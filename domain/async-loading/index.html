@@ -1,0 +1,61 @@
+<!doctype html>
+<head>
+  <style>
+    body {
+      font-family: 'Helvetica', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div id="chapters">
+    </div>
+  </div>
+  <script>
+    (() => {
+      const DOM = {
+        $chapters: document.getElementById('chapters'),
+      };
+      const URL = 'https://raw.githubusercontent.com/googlesamples/web-fundamentals/gh-pages/fundamentals/getting-started/primers';
+
+      function getJSON(url) {
+        return new Promise((resolve, reject) => {
+          const req = new XMLHttpRequest();
+          req.open('GET', url);
+          req.onload = () => {
+            if (req.status === 200) {
+              resolve(JSON.parse(req.response));
+              return;
+            }
+            reject(req.responseText);
+          }
+          req.onerror = (err) => {
+            reject(err);
+          }
+          req.send();
+        });
+      }
+
+      function init() {
+        getJSON(`${URL}/story.json`).then(story => {
+          const $heading = document.createRange().createContextualFragment(story.heading);
+          DOM.$chapters.before($heading);
+          return Promise.all(story.chapterUrls.map((url, index) => {
+            return getJSON(`${URL}/${url}`);
+          }));
+        }).then(chapters => {
+          const $chapters = document.createDocumentFragment();
+          chapters.forEach(chapter => {
+            $chapters.appendChild(document.createRange().createContextualFragment(chapter.html));
+          });
+          DOM.$chapters.appendChild($chapters);
+        }).catch(err => {
+          console.warn(err);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', init);
+    })();
+  </script>
+</body>
+</html>

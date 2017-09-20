@@ -1,0 +1,144 @@
+<!doctype html>
+<head>
+  <style>
+    body {
+      font-family: 'Helvetica', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>People</h1>
+  <table class="js-table">
+    <tr class="js-table-header">
+      <th data-field="name">Name</th>
+      <th data-field="age">Age</th>
+      <th data-field="email">Email</th>
+    </tr>
+    <tbody class="js-table-body">
+    </tbody>
+  </table>
+  <button class="js-page-button button-prev" data-type="prev">Prev</button>
+  Page <span class="js-current-page"></span> / <span class="js-total-page"></span>
+  <button class="js-page-button button-next" data-type="next">Next</button>
+
+  <script type="text/javascript" src="data.js"></script>
+  <script>
+    (() => {
+      function init() {
+        const DOM = {
+          $pageButtons: document.querySelectorAll('.js-page-button'),
+          $prevButton: document.querySelector('.js-page-button.button-prev'),
+          $nextButton: document.querySelector('.js-page-button.button-next'),
+          $tableHeader: document.querySelector('.js-table-header'),
+          $tableBody: document.querySelector('.js-table-body'),
+          $currentPage: document.querySelector('.js-current-page'),
+          $totalPages: document.querySelector('.js-total-page'),
+        };
+
+        const PAGE_SIZE = 10;
+        function initialState() {
+          return {
+            currentPage: 0,
+            totalPages: 0,
+            sortField: 'name',
+            sortOrder: 'asc',
+            data,
+          };
+        }
+        let state = initialState();
+        state.totalPages = Math.ceil(state.data.length / PAGE_SIZE);
+
+        function navigatePages(type) {
+          let newCurrentPage = state.currentPage + (type === 'prev' ? -1 : 1);
+          newCurrentPage = Math.max(0, newCurrentPage);
+          newCurrentPage = Math.min(newCurrentPage, state.totalPages - 1);
+          state.currentPage = newCurrentPage;
+        }
+
+        function setSortField(field) {
+          state.currentPage = 0;
+          if (state.sortField !== field) {
+            state.sortField = field;
+            state.sortOrder = 'asc';
+          } else {
+            state.sortOrder = state.sortOrder === 'asc' ? 'desc' : 'asc';
+          }
+        }
+
+        function attachEventListeners() {
+          // Pagination.
+          DOM.$pageButtons.forEach(el => {
+            el.addEventListener('click', function () {
+              navigatePages(this.getAttribute('data-type'));
+              render();
+            });
+          });
+
+          // Sorting.
+          DOM.$tableHeader.addEventListener('click', function (event) {
+            const el = event.target;
+            const field = el.getAttribute('data-field');
+            if (el.tagName !== 'TH' || !field) {
+              return;
+            }
+            setSortField(field);
+            render();
+          });
+        }
+
+        function render() {
+          DOM.$tableBody.innerHTML = '';
+
+          // Sort data.
+          const sortField = state.sortField;
+          state.data.sort((a, b) => {
+            switch (sortField) {
+              case 'name':
+              case 'email':
+                return a[sortField] > b[sortField] ? 1 : -1;
+              case 'age':
+                return a[sortField] - b[sortField];
+            }
+          });
+          if (state.sortOrder === 'desc') {
+            state.data.reverse();
+          }
+
+          // Create table rows.
+          const pageData = state.data.slice(state.currentPage * PAGE_SIZE, state.currentPage * PAGE_SIZE + PAGE_SIZE);
+          const $tableRowsFragment = document.createDocumentFragment();
+          pageData.forEach(person => {
+            const $tableRow = document.createElement('tr');
+            ['name', 'age', 'email'].forEach(field => {
+              const $tableCell = document.createElement('td');
+              $tableCell.textContent = person[field];
+              $tableRow.appendChild($tableCell);
+            });
+            $tableRowsFragment.appendChild($tableRow);
+          });
+          DOM.$tableBody.appendChild($tableRowsFragment);
+
+          // Pagination buttons disabled states.
+          DOM.$currentPage.textContent = state.currentPage + 1;
+          DOM.$totalPages.textContent = state.totalPages;
+          if (state.currentPage === 0) {
+            DOM.$prevButton.setAttribute('disabled', true);
+          } else {
+            DOM.$prevButton.removeAttribute('disabled');
+          }
+          if (state.currentPage === state.totalPages - 1) {
+            DOM.$nextButton.setAttribute('disabled', true);
+          } else {
+            DOM.$nextButton.removeAttribute('disabled');
+          }
+        }
+
+        render();
+        attachEventListeners();
+      }
+
+      document.addEventListener('DOMContentLoaded', init);
+    })();
+  </script>
+</body>
+</html>
