@@ -14,7 +14,6 @@ While there are many awesome books like [Cracking the Coding Interview](http://w
 - **[Algorithms Questions](algorithms)**
   - Questions categorized by topic.
 - **[Design Questions](design)**
-- **[Domain-specific Questions](domain)**
 - **[Front End Study Notes](front-end)**
   - Summarized notes on the various aspects of front end.
   - [Front End Job Interview Questions and Answers](front-end/interview-questions.md) ⭐
