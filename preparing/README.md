@@ -17,7 +17,7 @@ One exception to the convention of allowing you to "pick any programming languag
 
 If you have been out of college for a while, it will be highly advisable to revise the CS fundamentals — Algorithms and Data Structures. Personally I prefer to revise as I practiced so I scanned through my college notes and revised the various algorithms as I worked on the algorithm problems from LeetCode and Cracking the Coding Interview.
 
-This [interviews repository](https://github.com/kdn251) by Kevin Naughton Jr. served as a quick refresher for me.
+This [interviews repository](https://github.com/kdn251/interviews) by Kevin Naughton Jr. served as a quick refresher for me.
 
 ### Mastery through Practice
 
