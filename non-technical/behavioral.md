@@ -64,6 +64,9 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Amazon-Interview-Questio
 - Talked about a situation where you had a conflict with a teammate.
 - In my professional experience have you worked on something without getting approval from your manager?
 - Tell me a situation where you would have done something differently from what you actually did.
+- What is the most exceedingly bad misstep you at any point made?
+- Describe what Human Resource means to you.
+- How would you improve Amazon’s website?
 
 ## Dropbox
 
