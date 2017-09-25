@@ -10,6 +10,7 @@ While there are many awesome books like [Cracking the Coding Interview](http://w
 
 ## Contents
 
+- **[Preparing for a Coding Interview](preparing)**
 - **[Algorithms Questions](algorithms)**
   - Questions categorized by topic.
 - **[Design Questions](design)**

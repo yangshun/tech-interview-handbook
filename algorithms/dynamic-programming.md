@@ -22,6 +22,4 @@ Dynamic Programming
     // [3, 6, 4] => 7
     // [4, 10, 3, 1, 5] => 15
     ~~~
-- How many string representations are there for an integer where `a->1, b->2, ... z->26`.
-  - E.g. `26 => 2`. Because `26` can be encoded as `"z"` and `"bf"`.
 - Given a list of denominations (e.g., `[1, 2, 5]` means you have coins worth $1, $2, and $5) and a target number `k`, find all possible combinations, if any, of coins in the given denominations that add up to `k`. You can use coins of the same denomination more than once.

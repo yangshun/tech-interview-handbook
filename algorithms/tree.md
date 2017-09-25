@@ -15,7 +15,6 @@ Tree
 - Given a directory of files and folders (and relevant functions), how would you parse through it to find equivalent files?
 - Write a basic file system and implement the commands ls, pwd, mkdir, create, rm, cd, cat, mv.
 - Compute the intersection of two binary search trees.
-- Given a tree, where the parent has any number of nodes and each node has a number, return the average of all the nodes on each level in an array.
 - Given a binary tree, output all the node to leaf paths of it.
 - Given a string of characters without spaces, is there a way to break the string into valid words without leftover characters?
 - Print a binary tree level by level.
