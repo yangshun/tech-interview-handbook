@@ -1,5 +1,10 @@
 <div align="center">
-  <img src="https://cdn.rawgit.com/yangshun/tech-interview-handbook/master/assets/book.svg" alt="Tech Interview Handbook" width="400">
+  <img src="https://cdn.rawgit.com/yangshun/tech-interview-handbook/master/assets/book.svg" alt="Tech Interview Handbook" width="400"/>
+  <br>
+  <p>
+    <em>Credits: <a href="https://dribbble.com/shots/3831443-Tech-Interview-Handbook">Illustration</a> by <a href="https://dribbble.com/yangheng">@yangheng</a>
+    </em>
+  </p>
 </div>
 
 # Tech Interview Handbook
