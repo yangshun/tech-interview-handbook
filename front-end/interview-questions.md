@@ -1,9 +1,9 @@
-Front End Job Interview Questions
+Front-end Job Interview Questions
 ==
 
-Unlike typical software engineer job interviews, front end job interviews have less emphasis on algorithms and have more questions on intricate knowledge and expertise about the domain — HTML, CSS, JavaScript, just to name a few areas.
+Unlike typical software engineer job interviews, front-end job interviews have less emphasis on algorithms and have more questions on intricate knowledge and expertise about the domain — HTML, CSS, JavaScript, just to name a few areas.
 
-While there are some existing resources to help front end developers in preparing for interviews, they aren't as abundant as materials for a software engineer interview. Among the existing resources, probably the most helpful question bank would be [Front End Job Interview Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions). Unfortunately, I couldn't find many complete and satisfactory answers for these questions online, hence here is my attempt at answering them. Being an open source repository, the project can live on with the support of the community as the state of web evolves.
+While there are some existing resources to help front end developers in preparing for interviews, they aren't as abundant as materials for a software engineer interview. Among the existing resources, probably the most helpful question bank would be [Front-end Job Interview Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions). Unfortunately, I couldn't find many complete and satisfactory answers for these questions online, hence here is my attempt at answering them. Being an open source repository, the project can live on with the support of the community as the state of web evolves.
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ While there are some existing resources to help front end developers in preparin
 
 Answers to [Front-end Job Interview Questions - HTML Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions#html-questions). Pull requests for suggestions and corrections are welcome!
 
-#### What does a `doctype` do?
+### What does a `doctype` do?
 
 `doctype` is an abbreviation for document type. It is a declaration used in HTML5 to distinguish between a standards-compliant parsing mode and a quirks parsing mode. Hence its presence tells the browser to parse and render the webpage in standards mode.
 
@@ -26,7 +26,7 @@ Moral of the story - just add `<!DOCTYPE html>` at the start of your page.
 - https://stackoverflow.com/questions/7695044/what-does-doctype-html-do
 - https://www.w3.org/QA/Tips/Doctype
 
-#### What's the difference between full standards mode, almost standards mode and quirks mode?
+### What's the difference between full standards mode, almost standards mode and quirks mode?
 
 - **Quirks mode** - Layout emulates non-standard behavior in Netscape Navigator 4 and Internet Explorer 5. This is essential in order to support websites that were built before the widespread adoption of web standards. The list of quirks can be found [here](https://developer.mozilla.org/en-US/docs/Mozilla/Mozilla_quirks_mode_behavior).
 - **Full standards mode** - The layout behavior is the one described by the HTML and CSS specifications.
@@ -36,7 +36,7 @@ Moral of the story - just add `<!DOCTYPE html>` at the start of your page.
 
 - https://developer.mozilla.org/en-US/docs/Quirks_Mode_and_Standards_Mode
 
-#### What's the difference between HTML and XHTML?
+### What's the difference between HTML and XHTML?
 
 XHTML belongs to the family of XML markups languages and is different from HTML. Some of differences are as follows:
 
@@ -52,7 +52,7 @@ Full list of differences can be found on [Wikipedia](https://en.wikipedia.org/wi
 - https://developer.mozilla.org/en-US/docs/Archive/Web/Properly_Using_CSS_and_JavaScript_in_XHTML_Documents_
 - https://en.wikipedia.org/wiki/XHTML
 
-#### Are there any problems with serving pages as `application/xhtml+xml`?
+### Are there any problems with serving pages as `application/xhtml+xml`?
 
 Basically the problems lie in the differences between parsing HTML and XML as mentioned above.
 
@@ -63,7 +63,7 @@ Basically the problems lie in the differences between parsing HTML and XML as me
 
 - https://developer.mozilla.org/en-US/docs/Quirks_Mode_and_Standards_Mode#XHTML
 
-#### How do you serve a page with content in multiple languages?
+### How do you serve a page with content in multiple languages?
 
 The question is a little vague, I will assume that it is asking about the most common case, which is how to serve a page with content available in multiple languages, but the content within the page should be displayed only in one consistent language.
 
@@ -75,7 +75,7 @@ In the back end, the HTML markup will contain `i18n` placeholders and content fo
 
 - https://www.w3.org/International/getting-started/language
 
-#### What kind of things must you be wary of when designing or developing for multilingual sites?
+### What kind of things must you be wary of when designing or developing for multilingual sites?
 
 - Use `lang` attribute in your HTML.
 - Directing users to their native language - Allow a user to change his country/language easily without hassle.
@@ -89,7 +89,7 @@ In the back end, the HTML markup will contain `i18n` placeholders and content fo
 
 - https://www.quora.com/What-kind-of-things-one-should-be-wary-of-when-designing-or-developing-for-multilingual-sites
 
-#### What are `data-` attributes good for?
+### What are `data-` attributes good for?
 
 Before JavaScript frameworks became popular, front end developers used `data-` attributes to store extra data within the DOM itself, without other hacks such as non-standard attributes, extra properties on the DOM. It is intended to store custom data private to the page or application, for which there are no more appropriate attributes or elements.
 
@@ -99,7 +99,7 @@ These days, using `data-` attributes is not encouraged. One reason is that users
 
 - http://html5doctor.com/html5-custom-data-attributes/
 
-#### Consider HTML5 as an open web platform. What are the building blocks of HTML5?
+### Consider HTML5 as an open web platform. What are the building blocks of HTML5?
 
 - Semantics - Allowing you to describe more precisely what your content is.
 - Connectivity - Allowing you to communicate with the server in new and innovative ways.
@@ -114,7 +114,7 @@ These days, using `data-` attributes is not encouraged. One reason is that users
 
 - https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5
 
-#### Describe the difference between a `cookie`, `sessionStorage` and `localStorage`.
+### Describe the difference between a `cookie`, `sessionStorage` and `localStorage`.
 
 All the above mentioned technologies are key-value storage mechanisms on the client side. They are only able to store values as strings.
 
@@ -133,7 +133,7 @@ All the above mentioned technologies are key-value storage mechanisms on the cli
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies
 - http://tutorial.techaltum.com/local-and-session-storage.html
 
-#### Describe the difference between `<script>`, `<script async>` and `<script defer>`.
+### Describe the difference between `<script>`, `<script async>` and `<script defer>`.
 
 - `<script>` - HTML parsing is blocked, the script is fetched and executed immediately, HTML parsing resumes after the script is executed.
 - `<script async>` - The script will be fetched in parallel to HTML parsing and executed as soon as it is available (potentially before HTML parsing completes). Use `async` when the script is independent of any other scripts on the page, for example analytics.
@@ -147,7 +147,7 @@ Note: The `async` and `defer` attrib­utes are ignored for scripts that have no 
 - https://stackoverflow.com/questions/10808109/script-tag-async-defer
 - https://bitsofco.de/async-vs-defer/
 
-#### Why is it generally a good idea to position CSS `<link>`s between `<head></head>` and JS `<script>`s just before `</body>`? Do you know any exceptions?
+### Why is it generally a good idea to position CSS `<link>`s between `<head></head>` and JS `<script>`s just before `</body>`? Do you know any exceptions?
 
 **Placing `<link>`s in the `<head>`**
 
@@ -163,7 +163,7 @@ An exception for positioning of `<script>`s at the bottom is when your script co
 
 - https://developer.yahoo.com/performance/rules.html#css_top
 
-#### What is progressive rendering?
+### What is progressive rendering?
 
 Progressive rendering is the name given to techniques used to improve performance of a webpage (in particular, improve perceived load time) to render content for display as quickly as possible.
 
@@ -180,7 +180,7 @@ Examples of such techniques:
 - https://stackoverflow.com/questions/33651166/what-is-progressive-rendering
 - http://www.ebaytechblog.com/2014/12/08/async-fragments-rediscovering-progressive-html-rendering-with-marko/
 
-#### Have you used different HTML templating languages before?
+### Have you used different HTML templating languages before?
 
 Yes, Jade, ERB, Slim, Handlebars, Jinja, Liquid, just to name a few. In my opinion, they are more or less the same and provide similar functionality of escaping content and helpful filters for manipulating the data to be displayed. Most templating engines will also allow you to inject your own filters in the event you need custom processing before display.
 
@@ -193,12 +193,12 @@ Yes, Jade, ERB, Slim, Handlebars, Jinja, Liquid, just to name a few. In my opini
 
 Answers to [Front-end Job Interview Questions - CSS Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions#css-questions). Pull requests for suggestions and corrections are welcome!
 
-#### What is the difference between classes and IDs in CSS?
+### What is the difference between classes and IDs in CSS?
 
 - **IDs** - Meant to be unique within the document. Can be used to identify an element when linking using a fragment identifier. Elements can only have one `id` attribute.
 - **Classes** - Can be reused on multiple elements within the document. Mainly for styling and targeting elements.
 
-#### What's the difference between "resetting" and "normalizing" CSS? Which would you choose, and why?
+### What's the difference between "resetting" and "normalizing" CSS? Which would you choose, and why?
 
 - **Resetting** - Resetting is meant to strip all default browser styling on elements. For e.g. `margin`s, `padding`s, `font-size`s of all elements are reset to be the same. You will have to redeclare styling for common typographic elements.
 - **Normalizing** - Normalizing preserves useful default styles rather than "unstyling" everything. It also corrects bugs for common browser dependencies.
@@ -209,7 +209,7 @@ I would choose resetting when I have very a customized or unconventional site de
 
 - https://stackoverflow.com/questions/6887336/what-is-the-difference-between-normalize-css-and-reset-css
 
-#### Describe `float`s and how they work.
+### Describe `float`s and how they work.
 
 Float is a CSS positioning property. Floated elements remain a part of the flow of the page, and will affect the positioning of other elements (e.g. text will flow around floated elements), unlike `position: absolute` elements, which are removed from the flow of the page.
 
@@ -235,7 +235,7 @@ Alternatively, give `overflow: auto` or `overflow: hidden` property to the paren
 
 - https://css-tricks.com/all-about-floats/
 
-#### Describe `z-index` and how stacking context is formed.
+### Describe `z-index` and how stacking context is formed.
 
 The `z-index` property in CSS controls the vertical stacking order of elements that overlap. `z-index` only effects elements that have a `position` value which is not `static`.
 
@@ -251,7 +251,7 @@ Each stacking context is self-contained - after the element's contents are stack
 - https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
 - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
 
-#### Describe Block Formatting Context (BFC) and how it works.
+### Describe Block Formatting Context (BFC) and how it works.
 
 A Block Formatting Context (BFC) is part of the visual CSS rendering of a web page in which block boxes are laid out. Floats, absolutely positioned elements, `inline-blocks`, `table-cells`, `table-caption`s, and elements with `overflow` other than `visible` (except when that value has been propagated to the viewport) establish new block formatting contexts.
 
@@ -271,7 +271,7 @@ Vertical margins between adjacent block-level boxes in a BFC collapse. Read more
 - https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context
 - https://www.sitepoint.com/understanding-block-formatting-contexts-in-css/
 
-#### What are the various clearing techniques and which is appropriate for what context?
+### What are the various clearing techniques and which is appropriate for what context?
 
 - Empty `div` method - `<div style="clear:both;"></div>`.
 - Clearfix method - Refer to the `.clearfix` class above.
@@ -279,7 +279,7 @@ Vertical margins between adjacent block-level boxes in a BFC collapse. Read more
 
 In large projects, I would write a utility `.clearfix` class and use them in places where I need it. `overflow: hidden` might clip children if the children is taller than the parent and is not very ideal.
 
-#### Explain CSS sprites, and how you would implement them on a page or site.
+### Explain CSS sprites, and how you would implement them on a page or site.
 
 CSS sprites combine multiple images into one single larger image. It is commonly used technique for icons (Gmail uses it). How to implement it:
 
@@ -292,7 +292,7 @@ CSS sprites combine multiple images into one single larger image. It is commonly
 - Reduce the number of HTTP requests for multiple images (only one single request is required per spritesheet). But with HTTP2, loading multiple images is no longer much of an issue.
 - Advance downloading of assets that won't be downloaded until needed, such as images that only appear upon `:hover` pseudo-states. Blinking wouldn't be seen.
 
-#### What are your favorite image replacement techniques and which do you use when?
+### What are your favorite image replacement techniques and which do you use when?
 
 CSS image replacement is a technique of replacing a text element (usually a header tag like an `<h1>`) with an image (often a logo). It has its origins in the time before web fonts and SVG. For years, web developers battled against browser inconsistencies to craft image replacement techniques that struck the right balance between design and accessibility.
 
@@ -302,14 +302,14 @@ It's not really relevant these days. Check out the link below for all the availa
 
 - https://css-tricks.com/the-image-replacement-museum/
 
-#### How would you approach fixing browser-specific styling issues?
+### How would you approach fixing browser-specific styling issues?
 
 - After identifying the issue and the offending browser, use a separate style sheet that only loads when that specific browser is being used. This technique requires server-side rendering though.
 - Use libraries like Bootstrap that already handles these styling issues for you.
 - Use `autoprefixer` to automatically add vendor prefixes to your code.
 - Use Reset CSS or Normalize.css.
 
-#### How do you serve your pages for feature-constrained browsers? What techniques/processes do you use?
+### How do you serve your pages for feature-constrained browsers? What techniques/processes do you use?
 
 - Graceful degradation - The practice of building an application for modern browsers while ensuring it remains functional in older browsers.
 - Progressive enhancement - The practice of building an application for a base level of user experience, but adding functional enhancements when a browser supports it.
@@ -317,7 +317,7 @@ It's not really relevant these days. Check out the link below for all the availa
 - Autoprefixer for automatic vendor prefix insertion.
 - Feature detection using [Modernizr](https://modernizr.com/).
 
-#### What are the different ways to visually hide content (and make it available only for screen readers)?
+### What are the different ways to visually hide content (and make it available only for screen readers)?
 
 These techniques are related to accessibility (a11y).
 
@@ -328,19 +328,19 @@ These techniques are related to accessibility (a11y).
 
 I would go with the `absolute` positioning approach, as it has the least caveats and works for most elements.
 
-#### Have you ever used a grid system, and if so, what do you prefer?
+### Have you ever used a grid system, and if so, what do you prefer?
 
 I like the `float`-based grid system because it still has the most browser support among the alternative existing systems (flex, grid). It has been used in Bootstrap for years and has been proven to work.
 
-#### Have you used or implemented media queries or mobile-specific layouts/CSS?
+### Have you used or implemented media queries or mobile-specific layouts/CSS?
 
 Yes. An example would be transforming a stacked pill navigation into a fixed-bottom tab navigation beyond a certain breakpoint.
 
-#### Are you familiar with styling SVG?
+### Are you familiar with styling SVG?
 
 No... Sadly.
 
-#### How do you optimize your webpages for print?
+### How do you optimize your webpages for print?
 
 - Create a stylesheet for print or use media queries.
 
@@ -378,7 +378,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit....
 
 - https://davidwalsh.name/optimizing-structure-print-css
 
-#### What are some of the "gotchas" for writing efficient CSS?
+### What are some of the "gotchas" for writing efficient CSS?
 
 Firstly, understand that browsers match selectors from rightmost (key selector) to left. Browsers filter out elements in the DOM according to the key selector, and traverse up its parent elements to determine matches. The shorter the length of the selector chain, the faster the browser can determine if that element matches the selector. Hence avoid key selectors that are tag and universal selectors. They match a large numbers of elements and browsers will have to do more work in determining if the parents do match.
 
@@ -391,7 +391,7 @@ Be aware of which CSS properties trigger reflow, repaint and compositing. Avoid 
 - https://developers.google.com/web/fundamentals/performance/rendering/
 - https://csstriggers.com/
 
-#### What are the advantages/disadvantages of using CSS preprocessors?
+### What are the advantages/disadvantages of using CSS preprocessors?
 
 **Advantages:**
 
@@ -405,7 +405,7 @@ Be aware of which CSS properties trigger reflow, repaint and compositing. Avoid 
 
 - Requires tools for preprocessing. Re-compilation time can be slow.
 
-#### Describe what you like and dislike about the CSS preprocessors you have used.
+### Describe what you like and dislike about the CSS preprocessors you have used.
 
 **Likes:**
 
@@ -417,11 +417,11 @@ Be aware of which CSS properties trigger reflow, repaint and compositing. Avoid 
 - I use Sass via `node-sass`, which is a binding for LibSass written in C++. I have to frequently recompile it when switching between node versions.
 - In Less, variable names are prefixed with `@`, which can be confused with native CSS keywords like `@media`, `@import` and `@font-face` rule.
 
-#### How would you implement a web design comp that uses non-standard fonts?
+### How would you implement a web design comp that uses non-standard fonts?
 
 Use `@font-face` and define `font-family` for different `font-weight`s.
 
-#### Explain how a browser determines what elements match a CSS selector.
+### Explain how a browser determines what elements match a CSS selector.
 
 This part is related to the above about writing efficient CSS. Browsers match selectors from rightmost (key selector) to left. Browsers filter out elements in the DOM according to the key selector, and traverse up its parent elements to determine matches. The shorter the length of the selector chain, the faster the browser can determine if that element matches the selector.
 
@@ -431,7 +431,7 @@ For example with this selector `p span`, browsers firstly find all the `<span>` 
 
 - https://stackoverflow.com/questions/5797014/why-do-browsers-match-css-selectors-from-right-to-left
 
-#### Describe pseudo-elements and discuss what they are used for.
+### Describe pseudo-elements and discuss what they are used for.
 
 A CSS pseudo-element is a keyword added to a selector that lets you style a specific part of the selected element(s). They can be used for decoration (`:first-line`, `:first-letter`) or adding elements to the markup (combined with `content: ...`) without having to modify the markup (`:before`, `:after`).
 
@@ -443,7 +443,7 @@ A CSS pseudo-element is a keyword added to a selector that lets you style a spec
 
 - https://css-tricks.com/almanac/selectors/a/after-and-before/
 
-#### Explain your understanding of the box model and how you would tell the browser in CSS to render your layout in different box models.
+### Explain your understanding of the box model and how you would tell the browser in CSS to render your layout in different box models.
 
 The CSS box model describes the rectangular boxes that are generated for elements in the document tree and laid out according to the visual formatting model. Each box has a content area (e.g. text, an image, etc.) and optional surrounding `padding`, `border`, and `margin` areas.
 
@@ -466,18 +466,18 @@ The box model has the following rules:
 
 - https://www.smashingmagazine.com/2010/06/the-principles-of-cross-browser-css-coding/#understand-the-css-box-model
 
-#### What does `* { box-sizing: border-box; }` do? What are its advantages?
+### What does `* { box-sizing: border-box; }` do? What are its advantages?
 
 - By default, elements have `box-sizing: content-box` applied, and only the content size is being accounted for.
 - `box-sizing: border-box` changes how the `width` and `height` of elements are being calculated, `border` and `padding` are also being included in the calculation.
 - The `height` of an element is now calculated by the content's `height` + vertical `padding` + vertical `border` width.
 - The `width` of an element is now calculated by the content's `width` + horizontal `padding` + horizontal `border` width.
 
-#### List as many values for the `display` property that you can remember.
+### List as many values for the `display` property that you can remember.
 
 - `none`, `block`, `inline`, `inline-block`, `table`, `table-row`, `table-cell`, `list-item`.
 
-#### What's the difference between `inline` and `inline-block`?
+### What's the difference between `inline` and `inline-block`?
 
 I shall throw in a comparison with `block` for good measure.
 
@@ -504,7 +504,7 @@ A positioned element is an element whose computed `position` property is either 
 
 - https://developer.mozilla.org/en/docs/Web/CSS/position
 
-#### The 'C' in CSS stands for Cascading. How is priority determined in assigning styles (a few examples)? How can you use this system to your advantage?
+### The 'C' in CSS stands for Cascading. How is priority determined in assigning styles (a few examples)? How can you use this system to your advantage?
 
 Browser determines what styles to show on an element depending on the specificity of CSS rules. We assume that the browser has already determined the rules that match a particular element. Among the matching rules, the specificity, four comma-separate values, `a, b, c, d` are calculated for each rule based on the following:
 
@@ -524,13 +524,13 @@ I would write CSS rules with low specificity so that they can be easily overridd
 - https://www.smashingmagazine.com/2007/07/css-specificity-things-you-should-know/
 - https://www.sitepoint.com/web-foundations/specificity/
 
-#### What existing CSS frameworks have you used locally, or in production? How would you change/improve them?
+### What existing CSS frameworks have you used locally, or in production? How would you change/improve them?
 
 - **Bootstrap** - Slow release cycle. Bootstrap 4 has been in alpha for almost 2 years. Add a spinner button component, as it is widely-used.
 - **Semantic UI** - Source code structure makes theme customization is extremely hard to understand. Painful to customize with unconventional theming system. Hardcoded config path within the vendor library. Not well-designed for overriding variables unlike in Bootstrap.
 - **Bulma** - A lot of non-semantic and superfluous classes and markup required. Not backward compatible. Upgrading versions breaks the app in subtle manners.
 
-#### Have you played around with the new CSS Flexbox or Grid specs?
+### Have you played around with the new CSS Flexbox or Grid specs?
 
 Yes. Flexbox is mainly meant for 1-dimensional layouts while Grid is meant for 2-dimensional layouts.
 
@@ -542,7 +542,7 @@ Grid is by far the most intuitive approach for creating grid-based layouts (it b
 
 - https://philipwalton.github.io/solved-by-flexbox/
 
-#### How is responsive design different from adaptive design?
+### How is responsive design different from adaptive design?
 
 Both responsive and adaptive design attempt to optimize the user experience across different devices, adjusting for different viewport sizes, resolutions, usage contexts, control mechanisms, and so on.
 
@@ -556,7 +556,7 @@ Adaptive design is more like the modern definition of progressive enhancement. I
 - http://mediumwell.com/responsive-adaptive-mobile/
 - https://css-tricks.com/the-difference-between-responsive-and-adaptive-design/
 
-#### Have you ever worked with retina graphics? If so, when and what techniques did you use?
+### Have you ever worked with retina graphics? If so, when and what techniques did you use?
 
 I tend to use higher resolution graphics (twice the display size) to handle retina display. The better way would be to use a media query like `@media only screen and (min-device-pixel-ratio: 2) { ... }` and change the `background-image`.
 
@@ -568,7 +568,7 @@ Another method would be to use JavaScript to replace the `<img>` `src` attribute
 
 - https://www.sitepoint.com/css-techniques-for-retina-displays/
 
-#### Is there any reason you'd want to use `translate()` instead of `absolute` positioning, or vice-versa? And why?
+### Is there any reason you'd want to use `translate()` instead of `absolute` positioning, or vice-versa? And why?
 
 `translate()` is a value of CSS `transform`. Changing `transform` or `opacity` does not trigger browser reflow or repaint, only compositions, whereas changing the absolute positioning triggers `reflow`. `transform` causes the browser to create a GPU layer for the element but changing absolute positioning properties uses the CPU. Hence `translate()` is more efficient and will result in shorter paint times for smoother animations.
 
@@ -589,7 +589,7 @@ When using `translate()`, the element still takes up its original space (sort of
 
 Answers to [Front-end Job Interview Questions - JS Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions#js-questions). Pull requests for suggestions and corrections are welcome!
 
-#### Explain event delegation
+### Explain event delegation
 
 Event delegation is a technique involving adding event listeners to a parent element instead of adding them to the descendant elements. The listener will fire whenever the event is triggered on the descendant elements due to event bubbling up the DOM. The benefits of this technique are:
 
@@ -601,7 +601,7 @@ Event delegation is a technique involving adding event listeners to a parent ele
 - https://davidwalsh.name/event-delegate
 - https://stackoverflow.com/questions/1687296/what-is-dom-event-delegation
 
-#### Explain how `this` works in JavaScript
+### Explain how `this` works in JavaScript
 
 There's no simple explanation for `this`; it is one of the most confusing concepts in JavaScript. A hand-wavey explanation is that the value of `this` depends on how the function is called. I have read many explanations on `this` online, and I found [Arnav Aggrawal](https://medium.com/@arnav_aggarwal)'s explanation to be the clearest. The following rules are applied:
 
@@ -619,7 +619,7 @@ For an in-depth explanation, do check out his [article on Medium](https://codebu
 - https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3
 - https://stackoverflow.com/a/3127440/1751946
 
-#### Explain how prototypal inheritance works
+### Explain how prototypal inheritance works
 
 This is an extremely common JavaScript interview question. All JavaScript objects have a `prototype` property, that is a reference to another object. When a property is accessed on an object and if the property is not found on that object, the JavaScript engine looks at the object's `prototype`. and the `prototype`'s `prototype` and so on, until it finds the property defined on one of the `prototype`s or until it reaches the end of the prototype chain. This behaviour simulates classical inheritance, but it is really more of [delegation than inheritance](https://davidwalsh.name/javascript-objects).
 
@@ -628,7 +628,7 @@ This is an extremely common JavaScript interview question. All JavaScript object
 - https://www.quora.com/What-is-prototypal-inheritance/answer/Kyle-Simpson
 - https://davidwalsh.name/javascript-objects
 
-#### What do you think of AMD vs CommonJS?
+### What do you think of AMD vs CommonJS?
 
 Both are ways to implement a module system, which was not natively present in JavaScript until ES2015 came along. CommonJS is synchronous while AMD (Asynchronous Module Definition) is obviously asynchronous. CommonJS is designed with server-side development in mind while AMD, with its support for asynchronous loading of modules, is more intended for browsers.
 
@@ -641,7 +641,7 @@ I'm glad that with ES2015 modules, that has support for both synchronous and asy
 - https://auth0.com/blog/javascript-module-systems-showdown/
 - https://stackoverflow.com/questions/16521471/relation-between-commonjs-amd-and-requirejs
 
-#### Explain why the following doesn't work as an IIFE: `function foo(){ }();`. What needs to be changed to properly make it an IIFE?
+### Explain why the following doesn't work as an IIFE: `function foo(){ }();`. What needs to be changed to properly make it an IIFE?
 
 IIFE stands for Immediately Invoked Function Expressions. The JavaScript parser reads `function foo(){ }();` as `function foo(){ }` and `();`, where the former is a function declaration and the latter (a pair of brackets) is an attempt at calling a function but there is no name specified, hence it throws `Uncaught SyntaxError: Unexpected token )`.
 
@@ -651,7 +651,7 @@ Here are two ways to fix it that involves adding more brackets: `(function foo()
 
 - http://lucybain.com/blog/2014/immediately-invoked-function-expression/
 
-#### What's the difference between a variable that is: `null`, `undefined` or undeclared? How would you go about checking for any of these states?
+### What's the difference between a variable that is: `null`, `undefined` or undeclared? How would you go about checking for any of these states?
 
 **Undeclared** variables are created when you assign to a value to an identifier that is not previously created using `var`, `let` or `const`. Undeclared variables will be defined globally, outside of the current scope. In strict mode, a `ReferenceError` will be thrown when you try to assign to an undeclared variable. Undeclared variables are bad just like how global variables are bad. Avoid them at all cost! To check for them, wrap its usage in a `try`/`catch` block.
 
@@ -695,7 +695,7 @@ As a personal habit, I never leave my variables undeclared or unassigned. I will
 - https://stackoverflow.com/questions/15985875/effect-of-declared-and-undeclared-variables
 - https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/undefined
 
-#### What is a closure, and how/why would you use one?
+### What is a closure, and how/why would you use one?
 
 A closure is the combination of a function and the lexical environment within which that function was declared. The word "lexical" refers to the fact that lexical scoping uses the location where a variable is declared within the source code to determine where that variable is available. Closures are functions that have access to the outer (enclosing) function’s variables—scope chain even after the outer function has returned.
 
@@ -709,7 +709,7 @@ A closure is the combination of a function and the lexical environment within wh
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 - https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36
 
-#### What's a typical use case for anonymous functions?
+### What's a typical use case for anonymous functions?
 
 They can be used in IIFEs to encapsulate some code within a local scope so that variables declared in it do not leak to the global scope.
 
@@ -742,7 +742,7 @@ console.log(double); // [2, 4, 6]
 - https://www.quora.com/What-is-a-typical-usecase-for-anonymous-functions
 - https://stackoverflow.com/questions/10273185/what-are-the-benefits-to-using-anonymous-functions-instead-of-named-functions-fo
 
-#### How do you organize your code? (module pattern, classical inheritance?)
+### How do you organize your code? (module pattern, classical inheritance?)
 
 In the past, I used Backbone for my models which encourages a more OOP approach, creating Backbone models and attaching methods to them.
 
@@ -750,7 +750,7 @@ The module pattern is still great, but these days, I use the Flux architecture b
 
 I avoid using classical inheritance where possible. When and if I do, I stick to [these rules](https://medium.com/@dan_abramov/how-to-use-classes-and-sleep-at-night-9af8de78ccb4).
 
-#### What's the difference between host objects and native objects?
+### What's the difference between host objects and native objects?
 
 Native objects are objects that are part of the JavaScript language defined by the ECMAScript specification, such as `String`, `Math`, `RegExp`, `Object`, `Function`, etc.
 
@@ -760,7 +760,7 @@ Host objects are provided by the runtime environment (browser or Node), such as 
 
 - https://stackoverflow.com/questions/7614317/what-is-the-difference-between-native-objects-and-host-objects
 
-#### Difference between: `function Person(){}`, `var person = Person()`, and `var person = new Person()`?
+### Difference between: `function Person(){}`, `var person = Person()`, and `var person = new Person()`?
 
 This question is pretty vague. My best guess at its intention is that it is asking about constructors in JavaScript. Technically speaking, `function Person(){}` is just a normal function declaration. The convention is use PascalCase for functions that are intended to be used as constructors.
 
@@ -786,7 +786,7 @@ console.log(person.name); // "john"
 
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new
 
-#### What's the difference between `.call` and `.apply`?
+### What's the difference between `.call` and `.apply`?
 
 Both `.call` and `.apply` are used to invoke functions and the first parameter will be used as the value of `this` within the function. However, `.call` takes in a comma-separated arguments as the next arguments while `.apply` takes in an array of arguments as the next argument. An easy way to remember this is C for `call` and comma-separated and A for `apply` and array of arguments.
 
@@ -799,7 +799,7 @@ console.log(add.call(null, 1, 2)) // 3
 console.log(add.apply(null, [1, 2])) // 3
 ```
 
-#### Explain `Function.prototype.bind`.
+### Explain `Function.prototype.bind`.
 
 Taken word-for-word from [MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind):
 
@@ -811,7 +811,7 @@ In my experience, it is most useful for binding the value of `this` in methods o
 
 - https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind
 
-#### When would you use `document.write()`?
+### When would you use `document.write()`?
 
 `document.write()` writes a string of text to a document stream opened by `document.open()`. When `document.write()` is executed after the page has loaded, it will call `document.open` which clears the whole document (`<head>` and `<body>` removed!) and replaces the contents with the given parameter value in string. Hence it is usually considered dangerous and prone to misuse.
 
@@ -822,7 +822,7 @@ There are some answers online that explain `document.write()` is being used in a
 - https://www.quirksmode.org/blog/archives/2005/06/three_javascrip_1.html
 - https://github.com/h5bp/html5-boilerplate/wiki/Script-Loading-Techniques#documentwrite-script-tag
 
-#### What's the difference between feature detection, feature inference, and using the UA string?
+### What's the difference between feature detection, feature inference, and using the UA string?
 
 **Feature Detection**
 
@@ -860,7 +860,7 @@ This is a browser-reported string that allows the network protocol peers to iden
 - https://stackoverflow.com/questions/20104930/whats-the-difference-between-feature-detection-feature-inference-and-using-th
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent
 
-#### Explain Ajax in as much detail as possible.
+### Explain Ajax in as much detail as possible.
 
 Ajax (asynchronous JavaScript and XML") is a set of web development techniques using many web technologies on the client side to create asynchronous web applications. With Ajax, web applications can send data to and retrieve from a server asynchronously (in the background) without interfering with the display and behavior of the existing page. By decoupling the data interchange layer from the presentation layer, Ajax allows for web pages, and by extension web applications, to change content dynamically without the need to reload the entire page. In practice, modern implementations commonly substitute JSON for XML due to the advantages of being native to JavaScript.
 
@@ -871,7 +871,7 @@ The `XMLHttpRequest` API is frequently used for the asynchronous communication o
 - https://en.wikipedia.org/wiki/Ajax_(programming)
 - https://developer.mozilla.org/en-US/docs/AJAX
 
-#### What are the advantages and disadvantages of using Ajax?
+### What are the advantages and disadvantages of using Ajax?
 
 **Advantages**
 
@@ -887,7 +887,7 @@ The `XMLHttpRequest` API is frequently used for the asynchronous communication o
 - Some webcrawlers do not execute JavaScript and would not see content that has been loaded by JavaScript.
 - Basically most of the disadvantages of an SPA.
 
-#### Explain how JSONP works (and how it's not really Ajax).
+### Explain how JSONP works (and how it's not really Ajax).
 
 JSONP (JSON with Padding) is a method commonly used to bypass the cross-domain policies in web browsers because Ajax requests from the current page to a cross-origin domain is not allowed.
 
@@ -919,7 +919,7 @@ These days, [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) i
 
 - https://stackoverflow.com/a/2067584/1751946
 
-#### Have you ever used JavaScript templating? If so, what libraries have you used?
+### Have you ever used JavaScript templating? If so, what libraries have you used?
 
 Yes. Handlebars, Underscore, Lodash, AngularJS and JSX. I disliked templating in AngularJS because it made heavy use of strings in the directives and typos would go uncaught. JSX is my new favourite as it is closer to JavaScript and there is barely and syntax to be learnt. Nowadays, you can even use ES2015 template string literals as a quick way for creating templates without relying on third-party code.
 
@@ -929,7 +929,7 @@ const template = `<div>My name is: ${name}</div>`;
 
 However, do beware of a potential XSS in the above approach as the contents are not escaped for you, unlike in templating libraries.
 
-#### Explain "hoisting".
+### Explain "hoisting".
 
 Hoisting is a term used to explain the behavior of variable declarations in your code. Variables declared or initialized with the `var` keyword will have their declaration "hoisted" up to the top of the current scope. However, only the declaration is hoisted, the assignment (if there is one), will stay where it is. Let's explain with a few examples.
 
@@ -965,11 +965,11 @@ var bar = function() {
 console.log(bar); // [Function: bar]
 ```
 
-#### Describe event bubbling.
+### Describe event bubbling.
 
 When an event triggers on a DOM element, it will attempt to handle the event if there is a listener attached, then the event is bubbled up to its parent and the same thing happens. This bubbling occurs up the element's ancestors all the way to the `document`. Event bubbling is the mechanism behind event delegation.
 
-#### What's the difference between an "attribute" and a "property"?
+### What's the difference between an "attribute" and a "property"?
 
 Attributes are defined on the HTML markup but properties are defined on the DOM. To illustrate the difference, imagine we have this text field in our HTML: `<input type="text" value="Hello">`.
 
@@ -990,7 +990,7 @@ console.log(input.value); // Hello World!
 
 - https://stackoverflow.com/questions/6003819/properties-and-attributes-in-html
 
-#### Why is extending built-in JavaScript objects not a good idea?
+### Why is extending built-in JavaScript objects not a good idea?
 
 Extending a built-in/native JavaScript object means adding properties/functions to its `prototype`. While this may seem like a good idea at first, it is dangerous in practice. Imagine your code uses a few libraries that both extend the `Array.prototype` by adding the same `contains` method, the implementations will overwrite each other and your code will break if the behavior of these two methods are not the same.
 
@@ -1000,7 +1000,7 @@ The only time you may want to extend a native object is when you want to create 
 
 - http://lucybain.com/blog/2014/js-extending-built-in-objects/
 
-#### Difference between document load event and document DOMContentLoaded event?
+### Difference between document load event and document DOMContentLoaded event?
 
 The `DOMContentLoaded` event is fired when the initial HTML document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading.
 
@@ -1011,7 +1011,7 @@ The `DOMContentLoaded` event is fired when the initial HTML document has been co
 - https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded
 - https://developer.mozilla.org/en-US/docs/Web/Events/load
 
-#### What is the difference between `==` and `===`?
+### What is the difference between `==` and `===`?
 
 `==` is the abstract equality operator while `===` is the strict equality operator. The `==` operator will compare for equality after doing any necessary type conversions. The `===` operator will not do type conversion, so if two values are not the same type `===` will simply return `false`. When using `==`, funky things can happen, such as:
 
@@ -1036,7 +1036,7 @@ console.log(a == undefined); // true
 
 - https://stackoverflow.com/questions/359494/which-equals-operator-vs-should-be-used-in-javascript-comparisons
 
-#### Explain the same-origin policy with regards to JavaScript.
+### Explain the same-origin policy with regards to JavaScript.
 
 The same-origin policy prevents JavaScript from making requests across domain boundaries. An origin is defined as a combination of URI scheme, hostname, and port number. This policy prevents a malicious script on one page from obtaining access to sensitive data on another web page through that page's Document Object Model.
 
@@ -1044,7 +1044,7 @@ The same-origin policy prevents JavaScript from making requests across domain bo
 
 - https://en.wikipedia.org/wiki/Same-origin_policy
 
-#### Make this work:
+### Make this work:
 
 ```js
 duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
@@ -1058,7 +1058,7 @@ function duplicate(arr) {
 duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
 ```
 
-#### Why is it called a Ternary expression, what does the word "Ternary" indicate?
+### Why is it called a Ternary expression, what does the word "Ternary" indicate?
 
 "Ternary" indicates three, and a ternary expression accepts three operands, the test condition, the "then" expression and the "else" expression. Ternary expressions are not specific to JavaScript and I'm not sure why it is even in this list.
 
@@ -1066,7 +1066,7 @@ duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
 
 - https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
 
-#### What is `"use strict";`? What are the advantages and disadvantages to using it?
+### What is `"use strict";`? What are the advantages and disadvantages to using it?
 
 'use strict' is a statement used to enable strict mode to entire scripts or individual functions. Strict mode is a way to opt in to a restricted variant of JavaScript.
 
@@ -1093,7 +1093,7 @@ Overall, I think the benefits outweigh the disadvantages, and I never had to rel
 - http://2ality.com/2011/10/strict-mode-hatred.html
 - http://lucybain.com/blog/2014/js-use-strict/
 
-#### Create a for loop that iterates up to `100` while outputting **"fizz"** at multiples of `3`, **"buzz"** at multiples of `5` and **"fizzbuzz"** at multiples of `3` and `5`.
+### Create a for loop that iterates up to `100` while outputting **"fizz"** at multiples of `3`, **"buzz"** at multiples of `5` and **"fizzbuzz"** at multiples of `3` and `5`.
 
 Check out this version of FizzBuzz by [Paul Irish](https://gist.github.com/jaysonrowe/1592432#gistcomment-790724).
 
@@ -1110,11 +1110,11 @@ I would not advise you to write the above during interviews though. Just stick w
 
 - https://gist.github.com/jaysonrowe/1592432
 
-#### Why is it, in general, a good idea to leave the global scope of a website as-is and never touch it?
+### Why is it, in general, a good idea to leave the global scope of a website as-is and never touch it?
 
 Every script has access to the global scope, and if everyone is using the global namespace to define their own variables, there will bound to be collisions. Use the module pattern (IIFEs) to encapsulate your variables within a local namespace.
 
-#### Why would you use something like the `load` event? Does this event have disadvantages? Do you know any alternatives, and why would you use those?
+### Why would you use something like the `load` event? Does this event have disadvantages? Do you know any alternatives, and why would you use those?
 
 The `load` event fires at the end of the document loading process. At this point, all of the objects in the document are in the DOM, and all the images, scripts, links and sub-frames have finished loading.
 
@@ -1126,7 +1126,7 @@ TODO.
 
 - https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload
 
-#### Explain what a single page app is and how to make one SEO-friendly.
+### Explain what a single page app is and how to make one SEO-friendly.
 
 The below is taken from the awesome [Grab Front End Guide](https://github.com/grab/front-end-guide), which coincidentally, is written by me!
 
@@ -1153,7 +1153,7 @@ The downsides:
 - http://blog.isquaredsoftware.com/presentations/2016-10-revolution-of-web-dev/
 - https://medium.freecodecamp.com/heres-why-client-side-rendering-won-46a349fadb52
 
-#### What is the extent of your experience with Promises and/or their polyfills?
+### What is the extent of your experience with Promises and/or their polyfills?
 
 Possess working knowledge of it. A promise is an object that may produce a single value some time in the future: either a resolved value, or a reason that it’s not resolved (e.g., a network error occurred). A promise may be in one of 3 possible states: fulfilled, rejected, or pending. Promise users can attach callbacks to handle the fulfilled value or the reason for rejection.
 
@@ -1163,7 +1163,7 @@ Some common polyfills are `$.deferred`, Q and Bluebird but not all of them compl
 
 - https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261
 
-#### What are the pros and cons of using Promises instead of callbacks?
+### What are the pros and cons of using Promises instead of callbacks?
 
 **Pros**
 
@@ -1176,7 +1176,7 @@ Some common polyfills are `$.deferred`, Q and Bluebird but not all of them compl
 - Slightly more complex code (debatable).
 - In older browsers where ES2015 is not supported, you need to load a polyfill in order to use it.
 
-#### What are some of the advantages/disadvantages of writing JavaScript code in a language that compiles to JavaScript?
+### What are some of the advantages/disadvantages of writing JavaScript code in a language that compiles to JavaScript?
 
 Some examples of languages that compile to JavaScript include CoffeeScript, Elm, ClojureScript, PureScript and TypeScript.
 
@@ -1202,7 +1202,7 @@ Practically, ES2015 has vastly improved JavaScript and made it much nicer to wri
 
 - https://softwareengineering.stackexchange.com/questions/72569/what-are-the-pros-and-cons-of-coffeescript
 
-#### What tools and techniques do you use debugging JavaScript code?
+### What tools and techniques do you use debugging JavaScript code?
 
 - React and Redux
   - [React Devtools](https://github.com/facebook/react-devtools)
@@ -1217,7 +1217,7 @@ Practically, ES2015 has vastly improved JavaScript and made it much nicer to wri
 - https://hackernoon.com/twelve-fancy-chrome-devtools-tips-dc1e39d10d9d
 - https://raygun.com/blog/javascript-debugging/
 
-#### What language constructions do you use for iterating over object properties and array items?
+### What language constructions do you use for iterating over object properties and array items?
 
 For objects:
 
@@ -1231,8 +1231,7 @@ For arrays:
 
 Most of the time, I would prefer the `.forEach` method, but it really depends on what you are trying to do. `for` loops allow more flexibility, such as prematurely terminate the loop using `break` or incrementing the iterator more than once per loop.
 
-
-#### Explain the difference between mutable and immutable objects.
+### Explain the difference between mutable and immutable objects.
 
 - What is an example of an immutable object in JavaScript?
 - What are the pros and cons of immutability?
@@ -1240,13 +1239,13 @@ Most of the time, I would prefer the `.forEach` method, but it really depends on
 
 TODO
 
-#### Explain the difference between synchronous and asynchronous functions.
+### Explain the difference between synchronous and asynchronous functions.
 
 Synchronous functions are blocking while asynchronous functions are not. In synchronous functions, statements complete before the next statement is run. In this case the program is evaluated exactly in order of the statements and execution of the program is paused if one of the statements take a very long time.
 
 Asynchronous functions usually accept a callback as a parameter and execution continues on the next line immediately after the asynchronous function is invoked. The callback is only invoked when the asynchronous operation is complete and the call stack is empty. Heavy duty operations such as loading data from a web server or querying a database should be done asynchronously so that the main thread can continue executing other operations instead of blocking until that long operation to complete (in the case of browsers, the UI will freeze).
 
-#### What is event loop? What is the difference between call stack and task queue?
+### What is event loop? What is the difference between call stack and task queue?
 
 The event loop is a single-threaded loop that monitors the call stack and checks if there is any work to be done in the task queue. If the call stack is empty and there are callback functions in the task queue, a function is dequeued and pushed onto the call stack to be executed.
 
@@ -1257,7 +1256,7 @@ If you haven't already checked out Philip Robert's [talk on the Event Loop](http
 - https://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html
 - http://theproactiveprogrammer.com/javascript/the-javascript-event-loop-a-stack-and-a-queue/
 
-#### Explain the differences on the usage of `foo` between `function foo() {}` and `var foo = function() {}`
+### Explain the differences on the usage of `foo` between `function foo() {}` and `var foo = function() {}`
 
 The former is a function declaration while the latter is a function expression. The key difference is that function declarations have its body hoisted but the bodies of function expressions are not (they have the same hoisting behaviour as variables). For more explanation on hoisting, refer to the question above on hoisting. If you try to invoke a function expression before it is defined, you will get an `Uncaught TypeError: XXX is not a function` error.
 
