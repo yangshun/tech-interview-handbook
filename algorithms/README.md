@@ -308,11 +308,11 @@ transposed_matrix = zip(*matrix)
 - When you need to compare strings where the order isn't important (like anagram), you may consider using a hash map as a counter. If your language has a built-in `Counter` class like Python, ask to use that instead.
 - If you need to keep a counter of characters, a common mistake to make is to say that the space complexity required for the counter is O(n). The space required for a counter is O(1) not O(n), because the upper bound is the range of characters which is usually a fixed constant of 26 when the input set is just lower case Latin characters.
 - Common data structures for looking up strings efficiently:
-  - [Trie / Prefix Tree](https://www.wikiwand.com/en/Trie)
-  - [Suffix Tree](https://www.wikiwand.com/en/Suffix_tree)
+  - [Trie / Prefix Tree](https://en.wikipedia.org/wiki/Trie)
+  - [Suffix Tree](https://en.wikipedia.org/wiki/Suffix_tree)
 - Common string algorithms:
-  - [Rabin Karp](https://www.wikiwand.com/en/Rabin%E2%80%93Karp_algorithm) for efficient searching of substring using a rolling hash.
-  - [KMP](https://www.wikiwand.com/en/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm) for efficient searching of substring.
+  - [Rabin Karp](https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm) for efficient searching of substring using a rolling hash.
+  - [KMP](https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm) for efficient searching of substring.
 
 #### Non-repeating Characters
 
