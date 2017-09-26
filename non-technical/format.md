@@ -75,7 +75,7 @@ For on-site interviews at smaller (non-public) companies, most will allow (and p
   - 1 x Behavioural (Jedi). Meet with an Engineering Manager and discussing past experiences and working style.
   - 1 x Design/architecture on whiteboard (Pirate).
 - Tips:
-  - You are only allowed to use the whiteboard. No laptops involved.
+  - You are only allowed to use the whiteboard (or wall). No laptops involved.
   - For the Jedi round, you may be asked a technical question at the end of it. Front end candidates will be given a small HTML/CSS problem nearing the end of the session.
   - For the Ninja rounds, you may be asked one to two questions depending on how fast you progress through the question.
 
@@ -87,9 +87,12 @@ For on-site interviews at smaller (non-public) companies, most will allow (and p
 - On-site (Front End):
   - 3 x Front end on whiteboard. Have to use Vanilla JS (or at the most, jQuery).
   - 2 x Algorithm on whiteboard.
+- Team matching.
+  - Speak with managers from different teams who are interested in your profile.
 - Tips:
   - You are only allowed to use the whiteboard. No laptops involved.
   - In rare cases, candidates may even be allowed to skip the phone interview round and advanced to on-site directly.
+  - For non-fresh grads, you only receive an offer if you are successfully matched with a team.
 
 ### Lyft
 

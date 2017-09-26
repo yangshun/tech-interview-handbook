@@ -14,19 +14,16 @@ This handbook is pretty new and help from you in contributing content would be v
 
 ## Motivations
 
-While there are many awesome books like [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) and interview-related repositories on Github that contain a lot of algorithm questions, for more domain-specific and non-software engineering questions, there seems to be a lack in resources. This handbook aims to cover questions beyond the algorithm coding questions.
+While there are many awesome books like [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) and interview-related repositories on Github that contain a lot of algorithm questions, for more domain-specific and non-software engineering questions, there seems to be a lack in resources. This handbook aims to cover content beyond the typical algorithmic coding questions.
 
 ## Contents
 
 - **[Preparing for a Coding Interview](preparing)**
-- **[Algorithm Questions](algorithms)**
-  - Questions categorized by topics.
+- **[Algorithm Questions](algorithms)** - Questions categorized by topics.
 - **[Design Questions](design)**
-- **[Front End Study Notes](front-end)**
-  - Summarized notes on the various aspects of front end.
+- **[Front End Study Notes](front-end)** - Summarized notes on the various aspects of front end.
   - [Front End Job Interview Questions and Answers](front-end/interview-questions.md) 🔥⭐
-- **[Non-Technical Tips](non-technical)**
-  - Random non-technical tips that cover behavioral and psychological aspects, interview formats and "Do you have any questions for me?".
+- **[Non-Technical Tips](non-technical)** - Random non-technical tips that cover behavioral and psychological aspects, interview formats and "Do you have any questions for me?".
   - [Behavioral Questions](non-technical/behavioral.md)
   - [Interview Formats](non-technical/format.md)
   - [Psychological Tricks](non-technical/psychological.md)
