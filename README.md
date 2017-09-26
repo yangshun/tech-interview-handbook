@@ -4,7 +4,11 @@
 
 # Tech Interview Handbook
 
-Handbook to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress.
+Handbook to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress. Besides the usual algorithm questions, other cool stuff include:
+
+- [Interview formats](non-technical/format.md) of the famous tech companies!
+- [Behavioural questions](non-technical/behavioral.md) categorized by companies!
+- A list of [GOOD questions to ask](non-technical/questions-to-ask.md) your interviewers the end of the interviews!
 
 This handbook is pretty new and help from you in contributing content would be very much appreciated!
 
@@ -15,12 +19,12 @@ While there are many awesome books like [Cracking the Coding Interview](http://w
 ## Contents
 
 - **[Preparing for a Coding Interview](preparing)**
-- **[Algorithms Questions](algorithms)**
-  - Questions categorized by topic.
+- **[Algorithm Questions](algorithms)**
+  - Questions categorized by topics.
 - **[Design Questions](design)**
 - **[Front End Study Notes](front-end)**
   - Summarized notes on the various aspects of front end.
-  - [Front End Job Interview Questions and Answers](front-end/interview-questions.md) ⭐
+  - [Front End Job Interview Questions and Answers](front-end/interview-questions.md) 🔥⭐
 - **[Non-Technical Tips](non-technical)**
   - Random non-technical tips that cover behavioral and psychological aspects, interview formats and "Do you have any questions for me?".
   - [Behavioral Questions](non-technical/behavioral.md)
