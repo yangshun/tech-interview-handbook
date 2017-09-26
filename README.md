@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="https://cdn.rawgit.com/yangshun/tech-interview-handbook/master/assets/logo.svg" alt="Tech Interview Handbook" width="300">
+</div>
+
 # Tech Interview Handbook
 
 Handbook to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress.
