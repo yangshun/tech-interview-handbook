@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://cdn.rawgit.com/yangshun/tech-interview-handbook/master/assets/book.svg" alt="Tech Interview Handbook" width="300">
+  <img src="https://cdn.rawgit.com/yangshun/tech-interview-handbook/master/assets/book.svg" alt="Tech Interview Handbook" width="400">
 </div>
 
 # Tech Interview Handbook
