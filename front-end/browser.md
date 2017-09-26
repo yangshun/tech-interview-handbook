@@ -34,7 +34,7 @@ High level flow of how browsers render a webpage:
 
 ###### References
 
-- https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/webkitflow.png
+- http://taligarsiel.com/Projects/howbrowserswork1.htm
 - https://medium.freecodecamp.org/its-not-dark-magic-pulling-back-the-curtains-from-your-stylesheets-c8d677fa21b2
 
 ## Repaint
@@ -53,7 +53,7 @@ When the changes affect document contents or structure, or element position, a r
 
 #### References
 
-- [How Browsers Work](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/)
+- [How Browsers Work](http://taligarsiel.com/Projects/howbrowserswork1.htm)
 - [What Every Frontend Developer Should Know About Webpage Rendering](http://frontendbabel.info/articles/webpage-rendering-101/)
 - [Rendering: repaint, reflow/relayout, restyle](http://www.phpied.com/rendering-repaint-reflowrelayout-restyle/)
 - [Building the DOM faster: speculative parsing, async, defer and preload](https://hacks.mozilla.org/2017/09/building-the-dom-faster-speculative-parsing-async-defer-and-preload/)

@@ -581,7 +581,6 @@ When using `translate()`, the element still takes up its original space (sort of
 ### Other Answers
 
 - https://neal.codes/blog/front-end-interview-css-questions
-- http://jgthms.com/css-interview-questions-and-answers.html
 - https://quizlet.com/28293152/front-end-interview-questions-css-flash-cards/
 - http://peterdoes.it/2015/12/03/a-personal-exercise-front-end-job-interview-questions-and-my-answers-all/
 

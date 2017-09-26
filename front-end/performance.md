@@ -58,7 +58,7 @@ Performance
 
 ## Web Performance Rules
 
-- https://www.html5rocks.com/en/tutorials/webperformance/basics/
+- https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp
 - http://stevesouders.com/hpws/rules.php
 - https://developer.yahoo.com/performance/rules.html
 - https://browserdiet.com/en/
