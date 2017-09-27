@@ -13,7 +13,6 @@ Here are some good questions to ask at the end of the interview, extracted from 
 - What does a typical day look like for you?
 - What do you think the company can improve at?
 - How would you see yourself growing at this company in the next few years?
-- What do you wish you were told about the company before you joined?
 - Was there a time where you messed up and how was it handled?
 - Why did you choose to come to this company?
 - When you were last interviewing, what were some of your other options, and what made you choose this company?
@@ -42,11 +41,11 @@ These questions are suitable for any technical role.
 - How would you describe your engineering culture?
 - How has your role changed since joining the company?
 - What is your stack? What is the rationale for/story behind this specific stack?
-- Do you tend to roll your own solutions more often or rely on third party tools? What’s the rationale in a specific case?
+- Do you tend to roll your own solutions more often or rely on third party tools? What's the rationale in a specific case?
 - How does the engineering team balance resources between feature requests and engineering maintenance?
 - What do you measure? What are your most important product metrics?
 - What does the company do to nurture and train its employees?
-- How often have you moved teams? What made you join the team you’re on right now? If you wanted to move teams, what would need to happen?
+- How often have you moved teams? What made you join the team you're on right now? If you wanted to move teams, what would need to happen?
 
 ### Management
 
@@ -58,10 +57,10 @@ These questions are suitable for asking Engineering Managers, especially useful 
 - **What are the strengths and weaknesses of the current team? What is being done to improve upon the weaknesses?**
 - How did you become a manager?
 - How do your engineers know what to work on each day?
-- What is your team’s biggest challenge right now?
+- What is your team's biggest challenge right now?
 - How do you measure individual performance?
 - How often are 1:1s conducted?
-- How’s the current team composition like?
+- What is the current team composition like?
 
 ### Leadership
 
@@ -93,4 +92,4 @@ These questions are intended for senior level management, such as CEO, CTO, VPs.
 - [Questions I'm asking in interviews](http://jvns.ca/blog/2013/12/30/questions-im-asking-in-interviews/)
 - [How to interview your interviewers](http://blog.alinelerner.com/how-to-interview-your-interviewers/)
 - [How to Break Into the Tech Industry—a Guide to Job Hunting and Tech Interviews](https://haseebq.com/how-to-break-into-tech-job-hunting-and-interviews/)
-- [A developer’s guide to interviewing](https://medium.freecodecamp.org/how-to-interview-as-a-developer-candidate-b666734f12dd)
+- [A developer's guide to interviewing](https://medium.freecodecamp.org/how-to-interview-as-a-developer-candidate-b666734f12dd)

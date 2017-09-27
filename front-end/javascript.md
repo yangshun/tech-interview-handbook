@@ -17,7 +17,7 @@ WIP.
 - **Hoisting** - TBD
 - **Promise** - TBD
 - **Prototype** - TBD
-- **This** - The `this` keyword does not refer to the function in which it is used or it’s scope. It refers to the object on which a function is being executed and depends entirely on the call-site of the function.
+- **This** - The `this` keyword does not refer to the function in which it is used or it's scope. It refers to the object on which a function is being executed and depends entirely on the call-site of the function.
 
 ## Core Language
 

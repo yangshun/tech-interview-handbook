@@ -50,7 +50,7 @@ Arrays
 - Given an array of integers, find a maximum sum of non-adjacent elements.
   - E.g. `[1, 0, 3, 9, 2]` should return `10 (1 + 9)`.
   - [Source](http://blog.gainlo.co/index.php/2016/12/02/uber-interview-question-maximum-sum-non-adjacent-elements/)
-- Given an array of integers, modify the array by moving all the zeros to the end (right side). The order of other elements doesn’t matter.
+- Given an array of integers, modify the array by moving all the zeros to the end (right side). The order of other elements doesn't matter.
   - E.g. `[1, 2, 0, 3, 0, 1, 2]`, the program can output `[1, 2, 3, 1, 2, 0, 0]`.
   - [Source](http://blog.gainlo.co/index.php/2016/11/18/uber-interview-question-move-zeroes/).
 - Given an array, return the length of the longest increasing contiguous subarray.

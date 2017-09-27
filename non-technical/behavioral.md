@@ -66,7 +66,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Amazon-Interview-Questio
 - Tell me a situation where you would have done something differently from what you actually did.
 - What is the most exceedingly bad misstep you at any point made?
 - Describe what Human Resource means to you.
-- How would you improve Amazon’s website?
+- How would you improve Amazon's website?
 
 ## Dropbox
 
@@ -90,7 +90,7 @@ Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions
 - Give me an example of a time where you had a difference of opinion with a team member. How did you handle that?
 - Tell me about a challenge you faced recently in your role. How did you tackle it? What was the outcome?
 - Where do you want to be in five years?
-- Tell me about a time you needed information from someone who wasn’t responsive. What did you do?
+- Tell me about a time you needed information from someone who wasn't responsive. What did you do?
 
 ## Lyft
 

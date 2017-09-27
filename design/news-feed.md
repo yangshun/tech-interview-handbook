@@ -65,12 +65,12 @@ TODO
 >
 > The system will first get all userIDs of friends from friend table. Then it fetches all feedIDs for each friend from user-feed table. Finally, feed content is fetched based on feedID from feed table. You can see that we need to perform 3 joins, which can affect performance.
 >
-> A common optimization is to store feed content together with feedID in user-feed table so that we don’t need to join the feed table any more. This approach is called denormalization, which means by adding redundant data, we can optimize the read performance (reducing the number of joins).
+> A common optimization is to store feed content together with feedID in user-feed table so that we don't need to join the feed table any more. This approach is called denormalization, which means by adding redundant data, we can optimize the read performance (reducing the number of joins).
 >
 > The disadvantages are obvious:
 > - Data redundancy. We are storing redundant data, which occupies storage space (classic time-space trade-off).
 > - Data consistency. Whenever we update a feed, we need to update both feed table and user-feed table. Otherwise, there is data inconsistency. This increases the complexity of the system.
-> - Remember that there’s no one approach always better than the other (normalization vs denormalization). It’s a matter of whether you want to optimize for read or write.
+> - Remember that there's no one approach always better than the other (normalization vs denormalization). It's a matter of whether you want to optimize for read or write.
 
 ## Feed Display
 
