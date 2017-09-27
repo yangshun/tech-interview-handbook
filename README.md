@@ -45,3 +45,8 @@ While there are many awesome books like [Cracking the Coding Interview](http://w
 ## Contributing
 
 There are no hard contributing guidelines at the moment as things are still in flux, might find a better approach to structure content, but we will figure out as we go along! Just contribute whatever that you think will help others. If you would like to contribute content for different domains, feel free to create an issue or submit a pull request and we can discuss further.
+
+## Contributors
+
+- [Yangshun Tay](https://github.com/yangshun)
+- [Louie Tan](https://github.com/louietyj)
