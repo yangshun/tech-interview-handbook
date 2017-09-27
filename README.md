@@ -11,40 +11,41 @@
 
 # Tech Interview Handbook
 
-Handbook to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff include:
+Carefully curated content to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff include:
 
 - [How to prepare](preparing) for coding interviews
-- [Tips and best questions to practice](algorithms) for each algorithm topic
-- [Detailed answers](front-end/interview-questions.md) to the famous "Front-end Job Interview Questions"
+- [Algorithm tips and the best practice questions](algorithms) categorized by topic
+- ["Front-end Job Interview Questions" answers](front-end/interview-questions.md)
 - [Interview formats](non-technical/format.md) of the top tech companies
-- [Behavioural questions](non-technical/behavioral.md) categorized by companies
-- [Good questions to ask](non-technical/questions-to-ask.md) your interviewers at the end of the interviews
+- [Behavioral questions](non-technical/behavioral.md) categorized by companies
+- [Good questions to ask your interviewers](non-technical/questions-to-ask.md) at the end of the interviews
 
 This handbook is pretty new and help from you in contributing content would be very much appreciated!
 
-## Motivations
+## How is this repository different?
 
-While there are many awesome books like [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) and interview-related repositories on Github that contain a lot of algorithm questions, for more domain-specific and non-software engineering questions, there seems to be a lack in resources. This handbook aims to cover content beyond the typical algorithmic coding questions.
+There are so many awesome books like [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) and interview-related repositories out there on GitHub, what makes this repository different? The difference is that many existing interview repositories contain mainly links to external resources whereas this repository contains top quality curated content directly for your consumption.
+
+Also, existing resources focus mainly on algorithm questions, and lack in coverage for more domain-specific and non-technical questions. This handbook aims to cover content beyond the typical algorithmic coding questions. 😎
 
 ## Contents
 
 - **[Preparing for a Coding Interview](preparing)**
-- **[Algorithm Questions](algorithms)** - Questions categorized by topics.
+- **[Algorithm Questions](algorithms)** - Questions categorized by topics
 - **[Design Questions](design)**
-- **[Front-end Study Notes](front-end)** - Summarized notes on the various aspects of front-end.
+- **[Front-end Study Notes](front-end)** - Summarized notes on the various aspects of front-end
   - [Front-end Job Interview Questions and Answers](front-end/interview-questions.md) 🔥⭐
-- **[Non-Technical Tips](non-technical)** - Random non-technical tips that cover behavioral and psychological aspects, interview formats and "Do you have any questions for me?".
+- **[Non-Technical Tips](non-technical)** - Random non-technical tips that cover behavioral and psychological aspects, interview formats and "Do you have any questions for me?"
   - [Behavioral Questions](non-technical/behavioral.md)
   - [Interview Formats](non-technical/format.md)
   - [Psychological Tricks](non-technical/psychological.md)
   - [Questions to Ask](non-technical/questions-to-ask.md)
   - [Negotiation Tips](non-technical/negotiation.md)
-- **[Utilities](utilities)**
-  - Snippets of algorithms/code that will help in coding questions.
+- **[Utilities](utilities)** - Snippets of algorithms/code that will help in coding questions.
 
 ## Contributing
 
-There are no hard contributing guidelines at the moment as things are still in flux, might find a better approach to structure content, but we will figure out as we go along! Just contribute whatever that you think will help others. If you would like to contribute content for different domains, feel free to create an issue or submit a pull request and we can discuss further.
+There are no formal contributing guidelines at the moment as things are still in flux and we might find a better approach to structure content as we go along. You are welcome contribute whatever that you think will be helpful to fellow engineers. If you would like to contribute content for different domains, feel free to create an issue or submit a pull request and we can discuss further.
 
 ## Maintainers
 
