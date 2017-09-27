@@ -14,10 +14,11 @@
 Handbook to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff include:
 
 - [How to prepare](preparing) for coding interviews
+- [Tips and best questions to practice](algorithms) for each algorithm topic
 - [Detailed answers](front-end/interview-questions.md) to the famous "Front-end Job Interview Questions"
 - [Interview formats](non-technical/format.md) of the famous tech companies
 - [Behavioural questions](non-technical/behavioral.md) categorized by companies
-- A list of [GOOD questions to ask](non-technical/questions-to-ask.md) your interviewers the end of the interviews
+- [Good questions to ask](non-technical/questions-to-ask.md) your interviewers the end of the interviews
 
 This handbook is pretty new and help from you in contributing content would be very much appreciated!
 
