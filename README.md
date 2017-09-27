@@ -16,9 +16,9 @@ Handbook to help you ace your next technical interview, with a focus on algorith
 - [How to prepare](preparing) for coding interviews
 - [Tips and best questions to practice](algorithms) for each algorithm topic
 - [Detailed answers](front-end/interview-questions.md) to the famous "Front-end Job Interview Questions"
-- [Interview formats](non-technical/format.md) of the famous tech companies
+- [Interview formats](non-technical/format.md) of the top tech companies
 - [Behavioural questions](non-technical/behavioral.md) categorized by companies
-- [Good questions to ask](non-technical/questions-to-ask.md) your interviewers the end of the interviews
+- [Good questions to ask](non-technical/questions-to-ask.md) your interviewers at the end of the interviews
 
 This handbook is pretty new and help from you in contributing content would be very much appreciated!
 
