@@ -1,6 +1,8 @@
 Performance
 ==
 
+WIP.
+
 ## Glossary
 
 - **Critical Rendering Path** -

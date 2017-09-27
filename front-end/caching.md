@@ -1,6 +1,8 @@
 Caching
 ==
 
+WIP.
+
 ## Glossary
 
 - **Cookies**
