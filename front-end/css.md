@@ -12,7 +12,11 @@ If you are a total beginner to CSS, Codecademy's [HTML & CSS course](https://www
 ## Glossary
 
 - [**Box Model**](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model) - The CSS box model describes the rectangular boxes that are generated for elements in the document tree and laid out according to the visual formatting model. Each box has a content area (e.g. text, an image, etc.) and optional surrounding padding, border, and margin areas.
-- **Specificity** - TBD
+- [**Specificity**](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) - Specificity is how browsers decide which CSS property values are the most relevant to an element and, will therefore be applied. It is a weight that is applied to a given CSS declaration, determined by the number of each selector type in the matching selector. 
+  - When multiple declarations have equal specificity, the last declaration found in the CSS is applied to the element. It only applies when the same element is targeted by multiple declarations. As per CSS rules, directly targeted elements will always take precedence over rules which an element inherits from its ancestor.
+  - Typically used in type selectors/pseduo elements (`h1`, `div`, `:before`), class/attribute selectors (`.btn`, `[type="radio"]`), pseudo-classes (`:hover`) and ID selectors (`#someElement`).
+  - Inline styles added to an element always overwrite any styles in external stylesheets, and thus can be thought of as having the highest specificity.
+  - When an important rule (`!important`) is used on a style declaration, this declaration overrides any other declarations. Try to avoid using `!important`, as it breaks  the natural cascading in the stylesheets. Always look for a way to use specificity before even considering `!important`, and only use !important on page-specific CSS that overrides foreign CSS (from external libraries, like Bootstrap).
 - [**Positioning**](https://developer.mozilla.org/en-US/docs/Web/CSS/position) - The position CSS property determines how an element will be positioned in a document. The `top`, `right`, `bottom`, and `left` properties would later determine the final location of said positioned element.
   - Initial value: `static`
   - Values that are frequently used: `relative`, `absolute`, `fixed`, `sticky`
