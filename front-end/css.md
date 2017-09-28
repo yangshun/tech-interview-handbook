@@ -11,9 +11,9 @@ If you are a total beginner to CSS, Codecademy's [HTML & CSS course](https://www
 
 ## Glossary
 
-- **Box Model** - The CSS box model describes the rectangular boxes that are generated for elements in the document tree and laid out according to the visual formatting model. Each box has a content area (e.g. text, an image, etc.) and optional surrounding padding, border, and margin areas.
+- [**Box Model**](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model) - The CSS box model describes the rectangular boxes that are generated for elements in the document tree and laid out according to the visual formatting model. Each box has a content area (e.g. text, an image, etc.) and optional surrounding padding, border, and margin areas.
 - **Specificity** - TBD
-- **Positioning** - TBD
+- [**Positioning**](https://developer.mozilla.org/en-US/docs/Web/CSS/position) - TBD
 - **Floats** - TBD
 
 ## Writing CSS without Side Effects
