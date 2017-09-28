@@ -13,7 +13,9 @@ If you are a total beginner to CSS, Codecademy's [HTML & CSS course](https://www
 
 - [**Box Model**](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model) - The CSS box model describes the rectangular boxes that are generated for elements in the document tree and laid out according to the visual formatting model. Each box has a content area (e.g. text, an image, etc.) and optional surrounding padding, border, and margin areas.
 - **Specificity** - TBD
-- [**Positioning**](https://developer.mozilla.org/en-US/docs/Web/CSS/position) - TBD
+- [**Positioning**](https://developer.mozilla.org/en-US/docs/Web/CSS/position) - The position CSS property determines how an element will be positioned in a document. The `top`, `right`, `bottom`, and `left` properties would later determine the final location of said positioned element.
+  - Initial value: `static`
+  - Values that are frequently used: `relative`, `absolute`, `fixed`, `sticky`
 - **Floats** - TBD
 
 ## Writing CSS without Side Effects
