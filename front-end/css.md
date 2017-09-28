@@ -16,7 +16,10 @@ If you are a total beginner to CSS, Codecademy's [HTML & CSS course](https://www
 - [**Positioning**](https://developer.mozilla.org/en-US/docs/Web/CSS/position) - The position CSS property determines how an element will be positioned in a document. The `top`, `right`, `bottom`, and `left` properties would later determine the final location of said positioned element.
   - Initial value: `static`
   - Values that are frequently used: `relative`, `absolute`, `fixed`, `sticky`
-- **Floats** - TBD
+- [**Floats**](https://developer.mozilla.org/en-US/docs/Web/CSS/float) - The `float` CSS property determines where an element should be placed - along the left or right side of its container. This allows text and inline elements to wrap around it. Also note, the element would be removed from the normal *flow* of the web page, though still remaining a part of the flow (in contrast to `position: absolute`). For an element to be `float`, it's value must not be `none`.
+  - Initial value: `none`
+  - Values that are frequently used: `left`, `right`, `inline-start`, `inline-end`.
+  - Additional Notes: Usually, there would be cases that you may want to move an item below any floated elements. E.g, you may want some elements like your paragraphs to remain adjacent to floats, but force headings and footers to be on their own line. See [`clear` attribute](https://developer.mozilla.org/en-US/docs/Web/CSS/clear) for more examples
 
 ## Writing CSS without Side Effects
 
