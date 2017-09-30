@@ -170,12 +170,12 @@ def traverse(matrix):
 
 - [Clone Graph](https://leetcode.com/problems/clone-graph/)
 - [Course Schedule](https://leetcode.com/problems/course-schedule/)
-- [Alien Dictionary (Leetcode Premium)](https://leetcode.com/problems/alien-dictionary/)
 - [Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
 - [Number of Islands](https://leetcode.com/problems/number-of-islands/)
+- [Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
+- [Alien Dictionary (Leetcode Premium)](https://leetcode.com/problems/alien-dictionary/)
 - [Graph Valid Tree (Leetcode Premium)](https://leetcode.com/problems/graph-valid-tree/)
 - [Number of Connected Components in an Undirected Graph (Leetcode Premium)](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
-- [Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
 
 ## Interval
 
@@ -204,8 +204,8 @@ def merge_overlapping_intervals(a, b):
 
 - [Insert Interval](https://leetcode.com/problems/insert-interval/)
 - [Merge Intervals](https://leetcode.com/problems/merge-intervals/)
-- [Meeting Rooms (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms/) and [Meeting Rooms II (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms-ii/)
 - [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
+- [Meeting Rooms (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms/) and [Meeting Rooms II (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms-ii/)
 
 ## Linked List
 
@@ -350,13 +350,13 @@ for c in set(word):
 - [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 - [Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/)
 - [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/description/)
-- [Encode and Decode Strings (Leetcode Premium)](https://leetcode.com/problems/encode-and-decode-strings/)
 - [Valid Anagram](https://leetcode.com/problems/valid-anagram)
 - [Group Anagrams](https://leetcode.com/problems/group-anagrams/)
 - [Valid Parentheses](https://leetcode.com/problems/valid-parentheses)
 - [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
 - [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
 - [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/)
+- [Encode and Decode Strings (Leetcode Premium)](https://leetcode.com/problems/encode-and-decode-strings/)
 
 ## Tree
 
