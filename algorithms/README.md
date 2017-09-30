@@ -3,7 +3,7 @@ Algorithm Questions
 
 This section dives deep into practical tips for specific topics of algorithms and data structures which appear frequently in coding questions. Many algorithm questions involve techniques that can be applied to questions of similar nature. The more techniques you have in your arsenal, the higher the chances of passing the interview. They may lead you to discover corner cases you might have missed out or even lead you towards the optimal approach!
 
-For each topic, there is also a list of recommended common questions which in my opinion is highly valuable for mastering the core concepts for the topic.
+For each topic, study links are recommended to help you master the topic. There is a list of recommended common questions to practice which in my opinion is highly valuable for mastering the core concepts for the topic.
 
 ## Contents
 
@@ -50,6 +50,8 @@ For each topic, there is also a list of recommended common questions which in my
 
 ## Sequence
 
+#### Notes
+
 - Arrays and strings are considered sequences (a string is a sequence of characters). There are tips relevant for dealing with both arrays and strings which will be covered here.
 - Are there duplicate values in the sequence, would it affect the answer?
 - Check for sequence out of bounds.
@@ -57,12 +59,16 @@ For each topic, there is also a list of recommended common questions which in my
 - Sometimes you can traverse the sequence from the right rather than from the left.
 - Master the [sliding window technique](https://discuss.leetcode.com/topic/30941/here-is-a-10-line-template-that-can-solve-most-substring-problems) that applies to many substring/subarray problems.
 - When you are given two sequences to process, it is common to have one index per sequence to traverse/compare the both of them. For example, we use the same approach to merge two sorted arrays.
-- Corner cases:
-  - Empty sequence.
-  - Sequence with 1 or 2 elements.
-  - Sequence with repeated elements.
+
+#### Corner Cases
+
+- Empty sequence.
+- Sequence with 1 or 2 elements.
+- Sequence with repeated elements.
 
 ## Array
+
+#### Notes
 
 - Is the array sorted or partially sorted? If it is, some form of binary search should be possible. This also usually means that the interviewer is looking for a solution that is faster than O(n).
 - Can you sort the array? Sometimes sorting the array first may significantly simplify the problem. Make sure that the order of array elements do not need to be preserved before attempting a sort.
@@ -84,12 +90,23 @@ For each topic, there is also a list of recommended common questions which in my
 
 ## Binary
 
+#### Study Links
+
+- [Bits, Bytes, Building With Binary](https://medium.com/basecs/bits-bytes-building-with-binary-13cb4289aafa)
+
+#### Notes
+
 - Questions involving binary representations and bitwise operations are asked sometimes and you must be absolutely familiar with how to convert a number from decimal form into binary form (and vice versa) in your programming language of choice.
 - Test k<sup>th</sup> bit is set: `num & (1 << k) != 0`.
 - Set k<sup>th</sup> bit: `num |= (1 << k)`.
 - Turn off k<sup>th</sup> bit: `num &= ~(1 << k)`.
 - Toggle the k<sup>th</sup> bit: `num ^= (1 << k)`.
 - To check if a number is a power of 2, `num & num - 1 == 0`.
+
+#### Corner Cases
+
+- Check for overflow/underflow.
+- Negative numbers.
 
 #### Practice Questions
 
@@ -101,8 +118,13 @@ For each topic, there is also a list of recommended common questions which in my
 
 ## Dynamic Programming
 
+#### Study Links
+
+- [Demystifying Dynamic Programming](https://medium.freecodecamp.org/demystifying-dynamic-programming-3efafb8d4296)
+
+#### Notes
+
 - Usually used to solve optimization problems.
-- Alaina Kafkes has written an [awesome post](https://medium.freecodecamp.org/demystifying-dynamic-programming-3efafb8d4296) on tackling DP problems.
 - The only way to get better at DP is to practice. It takes some amount of practice to be able to recognize that a problem can be solved by DP.
 - Sometimes you do not need to store the whole DP table in memory, the last two values or the last two rows of the matrix will suffice.
 
@@ -122,10 +144,20 @@ For each topic, there is also a list of recommended common questions which in my
 
 ## Geometry
 
+#### Notes
+
 - When comparing euclidean distance between two pairs of points, using dx<sup>2</sup> + dy<sup>2</sup> is sufficient. It is unnecessary to square root the value.
 - To find out if two circles overlap, check that the distance between the two centers of the circles is less than the sum of their radii.
 
 ## Graph
+
+#### Study Links
+
+- [From Theory To Practice: Representing Graphs](https://medium.com/basecs/from-theory-to-practice-representing-graphs-cfd782c5be38)
+- [Deep Dive Through A Graph: DFS Traversal](https://medium.com/basecs/deep-dive-through-a-graph-dfs-traversal-8177df5d0f13)
+- [Going Broad In A Graph: BFS Traversal](https://medium.com/basecs/going-broad-in-a-graph-bfs-traversal-959bd1a09255)
+
+#### Notes
 
 - Be familiar with the various graph representations, graph search algorithms and their time and space complexities.
 - You can be given a list of edges and tasked to build your own graph from the edges to perform a traversal on. The common graph representations are:
@@ -160,11 +192,12 @@ def traverse(matrix):
       dfs(i, j)
 ```
 
-- Corner cases:
-  - Empty graph.
-  - Graph with one or two nodes.
-  - Disjoint graphs.
-  - Graph with cycles.
+#### Corner Cases
+
+- Empty graph.
+- Graph with one or two nodes.
+- Disjoint graphs.
+- Graph with cycles.
 
 #### Practice Questions
 
@@ -178,6 +211,8 @@ def traverse(matrix):
 - [Number of Connected Components in an Undirected Graph (Leetcode Premium)](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
 
 ## Interval
+
+#### Notes
 
 - Interval questions are questions where you are given an array of two-element arrays (an interval) and the two values represent a start and an end value. Interval questions are considered part of the array family but they involve some common techniques hence they are extracted out to this special section of their own.
 - An example interval array: `[[1, 2], [4, 7]]`.
@@ -194,11 +229,12 @@ def merge_overlapping_intervals(a, b):
   return [min(a[0], b[0]), max(a[1], b[1])]
 ```
 
-- Corner cases:
-  - Single interval.
-  - Non-overlapping intervals.
-  - An interval totally consumed within another interval.
-  - Duplicate intervals.
+#### Corner Cases
+
+- Single interval.
+- Non-overlapping intervals.
+- An interval totally consumed within another interval.
+- Duplicate intervals.
 
 #### Practice Questions
 
@@ -208,6 +244,8 @@ def merge_overlapping_intervals(a, b):
 - [Meeting Rooms (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms/) and [Meeting Rooms II (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms-ii/)
 
 ## Linked List
+
+#### Notes
 
 - Like arrays, linked lists are used to represent sequential data. The benefit of linked lists is that insertion and deletion from anywhere in the list is O(1) whereas in arrays the following elements will have to be shifted.
 - Adding a dummy node at the head and/or tail might help to handle many edge cases where operations have to be performed at the head or the tail. The presence of dummy nodes essentially ensures that operations will never have be done on the head or the tail, thereby removing a lot of headache in writing conditional checks to dealing with null pointers. Be sure to remember to remove them at the end of the operation.
@@ -224,10 +262,12 @@ def merge_overlapping_intervals(a, b):
   - Reversing a linked list in-place.
   - Finding the middle node of the linked list using fast/slow pointers.
   - Merging two lists together.
-- Corner cases:
-  - Single node.
-  - Two nodes.
-  - Cycle in linked list - Clarify whether there can be a cycle in the list? Usually the answer is no.
+
+#### Corner Cases
+
+- Single node.
+- Two nodes.
+- Linked list has cycle. Clarify with the interviewer whether there can be a cycle in the list. Usually the answer is no.
 
 #### Practice Questions
 
@@ -260,10 +300,6 @@ def merge_overlapping_intervals(a, b):
 ## Matrix
 
 - A matrix is a 2-dimensional array. Questions involving matrices are usually related to dynamic programming or graph traversal.
-- Corner cases:
-  - Empty matrix. Check that none of the arrays are 0 length.
-  - 1 x 1 matrix.
-  - Matrix with only one row or column.
 - For questions involving traversal or dynamic programming, you almost always want to make a copy of the matrix with the same dimensions that is initialized to empty values to store the visited state or dynamic programming table. Be familiar with such a routine:
 
 ```py
@@ -277,6 +313,12 @@ copy = [[0 for _ in range(cols)] for _ in range(rows)]
 ```py
 transposed_matrix = zip(*matrix)
 ```
+
+#### Corner Cases
+
+- Empty matrix. Check that none of the arrays are 0 length.
+- 1 x 1 matrix.
+- Matrix with only one row or column.
 
 #### Practice Questions
 
@@ -302,8 +344,6 @@ transposed_matrix = zip(*matrix)
 ## String
 
 - Please read the above tips on [Sequence](#sequence) because they apply to strings too.
-- Corner cases:
-  - Strings with only one distinct character.
 - Ask about input character set and case sensitivity. Usually the characters are limited to lower case Latin characters, i.e. a-z.
 - When you need to compare strings where the order isn't important (like anagram), you may consider using a hash map as a counter. If your language has a built-in `Counter` class like Python, ask to use that instead.
 - If you need to keep a counter of characters, a common mistake to make is to say that the space complexity required for the counter is O(n). The space required for a counter is O(1) not O(n), because the upper bound is the range of characters which is usually a fixed constant of 26 when the input set is just lower case Latin characters.
@@ -313,6 +353,10 @@ transposed_matrix = zip(*matrix)
 - Common string algorithms:
   - [Rabin Karp](https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm) for efficient searching of substring using a rolling hash.
   - [KMP](https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm) for efficient searching of substring.
+
+#### Corner Cases
+
+- Strings with only one distinct character.
 
 #### Non-repeating Characters
 
@@ -326,15 +370,15 @@ for c in set(word):
 
 - To determine if two strings have common characters, perform `&` on the two bitmasks and if the result is non-zero, the two strings do have common characters: `mask_a & mask_b > 0`.
 
-#### Anagram
+### Anagram
 
 - An anagram is direct word switch or word play, the result of rearranging the letters of a word or phrase to produce a new word or phrase, using all the original letters exactly once. In interviews, usually we are only bothered with words without spaces in them.
-- Determine if two strings are anagrams:
-  - Sorting both strings should produce the same resulting string.
-  - If we map each character to a prime number and we multiply each mapped number together, anagrams should have the same multiple (prime factor decomposition).
-  - Frequency counting of characters will help to determine if two strings are anagrams.
+- To determine if two strings are anagrams, there are a few plausible approaches.
+  - Sorting both strings should produce the same resulting string. This takes O(nlgn) time and O(lgn) space.
+  - If we map each character to a prime number and we multiply each mapped number together, anagrams should have the same multiple (prime factor decomposition). This takes O(n) time and O(1) space.
+  - Frequency counting of characters will help to determine if two strings are anagrams. This also takes O(n) time and O(1) space.
 
-#### Palindrome
+### Palindrome
 
 - A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward, such as madam or racecar.
 - Ways to determine if a string is a palindrome:
@@ -360,6 +404,12 @@ for c in set(word):
 
 ## Tree
 
+#### Study Links
+
+- [Leaf It Up To Binary Trees](https://medium.com/basecs/leaf-it-up-to-binary-trees-11001aaf746d)
+
+#### Notes
+
 - A tree is an undirected, connected, acyclic graph.
 - Recursion is a common approach for trees. When you notice the subtree problem can be used to solve the whole problem, you should try recursion.
 - When using recursion, always remember to check for the base case, usually where the node is `null`.
@@ -367,17 +417,19 @@ for c in set(word):
 - Sometimes it is possible that your recursive function needs to return two values.
 - If the question involves summation of nodes along the way, be sure to check whether nodes can be negative.
 - You should be very familiar with writing pre-order, in-order and post-order traversal recursively. As an extension, challenge yourself by writing them iteratively. Sometimes interviewers do ask candidates for the iterative approach, especially if the candidate finishes writing the recursive approach too fast.
-- Corner cases:
-  - Empty tree.
-  - Single node.
-  - Two nodes.
-  - Very skewed tree (like a linked list).
 
-**Binary Tree**
+#### Corner Cases
+
+- Empty tree.
+- Single node.
+- Two nodes.
+- Very skewed tree (like a linked list).
+
+### Binary Tree
 
 - In-order traversal of a binary tree is insufficient to uniquely serialize a tree. Pre-order or post-order traversal is also required.
 
-**Binary Search Tree**
+### Binary Search Tree
 
 - In-order traversal of a BST will give you all elements in order.
 - Be very familiar with the properties of a BST and validating that a binary tree is a BST. This comes up more often than expected.
@@ -399,6 +451,12 @@ for c in set(word):
 
 ## Trie
 
+#### Study Links
+
+- [Trying to Understand Tries](https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014)
+
+#### Notes
+
 - Tries are special trees (prefix trees) that make searching and storing strings more efficient. Tries have many practical applications such as for searching and autocomplete. It will be helpful to know these common applications so that you can easily identify when a problem can be solved efficiently using a trie.
 - Sometimes preprocessing a dictionary of words (given in a list) into a trie will improve the efficiency when searching for a word of length k among n words. Searching becomes O(k) instead of O(n).
 - LeetCode has written a [very comprehensive article](https://leetcode.com/articles/implement-trie-prefix-tree/) on tries which you are highly encouraged to read.
@@ -411,6 +469,12 @@ for c in set(word):
 - [Word Search II](https://leetcode.com/problems/word-search-ii/)
 
 ## Heap
+
+#### Study Links
+
+- [Learning to Love Heaps](https://medium.com/basecs/learning-to-love-heaps-cef2b273a238)
+
+#### Notes
 
 - If you see a top/lowest K being mentioned in the question, it is usually a signal that a heap can be used to solve the problem.
 - If you require the top K elements use a Min Heap of size K. Iterate through each element, pushing it into the heap. Whenever the heap size exceeds K, remove the minimum element, that will guarantee that you have the K largest elements.
@@ -426,3 +490,4 @@ for c in set(word):
 - http://blog.triplebyte.com/how-to-pass-a-programming-interview
 - https://quip.com/q41AA3OmoZbC
 - http://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/
+- https://medium.com/basecs
