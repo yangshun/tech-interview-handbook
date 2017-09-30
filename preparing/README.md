@@ -19,6 +19,8 @@ If you have been out of college for a while, it will be highly advisable to revi
 
 This [interviews repository](https://github.com/kdn251/interviews) by Kevin Naughton Jr. served as a quick refresher for me.
 
+The Medium publication [basecs](https://medium.com/basecs) by [Vaidehi Joshi](https://medium.com/@vaidehijoshi) is also a great and light-hearted resource to recap on the various data structures and algorithms.
+
 ### Mastery through Practice
 
 Next, gain familiarity and mastery of the algorithms and data structures in your chosen programming language:
