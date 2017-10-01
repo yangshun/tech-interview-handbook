@@ -13,9 +13,9 @@ Java is a decent choice too but having to constantly declare types in your code 
 
 One exception to the convention of allowing you to "pick any programming language you want" is when you are interviewing for a domain-specific position, such as Front End/iOS/Android Engineer roles, in which you would need to be familiar with coding algorithms in JavaScript, Objective-C/Swift and Java respectively. If you need to use a data structure that the language does not support, such as a Queue or Heap in JavaScript, perhaps try asking the interviewer whether you can assume that you have a data structure that implements certain methods with specified time complexities. If the implementation of that data structure is not crucial to solving the problem, the interviewer will usually allow it. In reality, being aware of existing data structures and selecting the appropriate ones to tackle the problem at hand is more important than knowing the intricate implementation details.
 
-### Revise your CS101
+### Review your CS101
 
-If you have been out of college for a while, it will be highly advisable to revise the CS fundamentals — Algorithms and Data Structures. Personally I prefer to revise as I practiced so I scanned through my college notes and revised the various algorithms as I worked on the algorithm problems from LeetCode and Cracking the Coding Interview.
+If you have been out of college for a while, it is highly advisable to review CS fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work on algorithm problems from LeetCode and Cracking the Coding Interview.
 
 This [interviews repository](https://github.com/kdn251/interviews) by Kevin Naughton Jr. served as a quick refresher for me.
 
