@@ -11,7 +11,7 @@
 
 # Tech Interview Handbook
 
-Carefully curated content to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff include:
+Carefully curated content to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff includes:
 
 - [How to prepare](preparing) for coding interviews
 - [Algorithm tips and the best practice questions](algorithms) categorized by topic
@@ -45,7 +45,7 @@ Also, existing resources focus mainly on algorithm questions, and lack in covera
 
 ## Contributing
 
-There are no formal contributing guidelines at the moment as things are still in flux and we might find a better approach to structure content as we go along. You are welcome contribute whatever that you think will be helpful to fellow engineers. If you would like to contribute content for different domains, feel free to create an issue or submit a pull request and we can discuss further.
+There are no formal contributing guidelines at the moment as things are still in flux and we might find a better approach to structure content as we go along. You are welcome to contribute whatever you think will be helpful to fellow engineers. If you would like to contribute content for different domains, feel free to create an issue or submit a pull request and we can discuss further.
 
 ## Maintainers
 
