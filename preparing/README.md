@@ -15,7 +15,7 @@ One exception to the convention of allowing you to "pick any programming languag
 
 ### Review your CS101
 
-If you have been out of college for a while, it is  highly advisable to review CS fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work algorithm problems from LeetCode and Cracking the Coding Interview.
+If you have been out of college for a while, it is highly advisable to review CS fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work on algorithm problems from LeetCode and Cracking the Coding Interview.
 
 This [interviews repository](https://github.com/kdn251/interviews) by Kevin Naughton Jr. served as a quick refresher for me.
 
