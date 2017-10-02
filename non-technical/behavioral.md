@@ -31,7 +31,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Airbnb-Interview-Questio
 
 While loving to travel or appreciating Airbnb's growth may be good answers, try to demonstrate the deep connection you have with the product.
 
-- What does it mean to be you belong anywhere?
+- What does "belong anywhere" mean to you?
 - What large problems in the world would you solve today?
 - Why do you like Airbnb?
 - If you had an unlimited budget and you could buy one gift for one person, what would you buy and who would you buy it for?
