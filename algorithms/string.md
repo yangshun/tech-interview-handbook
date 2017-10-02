@@ -10,7 +10,7 @@ String
 - Write a function called `eval`, which takes a string and returns a boolean. This string is allowed 6 different characters: `0`, `1`, `&`, `|`, `(`, and `)`. `eval` should evaluate the string as a boolean expression, where `0` is `false`, `1` is `true`, `&` is an `and`, and `|` is an `or`.
   - E.g `"(0 | (1 | 0)) & (1 & ((1 | 0) & 0))"`
 - Given a pattern string like `"abba"` and an input string like `"redbluebluered"`, return `true` if and only if there's a one to one mapping of letters in the pattern to substrings of the input.
-  - E.g. `"abba"` and `"redblueredblue"` should return `true`.
+  - E.g. `"abba"` and `"redbluebluered"` should return `true`.
   - E.g. `"aaaa"` and `"asdasdasdasd"` should return `true`.
   - E.g. `"aabb"` and `"xyzabcxzyabc"` should return `false`.
 - If you received a file in chunks, calculate when you have the full file. Quite an open-ended question. Can assume chunks come with start and end, or size, etc.
