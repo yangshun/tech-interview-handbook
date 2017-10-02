@@ -1,7 +1,11 @@
 /*
  * Doubly LinkedList with functionalities of 
-   * add
-   * contains
+   * add: Add node to list
+   * contains: Check if the list contains a certain value (Not a strict object comparison)
+   * getCurrentNode
+   * toString(): Prints the LinkedList representation
+   * next()
+   * previous()
 */
 class Node {
   constructor(_value) {
