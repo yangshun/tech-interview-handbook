@@ -675,12 +675,12 @@ console.log(foo == null); // true. Wrong, don't use this to check!
 
 function bar() {}
 var baz = bar();
-console.log(baz === undefined); // undefined
+console.log(baz); // undefined
 ```
 
 A variable that is `null` will have been explicitly assigned to the `null` value. It represents no value and is different from `undefined` in the sense that it has been explicitly assigned. To check for `null,` simply compare using the strict equality operator. Note that like the above, you should not be using the abstract equality operator (`==`) to check, as it will also return `true` if the value is `undefined`.
 
-```
+```js
 var foo = null;
 console.log(foo === null); // true
 
