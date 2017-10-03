@@ -26,11 +26,11 @@ This handbook is pretty new and help from you in contributing content would be v
 
 ## Why do I want this?
 
-This repository has content that covers all phases of a technical interview; from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful as well.
+This repository has *practical* content that covers all phases of a technical interview; from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful as well.
 
 ## Who is this for?
 
-Anybody who wants to land a job at a tech company but is new to technical interviews, or seasoned engineers who have not been on the other side of the interviewing table in a while and wants to get back into the game.
+Anybody who wants to land a job at a tech company but is new to technical interviews, seasoned engineers who have not been on the other side of the interviewing table in a while and wants to get back into the game, or anyone who wants to be better at technical interviewing.
 
 ## How is this repository different?
 
