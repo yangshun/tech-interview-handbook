@@ -154,7 +154,7 @@ Note: The `async` and `defer` attrib­utes are ignored for scripts that have no 
 
 Putting `<link>`s in the head is part of the specification. Besides that, placing at the top allows the page to render progressively which improves user experience. The problem with putting stylesheets near the bottom of the document is that it prohibits progressive rendering in many browsers, including Internet Explorer. Some browsers block rendering to avoid having to repaint elements of the page if their styles change. The user is stuck viewing a blank white page. It prevents the flash of unstyled contents.
 
-**Placing `<scripts>`s just before `</body>`**
+**Placing `<script>`s just before `</body>`**
 
 `<script>`s block HTML parsing while they are being downloaded and executed. Downloading the scripts at the bottom will allow the HTML to be parsed and displayed to the user first.
 
