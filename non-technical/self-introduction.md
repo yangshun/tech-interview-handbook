@@ -14,12 +14,12 @@ The Elevator Pitch is an indispensable tool for you as you move forward in your 
   - Tell them who you are, who you work for (or school and major), and what you do.
 - KISS (Keep It Simple, Stupid)
   - Tell them some highlights from your favorite / most impressive projects.
-    - Do not delve into the depths of how you reverse engineered a game and decrypted a packet to predict when to use your DKP on a drop. Tell them the executive summary: "I reverse engineered X game by decrypting Y packet to predict Z." If this catches their interest, they *will* ask further questions on their own.
+  - Do not delve into the depths of how you reverse engineered a game and decrypted a packet to predict when to use your DKP on a drop. Tell them the executive summary: "I reverse engineered X game by decrypting Y packet to predict Z." If this catches their interest, they *will* ask further questions on their own.
 - Why do *they* want *you*?
   - This is where you use your knowledge of the company, knowledge of their technology stack(s), your unique talent that they want, etc. in order to solidify your ability to contribute to their company.
 - PRACTICE!
   - Lastly, you must practice your pitch! Having a great, succinct summary of your skills only helps if you can actually deliver it rapidly! You should practice keeping a quick but easy-to-follow pace that won't overwhelm them but won't bore them. It's a precarious balance, but can be ironed out with practice.
-  
+
 Having an Elevator Pitch on hand is a great way to create a network and happen upon new job opportunities. There will often be times where you can't prepare for an interview or meeting, and it is incredibly handy to have a practiced pitch.
 
 ###### References

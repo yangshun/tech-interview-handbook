@@ -18,7 +18,7 @@ Carefully curated content to help you ace your next technical interview, with a 
 - [How to prepare](preparing) for coding interviews
 - [Algorithm tips and the best practice questions](algorithms) categorized by topic
 - ["Front-end Job Interview Questions" answers](front-end/interview-questions.md)
-- [Interview formats](non-technical/format.md) of the top tech companies
+- [Interview formats](non-technical/interview-formats.md) of the top tech companies
 - [Behavioral questions](non-technical/behavioral.md) categorized by companies
 - [Good questions to ask your interviewers](non-technical/questions-to-ask.md) at the end of the interviews
 
@@ -47,8 +47,8 @@ Also, existing resources focus mainly on algorithm questions, and lack in covera
   - [Front-end Job Interview Questions and Answers](front-end/interview-questions.md) 🔥⭐
 - **[Non-Technical Tips](non-technical)** - Random non-technical tips that cover behavioral and psychological aspects, interview formats and "Do you have any questions for me?"
   - [Behavioral Questions](non-technical/behavioral.md)
-  - [Interview Formats](non-technical/format.md)
-  - [Psychological Tricks](non-technical/psychological.md)
+  - [Interview Formats](non-technical/interview-formats.md)
+  - [Psychological Tricks](non-technical/psychological-tricks.md)
   - [Questions to Ask](non-technical/questions-to-ask.md)
   - [Negotiation Tips](non-technical/negotiation.md)
 - **[Utilities](utilities)** - Snippets of algorithms/code that will help in coding questions.
