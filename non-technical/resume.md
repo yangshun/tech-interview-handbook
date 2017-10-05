@@ -16,7 +16,7 @@ Before writing your resume, it is important to understand the recruiting structu
 
 ### The Skill Set Checklist
 
-Before opening up a position/starting the search for candidates, I usually consult very closely with the team manager/decision maker to find out the specific skill sets that are relevant for the position. These skill sets are typically grouped into "Must have", "Good to have", "Special bonus".
+Before opening up a position/starting the search for candidates, I usually consult very closely with the team manager/decision maker to find out the specific skill sets that are relevant for the position. These skill sets are typically grouped into "Must have", "Good to have", and "Special bonus".
 
 - "Must have" — Typically, most of the must-haves include a degree (or not) in a relevant technical field, some years (or not) of experience in a particular programming language or technology.
 - "Good to have" — Includes experience/familiarity with secondary languages/technologies which may not be directly relevant to what the candidate would be working on, but could be required due to some interfacing with other components of the project. It could also include softer skills such as being a good team player, clear communication, etc.
@@ -30,7 +30,7 @@ Typically, I do not seek that "one perfect candidate". What I seek for is the "b
 
 When I am looking at your resume, I am doing a keyword match against the skill set checklist. If I see a good amount of the right keywords in your resume, it is a pass. If I need to spend more than 10 seconds trying to figure out what you are writing about, it is a fail. If I see an excessive amount of keywords (much looking like spam), it signals a red flag and goes into the "maybe". Depending on whether I think I have enough candidates for the day, you could eventually go into the pass or fail stack.
 
-There are lots of articles writing about how recruiters only spend an average of about 10 seconds to screen each resume. The news is, this is true because resume screening such a menial, robotic and repetitive task. In fact, many applicant tracking systems (ATS) now are so advanced that they can parse your resume automatically, search for specific keywords in your resume, and score your resume based on the weights pre-assigned to each keyword.
+There are lots of articles writing about how recruiters only spend an average of about 10 seconds to screen each resume. The news is, this is true because resume screening is such a menial, robotic and repetitive task. In fact, many applicant tracking systems (ATS) now are so advanced that they can parse your resume automatically, search for specific keywords in your resume, and score your resume based on the weights pre-assigned to each keyword.
 
 Finding a job is a two-way fit — the company wants someone with the relevant skills required, but it is also important for the applicant to fit in the company culture, and be able to gain something out of his stint. Hence, honesty is the single most important criteria in a resume.
 
@@ -112,7 +112,7 @@ Always list your resume in reverse chronological order - the most recent at the 
 - Be consistent about the way you format your resume. Italics, underline, bold, and how they are used.
 - Keep to a single standard font (avoid fancy fonts like Comic Sans or whatever) and do not have too many varying styles/font sizes/color
 - Be consistent about the way you list your dates (eg. May 2011 - Aug 2011). Avoid using numerals for both month and date due to the difference in style for MMDD and DDMM in different countries. Dates like "Aug 2011 - June 12" just show that you have zero attention to detail.
-- Unless you are applying for a design job, just stick to the standard "table" style for the resume. There is nothing wrong with the standard style, and it helps the recruiter screen your resume more efficiently since they asre trained through experience to read that format. It would also help in the automatic scoring by the ATS. The last thing you want is for your application to be rejected because the system could not parse your resume for it to be scored. That said, I am not discouraging you from coming up with your own design. It is nice to read something different. Just be aware of the risks you could be taking.
+- Unless you are applying for a design job, just stick to the standard "table" style for the resume. There is nothing wrong with the standard style, and it helps the recruiter screen your resume more efficiently since they are trained through experience to read that format. It would also help in the automatic scoring by the ATS. The last thing you want is for your application to be rejected because the system could not parse your resume for it to be scored. That said, I am not discouraging you from coming up with your own design. It is nice to read something different. Just be aware of the risks you could be taking.
 - Name your file `firstname_lastname_resume.pdf` instead of `resume.pdf - it is easier for recruiters to search/forward.
 - PDF preferred over Word doc.
 - Be consistent about bullet points.
