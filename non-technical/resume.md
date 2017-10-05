@@ -3,6 +3,11 @@ Resume
 
 The following content is by Christina Ng and rephrased for the purpose of this handbook. You can follow her on [Medium](https://medium.com/@christinang89) or [Quora](https://www.quora.com/profile/Christina-Ng).
 
+## Table of Contents
+
+  1. [How Your Resume is Screened](#how-your-resume-is-screened)
+  1. [10 Ways To Improve Your Resume](#10-ways-to-improve-your-resume)
+
 ## How Your Resume is Screened
 
 While many engineers can be rather qualified for the role they are applying for, they miss out on getting a shot at the interview as they might never get past resume screening. The main issue was that they do not understand how recruiters worked.
@@ -21,7 +26,7 @@ Now that I am armed with this list, the search for candidates begin.
 
 Typically, I do not seek that "one perfect candidate". What I seek for is the "best fit candidate". The search is essentially a numbers game. I know that for a specific job posting, there would perhaps be X applicants. At each stage of the interview process, some percentage of the candidates will be eliminated, leaving only a final Y% of the initial pool to choose from. Since Y tends to be a rather small number, recruiters will try to maximize X.
 
-### The 10 seconds glance
+### The 10 Seconds Glance
 
 When I am looking at your resume, I am doing a keyword match against the skill set checklist. If I see a good amount of the right keywords in your resume, it is a pass. If I need to spend more than 10 seconds trying to figure out what you are writing about, it is a fail. If I see an excessive amount of keywords (much looking like spam), it signals a red flag and goes into the "maybe". Depending on whether I think I have enough candidates for the day, you could eventually go into the pass or fail stack.
 
@@ -114,7 +119,7 @@ Always list your resume in reverse chronological order - the most recent at the 
 - Your resume should not look sparse. (Come on, it is only 1 page!) If you really have trouble filling it up, you are either not thinking hard enough, or not doing enough. In the case of the latter, consider working on your personal projects (i.e. stuff you can post on GitHub). That said, do not write stuff just to fill space. Read point 4.
 - This should be common sense, but do not commit fraud, i.e. apply for the same job using a different name, or using your friend's resume to apply for the same job. Some ATS issues an indicator if they suspect the application to be a duplicate.
 
-#### 8. Listing Your Skills
+#### 8. Listing Your skills
 
 It is useful to list your relevant skills in a quick summary section for easy reading/matching. However, many people make the mistake of listing as many skills/programming languages in the resume as possible. This may get you through the ATS scoring, but it definitely would not leave a good impression on the recruiter - the actual human reading your resume and deciding whether to call you up for an interview!
 
@@ -136,4 +141,4 @@ If you have some space on your resume, it is good to list additional interests o
 ###### References
 
 - [Screening your resume is like playing word search](https://medium.com/@christinang89/screening-your-resume-is-like-playing-word-search-60f4d0e60840)
-- [0 tips to get past resume screening for College Students/Grads](https://christinang89.quora.com/10-tips-to-get-past-resume-screening-for-College-Students-Grads)
+- [10 tips to get past resume screening for College Students/Grads](https://christinang89.quora.com/10-tips-to-get-past-resume-screening-for-College-Students-Grads)
