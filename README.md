@@ -21,6 +21,7 @@ Carefully curated content to help you ace your next technical interview, with a 
 - [Interview formats](non-technical/interview-formats.md) of the top tech companies
 - [Behavioral questions](non-technical/behavioral.md) categorized by companies
 - [Good questions to ask your interviewers](non-technical/questions-to-ask.md) at the end of the interviews
+- [Helpful resume tips](non-technical/resume.md) to get your resume noticed and the Dos and Don'ts
 
 This handbook is pretty new and help from you in contributing content would be very much appreciated!
 
@@ -46,6 +47,7 @@ Also, existing resources focus mainly on algorithm questions, and lack in covera
 - **[Front-end Study Notes](front-end)** - Summarized notes on the various aspects of front-end
   - [Front-end Job Interview Questions and Answers](front-end/interview-questions.md) 🔥⭐
 - **[Non-Technical Tips](non-technical)** - Random non-technical tips that cover behavioral and psychological aspects, interview formats and "Do you have any questions for me?"
+  - [Resume Tips](non-technical/resume.md)
   - [Behavioral Questions](non-technical/behavioral.md)
   - [Interview Formats](non-technical/interview-formats.md)
   - [Psychological Tricks](non-technical/psychological-tricks.md)
