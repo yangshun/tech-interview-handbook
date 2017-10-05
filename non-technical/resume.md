@@ -16,7 +16,7 @@ Before writing your resume, it is important to understand the recruiting structu
 
 ### The Skill Set Checklist
 
-Before opening up a position/starting the search for candidates, I usually consult very closely with the team manager/decision maker to find out the specific skill sets that are relevant for the position. These skill sets are typically grouped into "Must have", "Good to have", "Special bonus".
+Before opening up a position/starting the search for candidates, I usually consult very closely with the team manager/decision maker to find out the specific skill sets that are relevant for the position. These skill sets are typically grouped into "Must have", "Good to have", and "Special bonus".
 
 - "Must have" — Typically, most of the must-haves include a degree (or not) in a relevant technical field, some years (or not) of experience in a particular programming language or technology.
 - "Good to have" — Includes experience/familiarity with secondary languages/technologies which may not be directly relevant to what the candidate would be working on, but could be required due to some interfacing with other components of the project. It could also include softer skills such as being a good team player, clear communication, etc.
