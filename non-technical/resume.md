@@ -30,7 +30,7 @@ Typically, I do not seek that "one perfect candidate". What I seek for is the "b
 
 When I am looking at your resume, I am doing a keyword match against the skill set checklist. If I see a good amount of the right keywords in your resume, it is a pass. If I need to spend more than 10 seconds trying to figure out what you are writing about, it is a fail. If I see an excessive amount of keywords (much looking like spam), it signals a red flag and goes into the "maybe". Depending on whether I think I have enough candidates for the day, you could eventually go into the pass or fail stack.
 
-There are lots of articles writing about how recruiters only spend an average of about 10 seconds to screen each resume. The news is, this is true because resume screening such a menial, robotic and repetitive task. In fact, many applicant tracking systems (ATS) now are so advanced that they can parse your resume automatically, search for specific keywords in your resume, and score your resume based on the weights pre-assigned to each keyword.
+There are lots of articles writing about how recruiters only spend an average of about 10 seconds to screen each resume. The news is, this is true because resume screening is such a menial, robotic and repetitive task. In fact, many applicant tracking systems (ATS) now are so advanced that they can parse your resume automatically, search for specific keywords in your resume, and score your resume based on the weights pre-assigned to each keyword.
 
 Finding a job is a two-way fit — the company wants someone with the relevant skills required, but it is also important for the applicant to fit in the company culture, and be able to gain something out of his stint. Hence, honesty is the single most important criteria in a resume.
 
