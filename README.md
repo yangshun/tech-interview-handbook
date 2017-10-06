@@ -21,7 +21,7 @@ Carefully curated content to help you ace your next technical interview, with a 
 - [Interview formats](non-technical/interview-formats.md) of the top tech companies
 - [Behavioral questions](non-technical/behavioral.md) categorized by companies
 - [Good questions to ask your interviewers](non-technical/questions-to-ask.md) at the end of the interviews
-- [Helpful resume tips](non-technical/resume.md) to get your resume noticed and the Dos and Don'ts
+- [Helpful resume tips](non-technical/resume.md) to get your resume noticed and the Do's and Don'ts
 
 This handbook is pretty new and help from you in contributing content would be very much appreciated!
 
@@ -53,7 +53,7 @@ Also, existing resources focus mainly on algorithm questions, and lack in covera
   - [Psychological Tricks](non-technical/psychological-tricks.md)
   - [Questions to Ask](non-technical/questions-to-ask.md)
   - [Negotiation Tips](non-technical/negotiation.md)
-- **[Utilities](utilities)** - Snippets of algorithms/code that will help in coding questions.
+- **[Utilities](utilities)** - Snippets of algorithms/code that will help in coding questions
 
 ## Contributing
 
