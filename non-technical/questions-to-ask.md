@@ -19,6 +19,14 @@ Here are some good questions to ask at the end of the interview, extracted from 
 - What was something you wish someone would have told you before you joined?
 - What was your best moment so far at the company?
 
+### Product
+
+- Tell me about main products of your company.
+- What is the current version of product? (If it's v1.0 or similar - there could be a lot of chaos to work with)
+- What products are main competitors for yours?
+- What makes your product competitive?
+- When are you planning to provide the next release? (If in several months, it would mean a lot of requirements specified in job description are not so highly actual, not needed right now)
+
 ### Culture
 
 - **What is the most frustrating part about working here?**
@@ -37,6 +45,7 @@ These questions are suitable for any technical role.
 - **What has been the worst technical blunder that has happened in the recent past? How did you guys deal with it? What changes were implemented afterwards to make sure it didn't happen again?**
 - **What is the most costly technical decision made early on that the company is living with now?**
 - **What is the most fulfilling/exciting/technically complex project that you've worked on here so far?**
+- **There's "C++" (or Python, Swift or any other tech) in job description. How will you estimate my proficiency in this tech in 3 month? What exactly will I have to do concerning it - write 500 lines of code, create some classes, framework, library?**
 - How do you know what to work on each day?
 - How would you describe your engineering culture?
 - How has your role changed since joining the company?
@@ -46,6 +55,7 @@ These questions are suitable for any technical role.
 - What do you measure? What are your most important product metrics?
 - What does the company do to nurture and train its employees?
 - How often have you moved teams? What made you join the team you're on right now? If you wanted to move teams, what would need to happen?
+- If you hire person, what do you have for him to study product you're working on and processes in general? Do you have specifications, requirements, documentation?
 
 ### Management
 
