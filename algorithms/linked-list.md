@@ -10,4 +10,3 @@ Linked List
 - A question involving an API's integration with hash map where the buckets of hash map are made up of linked lists.
 - Given a singly linked list (a list which can only be traversed in one direction), find the item that is located at 'k' items from the end. So if the list is a, b, c, d and k is 2 then the answer is 'c'. The solution should not search the list twice.
 - How can you tell if a Linked List is a Palindrome?
-- Implement a LRU cache with O(1) runtime for all its operations.
