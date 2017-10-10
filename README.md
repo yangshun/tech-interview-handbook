@@ -54,6 +54,7 @@ Also, existing resources focus mainly on algorithm questions, and lack in covera
   - [Questions to Ask](non-technical/questions-to-ask.md)
   - [Negotiation Tips](non-technical/negotiation.md)
 - **[Utilities](utilities)** - Snippets of algorithms/code that will help in coding questions
+  - **UPDATE** - Check out [Lago](https://github.com/yangshun/lago), which is a Data Structures and Algorithms library that contains more high quality implementations with 100% test coverage.
 
 ## Related
 
