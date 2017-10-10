@@ -21,7 +21,7 @@ This [interviews repository](https://github.com/kdn251/interviews) by Kevin Naug
 
 The Medium publication [basecs](https://medium.com/basecs) by [Vaidehi Joshi](https://medium.com/@vaidehijoshi) is also a great and light-hearted resource to recap on the various data structures and algorithms.
 
-If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), an Data Structures and Algorithms library for JavaScript. It is pretty much still WIP but I intend to make it into a library that is able to be used in production and also a reference resource for learning Data Structures and Algorithms.
+If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), a Data Structures and Algorithms library for JavaScript. It is pretty much still WIP but I intend to make it into a library that is able to be used in production and also a reference resource for revising Data Structures and Algorithms.
 
 ### Mastery through Practice
 

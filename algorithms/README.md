@@ -5,7 +5,7 @@ This section dives deep into practical tips for specific topics of algorithms an
 
 For each topic, study links are recommended to help you master the topic. There is a list of recommended common questions to practice which in my opinion is highly valuable for mastering the core concepts for the topic.
 
-If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), an Data Structures and Algorithms library for JavaScript. It is pretty much still WIP but I intend to make it into a library that is able to be used in production and also a reference resource for learning Data Structures and Algorithms.
+If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), a Data Structures and Algorithms library for JavaScript. It is pretty much still WIP but I intend to make it into a library that is able to be used in production and also a reference resource for revising Data Structures and Algorithms.
 
 ## Contents
 

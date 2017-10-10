@@ -55,6 +55,10 @@ Also, existing resources focus mainly on algorithm questions, and lack in covera
   - [Negotiation Tips](non-technical/negotiation.md)
 - **[Utilities](utilities)** - Snippets of algorithms/code that will help in coding questions
 
+## Related
+
+If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), a Data Structures and Algorithms library for JavaScript. It is pretty much still WIP but I intend to make it into a library that is able to be used in production and also a reference resource for revising Data Structures and Algorithms.
+
 ## Contributing
 
 There are no formal contributing guidelines at the moment as things are still in flux and we might find a better approach to structure content as we go along. You are welcome to contribute whatever you think will be helpful to fellow engineers. If you would like to contribute content for different domains, feel free to create an issue or submit a pull request and we can discuss further.
