@@ -113,7 +113,7 @@ Always list your resume in reverse chronological order - the most recent at the 
 - Keep to a single standard font (avoid fancy fonts like Comic Sans or whatever) and do not have too many varying styles/font sizes/color
 - Be consistent about the way you list your dates (eg. May 2011 - Aug 2011). Avoid using numerals for both month and date due to the difference in style for MMDD and DDMM in different countries. Dates like "Aug 2011 - June 12" just show that you have zero attention to detail.
 - Unless you are applying for a design job, just stick to the standard "table" style for the resume. There is nothing wrong with the standard style, and it helps the recruiter screen your resume more efficiently since they are trained through experience to read that format. It would also help in the automatic scoring by the ATS. The last thing you want is for your application to be rejected because the system could not parse your resume for it to be scored. That said, I am not discouraging you from coming up with your own design. It is nice to read something different. Just be aware of the risks you could be taking.
-- Name your file `firstname_lastname_resume.pdf` instead of `resume.pdf - it is easier for recruiters to search/forward.
+- Name your file `firstname_lastname_resume.pdf` instead of `resume.pdf` - it is easier for recruiters to search/forward.
 - PDF preferred over Word doc.
 - Be consistent about bullet points.
 - Your resume should not look sparse. (Come on, it is only 1 page!) If you really have trouble filling it up, you are either not thinking hard enough, or not doing enough. In the case of the latter, consider working on your personal projects (i.e. stuff you can post on GitHub). That said, do not write stuff just to fill space. Read point 4.
@@ -137,6 +137,14 @@ Ideally, you want the project section to demonstrate your personality and skills
 Here's the news - Recruiters do search for your name! Definitely pre-empt that by Googling/Facebook-ing/searching yourself on all forms of social media to see what turns up. Make sure your privacy settings are restricted so your online profile shows only the image you are trying to project.
 
 If you have some space on your resume, it is good to list additional interests outside of coding. Eg. skiing, water sports, soccer, etc etc. Gives the interviewer something to talk to you about. It also shows that you are a well-rounded individual/cool person to hang out with.
+
+#### 11. Resume Layout
+
+Absolutely, no headshots.
+
+It's important to note the layout of your resume. If you choose to quickly upload your resume via an auto-fill program, understand that the program will read your resume from top to bottom, left to right. This is good to keep in mind when developing the layout of your resume.
+
+Try to keep white space down to a minimum. This will also help reduce the length of your resume to one page. For instance, white space usually exists near the sides of your resume. Use that space to list out your skills in a vertical column!
 
 ###### References
 
