@@ -324,7 +324,7 @@ These techniques are related to accessibility (a11y).
 
 - `visibility: hidden`. However the element is still in the flow of the page, and still takes up space.
 - `width: 0; height: 0`. Make the element not take up any space on the screen at all, resulting in not showing it.
-- `position; absolute; left: -99999px`. Position it outside of the screen.
+- `position: absolute; left: -99999px`. Position it outside of the screen.
 - `text-indent: -9999px`. This only works on text within the `block` elements.
 
 I would go with the `absolute` positioning approach, as it has the least caveats and works for most elements.
@@ -528,7 +528,7 @@ I would write CSS rules with low specificity so that they can be easily overridd
 ### What existing CSS frameworks have you used locally, or in production? How would you change/improve them?
 
 - **Bootstrap** - Slow release cycle. Bootstrap 4 has been in alpha for almost 2 years. Add a spinner button component, as it is widely-used.
-- **Semantic UI** - Source code structure makes theme customization is extremely hard to understand. Painful to customize with unconventional theming system. Hardcoded config path within the vendor library. Not well-designed for overriding variables unlike in Bootstrap.
+- **Semantic UI** - Source code structure makes theme customization extremely hard to understand. Painful to customize with unconventional theming system. Hardcoded config path within the vendor library. Not well-designed for overriding variables unlike in Bootstrap.
 - **Bulma** - A lot of non-semantic and superfluous classes and markup required. Not backward compatible. Upgrading versions breaks the app in subtle manners.
 
 ### Have you played around with the new CSS Flexbox or Grid specs?
@@ -1202,7 +1202,7 @@ Practically, ES2015 has vastly improved JavaScript and made it much nicer to wri
 
 - https://softwareengineering.stackexchange.com/questions/72569/what-are-the-pros-and-cons-of-coffeescript
 
-### What tools and techniques do you use debugging JavaScript code?
+### What tools and techniques do you use for debugging JavaScript code?
 
 - React and Redux
   - [React Devtools](https://github.com/facebook/react-devtools)
