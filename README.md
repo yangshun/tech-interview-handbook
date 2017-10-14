@@ -16,7 +16,7 @@
 Carefully curated content to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff includes:
 
 - [How to prepare](preparing) for coding interviews
-- [Interview Cheatsheet](preparing/cheatsheet.md) - Straight-to-the-point Do's and Don'ts
+- [Interview Cheatsheet](preparing/cheatsheet.md) - Straight-to-the-point Do's and Don'ts 🆕
 - [Algorithm tips and the best practice questions](algorithms) categorized by topic
 - ["Front-end Job Interview Questions" answers](front-end/interview-questions.md)
 - [Interview formats](non-technical/interview-formats.md) of the top tech companies
