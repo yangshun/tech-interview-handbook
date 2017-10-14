@@ -67,13 +67,14 @@ Information that a recruiter wants to know:
 
 Information nobody needs to know:
 
+- Your profile picture.
 - Address, home phone number, gender, religion, race, marital status, etc etc.
 - Elementary, middle, high school.
 - Your low GPA.
 - Anything less recent than 3-4 years unless they are valid job experiences.
 - Anything about your parents/siblings, their names, occupation, etc.
 - Your life story.
-- Anything not relevant to the job you are applying for (eg. that you have a driving license when you are applying to be a programmer).
+- Anything not relevant to the job you are applying for (e.g. that you have a driving license when you are applying to be a programmer).
 
 Ideally, keep it short, concise, but as detailed as possible.
 
@@ -107,7 +108,7 @@ Always list your resume in reverse chronological order - the most recent at the 
 - Avoid emails like "me@christi.na" or "admin@[mycooldomain].com" -- because it is very prone to typo errors.
 - Make sure the number you have listed is the best way to reach you. The last thing you want is to miss the call from the recruiter because you typed the wrong number, or you are not available on that number during office hours (most probably the times the recruiter will call).
 
-#### 7. Formatting/Design
+#### 7. Layout/Formatting/Design
 
 - Be consistent about the way you format your resume. Italics, underline, bold, and how they are used.
 - Keep to a single standard font (avoid fancy fonts like Comic Sans or whatever) and do not have too many varying styles/font sizes/color
@@ -118,6 +119,8 @@ Always list your resume in reverse chronological order - the most recent at the 
 - Be consistent about bullet points.
 - Your resume should not look sparse. (Come on, it is only 1 page!) If you really have trouble filling it up, you are either not thinking hard enough, or not doing enough. In the case of the latter, consider working on your personal projects (i.e. stuff you can post on GitHub). That said, do not write stuff just to fill space. Read point 4.
 - This should be common sense, but do not commit fraud, i.e. apply for the same job using a different name, or using your friend's resume to apply for the same job. Some ATS issues an indicator if they suspect the application to be a duplicate.
+- It's important to note the layout of your resume. If you choose to quickly upload your resume via an auto-fill program, understand that the program will read your resume from top to bottom, left to right. This is good to keep in mind when developing the layout of your resume.
+- Try to keep white space down to a minimum. This will also help reduce the length of your resume to one page. Reduce margins and paddings reasonably.
 
 #### 8. Listing Your skills
 
@@ -137,14 +140,6 @@ Ideally, you want the project section to demonstrate your personality and skills
 Here's the news - Recruiters do search for your name! Definitely pre-empt that by Googling/Facebook-ing/searching yourself on all forms of social media to see what turns up. Make sure your privacy settings are restricted so your online profile shows only the image you are trying to project.
 
 If you have some space on your resume, it is good to list additional interests outside of coding. Eg. skiing, water sports, soccer, etc etc. Gives the interviewer something to talk to you about. It also shows that you are a well-rounded individual/cool person to hang out with.
-
-#### 11. Resume Layout
-
-Absolutely, no headshots.
-
-It's important to note the layout of your resume. If you choose to quickly upload your resume via an auto-fill program, understand that the program will read your resume from top to bottom, left to right. This is good to keep in mind when developing the layout of your resume.
-
-Try to keep white space down to a minimum. This will also help reduce the length of your resume to one page. For instance, white space usually exists near the sides of your resume. Use that space to list out your skills in a vertical column!
 
 ###### References
 
