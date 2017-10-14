@@ -26,6 +26,7 @@ Here are some good questions to ask at the end of the interview, extracted from 
 - **What is something you wish were different about your job?**
 - How will the work I will be doing contribute to the organization's mission?
 - What do you like about working here?
+- What is your policy on working from home/remotely?
 - (If the company is a startup) When was the last time you interacted with a founder? What was it regarding? Generally how involved are the founders in the day-to-day?
 - Does the company culture encourage entrepreneurship? Could you give me any specific examples?
 
@@ -37,6 +38,7 @@ These questions are suitable for any technical role.
 - **What has been the worst technical blunder that has happened in the recent past? How did you guys deal with it? What changes were implemented afterwards to make sure it didn't happen again?**
 - **What is the most costly technical decision made early on that the company is living with now?**
 - **What is the most fulfilling/exciting/technically complex project that you've worked on here so far?**
+- How do you evaluate new technologies? Who makes the final decisions?
 - How do you know what to work on each day?
 - How would you describe your engineering culture?
 - How has your role changed since joining the company?
@@ -65,12 +67,14 @@ These questions are suitable for asking Engineering Managers, especially useful 
 - **What does success look like for your team?**
 - **What qualities do you look out for when hiring for this role?**
 - **What are the strengths and weaknesses of the current team? What is being done to improve upon the weaknesses?**
+- **Can you tell me about a time you resolved an interpersonal conflict?**
 - How did you become a manager?
 - How do your engineers know what to work on each day?
 - What is your team's biggest challenge right now?
 - How do you measure individual performance?
 - How often are 1:1s conducted?
 - What is the current team composition like?
+- What opportunities are available to switch roles? How does this work?
 
 ### Leadership
 
@@ -103,3 +107,4 @@ These questions are intended for senior level management, such as CEO, CTO, VPs.
 - [How to interview your interviewers](http://blog.alinelerner.com/how-to-interview-your-interviewers/)
 - [How to Break Into the Tech Industry—a Guide to Job Hunting and Tech Interviews](https://haseebq.com/how-to-break-into-tech-job-hunting-and-interviews/)
 - [A developer's guide to interviewing](https://medium.freecodecamp.org/how-to-interview-as-a-developer-candidate-b666734f12dd)
+- [Questions I'm asking in interviews 2017](https://cternus.net/blog/2017/10/10/questions-i-m-asking-in-interviews-2017/)
