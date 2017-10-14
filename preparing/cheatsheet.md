@@ -1,7 +1,7 @@
 Interview Cheatsheet
 ==
 
-This is a straight-to-the-point distilled list of technical interview Do's and Don'ts. Some of these may apply to only phone screens on whiteboard interviews but most will apply to both. I revise this list before each of my interviews to remind myself of them and eventually internalized all of them to the point I do not have to rely on it anymore.
+This is a straight-to-the-point distilled list of technical interview Do's and Don'ts, mainly for algorithmic interviews. Some of these may apply to only phone screens on whiteboard interviews but most will apply to both. I revise this list before each of my interviews to remind myself of them and eventually internalized all of them to the point I do not have to rely on it anymore.
 
 For a detailed walkthrough of interview preparation, refer to the ["Preparing for a Coding Interview"](./) section.
 
@@ -12,10 +12,13 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 |✅|Prepare pen, paper and earphones/headphones.|
 |✅|Find a quiet environment with good Internet connection.|
 |✅|Ensure webcam and audio are working. There were times I had to restart Chrome to get Hangouts to work again.|
-|✅|Stay calm and composed.|
-|✅|Familiarize yourself with the coding environment (CoderPad/CodePen). Set up the coding shortcuts, turn on autocompletion, tab spacing, etc.|
 |✅|Request for the option to interview over Hangouts/Skype instead of a phone call; it is easier to send links or text across.|
+|✅|Decide on and be familiar with a programming language.|
+|✅|Familiarize yourself with the coding environment (CoderPad/CodePen). Set up the coding shortcuts, turn on autocompletion, tab spacing, etc.|
+|✅|Prepare answers to the [frequently-asked questions](../non-technical/behavioral.md) in an interview.|
+|✅|Prepare some [questions to ask](../non-technical/questions-to-ask.md) at the end of the interview.|
 |✅|Dress comfortably. Usually you do not need to wear smart clothes, casual should be fine. T-shirts and jeans are acceptable at most places.|
+|✅|Stay calm and composed.|
 |⚠️|Turn off the webcam if possible. Most remote interviews will not require video chat and leaving it on only serves as a distraction.|
 
 ### 2. Introduction
@@ -32,6 +35,7 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 || Things |
 |-|-|
 |✅|Repeat the question back at the interviewer.|
+|✅|Clarify any assumptions you made subconsciously. Many questions are under-specified on purpose. A tree-like diagram could very well be a graph that allows for cycles and a naive recursive solution would not work.|
 |✅|Clarify input format and range. Ask whether input can be assumed to be well-formed and non-null.|
 |✅|Work through a small example to ensure you understood the question.|
 |✅|Explain a high level approach even if it is a brute force one.|
@@ -50,10 +54,13 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 |✅|Explain what you are coding/typing to the interviewer, what you are trying to achieve.|
 |✅|Practice good coding style. Clear variable names, consistent operator spacing, proper indentation, etc.|
 |✅|Type/write at a reasonable speed.|
+|✅|As much as possible, write actual compilable code, not pseudocode.|
 |✅|Write in a modular fashion. Extract out chunks of repeated code into functions.|
+|✅|Ask for permission to use trivial functions without having to implement them; saves you some time.|
 |✅|Use the hints given by the interviewer.|
 |✅|Demonstrate mastery of your chosen programming language.|
 |✅|Demonstrate technical knowledge in data structures and algorithms.|
+|✅|If you are cutting corners in your code, state that out loud to your interviewer and say what you would do in a non-interview setting (no time constraints). E.g., I would write a regex to parse this string rather than using `split()` which may not cover all cases.|
 |✅|Practice whiteboard space-management skills.|
 |⚠️|Reasonable defensive coding. Check for nulls, empty collections, etc. Can omit if input validity has been clarified with the interviewer.|
 |❌|Remain quiet the whole time.|
@@ -74,8 +81,8 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 |✅|Look out for places where you can refactor.|
 |✅|Reiterate the time and space complexity of your code.|
 |✅|Explain trade-offs and how the code/approach can be improved if given more time.|
-|❌|Immediately announce that you are done coding.|
-|❌|Argue with the interviewer.|
+|❌|Immediately announce that you are done coding. Do the above first!|
+|❌|Argue with the interviewer. They may be wrong but that is very unlikely given that they are familiar with the question.|
 
 ### 6. Wrap Up
 
@@ -85,3 +92,7 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 |✅|Thank the interviewer.|
 |❌|End the interview without asking any questions.|
 |❌|Ask about your interview performance. It can get awkward.|
+
+###### References
+
+- [Preparing for a Facebook/Google Software Engineer Interview](https://orrsella.com/2016/05/14/preparing-for-a-facebook-google-software-engineer-interview/)
