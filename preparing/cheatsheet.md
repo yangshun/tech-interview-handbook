@@ -3,14 +3,16 @@ Interview Cheatsheet
 
 This is a straight-to-the-point distilled list of technical interview Do's and Don'ts. Some of these may apply to only phone screens on whiteboard interviews but most will apply to both. I revise this list before each of my interviews to remind myself of them and eventually internalized all of them to the point I do not have to rely on it anymore.
 
+For a detailed walkthrough of interview preparation, refer to the ["How to Prepare"](./) section.
+
 ### 1. Before Interview
 
 **Do's**
 
 - Prepare pen, paper and earphones/headphones.
-- Find a quiet environment with good internet connection.
+- Find a quiet environment with good Internet connection.
 - Stay calm and composed.
-- Familiarize yourself with the coding environment - CoderPad, CodePen, etc.
+- Familiarize yourself with the coding environment (CoderPad/CodePen). Set up the coding shortcuts, turn on autocompletion, tab spacing, etc.
 - Dress comfortably. Usually you do not need to wear shirt and tie.
 
 ### 2. Introduction
@@ -33,29 +35,29 @@ This is a straight-to-the-point distilled list of technical interview Do's and D
 - Clarify input format and range.
 - Work through a small example to ensure you understood the question.
 - Explain a high level approach even if it is a brute force one.
-- Improve upon the approach and optimize.
-- State and explain the time and space complexity of your approaches.
-- If stuck, think about related problems you've seen before and how they were solved. Check out the [tips](../algorithms) in this section.
+- Improve upon the approach and optimize. Reduce duplicated work and cache repeated computations.
+- Think carefully, then state and explain the time and space complexity of your approaches.
+- If stuck, think about related problems you have seen before and how they were solved. Check out the [tips](../algorithms) in this section.
 
 **Don'ts**
 
 - Ignore information given to you. Every piece is important.
 - Jump into coding straightaway.
 - Start coding without interviewer's green light.
+- Appear too unsure about your approach or analysis.
 
 ### 4. During Coding
 
 **Do's**
 
-- Practice good coding style. Clear variable names, consistent operator spacing.
+- Practice good coding style. Clear variable names, consistent operator spacing, proper indentation, etc.
 - Defensive coding. Check for nulls, empty collections, etc.
 - Explain what you are coding/typing to the interviewer, what you are trying to achieve.
 - Type/write at a reasonable speed.
 - Write in a modular fashion. Extract out chunks of repeated code into functions.
 - Use the hints given by the interviewer.
 - Practice whiteboard space-management skills.
-- Demonstrate mastery of the language.
-- Let the interviewer talk. Usually if they speak, they are trying to give you hints or steer you in the right direction.
+- Demonstrate mastery of your chosen programming language.
 
 **Don'ts**
 
@@ -63,6 +65,7 @@ This is a straight-to-the-point distilled list of technical interview Do's and D
 - Spend too much time writing comments.
 - Use extremely verbose variable names.
 - Copy and paste code without checking.
+- Interrupt your interviewer when they are talking. Usually if they speak, they are trying to give you hints or steer you in the right direction.
 - Write too big (takes up too much space) or too small (illegible) if on a whiteboard.
 
 ### 5. After Coding
@@ -86,10 +89,10 @@ This is a straight-to-the-point distilled list of technical interview Do's and D
 
 **Do's**
 
-- Ask questions and ask good questions! Pick some questions from [here](../non-technical/questions-to-ask.md).
-- Ask questions that are tailored to the company.
+- Ask questions. More importantly, ask good and engaging questions that are tailored to the company! Pick some questions from [here](../non-technical/questions-to-ask.md).
 - Thank the interviewer.
 
 **Don'ts**
 
 - End the interview without asking any questions.
+- Ask about interview performance. It can get awkward.
