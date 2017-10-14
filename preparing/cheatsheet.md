@@ -13,7 +13,7 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 |✅|Find a quiet environment with good Internet connection.|
 |✅|Stay calm and composed.|
 |✅|Familiarize yourself with the coding environment (CoderPad/CodePen). Set up the coding shortcuts, turn on autocompletion, tab spacing, etc.|
-|✅|Dress comfortably. T-shirts and jeans are acceptable at most places.|
+|✅|Dress comfortably. Usually you do not need to wear smart clothes, casual should be fine. T-shirts and jeans are acceptable at most places.|
 
 ### 2. Introduction
 
