@@ -3,7 +3,7 @@ Interview Cheatsheet
 
 This is a straight-to-the-point distilled list of technical interview Do's and Don'ts. Some of these may apply to only phone screens on whiteboard interviews but most will apply to both. I revise this list before each of my interviews to remind myself of them and eventually internalized all of them to the point I do not have to rely on it anymore.
 
-For a detailed walkthrough of interview preparation, refer to the ["How to Prepare"](./) section.
+For a detailed walkthrough of interview preparation, refer to the ["Preparing for a Coding Interview"](./) section.
 
 ### 1. Before Interview
 
@@ -19,7 +19,7 @@ For a detailed walkthrough of interview preparation, refer to the ["How to Prepa
 
 **Do's**
 
-- Introduce yourself in a few sentences under a minute.
+- Introduce yourself in a few sentences under a minute or two.
 - Mention interesting points that are relevant to the role you are applying for.
 - Sound enthusiastic! Speak with a smile and you will naturally sound more engaging.
 
@@ -89,10 +89,10 @@ For a detailed walkthrough of interview preparation, refer to the ["How to Prepa
 
 **Do's**
 
-- Ask questions. More importantly, ask good and engaging questions that are tailored to the company! Pick some questions from [here](../non-technical/questions-to-ask.md).
+- Ask questions. More importantly, ask good and engaging questions that are tailored to the company! Pick some questions from [this list](../non-technical/questions-to-ask.md).
 - Thank the interviewer.
 
 **Don'ts**
 
 - End the interview without asking any questions.
-- Ask about interview performance. It can get awkward.
+- Ask about your interview performance. It can get awkward.
