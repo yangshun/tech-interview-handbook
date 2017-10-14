@@ -13,7 +13,7 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 |✅|Find a quiet environment with good Internet connection.|
 |✅|Stay calm and composed.|
 |✅|Familiarize yourself with the coding environment (CoderPad/CodePen). Set up the coding shortcuts, turn on autocompletion, tab spacing, etc.|
-|✅| Dress comfortably. Usually you do not need to wear shirt and tie.|
+|✅|Dress comfortably. T-shirts and jeans are acceptable at most places.|
 
 ### 2. Introduction
 
@@ -50,8 +50,9 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 |✅|Type/write at a reasonable speed.|
 |✅|Write in a modular fashion. Extract out chunks of repeated code into functions.|
 |✅|Use the hints given by the interviewer.|
-|✅|Practice whiteboard space-management skills.|
 |✅|Demonstrate mastery of your chosen programming language.|
+|✅|Demonstrate technical knowledge in data structures and algorithms.|
+|✅|Practice whiteboard space-management skills.|
 |❌|Remain quiet the whole time.|
 |❌|Spend too much time writing comments.|
 |❌|Use extremely verbose variable names.|
