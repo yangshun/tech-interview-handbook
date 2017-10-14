@@ -11,9 +11,12 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 |-|-|
 |✅|Prepare pen, paper and earphones/headphones.|
 |✅|Find a quiet environment with good Internet connection.|
+|✅|Ensure webcam and audio are working. There were times I had to restart Chrome to get Hangouts to work again.|
 |✅|Stay calm and composed.|
 |✅|Familiarize yourself with the coding environment (CoderPad/CodePen). Set up the coding shortcuts, turn on autocompletion, tab spacing, etc.|
+|✅|Request for the option to interview over Hangouts/Skype instead of a phone call; it is easier to send links or text across.|
 |✅|Dress comfortably. Usually you do not need to wear smart clothes, casual should be fine. T-shirts and jeans are acceptable at most places.|
+|⚠️|Turn off the webcam if possible. Most remote interviews will not require video chat and leaving it on only serves as distractions.|
 
 ### 2. Introduction
 
@@ -29,7 +32,7 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 || Things |
 |-|-|
 |✅|Repeat the question back at the interviewer.|
-|✅|Clarify input format and range.|
+|✅|Clarify input format and range. Ask whether input can be assumed to be well-formed and non-null.|
 |✅|Work through a small example to ensure you understood the question.|
 |✅|Explain a high level approach even if it is a brute force one.|
 |✅|Improve upon the approach and optimize. Reduce duplicated work and cache repeated computations.|
@@ -44,15 +47,15 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 
 || Things |
 |-|-|
-|✅|Practice good coding style. Clear variable names, consistent operator spacing, proper indentation, etc.|
-|✅|Defensive coding. Check for nulls, empty collections, etc.|
 |✅|Explain what you are coding/typing to the interviewer, what you are trying to achieve.|
+|✅|Practice good coding style. Clear variable names, consistent operator spacing, proper indentation, etc.|
 |✅|Type/write at a reasonable speed.|
 |✅|Write in a modular fashion. Extract out chunks of repeated code into functions.|
 |✅|Use the hints given by the interviewer.|
 |✅|Demonstrate mastery of your chosen programming language.|
 |✅|Demonstrate technical knowledge in data structures and algorithms.|
 |✅|Practice whiteboard space-management skills.|
+|⚠️|Reasonable defensive coding. Check for nulls, empty collections, etc. Can omit if input validity has been clarified with the interviewer.|
 |❌|Remain quiet the whole time.|
 |❌|Spend too much time writing comments.|
 |❌|Use extremely verbose variable names.|
