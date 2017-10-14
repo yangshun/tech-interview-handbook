@@ -47,11 +47,15 @@ For phone screens/remote interviews, prepare paper and pen/pencil to jot down an
 
 Use earphones and make sure you are in a quiet environment. You definitely do not want to be holding a phone in one hand and only be able to type with the other. Try avoiding using speakers because if the echo is bad, communication is harder and repeating of words will just result in loss of valuable time.
 
+**Self Introduction**
+
+TODO
+
 **Upon Getting the Question**
 
 Many candidates jump into coding the moment they hear the question. That is usually a big mistake. Take a moment to repeat the question back at the interviewer and make sure that you understand exactly what they are asking. If you misunderstood and when you repeat back the question, they will clarify.
 
-Always seek clarification about the question upon hearing it even if it you think it is clear to you. You might discover something that you have missed out and it also sends a signal to the interviewer that you are a careful person who pays attention to details. Consider asking the following questions:
+Always seek clarification about the question upon hearing it even if it you think it is clear to you. You might discover something that you have missed out and it also sends a signal to the interviewer that you are a careful person who pays attention to details. Some interviewers deliberately omit important details to see if you ask the right questions. Consider asking the following questions:
 
 - How big is the size of the input?
 - How big is the range of values?
@@ -96,4 +100,22 @@ A great resource for practicing mock coding interviews would be [interviewing.io
 
 I have used interviewing.io both as an interviewer and an interviewee and found the experience to be really great! [Aline Lerner](https://twitter.com/alinelernerLLC), the CEO and co-founder of interviewing.io and her team are passionate about revolutionizing the technical interview process and helping candidates to improve their skills at interviewing. She has also published a number of technical interview-related articles on the [interviewing.io blog](http://blog.interviewing.io/). interviewing.io is still in beta now but I recommend signing up as early as possible to increase the likelihood of getting an invite.
 
-Another platform that allows you to practice coding interviews is [Pramp](https://pramp.com/). Where interviewing.io matches potential job seekers with seasoned technical interviewers, Pramp differs takes a different approach. Pramp pairs you up with another peer who is also a job seeker and both of you take turns to assume the role of interviewer and interviewee. Pramp also prepares questions for you, along with suggested solutions and prompts to guide the interviewee. Personally, I do not really like Pramp's approach because if I were to interview someone, I would rather choose a question I am familiar with. Also, many users of the platform do not have the experience of being interviewers and that can result in a horrible interview experience. There was once where my matched peer, as the interviewer, did not have the right understanding of the question and attempted to lead me down the wrong path of solving the question.
+Another platform that allows you to practice coding interviews is [Pramp](https://pramp.com/). Where interviewing.io matches potential job seekers with seasoned technical interviewers, Pramp takes a different approach. Pramp pairs you up with another peer who is also a job seeker and both of you take turns to assume the role of interviewer and interviewee. Pramp also prepares questions for you, along with suggested solutions and prompts to guide the interviewee.
+
+Personally, I am not that fond of Pramp's approach because if I were to interview someone, I would rather choose a question I am familiar with. Also, many users of the platform do not have the experience of being interviewers and that can result in a horrible interview experience. There was once where my matched peer, as the interviewer, did not have the right understanding of the question and attempted to lead me down the wrong path of solving the question. However, this is more of a problem of the candidate than the platform though.
+
+### Conclusion
+
+Coding interviews are tough. But fortunately, you can get better at them by studying and practicing for them, and doing mock interviews.
+To recap, to do well in coding interviews:
+
+1. Decide on a programming language
+1. Study CS fundamentals
+1. Practice solving algorithm questions
+1. Internalize the [Do's and Don'ts of interviews](./cheatsheet.md)
+1. Practice doing mock interviews
+1. Interview successfully to get the job
+
+By following these steps, you will improve your coding interview skills, and be one step closer (or probably more) to landing your dream job.
+
+All the best!
