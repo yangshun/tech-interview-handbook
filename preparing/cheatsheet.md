@@ -1,7 +1,7 @@
 Interview Cheatsheet
 ==
 
-This is a straight-to-the-point distilled list of technical interview Do's and Don'ts. Some of these may apply to only phone screens on whiteboard interviews but most will apply to both.
+This is a straight-to-the-point distilled list of technical interview Do's and Don'ts. Some of these may apply to only phone screens on whiteboard interviews but most will apply to both. I revise this list before each of my interviews to remind myself of them and eventually internalized all of them to the point I do not have to rely on it anymore.
 
 ### 1. Before Interview
 
@@ -86,7 +86,7 @@ This is a straight-to-the-point distilled list of technical interview Do's and D
 
 **Do's**
 
-- Ask questions and ask good questions! Pick some questions from [here](../non-technical/questions-to-ask).
+- Ask questions and ask good questions! Pick some questions from [here](../non-technical/questions-to-ask.md).
 - Ask questions that are tailored to the company.
 - Thank the interviewer.
 
