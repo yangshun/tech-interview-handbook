@@ -5,6 +5,8 @@ This is a straight-to-the-point distilled list of technical interview Do's and D
 
 For a detailed walkthrough of interview preparation, refer to the ["Preparing for a Coding Interview"](./) section.
 
+**Legend:** ✅ = Do, ❌ = Don't, ⚠️ = Situational
+
 ### 1. Before Interview
 
 || Things |
@@ -90,8 +92,8 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 |-|-|
 |✅|Ask questions. More importantly, ask good and engaging questions that are tailored to the company! Pick some questions from [this list](../non-technical/questions-to-ask.md).|
 |✅|Thank the interviewer.|
+|⚠️|Ask about your interview performance. It can get awkward.|
 |❌|End the interview without asking any questions.|
-|❌|Ask about your interview performance. It can get awkward.|
 
 ###### References
 
