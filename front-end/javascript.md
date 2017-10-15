@@ -61,6 +61,7 @@ WIP.
   - https://css-tricks.com/debouncing-throttling-explained-examples/
 - Callbacks
 - [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+- [Async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) and [Await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) in ES7
 
 **Reference**
 
