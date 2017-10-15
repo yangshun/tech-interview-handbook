@@ -5,6 +5,11 @@ This is a straight-to-the-point distilled list of technical interview Do's and D
 
 For a detailed walkthrough of interview preparation, refer to the ["Preparing for a Coding Interview"](./) section.
 
+Legend: 
+✅ = DO
+❌ = DONT
+⚠️ = OPTIONAL
+
 ### 1. Before Interview
 
 || Things |
