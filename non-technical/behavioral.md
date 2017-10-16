@@ -13,7 +13,7 @@ Learn the [STAR](https://en.wikipedia.org/wiki/Situation,_task,_action,_result) 
 - Why do you want to work for X company?
 - Why do you want to leave your current/last company?
 - What are you looking for in your next role?
-- Tell me about a time where you had a conflict with a co-worker.
+- Tell me about a time when you had a conflict with a co-worker.
 - Tell me about a time in which you had a conflict and needed to influence somebody else.
 - What project are you currently working on?
 - What is the most challenging aspect of your current project?
@@ -93,7 +93,7 @@ Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions
 - Why are you looking to leave your current company?
 - What is your biggest strength and area of growth?
 - Tell me about a time your work responsibilities got a little overwhelming. What did you do?
-- Give me an example of a time where you had a difference of opinion with a team member. How did you handle that?
+- Give me an example of a time when you had a difference of opinion with a team member. How did you handle that?
 - Tell me about a challenge you faced recently in your role. How did you tackle it? What was the outcome?
 - Where do you want to be in five years?
 - Tell me about a time you needed information from someone who wasn't responsive. What did you do?
@@ -154,7 +154,7 @@ Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Stripe-Interview-Questions-E671932.htm)
 
-- How do you stay up to date with latest technologies?
+- How do you stay up to date with the latest technologies?
 - Explain a project that you worked on recently that was difficult.
 - Where do you see yourself in five years?
 

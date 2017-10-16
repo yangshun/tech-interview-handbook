@@ -20,7 +20,7 @@ The Elevator Pitch is an indispensable tool for you as you move forward in your 
 - PRACTICE!
   - Lastly, you must practice your pitch! Having a great, succinct summary of your skills only helps if you can actually deliver it rapidly! You should practice keeping a quick but easy-to-follow pace that won't overwhelm them but won't bore them. It's a precarious balance, but can be ironed out with practice.
 
-Having an Elevator Pitch on hand is a great way to create a network and happen upon new job opportunities. There will often be times where you can't prepare for an interview or meeting, and it is incredibly handy to have a practiced pitch.
+Having an Elevator Pitch on hand is a great way to create a network and happen upon new job opportunities. There will often be times when you can't prepare for an interview or meeting, and it is incredibly handy to have a practiced pitch.
 
 ###### References
 
