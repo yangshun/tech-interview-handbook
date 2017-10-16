@@ -536,7 +536,7 @@ When a question involves a BST, the interviewer is usually looking for a solutio
 #### Study Links
 
 - [Trying to Understand Tries](https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014)
-- [Implement Trie (Prefix Tree)]
+- [Trie Implementation](http://www.geeksforgeeks.org/trie-insert-and-search/)
 
 #### Notes
 
