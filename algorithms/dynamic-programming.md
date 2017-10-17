@@ -1,8 +1,6 @@
 Dynamic Programming
-===================
+==
 
-Example problems
-----------------
 - Given a flight itinerary consisting of starting city, destination city, and ticket price (2D list) - find the optimal price flight path to get from start to destination. (A variation of Dynamic Programming Shortest Path)
 - Given some coin denominations and a target value `M`, return the coins combination with the minimum number of coins.
   - Time complexity: `O(MN)`, where N is the number of distinct type of coins.
