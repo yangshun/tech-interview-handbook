@@ -5,8 +5,8 @@ Dynamic Programming
 - Given some coin denominations and a target value `M`, return the coins combination with the minimum number of coins.
   - Time complexity: `O(MN)`, where N is the number of distinct type of coins.
   - Space complexity: `O(M)`.
-- Given a set of numbers in an array which represent number of consecutive days of AirBnb reservation requested, as a host, pick the sequence which maximizes the number of days of occupancy, at the same time, leaving at least a 1 day gap in-between bookings for cleaning.
-  - Problem reduces to finding the maximum sum of non-consecutive array elements.
+- Given a set of numbers in an array which represent a number of consecutive days of Airbnb reservation requested, as a host, pick the sequence which maximizes the number of days of occupancy, at the same time, leaving at least a 1-day gap in-between bookings for cleaning.
+  - The problem reduces to finding the maximum sum of non-consecutive array elements.
   - E.g.
     ~~~
     // [5, 1, 1, 5] => 10
@@ -16,7 +16,8 @@ Dynamic Programming
     // Dec 6 - 7
     // Dec 7 - 12
 
-    The answer would be to pick Dec 1-5 (5 days) and then pick Dec 7-12 for a total of 10 days of occupancy, at the same time, leaving at least 1 day gap for cleaning between reservations.
+    The answer would be to pick Dec 1-5 (5 days) and then pick Dec 7-12 for a total of 10 days of
+    occupancy, at the same time, leaving at least 1-day gap for cleaning between reservations.
 
     Similarly,
     // [3, 6, 4] => 7
