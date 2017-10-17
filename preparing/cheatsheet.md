@@ -95,6 +95,13 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 |⚠️|Ask about your interview performance. It can get awkward.|
 |❌|End the interview without asking any questions.|
 
+### 7. Post Interview
+
+|| Things |
+|-|-|
+|✅|Record the interview questions and answers down as these can be useful for future reference.|
+|⚠️|Send a follow up email to your interviewer(s) thanking them for their time and the opportunity to interview with them.|
+
 ###### References
 
 - [Preparing for a Facebook/Google Software Engineer Interview](https://orrsella.com/2016/05/14/preparing-for-a-facebook-google-software-engineer-interview/)
