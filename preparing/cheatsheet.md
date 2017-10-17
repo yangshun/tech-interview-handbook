@@ -99,8 +99,8 @@ For a detailed walkthrough of interview preparation, refer to the ["Preparing fo
 
 || Things |
 |-|-|
-|✅|Send a follow up email to your interview(ers) thanking them for their time and the opportunity to interview with them.|
-|✅|Backup any questions and answers that you wrote down regarding the interview, these can be usefull for future reference.|
+|✅|Record the interview questions and answers down as these can be useful for future reference.|
+|⚠️|Send a follow up email to your interviewer(s) thanking them for their time and the opportunity to interview with them.|
 
 ###### References
 
