@@ -15,12 +15,12 @@ function binarySearch(arr, target) {
     return -1;
 }
 
-console.log(binarySearch([1, 2, 3, 10], 1) === 0)
-console.log(binarySearch([1, 2, 3, 10], 2) === 1)
-console.log(binarySearch([1, 2, 3, 10], 3) === 2)
-console.log(binarySearch([1, 2, 3, 10], 10) === 3)
-console.log(binarySearch([1, 2, 3, 10], 9) === -1)
-console.log(binarySearch([1, 2, 3, 10], 4) === -1)
-console.log(binarySearch([1, 2, 3, 10], 0) === -1)
-console.log(binarySearch([1, 2, 3, 10], 11) === -1)
-console.log(binarySearch([5, 7, 8, 10], 3) === -1)
+console.log(binarySearch([1, 2, 3, 10], 1) === 0);
+console.log(binarySearch([1, 2, 3, 10], 2) === 1);
+console.log(binarySearch([1, 2, 3, 10], 3) === 2);
+console.log(binarySearch([1, 2, 3, 10], 10) === 3);
+console.log(binarySearch([1, 2, 3, 10], 9) === -1);
+console.log(binarySearch([1, 2, 3, 10], 4) === -1);
+console.log(binarySearch([1, 2, 3, 10], 0) === -1);
+console.log(binarySearch([1, 2, 3, 10], 11) === -1);
+console.log(binarySearch([5, 7, 8, 10], 3) === -1);

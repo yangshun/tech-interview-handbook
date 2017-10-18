@@ -32,4 +32,4 @@ function graphTopoSort(numberNodes, edges) {
     return order.length == numberNodes ? order : [];
 }
 
-console.log(graphTopoSort(3, [[0, 1], [0, 2]]))
+console.log(graphTopoSort(3, [[0, 1], [0, 2]]));
