@@ -1,3 +1,4 @@
+// Does not handle negative numbers.
 function intToBin(number) {
     if (number === 0) {
         return '0';

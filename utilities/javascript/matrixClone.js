@@ -11,6 +11,7 @@ const a = [[1, 2], [1, 4]];
 console.log(deepEqual(matrixClone(a), [[1, 2], [1, 4]]));
 a[0][0] = 4;
 console.log(deepEqual(matrixClone(a), [[1, 2], [1, 4]]) === false);
+console.log(deepEqual(matrixClone([[1]]), [[1]]));
 
 // Test clone with default value.
 console.log(deepEqual(matrixClone([[1, 2], [1, 4]], 1), [[1, 1], [1, 1]]));

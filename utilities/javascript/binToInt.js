@@ -1,3 +1,4 @@
+// Does not handle negative binary numbers.
 function binToInt(binary) {
     let res = 0;
     for (let i = 0; i < binary.length; i++) {
