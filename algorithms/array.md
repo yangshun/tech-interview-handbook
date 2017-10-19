@@ -56,3 +56,5 @@ Arrays
 - Given an array, return the length of the longest increasing contiguous subarray.
   - E.g., `[1, 3, 2, 3, 4, 8, 7, 9]`, should return `4` because the longest increasing array is `[2, 3, 4, 8]`.
   - [Source](http://blog.gainlo.co/index.php/2017/02/02/uber-interview-questions-longest-increasing-subarray/).
+  -Merge two sorted arrays with O(1) extra space
+  -[Source](http://www.geeksforgeeks.org/merge-two-sorted-arrays-o1-extra-space/)
