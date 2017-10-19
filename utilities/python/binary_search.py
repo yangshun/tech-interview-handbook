@@ -11,6 +11,32 @@ def binary_search(arr, target):
             right = mid - 1
     return -1
 
+def bisect_left(arr, target):
+    """Returns the leftmost position that `target` should
+    go to such that the sequence remains sorted."""
+    left = 0
+    right = len(arr)
+    while left < right:
+        mid = (left + right) // 2
+        if arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid
+    return left
+
+def bisect_right(arr, target):
+    """Returns the rightmost position that `target` should
+    go to such that the sequence remains sorted."""
+    left = 0
+    right = len(arr)
+    while left < right:
+        mid = (left + right) // 2
+        if arr[mid] > target:
+            right = mid
+        else:
+            left = mid + 1
+    return left
+
 print(binary_search([1, 2, 3, 10], 1) == 0)
 print(binary_search([1, 2, 3, 10], 2) == 1)
 print(binary_search([1, 2, 3, 10], 3) == 2)
