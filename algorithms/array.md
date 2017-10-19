@@ -7,7 +7,7 @@ Arrays
 - Paginate an array with constraints, such as skipping certain items.
 - Implement a circular buffer using an array.
 - Given array of arrays, sort them in ascending order.
-- Given an array of integers, print out a histogram of using said array; include a base layer (all stars)
+- Given an array of integers, print out a histogram using the said array; include a base layer (all stars)
   - E.g. `[5, 4, 0, 3, 4, 1]`
 
 ```
