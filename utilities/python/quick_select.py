@@ -44,3 +44,17 @@ def quick_select(array, k):
             right = pivot_index
         else:
             left = pivot_index + 1
+
+
+
+print(quick_select([0], 0) == 0)
+print(quick_select([0, 1, 2, 3, 4], 2) == 2)
+print(quick_select([4, 3, 2, 1, 0], 2) == 2)
+print(quick_select([1, 3, 4, 2, 0], 2) == 2)
+
+# Large test case, for randomized tests
+lst = list(range(1000))
+for _ in range(10):
+    k = random.randint(0, 999)
+    random.shuffle(lst)
+    print(quick_select(lst, k) == k)
