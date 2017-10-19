@@ -25,3 +25,26 @@ def union(parents, p, q):
     else:
         parents[p] = q
         weights[q] += weights[p]
+
+
+
+# Start with all elements separate
+# -> [0], [1], [2], [3], [4], [5], [6]
+print(find_root(parents, 2) == 2)
+
+# Merge 1, 2, 3 and 4, 5, 6
+# -> [0], [1, 2, 3], [4, 5, 6]
+union(parents, 1, 2)
+union(parents, 2, 3)
+union(parents, 4, 5)
+union(parents, 4, 6)
+
+# Roots of 1, 2, 3 and 4, 5, 6 are the same
+print(find_root(parents, 0))
+print(list(find_root(parents, i) for i in (1, 2, 3)))
+print(list(find_root(parents, i) for i in (4, 5, 6)))
+
+# Merge 2, 4
+# -> [0], [1, 2, 3, 4, 5, 6]
+union(parents, 2, 4)
+print(list(find_root(parents, i) for i in (1, 2, 3, 4, 5, 6)))
