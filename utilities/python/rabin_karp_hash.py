@@ -24,3 +24,18 @@ def rk_hash_update(curr_hash, size, add_n, rem_n):
     add_n: The integer appended to the right
     rem_n: The integer removed from the left'''
     return (curr_hash - (rem_n * BASE ** (size - 1))) * BASE + add_n
+
+
+
+abc_hash = rk_hash_init(tuple(map(ord, 'abc')))     # Init the hash with 'abc'
+print('abc:', abc_hash)
+bcd_hash_1 = rk_hash_update(abc_hash, 3, ord('d'), ord('a'))    # Add a 'd' to the right, remove an 'a' from the left
+print('bcd 1:', bcd_hash_1)
+
+zbc_hash = rk_hash_init(tuple(map(ord, 'zbc')))     # Init the hash with 'zbc'
+print('zbc:', zbc_hash)
+bcd_hash_2 = rk_hash_update(zbc_hash, 3, ord('d'), ord('z'))    # Add a 'd' to the right, remove a 'z' from the left
+print('bcd 2:', bcd_hash_2)
+
+# Notice that both hash values are the same despite arriving via different paths
+print(bcd_hash_1 == bcd_hash_2)
