@@ -50,3 +50,35 @@ def heappop(heap):
     del heap[-1]
     _bubble_down(heap, 0)
     return min_value
+
+
+
+# Example usage
+heap = [3, 2, 1, 0]
+heapify(heap)
+print('Heap(0, 1, 2, 3):', heap)
+heappush(heap, 4)
+heappush(heap, 7)
+heappush(heap, 6)
+heappush(heap, 5)
+print('Heap(0, 1, 2, 3, 4, 5, 6, 7):', heap)
+
+sorted_list = [heappop(heap) for _ in range(8)]
+print('Heap-sorted list:', sorted_list)
+
+# Large test case, for randomized tests
+import random
+
+# Heapify 0 ~ 99
+heap = list(range(100))
+random.shuffle(heap)
+heapify(heap)
+
+# Push 100 ~ 199 in random order
+new_elems = list(range(100, 200))
+random.shuffle(new_elems)
+for elem in new_elems:
+    heappush(heap, elem)
+
+sorted_list = [heappop(heap) for _ in range(200)]
+print(sorted_list == sorted(sorted_list))
