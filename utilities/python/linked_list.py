@@ -71,3 +71,10 @@ def linked_list_delete_index(linked_list, index):
         raise ValueError
     node.next = node.next.next
     return linked_list
+
+def linked_list_iter(linked_list):
+    '''Lazy iterator over each node in the linked list'''
+    node = linked_list
+    while node is not None:
+        yield node
+        node = node.next
