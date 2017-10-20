@@ -78,3 +78,32 @@ def linked_list_iter(linked_list):
     while node is not None:
         yield node
         node = node.next
+
+
+# Append to back
+linked_list = None    # Start with an empty linked list
+linked_list = linked_list_append(linked_list, 1)
+linked_list = linked_list_append(linked_list, 2)
+linked_list = linked_list_append(linked_list, 4)
+print([node.value for node in linked_list_iter(linked_list)])
+
+# Insert by index
+linked_list = linked_list_insert_index(linked_list, 0, 0) # Front
+print([node.value for node in linked_list_iter(linked_list)])
+linked_list = linked_list_insert_index(linked_list, 3, 3) # Back
+print([node.value for node in linked_list_iter(linked_list)])
+
+# Delete "3"
+linked_list = linked_list_delete(linked_list, 3)
+print([node.value for node in linked_list_iter(linked_list)])
+
+# Delete by index
+linked_list = linked_list_delete_index(linked_list, 0)
+print([node.value for node in linked_list_iter(linked_list)])
+linked_list = linked_list_delete_index(linked_list, 1)
+print([node.value for node in linked_list_iter(linked_list)])
+
+# Delete until empty
+linked_list = linked_list_delete_index(linked_list, 0)
+linked_list = linked_list_delete_index(linked_list, 0)
+print([node.value for node in linked_list_iter(linked_list)])
