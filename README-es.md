@@ -13,11 +13,7 @@
 
 ## Que es esto?
 
-Contenido cuidadosamente seleccionado para ayudarte a realizar tu próxima entrevista, con un enfoque en los algoritmos y el dominio del front-end.
-
-Preguntas de diseño de sistema están en progreso. Además de las preguntas de algoritmo habituales, otras cosas ** increíbles ** incluyen:
-
-Carefully curated content to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff includes:
+Contenido cuidadosamente seleccionado para ayudarte a realizar tu próxima entrevista, con un enfoque en los algoritmos y el dominio del front-end. Preguntas de diseño de sistema están en progreso. Además de las preguntas de algoritmo habituales, otras cosas ** increíbles ** incluyen:
 
 - [How to prepare](preparing) for coding interviews
 - [Interview Cheatsheet](preparing/cheatsheet.md) - Straight-to-the-point Do's and Don'ts 🆕
@@ -36,7 +32,7 @@ This handbook is pretty new and help from you in contributing content would be v
 
 Este repositorio tiene un contenido * práctico * que cubre todas las fases de una entrevista técnica; desde solicitar un trabajo hasta pasar las entrevistas para recibit una oferta de negociación. Los candidatos técnicamente competentes también podrían encontrar útil el contenido no técnico.
 
-## A  quien va dirigito?
+## A  quien va dirigido?
 
 Cualquiera que quiera conseguir un trabajo en una compañía de tecnología, pero es nuevo en las entrevistas técnicas, ingenieros experimentados que no han estado del otro lado de la mesa de entrevistas desde hace tiempo y quieren volver al juego, o cualquiera que quiera ser mejor en entrevistas técnicas.
 
@@ -63,7 +59,7 @@ Además, los recursos existentes se centran principalmente en preguntas sobre al
   - [Questions to Ask](non-technical/questions-to-ask.md)
   - [Negotiation Tips](non-technical/negotiation.md)
 - **[Utilities](utilities)** - Fragmentos de algoritmos / código que ayudarán a codificar preguntas
-  - **UPDATE** - Check out [Lago](https://github.com/yangshun/lago), Que es Data Structures and Algorithms library que contiene más implementaciones de alta calidad con una cobertura de prueba del 100%.
+- **UPDATE** - Check out [Lago](https://github.com/yangshun/lago), Que es Data Structures and Algorithms library que contiene más implementaciones de alta calidad con una cobertura de prueba del 100%.
 
 ## Relacionado
 
