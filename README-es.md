@@ -46,18 +46,18 @@ Además, los recursos existentes se centran principalmente en preguntas sobre al
 ## Contenido
 
 - **[Preparing for a Coding Interview](preparing)**
-  - [Interview cheatsheet](preparing/cheatsheet.md) - Qué hacer y qué no hacer al momento
+- [Interview cheatsheet](preparing/cheatsheet.md) - Qué hacer y qué no hacer al momento
 - **[Algorithm Questions](algorithms)** - Preguntas categorizadas by topics
 - **[Design Questions](design)**
 - **[Front-end Study Notes](front-end)** - Notas resumidas sobre los diversos aspectos del front-end
-  - [Front-end Job Interview Questions and Answers](front-end/interview-questions.md) 🔥⭐
+- [Front-end Job Interview Questions and Answers](front-end/interview-questions.md) 🔥⭐
 - **[Non-Technical Tips](non-technical)** - Consejos aleatorios no técnicos que cubren aspectos conductuales y psicológicos, formatos de entrevistas y "¿Tiene alguna pregunta para mí?"
-  - [Resume Tips](non-technical/resume.md)
-  - [Behavioral Questions](non-technical/behavioral.md)
-  - [Interview Formats](non-technical/interview-formats.md)
-  - [Psychological Tricks](non-technical/psychological-tricks.md)
-  - [Questions to Ask](non-technical/questions-to-ask.md)
-  - [Negotiation Tips](non-technical/negotiation.md)
+- [Resume Tips](non-technical/resume.md)
+- [Behavioral Questions](non-technical/behavioral.md)
+- [Interview Formats](non-technical/interview-formats.md)
+- [Psychological Tricks](non-technical/psychological-tricks.md)
+- [Questions to Ask](non-technical/questions-to-ask.md)
+- [Negotiation Tips](non-technical/negotiation.md)
 - **[Utilities](utilities)** - Fragmentos de algoritmos / código que ayudarán a codificar preguntas
 - **UPDATE** - Check out [Lago](https://github.com/yangshun/lago), Que es Data Structures and Algorithms library que contiene más implementaciones de alta calidad con una cobertura de prueba del 100%.
 
