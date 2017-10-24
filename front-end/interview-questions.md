@@ -99,6 +99,7 @@ These days, using `data-` attributes is not encouraged. One reason is that users
 ###### References
 
 - http://html5doctor.com/html5-custom-data-attributes/
+- https://www.w3.org/TR/html5/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes
 
 ### Consider HTML5 as an open web platform. What are the building blocks of HTML5?
 
@@ -713,7 +714,7 @@ A closure is the combination of a function and the lexical environment within wh
 
 They can be used in IIFEs to encapsulate some code within a local scope so that variables declared in it do not leak to the global scope.
 
-```
+```js
 (function() {
   // Some code here.
 })();
@@ -721,7 +722,7 @@ They can be used in IIFEs to encapsulate some code within a local scope so that 
 
 As a callback that is used once and does not need to be used anywhere else. The code will seem more self-contained and readable when handlers are defined right inside the code calling them, rather than having to search elsewhere to find the function body.
 
-```
+```js
 setTimeout(function () {
   console.log('Hello world!');
 }, 1000);
@@ -729,7 +730,7 @@ setTimeout(function () {
 
 Arguments to functional programming constructs or Lodash (similar to callbacks).
 
-```
+```js
 const arr = [1, 2, 3];
 const double = arr.map(function (el) {
   return el * 2;
@@ -891,7 +892,7 @@ The `XMLHttpRequest` API is frequently used for the asynchronous communication o
 
 JSONP (JSON with Padding) is a method commonly used to bypass the cross-domain policies in web browsers because Ajax requests from the current page to a cross-origin domain is not allowed.
 
-JSONP works by making a request to a cross-origin domain via a `<script>` tag and usually with a `callback` query parameter, for example: `https://example.com?callback=printData`. The server will then wrap the data within the a function called `printData` and return it to the client.
+JSONP works by making a request to a cross-origin domain via a `<script>` tag and usually with a `callback` query parameter, for example: `https://example.com?callback=printData`. The server will then wrap the data within a function called `printData` and return it to the client.
 
 ```html
 <!-- https://mydomain.com -->
@@ -923,7 +924,7 @@ These days, [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) i
 
 Yes. Handlebars, Underscore, Lodash, AngularJS and JSX. I disliked templating in AngularJS because it made heavy use of strings in the directives and typos would go uncaught. JSX is my new favourite as it is closer to JavaScript and there is barely and syntax to be learnt. Nowadays, you can even use ES2015 template string literals as a quick way for creating templates without relying on third-party code.
 
-```
+```js
 const template = `<div>My name is: ${name}</div>`;
 ```
 
@@ -933,7 +934,7 @@ However, do beware of a potential XSS in the above approach as the contents are 
 
 Hoisting is a term used to explain the behavior of variable declarations in your code. Variables declared or initialized with the `var` keyword will have their declaration "hoisted" up to the top of the current scope. However, only the declaration is hoisted, the assignment (if there is one), will stay where it is. Let's explain with a few examples.
 
-```
+```js
 // var declarations are hoisted.
 console.log(foo); // undefined
 var foo = 1;
@@ -947,7 +948,7 @@ console.log(bar); // 2
 
 Function declarations have the body hoisted while the function expressions (written in the form of variable declarations) only has the variable declaration hoisted.
 
-```
+```js
 // Function Declaration
 console.log(foo); // [Function: foo]
 foo(); // 'FOOOOO'
@@ -973,7 +974,7 @@ When an event triggers on a DOM element, it will attempt to handle the event if 
 
 Attributes are defined on the HTML markup but properties are defined on the DOM. To illustrate the difference, imagine we have this text field in our HTML: `<input type="text" value="Hello">`.
 
-```
+```js
 const input = document.querySelector('input');
 console.log(input.getAttribute('value')); // Hello
 console.log(input.value); // Hello
@@ -981,7 +982,7 @@ console.log(input.value); // Hello
 
 But after you change the value of the text field by adding "World!" to it, this becomes:
 
-```
+```js
 console.log(input.getAttribute('value')); // Hello
 console.log(input.value); // Hello World!
 ```
