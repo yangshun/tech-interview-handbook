@@ -200,6 +200,10 @@ Answers to [Front-end Job Interview Questions - CSS Questions](https://github.co
 - **IDs** - Meant to be unique within the document. Can be used to identify an element when linking using a fragment identifier. Elements can only have one `id` attribute.
 - **Classes** - Can be reused on multiple elements within the document. Mainly for styling and targeting elements.
 
+###### References
+- https://www.w3.org/TR/CSS1/#id-as-selector
+- https://www.w3.org/TR/CSS1/#class-as-selector
+
 ### What's the difference between "resetting" and "normalizing" CSS? Which would you choose, and why?
 
 - **Resetting** - Resetting is meant to strip all default browser styling on elements. For e.g. `margin`s, `padding`s, `font-size`s of all elements are reset to be the same. You will have to redeclare styling for common typographic elements.
