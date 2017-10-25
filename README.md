@@ -32,7 +32,7 @@ This repository has *practical* content that covers all phases of a technical in
 
 ## Who is this for?
 
-Anybody who wants to land a job at a tech company but is new to technical interviews, seasoned engineers who have not been on the other side of the interviewing table in a while and wants to get back into the game, or anyone who wants to be better at technical interviewing.
+Anybody who wants to land a job at a tech company but is new to technical interviews, seasoned engineers who have not been on the other side of the interviewing table in a while and want to get back into the game, or anyone who wants to be better at technical interviewing.
 
 ## How is this repository different?
 
