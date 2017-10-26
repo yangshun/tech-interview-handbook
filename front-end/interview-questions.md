@@ -299,6 +299,7 @@ CSS sprites combine multiple images into one single larger image. It is commonly
 - Advance downloading of assets that won't be downloaded until needed, such as images that only appear upon `:hover` pseudo-states. Blinking wouldn't be seen.
 
 ###### References
+
 - https://css-tricks.com/css-sprites/
 
 ### What are your favorite image replacement techniques and which do you use when?
