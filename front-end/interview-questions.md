@@ -200,6 +200,10 @@ Answers to [Front-end Job Interview Questions - CSS Questions](https://github.co
 - **IDs** - Meant to be unique within the document. Can be used to identify an element when linking using a fragment identifier. Elements can only have one `id` attribute.
 - **Classes** - Can be reused on multiple elements within the document. Mainly for styling and targeting elements.
 
+###### References
+- https://www.w3.org/TR/CSS1/#id-as-selector
+- https://www.w3.org/TR/CSS1/#class-as-selector
+
 ### What's the difference between "resetting" and "normalizing" CSS? Which would you choose, and why?
 
 - **Resetting** - Resetting is meant to strip all default browser styling on elements. For e.g. `margin`s, `padding`s, `font-size`s of all elements are reset to be the same. You will have to redeclare styling for common typographic elements.
@@ -293,6 +297,10 @@ CSS sprites combine multiple images into one single larger image. It is commonly
 
 - Reduce the number of HTTP requests for multiple images (only one single request is required per spritesheet). But with HTTP2, loading multiple images is no longer much of an issue.
 - Advance downloading of assets that won't be downloaded until needed, such as images that only appear upon `:hover` pseudo-states. Blinking wouldn't be seen.
+
+###### References
+
+- https://css-tricks.com/css-sprites/
 
 ### What are your favorite image replacement techniques and which do you use when?
 
