@@ -67,7 +67,7 @@ The following is a checklist that contains recommendations for implementing HTML
 - Accessibility tree = DOM + ARIA.
 - ARIA attributes
   - Allow us to modify the accessibility tree before they are exposed to assistive technologies.
-  - DO NOT modify the element apperance.
+  - DO NOT modify the element appearance.
   - DO NOT modify element behaviour.
   - DO NOT add focusability.
   - DO NOT add keyboard event handling.
