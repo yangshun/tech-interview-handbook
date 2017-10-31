@@ -633,6 +633,7 @@ For an in-depth explanation, do check out his [article on Medium](https://codebu
 
 ###### References
 
+- https://journeyintojavascript.quora.com/understanding-this-once-and-for-all
 - https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3
 - https://stackoverflow.com/a/3127440/1751946
 
