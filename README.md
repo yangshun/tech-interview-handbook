@@ -28,7 +28,7 @@ This handbook is pretty new and help from you in contributing content would be v
 
 ## Why do I want this?
 
-This repository has *practical* content that covers all phases of a technical interview from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful as well.
+This repository has *practical* content that covers all phases of a technical interview, from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful as well.
 
 ## Who is this for?
 
