@@ -5,6 +5,8 @@ This section dives deep into practical tips for specific topics of algorithms an
 
 For each topic, study links are recommended to help you master the topic. There is a list of recommended common questions to practice which in my opinion is highly valuable for mastering the core concepts for the topic.
 
+If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), a Data Structures and Algorithms library for JavaScript. It is pretty much still WIP but I intend to make it into a library that is able to be used in production and also a reference resource for revising Data Structures and Algorithms.
+
 ## Contents
 
 - [Array](array.md)
@@ -26,6 +28,8 @@ For each topic, study links are recommended to help you master the topic. There 
 - [Tree](tree.md)
 
 ## General Tips
+
+Clarify any assumptions you made subconsciously. Many questions are under-specified on purpose.
 
 Always validate input first. Check for invalid/empty/negative/different type input. Never assume you are given the valid parameters. Alternatively, clarify with the interviewer whether you can assume valid input (usually yes), which can save you time from writing code that does input validation.
 
@@ -56,7 +60,7 @@ Data structures can be augmented to achieve efficient time complexities across d
 
 Hashmaps are probably the most commonly used data structure for algorithm questions. If you are stuck on a question, your last resort can be to enumerate through the possible data structures (thankfully there aren't that many of them) and consider whether each of them can be applied to the problem. This has worked for me sometimes.
 
-If you are cutting corners in your code, state that out loud to your interviewer and say what you would do in a non-interview setting (no time constraints). E.g., I would write a regex to parse this string rather than using `split()` which does not cover all cases.
+If you are cutting corners in your code, state that out loud to your interviewer and say what you would do in a non-interview setting (no time constraints). E.g., I would write a regex to parse this string rather than using `split()` which may not cover all cases.
 
 ## Sequence
 
@@ -189,7 +193,7 @@ You can be given a list of edges and tasked to build your own graph from the edg
   - Adjacency list.
   - Hashmap of hashmaps.
 
-Some inputs look like they are trees but they are actually graphs. In that case you will have to handle cycles and keep a set of visited nodes when traversing.
+A tree-like diagram could very well be a graph that allows for cycles and a naive recursive solution would not work. In that case you will have to handle cycles and keep a set of visited nodes when traversing.
 
 #### Graph search algorithms:
 
@@ -532,7 +536,7 @@ When a question involves a BST, the interviewer is usually looking for a solutio
 #### Study Links
 
 - [Trying to Understand Tries](https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014)
-- [Implement Trie (Prefix Tree)]
+- [Implement Trie (Prefix Tree)](https://leetcode.com/articles/implement-trie-prefix-tree/)
 
 #### Notes
 

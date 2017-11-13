@@ -26,6 +26,7 @@ Here are some good questions to ask at the end of the interview, extracted from 
 - **What is something you wish were different about your job?**
 - How will the work I will be doing contribute to the organization's mission?
 - What do you like about working here?
+- What is your policy on working from home/remotely?
 - (If the company is a startup) When was the last time you interacted with a founder? What was it regarding? Generally how involved are the founders in the day-to-day?
 - Does the company culture encourage entrepreneurship? Could you give me any specific examples?
 
@@ -37,6 +38,7 @@ These questions are suitable for any technical role.
 - **What has been the worst technical blunder that has happened in the recent past? How did you guys deal with it? What changes were implemented afterwards to make sure it didn't happen again?**
 - **What is the most costly technical decision made early on that the company is living with now?**
 - **What is the most fulfilling/exciting/technically complex project that you've worked on here so far?**
+- How do you evaluate new technologies? Who makes the final decisions?
 - How do you know what to work on each day?
 - How would you describe your engineering culture?
 - How has your role changed since joining the company?
@@ -46,6 +48,16 @@ These questions are suitable for any technical role.
 - What do you measure? What are your most important product metrics?
 - What does the company do to nurture and train its employees?
 - How often have you moved teams? What made you join the team you're on right now? If you wanted to move teams, what would need to happen?
+- If you hire person, what do you have for him to study product you're working on and processes in general? Do you have specifications, requirements, documentation?
+- There's "C++" (or Python, Swift or any other tech) in the job description. How will you estimate my proficiency in this tech in 3 months?
+
+### Product
+
+- Tell me about the main products of your company.
+- What is the current version of product? (If it is v1.0 or similar - there could be a lot of chaos to work with)
+- What products are your main competitors?
+- What makes your product competitive?
+- When are you planning to provide the next release? (If in several months, it would mean a lot of requirements specified in job description are not needed right now)
 
 ### Management
 
@@ -55,12 +67,14 @@ These questions are suitable for asking Engineering Managers, especially useful 
 - **What does success look like for your team?**
 - **What qualities do you look out for when hiring for this role?**
 - **What are the strengths and weaknesses of the current team? What is being done to improve upon the weaknesses?**
+- **Can you tell me about a time you resolved an interpersonal conflict?**
 - How did you become a manager?
 - How do your engineers know what to work on each day?
 - What is your team's biggest challenge right now?
 - How do you measure individual performance?
 - How often are 1:1s conducted?
 - What is the current team composition like?
+- What opportunities are available to switch roles? How does this work?
 
 ### Leadership
 
@@ -93,3 +107,4 @@ These questions are intended for senior level management, such as CEO, CTO, VPs.
 - [How to interview your interviewers](http://blog.alinelerner.com/how-to-interview-your-interviewers/)
 - [How to Break Into the Tech Industry—a Guide to Job Hunting and Tech Interviews](https://haseebq.com/how-to-break-into-tech-job-hunting-and-interviews/)
 - [A developer's guide to interviewing](https://medium.freecodecamp.org/how-to-interview-as-a-developer-candidate-b666734f12dd)
+- [Questions I'm asking in interviews 2017](https://cternus.net/blog/2017/10/10/questions-i-m-asking-in-interviews-2017/)

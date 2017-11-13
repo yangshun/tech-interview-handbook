@@ -12,18 +12,23 @@ Learn the [STAR](https://en.wikipedia.org/wiki/Situation,_task,_action,_result) 
 
 - Why do you want to work for X company?
 - Why do you want to leave your current/last company?
-- Tell me about a time where you had a conflict with a co-worker.
+- What are you looking for in your next role?
+- Tell me about a time when you had a conflict with a co-worker.
 - Tell me about a time in which you had a conflict and needed to influence somebody else.
 - What project are you currently working on?
 - What is the most challenging aspect of your current project?
 - What was the most difficult bug that you fixed in the past 6 months?
 - How do you tackle challenges? Name a difficult challenge you faced while working on a project, how you overcame it, and what you learned.
 - What are you excited about?
+- What frustrates you?
 - Imagine it is your first day here at the company. What do you want to work on? What features would you improve on?
 - What are the most interesting projects you have worked on and how might they be relevant to this company's environment?
 - Tell me about a time you had a disagreement with your manager.
 - Talk about a project you are most passionate about, or one where you did your best work.
 - What does your best day of work look like?
+- What is something that you had to push for in your previous projects?
+- What is the most constructive feedback you have received in your career?
+- What was one thing you had to persevere for multiple months?
 
 ## Airbnb
 
@@ -35,6 +40,7 @@ While loving to travel or appreciating Airbnb's growth may be good answers, try 
 - What large problems in the world would you solve today?
 - Why do you like Airbnb?
 - If you had an unlimited budget and you could buy one gift for one person, what would you buy and who would you buy it for?
+- If you had an unlimited budget and you could go somewhere, where would you go?
 - Share one of your trips with us.
 - What is the most challenging project in or out of school that you have worked on in the last 6 months.
 - What is the thing that you don't want from your last internship/job?
@@ -87,7 +93,7 @@ Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions
 - Why are you looking to leave your current company?
 - What is your biggest strength and area of growth?
 - Tell me about a time your work responsibilities got a little overwhelming. What did you do?
-- Give me an example of a time where you had a difference of opinion with a team member. How did you handle that?
+- Give me an example of a time when you had a difference of opinion with a team member. How did you handle that?
 - Tell me about a challenge you faced recently in your role. How did you tackle it? What was the outcome?
 - Where do you want to be in five years?
 - Tell me about a time you needed information from someone who wasn't responsive. What did you do?
@@ -148,7 +154,7 @@ Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Stripe-Interview-Questions-E671932.htm)
 
-- How do you stay up to date with latest technologies?
+- How do you stay up to date with the latest technologies?
 - Explain a project that you worked on recently that was difficult.
 - Where do you see yourself in five years?
 

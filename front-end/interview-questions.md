@@ -84,6 +84,7 @@ In the back end, the HTML markup will contain `i18n` placeholders and content fo
 - Be mindful of how colors are perceived - Colors are perceived differently across languages and cultures. The design should use color appropriately.
 - Formatting dates and currencies - Calendar dates are sometimes presented in different ways. Eg. "May 31, 2012" in the U.S. vs. "31 May 2012" in parts of Europe.
 - Do not concatenate translated strings - Do not do anything like `"The date today is " + date`. It will break in languages with different word order. Using template parameters instead.
+- Language reading direction - In English, we read from left-to-right, top-to-bottom, in traditional Japanese, text is read up-to-down, right-to-left.
 
 ###### References
 
@@ -98,6 +99,7 @@ These days, using `data-` attributes is not encouraged. One reason is that users
 ###### References
 
 - http://html5doctor.com/html5-custom-data-attributes/
+- https://www.w3.org/TR/html5/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes
 
 ### Consider HTML5 as an open web platform. What are the building blocks of HTML5?
 
@@ -153,7 +155,7 @@ Note: The `async` and `defer` attrib­utes are ignored for scripts that have no 
 
 Putting `<link>`s in the head is part of the specification. Besides that, placing at the top allows the page to render progressively which improves user experience. The problem with putting stylesheets near the bottom of the document is that it prohibits progressive rendering in many browsers, including Internet Explorer. Some browsers block rendering to avoid having to repaint elements of the page if their styles change. The user is stuck viewing a blank white page. It prevents the flash of unstyled contents.
 
-**Placing `<scripts>`s just before `<body>`**
+**Placing `<script>`s just before `</body>`**
 
 `<script>`s block HTML parsing while they are being downloaded and executed. Downloading the scripts at the bottom will allow the HTML to be parsed and displayed to the user first.
 
@@ -197,6 +199,10 @@ Answers to [Front-end Job Interview Questions - CSS Questions](https://github.co
 
 - **IDs** - Meant to be unique within the document. Can be used to identify an element when linking using a fragment identifier. Elements can only have one `id` attribute.
 - **Classes** - Can be reused on multiple elements within the document. Mainly for styling and targeting elements.
+
+###### References
+- https://www.w3.org/TR/CSS1/#id-as-selector
+- https://www.w3.org/TR/CSS1/#class-as-selector
 
 ### What's the difference between "resetting" and "normalizing" CSS? Which would you choose, and why?
 
@@ -292,6 +298,10 @@ CSS sprites combine multiple images into one single larger image. It is commonly
 - Reduce the number of HTTP requests for multiple images (only one single request is required per spritesheet). But with HTTP2, loading multiple images is no longer much of an issue.
 - Advance downloading of assets that won't be downloaded until needed, such as images that only appear upon `:hover` pseudo-states. Blinking wouldn't be seen.
 
+###### References
+
+- https://css-tricks.com/css-sprites/
+
 ### What are your favorite image replacement techniques and which do you use when?
 
 CSS image replacement is a technique of replacing a text element (usually a header tag like an `<h1>`) with an image (often a logo). It has its origins in the time before web fonts and SVG. For years, web developers battled against browser inconsistencies to craft image replacement techniques that struck the right balance between design and accessibility.
@@ -323,10 +333,18 @@ These techniques are related to accessibility (a11y).
 
 - `visibility: hidden`. However the element is still in the flow of the page, and still takes up space.
 - `width: 0; height: 0`. Make the element not take up any space on the screen at all, resulting in not showing it.
-- `position; absolute; left: -99999px`. Position it outside of the screen.
+- `position: absolute; left: -99999px`. Position it outside of the screen.
 - `text-indent: -9999px`. This only works on text within the `block` elements.
+- Metadata. For example by using Schema.org, RDF and JSON-LD.
+- WAI-ARIA. A W3C technical specification that specifies how to increase the accessibility of web pages.
 
-I would go with the `absolute` positioning approach, as it has the least caveats and works for most elements.
+Even if WAI-ARIA is the ideal solution, I would go with the `absolute` positioning approach, as it has the least caveats, works for most elements and it's an easy technique.
+
+###### References
+
+- https://www.w3.org/TR/wai-aria-1.1/
+- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
+- http://a11yproject.com/
 
 ### Have you ever used a grid system, and if so, what do you prefer?
 
@@ -527,7 +545,7 @@ I would write CSS rules with low specificity so that they can be easily overridd
 ### What existing CSS frameworks have you used locally, or in production? How would you change/improve them?
 
 - **Bootstrap** - Slow release cycle. Bootstrap 4 has been in alpha for almost 2 years. Add a spinner button component, as it is widely-used.
-- **Semantic UI** - Source code structure makes theme customization is extremely hard to understand. Painful to customize with unconventional theming system. Hardcoded config path within the vendor library. Not well-designed for overriding variables unlike in Bootstrap.
+- **Semantic UI** - Source code structure makes theme customization extremely hard to understand. Painful to customize with unconventional theming system. Hardcoded config path within the vendor library. Not well-designed for overriding variables unlike in Bootstrap.
 - **Bulma** - A lot of non-semantic and superfluous classes and markup required. Not backward compatible. Upgrading versions breaks the app in subtle manners.
 
 ### Have you played around with the new CSS Flexbox or Grid specs?
@@ -620,7 +638,7 @@ For an in-depth explanation, do check out his [article on Medium](https://codebu
 
 ### Explain how prototypal inheritance works
 
-This is an extremely common JavaScript interview question. All JavaScript objects have a `prototype` property, that is a reference to another object. When a property is accessed on an object and if the property is not found on that object, the JavaScript engine looks at the object's `prototype`. and the `prototype`'s `prototype` and so on, until it finds the property defined on one of the `prototype`s or until it reaches the end of the prototype chain. This behaviour simulates classical inheritance, but it is really more of [delegation than inheritance](https://davidwalsh.name/javascript-objects).
+This is an extremely common JavaScript interview question. All JavaScript objects have a `prototype` property, that is a reference to another object. When a property is accessed on an object and if the property is not found on that object, the JavaScript engine looks at the object's `prototype`, and the `prototype`'s `prototype` and so on, until it finds the property defined on one of the `prototype`s or until it reaches the end of the prototype chain. This behaviour simulates classical inheritance, but it is really more of [delegation than inheritance](https://davidwalsh.name/javascript-objects).
 
 ###### References
 
@@ -675,12 +693,12 @@ console.log(foo == null); // true. Wrong, don't use this to check!
 
 function bar() {}
 var baz = bar();
-console.log(baz === undefined); // undefined
+console.log(baz); // undefined
 ```
 
 A variable that is `null` will have been explicitly assigned to the `null` value. It represents no value and is different from `undefined` in the sense that it has been explicitly assigned. To check for `null,` simply compare using the strict equality operator. Note that like the above, you should not be using the abstract equality operator (`==`) to check, as it will also return `true` if the value is `undefined`.
 
-```
+```js
 var foo = null;
 console.log(foo === null); // true
 
@@ -712,7 +730,7 @@ A closure is the combination of a function and the lexical environment within wh
 
 They can be used in IIFEs to encapsulate some code within a local scope so that variables declared in it do not leak to the global scope.
 
-```
+```js
 (function() {
   // Some code here.
 })();
@@ -720,7 +738,7 @@ They can be used in IIFEs to encapsulate some code within a local scope so that 
 
 As a callback that is used once and does not need to be used anywhere else. The code will seem more self-contained and readable when handlers are defined right inside the code calling them, rather than having to search elsewhere to find the function body.
 
-```
+```js
 setTimeout(function () {
   console.log('Hello world!');
 }, 1000);
@@ -728,7 +746,7 @@ setTimeout(function () {
 
 Arguments to functional programming constructs or Lodash (similar to callbacks).
 
-```
+```js
 const arr = [1, 2, 3];
 const double = arr.map(function (el) {
   return el * 2;
@@ -765,7 +783,7 @@ This question is pretty vague. My best guess at its intention is that it is aski
 
 `var person = Person()` invokes the `Person` as a function, and not as a constructor. Invoking as such is a common mistake if it the function is intended to be used as a constructor. Typically, the constructor does not return anything, hence invoking the constructor like a normal function will return `undefined` and that gets assigned to the variable intended as the instance.
 
-`var person = new Person()` creates an instance of the `Person` object using the `new` operator, which inherits from `Person.prototype`. An alterative would be to use `Object.create`, such as: `Object.create(Person.prototype)`.
+`var person = new Person()` creates an instance of the `Person` object using the `new` operator, which inherits from `Person.prototype`. An alternative would be to use `Object.create`, such as: `Object.create(Person.prototype)`.
 
 ```js
 function Person(name) {
@@ -890,7 +908,7 @@ The `XMLHttpRequest` API is frequently used for the asynchronous communication o
 
 JSONP (JSON with Padding) is a method commonly used to bypass the cross-domain policies in web browsers because Ajax requests from the current page to a cross-origin domain is not allowed.
 
-JSONP works by making a request to a cross-origin domain via a `<script>` tag and usually with a `callback` query parameter, for example: `https://example.com?callback=printData`. The server will then wrap the data within the a function called `printData` and return it to the client.
+JSONP works by making a request to a cross-origin domain via a `<script>` tag and usually with a `callback` query parameter, for example: `https://example.com?callback=printData`. The server will then wrap the data within a function called `printData` and return it to the client.
 
 ```html
 <!-- https://mydomain.com -->
@@ -922,7 +940,7 @@ These days, [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) i
 
 Yes. Handlebars, Underscore, Lodash, AngularJS and JSX. I disliked templating in AngularJS because it made heavy use of strings in the directives and typos would go uncaught. JSX is my new favourite as it is closer to JavaScript and there is barely and syntax to be learnt. Nowadays, you can even use ES2015 template string literals as a quick way for creating templates without relying on third-party code.
 
-```
+```js
 const template = `<div>My name is: ${name}</div>`;
 ```
 
@@ -932,7 +950,7 @@ However, do beware of a potential XSS in the above approach as the contents are 
 
 Hoisting is a term used to explain the behavior of variable declarations in your code. Variables declared or initialized with the `var` keyword will have their declaration "hoisted" up to the top of the current scope. However, only the declaration is hoisted, the assignment (if there is one), will stay where it is. Let's explain with a few examples.
 
-```
+```js
 // var declarations are hoisted.
 console.log(foo); // undefined
 var foo = 1;
@@ -946,7 +964,7 @@ console.log(bar); // 2
 
 Function declarations have the body hoisted while the function expressions (written in the form of variable declarations) only has the variable declaration hoisted.
 
-```
+```js
 // Function Declaration
 console.log(foo); // [Function: foo]
 foo(); // 'FOOOOO'
@@ -972,7 +990,7 @@ When an event triggers on a DOM element, it will attempt to handle the event if 
 
 Attributes are defined on the HTML markup but properties are defined on the DOM. To illustrate the difference, imagine we have this text field in our HTML: `<input type="text" value="Hello">`.
 
-```
+```js
 const input = document.querySelector('input');
 console.log(input.getAttribute('value')); // Hello
 console.log(input.value); // Hello
@@ -980,7 +998,7 @@ console.log(input.value); // Hello
 
 But after you change the value of the text field by adding "World!" to it, this becomes:
 
-```
+```js
 console.log(input.getAttribute('value')); // Hello
 console.log(input.value); // Hello World!
 ```
@@ -1201,7 +1219,7 @@ Practically, ES2015 has vastly improved JavaScript and made it much nicer to wri
 
 - https://softwareengineering.stackexchange.com/questions/72569/what-are-the-pros-and-cons-of-coffeescript
 
-### What tools and techniques do you use debugging JavaScript code?
+### What tools and techniques do you use for debugging JavaScript code?
 
 - React and Redux
   - [React Devtools](https://github.com/facebook/react-devtools)

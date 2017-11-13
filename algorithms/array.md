@@ -1,7 +1,7 @@
 Arrays
 ==
 
-- In an arrays of arrays, e.g. given `[[], [1, 2, 3], [4, 5], [], [], [6, 7], [8], [9, 10], [], []]`, print: `1, 2, 3, 4, 5, 6, 7, 8, 9, 10`.
+- In an array of arrays, e.g. given `[[], [1, 2, 3], [4, 5], [], [], [6, 7], [8], [9, 10], [], []]`, print: `1, 2, 3, 4, 5, 6, 7, 8, 9, 10`.
   - Implement an iterator that supports `hasNext()`, `next()` and `remove()` methods.
 - Given a list of item prices, find all possible combinations of items that sum a particular value `K`.
 - Paginate an array with constraints, such as skipping certain items.
@@ -56,3 +56,5 @@ Arrays
 - Given an array, return the length of the longest increasing contiguous subarray.
   - E.g., `[1, 3, 2, 3, 4, 8, 7, 9]`, should return `4` because the longest increasing array is `[2, 3, 4, 8]`.
   - [Source](http://blog.gainlo.co/index.php/2017/02/02/uber-interview-questions-longest-increasing-subarray/).
+- Given an array of integers where every value appears twice except one, find the single, non-repeating value. Follow up: do so with O(1) space.
+  - E.g., `[2, 5, 3, 2, 1, 3, 4, 5, 1]` returns 4, because it is the only value that appears in the array only once.
