@@ -508,7 +508,7 @@ I shall throw in a comparison with `block` for good measure.
 | Margins and paddings | All sides respected. | All sides respected. | Only horizontal sides respected. Vertical sides, if specified, do not affect layout. Vertical space it takes up depends on `line-height`, even though the `border` and `padding` appear visually around the content. |
 | Float | - | - | Becomes like a `block` element where you can set vertical margins and paddings. |
 
-**What's the difference between a `relative`, `fixed`, `absolute` and `static`-ally positioned element?**
+### What's the difference between a `relative`, `fixed`, `absolute` and `static`-ally positioned element?**
 
 A positioned element is an element whose computed `position` property is either `relative`, `absolute`, `fixed` or `sticky`.
 
