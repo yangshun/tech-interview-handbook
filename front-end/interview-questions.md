@@ -714,7 +714,7 @@ As a personal habit, I never leave my variables undeclared or unassigned. I will
 
 ### What is a closure, and how/why would you use one?
 
-A closure is the combination of a function and the lexical environment within which that function was declared. The word "lexical" refers to the fact that lexical scoping uses the location where a variable is declared within the source code to determine where that variable is available. Closures are functions that have access to the outer (enclosing) function's variables—scope chain even after the outer function has returned.
+A closure is the combination of a function and the lexical environment within which that function was declared. The word "lexical" refers to the fact that lexical scoping uses the location where a variable is declared within the source code to determine where that variable is available. Closures are functions that have access to the outer (enclosing) function's variables—scope chain even after the outer function has returned. If we talk about closure, we should mention a function and a scope, because closure is a kind of relationship between function and scope, for example, "the foo() has a closure over the scope"
 
 **Why would you use one?**
 
