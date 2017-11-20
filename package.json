@@ -1,0 +1,21 @@
+{
+  "name": "tech-interview-handbook",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "0.14.3",
+    "lint-staged": "5.0.0",
+    "prettier": "1.8.2"
+  },
+  "lint-staged": {
+    "*.{js,json,md}": ["prettier --write", "git add"]
+  },
+  "scripts": {
+    "prettier":
+      "prettier --ignore-path .gitignore --write \"**/*.{js,json,md}\"",
+    "precommit": "lint-staged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lipis/prettier-setup"
+  }
+}

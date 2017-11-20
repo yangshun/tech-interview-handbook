@@ -1,5 +1,4 @@
-Negotiation
-==
+# Negotiation
 
 ### Ten Rules of Negotiation
 

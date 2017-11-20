@@ -1,5 +1,4 @@
-Algorithm Questions
-==
+# Algorithm Questions
 
 This section dives deep into practical tips for specific topics of algorithms and data structures which appear frequently in coding questions. Many algorithm questions involve techniques that can be applied to questions of similar nature. The more techniques you have in your arsenal, the higher the chances of passing the interview. They may lead you to discover corner cases you might have missed out or even lead you towards the optimal approach!
 
@@ -9,23 +8,23 @@ If you are interested in how data structures are implemented, check out [Lago](h
 
 ## Contents
 
-- [Array](array.md)
-- [Dynamic Programming and Memoization](dynamic-programming.md)
-- [Geometry](geometry.md)
-- [Graph](graph.md)
-- [Hash Table](hash-table.md)
-- [Heap](heap.md)
-- [Interval](interval.md)
-- [Linked List](linked-list.md)
-- [Math](math.md)
-- [Matrix](matrix.md)
-- [Object-Oriented Programming](oop.md)
-- [Permutation](permutation.md)
-- [Queue](queue.md)
-- [Sorting and Searching](sorting-searching.md)
-- [Stack](stack.md)
-- [String](string.md)
-- [Tree](tree.md)
+* [Array](array.md)
+* [Dynamic Programming and Memoization](dynamic-programming.md)
+* [Geometry](geometry.md)
+* [Graph](graph.md)
+* [Hash Table](hash-table.md)
+* [Heap](heap.md)
+* [Interval](interval.md)
+* [Linked List](linked-list.md)
+* [Math](math.md)
+* [Matrix](matrix.md)
+* [Object-Oriented Programming](oop.md)
+* [Permutation](permutation.md)
+* [Queue](queue.md)
+* [Sorting and Searching](sorting-searching.md)
+* [Stack](stack.md)
+* [String](string.md)
+* [Tree](tree.md)
 
 ## General Tips
 
@@ -45,12 +44,12 @@ Is the algorithm meant to be run multiple times, for example in a web server? If
 
 Use a mix of functional and imperative programming paradigms:
 
-- Write pure functions as much as possible.
-- Pure functions are easier to reason about and can help to reduce bugs in your implementation.
-- Avoid mutating the parameters passed into your function especially if they are passed by reference unless you are sure of what you are doing.
-- However, functional programming is usually expensive in terms of space complexity because of non-mutation and the repeated allocation of new objects. On the other hand, imperative code is faster because you operate on existing objects. Hence you will need to achieve a balance between accuracy vs efficiency, by using the right amount of functional and imperative code where appropriate.
-- Avoid relying on and mutating global variables. Global variables introduce state.
-- If you have to rely on global variables, make sure that you do not mutate it by accident.
+* Write pure functions as much as possible.
+* Pure functions are easier to reason about and can help to reduce bugs in your implementation.
+* Avoid mutating the parameters passed into your function especially if they are passed by reference unless you are sure of what you are doing.
+* However, functional programming is usually expensive in terms of space complexity because of non-mutation and the repeated allocation of new objects. On the other hand, imperative code is faster because you operate on existing objects. Hence you will need to achieve a balance between accuracy vs efficiency, by using the right amount of functional and imperative code where appropriate.
+* Avoid relying on and mutating global variables. Global variables introduce state.
+* If you have to rely on global variables, make sure that you do not mutate it by accident.
 
 Generally, to improve the speed of a program, we can either choose a more appropriate data structure/algorithm or use more memory. It's a classic space/time tradeoff.
 
@@ -82,9 +81,9 @@ When you are given two sequences to process, it is common to have one index per 
 
 #### Corner Cases
 
-- Empty sequence.
-- Sequence with 1 or 2 elements.
-- Sequence with repeated elements.
+* Empty sequence.
+* Sequence with 1 or 2 elements.
+* Sequence with repeated elements.
 
 ## Array
 
@@ -100,22 +99,22 @@ If you are given a sequence and the interviewer asks for O(1) space, it might be
 
 #### Practice Questions
 
-- [Two Sum](https://leetcode.com/problems/two-sum/)
-- [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
-- [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
-- [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
-- [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
-- [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
-- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
-- [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
-- [3Sum](https://leetcode.com/problems/3sum/)
-- [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
+* [Two Sum](https://leetcode.com/problems/two-sum/)
+* [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+* [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
+* [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
+* [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
+* [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
+* [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+* [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+* [3Sum](https://leetcode.com/problems/3sum/)
+* [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
 
 ## Binary
 
 #### Study Links
 
-- [Bits, Bytes, Building With Binary](https://medium.com/basecs/bits-bytes-building-with-binary-13cb4289aafa)
+* [Bits, Bytes, Building With Binary](https://medium.com/basecs/bits-bytes-building-with-binary-13cb4289aafa)
 
 #### Notes
 
@@ -123,30 +122,30 @@ Questions involving binary representations and bitwise operations are asked some
 
 Some helpful utility snippets:
 
-- Test k<sup>th</sup> bit is set: `num & (1 << k) != 0`.
-- Set k<sup>th</sup> bit: `num |= (1 << k)`.
-- Turn off k<sup>th</sup> bit: `num &= ~(1 << k)`.
-- Toggle the k<sup>th</sup> bit: `num ^= (1 << k)`.
-- To check if a number is a power of 2, `num & num - 1 == 0`.
+* Test k<sup>th</sup> bit is set: `num & (1 << k) != 0`.
+* Set k<sup>th</sup> bit: `num |= (1 << k)`.
+* Turn off k<sup>th</sup> bit: `num &= ~(1 << k)`.
+* Toggle the k<sup>th</sup> bit: `num ^= (1 << k)`.
+* To check if a number is a power of 2, `num & num - 1 == 0`.
 
 #### Corner Cases
 
-- Check for overflow/underflow.
-- Negative numbers.
+* Check for overflow/underflow.
+* Negative numbers.
 
 #### Practice Questions
 
-- [Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/)
-- [Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
-- [Counting Bits](https://leetcode.com/problems/counting-bits/)
-- [Missing Number](https://leetcode.com/problems/missing-number/)
-- [Reverse Bits](https://leetcode.com/problems/reverse-bits/)
+* [Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/)
+* [Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
+* [Counting Bits](https://leetcode.com/problems/counting-bits/)
+* [Missing Number](https://leetcode.com/problems/missing-number/)
+* [Reverse Bits](https://leetcode.com/problems/reverse-bits/)
 
 ## Dynamic Programming
 
 #### Study Links
 
-- [Demystifying Dynamic Programming](https://medium.freecodecamp.org/demystifying-dynamic-programming-3efafb8d4296)
+* [Demystifying Dynamic Programming](https://medium.freecodecamp.org/demystifying-dynamic-programming-3efafb8d4296)
 
 #### Notes
 
@@ -156,17 +155,17 @@ Sometimes you do not need to store the whole DP table in memory, the last two va
 
 #### Practice Questions
 
-- 0/1 Knapsack
-- [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
-- [Coin Change](https://leetcode.com/problems/coin-change/)
-- [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
-- [Longest Common Subsequence]()
-- [Word Break Problem](https://leetcode.com/problems/word-break/)
-- [Combination Sum](https://leetcode.com/problems/combination-sum-iv/)
-- [House Robber](https://leetcode.com/problems/house-robber/) and [House Robber II](https://leetcode.com/problems/house-robber-ii/)
-- [Decode Ways](https://leetcode.com/problems/decode-ways/)
-- [Unique Paths](https://leetcode.com/problems/unique-paths/)
-- [Jump Game](https://leetcode.com/problems/jump-game/)
+* 0/1 Knapsack
+* [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
+* [Coin Change](https://leetcode.com/problems/coin-change/)
+* [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
+* [Longest Common Subsequence]()
+* [Word Break Problem](https://leetcode.com/problems/word-break/)
+* [Combination Sum](https://leetcode.com/problems/combination-sum-iv/)
+* [House Robber](https://leetcode.com/problems/house-robber/) and [House Robber II](https://leetcode.com/problems/house-robber-ii/)
+* [Decode Ways](https://leetcode.com/problems/decode-ways/)
+* [Unique Paths](https://leetcode.com/problems/unique-paths/)
+* [Jump Game](https://leetcode.com/problems/jump-game/)
 
 ## Geometry
 
@@ -180,26 +179,27 @@ To find out if two circles overlap, check that the distance between the two cent
 
 #### Study Links
 
-- [From Theory To Practice: Representing Graphs](https://medium.com/basecs/from-theory-to-practice-representing-graphs-cfd782c5be38)
-- [Deep Dive Through A Graph: DFS Traversal](https://medium.com/basecs/deep-dive-through-a-graph-dfs-traversal-8177df5d0f13)
-- [Going Broad In A Graph: BFS Traversal](https://medium.com/basecs/going-broad-in-a-graph-bfs-traversal-959bd1a09255)
+* [From Theory To Practice: Representing Graphs](https://medium.com/basecs/from-theory-to-practice-representing-graphs-cfd782c5be38)
+* [Deep Dive Through A Graph: DFS Traversal](https://medium.com/basecs/deep-dive-through-a-graph-dfs-traversal-8177df5d0f13)
+* [Going Broad In A Graph: BFS Traversal](https://medium.com/basecs/going-broad-in-a-graph-bfs-traversal-959bd1a09255)
 
 #### Notes
 
 Be familiar with the various graph representations, graph search algorithms and their time and space complexities.
 
 You can be given a list of edges and tasked to build your own graph from the edges to perform a traversal on. The common graph representations are:
-  - Adjacency matrix.
-  - Adjacency list.
-  - Hashmap of hashmaps.
+
+* Adjacency matrix.
+* Adjacency list.
+* Hashmap of hashmaps.
 
 A tree-like diagram could very well be a graph that allows for cycles and a naive recursive solution would not work. In that case you will have to handle cycles and keep a set of visited nodes when traversing.
 
 #### Graph search algorithms:
 
-- **Common** - Breadth-first Search, Depth-first Search
-- **Uncommon** - Topological Sort, Dijkstra's algorithm
-- **Rare** - Bellman-Ford algorithm, Floyd-Warshall algorithm, Prim's algorithm, Kruskal's algorithm
+* **Common** - Breadth-first Search, Depth-first Search
+* **Uncommon** - Topological Sort, Dijkstra's algorithm
+* **Rare** - Bellman-Ford algorithm, Floyd-Warshall algorithm, Prim's algorithm, Kruskal's algorithm
 
 In coding interviews, graphs are commonly represented as 2-D matrices where cells are the nodes and each cell can traverse to its adjacent cells (up/down/left/right). Hence it is important that you be familiar with traversing a 2-D matrix. When recursively traversing the matrix, always ensure that your next position is within the boundary of the matrix. More tips for doing depth-first searches on a matrix can be found [here](https://discuss.leetcode.com/topic/66065/python-dfs-bests-85-tips-for-all-dfs-in-matrix-question/). A simple template for doing depth-first searches on a matrix goes like this:
 
@@ -226,21 +226,21 @@ def traverse(matrix):
 
 #### Corner Cases
 
-- Empty graph.
-- Graph with one or two nodes.
-- Disjoint graphs.
-- Graph with cycles.
+* Empty graph.
+* Graph with one or two nodes.
+* Disjoint graphs.
+* Graph with cycles.
 
 #### Practice Questions
 
-- [Clone Graph](https://leetcode.com/problems/clone-graph/)
-- [Course Schedule](https://leetcode.com/problems/course-schedule/)
-- [Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
-- [Number of Islands](https://leetcode.com/problems/number-of-islands/)
-- [Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
-- [Alien Dictionary (Leetcode Premium)](https://leetcode.com/problems/alien-dictionary/)
-- [Graph Valid Tree (Leetcode Premium)](https://leetcode.com/problems/graph-valid-tree/)
-- [Number of Connected Components in an Undirected Graph (Leetcode Premium)](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
+* [Clone Graph](https://leetcode.com/problems/clone-graph/)
+* [Course Schedule](https://leetcode.com/problems/course-schedule/)
+* [Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
+* [Number of Islands](https://leetcode.com/problems/number-of-islands/)
+* [Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
+* [Alien Dictionary (Leetcode Premium)](https://leetcode.com/problems/alien-dictionary/)
+* [Graph Valid Tree (Leetcode Premium)](https://leetcode.com/problems/graph-valid-tree/)
+* [Number of Connected Components in an Undirected Graph (Leetcode Premium)](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
 
 ## Interval
 
@@ -268,17 +268,17 @@ def merge_overlapping_intervals(a, b):
 
 #### Corner Cases
 
-- Single interval.
-- Non-overlapping intervals.
-- An interval totally consumed within another interval.
-- Duplicate intervals.
+* Single interval.
+* Non-overlapping intervals.
+* An interval totally consumed within another interval.
+* Duplicate intervals.
 
 #### Practice Questions
 
-- [Insert Interval](https://leetcode.com/problems/insert-interval/)
-- [Merge Intervals](https://leetcode.com/problems/merge-intervals/)
-- [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
-- [Meeting Rooms (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms/) and [Meeting Rooms II (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms-ii/)
+* [Insert Interval](https://leetcode.com/problems/insert-interval/)
+* [Merge Intervals](https://leetcode.com/problems/merge-intervals/)
+* [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
+* [Meeting Rooms (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms/) and [Meeting Rooms II (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms-ii/)
 
 ## Linked List
 
@@ -297,30 +297,32 @@ For partitioning linked lists, create two separate linked lists and join them ba
 Linked lists problems share similarity with array problems, think about how you would do it for an array and try to apply it to a linked list.
 
 Two pointer approaches are also common for linked lists. For example:
-  - Getting the k<sup>th</sup> from last node - Have two pointers, where one is k nodes ahead of the other. When the node ahead reaches the end, the other node is k nodes behind.
-  - Detecting cycles - Have two pointers, where one pointer increments twice as much as the other, if the two pointers meet, means that there is a cycle.
-  - Getting the middle node - Have two pointers, where one pointer increments twice as much as the other. When the faster node reaches the end of the list, the slower node will be at the middle.
+
+* Getting the k<sup>th</sup> from last node - Have two pointers, where one is k nodes ahead of the other. When the node ahead reaches the end, the other node is k nodes behind.
+* Detecting cycles - Have two pointers, where one pointer increments twice as much as the other, if the two pointers meet, means that there is a cycle.
+* Getting the middle node - Have two pointers, where one pointer increments twice as much as the other. When the faster node reaches the end of the list, the slower node will be at the middle.
 
 Be familiar with the following routines because many linked list questions make use of one or more of these routines in the solution:
-  - Counting the number of nodes in the linked list.
-  - Reversing a linked list in-place.
-  - Finding the middle node of the linked list using fast/slow pointers.
-  - Merging two lists together.
+
+* Counting the number of nodes in the linked list.
+* Reversing a linked list in-place.
+* Finding the middle node of the linked list using fast/slow pointers.
+* Merging two lists together.
 
 #### Corner Cases
 
-- Single node.
-- Two nodes.
-- Linked list has cycle. Clarify with the interviewer whether there can be a cycle in the list. Usually the answer is no.
+* Single node.
+* Two nodes.
+* Linked list has cycle. Clarify with the interviewer whether there can be a cycle in the list. Usually the answer is no.
 
 #### Practice Questions
 
-- [Reverse a Linked List](https://leetcode.com/problems/reverse-linked-list/)
-- [Detect Cycle in a Linked List](https://leetcode.com/problems/linked-list-cycle/)
-- [Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
-- [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
-- [Remove Nth Node From End Of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
-- [Reorder List](https://leetcode.com/problems/reorder-list/)
+* [Reverse a Linked List](https://leetcode.com/problems/reverse-linked-list/)
+* [Detect Cycle in a Linked List](https://leetcode.com/problems/linked-list-cycle/)
+* [Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+* [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+* [Remove Nth Node From End Of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
+* [Reorder List](https://leetcode.com/problems/reorder-list/)
 
 ## Math
 
@@ -338,16 +340,16 @@ If the question asks to implement an operator such as power, squareroot or divis
 
 #### Some common formulas:
 
-- Sum of 1 to N = (n+1) * n/2
-- Sum of GP = 2<sup>0</sup> + 2<sup>1</sup> + 2<sup>2</sup> + 2<sup>3</sup> + ... 2<sup>n</sup> = 2<sup>n+1</sup> - 1
-- Permutations of N = N! / (N-K)!
-- Combinations of N = N! / (K! * (N-K)!)
+* Sum of 1 to N = (n+1) \* n/2
+* Sum of GP = 2<sup>0</sup> + 2<sup>1</sup> + 2<sup>2</sup> + 2<sup>3</sup> + ... 2<sup>n</sup> = 2<sup>n+1</sup> - 1
+* Permutations of N = N! / (N-K)!
+* Combinations of N = N! / (K! \* (N-K)!)
 
 #### Practice Questions
 
-- [Pow(x, n)](https://leetcode.com/problems/powx-n/)
-- [Sqrt(x)](https://leetcode.com/problems/sqrtx/)
-- [Integer to English Words](https://leetcode.com/problems/integer-to-english-words/)
+* [Pow(x, n)](https://leetcode.com/problems/powx-n/)
+* [Sqrt(x)](https://leetcode.com/problems/sqrtx/)
+* [Integer to English Words](https://leetcode.com/problems/integer-to-english-words/)
 
 ## Matrix
 
@@ -372,16 +374,16 @@ transposed_matrix = zip(*matrix)
 
 #### Corner Cases
 
-- Empty matrix. Check that none of the arrays are 0 length.
-- 1 x 1 matrix.
-- Matrix with only one row or column.
+* Empty matrix. Check that none of the arrays are 0 length.
+* 1 x 1 matrix.
+* Matrix with only one row or column.
 
 #### Practice Questions
 
-- [Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)
-- [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)
-- [Rotate Image](https://leetcode.com/problems/rotate-image/)
-- [Word Search](https://leetcode.com/problems/word-search/)
+* [Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)
+* [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)
+* [Rotate Image](https://leetcode.com/problems/rotate-image/)
+* [Word Search](https://leetcode.com/problems/word-search/)
 
 ## Recursion
 
@@ -395,8 +397,8 @@ Recursion implicitly uses a stack. Hence all recursive approaches can be rewritt
 
 #### Practice Questions
 
-- [Subsets](https://leetcode.com/problems/subsets/) and [Subsets II](https://leetcode.com/problems/subsets-ii/)
-- [Strobogrammatic Number II (Leetcode Premium)](https://leetcode.com/problems/strobogrammatic-number-ii/)
+* [Subsets](https://leetcode.com/problems/subsets/) and [Subsets II](https://leetcode.com/problems/subsets-ii/)
+* [Strobogrammatic Number II (Leetcode Premium)](https://leetcode.com/problems/strobogrammatic-number-ii/)
 
 ## String
 
@@ -412,21 +414,21 @@ If you need to keep a counter of characters, a common mistake is to say that the
 
 Common data structures for looking up strings efficiently are
 
-- [Trie / Prefix Tree](https://en.wikipedia.org/wiki/Trie)
-- [Suffix Tree](https://en.wikipedia.org/wiki/Suffix_tree)
+* [Trie / Prefix Tree](https://en.wikipedia.org/wiki/Trie)
+* [Suffix Tree](https://en.wikipedia.org/wiki/Suffix_tree)
 
 Common string algorithms are
 
-- [Rabin Karp](https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm) for efficient searching of substring using a rolling hash.
-- [KMP](https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm) for efficient searching of substring.
+* [Rabin Karp](https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm) for efficient searching of substring using a rolling hash.
+* [KMP](https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm) for efficient searching of substring.
 
 #### Corner Cases
 
-- Strings with only one distinct character.
+* Strings with only one distinct character.
 
 #### Non-repeating Characters
 
-- Use a 26-bit bitmask to indicate which lower case latin characters are inside the string.
+* Use a 26-bit bitmask to indicate which lower case latin characters are inside the string.
 
 ```py
 mask = 0
@@ -442,44 +444,44 @@ An anagram is word switch or word play. It is the result of re-arranging the let
 
 To determine if two strings are anagrams, there are a few plausible approaches:
 
-- Sorting both strings should produce the same resulting string. This takes O(nlgn) time and O(lgn) space.
-- If we map each character to a prime number and we multiply each mapped number together, anagrams should have the same multiple (prime factor decomposition). This takes O(n) time and O(1) space.
-- Frequency counting of characters will help to determine if two strings are anagrams. This also takes O(n) time and O(1) space.
+* Sorting both strings should produce the same resulting string. This takes O(nlgn) time and O(lgn) space.
+* If we map each character to a prime number and we multiply each mapped number together, anagrams should have the same multiple (prime factor decomposition). This takes O(n) time and O(1) space.
+* Frequency counting of characters will help to determine if two strings are anagrams. This also takes O(n) time and O(1) space.
 
 ### Palindrome
 
-A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward, such as *madam* or *racecar*.
+A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward, such as _madam_ or _racecar_.
 
 Here are ways to determine if a string is a palindrome:
 
-- Reverse the string and it should be equal to itself.
-- Have two pointers at the start and end of the string. Move the pointers inward till they meet. At any point in time, the characters at both pointers should match.
+* Reverse the string and it should be equal to itself.
+* Have two pointers at the start and end of the string. Move the pointers inward till they meet. At any point in time, the characters at both pointers should match.
 
 The order of characters within the string matters, so HashMaps are usually not helpful.
 
 When a question is about counting the number of palindromes, a common trick is to have two pointers that move outward, away from the middle. Note that palindromes can be even or odd length. For each middle pivot position, you need to check it twice: Once that includes the character and once without the character.
 
-- For substrings, you can terminate early once there is no match.
-- For subsequences, use dynamic programming as there are overlapping subproblems. Check out [this question](https://leetcode.com/problems/longest-palindromic-subsequence/).
+* For substrings, you can terminate early once there is no match.
+* For subsequences, use dynamic programming as there are overlapping subproblems. Check out [this question](https://leetcode.com/problems/longest-palindromic-subsequence/).
 
 #### Practice Questions
 
-- [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
-- [Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/)
-- [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/description/)
-- [Valid Anagram](https://leetcode.com/problems/valid-anagram)
-- [Group Anagrams](https://leetcode.com/problems/group-anagrams/)
-- [Valid Parentheses](https://leetcode.com/problems/valid-parentheses)
-- [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
-- [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
-- [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/)
-- [Encode and Decode Strings (Leetcode Premium)](https://leetcode.com/problems/encode-and-decode-strings/)
+* [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+* [Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/)
+* [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/description/)
+* [Valid Anagram](https://leetcode.com/problems/valid-anagram)
+* [Group Anagrams](https://leetcode.com/problems/group-anagrams/)
+* [Valid Parentheses](https://leetcode.com/problems/valid-parentheses)
+* [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+* [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
+* [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/)
+* [Encode and Decode Strings (Leetcode Premium)](https://leetcode.com/problems/encode-and-decode-strings/)
 
 ## Tree
 
 #### Study Links
 
-- [Leaf It Up To Binary Trees](https://medium.com/basecs/leaf-it-up-to-binary-trees-11001aaf746d)
+* [Leaf It Up To Binary Trees](https://medium.com/basecs/leaf-it-up-to-binary-trees-11001aaf746d)
 
 #### Notes
 
@@ -497,13 +499,12 @@ If the question involves summation of nodes along the way, be sure to check whet
 
 You should be very familiar with writing pre-order, in-order, and post-order traversal recursively. As an extension, challenge yourself by writing them iteratively. Sometimes interviewers ask candidates for the iterative approach, especially if the candidate finishes writing the recursive approach too quickly.
 
-
 #### Corner Cases
 
-- Empty tree.
-- Single node.
-- Two nodes.
-- Very skewed tree (like a linked list).
+* Empty tree.
+* Single node.
+* Two nodes.
+* Very skewed tree (like a linked list).
 
 ### Binary Tree
 
@@ -519,24 +520,24 @@ When a question involves a BST, the interviewer is usually looking for a solutio
 
 #### Practice Questions
 
-- [Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
-- [Same Tree](https://leetcode.com/problems/same-tree/)
-- [Invert/Flip Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
-- [Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
-- [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
-- [Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
-- [Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/)
-- [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
-- [Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
-- [Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
-- [Lowest Common Ancestor of BST](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+* [Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+* [Same Tree](https://leetcode.com/problems/same-tree/)
+* [Invert/Flip Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
+* [Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
+* [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
+* [Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
+* [Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/)
+* [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+* [Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
+* [Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
+* [Lowest Common Ancestor of BST](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 
 ## Trie
 
 #### Study Links
 
-- [Trying to Understand Tries](https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014)
-- [Implement Trie (Prefix Tree)](https://leetcode.com/articles/implement-trie-prefix-tree/)
+* [Trying to Understand Tries](https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014)
+* [Implement Trie (Prefix Tree)](https://leetcode.com/articles/implement-trie-prefix-tree/)
 
 #### Notes
 
@@ -548,31 +549,31 @@ Be familiar with implementing, from scratch, a `Trie` class and its `add`, `remo
 
 #### Practice Questions
 
-- [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree)
-- [Add and Search Word](https://leetcode.com/problems/add-and-search-word-data-structure-design)
-- [Word Search II](https://leetcode.com/problems/word-search-ii/)
+* [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree)
+* [Add and Search Word](https://leetcode.com/problems/add-and-search-word-data-structure-design)
+* [Word Search II](https://leetcode.com/problems/word-search-ii/)
 
 ## Heap
 
 #### Study Links
 
-- [Learning to Love Heaps](https://medium.com/basecs/learning-to-love-heaps-cef2b273a238)
+* [Learning to Love Heaps](https://medium.com/basecs/learning-to-love-heaps-cef2b273a238)
 
 #### Notes
 
-If you see a top or lowest *k* being mentioned in the question, it is usually a signal that a heap can be used to solve the problem, such as in [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/).
+If you see a top or lowest _k_ being mentioned in the question, it is usually a signal that a heap can be used to solve the problem, such as in [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/).
 
-If you require the top *k* elements use a Min Heap of size *k*. Iterate through each element, pushing it into the heap. Whenever the heap size exceeds *k*, remove the minimum element, that will guarantee that you have the *k* largest elements.
+If you require the top _k_ elements use a Min Heap of size _k_. Iterate through each element, pushing it into the heap. Whenever the heap size exceeds _k_, remove the minimum element, that will guarantee that you have the _k_ largest elements.
 
 #### Practice Questions
 
-- [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
-- [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
-- [Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)
+* [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+* [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
+* [Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)
 
 ###### References
 
-- http://blog.triplebyte.com/how-to-pass-a-programming-interview
-- https://quip.com/q41AA3OmoZbC
-- http://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/
-- https://medium.com/basecs
+* http://blog.triplebyte.com/how-to-pass-a-programming-interview
+* https://quip.com/q41AA3OmoZbC
+* http://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/
+* https://medium.com/basecs

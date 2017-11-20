@@ -1,20 +1,19 @@
-Security
-==
+# Security
 
 ## Encryption
 
 #### Symmetrical Encryption
 
-- Symmetrical encryption is a type of encryption where one key can be used to encrypt messages and also decrypt the same message.
-- Symmetrical encryption is usually much less computationally expensive as compared to asymmetric encryption.
-- Often called "shared secret" encryption, or "secret key" encryption.
-- To use a symmetric encryption scheme, the sender and receiver must securely share a key in advance. This sharing can be done via asymmetric encryption.
+* Symmetrical encryption is a type of encryption where one key can be used to encrypt messages and also decrypt the same message.
+* Symmetrical encryption is usually much less computationally expensive as compared to asymmetric encryption.
+* Often called "shared secret" encryption, or "secret key" encryption.
+* To use a symmetric encryption scheme, the sender and receiver must securely share a key in advance. This sharing can be done via asymmetric encryption.
 
 #### Asymmetric Encryption
 
-- A pair of keys are required: a **private key** and a **public key**. Public keys can be shared with anyone while private keys should be kept secret and known only to the owner.
-- A private key can be used to decrypt a message encrypted by a public key. A successful decryption verifies that the holder possesses the private key.
-- Also known as public key cryptography.
+* A pair of keys are required: a **private key** and a **public key**. Public keys can be shared with anyone while private keys should be kept secret and known only to the owner.
+* A private key can be used to decrypt a message encrypted by a public key. A successful decryption verifies that the holder possesses the private key.
+* Also known as public key cryptography.
 
 ## Public Key Infrastructure
 
@@ -22,7 +21,7 @@ A public key infrastructure (PKI) is a system for the creation, storage, and dis
 
 ###### References
 
-- https://www.wikiwand.com/en/Public_key_infrastructure
+* https://www.wikiwand.com/en/Public_key_infrastructure
 
 ## SSH
 
@@ -64,4 +63,4 @@ Authentication using SSH key pairs begins after the symmetric encryption has bee
 
 ###### References
 
-- https://www.digitalocean.com/community/tutorials/understanding-the-ssh-encryption-and-connection-process
+* https://www.digitalocean.com/community/tutorials/understanding-the-ssh-encryption-and-connection-process
