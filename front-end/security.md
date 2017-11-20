@@ -51,7 +51,7 @@ XSS vulnerabilities allow attackers to bypass essentially all CSRF preventions.
 
 ###### References
 
-* [OWASP CSRF](<https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)>)
+* [OWASP CSRF](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29)
 
 ## HTTPS
 
