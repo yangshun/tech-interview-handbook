@@ -1,14 +1,14 @@
 function isSubsequence(s, t) {
-    if (s.length > t.length) {
-        return false;
+  if (s.length > t.length) {
+    return false;
+  }
+  let matchedLength = 0;
+  for (let i = 0; i < t.length; i++) {
+    if (matchedLength < s.length && s[matchedLength] === t[i]) {
+      matchedLength += 1;
     }
-    let matchedLength = 0;
-    for (let i = 0; i < t.length; i++) {
-        if (matchedLength < s.length && s[matchedLength] === t[i]) {
-            matchedLength += 1;
-        }
-    }
-    return matchedLength === s.length;
+  }
+  return matchedLength === s.length;
 }
 
 console.log(isSubsequence('abc', 'abcde') === true);

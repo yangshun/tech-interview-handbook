@@ -1,6 +1,6 @@
 // Interval: [start, end].
 function intervalsIntersect(a, b) {
-    return a[0] < b[1] && b[0] < a[1];
+  return a[0] < b[1] && b[0] < a[1];
 }
 
 console.log(intervalsIntersect([1, 2], [3, 4]) === false);

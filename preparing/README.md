@@ -1,5 +1,4 @@
-Preparing for a Coding Interview
-==
+# Preparing for a Coding Interview
 
 ### Picking a Programming Language
 
@@ -13,9 +12,9 @@ Java is a decent choice too but having to constantly declare types in your code 
 
 One exception to the convention of allowing you to "pick any programming language you want" is when you are interviewing for a domain-specific position, such as Front End/iOS/Android Engineer roles, in which you would need to be familiar with coding algorithms in JavaScript, Objective-C/Swift and Java respectively. If you need to use a data structure that the language does not support, such as a Queue or Heap in JavaScript, perhaps try asking the interviewer whether you can assume that you have a data structure that implements certain methods with specified time complexities. If the implementation of that data structure is not crucial to solving the problem, the interviewer will usually allow it. In reality, being aware of existing data structures and selecting the appropriate ones to tackle the problem at hand is more important than knowing the intricate implementation details.
 
-### Review your CS101
+### Review your CS101
 
-If you have been out of college for a while, it is highly advisable to review CS fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work on algorithm problems from LeetCode and Cracking the Coding Interview.
+If you have been out of college for a while, it is highly advisable to review CS fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work on algorithm problems from LeetCode and Cracking the Coding Interview.
 
 This [interviews repository](https://github.com/kdn251/interviews) by Kevin Naughton Jr. served as a quick refresher for me.
 
@@ -57,12 +56,12 @@ Many candidates jump into coding the moment they hear the question. That is usua
 
 Always seek clarification about the question upon hearing it even if it you think it is clear to you. You might discover something that you have missed out and it also sends a signal to the interviewer that you are a careful person who pays attention to details. Some interviewers deliberately omit important details to see if you ask the right questions. Consider asking the following questions:
 
-- How big is the size of the input?
-- How big is the range of values?
-- What kind of values are there? Are there negative numbers? Floating points? Will there be empty inputs?
-- Are there duplicates within the input?
-- What are some extreme cases of the input?
-- How is the input stored? If you are given a dictionary of words, is it a list of strings or a Trie?
+* How big is the size of the input?
+* How big is the range of values?
+* What kind of values are there? Are there negative numbers? Floating points? Will there be empty inputs?
+* Are there duplicates within the input?
+* What are some extreme cases of the input?
+* How is the input stored? If you are given a dictionary of words, is it a list of strings or a Trie?
 
 After you have sufficiently clarified the scope and intention of the problem, explain your high level approach to the interviewer even if it is a naive solution. If you are stuck, consider various approaches and explain out loud why it will/will not work. Sometimes your interviewer might drop hints and lead you towards the right path.
 
@@ -90,7 +89,7 @@ If there are huge duplicated chunks of code in your solution, it would be a good
 
 Lastly, give the time/space complexity of your code and explain why it is such. You can even annotate certain chunks of your code with the various time/space complexities to demonstrate your understanding of your code and the APIs of your chosen programming language. Explain any trade-offs in your current approach vs alternative approaches, possibly in terms of time/space.
 
-If your interviewer is happy with the solution, the interview usually ends here. It is also not uncommon that the interviewer asks you extension questions, such as how you would handle the problem if the whole input is too large to fit into memory, or if the input arrives as a stream. This is a common follow-up question at Google where they care a lot about scale. The answer is usually a divide-and-conquer approach — perform distributed processing of the data and only read certain chunks of the input from disk into memory, write the output back to disk and combine them later on.
+If your interviewer is happy with the solution, the interview usually ends here. It is also not uncommon that the interviewer asks you extension questions, such as how you would handle the problem if the whole input is too large to fit into memory, or if the input arrives as a stream. This is a common follow-up question at Google where they care a lot about scale. The answer is usually a divide-and-conquer approach — perform distributed processing of the data and only read certain chunks of the input from disk into memory, write the output back to disk and combine them later on.
 
 ### Practicing via Mock Interviews
 
@@ -106,8 +105,7 @@ Personally, I am not that fond of Pramp's approach because if I were to intervie
 
 ### Conclusion
 
-Coding interviews are tough. But fortunately, you can get better at them by studying and practicing for them, and doing mock interviews.
-To recap, to do well in coding interviews:
+Coding interviews are tough. But fortunately, you can get better at them by studying and practicing for them, and doing mock interviews. To recap, to do well in coding interviews:
 
 1. Decide on a programming language
 1. Study CS fundamentals

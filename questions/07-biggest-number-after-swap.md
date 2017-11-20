@@ -18,4 +18,4 @@ Given a non-negative integer, find the maximum possible number if you can swap t
 
 ## Follow Up
 
-- What if the given integer can be negative?
+* What if the given integer can be negative?

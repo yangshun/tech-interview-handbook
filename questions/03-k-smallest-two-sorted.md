@@ -18,10 +18,10 @@ Output: [1, 2, 2]
 
 ## Time Complexities
 
-- Bad:
-  - Time: O((n + m)log(n + m))
-- Good:
-  - Time: O(k)
+* Bad:
+  * Time: O((n + m)log(n + m))
+* Good:
+  * Time: O(k)
 
 ## Sample Answers
 

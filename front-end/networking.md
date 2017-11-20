@@ -1,11 +1,10 @@
-Networking
-==
+# Networking
 
 WIP.
 
 ## Glossary
 
-- **JSON**
-- **RPC**
-- **HTTP**
-- **HTTP/2**
+* **JSON**
+* **RPC**
+* **HTTP**
+* **HTTP/2**

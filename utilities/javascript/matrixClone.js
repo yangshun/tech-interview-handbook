@@ -1,7 +1,9 @@
 function matrixClone(matrix, defaultValue) {
-    return matrix.map(row => {
-        return defaultValue === undefined ? row.slice(0) : Array(row.length).fill(defaultValue);
-    });
+  return matrix.map(row => {
+    return defaultValue === undefined
+      ? row.slice(0)
+      : Array(row.length).fill(defaultValue);
+  });
 }
 
 const deepEqual = require('./deepEqual');
@@ -15,4 +17,6 @@ console.log(deepEqual(matrixClone([[1]]), [[1]]));
 
 // Test clone with default value.
 console.log(deepEqual(matrixClone([[1, 2], [1, 4]], 1), [[1, 1], [1, 1]]));
-console.log(deepEqual(matrixClone([[1, 2], [1, 4]], null), [[null, null], [null, null]]));
+console.log(
+  deepEqual(matrixClone([[1, 2], [1, 4]], null), [[null, null], [null, null]]),
+);
