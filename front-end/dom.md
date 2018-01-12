@@ -86,7 +86,7 @@ A `NodeList` can contain any node type, but an `HTMLCollection` is supposed to o
 
 **How do you convert an `HTMLCollection` or `NodeList` into an array?**
 
-```
+```js
 const nodelist = document.querySelectorAll('div');
 // Array.from
 const divArray = Array.from(nodelist);
