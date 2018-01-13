@@ -15,20 +15,20 @@
 
 Carefully curated content to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff includes:
 
-- [How to prepare](preparing) for coding interviews
-- [Interview Cheatsheet](preparing/cheatsheet.md) - Straight-to-the-point Do's and Don'ts 🆕
-- [Algorithm tips and the best practice questions](algorithms) categorized by topic
-- ["Front-end Job Interview Questions" answers](front-end/interview-questions.md)
-- [Interview formats](non-technical/interview-formats.md) of the top tech companies
-- [Behavioral questions](non-technical/behavioral.md) categorized by companies
-- [Good questions to ask your interviewers](non-technical/questions-to-ask.md) at the end of the interviews
-- [Helpful resume tips](non-technical/resume.md) to get your resume noticed and the Do's and Don'ts
+* [How to prepare](preparing) for coding interviews
+* [Interview Cheatsheet](preparing/cheatsheet.md) - Straight-to-the-point Do's and Don'ts 🆕
+* [Algorithm tips and the best practice questions](algorithms) categorized by topic
+* ["Front-end Job Interview Questions" answers](https://github.com/yangshun/front-end-interview-handbook)
+* [Interview formats](non-technical/interview-formats.md) of the top tech companies
+* [Behavioral questions](non-technical/behavioral.md) categorized by companies
+* [Good questions to ask your interviewers](non-technical/questions-to-ask.md) at the end of the interviews
+* [Helpful resume tips](non-technical/resume.md) to get your resume noticed and the Do's and Don'ts
 
 This handbook is pretty new and help from you in contributing content would be very much appreciated!
 
 ## Why do I want this?
 
-This repository has *practical* content that covers all phases of a technical interview, from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful as well.
+This repository has _practical_ content that covers all phases of a technical interview, from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful as well.
 
 ## Who is this for?
 
@@ -40,23 +40,26 @@ There are so many awesome books like [Cracking the Coding Interview](http://www.
 
 Also, existing resources focus mainly on algorithm questions and lack coverage for more domain-specific and non-technical questions. This handbook aims to cover content beyond the typical algorithmic coding questions. 😎
 
+## Looking for Front End content?
+
+Front end-related content have been extract out into a separate repository - [Front End Interview Handbook](https://github.com/yangshun/front-end-interview-handbook).
+
 ## Contents
 
-- **[Preparing for a Coding Interview](preparing)**
-  - [Interview cheatsheet](preparing/cheatsheet.md) - Straight-to-the-point Do's and Don'ts
-- **[Algorithm Questions](algorithms)** - Questions categorized by topics
-- **[Design Questions](design)**
-- **[Front-end Study Notes](front-end)** - Summarized notes on the various aspects of front-end
-  - [Front-end Job Interview Questions and Answers](front-end/interview-questions.md) 🔥⭐
-- **[Non-Technical Tips](non-technical)** - Random non-technical tips that cover behavioral and psychological aspects, interview formats and "Do you have any questions for me?"
-  - [Resume Tips](non-technical/resume.md)
-  - [Behavioral Questions](non-technical/behavioral.md)
-  - [Interview Formats](non-technical/interview-formats.md)
-  - [Psychological Tricks](non-technical/psychological-tricks.md)
-  - [Questions to Ask](non-technical/questions-to-ask.md)
-  - [Negotiation Tips](non-technical/negotiation.md)
-- **[Utilities](utilities)** - Snippets of algorithms/code that will help in coding questions
-  - **UPDATE** - Check out [Lago](https://github.com/yangshun/lago), which is a Data Structures and Algorithms library that contains more high-quality implementations with 100% test coverage.
+* **[Preparing for a Coding Interview](preparing)**
+  * [Interview cheatsheet](preparing/cheatsheet.md) - Straight-to-the-point Do's and Don'ts
+* **[Algorithm Questions](algorithms)** - Questions categorized by topics
+* **[Design Questions](design)**
+* **[Front-end Job Interview Questions and Answers](https://github.com/yangshun/front-end-interview-handbook) 🔥⭐** - Answers to the famous Front End Developer Job Interview questions
+* **[Non-Technical Tips](non-technical)** - Random non-technical tips that cover behavioral and psychological aspects, interview formats and "Do you have any questions for me?"
+  * [Resume Tips](non-technical/resume.md)
+  * [Behavioral Questions](non-technical/behavioral.md)
+  * [Interview Formats](non-technical/interview-formats.md)
+  * [Psychological Tricks](non-technical/psychological-tricks.md)
+  * [Questions to Ask](non-technical/questions-to-ask.md)
+  * [Negotiation Tips](non-technical/negotiation.md)
+* **[Utilities](utilities)** - Snippets of algorithms/code that will help in coding questions
+  * **UPDATE** - Check out [Lago](https://github.com/yangshun/lago), which is a Data Structures and Algorithms library that contains more high-quality implementations with 100% test coverage.
 
 ## Related
 
@@ -68,5 +71,5 @@ There are no formal contributing guidelines at the moment as things are still in
 
 ## Maintainers
 
-- [Yangshun Tay](https://github.com/yangshun)
-- [Louie Tan](https://github.com/louietyj)
+* [Yangshun Tay](https://github.com/yangshun)
+* [Louie Tan](https://github.com/louietyj)
