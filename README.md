@@ -13,7 +13,7 @@
 
 ## What is this?
 
-Carefully curated content to help you ace your next technical interview, with a focus on algorithms and the front end domain. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff includes:
+Carefully curated content to help you ace your next technical interview, with a focus on algorithms. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff includes:
 
 * [How to prepare](preparing) for coding interviews
 * [Interview Cheatsheet](preparing/cheatsheet.md) - Straight-to-the-point Do's and Don'ts 🆕
@@ -42,7 +42,7 @@ Also, existing resources focus mainly on algorithm questions and lack coverage f
 
 ## Looking for Front End content?
 
-Front end-related content have been extract out into a separate repository - [Front End Interview Handbook](https://github.com/yangshun/front-end-interview-handbook).
+Front end-related content have been extracted out into a separate repository - [Front End Interview Handbook](https://github.com/yangshun/front-end-interview-handbook).
 
 ## Contents
 
@@ -50,7 +50,7 @@ Front end-related content have been extract out into a separate repository - [Fr
   * [Interview cheatsheet](preparing/cheatsheet.md) - Straight-to-the-point Do's and Don'ts
 * **[Algorithm Questions](algorithms)** - Questions categorized by topics
 * **[Design Questions](design)**
-* **[Front-end Job Interview Questions and Answers](https://github.com/yangshun/front-end-interview-handbook) 🔥⭐** - Answers to the famous Front End Developer Job Interview questions
+* **[Front-end Job Interview Questions and Answers](https://github.com/yangshun/front-end-interview-handbook) 🔥⭐** - Answers to the famous "Front-end Job Interview Questions"
 * **[Non-Technical Tips](non-technical)** - Random non-technical tips that cover behavioral and psychological aspects, interview formats and "Do you have any questions for me?"
   * [Resume Tips](non-technical/resume.md)
   * [Behavioral Questions](non-technical/behavioral.md)
