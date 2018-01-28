@@ -78,6 +78,14 @@ These questions are suitable for asking Engineering Managers, especially useful 
 * How often are 1:1s conducted?
 * What is the current team composition like?
 * What opportunities are available to switch roles? How does this work?
+* Two senior team members disagree over a technical issue. How do you handle it?
+* Have you managed a poor performer at some point in your career before?. What did you do and how did it work?
+* Where do you spend more of your time, high performers or low performers?
+* Sometimes there's a trade-off between what's best for one of your team members and what's best for the team. Give an example of how you handled this and why.
+* Give an example of a time you faced a difficult mentoring/coaching challenge. What did you do and why?
+* What is your management philosophy?
+* What is the role of data and metrics in managing a team like ours?
+* What role doing the manager play in making technical decisions?
 
 ### Leadership
 
@@ -112,3 +120,4 @@ These questions are intended for senior level management, such as CEO, CTO, VPs.
 * [A developer's guide to interviewing](https://medium.freecodecamp.org/how-to-interview-as-a-developer-candidate-b666734f12dd)
 * [Questions I'm asking in interviews 2017](https://cternus.net/blog/2017/10/10/questions-i-m-asking-in-interviews-2017/)
 * [What are good questions to ask during a software developer interview when asked "Do you have any questions now?"](https://www.quora.com/What-are-good-questions-to-ask-during-a-software-developer-interview-when-asked-do-you-have-any-questions-now/answer/John-L-Miller)
+* [What are some good questions to ask when interviewing someone for a manager position?](https://www.quora.com/What-are-some-good-questions-to-ask-when-interviewing-someone-for-a-manager-position/answer/David-Seidman)
