@@ -85,7 +85,8 @@ These questions are suitable for asking Engineering Managers, especially useful 
 * Give an example of a time you faced a difficult mentoring/coaching challenge. What did you do and why?
 * What is your management philosophy?
 * What is the role of data and metrics in managing a team like ours?
-* What role doing the manager play in making technical decisions?
+* What role does the manager play in making technical decisions?
+* What is an example of a change you have made in the team that improved the team?
 
 ### Leadership
 
