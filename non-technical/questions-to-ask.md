@@ -67,7 +67,7 @@ These questions are suitable for any technical role.
 These questions are suitable for asking Engineering Managers, especially useful for the Team Matching phase of Google interviews or post-offer calls that your recruiters set up with the various team managers.
 
 * **How do you train/ramp up engineers who are new to the team?**
-* **What does success look like for your team?**
+* **What does success look like for your team/project?**
 * **What qualities do you look out for when hiring for this role?**
 * **What are the strengths and weaknesses of the current team? What is being done to improve upon the weaknesses?**
 * **Can you tell me about a time you resolved an interpersonal conflict?**
@@ -79,7 +79,7 @@ These questions are suitable for asking Engineering Managers, especially useful 
 * What is the current team composition like?
 * What opportunities are available to switch roles? How does this work?
 * Two senior team members disagree over a technical issue. How do you handle it?
-* Have you managed a poor performer at some point in your career before?. What did you do and how did it work?
+* Have you managed a poor performer at some point in your career before? What did you do and how did it work?
 * Where do you spend more of your time, high performers or low performers?
 * Sometimes there's a trade-off between what's best for one of your team members and what's best for the team. Give an example of how you handled this and why.
 * Give an example of a time you faced a difficult mentoring/coaching challenge. What did you do and why?
@@ -87,6 +87,9 @@ These questions are suitable for asking Engineering Managers, especially useful 
 * What is the role of data and metrics in managing a team like ours?
 * What role does the manager play in making technical decisions?
 * What is an example of a change you have made in the team that improved the team?
+* What would be the most important problem you would want me to solve if I joined your team?
+* What opportunities for growth will your team provide?
+* What would I work on if I joined this team and who would I work most closely with?
 
 ### Leadership
 
