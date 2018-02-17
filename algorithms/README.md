@@ -1,6 +1,7 @@
 Algorithm Questions
 ==
 
+
 This section dives deep into practical tips for specific topics of algorithms and data structures which appear frequently in coding questions. Many algorithm questions involve techniques that can be applied to questions of similar nature. The more techniques you have in your arsenal, the higher the chances of passing the interview. They may lead you to discover corner cases you might have missed out or even lead you towards the optimal approach!
 
 For each topic, study links are recommended to help you master the topic. There is a list of recommended common questions to practice which in my opinion is highly valuable for mastering the core concepts for the topic.
@@ -576,3 +577,126 @@ If you require the top *k* elements use a Min Heap of size *k*. Iterate through 
 - https://quip.com/q41AA3OmoZbC
 - http://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/
 - https://medium.com/basecs
+
+-----
+
+Spanish translation
+
+Preguntas sobre los algoritmos
+==
+
+
+en esta sección se zambulle profundamente en consejos prácticos para temas específicos de algoritmos y estructuras de datos que aparecen con frecuencia en la codificación de preguntas. Muchas preguntas del algoritmo implican técnicas que pueden aplicarse a las cuestiones de naturaleza similar. Las técnicas más tienes en tu arsenal, mayor será la posibilidad de pasar la entrevista. Pueden llevar a descubrir casos de rincón que podría haber perdido hacia fuera o incluso llevan hacia el enfoque óptimo!
+
+Para cada tema, hay enlaces de estudio que se recomiendan para ayudarle a amaestrar el tema.
+
+Hay una lista de preguntas comunes recomendados a la práctica que en mi opinión es muy valiosa para dominar los conceptos básicos del tema. Si usted está interesado en cómo las estructuras de datos se implementan, Compruebe hacia fuera [Lago] (https://github.com/yangshun/lago), estructuras de datos y biblioteca de algoritmos para JavaScript. Es bastante mucho WIP todavía pero voy a hacer en una biblioteca que puede ser utilizado en la producción y también un recurso de referencia para la revisión de las estructuras de datos y algoritmos.
+
+### Contenidos 
+
+ -[Array](array.md)
+- [Dynamic Programming and Memoization](dynamic-programming.md)
+- [Geometry](geometry.md)
+- [Graph](graph.md)
+- [Hash Table](hash-table.md)
+- [Heap](heap.md)
+- [Interval](interval.md)
+- [Linked List](linked-list.md)
+- [Math](math.md)
+- [Matrix](matrix.md)
+- [Object-Oriented Programming](oop.md)
+- [Permutation](permutation.md)
+- [Queue](queue.md)
+- [Sorting and Searching](sorting-searching.md)
+- [Stack](stack.md)
+- [String](string.md)
+- [Tree](tree.md)
+
+## Consejos generales
+
+Aclarar cualquier hipótesis que subconscientemente. Muchas preguntas están especificados bajo a propósito.
+
+. Siempre validar entrada de primero. Compruebe la entrada de tipo no válido/vacío/negativo/diferentes. Nunca suponga que se da los parámetros válidos. Por otra parte, aclarar con el entrevistador si usted puede asumir entrada válida (generalmente sí), que puede ahorrar tiempo de escritura de código hace de entrada de validación.
+
+¿Hay alguna complejidad requisitos/restricciones de tiempo/espacio? 
+
+Comprobar errores off-by-one
+
+en idiomas donde no hay ninguna coacción de tipo automático, compruebe que la concatenación de los valores son del mismo tipo: 'int' / 'str' / 'lista'. 
+
+Después de terminar el código, use unas entradas de ejemplo para su solución.
+
+¿El algoritmo debe ejecutarse varias veces, por ejemplo en un servidor web? En caso afirmativo, la entrada es probable que preprocesar-capaces de mejorar la eficiencia en cada llamada. 
+
+Utilizar una mezcla de paradigmas de programación imperativas y funcionales:
+
+ - escribir puras funciones tanto como sea posible.
+ - funciones puras son más fáciles de la razón sobre y puede ayudar a reducir errores en la aplicación.
+ - evitar mutando los parámetros pasados a la función sobre todo si se pasan por referencia a menos que esté seguro de lo que están       haciendo.
+  - sin embargo, la programación funcional es generalmente costoso en términos de complejidad de espacio debido a mutación no y la       repetida asignación de nuevos objetos. Por otro lado, código imperativo es más rápido ya que operan sobre objetos existentes. Por lo t  anto, tendrá que lograr un equilibrio entre la eficacia del vs de precisión, usando la cantidad correcta de código funcional y fundamental en su caso
+  -evitar depender y mutando a variables globales. Variables globales de introducir estado.
+  - Si tienes que depender de variables globales, asegúrese de que no mutar por accidente.
+
+En general, para mejorar la velocidad de un programa, podemos elegir un algoritmo/de estructura de datos más apropiado o utilizar más memoria. Es un equilibrio clásico de espacio/tiempo.
+
+Estructuras de datos son sus armas. Elegir el arma adecuado para la batalla correcta es la clave para la victoria. Estar muy familiarizado sobre los puntos fuertes de cada estructura de datos y la complejidad de tiempo para sus diversas operaciones. 
+
+Estructuras de datos se pueden aumentar para lograr complejidad de tiempo eficiente a través de diferentes operaciones. Por ejemplo, puede utilizarse un mapa hash junto con una lista doblemente ligada a alcanzar la complejidad de tiempo de o (1) para el funcionamiento de la 'get' y 'poner' en una [caché LRU] (https://leetcode.com/problems/lru-cache/).
+
+Hashmaps son probablemente la estructura de datos más comúnmente utilizado para las preguntas del algoritmo. Si están pegados en una pregunta, puede ser su último recurso enumerar los datos posibles estructuras (Afortunadamente no hay codigo postal que muchos de ellos) y examinar si cada uno de ellos puede aplicarse al problema. Esto ha trabajado para mí a veces.
+
+Si son las esquinas del corte en el código, estado en voz alta a su entrevistador y decir lo que harías en un entorno no-entrevista (sin limitaciones de tiempo). Por ejemplo, escribiría una expresión regular para analizar esta cadena en lugar de usar 'split()' que no puede cubrir todos los casos.
+
+## Sequencia
+
+#### Notas
+
+Arrays y cadenas se consideran secuencias (una cadena es una secuencia de caracteres). Hay consejos relevantes para tratar con arrays y cadenas que serán cubiertos aquí
+
+¿Son allí duplicar valores en la secuencia, afectaría la respuesta? 
+
+Compruebe la secuencia fuera de los límites
+
+Ser consciente acerca de rebanar o concatenar secuencias en el código. Por lo general, corte y concatenar secuencias requieren tiempo de O(n). Utilizar índices de inicio y fin para delimitar una submatriz/subcadena siempre que sea posible.
+
+A veces puede recorrer la secuencia de la derecha en lugar de la izquierda. 
+
+Dominar la [técnica de ventana deslizante] (https://discuss.leetcode.com/topic/30941/here-is-a-10-line-template-that-can-solve-most-substring-problems) que se aplica a muchos problemas de subcadena/subarra
+
+ Cuando se dan dos secuencias para procesar, es común tener un índice por secuencia de travesía/comparar los dos. Por ejemplo, utilizamos el mismo enfoque para combinar dos arreglos ordenados.
+ 
+ ## Casos de esquina
+ 
+ -sequencia vacia
+ -secuencia con 1 o 2 elementos
+ -secuencia con elementos repetidos
+ 
+ #### Array.
+ 
+ ## Notas
+ 
+Wsta  la matriz ordenada o parcialmente ordenada? Si es así, algún tipo de búsqueda binaria debe ser posible. También generalmente, esto significa que el entrevistador está buscando una solución que es más rápida que O(n)
+
+¿Usted puede ordenar el array? A veces la matriz de clasificación primero puede significativamente simplificar el problema. Asegúrese de que el orden de los elementos de la matriz no es necesario ser preservado antes de tratar de una especie
+
+Preguntas cuando se trata de suma o multiplicación de una submatriz, previo cómputo utilizando hash o un prefijo/sufijo suma/producto puede ser útil.
+
+Si le dan una secuencia y el entrevistador pide espacio de o (1), podría ser posible utilizar la matriz sí mismo como una tabla hash. Por ejemplo, si la matriz tiene valores de 1 a N, donde N es la longitud de la matriz, niega el valor de ese índice (menos uno) para indicar la presencia de ese número.
+
+## Listas enlazadas
+
+## Notas
+
+Como arrays, listas enlazadas son usadas para representar datos secuenciales. El beneficio de las listas enlazadas es que la inserción y eliminación de cualquier parte de la lista es o (1) Considerando que en arreglos de discos de los siguientes elementos deberán ser cambiados de puesto
+
+Adición de un nodo ficticio en la cabeza o la cola puede ayudar a tratar muchos casos de borde donde operaciones tienen que realizarse en la cabeza o la cola. La presencia de adenopatías maniquí esencialmente asegura que las operaciones nunca se habrán hecho en la cabeza o la cola, eliminando mucho de dolor de cabeza en la escritura condicional comprueba a tratar con punteros nulas. Asegúrese de recordar retirar al final de la operación.
+
+Listas a veces vinculado problema pueden ser resuelto sin almacenamiento adicional. Trate de pedir ideas de atrás un problema de la lista enlazada.
+
+Para su eliminación en listas vinculadas, puede modificar los valores de nodo o cambiar los punteros del nodo. Puede que necesite conservar una referencia al elemento anterior.
+
+Para repartir las listas enlazadas, crear dos listas separadas de vinculados y unirse a ellos volver juntos.
+
+ Listas enlazadas problemas compartir similitud con problemas de matriz, piense en cómo sería hacerlo para una matriz e intentar aplicar a una lista enlazada.
+ 
+ 
