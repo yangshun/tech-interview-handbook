@@ -20,7 +20,7 @@ def graph_dfs(matrix):
 # Follow up:
 # 1) Diagonal cells are considered neighbors
 # 2) View the matrix like Earth, right boundary is adjacent to the left boundary, top adjacent to left, etc.
-def graph_dfs_diagonals(matrix):
+def graph_dfs_diagonals_and_boundary_wrap(matrix):
     rows, cols = len(matrix), len(matrix[0])
     visited = set()
     # Change 1: Add 4 more diagonal directions.
