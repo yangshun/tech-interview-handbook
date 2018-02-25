@@ -28,7 +28,6 @@ def graph_dfs_diagonals_and_boundary_wrap(matrix):
     def dfs(i, j):
         if (i, j) in visited:
             return
-        print(matrix[i][j])
         visited.add((i, j))
         for direction in directions:
             # Change 2: No more boundary, use modulo to allow traversal that exceed boundaries to wrap around.
