@@ -28,7 +28,7 @@ Learn the [STAR](https://en.wikipedia.org/wiki/Situation,_task,_action,_result) 
 - What does your best day of work look like?
 - What is something that you had to push for in your previous projects?
 - What is the most constructive feedback you have received in your career?
-- What was one thing you had to persevere for multiple months?
+- What is something you had to persevere at for multiple months?
 
 ## Airbnb
 
@@ -43,9 +43,9 @@ While loving to travel or appreciating Airbnb's growth may be good answers, try 
 - If you had an unlimited budget and you could go somewhere, where would you go?
 - Share one of your trips with us.
 - What is the most challenging project in or out of school that you have worked on in the last 6 months.
-- What is the thing that you don't want from your last internship/job?
+- What is something that you don't want from your last internship/job?
 - Give me an example of when you've been a good host.
-- One thing you would like to remove from the Airbnb experience.
+- What's something you'd like to remove from the Airbnb experience?
 - What is something new that you can teach your interviewer in a few minutes?
 - Tell me about why you want to work here.
 - What is the best gift you have ever given or received?
@@ -67,11 +67,11 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Amazon-Interview-Questio
 
 - How do you deal with a failed deadline?
 - Why do you want to work for Amazon?
-- Talked about a situation where you had a conflict with a teammate.
+- Tell me about a situation where you had a conflict with a teammate.
 - In my professional experience have you worked on something without getting approval from your manager?
 - Tell me a situation where you would have done something differently from what you actually did.
-- What is the most exceedingly bad misstep you at any point made?
-- Describe what Human Resource means to you.
+- What is the most exceedingly bad misstep you've made at any point?
+- Describe what Human Resources means to you.
 - How would you improve Amazon's website?
 
 ## Dropbox
@@ -115,13 +115,13 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Palantir-Technologies-In
 - What are your three strengths and three weaknesses?
 - If you were in charge of picking projects for Palantir, what problem would you try to solve?
 - **What is something 90% of people disagree with you about?**
-- What are some of the best and worse things about your current company?
+- What are some of the best and worst things about your current company?
 - **What is broken around you?**
 - What would your manager say about you?
 - Describe Palantir to your grandmother.
-- Teach me something you've learned?
-- Tell me a time when you predicted something?
-- If your supervisors were to rate you on a scale of 1-10 what would they rate you?
+- Teach me something you've learned.
+- Tell me a time when you predicted something.
+- If your supervisors were to rate you on a scale of 1-10, what would they rate you?
 - What was the most fun thing you did recently?
 - Tell me the story of how you became who you are today and what made you apply to Palantir.
 
@@ -133,10 +133,10 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Slack-Interview-Question
 - Why do you want to join Slack?
 - Tell me about your past projects.
 - Explain me your toughest project and the working architecture.
-- Apart from technical knowledge what did you learn during your internship?
+- Apart from technical knowledge, what did you learn during your internship?
 - If someone has a different viewpoint to do a project like different programming language, how would handle this situation?
 - What are your most interesting subjects and why?
-- Did you find any bug in Slack?
+- Did you find any bugs in Slack?
 - What is your favorite feature and why?
 
 ## Stack Overflow
