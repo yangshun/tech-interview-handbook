@@ -147,6 +147,7 @@ Some helpful utility snippets:
 #### Study Links
 
 - [Demystifying Dynamic Programming](https://medium.freecodecamp.org/demystifying-dynamic-programming-3efafb8d4296)
+- [Dynamic Programming – 7 Steps to Solve any DP Interview Problem](http://blog.refdash.com/dynamic-programming-tutorial-example/)
 
 #### Notes
 
