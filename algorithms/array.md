@@ -30,7 +30,6 @@ Arrays
 - Given an array of numbers list out all triplets that sum to 0. Do so with a running time of less than O(n^3).
   - [Source](http://blog.gainlo.co/index.php/2016/07/19/3sum/).
 - Given an array of numbers list out all quadruplets that sum to 0. Do so with a running time of less than O(n^4).
-- Given an array of integers, move all the zeroes to the end while preserving the order of the other elements. You have to do it in-place and are not allowed to use any extra storage.
 - Given an array of integers, find the subarray with the largest sum. Can you do it in linear time.
   - Maximum subarray sum problem.
 - You have an array with the heights of an island (at point 1, point 2 etc) and you want to know how much water would remain on this island (without flowing away).
@@ -50,7 +49,7 @@ Arrays
 - Given an array of integers, find a maximum sum of non-adjacent elements.
   - E.g. `[1, 0, 3, 9, 2]` should return `10 (1 + 9)`.
   - [Source](http://blog.gainlo.co/index.php/2016/12/02/uber-interview-question-maximum-sum-non-adjacent-elements/)
-- Given an array of integers, modify the array by moving all the zeros to the end (right side). The order of other elements doesn't matter.
+- Given an array of integers, modify the array by moving all the zeroes to the end (right side). The order of other elements doesn't matter.
   - E.g. `[1, 2, 0, 3, 0, 1, 2]`, the program can output `[1, 2, 3, 1, 2, 0, 0]`.
   - [Source](http://blog.gainlo.co/index.php/2016/11/18/uber-interview-question-move-zeroes/).
 - Given an array, return the length of the longest increasing contiguous subarray.
