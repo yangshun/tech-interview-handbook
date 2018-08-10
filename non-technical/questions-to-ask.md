@@ -48,7 +48,7 @@ These questions are suitable for any technical role.
 * What do you measure? What are your most important product metrics?
 * What does the company do to nurture and train its employees?
 * How often have you moved teams? What made you join the team you're on right now? If you wanted to move teams, what would need to happen?
-* If you hire person, what do you have for him to study product you're working on and processes in general? Do you have specifications, requirements, documentation?
+* What resources does the company have for new hires to study its product and processes? Are there specifications, requirements, documentation?
 * There's "C++" (or Python, Swift or any other tech) in the job description. How will you estimate my proficiency in this tech in 3 months?
 * How do you think my expertise would be relevant to this team? What unique value can I add?
 
