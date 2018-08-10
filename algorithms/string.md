@@ -16,7 +16,6 @@ String
 - If you received a file in chunks, calculate when you have the full file. Quite an open-ended question. Can assume chunks come with start and end, or size, etc.
 - Given a list of names (strings) and the width of a line, design an algorithm to display them using the minimum number of lines.
 - Design a spell-checking algorithm.
-- Count and say problem.
 - Longest substring with `K` unique characters.
   - [Source](http://blog.gainlo.co/index.php/2016/04/12/find-the-longest-substring-with-k-unique-characters/)
 - Given a set of random strings, write a function that returns a set that groups all the anagrams together.
