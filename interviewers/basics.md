@@ -17,4 +17,4 @@ These items will all change based on your specific company and needs but these i
 
 - **Tools** - Using a text editor such as Sublime or Atom will give the interviewee syntax highlighting but doesn't show compiler errors which can be a help.
 - **Nitpicking** - Sometimes psuedocode is okay. If testing in C# do you really need the interviewee to write `Console.WriteLine()` or is `Print()` good enough?
--**Keep Dialog Open** - Don't leave the interviewee alone or sit quietly by as they attempt to coe. Give some subtle hints like "I see you're doing ____, can you think of any other ways to accomplish this?" It's unlikely that the interviewee will be working in a silo should they get the job, is there any reason they should be during the interview?
+-**Keep Dialog Open** - Don't leave the interviewee alone or sit quietly by as they attempt to code. Give some subtle hints like "I see you're doing ____, can you think of any other ways to accomplish this?" It's unlikely that the interviewee will be working in a silo should they get the job, is there any reason they should be during the interview?
