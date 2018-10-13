@@ -49,13 +49,31 @@ Use earphones and make sure you are in a quiet environment. You definitely do no
 
 **Self Introduction**
 
-TODO
+Prepare a self introduction that follows the following outline (inspired by "Cracking the Coding Interview" by Gayle McDowell):
+
+1. A sentence about your current or most recent role.
+1. A few sentences about your (academic) background. What did you focus on?
+1. Some sentences about your professional experience after school/university. Where did you work? What projects did you deal with? What where typical challenges and tasks? Which technologies did you use?
+1. Mention one to two sentences about what you do outside of work, if it is relevant for the role.
+1. Finish with a statement saying why you are seeking a new job opportunity and why you are interested in the role you applied for.
+
+An example of the above could be:
+
+> I'm John Doe and currently a Software Engineer at Google.
+> 
+> My background is in Computer Science, where I received my bachelor's degree at MIT and my Master's degree at Stanford. I mainly did research on how to decrease complexity of search algorithms.
+> 
+> After university, I started to work at Microsoft as a Software Engineer. It was a great experience as I was working in the Office team contributing to MS Word and MS Powerpoint. I learned a lot about C# and .NET back then. After about two years, I got an offer from Google where I have been working since then. I'm now leading the Search Optimization team and have gained a lot of knowledge in scalability and domain knowledge. My daily tasks consist of optimizing search queries and mentoring junior engineers.
+> 
+> Outside of work I develop a on open source projects written in Python. Examples of some open source projects I created are <insert examples>.
+> 
+> I'm now seeking new job oppurtunities in the Boston area since I'm relocating for personal reasons. In particular I think Boston Dynamics is a perfect fit for my interests as well as my skill set.
 
 **Upon Getting the Question**
 
 Many candidates jump into coding the moment they hear the question. That is usually a big mistake. Take a moment to repeat the question back at the interviewer and make sure that you understand exactly what they are asking. Repeating back/rephrasing the question will reduce chances of miscommunication.
 
-Always seek clarification about the question upon hearing it even if it you think it is clear to you. You might discover something that you have missed out and it also sends a signal to the interviewer that you are a careful person who pays attention to details. Some interviewers deliberately omit important details to see if you ask the right questions. 
+Always seek clarification about the question upon hearing it even if it you think it is clear to you. You might discover something that you have missed out and it also sends a signal to the interviewer that you are a careful person who pays attention to details. Some interviewers deliberately omit important details to see if you ask the right questions.
 
 Some common questions you can ask:
 
