@@ -5,7 +5,7 @@ Security
 
 #### Symmetrical Encryption
 
-- Symmetrical encryption is a type of encryption where one key can be used to encrypt messages and also decrypt the same message.
+- Symmetrical encryption is a type of encryption where the same key is used to encrypt plaintext messages and to decrypt ciphertext.
 - Symmetrical encryption is usually much less computationally expensive as compared to asymmetric encryption.
 - Often called "shared secret" encryption, or "secret key" encryption.
 - To use a symmetric encryption scheme, the sender and receiver must securely share a key in advance. This sharing can be done via asymmetric encryption.
@@ -13,8 +13,8 @@ Security
 #### Asymmetric Encryption
 
 - A pair of keys are required: a **private key** and a **public key**. Public keys can be shared with anyone while private keys should be kept secret and known only to the owner.
-- A private key can be used to decrypt a message encrypted by a public key. A successful decryption verifies that the holder possesses the private key.
-- Also known as public key cryptography.
+- A private key can be used to decrypt a message encrypted by the corresponding public key. A successful decryption verifies that the holder possesses the private key.
+- Also known as public-key cryptography.
 
 ## Public Key Infrastructure
 
@@ -30,7 +30,7 @@ An SSH session consists of two stages, **Negotiating Encryption** and **User Aut
 
 #### Negotiating Encryption
 
-The goal of this stage is for the client and server to agree upon and establish encryption to protect future communication, by generating an identical session key. One possible algorithm to generate the key is the Diffie–Hellman key exchange scheme. Each party generates a public/private key pair and exchanges the public key. After obtaining an authentic copy of each other's public keys, each party can compute a shared secret offline.
+The goal of this stage is for the client and server to agree upon and establish encryption to protect future communication, by generating an identical session key. One possible algorithm to generate the session key is the Diffie–Hellman key exchange scheme. Each party generates a public/private key pair and exchanges the public key. After obtaining an authentic copy of each other's public keys, each party can compute a shared secret offline.
 
 The basis of this procedure for classic Diffie-Hellman is:
 
