@@ -14,6 +14,7 @@ For on-site interviews at smaller (non-public) companies, most will allow (and p
 - [Google](#google)
 - [Lyft](#lyft)
 - [Palantir](#palantir)
+- [Trendyol](#trendyol)
 - [WhatsApp](#whatsapp)
 
 ### Airbnb
@@ -120,6 +121,23 @@ For on-site interviews at smaller (non-public) companies, most will allow (and p
 - Tips:
   - I opted to use React and had to set up projects on the spot using `create-react-app`.
   - You may be asked to meet with Engineering Managers after the technical sessions and it's not necessarily a good/bad thing.
+  
+  ### Trendyol
+
+- Recruiter phone screen or on-site
+- Technical challenge:
+  - Algorithm/front end/back end/ mobile programming case study.
+- On-site (General & Technical):
+  - Past experience/project
+  - Cross functional
+  - General coding
+  - Algorithm coding
+  - System design/architecture
+   
+- Tips:
+  - Fresh grads & parttimers solve algorithm tasks on Codility before recruiter process
+  - Both technical and cultural fits are important for evalutaions.
+  - OOP, unit testing and working with pair are essential competencies looking for.
 
 ### WhatsApp
 
