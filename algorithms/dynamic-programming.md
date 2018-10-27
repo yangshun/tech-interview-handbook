@@ -24,3 +24,10 @@ Dynamic Programming
     // [4, 10, 3, 1, 5] => 15
     ~~~
 - Given a list of denominations (e.g., `[1, 2, 5]` means you have coins worth $1, $2, and $5) and a target number `k`, find all possible combinations, if any, of coins in the given denominations that add up to `k`. You can use coins of the same denomination more than once.
+- You are climbing a stair case. It takes n steps to reach to the top.
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+Example - 
+Input : 3; 
+Return : 3; 
+Steps : [1 1 1], [1 2], [2 1]
+
