@@ -67,7 +67,7 @@ An example of the above could be:
 > 
 > Outside of work I develop a on open source projects written in Python. Examples of some open source projects I created are <insert examples>.
 > 
-> I'm now seeking new job oppurtunities in the Boston area since I'm relocating for personal reasons. In particular I think Boston Dynamics is a perfect fit for my interests as well as my skill set.
+> I'm now seeking new job opportunities in the Boston area since I'm relocating for personal reasons. In particular I think Boston Dynamics is a perfect fit for my interests as well as my skill set.
 
 **Upon Getting the Question**
 
