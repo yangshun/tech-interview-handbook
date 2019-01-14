@@ -91,7 +91,6 @@ Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions
 - Why are you interested in this opportunity?
 - What are your salary expectations?
 - Why are you looking to leave your current company?
-- What is your biggest strength and area of growth?
 - Tell me about a time your work responsibilities got a little overwhelming. What did you do?
 - Give me an example of a time when you had a difference of opinion with a team member. How did you handle that?
 - Tell me about a challenge you faced recently in your role. How did you tackle it? What was the outcome?

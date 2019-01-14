@@ -52,7 +52,7 @@ Use a mix of functional and imperative programming paradigms:
 - Avoid relying on and mutating global variables. Global variables introduce state.
 - If you have to rely on global variables, make sure that you do not mutate it by accident.
 
-Generally, to improve the speed of a program, we can either choose a more appropriate data structure/algorithm or use more memory. It's a classic space/time tradeoff.
+Generally, to improve the speed of a program, we can either: (1) choose a more appropriate data structure/algorithm; or (2) use more memory. The latter demonstrates a classic space vs. time tradeoff, but it is not necessarily the case that you can only achieve better speed at the expense of space. Also, note that there is often a theoretical limit to how fast your program can run (in terms of time complexity). For instance, a question that requires you to find the smallest/largest element in an unsorted array cannot run faster than O(N).
 
 Data structures are your weapons. Choosing the right weapon for the right battle is the key to victory. Be very familiar about the strengths of each data structure and the time complexities for its various operations.
 
@@ -147,7 +147,7 @@ Some helpful utility snippets:
 #### Study Links
 
 - [Demystifying Dynamic Programming](https://medium.freecodecamp.org/demystifying-dynamic-programming-3efafb8d4296)
-- [Dynamic Programming – 7 Steps to Solve any DP Interview Problem](http://blog.refdash.com/dynamic-programming-tutorial-example/)
+- [Dynamic Programming – 7 Steps to Solve any DP Interview Problem](https://dev.to/nikolaotasevic/dynamic-programming--7-steps-to-solve-any-dp-interview-problem-3870)
 
 #### Notes
 
@@ -490,7 +490,7 @@ Recursion is a common approach for trees. When you notice that the subtree probl
 
 When using recursion, always remember to check for the base case, usually where the node is `null`.
 
-When you are asked to traverse a tree by level, use depth first search.
+When you are asked to traverse a tree by level, use breadth-first search.
 
 Sometimes it is possible that your recursive function needs to return two values.
 
