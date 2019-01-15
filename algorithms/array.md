@@ -4,6 +4,8 @@ Arrays
 #### Hard
 - Given a set of rectangles represented by a height and an interval along the y-axis, determine the size of its union. ([Solution](https://www.geeksforgeeks.org/divide-and-conquer-set-7-the-skyline-problem/))
 - Given an array, find the longest arithmetic progression. ([Solution](https://www.geeksforgeeks.org/longest-arithmetic-progression-dp-35/))
+- Given an unsorted array of integers, find the length of the longest consecutive elements sequence. 
+  - E.g. `[100, 4, 200, 1, 3, 2] => 4`. Explanation: The longest consecutive elements sequence is `[1, 2, 3, 4]`. Therefore its length is 4. Note: Your algorithm should run in O(n) complexity. ([Solution](https://www.geeksforgeeks.org/longest-consecutive-subsequence/))
 
 #### Medium
 - Given a list of item prices, find all possible combinations of items that sum a particular value `K`. ([Solution](https://www.geeksforgeeks.org/combinational-sum/))
