@@ -80,6 +80,8 @@ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com
 
 <a href="https://opencollective.com/tech-interview-handbook#backers" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/backers.svg?width=890"></a>
 
+<a href="https://www.buymeacoffee.com/yangshun" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
 ### Sponsors
 
 Support this project by becoming a sponsor. Your logo/profile picture will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/tech-interview-handbook#sponsor)]
