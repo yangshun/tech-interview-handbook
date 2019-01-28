@@ -11,6 +11,9 @@
   </p>
 </div>
 
+[![Backers on Open Collective](https://opencollective.com/tech-interview-handbook/backers/badge.svg)](#backers)
+ [![Sponsors on Open Collective](https://opencollective.com/tech-interview-handbook/sponsors/badge.svg)](#sponsors) 
+
 ## What is this?
 
 Carefully curated content to help you ace your next technical interview, with a focus on algorithms. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff includes:
@@ -101,3 +104,33 @@ Support this project by becoming a sponsor. Your logo/profile picture will show 
 
 * [Yangshun Tay](https://github.com/yangshun)
 * [Louie Tan](https://github.com/louietyj)
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/yangshun/tech-interview-handbook/graphs/contributors"><img src="https://opencollective.com/tech-interview-handbook/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/tech-interview-handbook#backer)]
+
+<a href="https://opencollective.com/tech-interview-handbook#backers" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/tech-interview-handbook#sponsor)]
+
+<a href="https://opencollective.com/tech-interview-handbook/sponsor/0/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/tech-interview-handbook/sponsor/1/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/tech-interview-handbook/sponsor/2/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/tech-interview-handbook/sponsor/3/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/tech-interview-handbook/sponsor/4/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/tech-interview-handbook/sponsor/5/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/tech-interview-handbook/sponsor/6/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/tech-interview-handbook/sponsor/7/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/tech-interview-handbook/sponsor/8/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/tech-interview-handbook/sponsor/9/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/9/avatar.svg"></a>
+
+
