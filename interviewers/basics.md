@@ -3,7 +3,7 @@ Basics
 
 ## Disclaimer
 
-These items will all change based on your specific company and needs but these items area starting point.
+All these items will change based on your specific company and needs but these items area are the starting point.
 
 ## Items To Consider
 
