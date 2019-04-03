@@ -17,7 +17,7 @@ function deepEqual(val1, val2) {
     }
 
     // Object comparison.
-    if (typeof val1 === 'object' && typeof val2 === 'object' && val1 !== null) {
+    if (typeof val1 === 'object' && typeof val2 === 'object' && val1 !== null && val2 !== null) {
         const keys1 = Object.keys(val1), keys2 = Object.keys(val2);
         if (keys1.length !== keys2.length) {
             return false;
