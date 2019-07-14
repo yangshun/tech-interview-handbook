@@ -161,7 +161,7 @@ Sometimes you do not need to store the whole DP table in memory, the last two va
 - [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 - [Coin Change](https://leetcode.com/problems/coin-change/)
 - [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
-- [Longest Common Subsequence]()
+- [Longest Common Subsequence](https://www.geeksforgeeks.org/longest-common-subsequence-dp-4/)
 - [Word Break Problem](https://leetcode.com/problems/word-break/)
 - [Combination Sum](https://leetcode.com/problems/combination-sum-iv/)
 - [House Robber](https://leetcode.com/problems/house-robber/) and [House Robber II](https://leetcode.com/problems/house-robber-ii/)
