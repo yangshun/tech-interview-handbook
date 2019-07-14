@@ -1,5 +1,4 @@
-Design Questions
-==
+# Design Questions
 
 ## Guides
 

@@ -1,5 +1,4 @@
-Preparing for a Coding Interview
-==
+# Preparing for a Coding Interview
 
 ### Picking a Programming Language
 
@@ -60,13 +59,13 @@ Prepare a self introduction that follows the following outline (inspired by "Cra
 An example of the above could be:
 
 > I'm John Doe and currently a Software Engineer at Google.
-> 
+>
 > My background is in Computer Science, where I received my bachelor's degree at MIT and my Master's degree at Stanford. I mainly did research on how to decrease complexity of search algorithms.
-> 
+>
 > After university, I started to work at Microsoft as a Software Engineer. It was a great experience as I was working in the Office team contributing to MS Word and MS Powerpoint. I learned a lot about C# and .NET back then. After about two years, I got an offer from Google where I have been working since then. I'm now leading the Search Optimization team and have gained a lot of knowledge in scalability and domain knowledge. My daily tasks consist of optimizing search queries and mentoring junior engineers.
-> 
+>
 > Outside of work I develop a on open source projects written in Python. Examples of some open source projects I created are <insert examples>.
-> 
+>
 > I'm now seeking new job opportunities in the Boston area since I'm relocating for personal reasons. In particular I think Boston Dynamics is a perfect fit for my interests as well as my skill set.
 
 **Upon Getting the Question**

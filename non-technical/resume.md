@@ -1,12 +1,11 @@
-Resume
-==
+# Resume
 
 The following content is by Christina Ng and rephrased for the purpose of this handbook. You can follow her on [Medium](https://medium.com/@christinang89) or [Quora](https://www.quora.com/profile/Christina-Ng).
 
 ## Table of Contents
 
-  1. [How Your Resume is Screened](#how-your-resume-is-screened)
-  1. [10 Ways To Improve Your Resume](#10-ways-to-improve-your-resume)
+1. [How Your Resume is Screened](#how-your-resume-is-screened)
+1. [10 Ways To Improve Your Resume](#10-ways-to-improve-your-resume)
 
 ## How Your Resume is Screened
 
@@ -78,7 +77,7 @@ Information nobody needs to know:
 
 Ideally, keep it short, concise, but as detailed as possible.
 
-####  3. GPA does matter
+#### 3. GPA does matter
 
 Everyone wants the cream of the crop. In the absence of a standardized test, GPA serves as that indicator. **While GPA may not necessarily be a good indication of how well you can code, a high GPA would definitely put you in a more favorable position to the recruiter.**
 
@@ -92,7 +91,7 @@ Also, when you list your GPA/results, try to benchmark it. Instead of simply lis
 
 Are you looking for a summer internship/full-time employment? What position are you applying for? Read the job description and know the job you are applying for!!
 
-**"Work experience" does not mean any work experience; it means *relevant* work experience.** If you are applying for a developer position, the recruiter is not interested to know that you were a student escort for girls walking back to their apartments at night, nor that you were a cashier at Starbucks. You would be better off writing about the project you did for some programming class - yes, even if it was just a school project. Tailor your experiences and projects according to the job you are applying for. Pick relevant details to emphasize on and do not be hesitant to drop stuff completely if they are totally irrelevant. Quality over quantity.
+**"Work experience" does not mean any work experience; it means _relevant_ work experience.** If you are applying for a developer position, the recruiter is not interested to know that you were a student escort for girls walking back to their apartments at night, nor that you were a cashier at Starbucks. You would be better off writing about the project you did for some programming class - yes, even if it was just a school project. Tailor your experiences and projects according to the job you are applying for. Pick relevant details to emphasize on and do not be hesitant to drop stuff completely if they are totally irrelevant. Quality over quantity.
 
 - Make sure the description is comprehensive. Avoid writing "Software engineering intern - write code". You are better off not writing anything.
 - Based on my experience, most fresh grads do not have extremely relevant job experience (unless you are lucky to have scored a really rewarding internship). For developer positions, I think it is ok to not have any job experience and just list projects.
@@ -133,7 +132,7 @@ Ideally, if your resume is good enough, the recruiter should already know what y
 - Ideally, 1-2 lines about the project, 2-3 lines about your role, what technologies you used, what you did, your learning, etc etc. These can be Final Year Projects, Research projects, projects for a particular class, freelance projects, or just personal projects (ie. GitHub stuff).
 - Ideally, 2 to 3 projects that align with your interests/position you are applying for.
 - Avoid using titles such as "Project for [module code]". Sorry, the recruiter has no idea what class is represented by the module code.
-Ideally, you want the project section to demonstrate your personality and skills, and be the talking point during the interview.
+  Ideally, you want the project section to demonstrate your personality and skills, and be the talking point during the interview.
 
 #### 10. Online profile/other interests
 

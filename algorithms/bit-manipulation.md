@@ -1,5 +1,4 @@
-Bit Manipulation
-==
+# Bit Manipulation
 
 - How do you verify if an interger is a power of 2?
 - Write a program to print the binary representation of an integer.

@@ -1,5 +1,4 @@
-Algorithm Questions
-==
+# Algorithm Questions
 
 This section dives deep into practical tips for specific topics of algorithms and data structures which appear frequently in coding questions. Many algorithm questions involve techniques that can be applied to questions of similar nature. The more techniques you have in your arsenal, the higher the chances of passing the interview. They may lead you to discover corner cases you might have missed out or even lead you towards the optimal approach!
 
@@ -190,9 +189,10 @@ To find out if two circles overlap, check that the distance between the two cent
 Be familiar with the various graph representations, graph search algorithms and their time and space complexities.
 
 You can be given a list of edges and tasked to build your own graph from the edges to perform a traversal on. The common graph representations are:
-  - Adjacency matrix.
-  - Adjacency list.
-  - Hashmap of hashmaps.
+
+- Adjacency matrix.
+- Adjacency list.
+- Hashmap of hashmaps.
 
 A tree-like diagram could very well be a graph that allows for cycles and a naive recursive solution would not work. In that case you will have to handle cycles and keep a set of visited nodes when traversing.
 
@@ -298,15 +298,17 @@ For partitioning linked lists, create two separate linked lists and join them ba
 Linked lists problems share similarity with array problems, think about how you would do it for an array and try to apply it to a linked list.
 
 Two pointer approaches are also common for linked lists. For example:
-  - Getting the k<sup>th</sup> from last node - Have two pointers, where one is k nodes ahead of the other. When the node ahead reaches the end, the other node is k nodes behind.
-  - Detecting cycles - Have two pointers, where one pointer increments twice as much as the other, if the two pointers meet, means that there is a cycle.
-  - Getting the middle node - Have two pointers, where one pointer increments twice as much as the other. When the faster node reaches the end of the list, the slower node will be at the middle.
+
+- Getting the k<sup>th</sup> from last node - Have two pointers, where one is k nodes ahead of the other. When the node ahead reaches the end, the other node is k nodes behind.
+- Detecting cycles - Have two pointers, where one pointer increments twice as much as the other, if the two pointers meet, means that there is a cycle.
+- Getting the middle node - Have two pointers, where one pointer increments twice as much as the other. When the faster node reaches the end of the list, the slower node will be at the middle.
 
 Be familiar with the following routines because many linked list questions make use of one or more of these routines in the solution:
-  - Counting the number of nodes in the linked list.
-  - Reversing a linked list in-place.
-  - Finding the middle node of the linked list using fast/slow pointers.
-  - Merging two lists together.
+
+- Counting the number of nodes in the linked list.
+- Reversing a linked list in-place.
+- Finding the middle node of the linked list using fast/slow pointers.
+- Merging two lists together.
 
 #### Corner Cases
 
@@ -339,10 +341,10 @@ If the question asks to implement an operator such as power, squareroot or divis
 
 #### Some common formulas:
 
-- Sum of 1 to N = (n+1) * n/2
+- Sum of 1 to N = (n+1) \* n/2
 - Sum of GP = 2<sup>0</sup> + 2<sup>1</sup> + 2<sup>2</sup> + 2<sup>3</sup> + ... 2<sup>n</sup> = 2<sup>n+1</sup> - 1
 - Permutations of N = N! / (N-K)!
-- Combinations of N = N! / (K! * (N-K)!)
+- Combinations of N = N! / (K! \* (N-K)!)
 
 #### Practice Questions
 
@@ -449,7 +451,7 @@ To determine if two strings are anagrams, there are a few plausible approaches:
 
 ### Palindrome
 
-A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward, such as *madam* or *racecar*.
+A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward, such as _madam_ or _racecar_.
 
 Here are ways to determine if a string is a palindrome:
 
@@ -497,7 +499,6 @@ Sometimes it is possible that your recursive function needs to return two values
 If the question involves summation of nodes along the way, be sure to check whether nodes can be negative.
 
 You should be very familiar with writing pre-order, in-order, and post-order traversal recursively. As an extension, challenge yourself by writing them iteratively. Sometimes interviewers ask candidates for the iterative approach, especially if the candidate finishes writing the recursive approach too quickly.
-
 
 #### Corner Cases
 
@@ -561,9 +562,9 @@ Be familiar with implementing, from scratch, a `Trie` class and its `add`, `remo
 
 #### Notes
 
-If you see a top or lowest *k* being mentioned in the question, it is usually a signal that a heap can be used to solve the problem, such as in [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/).
+If you see a top or lowest _k_ being mentioned in the question, it is usually a signal that a heap can be used to solve the problem, such as in [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/).
 
-If you require the top *k* elements use a Min Heap of size *k*. Iterate through each element, pushing it into the heap. Whenever the heap size exceeds *k*, remove the minimum element, that will guarantee that you have the *k* largest elements.
+If you require the top _k_ elements use a Min Heap of size _k_. Iterate through each element, pushing it into the heap. Whenever the heap size exceeds _k_, remove the minimum element, that will guarantee that you have the _k_ largest elements.
 
 #### Practice Questions
 

@@ -1,5 +1,4 @@
-News Feed
-==
+# News Feed
 
 ## Variants
 
@@ -68,6 +67,7 @@ TODO
 > A common optimization is to store feed content together with feedID in user-feed table so that we don't need to join the feed table any more. This approach is called denormalization, which means by adding redundant data, we can optimize the read performance (reducing the number of joins).
 >
 > The disadvantages are obvious:
+>
 > - Data redundancy. We are storing redundant data, which occupies storage space (classic time-space trade-off).
 > - Data consistency. Whenever we update a feed, we need to update both feed table and user-feed table. Otherwise, there is data inconsistency. This increases the complexity of the system.
 > - Remember that there's no one approach always better than the other (normalization vs denormalization). It's a matter of whether you want to optimize for read or write.
@@ -76,9 +76,9 @@ TODO
 
 - The most straightforward way is to fetch posts from all the people you follow and render them sorted by time.
 - There can be many posts to fetch. How many posts should you fetch?
- - What are the pagination approaches and the pros and cons of each approach?
-  - Offset by page size
-  - Offset by time
+- What are the pagination approaches and the pros and cons of each approach?
+- Offset by page size
+- Offset by time
 - What data should the post contain when you initially fetch them?
 - Lazy loading approach for loading associated data: media, comments, people who liked the post.
 - Media

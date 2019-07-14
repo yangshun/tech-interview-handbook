@@ -1,5 +1,4 @@
-Psychological Tricks
-==
+# Psychological Tricks
 
 Here are some psychological tricks that will help you ace a job interview.
 

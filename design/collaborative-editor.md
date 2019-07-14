@@ -1,5 +1,4 @@
-Collaborative Document Editor
-==
+# Collaborative Document Editor
 
 ## Variants
 

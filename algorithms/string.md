@@ -1,5 +1,4 @@
-String
-==
+# String
 
 - Output list of strings representing a page of hostings given a list of CSV strings.
 - Given a list of words, find the word pairs that when concatenated form a palindrome.
@@ -42,7 +41,7 @@ String
   - E.g. `1122344`, next: `21221324`, next: `12112211121214`.
   - Count and say problem.
 - Compress a string by grouping consecutive similar questions together:
-  - E.g. `'aaabbbcc' => `'a3b3c2'`.
+  - E.g. `'aaabbbcc' =>`'a3b3c2'`.
 - You have a string consisting of open and closed parentheses, but parentheses may be imbalanced. Make the parentheses balanced and return the new string.
 - Given a set of strings, return the smallest subset that contains prefixes for every string.
   - E.g. `['foo', 'foog', 'food', 'asdf']` => `['foo', 'asdf']`.

@@ -1,5 +1,4 @@
-Math
-==
+# Math
 
 - Create a square root function.
 - Given a string such as "123" or "67", write a function to output the number represented by the string without using casting.

@@ -1,26 +1,28 @@
-Arrays
-==
+# Arrays
 
 #### Hard
+
 - Given a set of rectangles represented by a height and an interval along the y-axis, determine the size of its union. ([Solution](https://www.geeksforgeeks.org/divide-and-conquer-set-7-the-skyline-problem/))
 - Given an array, find the longest arithmetic progression. ([Solution](https://www.geeksforgeeks.org/longest-arithmetic-progression-dp-35/))
-- Given an unsorted array of integers, find the length of the longest consecutive elements sequence. 
+- Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
   - E.g. `[100, 4, 200, 1, 3, 2] => 4`. Explanation: The longest consecutive elements sequence is `[1, 2, 3, 4]`. Therefore its length is 4. Note: Your algorithm should run in O(n) complexity. ([Solution](https://www.geeksforgeeks.org/longest-consecutive-subsequence/))
 
 #### Medium
+
 - Given a list of item prices, find all possible combinations of items that sum a particular value `K`. ([Solution](https://www.geeksforgeeks.org/combinational-sum/))
 - Given an array of integers find whether there is a sub-sequence that sums to 0 and return it. ([Solution](https://www.geeksforgeeks.org/find-if-there-is-a-subarray-with-0-sum/))
   - E.g. `[1, 2, -3, 1]` => `[1, 2, -3]` or `[2, -3, 1]`
 - Trapping rain water: You have an array with the heights of an island (at point 1, point 2 etc) and you want to know how much water would remain on this island (without flowing away). ([Solution](https://www.geeksforgeeks.org/trapping-rain-water/))
 
 #### Easy
+
 - Implement a circular buffer using an array. ([Solution](https://www.geeksforgeeks.org/circular-queue-set-1-introduction-array-implementation/))
 - Given an array of integers, print out a histogram using the said array; include a base layer (all stars) ([Solution](https://www.geeksforgeeks.org/program-make-histogram-array/))
 - Given an array and an index, find the product of the elements of the array except the element at that index. ([Solution](https://www.geeksforgeeks.org/a-product-array-puzzle/))
 - Given 2 separate arrays, write a method to find the values that exist in both arrays and return them. ([Solution](https://www.geeksforgeeks.org/union-and-intersection-of-two-sorted-arrays-2/))
 - Given an input array and another array that describes a new index for each element, mutate the input array so that each element ends up in their new index ([Solution](https://www.geeksforgeeks.org/reorder-a-array-according-to-given-indexes/))
   - Discuss the runtime of the algorithm and how you can be sure there would not be any infinite loops
-- Given an array of non-negative numbers, find continuous subarray with sum to S.  ([Solution 1](https://www.geeksforgeeks.org/find-subarray-with-given-sum/)) ([Solution 2](http://blog.gainlo.co/index.php/2016/06/01/subarray-with-given-sum/))
+- Given an array of non-negative numbers, find continuous subarray with sum to S. ([Solution 1](https://www.geeksforgeeks.org/find-subarray-with-given-sum/)) ([Solution 2](http://blog.gainlo.co/index.php/2016/06/01/subarray-with-given-sum/))
 - Given an array of numbers list out all triplets that sum to 0. Do so with a running time of less than O(n^3). ([Solution 1](https://www.geeksforgeeks.org/find-triplets-array-whose-sum-equal-zero/)) ([Solution 2](http://blog.gainlo.co/index.php/2016/07/19/3sum/))
 - Given an array of numbers list out all quadruplets that sum to 0. Do so with a running time of less than O(n^4). ([Solution](https://www.geeksforgeeks.org/find-four-numbers-with-sum-equal-to-given-sum/))
 - Given an array of integers, find the subarray with the largest sum. ([Solution](https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/))
@@ -42,6 +44,7 @@ Arrays
   - E.g., `[2, 5, 3, 2, 1, 3, 4, 5, 1]` returns 4, because it is the only value that appears in the array only once.
 
 #### Other
+
 - In an array of arrays, e.g. given `[[], [1, 2, 3], [4, 5], [], [], [6, 7], [8], [9, 10], [], []]`, print: `1, 2, 3, 4, 5, 6, 7, 8, 9, 10`.
   - Implement an iterator that supports `hasNext()`, `next()` and `remove()` methods.
 - Paginate an array with constraints, such as skipping certain items.
