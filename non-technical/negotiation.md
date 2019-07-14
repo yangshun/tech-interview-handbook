@@ -1,4 +1,7 @@
-# Negotiation
+---
+id: negotiation
+title: Negotiation
+---
 
 ### Ten Rules of Negotiation
 

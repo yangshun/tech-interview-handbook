@@ -1,5 +1,7 @@
-Interview Cheatsheet
-==
+---
+id: interview-cheatsheet
+title: Interview Cheatsheet
+---
 
 This is a straight-to-the-point, distilled list of technical interview Do's and Don'ts, mainly for algorithmic interviews. Some of these may apply to only phone screens or whiteboard interviews, but most will apply to both. I revise this list before each of my interviews to remind myself of them and eventually internalized all of them to the point I do not have to rely on it anymore.
 

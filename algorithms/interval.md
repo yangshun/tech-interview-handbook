@@ -1,4 +1,7 @@
-# Interval
+---
+id: interval
+title: Interval
+---
 
 - Given a list of schedules, provide a list of times that are available for a meeting.
 

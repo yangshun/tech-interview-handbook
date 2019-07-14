@@ -1,4 +1,7 @@
-# String
+---
+id: string
+title: String
+---
 
 - Output list of strings representing a page of hostings given a list of CSV strings.
 - Given a list of words, find the word pairs that when concatenated form a palindrome.

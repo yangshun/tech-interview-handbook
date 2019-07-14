@@ -1,3 +1,8 @@
+---
+id: cover-letter
+title: Cover Letter
+---
+
 # Cover Letter
 
 - A short introduction describing who you are and what you're looking for.

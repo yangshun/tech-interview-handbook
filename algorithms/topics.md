@@ -1,4 +1,7 @@
-# Topics
+---
+id: topics
+title: Topics
+---
 
 ## Arrays
 

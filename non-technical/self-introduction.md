@@ -1,4 +1,7 @@
-# Self Introduction
+---
+id: self-introduction
+title: Self Introduction
+---
 
 You can rephrase the question like this:
 

@@ -1,4 +1,7 @@
-# Questions to Ask
+---
+id: questions-to-task
+title: Questions To Ask
+---
 
 Here are some good questions to ask at the end of the interview, extracted from various sources. The ones in **bold** are the ones that tend to make the interviewer go "That's a good question" and pause and think for a bit.
 

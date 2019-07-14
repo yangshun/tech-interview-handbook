@@ -1,4 +1,7 @@
-# Object-Oriented Programming
+---
+id: oop
+title: Object-Oriented Programming
+---
 
 - How would you design a chess game? What classes and objects would you use? What methods would they have?
 - How would you design the data structures for a book keeping system for a library?

@@ -1,3 +1,8 @@
+---
+id: behavioral
+title: Behavioral
+---
+
 # Behavioral
 
 Learn the [STAR](https://en.wikipedia.org/wiki/Situation,_task,_action,_result) format. From Wikipedia:

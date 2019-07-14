@@ -1,4 +1,7 @@
-# Arrays
+---
+id: array
+title: Array
+---
 
 #### Hard
 

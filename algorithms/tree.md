@@ -1,4 +1,7 @@
-# Tree
+---
+id: tree
+title: Tree
+---
 
 - Find the height of a tree.
 - Find the longest path from the root to leaf in a tree.

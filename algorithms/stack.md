@@ -1,4 +1,7 @@
-# Stack
+---
+id: stack
+title: Stack
+---
 
 - Implementation of an interpreter for a small language that does multiplication/addition/etc.
 - Design a `MinStack` data structure that supports a `min()` operation that returns the minimum value in the stack in O(1) time.
