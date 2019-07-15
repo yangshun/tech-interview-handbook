@@ -1,7 +1,7 @@
 <h1 align="center">Tech Interview Handbook</h1>
 
 <div align="center">
-  <a href="https://dribbble.com/shots/3831443-Tech-Interview-Handbook">
+  <a href="https://yangshun.github.io/tech-interview-handbook/">
     <img src="website/static/img/logo.svg" alt="Tech Interview Handbook" width="400"/>
     </a>
   <br>
@@ -9,6 +9,9 @@
     <em>Credits: <a href="https://dribbble.com/shots/3831443-Tech-Interview-Handbook">Illustration</a> by <a href="https://dribbble.com/yangheng">@yangheng</a>
     </em>
   </p>
+  <h3>
+    <a href="https://yangshun.github.io/tech-interview-handbook/">Read on the website</a>
+  </h3>
 </div>
 
 ## What is this?
