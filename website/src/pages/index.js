@@ -93,22 +93,22 @@ function Home() {
               <div className="margin-vert--lg text--center">
                 <h2>Many Success Stories</h2>
               </div>
-              <div class="card margin-vert--lg">
-                <div class="card__header">
-                  <div class="avatar">
+              <div className="card margin-vert--lg">
+                <div className="card__header">
+                  <div className="avatar">
                     <img
-                      class="avatar__photo"
+                      className="avatar__photo"
                       src="https://avatars1.githubusercontent.com/u/1315101?s=460&v=4"
                     />
-                    <div class="avatar__intro">
-                      <h4 class="avatar__name">Yangshun Tay</h4>
-                      <small class="avatar__subtitle">
+                    <div className="avatar__intro">
+                      <h4 className="avatar__name">Yangshun Tay</h4>
+                      <small className="avatar__subtitle">
                         Front End Engineer, Facebook
                       </small>
                     </div>
                   </div>
                 </div>
-                <div class="card__body">
+                <div className="card__body">
                   <blockquote>
                     "My job hunt was successful beyond my expectations thanks to
                     this wonderful resource. Huge thanks to the author for

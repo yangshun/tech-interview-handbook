@@ -805,6 +805,11 @@
     "@docusaurus/utils" "^2.0.0-alpha.21"
     globby "^9.2.0"
 
+"@docusaurus/plugin-google-gtag@^2.0.0-alpha.21":
+  version "2.0.0-alpha.21"
+  resolved "https://registry.yarnpkg.com/@docusaurus/plugin-google-gtag/-/plugin-google-gtag-2.0.0-alpha.21.tgz#ee395ee915363ee9460096fe89da7fe188b97d74"
+  integrity sha512-Gip20Gd4vJCjlaY9Cgn5D74CJybBdL7utl/73vNHNvoU9iLbXUeidMkeT2x8KPANBh8cVBIKN7gqEJ2TiINjbQ==
+
 "@docusaurus/plugin-sitemap@^2.0.0-alpha.21":
   version "2.0.0-alpha.21"
   resolved "https://registry.yarnpkg.com/@docusaurus/plugin-sitemap/-/plugin-sitemap-2.0.0-alpha.21.tgz#b24ae409f07b3b7b4a3da427e83fa4c72977279c"

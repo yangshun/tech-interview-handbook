@@ -12,6 +12,7 @@
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.21",
     "@docusaurus/preset-classic": "^2.0.0-alpha.21",
+    "@docusaurus/plugin-google-gtag": "^2.0.0-alpha.21",
     "classnames": "^2.2.6",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
