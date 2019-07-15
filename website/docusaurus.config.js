@@ -4,7 +4,7 @@ module.exports = {
     'Carefully curated content to help you ace your next technical interview',
   url: 'https://yangshun.github.io',
   baseUrl: '/tech-interview-handbook/',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
   organizationName: 'yangshun',
   projectName: 'tech-interview-handbook',
   themeConfig: {
