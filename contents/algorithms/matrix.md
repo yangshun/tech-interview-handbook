@@ -3,6 +3,40 @@ id: matrix
 title: Matrix
 ---
 
+## Notes
+
+A matrix is a 2-dimensional array. Questions involving matrices are usually related to dynamic programming or graph traversal.
+
+For questions involving traversal or dynamic programming, you almost always want to make a copy of the matrix with the same dimensions that is initialized to empty values to store the visited state or dynamic programming table. Be familiar with such a routine:
+
+```py
+rows, cols = len(matrix), len(matrix[0])
+copy = [[0 for _ in range(cols)] for _ in range(rows)]
+```
+
+Many grid-based games can be modeled as a matrix, such as Tic-Tac-Toe, Sudoku, Crossword, Connect 4, Battleship, etc. It is not uncommon to be asked to verify the winning condition of the game. For games like Tic-Tac-Toe, Connect 4 and Crosswords, where verification has to be done vertically and horizontally, one trick is to write code to verify the matrix for the horizontal cells, transpose the matrix and reuse the logic for horizontal verification to verify originally vertical cells (which are now horizontal).
+
+Transposing a matrix in Python is simply:
+
+```py
+transposed_matrix = zip(*matrix)
+```
+
+## Corner cases
+
+- Empty matrix. Check that none of the arrays are 0 length
+- 1 x 1 matrix
+- Matrix with only one row or column
+
+## Recommended Leetcode questions
+
+- [Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)
+- [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)
+- [Rotate Image](https://leetcode.com/problems/rotate-image/)
+- [Word Search](https://leetcode.com/problems/word-search/)
+
+## More questions
+
 - You're given a 3 x 3 board of a tile puzzle, with 8 tiles numbered 1 to 8, and an empty spot. You can move any tile adjacent to the empty spot, to the empty spot, creating an empty spot where the tile originally was. The goal is to find a series of moves that will solve the board, i.e. get `[[1, 2, 3], [4, 5, 6], [7, 8, - ]]` where - is the empty tile.
 - Boggle implementation. Given a dictionary, and a matrix of letters, find all the words in the matrix that are in the dictionary. You can go across, down or diagonally.
 - The values of the matrix will represent numbers of carrots available to the rabbit in each square of the garden. If the garden does not have an exact center, the rabbit should start in the square closest to the center with the highest carrot count. On a given turn, the rabbit will eat the carrots available on the square that it is on, and then move up, down, left, or right, choosing the square that has the most carrots. If there are no carrots left on any of the adjacent squares, the rabbit will go to sleep. You may assume that the rabbit will never have to choose between two squares with the same number of carrots. Write a function which takes a garden matrix and returns the number of carrots the rabbit eats. You may assume the matrix is rectangular with at least 1 row and 1 column, and that it is populated with non-negative integers. For example,

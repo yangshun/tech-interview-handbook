@@ -5,18 +5,13 @@ title: Resume
 
 The following content is by Christina Ng and rephrased for the purpose of this handbook. You can follow her on [Medium](https://medium.com/@christinang89) or [Quora](https://www.quora.com/profile/Christina-Ng).
 
-## Table of Contents
-
-1. [How Your Resume is Screened](#how-your-resume-is-screened)
-1. [10 Ways To Improve Your Resume](#10-ways-to-improve-your-resume)
-
-## How Your Resume is Screened
+## How your resume is screened
 
 While many engineers can be rather qualified for the role they are applying for, they miss out on getting a shot at the interview as they might never get past resume screening. The main issue was that they do not understand how recruiters worked.
 
 Before writing your resume, it is important to understand the recruiting structure and how recruiting is done.
 
-### The Skill Set Checklist
+### The skill set checklist
 
 Before opening up a position/starting the search for candidates, I usually consult very closely with the team manager/decision maker to find out the specific skill sets that are relevant for the position. These skill sets are typically grouped into "Must have", "Good to have", and "Special bonus".
 
@@ -28,7 +23,7 @@ Now that I am armed with this list, the search for candidates begin.
 
 Typically, I do not seek that "one perfect candidate". What I seek for is the "best fit candidate". The search is essentially a numbers game. I know that for a specific job posting, there would perhaps be X applicants. At each stage of the interview process, some percentage of the candidates will be eliminated, leaving only a final Y% of the initial pool to choose from. Since Y tends to be a rather small number, recruiters will try to maximize X.
 
-### The 10 Seconds Glance
+### The 10 seconds glance
 
 When I am looking at your resume, I am doing a keyword match against the skill set checklist. If I see a good amount of the right keywords in your resume, it is a pass. If I need to spend more than 10 seconds trying to figure out what you are writing about, it is a fail. If I see an excessive amount of keywords (much looking like spam), it signals a red flag and goes into the "maybe". Depending on whether I think I have enough candidates for the day, you could eventually go into the pass or fail stack.
 
@@ -40,11 +35,11 @@ There is a delicate balance between finding the right job vs. finding a job. Get
 
 When hiring fresh grads, I know that many of them will not have as much experience as someone who has years of industry experience. Hence, I would look out more for soft skills, such as attention to detail, initiative, passion, ability to get things done, etc. Note: this applies only if you have met the minimum threshold of proficiency/competency in the skill set checklist.
 
-## 10 Ways To Improve Your Resume
+## 10 ways To improve your resume
 
 Now that you are aware of how recruiters screen your resume, here are 10 actionable ways you can do to improve your resume.
 
-#### 1. Cover letter
+### 1. Cover letter
 
 I've often received resumes with no cover letters, and I am perfectly fine with it. If you ask me, it is better to have no cover letter than to have a bad cover letter, especially if your cover letter is a "templated" content. An effective cover letter needs to highlight the fit between the job requirements and your skills/experiences. Do not just tell me what you have done in your cover letter; Tell me how it is a fit for what I am looking for.
 
@@ -53,7 +48,7 @@ Some small nitpicks:
 - Make sure that the cover letter is addressed to the right person (either the name of the recruiter if it is known, or to a generic hiring manager) and company.
 - Run a spell check.
 
-#### 2. Length of resume
+### 2. Length of resume
 
 Your resume should be kept to 1 page or a MAXIMUM of 2 pages. Include only your most recent and relevant experiences.
 
@@ -80,7 +75,7 @@ Information nobody needs to know:
 
 Ideally, keep it short, concise, but as detailed as possible.
 
-#### 3. GPA does matter
+### 3. GPA does matter
 
 Everyone wants the cream of the crop. In the absence of a standardized test, GPA serves as that indicator. **While GPA may not necessarily be a good indication of how well you can code, a high GPA would definitely put you in a more favorable position to the recruiter.**
 
@@ -90,7 +85,7 @@ In a different scenario, some students have low GPA, but it might be due to some
 
 Also, when you list your GPA/results, try to benchmark it. Instead of simply listing 4.6, write 4.6/5.0 (First Class Honors or Summa Cum Laude). To the recruiter, 4.6 does not mean anything if he/she is not familiar with your grading system.
 
-#### 4. Be clear about your objectives
+### 4. Be clear about your objectives
 
 Are you looking for a summer internship/full-time employment? What position are you applying for? Read the job description and know the job you are applying for!!
 
@@ -99,18 +94,18 @@ Are you looking for a summer internship/full-time employment? What position are 
 - Make sure the description is comprehensive. Avoid writing "Software engineering intern - write code". You are better off not writing anything.
 - Based on my experience, most fresh grads do not have extremely relevant job experience (unless you are lucky to have scored a really rewarding internship). For developer positions, I think it is ok to not have any job experience and just list projects.
 
-#### 5. Reverse chronological order
+### 5. Reverse chronological order
 
 Always list your resume in reverse chronological order - the most recent at the top. Recruiters are more interested in what you have worked on recently than what you worked on 3 years ago. Chances are, you probably forgot the details too anyway.
 
-#### 6. Make sure you are contactable
+### 6. Make sure you are contactable
 
 - Get a proper email account with ideally your first name and last name, eg. "john.doe@gmail.com" instead of "angrybirds88@gmail.com".
 - If you are using your school's .edu email, try to have an alias like "john.doe@xxx.edu" instead of "a002342342@xxx.edu".
 - Avoid emails like "me@christi.na" or "admin@[mycooldomain].com" -- because it is very prone to typo errors.
 - Make sure the number you have listed is the best way to reach you. The last thing you want is to miss the call from the recruiter because you typed the wrong number, or you are not available on that number during office hours (most probably the times the recruiter will call).
 
-#### 7. Layout/Formatting/Design
+### 7. Layout/Formatting/Design
 
 - Be consistent about the way you format your resume. Italics, underline, bold, and how they are used.
 - Keep to a single standard font (avoid fancy fonts like Comic Sans or whatever) and do not have too many varying styles/font sizes/color
@@ -124,20 +119,19 @@ Always list your resume in reverse chronological order - the most recent at the 
 - It's important to note the layout of your resume. If you choose to quickly upload your resume via an auto-fill program, understand that the program will read your resume from top to bottom, left to right. This is good to keep in mind when developing the layout of your resume.
 - Try to keep white space down to a minimum. This will also help reduce the length of your resume to one page. Reduce margins and paddings reasonably.
 
-#### 8. Listing Your skills
+### 8. Listing Your skills
 
 It is useful to list your relevant skills in a quick summary section for easy reading/matching. However, many people make the mistake of listing as many skills/programming languages in the resume as possible. This may get you through the ATS scoring, but it definitely would not leave a good impression on the recruiter - the actual human reading your resume and deciding whether to call you up for an interview!
 
 Ideally, if your resume is good enough, the recruiter should already know what you are proficient in. The skills section is just a quick summary/reiteration. **Listing a bunch of technologies you claim you know without actually showing how you have worked with them is pointless.**
 
-#### 9. Projects
+### 9. Projects
 
 - Ideally, 1-2 lines about the project, 2-3 lines about your role, what technologies you used, what you did, your learning, etc etc. These can be Final Year Projects, Research projects, projects for a particular class, freelance projects, or just personal projects (ie. GitHub stuff).
 - Ideally, 2 to 3 projects that align with your interests/position you are applying for.
-- Avoid using titles such as "Project for [module code]". Sorry, the recruiter has no idea what class is represented by the module code.
-  Ideally, you want the project section to demonstrate your personality and skills, and be the talking point during the interview.
+- Avoid using titles such as "Project for [module code]". Sorry, the recruiter has no idea what class is represented by the module code. Ideally, you want the project section to demonstrate your personality and skills, and be the talking point during the interview.
 
-#### 10. Online profile/other interests
+### 10. Online profile/other interests
 
 Here's the news - Recruiters do search for your name! Definitely pre-empt that by Googling/Facebook-ing/searching yourself on all forms of social media to see what turns up. Make sure your privacy settings are restricted so your online profile shows only the image you are trying to project.
 

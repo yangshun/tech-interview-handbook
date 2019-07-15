@@ -3,6 +3,8 @@ id: oop
 title: Object-Oriented Programming
 ---
 
+## More questions
+
 - How would you design a chess game? What classes and objects would you use? What methods would they have?
 - How would you design the data structures for a book keeping system for a library?
 - Explain how you would design a HTTP server? Give examples of classes, methods, and interfaces. What are the challenges here?

@@ -3,21 +3,52 @@ id: array
 title: Array
 ---
 
-#### Hard
+## Tips
 
-- Given a set of rectangles represented by a height and an interval along the y-axis, determine the size of its union. ([Solution](https://www.geeksforgeeks.org/divide-and-conquer-set-7-the-skyline-problem/))
-- Given an array, find the longest arithmetic progression. ([Solution](https://www.geeksforgeeks.org/longest-arithmetic-progression-dp-35/))
-- Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
-  - E.g. `[100, 4, 200, 1, 3, 2] => 4`. Explanation: The longest consecutive elements sequence is `[1, 2, 3, 4]`. Therefore its length is 4. Note: Your algorithm should run in O(n) complexity. ([Solution](https://www.geeksforgeeks.org/longest-consecutive-subsequence/))
+Is the array sorted or partially sorted? If it is, some form of binary search should be possible. This also usually means that the interviewer is looking for a solution that is faster than O(n).
 
-#### Medium
+Can you sort the array? Sometimes sorting the array first may significantly simplify the problem. Make sure that the order of array elements do not need to be preserved before attempting a sort.
 
-- Given a list of item prices, find all possible combinations of items that sum a particular value `K`. ([Solution](https://www.geeksforgeeks.org/combinational-sum/))
-- Given an array of integers find whether there is a sub-sequence that sums to 0 and return it. ([Solution](https://www.geeksforgeeks.org/find-if-there-is-a-subarray-with-0-sum/))
-  - E.g. `[1, 2, -3, 1]` => `[1, 2, -3]` or `[2, -3, 1]`
-- Trapping rain water: You have an array with the heights of an island (at point 1, point 2 etc) and you want to know how much water would remain on this island (without flowing away). ([Solution](https://www.geeksforgeeks.org/trapping-rain-water/))
+For questions where summation or multiplication of a subarray is involved, pre-computation using hashing or a prefix/suffix sum/product might be useful.
 
-#### Easy
+If you are given a sequence and the interviewer asks for O(1) space, it might be possible to use the array itself as a hash table. For example, if the array only has values from 1 to N, where N is the length of the array, negate the value at that index (minus one) to indicate presence of that number.
+
+## Arrays are sequences
+
+Are there duplicate values in the array, would it affect the answer?
+
+When using an index to iterate through array elements, be careful not to go out of bounds.
+
+Be mindful about slicing or concatenating arrays in your code. Typically, slicing and concatenating arrays require O(n) time. Use start and end indices to demarcate a subarray/range where possible.
+
+Sometimes you can traverse the array from the right rather than from the left.
+
+Master the [sliding window technique](https://discuss.leetcode.com/topic/30941/here-is-a-10-line-template-that-can-solve-most-substring-problems) that applies to many subarray problems.
+
+When you are given two arrays to process, it is common to have one index per array (pointer) to traverse/compare the both of them. For example, we use the same approach to merge two sorted arrays.
+
+## Corner cases
+
+- Empty sequence
+- Sequence with 1 or 2 elements
+- Sequence with repeated elements
+
+## Recommended Leetcode questions
+
+- [Two Sum](https://leetcode.com/problems/two-sum/)
+- [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+- [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
+- [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
+- [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
+- [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
+- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+- [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+- [3Sum](https://leetcode.com/problems/3sum/)
+- [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
+
+## More questions
+
+### Easy
 
 - Implement a circular buffer using an array. ([Solution](https://www.geeksforgeeks.org/circular-queue-set-1-introduction-array-implementation/))
 - Given an array of integers, print out a histogram using the said array; include a base layer (all stars) ([Solution](https://www.geeksforgeeks.org/program-make-histogram-array/))
@@ -46,7 +77,21 @@ title: Array
 - Given an array of integers where every value appears twice except one, find the single, non-repeating value. Follow up: do so with O(1) space. ([Solution](https://www.geeksforgeeks.org/find-element-appears-array-every-element-appears-twice/))
   - E.g., `[2, 5, 3, 2, 1, 3, 4, 5, 1]` returns 4, because it is the only value that appears in the array only once.
 
-#### Other
+### Medium
+
+- Given a list of item prices, find all possible combinations of items that sum a particular value `K`. ([Solution](https://www.geeksforgeeks.org/combinational-sum/))
+- Given an array of integers find whether there is a sub-sequence that sums to 0 and return it. ([Solution](https://www.geeksforgeeks.org/find-if-there-is-a-subarray-with-0-sum/))
+  - E.g. `[1, 2, -3, 1]` => `[1, 2, -3]` or `[2, -3, 1]`
+- Trapping rain water: You have an array with the heights of an island (at point 1, point 2 etc) and you want to know how much water would remain on this island (without flowing away). ([Solution](https://www.geeksforgeeks.org/trapping-rain-water/))
+
+### Hard
+
+- Given a set of rectangles represented by a height and an interval along the y-axis, determine the size of its union. ([Solution](https://www.geeksforgeeks.org/divide-and-conquer-set-7-the-skyline-problem/))
+- Given an array, find the longest arithmetic progression. ([Solution](https://www.geeksforgeeks.org/longest-arithmetic-progression-dp-35/))
+- Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
+  - E.g. `[100, 4, 200, 1, 3, 2] => 4`. Explanation: The longest consecutive elements sequence is `[1, 2, 3, 4]`. Therefore its length is 4. Note: Your algorithm should run in O(n) complexity. ([Solution](https://www.geeksforgeeks.org/longest-consecutive-subsequence/))
+
+### Other
 
 - In an array of arrays, e.g. given `[[], [1, 2, 3], [4, 5], [], [], [6, 7], [8], [9, 10], [], []]`, print: `1, 2, 3, 4, 5, 6, 7, 8, 9, 10`.
   - Implement an iterator that supports `hasNext()`, `next()` and `remove()` methods.

@@ -3,6 +3,8 @@ id: permutation
 title: Permutation
 ---
 
+## More questions
+
 - You are given a 7 digit phone number, and you should find all possible letter combinations based on the digit-to-letter mapping on numeric pad and return only the ones that have valid match against a given dictionary of words.
 - Give all possible letter combinations from a phone number.
 - Generate all subsets of a string.

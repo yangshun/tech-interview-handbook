@@ -1,13 +1,17 @@
 ---
-id: interview-cheatsheet
-title: Interview Cheatsheet
+id: cheatsheet
+title: Cheatsheet
 ---
 
 This is a straight-to-the-point, distilled list of technical interview Do's and Don'ts, mainly for algorithmic interviews. Some of these may apply to only phone screens or whiteboard interviews, but most will apply to both. I revise this list before each of my interviews to remind myself of them and eventually internalized all of them to the point I do not have to rely on it anymore.
 
-For a detailed walkthrough of interview preparation, refer to the ["Preparing for a Coding Interview"](./) section.
+## The Process
 
-**Legend:** ✅ = Do, ❌ = Don't, ⚠️ = Situational
+#### Legend
+
+- ✅ = Do
+- ❌ = Don't
+- ⚠️ = Situational
 
 ### 1. Before Interview
 

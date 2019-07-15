@@ -1,18 +1,9 @@
 ---
-id: behavioral
-title: Behavioral
+id: behavioral-questions
+title: Common Questions
 ---
 
-# Behavioral
-
-Learn the [STAR](https://en.wikipedia.org/wiki/Situation,_task,_action,_result) format. From Wikipedia:
-
-- **Situation** - The interviewer wants you to present a recent challenge and situation in which you found yourself.
-- **Task** - What were you required to achieve? The interviewer will be looking to see what you were trying to achieve from the situation. Some performance development methods[1] use “Target” rather than “Task”. Job interview candidates who describe a “Target” they set themselves instead of an externally imposed “Task” emphasize their own intrinsic motivation to perform and to develop their performance.
-- **Action** - What did you do? The interviewer will be looking for information on what you did, why you did it and what the alternatives were.
-- **Results** - What was the outcome of your actions? What did you achieve through your actions and did you meet your objectives? What did you learn from this experience and have you used this learning since?
-
-## General
+### General
 
 - Why do you want to work for X company?
 - Why do you want to leave your current/last company?
@@ -34,7 +25,7 @@ Learn the [STAR](https://en.wikipedia.org/wiki/Situation,_task,_action,_result) 
 - What is the most constructive feedback you have received in your career?
 - What is something you had to persevere at for multiple months?
 
-## Airbnb
+### Airbnb
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Airbnb-Interview-Questions-E391850.htm)
 
@@ -65,7 +56,7 @@ While loving to travel or appreciating Airbnb's growth may be good answers, try 
 - How does Airbnb impact our guests and hosts?
 - What part of our mission resonates the most with you?
 
-## Amazon
+### Amazon
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036.htm)
 
@@ -78,7 +69,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Amazon-Interview-Questio
 - Describe what Human Resources means to you.
 - How would you improve Amazon's website?
 
-## Dropbox
+### Dropbox
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Dropbox-Interview-Questions-E415350.htm)
 
@@ -86,7 +77,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Dropbox-Interview-Questi
 - If you were hired here what would you do?
 - State an experience about how you solved a technical problem. Be specific about the diagnosis and process.
 
-## Hired
+### Hired
 
 Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions-how-to-answer/)
 
@@ -101,14 +92,14 @@ Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions
 - Where do you want to be in five years?
 - Tell me about a time you needed information from someone who wasn't responsive. What did you do?
 
-## Lyft
+### Lyft
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Lyft-Interview-Questions-E700614.htm)
 
 - Tell me about your most interesting/challenging project to date.
 - Why Lyft? What are you looking for in the next role?
 
-## Palantir
+### Palantir
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Palantir-Technologies-Interview-Questions-E236375.htm)
 
@@ -128,7 +119,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Palantir-Technologies-In
 - What was the most fun thing you did recently?
 - Tell me the story of how you became who you are today and what made you apply to Palantir.
 
-## Slack
+### Slack
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Slack-Interview-Questions-E950758.htm)
 
@@ -142,7 +133,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Slack-Interview-Question
 - Did you find any bugs in Slack?
 - What is your favorite feature and why?
 
-## Stack Overflow
+### Stack Overflow
 
 Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions-how-to-answer/)
 
@@ -153,7 +144,7 @@ Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions
 - Why do you want to work here?
 - How do you handle disagreements with coworkers?
 
-## Stripe
+### Stripe
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Stripe-Interview-Questions-E671932.htm)
 
@@ -161,7 +152,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Stripe-Interview-Questio
 - Explain a project that you worked on recently that was difficult.
 - Where do you see yourself in five years?
 
-## Twitter
+### Twitter
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Twitter-Interview-Questions-E100569.htm)
 
