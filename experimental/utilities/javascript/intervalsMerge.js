@@ -1,7 +1,7 @@
 // Interval: [start, end].
 // Merges two overlapping intervals into one.
 function intervalsMerge(a, b) {
-    return [Math.min(a[0], b[0]), Math.max(a[1], b[1])];
+  return [Math.min(a[0], b[0]), Math.max(a[1], b[1])];
 }
 
 const deepEqual = require('./deepEqual');
