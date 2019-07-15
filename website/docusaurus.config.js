@@ -27,6 +27,9 @@ module.exports = {
       style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} Yangshun Tay. Built with Docusaurus.`,
     },
+    gtag: {
+      trackingID: 'UA-44622716-2',
+    },
   },
   presets: [
     [
