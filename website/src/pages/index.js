@@ -6,6 +6,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import withBaseUrl from '@docusaurus/withBaseUrl';
 import styles from './styles.module.css';
 
+import successStories from '../data/successStories';
+
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
@@ -101,31 +103,24 @@ function Home() {
           <div className="row">
             <div className="col col--6 col--offset-3">
               <div className="margin-vert--lg text--center">
-                <h2>Many Success Stories</h2>
+                <h2>Success Stories</h2>
               </div>
-              <div className="card margin-vert--lg">
-                <div className="card__header">
-                  <div className="avatar">
-                    <img
-                      className="avatar__photo"
-                      src="https://avatars1.githubusercontent.com/u/1315101?s=460&v=4"
-                    />
-                    <div className="avatar__intro">
-                      <h4 className="avatar__name">Yangshun Tay</h4>
-                      <small className="avatar__subtitle">
-                        Front End Engineer, Facebook
-                      </small>
+              {successStories.map(user => (
+                <div className="card margin-vert--lg" key={user.name}>
+                  <div className="card__header">
+                    <div className="avatar">
+                      <img className="avatar__photo" src={user.thumbnail} />
+                      <div className="avatar__intro">
+                        <h4 className="avatar__name">{user.name}</h4>
+                        <small className="avatar__subtitle">{user.title}</small>
+                      </div>
                     </div>
                   </div>
+                  <div className="card__body">
+                    <blockquote>"{user.quote}"</blockquote>
+                  </div>
                 </div>
-                <div className="card__body">
-                  <blockquote>
-                    "My job hunt was successful beyond my expectations thanks to
-                    this wonderful resource. Huge thanks to the author for
-                    sharing their knowledge!"
-                  </blockquote>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
