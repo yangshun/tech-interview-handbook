@@ -1,6 +1,9 @@
 module.exports = {
   docs: {
-    Preface: ['introduction'],
+    Preface: [
+      'introduction',
+      // 'landscape',
+    ],
     'Job Application': [
       // 'how-to-apply',
       'resume',
@@ -32,8 +35,8 @@ module.exports = {
         ],
       },
       'questions-to-ask',
-      'negotiation',
     ],
+    'Post Interview': ['negotiation', 'understanding-compensation'],
     Algorithms: [
       'algorithms/algorithms-introduction',
       'algorithms/array',
