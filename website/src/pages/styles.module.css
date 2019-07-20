@@ -20,3 +20,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.sectionAlt {
+  background-color: var(--ifm-color-emphasis-alpha-05);
+}
