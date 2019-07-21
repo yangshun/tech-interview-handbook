@@ -23,8 +23,8 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ✅ | Request for the option to interview over Hangouts/Skype instead of a phone call; it is easier to send links or text across. |
 | ✅ | Decide on and be familiar with a programming language. |
 | ✅ | Familiarize yourself with the coding environment (CoderPad/CodePen). Set up the coding shortcuts, turn on autocompletion, tab spacing, etc. |
-| ✅ | Prepare answers to the [frequently-asked questions](../non-technical/behavioral.md) in an interview. |
-| ✅ | Prepare some [questions to ask](../non-technical/questions-to-ask.md) at the end of the interview. |
+| ✅ | Prepare answers to the [frequently-asked questions](behavioral-questions.md) in an interview. |
+| ✅ | Prepare some [questions to ask](questions-to-ask.md) at the end of the interview. |
 | ✅ | Dress comfortably. Usually you do not need to wear smart clothes, casual should be fine. T-shirts and jeans are acceptable at most places. |
 | ✅ | Stay calm and composed. |
 | ⚠️ | Turn off the webcam if possible. Most remote interviews will not require video chat and leaving it on only serves as a distraction. |
@@ -49,7 +49,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ✅ | Explain a high level approach even if it is a brute force one. |
 | ✅ | Improve upon the approach and optimize. Reduce duplicated work and cache repeated computations. |
 | ✅ | Think carefully, then state and explain the time and space complexity of your approaches. |
-| ✅ | If stuck, think about related problems you have seen before and how they were solved. Check out the [tips](../algorithms) in this section. |
+| ✅ | If stuck, think about related problems you have seen before and how they were solved. Check out the [tips](algorithms/introduction.md) in this section. |
 | ❌ | Ignore information given to you. Every piece is important. |
 | ❌ | Jump into coding straightaway. |
 | ❌ | Start coding without interviewer's green light. |
@@ -96,7 +96,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 
 |  | Things |
 | --- | --- |
-| ✅ | Ask questions. More importantly, ask good and engaging questions that are tailored to the company! Pick some questions from [this list](../non-technical/questions-to-ask.md). |
+| ✅ | Ask questions. More importantly, ask good and engaging questions that are tailored to the company! Pick some questions from [this list](questions-to-ask.md). |
 | ✅ | Thank the interviewer. |
 | ⚠️ | Ask about your interview performance. It can get awkward. |
 | ❌ | End the interview without asking any questions. |
