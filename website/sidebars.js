@@ -1,9 +1,6 @@
 module.exports = {
   docs: {
-    Preface: [
-      'introduction',
-      // 'landscape',
-    ],
+    Preface: ['introduction', 'landscape'],
     'Job Application': [
       // 'how-to-apply',
       'resume',
