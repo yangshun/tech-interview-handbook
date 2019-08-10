@@ -29,7 +29,7 @@ When I am looking at your resume, I am doing a keyword match against the skill s
 
 There are lots of articles writing about how recruiters only spend an average of about 10 seconds to screen each resume. The news is, this is true because resume screening is such a menial, robotic and repetitive task. In fact, many applicant tracking systems (ATS) now are so advanced that they can parse your resume automatically, search for specific keywords in your resume, and score your resume based on the weights pre-assigned to each keyword.
 
-Finding a job is a two-way fit — the company wants someone with the relevant skills required, but it is also important for the applicant to fit in the company culture, and be able to gain something out of his stint. Hence, honesty is the single most important criteria in a resume.
+Finding a job is a two-way fit — the company wants someone with the relevant skills required, but it is also important for the applicant to fit in the company culture, and be able to gain something out of their stint. Hence, honesty is the single most important criteria in a resume.
 
 There is a delicate balance between finding the right job vs. finding a job. Getting rejected does not always mean you are not good enough. Sometimes, it just means you are not a right fit for what the company is looking for.
 
@@ -60,11 +60,11 @@ Information that a recruiter wants to know:
 - Projects that you have worked on.
 - Work experience/co-curricular activities.
 - Skills/other interests.
-- Street cred - GitHub/StackOverflow/LinkedIn profile (optional, but highly recommended).
+- Street cred - GitHub/Stack Overflow/LinkedIn profile (optional, but highly recommended).
 
 Information nobody needs to know:
 
-- Your profile picture.
+- Your profile picture. In the US, it is illegal to discriminate based on age, gender, race, or appearance.
 - Address, home phone number, gender, religion, race, marital status, etc etc.
 - Elementary, middle, high school.
 - Your low GPA.
@@ -87,7 +87,7 @@ Also, when you list your GPA/results, try to benchmark it. Instead of simply lis
 
 ### 4. Be clear about your objectives
 
-Are you looking for a summer internship/full-time employment? What position are you applying for? Read the job description and know the job you are applying for!!
+Are you looking for a summer internship/full-time employment? What position are you applying for? Read the job description and know the job you are applying for!
 
 **"Work experience" does not mean any work experience; it means _relevant_ work experience.** If you are applying for a developer position, the recruiter is not interested to know that you were a student escort for girls walking back to their apartments at night, nor that you were a cashier at Starbucks. You would be better off writing about the project you did for some programming class - yes, even if it was just a school project. Tailor your experiences and projects according to the job you are applying for. Pick relevant details to emphasize on and do not be hesitant to drop stuff completely if they are totally irrelevant. Quality over quantity.
 
@@ -119,7 +119,7 @@ Always list your resume in reverse chronological order - the most recent at the 
 - It's important to note the layout of your resume. If you choose to quickly upload your resume via an auto-fill program, understand that the program will read your resume from top to bottom, left to right. This is good to keep in mind when developing the layout of your resume.
 - Try to keep white space down to a minimum. This will also help reduce the length of your resume to one page. Reduce margins and paddings reasonably.
 
-### 8. Listing Your skills
+### 8. Listing your skills
 
 It is useful to list your relevant skills in a quick summary section for easy reading/matching. However, many people make the mistake of listing as many skills/programming languages in the resume as possible. This may get you through the ATS scoring, but it definitely would not leave a good impression on the recruiter - the actual human reading your resume and deciding whether to call you up for an interview!
 
