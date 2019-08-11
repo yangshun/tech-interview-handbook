@@ -67,7 +67,7 @@ The focus of week 3 is on non-linear data structures like trees, graphs and heap
 
 ## Week 4
 
-Week 4 builds up on knowledge from previous weeks but questions are of increased difficulty. Expect to see such level of questions during interviews. We get to use more advanced data structures such as heaps and tries in this week.
+Week 4 builds up on knowledge from previous weeks but questions are of increased difficulty. Expect to see such level of questions during interviews. You get to get more practice on advanced data structures such as heaps and tries.
 
 - [Add and Search Word](https://leetcode.com/problems/add-and-search-word-data-structure-design/)
 - [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
@@ -90,15 +90,17 @@ Week 4 builds up on knowledge from previous weeks but questions are of increased
 
 ## Week 5
 
-Week 5 focuses on Dynamic Programming questions.
+Week 5 focuses on Dynamic Programming (DP) questions. Personally as an interviewer, I'm not a fan of DP questions as they are not really applicable to practical scenarios. However, companies like Google still ask DP questions and if you joining Google is your dream, DP is unavoidable.
+
+DP questions can be hard to master and the best way to get better at them is... you guessed it - practice! Be familiar with the concepts of memoization and backtracking.
 
 - [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 - [Coin Change](https://leetcode.com/problems/coin-change/)
 - [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
-- [Word Break Problem](https://leetcode.com/problems/word-break/)
 - [Combination Sum](https://leetcode.com/problems/combination-sum-iv/)
 - [House Robber](https://leetcode.com/problems/house-robber/)
 - [House Robber II](https://leetcode.com/problems/house-robber-ii/)
 - [Decode Ways](https://leetcode.com/problems/decode-ways/)
 - [Unique Paths](https://leetcode.com/problems/unique-paths/)
 - [Jump Game](https://leetcode.com/problems/jump-game/)
+- [Word Break Problem](https://leetcode.com/problems/word-break/)
