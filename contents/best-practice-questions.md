@@ -3,7 +3,9 @@ id: best-practice-questions
 title: Best Practice Questions
 ---
 
-Here is a suggested schedule for revising and practicing algorithm questions on [LeetCode](https://leetcode.com). Sign up for an account if you don't already have one, it's critical to your success in interviewing!)
+Here is a suggested schedule for revising and practicing algorithm questions on [LeetCode](https://leetcode.com). Sign up for an account if you don't already have one, it's critical to your success in interviewing!
+
+When practicing, you are advise to treat it like a real coding interview and check through thoroughly before submitting. Consider even manually coming up with some tests cases and running through them to verify correctness!
 
 ## Week 1
 
@@ -27,7 +29,7 @@ In week 1, we will start off easy and do a mix of easy and medium questions on a
 
 ## Week 2
 
-The focus of week 2 is on Linked List, string and matrix-based questions.
+The focus of week 2 is on Linked List, string and matrix-based questions. The goal is to learn the common routines dealing with linked lists, traversing matrices and sequence analysis (arrays/strings) techniques such as sliding window.
 
 - [Reverse a Linked List](https://leetcode.com/problems/reverse-linked-list/)
 - [Detect Cycle in a Linked List](https://leetcode.com/problems/linked-list-cycle/)
@@ -35,6 +37,7 @@ The focus of week 2 is on Linked List, string and matrix-based questions.
 - [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
 - [Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/)
 - [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+- [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
 - [Number of Islands](https://leetcode.com/problems/number-of-islands/)
 - [Remove Nth Node From End Of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
 - [Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
@@ -42,14 +45,13 @@ The focus of week 2 is on Linked List, string and matrix-based questions.
 
 ## Week 3
 
-The focus of week 3 is on non-linear data structures like trees, graphs and heaps.
+The focus of week 3 is on non-linear data structures like trees, graphs and heaps. You should be familiar with the various tree traversal (in-order, pre-order, post-order) algorithms and graph traversal algorithms such as breadth-first search and depth-first search. In my experience, using more advanced graph algorithms (Dijkstra's and Floyd-Warshall) is quite rare and usually not necessary.
 
 - [Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 - [Invert/Flip Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
 - [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/)
 - [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
 - [Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
-- [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
 - [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
 - [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
 - [Clone Graph](https://leetcode.com/problems/clone-graph/)
@@ -65,7 +67,7 @@ The focus of week 3 is on non-linear data structures like trees, graphs and heap
 
 ## Week 4
 
-Week 4 builds up on knowledge from previous weeks but questions are of increased difficulty. Expect to see such level of questions during interviews.
+Week 4 builds up on knowledge from previous weeks but questions are of increased difficulty. Expect to see such level of questions during interviews. We get to use more advanced data structures such as heaps and tries in this week.
 
 - [Add and Search Word](https://leetcode.com/problems/add-and-search-word-data-structure-design/)
 - [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)

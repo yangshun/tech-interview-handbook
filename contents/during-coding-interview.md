@@ -1,6 +1,6 @@
 ---
-id: coding-round-phases
-title: Phases
+id: during-coding-interview
+title: During the Coding Interview
 ---
 
 Congratulations, you are ready to put your skills into practice! In a real coding interview, you will be given a technical question by the interviewer, write code in a real-time collaborative editor (phone screen) or on a whiteboard (on-site) to solve the problem within 30–45 minutes. This is where the real fun begins!
@@ -57,7 +57,23 @@ Start with a brute force approach, communicate it to the interviewer, explain th
 
 Only start coding after you and your interviewer have agreed on an approach and they have given you the green light.
 
-## Starting to code
+## What to do when stuck
+
+Getting stuck during coding interviews is extremely common. But do not worry, that is part of the process and is a test of your problem solving abilities. Here are some tips to try out when you are stuck:
+
+- Talk through what you initially thought might work and explain why it doesn't
+  - This can help guide you on the right track by avoiding the pitfalls
+- Come up with more test cases and write them down
+  - A pattern may emerge
+- Think about how you would solve it without a program
+  - You may spot a pattern and come up with a general algorithm for it
+- Recall past questions related to the topic, what similar questions in the past have you encountered and what techniques did you use?
+- Enumerate through the common data structures and whether they can be applied to the question
+  - Dictionaries/maps are extremely common in making algorithms more efficient
+- Look out for repeated work and determine if you can cache those computations
+  - Trade off memory for speed
+
+## While coding
 
 Write your code with good coding style. Reading code written by others is usually not an enjoyable task. Reading horribly-formatted code by others makes it worse. Your goal is to make your interviewer understand the code you have written so that they can quickly evaluate if your code does what you say it does and whether it solves the given problem. Use clear variable names, avoid single letter names unless they are for iteration. However, if you are coding on a whiteboard, you might not want to use extremely verbose variable names for the sake of reducing the amount you have to write. Abbreviations are usually fine if you explain what it means beforehand.
 

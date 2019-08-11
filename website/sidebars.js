@@ -18,7 +18,7 @@ module.exports = {
           'picking-a-language',
           'study-and-practice',
           'best-practice-questions',
-          'coding-round-phases',
+          'during-coding-interview',
           'cheatsheet',
           'mock-interviews',
         ],
