@@ -9,5 +9,5 @@ action "Deploy" {
     GIT_USER = "yangshun"
     USE_SSH = "1"
   }
-  runs = "yarn deploy"
+  runs = "cd website && yarn && yarn deploy"
 }
