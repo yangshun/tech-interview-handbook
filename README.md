@@ -37,6 +37,12 @@ This repository has _practical_ content that covers all phases of a technical in
 
 Anybody who wants to land a job at a tech company but is new to technical interviews, seasoned engineers who have not been on the other side of the interviewing table in a while and want to get back into the game, or anyone who wants to be better at technical interviewing.
 
+---
+
+💰**Looking for a job? Sign up with [Triplebyte](https://triplebyte.com/a/PJaJNpO/tihg) to efficiently interview with top tech companies!** 💰
+
+---
+
 ## How is this repository different?
 
 There are many awesome books like [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) and interview-related repositories out there on GitHub, what makes this repository different? The difference is that many existing interview repositories contain mainly links to external resources whereas this repository contains top quality curated content directly for your consumption.

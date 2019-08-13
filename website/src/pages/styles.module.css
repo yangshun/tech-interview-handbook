@@ -24,3 +24,15 @@
 .sectionAlt {
   background-color: var(--ifm-color-emphasis-alpha-05);
 }
+
+.sectionDark {
+  background-color: var(--ifm-color-primary);
+}
+
+.sectionDarkTitle {
+  color: var(--ifm-color-white);
+}
+
+.sectionDarkLink {
+  color: var(--ifm-color-black-alpha-80);
+}

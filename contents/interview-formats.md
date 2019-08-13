@@ -31,6 +31,8 @@ Examples
 
 Phone interview are the most common format and every candidate will face this at least once while interviewing. You will be asked to speak with an interviewer either over a phone call or VoIP (Skype/Hangout). A question will be given to you and you will work on that question using an online collaborative editor (CoderPad/CodePen/Google Docs).
 
+You are usually not allowed to execute the code even if the editor supports execution. So don't rely on that for verifying the correctness of your solution.
+
 ### Onsite
 
 If you have made it to this stage, congratulations! This is usually the final stage before an offer decision. Candidates who made it to the onsite stage will be required to have an in-person interview at the office. If you are an overseas candidate, companies might even fly you in and pay for your accommodations!
@@ -68,7 +70,7 @@ If the company provides lunch, you might also have a lunch session with an emplo
 - Technical phone interview
 - On-site (Product Engineer):
   - 3 x Algorithm and system design on whiteboard within the same session
-  - 1 x Algorithm on laptop and system design. This session involves writing code on your own laptop to solve 3 well-defined algorithm problems in around 45 minutes after which an engineer will come in and review the code with you. You are not supposed to run the code while working on the problem.
+  - 1 x Algorithm on laptop and system design. This session involves writing code on your own laptop to solve 3 well-defined algorithm problems in around 45 minutes after which an engineer will come in and review the code with you. You are not supposed to run the code while working on the problem
 - Tips:
   - No front end questions were asked
   - Asana places high emphasis on System Design and makes heavy use of the whiteboard. You do not necessarily have to write code for the algorithm question of the first three interviews

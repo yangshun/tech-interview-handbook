@@ -44,10 +44,34 @@ function Home() {
         </div>
       </header>
       <main>
-        <div className="padding-vert--xl">
-          <div className="container">
+        <div className={styles.sectionDark}>
+          <div className="container padding-vert--md">
             <div className="row">
-              <div className="col col--10 col--offset-1">
+              <div className="col col--8 col--offset-2">
+                <div className="margin-vert--lg text--center">
+                  <h2 className={styles.sectionDarkTitle}>
+                    Job hunting? Sign up with Triplebyte to efficiently
+                    interview with top tech companies and land your dream job!
+                    💰
+                  </h2>
+                  <div className="margin-vert--lg">
+                    <a
+                      className="button button--secondary button--lg"
+                      href="https://triplebyte.com/a/PJaJNpO/tihw"
+                      rel="noreferrer noopener"
+                      target="_blank">
+                      Sign Up with Triplebyte
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p className="padding-vert--xl">
+          <p className="container">
+            <p className="row">
+              <p className="col col--10 col--offset-1">
                 <h2 className="text--center  margin-bottom--xl">
                   Why Tech Interview Handbook?
                 </h2>
@@ -74,7 +98,7 @@ function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="row margin-vert--lg">
+                <p className="row margin-vert--lg">
                   <div className="col">
                     <h3>Practical Algorithm Tips</h3>
                     <p>
@@ -89,18 +113,18 @@ function Home() {
                       and you can prepare your answers ahead of time.
                     </p>
                   </div>
-                  <div className="col">
+                  <p className="col">
                     <h3>Tested and Proven</h3>
                     <p>
                       Countless engineers have gotten their dream jobs with its
                       help.
                     </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                  </p>
+                </p>
+              </p>
+            </p>
+          </p>
+        </p>
         <div className={styles.sectionAlt}>
           <div className="container padding-vert--xl">
             <div className="row">
