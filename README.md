@@ -39,7 +39,9 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 
 ---
 
-💰**Looking for a job? Sign up with [Triplebyte](https://triplebyte.com/a/PJaJNpO/tihg) to efficiently interview with top tech companies!** 💰
+<div align="center">
+  <strong>💰 Looking for a job? Sign up with <a href="https://triplebyte.com/a/PJaJNpO/tihg">Triplebyte</a> to efficiently interview with top tech companies! 💰</strong>
+</div>
 
 ---
 

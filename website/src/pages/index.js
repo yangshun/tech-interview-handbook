@@ -60,7 +60,7 @@ function Home() {
                       href="https://triplebyte.com/a/PJaJNpO/tihw"
                       rel="noreferrer noopener"
                       target="_blank">
-                      Sign Up with Triplebyte
+                      Sign Up Now!
                     </a>
                   </div>
                 </div>
