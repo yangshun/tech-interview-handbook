@@ -1,5 +1,5 @@
 ---
-id: company-interview-formats
+id: interview-formats
 title: Interview Formats
 ---
 
@@ -31,13 +31,15 @@ Examples
 
 Phone interview are the most common format and every candidate will face this at least once while interviewing. You will be asked to speak with an interviewer either over a phone call or VoIP (Skype/Hangout). A question will be given to you and you will work on that question using an online collaborative editor (CoderPad/CodePen/Google Docs).
 
-You are usually not allowed to execute the code even if the editor supports execution. So don't rely on that for verifying the correctness of your solution.
+You are usually not allowed to execute the code even if the editor supports execution. So don't rely on that for verifying the correctness of your solution. Formats would differ slightly depending on the roles you are applying to. Many companies like to use [CoderPad](https://coderpad.io/) for collaborative code editing. CoderPad supports running of the program, so you is possible that you are asked to fix your code such that it can be run. For front end interviews, many companies like to use [CodePen](https://codepen.io/), and it will be worth your time to familiarize yourself with the user interfaces of such web-based coding environments.
 
 ### Onsite
 
 If you have made it to this stage, congratulations! This is usually the final stage before an offer decision. Candidates who made it to the onsite stage will be required to have an in-person interview at the office. If you are an overseas candidate, companies might even fly you in and pay for your accommodations!
 
 The onsite stage usually consists of multiple rounds (coding, system design, behavioral) and is expected to last for a few hours. Since you are onsite, it is possible that you will be asked to do a whiteboard exercise with an interviewer, usually either solving an algorithm question or doing a system design question. It ia also possible that you have to bring you own laptops and work on a project/solve a coding problem on the spot.
+
+For onsite interviews at smaller (non-public) companies, most will allow (and prefer) that you use your own laptop. Hence it is important that you prepare your development environment in advance.
 
 If the company provides lunch, you might also have a lunch session with an employee where you can find out more about the company culture.
 

@@ -5,15 +5,13 @@ title: Cheatsheet
 
 This is a straight-to-the-point, distilled list of technical interview Do's and Don'ts, mainly for algorithmic interviews. Some of these may apply to only phone screens or whiteboard interviews, but most will apply to both. I revise this list before each of my interviews to remind myself of them and eventually internalized all of them to the point I do not have to rely on it anymore.
 
-## The Process
-
 #### Legend
 
 - ✅ = Do
 - ❌ = Don't
 - ⚠️ = Situational
 
-### 1. Before Interview
+### Before interview
 
 |  | Things |
 | --- | --- |
@@ -29,7 +27,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ✅ | Stay calm and composed. |
 | ⚠️ | Turn off the webcam if possible. Most remote interviews will not require video chat and leaving it on only serves as a distraction. |
 
-### 2. Introduction
+### Introduction
 
 |  | Things |
 | --- | --- |
@@ -38,7 +36,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ✅ | Sound enthusiastic! Speak with a smile and you will naturally sound more engaging. |
 | ❌ | Spend too long introducing yourself. The more time you spend talking the less time you have to code. |
 
-### 3. Upon Getting the Question
+### Upon receiving the question
 
 |  | Things |
 | --- | --- |
@@ -55,7 +53,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ❌ | Start coding without interviewer's green light. |
 | ❌ | Appear too unsure about your approach or analysis. |
 
-### 4. During Coding
+### During coding
 
 |  | Things |
 | --- | --- |
@@ -78,7 +76,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ❌ | Interrupt your interviewer when they are talking. Usually if they speak, they are trying to give you hints or steer you in the right direction. |
 | ❌ | Write too big (takes up too much space) or too small (illegible) if on a whiteboard. |
 
-### 5. After Coding
+### After coding
 
 |  | Things |
 | --- | --- |
@@ -92,7 +90,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ❌ | Immediately announce that you are done coding. Do the above first! |
 | ❌ | Argue with the interviewer. They may be wrong but that is very unlikely given that they are familiar with the question. |
 
-### 6. Wrap Up
+### Wrap up
 
 |  | Things |
 | --- | --- |
@@ -101,7 +99,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ⚠️ | Ask about your interview performance. It can get awkward. |
 | ❌ | End the interview without asking any questions. |
 
-### 7. Post Interview
+### Post interview
 
 |  | Things |
 | --- | --- |

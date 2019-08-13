@@ -7,7 +7,7 @@ Here is a suggested schedule for revising and practicing algorithm questions on 
 
 When practicing, you are advise to treat it like a real coding interview and check through thoroughly before submitting. Consider even manually coming up with some tests cases and running through them to verify correctness!
 
-## Week 1
+## Week 1 - Sequences
 
 In week 1, we will start off easy and do a mix of easy and medium questions on arrays and strings. Arrays and strings are the most common types of questions to be found in interviews; gaining familiarity with them will help in building strong fundamentals to better handle tougher questions.
 
@@ -27,7 +27,7 @@ In week 1, we will start off easy and do a mix of easy and medium questions on a
 - [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
 - [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
 
-## Week 2
+## Week 2 - Data Structures
 
 The focus of week 2 is on Linked List, string and matrix-based questions. The goal is to learn the common routines dealing with linked lists, traversing matrices and sequence analysis (arrays/strings) techniques such as sliding window.
 
@@ -43,7 +43,7 @@ The focus of week 2 is on Linked List, string and matrix-based questions. The go
 - [Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
 - [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
 
-## Week 3
+## Week 3 - Non-Linear Data Structures
 
 The focus of week 3 is on non-linear data structures like trees, graphs and heaps. You should be familiar with the various tree traversal (in-order, pre-order, post-order) algorithms and graph traversal algorithms such as breadth-first search and depth-first search. In my experience, using more advanced graph algorithms (Dijkstra's and Floyd-Warshall) is quite rare and usually not necessary.
 
@@ -65,7 +65,7 @@ The focus of week 3 is on non-linear data structures like trees, graphs and heap
 - [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
 - [Encode and Decode Strings (Leetcode Premium)](https://leetcode.com/problems/encode-and-decode-strings/)
 
-## Week 4
+## Week 4 - More Data Structures
 
 Week 4 builds up on knowledge from previous weeks but questions are of increased difficulty. Expect to see such level of questions during interviews. You get to get more practice on advanced data structures such as heaps and tries.
 
@@ -88,7 +88,7 @@ Week 4 builds up on knowledge from previous weeks but questions are of increased
 - [Graph Valid Tree (Leetcode Premium)](https://leetcode.com/problems/graph-valid-tree/)
 - [Number of Connected Components in an Undirected Graph (Leetcode Premium)](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
 
-## Week 5
+## Week 5 - Dynamic Programming
 
 Week 5 focuses on Dynamic Programming (DP) questions. Personally as an interviewer, I'm not a fan of DP questions as they are not really applicable to practical scenarios. However, companies like Google still ask DP questions and if you joining Google is your dream, DP is unavoidable.
 

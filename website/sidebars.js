@@ -7,8 +7,7 @@ module.exports = {
       'cover-letter',
     ],
     'Interview Process': [
-      // 'interview-stages',
-      'company-interview-formats',
+      'interview-formats',
       'self-introduction',
       {
         type: 'category',
