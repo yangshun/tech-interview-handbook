@@ -5,7 +5,7 @@ title: Best Practice Questions
 
 Here is a suggested schedule for revising and practicing algorithm questions on [LeetCode](https://leetcode.com). Sign up for an account if you don't already have one, it's critical to your success in interviewing!
 
-When practicing, you are advise to treat it like a real coding interview and check through thoroughly before submitting. Consider even manually coming up with some tests cases and running through them to verify correctness!
+When practicing, you are advised to treat it like a real coding interview and check through thoroughly before submitting. Consider even manually coming up with some tests cases and running through them to verify correctness!
 
 ## Week 1 - Sequences
 
@@ -29,7 +29,7 @@ In week 1, we will start off easy and do a mix of easy and medium questions on a
 
 ## Week 2 - Data Structures
 
-The focus of week 2 is on Linked List, string and matrix-based questions. The goal is to learn the common routines dealing with linked lists, traversing matrices and sequence analysis (arrays/strings) techniques such as sliding window.
+The focus of week 2 is on linked lists, strings and matrix-based questions. The goal is to learn the common routines dealing with linked lists, traversing matrices and sequence analysis (arrays/strings) techniques such as sliding window.
 
 - [Reverse a Linked List](https://leetcode.com/problems/reverse-linked-list/)
 - [Detect Cycle in a Linked List](https://leetcode.com/problems/linked-list-cycle/)
@@ -40,6 +40,7 @@ The focus of week 2 is on Linked List, string and matrix-based questions. The go
 - [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
 - [Number of Islands](https://leetcode.com/problems/number-of-islands/)
 - [Remove Nth Node From End Of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
+- [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/)
 - [Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
 - [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
 
@@ -49,7 +50,6 @@ The focus of week 3 is on non-linear data structures like trees, graphs and heap
 
 - [Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 - [Invert/Flip Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
-- [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/)
 - [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
 - [Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
 - [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
@@ -67,7 +67,7 @@ The focus of week 3 is on non-linear data structures like trees, graphs and heap
 
 ## Week 4 - More Data Structures
 
-Week 4 builds up on knowledge from previous weeks but questions are of increased difficulty. Expect to see such level of questions during interviews. You get to get more practice on advanced data structures such as heaps and tries.
+Week 4 builds up on knowledge from previous weeks but questions are of increased difficulty. Expect to see such level of questions during interviews. You get more practice on more advanced data structures such as (but not exclusively limited to) heaps and tries.
 
 - [Add and Search Word](https://leetcode.com/problems/add-and-search-word-data-structure-design/)
 - [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
@@ -90,9 +90,11 @@ Week 4 builds up on knowledge from previous weeks but questions are of increased
 
 ## Week 5 - Dynamic Programming
 
-Week 5 focuses on Dynamic Programming (DP) questions. Personally as an interviewer, I'm not a fan of DP questions as they are not really applicable to practical scenarios. However, companies like Google still ask DP questions and if you joining Google is your dream, DP is unavoidable.
+Week 5 focuses on Dynamic Programming (DP) questions. Personally as an interviewer, I'm not a fan of DP questions as they are not really applicable to practical scenarios and frankly if I were made to do the tough DP questions during my interviews I'd not have gotten the job. However, companies like Google still ask DP questions and if joining Google is your dream, DP is unavoidable.
 
 DP questions can be hard to master and the best way to get better at them is... you guessed it - practice! Be familiar with the concepts of memoization and backtracking.
+
+Practically speaking the return of investment (ROI) on studying and practicing for DP questions is very low. Hence DP questions are less important/optional and you should only do them if you're very keen to have all bases covered.
 
 - [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 - [Coin Change](https://leetcode.com/problems/coin-change/)
