@@ -5,7 +5,7 @@ title: Understanding Compensation
 
 Compensation is a huge factor when it comes to deciding between job offers. This section gives you a breakdown of the common components of compensation in the tech industry.
 
-In most companies, your compensation will consist of base salary, a performance bonus and equity/stocks.
+In most companies, your compensation will consist of base salary, a performance bonus and equity/stocks. For compensation data, check out [Levels.fyi](https://www.levels.fyi/comp.html).
 
 ### Base salary
 
