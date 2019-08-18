@@ -11,7 +11,7 @@ Most of the content covered here will be specific to the Bay Area. Landscape dif
 
 ### High Demand
 
-Almost every domain leverages on technology, hence Software Engineers are needed in almost industry. Demand for engineers is higher than supply, leading to generally high-paying jobs. Moreover, the demand is continuously growing.
+Almost every domain leverages on technology, hence Software Engineers are needed in almost every industry. Demand for engineers is higher than supply, leading to generally high-paying jobs. Moreover, the demand is continuously growing.
 
 ### Stable career
 
