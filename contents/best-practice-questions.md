@@ -5,7 +5,7 @@ title: Best Practice Questions
 
 Here is a suggested schedule for revising and practicing algorithm questions on [LeetCode](https://leetcode.com). Sign up for an account if you don't already have one, it's critical to your success in interviewing!
 
-When practicing, you are advised to treat it like a real coding interview and check through thoroughly before submitting. Consider even manually coming up with some tests cases and running through them to verify correctness!
+When practicing, you are advised to treat it like a real coding interview and check through thoroughly before submitting. Consider even manually coming up with some test cases and running through them to verify correctness!
 
 ## Week 1 - Sequences
 
