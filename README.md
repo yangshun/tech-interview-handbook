@@ -2,12 +2,11 @@
 
 <div align="center">
   <a href="https://yangshun.github.io/tech-interview-handbook/">
-    <img src="website/static/img/logo.svg" alt="Tech Interview Handbook" width="400"/>
-    </a>
+    <img src="website/static/img/logo.svg" alt="Tech Interview Handbook" width="400">
+  </a>
   <br>
   <p>
-    <em>Credits: <a href="https://dribbble.com/shots/3831443-Tech-Interview-Handbook">Illustration</a> by <a href="https://dribbble.com/yangheng">@yangheng</a>
-    </em>
+    <em>Credits: <a href="https://dribbble.com/shots/3831443-Tech-Interview-Handbook">Illustration</a> by <a href="https://dribbble.com/yangheng">@yangheng</a></em>
   </p>
   <h3>
     <a href="https://yangshun.github.io/tech-interview-handbook/">Read on the website</a>
@@ -69,7 +68,7 @@ There are no formal contributing guidelines at the moment as things are still in
 
 ### Contributors
 
-This project exists thanks to all the people who contributed. [[Contribute](CONTRIBUTING.md)]. <a href="https://github.com/yangshun/tech-interview-handbook/graphs/contributors"><img src="https://opencollective.com/tech-interview-handbook/contributors.svg?width=890&button=false" /></a>
+This project exists thanks to all the people who contributed. [[Contribute](CONTRIBUTING.md)]. <a href="https://github.com/yangshun/tech-interview-handbook/graphs/contributors"><img src="https://opencollective.com/tech-interview-handbook/contributors.svg?width=890&button=false"></a>
 
 ### Backers
 
@@ -77,7 +76,7 @@ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com
 
 <a href="https://opencollective.com/tech-interview-handbook#backers" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/backers.svg?width=890"></a>
 
-<a href="https://www.buymeacoffee.com/yangshun" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+<a href="https://www.buymeacoffee.com/yangshun" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important; width: auto !important;"></a>
 
 ### Sponsors
 
