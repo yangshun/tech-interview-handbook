@@ -27,7 +27,7 @@ A software engineering job is perhaps the most flexible job that exists in terms
 
 ## Internships vs full-time
 
-If you dream of working at a top-tier tech company one day, getting hired via an intern conversion is by far the easiest way to achieve that. Internship interviews are extremly short (usually just 2 rounds whereas interviews for full-time roles are usually 4-5 rounds). Internships allow you to work at a company over a short period of time (3 months or so) and helps in understanding the company and engineering culture better. Companies also tend to give higher return job offers to high performing interns as they have proven to be effective at the job and fits into the culture; hence hiring them is considered to be relatively low-risk.
+If you dream of working at a top-tier tech company one day, getting hired via an intern conversion is by far the easiest way to achieve that. Internship interviews are extremely short (usually just 2 rounds whereas interviews for full-time roles are usually 4-5 rounds). Internships allow you to work at a company over a short period of time (3 months or so) and helps in understanding the company and engineering culture better. Companies also tend to give higher return job offers to high performing interns as they have proven to be effective at the job and fits into the culture; hence hiring them is considered to be relatively low-risk.
 
 Top tech companies pay a ridiculous amount for interns:
 
