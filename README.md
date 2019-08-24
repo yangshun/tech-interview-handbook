@@ -21,7 +21,7 @@ Carefully curated content to help you ace your next technical interview, with a 
 - [Interview Cheatsheet](https://yangshun.github.io/tech-interview-handbook/cheatsheet) - Straight-to-the-point Do's and Don'ts
 - [Algorithm tips and the best practice questions](https://yangshun.github.io/tech-interview-handbook/algorithms/algorithms-introduction) categorized by topic
 - ["Front-end Job Interview Questions" answers](https://github.com/yangshun/front-end-interview-handbook)
-- [Interview formats](https://yangshun.github.io/tech-interview-handbook/company-interview-formats) of the top tech companies
+- [Interview formats](https://yangshun.github.io/tech-interview-handbook/interview-formats) of the top tech companies
 - [Behavioral questions](https://yangshun.github.io/tech-interview-handbook/behavioral-questions) asked by the top tech companies
 - [Good questions to ask your interviewers](https://yangshun.github.io/tech-interview-handbook/questions-to-ask) at the end of the interviews
 - [Helpful resume tips](https://yangshun.github.io/tech-interview-handbook/resume) to get your resume noticed and the Do's and Don'ts
