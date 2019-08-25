@@ -12,7 +12,6 @@ title: Sorting and Searching
 - Search for an element in a sorted and rotated array.
   - [Source](http://blog.gainlo.co/index.php/2017/01/12/rotated-array-binary-search/)
 - Sort a list where each element is no more than k positions away from its sorted position.
-- Search for an item in a sorted, but rotated, array.
 - Merge two sorted lists together.
 - Give 3 distinct algorithms to find the K largest values in a list of N items.
 - Find the minimum element in a sorted rotated array in faster than O(n) time.
