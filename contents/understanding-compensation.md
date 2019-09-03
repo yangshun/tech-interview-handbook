@@ -47,7 +47,7 @@ Equity usually vests (becomes available to you) over a period of time (typically
 
 Until the company goes public or gets acquired, the equity is not worth anything. Be mindful of what you are getting yourself into!
 
-Not all equity is treated equally. Depending on the company you join and which stage that company is at, you may receive one of the following types: stock options or stock frants.
+Not all equity is treated equally. Depending on the company you join and which stage that company is at, you may receive one of the following types: stock options or stock grants.
 
 #### Stock options
 
