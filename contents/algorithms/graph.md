@@ -30,24 +30,49 @@ A tree-like diagram could very well be a graph that allows for cycles and a naiv
 In coding interviews, graphs are commonly represented as 2-D matrices where cells are the nodes and each cell can traverse to its adjacent cells (up/down/left/right). Hence it is important that you be familiar with traversing a 2-D matrix. When recursively traversing the matrix, always ensure that your next position is within the boundary of the matrix. More tips for doing depth-first searches on a matrix can be found [here](https://discuss.leetcode.com/topic/66065/python-dfs-bests-85-tips-for-all-dfs-in-matrix-question/). A simple template for doing depth-first searches on a matrix goes like this:
 
 ```py
-def traverse(matrix):
-  rows, cols = len(matrix), len(matrix[0])
-  visited = set()
-  directions = ((0, 1), (0, -1), (1, 0), (-1, 0))
-  def dfs(i, j):
-    if (i, j) in visited:
-      return
-    visited.add((i, j))
-    # Traverse neighbors
-    for direction in directions:
-      next_i, next_j = i + direction[0], j + direction[1]
-      if 0 <= next_i < rows and 0 <= next_j < cols: # Check boundary
-        # Add any other checking here ^
-        dfs(next_i, next_j)
+from collections import namedtuple, deque
 
-  for i in range(rows):
-    for j in range(cols):
-      dfs(i, j)
+# Create point and direction data structures
+Point = namedtuple("Point", ["x", "y"])
+Direction = namedtuple("Direction", ["x", "y"])
+
+
+# Here the method can only be "DFS" and "BFS"
+def traverse(matrix, method):
+    rows, cols = len(matrix), len(matrix[0])
+    visited = set()
+    directions = (Direction(0, 1), Direction(0, -1), Direction(1, 0), Direction(-1, 0))
+
+    # Depends upon the question: many grid questions have blocked cells.
+    # This implementation assumes 0s represent valid and 1s represent invalid
+    def is_valid(point):
+        return matrix[point.x][point.y] == 0
+
+    def pass_all_conditions(current_point):
+        return current_point.x in range(rows) and current_point.y in range(cols) \
+               and current_point not in visited and is_valid(current_point)
+
+
+    def add_neighbours(store, current_point):
+        visited.add(current_point)
+        # Add even invalid points because they will be filtered out by passAllConditions
+        for direction in directions:
+            new_x, new_y = current_point.x + direction.x, current_point.y + direction.y
+            # Adding from the right side for both queue and stack
+            store.append(Point(new_x, new_y))
+
+
+    # Handle disjointed graphs
+    for x in range(rows):
+        for y in range(cols):
+            store = deque([Point(x, y)])
+            while store:
+                if method == "BFS":
+                    current_point = store.popleft()
+                else:
+                    current_point = store.pop()
+                if pass_all_conditions(current_point):
+                    add_neighbours(store, current_point)
 ```
 
 ## Corner cases
