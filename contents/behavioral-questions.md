@@ -63,7 +63,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Amazon-Interview-Questio
 - How do you deal with a failed deadline?
 - Why do you want to work for Amazon?
 - Tell me about a situation where you had a conflict with a teammate.
-- In my professional experience have you worked on something without getting approval from your manager?
+- In your professional experience have you worked on something without getting approval from your manager?
 - Tell me a situation where you would have done something differently from what you actually did.
 - What is the most exceedingly bad misstep you've made at any point?
 - Describe what Human Resources means to you.
@@ -103,14 +103,14 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Lyft-Interview-Questions
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Palantir-Technologies-Interview-Questions-E236375.htm)
 
+- **What is something 90% of people disagree with you about?**
+- **What is broken around you?**
 - How do you deal with difficult coworkers? Think about specific instances where you resolved conflicts.
 - How did you win over the difficult employees?
 - Tell me about an analytical problem that you have worked on in the past.
 - What are your three strengths and three weaknesses?
 - If you were in charge of picking projects for Palantir, what problem would you try to solve?
-- **What is something 90% of people disagree with you about?**
 - What are some of the best and worst things about your current company?
-- **What is broken around you?**
 - What would your manager say about you?
 - Describe Palantir to your grandmother.
 - Teach me something you've learned.
@@ -142,7 +142,7 @@ Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions
 - How did you solve it?
 - Where do you see yourself in 5 years?
 - Why do you want to work here?
-- How do you handle disagreements with coworkers?
+- How do you handle disagreements with co-workers?
 
 ### Stripe
 
