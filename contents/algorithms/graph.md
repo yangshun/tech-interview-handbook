@@ -69,12 +69,11 @@ Another similar template for doing breadth first searches on the matrix goes lik
 from collections import deque
 
 def bfs(matrix, method):
-  def add_neighbours(store, current_point):
+  def add_neighbours(queue, current_point):
     visited.add(current_point)
     for direction in directions:
     new_x, new_y = current_point[0] + direction[0], current_point[1] + direction[1]
-    # Adding from the right side for both queue and stack
-    store.append((new_x, new_y))
+    queue.append((new_x, new_y))
 
   # Depends upon the question: many grid questions have blocked cells.
   # This implementation assumes 0s represent valid and 1s represent invalid
@@ -90,9 +89,9 @@ def bfs(matrix, method):
   # Handle disjointed graphs
   for x in range(rows):
      for y in range(cols):
-       store = deque([Point(x, y)])
+       queue = deque([(i, j)])
        while store:
-         current_point = store.popleft()
+         current_point = queue.popleft()
          if pass_all_conditions(current_point):
            add_neighbours(store, current_point)
 ```
