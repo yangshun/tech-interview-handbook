@@ -27,53 +27,77 @@ A tree-like diagram could very well be a graph that allows for cycles and a naiv
 - **Uncommon** - Topological Sort, Dijkstra's algorithm
 - **Rare** - Bellman-Ford algorithm, Floyd-Warshall algorithm, Prim's algorithm, Kruskal's algorithm
 
-In coding interviews, graphs are commonly represented as 2-D matrices where cells are the nodes and each cell can traverse to its adjacent cells (up/down/left/right). Hence it is important that you be familiar with traversing a 2-D matrix. When recursively traversing the matrix, always ensure that your next position is within the boundary of the matrix. More tips for doing depth-first searches on a matrix can be found [here](https://discuss.leetcode.com/topic/66065/python-dfs-bests-85-tips-for-all-dfs-in-matrix-question/). A simple template for doing depth-first searches on a matrix goes like this:
+In coding interviews, graphs are commonly represented as 2-D matrices where cells are the nodes and each cell can traverse to its adjacent cells (up/down/left/right). Hence it is important that you be familiar with traversing a 2-D matrix. When traversing the matrix, always ensure that your current position is within the boundary of the matrix and has not been visited before. 
+
+A simple template for doing depth-first searches on a matrix goes like this:
 
 ```py
-from collections import namedtuple, deque
-
-# Create point and direction data structures
-Point = namedtuple("Point", ["x", "y"])
-Direction = namedtuple("Direction", ["x", "y"])
-
-
 # Here the method can only be "DFS" and "BFS"
-def traverse(matrix, method):
-    rows, cols = len(matrix), len(matrix[0])
-    visited = set()
-    directions = (Direction(0, 1), Direction(0, -1), Direction(1, 0), Direction(-1, 0))
+def dfs(matrix, method):
+  rows, cols = len(matrix), len(matrix[0])
+  visited = set()
+  directions = ((0, 1), (0, -1), (1, 0), (-1, 0))
 
-    # Depends upon the question: many grid questions have blocked cells.
-    # This implementation assumes 0s represent valid and 1s represent invalid
-    def is_valid(point):
-        return matrix[point.x][point.y] == 0
+  # Depends upon the question: many grid questions have blocked cells.
+  # This implementation assumes 0s represent valid and 1s represent invalid
+  def is_valid(point):
+    return matrix[point[0]][point[1]] == 0
 
-    def pass_all_conditions(current_point):
-        return current_point.x in range(rows) and current_point.y in range(cols) \
-               and current_point not in visited and is_valid(current_point)
-
-
-    def add_neighbours(store, current_point):
-        visited.add(current_point)
-        # Add even invalid points because they will be filtered out by passAllConditions
-        for direction in directions:
-            new_x, new_y = current_point.x + direction.x, current_point.y + direction.y
-            # Adding from the right side for both queue and stack
-            store.append(Point(new_x, new_y))
-
-
-    # Handle disjointed graphs
-    for x in range(rows):
-        for y in range(cols):
-            store = deque([Point(x, y)])
-            while store:
-                if method == "BFS":
-                    current_point = store.popleft()
-                else:
-                    current_point = store.pop()
-                if pass_all_conditions(current_point):
-                    add_neighbours(store, current_point)
+  def pass_all_conditions(current_point):
+    return current_point[0] in range(rows) and current_point[1] in range(cols) \
+           and current_point not in visited and is_valid(current_point)
+           
+  def traverse(i, j):
+    if not pass_all_conditions(i, j):
+      return
+    visited.add((i, j))
+    # Traverse neighbors
+    for direction in directions:
+      next_i, next_j = i + direction[0], j + direction[1]
+      
+        
+  for i in range(rows):
+    for j in range(cols):
+      dfs(i, j)
+  
 ```
+
+Another similar template for doing breadth first searches on the matrix goes like this:
+
+```py
+from collections import deque
+
+def bfs(matrix, method):
+  def add_neighbours(store, current_point):
+    visited.add(current_point)
+    # Add even invalid points because they will be filtered out by passAllConditions
+    for direction in directions:
+    new_x, new_y = current_point[0] + direction[0], current_point[1] + direction[1]
+    # Adding from the right side for both queue and stack
+    store.append((new_x, new_y))
+
+  # Depends upon the question: many grid questions have blocked cells.
+  # This implementation assumes 0s represent valid and 1s represent invalid
+  def is_valid(point):
+    return matrix[point[0]][point[1]] == 0
+
+  def pass_all_conditions(current_point):
+    return current_point[0] in range(rows) and current_point[1] in range(cols) \
+           and current_point not in visited and is_valid(current_point)
+    
+  # Handle disjointed graphs
+  for x in range(rows):
+     for y in range(cols):
+       store = deque([Point(x, y)])
+       while store:
+         current_point = store.popleft()
+         if pass_all_conditions(current_point):
+           add_neighbours(store, current_point)
+```
+
+> NOTE: While DFS is implemented using recursion in this sample, it could also be implemented iteratively similar to BFS. The key difference between the algorithms lies in the underlying data structure (BFS uses a queue while DFS uses a stack). The `deque` class in Python can function as both a stack and a queue
+
+For additional tips on BFS and DFS, you can refer to this [LeetCode post](https://leetcode.com/problems/pacific-atlantic-water-flow/discuss/90774/Python-solution-with-detailed-explanation)
 
 ## Corner cases
 
