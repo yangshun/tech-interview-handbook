@@ -113,13 +113,13 @@ If the company provides lunch, you might also have a lunch session with an emplo
 - Recruiter phone screen
 - Technical phone interview:
   - 1 or 2 x algorithm on Google Doc
-- On-site (Front End):
-  - 3 x Front end on whiteboard. Have to use Vanilla JS (or at the most, jQuery)
-  - 2 x Algorithm on whiteboard
+- On-site:
+  - 1 or 2 x Front end on whiteboard. May be required to use Vanilla JS (or at the most, jQuery) depending on the question. (Front End only)
+  - 2 to 4 x Algorithm on whiteboard
+  - 1 x General Cognitive Ability, Leadership and "Googleyness".
 - Team matching
   - Speak with managers from different teams who are interested in your profile
 - Tips:
-  - You are only allowed to use the whiteboard. No laptops involved
   - In rare cases, candidates may even be allowed to skip the phone interview round and advanced to on-site directly
   - For non-fresh grads, you only receive an offer if you are successfully matched with a team
 
