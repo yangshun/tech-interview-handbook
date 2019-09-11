@@ -42,7 +42,6 @@ The focus of week 2 is on linked lists, strings and matrix-based questions. The 
 - [Remove Nth Node From End Of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
 - [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/)
 - [Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
-- [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
 
 ## Week 3 - Non-Linear Data Structures
 
