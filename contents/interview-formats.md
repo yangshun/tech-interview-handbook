@@ -37,7 +37,7 @@ You are usually not allowed to execute the code even if the editor supports exec
 
 If you have made it to this stage, congratulations! This is usually the final stage before an offer decision. Candidates who made it to the onsite stage will be required to have an in-person interview at the office. If you are an overseas candidate, companies might even fly you in and pay for your accommodations!
 
-The onsite stage usually consists of multiple rounds (coding, system design, behavioral) and is expected to last for a few hours. Since you are onsite, it is possible that you will be asked to do a whiteboard exercise with an interviewer, usually either solving an algorithm question or doing a system design question. It ia also possible that you have to bring you own laptops and work on a project/solve a coding problem on the spot.
+The onsite stage usually consists of multiple rounds (coding, system design, behavioral) and is expected to last for a few hours. Since you are onsite, it is possible that you will be asked to do a whiteboard exercise with an interviewer, usually either solving an algorithm question or doing a system design question. It is also possible that you have to bring you own laptops and work on a project/solve a coding problem on the spot.
 
 For onsite interviews at smaller (non-public) companies, most will allow (and prefer) that you use your own laptop. Hence it is important that you prepare your development environment in advance.
 
