@@ -32,35 +32,37 @@ In coding interviews, graphs are commonly represented as 2-D matrices where cell
 A simple template for doing depth-first searches on a matrix goes like this:
 
 ```py
-def dfs(matrix, method):
+from collections import deque
+
+
+def dfs(matrix):
+  # check for an empty graph
+  if len(matrix) == 0:
+    return []
   rows, cols = len(matrix), len(matrix[0])
   visited = set()
   directions = ((0, 1), (0, -1), (1, 0), (-1, 0))
 
-  # Depends upon the question: many grid questions have blocked cells.
-  # This implementation assumes 0s represent valid and 1s represent invalid
-  def is_valid(i, j):
-    return matrix[i][j] == 0
-
-  # Uses short circuiting to check whether current position is within the boundary 
-  # and has not been visited before checking if it is valid
+  # Uses short circuiting to check whether current position is within the
+  # boundary and has not been visited before checking if it is valid
   def pass_all_conditions(i, j):
-    return i in range(rows) and j in range(cols) and (i, j) not in visited \ 
-      and is_valid((i, j))
-           
+    return i in range(rows) and j in range(cols) and (i, j) not in visited
+
   def traverse(i, j):
-    if not pass_all_conditions(i, j):
-      return
-    visited.add((i, j))
-    # Traverse neighbors
-    for direction in directions:
-      next_i, next_j = i + direction[0], j + direction[1]
-      
-        
+    stack = deque([(i, j)])
+    while stack:
+      curr_i, curr_j = stack.pop()
+      if pass_all_conditions(curr_i, curr_j):
+        visited.add((curr_i, curr_j))
+        # Traverse neighbors
+        for direction in directions:
+          next_i, next_j = curr_i + direction[0], curr_j + direction[1]
+          stack.append((next_i, next_j))
+
   for i in range(rows):
     for j in range(cols):
-      dfs(i, j)
-  
+      traverse(i, j)
+
 ```
 
 Another similar template for doing breadth first searches on the matrix goes like this:
@@ -68,32 +70,35 @@ Another similar template for doing breadth first searches on the matrix goes lik
 ```py
 from collections import deque
 
-def bfs(matrix, method):
-  def add_neighbours(queue, current_point):
-    visited.add(current_point)
-    for direction in directions:
-    new_x, new_y = current_point[0] + direction[0], current_point[1] + direction[1]
-    queue.append((new_x, new_y))
 
-  # Depends upon the question: many grid questions have blocked cells.
-  # This implementation assumes 0s represent valid and 1s represent invalid
-  def is_valid(i, j):
-    return matrix[i][j] == 0
+def bfs(matrix):
+  # check for an empty graph
+  if len(matrix) == 0:
+    return []
+  rows, cols = len(matrix), len(matrix[0])
+  visited = set()
+  directions = ((0, 1), (0, -1), (1, 0), (-1, 0))
 
-  # Uses short circuiting to check whether current position is within the boundary 
-  # and has not been visited before checking if it is valid
-  def pass_all_conditions(current_point):
-    return i in range(rows) and j in range(cols) and current_point not in visited \ 
-      and is_valid(current_point)
-    
-  # Handle disjointed graphs
-  for x in range(rows):
-     for y in range(cols):
-       queue = deque([(i, j)])
-       while store:
-         current_point = queue.popleft()
-         if pass_all_conditions(current_point):
-           add_neighbours(store, current_point)
+  # Uses short circuiting to check whether current position is within the
+  # boundary and has not been visited before checking if it is valid
+  def pass_all_conditions(i, j):
+    return i in range(rows) and j in range(cols) and (i, j) not in visited
+
+  def traverse(i, j):
+    queue = deque([(i, j)])
+    while queue:
+      curr_i, curr_j = queue.pop()
+      if pass_all_conditions(curr_i, curr_j):
+        visited.add((curr_i, curr_j))
+        # Traverse neighbors
+        for direction in directions:
+          next_i, next_j = curr_i + direction[0], curr_j + direction[1]
+          queue.append((next_i, next_j))
+
+  for i in range(rows):
+    for j in range(cols):
+      traverse(i, j)
+
 ```
 
 > NOTE: While DFS is implemented using recursion in this sample, it could also be implemented iteratively similar to BFS. The key difference between the algorithms lies in the underlying data structure (BFS uses a queue while DFS uses a stack). The `deque` class in Python can function as both a stack and a queue
