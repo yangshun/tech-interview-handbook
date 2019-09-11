@@ -32,7 +32,6 @@ In coding interviews, graphs are commonly represented as 2-D matrices where cell
 A simple template for doing depth-first searches on a matrix goes like this:
 
 ```py
-# Here the method can only be "DFS" and "BFS"
 def dfs(matrix, method):
   rows, cols = len(matrix), len(matrix[0])
   visited = set()
@@ -40,12 +39,14 @@ def dfs(matrix, method):
 
   # Depends upon the question: many grid questions have blocked cells.
   # This implementation assumes 0s represent valid and 1s represent invalid
-  def is_valid(point):
-    return matrix[point[0]][point[1]] == 0
+  def is_valid(i, j):
+    return matrix[i][j] == 0
 
-  def pass_all_conditions(current_point):
-    return current_point[0] in range(rows) and current_point[1] in range(cols) \
-           and current_point not in visited and is_valid(current_point)
+  # Uses short circuiting to check whether current position is within the boundary 
+  # and has not been visited before checking if it is valid
+  def pass_all_conditions(i, j):
+    return i in range(rows) and j in range(cols) and (i, j) not in visited \ 
+      and is_valid((i, j))
            
   def traverse(i, j):
     if not pass_all_conditions(i, j):
@@ -70,7 +71,6 @@ from collections import deque
 def bfs(matrix, method):
   def add_neighbours(store, current_point):
     visited.add(current_point)
-    # Add even invalid points because they will be filtered out by passAllConditions
     for direction in directions:
     new_x, new_y = current_point[0] + direction[0], current_point[1] + direction[1]
     # Adding from the right side for both queue and stack
@@ -78,12 +78,14 @@ def bfs(matrix, method):
 
   # Depends upon the question: many grid questions have blocked cells.
   # This implementation assumes 0s represent valid and 1s represent invalid
-  def is_valid(point):
-    return matrix[point[0]][point[1]] == 0
+  def is_valid(i, j):
+    return matrix[i][j] == 0
 
+  # Uses short circuiting to check whether current position is within the boundary 
+  # and has not been visited before checking if it is valid
   def pass_all_conditions(current_point):
-    return current_point[0] in range(rows) and current_point[1] in range(cols) \
-           and current_point not in visited and is_valid(current_point)
+    return i in range(rows) and j in range(cols) and current_point not in visited \ 
+      and is_valid(current_point)
     
   # Handle disjointed graphs
   for x in range(rows):
