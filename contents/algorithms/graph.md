@@ -32,12 +32,9 @@ In coding interviews, graphs are commonly represented as 2-D matrices where cell
 A simple template for doing depth-first searches on a matrix goes like this:
 
 ```py
-from collections import deque
-
-
 def dfs(matrix):
   # check for an empty graph
-  if len(matrix) == 0:
+  if not matrix:
     return []
   rows, cols = len(matrix), len(matrix[0])
   visited = set()
@@ -49,20 +46,17 @@ def dfs(matrix):
     return i in range(rows) and j in range(cols) and (i, j) not in visited
 
   def traverse(i, j):
-    stack = deque([(i, j)])
-    while stack:
-      curr_i, curr_j = stack.pop()
-      if pass_all_conditions(curr_i, curr_j):
-        visited.add((curr_i, curr_j))
-        # Traverse neighbors
-        for direction in directions:
-          next_i, next_j = curr_i + direction[0], curr_j + direction[1]
-          stack.append((next_i, next_j))
+    if not pass_all_conditions(i, j):
+      return
+    visited.add((i, j))
+    # Traverse neighbors
+    for direction in directions:
+      next_i, next_j = i + direction[0], j + direction[1]
+      traverse(next_i, next_j)
 
   for i in range(rows):
     for j in range(cols):
       traverse(i, j)
-
 ```
 
 Another similar template for doing breadth first searches on the matrix goes like this:
@@ -73,7 +67,7 @@ from collections import deque
 
 def bfs(matrix):
   # check for an empty graph
-  if len(matrix) == 0:
+  if not matrix:
     return []
   rows, cols = len(matrix), len(matrix[0])
   visited = set()
