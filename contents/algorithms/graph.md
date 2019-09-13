@@ -27,28 +27,72 @@ A tree-like diagram could very well be a graph that allows for cycles and a naiv
 - **Uncommon** - Topological Sort, Dijkstra's algorithm
 - **Rare** - Bellman-Ford algorithm, Floyd-Warshall algorithm, Prim's algorithm, Kruskal's algorithm
 
-In coding interviews, graphs are commonly represented as 2-D matrices where cells are the nodes and each cell can traverse to its adjacent cells (up/down/left/right). Hence it is important that you be familiar with traversing a 2-D matrix. When recursively traversing the matrix, always ensure that your next position is within the boundary of the matrix. More tips for doing depth-first searches on a matrix can be found [here](https://discuss.leetcode.com/topic/66065/python-dfs-bests-85-tips-for-all-dfs-in-matrix-question/). A simple template for doing depth-first searches on a matrix goes like this:
+In coding interviews, graphs are commonly represented as 2-D matrices where cells are the nodes and each cell can traverse to its adjacent cells (up/down/left/right). Hence it is important that you be familiar with traversing a 2-D matrix. When traversing the matrix, always ensure that your current position is within the boundary of the matrix and has not been visited before. 
+
+A simple template for doing depth-first searches on a matrix goes like this:
 
 ```py
-def traverse(matrix):
+def dfs(matrix):
+  # Check for an empty graph.
+  if not matrix:
+    return []
+
   rows, cols = len(matrix), len(matrix[0])
   visited = set()
   directions = ((0, 1), (0, -1), (1, 0), (-1, 0))
-  def dfs(i, j):
+
+  def traverse(i, j):
     if (i, j) in visited:
       return
+
     visited.add((i, j))
-    # Traverse neighbors
+    # Traverse neighbors.
     for direction in directions:
       next_i, next_j = i + direction[0], j + direction[1]
-      if 0 <= next_i < rows and 0 <= next_j < cols: # Check boundary
-        # Add any other checking here ^
-        dfs(next_i, next_j)
+      if 0 <= next_i < rows and 0 <= next_j < cols:
+        # Add in your question-specific checks.
+        traverse(next_i, next_j)
 
   for i in range(rows):
     for j in range(cols):
-      dfs(i, j)
+      traverse(i, j)
 ```
+
+A similar template for doing breadth-first searches on the matrix goes like this:
+
+```py
+from collections import deque
+
+def bfs(matrix):
+  # Check for an empty graph.
+  if not matrix:
+    return []
+
+  rows, cols = len(matrix), len(matrix[0])
+  visited = set()
+  directions = ((0, 1), (0, -1), (1, 0), (-1, 0))
+
+  def traverse(i, j):
+    queue = deque([(i, j)])
+    while queue:
+      curr_i, curr_j = queue.pop()
+      if (curr_i, curr_j) not in visited:
+        visited.add((curr_i, curr_j))
+        # Traverse neighbors.
+        for direction in directions:
+          next_i, next_j = curr_i + direction[0], curr_j + direction[1]
+          if 0 <= next_i < rows and 0 <= next_j < cols:
+            # Add in your question-specific checks.
+            queue.append((next_i, next_j))
+
+  for i in range(rows):
+    for j in range(cols):
+      traverse(i, j)
+```
+
+> NOTE: While DFS is implemented using recursion in this sample, it could also be implemented iteratively similar to BFS. The key difference between the algorithms lies in the underlying data structure (BFS uses a queue while DFS uses a stack). The `deque` class in Python can function as both a stack and a queue
+
+For additional tips on BFS and DFS, you can refer to this [LeetCode post](https://leetcode.com/problems/pacific-atlantic-water-flow/discuss/90774/Python-solution-with-detailed-explanation)
 
 ## Corner cases
 
