@@ -26,11 +26,7 @@ module.exports = {
       {
         type: 'category',
         label: 'Behavioral Round',
-        items: [
-          'star-framework',
-          'behavioral-questions',
-          'psychological-tricks',
-        ],
+        items: ['star-format', 'behavioral-questions', 'psychological-tricks'],
       },
       'questions-to-ask',
     ],
