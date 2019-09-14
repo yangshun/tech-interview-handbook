@@ -3,7 +3,7 @@ id: study-and-practice
 title: Study and Practice
 ---
 
-## Recap CS Fundamentals
+## Recap CS fundamentals
 
 If you have been out of college for a while, it is highly advisable to review CS fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work on algorithm problems from LeetCode and Cracking the Coding Interview.
 
