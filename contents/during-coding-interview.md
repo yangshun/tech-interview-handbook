@@ -15,25 +15,7 @@ Use earphones and make sure you are in a quiet environment. You definitely do no
 
 ## Self introduction
 
-Prepare a self introduction that follows the following outline (inspired by "Cracking the Coding Interview" by Gayle McDowell):
-
-1. A sentence about your current or most recent role.
-1. A few sentences about your (academic) background. What did you focus on?
-1. Some sentences about your professional experience after school/university. Where did you work? What projects did you deal with? What where typical challenges and tasks? Which technologies did you use?
-1. Mention one to two sentences about what you do outside of work, if it is relevant for the role.
-1. Finish with a statement saying why you are seeking a new job opportunity and why you are interested in the role you applied for.
-
-An example of the above could be:
-
-> I'm John Doe and currently a Software Engineer at Google.
->
-> My background is in Computer Science, where I received my bachelor's degree at MIT and my Master's degree at Stanford. I mainly did research on how to decrease complexity of search algorithms.
->
-> After university, I started to work at Microsoft as a Software Engineer. It was a great experience as I was working in the Office team contributing to MS Word and MS Powerpoint. I learned a lot about C# and .NET back then. After about two years, I got an offer from Google where I have been working since then. I'm now leading the Search Optimization team and have gained a lot of knowledge in scalability and domain knowledge. My daily tasks consist of optimizing search queries and mentoring junior engineers.
->
-> Outside of work I develop a on open source projects written in Python. Examples of some open source projects I created are &lt;insert examples&gt;.
->
-> I'm now seeking new job opportunities in the Boston area since I'm relocating for personal reasons. In particular I think Boston Dynamics is a perfect fit for my interests as well as my skill set.
+Prepare a self introduction by following the [self introduction section](./self-introduction.md).
 
 ## Upon receiving the question
 
