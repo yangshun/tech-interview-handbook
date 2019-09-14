@@ -19,6 +19,7 @@ module.exports = {
           'best-practice-questions',
           'during-coding-interview',
           'cheatsheet',
+          'coding-signals',
           'mock-interviews',
         ],
       },
