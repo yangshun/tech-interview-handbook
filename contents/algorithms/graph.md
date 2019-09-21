@@ -75,7 +75,7 @@ def bfs(matrix):
   def traverse(i, j):
     queue = deque([(i, j)])
     while queue:
-      curr_i, curr_j = queue.pop()
+      curr_i, curr_j = queue.popleft()
       if (curr_i, curr_j) not in visited:
         visited.add((curr_i, curr_j))
         # Traverse neighbors.
