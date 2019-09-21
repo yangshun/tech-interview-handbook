@@ -21,7 +21,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ✅ | Request for the option to interview over Hangouts/Skype instead of a phone call; it is easier to send links or text across. |
 | ✅ | Decide on and be familiar with a programming language. |
 | ✅ | Familiarize yourself with the coding environment (CoderPad/CodePen). Set up the coding shortcuts, turn on autocompletion, tab spacing, etc. |
-| ✅ | Prepare answers to the [frequently-asked behaioral questions](behavioral-questions.md) in an interview. |
+| ✅ | Prepare answers to the [frequently-asked behavioral questions](behavioral-questions.md) in an interview. |
 | ✅ | Prepare some [questions to ask](questions-to-ask.md) at the end of the interview. |
 | ✅ | Dress comfortably. Usually you do not need to wear smart clothes, casual should be fine. T-shirts and jeans are acceptable at most places. |
 | ✅ | Stay calm and composed. |
