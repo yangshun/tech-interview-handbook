@@ -3,7 +3,7 @@ id: array
 title: Array
 ---
 
-## Tips
+## Notes
 
 Is the array sorted or partially sorted? If it is, some form of binary search should be possible. This also usually means that the interviewer is looking for a solution that is faster than O(n).
 
