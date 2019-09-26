@@ -69,18 +69,4 @@ export default [
       </>
     ),
   },
-  {
-    name: 'Yangshun Tay',
-    title: 'Front End Engineer, Facebook',
-    thumbnail: 'https://avatars1.githubusercontent.com/u/1315101?s=460&v=4',
-    quote: (
-      <>
-        I always thought that getting a job at Facebook was a dream beyond my
-        reach. However, with help from this handbook, determination and
-        preparation, my job hunt went beyond my expectations and was pretty
-        successful, landing me offers with Facebook, Google, Airbnb, Dropbox,
-        and Lyft. Huge thanks to the authors for sharing their knowledge!
-      </>
-    ),
-  },
 ];
