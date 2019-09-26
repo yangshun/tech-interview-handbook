@@ -3,7 +3,7 @@ id: hash-table
 title: Hash Table
 ---
 
-## More questions
+## Sample questions
 
 - Describe an implementation of a least-used cache, and big-O notation of it.
 - A question involving an API's integration with hash map where the buckets of hash map are made up of linked lists.

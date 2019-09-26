@@ -16,7 +16,7 @@ Sometimes preprocessing a dictionary of words (given in a list) into a trie, wil
 
 Be familiar with implementing, from scratch, a `Trie` class and its `add`, `remove` and `search` methods.
 
-## Recommended Leetcode questions
+## Recommended LeetCode questions
 
 - [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree)
 - [Add and Search Word](https://leetcode.com/problems/add-and-search-word-data-structure-design)

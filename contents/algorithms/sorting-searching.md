@@ -3,7 +3,7 @@ id: sorting-searching
 title: Sorting and Searching
 ---
 
-## More questions
+## Sample questions
 
 - Sorting search results on a page given a certain set of criteria.
 - Sort a list of numbers in which each number is at a distance `K` from its actual position.

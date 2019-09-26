@@ -62,7 +62,7 @@ The focus of week 3 is on non-linear data structures like trees, graphs and heap
 - [Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
 - [Same Tree](https://leetcode.com/problems/same-tree/)
 - [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
-- [Encode and Decode Strings (Leetcode Premium)](https://leetcode.com/problems/encode-and-decode-strings/)
+- [Encode and Decode Strings (LeetCode Premium)](https://leetcode.com/problems/encode-and-decode-strings/)
 
 ## Week 4 - More Data Structures
 
@@ -81,11 +81,11 @@ Week 4 builds up on knowledge from previous weeks but questions are of increased
 
 #### Optional
 
-- [Meeting Rooms (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms/)
-- [Meeting Rooms II (Leetcode Premium)](https://leetcode.com/problems/meeting-rooms-ii/)
-- [Alien Dictionary (Leetcode Premium)](https://leetcode.com/problems/alien-dictionary/)
-- [Graph Valid Tree (Leetcode Premium)](https://leetcode.com/problems/graph-valid-tree/)
-- [Number of Connected Components in an Undirected Graph (Leetcode Premium)](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
+- [Meeting Rooms (LeetCode Premium)](https://leetcode.com/problems/meeting-rooms/)
+- [Meeting Rooms II (LeetCode Premium)](https://leetcode.com/problems/meeting-rooms-ii/)
+- [Alien Dictionary (LeetCode Premium)](https://leetcode.com/problems/alien-dictionary/)
+- [Graph Valid Tree (LeetCode Premium)](https://leetcode.com/problems/graph-valid-tree/)
+- [Number of Connected Components in an Undirected Graph (LeetCode Premium)](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
 
 ## Week 5 - Dynamic Programming
 

@@ -38,7 +38,7 @@ Be familiar with the following routines because many linked list questions make 
 - Two nodes
 - Linked list has cycle. **Tip:** Clarify with the interviewer whether there can be a cycle in the list. Usually the answer is no
 
-## Recommended Leetcode questions
+## Recommended LeetCode questions
 
 - [Reverse a Linked List](https://leetcode.com/problems/reverse-linked-list/)
 - [Detect Cycle in a Linked List](https://leetcode.com/problems/linked-list-cycle/)
@@ -46,15 +46,3 @@ Be familiar with the following routines because many linked list questions make 
 - [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
 - [Remove Nth Node From End Of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
 - [Reorder List](https://leetcode.com/problems/reorder-list/)
-
-## More questions
-
-- Given a linked list, in addition to the next pointer, each node has a child pointer that can point to a separate list. With the head node, flatten the list to a single-level linked list.
-  - [Source](http://blog.gainlo.co/index.php/2016/06/12/flatten-a-linked-list/)
-- Reverse a singly linked list. Implement it recursively and iteratively.
-- Convert a binary tree to a doubly circular linked list.
-- Implement an LRU cache with O(1) runtime for all its operations.
-- Check distance between values in linked list.
-- A question involving an API's integration with hash map where the buckets of hash map are made up of linked lists.
-- Given a singly linked list (a list which can only be traversed in one direction), find the item that is located at 'k' items from the end. So if the list is a, b, c, d and k is 2 then the answer is 'c'. The solution should not search the list twice.
-- How can you tell if a Linked List is a Palindrome?

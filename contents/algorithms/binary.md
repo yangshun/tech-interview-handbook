@@ -24,17 +24,10 @@ Some helpful utility snippets:
 - Be aware and check for overflow/underflow
 - Negative numbers
 
-## Recommended Leetcode questions
+## Recommended LeetCode questions
 
 - [Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/)
 - [Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
 - [Counting Bits](https://leetcode.com/problems/counting-bits/)
 - [Missing Number](https://leetcode.com/problems/missing-number/)
 - [Reverse Bits](https://leetcode.com/problems/reverse-bits/)
-
-## More questions
-
-- How do you verify if an integer is a power of 2?
-- Write a program to print the binary representation of an integer.
-- Write a program to print out the number of 1 bits in a given integer.
-- Write a program to determine the largest possible integer using the same number of 1 bits in a given number.
