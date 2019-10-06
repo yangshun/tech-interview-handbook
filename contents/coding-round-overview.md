@@ -3,7 +3,7 @@ id: coding-round-overview
 title: Overview
 ---
 
-Coding interviews are tough. But fortunately, there's a tried and prove method to get better at them. With a combination of studying, practicing questions and doing mock interviews, getting that dream job can become a reality.
+Coding interviews are tough. But fortunately, there's a tried and proven method to get better at them. With a combination of studying, practicing questions and doing mock interviews, getting that dream job can become a reality.
 
 1. Decide on a programming language
 1. Study CS fundamentals
