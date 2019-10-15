@@ -1,3 +1,4 @@
+
 ---
 id: behavioral-questions
 title: Common Questions
@@ -24,6 +25,7 @@ title: Common Questions
 - What is something that you had to push for in your previous projects?
 - What is the most constructive feedback you have received in your career?
 - What is something you had to persevere at for multiple months?
+- How did you handle meeting a tight deadline?
 
 ### Airbnb
 
