@@ -24,6 +24,7 @@ title: Common Questions
 - What is something that you had to push for in your previous projects?
 - What is the most constructive feedback you have received in your career?
 - What is something you had to persevere at for multiple months?
+- Tell me about a time you met a tight deadline.
 
 ### Airbnb
 
