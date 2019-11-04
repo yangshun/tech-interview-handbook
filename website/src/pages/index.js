@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import withBaseUrl from '@docusaurus/withBaseUrl';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
 import successStories from '../data/successStories';
@@ -17,7 +17,7 @@ function Home() {
         <div className="container">
           <img
             className={classnames(styles.heroBannerLogo, 'margin-vert--md')}
-            src={withBaseUrl('img/logo.svg')}
+            src={useBaseUrl('img/logo.svg')}
           />
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
@@ -27,7 +27,7 @@ function Home() {
                 'button button--primary button--lg',
                 styles.getStarted,
               )}
-              to={withBaseUrl('introduction')}>
+              to={useBaseUrl('introduction')}>
               Get Started&nbsp;&nbsp;→
             </Link>
           </div>
