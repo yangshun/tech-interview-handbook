@@ -7,7 +7,7 @@ The point of interviews is for interviewers to extract signals from certain cand
 
 When interviewers take down interview feedback, these are likely what is on their feedback sheet.
 
-## Problem Solving
+## Problem solving
 
 #### Understanding the problem
 
@@ -34,7 +34,7 @@ When interviewers take down interview feedback, these are likely what is on thei
 - 👍 Did not require any major hints
 - 👎 Needed plenty of hints
 
-## Technical Competency
+## Technical competency
 
 #### Speed
 

@@ -30,7 +30,7 @@ export default [
     quote: (
       <>
         Most of us are familiar with having the prospect of having to grind tons
-        of Leetcode problems before the interview, but I really wanted a sense
+        of LeetCode problems before the interview, but I really wanted a sense
         of direction, an outline of sorts to prepare efficiently; I wanted to
         pick questions that covered all the important concepts one can be tested
         on. The Tech Interview Handbook provides just that; the Algorithms

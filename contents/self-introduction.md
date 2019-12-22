@@ -9,7 +9,7 @@ You can rephrase the question like this:
 
 > "Tell me about your journey into tech. How did you get interested in coding, and why was web development (or replace with other job-specific skills) a good fit for you? How is that applicable to our role or company goals?"
 
-## The Elevator Pitch
+## The elevator pitch
 
 An "elevator pitch" originates from a journalist trying to pitch an idea to an editor. The only time to catch the editor was in the elevator and she had only around 30 seconds to do so. The key elements of elevator pitches include:
 
@@ -59,7 +59,7 @@ Prepare a self introduction that follows the following outline (inspired by "Cra
 
 ### Example 1: Front End Engineer at Facebook
 
-#### Self Introduction
+#### Self introduction
 
 > "Hi I’m Yangshun and I graduated from National University of Singapore in 2015 with a degree in Computer Science. My interests are in Front End Engineering and I love to create beautiful performant products with delightful user experiences.
 >
@@ -78,7 +78,7 @@ Prepare a self introduction that follows the following outline (inspired by "Cra
 
 ### Example 2: Front End Engineer at Lyft
 
-#### Self Introduction
+#### Self introduction
 
 > "Hi I’m Yangshun and I graduated from National University of Singapore in 2015 with a degree in Computer Science. My interests are in Front End Engineering and I love to create beautiful performant products with delightful user experiences.
 >
