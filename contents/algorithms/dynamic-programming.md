@@ -26,4 +26,4 @@ Sometimes you do not need to store the whole DP table in memory, the last two va
 - [House Robber](https://leetcode.com/problems/house-robber/) and [House Robber II](https://leetcode.com/problems/house-robber-ii/)
 - [Decode Ways](https://leetcode.com/problems/decode-ways/)
 - [Unique Paths](https://leetcode.com/problems/unique-paths/)
-- [Jump Game](https://leetcode.com/problems/jump-game/)
+
