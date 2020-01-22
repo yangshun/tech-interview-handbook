@@ -36,7 +36,7 @@ Tell them some highlights from your favorite/most impressive projects and includ
 
 ### Why do _they_ want _you_?
 
-Tell the interviewer why you would make a good hire. Is your experience relevant to the company? Have you used a similar tech stack as the company or built relevant products? What unique talent(s) do you have that makes gives them confidence about your ability to contribute to the company?
+Tell the interviewer why you would make a good hire. Is your experience relevant to the company? Have you used a similar tech stack as the company or built relevant products? What unique talent(s) do you have that may give them confidence about your ability to contribute to the company?
 
 ### Practice!
 
