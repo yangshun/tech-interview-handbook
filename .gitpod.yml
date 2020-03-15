@@ -1,0 +1,7 @@
+tasks:
+  - command: gp await-port 3000 && gp preview $(gp url 3000)/tech-interview-handbook/
+  - init: cd website/ && yarn install && yarn build
+    command: yarn start
+ports:
+  - port: 3000
+    onOpen: ignore
