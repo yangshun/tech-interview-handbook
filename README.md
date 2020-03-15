@@ -72,7 +72,7 @@ There are no formal contributing guidelines at the moment as things are still in
 
 ### Contribute online with a single click
 
-You can use gitpod (A free online VS Code like IDE) for contributing online. With a single click in it will launch a ready to code workspace with all the dependencies being pre-installed & the build & start scripts for the website in process so that you can start coding straight away.
+You can use Gitpod (A free online VS Code like IDE) for contributing online. With a single click in it will launch a ready to code workspace with all the dependencies being pre-installed & the build & start scripts for the website in process so that you can start coding straight away.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/yangshun/tech-interview-handbook)
 
