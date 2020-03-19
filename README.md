@@ -70,9 +70,15 @@ If you are interested in how data structures are implemented, check out [Lago](h
 
 There are no formal contributing guidelines at the moment as things are still in flux and we might find a better approach to structure content as we go along. You are welcome to contribute whatever you think will be helpful to fellow engineers. If you would like to contribute content for different domains, feel free to create an issue or submit a pull request and we can discuss further.
 
-### Contribute online with a single click
+### Online one-click setup for contributing
 
-You can use Gitpod (A free online VS Code like IDE) for contributing online. With a single click in it will launch a ready to code workspace with all the dependencies being pre-installed & the build & start scripts for the website in process so that you can start coding straight away.
+You can use Gitpod (A free online VS Code-like IDE) for contributing online. With a single click it will launch a workspace and automatically:
+
+- clone the tech-interview-handbook repo.
+- install the dependencies.
+- run `yarn start`.
+
+So that you can start straight away.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/yangshun/tech-interview-handbook)
 
