@@ -140,8 +140,47 @@ function Home() {
           className={classnames(
             'margin-vert--lg',
             'padding-vert--lg',
-            'text--center',
             styles.sectionAlt,
+          )}>
+          <div className="container">
+            <div className="row">
+              <div className="col col--6 col--offset-3">
+                <h2
+                  className={classnames(
+                    'margin-vert--lg',
+                    'text--center',
+                    styles.sectionTitle,
+                  )}>
+                  Success Stories
+                </h2>
+                {successStories.map((user) => (
+                  <div className="card margin-vert--lg" key={user.name}>
+                    <div className="card__body">
+                      <p className={styles.quote}>"{user.quote}"</p>
+                    </div>
+                    <div className="card__header">
+                      <div className="avatar">
+                        <img className="avatar__photo" src={user.thumbnail} />
+                        <div className="avatar__intro">
+                          <h4 className="avatar__name">{user.name}</h4>
+                          <small className="avatar__subtitle">
+                            {user.title}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={classnames(
+            'margin-vert--lg',
+            'padding-vert--lg',
+            'text--center',
           )}>
           <div className="container">
             <div className="row">
@@ -208,40 +247,6 @@ function Home() {
                     Become a sponsor!
                   </a>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={classnames('margin-vert--lg', 'padding-vert--lg')}>
-          <div className="container">
-            <div className="row">
-              <div className="col col--6 col--offset-3">
-                <h2
-                  className={classnames(
-                    'margin-vert--lg',
-                    'text--center',
-                    styles.sectionTitle,
-                  )}>
-                  Success Stories
-                </h2>
-                {successStories.map(user => (
-                  <div className="card margin-vert--lg" key={user.name}>
-                    <div className="card__body">
-                      <p className={styles.quote}>"{user.quote}"</p>
-                    </div>
-                    <div className="card__header">
-                      <div className="avatar">
-                        <img className="avatar__photo" src={user.thumbnail} />
-                        <div className="avatar__intro">
-                          <h4 className="avatar__name">{user.name}</h4>
-                          <small className="avatar__subtitle">
-                            {user.title}
-                          </small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
           </div>

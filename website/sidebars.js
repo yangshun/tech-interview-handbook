@@ -21,6 +21,7 @@ module.exports = {
           'cheatsheet',
           'coding-signals',
           'mock-interviews',
+          'interviewer-cheatsheet',
         ],
       },
       {
