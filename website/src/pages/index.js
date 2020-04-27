@@ -175,7 +175,6 @@ function Home() {
             </div>
           </div>
         </div>
-
         <div
           className={classnames(
             'margin-vert--lg',

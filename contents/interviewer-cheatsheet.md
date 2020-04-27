@@ -57,6 +57,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | --- | --- |
 | ✅ | Ask for candidate to provide test cases and run through the code with them. |
 | ✅ | Point out edge cases candidate missed and ask the candidate to address them. |
+| ✅ | Take note of the duration TC spent on each question to include in the feedback. |
 | ✅ | Ask for time complexity and space analysis. |
 | ✅ | Preserve the code somewhere - take a picture or copy the code out. |
 | ✅ | Stop the candidate when there is 5 minutes left. e.g. ("I'll stop you here and let's go to the next section") |
