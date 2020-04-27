@@ -8,6 +8,10 @@ module.exports = {
   organizationName: 'yangshun',
   projectName: 'tech-interview-handbook',
   themeConfig: {
+    prism: {
+      theme: require('prism-react-renderer/themes/github'),
+      darkTheme: require('prism-react-renderer/themes/dracula'),
+    },
     navbar: {
       title: 'Tech Interview Handbook',
       logo: {
