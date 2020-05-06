@@ -8,6 +8,7 @@ module.exports = {
     ],
     'Interview Process': [
       'interview-formats',
+      'overcome-nervousness',
       'self-introduction',
       {
         type: 'category',
