@@ -4,11 +4,11 @@ title: Summing Root To Leaf Numbers
 author: Raivat Shah
 author_title: Student at NUS Computing
 author_url: https://github.com/raivatshah
-author_image_url: https://avatars3.githubusercontent.com/u/29497717?s=460&u=0624&v=4
+author_image_url: https://github.com/raivatshah.png
 tags: [leetcode, trees, problem-solving]
 ---
 
-Sum Root to Leaf Numbers is an [interesting problem from Leetcode](https://leetcode.com/problems/sum-root-to-leaf-numbers/). The problem is of medium difficulty and is about binary trees. This post is an explained solution to the problem. 
+Sum Root to Leaf Numbers is an [interesting problem from LeetCode](https://leetcode.com/problems/sum-root-to-leaf-numbers/). The problem is of medium difficulty and is about binary trees. This post is an explained solution to the problem. 
 
 I assume that you’re familiar with Python and the concept of binary trees. If you’re not, you can read [this article](https://www.tutorialspoint.com/python_data_structure/python_binary_tree.htm) to get started.
 
@@ -42,7 +42,7 @@ class Solution:
     def sum_numbers(self, root: TreeNode) -> int:
 ```
 
-The method signature given to us in the problem has one argument: root, which is of the type `TreeNode` . A `TreeNode` class is as follows (from Leetcode):
+The method signature given to us in the problem has one argument: root, which is of the type `TreeNode` . A `TreeNode` class is as follows (from LeetCode):
 
 ```
 class TreeNode:
