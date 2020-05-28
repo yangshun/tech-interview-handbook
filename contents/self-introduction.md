@@ -84,7 +84,7 @@ Prepare a self introduction that follows the following outline (inspired by "Cra
 >
 > I previously worked at Grab where I led the Grab for Work project. Grab for Work was a service for companies to make corporate transportation expenses convenient. Companies can create employee groups, set ride policies and share corporate payment methods with their employees. I built the project with another engineer over the period of 3 months on a React/Redux and Golang stack."
 >
-> I'm interested in the Front End Engineer role at Lyft because I like working in this ridesharing space and creating products for users to improve their
+> I'm interested in the Front End Engineer role at Lyft because I like working in this ridesharing space and creating products for users to improve their life.
 
 #### Breakdown
 
