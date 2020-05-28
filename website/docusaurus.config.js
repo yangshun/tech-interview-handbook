@@ -20,6 +20,7 @@ module.exports = {
       },
       links: [
         {to: 'introduction', label: 'Getting Started', position: 'right'},
+        {to: 'blog', label: 'Blog', position: 'right'},
         {
           href: 'https://github.com/yangshun/tech-interview-handbook',
           label: 'GitHub',
