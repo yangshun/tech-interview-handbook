@@ -42,7 +42,9 @@ module.exports = {
     announcementBar: {
       id: 'black_lives_matter',
       content:
-        '<div style="color: #fff; font-weight: bold">Black Lives Matter. <a target="_blank" href="https://support.eji.org/give/153413/#!/donation/checkout">Support the Equal Justice Initiative</a></div>',
+        '<div style="font-weight: bold">Black Lives Matter. <a target="_blank" href="https://support.eji.org/give/153413/#!/donation/checkout">Support the Equal Justice Initiative</a></div>',
+      backgroundColor: '#000',
+      textColor: '#f5f6f7',
     },
   },
   presets: [
