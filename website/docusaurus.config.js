@@ -39,6 +39,11 @@ module.exports = {
       apiKey: 'bd359779d1c4c71ade6062e8f13f5a83',
       indexName: 'yangshun-tech-interview',
     },
+    announcementBar: {
+      id: 'black_lives_matter',
+      content:
+        '<div style="color: #fff; font-weight: bold">Black Lives Matter. <a target="_blank" href="https://support.eji.org/give/153413/#!/donation/checkout">Support the Equal Justice Initiative</a></div>',
+    },
   },
   presets: [
     [
