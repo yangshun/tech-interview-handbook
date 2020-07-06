@@ -35,7 +35,7 @@ Bonuses are usually paid on a semi-annual basis and are typically dependent on a
 
 - Alice is an Engineering Manager with 10 years of professional experience. Her base salary is 220,000, is an experienced engineering manager (seniority multiplier: 20%), exceeded expectations for the half (individual performance multiplier: 150%) and her company did pretty awesome (company performance multiplier: 130%). For that half, her bonus will be as follows:
 
-  - **Bonus:** 200,000 x 50% (half a year) x 20% (seniority) x 200% (individual performance) x 130% (company performance) = 39000
+  - **Bonus:** 220,000 x 50% (half a year) x 20% (seniority) x 150% (individual performance) x 130% (company performance) = 42900
 
 Hence the amount of bonus you receive can be highly variable and senior employees get a higher proportion of their compensation from bonuses.
 
