@@ -18,7 +18,7 @@ module.exports = {
         alt: 'Tech Interview Handbook Logo',
         src: 'img/logo.svg',
       },
-      links: [
+      items: [
         {to: 'introduction', label: 'Getting Started', position: 'right'},
         {to: 'blog', label: 'Blog', position: 'right'},
         {
