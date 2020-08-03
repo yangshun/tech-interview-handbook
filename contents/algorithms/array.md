@@ -13,6 +13,8 @@ For questions where summation or multiplication of a subarray is involved, pre-c
 
 If you are given a sequence and the interviewer asks for O(1) space, it might be possible to use the array itself as a hash table. For example, if the array only has values from 1 to N, where N is the length of the array, negate the value at that index (minus one) to indicate presence of that number.
 
+Also O(n) doesn't mean you can only traverse the array once. Sometimes traversing the array more than once can help you solve the problem easily.
+
 ## Arrays are sequences
 
 Are there duplicate values in the array, would it affect the answer?
