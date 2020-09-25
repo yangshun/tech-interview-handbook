@@ -5,7 +5,7 @@ title: Linked List
 
 ## Notes
 
-Like arrays, linked lists are used to represent sequential data. The benefit of linked lists is that insertion and deletion from anywhere in the list is O(1) whereas in arrays the following elements will have to be shifted.
+Like arrays, linked lists are used to represent sequential data. The benefit of linked lists is that insertion and deletion of a node in the list (given its location) is O(1) whereas in arrays the following elements will have to be shifted.
 
 Adding a dummy node at the head and/or tail might help to handle many edge cases where operations have to be performed at the head or the tail. The presence of dummy nodes essentially ensures that operations will never have be done on the head or the tail, thereby removing a lot of headache in writing conditional checks to dealing with null pointers. Be sure to remember to remove them at the end of the operation.
 
