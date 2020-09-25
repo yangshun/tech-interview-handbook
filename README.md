@@ -10,7 +10,7 @@
   </a>
   <br>
   <p>
-    <em>Credits: <a href="https://dribbble.com/shots/3831443-Tech-Interview-Handbook">Illustration</a> by <a href="https://dribbble.com/yangheng">@yangheng</a></em>
+    <em>Credits: <a href="https://dribbble.com/shots/3831443-Tech-Interview-Handbook">Illustration</a> by <a href="https://dribbble.com/leftaligned">@leftaligned</a></em>
   </p>
   <h3>
     <a href="https://yangshun.github.io/tech-interview-handbook/">Read on the website</a>
