@@ -2,12 +2,12 @@
 
 ## Encryption
 
-#### Symmetrical Encryption
+#### Symmetric Encryption
 
-- Symmetrical encryption is a type of encryption where the same key is used to encrypt plaintext messages and to decrypt ciphertext.
-- Symmetrical encryption is usually much less computationally expensive as compared to asymmetric encryption.
+- Symmetric encryption is a type of encryption where the same key is used to encrypt plaintext messages and to decrypt ciphertext.
+- Symmetric encryption is usually much less computationally expensive as compared to asymmetric encryption.
 - Often called "shared secret" encryption, or "secret key" encryption.
-- To use a symmetric encryption scheme, the sender and receiver must securely share a key in advance. This sharing can be done via asymmetric encryption.
+- To use a symmetric encryption scheme, the sender and receiver must securely share a key in advance. This sharing can be done via asymmetric encryption or established through a key exchange algorithm like [Diffie Hellman key exchange](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange).
 
 #### Asymmetric Encryption
 
