@@ -8,4 +8,4 @@ trim_trailing_whitespace = true
 [*.{js,py}]
 charset = utf-8
 indent_style = space
-indent_size = 4
+indent_size = 2
