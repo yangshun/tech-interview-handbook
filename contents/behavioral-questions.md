@@ -26,18 +26,13 @@ title: Common Questions
 - What is something you had to persevere at for multiple months?
 - Tell me about a time you met a tight deadline.
 - If this were your first annual review with our company, what would I be telling you right now?
-- Time management has become a necessary factor in productivity. Give an example of a time-management skill you’ve learned and applied at work.
-- How do you handle tension with your boss?
+- Time management has become a necessary factor in productivity. Give an example of a time-management skill you've learned and applied at work.
 - Tell me about a problem you've had getting along with a work associate.
 - What aspects of your work are most often criticized?
 - How have you handled criticism of your work?
-- Do you like to work alone or as a part of a team?
-- Where do you see yourself professionally in 3-5 years.
-- What kind of experience do you have with *insert language here* language?
 - What strengths do you think are most important for *your job position*?
 - What words would your colleagues use to describe you?
 - What would you hope to achieve in the first six months after being hired?
-- How do you manage your work-life balance?
 
 ### Airbnb
 
