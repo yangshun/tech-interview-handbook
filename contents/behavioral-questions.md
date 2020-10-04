@@ -25,6 +25,14 @@ title: Common Questions
 - What is the most constructive feedback you have received in your career?
 - What is something you had to persevere at for multiple months?
 - Tell me about a time you met a tight deadline.
+- If this were your first annual review with our company, what would I be telling you right now?
+- Time management has become a necessary factor in productivity. Give an example of a time-management skill you've learned and applied at work.
+- Tell me about a problem you've had getting along with a work associate.
+- What aspects of your work are most often criticized?
+- How have you handled criticism of your work?
+- What strengths do you think are most important for *your job position*?
+- What words would your colleagues use to describe you?
+- What would you hope to achieve in the first six months after being hired?
 
 ### Airbnb
 
