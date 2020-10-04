@@ -1,0 +1,221 @@
+#include<iostream>
+using namespace std;
+int n=0;
+int a[1000];
+int found=0;
+void menu()
+{
+	cout<<"\t Main Menu\n";
+	cout<<"0.Enter Array\n";
+	cout<<"1.Bubble Sort\n";
+	cout<<"2.Insertion Sort\n";
+	cout<<"3.Selection Sort\n";
+	cout<<"4.Quick Sort\n";
+	cout<<"5.Linear Search\n";
+	cout<<"6.Binary Search\n";
+}
+void Enter_Array()
+{
+	cout<<"enter size of array:";
+	cin>>n;
+	cout<<"\n enter elements of the array:\n";
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
+	cout<<"\n entered array is:\t";
+	for(int i=0;i<n;i++)
+	{
+		cout<<a[i]<<" ";
+	}
+}
+void display()
+{
+	cout<<"\n sorted array:\n";
+	for(int i=0;i<n;i++)
+	{
+		cout<<a[i]<<" ";
+	}
+}
+void Bubble_Sort()
+{	
+	int temp,ctr=0;
+	for(int i=0;i<n;i++)
+	{
+		for(int j=n-1;j>i;j--)
+		{
+			if(a[j]<a[j-1])
+			{
+				temp=a[j];
+				a[j]=a[j-1];
+				a[j-1]=temp;
+			}
+		}
+		cout<<"\n Array after iteration "<<ctr++<<" is: \n";
+		for(int k=0;k<n;k++)
+			cout<<a[k]<<" ";	
+	}
+	display();
+}
+void Insertion_Sort()
+{
+	int temp,j;
+	for(int i=0;i<n;i++)
+	{
+		temp=a[i];
+		j=i-1;
+		while(temp<a[j])
+		{
+			a[j+1]=a[j];
+			j--;
+		}
+		a[j+1]=temp;
+		cout<<"\n Array after pass "<<i<<" is:\n";
+		for(int k=0;k<n;k++)
+			cout<<a[k]<<" ";	
+	}
+	display();
+}
+void Selection_Sort()
+{	
+	int small,pos,temp;
+	for(int i=0;i<n-1;i++)
+	{
+		small=a[i];
+		pos=i;
+		for(int j=i+1;j<n;j++)
+		{
+			if(a[j]<small)
+			{
+				small=a[j];
+				pos=j;
+			}
+		}
+		temp=a[i];
+		a[i]=a[pos];
+		a[pos]=temp;
+		cout<<"\n array afer pass "<<i+1<<" is: \n";
+		for(int j=0;j<n;j++)
+			cout<<a[j]<<" ";
+	}
+	display();
+}
+int partition(int a[],int low, int high)
+{
+	int pivot=a[high];				//pivot is the last element of the Array.
+	int i=(low-1);
+	int temp;					//index of smaller element.
+	for(int j=low;j<=high-1;j++)
+	{
+		//if current element is smaller or equal to pivot
+		if(a[j]<=pivot)
+		{
+			i++;
+			temp=a[i];
+			a[i]=a[j];
+			a[j]=temp;
+		}
+		temp=0;
+	}
+	temp=a[i+1];
+	a[i+1]=a[high];
+	a[high]=temp;
+	
+	return (i+1);
+}
+void Quick_Sort(int a[],int low,int high)
+{
+	//low is the starting index.
+	//high is the ending index.
+	if(low<high)
+	{
+		//pi is partition index,arr[pi] is now at right place.
+		int pi=partition(a,low,high);
+		Quick_Sort(a,low,pi-1);
+		Quick_Sort(a,pi+1,high);
+	}
+}
+void Linear_Search()
+{
+	int x;
+	int j;
+	cout<<"\n enter element to search:";
+	cin>>x;
+	for(int i=0;i<n;i++)
+	{
+		found=0;
+		if(x==a[i])
+		{
+			found=1;
+			j=i;
+			break;
+		}
+	}
+	if(found==1)
+		cout<<"element "<<x<<" found at "<<j;
+	else
+		cout<<"element "<<x<<" not found.";
+}
+void Binary_Search()
+{
+	int beg,last,mid,x;
+	cout<<"enter element to search:";
+	cin>>x;
+	beg=0;
+	last=n-1; 
+	while(beg<=last)
+	{
+		found=0;
+		mid=(beg+last)/2;
+		if(x==a[mid])
+		{
+			found=1;
+			break;
+		}
+		else if(x>a[mid])
+			beg=mid+1;
+		else
+			last=mid-1;
+	}
+	if(found==1)
+		cout<<"element "<<x<<" found at "<<mid;
+	else
+		cout<<"element "<<x<<" not found";
+}
+int main()
+{
+	int ch;
+	char ctr='y';
+	do
+	{
+		menu();
+		cout<<"choose:";
+		cin>>ch;
+		switch(ch)
+		{
+			case 0:Enter_Array();
+				break;
+			case 1:Bubble_Sort();
+				break;
+			case 2:Insertion_Sort();
+				break;
+			case 3:Selection_Sort();
+				break;
+			case 4:Quick_Sort(a,0,n-1);
+				display();
+				break;
+			case 5:Linear_Search();
+				break;
+			case 6:Binary_Search();
+				break;
+			default:
+				cout<<"enter from menu.";
+				break;
+		}
+		cout<<"\n do you want to continue?(y/n):";
+		cin>>ctr;
+	}
+	while(ctr=='y');
+	
+	return 0;
+}
