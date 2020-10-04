@@ -1,0 +1,431 @@
+//	PROGRAM:MAPPING OF 2 DIMENSIONAL MATRIX
+
+#include<iostream>
+using namespace std;
+//m is number of rows.
+//n is number of columns.
+//a is a 2d array.
+//bis a 1d array.
+int i,j,k,m,n,a[10][10],b[100],found=0;;
+int enter()				//function to enter a matrix.
+{
+	cout<<"enter no. of rows:";
+	cin>>m;
+	cout<<"\n enter no. of columns:";
+	cin>>n;
+	cout<<"\n enter elements of matrix:"<<endl;
+	for(i=0;i<m;i++)		//loop to enter elements of matix.
+	{
+		for(j=0;j<n;j++)
+		{
+			cin>>a[i][j];
+		}
+	}
+	cout<<"\n entered matrix:"<<endl;
+	for(i=0;i<m;i++)		//loop to display the matix.
+	{
+		for(j=0;j<n;j++)
+		{
+			cout<<a[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+	return 0;
+}
+/*
+Diagonal matrix:
+		1 0 0 0 0 
+		0 2 0 0 0
+		0 0 3 0 0 
+		0 0 0 4 0
+		0 0 0 0 5
+	all the elements(except main diagonal) should be 0.
+*/
+int diagonal()			//function to check whether matrix is diagonal or not. 
+{
+	found=0;
+	for(i=0;i<m;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			if(i!=j && a[i][j]!=0)		//if non diagonal elements are not 0 then found=1.
+			{
+				found=1;
+			}
+			if(found==0)				//if found=0 convert 2d array into 1d array.
+			{
+				k=i*n + j;
+				b[k]=a[i][j];
+			}
+		}
+	}
+	//if found is equal to 0 display new 1d array. if found is not equal to 0 display matrix is not diagonal. 
+	if(found==0)	 
+	{
+		cout<<"\n entered matrix is a diagonal matrix";
+		cout<<"\n new matrix:"<<endl;
+		for(k=0;k<m*n;k++)					//number of elements in new 1d array are m*n.
+		{
+			cout<<b[k]<<" ";
+		}
+	}
+	else
+		cout<<"\n entered matrix is not a diagonal matrix "<<endl;
+	return 0;
+}
+/*
+Tridiagonal matrix:
+		1 2 0 0 0 
+		3 4 5 0 0
+		0 6 7 8 0
+		0 0 9 10 11 
+		0 0 0 12 13
+	all the elements(except tridiagonal) should be 0.
+*/
+int tridiagonal()			//function to check whether matrix is tidiagonal or not.
+{	
+	int x;
+	//matrix should be a square matrix.
+	if(m==n)				
+	{
+		found=0;
+		x=3*n-2;			//number of elements in new 1d array are 3*m-2.
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				k=(i-j);
+				if((k<-1 || k>1) && a[i][j]!=0)			//if non tridiagonal elements are not 0 then found is equal to 0.
+				{
+					found=1;
+				}
+				if(k>=-1 || k<=1)			//if i-j is greater than -1 and less than 1. then (i,j) is tridiagonal element.
+				{
+					switch(k)				// switch case for lower diagonal,main diagonal and upper diagonal.
+					{
+						case 1:						//for lower diagonal.
+							b[i-1]=a[i][j];
+							break;
+						case 0:						//for main diagonal.
+							b[n+i-1]=a[i][j];
+							break;
+						case -1:					//for upper diagonal.
+							b[2*n+i-1]=a[i][j];
+							break;
+					}
+				}
+			}	
+		}
+		//if found is 0 then display the new 1d array.
+		// if found is not 0 then display matrix is not tridiagonal.
+		if(found==0)
+		{
+			cout<<"\n entered matrix is tridiagonal.";
+			cout<<"\n new matrix:"<<endl;
+			for(i=0;i<x;i++)
+			{
+				cout<<b[i]<<" ";
+			}
+		}
+		else
+			cout<<"\n entered matrix is not tridiagonal.";
+	}
+	else
+		cout<<"\n enter matrix is  not a square matrix.";	
+	return 0;
+}
+/*
+example of lower triangular matrix:
+        1  0  0  0  0 
+        2  3  0  0  0 
+        4  5  6  0  0
+        7  8  9 10  0
+       11 12 13 14 15
+    All the elements(except lower triangle elements) should be 0.
+	There are two ways to map lower triangular matrix into 1d array:
+			1.row major
+				mapping formula-> i*(i+1)/2 +j.
+			2.column major 
+				mapping formula-> (m*j) + i - (j*(j+1)/2)
+*/
+int lower_triangle()					//function to check whether matrix is lower triangular or not.
+{
+	int rc;
+	found=0;
+	//matrix should be a square matrix.
+	if(m==n)
+	{
+		//switch case to choose how to display 1d array(row major or column major).
+		cout<<"1.row major"<<endl;
+		cout<<"2.column major"<<endl;
+		cout<<"choose(1/2):";
+		cin>>rc;
+		switch(rc)								
+		{
+			case 1:											//for row major lower triangular matrix
+				for(i=0;i<m;i++)
+				{
+					for(j=0;j<n;j++)
+					{
+						if(i<j && a[i][j]!=0)				//if non lower triangle elements are not 0 then found is 1.
+						{
+							found=1;
+						}
+						if(i>=j)				//for lower triangle elements if condition is correct convert 2d array into 1d array.
+						{
+							k=(i*(i+1)/2 + j);		//formula for row major mapping of upper triangular matrix.
+							b[k]=a[i][j];
+						}
+					}
+				}
+				//if found is 0 display the new 1d array in row major.
+				//if found is not 0 display matrix is not lower triangular.
+				if(found==0)	
+				{
+					cout<<"\n matrix is lower triangular";
+					cout<<"\n new matrix row major:"<<endl;
+					for(k=0;k<m*(m+1)/2;k++)				//number of elemets in new 1d array are m*(m+1)/2.
+					{
+						cout<<b[k]<<" ";
+					}
+				}
+				else
+				{
+					cout<<"\n matix is not lower triangular"<<endl;
+				}
+				break;
+			case 2:												//for column major lower triangular matrix					
+				for(i=0;i<m;i++)
+				{
+					for(j=0;j<n;j++)
+					{
+						if(i<j && a[i][j]!=0)					//if non lower triangle elements are not 0 then found is 1.
+						{
+							found=1;
+						}
+						if(i>=j)					//for lower trianle elements if condition is correct convert 2d array into 1d array.
+						{
+							k=((m*j) + i - j*(j+1)/2);	//formula for column major mapping of upper triangular matrix
+							b[k]=a[i][j];
+						}
+					}
+				}
+				// if found is 0 display the new 1d array in column major.
+				//if found is not  0 display matrix is not lower triangular
+				if(found==0)
+				{
+					cout<<"\n matrix is lower triangular";
+					cout<<"\n new matrix column major:"<<endl;
+					for(k=0;k<m*(m+1)/2;k++)				//number of elememts in new 1d array are m*(m+1)/2
+					{
+						cout<<b[k]<<" ";
+					}
+				}
+				else
+				{
+					cout<<"\n matrix is not lower triangular"<<endl;
+				}
+				break;
+			default:							//in case user enters wrong number.
+				cout<<"\n enter 1 or 2.";
+				break;							
+		}
+	}
+	else
+		cout<<"\n sorry,matrix is not a square matrix"<<endl;
+	return 0;
+}
+/* example of upper triangular matrix:
+			1  2  3  4  5 
+			0  6  7  8  9 
+			0  0 10 11 12
+			0  0  0 13 14
+			0  0  0  0 15
+	All elements(except upper triangle elements) should be 0.
+	there are 2 ways to map upper triangular matrix.
+		1.row major
+			mapping formula->(n*i) + j - i*(i+1)/2.
+		2.column major
+			mapping formula->j*(j+1)/2 + i.
+*/
+int upper_triangle()					//function to check whether matrix is upper triangular or not.
+{
+	int rc;
+	found=0;
+	//matrix should be a square matrix.
+	if(m==n)
+	{
+		//switch case to choose how to display 1d array(row major or column major).
+		cout<<"1.row major"<<endl;
+		cout<<"2.column major"<<endl;
+		cout<<"choose(1/2):";
+		cin>>rc;
+		switch(rc)
+		{
+			case 1:									 //for row major upper triangular matrix
+				for(i=0;i<m;i++)
+				{	
+					for(j=0;j<n;j++)
+					{
+						if(i>j && a[i][j]!=0)		//if non upper triangle elements are not 0 then found is 1.
+							found=1;
+						if(i<=j)			 //for upper triangular elements if condition is correct convert 2d array into 1d array.
+						{
+							k=((n*i) + j - i*(i+1)/2);			//formula for row major mapping of upper triangular matrix.
+							b[k]=a[i][j];
+						}
+					}
+				}
+				//if found is 0 display new 1d array in row major.
+				//if found is 1 display matrix is not upper triangular.
+				if(found==0)
+				{
+					cout<<"\n matrix is upper triangular";
+					cout<<"\n new matrix row wise:";
+					for(k=0;k<m*(m+1)/2;k++)				//number of elements  in new 1d array are m*(m+1)/2.
+					{
+						cout<<b[k]<<" ";
+					}
+				}
+				else
+					cout<<"\n matrix is not upper triangular"<<endl;
+				break;
+			case 2:													//for column major upper triangular matrix
+				for(i=0;i<m;i++)
+				{
+					for(j=0;j<n;j++)
+					{
+						if(i>j && a[i][j]!=0)				//if non upper triangle elements are not 0 then found is 1.
+							found=1;
+						if(i<=j)				//for upper triangular elements if condition is correct convert 2d array into 1d array.
+						{
+							k=(j*(j+1)/2 + i);		//formula for column major mapping of upper triangular matrix.
+							b[k]=a[i][j];
+						}
+					}
+				}
+				//if found is 0 display new 1d array in row major.
+				//if found is 1 display matrix is not upper triangular.
+				if(found==0)
+				{
+					cout<<"\n matrix is upper triangular";
+					cout<<"\n new matrix column wise:";
+					for(k=0;k<m*(m+1)/2;k++)					//number of elements in new 1d array are m*(m+1)/2.
+					{
+						cout<<b[k]<<" ";
+					}
+				}
+				else
+					cout<<"\n matrix is not upper triangular"<<endl;
+				break;
+			default:										//in case user enters wrong number 
+				cout<<"\n enter 1 or 2.";
+				break;	
+		}
+	}
+	else 										//to show that entered matrix is not a square matrix
+		cout<<"\n sorry,matrix is not square matrix"<<endl;           //and triangular matrices are square matices.
+	return 0;
+}
+/*
+ example of symmetric matrix :
+ 			0  1  2  3  4
+ 			1  0  5  6  7
+ 			2  5  0  8  9 
+ 			3  6  8  0 10
+ 			4  7  9 10  0
+ 	All the main diagonal elements should be 0 and (i,j)th element of matrix must be equal to (j,i)th element of matrix.
+	if we map in row major then column major elements will be covered as row major elements are equal to column major elements.
+*/
+int symmetric()					//to check whether matrix is symmetric or not 
+{
+	found=0;
+	//matrix should be a square matrix.
+	if(m==n)
+	{
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				if(a[i][j]!=a[j][i] || a[i][i]!=0)			//if (i,j)th element is not equal to (j,i)th element then found is 1.
+					found=1;
+				else  							//else convert 2d matrix into 1 d array.
+				{
+					if(i<=j)		//if condition is correct convert 2d array into 1d array
+					{
+						k=((n*i) + j - i*(i+1)/2);		////formula for row major mapping of upper triangular matrix. 
+						b[k]=a[i][j];
+					}
+				}
+				
+			}
+		}
+		//if found is 0 display new 1d array.
+		//else display matri is not symmetric.
+		if(found==0)
+		{
+			cout<<"\n matrix is symmetric";
+			cout<<"\n new matrix:"<<endl;
+			for(k=0;k<m*(m+1)/2;k++)			//number of element in new 1d array are m*(m+1)/2.
+			{
+				cout<<b[k]<<" ";
+			}
+		}
+		else
+			cout<<"\n matrix is not symetric."<<endl;
+	}
+	else
+	 cout<<"sorry,enter matrix is not square matrix.";
+	 return 0;
+}
+// main menu
+//function to display number of operations.
+int menu()											
+{
+	cout<<"\n   MAIN MENU"<<endl;
+	cout<<"1.enter matrix"<<endl;
+	cout<<"2.diagonal matrix"<<endl;
+	cout<<"3.lower triangular matrix"<<endl;
+	cout<<"4.upper triangular matrix"<<endl;
+	cout<<"5.symmetric matrix"<<endl;
+	cout<<"6.tridiagonal matrix"<<endl;
+	return 0;
+}
+//main function
+int main()
+{	
+	int ch;
+	char ch1;
+	do
+	{
+		menu();
+		cout<<"\n choose:";
+		cin>>ch;
+		switch(ch)							//switch case to choose between operation.
+		{		
+			menu();
+			case 1:enter();										//to enter a mXn matrix
+					break;
+			case 2:diagonal();									//to find whether matrix is diagonal or not
+					break;
+			case 3:lower_triangle();							//to find whether matrix is lower triangular or not
+					break;		
+			case 4:upper_triangle();							//to find whether matrix is upper triangular or not
+					break;
+			case 5:symmetric();									//to find whether matrix is symmetric or not
+					break;
+			case 6:tridiagonal();								//to find whether matrix is tridiagonal or not
+					break;
+			default:											//in case user enters wrong number.
+				cout<<"\n enter from menu.";
+				break;		
+		}
+		cout<<"\n want to enter more(y/n)?";					//if user want to choose again.
+		cin>>ch1;
+		if(ch1=='y' || ch1=='Y')
+		cout<<"\n enter again:"<<endl;							
+	}
+	while(ch1=='y' || ch1=='Y');				//switch case will run while you say yes.
+	return 0;
+}
+//----------X----------X----------X----------X-----END-----X----------X----------X----------X----------X----------
