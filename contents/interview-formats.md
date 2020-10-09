@@ -160,3 +160,22 @@ If the company provides lunch, you might also have a lunch session with an emplo
 - Tips:
   - No front end questions were asked
   - 1 of the interviewers is an Engineering Manager
+  
+### Amazon
+
+- Recruiter phone screen
+- Technical phone interview:
+  - 1 or 2 x Algorithm/front end on CoderPad/CodePen
+- On-site (General):
+  - 2 x Algorithm coding on CoderPad
+  - 1 x System design/architecture
+- On-site (Back End):
+  - 2 x BackEnd coding on CodePen. Use any framework/library
+  - 1 x Past experience/project
+  - 2 x Cross functional
+- Tips:
+  - All sessions involve coding on your own laptop. Prepare your development environment in advance
+  - You are allowed to look up APIs if you need to
+  - They seem to place high emphasis on compilable, runnable code in all their coding rounds
+  - Cross functional interviews will involve getting Airbnb employees from any discipline to speak with you. These interviews are mostly non-technical but are extremely important to Amazon because they place a high emphasis on cultural fit. Do look up the Airbnb section of the behavioral questions to know what sort of questions to expect
+
