@@ -25,7 +25,7 @@
 
 <hr/>
 
-## What is this?
+## _What is this?_
 
 Carefully curated content to help you ace your next technical interview, with a focus on algorithms. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff includes:
 
@@ -40,11 +40,11 @@ Carefully curated content to help you ace your next technical interview, with a 
 
 Help from you in contributing content would be very much appreciated!
 
-## Why do I want this?
+## _Why do I want this?_
 
 This repository has _practical_ content that covers all phases of a technical interview, from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful as well.
 
-## Who is this for?
+## _Who is this for?_
 
 Anybody who wants to land a job at a tech company but is new to technical interviews, seasoned engineers who have not been on the other side of the interviewing table in a while and want to get back into the game, or anyone who wants to be better at technical interviewing.
 
@@ -56,29 +56,29 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 
 ---
 
-## How is this repository different?
+## _How is this repository different?_
 
 There are many awesome books like [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) and interview-related repositories out there on GitHub, what makes this repository different? The difference is that many existing interview repositories contain mainly links to external resources whereas this repository contains top quality curated content directly for your consumption.
 
 Also, existing resources focus mainly on algorithm questions and lack coverage for more domain-specific and non-technical questions. This handbook aims to cover content beyond the typical algorithmic coding questions. 😎
 
-## Looking for Front End content?
+## _Looking for Front End content?_
 
 Front end-related content have been extracted out into a separate repository - [Front End Interview Handbook](https://github.com/yangshun/front-end-interview-handbook).
 
-## Contents
+## _Contents_
 
 A [Docusaurus](https://github.com/facebook/docusaurus) website has been created to provide a better reading experience. Check out the website [here](https://yangshun.github.io/tech-interview-handbook/)!
 
-## Related
+## _Related_
 
 If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), a Data Structures and Algorithms library for JavaScript. It is pretty much still WIP but I intend to make it into a library that is able to be used in production and also a reference resource for revising Data Structures and Algorithms.
 
-## Contributing
+## _Contributing_
 
 There are no formal contributing guidelines at the moment as things are still in flux and we might find a better approach to structure content as we go along. You are welcome to contribute whatever you think will be helpful to fellow engineers. If you would like to contribute content for different domains, feel free to create an issue or submit a pull request and we can discuss further.
 
-### Online one-click setup for contributing
+### _Online one-click setup for contributing_
 
 You can use Gitpod (A free online VS Code-like IDE) for contributing online. With a single click it will launch a workspace and automatically:
 
@@ -90,11 +90,11 @@ So that you can start straight away.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/yangshun/tech-interview-handbook)
 
-### Contributors
+### _Contributors_
 
 This project exists thanks to all the people who contributed. [[Contribute](CONTRIBUTING.md)]. <a href="https://github.com/yangshun/tech-interview-handbook/graphs/contributors"><img src="https://opencollective.com/tech-interview-handbook/contributors.svg?width=890&button=false"></a>
 
-### Backers
+### _Backers_
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/tech-interview-handbook#backer)]
 
@@ -102,17 +102,17 @@ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com
 
 <a href="https://www.buymeacoffee.com/yangshun" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important; width: auto !important;"></a>
 
-### Sponsors
+### _Sponsors_
 
 Support this project by becoming a sponsor. Your logo/profile picture will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/tech-interview-handbook#sponsor)]
 
 <a href="https://opencollective.com/tech-interview-handbook/sponsor/0/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/0/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/1/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/1/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/2/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/2/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/3/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/3/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/4/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/4/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/5/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/5/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/6/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/6/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/7/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/7/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/8/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/8/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/9/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/9/avatar.svg"></a>
 
-## Maintainers
+## _Maintainers_
 
 - [Yangshun Tay](https://github.com/yangshun)
 - [Louie Tan](https://github.com/louietyj)
 
-## Disclaimer
+## _Disclaimer_
 
 I am providing code in the repository to you under an open source license. Because this is my personal repository, the license you receive to my code is from me and not my employer (Facebook)
