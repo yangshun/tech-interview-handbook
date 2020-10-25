@@ -58,13 +58,13 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 
 ## How is this repository different?
 
-There are many awesome books like [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) and interview-related repositories out there on GitHub, what makes this repository different? The difference is that many existing interview repositories contain mainly links to external resources whereas this repository contains top quality curated content directly for your consumption.
+There are many awesome books like [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) and interview-related repositories out there on GitHub, what makes this repository different? The difference is that many existing interview repositories contain mainly links to external resources whereas this repository contains top-quality curated content directly for your consumption.
 
 Also, existing resources focus mainly on algorithm questions and lack coverage for more domain-specific and non-technical questions. This handbook aims to cover content beyond the typical algorithmic coding questions. 😎
 
 ## Looking for Front End content?
 
-Front end-related content have been extracted out into a separate repository - [Front End Interview Handbook](https://github.com/yangshun/front-end-interview-handbook).
+Front-end-related content has been extracted out into a separate repository - [Front End Interview Handbook](https://github.com/yangshun/front-end-interview-handbook).
 
 ## Contents
 
