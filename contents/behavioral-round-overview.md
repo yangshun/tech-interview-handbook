@@ -17,6 +17,6 @@ Companies value behavioral skills and do evaluate candidates on them. At the tim
 - Provide specific examples about what you did and the resulting impact
 - Critique yourself and share what you learned from a past situation
 - Talk about what you like about your current role and/or being a developer
-- Discuss what and why changes you would like to make
+- Discuss what and what changes you would like to make
 
 _Source: [Preparing for your Onsite Interview at Facebook](https://www.facebook.com/careers/swe-prep-onsite)_
