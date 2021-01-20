@@ -13,10 +13,10 @@ Companies value behavioral skills and do evaluate candidates on them. At the tim
 
 ## What Facebook looks for in behavioral interviews
 
-- Discuss anything written on your resume, and be able to go in-depth
-- Provide specific examples about what you did and the resulting impact
-- Critique yourself and share what you learned from a past situation
-- Talk about what you like about your current role and/or being a developer
-- Discuss what and why changes you would like to make
+- Discuss anything that's on your resume, including current projects and details.
+- Provide specific examples about what you did and the resulting impact.
+- Critique yourself and share what you learned from a past situation.
+- Talk about what you like about your current role and/or being a developer.
+- Discuss why you'd like to make a change.
 
 _Source: [Preparing for your Onsite Interview at Facebook](https://www.facebook.com/careers/swe-prep-onsite)_
