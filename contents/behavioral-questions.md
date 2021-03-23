@@ -78,6 +78,17 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Amazon-Interview-Questio
 - Describe what Human Resources means to you.
 - How would you improve Amazon's website?
 
+### Bytedance
+
+Source: [Glassdoor]
+
+- What do you know about product manager and why?
+- Take me through a product you launched from start to end
+- What's the biggest achievement in your previous projects
+- Why do you want to work at ByteDance?
+- Tell me about a recent failure and what you learned from the experience
+- What excites you about the role?
+
 ### Dropbox
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Dropbox-Interview-Questions-E415350.htm)
