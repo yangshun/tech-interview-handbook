@@ -13,4 +13,4 @@ This repository has **practical** content that covers all phases of a technical 
 
 ## Who is this for?
 
-Whether you are a beginner to technical interviews or a seasoned engineer who have not been on the other side of the interviewing table in a while and want to get back into the game, the Tech Interview Handbook has got you covered.
+Whether you are a beginner to technical interviews or a seasoned engineer who have not been on the other side of the interviewing table in a while and want to get back into the game, the Tech Interview Handbook has got you covered.It doesn't matter how slowly you go as long as you do not stop.
