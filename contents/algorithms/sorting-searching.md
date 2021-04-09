@@ -11,7 +11,6 @@ title: Sorting and Searching
 - Given users with locations in a list and a logged-in user with locations, find their travel buddies (people who shared more than half of your locations).
 - Search for an element in a sorted and rotated array.
   - [Source](http://blog.gainlo.co/index.php/2017/01/12/rotated-array-binary-search/)
-- Sort a list where each element is no more than k positions away from its sorted position.
 - Merge two sorted lists together.
 - Give 3 distinct algorithms to find the K largest values in a list of N items.
 - Find the minimum element in a sorted rotated array in faster than O(n) time.
