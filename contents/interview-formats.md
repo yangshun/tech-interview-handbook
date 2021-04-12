@@ -177,5 +177,5 @@ If the company provides lunch, you might also have a lunch session with an emplo
   - All sessions involve coding on your own laptop. Prepare your development environment in advance
   - You are allowed to look up APIs if you need to
   - They seem to place high emphasis on compilable, runnable code in all their coding rounds
-  - Cross functional interviews will involve getting Airbnb employees from any discipline to speak with you. These interviews are mostly non-technical but are extremely important to Amazon because they place a high emphasis on cultural fit. Do look up the Airbnb section of the behavioral questions to know what sort of questions to expect
+  - Cross functional interviews will involve getting Amazon employees from any discipline to speak with you. These interviews are mostly non-technical but are extremely important to Amazon because they place a high emphasis on cultural fit. Do look up the Amazon section of the behavioral questions to know what sort of questions to expect
 
