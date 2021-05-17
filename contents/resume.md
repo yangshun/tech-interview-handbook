@@ -55,6 +55,7 @@ Your resume should be kept to 1 page or a MAXIMUM of 2 pages. Include only your 
 Information that a recruiter wants to know:
 
 - Name, email, contact number.
+- Objective statement
 - Education details: College, Major, GPA, Sample classes (optional, but if you list, make sure its classes that you scored well in and are relevant to your area of interest), academic awards, availability.
 - If you have studied abroad, you can list that too.
 - Projects that you have worked on.
