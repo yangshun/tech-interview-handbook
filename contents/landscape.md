@@ -17,7 +17,7 @@ Almost every domain leverages on technology, hence Software Engineers are needed
 
 Computer Science is rapidly gaining popularity and engineering is a highly-regarded professional career. Unlike the creative industry, you do not have to be the top 1% of the industry to lead a comfortable life. An engineer fresh out of college working at a Silicon Valley company (both large companies and startups) can expect to receive a starting salary of more than USD 100,000 and it just gets better from there.
 
-### Require lifelong learning
+### Requires lifelong learning
 
 Technology industry is an extremely fast-moving one. Many technologies used today didn't even exist/were popular a decade ago; in 2009, mobile app development and blockchain were pretty much unheard of. Engineers constantly need to upgrade their skills to stay relevant to the demands of the job market. Engineering is a great career for passionate individuals who like to learn.
 

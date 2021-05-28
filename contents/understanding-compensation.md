@@ -45,7 +45,7 @@ Equity is what differentiates a tech job from a non-tech one. Equity means a sha
 
 Equity usually vests (becomes available to you) over a period of time (typically 4 years) and can vest equally every month/quarter/year. A vesting cliff means the minimum period of time before your vesting begins. For example, if you are granted 4,800 shares over a 4 year schedule with a 1 year cliff, and monthly vesting, you will get 1,200 shares at the end of your first year and 100 shares every month thereafter for the subsequent 3 years.
 
-Until the company goes public or gets acquired, the equity is not worth anything. Be mindful of what you are getting yourself into!
+Until the company goes public (IPO) or gets acquired, the equity is usually not worth anything. However, there are instances where you can sell your stocks internally even though the company hasn't gone public. Be mindful of what you are getting yourself into!
 
 Not all equity is treated equally. Depending on the company you join and which stage that company is at, you may receive one of the following types: stock options or stock grants.
 
@@ -69,8 +69,9 @@ There can be conditions attached to signing bonuses, such as having to return a 
 
 ### Misc bonuses/perks
 
-While these perks are not exactly cash, they can help you save money which is almost equivalent to getting compensated more.
+While these perks are not exactly cash, they can help you save money which is almost equivalent to getting compensated more. Do find out more about these from your recruiters if you get the chance.
 
 - Free meals - Food is not exactly cheap in the Bay Area and having some meals provided on weekdays can result in saving few thousand dollars a year
 - Relocation bonus - Helpful if you are moving from abroad, and this can partially offset costs due to relocating
+- Health and dental insurance/plans - Companies often partner with insurance companies to provide employees with health and dental plans. These can amount to a few thousand dollars worth annually and is especially useful in locations where healthcare is expensive
 - Shuttle service - Public transportation in the Bay Area is not that great and the most common form of commute is driving. Being able to take a shuttle service helps in saving money on gas, transport, and freeing up your mind to do other things during the commute
