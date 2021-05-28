@@ -18,9 +18,9 @@ Examples:
 
 ### Take home assignment
 
-There has been numerous debates on whether asking algorithm questions are a good way of assessing individual abilities as they aren't exactly the most relevant skills needed for a job. Take home assignment is a format designed to address the shortcomings of the algorithm interview by getting candidates to work on larger projects which allow them to demonstrate software design skills.
+There has been numerous debates on whether asking algorithm questions are a good way of assessing individual abilities as they aren't exactly the most relevant skills needed for a job. Take home assignment is a format designed to address the shortcomings of the algorithm interview by getting candidates to work on larger projects which allow them to demonstrate software design skills. 
 
-However, this interview format takes up more time from both the candidates and the company and hence it is not as commonly seen in large companies where they have a high volume of candidates. This format is more common among startups and small companies.
+However, this interview format takes up more time from both the candidates and the company and hence it is not as commonly seen in large companies where they have a high volume of candidates. This format is more common among startups and small companies. Tools like [Intervue.io](https://intervue.io/) can auto grade assignments which can reduce time for the organisation to improve evaluation efficiency. 
 
 Examples
 
