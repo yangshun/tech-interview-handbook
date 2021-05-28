@@ -1,6 +1,6 @@
 ---
-id: summing-root-to-leaf-numbers
 title: Summing Root To Leaf Numbers
+slug: summing-root-to-leaf-numbers
 author: Raivat Shah
 author_title: Student at NUS Computing
 author_url: https://github.com/raivatshah

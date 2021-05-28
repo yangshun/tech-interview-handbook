@@ -46,7 +46,7 @@ module.exports = {
       {
         docs: {
           path: '../contents',
-          routeBasePath: '',
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/yangshun/tech-interview-handbook/edit/master/contents/',
