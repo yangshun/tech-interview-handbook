@@ -55,17 +55,21 @@ function Home() {
               <div className="col col--8 col--offset-2">
                 <div className="margin-vert--lg text--center">
                   <h2 className={styles.sectionPrimaryTitle}>
-                    Job hunting? Sign up with Triplebyte to efficiently
-                    interview with top tech companies and land your dream job!
-                    💰
+                    <div align="center">
+                      <strong>
+                        Got a job offer? Don't leave money on the table! Get
+                        risk-free salary negotiation help from Moonchaser. You
+                        pay nothing unless your offer is increased.
+                      </strong>
+                    </div>
                   </h2>
                   <div className="margin-vert--lg">
                     <a
                       className="button button--secondary button--lg"
-                      href="https://triplebyte.com/a/PJaJNpO/tihw"
+                      href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_campaign=website_homepage"
                       rel="noreferrer noopener"
                       target="_blank">
-                      Sign up for free!
+                      Check it Out&nbsp;&nbsp;→
                     </a>
                   </div>
                 </div>

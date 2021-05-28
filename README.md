@@ -20,7 +20,7 @@
 <hr/>
 
 <div align="center">
-  <h3>Got a job offer? Get risk-free salary negotiation help from <a href="https://www.moonchaser.io/landing-page?utm_source=techinterviewhandbook&utm_medium=referral&utm_campaign=github" target="_blank">Moonchaser</a>, you pay nothing unless your offer is increased. Don't leave money on the table 💰!</h3>
+  <h3>Got a job offer? Get risk-free salary negotiation help from <a href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_campaign=github" target="_blank">Moonchaser</a>, you pay nothing unless your offer is increased. Don't leave money on the table 💰!</h3>
 </div>
 
 <hr/>
