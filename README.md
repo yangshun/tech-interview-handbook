@@ -1,7 +1,7 @@
 <h1 align="center">Tech Interview Handbook</h1>
 
 <div align="center">
-  <a href="https://yangshun.github.io/tech-interview-handbook/">
+  <a href="https://techinterviewhandbook.org/">
     <img src="website/static/img/logo.svg" alt="Tech Interview Handbook" width="400">
   </a>
   <br>
@@ -13,7 +13,7 @@
     <em>Credits: <a href="https://dribbble.com/shots/3831443-Tech-Interview-Handbook">Illustration</a> by <a href="https://dribbble.com/leftaligned">@leftaligned</a></em>
   </p>
   <h3>
-    <a href="https://yangshun.github.io/tech-interview-handbook/">Read on the website</a>
+    <a href="https://techinterviewhandbook.org/">Read on the website</a>
   </h3>
 </div>
 
@@ -29,14 +29,14 @@
 
 Carefully curated content to help you ace your next technical interview, with a focus on algorithms. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff includes:
 
-- [How to prepare](https://yangshun.github.io/tech-interview-handbook/coding-round-overview) for coding interviews
-- [Interview Cheatsheet](https://yangshun.github.io/tech-interview-handbook/cheatsheet) - Straight-to-the-point Do's and Don'ts
-- [Algorithm tips and the best practice questions](https://yangshun.github.io/tech-interview-handbook/algorithms/algorithms-introduction) categorized by topic
+- [How to prepare](https://techinterviewhandbook.org/coding-round-overview) for coding interviews
+- [Interview Cheatsheet](https://techinterviewhandbook.org/cheatsheet) - Straight-to-the-point Do's and Don'ts
+- [Algorithm tips and the best practice questions](https://techinterviewhandbook.org/algorithms/algorithms-introduction) categorized by topic
 - ["Front-end Job Interview Questions" answers](https://github.com/yangshun/front-end-interview-handbook)
-- [Interview formats](https://yangshun.github.io/tech-interview-handbook/interview-formats) of the top tech companies
-- [Behavioral questions](https://yangshun.github.io/tech-interview-handbook/behavioral-questions) asked by the top tech companies
-- [Good questions to ask your interviewers](https://yangshun.github.io/tech-interview-handbook/questions-to-ask) at the end of the interviews
-- [Helpful resume tips](https://yangshun.github.io/tech-interview-handbook/resume) to get your resume noticed and the Do's and Don'ts
+- [Interview formats](https://techinterviewhandbook.org/interview-formats) of the top tech companies
+- [Behavioral questions](https://techinterviewhandbook.org/behavioral-questions) asked by the top tech companies
+- [Good questions to ask your interviewers](https://techinterviewhandbook.org/questions-to-ask) at the end of the interviews
+- [Helpful resume tips](https://techinterviewhandbook.org/resume) to get your resume noticed and the Do's and Don'ts
 
 Help from you in contributing content would be very much appreciated!
 
@@ -68,7 +68,7 @@ Front end-related content have been extracted out into a separate repository - [
 
 ## Contents
 
-A [Docusaurus](https://github.com/facebook/docusaurus) website has been created to provide a better reading experience. Check out the website [here](https://yangshun.github.io/tech-interview-handbook/)!
+A [Docusaurus](https://github.com/facebook/docusaurus) website has been created to provide a better reading experience. Check out the website [here](https://techinterviewhandbook.org/)!
 
 ## Related
 
