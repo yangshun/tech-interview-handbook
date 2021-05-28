@@ -13,7 +13,7 @@ If you haven't been negotiating your past offers, or are new to the negotiation 
 
 :::tip
 
-Get risk-free salary negotiation help from [**Moonchaser**](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_campaign=website_negotiation), you pay nothing unless your offer is increased. Don't leave money on the table 💰!
+Get paid more. Receive risk-free salary negotiation help from [**Moonchaser**](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_campaign=website_negotiation), you pay nothing unless your offer is increased. Don't leave money on the table 💰!
 
 :::
 

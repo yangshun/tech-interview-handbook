@@ -57,9 +57,9 @@ function Home() {
                   <h2 className={styles.sectionPrimaryTitle}>
                     <div align="center">
                       <strong>
-                        Got a job offer? Don't leave money on the table! Get
-                        risk-free salary negotiation help from Moonchaser. You
-                        pay nothing unless your offer is increased.
+                        Get paid more. Receive risk-free salary negotiation help
+                        from Moonchaser. You pay nothing unless your offer is
+                        increased.
                       </strong>
                     </div>
                   </h2>
