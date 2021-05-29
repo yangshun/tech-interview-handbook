@@ -9,11 +9,11 @@ If you've received an offer (or even better, offers), congratulations! You may h
 
 **Here's something that recruiters don't want you to know:** In most cases, there's room for negotiation on your offer. The initial offer that you are given is not the best package that the company can offer. During my job hunting experience and having received offers from numerous top tech companies like Facebook, Google, Airbnb, Lyft, and Dropbox, I have found this to be true. In most cases, you could always negotiate for more money, and some aspects of your salary is easier to negotiate than the others.
 
-If you haven't been negotiating your past offers, or are new to the negotiation game, worry not! [Moonchaser](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_campaign=website_negotiation) can help you with it. How it works is that you will be guided by their experienced team of professionals throughout the entire salary negotiation process. It's also risk-free because you don't have to pay anything unless they helped you to increase your offer. It's a **no-brainer decision** to get the help of Moonchaser during the offer process. Some increase is better than no increase. Don't leave money on the table!
+If you haven't been negotiating your past offers, or are new to the negotiation game, worry not! [Moonchaser](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) can help you with it. How it works is that you will be guided by their experienced team of professionals throughout the entire salary negotiation process. It's also risk-free because you don't have to pay anything unless they helped you to increase your offer. It's a **no-brainer decision** to get the help of Moonchaser during the offer process. Some increase is better than no increase. Don't leave money on the table!
 
 :::tip
 
-Get paid more. Receive risk-free salary negotiation help from [**Moonchaser**](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_campaign=website_negotiation), you pay nothing unless your offer is increased. Don't leave money on the table 💰!
+Get paid more. Receive risk-free salary negotiation help from [**Moonchaser**](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation), you pay nothing unless your offer is increased. Don't leave money on the table 💰!
 
 :::
 
@@ -103,6 +103,6 @@ Don't waste their time or play games for your own purposes. Even if the company 
 
 :::tip
 
-Get risk-free salary negotiation help from [Moonchaser](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_campaign=website_negotiation), you pay nothing unless your offer is increased. Don't leave money on the table 💰!
+Get risk-free salary negotiation help from [Moonchaser](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation), you pay nothing unless your offer is increased. Don't leave money on the table 💰!
 
 :::

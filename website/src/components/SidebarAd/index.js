@@ -10,7 +10,7 @@ function SidebarAd() {
   return (
     <a
       className={styles.container}
-      href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_campaign=website_docs_sidebar"
+      href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_docs_sidebar"
       target="_blank"
       rel="noreferrer noopener">
       <p className={styles.tagline}>

@@ -66,7 +66,7 @@ function Home() {
                   <div className="margin-vert--lg">
                     <a
                       className="button button--secondary button--lg"
-                      href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_campaign=website_homepage"
+                      href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
                       rel="noreferrer noopener"
                       target="_blank">
                       Check it Out&nbsp;&nbsp;→
