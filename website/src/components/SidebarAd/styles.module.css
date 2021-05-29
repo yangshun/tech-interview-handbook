@@ -1,5 +1,5 @@
 .container {
-  background-color: var(--ifm-color-primary-light);
+  background-color: var(--ifm-color-primary);
   background-repeat: no-repeat;
   background-size: contain;
   border-radius: var(--ifm-global-radius);
@@ -12,7 +12,7 @@
 }
 
 .container:hover {
-  background-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-primary-dark);
   color: #fff;
   text-decoration: none;
 }
