@@ -69,7 +69,7 @@ function Home() {
                       href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
                       rel="noreferrer noopener"
                       target="_blank">
-                      Check it Out&nbsp;&nbsp;→
+                      Find Out More&nbsp;&nbsp;→
                     </a>
                   </div>
                 </div>
