@@ -21,7 +21,7 @@ You can be given a list of edges and tasked to build your own graph from the edg
 
 A tree-like diagram could very well be a graph that allows for cycles and a naive recursive solution would not work. In that case you will have to handle cycles and keep a set of visited nodes when traversing.
 
-## Graph search algorithms:
+## Graph search algorithms
 
 - **Common** - Breadth-first Search, Depth-first Search
 - **Uncommon** - Topological Sort, Dijkstra's algorithm
@@ -90,7 +90,11 @@ def bfs(matrix):
       traverse(i, j)
 ```
 
-> NOTE: While DFS is implemented using recursion in this sample, it could also be implemented iteratively similar to BFS. The key difference between the algorithms lies in the underlying data structure (BFS uses a queue while DFS uses a stack). The `deque` class in Python can function as both a stack and a queue
+:::note
+
+While DFS is implemented using recursion in this sample, it could also be implemented iteratively similar to BFS. The key difference between the algorithms lies in the underlying data structure (BFS uses a queue while DFS uses a stack). The `deque` class in Python can function as both a stack and a queue
+
+:::
 
 For additional tips on BFS and DFS, you can refer to this [LeetCode post](https://leetcode.com/problems/pacific-atlantic-water-flow/discuss/90774/Python-solution-with-detailed-explanation)
 

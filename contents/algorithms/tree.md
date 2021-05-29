@@ -46,7 +46,7 @@ Be very familiar with the properties of a BST and validating that a binary tree 
 
 When a question involves a BST, the interviewer is usually looking for a solution which runs faster than O(n).
 
-#### Recommended LeetCode questions
+## Recommended LeetCode questions
 
 - [Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
 - [Same Tree](https://leetcode.com/problems/same-tree/)

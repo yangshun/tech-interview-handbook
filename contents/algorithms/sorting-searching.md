@@ -3,6 +3,10 @@ id: sorting-searching
 title: Sorting and Searching
 ---
 
+## Tips
+
+When a given sequence is in a sorted order (be it ascending or descending), using binary search should be one of the first things that come to your mind.
+
 ## Sample questions
 
 - Sorting search results on a page given a certain set of criteria.
