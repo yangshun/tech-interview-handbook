@@ -5,6 +5,7 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import styles from './styles.module.css';
 
 const AD_ELEMENT_ID = 'ad-element-id';
+const CONTAINER_SELECTOR = '[class^="tableOfContents"]';
 
 function SidebarAd() {
   return (
@@ -28,13 +29,21 @@ function initAd() {
       return $el;
     }
 
-    const $tocEl = document.querySelector('[class^="tableOfContents"]');
+    const $tocEl = document.querySelector(CONTAINER_SELECTOR);
+    if ($tocEl == null) {
+      return null;
+    }
+
     const $newEl = document.createElement('div');
     $newEl.id = AD_ELEMENT_ID;
-    $tocEl.appendChild($newEl);
+    $tocEl.append($newEl);
 
     return $newEl;
   })();
+
+  if ($adEl == null) {
+    return;
+  }
 
   ReactDOM.render(<SidebarAd />, $adEl);
 }
