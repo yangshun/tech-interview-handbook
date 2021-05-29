@@ -36,7 +36,7 @@ function initAd() {
 
     const $newEl = document.createElement('div');
     $newEl.id = AD_ELEMENT_ID;
-    $tocEl.append($newEl);
+    $tocEl.prepend($newEl);
 
     return $newEl;
   })();
