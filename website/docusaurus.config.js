@@ -59,4 +59,5 @@ module.exports = {
       },
     ],
   ],
+  clientModules: [require.resolve('./src/components/SidebarAd')],
 };

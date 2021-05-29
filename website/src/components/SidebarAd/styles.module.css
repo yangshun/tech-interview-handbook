@@ -1,0 +1,27 @@
+.container {
+  background-color: var(--ifm-color-primary-light);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: var(--ifm-global-radius);
+  color: #fff;
+  display: block;
+  margin: 1rem;
+  padding: 1rem;
+  transition: background-color var(--ifm-transition-fast)
+    var(--ifm-transition-timing-default);
+}
+
+.container:hover {
+  background-color: var(--ifm-color-primary);
+  color: #fff;
+  text-decoration: none;
+}
+
+.tagline {
+  font-size: 0.75rem;
+  margin-bottom: 0;
+}
+
+.logo {
+  width: 96px;
+}
