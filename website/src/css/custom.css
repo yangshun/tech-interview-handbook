@@ -19,3 +19,21 @@ html[data-theme='dark'] {
   --ifm-color-primary-lighter: rgb(165, 165, 245);
   --ifm-color-primary-lightest: rgb(191, 191, 248);
 }
+
+@media screen and (max-width: 767px) {
+  :root {
+    --ifm-font-size-base: 16px;
+  }
+
+  .markdown h1 {
+    --ifm-h1-font-size: 1.5rem;
+  }
+
+  .markdown h2 {
+    --ifm-h2-font-size: 1.375rem;
+  }
+
+  .markdown h3 {
+    --ifm-h3-font-size: 1.25rem;
+  }
+}
