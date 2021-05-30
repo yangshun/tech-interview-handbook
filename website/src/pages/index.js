@@ -68,7 +68,10 @@ function Home() {
                       className="button button--secondary button--lg"
                       href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
                       rel="noreferrer noopener"
-                      target="_blank">
+                      target="_blank"
+                      onClick={() => {
+                        window.gtag('event', 'moonchaser.click');
+                      }}>
                       Find Out More&nbsp;&nbsp;→
                     </a>
                   </div>
