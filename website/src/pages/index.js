@@ -175,6 +175,15 @@ function Home() {
                     </div>
                   </div>
                 ))}
+                <p className="margin-vert--lg text--center">
+                  Would you like to contribute a success story?{' '}
+                  <a
+                    href="https://github.com/yangshun/tech-interview-handbook/edit/master/website/src/data/successStories.js"
+                    target="_blank">
+                    Open a Pull Request here
+                  </a>
+                  !
+                </p>
               </div>
             </div>
           </div>

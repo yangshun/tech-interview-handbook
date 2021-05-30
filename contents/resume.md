@@ -35,7 +35,7 @@ There is a delicate balance between finding the right job vs. finding a job. Get
 
 When hiring fresh grads, I know that many of them will not have as much experience as someone who has years of industry experience. Hence, I would look out more for soft skills, such as attention to detail, initiative, passion, ability to get things done, etc. Note: this applies only if you have met the minimum threshold of proficiency/competency in the skill set checklist.
 
-## 10 ways To improve your resume
+## 10 ways to improve your resume
 
 Now that you are aware of how recruiters screen your resume, here are 10 actionable ways you can do to improve your resume.
 
