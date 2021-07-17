@@ -26,6 +26,11 @@ module.exports = {
           label: 'GitHub',
           position: 'right',
         },
+        {
+          href: 'https://www.facebook.com/techinterviewhandbook',
+          label: 'Facebook',
+          position: 'right',
+        },
       ],
     },
     footer: {
