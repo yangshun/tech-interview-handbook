@@ -13,7 +13,7 @@
     <em>Credits: <a href="https://dribbble.com/shots/3831443-Tech-Interview-Handbook">Illustration</a> by <a href="https://dribbble.com/leftaligned">@leftaligned</a></em>
   </p>
   <h3>
-    <a href="https://techinterviewhandbook.org/">Read on the website</a>
+    <a href="https://techinterviewhandbook.org/">Read on the website</a> | <a href="https://facebook.com/techinterviewhandbook">Follow us on Facebook</a> 
   </h3>
 </div>
 
