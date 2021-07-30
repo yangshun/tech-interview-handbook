@@ -94,3 +94,9 @@ When interviewers take down interview feedback, these are likely what is on thei
 
 - 👍 Able to explain overall approach, technical terms and acronyms (where applicable)
 - 👎 Failed to effectively explain overall approach, technical terms and acronyms (where applicable)
+
+#### Explains while coding
+
+- 👍 Explains what the code is doing while coding, especially for parts which aren't obvious
+- 👎 Keeps silent during coding, or just reading out the code without much 
+explanation
