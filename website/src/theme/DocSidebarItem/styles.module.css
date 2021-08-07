@@ -1,0 +1,15 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@media (min-width: 997px) {
+  .menuLinkText {
+    cursor: initial;
+  }
+  .menuLinkText:hover {
+    background: none;
+  }
+}

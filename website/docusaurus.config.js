@@ -19,7 +19,7 @@ module.exports = {
         src: 'img/logo.svg',
       },
       items: [
-        {to: 'introduction', label: 'Getting Started', position: 'right'},
+        {href: '/introduction', label: 'Getting Started', position: 'right'},
         {to: 'blog', label: 'Blog', position: 'right'},
         {
           href: 'https://github.com/yangshun/tech-interview-handbook',

@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import Link from '@docusaurus/Link';
 import Translate, {translate} from '@docusaurus/Translate';
 
 function DocPaginator(props) {
   const {metadata} = props;
   return (
     <nav
-      className="pagination-nav"
+      className="pagination-nav docusaurus-mt-lg"
       aria-label={translate({
         id: 'theme.docs.paginator.navAriaLabel',
         message: 'Docs pages navigation',

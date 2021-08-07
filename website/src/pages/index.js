@@ -26,14 +26,14 @@ function Home() {
             From the author of the <a href={BLIND_75_URL} target="_blank">Blind 75 List</a>
           </p>
           <div className={styles.buttons}>
-            <Link
+            <a
               className={classnames(
                 'button button--primary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('introduction')}>
+              href={useBaseUrl('introduction')}>
               Get Started&nbsp;&nbsp;→
-            </Link>
+            </a>
           </div>
           <div className="margin-top--lg">
             <iframe
