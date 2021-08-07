@@ -1,18 +1,38 @@
 .container {
-  background: linear-gradient(138deg, rgb(69, 104, 220), rgb(176, 106, 179));
   background-repeat: no-repeat;
   background-size: contain;
   border-radius: var(--ifm-global-radius);
   color: #fff;
   display: block;
+  opacity: 0.95;
   padding: 1rem;
-  transition: background-color var(--ifm-transition-fast)
+  transition: opacity var(--ifm-transition-fast)
     var(--ifm-transition-timing-default);
 }
 
+.backgroundPurple {
+  background-image: linear-gradient(138deg, rgb(69, 104, 220), rgb(176, 106, 179));
+}
+
+.backgroundRed {
+  background-image: linear-gradient(39deg, rgb(188, 78, 156), rgb(248, 7, 89));
+}
+
+.backgroundOrange {
+  background-image: linear-gradient(39deg, rgb(255, 81, 47), rgb(240, 152, 25));
+}
+
+.backgroundGreen {
+  background-image: linear-gradient(198deg, rgb(29, 151, 108), rgb(147, 249, 185));
+}
+
+.backgroundBlue {
+  background-image: linear-gradient(153deg, rgb(116, 116, 191), rgb(52, 138, 199));
+}
+
 .container:hover {
-  background-color: var(--ifm-color-primary-dark);
   color: #fff;
+  opacity: 1;
   text-decoration: none;
 }
 
