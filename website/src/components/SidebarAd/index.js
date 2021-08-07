@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 const BACKGROUNDS = [
   styles.backgroundBlue,
-  styles.backgroundGreen,
   styles.backgroundOrange,
   styles.backgroundPurple,
   styles.backgroundRed,
