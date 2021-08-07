@@ -23,7 +23,7 @@ function Home() {
           />
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline} <br/>
-            From the author of the <a href={BLIND_75_URL} target="_blank">Blind 75 List</a>
+            Brought to you by the author of the <a href={BLIND_75_URL} target="_blank">Blind 75 List</a>
           </p>
           <div className={styles.buttons}>
             <a
