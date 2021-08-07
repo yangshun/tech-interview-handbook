@@ -64,7 +64,6 @@ module.exports = {
       },
     ],
   ],
-  clientModules: [require.resolve('./src/components/SidebarAd')],
   scripts: [
     {
       src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4984084888641317",

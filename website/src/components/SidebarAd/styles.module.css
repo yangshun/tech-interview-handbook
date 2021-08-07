@@ -1,11 +1,10 @@
 .container {
-  background-color: var(--ifm-color-primary);
+  background: linear-gradient(138deg, rgb(69, 104, 220), rgb(176, 106, 179));
   background-repeat: no-repeat;
   background-size: contain;
   border-radius: var(--ifm-global-radius);
   color: #fff;
   display: block;
-  margin: 1rem;
   padding: 1rem;
   transition: background-color var(--ifm-transition-fast)
     var(--ifm-transition-timing-default);
