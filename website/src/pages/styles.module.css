@@ -34,7 +34,7 @@
 }
 
 .sectionPrimary {
-  background-color: var(--ifm-color-primary);
+  background: linear-gradient(90deg,#12c2e9,#c471ed,#f64f59);
 }
 
 .sectionPrimaryTitle {
