@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Tech Interview Handbook',
   tagline:
-    'Carefully curated content to help you ace your next technical interview',
+    'Curated technical interview preparation materials for busy engineers',
   url: 'https://techinterviewhandbook.org',
   baseUrl: '/',
   favicon: 'img/favicon.png',

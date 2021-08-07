@@ -27,7 +27,10 @@
 
 ## What is this?
 
-Carefully curated content to help you ace your next technical interview, with a focus on algorithms. System design questions are in-progress. Besides the usual algorithm questions, other **awesome** stuff includes:
+No one has time to do a few hundred LeetCode questions. Here's *free and curated* technical interview preparation materials for 
+busy engineers, from the author of the [Blind 75 List](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU). 
+
+Besides the usual algorithm questions, other **awesome** stuff includes:
 
 - [How to prepare](https://techinterviewhandbook.org/coding-round-overview) for coding interviews
 - [Interview Cheatsheet](https://techinterviewhandbook.org/cheatsheet) - Straight-to-the-point Do's and Don'ts

@@ -8,6 +8,8 @@ import styles from './styles.module.css';
 
 import successStories from '../data/successStories';
 
+const BLIND_75_URL = 'https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU';
+
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
@@ -20,7 +22,9 @@ function Home() {
             src={useBaseUrl('img/logo.svg')}
           />
           <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <p className="hero__subtitle">{siteConfig.tagline} <br/>
+            From the author of the <a href={BLIND_75_URL} target="_blank">Blind 75 List</a>
+          </p>
           <div className={styles.buttons}>
             <Link
               className={classnames(
@@ -105,7 +109,7 @@ function Home() {
                     <p>
                       No one has time to practice a few hundred LeetCode
                       questions. We tell you which are the best questions to
-                      practice.
+                      practice. We created the <a href={BLIND_75_URL} target="_blank">Blind 75 List</a>.
                     </p>
                   </div>
                   <div className="col">
