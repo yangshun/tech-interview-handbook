@@ -65,7 +65,23 @@ If the company provides lunch, you might also have a lunch session with an emplo
   - You are allowed to look up APIs if you need to
   - They seem to place high emphasis on compilable, runnable code in all their coding rounds
   - Cross functional interviews will involve getting Airbnb employees from any discipline to speak with you. These interviews are mostly non-technical but are extremely important to Airbnb because they place a high emphasis on cultural fit. Do look up the Airbnb section of the behavioral questions to know what sort of questions to expect
+  
+### AfterPay
 
+- Recruiter phone screen + behavioural questions
+  - Past experience/project
+  - Discussion on technologies listed on candidate's resume
+- Techincal zoom interview(Front end): 
+  - 2 x CSS animation on CodeSandbox 
+  - 2 x coding with React on CodeSandbox
+  - 2 x General React knowledges(hooks, ES6 features)
+- On-site (Front end)
+  - Cross functional
+  - Meeting the head of department and introduing corprate culture
+- Tips: 
+  - The director will directly contact the candidate first and one of the team members will conduct the technical interview
+  - They put much emphasis on candidate's project and will ask you to remake some part of it on spot
+  
 ### Asana
 
 - Recruiter phone screen
