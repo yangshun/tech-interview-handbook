@@ -73,8 +73,8 @@ If the company provides lunch, you might also have a lunch session with an emplo
   - Discussion on technologies listed on candidate's resume
 - Techincal zoom interview(Front end): 
   - 2 x CSS animation on CodeSandbox 
-  - 2 x coding with React on CodeSandbox
-  - 2 x General React knowledges(hooks, ES6 features)
+  - 2 x Coding with React on CodeSandbox
+  - 2 x General React knowledge(hooks, ES6 features)
 - On-site (Front end)
   - Cross functional
   - Meeting the head of department and introducing corporate culture
