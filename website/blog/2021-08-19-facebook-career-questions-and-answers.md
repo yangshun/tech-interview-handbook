@@ -114,9 +114,6 @@ Referrals tend to have a higher visibility than someone who applies on the Caree
 
 I look through your transcript and resume and look for stuff that suggests you'd make a good employee. What things I look out for - excellent grades in the relevant modules, notable internships, interesting side projects, ICPC/IOI awards. Bonus: Open Source experience. I'm a huge fan of Open Source and if you have built something really cool that's Open Source, I'd refer you even if your grades are terrible.
 
-### I'm an international student at SMU, does Facebook sponsor employment pass?
-
-IANAL. But we have had international students interning at Facebook before and are currently working at Facebook. Please check with the recruiter.
 
 ### Do I stand a good chance if I'm from a Info Systems background but gotten good grades for programming modules? Currently taking some CS modules now too.
 
@@ -125,6 +122,16 @@ There are many IS folks who are good engineers. As long as you can demonstrate t
 ### Would you know whether Facebook's hiring process has a preference for single-page resumes?
 
 As an interviewer for FB senior-ish candidates, I have seen some horrendously long resumes. So I would think single-page is not a hard rule, more of a recommendation. If you are exceeding a single page, then you are likely including too many things. [My own resume](https://docs.google.com/document/d/13c8KsKSsP5biJT8N70aLULyq-I5ywuWrxRxr2faQTK4/) is a 2-column one with small-ish font which I used in my last job hunt in 2017. It has got me replies from recruiters even before I started working at Facebook.
+
+
+### I'm an international student at SMU, does Facebook sponsor employment pass?
+
+IANAL. But we have had international students interning at Facebook before and are currently working at Facebook. Please check with the recruiter.
+
+### Am I eligible to work overseas in US/London/Canada?
+
+IANAR. If you're Singaporean, you'd have no problems working anywhere. If you're a foreign student, you could check with your seniors or just ask the recruiter when you get the chance.
+
 
 ## Interviews
 
@@ -365,8 +372,6 @@ I'm very lucky that Software Engineering exists so that there's something meanin
 
 DSA. No DSA mastery, no passing of interviews, no Facebook job offer.
 
-## Overseas Eligibility
+---
 
-### Am I eligible to work overseas in US/London/Canada?
-
-IANAR. If you're Singaporean, you'd have no problems working anywhere. If you're a foreign student, you could check with your seniors or just ask the recruiter when you get the chance.
+**_I am not a recruiter and I might have answered some of the recruiting or internship-related questions wrongly, read at your own risk. Opinions expressed are my own and do not represent the views of my employer._**
