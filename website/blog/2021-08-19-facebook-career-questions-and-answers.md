@@ -240,15 +240,16 @@ First and foremost, check out the following (old but still relevant) [article](h
 
 Nit - Hacker Way is not in San Francisco, it is in Menlo Park. Perhaps you meant SF Bay Area. Anyway, FB SG and FB US differ is quite a lot of ways. There are too many to list but I'll list the most obvious ones.
 
-- Projects - Primarily product teams and hires primarily SWEs and EEs, while FB US has a good mix of teams, including infrastructure teams and hires across all roles. So if you're interested in working on infra stuff like our internal logging framework, GraphQL, our internal ORM, you'd have to look at non-SG offices
-- Changing teams - SG has fewer teams, so if you were looking to change teams but remain in Singapore, the choices are more limited
-- Company culture - You don't get to attend the events held only at the HQ in-person, such as Zuck's Q&A or company town halls or the summer and holiday parties (but there are local versions of them)
-- Food - Smaller selection of cafes. Food is still pretty darn good though. There's nothing to complain about free food
-- Office - Smaller office in SG, but still one of the coolest in SG. Menlo Park Headquarters is amazing, there's an arcade, board games room, a barber, ice cream shop, a gadgets vending machine, and more. It looks like Universal Studios at night. I'll just leave this [video](https://www.youtube.com/watch?v=cY3sMN3wohg) here
-- $$$ - FB pay is top tier in both US and SG. However in SG, you have to pay less tax and cheaper living expenses. In SG, I earn less but save more due to the large difference in taxes
-- Taxes - SG tax is crazy low compared to US. US taxes you on every damn thing, including the capital gains from your stocks and bank interest earned (WTF), but SG doesn't
-- Engineering Culture - Similar-ish because quite a number of engineers in FB SG moved here from FB US, including myself. But being a smaller office, we don't have extremely senior engineers (no principal and higher)
-- Social Security - I thought Bay Area was relatively safer than the smaller US states, but these days [driving on the highway also can get shot](https://www.youtube.com/watch?v=0ybiHCxNb3w), so I don't know anymore. I think SG is definitely safer, at least you definitely won't kena any racist remarks or comments while walking on the streets
+- Career Progression - FB US, being the HQ and where the company started, has the most number of teams and you have all levels of seniority of folks there. In FB SG, there are fewer teams and due to the size of the office now, there isn't a need for extremely senior engineers yet. So if you're talking about long term career progression, SG definitely loses out here. But don't need to think so far la, FB SG is still big enough for you to get to senior engineer position and earn enough to live comfortably for the rest of your life.
+- Projects - Primarily product teams and hires primarily SWEs and EEs, while FB US has a good mix of teams, including infrastructure teams and hires across all roles. So if you're interested in working on infra stuff like our internal logging framework, GraphQL, our internal ORM, you'd have to look at non-SG offices.
+- Changing Teams - SG has fewer teams, so if you were looking to change teams but remain in Singapore, the choices are more limited.
+- Company Culture - You don't get to attend the events held only at the HQ in-person, such as Zuck's Q&A or company town halls or the summer and holiday parties (but there are local versions of them).
+- Food - Smaller selection of cafes. Food is still pretty darn good though. There's nothing to complain about free food.
+- Office - Smaller office in SG, but still one of the coolest in SG. Menlo Park Headquarters is amazing, there's an arcade, board games room, a barber, ice cream shop, a gadgets vending machine, and more. It looks like Universal Studios at night. I'll just leave this [video](https://www.youtube.com/watch?v=cY3sMN3wohg) here.
+- $$$ - FB pay is top tier in both US and SG. However in SG, you have to pay less tax and cheaper living expenses. In SG, I earn less but save more due to the large difference in taxes.
+- Taxes - SG tax is crazy low compared to US. US taxes you on every damn thing, including the capital gains from your stocks and bank interest earned (WTF), but SG doesn't.
+- Engineering Culture - Similar-ish because quite a number of engineers in FB SG moved here from FB US, including myself. But being a smaller office, we don't have extremely senior engineers (no principal and higher).
+- Social Security - I thought Bay Area was relatively safer than the smaller US states, but these days [driving on the highway also can get shot](https://www.youtube.com/watch?v=0ybiHCxNb3w), so I don't know anymore. I think SG is definitely safer, at least you definitely won't kena any racist remarks or comments while walking on the streets.
 - Personal Happiness - Obviously you'd have fewer friends and family if you're in the US. If that's important to you then life there might be hard. But you can make new angmoh friends or hang out with the steadily growing SG community over there.
 - Dating Scene - If you're single, it might be hard to find a long-term partner there. The female Singaporean engineers there are mostly taken, those that are not, probably want to stay single. Dating there will be quite hard! I know of friends who got together with Americans/immigrants and then they get a green card and plan to stay there for good. You can consider that too.
 
@@ -268,11 +269,17 @@ I work on selling FRL hardware, not directly on FRL hardware/software itself. If
 
 ### What engineers is Facebook looking for - especially for New Grads? At the moment, I have knowledge on a breadth of tools but when asked on under the hood stuff, I can only explain what the tool / framework is trying to extract instead of going in depth as to how stuff actually works. Is the firm looking for new grad engineers who are language / tool / framework agnostic and can work towards building the skillset within the firm - or people who already have a speciality?
 
-TODO
+FB uses Flow (for JavaScript typechecking) and Hack (typed version of PHP) which most people outside of FB won't use. If we were to hire only people who have prior experience with them, then we'd have a really hard time filling our head count.
+
+When tech companies hire SWEs, usually it's for a generalist position and they would expect the employees to pick up any new language or tool to get the job down. If you master your fundamentals, doing that shouldn't be too hard. So really most companies would want to hire people who can learn fast and adapt. The exception is if you're a super senior person (think principal level and above), then you'd be hired for your specialized skillsets probably because the company needs some subject-matter expert in that area. But most of you are still undergrads, that doesn't apply to you.
+
+At the end of the day, many language and tools are similar-ish. New technologies learn from existing technologies and improve on them, learning new technologies isn't always that foreign.
+
+However, to be a good SWE, I would recommend peeking beneath the abstraction layers and understanding what problem this technology is trying to solve, how it works under the hood, and what advantages/disadvantages it has compared to similar technologies. That's why I love Open Source, all the code is public - you can read the code, look at how the projects are structured, and even contribute to them. I also love reading articles comparing technologies so that I know what tradeoffs the projects are making and what's the right tool for the job. Don't be a mindless drone who uses technologies without knowing why you are using it instead of alternatives. That'll be an easy way to get phased out really soon, especially considering how fast technologies move.
 
 ### In my conversations with most engineers from US tech companies, I often hear that one of the major shortcomings of working in the Singapore offices is that they are more auxiliary in their functions, and that opportunities for "core" engineering work are few and far between. Since you have worked in both the Menlo Park and SG offices, I'd love to hear your response to this within the context of Facebook.
 
-TODO.
+Answered above in the US vs SG comparison.
 
 ## Personal Experience
 
