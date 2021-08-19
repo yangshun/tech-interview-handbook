@@ -114,7 +114,6 @@ Referrals tend to have a higher visibility than someone who applies on the Caree
 
 I look through your transcript and resume and look for stuff that suggests you'd make a good employee. What things I look out for - excellent grades in the relevant modules, notable internships, interesting side projects, ICPC/IOI awards. Bonus: Open Source experience. I'm a huge fan of Open Source and if you have built something really cool that's Open Source, I'd refer you even if your grades are terrible.
 
-
 ### Do I stand a good chance if I'm from a Info Systems background but gotten good grades for programming modules? Currently taking some CS modules now too.
 
 There are many IS folks who are good engineers. As long as you can demonstrate that you have mastery of programming and DSA, it shouldn't be an issue.
@@ -123,7 +122,6 @@ There are many IS folks who are good engineers. As long as you can demonstrate t
 
 As an interviewer for FB senior-ish candidates, I have seen some horrendously long resumes. So I would think single-page is not a hard rule, more of a recommendation. If you are exceeding a single page, then you are likely including too many things. [My own resume](https://docs.google.com/document/d/13c8KsKSsP5biJT8N70aLULyq-I5ywuWrxRxr2faQTK4/) is a 2-column one with small-ish font which I used in my last job hunt in 2017. It has got me replies from recruiters even before I started working at Facebook.
 
-
 ### I'm an international student at SMU, does Facebook sponsor employment pass?
 
 IANAL. But we have had international students interning at Facebook before and are currently working at Facebook. Please check with the recruiter.
@@ -131,7 +129,6 @@ IANAL. But we have had international students interning at Facebook before and a
 ### Am I eligible to work overseas in US/London/Canada?
 
 IANAR. If you're Singaporean, you'd have no problems working anywhere. If you're a foreign student, you could check with your seniors or just ask the recruiter when you get the chance.
-
 
 ## Interviews
 
@@ -302,13 +299,13 @@ I haven't worked at Google so I can't comment on workload at Google. But Google 
 
 ### Am I correct to interpret that you started at Grab after graduation? What internships did you do during your studies?
 
-Yes I worked at Grab for two years after graduation, you can check out my LinkedIn. In Year 2 I did CVWO, Year 3 NOC in Silicon Valley for EasilyDo (now called Edison), Year 4 I was a Game Producer (non programmer!) in SUTD Game Lab (previously MIT Gambit program). Back during my time, overseas internships weren't common. The number of Google and FB interns each year was fewer than 10.
+Yes I worked at Grab for two years after graduation, you can check out my LinkedIn. Regarding university internships, Year 2 I did CVWO, Year 3 NOC in Silicon Valley for EasilyDo (now called Edison), Year 4 I was a Game Producer (non-programmer!) in SUTD Game Lab (previously MIT Gambit program). Back during my time, overseas internships weren't common. The number of Google and FB interns each year was fewer than 10.
 
 ### I'm also curious about what you do in your role as a Front End engineer, and why you decided to work at Facebook?
 
 As a Front End Engineer at Facebook, I primarily write JavaScript and some Hack (PHP with types). Being at Facebook is fun because I get to do front end work which isn't product, such as building React-based design systems, front end tooling, lint rules, CSS frameworks (Infima), Static site generators (Docusaurus).
 
-Facebook is the leader in terms of front end web technologies. If you develop on the web, you would more likely than not, be using some of Facebook's open source work, whether directly or not. There's React, Flux, Jest, GraphQL, React Native, Docusaurus, Draft.js, Relay, Flow, just to name a few. By working at Facebook, I also got the chance to work on Docusaurus and for a year, led the development of Docusaurus v2, which is one of the projects I am most proud of in my career. Today, Docusaurus is powering most of Facebook's open source websites. Many of the open source leaders I look up to were also at Facebook. I got to contribute to many high profile open source front end projects by Facebook and also work alongside the creator of React (Jordan Walke) on improving the front end of Facebook's Ads Interfaces. Not to mention that Facebook employees will be the first to dogfood React's new APIs and participate in design discussions and influence the future roadmap of React.
+Facebook is the leader in terms of front end web technologies. If you develop on the web, you would more likely than not, be using some of Facebook's open source work, whether directly or not. There's React, Flux, Jest, GraphQL, React Native, Docusaurus, Draft.js, Relay, Flow, just to name a few. By working at Facebook, I also got the chance to work on Docusaurus and for two years, led the development of Docusaurus v2, which is one of the projects I am most proud of in my career. Today, Docusaurus is powering most of Facebook's open source websites. Many of the open source leaders I look up to were also at Facebook. I got to contribute to many high profile open source front end projects by Facebook and also work alongside the creator of React (Jordan Walke) on improving the front end of Facebook's Ads Interfaces. Not to mention that Facebook employees will be the first to dogfood React's new APIs and participate in design discussions and influence the future roadmap of React.
 
 On the culture and working environment front, I have always vibed with Facebook's hacker culture and products more than Google's, so naturally I chose Facebook over Google even though their offers were comparable and I was given a chance to work on Google's search results page.
 
@@ -324,7 +321,9 @@ I've answered about my work above.
 
 ### What made you and the team came up with the idea of NUSMods and NUSWhispers? I think its really great to code for good and fulfilling stuff rather than coding for corporate means
 
-I didn't come up with NUSMods. [Beng](https://nusmods.com/team) did. I helped to build features, recruit members into the team, and also started the v3 rewrite which is the one you are using now. Most of the credit would go to [Yi Jiang](https://www.github.com/ZhangYiJiang), [Li Kai](https://www.github.com/li-kai) and [E-Liang](https://www.github.com/taneliang) for the current version though. Shout-out to [Christopher Goh](https://www.github.com/chrisgzf) for taking the helm now. Joining NUSMods was one of the best decisions in my life, as impacted the lives of so many students (I daresay above 100k), learnt so much from working on it (it's a relatively complex web application), and it helped me grow my network of like-minded individuals.
+I didn't come up with NUSMods. [Beng](https://nusmods.com/team) did. I helped to build features (my favorite being theming and dark mode), recruit members into the team, and also started the v3 rewrite which is the one you are using now. Most of the credit would go to [Yi Jiang](https://www.github.com/ZhangYiJiang), [Li Kai](https://www.github.com/li-kai) and [E-Liang](https://www.github.com/taneliang) for the current version. NUSMods code base isn't exactly that big, but it took us over a year of work to rewrite it on a modern stack.
+
+Shout-out to [Christopher Goh](https://www.github.com/chrisgzf) for taking the helm now! Joining NUSMods was one of the best decisions in my life, as impacted the lives of so many students (I daresay above 100k), learnt so much from working on it (it's a relatively complex web application), and it helped me grow my network of like-minded individuals. **We need more people to contribute so that the project can live on.** Notice that the NUSMods core team (and alumni) have pretty zai backgrounds? Correlation or causation? Maybe both.
 
 I came up with the idea for NUSWhispers but I didn't write much code for it. I was tutor for a web development course (CP3101B) back in 2015 and I proposed that idea to some students. I'm glad they did a darn good job of it. Back then I wanted to create a platform that could connect and help students around the school and the idea of an anonymous platform/page sounded like fun.
 
@@ -365,6 +364,8 @@ This is a hard question to answer because everyone is different. Some people are
 Strike a balance between breadth and depth. As undergrads, you can have a lot of room to explore and also relatively low stakes environment to fail. Take this chance to try out a lot of things, then choose what you really like and are good at. You can specialize after you have tried out enough things and know what you want and are good at. I've tried out back end, mobile, game development and prefer front end development the most.
 
 By now you should know that not every investment reaps the same level of rewards. CCAs which aren't related to CS can be fun, widen your social circle and improve your soft skills. If that's important to you, by all means go ahead. But if you suck at programming, and spend all your spare time on random CCAs which doesn't help you in your craft, then you'll probably end up as a mediocre programmer. Back in school, I never really had an official CCA - I chose to do tutoring, work on open source stuff like NUSMods, and working as a boarding councillor at NUS High (sort of like RA but for NUS High Students), which gave me free accommodation near school). I liked the balance and diversity of the activities I had.
+
+My CAP isn't that high - got first class but not near 5.00. I reckon I could get A+ for every module if I really spent all my time studying, but studying isn't exactly my favorite activity to do. I got my As usually from modules which were project-heavy. I value and enjoy the hands on experience more than the mugging experience. 
 
 I'm very lucky that Software Engineering exists so that there's something meaningful which I can spend my time on, I enjoy doing, and also pays the bills.
 
