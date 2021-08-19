@@ -118,6 +118,10 @@ I look through your transcript and resume and look for stuff that suggests you'd
 
 IANAL. But we have had international students interning at Facebook before and are currently working at Facebook. Please check with the recruiter.
 
+### Do I stand a good chance if I'm from a Info Systems background but gotten good grades for programming modules? Currently taking some CS modules now too.
+
+There are many IS folks who are good engineers. As long as you can demonstrate that you have mastery of programming and DSA, it shouldn't be an issue.
+
 ## Interviews
 
 ### What's the interview process like?
