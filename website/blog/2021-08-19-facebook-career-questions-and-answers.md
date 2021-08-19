@@ -10,7 +10,7 @@ tags: [facebook, career]
 
 A number of students from the Project Intern group have been asking me questions related to Facebook internships, working at Facebook, and my personal journey. I decided to write down my answers in the form of a blog post so they can be shared more broadly and I can point people to this blog post in future whenever I get asked similar questions.
 
-***I am not a recruiter and I might have answered some of the recruiting or internship-related questions wrongly, read at your own risk. Opinions expressed are my own and do not represent the views of my employer.***
+**_I am not a recruiter and I might have answered some of the recruiting or internship-related questions wrongly, read at your own risk. Opinions expressed are my own and do not represent the views of my employer._**
 
 ## Glossary
 
@@ -121,6 +121,10 @@ IANAL. But we have had international students interning at Facebook before and a
 ### Do I stand a good chance if I'm from a Info Systems background but gotten good grades for programming modules? Currently taking some CS modules now too.
 
 There are many IS folks who are good engineers. As long as you can demonstrate that you have mastery of programming and DSA, it shouldn't be an issue.
+
+### Would you know whether Facebook's hiring process has a preference for single-page resumes?
+
+As an interviewer for FB senior-ish candidates, I have seen some horrendously long resumes. So I would think single-page is not a hard rule, more of a recommendation. If you are exceeding a single page, then you are likely including too many things. [My own resume](https://docs.google.com/document/d/13c8KsKSsP5biJT8N70aLULyq-I5ywuWrxRxr2faQTK4/) is a 2-column one with small-ish font which I used in my last job hunt in 2017. It has got me replies from recruiters even before I started working at Facebook.
 
 ## Interviews
 
@@ -234,15 +238,19 @@ There's also an [article about Software Engineering in APAC](https://www.faceboo
 
 First and foremost, check out the following (old but still relevant) [article](https://vulcanpost.com/648705/facebook-singapore-office-marina-one/).
 
-Nit - Hacker Way is not in San Francisco, it is in Menlo Park. Perhaps you meant SF Bay Area. Anyway, FB SG and FB US differ is quite a lot of ways. There are too many to list but I'll list the most obvious ones. 
+Nit - Hacker Way is not in San Francisco, it is in Menlo Park. Perhaps you meant SF Bay Area. Anyway, FB SG and FB US differ is quite a lot of ways. There are too many to list but I'll list the most obvious ones.
 
 - Projects - Primarily product teams and hires primarily SWEs and EEs, while FB US has a good mix of teams, including infrastructure teams and hires across all roles. So if you're interested in working on infra stuff like our internal logging framework, GraphQL, our internal ORM, you'd have to look at non-SG offices
 - Changing teams - SG has fewer teams, so if you were looking to change teams but remain in Singapore, the choices are more limited
-- You don't get to attend Zuck's Q&A or company town halls in-person
+- Company culture - You don't get to attend the events held only at the HQ in-person, such as Zuck's Q&A or company town halls or the summer and holiday parties (but there are local versions of them)
 - Food - Smaller selection of cafes. Food is still pretty darn good though. There's nothing to complain about free food
 - Office - Smaller office in SG, but still one of the coolest in SG. Menlo Park Headquarters is amazing, there's an arcade, board games room, a barber, ice cream shop, a gadgets vending machine, and more. It looks like Universal Studios at night. I'll just leave this [video](https://www.youtube.com/watch?v=cY3sMN3wohg) here
 - $$$ - FB pay is top tier in both US and SG. However in SG, you have to pay less tax and cheaper living expenses. In SG, I earn less but save more due to the large difference in taxes
+- Taxes - SG tax is crazy low compared to US. US taxes you on every damn thing, including the capital gains from your stocks and bank interest earned (WTF), but SG doesn't
 - Engineering Culture - Similar-ish because quite a number of engineers in FB SG moved here from FB US, including myself. But being a smaller office, we don't have extremely senior engineers (no principal and higher)
+- Social Security - I thought Bay Area was relatively safer than the smaller US states, but these days [driving on the highway also can get shot](https://www.youtube.com/watch?v=0ybiHCxNb3w), so I don't know anymore. I think SG is definitely safer, at least you definitely won't kena any racist remarks or comments while walking on the streets
+- Personal Happiness - Obviously you'd have fewer friends and family if you're in the US. If that's important to you then life there might be hard. But you can make new angmoh friends or hang out with the steadily growing SG community over there.
+- Dating Scene - If you're single, it might be hard to find a long-term partner there. The female Singaporean engineers there are mostly taken, those that are not, probably want to stay single. Dating there will be quite hard! I know of friends who got together with Americans/immigrants and then they get a green card and plan to stay there for good. You can consider that too.
 
 I would describe myself as a small fish in a big pond when I was in FB US and am now a big fish in a smaller pond in FB SG. I enjoy my current work and team in FB SG and I see myself being in this role for a few more years at least.
 
@@ -257,6 +265,14 @@ Differences answered above. If you're solid in your Front End web fundamentals (
 ### In the past one year, I have been hearing quite a lot of things about FB Reality Labs, and I heard that quite a significant portion of FB engineers are working on it now (and I think you are as well?)... do you have any thoughts about how it feels to work there and perhaps the future prospects?
 
 I work on selling FRL hardware, not directly on FRL hardware/software itself. If you haven't heard of the [metaverse](https://www.theverge.com/22588022/mark-zuckerberg-facebook-ceo-metaverse-interview), you should read up about it. I don't have too many opinions on the future of FRL but I can say that Quest 2 is the market leader in terms of VR headsets and [Quest 2 was a major driver behind FB's $885 million 2020 Q4 non-ad revenue](https://www.roadtovr.com/zuckerberg-quest-2-mainstream-vr-headset-facebook-q4-2020-earnings/).
+
+### What engineers is Facebook looking for - especially for New Grads? At the moment, I have knowledge on a breadth of tools but when asked on under the hood stuff, I can only explain what the tool / framework is trying to extract instead of going in depth as to how stuff actually works. Is the firm looking for new grad engineers who are language / tool / framework agnostic and can work towards building the skillset within the firm - or people who already have a speciality?
+
+TODO
+
+### In my conversations with most engineers from US tech companies, I often hear that one of the major shortcomings of working in the Singapore offices is that they are more auxiliary in their functions, and that opportunities for "core" engineering work are few and far between. Since you have worked in both the Menlo Park and SG offices, I'd love to hear your response to this within the context of Facebook.
+
+TODO.
 
 ## Personal Experience
 
@@ -276,7 +292,7 @@ Yes I worked at Grab for two years after graduation, you can check out my Linked
 
 ### I'm also curious about what you do in your role as a Front End engineer, and why you decided to work at Facebook?
 
-As a Front End Engineer at Facebook, I primarily write JavaScript and some Hack (PHP with types). Being at Facebook is fun because I get to do front end work which isn't product, such as building React-based design systems, front end tooling, lint rules, CSS frameworks (Infima), Static site generators (Docusaurus). 
+As a Front End Engineer at Facebook, I primarily write JavaScript and some Hack (PHP with types). Being at Facebook is fun because I get to do front end work which isn't product, such as building React-based design systems, front end tooling, lint rules, CSS frameworks (Infima), Static site generators (Docusaurus).
 
 Facebook is the leader in terms of front end web technologies. If you develop on the web, you would more likely than not, be using some of Facebook's open source work, whether directly or not. There's React, Flux, Jest, GraphQL, React Native, Docusaurus, Draft.js, Relay, Flow, just to name a few. By working at Facebook, I also got the chance to work on Docusaurus and for a year, led the development of Docusaurus v2, which is one of the projects I am most proud of in my career. Today, Docusaurus is powering most of Facebook's open source websites. Many of the open source leaders I look up to were also at Facebook. I got to contribute to many high profile open source front end projects by Facebook and also work alongside the creator of React (Jordan Walke) on improving the front end of Facebook's Ads Interfaces. Not to mention that Facebook employees will be the first to dogfood React's new APIs and participate in design discussions and influence the future roadmap of React.
 
@@ -288,7 +304,7 @@ Facebook is the best place for a Front End Engineer to grow and learn from the v
 
 The learning opportunities depend on many factors - individual preferences, team, projects, luck. Facebook is such a large company that covers virtually almost every domain of technology one can be interested in. With great internal mobility, it isn't hard to find a project that one will be passionate about. The benefits (and also downsides) of working at such a large company is that you often have to think about scalability in your work. How do you scale your work to the tens of thousands of engineers using your libraries or the billions of users using your product?
 
-Facebook is also a company which takes the growth of employees very seriously. We have clear levels and expectations for engineers, supportive managers who really care about the growth of their team, mentorship programs available for anyone who wants to grow in a particular area. One of a manager's core responsibilities is to grow their team and employees, and they are being evaluated on that, so you can be sure that they treat it seriously. We have weekly 1:1s with managers and with our leads. Personally I'm mentoring around 3-4 junior engineers and helping them to grow into senior engineers in both their technical and organizational skills. 
+Facebook is also a company which takes the growth of employees very seriously. We have clear levels and expectations for engineers, supportive managers who really care about the growth of their team, mentorship programs available for anyone who wants to grow in a particular area. One of a manager's core responsibilities is to grow their team and employees, and they are being evaluated on that, so you can be sure that they treat it seriously. We have weekly 1:1s with managers and with our leads. Personally I'm mentoring around 3-4 junior engineers and helping them to grow into senior engineers in both their technical and organizational skills.
 
 I've answered about my work above.
 
