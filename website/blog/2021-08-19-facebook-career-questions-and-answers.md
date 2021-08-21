@@ -24,18 +24,16 @@ A number of students from the Project Intern group have been asking me questions
 - IANAR - I am not a recruiter
 - IANAL - I am not a lawyer
 - IINW - If I'm not wrong
+- RA - Residential Assistant
 - SWE - Software Engineer/ing
 - TPM - Technical Program Manager
 
 ## Caveats
 
-- These replies are tailored towards the Facebook interview process for interns and fresh grads. Most of these answers apply across the board but there are exceptions for certain specialized, non-SWE roles.
+- These replies are tailored towards the Facebook interview process for interns and fresh grads. They may or may not apply to other smaller companies.
+- Most of these answers apply across the board but there are exceptions for certain specialized, non-SWE roles.
 
 ## Application/Referral
-
-### I'm from SUTD and my schedule is pretty weird! I'm graduating next year so should I apply for internship or a job?
-
-If you have any spare summers left, you can and should go for an internship. IMO passing an internship interview is easier than a full-time interview, and likely leads to a better conversion package also if you have performed well during the internship.
 
 ### What's the application process like (for internships)?
 
@@ -55,7 +53,7 @@ Grades matter less the longer someone has left school. For students, because the
 
 ### Is the resume screening done by AI / human recruiter? What is being looked out for on the resume? As someone who isn't strong academically, will I be able to compete purely based on experience on my resume?
 
-IANAR. Usually people suck at their studies because instead of studying they spent their time elsewhere. If it was spent on related stuff like hacking on side projects and internships, that probably makes up for the lack of academic grades. But if you spent your time clubbing instead of studying, then I'm sorry you probably won't get past the screening. Note that CS is such a hot course now that only the best students can get in these days. A fair amount of students have both good grades AND non-academic achievements. Competition is tough!
+IANAR. Usually people suck at their studies because instead of studying they spent their time elsewhere. If it was spent on related stuff like hacking on side projects and internships, that probably makes up for the subpar academic grades. But if you suck at studies and spent your time clubbing instead, then I'm sorry you probably won't get past the screening. Note that CS is such a hot course now that only the best students can get in these days. A fair amount of students have both good grades AND non-academic achievements. Competition is tough!
 
 ### Are there any languages/frameworks that are helpful to know before applying?
 
@@ -67,7 +65,7 @@ IANAR. But as with all jobs, there are definitely limited spots and once they're
 
 ### How's the referral process about/like?
 
-I will send you a form where you can fill up your name, email, upload your resume and select the roles you would like to apply. From there on, from an applicant perspective it's not different from them applying themselves on the Facebook Careers Portal.
+Facebook will send you a form (initiated by me) where you can fill up your name, email, upload your resume, and select the roles you would like to apply. From there on, from an applicant perspective it's not different from them applying themselves on the Facebook Careers Portal.
 
 ### May I know until when your referral is valid? I was hoping to start my application a bit later so was hoping to reach out to you then for a referral. Is there any last date to "claim" this in any way?
 
@@ -104,7 +102,7 @@ For SWE, I've answered above. I'm not sure about Enterprise Engineers, I suspect
 ### Is there anything I can do/prepare to improve my chances of getting through the recruiter screen?
 
 1. Get a referral
-1. Have a solid and neat resume that showcases your abilities
+1. Have a solid neat resume that showcases your abilities
 
 ### How much does a referral help in landing a interview?
 
@@ -120,11 +118,15 @@ There are many IS folks who are good engineers. As long as you can demonstrate t
 
 ### Would you know whether Facebook's hiring process has a preference for single-page resumes?
 
-As an interviewer for FB senior-ish candidates, I have seen some horrendously long resumes. So I would think single-page is not a hard rule, more of a recommendation. If you are exceeding a single page, then you are likely including too many things. [My own resume](https://docs.google.com/document/d/13c8KsKSsP5biJT8N70aLULyq-I5ywuWrxRxr2faQTK4/) is a 2-column one with small-ish font which I used in my last job hunt in 2017. It has got me replies from recruiters even before I started working at Facebook.
+As an interviewer for FB senior-ish candidates, I have seen some horrendously long resumes. So I would think single-page is not a hard rule, more of a recommendation. If you are exceeding a single page, then you are likely including too many things. [My own resume](https://docs.google.com/document/d/13c8KsKSsP5biJT8N70aLULyq-I5ywuWrxRxr2faQTK4/) is a 2-column one with small-ish font which I used in my last job hunt in 2017. It has got me replies from recruiters. This was before I started working at Facebook, so the Facebook branding isn't the main reason.
 
 ### I'm an international student at SMU, does Facebook sponsor employment pass?
 
 IANAL. But we have had international students interning at Facebook before and are currently working at Facebook. Please check with the recruiter.
+
+### I'm from SUTD and my schedule is pretty weird! I'm graduating next year so should I apply for internship or a job?
+
+If you have any spare summers left, you can and should go for an internship. IMO passing an internship interview is easier than a full-time interview, and likely leads to a better conversion package also if you have performed well during the internship.
 
 ### Am I eligible to work overseas in US/London/Canada?
 
@@ -154,7 +156,7 @@ Benefit you in terms of what, and when? For passing the interviews, DSA and Leet
 
 ### I heard FB doesn't ask dynamic programming questions, correct me if I'm wrong. Are there any topics I should be focusing more on?
 
-I can neither confirm nor deny this. General tip for any coding interview - focus on the most common data structures and algorithms. Look at the recommended practice questions in the handbook.
+I can neither confirm nor deny this. General tip for coding interviews - focus on the most common data structures and algorithms. If a particular topic is really obscure, most likely you won't be asked on it because asking obscure stuff sometimes work against the interviewers as it'd be harder for them to extract the right signals out of it. Look at the recommended practice questions in the handbook.
 
 ### How many rounds of interviews are there? Does FB ask system design on the live interviews?
 
@@ -162,17 +164,17 @@ For internships, typically two coding. For fresh grads, typically two coding wit
 
 ### Would I be tested on specific tech stacks/real project experience, or is it purely algo based?
 
-If you're applying for a SWE position, you won't be tested on a specific tech stacks/languages. The algorithm questions asked can be implemented in most programming languages (but you probably want to avoid using wenyan). If you're applying for a specialized position, then you might be asked to use domain-specific languages, which the recruiter will let you know ahead of time.
+If you're applying for a SWE position, you won't be tested on a specific tech stacks/languages. The algorithm questions asked can be implemented in most programming languages (but you probably want to avoid using wenyan). If you're applying for a specialized position, then you might be asked to use domain-specific languages, which the recruiter should (will?) let you know ahead of time.
 
 ## Internship
 
 ### What are 3 qualities of a intern/new hire fellow FB engineers look out for?
 
-This is a long answer. But to get a conversion offer, interns have to show productivity and complete their assigned projects within the internship duration, product high quality code/work, demonstrate fast learning speed, actively communicate and collaborate, and show initiative and independence. Pretty much common sense if you ask me.
+This is a long answer and there are more than 3 qualities. But to get a conversion offer, in summary, interns have to show productivity and complete their assigned projects within the internship duration, product high quality code/work, demonstrate fast learning speed, actively communicate and collaborate, and show initiative and independence. Pretty much common sense if you ask me.
 
 ### What are the different types of internship roles that are opening in FB (both here in SG and overseas)!
 
-IANACP. SG is quite limited in the sense we primarily only have SWE, EE interns. But I think I have seen TPM interns before. For overseas, almost every role is available.
+IANACP. FB SG is quite limited in the sense we primarily only hiring SWE, EE interns. But I think I have seen TPM interns before. For overseas, almost every role is available.
 
 ### Are there machine learning/data science internship roles at Facebook SG? How about in other countries?
 
@@ -365,7 +367,7 @@ Strike a balance between breadth and depth. As undergrads, you can have a lot of
 
 By now you should know that not every investment reaps the same level of rewards. CCAs which aren't related to CS can be fun, widen your social circle and improve your soft skills. If that's important to you, by all means go ahead. But if you suck at programming, and spend all your spare time on random CCAs which doesn't help you in your craft, then you'll probably end up as a mediocre programmer. Back in school, I never really had an official CCA - I chose to do tutoring, work on open source stuff like NUSMods, and working as a boarding councillor at NUS High (sort of like RA but for NUS High Students), which gave me free accommodation near school). I liked the balance and diversity of the activities I had.
 
-My CAP isn't that high - got first class but not near 5.00. I reckon I could get A+ for every module if I really spent all my time studying, but studying isn't exactly my favorite activity to do. I got my As usually from modules which were project-heavy. I value and enjoy the hands on experience more than the mugging experience. 
+My CAP isn't that high - got first class but not near 5.00. I reckon I could get A+ for every module if I really spent all my time studying, but studying isn't exactly my favorite activity to do. I got my As usually from modules which were project-heavy. I value and enjoy the hands on experience more than the mugging experience.
 
 I'm very lucky that Software Engineering exists so that there's something meaningful which I can spend my time on, I enjoy doing, and also pays the bills.
 
