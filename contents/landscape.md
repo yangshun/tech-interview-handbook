@@ -3,7 +3,7 @@ id: landscape
 title: Landscape
 ---
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
+import InternshipSalariesURL from '@site/static/img/internship-salaries.jpg';
 
 Most of the content covered here will be specific to the Bay Area. Landscape differences due to geographical location are mentioned briefly [below](#geographical-location).
 
@@ -33,7 +33,7 @@ Top tech companies pay a ridiculous amount for interns:
 
 <div class="text--center">
 
-<img src={useBaseUrl('/img/internship-salaries.jpg')} />
+<img alt="Internship Salaries URL" src={InternshipSalariesURL} />
 
 _Salaries of top tech internships in 2016 ([source](https://twitter.com/rodneyfolz/status/724787290824798209))_
 

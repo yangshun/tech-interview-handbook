@@ -2,8 +2,8 @@ module.exports = {
   docs: {
     Preface: ['introduction', 'landscape'],
     'Job Application': [
-      // 'how-to-apply',
       'resume',
+      'resume-case-study',
       'cover-letter',
     ],
     'Interview Process': [
