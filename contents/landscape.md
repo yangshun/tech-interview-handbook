@@ -33,9 +33,15 @@ Top tech companies pay a ridiculous amount for interns:
 
 <div class="text--center">
 
-<img alt="Internship Salaries URL" src={InternshipSalariesURL} />
+<figure>
+<img alt="Salaries of top tech internships in 2016" src={InternshipSalariesURL} />
 
-_Salaries of top tech internships in 2016 ([source](https://twitter.com/rodneyfolz/status/724787290824798209))_
+<figcaption>
+
+Salaries of top tech internships in 2016 ([source](https://twitter.com/rodneyfolz/status/724787290824798209))
+
+</figcaption>
+</figure>
 
 </div>
 

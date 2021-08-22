@@ -11,7 +11,10 @@ Here's the initial version of Teik Jun's resume I received from him.
 
 <div class="text--center">
 
-<img alt="Teik Jun's Initial Resume" src={TeikjunResumeOldURL} />
+<figure>
+    <img alt="Teik Jun's Initial Resume" src={TeikjunResumeOldURL} />
+    <figcaption>Teik Jun's Initial Resume</figcaption>
+</figure>
 
 </div>
 
@@ -48,8 +51,13 @@ Here's an improved version of Teik Jun's resume which I feel which better highli
 - Removed redundant and unimportant details.
 - Added links to certain projects to make it more convenient for recruiters who want to gain more context of the projects listed.
 
+In my opinion, this improved resume is sure to capture the eyes of any recruiter in the world!
+
 <div class="text--center">
 
-<img alt="Teik Jun's Improved Resume" src={TeikjunResumeNewURL} />
+<figure>
+    <img alt="Teik Jun's Improved Resume" src={TeikjunResumeNewURL} />
+    <figcaption>Teik Jun's Improved Resume</figcaption>
+</figure>
 
 </div>
