@@ -10,17 +10,15 @@ To put the points mentioned in the [the previous section](resume.md) in practice
 Here's the initial version of Teik Jun's resume I received from him.
 
 <div class="text--center">
-
-<figure>
-    <img alt="Teik Jun's Initial Resume" src={TeikjunResumeOldURL} />
-    <figcaption>Teik Jun's Initial Resume</figcaption>
-</figure>
-
+    <figure>
+        <img alt="Teik Jun's Initial Resume" class="shadow--md" src={TeikjunResumeOldURL} />
+        <figcaption>Teik Jun's Initial Resume</figcaption>
+    </figure>
 </div>
 
 On first glance, it looks like a solid resume, and it is. However, I've known Teik Jun for a few years now since the [Major League Hacking (MLH) Fellowship program](https://fellowship.mlh.io/) where he [contributed a ton of features to Docusaurus v2](https://github.com/facebook/docusaurus/commits?author=teikjun), and know that he has done even greater things in the past. This version of his resume doesn't do his skills justice. Let's see how we can improve it by applying the points learnt in the previous section.
 
-## Resume Critique
+## Resume critique
 
 ### Good
 
@@ -30,7 +28,7 @@ On first glance, it looks like a solid resume, and it is. However, I've known Te
 - Reverse chronological order
 - Straightforward, bullet point format
 
-### Points to Improve
+### Points of improvement
 
 - Irrelevant experience - It's honestly super cool to be "Best Shot" of Sniper Course and to get other impressive accolades as an NSF, but it's hardly relevant to a SWE job. If I were running out of space I'd remove it.
 - Not sufficiently conveying the impressiveness of his experience - Teik Jun's work on the MLH program was for a popular Facebook Open Source project, Docusaurus (the same project that powers this website) and he did very very good work as part of the program. I know because I reviewed his Pull Requests and he did a damn good job. Docusaurus is an important project to Facebook and widely used by popular Facebook projects like React Native, Jest, and Relay.
@@ -43,7 +41,7 @@ On first glance, it looks like a solid resume, and it is. However, I've known Te
 
 I know that Teik Jun will be interning with ByteDance in the fall, so it could be added to further boost Teik Jun's professional experience.
 
-## Improved Version
+## Improved version
 
 Here's an improved version of Teik Jun's resume which I feel which better highlights Teik Jun's abilities. Main changes made were:
 
@@ -54,10 +52,8 @@ Here's an improved version of Teik Jun's resume which I feel which better highli
 In my opinion, this improved resume is sure to capture the eyes of any recruiter in the world!
 
 <div class="text--center">
-
-<figure>
-    <img alt="Teik Jun's Improved Resume" src={TeikjunResumeNewURL} />
-    <figcaption>Teik Jun's Improved Resume</figcaption>
-</figure>
-
+    <figure>
+        <img alt="Teik Jun's Improved Resume" class="shadow--md" src={TeikjunResumeNewURL} />
+        <figcaption>Teik Jun's Improved Resume</figcaption>
+    </figure>
 </div>

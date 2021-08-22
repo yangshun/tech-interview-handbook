@@ -4,6 +4,7 @@ module.exports = {
     'Job Application': [
       'resume',
       'resume-case-study',
+      'resume-sample',
       'cover-letter',
     ],
     'Interview Process': [
