@@ -34,12 +34,12 @@ On first glance, it looks like a solid resume, and it is. However, I've known Te
 - Not sufficiently conveying the impressiveness of his experience - Teik Jun's work on the MLH program was for a popular Facebook Open Source project, Docusaurus (the same project that powers this website) and he did very very good work as part of the program. I know because I reviewed his Pull Requests and he did a damn good job. Docusaurus is an important project to Facebook and widely used by popular Facebook projects like React Native, Jest, and Relay.
 - Not explaining what the project is about - In most cases, recruiters are the ones reading a resume and they would not know what a project is about, especially when most of them aren't technical. Hence resumes also have to explain the complexity and impact of a project. I know what Docusaurus and TEAMMATES are, but that's because I worked on Docusaurus and I am aware of NUS' projects. Most recruiters would not, so we have to explain what they are. TEAMMATES was also a Google Summer of Code project, so mentioning that would be nice.
 - Trivial details - Under TEAMMATES, there was a point "Added a progress indicator component for expensive operations". This sounds quite small and can be removed if there's a lack of space.
-- Obscure projects - The "Mentorship Management Web Application" doesn't sufficiently relay the complexity. The details are also obvious and doesn't sound impressive. I'd remove this project because it doesn't add much value
-- Contributions to Open Source Projects - Any project can be made open source and contributing to your own open source homework doesn't mean much. What makes open source contributions impressive would be the complexity of the project and the contributions made. The latter might be hard to fit into a resume, so we should do the former at the very least
+- Obscure projects - The "Mentorship Management Web Application" doesn't sufficiently relay the complexity. The details are also obvious and doesn't sound impressive. I'd remove this project because it doesn't add much value.
+- Contributions to Open Source Projects - Any project can be made open source and contributing to your own open source homework doesn't mean much. What makes open source contributions impressive would be the complexity of the project and the contributions made. The latter might be hard to fit into a resume, so we should do the former at the very least.
 
 ### Bonus
 
-I know that Teik Jun will be interning with ByteDance in the fall, so it could be added to further boost Teik Jun's professional experience.
+I know that Teik Jun will be interning with ByteDance in the fall, so it could be added as a signal of Teik Jun's abilities, telling recruiters that he's good enough to work at ByteDance.
 
 ## Improved version
 
