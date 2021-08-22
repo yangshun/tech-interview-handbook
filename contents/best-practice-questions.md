@@ -3,9 +3,15 @@ id: best-practice-questions
 title: Best Practice Questions
 ---
 
-Here is a suggested schedule for revising and practicing algorithm questions on [LeetCode](https://leetcode.com). Sign up for an account if you don't already have one, it's critical to your success in interviewing!
+Practicing is the best way to prepare for coding interviews. Years ago, I curated a list of the most important 75 questions on [LeetCode](https://leetcode.com). Many other LeetCode questions are a mash of the techniques from these individual questions. I used this list in my last job hunt to only do the important questions.
+
+I [shared this list on Blind](<(https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-100-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)>) to save peoples' time when revising and someone reposted this list on [the LeetCode forums](https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions). It somehow blew up and became super famous in the coding interview scene, people even gave it a name - **Blind 75**. The Blind 75 questions as a LeetCode list can be found [here](https://leetcode.com/list/xi4ci4ig/).
+
+Years later, I further distilled the list down into only 50 questions and spread them across a 5-week schedule. Here is the suggested schedule for revising and practicing algorithm questions on LeetCode. Sign up for an account if you don't already have one, it's critical to your success in interviewing!
 
 When practicing, you are advised to treat it like a real coding interview and check through thoroughly before submitting. Consider even manually coming up with some test cases and running through them to verify correctness!
+
+I've created a [LeetCode list](https://leetcode.com/list/?selectedList=9h4lgwl2) for the following questions (except the Premium ones). Feel free to use it to track your practice progress.
 
 ## Week 1 - Sequences
 
@@ -105,3 +111,7 @@ Practically speaking the return of investment (ROI) on studying and practicing f
 - [Unique Paths](https://leetcode.com/problems/unique-paths/)
 - [Jump Game](https://leetcode.com/problems/jump-game/)
 - [Word Break Problem](https://leetcode.com/problems/word-break/)
+
+---
+
+I've created a [LeetCode list](https://leetcode.com/list/?selectedList=9h4lgwl2) for the following questions (except the Premium ones). Feel free to use it to track your practice progress.
