@@ -63,8 +63,8 @@ When interviewers take down interview feedback, these are likely what is on thei
 
 #### Coding style
 
-- 👍 Coding style was neat (proper indentation, spacing and no bad practices)
-- 👎 Coding style was messy (inconsistent indentation, weird spacings, etc)
+- 👍 Coding style was neat (proper indentation, spacing, and no bad practices)
+- 👎 Coding style was messy (inconsistent indentation, weird spacings, etc.)
 
 ## Testing
 
@@ -92,11 +92,11 @@ When interviewers take down interview feedback, these are likely what is on thei
 
 #### Communicating approach
 
-- 👍 Able to explain overall approach, technical terms and acronyms (where applicable)
-- 👎 Failed to effectively explain overall approach, technical terms and acronyms (where applicable)
+- 👍 Able to explain overall approach, technical terms, and acronyms (where applicable)
+- 👎 Failed to effectively explain overall approach, technical terms, and acronyms (where applicable)
 
 #### Explains while coding
 
-- 👍 Explains what the code is doing while coding, especially for parts which aren't obvious
+- 👍 Explains what the code is doing while coding, especially for parts that aren't obvious
 - 👎 Keeps silent during coding, or just reading out the code without much 
 explanation
