@@ -32,8 +32,8 @@ A number of students from the Project Intern group have been asking me questions
 
 ## Caveats
 
-- These replies are tailored towards the Facebook interview process for interns and fresh grads. They may or may not apply to other smaller companies.
-- Most of these answers apply across the board but there are exceptions for certain specialized, non-SWE roles.
+- These replies are tailored towards the Facebook interview process for interns and fresh grads. They may or may not apply to other companies, especially smaller ones.
+- Most of these answers apply across the board for every engineer role but there are exceptions for certain specialized engineering roles like Security Engineering or Front End Engineering.
 
 ## Application/Referral
 
