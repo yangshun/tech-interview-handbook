@@ -10,6 +10,8 @@ tags: [facebook, career]
 
 A number of students from the Project Intern group have been asking me questions related to Facebook internships, working at Facebook, and my personal journey. I decided to write down my answers in the form of a blog post so they can be shared more broadly and I can point people to this blog post in future whenever I get asked similar questions.
 
+<!--truncate-->
+
 **_I am not a recruiter and I might have answered some of the recruiting or internship-related questions wrongly, so take them with a grain of salt. Opinions expressed are my own and do not represent the views of my employer._**
 
 ## Glossary
