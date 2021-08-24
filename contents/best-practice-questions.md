@@ -11,7 +11,7 @@ Years later, I further distilled the list down into only 50 questions and spread
 
 When practicing, you are advised to treat it like a real coding interview and check through thoroughly before submitting. Consider even manually coming up with some test cases and running through them to verify correctness!
 
-I've created a [LeetCode list](https://leetcode.com/list/?selectedList=9h4lgwl2) for the following questions (except the Premium ones). Feel free to use it to track your practice progress.
+I've created a [LeetCode list](https://leetcode.com/list/9h4lgwl2) for the following questions (except the Premium ones). Feel free to use it to track your practice progress.
 
 ## Week 1 - Sequences
 
@@ -114,4 +114,4 @@ Practically speaking the return of investment (ROI) on studying and practicing f
 
 ---
 
-I've created a [LeetCode list](https://leetcode.com/list/?selectedList=9h4lgwl2) for the following questions (except the Premium ones). Feel free to use it to track your practice progress.
+I've created a [LeetCode list](https://leetcode.com/list/9h4lgwl2) for the following questions (except the Premium ones). Feel free to use it to track your practice progress.
