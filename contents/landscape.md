@@ -62,6 +62,6 @@ Companies have different focuses depending on the stage they are at and the type
 |  | US (Silicon Valley/NY) | Singapore | China(major cities) |
 | --- | --- | --- | --- |
 | Starting Pay | USD 100,000 | Monthly $4320 (Median), $5000 (75th percentile) | RMB 150,000 |
-| Talent Access | Global talent, diverse nationalities and backgrounds | Usually regional, mostly Asians | Only Chinese developers |
+| Talent Access | Global talent, diverse nationalities and backgrounds | Usually regional, mostly Asians | Mostly Chinese |
 | Types of Companies | HQ of large companies (Facebook, Amazon, Apple, Google, Microsoft, etc), Startups | Branch offices of large companies, Startups | HQ of larger local Chinese tech companies, branch offices of International ones(Amazon, Microsoft, IBM, etc)
-| Types of Engineering Work | Depends on size of office/company | Both product and infra (building new programming languages, frameworks, and tools) | Mostly product team(frontend, backend and devops) |
+| Types of Engineering Work | Depends on size of office/company | Both product and infra (building new programming languages, frameworks, and tools) | Mostly product and infra(frontend, backend and devops), some blockchain openings  |
