@@ -66,7 +66,7 @@ If the company provides lunch, you might also have a lunch session with an emplo
   - They seem to place high emphasis on compilable, runnable code in all their coding rounds
   - Cross functional interviews will involve getting Airbnb employees from any discipline to speak with you. These interviews are mostly non-technical but are extremely important to Airbnb because they place a high emphasis on cultural fit. Do look up the Airbnb section of the behavioral questions to know what sort of questions to expect
   
-### AfterPay
+### Afterpay(Square)
 
 - Recruiter phone screen + behavioural questions
   - Past experience/project
@@ -95,7 +95,21 @@ If the company provides lunch, you might also have a lunch session with an emplo
   - All 4 sessions involve algorithms and system design. One of the sessions will be conducted by an Engineering Manager
   - The last session will involve coding on your own laptop. Prepare your development environment in advance
   - Regardless of Product Engineer or Engineering Generalist position, their interview format and questions are similar
+  
+### Citi 
 
+- Recruiter phone screen
+- Techical zoom interview
+  - 2 x JS block scope 
+  - 3 x CSS block & inline 
+  - 1 x AJAX question
+- On-site (Front End):
+  - Past experience/project with the manager
+  - Discussion on recent frontend technologies
+- Tips:
+  - The candidate is allowed to look up info online
+  - Citi asks more about output of a given snippet than input, so preparing by looking up MCQ can be more efficient
+   
 ### Dropbox
 
 - Recruiter phone screen
