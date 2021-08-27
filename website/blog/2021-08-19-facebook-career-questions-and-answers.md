@@ -77,6 +77,12 @@ As long as I remain employed at Facebook, I'm happy to refer you if I feel that 
 
 Answered above. I don't think most students need to worry about the resume screening stage. Worry about the interviews. Use a neat and standard template and you should be fine.
 
+If you're applying for US positions, it'd be helpful to do the following:
+
+- Mention expected year of graduation (month as well if you know)
+- If you're applying to US roles, mention US work eligibility. This is straightforward for Singaporeans (mention eligibility for H-1B1 visa)
+- Use GPA instead of CAP
+
 ### If I build my projects must some of them be pushed to production before applying?
 
 Best if you can, but I'm not sure if recruiters actually click on your project links. Maybe just don't include the link if it's not really usable?
@@ -99,7 +105,9 @@ IANAR. Typically you will only be interviewed for one location. Candidates based
 
 ### What is the application process like for the Software Engineer role? Is it any different from the Enterprise and Front End Engineer role?
 
-For SWE, I've answered above. I'm not sure about Enterprise Engineers, I suspect it wouldn't be too different. For Front End Engineers, the questions will be domain-specific, hence will require candidates to write HTML/CSS/JavaScript. Note that Facebook Singapore currently does not hire Front End Engineers and interns. If you're interested in a Front End Engineer internship/FTE position, you'd have to look overseas.
+For SWE, I've answered above. I'm not sure about Enterprise Engineers, I suspect it wouldn't be too different. For Front End Engineers, the questions will be domain-specific, hence will require candidates to be familiar with HTML/CSS/JS/Vanilla JS DOM manipulation methods, and less emphasis on Data Structures and Algorithms. I would expect most students to not have enough domain expertise to pass a Front End Interview, so don't anyhow apply for it. Simple litmus test - can you build a TODO list app in pure vanilla JavaScript, without using React/jQuery?
+
+Note that Facebook Singapore currently does not hire Front End Engineers and interns. If you're interested in a Front End Engineer internship/FTE position, you'd have to look overseas.
 
 ### Is there anything I can do/prepare to improve my chances of getting through the recruiter screen?
 
@@ -133,6 +141,16 @@ If you have any spare summers left, you can and should go for an internship. IMO
 ### Am I eligible to work overseas in US/London/Canada?
 
 IANAR. If you're Singaporean, you'd have no problems working anywhere. If you're a foreign student, you could check with your seniors or just ask the recruiter when you get the chance.
+
+### I want to intern in SG and work in US. Is that possible?
+
+For interns, your return offer will be for the location you interned in. So you should also factor in where you want to work full-time and strive to intern at the same location.
+
+### How long do I have to wait if I get rejected?
+
+There's a 6-month to 1-year cooldown period for each role - E.g. if you've interviewed for SWE in the US and failed, you'd have to wait some amount of time before interviewing for the SWE position again in SG (or any location). This cooldown is per role, so you're free to apply again immediately and interview for another role, e.g Front End Engineer, assuming your resume gets picked up.
+
+As of writing, internships in FB SG are run annually so if you fail this year you'd have to wait for the next.
 
 ## Interviews
 

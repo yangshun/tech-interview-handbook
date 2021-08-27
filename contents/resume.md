@@ -138,6 +138,14 @@ Here's the news - Recruiters do search for your name! Definitely pre-empt that b
 
 If you have some space on your resume, it is good to list additional interests outside of coding. Eg. skiing, water sports, soccer, etc etc. Gives the interviewer something to talk to you about. It also shows that you are a well-rounded individual/cool person to hang out with.
 
+### 11. Country-specific Customization
+
+If you are applying to foreign countries, it'd help to customize your resume to make it easier for recruiters of that country to understand your resume. For example, you can do the following for US roles:
+
+- If you're interning, expected year of graduation (month as well if you know) because some places only want to hire interns who are graduating soon
+- Mention work eligibility. This is straightforward for Singaporeans (mention eligibility for for H-1B1 visa)
+- Convert your grades to a GPA out of 5 and mention whether it's First Class Honors/Summa Cum Laude
+
 ###### References
 
 - [Screening your resume is like playing word search](https://medium.com/@christinang89/screening-your-resume-is-like-playing-word-search-60f4d0e60840)
