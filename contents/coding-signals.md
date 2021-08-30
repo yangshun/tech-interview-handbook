@@ -98,5 +98,4 @@ When interviewers take down interview feedback, these are likely what is on thei
 #### Explains while coding
 
 - 👍 Explains what the code is doing while coding, especially for parts that aren't obvious
-- 👎 Keeps silent during coding, or just reading out the code without much 
-explanation
+- 👎 Keeps silent during coding, or just reading out the code without much explanation

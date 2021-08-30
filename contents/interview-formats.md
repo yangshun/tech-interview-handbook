@@ -160,4 +160,3 @@ If the company provides lunch, you might also have a lunch session with an emplo
 - Tips:
   - No front end questions were asked
   - 1 of the interviewers is an Engineering Manager
-  

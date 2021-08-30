@@ -30,7 +30,7 @@ title: Common Questions
 - Tell me about a problem you've had getting along with a work associate.
 - What aspects of your work are most often criticized?
 - How have you handled criticism of your work?
-- What strengths do you think are most important for *your job position*?
+- What strengths do you think are most important for _your job position_?
 - What words would your colleagues use to describe you?
 - What would you hope to achieve in the first six months after being hired?
 
