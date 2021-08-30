@@ -6,7 +6,12 @@ author_title: Engineering Lead at Facebook
 author_url: https://github.com/yangshun
 author_image_url: https://github.com/yangshun.png
 tags: [facebook, career]
+hide_table_of_contents: true
 ---
+
+<head>
+  <link rel="canonical" href="https://yangshun.im/blog/facebook-career-questions-and-answers" />
+</head>
 
 A number of students from the Project Intern group have been asking me questions related to Facebook internships, working at Facebook, and my personal journey. I decided to write down my answers in the form of a blog post so they can be shared more broadly and I can point people to this blog post in future whenever I get asked similar questions.
 

@@ -6,6 +6,7 @@ author_title: Student at NUS Computing
 author_url: https://github.com/raivatshah
 author_image_url: https://github.com/raivatshah.png
 tags: [leetcode, trees, problem-solving]
+hide_table_of_contents: true
 ---
 
 Sum Root to Leaf Numbers is an [interesting problem from LeetCode](https://leetcode.com/problems/sum-root-to-leaf-numbers/). The problem is of medium difficulty and is about binary trees. This post is an explains the solution to the problem.

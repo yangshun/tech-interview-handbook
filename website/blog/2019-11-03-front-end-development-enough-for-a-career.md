@@ -7,7 +7,12 @@ author_url: https://github.com/yangshun
 author_image_url: https://github.com/yangshun.png
 author_twitter: yangshunz
 tags: [front end, career]
+hide_table_of_contents: true
 ---
+
+<head>
+  <link rel="canonical" href="https://yangshun.im/blog/are-front-end-development-skills-enough-for-a-career" />
+</head>
 
 Recently, an undergrad freshmen I met at an event asked me a question regarding Front End development as a career.
 

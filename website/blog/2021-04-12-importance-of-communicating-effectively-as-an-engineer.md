@@ -6,7 +6,12 @@ author_title: Engineering Lead at Facebook
 author_url: https://github.com/yangshun
 author_image_url: https://github.com/yangshun.png
 tags: [career, communication]
+hide_table_of_contents: true
 ---
+
+<head>
+  <link rel="canonical" href="https://yangshun.im/blog/importance-of-communicating-effectively-as-engineers" />
+</head>
 
 import BadCommunicationURL from '@site/static/img/bad-communication.jpg';
 

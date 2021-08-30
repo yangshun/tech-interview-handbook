@@ -8,7 +8,8 @@ import styles from './styles.module.css';
 
 import successStories from '../data/successStories';
 
-const BLIND_75_URL = 'https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU';
+const BLIND_75_URL =
+  'https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU';
 
 function Home() {
   const context = useDocusaurusContext();
@@ -22,8 +23,12 @@ function Home() {
             src={useBaseUrl('img/logo.svg')}
           />
           <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline} <br/>
-            Brought to you by the author of the <a href={BLIND_75_URL} target="_blank">Blind 75 List</a>
+          <p className="hero__subtitle">
+            {siteConfig.tagline} <br />
+            Brought to you by the author of the{' '}
+            <a href={BLIND_75_URL} target="_blank">
+              Blind 75 List
+            </a>
           </p>
           <div className={styles.buttons}>
             <a
@@ -109,7 +114,11 @@ function Home() {
                     <p>
                       No one has time to practice a few hundred LeetCode
                       questions. We tell you which are the best questions to
-                      practice. We created the <a href={BLIND_75_URL} target="_blank">Blind 75 List</a>.
+                      practice. We created the{' '}
+                      <a href={BLIND_75_URL} target="_blank">
+                        Blind 75 List
+                      </a>
+                      .
                     </p>
                   </div>
                   <div className="col">
@@ -173,7 +182,7 @@ function Home() {
                       <div className="avatar">
                         <img className="avatar__photo" src={user.thumbnail} />
                         <div className="avatar__intro">
-                          <h4 className="avatar__name">{user.name}</h4>
+                          <div className="avatar__name">{user.name}</div>
                           <small className="avatar__subtitle">
                             {user.title}
                           </small>
