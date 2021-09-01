@@ -1,7 +1,6 @@
 module.exports = {
   title: 'Tech Interview Handbook',
-  tagline:
-    'Curated interview preparation materials for busy engineers',
+  tagline: 'Curated interview preparation materials for busy engineers',
   url: 'https://techinterviewhandbook.org',
   baseUrl: '/',
   favicon: 'img/favicon.png',
@@ -29,6 +28,11 @@ module.exports = {
         {
           href: 'https://www.facebook.com/techinterviewhandbook',
           label: 'Facebook',
+          position: 'right',
+        },
+        {
+          href: 'https://twitter.com/yangshunz',
+          label: 'Twitter',
           position: 'right',
         },
       ],
@@ -66,7 +70,7 @@ module.exports = {
   ],
   scripts: [
     {
-      src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4984084888641317",
+      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4984084888641317',
       crossorigin: 'anonymous',
       async: true,
     },
