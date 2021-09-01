@@ -24,7 +24,7 @@ export default React.memo(function SidebarAd() {
       target="_blank"
       rel="noreferrer noopener"
       onClick={() => {
-        window.gtag('event', 'moonchaser.click');
+        window.gtag('event', 'moonchaser.sidebar.click');
       }}>
       <p className={styles.tagline}>
         <strong>Get paid more.</strong> Receive risk-free salary negotiation
@@ -34,15 +34,15 @@ export default React.memo(function SidebarAd() {
   ) : (
     <a
       className={clsx(styles.container, backgroundClass)}
-      href="https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
+      href="https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_docs_sidebar"
       target="_blank"
       rel="noreferrer noopener"
       onClick={() => {
-        window.gtag('event', 'moonchaser.click');
+        window.gtag('event', 'levelsfyi.sidebar.click');
       }}>
       <p className={styles.tagline}>
         <strong>Get paid, not played.</strong> Chat with former tech recruiters
-        who’ll guide you on exactly what to say to get you a higher offer.
+        who’ll guide you on exactly what to say to negotiate a higher offer.
       </p>
     </a>
   );

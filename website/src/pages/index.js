@@ -81,7 +81,7 @@ function Home() {
                           rel="noreferrer noopener"
                           target="_blank"
                           onClick={() => {
-                            window.gtag('event', 'moonchaser.click');
+                            window.gtag('event', 'moonchaser.homepage.click');
                           }}>
                           Get Risk-free Negotiation Help&nbsp;&nbsp;→
                         </a>
@@ -94,7 +94,7 @@ function Home() {
                           <strong>
                             Get paid, not played. Chat with former tech
                             recruiters who’ll guide you on exactly what to say
-                            to get you a higher offer.
+                            to negotiate a higher offer.
                           </strong>
                         </div>
                       </h2>
@@ -105,7 +105,7 @@ function Home() {
                           rel="noreferrer noopener"
                           target="_blank"
                           onClick={() => {
-                            window.gtag('event', 'levelsfyi.click');
+                            window.gtag('event', 'levelsfyi.homepage.click');
                           }}>
                           Get Negotiation Help&nbsp;&nbsp;→
                         </a>
