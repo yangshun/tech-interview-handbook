@@ -7,13 +7,21 @@ title: Negotiation
 
 If you've received an offer (or even better, offers), congratulations! You may heave a huge sigh of relief and think that the toughest parts are over. Well yes, but not entirely! For most people, the reason they're finding a new job is to increase their salary, and salary negotiation is the last stretch in achieving that goal.
 
-**Here's something that recruiters don't want you to know:** In most cases, there's room for negotiation on your offer. The initial offer that you are given is not the best package that the company can offer. During my job hunting experience and having received offers from numerous top tech companies like Facebook, Google, Airbnb, Lyft, and Dropbox, I have found this to be true. In most cases, you could always negotiate for more money, and some aspects of your salary is easier to negotiate than the others.
+**Here's something that recruiters don't want you to know:** In most cases, there's room for negotiation on your offer. The initial offer that you are given is not the best package that the company can offer. During my job hunting experience and having received offers from numerous top tech companies like Facebook, Google, Airbnb, Lyft, and Dropbox, I have found this to be true. In most cases, you could always negotiate for more money, and some aspects of your salary is easier to negotiate than others.
 
-If you haven't been negotiating your past offers, or are new to the negotiation game, worry not! [Moonchaser](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) can help you with it. How it works is that you will be guided by their experienced team of professionals throughout the entire salary negotiation process. It's also risk-free because you don't have to pay anything unless they helped you to increase your offer. It's a **no-brainer decision** to get the help of Moonchaser during the offer process. Some increase is better than no increase. Don't leave money on the table!
+If you haven't been negotiating your past offers, or are new to the negotiation game, worry not! There are multiple negotiation services that can help you out. Typically, they'd be well-worth the cost.
+
+### Moonchaser
+
+How it works is that you will be guided by their experienced team of professionals throughout the entire salary negotiation process. It's also risk-free because you don't have to pay anything unless you have an increased offer. It's a **no-brainer decision** to get the help of Moonchaser during the offer process. Some increase is better than no increase. Don't leave money on the table! Check out [Moonchaser](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation).
+
+### Levels.fyi
+
+[Levels.fyi](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) is most famously known for being a salary database but they also offer complementary services such as salary negotiation where you will be put in-touch with experienced recruiters to help you in the process. How Levels.fyi differs from Moonchaser is that Levels.fyi charge a flat fee whereas Moonchaser takes a percentage of the increase.
 
 :::tip
 
-Get paid more. Receive risk-free salary negotiation help from [**Moonchaser**](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation), you pay nothing unless your offer is increased. Don't leave money on the table 💰!
+Get paid more. Receive salary negotiation help from [**Moonchaser**](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) or [**Levels.fyi**](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) and their team of experienced recruiters. Don't leave money on the table 💰!
 
 :::
 
@@ -103,6 +111,6 @@ Don't waste their time or play games for your own purposes. Even if the company 
 
 :::tip
 
-Get risk-free salary negotiation help from [Moonchaser](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation), you pay nothing unless your offer is increased. Don't leave money on the table 💰!
+Get paid more. Receive salary negotiation help from [**Moonchaser**](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) or [**Levels.fyi**](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) and their team of experienced recruiters. Don't leave money on the table 💰!
 
 :::
