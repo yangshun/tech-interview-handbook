@@ -40,7 +40,7 @@ Here's an example of how the STAR format can be used to answer the question: **"
 
 Through the above, experienced interviewers can extract the following qualities from the mentioned behaviors.
 
-- **Empathy** - Empathize with both roles and made sure to understand each individuals’ reasons
+- **Empathy** - Empathize with both roles and made sure to understand each individuals' reasons
 - **Willingness** - to wear multiple hats: Picked up the role of the designer and came up with wireframes
 - **Project management** - Able to unblock the project by changing approaches midway to great effectiveness
 - **Conflict management** - Explain to parties involved in conflict and make sure no hard feelings remain

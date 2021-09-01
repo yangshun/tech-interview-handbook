@@ -52,16 +52,20 @@ Companies have different focuses depending on the stage they are at and the type
 |  | Early-stage Startup | Late-stage Startup | Large Company |
 | --- | --- | --- | --- |
 | Company Size | <100 | 100-1000 | >1000 |
-| Compensation | Base salary is a bit higher than big companies. Higher equity amount but its value is hard to judge as the company's valuation is unclear and stocks are not worth money yet. | Base salary is a bit higher than big companies. Company valuation is clearer and stocks have higher chance of being worth money. | Depends on the prestige of the company. Compensation is usually market standard or better. Stocks are worth money if company has gone public. |
-| Types of Work | Mainly product development. Engineers have to wear multiple hats - Front End, Back End, DevOps, Design, etc. | Product development and some infra. | Diverse roles and specialized work; dedicated people for each role. Infra work is more common. Also more opportunities for internal transfers. |
-| Career Ladders | Unstructured. No (or very vague) career levels. No formal mentorship nor training. | Somewhat structured. | Very structured. Well-defined career levels. |
-| Iteration Speed | Extremely fast. Struggling to find product market fit. | Moderate. Has found product market fit, trying to grow user base. | Stable product with wide user base. Have to roll out changes incrementally and run experiments. |
+| Compensation | Base salary is a bit higher than big companies. Higher equity amount but its value is hard to judge as the company's valuation is unclear and stocks are not worth money yet. High risk, high return. | Base salary is a bit higher than big companies. Company valuation is clearer and stocks have higher chance of being worth money. | Depends on the prestige of the company. Compensation is usually market standard or better. Stocks are worth money if company has gone public. |
+| Types of Work | Mainly product development. Engineers have to wear multiple hats - Front End, Back End, DevOps, Design, etc. | Product development and some infra. | Diverse roles and specialized work; dedicated people for each role. Infra and prod infra work is more common. More opportunities for internal transfers, sometimes even across the globe. |
+| Career Ladders | Unstructured. No (or very vague) career levels. Not much formal mentorship nor training. | Somewhat structured. | Very structured. Well-defined career levels. |
+| Iteration Speed | Extremely fast. Struggling to find product market fit. | Moderate. Has found product market fit, trying to grow user base. | Stable product with wide user base. Incrementally roll out changes and do lots of experimentation. |
+
+_It's important to note that the above are just general trends and exceptions can apply._
 
 ## Geographical location
 
 |  | US (Silicon Valley/NY) | Singapore |
 | --- | --- | --- |
-| Starting Pay | USD 100,000 | Monthly $4320 (Median), $5000 (75th percentile) |
+| Starting Pay | USD 100,000 | Monthly $5243 (Median), $6316 (75th percentile) |
 | Talent Access | Global talent, diverse nationalities and backgrounds | Usually regional, mostly Asians |
 | Types of Companies | HQ of large companies (Facebook, Amazon, Apple, Google, Microsoft, etc), Startups | Branch offices of large companies, Startups |
 | Types of Engineering Work | Depends on size of office/company | Both product and infra (building new programming languages, frameworks, and tools) |
+
+_Singapore salary data taken from [NUS GES 2020](https://www.moe.gov.sg/-/media/files/post-secondary/ges-2020/web-publication-nus-ges-2020.pdf)._

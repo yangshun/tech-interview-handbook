@@ -71,7 +71,7 @@ There can be conditions attached to signing bonuses, such as having to return a 
 
 While these perks are not exactly cash, they can help you save money which is almost equivalent to getting compensated more. Do find out more about these from your recruiters if you get the chance.
 
-- Free meals - Food is not exactly cheap in the Bay Area and having some meals provided on weekdays can result in saving few thousand dollars a year
-- Relocation bonus - Helpful if you are moving from abroad, and this can partially offset costs due to relocating
-- Health and dental insurance/plans - Companies often partner with insurance companies to provide employees with health and dental plans. These can amount to a few thousand dollars worth annually and is especially useful in locations where healthcare is expensive
-- Shuttle service - Public transportation in the Bay Area is not that great and the most common form of commute is driving. Being able to take a shuttle service helps in saving money on gas, transport, and freeing up your mind to do other things during the commute
+- **Free meals** - Food is not exactly cheap in the Bay Area and having some meals provided on weekdays can result in saving few thousand dollars a year and hours spent on travelling out to get food
+- **Relocation bonus** - Helpful if you are moving from abroad. This can partially offset costs incurred during relocation
+- **Health and dental insurance/plans** - Companies often partner with insurance companies to provide employees with health and dental plans. These can amount to a few thousand dollars worth annually and is especially useful in locations where healthcare is expensive
+- **Shuttle service** - Public transportation in the Bay Area is not that great and the most common form of commute is driving. Being able to take a shuttle service helps in saving money on gas, transport, and freeing up your mind to do other things during the commute

@@ -7,7 +7,7 @@ title: String
 
 Ask about input character set and case sensitivity. Usually the characters are limited to lowercase Latin characters, for example a to z.
 
-When you need to compare strings where the order isn’t important (like anagram), you may consider using a HashMap as a counter. If your language has a built-in Counter class like Python, ask to use that instead.
+When you need to compare strings where the order isn't important (like anagram), you may consider using a HashMap as a counter. If your language has a built-in Counter class like Python, ask to use that instead.
 
 If you need to keep a counter of characters, a common mistake is to say that the space complexity required for the counter is O(n). The space required for a counter is O(1) not O(n). This is because the upper bound is the range of characters, which is usually a fixed constant of 26. The input set is just lowercase Latin characters.
 

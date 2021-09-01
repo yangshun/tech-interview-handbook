@@ -35,6 +35,6 @@ Find out and be familiar with the common pitfalls and caveats of the language. I
 
 ### Broaden exposure
 
-Gain a broad exposure to questions from various topics. In the second half of the article I mention algorithm topics and practice questions for each topic. Do around 100–200 LeetCode questions and you should be good.
+Gain a broad exposure to questions from various topics. In the second half of the article I mention algorithm topics and practice questions for each topic. If you can spare the time, do around 100–200 LeetCode questions of varying topics and you should be good.
 
-Practice, practice and more practice!
+**Practice, practice and more practice!**

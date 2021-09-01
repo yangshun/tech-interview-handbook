@@ -42,7 +42,7 @@ export default React.memo(function SidebarAd() {
       }}>
       <p className={styles.tagline}>
         <strong>Get paid, not played.</strong> Chat with former tech recruiters
-        who’ll guide you on exactly what to say to negotiate a higher offer.
+        who'll guide you on exactly what to say to negotiate a higher offer.
       </p>
     </a>
   );

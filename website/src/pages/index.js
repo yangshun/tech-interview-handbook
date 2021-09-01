@@ -93,7 +93,7 @@ function Home() {
                         <div align="center">
                           <strong>
                             Get paid, not played. Chat with former tech
-                            recruiters who’ll guide you on exactly what to say
+                            recruiters who'll guide you on exactly what to say
                             to negotiate a higher offer.
                           </strong>
                         </div>

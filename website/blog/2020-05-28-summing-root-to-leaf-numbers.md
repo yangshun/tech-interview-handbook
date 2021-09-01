@@ -13,7 +13,7 @@ Sum Root to Leaf Numbers is an [interesting problem from LeetCode](https://leetc
 
 <!--truncate-->
 
-I assume that you’re familiar with Python and the concept of binary trees. If you’re not, you can read [this article](https://www.tutorialspoint.com/python_data_structure/python_binary_tree.htm) to get started.
+I assume that you're familiar with Python and the concept of binary trees. If you're not, you can read [this article](https://www.tutorialspoint.com/python_data_structure/python_binary_tree.htm) to get started.
 
 <!--truncate-->
 
@@ -21,7 +21,7 @@ I assume that you’re familiar with Python and the concept of binary trees. If 
 
 ## The Problem
 
-Given a binary tree whose nodes contain values `0-9`, we have to find the sum of all numbers formed by root-to-leaf paths. A leaf is a node that doesn’t have any child nodes. **In a binary tree, a root-to-leaf path is always unique**. Here below is the expected behavior of the solution required:
+Given a binary tree whose nodes contain values `0-9`, we have to find the sum of all numbers formed by root-to-leaf paths. A leaf is a node that doesn't have any child nodes. **In a binary tree, a root-to-leaf path is always unique**. Here below is the expected behavior of the solution required:
 
 ![leetcode2](https://user-images.githubusercontent.com/29497717/82636816-0be5d480-9c36-11ea-8b2d-78bb36c865ee.jpeg)
 
@@ -37,9 +37,9 @@ In the tree on the left, the output is `25`. `25` is the sum of `12` and `13`, w
 
 ## The Solution
 
-We can do a `pre-order` traversal of the tree where we incrementally construct a number and exploit the fact that numbers formed by nodes in the same sub-tree have common digits. When we’re done forming numbers in a sub-tree, we can backtrack and go to another sub-tree.
+We can do a `pre-order` traversal of the tree where we incrementally construct a number and exploit the fact that numbers formed by nodes in the same sub-tree have common digits. When we're done forming numbers in a sub-tree, we can backtrack and go to another sub-tree.
 
-Let’s create a `Solution` class to encompass our solution.
+Let's create a `Solution` class to encompass our solution.
 
 ```py
 class Solution:
