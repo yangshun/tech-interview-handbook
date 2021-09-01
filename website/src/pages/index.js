@@ -210,7 +210,7 @@ function Home() {
                       <div className="avatar">
                         <img className="avatar__photo" src={user.thumbnail} />
                         <div className="avatar__intro">
-                          <h4 className="avatar__name">{user.name}</h4>
+                          <div className="avatar__name">{user.name}</div>
                           <small className="avatar__subtitle">
                             {user.title}
                           </small>
