@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 import clsx from 'clsx';
 
