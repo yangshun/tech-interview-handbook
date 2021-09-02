@@ -22,7 +22,7 @@ export default React.memo(function SidebarAd() {
   return (
     <BrowserOnly>
       {() =>
-        Math.random() ? (
+        Math.random() > 0.5 ? (
           <a
             className={clsx(styles.container, backgroundClass)}
             href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_docs_sidebar"
