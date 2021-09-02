@@ -21,6 +21,7 @@ export default React.memo(function SidebarAd() {
     <a
       className={clsx(styles.container, backgroundClass)}
       href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_docs_sidebar"
+      key={Math.random()}
       target="_blank"
       rel="noreferrer noopener"
       onClick={() => {
@@ -35,6 +36,7 @@ export default React.memo(function SidebarAd() {
     <a
       className={clsx(styles.container, backgroundClass)}
       href="https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_docs_sidebar"
+      key={Math.random()}
       target="_blank"
       rel="noreferrer noopener"
       onClick={() => {

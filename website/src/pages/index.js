@@ -64,7 +64,7 @@ function Home() {
               <div className="col col--8 col--offset-2">
                 <div className="margin-vert--lg text--center">
                   {Math.random() > 0.5 ? (
-                    <>
+                    <div key={Math.random()}>
                       <h2 className={styles.sectionPrimaryTitle}>
                         <strong>
                           Get paid more. Receive risk-free salary negotiation
@@ -84,9 +84,9 @@ function Home() {
                           Get Risk-free Negotiation Help&nbsp;&nbsp;→
                         </a>
                       </div>
-                    </>
+                    </div>
                   ) : (
-                    <>
+                    <div key={Math.random()}>
                       <h2 className={styles.sectionPrimaryTitle}>
                         <strong>
                           Get paid, not played. Chat with former tech recruiters
@@ -106,7 +106,7 @@ function Home() {
                           Get Negotiation Help&nbsp;&nbsp;→
                         </a>
                       </div>
-                    </>
+                    </div>
                   )}
                 </div>
               </div>
