@@ -66,13 +66,11 @@ function Home() {
                   {Math.random() > 0.5 ? (
                     <>
                       <h2 className={styles.sectionPrimaryTitle}>
-                        <div align="center">
-                          <strong>
-                            Get paid more. Receive risk-free salary negotiation
-                            help from Moonchaser. You pay nothing unless your
-                            offer is increased.
-                          </strong>
-                        </div>
+                        <strong>
+                          Get paid more. Receive risk-free salary negotiation
+                          help from Moonchaser. You pay nothing unless your
+                          offer is increased.
+                        </strong>
                       </h2>
                       <div className="margin-vert--lg">
                         <a
@@ -90,13 +88,11 @@ function Home() {
                   ) : (
                     <>
                       <h2 className={styles.sectionPrimaryTitle}>
-                        <div align="center">
-                          <strong>
-                            Get paid, not played. Chat with former tech
-                            recruiters who'll guide you on exactly what to say
-                            to negotiate a higher offer.
-                          </strong>
-                        </div>
+                        <strong>
+                          Get paid, not played. Chat with former tech recruiters
+                          who'll guide you on exactly what to say to negotiate a
+                          higher offer.
+                        </strong>
                       </h2>
                       <div className="margin-vert--lg">
                         <a

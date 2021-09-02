@@ -1,6 +1,6 @@
 ---
-title: My Experience With Front End Interviews
-slug: my-experience-with-front-end-interviews
+title: A Glimpse into Front End Interviews
+slug: a-glimpse-into-front-end-interviews
 author: Kai Li
 author_title: Software Engineer at Quora
 author_url: https://github.com/li-kai
