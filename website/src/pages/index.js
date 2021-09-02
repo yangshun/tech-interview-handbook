@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
@@ -53,66 +54,78 @@ function Home() {
         </div>
       </header>
       <div>
-        <div
-          className={classnames(
-            'margin-bottom--lg',
-            'padding-vert--lg',
-            styles.sectionPrimary,
-          )}>
-          <div className="container">
-            <div className="row">
-              <div className="col col--8 col--offset-2">
-                <div className="margin-vert--lg text--center">
-                  {Math.random() > 0.5 ? (
-                    <div key={Math.random()}>
-                      <h2 className={styles.sectionPrimaryTitle}>
-                        <strong>
-                          Get paid more. Receive risk-free salary negotiation
-                          help from Moonchaser. You pay nothing unless your
-                          offer is increased.
-                        </strong>
-                      </h2>
-                      <div className="margin-vert--lg">
-                        <a
-                          className="button button--secondary button--lg"
-                          href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
-                          rel="noreferrer noopener"
-                          target="_blank"
-                          onClick={() => {
-                            window.gtag('event', 'moonchaser.homepage.click');
-                          }}>
-                          Get Risk-free Negotiation Help&nbsp;&nbsp;→
-                        </a>
-                      </div>
+        {/* // Because the SSR and client output can differ and hydration doesn't patch attribute differences, 
+        we'll render this on the browser only. */}
+        <BrowserOnly>
+          {() => (
+            <div
+              className={classnames(
+                'margin-bottom--lg',
+                'padding-vert--lg',
+                styles.sectionPrimary,
+              )}>
+              <div className="container">
+                <div className="row">
+                  <div className="col col--8 col--offset-2">
+                    <div className="margin-vert--lg text--center">
+                      {Math.random() > 0.5 ? (
+                        <div key={Math.random()}>
+                          <h2 className={styles.sectionPrimaryTitle}>
+                            <strong>
+                              Get paid more. Receive risk-free salary
+                              negotiation help from Moonchaser. You pay nothing
+                              unless your offer is increased.
+                            </strong>
+                          </h2>
+                          <div className="margin-vert--lg">
+                            <a
+                              className="button button--secondary button--lg"
+                              href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
+                              rel="noreferrer noopener"
+                              target="_blank"
+                              onClick={() => {
+                                window.gtag(
+                                  'event',
+                                  'moonchaser.homepage.click',
+                                );
+                              }}>
+                              Get Risk-free Negotiation Help&nbsp;&nbsp;→
+                            </a>
+                          </div>
+                        </div>
+                      ) : (
+                        <div key={Math.random()}>
+                          <h2 className={styles.sectionPrimaryTitle}>
+                            <strong>
+                              Get paid, not played. Chat with former tech
+                              recruiters who'll guide you on exactly what to say
+                              to negotiate a higher offer.
+                            </strong>
+                          </h2>
+                          <div className="margin-vert--lg">
+                            <a
+                              className="button button--secondary button--lg"
+                              href="https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
+                              rel="noreferrer noopener"
+                              target="_blank"
+                              onClick={() => {
+                                window.gtag(
+                                  'event',
+                                  'levelsfyi.homepage.click',
+                                );
+                              }}>
+                              Get Negotiation Help&nbsp;&nbsp;→
+                            </a>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  ) : (
-                    <div key={Math.random()}>
-                      <h2 className={styles.sectionPrimaryTitle}>
-                        <strong>
-                          Get paid, not played. Chat with former tech recruiters
-                          who'll guide you on exactly what to say to negotiate a
-                          higher offer.
-                        </strong>
-                      </h2>
-                      <div className="margin-vert--lg">
-                        <a
-                          className="button button--secondary button--lg"
-                          href="https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
-                          rel="noreferrer noopener"
-                          target="_blank"
-                          onClick={() => {
-                            window.gtag('event', 'levelsfyi.homepage.click');
-                          }}>
-                          Get Negotiation Help&nbsp;&nbsp;→
-                        </a>
-                      </div>
-                    </div>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          )}
+        </BrowserOnly>
         <div className={classnames('margin-vert--lg', 'padding-vert--lg')}>
           <div className="container">
             <div className="row">
