@@ -33,10 +33,7 @@ function Home() {
           </p>
           <div className={styles.buttons}>
             <a
-              className={classnames(
-                'button button--primary button--lg',
-                styles.getStarted,
-              )}
+              className={classnames('button button--primary button--lg')}
               href={useBaseUrl('introduction')}>
               Get Started&nbsp;&nbsp;→
             </a>
