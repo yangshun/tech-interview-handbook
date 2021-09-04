@@ -37,7 +37,12 @@ module.exports = {
       },
       'questions-to-ask',
     ],
-    'Post Interview': ['understanding-compensation', 'negotiation'],
+    'Post Interview': [
+      'understanding-compensation',
+      'negotiation',
+      'engineering-levels',
+      'team-selection',
+    ],
     Algorithms: [
       'algorithms/algorithms-introduction',
       'algorithms/array',
