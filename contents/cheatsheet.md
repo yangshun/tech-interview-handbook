@@ -53,13 +53,13 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ❌ | Start coding without interviewer's green light. |
 | ❌ | Appear too unsure about your approach or analysis. |
 
-### During coding
+### Code out your solution
 
 |  | Things |
 | --- | --- |
 | ✅ | Explain what you are coding/typing to the interviewer, what you are trying to achieve. |
 | ✅ | Practice good coding style. Clear variable names, consistent operator spacing, proper indentation, etc. |
-| ✅ | Type/write at a reasonable speed. |
+| ✅ | Type/write at a reasonable speed. Too slow is no good. |
 | ✅ | As much as possible, write actual compilable code, not pseudocode. |
 | ✅ | Write in a modular fashion. Extract out chunks of repeated code into functions. |
 | ✅ | Ask for permission to use trivial functions without having to implement them; saves you some time. |
@@ -69,7 +69,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ✅ | If you are cutting corners in your code, state that out loud to your interviewer and say what you would do in a non-interview setting (no time constraints). E.g., "Under non-interview settings, I would write a regex to parse this string rather than using `split()` which may not cover all cases." |
 | ✅ | Practice whiteboard space-management skills. |
 | ⚠️ | Reasonable defensive coding. Check for nulls, empty collections, etc. Can omit if input validity has been clarified with the interviewer. |
-| ❌ | Remain quiet the whole time. |
+| ❌ | Remain quiet the whole time while coding. |
 | ❌ | Spend too much time writing comments. |
 | ❌ | Use extremely verbose or single-character (unless they're common like `i`, `n`) variable names. |
 | ❌ | Copy and paste code without checking (e.g. variables need to be renamed). |
@@ -82,7 +82,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | --- | --- |
 | ✅ | Scan through your code for mistakes as if it was your first time seeing code written by someone else. |
 | ✅ | Check for off-by-one errors. |
-| ✅ | Come up with more test cases. Try extreme test cases. |
+| ✅ | Come up with test cases. Try extreme test cases - empty sets, single item sets, negative numbers |
 | ✅ | Step through your code with those test cases. |
 | ✅ | Look out for places where you can refactor. |
 | ✅ | Reiterate the time and space complexity of your code. |
