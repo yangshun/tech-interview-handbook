@@ -46,10 +46,10 @@ jobs:
           git config --global user.name "gh-actions"
           cd website
           if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
+            yarn install --frozen-lockfile
           elif [ -e package-lock.json ]; then
-          npm ci
+            npm ci
           else
-          npm i
+            npm i
           fi
           npm run deploy
