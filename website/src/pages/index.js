@@ -16,7 +16,9 @@ function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
   return (
-    <Layout title={siteConfig.title} description={siteConfig.tagline}>
+    <Layout
+      title="Technical Interview Guide for Busy Engineers"
+      description={siteConfig.tagline}>
       <header className={classnames('hero', styles.heroBanner)}>
         <div className="container">
           <img
