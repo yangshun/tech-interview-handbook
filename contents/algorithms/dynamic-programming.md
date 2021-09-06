@@ -27,3 +27,7 @@ Sometimes you do not need to store the whole DP table in memory, the last two va
 - [Decode Ways](https://leetcode.com/problems/decode-ways/)
 - [Unique Paths](https://leetcode.com/problems/unique-paths/)
 - [Jump Game](https://leetcode.com/problems/jump-game/)
+
+## Courses
+
+- [Grokking the Dynamic Programming Patterns for Coding Interviews](https://www.educative.io/courses/grokking-dynamic-programming-patterns-for-coding-interviews?aff=x23W)

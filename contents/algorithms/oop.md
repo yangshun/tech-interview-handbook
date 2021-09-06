@@ -11,3 +11,7 @@ title: Object-Oriented Programming
 - Discuss algorithms and data structures for a garbage collector?
 - How would you implement an HR system to keep track of employee salaries and benefits?
 - How would you implement an Elevator system?
+
+## Courses
+
+- [Grokking the Object Oriented Design Interview](https://www.educative.io/courses/grokking-the-object-oriented-design-interview?aff=x23W)

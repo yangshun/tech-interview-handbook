@@ -7,7 +7,7 @@ title: Negotiation
 
 If you've received an offer (or even better, offers), congratulations! You may heave a huge sigh of relief and think that the toughest parts are over. Well yes, but not entirely! For most people, the reason they're finding a new job is to increase their salary, and salary negotiation is the last stretch in achieving that goal.
 
-**Here's something that recruiters don't want you to know:** In most cases, there's room for negotiation on your offer. The initial offer that you are given is not the best package that the company can offer. During my job hunting experience and having received offers from numerous top tech companies like Facebook, Google, Airbnb, Lyft, and Dropbox, I have found this to be true. In most cases, you could always negotiate for more money, and some aspects of your salary is easier to negotiate than others.
+**Here's something that recruiters don't want you to know -** In most cases, there's room for negotiation on your offer and _recruiters expect candidates to negotiate_. The initial offer that you are given is not the best package that the company can offer. During my last job hunting experience, I received offers from numerous top tech companies like Facebook, Google, Airbnb, Lyft, Dropbox, and I have found this to be true. In most cases, you could always negotiate for more money, and some aspects of your salary is easier to negotiate than others. With many offers in hand, I was able to negotiate a better offer from every company.
 
 If you haven't been negotiating your past offers, or are new to the negotiation game, worry not! There are multiple negotiation services that can help you out. Typically, they'd be well-worth the cost.
 
@@ -24,6 +24,10 @@ How it works is that you will be guided by their experienced team of professiona
 Get paid more. Receive salary negotiation help from [**Moonchaser**](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) or [**Levels.fyi**](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) and their team of experienced recruiters. Don't leave money on the table 💰!
 
 :::
+
+### Grokking Comp Negotiation in Tech
+
+If you are not keen on paying for negotiation services and are a fan of courses, here's something for you - the [Grokking Comp Negotiation in Tech](https://www.educative.io/courses/grokking-comp-negotiation?aff=x23W) course, a text-based course where you can get information on each aspect of negotiation. **Disclaimer: I haven't tried this course before.**
 
 ## Ten Rules of Negotiation
 
