@@ -16,15 +16,15 @@ The [STAR](https://en.wikipedia.org/wiki/Situation,_task,_action,_result) format
 
 Here's an example of how the STAR format can be used to answer the question: **"Tell me about a time in which you had a conflict and needed to influence somebody else"**.
 
-#### Situation
+### Situation
 
 > "I was the team lead of a school project about building a social network mobile web app. Our designer's mid-terms were approaching and didn't have time to produce the mockups. Our front end person was rushing him for the mockups so that he could proceed with his work and that was stressing the designer out. The atmosphere in the team was tense."
 
-#### Task
+### Task
 
 > "As the team lead, I had to resolve the tension between the front end developer and the designer so that the team could work together peacefully and complete the project on time."
 
-#### Action
+### Action
 
 > "I spoke to the front end developer to ask him why he was rushing the designer for the designs. He said that he wanted the designs early because it would be a waste of time rebuilding if the designer designed something different eventually. I explained to him that the mid-term dates were out of the designer's control and we had to be more understanding about each others' schedules.
 >
@@ -32,11 +32,11 @@ Here's an example of how the STAR format can be used to answer the question: **"
 >
 > As someone with some experience in UI/UX design, I came up with wireframe mocks, ran them by the designer for approval, then passed them to the front end developer to start building. I encouraged the front end developer to use placeholders and not be too concerned about the details for now. We could build the non-UI parts first (authentication, hook up with APIs) and tweak pixels and add polish later on. The front end developer agreed and went ahead with the approach. I explained to the front end developer that the designer will pass us the mockups after his mid-term, by &lt;DATE&gt;."
 
-#### Result
+### Result
 
 > "When our designer ended mid-terms, he came back with beautiful mockups that fit well into the wireframes. Our front end developer implemented them with great care to detail. We ended up scoring top marks for the project and became a great team."
 
-#### Qualities
+### Qualities
 
 Through the above, experienced interviewers can extract the following qualities from the mentioned behaviors.
 

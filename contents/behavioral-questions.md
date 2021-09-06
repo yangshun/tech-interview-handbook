@@ -3,7 +3,9 @@ id: behavioral-questions
 title: Common Questions
 ---
 
-### General
+Here's a list of common behavioral questions to prepare for. If you prepare well for the general questions and apply the STAR format along with demonstrating qualities, you will be fine.
+
+## General
 
 - Why do you want to work for X company?
 - Why do you want to leave your current/last company?
@@ -34,9 +36,7 @@ title: Common Questions
 - What words would your colleagues use to describe you?
 - What would you hope to achieve in the first six months after being hired?
 
-### Airbnb
-
-Source: [Glassdoor](https://www.glassdoor.com/Interview/Airbnb-Interview-Questions-E391850.htm)
+## Airbnb
 
 While loving to travel or appreciating Airbnb's growth may be good answers, try to demonstrate the deep connection you have with the product.
 
@@ -65,9 +65,9 @@ While loving to travel or appreciating Airbnb's growth may be good answers, try 
 - How does Airbnb impact our guests and hosts?
 - What part of our mission resonates the most with you?
 
-### Amazon
+Source: [Glassdoor](https://www.glassdoor.com/Interview/Airbnb-Interview-Questions-E391850.htm)
 
-Source: [Glassdoor](https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036.htm)
+## Amazon
 
 - How do you deal with a failed deadline?
 - Why do you want to work for Amazon?
@@ -78,28 +78,29 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Amazon-Interview-Questio
 - Describe what Human Resources means to you.
 - How would you improve Amazon's website?
 
-### Bytedance
+Source: [Glassdoor](https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036.htm)
 
-Source: [Glassdoor]
+## ByteDance
 
-- What do you know about product manager and why?
+- What do you know about &lt;role&gt; and why?
 - Take me through a product you launched from start to end
-- What's the biggest achievement in your previous projects
-- Why do you want to work at ByteDance?
+- What's the biggest achievement in your previous projects?
 - Tell me about a recent failure and what you learned from the experience
+- Why do you want to work at ByteDance?
+- What makes you a good fit for this position?
 - What excites you about the role?
 
-### Dropbox
+Source: [Glassdoor](https://www.glassdoor.sg/Interview/ByteDance-Interview-Questions-E1624196.htm)
 
-Source: [Glassdoor](https://www.glassdoor.com/Interview/Dropbox-Interview-Questions-E415350.htm)
+## Dropbox
 
 - Talk about your favorite project.
 - If you were hired here what would you do?
 - State an experience about how you solved a technical problem. Be specific about the diagnosis and process.
 
-### Hired
+Source: [Glassdoor](https://www.glassdoor.com/Interview/Dropbox-Interview-Questions-E415350.htm)
 
-Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions-how-to-answer/)
+## Hired
 
 - Tell me about yourself.
 - What is your biggest strength and area of growth?
@@ -112,16 +113,16 @@ Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions
 - Where do you want to be in five years?
 - Tell me about a time you needed information from someone who wasn't responsive. What did you do?
 
-### Lyft
+Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions-how-to-answer/)
 
-Source: [Glassdoor](https://www.glassdoor.com/Interview/Lyft-Interview-Questions-E700614.htm)
+## Lyft
 
 - Tell me about your most interesting/challenging project to date.
 - Why Lyft? What are you looking for in the next role?
 
-### Palantir
+Source: [Glassdoor](https://www.glassdoor.com/Interview/Lyft-Interview-Questions-E700614.htm)
 
-Source: [Glassdoor](https://www.glassdoor.com/Interview/Palantir-Technologies-Interview-Questions-E236375.htm)
+## Palantir
 
 - **What is something 90% of people disagree with you about?**
 - **What is broken around you?**
@@ -139,9 +140,9 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Palantir-Technologies-In
 - What was the most fun thing you did recently?
 - Tell me the story of how you became who you are today and what made you apply to Palantir.
 
-### Slack
+Source: [Glassdoor](https://www.glassdoor.com/Interview/Palantir-Technologies-Interview-Questions-E236375.htm)
 
-Source: [Glassdoor](https://www.glassdoor.com/Interview/Slack-Interview-Questions-E950758.htm)
+## Slack
 
 - Tell me something about your internship.
 - Why do you want to join Slack?
@@ -153,27 +154,29 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Slack-Interview-Question
 - Did you find any bugs in Slack?
 - What is your favorite feature and why?
 
-### Stack Overflow
+Source: [Glassdoor](https://www.glassdoor.com/Interview/Slack-Interview-Questions-E950758.htm)
 
-Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions-how-to-answer/)
+## Stack Overflow
 
 - What have you built?
 - What is the hardest technical problem you have run into?
-- How did you solve it?
+  - How did you solve it?
 - Where do you see yourself in 5 years?
 - Why do you want to work here?
 - How do you handle disagreements with co-workers?
 
-### Stripe
+Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions-how-to-answer/)
 
-Source: [Glassdoor](https://www.glassdoor.com/Interview/Stripe-Interview-Questions-E671932.htm)
+## Stripe
 
 - How do you stay up to date with the latest technologies?
 - Explain a project that you worked on recently that was difficult.
 - Where do you see yourself in five years?
 
-### Twitter
+Source: [Glassdoor](https://www.glassdoor.com/Interview/Stripe-Interview-Questions-E671932.htm)
 
-Source: [Glassdoor](https://www.glassdoor.com/Interview/Twitter-Interview-Questions-E100569.htm)
+## Twitter
 
 - What would your previous boss say your biggest strength was?
+
+Source: [Glassdoor](https://www.glassdoor.com/Interview/Twitter-Interview-Questions-E100569.htm)
