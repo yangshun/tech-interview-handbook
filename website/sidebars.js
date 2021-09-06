@@ -25,6 +25,7 @@ module.exports = {
           'interviewer-cheatsheet',
         ],
       },
+      'system-design',
       {
         type: 'category',
         label: 'Behavioral Round',
