@@ -27,8 +27,7 @@
 
 ## What is this?
 
-No one has time to do a few hundred LeetCode questions. Here's *free and curated* technical interview preparation materials for 
-busy engineers, brought to you by the author of the [Blind 75 List](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU). 
+No one has time to do a few hundred LeetCode questions. Here's _free and curated_ technical interview preparation materials for busy engineers, brought to you by the author of the [Blind 75 List](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU).
 
 Besides the usual algorithm questions, other **awesome** stuff includes:
 
@@ -54,7 +53,7 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 ---
 
 <div align="center">
-  <strong>💰 Looking for a job? Sign up for free with <a href="https://triplebyte.com/a/PJaJNpO/tihg">Triplebyte</a> to efficiently interview with top tech companies! 💰</strong>
+  <strong>💡 Looking for high quality interview courses? <a href="https://www.educative.io/explore?search_string=interview&aff=x23W">Educative</a> offers a ton of great courses to improve your interview game 💡</strong>
 </div>
 
 ---
@@ -69,9 +68,13 @@ Also, existing resources focus mainly on algorithm questions and lack coverage f
 
 Front end-related content have been extracted out into a separate repository - [Front End Interview Handbook](https://github.com/yangshun/front-end-interview-handbook).
 
+## Looking for System Design content?
+
+We're still working on System Design content. In the meanwhile, check out [Educative's Grokking the System Design Interview course](https://www.educative.io/courses/grokking-the-system-design-interview?aff=x23W), which in our opinion is one of the most useful resources for getting started on system design interviews preparation.
+
 ## Contents
 
-A [Docusaurus](https://github.com/facebook/docusaurus) website has been created to provide a better reading experience. Check out the website [here](https://techinterviewhandbook.org/)!
+A [Docusaurus](https://github.com/facebook/docusaurus) website has been created to provide a better reading experience. Check out the website [here](https://techinterviewhandbook.org)!
 
 ## Related
 

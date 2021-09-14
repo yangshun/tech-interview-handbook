@@ -22,7 +22,7 @@ System design content is still work-in-progress, but there are some resources to
 
 ## Courses
 
-- [Grokking the System Design Interview](https://www.educative.io/courses/grokking-the-system-design-interview?aff=x23W) - I've personally tried this and have referred many people to use this. Highly recommended!
+- [Grokking the System Design Interview](https://www.educative.io/courses/grokking-the-system-design-interview?aff=x23W) - I've personally taken this course and have referred many people to use this. Highly recommended!
 - [Grokking the Advanced System Design Interview](https://www.educative.io/courses/grokking-adv-system-design-intvw?aff=x23W) - I haven't tried this but it's by the same people who created "Grokking the System Design Interview", so it should be good! In my opinion you probably wouldn't need this unless you're very senior or going for a specialist position.
 
 ## Resources

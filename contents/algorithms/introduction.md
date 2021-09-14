@@ -50,6 +50,7 @@ If you want more structured algorithms practice, I recommend [Educative's Grokki
 
 ## References
 
+- [Educative's Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
 - http://blog.triplebyte.com/how-to-pass-a-programming-interview
 - https://quip.com/q41AA3OmoZbC
 - http://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/
