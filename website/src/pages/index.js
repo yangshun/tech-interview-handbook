@@ -61,15 +61,15 @@ function Home() {
               className={classnames(
                 'margin-bottom--lg',
                 'padding-vert--lg',
-                styles.sectionPrimary,
+                styles.sectionSponsor,
               )}>
               <div className="container">
                 <div className="row">
                   <div className="col col--8 col--offset-2">
                     <div className="margin-vert--lg text--center">
                       {Math.random() > 0.5 ? (
-                        <div key={Math.random()}>
-                          <h2 className={styles.sectionPrimaryTitle}>
+                        <div>
+                          <h2 className={styles.sectionSponsorTitle}>
                             <strong>
                               Get paid more. Receive risk-free salary
                               negotiation help from Moonchaser. You pay nothing
@@ -93,8 +93,8 @@ function Home() {
                           </div>
                         </div>
                       ) : (
-                        <div key={Math.random()}>
-                          <h2 className={styles.sectionPrimaryTitle}>
+                        <div>
+                          <h2 className={styles.sectionSponsorTitle}>
                             <strong>
                               Get paid, not played. Chat with former tech
                               recruiters who'll guide you on exactly what to say
@@ -186,6 +186,42 @@ function Home() {
                       Countless engineers have gotten their dream jobs with its
                       help.
                     </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className={classnames(
+            'margin-bottom--lg',
+            'padding-vert--lg',
+            styles.sectionSponsorAlt,
+          )}>
+          <div className="container">
+            <div className="row">
+              <div className="col col--8 col--offset-2">
+                <div className="margin-vert--lg text--center">
+                  <div>
+                    <h2 className={styles.sectionSponsorTitle}>
+                      <strong>
+                        Looking for high quality interview courses? Educative
+                        offers a ton of great courses to improve your interview
+                        game.
+                      </strong>
+                    </h2>
+                    <div className="margin-vert--lg">
+                      <a
+                        className="button button--secondary button--lg"
+                        href="https://www.educative.io/explore?search_string=interview&aff=x23W"
+                        rel="noreferrer noopener"
+                        target="_blank"
+                        onClick={() => {
+                          window.gtag('event', 'educative.homepage.click');
+                        }}>
+                        Get Started&nbsp;&nbsp;→
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>

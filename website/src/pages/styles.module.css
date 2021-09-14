@@ -33,11 +33,20 @@
   background-color: var(--ifm-color-emphasis-100);
 }
 
-.sectionPrimary {
-  background: linear-gradient(90deg,#12c2e9,#c471ed,#f64f59);
+.sectionSponsor {
+  background: linear-gradient(90deg, #12c2e9, #c471ed, #f64f59);
 }
 
-.sectionPrimaryTitle {
+.sectionSponsorAlt {
+  background: linear-gradient(
+    135deg,
+    rgb(29, 136, 244),
+    rgb(252, 67, 128),
+    rgb(251, 191, 36)
+  );
+}
+
+.sectionSponsorTitle {
   color: var(--ifm-color-white);
 }
 
