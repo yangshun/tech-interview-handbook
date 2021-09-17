@@ -46,8 +46,8 @@ module.exports = {
       trackingID: 'UA-44622716-2',
     },
     algolia: {
-      apiKey: 'bd359779d1c4c71ade6062e8f13f5a83',
-      indexName: 'yangshun-tech-interview',
+      apiKey: '4dabb055be464346fcb6877f086f08e8',
+      indexName: 'techinterviewhandbook',
     },
   },
   presets: [
