@@ -23,4 +23,4 @@ _Source: [Preparing for your Onsite Interview at Facebook](https://www.facebook.
 
 ## Courses
 
-I really don't think one needs to attend a course on behavioral interviews, but your mileage may vary. I've seen candidates get rejected for failing the behavioral round even though they did super well on the coding and system design interviews. If you want to take a course on behavioral interviews, you can check out Educative's [Grokking the Behavioral Interview](https://www.educative.io/courses/grokking-the-behavioral-interview?aff=x23W).
+I really don't think one needs to attend a course on behavioral interviews, but your mileage may vary. I've seen candidates get rejected for failing the behavioral round even though they did super well on the coding and system design interviews. If you want to take a course on behavioral interviews, you can check out Educative's [Grokking the Behavioral Interview](https://www.educative.io/courses/grokking-the-behavioral-interview?aff=x23W) course.

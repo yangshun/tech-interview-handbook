@@ -137,16 +137,29 @@ function Home() {
                   )}>
                   Why Tech Interview Handbook?
                 </h2>
-                <div className="row margin-vert--lg">
-                  <div className="col">
-                    <h3>From Zero to Hero</h3>
+                <div className={classnames('row', styles.featuresRow)}>
+                  <div
+                    className={classnames(
+                      'col',
+                      'col--4',
+                      styles.featuresRowItem,
+                    )}>
+                    <h3>💯 Go From Zero to Hero</h3>
                     <p>
                       Go from zero to tech interview hero with this handbook. No
                       prior interview experience needed.
                     </p>
+                    <a href={useBaseUrl('introduction')}>
+                      <strong>Learn more</strong>
+                    </a>
                   </div>
-                  <div className="col">
-                    <h3>Curated Practice Questions</h3>
+                  <div
+                    className={classnames(
+                      'col',
+                      'col--4',
+                      styles.featuresRowItem,
+                    )}>
+                    <h3>📝 Curated Practice Questions</h3>
                     <p>
                       No one has time to practice a few hundred LeetCode
                       questions. We tell you which are the best questions to
@@ -156,35 +169,65 @@ function Home() {
                       </a>
                       .
                     </p>
+                    <a href={useBaseUrl('best-practice-questions')}>
+                      <strong>Learn more</strong>
+                    </a>
                   </div>
-                  <div className="col">
-                    <h3>Interview Cheatsheet</h3>
+                  <div
+                    className={classnames(
+                      'col',
+                      'col--4',
+                      styles.featuresRowItem,
+                    )}>
+                    <h3>✅ Interview Cheatsheet</h3>
                     <p>
                       Straight-to-the-point Do's and Don'ts during an interview.
                       Knowing these, the battle is already half won.
                     </p>
+                    <a href={useBaseUrl('cheatsheet')}>
+                      <strong>Learn more</strong>
+                    </a>
                   </div>
-                </div>
-                <div className="row margin-vert--lg">
-                  <div className="col">
-                    <h3>Practical Algorithm Tips</h3>
+                  <div
+                    className={classnames(
+                      'col',
+                      'col--4',
+                      styles.featuresRowItem,
+                    )}>
+                    <h3>💁‍♀️ Practical Algorithm Tips</h3>
                     <p>
                       Practical tips for every algorithm topic - common
                       techniques and corner cases to look out for.
                     </p>
+                    <a href={useBaseUrl('algorithms/introduction')}>
+                      <strong>Learn more</strong>
+                    </a>
                   </div>
-                  <div className="col">
-                    <h3>Behavioral Questions</h3>
+                  <div
+                    className={classnames(
+                      'col',
+                      'col--4',
+                      styles.featuresRowItem,
+                    )}>
+                    <h3>💬 Behavioral Questions</h3>
                     <p>
                       Check out what behavioral questions companies commonly ask
                       and you can prepare your answers ahead of time.
                     </p>
+                    <a href={useBaseUrl('behavioral-questions')}>
+                      <strong>Learn more</strong>
+                    </a>
                   </div>
-                  <div className="col">
-                    <h3>Tested and Proven</h3>
+                  <div
+                    className={classnames(
+                      'col',
+                      'col--4',
+                      styles.featuresRowItem,
+                    )}>
+                    <h3>🧪 Tested and Proven</h3>
                     <p>
-                      Countless engineers have gotten their dream jobs with its
-                      help.
+                      Countless engineers have gotten their dream jobs with the
+                      help of Tech Interview Handbook.
                     </p>
                   </div>
                 </div>
@@ -193,11 +236,7 @@ function Home() {
           </div>
         </div>
         <div
-          className={classnames(
-            'margin-bottom--lg',
-            'padding-vert--lg',
-            styles.sectionSponsorAlt,
-          )}>
+          className={classnames('padding-vert--lg', styles.sectionSponsorAlt)}>
           <div className="container">
             <div className="row">
               <div className="col col--8 col--offset-2">
@@ -228,12 +267,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div
-          className={classnames(
-            'margin-vert--lg',
-            'padding-vert--lg',
-            styles.sectionAlt,
-          )}>
+        <div className={classnames('padding-vert--lg', styles.sectionAlt)}>
           <div className="container">
             <div className="row">
               <div className="col col--6 col--offset-3">
@@ -276,12 +310,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div
-          className={classnames(
-            'margin-vert--lg',
-            'padding-vert--lg',
-            'text--center',
-          )}>
+        <div className={classnames('padding-vert--lg', 'text--center')}>
           <div className="container">
             <div className="row">
               <div className="col col--8 col--offset-2">

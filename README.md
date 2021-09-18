@@ -17,13 +17,13 @@
   </h3>
 </div>
 
-<hr/>
+---
 
 <div align="center">
   <h3>Get paid more. Moonchaser has negotiated hundreds of tech offers. Get 1-1 guidance from their experienced team of ex-FAANG PMs, SWEs, and Recruiters. <a href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=github" target="_blank">Find out more</a></h3>
 </div>
 
-<hr/>
+---
 
 ## What is this?
 
@@ -33,12 +33,12 @@ Besides the usual algorithm questions, other **awesome** stuff includes:
 
 - [How to prepare](https://techinterviewhandbook.org/coding-round-overview) for coding interviews
 - [Interview Cheatsheet](https://techinterviewhandbook.org/cheatsheet) - Straight-to-the-point Do's and Don'ts
-- [Algorithm tips and the best practice questions](https://techinterviewhandbook.org/algorithms/algorithms-introduction) categorized by topic
-- ["Front-end Job Interview Questions" answers](https://github.com/yangshun/front-end-interview-handbook)
+- [Algorithm tips and the best practice questions](https://techinterviewhandbook.org/algorithms/introduction) categorized by topic
 - [Interview formats](https://techinterviewhandbook.org/interview-formats) of the top tech companies
 - [Behavioral questions](https://techinterviewhandbook.org/behavioral-questions) asked by the top tech companies
 - [Good questions to ask your interviewers](https://techinterviewhandbook.org/questions-to-ask) at the end of the interviews
 - [Helpful resume tips](https://techinterviewhandbook.org/resume) to get your resume noticed and the Do's and Don'ts
+- [Front-End Interview preparation](https://frontendinterviewhandbook.com)
 
 Help from you in contributing content would be very much appreciated!
 
@@ -53,7 +53,7 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 ---
 
 <div align="center">
-  <strong>💡 Looking for high quality interview courses? <a href="https://www.educative.io/explore?search_string=interview&aff=x23W">Educative</a> offers a ton of great courses to improve your interview game 💡</strong>
+  <h3>💡 Looking for high quality interview courses? <a href="https://www.educative.io/explore?search_string=interview&aff=x23W">Educative</a> offers a ton of great courses to improve your interview game 💡</h3>
 </div>
 
 ---
@@ -66,11 +66,11 @@ Also, existing resources focus mainly on algorithm questions and lack coverage f
 
 ## Looking for Front End content?
 
-Front end-related content have been extracted out into a separate repository - [Front End Interview Handbook](https://github.com/yangshun/front-end-interview-handbook).
+Front end-related content have been moved to a separate website - [Front End Interview Handbook](https://frontendinterviewhandbook.com).
 
 ## Looking for System Design content?
 
-We're still working on System Design content. In the meanwhile, check out [Educative's Grokking the System Design Interview course](https://www.educative.io/courses/grokking-the-system-design-interview?aff=x23W), which in our opinion is one of the most useful resources for getting started on system design interviews preparation.
+We're still working on System Design content. In the meanwhile, check out Educative's [Grokking the System Design Interview course](https://www.educative.io/courses/grokking-the-system-design-interview?aff=x23W), which in our opinion is one of the most useful resources for getting started on system design interviews preparation.
 
 ## Contents
 
@@ -121,4 +121,4 @@ Support this project by becoming a sponsor. Your logo/profile picture will show 
 
 ## Disclaimer
 
-I am providing code in the repository to you under an open source license. Because this is my personal repository, the license you receive to my code is from me and not my employer (Facebook)
+I am providing code in the repository to you under an open source license. Because this is my personal repository, the license you receive to my code is from me and not my employer (Facebook).
