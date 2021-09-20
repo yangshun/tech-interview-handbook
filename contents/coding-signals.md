@@ -7,7 +7,7 @@ The point of interviews is for interviewers to extract signals from certain cand
 
 When interviewers take down interview feedback, these are likely what is on their feedback sheet.
 
-Refer to the [Facebook's Onsite Interview Guide](https://scontent.xx.fbcdn.net/v/t39.2365-6/75448664_529293754518370_5563533277542744064_n.pdf?_nc_cat=108&ccb=1-5&_nc_sid=ad8a9d&_nc_ohc=wLjmSQfO3zQAX_fyaQ7&_nc_ht=scontent.xx&_nc_rmd=260&oh=577831ef9fb665716a3651b82f7041bc&oe=613A5FE8) for more information.
+Refer to the [Facebook's Onsite Interview Guide](https://www.facebook.com/careers/swe-prep-onsite) for more information.
 
 ## Communication
 
