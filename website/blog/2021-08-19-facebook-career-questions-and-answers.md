@@ -161,7 +161,7 @@ As of writing, internships in FB SG are run annually so if you fail this year yo
 
 ### What's the interview process like?
 
-Last year, it was a phone screen with recruiter, followed by 2 rounds of coding interviews (IINW) where the focus is on DSA.
+For all roles, there should be an initial contact (e.g. phone call) with recruiters. For interns, it would be 2 rounds of online coding interviews where the focus is on DSA. For fresh graduates, it would be 2 rounds of online coding interviews and 1 behavioral round.
 
 ### Based on your past experience, if a candidate does not get full marks for the online coding test, what are the chances of him or her getting a face to face interview? Just curious about the level of competition haha (This is because I'm not that worried about whiteboard interviews but afraid that I may not even get a chance to go through it)
 
