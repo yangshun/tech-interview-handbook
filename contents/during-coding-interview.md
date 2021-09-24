@@ -3,7 +3,7 @@ id: during-coding-interview
 title: During the Coding Interview
 ---
 
-Congratulations, you are ready to put your skills into practice! In a real coding interview, you will be given a technical question (or questions) by the interviewer, write code in a real-time collaborative editor (phone screen/virtual on-site) or on a whiteboard (on-site) to solve the problem within 30–45 minutes. This is where the real fun begins!
+Congratulations, you are ready to put your skills into practice! In a real coding interview, you will be given a technical question (or questions) by the interviewer, write code in a real-time collaborative editor (phone screen/virtual onsite) or on a whiteboard (onsite) to solve the problem within 30–45 minutes. This is where the real fun begins!
 
 Your interviewer will be looking out for signals that suggest you fit the requirements of the role and it is up to you to display those signals to them. Initially it may feel weird to be talking while you are coding as most programmers do not have the habit of explaining out loud as they are typing code. However, it is hard for the interviewer to know what you are thinking just by looking at the code that you type. If you communicate your approach to the interviewer before you start coding, you can validate your approach with them and the both of you can agree upon an acceptable approach.
 
