@@ -104,6 +104,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Dropbox-Interview-Questi
 
 - Tell me about yourself.
 - What is your biggest strength and area of growth?
+- If you are an animal then which type of animal you want to be?
 - Why are you interested in this opportunity?
 - What are your salary expectations?
 - Why are you looking to leave your current company?
@@ -112,6 +113,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Dropbox-Interview-Questi
 - Tell me about a challenge you faced recently in your role. How did you tackle it? What was the outcome?
 - Where do you want to be in five years?
 - Tell me about a time you needed information from someone who wasn't responsive. What did you do?
+- Any question from your side?
 
 Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions-how-to-answer/)
 
