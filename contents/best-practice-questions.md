@@ -62,6 +62,7 @@ The focus of week 3 is on non-linear data structures like trees, graphs and heap
 - [Clone Graph](https://leetcode.com/problems/clone-graph/)
 - [Course Schedule](https://leetcode.com/problems/course-schedule/)
 - [Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
+- [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
 
 #### Optional
 
