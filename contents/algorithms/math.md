@@ -13,8 +13,7 @@ Check for and handle overflow/underflow if you are using a typed language like J
 
 Consider negative numbers and floating point numbers. This may sound obvious, but under interview pressure, many obvious cases go unnoticed.
 
-When dealing with floating point numbers, avoid rounding mistakes by using epsilon comparison instead of equality check.
-  - E.g. `abs(x - y) <= 10e7` instead of `x == y`)
+When dealing with floating point numbers, take note of rounding mistakes. Consider using epsilon comparisons instead of equality checks. E.g. `abs(x - y) <= 10e7` instead of `x == y`).
 
 If the question asks to implement an operator such as power, squareroot or division and want it to be faster than O(n), binary search is usually the approach to go.
 
