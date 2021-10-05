@@ -20,6 +20,7 @@ Here are some psychological tricks that will help you ace a job interview.
   - To impress your interviewer, you should talk about past work experiences where you took initiative.
 - Be candid about your weaknesses.
   - It's wiser to say something genuine like, "I'm not always the best at staying organized," which sounds more honest, and could make your interviewer more inclined to recommend you for the position.
+  - Explain what you do in order to minimize the effects of this weakness on your work. If you say you "focus too much on detail" follow up by saying something like "I make sure to often take a step back and make sure it really matters on the bigger picture and I'm not spending time on something meaningless".
 - Speak expressively.
 - Showcase your potential.
   - You might be tempted to tell your interviewer all about your past accomplishments — but research suggests you should focus more on what you could do in the future, if the organization hires you.
