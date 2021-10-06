@@ -67,57 +67,27 @@ function Home() {
                 <div className="row">
                   <div className="col col--8 col--offset-2">
                     <div className="margin-vert--lg text--center">
-                      {Math.random() > 0.5 ? (
-                        <div>
-                          <h2 className={styles.sectionSponsorTitle}>
-                            <strong>
-                              Get paid more. Receive risk-free salary
-                              negotiation help from Moonchaser. You pay nothing
-                              unless your offer is increased.
-                            </strong>
-                          </h2>
-                          <div className="margin-vert--lg">
-                            <a
-                              className="button button--secondary button--lg"
-                              href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
-                              rel="noreferrer noopener"
-                              target="_blank"
-                              onClick={() => {
-                                window.gtag(
-                                  'event',
-                                  'moonchaser.homepage.click',
-                                );
-                              }}>
-                              Get Risk-free Negotiation Help&nbsp;&nbsp;→
-                            </a>
-                          </div>
+                      <div>
+                        <h2 className={styles.sectionSponsorTitle}>
+                          <strong>
+                            Get paid more. Receive risk-free salary negotiation
+                            help from Moonchaser. You pay nothing unless your
+                            offer is increased.
+                          </strong>
+                        </h2>
+                        <div className="margin-vert--lg">
+                          <a
+                            className="button button--secondary button--lg"
+                            href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
+                            rel="noreferrer noopener"
+                            target="_blank"
+                            onClick={() => {
+                              window.gtag('event', 'moonchaser.homepage.click');
+                            }}>
+                            Get Risk-free Negotiation Help&nbsp;&nbsp;→
+                          </a>
                         </div>
-                      ) : (
-                        <div>
-                          <h2 className={styles.sectionSponsorTitle}>
-                            <strong>
-                              Get paid, not played. Chat with former tech
-                              recruiters who'll guide you on exactly what to say
-                              to negotiate a higher offer.
-                            </strong>
-                          </h2>
-                          <div className="margin-vert--lg">
-                            <a
-                              className="button button--secondary button--lg"
-                              href="https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
-                              rel="noreferrer noopener"
-                              target="_blank"
-                              onClick={() => {
-                                window.gtag(
-                                  'event',
-                                  'levelsfyi.homepage.click',
-                                );
-                              }}>
-                              Get Negotiation Help&nbsp;&nbsp;→
-                            </a>
-                          </div>
-                        </div>
-                      )}
+                      </div>
                     </div>
                   </div>
                 </div>

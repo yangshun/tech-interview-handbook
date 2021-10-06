@@ -41,17 +41,16 @@ export default React.memo(function SidebarAd() {
         ) : (
           <a
             className={clsx(styles.container, backgroundClass)}
-            href="https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_docs_sidebar"
+            href="https://educative.io/tech-interview-handbook"
             key={Math.random()}
             target="_blank"
             rel="noreferrer noopener"
             onClick={() => {
-              window.gtag('event', 'levelsfyi.sidebar.click');
+              window.gtag('event', 'educative.sidebar.click');
             }}>
             <p className={styles.tagline}>
-              <strong>Get paid, not played.</strong> Chat with former tech
-              recruiters who'll guide you on exactly what to say to negotiate a
-              higher offer.
+              <strong>Level up with Educative.</strong> Get 10% off Educative's
+              wide range of interview courses today!
             </p>
           </a>
         )
