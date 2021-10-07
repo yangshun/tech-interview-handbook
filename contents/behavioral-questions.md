@@ -37,7 +37,6 @@ Here's a list of common behavioral questions to prepare for. If you prepare well
 - What would you hope to achieve in the first six months after being hired?
 - Tell me why you will be a good fit for the position.
 
-
 ## Airbnb
 
 While loving to travel or appreciating Airbnb's growth may be good answers, try to demonstrate the deep connection you have with the product.
