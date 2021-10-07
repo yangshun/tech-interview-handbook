@@ -35,6 +35,7 @@ Here's a list of common behavioral questions to prepare for. If you prepare well
 - What strengths do you think are most important for _your job position_?
 - What words would your colleagues use to describe you?
 - What would you hope to achieve in the first six months after being hired?
+- Tell me why you will be a good fit for the position.
 
 ## Airbnb
 
