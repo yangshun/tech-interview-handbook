@@ -11,7 +11,9 @@ import {
   usePrevious,
   Collapsible,
   useCollapsible,
+  ThemeClassNames,
 } from '@docusaurus/theme-common';
+import Link from '@docusaurus/Link';
 import isInternalUrl from '@docusaurus/isInternalUrl';
 import IconExternalLink from '@theme/IconExternalLink';
 import styles from './styles.module.css';
@@ -74,8 +76,14 @@ function useAutoExpandActiveCategory({isActive, collapsed, setCollapsed}) {
   }, [isActive, wasActive, collapsed]);
 }
 
-function DocSidebarItemCategory({item, onItemClick, activePath, ...props}) {
-  const {items, label, collapsible} = item;
+function DocSidebarItemCategory({
+  item,
+  onItemClick,
+  activePath,
+  level,
+  ...props
+}) {
+  const {items, label, collapsible, className} = item;
   const isActive = isActiveSidebarItem(item, activePath);
   const {collapsed, setCollapsed, toggleCollapsed} = useCollapsible({
     // active categories are always initialized as expanded
@@ -95,9 +103,15 @@ function DocSidebarItemCategory({item, onItemClick, activePath, ...props}) {
   });
   return (
     <li
-      className={clsx('menu__list-item', {
-        'menu__list-item--collapsed': collapsed,
-      })}>
+      className={clsx(
+        ThemeClassNames.docs.docSidebarItemCategory,
+        ThemeClassNames.docs.docSidebarItemCategoryLevel(level),
+        'menu__list-item',
+        {
+          'menu__list-item--collapsed': collapsed,
+        },
+        className,
+      )}>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a
         className={clsx('menu__link', {
@@ -124,22 +138,34 @@ function DocSidebarItemCategory({item, onItemClick, activePath, ...props}) {
           tabIndex={collapsed ? -1 : 0}
           onItemClick={onItemClick}
           activePath={activePath}
+          level={level + 1}
         />
       </Collapsible>
     </li>
   );
 }
 
-function DocSidebarItemLink({item, onItemClick, activePath, ...props}) {
-  const {href, label} = item;
+function DocSidebarItemLink({item, onItemClick, activePath, level, ...props}) {
+  const {href, label, className} = item;
   const isActive = isActiveSidebarItem(item, activePath);
   return (
-    <li className="menu__list-item" key={label}>
+    <li
+      className={clsx(
+        ThemeClassNames.docs.docSidebarItemLink,
+        ThemeClassNames.docs.docSidebarItemLinkLevel(level),
+        'menu__list-item',
+        className,
+      )}
+      key={label}>
       <a
         className={clsx('menu__link', {
           'menu__link--active': isActive,
         })}
+        aria-current={isActive ? 'page' : undefined}
         href={href}
+        {...(isInternalUrl(href) && {
+          onClick: onItemClick,
+        })}
         {...props}>
         {isInternalUrl(href) ? (
           label
