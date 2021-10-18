@@ -28,16 +28,18 @@ function Home() {
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">
             {siteConfig.tagline} <br />
-            Brought to you by the author of the{' '}
+            Brought to you by FAANG engineers and the author of the{' '}
             <a href={BLIND_75_URL} target="_blank">
               Blind 75 List
             </a>
+            <br />
+            Over 500,000 people have benefitted from this handbook!
           </p>
           <div className={styles.buttons}>
             <a
               className={classnames('button button--primary button--lg')}
               href={useBaseUrl('introduction')}>
-              Get Started&nbsp;&nbsp;→
+              Start Reading Now&nbsp;&nbsp;→
             </a>
           </div>
           <div className="margin-top--lg">
@@ -58,11 +60,7 @@ function Home() {
         <BrowserOnly>
           {() => (
             <div
-              className={classnames(
-                'margin-bottom--lg',
-                'padding-vert--lg',
-                styles.sectionSponsor,
-              )}>
+              className={classnames('padding-vert--lg', styles.sectionSponsor)}>
               <div className="container">
                 <div className="row">
                   <div className="col col--8 col--offset-2">
@@ -95,6 +93,107 @@ function Home() {
             </div>
           )}
         </BrowserOnly>
+        <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+          <div className="container">
+            <div className="row">
+              <div className="col col--10 col--offset-1">
+                <h2
+                  className={classnames(
+                    'text--center',
+                    'margin-bottom--xl',
+                    styles.sectionTitle,
+                  )}>
+                  Complete guide to getting software engineering jobs at top
+                  firms
+                </h2>
+                <div className={classnames('row', styles.featuresRow)}>
+                  <div
+                    className={classnames(
+                      'col',
+                      'col--4',
+                      styles.featuresRowItem,
+                    )}>
+                    <h3>Not sure where to start? We got you covered</h3>
+                    <ul>
+                      <li>
+                        <a href={useBaseUrl('resume')}>Resume Preparation</a>
+                      </li>
+                      <li>
+                        <a href={useBaseUrl('resume-case-study')}>
+                          Resume Samples
+                        </a>
+                      </li>
+                      <li>
+                        <a href={useBaseUrl('interview-formats')}>
+                          Interview Formats
+                        </a>
+                      </li>
+                      <li>
+                        <a href={useBaseUrl('best-practice-questions')}>
+                          Best Practice Questions
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    className={classnames(
+                      'col',
+                      'col--4',
+                      styles.featuresRowItem,
+                    )}>
+                    <h3>Efficiently prepare for all kinds of interviews</h3>
+                    <ul>
+                      <li>
+                        <a href={useBaseUrl('algorithms/introduction')}>
+                          Algorithms
+                        </a>
+                      </li>
+                      <li>
+                        <a href={useBaseUrl('system-design')}>System Design</a>
+                      </li>
+                      <li>
+                        <a href={useBaseUrl('behavioral-round-overview')}>
+                          Behavioral
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://frontendinterviewhandbook.com">
+                          Front End
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    className={classnames(
+                      'col',
+                      'col--4',
+                      styles.featuresRowItem,
+                    )}>
+                    <h3>Algorithms Deep-dive</h3>
+                    <ul>
+                      <li>
+                        <a href={useBaseUrl('algorithms/array')}>Array</a>
+                      </li>
+                      <li>
+                        <a href={useBaseUrl('algorithms/graph')}>Graph</a>
+                      </li>
+                      <li>
+                        <a href={useBaseUrl('algorithms/linked-list')}>
+                          Linked List
+                        </a>
+                      </li>
+                      <li>
+                        <a href={useBaseUrl('algorithms/introduction')}>
+                          and more...
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className={classnames('margin-vert--lg', 'padding-vert--lg')}>
           <div className="container">
             <div className="row">
@@ -105,7 +204,7 @@ function Home() {
                     'margin-bottom--xl',
                     styles.sectionTitle,
                   )}>
-                  Why Tech Interview Handbook?
+                  What is inside?
                 </h2>
                 <div className={classnames('row', styles.featuresRow)}>
                   <div
@@ -309,13 +408,33 @@ function Home() {
                 </div>
                 <div className="margin-vert--lg">
                   <a
-                    className="button button--primary button--lg"
+                    className="button button--secondary button--lg"
                     href="https://opencollective.com/tech-interview-handbook"
                     rel="noreferrer noopener"
                     target="_blank">
                     Become a sponsor!
                   </a>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+          <div className="container">
+            <div className="row">
+              <div className="col col--4">
+                <h2>Take the next step</h2>
+              </div>
+              <div className="col col--8">
+                <p className={classnames(styles.sectionTagline)}>
+                  It's free! Start improving your interview game today and get
+                  the job at the company of your dreams.
+                </p>
+                <a
+                  className={classnames('button button--primary button--lg')}
+                  href={useBaseUrl('introduction')}>
+                  Start Reading Now&nbsp;&nbsp;→
+                </a>
               </div>
             </div>
           </div>
