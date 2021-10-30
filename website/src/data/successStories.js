@@ -69,4 +69,24 @@ export default [
       </>
     ),
   },
+  {
+    name: 'Zongran Mo',
+    title: 'Software Engineer, Abnormal Security',
+    thumbnail: 'https://avatars.githubusercontent.com/u/19870898?s=400&v=4',
+    quote: (
+      <>
+        I have not been preparing much for my interviews before my final year in 
+        university. As I set my sights on my full time job, I referred heavily
+        to this handbook about things to prepare and look out for during my 
+        applicaion. It has helped me so much in many stages of my application.
+        My personal favorite is the best algorithm practice questions, which
+        is helpful in the future if I want to switch jobs.
+        <br />
+        <br />
+        With the help of this handbook, I successfully land offers from
+        Facebook, Quora, Abnormal Security and a few more established companies.
+        Highly recommend any tech job applicants to refer to this handbook.
+      </>
+    ),
+  },
 ];
