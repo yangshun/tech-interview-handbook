@@ -84,7 +84,7 @@ export default [
         <br />
         <br />
         With the help of this handbook, I successfully land offers from
-        Facebook, Quora, Abnormal Security and a few more estabilished companies.
+        Facebook, Quora, Abnormal Security and a few more established companies.
         Highly recommend any tech job applicants to refer to this handbook.
       </>
     ),
