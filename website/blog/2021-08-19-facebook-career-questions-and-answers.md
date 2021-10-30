@@ -5,7 +5,7 @@ author: Yangshun Tay
 author_title: Engineering Lead at Facebook
 author_url: https://github.com/yangshun
 author_image_url: https://github.com/yangshun.png
-tags: [facebook, career]
+tags: [career, facebook, meta]
 hide_table_of_contents: true
 ---
 
