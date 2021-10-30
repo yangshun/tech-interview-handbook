@@ -103,7 +103,7 @@ With COVID around, many companies are doing remote interviews even for the onsit
 - Tips:
   - You can code on your own laptop and look up APIs
   - Dropbox recruiters are very nice and will give you helpful information on what kind of questions to expect for the upcoming sessions
-  - One of the front end sessions involve coding up a pixel-perfect version of a real page on www.dropbox.com. You'll be given a spec of the desired page and you'll be asked to create a working version during the interview
+  - One of the front end sessions involve coding up a pixel-perfect version of a real page on the Dropbox website. You'll be given a spec of the desired page and you'll be asked to create a working version during the interview
 
 ### Facebook
 
