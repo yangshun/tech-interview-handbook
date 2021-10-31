@@ -27,7 +27,7 @@
 
 ## What is this?
 
-No one has time to do a few hundred LeetCode questions. Here's _free and curated_ technical interview preparation materials for busy engineers, brought to you by the author of the [Blind 75 List](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU).
+No one has time to do a few hundred LeetCode questions. Here are _free and curated_ technical interview preparation materials for busy engineers, brought to you by the author of the [Blind 75 List](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU).
 
 Besides the usual algorithm questions, other **awesome** stuff includes:
 
@@ -53,20 +53,20 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 ---
 
 <div align="center">
-  <h3>💡 Looking for high quality interview courses? <a href="https://www.educative.io/explore?search_string=interview&aff=x23W">Educative</a> offers a ton of great courses to improve your interview game 💡</h3>
+  <h3>💡 Looking for high-quality interview courses? <a href="https://www.educative.io/explore?search_string=interview&aff=x23W">Educative</a> offers a ton of great courses to improve your interview game 💡</h3>
 </div>
 
 ---
 
 ## How is this repository different?
 
-There are many awesome books like [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) and interview-related repositories out there on GitHub, what makes this repository different? The difference is that many existing interview repositories contain mainly links to external resources whereas this repository contains top quality curated content directly for your consumption.
+There are many awesome books like [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) and interview-related repositories out there on GitHub, what makes this repository different? The difference is that many existing interview repositories contain mainly links to external resources whereas this repository contains top-quality curated content directly for your consumption.
 
 Also, existing resources focus mainly on algorithm questions and lack coverage for more domain-specific and non-technical questions. This handbook aims to cover content beyond the typical algorithmic coding questions. 😎
 
 ## Looking for Front End content?
 
-Front end-related content have been moved to a separate website - [Front End Interview Handbook](https://frontendinterviewhandbook.com).
+Front-end-related content has been moved to a separate website - [Front End Interview Handbook](https://frontendinterviewhandbook.com).
 
 ## Looking for System Design content?
 
@@ -78,7 +78,7 @@ A [Docusaurus](https://github.com/facebook/docusaurus) website has been created 
 
 ## Related
 
-If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), a Data Structures and Algorithms library for JavaScript. It is pretty much still WIP but I intend to make it into a library that is able to be used in production and also a reference resource for revising Data Structures and Algorithms.
+If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), a Data Structures and Algorithms library for JavaScript. It is pretty much still WIP but I intend to make it into a library that can be used in production and also a reference resource for revising Data Structures and Algorithms.
 
 ## Contributing
 
