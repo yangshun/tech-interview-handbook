@@ -17,7 +17,7 @@ How it works is that you will be guided by their experienced team of professiona
 
 ### Levels.fyi
 
-[Levels.fyi](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) is most famously known for being a salary database but they also offer complementary services such as salary negotiation where you will be put in-touch with experienced recruiters to help you in the process. How Levels.fyi differs from Moonchaser is that Levels.fyi charge a flat fee whereas Moonchaser takes a percentage of the increase.
+[Levels.fyi](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) is most famously known for being a salary database but they also offer complementary services such as salary negotiation where you will be put in-touch with experienced recruiters to help you in the process. How Levels.fyi differs from Moonchaser is that Levels.fyi charges a flat fee whereas Moonchaser takes a percentage of the negotiated difference.
 
 :::tip
 
