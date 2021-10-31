@@ -48,7 +48,7 @@ For onsite interviews at smaller (non-public) companies, most will allow (and pr
 
 If the company provides lunch, you might also have a lunch session with an employee where you can find out more about the company culture.
 
-:::INFO
+:::info
 
 With COVID around, many companies are doing remote interviews even for the onsite rounds, so the instructions will differ.
 
