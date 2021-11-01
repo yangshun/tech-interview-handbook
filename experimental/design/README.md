@@ -10,6 +10,7 @@
 - http://www.puncsky.com/blog/2016/02/14/crack-the-system-design-interview/
 - https://www.palantir.com/2011/10/how-to-rock-a-systems-design-interview/
 - http://blog.gainlo.co/index.php/2017/04/13/system-design-interviews-part-ii-complete-guide-google-interview-preparation/
+- [List of system design videos](https://www.youtube.com/channel/UCn1XnDWhsLS5URXTi5wtFTA)
 
 ## Flow
 
