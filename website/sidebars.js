@@ -49,8 +49,9 @@ module.exports = {
           items: [
             'understanding-compensation',
             'negotiation',
+            'choosing-between-companies',
             'engineering-levels',
-            'team-selection',
+            // 'team-selection',
           ],
         },
       ],
