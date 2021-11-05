@@ -19,7 +19,7 @@ module.exports = {
     navbar: {
       title: 'Tech Interview Handbook',
       logo: {
-        alt: 'Tech Interview Handbook Logo',
+        alt: '',
         src: 'img/logo.svg',
       },
       items: [
