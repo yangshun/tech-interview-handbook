@@ -37,3 +37,9 @@ html[data-theme='dark'] {
     --ifm-h3-font-size: 1.25rem;
   }
 }
+
+div[class^='announcementBar_'] {
+  background-color: var(--ifm-color-primary);
+  color: #fff;
+  font-weight: bold;
+}

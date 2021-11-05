@@ -8,6 +8,10 @@ module.exports = {
   organizationName: 'yangshun',
   projectName: 'tech-interview-handbook',
   themeConfig: {
+    announcementBar: {
+      id: 'announcement-1', // Increment on change
+      content: `⭐️ Bring your interview skills to the next level with Educative. <a href="https://www.educative.io/explore?search_string=interview&aff=x23W">Join today for a discount!</a> ⭐️`,
+    },
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),
