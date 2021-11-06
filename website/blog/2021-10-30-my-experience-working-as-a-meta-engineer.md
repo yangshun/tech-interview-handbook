@@ -6,10 +6,15 @@ author_title: Engineering Lead at Meta
 author_url: https://github.com/yangshun
 author_image_url: https://github.com/yangshun.png
 tags: [career, facebook, meta]
+image: /img/meta-facebook.jpg
 hide_table_of_contents: true
 ---
 
 A number of the folks I referred have completed their interviews and are in the midst of deciding which company's offer to accept for their internship/full-time roles. Hence I figured it might be a good time to write about my experience at Meta (previously Facebook) so far as it could be helpful in helping some of them make their first important career decision!
+
+![Meta logo](/img/meta-facebook.jpg)
+
+<!--truncate-->
 
 ## Products
 
