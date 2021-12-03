@@ -25,6 +25,23 @@
 
 ---
 
+<div align="center">
+	<p>
+		<a href="https://simplify.jobs/?utm_source=github&utm_medium=tech_interview_handbook">
+			<b>Applying to internships?</b>
+			<br>
+			Autofill all your applications in a single click.
+			<br>
+			<div>
+				<img src="https://res.cloudinary.com/dpeo4xcnc/image/upload/v1637058958/simplify_banner.png" width="450"  alt="Simplify">
+			</div>
+		</a>
+		<sub><i>Stop manually re-entering your information. Simplify’s extension helps you autofill internship applications on millions of sites.</i></sub>
+	</p>
+</div>
+
+---
+
 ## What is this?
 
 No one has time to do a few hundred LeetCode questions. Here are _free and curated_ technical interview preparation materials for busy engineers, brought to you by the author of the [Blind 75 List](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU).
