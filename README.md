@@ -20,7 +20,18 @@
 ---
 
 <div align="center">
-  <h3>Get paid more. Moonchaser has negotiated hundreds of tech offers. Get 1-1 guidance from their experienced team of ex-FAANG PMs, SWEs, and Recruiters. <a href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=github" target="_blank">Find out more</a></h3>
+  <p>
+    <a href="https://simplify.jobs/?utm_source=github&utm_medium=tech_interview_handbook">
+      <strong>Applying to jobs or internships?</strong>
+      <br>
+      Autofill all your applications in a single click.
+      <br>
+      <div>
+        <img src="https://res.cloudinary.com/dpeo4xcnc/image/upload/v1637058958/simplify_banner.png" width="450"  alt="Simplify">
+      </div>
+    </a>
+    <sub><i>Stop manually re-entering your information. Simplify’s extension helps you autofill job applications on millions of sites.</i></sub>
+  </p>
 </div>
 
 ---
