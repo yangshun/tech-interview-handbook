@@ -143,7 +143,7 @@ If you have some space on your resume, it is good to list additional interests o
 If you are applying to foreign countries, it'd help to customize your resume to make it easier for recruiters of that country to understand your resume. For example, you can do the following for US roles:
 
 - If you're interning, expected year of graduation (month as well if you know) because some places only want to hire interns who are graduating soon
-- Mention work eligibility. This is straightforward for Singaporeans (mention eligibility for for H-1B1 visa)
+- Mention work eligibility. This is straightforward for Singaporeans (mention eligibility for H-1B1 visa)
 - Convert your grades to a GPA out of 5 and mention whether it's First Class Honors/Summa Cum Laude
 
 ###### References
