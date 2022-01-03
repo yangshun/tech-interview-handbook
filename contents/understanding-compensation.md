@@ -82,25 +82,25 @@ Here's crowdsourced data from Google and Facebook regarding the salaries for the
 
 ### Google
 
-| Level                   | Total      | Base     | Bonus    | Stock (/yr) |
-| ----------------------- | ---------- | -------- | -------- | ----------- |
-| L3 (Entry Level)        | $191,000   | $131,000 | $21,000  | $39,000     |
-| L4 (SWE)                | $267,000   | $158,000 | $28,000  | $81,000     |
-| L5 (Senior SWE)         | $355,000   | $188,000 | $37,000  | $130,000    |
-| L6 (Staff SWE)          | $489,000   | $223,000 | $50,000  | $214,000    |
-| L7 (Senior Staff SWE)   | $672,000   | $263,000 | $79,000  | $330,000    |
-| L8 (Principal Engineer) | $1,020,000 | $331,000 | $119,000 | $572,000    |
+| Level                   | Total (USD) | Base     | Bonus    | Stock (/yr) |
+| ----------------------- | ----------- | -------- | -------- | ----------- |
+| L3 (Entry Level)        | $191,000    | $131,000 | $21,000  | $39,000     |
+| L4 (SWE)                | $267,000    | $158,000 | $28,000  | $81,000     |
+| L5 (Senior SWE)         | $355,000    | $188,000 | $37,000  | $130,000    |
+| L6 (Staff SWE)          | $489,000    | $223,000 | $50,000  | $214,000    |
+| L7 (Senior Staff SWE)   | $672,000    | $263,000 | $79,000  | $330,000    |
+| L8 (Principal Engineer) | $1,020,000  | $331,000 | $119,000 | $572,000    |
 
 _Data as of Aug 2021. Source: [Levels.fyi](https://www.levels.fyi/company/Google/salaries/Software-Engineer/)_
 
 ### Facebook
 
-| Level                 | Total    | Base     | Bonus   | Stock (/yr) |
-| --------------------- | -------- | -------- | ------- | ----------- |
-| E3 (Entry Level)      | $180,000 | $122,000 | $14,000 | $43,000     |
-| E4 (SWE)              | $267,000 | $162,000 | $18,000 | $85,000     |
-| E5 (Senior SWE)       | $390,000 | $197,000 | $35,000 | $157,000    |
-| E6 (Staff SWE)        | $598,000 | $234,000 | $54,000 | $309,000    |
-| E7 (Senior Staff SWE) | $921,000 | $272,000 | $81,000 | $567,000    |
+| Level                 | Total (USD) | Base     | Bonus   | Stock (/yr) |
+| --------------------- | ----------- | -------- | ------- | ----------- |
+| E3 (Entry Level)      | $180,000    | $122,000 | $14,000 | $43,000     |
+| E4 (SWE)              | $267,000    | $162,000 | $18,000 | $85,000     |
+| E5 (Senior SWE)       | $390,000    | $197,000 | $35,000 | $157,000    |
+| E6 (Staff SWE)        | $598,000    | $234,000 | $54,000 | $309,000    |
+| E7 (Senior Staff SWE) | $921,000    | $272,000 | $81,000 | $567,000    |
 
 _Data as of Aug 2021. Source: [Levels.fyi](https://www.levels.fyi/company/Facebook/salaries/Software-Engineer/)_

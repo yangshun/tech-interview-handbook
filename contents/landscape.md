@@ -29,7 +29,25 @@ A software engineering job is perhaps the most flexible job that exists in terms
 
 If you dream of working at a top-tier tech company one day, getting hired via an intern conversion is by far the easiest way to achieve that. Internship interviews are extremely short (usually just 2 rounds whereas interviews for full-time roles are usually 4-5 rounds). Internships allow you to work at a company over a short period of time (3 months or so) and helps in understanding the company and engineering culture better. Companies also tend to give higher return job offers to high performing interns as they have proven to be effective at the job and fits into the culture; hence hiring them is considered to be relatively low-risk.
 
-Top tech companies pay a ridiculous amount for interns:
+Top tech companies pay a ridiculous amount even for junior candidates:
+
+### Singapore
+
+We ran a survey to find out what the more prominent tech companies in Singapore are paying new hires in 2022 and here's a sample of the results. View the [full dataset](https://docs.google.com/spreadsheets/d/1QtC8efWw0mVkGXW4QA9bX4f0nJhGbmFqCfVLSumMZ0I/) or [contribute your data](https://forms.gle/9oNNJJwespqWBZGw6)!
+
+| Company       | Internship (monthly in SGD) | Fresh Grad Annual Total (SGD) |
+| ------------- | --------------------------- | ----------------------------- |
+| Stripe        | 6000                        | 150,000                       |
+| Facebook/Meta | 6000                        | 140,000                       |
+| Google        | 5400                        | 110,000                       |
+| Shopee        | 4200                        | 100,000 - 140,000             |
+| ByteDance     | 4000                        | 85,000                        |
+| Grab          | 2500                        | No data                       |
+| Visa          | 2200                        | 75,000                        |
+
+_Note: Fresh grad annual total numbers are approximate and include base salary, stock and target bonuses._
+
+### United States
 
 <div class="text--center">
 
@@ -38,7 +56,7 @@ Top tech companies pay a ridiculous amount for interns:
 
 <figcaption>
 
-Salaries of top tech internships in 2016 ([source](https://twitter.com/rodneyfolz/status/724787290824798209))
+Salaries of top US tech internships in 2016 ([source](https://twitter.com/rodneyfolz/status/724787290824798209))
 
 </figcaption>
 </figure>
