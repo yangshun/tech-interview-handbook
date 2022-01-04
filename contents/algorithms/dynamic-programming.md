@@ -7,6 +7,7 @@ title: Dynamic Programming
 
 - [Demystifying Dynamic Programming](https://medium.freecodecamp.org/demystifying-dynamic-programming-3efafb8d4296)
 - [Dynamic Programming – 7 Steps to Solve any DP Interview Problem](https://dev.to/nikolaotasevic/dynamic-programming--7-steps-to-solve-any-dp-interview-problem-3870)
+- [Less Repetition, More Dynamic Programming](https://medium.com/basecs/less-repetition-more-dynamic-programming-43d29830a630)
 
 ## Notes
 
