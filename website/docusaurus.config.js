@@ -53,6 +53,9 @@ module.exports = {
       apiKey: '4dabb055be464346fcb6877f086f08e8',
       indexName: 'techinterviewhandbook',
     },
+    metadata: [
+      {name: 'fo-verify', content: '6993fa63-071e-4d11-8b10-a247c54c6061'},
+    ],
   },
   presets: [
     [
