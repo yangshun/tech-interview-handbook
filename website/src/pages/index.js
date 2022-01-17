@@ -12,6 +12,71 @@ import successStories from '../data/successStories';
 const BLIND_75_URL =
   'https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU';
 
+const FEATURES = [
+  {
+    title: <>💯 Go From Zero to Hero</>,
+    description: (
+      <>
+        Go from zero to tech interview hero with this handbook. No prior
+        interview experience needed.
+      </>
+    ),
+    link: '/introduction',
+  },
+  {
+    title: <>📝 Curated Practice Questions</>,
+    description: (
+      <>
+        No one has time to practice a few hundred questions. We created the{' '}
+        <a href={BLIND_75_URL} target="_blank">
+          Blind 75 List
+        </a>{' '}
+        to tell you which the best questions are.
+      </>
+    ),
+    link: '/best-practice-questions',
+  },
+  {
+    title: <>📋 Interview Cheatsheet</>,
+    description: (
+      <>
+        Straight-to-the-point Do's and Don'ts during an interview. The battle is
+        already half won.
+      </>
+    ),
+    link: '/cheatsheet',
+  },
+  {
+    title: <>💁‍♀️ Practical Algorithm Tips</>,
+    description: (
+      <>
+        Practical tips for every algorithm topic - common techniques and corner
+        cases to look out for.
+      </>
+    ),
+    link: '/algorithms/introduction',
+  },
+  {
+    title: <>💬 Behavioral Questions</>,
+    description: (
+      <>
+        Check out what behavioral questions companies commonly ask and you can
+        prepare your answers ahead of time.
+      </>
+    ),
+    link: '/behavioral-questions',
+  },
+  {
+    title: <>🧪 Tested and Proven</>,
+    description: (
+      <>
+        Countless engineers have gotten their dream jobs with the help of Tech
+        Interview Handbook.
+      </>
+    ),
+  },
+];
+
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
@@ -111,7 +176,7 @@ function Home() {
                     className={classnames(
                       'col',
                       'col--4',
-                      styles.featuresRowItem,
+                      styles.featuresRowItemContainer,
                     )}>
                     <h3>Not sure where to start? We got you covered</h3>
                     <ul>
@@ -139,7 +204,7 @@ function Home() {
                     className={classnames(
                       'col',
                       'col--4',
-                      styles.featuresRowItem,
+                      styles.featuresRowItemContainer,
                     )}>
                     <h3>Efficiently prepare for all kinds of interviews</h3>
                     <ul>
@@ -167,7 +232,7 @@ function Home() {
                     className={classnames(
                       'col',
                       'col--4',
-                      styles.featuresRowItem,
+                      styles.featuresRowItemContainer,
                     )}>
                     <h3>Algorithms Deep-dive</h3>
                     <ul>
@@ -207,98 +272,28 @@ function Home() {
                   What is inside?
                 </h2>
                 <div className={classnames('row', styles.featuresRow)}>
-                  <div
-                    className={classnames(
-                      'col',
-                      'col--4',
-                      styles.featuresRowItem,
-                    )}>
-                    <h3>💯 Go From Zero to Hero</h3>
-                    <p>
-                      Go from zero to tech interview hero with this handbook. No
-                      prior interview experience needed.
-                    </p>
-                    <a href={useBaseUrl('introduction')}>
-                      <strong>Learn more</strong>
-                    </a>
-                  </div>
-                  <div
-                    className={classnames(
-                      'col',
-                      'col--4',
-                      styles.featuresRowItem,
-                    )}>
-                    <h3>📝 Curated Practice Questions</h3>
-                    <p>
-                      No one has time to practice a few hundred LeetCode
-                      questions. We tell you which are the best questions to
-                      practice. We created the{' '}
-                      <a href={BLIND_75_URL} target="_blank">
-                        Blind 75 List
-                      </a>
-                      .
-                    </p>
-                    <a href={useBaseUrl('best-practice-questions')}>
-                      <strong>Learn more</strong>
-                    </a>
-                  </div>
-                  <div
-                    className={classnames(
-                      'col',
-                      'col--4',
-                      styles.featuresRowItem,
-                    )}>
-                    <h3>✅ Interview Cheatsheet</h3>
-                    <p>
-                      Straight-to-the-point Do's and Don'ts during an interview.
-                      Knowing these, the battle is already half won.
-                    </p>
-                    <a href={useBaseUrl('cheatsheet')}>
-                      <strong>Learn more</strong>
-                    </a>
-                  </div>
-                  <div
-                    className={classnames(
-                      'col',
-                      'col--4',
-                      styles.featuresRowItem,
-                    )}>
-                    <h3>💁‍♀️ Practical Algorithm Tips</h3>
-                    <p>
-                      Practical tips for every algorithm topic - common
-                      techniques and corner cases to look out for.
-                    </p>
-                    <a href={useBaseUrl('algorithms/introduction')}>
-                      <strong>Learn more</strong>
-                    </a>
-                  </div>
-                  <div
-                    className={classnames(
-                      'col',
-                      'col--4',
-                      styles.featuresRowItem,
-                    )}>
-                    <h3>💬 Behavioral Questions</h3>
-                    <p>
-                      Check out what behavioral questions companies commonly ask
-                      and you can prepare your answers ahead of time.
-                    </p>
-                    <a href={useBaseUrl('behavioral-questions')}>
-                      <strong>Learn more</strong>
-                    </a>
-                  </div>
-                  <div
-                    className={classnames(
-                      'col',
-                      'col--4',
-                      styles.featuresRowItem,
-                    )}>
-                    <h3>🧪 Tested and Proven</h3>
-                    <p>
-                      Countless engineers have gotten their dream jobs with the
-                      help of Tech Interview Handbook.
-                    </p>
-                  </div>
+                  {FEATURES.map(({title, description, link}) => (
+                    <div
+                      className={classnames(
+                        'col',
+                        'col--4',
+                        styles.featuresRowItemContainer,
+                      )}>
+                      <div className={styles.featuresRowItem}>
+                        <h3 className={styles.featuresRowItemTitle}>{title}</h3>
+                        <p className={styles.featuresRowItemDescription}>
+                          {description}
+                        </p>
+                        {link && (
+                          <a
+                            className={styles.featuresRowItemLink}
+                            href={useBaseUrl(link)}>
+                            <strong>Learn more</strong>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

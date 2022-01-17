@@ -58,6 +58,29 @@
   margin-top: -2rem;
 }
 
-.featuresRow .featuresRowItem {
+.featuresRow .featuresRowItemContainer {
   padding-top: 2rem;
+}
+
+.featuresRow .featuresRowItem {
+  border-color: var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-card-border-radius);
+  border-style: solid;
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+}
+
+.featuresRow .featuresRowItemTitle {
+  font-size: 1rem;
+}
+
+.featuresRow .featuresRowItemDescription {
+  font-size: 0.9rem;
+}
+
+.featuresRow .featuresRowItemLink {
+  font-size: 0.9rem;
 }
