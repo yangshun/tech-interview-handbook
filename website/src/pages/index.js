@@ -39,7 +39,7 @@ function Home() {
             <a
               className={classnames('button button--primary button--lg')}
               href={useBaseUrl('introduction')}>
-              Start Reading Now&nbsp;&nbsp;→
+              Start reading now&nbsp;&nbsp;→
             </a>
           </div>
           <div className="margin-top--lg">
@@ -69,7 +69,7 @@ function Home() {
                         <h2 className={styles.sectionSponsorTitle}>
                           <strong>
                             Get paid more. Receive risk-free salary negotiation
-                            help from Moonchaser. You pay nothing unless your
+                            advice from Moonchaser. You pay nothing unless your
                             offer is increased.
                           </strong>
                         </h2>
@@ -82,7 +82,7 @@ function Home() {
                             onClick={() => {
                               window.gtag('event', 'moonchaser.homepage.click');
                             }}>
-                            Get Risk-free Negotiation Help&nbsp;&nbsp;→
+                            Get risk-free negotiation advice&nbsp;&nbsp;→
                           </a>
                         </div>
                       </div>
@@ -327,7 +327,7 @@ function Home() {
                         onClick={() => {
                           window.gtag('event', 'educative.homepage.click');
                         }}>
-                        Get Started&nbsp;&nbsp;→
+                        Get started&nbsp;&nbsp;→
                       </a>
                     </div>
                   </div>
@@ -433,7 +433,7 @@ function Home() {
                 <a
                   className={classnames('button button--primary button--lg')}
                   href={useBaseUrl('introduction')}>
-                  Start Reading Now&nbsp;&nbsp;→
+                  Start reading now&nbsp;&nbsp;→
                 </a>
               </div>
             </div>

@@ -34,7 +34,7 @@ export default React.memo(function SidebarAd() {
             }}>
             <p className={styles.tagline}>
               <strong>Get paid more.</strong> Receive risk-free salary
-              negotiation help from Moonchaser. You pay nothing unless your
+              negotiation advice from Moonchaser. You pay nothing unless your
               offer is increased.
             </p>
           </a>

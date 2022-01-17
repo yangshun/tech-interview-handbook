@@ -21,7 +21,7 @@ How it works is that you will be guided by their experienced team of professiona
 
 :::tip
 
-Get paid more. Receive salary negotiation help from [**Moonchaser**](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) or [**Levels.fyi**](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) and their team of experienced recruiters. Don't leave money on the table 💰!
+Get paid more. Receive salary negotiation advice from [**Moonchaser**](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) or [**Levels.fyi**](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) and their team of experienced recruiters. Don't leave money on the table 💰!
 
 :::
 
