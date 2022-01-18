@@ -63,10 +63,6 @@
 }
 
 .featuresRow .featuresRowItem {
-  border-color: var(--ifm-color-emphasis-300);
-  border-radius: var(--ifm-card-border-radius);
-  border-style: solid;
-  border-width: 1px;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -83,4 +79,26 @@
 
 .featuresRow .featuresRowItemLink {
   font-size: 0.9rem;
+}
+
+.tweet {
+  font-size: 15px;
+}
+
+.tweetsSection {
+  margin-top: -2rem;
+}
+
+.tweetsSection > :global(.col) {
+  padding-top: 2rem;
+  margin-top: -2rem;
+}
+
+.tweetsSection > :global(.col) > * {
+  margin-top: 2rem;
+}
+
+.tweetMeta,
+.tweetMeta:hover {
+  color: var(--ifm-color-emphasis-700);
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -76,6 +75,30 @@ const FEATURES = [
     ),
   },
 ];
+
+function Tweet({url, handle, name, content, avatar, date}) {
+  return (
+    <div className={classnames('card', styles.tweet)}>
+      <div className="card__header">
+        <div className="avatar">
+          <img className="avatar__photo" src={avatar} />
+          <div className="avatar__intro">
+            <div className={styles.tweet}>
+              <strong>{name}</strong>{' '}
+              <span className={styles.tweetMeta}>
+                @{handle} &middot;{' '}
+                <a className={styles.tweetMeta} href={url}>
+                  {date}
+                </a>
+              </span>
+            </div>
+            <div>{content}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Home() {
   const context = useDocusaurusContext();
@@ -158,7 +181,7 @@ function Home() {
             </div>
           )}
         </BrowserOnly>
-        <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+        <div className={classnames('padding-vert--xl')}>
           <div className="container">
             <div className="row">
               <div className="col col--10 col--offset-1">
@@ -259,7 +282,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className={classnames('margin-vert--lg', 'padding-vert--lg')}>
+        <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
           <div className="container">
             <div className="row">
               <div className="col col--10 col--offset-1">
@@ -279,7 +302,7 @@ function Home() {
                         'col--4',
                         styles.featuresRowItemContainer,
                       )}>
-                      <div className={styles.featuresRowItem}>
+                      <div className={'card ' + styles.featuresRowItem}>
                         <h3 className={styles.featuresRowItemTitle}>{title}</h3>
                         <p className={styles.featuresRowItemDescription}>
                           {description}
@@ -327,6 +350,160 @@ function Home() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={classnames('padding-vert--lg', styles.sectionAlt)}>
+          <div className="container">
+            <h2
+              className={classnames(
+                'margin-vert--lg',
+                'text--center',
+                styles.sectionTitle,
+              )}>
+              Loved by many engineers
+            </h2>
+            <div className={classnames('row', styles.tweetsSection)}>
+              <div className="col col--4">
+                <Tweet
+                  url="https://twitter.com/Insharamin/status/1412978510788915205"
+                  handle="Insharamin"
+                  name="Insha"
+                  date="Jul 8, 2021"
+                  avatar="https://pbs.twimg.com/profile_images/1468474545891774464/jENKPsRG_400x400.jpg"
+                  content={
+                    <>
+                      1️⃣ Tech Interview Handbook
+                      <br />
+                      <br />
+                      This repository has practical content that covers all
+                      phases of a technical interview, from applying for a job
+                      to passing the interviews to offer negotiation. 📎
+                    </>
+                  }
+                />
+                <Tweet
+                  url="https://twitter.com/Justyna_Adam/status/1186166253830004736"
+                  handle="Justyna_Adam"
+                  name="Justyna_Adamczyk"
+                  date="Oct 21, 2019"
+                  avatar="https://pbs.twimg.com/profile_images/1328613502571978753/bTkdJhPt_400x400.jpg"
+                  content={
+                    <>
+                      Another excellent tech interview handbook! If you need to
+                      prepare yourself for a tech interview or you're an
+                      interviewer and need additional inspiration. Happy Monday!
+                      #techinterviews
+                    </>
+                  }
+                />
+                <Tweet
+                  url="https://twitter.com/umaar/status/913425809108606976"
+                  handle="umaar"
+                  name="Umar Hansa"
+                  date="Sep 28, 2017"
+                  avatar="https://pbs.twimg.com/profile_images/1305935669705965568/vS_bpIuu_400x400.jpg"
+                  content={
+                    <>
+                      Tech Interview Handbook 💻 - Content to help you ace your
+                      next technical interview. Lots of front-end content here
+                      ✅
+                    </>
+                  }
+                />
+              </div>
+              <div className="col col--4">
+                <Tweet
+                  url="https://twitter.com/palashv2/status/1452981345899085833"
+                  handle="palashv2"
+                  name="Palash"
+                  date="Oct 26, 2021"
+                  avatar="https://pbs.twimg.com/profile_images/1435103134842454016/DfF093MF_400x400.jpg"
+                  content={
+                    <>
+                      5. Tech Interview Handbook
+                      <br />
+                      <br />
+                      Here's free and curated technical interview preparation
+                      materials for busy engineers. Besides the usual algorithm
+                      questions, other awesome stuff includes How to prepare for
+                      coding interviews, Interview Cheatsheet, and more.
+                    </>
+                  }
+                />
+                <Tweet
+                  url="https://twitter.com/ravinwashere/status/1328381097277681665"
+                  handle="ravinwashere"
+                  name="Ravin"
+                  date="Nov 17, 2020"
+                  avatar="https://pbs.twimg.com/profile_images/1314872679195799552/80_xRIEF_400x400.jpg"
+                  content={
+                    <>
+                      Preparing for a job interview?
+                      <br />
+                      <br />
+                      The tech interview handbook contains carefully curated to
+                      help you ace your next technical interview.
+                      <br />
+                      <br />
+                      And it's free.
+                    </>
+                  }
+                />
+                <Tweet
+                  url="https://twitter.com/rwenderlich/status/1166336060533727232"
+                  handle="rwenderlich"
+                  name="raywenderlich.com"
+                  date="Aug 27, 2019"
+                  avatar="https://pbs.twimg.com/profile_images/1445056225478021122/2jTrV6Fi_400x400.jpg"
+                  content={<>Nice open source tech interview handbook</>}
+                />
+              </div>
+              <div className="col col--4">
+                <Tweet
+                  url="https://twitter.com/khalalw/status/1469496702365159431"
+                  handle="khalalw"
+                  name="Khalal Walker"
+                  date="Dec 11, 2021"
+                  avatar="https://pbs.twimg.com/profile_images/1479884864543285255/pcE_Nl12_400x400.jpg"
+                  content={
+                    <>
+                      Lastly, the Tech Interview Handbook. This is a pretty
+                      solid comprehensive resource from your initial
+                      introduction, to resumes, system design, coding, etc.
+                      Points to other solid resources that can be a great help.
+                    </>
+                  }
+                />
+                <Tweet
+                  url="https://twitter.com/Vinaystwt/status/1437062973554507777"
+                  handle="Vinaystwt"
+                  name="Vinay Sharma"
+                  date="Sep 12, 2021"
+                  avatar="https://pbs.twimg.com/profile_images/1413766958281990145/--os1eLq_400x400.jpg"
+                  content={
+                    <>
+                      🔹Tech Interview Handbook: Another useful resource that
+                      covers information about technical interviews. It covers
+                      the job applications, the interview process and the
+                      post-interview
+                    </>
+                  }
+                />
+                <Tweet
+                  url="https://twitter.com/sitepointdotcom/status/1164121717243023360"
+                  handle="sitepointdotcom"
+                  name="SitePoint"
+                  date="Aug 21, 2019"
+                  avatar="https://pbs.twimg.com/profile_images/1425900902783668228/eJF_2-Ds_400x400.jpg"
+                  content={
+                    <>
+                      The Tech Interview Handbook provides carefully curated
+                      content to help you ace your next technical interview.
+                    </>
+                  }
+                />
               </div>
             </div>
           </div>
