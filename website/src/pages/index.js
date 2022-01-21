@@ -107,10 +107,10 @@ function Home() {
       title="Technical Interview Guide for Busy Engineers"
       description={siteConfig.tagline}>
       <HeroSection />
-      <MoonchaserSection />
+      <EducativeSection />
       <ProductContentsSection />
       <FeaturesSection />
-      <EducativeSection />
+      <MoonchaserSection />
       <TweetsSection />
       <SuccessStoriesSection />
       <SponsorshipSection />
@@ -361,8 +361,8 @@ function EducativeSection() {
               <div>
                 <h2 className={styles.sectionSponsorTitle}>
                   <strong>
-                    Looking for high quality interview courses? Educative offers
-                    a ton of great courses to improve your interview game.
+                    Looking to get hired at FAANG? Educative offers a ton of
+                    great courses to improve your interview game.
                   </strong>
                 </h2>
                 <div className="margin-vert--lg">

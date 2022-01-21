@@ -49,8 +49,8 @@ export default React.memo(function SidebarAd() {
               window.gtag('event', 'educative.sidebar.click');
             }}>
             <p className={styles.tagline}>
-              <strong>Level up with Educative.</strong> Get 10% off Educative's
-              wide range of interview courses today!
+              <strong>Looking to get hired at FAANG?</strong> Educative offers
+              many great courses to improve your interview game.
             </p>
           </a>
         )
