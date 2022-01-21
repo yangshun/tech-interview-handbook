@@ -46,9 +46,6 @@ module.exports = {
       style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} Yangshun Tay. Built with Docusaurus.`,
     },
-    gtag: {
-      trackingID: 'UA-44622716-2',
-    },
     algolia: {
       apiKey: '4dabb055be464346fcb6877f086f08e8',
       indexName: 'techinterviewhandbook',
@@ -72,6 +69,9 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        gtag: {
+          trackingID: 'UA-44622716-2',
         },
       },
     ],
