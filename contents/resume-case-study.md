@@ -1,6 +1,7 @@
 ---
 id: resume-case-study
 title: Resume Case Study
+sidebar_label: Case Study
 ---
 
 import TeikjunResumeOldURL from '@site/static/img/teik-jun-resume-old.png'; import TeikjunResumeNewURL from '@site/static/img/teik-jun-resume-new.png';

@@ -1,6 +1,6 @@
 ---
 id: system-design
-title: System Design
+title: System Design Interviews
 ---
 
 The objective of system design interviews is to evaluate a candidate's skill at designing real-world software systems involving multiple components. System design questions are typically given to more senior candidates (with a few years of experience). Interns aren't typically given system design questions as it is hard to expect interns to have sufficient and relevant industry experience to answer this type of questions well.
@@ -32,4 +32,5 @@ System design content is still work-in-progress, but there are some resources to
 - [System Design Cheatsheet](https://gist.github.com/vasanthk/485d1c25737e8e72759f) - Brief and concise content. Serves as a good revision right before your system design interview.
 
 ## Books
+
 - [System Design Interview – An insider's guide, Second Edition](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF) - Beginner friendly resource to learn about system design, the content is easy to read and understand.

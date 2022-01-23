@@ -1,6 +1,7 @@
 ---
 id: behavioral-questions
-title: Common Questions
+title: Behavioral Interview Common Questions
+sidebar_label: Common Questions
 ---
 
 Here's a list of common behavioral questions to prepare for. If you prepare well for the general questions and apply the STAR format along with demonstrating qualities, you will be fine.

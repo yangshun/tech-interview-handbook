@@ -12,7 +12,7 @@
   --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
-  --ifm-font-size-base: 18px;
+  --ifm-font-size-base: 16px;
 }
 
 html[data-theme='dark'] {

@@ -1,6 +1,7 @@
 ---
 id: resume
-title: Resume
+title: Resume Checklist
+sidebar_label: Checklist
 ---
 
 The following content is by Christina Ng and rephrased for the purpose of this handbook. You can follow her on [Medium](https://medium.com/@christinang89) or [Quora](https://www.quora.com/profile/Christina-Ng).

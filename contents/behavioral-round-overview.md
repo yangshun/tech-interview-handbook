@@ -1,6 +1,7 @@
 ---
 id: behavioral-round-overview
-title: Overview
+title: Behavorial Round Overview
+sidebar_label: Overview
 ---
 
 Succeeding in an engineering career involves more than just technical skills. Behavioral interviews (aka people skills) become more important as an engineer becomes more senior. Senior engineers should have the ability to lead and influence, resolve conflicts, anticipate risks, plan the roadmap, and more.

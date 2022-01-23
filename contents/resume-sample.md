@@ -1,6 +1,7 @@
 ---
 id: resume-sample
 title: Resume Sample
+sidebar_label: Sample
 ---
 
 import YangshunResumeURL from '@site/static/img/yangshun-resume.png';
