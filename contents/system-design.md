@@ -20,12 +20,13 @@ Some common questions include:
 
 System design content is still work-in-progress, but there are some resources to help you in the meanwhile:
 
-## Courses
+## Quality Courses
 
-- [Grokking the System Design Interview](https://www.educative.io/courses/grokking-the-system-design-interview?aff=x23W) - I've personally taken this course and have referred many people to use this. Highly recommended!
+- [Grokking the System Design Interview](https://www.educative.io/courses/grokking-the-system-design-interview?aff=x23W) - This is probably the most famous system design interview course on the internet and what makes it different from the other courses is that it is purely text-based, great for people who refer reading over watching videos. It contains a repository of the popular system design problems along with a glossary of system design basics. I've personally taken this course and have recommended many others to use this. Highly recommended!
+- [System Design Interview Course by Exponent](https://www.tryexponent.com/courses/system-design-interview) - This course by Exponent covers system designs basics and has a huge database of popular system design questions with video explanations. Use this [referral link to get 10% off](https://www.tryexponent.com/refer/abdlb)! In my opinion, Exponent is one of the most credible interview preparation resources out there as their resources are high quality and goes beyond Software Engineering roles.
 - [Grokking the Advanced System Design Interview](https://www.educative.io/courses/grokking-adv-system-design-intvw?aff=x23W) - I haven't tried this but it's by the same people who created "Grokking the System Design Interview", so it should be good! In my opinion you probably wouldn't need this unless you're very senior or going for a specialist position.
 
-## Resources
+## Free resources
 
 - [System Design Primer](https://github.com/donnemartin/system-design-primer) - Most comprehensive resource on system design out there. Recommended only if you have a ton of time to spare.
 - [System Design Interview](https://github.com/checkcheckzz/system-design-interview) - Contains many links to tips about system design, system design-related topics and engineering blogs of famous companies.
