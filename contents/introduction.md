@@ -7,6 +7,8 @@ title: Introduction
 
 The **Tech Interview Handbook** contains carefully curated content to help you ace your next technical interview with a focus on algorithms. While there are a ton of interview resources on the internet, the best ones are either not free, or they do not cover the complete interview process, usually only focusing on algorithms. Tech Interview Handbook goes straight to the point and tells you the minimum you need to know to pass your technical interviews.
 
+Over 500,000 people have benefitted from this handbook!
+
 ## Why do I want this?
 
 This repository has **practical** content that covers all phases of a technical interview, from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful as well.

@@ -227,19 +227,21 @@ function ProductContentsSection() {
                 <h3>Not sure where to start? We got you covered</h3>
                 <ul>
                   <li>
-                    <a href={useBaseUrl('resume')}>Resume Preparation</a>
+                    <a href={useBaseUrl('resume')}>Resume preparation</a>
                   </li>
                   <li>
-                    <a href={useBaseUrl('resume-case-study')}>Resume Samples</a>
+                    <a href={useBaseUrl('resume-case-study')}>
+                      Resume case studies and samples
+                    </a>
                   </li>
                   <li>
                     <a href={useBaseUrl('interview-formats')}>
-                      Interview Formats
+                      Interview formats
                     </a>
                   </li>
                   <li>
                     <a href={useBaseUrl('best-practice-questions')}>
-                      Best Practice Questions
+                      Best practice questions
                     </a>
                   </li>
                 </ul>
@@ -267,7 +269,7 @@ function ProductContentsSection() {
                   </li>
                   <li>
                     <a href="https://frontendinterviewhandbook.com">
-                      Front End
+                      Front end
                     </a>
                   </li>
                 </ul>
@@ -278,7 +280,7 @@ function ProductContentsSection() {
                   'col--4',
                   styles.featuresRowItemContainer,
                 )}>
-                <h3>Algorithms Deep-dive</h3>
+                <h3>Algorithms deep-dive</h3>
                 <ul>
                   <li>
                     <a href={useBaseUrl('algorithms/array')}>Array</a>
@@ -288,7 +290,7 @@ function ProductContentsSection() {
                   </li>
                   <li>
                     <a href={useBaseUrl('algorithms/linked-list')}>
-                      Linked List
+                      Linked list
                     </a>
                   </li>
                   <li>
@@ -318,7 +320,7 @@ function FeaturesSection() {
                 'margin-bottom--xl',
                 styles.sectionTitle,
               )}>
-              What is inside?
+              There's everything you need
             </h2>
             <div className={classnames('row', styles.featuresRow)}>
               {FEATURES.map(({title, description, link}) => (
@@ -337,7 +339,7 @@ function FeaturesSection() {
                       <a
                         className={styles.featuresRowItemLink}
                         href={useBaseUrl(link)}>
-                        <strong>Learn more</strong>
+                        <strong>Start reading →</strong>
                       </a>
                     )}
                   </div>

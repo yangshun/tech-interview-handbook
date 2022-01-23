@@ -54,7 +54,7 @@ With COVID around, many companies are doing remote interviews even for the onsit
 
 :::
 
-## Formats of famous companies
+## Formats of top companies
 
 ### Airbnb
 
