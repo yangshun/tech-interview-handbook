@@ -33,19 +33,19 @@ Top tech companies pay a ridiculous amount even for junior candidates:
 
 ### Singapore
 
-We ran a survey to find out what the more prominent tech companies in Singapore are paying new hires in 2022 and here's a sample of the results. View the [full dataset](https://docs.google.com/spreadsheets/d/1QtC8efWw0mVkGXW4QA9bX4f0nJhGbmFqCfVLSumMZ0I/) or [contribute your data](https://forms.gle/9oNNJJwespqWBZGw6)!
+We ran a survey to find out what the famous tech companies in Singapore are paying new hires in 2022 and here's a sample of the results. View the [full dataset](https://docs.google.com/spreadsheets/d/1QtC8efWw0mVkGXW4QA9bX4f0nJhGbmFqCfVLSumMZ0I/) or [contribute your data](https://forms.gle/9oNNJJwespqWBZGw6)!
 
 | Company       | Internship (monthly in SGD) | Fresh Grad Annual Total (SGD) |
 | ------------- | --------------------------- | ----------------------------- |
-| Stripe        | 6000                        | 150,000                       |
-| Facebook/Meta | 6000                        | 140,000                       |
-| Google        | 5400                        | 110,000                       |
-| Shopee        | 4200                        | 100,000 - 140,000             |
-| ByteDance     | 4000                        | 85,000                        |
-| Grab          | 2500                        | No data                       |
-| Visa          | 2200                        | 75,000                        |
+| Stripe        | $6000                       | $150,000                      |
+| Facebook/Meta | $6000                       | $140,000                      |
+| Google        | $5400                       | $110,000                      |
+| Shopee        | $4200                       | $100,000 - $140,000           |
+| ByteDance     | $4000                       | $85,000                       |
+| Grab          | $2500                       | No data                       |
+| Visa          | $2200                       | $75,000                       |
 
-_Note: Fresh grad annual total numbers are approximate and include base salary, stock and target bonuses._
+_Note: Fresh grad annual total numbers are approximate and include base salary, stock, and target bonuses._
 
 ### United States
 

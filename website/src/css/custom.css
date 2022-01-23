@@ -48,3 +48,16 @@ div[class^='announcementBar_'] {
   color: #fff;
   font-weight: bold;
 }
+
+.theme-doc-markdown details {
+  --ifm-alert-background-color: transparent;
+  border: 1px solid var(--ifm-color-primary);
+}
+
+.theme-doc-markdown details h2,
+.theme-doc-markdown details h3,
+.theme-doc-markdown details h4,
+.theme-doc-markdown details h5,
+.theme-doc-markdown details h6 {
+  margin-bottom: 0 !important;
+}
