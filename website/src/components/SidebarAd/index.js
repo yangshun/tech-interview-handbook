@@ -51,7 +51,7 @@ export default React.memo(function SidebarAd() {
             <p className={styles.tagline}>
               <strong>Looking to get hired at FAANG?</strong> <u>Educative</u>{' '}
               offers many great courses to improve your interview game.{' '}
-              <u>Join today for a discount!</u>
+              <u>Join today for a 10% discount!</u>
             </p>
           </a>
         )

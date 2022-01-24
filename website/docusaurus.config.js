@@ -26,11 +26,6 @@ module.exports = {
         {href: '/introduction', label: 'Getting Started', position: 'left'},
         {to: 'blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/yangshun/tech-interview-handbook',
-          label: 'GitHub',
-          position: 'right',
-        },
-        {
           href: 'https://www.facebook.com/techinterviewhandbook',
           label: 'Facebook',
           position: 'right',
@@ -40,11 +35,83 @@ module.exports = {
           label: 'Twitter',
           position: 'right',
         },
+        {
+          href: 'https://github.com/yangshun/tech-interview-handbook',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
+        },
       ],
     },
     footer: {
       style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} Yangshun Tay. Built with Docusaurus.`,
+      links: [
+        {
+          title: 'General',
+          items: [
+            {
+              label: 'Get started',
+              href: '/introduction',
+            },
+            {
+              label: 'Blog',
+              href: '/blog',
+            },
+            {
+              label: 'Algorithms',
+              href: '/algorithms/introduction',
+            },
+          ],
+        },
+        {
+          title: 'Interviews',
+          items: [
+            {
+              label: 'Interview cheatsheet',
+              href: '/cheatsheet',
+            },
+            {
+              label: 'Coding round',
+              href: '/coding-round-overview',
+            },
+            {
+              label: 'System design',
+              href: '/system-design',
+            },
+            {
+              label: 'Behavioral round',
+              href: '/behavioral-round-overview',
+            },
+          ],
+        },
+        {
+          title: 'About',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/yangshun/tech-interview-handbook',
+            },
+            {
+              label: 'Facebook',
+              href: 'https://www.facebook.com/techinterviewhandbook',
+            },
+            {
+              label: 'Twitter',
+              href: 'https://twitter.com/yangshunz',
+            },
+          ],
+        },
+        {
+          title: 'More',
+          items: [
+            {
+              label: 'Contact us',
+              href: 'mailto:business@techinterviewhandbook.org',
+            },
+          ],
+        },
+      ],
     },
     algolia: {
       apiKey: '4dabb055be464346fcb6877f086f08e8',

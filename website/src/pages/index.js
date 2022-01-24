@@ -364,7 +364,8 @@ function EducativeSection() {
                 <h2 className={styles.sectionSponsorTitle}>
                   <strong>
                     Looking to get hired at FAANG? Educative offers a ton of
-                    great courses to improve your interview game.
+                    great courses to improve your interview game. Join today for
+                    a 10% discount!
                   </strong>
                 </h2>
                 <div className="margin-vert--lg">
@@ -376,7 +377,7 @@ function EducativeSection() {
                     onClick={() => {
                       window.gtag('event', 'educative.homepage.click');
                     }}>
-                    Get started&nbsp;&nbsp;→
+                    Check out courses&nbsp;&nbsp;→
                   </a>
                 </div>
               </div>
