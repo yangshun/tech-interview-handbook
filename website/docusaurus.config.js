@@ -23,23 +23,23 @@ module.exports = {
         src: 'img/logo.svg',
       },
       items: [
-        {href: '/introduction', label: 'Getting Started', position: 'left'},
+        {href: '/introduction', label: 'Getting started', position: 'left'},
         {to: 'blog', label: 'Blog', position: 'left'},
-        {
-          href: 'https://www.facebook.com/techinterviewhandbook',
-          label: 'Facebook',
-          position: 'right',
-        },
-        {
-          href: 'https://twitter.com/yangshunz',
-          label: 'Twitter',
-          position: 'right',
-        },
         {
           href: 'https://github.com/yangshun/tech-interview-handbook',
           position: 'right',
-          className: 'header-github-link',
+          className: 'navbar-icon navbar-icon-github',
           'aria-label': 'GitHub repository',
+        },
+        {
+          href: 'https://www.facebook.com/techinterviewhandbook',
+          position: 'right',
+          className: 'navbar-icon navbar-icon-facebook',
+        },
+        {
+          href: 'https://twitter.com/yangshunz',
+          position: 'right',
+          className: 'navbar-icon navbar-icon-twitter',
         },
       ],
     },
