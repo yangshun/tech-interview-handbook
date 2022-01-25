@@ -1,6 +1,6 @@
 ---
 id: mock-interviews
-title: Mock Interviews
+title: Mock interviews
 ---
 
 Interviewing is a skill that you can get better at. The steps mentioned above can be rehearsed over and over again until you have fully internalized them and following those steps become second nature to you. A good way to practice is to find a friend to partner with and the both of you can take turns to interview each other.

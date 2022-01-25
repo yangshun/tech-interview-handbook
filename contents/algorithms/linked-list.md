@@ -1,6 +1,6 @@
 ---
 id: linked-list
-title: Linked List
+title: Linked list
 ---
 
 ## Notes

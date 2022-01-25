@@ -1,6 +1,6 @@
 ---
 id: psychological-tricks
-title: Psychological Tricks
+title: Psychological tricks
 ---
 
 Here are some psychological tricks that will help you ace a job interview.

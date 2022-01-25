@@ -1,6 +1,6 @@
 ---
 id: star-format
-title: STAR Format
+title: STAR format
 ---
 
 ## What is STAR?

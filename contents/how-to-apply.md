@@ -1,6 +1,6 @@
 ---
 id: how-to-apply
-title: How to Apply
+title: How to apply
 ---
 
 ## Apply Directly

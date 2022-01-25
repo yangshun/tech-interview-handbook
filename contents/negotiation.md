@@ -3,7 +3,7 @@ id: negotiation
 title: Negotiation
 ---
 
-## Always Negotiate
+## Always negotiate
 
 If you've received an offer (or even better, offers), congratulations! You may heave a huge sigh of relief and think that the toughest parts are over. Well yes, but not entirely! For most people, the reason they're finding a new job is to increase their salary, and salary negotiation is the last stretch in achieving that goal.
 
@@ -29,7 +29,7 @@ Get paid more. Receive salary negotiation advice from [**Moonchaser**](https://w
 
 If you are not keen on paying for negotiation services and are a fan of courses, here's something for you - the [Grokking Comp Negotiation in Tech](https://www.educative.io/courses/grokking-comp-negotiation?aff=x23W) course, a text-based course where you can get information on each aspect of negotiation. **Disclaimer: I haven't tried this course before.**
 
-## Ten Rules of Negotiation
+## Ten rules of negotiation
 
 Key points extracted from "Ten Rules for Negotiating a Job Offer" [Part 1](http://haseebq.com/my-ten-rules-for-negotiating-a-job-offer/) and [Part 2](https://haseebq.com/how-not-to-bomb-your-offer-negotiation/) by Haseeb Qureshi.
 

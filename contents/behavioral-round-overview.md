@@ -1,6 +1,6 @@
 ---
 id: behavioral-round-overview
-title: Behavorial Round Overview
+title: Behavorial round overview
 sidebar_label: Overview
 ---
 

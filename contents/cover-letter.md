@@ -1,6 +1,6 @@
 ---
 id: cover-letter
-title: Cover Letter
+title: Cover letter
 ---
 
 - A short introduction describing who you are and what you're looking for

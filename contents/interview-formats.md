@@ -1,6 +1,6 @@
 ---
 id: interview-formats
-title: Interview Formats
+title: Interview formats
 ---
 
 Interviews are a multi-stage process and each stage can consist of vastly different formats.

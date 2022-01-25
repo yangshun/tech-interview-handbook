@@ -1,6 +1,6 @@
 ---
 id: resume
-title: Resume Checklist
+title: Resume checklist
 sidebar_label: Checklist
 ---
 

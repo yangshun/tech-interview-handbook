@@ -1,6 +1,6 @@
 ---
 id: system-design
-title: System Design Interviews
+title: System design interviews
 ---
 
 The objective of system design interviews is to evaluate a candidate's skill at designing real-world software systems involving multiple components. System design questions are typically given to more senior candidates (with a few years of experience). Interns aren't typically given system design questions as it is hard to expect interns to have sufficient and relevant industry experience to answer this type of questions well.
@@ -24,7 +24,7 @@ System design content is still work-in-progress, but the following are some reso
 
 :::
 
-## Quality Courses
+## Quality courses
 
 - ["Grokking the System Design Interview" by Educative](https://www.educative.io/courses/grokking-the-system-design-interview?aff=x23W) - This is probably the most famous system design interview course on the internet and what makes it different from most other courses out there is that it is purely text-based, which is great for people who refer reading over watching videos (such as myself!). It contains a repository of the popular system design problems along with a glossary of system design basics. I've personally completed this course and have recommended many others to use this. Highly recommended!
 - ["System Design Interview Course" by Exponent](https://www.tryexponent.com/courses/system-design-interview) - This course by Exponent covers system designs basics and has a huge database of popular system design questions with video explanations. Use this [referral link to get 10% off](https://www.tryexponent.com/refer/abdlb). In my opinion, Exponent is one of the most credible interview preparation resources out there as their resources are high quality and goes beyond Software Engineering roles.

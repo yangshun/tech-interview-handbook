@@ -1,6 +1,6 @@
 ---
 id: coding-signals
-title: Coding Signals
+title: Coding signals
 ---
 
 The point of interviews is for interviewers to extract signals from certain candidate behaviors. In coding interviews, the signals can be broadly classified into the following categories: Problem Solving, Technical Competency, Testing, and Communication.

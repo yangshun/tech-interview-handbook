@@ -1,6 +1,6 @@
 ---
 id: picking-a-language
-title: Picking a Language
+title: Picking a language
 ---
 
 Before anything else, you need to pick a programming language to do your interviews in. Most companies will let you code in any language you want, the only exception I know being Google, where they only allow candidates to pick from Java, C++, JavaScript or Python for their algorithmic coding interviews.

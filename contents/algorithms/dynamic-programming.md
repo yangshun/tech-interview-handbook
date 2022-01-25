@@ -1,6 +1,6 @@
 ---
 id: dynamic-programming
-title: Dynamic Programming
+title: Dynamic programming
 ---
 
 ## Study links

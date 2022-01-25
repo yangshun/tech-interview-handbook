@@ -1,6 +1,6 @@
 ---
 id: oop
-title: Object-Oriented Programming
+title: Object-oriented programming
 ---
 
 ## Sample questions

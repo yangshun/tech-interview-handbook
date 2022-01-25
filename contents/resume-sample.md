@@ -1,6 +1,6 @@
 ---
 id: resume-sample
-title: Resume Sample
+title: Resume sample
 sidebar_label: Sample
 ---
 

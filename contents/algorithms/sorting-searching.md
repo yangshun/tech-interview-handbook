@@ -1,6 +1,6 @@
 ---
 id: sorting-searching
-title: Sorting and Searching
+title: Sorting and searching
 ---
 
 ## Tips

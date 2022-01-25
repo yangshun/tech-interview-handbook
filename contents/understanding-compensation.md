@@ -1,6 +1,6 @@
 ---
 id: understanding-compensation
-title: Understanding Compensation
+title: Understanding compensation
 ---
 
 Compensation is one of the largest factors when it comes to deciding between job offers. This section gives you a breakdown of the common components of compensation in the tech industry.

@@ -1,6 +1,6 @@
 ---
 id: coding-round-overview
-title: Coding Round Overview
+title: Coding round overview
 sidebar_label: Overview
 ---
 

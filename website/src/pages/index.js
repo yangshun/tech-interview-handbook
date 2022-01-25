@@ -13,7 +13,7 @@ const BLIND_75_URL =
 
 const FEATURES = [
   {
-    title: <>💯 Go From Zero to Hero</>,
+    title: <>💯 Go From zero to hero</>,
     description: (
       <>
         Go from zero to tech interview hero with this handbook. No prior
@@ -23,7 +23,7 @@ const FEATURES = [
     link: '/introduction',
   },
   {
-    title: <>📝 Curated Practice Questions</>,
+    title: <>📝 Curated practice questions</>,
     description: (
       <>
         No one has time to practice a few hundred questions. We created the{' '}
@@ -36,7 +36,7 @@ const FEATURES = [
     link: '/best-practice-questions',
   },
   {
-    title: <>📋 Interview Cheatsheet</>,
+    title: <>📋 Interview cheatsheet</>,
     description: (
       <>
         Straight-to-the-point Do's and Don'ts during an interview. The battle is
@@ -46,7 +46,7 @@ const FEATURES = [
     link: '/cheatsheet',
   },
   {
-    title: <>💁‍♀️ Practical Algorithm Tips</>,
+    title: <>💁‍♀️ Practical algorithm tips</>,
     description: (
       <>
         Practical tips for every algorithm topic - common techniques and corner
@@ -56,7 +56,7 @@ const FEATURES = [
     link: '/algorithms/introduction',
   },
   {
-    title: <>💬 Behavioral Questions</>,
+    title: <>💬 Behavioral questions</>,
     description: (
       <>
         Check out what behavioral questions companies commonly ask and you can
@@ -66,7 +66,7 @@ const FEATURES = [
     link: '/behavioral-questions',
   },
   {
-    title: <>🧪 Tested and Proven</>,
+    title: <>🧪 Tested and proven</>,
     description: (
       <>
         Countless engineers have gotten their dream jobs with the help of Tech
@@ -557,7 +557,7 @@ function SuccessStoriesSection() {
                 'text--center',
                 styles.sectionTitle,
               )}>
-              Success Stories
+              Success stories
             </h2>
             {successStories.map((user) => (
               <div className="card margin-vert--lg" key={user.name}>

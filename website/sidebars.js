@@ -4,7 +4,7 @@ module.exports = {
       Preface: ['introduction', 'landscape'],
     },
     {
-      'Resume Preparation': [
+      'Resume preparation': [
         'resume',
         'resume-case-study',
         'resume-sample',
@@ -12,11 +12,11 @@ module.exports = {
       ],
     },
     {
-      'General Interview Tips': ['self-introduction', 'questions-to-ask'],
+      'General interview tips': ['self-introduction', 'questions-to-ask'],
     },
     'interview-formats',
     {
-      'Coding Interviews': [
+      'Coding interviews': [
         'coding-round-overview',
         'picking-a-language',
         'study-and-practice',
@@ -55,7 +55,7 @@ module.exports = {
     },
     'system-design',
     {
-      'Behavioral Interviews': [
+      'Behavioral interviews': [
         'behavioral-round-overview',
         'star-format',
         'behavioral-questions',
@@ -63,10 +63,10 @@ module.exports = {
       ],
     },
     {
-      'Offer Negotiation': ['understanding-compensation', 'negotiation'],
+      'Offer negotiation': ['understanding-compensation', 'negotiation'],
     },
     {
-      'Job Preparation': [
+      'Job preparation': [
         'choosing-between-companies',
         'engineering-levels',
         // 'team-selection',

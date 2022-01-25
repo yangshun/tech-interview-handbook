@@ -1,6 +1,6 @@
 ---
 id: during-coding-interview
-title: During the Coding Interview
+title: During the coding interview
 ---
 
 Congratulations, you are ready to put your skills into practice! In a real coding interview, you will be given a technical question (or questions) by the interviewer, write code in a real-time collaborative editor (phone screen/virtual onsite) or on a whiteboard (onsite) to solve the problem within 30–45 minutes. This is where the real fun begins!
