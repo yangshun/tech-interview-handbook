@@ -14,7 +14,12 @@ module.exports = {
     {
       'General interview tips': ['self-introduction', 'questions-to-ask'],
     },
-    'interview-formats',
+    {
+      'Interview formats': [
+        'interview-formats',
+        'interview-formats-top-companies',
+      ],
+    },
     {
       'Coding interviews': [
         'coding-round-overview',
