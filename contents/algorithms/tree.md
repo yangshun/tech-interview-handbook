@@ -38,6 +38,10 @@ Do check out the section on [Trie](trie.md), which is an advanced tree.
 
 In-order traversal of a binary tree is insufficient to uniquely serialize a tree. Pre-order or post-order traversal is also required.
 
+[Pre-order Traversal](https://www.techiedelight.com/preorder-tree-traversal-iterative-recursive/)
+[In-order Traversal](https://www.techiedelight.com/inorder-tree-traversal-iterative-recursive/)
+[Post-order Traversal]( https://www.techiedelight.com/postorder-tree-traversal-iterative-recursive/)
+
 ### Binary Search Tree (BST)
 
 In-order traversal of a BST will give you all elements in order.
