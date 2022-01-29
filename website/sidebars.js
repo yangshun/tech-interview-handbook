@@ -4,8 +4,9 @@ module.exports = {
       Preface: ['introduction', 'landscape'],
     },
     {
-      'Resume preparation': [
+      Resume: [
         'resume',
+        'resume-checklist',
         'resume-case-study',
         'resume-sample',
         'cover-letter',
