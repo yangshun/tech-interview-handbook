@@ -24,6 +24,14 @@ module.exports = {
       },
       items: [
         {href: '/introduction', label: 'Getting started', position: 'left'},
+        {
+          href: '/coding-round-overview',
+          label: 'Coding',
+        },
+        {
+          href: '/system-design',
+          label: 'System design',
+        },
         {to: 'blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/yangshun/tech-interview-handbook',
