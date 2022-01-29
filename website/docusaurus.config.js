@@ -35,11 +35,13 @@ module.exports = {
           href: 'https://www.facebook.com/techinterviewhandbook',
           position: 'right',
           className: 'navbar-icon navbar-icon-facebook',
+          'aria-label': 'Facebook page',
         },
         {
           href: 'https://twitter.com/yangshunz',
           position: 'right',
           className: 'navbar-icon navbar-icon-twitter',
+          'aria-label': 'Twitter page',
         },
       ],
     },

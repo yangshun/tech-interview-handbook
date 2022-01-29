@@ -134,10 +134,8 @@ function HeroSection() {
           {siteConfig.tagline} <br />
           Brought to you by FAANG engineers and the author of the{' '}
           <a href={BLIND_75_URL} target="_blank">
-            Blind 75 List
+            Blind 75 list
           </a>
-          <br />
-          Over 500,000 people have benefitted from this handbook!
         </p>
         <div className={styles.buttons}>
           <a
@@ -399,7 +397,7 @@ function TweetsSection() {
             'text--center',
             styles.sectionTitle,
           )}>
-          Loved by many engineers
+          Over 500,000 people have benefitted from this handbook!
         </h2>
         <div className={classnames('row', styles.tweetsSection)}>
           <div className="col col--4">
