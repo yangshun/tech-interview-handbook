@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Tech Interview Handbook',
   tagline: 'Free curated interview preparation materials for busy engineers',
-  url: 'https://techinterviewhandbook.org',
+  url: 'https://www.techinterviewhandbook.org',
   baseUrl: '/',
   trailingSlash: true,
   favicon: 'img/favicon.png',

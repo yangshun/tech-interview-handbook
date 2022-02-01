@@ -1,7 +1,7 @@
 <h1 align="center">Tech Interview Handbook</h1>
 
 <div align="center">
-  <a href="https://techinterviewhandbook.org/">
+  <a href="https://www.techinterviewhandbook.org/">
     <img src="website/static/img/logo.svg" alt="Tech Interview Handbook" width="400">
   </a>
   <br>
@@ -13,7 +13,7 @@
     <em>Credits: <a href="https://dribbble.com/shots/3831443-Tech-Interview-Handbook">Illustration</a> by <a href="https://dribbble.com/leftaligned">@leftaligned</a></em>
   </p>
   <h3>
-    <a href="https://techinterviewhandbook.org/">Read on the website</a> | <a href="https://facebook.com/techinterviewhandbook">Follow us on Facebook</a> 
+    <a href="https://www.techinterviewhandbook.org/">Read on the website</a> | <a href="https://facebook.com/techinterviewhandbook">Follow us on Facebook</a> 
   </h3>
 </div>
 
@@ -42,14 +42,15 @@ No one has time to do a few hundred LeetCode questions. Here are _free and curat
 
 Besides the usual algorithm questions, other **awesome** stuff includes:
 
-- [How to prepare](https://techinterviewhandbook.org/coding-round-overview) for coding interviews
-- [Interview Cheatsheet](https://techinterviewhandbook.org/cheatsheet) - Straight-to-the-point Do's and Don'ts
-- [Algorithm tips and the best practice questions](https://techinterviewhandbook.org/algorithms/introduction) categorized by topic
-- [Interview formats](https://techinterviewhandbook.org/interview-formats) of the top tech companies
-- [Behavioral questions](https://techinterviewhandbook.org/behavioral-questions) asked by the top tech companies
-- [Good questions to ask your interviewers](https://techinterviewhandbook.org/questions-to-ask) at the end of the interviews
-- [Helpful resume tips](https://techinterviewhandbook.org/resume) to get your resume noticed and the Do's and Don'ts
-- [Front-End Interview preparation](https://frontendinterviewhandbook.com)
+- [Best practice questions](https://techinterviewhandbook.org/best-practice-questions/) for coding interviews
+- [How to prepare](https://www.techinterviewhandbook.org/coding-round-overview/) for coding interviews
+- [Interview cheatsheet](https://www.techinterviewhandbook.org/cheatsheet/) - Straight-to-the-point Do's and Don'ts
+- [Algorithm tips](https://www.techinterviewhandbook.org/algorithms/introduction/) categorized by topic
+- [Interview formats](https://www.techinterviewhandbook.org/interview-formats/) of the top tech companies
+- [Behavioral questions](https://www.techinterviewhandbook.org/behavioral-questions/) asked by the top tech companies
+- [Good questions to ask your interviewers](https://www.techinterviewhandbook.org/questions-to-ask/) at the end of the interviews
+- [Helpful resume tips](https://www.techinterviewhandbook.org/resume/) to get your resume noticed and the Do's and Don'ts
+- [Front end interview preparation](https://www.frontendinterviewhandbook.com)
 
 Help from you in contributing content would be very much appreciated!
 
@@ -85,7 +86,7 @@ We're still working on System Design content. In the meanwhile, check out Educat
 
 ## Contents
 
-A [Docusaurus](https://github.com/facebook/docusaurus) website has been created to provide a better reading experience. Check out the website [here](https://techinterviewhandbook.org)!
+A [Docusaurus](https://github.com/facebook/docusaurus) website has been created to provide a better reading experience. Check out the website [here](https://www.techinterviewhandbook.org)!
 
 ## Related
 
