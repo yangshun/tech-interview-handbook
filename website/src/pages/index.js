@@ -87,7 +87,7 @@ function Tweet({url, handle, name, content, avatar, date}) {
               <strong>{name}</strong>{' '}
               <span className={styles.tweetMeta}>
                 @{handle} &middot;{' '}
-                <a className={styles.tweetMeta} href={url}>
+                <a className={styles.tweetMeta} href={url} rel="noopener">
                   {date}
                 </a>
               </span>
@@ -134,7 +134,7 @@ function HeroSection() {
         <p className="hero__subtitle">
           {siteConfig.tagline} <br />
           Brought to you by FAANG engineers and the author of the{' '}
-          <a href={BLIND_75_URL} target="_blank">
+          <a href={BLIND_75_URL} rel="noopener" target="_blank">
             Blind 75 list
           </a>
         </p>
@@ -183,7 +183,7 @@ function MoonchaserSection() {
                       <a
                         className="button button--secondary button--lg"
                         href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
-                        rel="noreferrer noopener"
+                        rel="noopener"
                         target="_blank"
                         onClick={() => {
                           window.gtag('event', 'moonchaser.homepage.click');
@@ -267,7 +267,9 @@ function ProductContentsSection() {
                     </a>
                   </li>
                   <li>
-                    <a href="https://frontendinterviewhandbook.com">
+                    <a
+                      href="https://frontendinterviewhandbook.com"
+                      rel="noopener">
                       Front end
                     </a>
                   </li>
@@ -371,7 +373,7 @@ function EducativeSection() {
                   <a
                     className="button button--secondary button--lg"
                     href="https://www.educative.io/explore?search_string=interview&aff=x23W"
-                    rel="noreferrer noopener"
+                    rel="noopener"
                     target="_blank"
                     onClick={() => {
                       window.gtag('event', 'educative.homepage.click');
@@ -582,6 +584,7 @@ function SuccessStoriesSection() {
               Would you like to contribute a success story?{' '}
               <a
                 href="https://github.com/yangshun/tech-interview-handbook/edit/master/website/src/data/successStories.js"
+                rel="noopener"
                 target="_blank">
                 Open a Pull Request here
               </a>
@@ -610,6 +613,7 @@ function SponsorshipSection() {
             <div>
               <a
                 href="https://opencollective.com/tech-interview-handbook/sponsor/0/website"
+                rel="noopener"
                 target="_blank">
                 <img
                   alt="Sponsor"
@@ -618,6 +622,7 @@ function SponsorshipSection() {
               </a>
               <a
                 href="https://opencollective.com/tech-interview-handbook/sponsor/1/website"
+                rel="noopener"
                 target="_blank">
                 <img
                   alt="Sponsor"
@@ -629,7 +634,7 @@ function SponsorshipSection() {
               <a
                 className="button button--secondary button--lg"
                 href="https://opencollective.com/tech-interview-handbook"
-                rel="noreferrer noopener"
+                rel="noopener"
                 target="_blank">
                 Become a sponsor!
               </a>
