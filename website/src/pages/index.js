@@ -81,7 +81,7 @@ function Tweet({url, handle, name, content, avatar, date}) {
     <div className={classnames('card', styles.tweet)}>
       <div className="card__header">
         <div className="avatar">
-          <img className="avatar__photo" src={avatar} />
+          <img alt={name} className="avatar__photo" src={avatar} />
           <div className="avatar__intro">
             <div className={styles.tweet}>
               <strong>{name}</strong>{' '}
@@ -126,6 +126,7 @@ function HeroSection() {
     <header className={classnames('hero', styles.heroBanner)}>
       <div className="container">
         <img
+          alt={siteConfig.title}
           className={classnames(styles.heroBannerLogo, 'margin-vert--md')}
           src={useBaseUrl('img/logo.svg')}
         />
@@ -564,7 +565,11 @@ function SuccessStoriesSection() {
                 </div>
                 <div className="card__header">
                   <div className="avatar">
-                    <img className="avatar__photo" src={user.thumbnail} />
+                    <img
+                      alt={user.name}
+                      className="avatar__photo"
+                      src={user.thumbnail}
+                    />
                     <div className="avatar__intro">
                       <div className="avatar__name">{user.name}</div>
                       <small className="avatar__subtitle">{user.title}</small>
@@ -606,12 +611,18 @@ function SponsorshipSection() {
               <a
                 href="https://opencollective.com/tech-interview-handbook/sponsor/0/website"
                 target="_blank">
-                <img src="https://opencollective.com/tech-interview-handbook/sponsor/0/avatar.svg" />
+                <img
+                  alt="Sponsor"
+                  src="https://opencollective.com/tech-interview-handbook/sponsor/0/avatar.svg"
+                />
               </a>
               <a
                 href="https://opencollective.com/tech-interview-handbook/sponsor/1/website"
                 target="_blank">
-                <img src="https://opencollective.com/tech-interview-handbook/sponsor/1/avatar.svg" />
+                <img
+                  alt="Sponsor"
+                  src="https://opencollective.com/tech-interview-handbook/sponsor/1/avatar.svg"
+                />
               </a>
             </div>
             <div className="margin-vert--lg">
