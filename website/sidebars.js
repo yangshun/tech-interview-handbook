@@ -4,7 +4,7 @@ module.exports = {
       Preface: ['introduction', 'landscape'],
     },
     {
-      Resume: [
+      'Step 1: Preparing your resume': [
         'resume',
         'resume-checklist',
         'resume-case-study',
@@ -13,66 +13,76 @@ module.exports = {
       ],
     },
     {
-      'General interview tips': ['self-introduction', 'questions-to-ask'],
-    },
-    {
-      'Interview formats': [
-        'interview-formats',
-        'interview-formats-top-companies',
-      ],
-    },
-    {
-      'Coding interviews': [
-        'coding-round-overview',
-        'picking-a-language',
-        'study-and-practice',
-        'best-practice-questions',
-        'during-coding-interview',
-        'cheatsheet',
-        'coding-signals',
-        'mock-interviews',
-        'interviewer-cheatsheet',
+      type: 'category',
+      label: 'Step 2: Acing the interview',
+      collapsed: false,
+      items: [
         {
-          Algorithms: [
-            'algorithms/algorithms-introduction',
-            'algorithms/array',
-            'algorithms/binary',
-            'algorithms/dynamic-programming',
-            'algorithms/geometry',
-            'algorithms/graph',
-            'algorithms/hash-table',
-            'algorithms/heap',
-            'algorithms/interval',
-            'algorithms/linked-list',
-            'algorithms/math',
-            'algorithms/matrix',
-            'algorithms/oop',
-            'algorithms/permutation',
-            'algorithms/queue',
-            'algorithms/recursion',
-            'algorithms/sorting-searching',
-            'algorithms/stack',
-            'algorithms/string',
-            'algorithms/tree',
-            'algorithms/trie',
+          'Interview formats': [
+            'interview-formats',
+            'interview-formats-top-companies',
+          ],
+        },
+        {
+          'General interview tips': ['self-introduction', 'questions-to-ask'],
+        },
+        {
+          '🔥 Coding interviews': [
+            'coding-round-overview',
+            'picking-a-language',
+            'study-and-practice',
+            'best-practice-questions',
+            'during-coding-interview',
+            'cheatsheet',
+            'coding-signals',
+            'mock-interviews',
+            'interviewer-cheatsheet',
+            {
+              Algorithms: [
+                'algorithms/algorithms-introduction',
+                'algorithms/array',
+                'algorithms/binary',
+                'algorithms/dynamic-programming',
+                'algorithms/geometry',
+                'algorithms/graph',
+                'algorithms/hash-table',
+                'algorithms/heap',
+                'algorithms/interval',
+                'algorithms/linked-list',
+                'algorithms/math',
+                'algorithms/matrix',
+                'algorithms/oop',
+                'algorithms/permutation',
+                'algorithms/queue',
+                'algorithms/recursion',
+                'algorithms/sorting-searching',
+                'algorithms/stack',
+                'algorithms/string',
+                'algorithms/tree',
+                'algorithms/trie',
+              ],
+            },
+          ],
+        },
+        'system-design',
+        {
+          'Behavioral interviews': [
+            'behavioral-round-overview',
+            'star-format',
+            'behavioral-questions',
+            'psychological-tricks',
           ],
         },
       ],
     },
-    'system-design',
     {
-      'Behavioral interviews': [
-        'behavioral-round-overview',
-        'star-format',
-        'behavioral-questions',
-        'psychological-tricks',
+      'Step 3: Negotiating the best offer': [
+        'understanding-compensation',
+        'negotiation',
       ],
     },
     {
-      'Offer negotiation': ['understanding-compensation', 'negotiation'],
-    },
-    {
-      'Job preparation': [
+      'Step 4: Getting ready for your job': [
         'choosing-between-companies',
         'engineering-levels',
         // 'team-selection',
