@@ -17,7 +17,7 @@ Regardless of company, **always negotiate** your offer, especially if you have m
 
 ## Products
 
-What does the company work on and is the company working on a domain you are interested in? Most big tech companies have teams working on all sorts of products. For these big tech companies, common products include ads networks, chat, enterprise offerings, video watching, payments, hardware products, industry-leading AI tools, internal tools, etc. Microsoft, Amazon, Apple and ByteDance have products in some of these areas as well. For many big companies, they are large enough that they build their our own infra and internal tools for most technologies they use because most existing technologies on the market can't meet their scale.
+What does the company work on and is the company working on a domain you are interested in? Most big tech companies have teams working on all sorts of products. For these big tech companies, common products include ads networks, chat, enterprise offerings, video watching, payments, hardware products, industry-leading AI tools, internal tools, etc. Microsoft, Amazon, Apple and ByteDance have products in some of these areas as well. For many big companies, they are large enough that they build their own infra and internal tools for most technologies they use because most existing technologies on the market can't meet their scale.
 
 That said, each tech company is uniquely known for something and it's in their DNA. So if you are interested in specific areas and you are sure you can be able to work on them, the choice should be clearer:
 
