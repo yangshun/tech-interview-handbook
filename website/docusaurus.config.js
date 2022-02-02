@@ -23,16 +23,20 @@ module.exports = {
         src: 'img/logo.svg',
       },
       items: [
-        {href: '/introduction', label: 'Getting started', position: 'left'},
         {
+          label: 'Start reading',
+          href: '/introduction',
+          position: 'left',
+        },
+        {
+          label: 'Coding interview guide',
           href: '/coding-interview',
-          label: 'Coding',
         },
         {
-          href: '/system-design',
-          label: 'System design',
+          label: 'Algorithms 101',
+          href: '/algorithms/introduction',
         },
-        {to: 'blog', label: 'Blog', position: 'left'},
+        {label: 'Blog', to: 'blog', position: 'left'},
         {
           href: 'https://github.com/yangshun/tech-interview-handbook',
           position: 'right',
@@ -61,7 +65,7 @@ module.exports = {
           title: 'General',
           items: [
             {
-              label: 'Get started',
+              label: 'Start reading',
               href: '/introduction',
             },
             {

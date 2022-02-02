@@ -1,6 +1,7 @@
 ---
 id: algorithms-introduction
 title: Introduction to algorithms
+sidebar_label: Introduction
 slug: introduction
 ---
 
