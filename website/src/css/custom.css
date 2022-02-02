@@ -25,6 +25,10 @@ html[data-theme='dark'] {
   --ifm-color-primary-lightest: rgb(191, 191, 248);
 }
 
+.markdown h1 {
+  margin-top: 1rem;
+}
+
 @media screen and (max-width: 767px) {
   :root {
     --ifm-font-size-base: 16px;

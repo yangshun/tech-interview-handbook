@@ -6,7 +6,7 @@ sidebar_label: Top companies
 
 :::info
 
-With COVID around, many companies are doing remote interviews even for the onsite rounds, so the instructions will differ.
+Due to COVID travel restrictions, many companies hold interviews remotely even for the onsite rounds, so the instructions might differ.
 
 :::
 

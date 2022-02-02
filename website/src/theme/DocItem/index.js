@@ -66,7 +66,6 @@ export default function DocItem(props) {
                   )}
                 />
               )}
-
               <div
                 className={clsx(ThemeClassNames.docs.docMarkdown, 'markdown')}>
                 {/*
