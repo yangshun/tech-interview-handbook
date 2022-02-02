@@ -20,7 +20,7 @@ From my experience as a FAANG interviewer as well as my discussions with countle
 
 <!-- **Tip**: TODO If you haven't already, read my guide on the fastest way to build up the relevant experience to get your first job as a software engineer. -->
 
-:::tip
+:::tip Expert tip
 
 If you are running low on time, I recommend [TopResume's Resume Writing Service](https://tidd.ly/3oezgOo), which has helped countless software engineers I know get interviews at FAANG.
 

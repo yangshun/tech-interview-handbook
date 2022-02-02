@@ -58,7 +58,7 @@ However, do not do keyword stuffing for the sake of it - always remember that th
 
 Analyze the JD and determine how important each skill and experience is, then optimize the frequency of the keyword according to its importance.
 
-:::tip
+:::tip Expert tip
 
 While optimizing for every application is ideal, you can generalize your resume to a type of position.
 

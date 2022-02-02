@@ -10,7 +10,7 @@ With COVID around, many companies are doing remote interviews even for the onsit
 
 :::
 
-Are there companies you would like to know more about? Email us at [business{at}techinterviewhandbook.org](mailto:business@techinterviewhandbook.org).
+Are there companies you would like to know more about? Email us at [contact{at}techinterviewhandbook.org](mailto:contact@techinterviewhandbook.org).
 
 ## Airbnb
 

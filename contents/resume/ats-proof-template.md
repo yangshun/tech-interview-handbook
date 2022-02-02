@@ -31,7 +31,7 @@ Most companies these days automate their resume screening process through Applic
 - Try not to use multi-column formats
 - Do not use the header or footer sections in a Word/Google Docs file
 
-:::tip
+:::tip Expert tip
 
 Use the standard resume template provided by Microsoft Word or Google Docs. I personally use Google Docs to create my resume as I can easily share it with peers for getting feedback and it has the convenience of being stored in the cloud.
 

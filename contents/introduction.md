@@ -11,15 +11,18 @@ Over 500,000 people have benefitted from this handbook! I have lost count of the
 
 ## Who am I?
 
-I'm [Yangshun](https://twitter.com/yangshunz), a Senior Software Engineer at Meta/Facebook. In 2017, I was frustrated at my job at Grab, a regional ridehailing company and wanted to break into FAANG but I didn't know how to. After studying and practicing for a few months, I interviewed at 11 companies and managed to get [9 offers from top tech companies in the Bay Area](https://www.teamblind.com/post/Sharing-my-offer-numbers-from-big-companies-for-your-reference-yNgqUPQR) - Facebook, Google, Airbnb, Palantir, Dropbox, Lyft, and some startups. This handbook is a collection of the notes I made while preparing for my interviews to serve as revision for efficient job hunts in the future, but will probably also benefit you in your job hunt!
+I'm [Yangshun](https://twitter.com/yangshunz), a Senior Software Engineer at Meta/Facebook. In 2017, I was frustrated at my job at Grab, a regional ridehailing company and wanted to break into FAANG but I didn't know how to. After few months of research, studying and practicing, I interviewed at 11 companies and managed to get [9 offers from top tech companies in the Bay Area](https://www.teamblind.com/post/Sharing-my-offer-numbers-from-big-companies-for-your-reference-yNgqUPQR) - Facebook, Google, Airbnb, Palantir, Dropbox, Lyft, and some startups.
 
-## Why do I want this?
+It was a tedious process which I don't ever want to go through again. It was a tedious process which I don't ever want to go through again. **I went through that process but with this handbook, you don't have to.** This handbook contains the essence of technical interviewing which will benefit you in your job hunt.
 
-- This repository has **practical** content that covers all phases of a technical interview, from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful
-- The information in this repository is condensed. Ultimately, the key to succeeding in technical interviews is consistent practice and I don't want to bore you with too many words. I tell you the minimum you need to know on how to go about navigating the interview process, you go and practice and land your dream job
+## Why would you read this?
+
+This repository has **practical** content that covers all phases of a technical interview, from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful.
+
+The information in this repository is condensed. Ultimately, the key to succeeding in technical interviews is consistent practice and I don't want to bore you with too many words. I tell you the minimum you need to know on how to go about navigating the interview process, you go and practice and land your dream job.
 
 ## Who is this for?
 
 Whether you are a beginner to technical interviews or a seasoned engineer who has not been on the other side of the interviewing table in a while and want to get back into the game, the Tech Interview Handbook has got you covered.
 
-If you are a busy engineer like most people are, this resource is for you. Nobody has time to do hundreds of LeetCode questions, and the good news is that you don't need to do that many to actually get the job at FAANG! We have looked through hundreds of LeetCode questions and distilled the [best questions to practice](./best-practice-questions.md).
+If you are a busy engineer like most people are, this resource is for you. Nobody has time to do hundreds of LeetCode questions, and the good news is that you don't need to do that many to actually get the job at FAANG! I looked through hundreds of LeetCode questions and distilled the [best questions to practice](./best-practice-questions.md).

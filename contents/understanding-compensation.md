@@ -59,7 +59,7 @@ When you leave a company, there is an exercise window (deadline given for you to
 
 A stock grant is commonly referred to as a Restricted Stock Unit (RSU) and it means you possess the stock immediately. If the company is public, you can sell them during defined trading windows.
 
-More reading on the topic can be done [here](https://gist.github.com/yossorion/4965df74fd6da6cdc280ec57e83a202d).
+More reading on the topic can be done on the [equity compensation guide](https://github.com/jlevy/og-equity-compensation) and the article ["What I Wish I'd Known About Equity Before Joining A Unicorn"](https://gist.github.com/yossorion/4965df74fd6da6cdc280ec57e83a202d).
 
 ## Signing bonus
 

@@ -20,7 +20,7 @@ toc_max_heading_level: 2
 
 Next, fill up your template!
 
-It is daunting to start on a fresh slate, so I recommend you always start by making a laundry list of bullet points under each section, then optimizing it accordingly. This prevents excessive attention placed on premature optimization.
+It is daunting to start on a fresh slate, so I recommend you start by making a laundry list of bullet points under each section, then optimizing it accordingly. This prevents excessive attention placed on premature optimization.
 
 **Do's for ATS readability**
 
@@ -32,15 +32,15 @@ It is daunting to start on a fresh slate, so I recommend you always start by mak
 - Do not use images, pictures or diagrams
 - Do not use tables
 
-:::tip
+:::tip Expert tip
 
 To maximize efficiency in applying for several job types, create and keep updated a "Master resume" which you basically use to maintain an exhaustive list of all points under every section of your resume. When applying for each job, you can make a copy of the Master and eliminate or optimize points as necessary.
 
 :::
 
-## Contact information
+## 1. Contact information
 
-### Must-haves
+**Must-haves**
 
 - Name
 - Personal phone number
@@ -52,7 +52,7 @@ To maximize efficiency in applying for several job types, create and keep update
   - I recommend Gmail if you are using other email services
 - LinkedIn profile
 
-### Good-to-haves
+**Good-to-haves**
 
 - GitHub profile URL
 - Personal website URL
@@ -64,11 +64,11 @@ To maximize efficiency in applying for several job types, create and keep update
 
 Where relevant, indicate achievements in coding platforms, for example, max ratings, ranking, number of stars, badges.
 
-## Professional summary
+## 2. Professional summary
 
 The professional summary, if written well, will be the most effective and important part of your resume. From my experience as an interviewer, I generally may not have the time to read into the detail of resumes - hence summaries which directly address why a candidate is a good fit for the job greatly improves their chances of capturing my attention.
 
-### Start with a resume headline
+**Start with a resume headline**
 
 Always start with a concise, one line description of yourself
 
@@ -79,7 +79,7 @@ Examples:
 
 - Staff Software Engineer at Facebook with over 5 years experience leading teams
 
-### Summarize your best selling points
+**Summarize your best selling points**
 
 Below the resume headline, include a summary of yourself which expands on your resume headline.
 
@@ -87,7 +87,7 @@ Below the resume headline, include a summary of yourself which expands on your r
 - Include most important skills and experiences relevant to the job applied, quantifying them where possible
 - Keep in mind to answer the question of "Why am I a good fit for this job?" - while writing the summary
 
-## Skills
+## 3. Skills
 
 Include programming languages and tech stacks:
 
@@ -96,7 +96,7 @@ Include programming languages and tech stacks:
   - Frameworks
   - Databases
 
-## Work experience
+## 4. Work experience
 
 List your work experience in a familiar format and reverse chronological order. Every job listed should have:
 
@@ -108,7 +108,7 @@ List your work experience in a familiar format and reverse chronological order. 
   - Accomplishments listed following this structure
     - `[Accomplishment summary] : [Action] that resulted in [quantifiable outcome]`
 
-## Education
+## 5. Education
 
 Most software engineering jobs will require at least an undergraduate degree. However, unless you are a recent graduate or do not have much work experience, it should not be prioritized above your work experience.
 
@@ -134,7 +134,7 @@ National University of Singapore, Singapore
 - President of hacker society
 ```
 
-## Projects
+## 6. Projects
 
 Include at least 2 projects you have contributed to, outlining your key contributions.
 
@@ -146,7 +146,7 @@ Lead maintainer 01/2018 - 04/2020
 - Used by 7.6k projects on GitHub
 ```
 
-## Awards, accolades and certifications
+## 7. Awards, accolades and certifications
 
 Only include achievements related to the job application:
 
