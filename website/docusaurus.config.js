@@ -70,7 +70,7 @@ module.exports = {
             },
             {
               label: 'Resume preparation',
-              href: '/resume',
+              href: '/resume/guide',
             },
             {
               label: 'Algorithms',

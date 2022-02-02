@@ -226,11 +226,8 @@ function ProductContentsSection() {
                 <h3>Not sure where to start? We got you covered</h3>
                 <ul>
                   <li>
-                    <a href={useBaseUrl('resume')}>Resume preparation</a>
-                  </li>
-                  <li>
-                    <a href={useBaseUrl('resume-case-study')}>
-                      Resume case studies and samples
+                    <a href={useBaseUrl('resume/guide')}>
+                      Step-by-step resume preparation
                     </a>
                   </li>
                   <li>
