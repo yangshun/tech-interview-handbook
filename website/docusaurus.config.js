@@ -25,7 +25,7 @@ module.exports = {
       items: [
         {href: '/introduction', label: 'Getting started', position: 'left'},
         {
-          href: '/coding-round-overview',
+          href: '/coding-interview',
           label: 'Coding',
         },
         {
@@ -83,7 +83,7 @@ module.exports = {
             },
             {
               label: 'Coding round',
-              href: '/coding-round-overview',
+              href: '/coding-interview',
             },
             {
               label: 'System design',

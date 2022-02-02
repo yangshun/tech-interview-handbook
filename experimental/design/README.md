@@ -2,7 +2,7 @@
 
 ## Guides
 
-- [Grokking the System Design Interview](https://www.educative.io/collection/5668639101419520/5649050225344512)
+- [Grokking the System Design Interview](https://www.educative.io/collection/5668639101419520/5649050225344512?aff=x23W)
 - https://github.com/donnemartin/system-design-primer
 - https://github.com/checkcheckzz/system-design-interview
 - https://github.com/shashank88/system_design

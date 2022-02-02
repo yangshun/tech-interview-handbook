@@ -40,6 +40,6 @@ When hiring fresh grads, I know that many of them will not have as much experien
 
 :::tip
 
-Use this [Resume parser tool](https://resume-parser.vercel.app/) to see how an industry-standard ATS parses your resume, then improve it accordingly!
+Use this [resume parser tool](https://resume-parser.vercel.app/) to see how an industry-standard ATS parses your resume, then improve it accordingly!
 
 :::

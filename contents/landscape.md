@@ -19,7 +19,7 @@ Computer Science is rapidly gaining popularity and engineering is a highly-regar
 
 ### Requires lifelong learning
 
-Technology industry is an extremely fast-moving one. Many technologies used today didn't even exist/were popular a decade ago; in 2009, mobile app development and blockchain were pretty much unheard of. Engineers constantly need to upgrade their skills to stay relevant to the demands of the job market. Engineering is a great career for passionate individuals who like to learn.
+Technology industry is an extremely fast-moving one. Many technologies used today didn't even exist/were popular a decade ago; in 2009, mobile app development and blockchain were pretty much unheard of. Engineers need to constantly upgrade their skills to stay relevant to the demands of the job market. Engineering is a great career for passionate individuals who like to learn.
 
 ### Flexible
 
@@ -27,25 +27,9 @@ A software engineering job is perhaps the most flexible job that exists in terms
 
 ## Internships vs full-time
 
-If you dream of working at a top-tier tech company one day, getting hired via an intern conversion is by far the easiest way to achieve that. Internship interviews are extremely short (usually just 2 rounds whereas interviews for full-time roles are usually 4-5 rounds). Internships allow you to work at a company over a short period of time (3 months or so) and helps in understanding the company and engineering culture better. Companies also tend to give higher return job offers to high performing interns as they have proven to be effective at the job and fits into the culture; hence hiring them is considered to be relatively low-risk.
+If you dream of working at a top tech company one day, getting hired via an intern conversion is by far the easiest way to achieve that. Internship interviews are extremely short (usually just 2 rounds whereas interviews for full-time roles are usually 4-5 rounds). Internships allow you to work at a company over a short period of time (3 months or so) and helps in getting a first-hand understanding of the company and engineering culture. Companies also tend to give higher return job offers to high performing interns as they have proven to be effective at the job and can work with existing employees; hence hiring them is considered to be relatively low-risk.
 
 Top tech companies pay a ridiculous amount even for junior candidates:
-
-### Singapore
-
-We ran a survey to find out what the famous tech companies in Singapore are paying new hires in 2022 and here's a sample of the results. View the [full dataset](https://docs.google.com/spreadsheets/d/1QtC8efWw0mVkGXW4QA9bX4f0nJhGbmFqCfVLSumMZ0I/) or [contribute your data](https://forms.gle/9oNNJJwespqWBZGw6)!
-
-| Company       | Internship (monthly in SGD) | Fresh Grad Annual Total (SGD) |
-| ------------- | --------------------------- | ----------------------------- |
-| Stripe        | $6000                       | $150,000                      |
-| Facebook/Meta | $6000                       | $140,000                      |
-| Google        | $5400                       | $110,000                      |
-| Shopee        | $4200                       | $100,000 - $140,000           |
-| ByteDance     | $4000                       | $85,000                       |
-| Grab          | $2500                       | No data                       |
-| Visa          | $2200                       | $75,000                       |
-
-_Note: Fresh grad annual total numbers are approximate and include base salary, stock, and target bonuses._
 
 ### United States
 
@@ -63,17 +47,33 @@ Salaries of top US tech internships in 2016 ([source](https://twitter.com/rodney
 
 </div>
 
+### Singapore
+
+We ran a survey to find out what the famous tech companies in Singapore are paying new hires in 2022 and here's a sample of the results. View the [full dataset](https://docs.google.com/spreadsheets/d/1QtC8efWw0mVkGXW4QA9bX4f0nJhGbmFqCfVLSumMZ0I/) or [contribute your data](https://forms.gle/9oNNJJwespqWBZGw6)!
+
+| Company       | Internship (monthly in SGD) | Fresh Grad Annual Total (SGD) |
+| ------------- | --------------------------- | ----------------------------- |
+| Stripe        | $6000                       | $150,000                      |
+| Meta/Facebook | $6000                       | $140,000                      |
+| Google        | $5400                       | $110,000                      |
+| Shopee        | $4200                       | $100,000 - $140,000           |
+| ByteDance     | $4000                       | $85,000                       |
+| Grab          | $2500                       | No data                       |
+| Visa          | $2200                       | $75,000                       |
+
+_Note: Fresh grad annual total numbers are approximate and include base salary, stock, and target bonuses._
+
 ## Company size
 
 Companies have different focuses depending on the stage they are at and the types of work to be done can also be vastly different. In the earlier stages where product-market fit hasn't been found, companies would be rapidly iterating on products and features, whereas larger companies that have already found the right product will focus on scaling their infrastructure and growing their users. Liquid compensation is also lower at early-stage companies due to the equity not being worth any money, but there is the chance of earning a lot more if/when the company IPOs or gets acquired.
 
-|  | Early-stage Startup | Late-stage Startup | Large Company |
+| Dimension | Early-stage startup | Late-stage startup | Large company |
 | --- | --- | --- | --- |
-| Company Size | <100 | 100-1000 | >1000 |
+| Company size | <100 | 100-1000 | >1000 |
 | Compensation | Base salary is a bit higher than big companies. Higher equity amount but its value is hard to judge as the company's valuation is unclear and stocks are not worth money yet. High risk, high return. | Base salary is a bit higher than big companies. Company valuation is clearer and stocks have higher chance of being worth money. | Depends on the prestige of the company. Compensation is usually market standard or better. Stocks are worth money if company has gone public. |
-| Types of Work | Mainly product development. Engineers have to wear multiple hats - Front End, Back End, DevOps, Design, etc. | Product development and some infra. | Diverse roles and specialized work; dedicated people for each role. Infra and prod infra work is more common. More opportunities for internal transfers, sometimes even across the globe. |
-| Career Ladders | Unstructured. No (or very vague) career levels. Not much formal mentorship nor training. | Somewhat structured. | Very structured. Well-defined career levels. |
-| Iteration Speed | Extremely fast. Struggling to find product market fit. | Moderate. Has found product market fit, trying to grow user base. | Stable product with wide user base. Incrementally roll out changes and do lots of experimentation. |
+| Types of work | Mainly product development. Engineers have to wear multiple hats - Front End, Back End, DevOps, Design, etc. | Product development and some infra. | Diverse roles and specialized work; dedicated people for each role. Infra and prod infra work is more common. More opportunities for internal transfers, sometimes even across the globe. |
+| Career ladder | Unstructured. No (or very vague) career levels. Not much formal mentorship nor training. | Somewhat structured. | Very structured. Well-defined career levels. |
+| Iteration speed | Extremely fast. Struggling to find product market fit. | Moderate. Has found product market fit, trying to grow user base. | Stable product with wide user base. Incrementally roll out changes and do lots of experimentation. |
 
 _It's important to note that the above are just general trends and exceptions can apply._
 

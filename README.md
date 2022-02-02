@@ -43,7 +43,7 @@ No one has time to do a few hundred LeetCode questions. Here are _free and curat
 Besides the usual algorithm questions, other **awesome** stuff includes:
 
 - [Best practice questions](https://techinterviewhandbook.org/best-practice-questions/) for coding interviews
-- [How to prepare](https://www.techinterviewhandbook.org/coding-round-overview/) for coding interviews
+- [How to prepare](https://www.techinterviewhandbook.org/coding-interview/) for coding interviews
 - [Interview cheatsheet](https://www.techinterviewhandbook.org/cheatsheet/) - Straight-to-the-point Do's and Don'ts
 - [Algorithm tips](https://www.techinterviewhandbook.org/algorithms/introduction/) categorized by topic
 - [Interview formats](https://www.techinterviewhandbook.org/interview-formats/) of the top tech companies

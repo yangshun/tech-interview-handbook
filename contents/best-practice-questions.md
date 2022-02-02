@@ -1,6 +1,7 @@
 ---
 id: best-practice-questions
 title: Best practice questions
+sidebar_label: 🔥 Best practice questions
 description: The best practice questions to prepare for algorithmic coding interviews by the author of Blind 75 spread across a 5-week schedule
 keywords: [algorithm, interview, questions, leetcode, blind 75]
 ---

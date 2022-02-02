@@ -27,8 +27,8 @@ Here are some tips to develop a good elevator pitch for yourself:
 
 Include who you are, who you work for (or school and major), and what you do.
 
-- For internships, you should mention the following: name, school and major, focus areas, past internships and/or noteworthy projects
-- For full-time roles, you should mention the following: name, past companies, noteworthy projects (best if it's a public consumer product that they might have heard of)
+- **Internships** - You should mention the following: name, school and major, focus areas, past internships and/or noteworthy projects
+- **Full-time** - You should mention the following: name, past companies, noteworthy projects (best if it's a public consumer product that they would have heard of)
 
 Does this look familiar? It should be, because it is similar to your resume! Your resume is a condensed version of your knowledge and experiences and your self introduction is essentially a condensed version of your resume. As you grow older, professional experience becomes more important and school background becomes less important. Hence your self introduction changes as you become more senior.
 
@@ -36,7 +36,7 @@ Does this look familiar? It should be, because it is similar to your resume! You
 
 Tell them some highlights from your favorite/most impressive projects and including some numbers if they're impressive or challenges that you've overcome. Do not delve into the depths of how you reverse engineered a game and decrypted a packet to predict when to use your DKP on a drop. Tell them the executive summary: "I reverse engineered X game by decrypting Y packet to predict Z." If this catches their interest, they _might_ ask further questions on their own.
 
-### Why do _they_ want _you_?
+### Why do they want you?
 
 Tell the interviewer why you would make a good hire. Is your experience relevant to the company? Have you used a similar tech stack as the company or built relevant products? What unique talent(s) do you have that may give them confidence about your ability to contribute to the company?
 

@@ -23,12 +23,10 @@ module.exports = {
             'interview-formats-top-companies',
           ],
         },
-        {
-          'General interview tips': ['self-introduction', 'questions-to-ask'],
-        },
+        'self-introduction',
         {
           '🔥 Coding interviews': [
-            'coding-round-overview',
+            'coding-interview',
             'picking-a-language',
             'study-and-practice',
             'best-practice-questions',
@@ -73,6 +71,7 @@ module.exports = {
             'psychological-tricks',
           ],
         },
+        'questions-to-ask',
       ],
     },
     {

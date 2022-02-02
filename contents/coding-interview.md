@@ -1,6 +1,6 @@
 ---
-id: coding-round-overview
-title: Coding round overview
+id: coding-interview
+title: Coding interviews
 sidebar_label: Overview
 ---
 
