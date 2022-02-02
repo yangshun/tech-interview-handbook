@@ -24,9 +24,11 @@ function TopResume({className}) {
         window.gtag('event', 'topresume.sidebar.click');
       }}>
       <p className={styles.tagline}>
+        <strong>Best resume service for FAANG</strong>
+        <br />
         If you are running low on time, I recommend TopResume's{' '}
-        <u>resume writing</u> and free <u>resume screening</u> services, which
-        has helped countless software engineers get interviews at FAANG.
+        <u>free resume review</u> services, which has helped countless software
+        engineers get interviews at FAANG.
       </p>
     </a>
   );
@@ -64,9 +66,10 @@ function Educative({className}) {
         window.gtag('event', 'educative.sidebar.click');
       }}>
       <p className={styles.tagline}>
-        <strong>Looking to get hired at FAANG?</strong> <u>Educative</u> offers
-        many great courses to improve your interview game.{' '}
-        <u>Join today for a 10% discount!</u>
+        <strong>Looking to get hired at FAANG?</strong>
+        <br />
+        <u>Educative</u> offers many great courses to improve your interview
+        game. <u>Join today for a 10% discount!</u>
       </p>
     </a>
   );

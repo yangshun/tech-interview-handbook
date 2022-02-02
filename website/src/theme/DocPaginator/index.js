@@ -6,7 +6,6 @@
  */
 import React from 'react';
 import Translate, {translate} from '@docusaurus/Translate';
-import SidebarAd from '../../components/SidebarAd';
 
 function DocPaginator({previous, next}) {
   return (
@@ -47,10 +46,6 @@ function DocPaginator({previous, next}) {
           )}
         </div>
       </nav>
-      <div className="margin-top--md">
-        <SidebarAd />
-      </div>
-    </>
   );
 }
 
