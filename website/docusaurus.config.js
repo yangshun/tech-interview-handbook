@@ -159,8 +159,8 @@ module.exports = {
       {
         redirects: [
           {
-            from: '/coding-interview',
-            to: '/coding-round-overview',
+            from: '/coding-round-overview',
+            to: '/coding-interview',
           },
         ],
       },
