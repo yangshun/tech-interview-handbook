@@ -112,10 +112,12 @@ Practically speaking the return of investment (ROI) on studying and practicing f
 - [Jump Game](https://leetcode.com/problems/jump-game/)
 - [Word Break Problem](https://leetcode.com/problems/word-break/)
 
-### Dynamic programming course
+#### Dynamic programming course
 
 - [Grokking the Dynamic Programming Patterns for Coding Interviews](https://www.educative.io/courses/grokking-dynamic-programming-patterns-for-coding-interviews?aff=x23W)
 
-## More practice
+## Quality courses
 
-If you want more structured algorithms practice, I recommend [Educative's Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W) course. This course essentially expands upon the questions here but approaches the practicing from a questions pattern perspective rather than data structures, which is an approach I also agree with for learning and getting better at algorithmic problems.
+If you want more structured algorithms practice, I recommend the following courses:
+
+- ["Grokking the Coding Interview: Patterns for Coding Questions" by Educative](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W) - This course essentially expands upon the questions on this page but approaches the practicing from a questions pattern perspective rather than data structures, which is an approach I also agree with for learning and have personally used to get better at algorithmic problems. **Learn and understand patterns, not memorize answers!**
