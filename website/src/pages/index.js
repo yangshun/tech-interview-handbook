@@ -29,7 +29,7 @@ const FEATURES = [
     description: (
       <>
         No one has time to practice a few hundred questions. We created the{' '}
-        <a href={BLIND_75_URL} target="_blank">
+        <a href={BLIND_75_URL} target="_blank" rel="noopener">
           Blind 75 List
         </a>{' '}
         to tell you which the best questions are.
