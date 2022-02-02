@@ -69,12 +69,16 @@ module.exports = {
               href: '/introduction',
             },
             {
-              label: 'Blog',
-              href: '/blog',
+              label: 'Resume preparation',
+              href: '/resume',
             },
             {
               label: 'Algorithms',
               href: '/algorithms/introduction',
+            },
+            {
+              label: 'Blog',
+              href: '/blog',
             },
           ],
         },
@@ -86,16 +90,16 @@ module.exports = {
               href: '/cheatsheet',
             },
             {
-              label: 'Coding round',
+              label: 'Coding interviews',
               href: '/coding-interview',
             },
             {
-              label: 'System design',
+              label: 'System design interviews',
               href: '/system-design',
             },
             {
-              label: 'Behavioral round',
-              href: '/behavioral-round-overview',
+              label: 'Behavioral interviews',
+              href: '/behavioral-interview',
             },
           ],
         },
@@ -121,7 +125,7 @@ module.exports = {
           items: [
             {
               label: 'Contact us',
-              href: 'mailto:business@techinterviewhandbook.org',
+              href: 'mailto:contact@techinterviewhandbook.org',
             },
           ],
         },
@@ -165,6 +169,10 @@ module.exports = {
           {
             from: '/coding-round-overview',
             to: '/coding-interview',
+          },
+          {
+            from: '/behavioral-round-overview',
+            to: '/behavioral-interview',
           },
         ],
       },

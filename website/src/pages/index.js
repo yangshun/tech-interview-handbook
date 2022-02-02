@@ -254,17 +254,18 @@ function ProductContentsSection() {
                 <h3>Efficiently prepare for all kinds of interviews</h3>
                 <ul>
                   <li>
+                    <a href={useBaseUrl('coding-interview')}>Coding</a>
+                  </li>
+                  <li>
                     <a href={useBaseUrl('algorithms/introduction')}>
                       Algorithms
                     </a>
                   </li>
                   <li>
-                    <a href={useBaseUrl('system-design')}>System Design</a>
+                    <a href={useBaseUrl('system-design')}>System design</a>
                   </li>
                   <li>
-                    <a href={useBaseUrl('behavioral-round-overview')}>
-                      Behavioral
-                    </a>
+                    <a href={useBaseUrl('behavioral-interview')}>Behavioral</a>
                   </li>
                   <li>
                     <a

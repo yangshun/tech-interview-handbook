@@ -65,7 +65,7 @@ module.exports = {
         'system-design',
         {
           'Behavioral interviews': [
-            'behavioral-round-overview',
+            'behavioral-interview',
             'star-format',
             'behavioral-questions',
             'psychological-tricks',

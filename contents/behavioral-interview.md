@@ -1,6 +1,6 @@
 ---
-id: behavioral-round-overview
-title: Behavorial round overview
+id: behavioral-interview
+title: Behavorial interview
 sidebar_label: Overview
 ---
 
