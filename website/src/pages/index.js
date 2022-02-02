@@ -10,6 +10,8 @@ import successStories from '../data/successStories';
 
 const BLIND_75_URL =
   'https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU';
+const BLIND_OFFER_NUMBERS_URL =
+  'https://www.teamblind.com/post/Sharing-my-offer-numbers-from-big-companies-for-your-reference-yNgqUPQR';
 
 const FEATURES = [
   {
@@ -107,11 +109,12 @@ function Home() {
       title="Technical Interview Guide for Busy Engineers"
       description={siteConfig.tagline}>
       <HeroSection />
+      <WhatIsThisSection />
+      <TweetsSection />
+      <HowToUseSection />
       <EducativeSection />
-      <ProductContentsSection />
       <FeaturesSection />
       <MoonchaserSection />
-      <TweetsSection />
       <SuccessStoriesSection />
       <SponsorshipSection />
       <PreFooterSection />
@@ -160,6 +163,57 @@ function HeroSection() {
   );
 }
 
+function WhatIsThisSection() {
+  return (
+    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+      <div className="container">
+        <div className="row">
+          <div className="col col--8 col--offset-2">
+            <h2 className="text--center margin-bottom--lg">
+              <span class="badge badge--primary">What is this</span>
+            </h2>
+            <h3
+              className={classnames(
+                'text--center',
+                'margin-bottom--lg',
+                styles.sectionTitle,
+              )}>
+              The fastest way to prepare effectively for your software
+              engineering interviews, used by >500,000 engineers
+            </h3>
+            <p
+              className={classnames(
+                'margin-bottom--lg',
+                styles.sectionTagline,
+              )}>
+              Tech Interview Handbook goes{' '}
+              <strong>straight to the point</strong> and tells you the{' '}
+              <strong>minimum</strong> you need to know to excel in your
+              technical interviews.
+              <br />
+              <br />
+              As a Senior Software Engineer and Tech Lead at Meta/Facebook, I
+              have personally gone through the frustrating process of browsing
+              through many unorganized resources to prepare for my technical
+              interviews.
+              <br />
+              <br />
+              This handbook contains the essence of technical interviewing I
+              gathered over my last job hunt, which allowed me to clinch{' '}
+              <a href={BLIND_OFFER_NUMBERS_URL}>
+                9 offers out of 11 top Bay Area companies
+              </a>{' '}
+              -{' '}
+              <strong>Facebook, Google, Airbnb, Palantir, Dropbox, Lyft</strong>
+              , and some startups!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function MoonchaserSection() {
   // Because the SSR and client output can differ and hydration doesn't patch attribute differences,
   // we'll render this on the browser only.
@@ -202,104 +256,131 @@ function MoonchaserSection() {
   );
 }
 
-function ProductContentsSection() {
+function HowToUseStep({index, title, ctaLink, contents}) {
   return (
-    <div className={classnames('padding-vert--xl')}>
+    <div className={classnames('card', styles.howToUseStep)}>
+      <div className="card__header">
+        <div className="margin-bottom--sm">
+          <small className={styles.howToUseStepLabel}>STEP {index}</small>
+        </div>
+        <h3>{title}</h3>
+      </div>
+      <div className="card__body">
+        <ul>
+          {contents.map((content, i) => (
+            <li key={i}>{content}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="card__footer">
+        <a
+          class="button button--secondary button--block"
+          href={useBaseUrl(ctaLink)}>
+          Read now →
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function HowToUseSection() {
+  return (
+    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
       <div className="container">
         <div className="row">
           <div className="col col--10 col--offset-1">
-            <h2
+            <h2 className="text--center margin-bottom--lg">
+              <span class="badge badge--primary">How to use</span>
+            </h2>
+            <h3
               className={classnames(
                 'text--center',
-                'margin-bottom--xl',
+                'margin-bottom--lg',
                 styles.sectionTitle,
               )}>
-              Complete guide to getting software engineering jobs at top firms
-            </h2>
-            <div className={classnames('row', styles.featuresRow)}>
-              <div
-                className={classnames(
-                  'col',
-                  'col--4',
-                  styles.featuresRowItemContainer,
-                )}>
-                <h3>Not sure where to start? We got you covered</h3>
-                <ul>
-                  <li>
-                    <a href={useBaseUrl('resume/guide')}>
-                      Step-by-step resume preparation
-                    </a>
-                  </li>
-                  <li>
-                    <a href={useBaseUrl('interview-formats')}>
-                      Interview formats
-                    </a>
-                  </li>
-                  <li>
-                    <a href={useBaseUrl('best-practice-questions')}>
-                      Best practice questions
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div
-                className={classnames(
-                  'col',
-                  'col--4',
-                  styles.featuresRowItemContainer,
-                )}>
-                <h3>Efficiently prepare for all kinds of interviews</h3>
-                <ul>
-                  <li>
-                    <a href={useBaseUrl('coding-interview')}>Coding</a>
-                  </li>
-                  <li>
-                    <a href={useBaseUrl('algorithms/introduction')}>
-                      Algorithms
-                    </a>
-                  </li>
-                  <li>
-                    <a href={useBaseUrl('system-design')}>System design</a>
-                  </li>
-                  <li>
-                    <a href={useBaseUrl('behavioral-interview')}>Behavioral</a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://frontendinterviewhandbook.com"
-                      rel="noopener">
-                      Front end
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div
-                className={classnames(
-                  'col',
-                  'col--4',
-                  styles.featuresRowItemContainer,
-                )}>
-                <h3>Algorithms deep-dive</h3>
-                <ul>
-                  <li>
-                    <a href={useBaseUrl('algorithms/array')}>Array</a>
-                  </li>
-                  <li>
-                    <a href={useBaseUrl('algorithms/graph')}>Graph</a>
-                  </li>
-                  <li>
-                    <a href={useBaseUrl('algorithms/linked-list')}>
-                      Linked list
-                    </a>
-                  </li>
-                  <li>
-                    <a href={useBaseUrl('algorithms/introduction')}>
-                      and more...
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+              Not sure where to start in your interview preparation?
+              <br /> We've got you covered.
+            </h3>
+            <p
+              className={classnames(
+                'text--center',
+                'margin-bottom--lg',
+                styles.sectionTagline,
+              )}>
+              This guide is structured in a{' '}
+              <strong>simple to follow, step-by-step</strong> style covering all
+              aspects of your software engineering interview preparation -{' '}
+              <strong>no prior interview experience required</strong>.
+            </p>
+          </div>
+        </div>
+        <div className={classnames('row', styles.featuresRow)}>
+          <div
+            className={classnames(
+              'col',
+              'col--3',
+              styles.featuresRowItemContainer,
+            )}>
+            <HowToUseStep
+              index={1}
+              title={<>Prepare a FAANG-ready resume</>}
+              contents={[
+                <>Create an ATS-proof resume</>,
+                <>Software engineering specific resume content</>,
+                <>Optimizing and and testing your resume</>,
+              ]}
+              ctaLink="/resume/guide"
+            />
+          </div>
+          <div
+            className={classnames(
+              'col',
+              'col--3',
+              styles.featuresRowItemContainer,
+            )}>
+            <HowToUseStep
+              index={2}
+              title={<>Ace the interviews</>}
+              contents={[
+                <>Step-by-step coding interview preparation</>,
+                <>Algorithms deep dive</>,
+                <>System design interview preparation</>,
+                <>Behavioral interview preparation</>,
+              ]}
+              ctaLink="/interview-formats"
+            />
+          </div>
+          <div
+            className={classnames(
+              'col',
+              'col--3',
+              styles.featuresRowItemContainer,
+            )}>
+            <HowToUseStep
+              index={3}
+              title={<>Negotiate the best offer</>}
+              contents={[
+                <>Negotiation strategies for software engineers</>,
+                <>Guide on how compensation works for software engineers</>,
+              ]}
+              ctaLink="/understanding-compensation"
+            />
+          </div>
+          <div
+            className={classnames(
+              'col',
+              'col--3',
+              styles.featuresRowItemContainer,
+            )}>
+            <HowToUseStep
+              index={4}
+              title={<>Prepare for the job</>}
+              contents={[
+                <>How to choose between companies</>,
+                <>Guide to engineering levels</>,
+              ]}
+              ctaLink="/choosing-between-companies"
+            />
           </div>
         </div>
       </div>
@@ -313,14 +394,17 @@ function FeaturesSection() {
       <div className="container">
         <div className="row">
           <div className="col col--10 col--offset-1">
-            <h2
+            <h2 className="text--center margin-bottom--lg">
+              <span class="badge badge--primary">Why this guide</span>
+            </h2>
+            <h3
               className={classnames(
                 'text--center',
-                'margin-bottom--xl',
+                'margin-vert--lg',
                 styles.sectionTitle,
               )}>
-              There's everything you need
-            </h2>
+              We have everything you need - all straight to the point
+            </h3>
             <div className={classnames('row', styles.featuresRow)}>
               {FEATURES.map(({title, description, link}) => (
                 <div
@@ -329,7 +413,7 @@ function FeaturesSection() {
                     'col--4',
                     styles.featuresRowItemContainer,
                   )}>
-                  <div className={'card ' + styles.featuresRowItem}>
+                  <div className={classnames('card', styles.featuresRowItem)}>
                     <h3 className={styles.featuresRowItemTitle}>{title}</h3>
                     <p className={styles.featuresRowItemDescription}>
                       {description}
@@ -338,7 +422,7 @@ function FeaturesSection() {
                       <a
                         className={styles.featuresRowItemLink}
                         href={useBaseUrl(link)}>
-                        <strong>Start reading →</strong>
+                        <strong>Read now →</strong>
                       </a>
                     )}
                   </div>
@@ -390,11 +474,11 @@ function EducativeSection() {
 
 function TweetsSection() {
   return (
-    <div className={classnames('padding-vert--lg', styles.sectionAlt)}>
+    <div className={classnames('padding-vert--xl', styles.sectionAlt2)}>
       <div className="container">
         <h2
           className={classnames(
-            'margin-vert--lg',
+            'margin-bottom--lg',
             'text--center',
             styles.sectionTitle,
           )}>
@@ -544,50 +628,18 @@ function TweetsSection() {
   );
 }
 
-function SuccessStoriesSection() {
+function SuccessStory({name, quote, thumbnail, title}) {
   return (
-    <div className={classnames('padding-vert--lg', styles.sectionAlt)}>
-      <div className="container">
-        <div className="row">
-          <div className="col col--6 col--offset-3">
-            <h2
-              className={classnames(
-                'margin-vert--lg',
-                'text--center',
-                styles.sectionTitle,
-              )}>
-              Success stories
-            </h2>
-            {successStories.map((user) => (
-              <div className="card margin-vert--lg" key={user.name}>
-                <div className="card__body">
-                  <p className={styles.quote}>"{user.quote}"</p>
-                </div>
-                <div className="card__header">
-                  <div className="avatar">
-                    <img
-                      alt={user.name}
-                      className="avatar__photo"
-                      src={user.thumbnail}
-                    />
-                    <div className="avatar__intro">
-                      <div className="avatar__name">{user.name}</div>
-                      <small className="avatar__subtitle">{user.title}</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-            <p className="margin-vert--lg text--center">
-              Would you like to contribute a success story?{' '}
-              <a
-                href="https://github.com/yangshun/tech-interview-handbook/edit/master/website/src/data/successStories.js"
-                rel="noopener"
-                target="_blank">
-                Open a Pull Request here
-              </a>
-              !
-            </p>
+    <div className="card margin-vert--lg">
+      <div className="card__body">
+        <p className={styles.quote}>"{quote}"</p>
+      </div>
+      <div className="card__header">
+        <div className="avatar">
+          <img alt={name} className="avatar__photo" src={thumbnail} />
+          <div className="avatar__intro">
+            <div className="avatar__name">{name}</div>
+            <small className="avatar__subtitle">{title}</small>
           </div>
         </div>
       </div>
@@ -595,9 +647,59 @@ function SuccessStoriesSection() {
   );
 }
 
+function SuccessStoriesSection() {
+  const storiesColumns = [[], []];
+  successStories.forEach((tweet, i) => storiesColumns[i % 2].push(tweet));
+
+  return (
+    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+      <div className="container">
+        <div className="row">
+          <div className="col col--6 col--offset-3">
+            <h2 className="text--center margin-bottom--lg">
+              <span class="badge badge--primary">Success stories</span>
+            </h2>
+            <h3
+              className={classnames(
+                'margin-vert--lg',
+                'text--center',
+                styles.sectionTitle,
+              )}>
+              Countless engineers have gotten a job at FAANG with this free
+              handbook
+            </h3>
+          </div>
+        </div>
+        <div className={classnames('row', styles.tweetsSection)}>
+          <div className="col col--offset-2 col--4">
+            {storiesColumns[0].map((user) => (
+              <SuccessStory key={user.name} {...user} />
+            ))}
+          </div>
+          <div className="col col--4">
+            {storiesColumns[1].map((user) => (
+              <SuccessStory key={user.name} {...user} />
+            ))}
+          </div>
+        </div>
+        <p className="margin-vert--lg text--center">
+          Would you like to contribute a success story?{' '}
+          <a
+            href="https://github.com/yangshun/tech-interview-handbook/edit/master/website/src/data/successStories.js"
+            rel="noopener"
+            target="_blank">
+            Open a Pull Request here
+          </a>
+          !
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function SponsorshipSection() {
   return (
-    <div className={classnames('padding-vert--lg', 'text--center')}>
+    <div className={classnames('padding-vert--xl', 'text--center')}>
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -628,7 +730,7 @@ function SponsorshipSection() {
                 />
               </a>
             </div>
-            <div className="margin-vert--lg">
+            <div className="margin-top--lg">
               <a
                 className="button button--secondary button--lg"
                 href="https://opencollective.com/tech-interview-handbook"
@@ -646,7 +748,7 @@ function SponsorshipSection() {
 
 function PreFooterSection() {
   return (
-    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+    <div className={classnames('padding-vert--xl', styles.sectionAlt2)}>
       <div className="container">
         <div className="row">
           <div className="col col--4">

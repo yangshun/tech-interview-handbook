@@ -4,7 +4,7 @@ module.exports = {
       Preface: ['introduction', 'landscape'],
     },
     {
-      'Step 1: Preparing your resume': [
+      'Step 1: Prepare a FAANG-ready resume': [
         'resume/guide',
         'resume/ats-proof-template',
         'resume/write-effective-content',
@@ -15,7 +15,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Step 2: Acing the interview',
+      label: 'Step 2: Ace the interview',
       collapsed: false,
       items: [
         {
@@ -76,13 +76,13 @@ module.exports = {
       ],
     },
     {
-      'Step 3: Negotiating the best offer': [
+      'Step 3: Negotiate the best offer': [
         'understanding-compensation',
         'negotiation',
       ],
     },
     {
-      'Step 4: Getting ready for your job': [
+      'Step 4: Prepare for the job': [
         'choosing-between-companies',
         'engineering-levels',
         // 'team-selection',

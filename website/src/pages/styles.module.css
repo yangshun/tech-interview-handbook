@@ -33,6 +33,10 @@
   background-color: var(--ifm-color-emphasis-100);
 }
 
+html[data-theme='light'] .sectionAlt2 {
+  background-color: var(--ifm-color-emphasis-200);
+}
+
 .sectionSponsor {
   background: linear-gradient(90deg, #12c2e9, #c471ed, #f64f59);
 }
@@ -52,6 +56,16 @@
 
 .quote {
   font-size: 1.1rem;
+}
+
+.howToUseStep {
+  height: 100%;
+}
+
+.howToUseStepLabel {
+  color: var(--ifm-color-primary);
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .featuresRow {
