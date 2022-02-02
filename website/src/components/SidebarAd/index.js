@@ -135,7 +135,7 @@ export default React.memo(function SidebarAd() {
         }
 
         if (
-          path.startsWith('/negotiation') ||
+          path.includes('negotiation') ||
           path.startsWith('/understanding-compensation')
         ) {
           return <Moonchaser className={backgroundClass} key={Math.random()} />;

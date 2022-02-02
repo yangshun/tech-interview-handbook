@@ -79,6 +79,7 @@ module.exports = {
       'Step 3: Negotiate the best offer': [
         'understanding-compensation',
         'negotiation',
+        'negotiation-rules',
       ],
     },
     {

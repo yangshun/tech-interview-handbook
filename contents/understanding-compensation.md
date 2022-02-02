@@ -5,7 +5,7 @@ title: Understanding compensation
 
 Compensation is one of the largest factors when it comes to deciding between job offers. This section gives you a breakdown of the common components of compensation in the tech industry.
 
-In most companies, your compensation will consist of base salary, a performance bonus and equity/stocks. For compensation data, check out [Levels.fyi](https://www.levels.fyi).
+In most companies, your compensation will consist of base salary, a performance bonus and equity/stocks. For compensation data, check out [Levels.fyi](https://www.levels.fyi?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation).
 
 ## Base salary
 
@@ -91,7 +91,7 @@ Here's crowdsourced data from Google and Facebook regarding the salaries for the
 | L7 (Senior Staff SWE)   | $672,000    | $263,000 | $79,000  | $330,000    |
 | L8 (Principal Engineer) | $1,020,000  | $331,000 | $119,000 | $572,000    |
 
-_Data as of Aug 2021. Source: [Levels.fyi](https://www.levels.fyi/company/Google/salaries/Software-Engineer/)_
+_Data as of Aug 2021. Source: [Levels.fyi](https://www.levels.fyi/company/Google/salaries/Software-Engineer/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation)_
 
 ### Facebook
 
@@ -103,4 +103,4 @@ _Data as of Aug 2021. Source: [Levels.fyi](https://www.levels.fyi/company/Google
 | E6 (Staff SWE)        | $598,000    | $234,000 | $54,000 | $309,000    |
 | E7 (Senior Staff SWE) | $921,000    | $272,000 | $81,000 | $567,000    |
 
-_Data as of Aug 2021. Source: [Levels.fyi](https://www.levels.fyi/company/Facebook/salaries/Software-Engineer/)_
+_Data as of Aug 2021. Source: [Levels.fyi](https://www.levels.fyi/company/Facebook/salaries/Software-Engineer/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation)_
