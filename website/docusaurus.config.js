@@ -147,8 +147,6 @@ module.exports = {
           path: '../contents',
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl:
-            'https://github.com/yangshun/tech-interview-handbook/edit/master/contents/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },

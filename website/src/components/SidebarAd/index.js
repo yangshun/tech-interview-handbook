@@ -13,6 +13,109 @@ const BACKGROUNDS = [
   styles.backgroundRed,
 ];
 
+function TopResume({className}) {
+  return (
+    <a
+      className={clsx(styles.container, className)}
+      href="https://tidd.ly/3oezgOo"
+      target="_blank"
+      rel="noopener"
+      onClick={() => {
+        window.gtag('event', 'topresume.sidebar.click');
+      }}>
+      <p className={styles.tagline}>
+        If you are running low on time, I recommend TopResume's{' '}
+        <u>resume writing</u> and free <u>resume screening</u> services, which
+        has helped countless software engineers get interviews at FAANG.
+      </p>
+    </a>
+  );
+}
+
+function Moonchaser({className}) {
+  return (
+    <a
+      className={clsx(styles.container, className)}
+      href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_docs_sidebar"
+      key={Math.random()}
+      target="_blank"
+      rel="noopener"
+      onClick={() => {
+        window.gtag('event', 'moonchaser.sidebar.click');
+      }}>
+      <p className={styles.tagline}>
+        <strong>Get paid more.</strong> Receive risk-free salary negotiation
+        advice from <u>Moonchaser</u>. You pay nothing unless your offer is
+        increased. <u>Book a free consultation today!</u>
+      </p>
+    </a>
+  );
+}
+
+function Educative({className}) {
+  return (
+    <a
+      className={clsx(styles.container, className)}
+      href="https://educative.io/tech-interview-handbook"
+      key={Math.random()}
+      target="_blank"
+      rel="noopener"
+      onClick={() => {
+        window.gtag('event', 'educative.sidebar.click');
+      }}>
+      <p className={styles.tagline}>
+        <strong>Looking to get hired at FAANG?</strong> <u>Educative</u> offers
+        many great courses to improve your interview game.{' '}
+        <u>Join today for a 10% discount!</u>
+      </p>
+    </a>
+  );
+}
+
+function EducativeCoding({className}) {
+  return (
+    <a
+      className={clsx(styles.container, className)}
+      href="https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W"
+      key={Math.random()}
+      target="_blank"
+      rel="noopener"
+      onClick={() => {
+        window.gtag('event', 'educative.coding.sidebar.click');
+      }}>
+      <p className={styles.tagline}>
+        <strong>Get the job at FAANG</strong>
+        <br />
+        "Grokking the Coding Interview: Patterns for Coding Questions" by
+        Educative is the best course for improving your algorithms interview
+        game. <u>Join today for a 10% discount!</u>
+      </p>
+    </a>
+  );
+}
+
+function EducativeSystemDesign({className}) {
+  return (
+    <a
+      className={clsx(styles.container, className)}
+      href="https://www.educative.io/courses/grokking-the-system-design-interview?aff=x23W"
+      key={Math.random()}
+      target="_blank"
+      rel="noopener"
+      onClick={() => {
+        window.gtag('event', 'educative.coding.sidebar.click');
+      }}>
+      <p className={styles.tagline}>
+        <strong>Get the job at FAANG</strong>
+        <br />
+        "Grokking the System Design Interview" by Educative is a highly
+        recommended course for improving your system design interview game.{' '}
+        <u>Join today for a 10% discount!</u>
+      </p>
+    </a>
+  );
+}
+
 export default React.memo(function SidebarAd() {
   const backgroundClass =
     BACKGROUNDS[Math.floor(Math.random() * BACKGROUNDS.length)];
@@ -21,41 +124,46 @@ export default React.memo(function SidebarAd() {
   // we'll render this on the browser only.
   return (
     <BrowserOnly>
-      {() =>
-        Math.random() > 0.5 ? (
-          <a
-            className={clsx(styles.container, backgroundClass)}
-            href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_docs_sidebar"
-            key={Math.random()}
-            target="_blank"
-            rel="noreferrer noopener"
-            onClick={() => {
-              window.gtag('event', 'moonchaser.sidebar.click');
-            }}>
-            <p className={styles.tagline}>
-              <strong>Get paid more.</strong> Receive risk-free salary
-              negotiation advice from <u>Moonchaser</u>. You pay nothing unless
-              your offer is increased. <u>Book a free consultation today!</u>
-            </p>
-          </a>
+      {() => {
+        const path = window.location.pathname;
+        // Ugly hack to show conditional sidebar content.
+        if (path.startsWith('/resume')) {
+          return <TopResume className={backgroundClass} key={Math.random()} />;
+        }
+
+        if (
+          path.startsWith('/negotiation') ||
+          path.startsWith('/understanding-compensation')
+        ) {
+          return <Moonchaser className={backgroundClass} key={Math.random()} />;
+        }
+
+        if (
+          path.includes('coding') ||
+          path.startsWith('/best-practice-questions') ||
+          path.startsWith('/cheatsheet') ||
+          path.startsWith('/algorithms')
+        ) {
+          return (
+            <EducativeCoding className={backgroundClass} key={Math.random()} />
+          );
+        }
+
+        if (path.includes('system-design')) {
+          return (
+            <EducativeSystemDesign
+              className={backgroundClass}
+              key={Math.random()}
+            />
+          );
+        }
+
+        return Math.random() > 0.5 ? (
+          <Moonchaser className={backgroundClass} key={Math.random()} />
         ) : (
-          <a
-            className={clsx(styles.container, backgroundClass)}
-            href="https://educative.io/tech-interview-handbook"
-            key={Math.random()}
-            target="_blank"
-            rel="noreferrer noopener"
-            onClick={() => {
-              window.gtag('event', 'educative.sidebar.click');
-            }}>
-            <p className={styles.tagline}>
-              <strong>Looking to get hired at FAANG?</strong> <u>Educative</u>{' '}
-              offers many great courses to improve your interview game.{' '}
-              <u>Join today for a 10% discount!</u>
-            </p>
-          </a>
-        )
-      }
+          <Educative className={backgroundClass} key={Math.random()} />
+        );
+      }}
     </BrowserOnly>
   );
 });
