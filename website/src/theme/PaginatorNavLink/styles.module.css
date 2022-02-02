@@ -1,0 +1,13 @@
+.root {
+  position: relative;
+}
+
+.arrow {
+  font-weight: bold;
+  font-size: 2rem;
+  float: right;
+  transform: scale(2);
+  position: absolute;
+  right: 1.5rem;
+  top: 1rem;
+}

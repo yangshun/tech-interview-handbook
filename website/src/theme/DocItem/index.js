@@ -80,10 +80,10 @@ export default function DocItem(props) {
                   </header>
                 )}
 
+                <DocItemFooter {...props} />
+                <br />
                 <DocContent />
               </div>
-
-              <DocItemFooter {...props} />
             </article>
             <DocPaginator previous={metadata.previous} next={metadata.next} />
             <div className="margin-top--md">

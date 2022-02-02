@@ -62,6 +62,15 @@ div[class^='announcementBar_'] {
   margin-bottom: 0 !important;
 }
 
+.pagination-nav__item:first-child .pagination-nav__label::before,
+.pagination-nav__item--next .pagination-nav__label::after {
+  content: '';
+}
+
+.pagination-nav__item .pagination-nav__label {
+  font-size: 1.5rem;
+}
+
 .navbar-icon:before {
   background-repeat: no-repeat;
   content: '';
