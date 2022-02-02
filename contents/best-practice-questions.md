@@ -1,11 +1,20 @@
 ---
 id: best-practice-questions
 title: Best practice questions
+description: The best practice questions to prepare for algorithmic coding interviews by the author of Blind 75 spread across a 5-week schedule
+keywords: [algorithm, interview, questions, leetcode, blind 75]
 ---
+
+<head>
+  <title>Best practice questions by the author of Blind 75 | Tech Interview Handbook</title>
+  <meta property="og:title" content="Best practice questions by the author of Blind 75 | Tech Interview Handbook"/>
+</head>
+
+Hey there, the author of Blind 75 here 👋!
 
 Practicing is the best way to prepare for coding interviews. Years ago, I curated a list of the most important 75 questions on [LeetCode](https://leetcode.com). Many other LeetCode questions are a mash of the techniques from these individual questions. I used this list in my last job hunt to only do the important questions.
 
-I [shared this list on Blind](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-100-LeetCode-Questions-to-Save-Your-Time-OaM1orEU) to save peoples' time when revising and someone reposted this list on [the LeetCode forum](https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions). It somehow blew up and became super famous in the coding interview scene, people even gave it a name - **Blind 75**. The Blind 75 questions as a LeetCode list can be found [here](https://leetcode.com/list/xi4ci4ig/).
+I [shared this list on Blind](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-100-LeetCode-Questions-to-Save-Your-Time-OaM1orEU) by extracting the questions from [my freeCodeCamp article](https://www.freecodecamp.org/news/coding-interviews-for-dummies-5e048933b82b/) to save peoples' time when revising and someone reposted this list on [the LeetCode forum](https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions). It somehow blew up and became super famous in the coding interview scene, people even gave it a name - **Blind 75**. The Blind 75 questions as a LeetCode list can be found [here](https://leetcode.com/list/xi4ci4ig/).
 
 Years later, I further distilled the list down into only 50 questions and spread them across a 5-week schedule. Here is the suggested schedule for revising and practicing algorithm questions on LeetCode. Sign up for an account if you don't already have one, it's critical to your success in interviewing!
 
@@ -15,7 +24,7 @@ I've created a [LeetCode list](https://leetcode.com/list/9h4lgwl2) for the follo
 
 ## Week 1 - Sequences
 
-In week 1, we will start off easy and do a mix of easy and medium questions on arrays and strings. Arrays and strings are the most common types of questions to be found in interviews; gaining familiarity with them will help in building strong fundamentals to better handle tougher questions.
+In week 1, we will warm up by doing a mix of easy and medium questions on arrays and strings. Arrays and strings are the most common types of questions to be found in interviews; gaining familiarity with them will help in building strong fundamentals to better handle tougher questions.
 
 - [Two Sum](https://leetcode.com/problems/two-sum/)
 - [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
@@ -35,7 +44,7 @@ In week 1, we will start off easy and do a mix of easy and medium questions on a
 
 ## Week 2 - Data structures
 
-The focus of week 2 is on linked lists, strings and matrix-based questions. The goal is to learn the common routines dealing with linked lists, traversing matrices and sequence analysis (arrays/strings) techniques such as sliding window.
+The focus of week 2 is on linked lists, strings and matrix-based questions. The goal is to learn the common routines dealing with linked lists, traversing matrices and sequence analysis (arrays/strings) techniques such as sliding window, linked list traversal and matrix traversal.
 
 - [Reverse a Linked List](https://leetcode.com/problems/reverse-linked-list/)
 - [Detect Cycle in a Linked List](https://leetcode.com/problems/linked-list-cycle/)
@@ -72,7 +81,7 @@ The focus of week 3 is on non-linear data structures like trees, graphs and heap
 
 ## Week 4 - More data structures
 
-Week 4 builds up on knowledge from previous weeks but questions are of increased difficulty. Expect to see such level of questions during interviews. You get more practice on more advanced data structures such as (but not exclusively limited to) heaps and tries.
+Week 4 builds up on knowledge from previous weeks but questions are of increased difficulty. Expect to see such level of questions during interviews. You get more practice on more advanced data structures such as (but not exclusively limited to) heaps and tries which are less common but are still asked.
 
 - [Add and Search Word](https://leetcode.com/problems/add-and-search-word-data-structure-design/)
 - [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
@@ -99,7 +108,7 @@ Week 5 focuses on Dynamic Programming (DP) questions. Personally as an interview
 
 DP questions can be hard to master and the best way to get better at them is... you guessed it - practice! Be familiar with the concepts of memoization and backtracking.
 
-Practically speaking the return of investment (ROI) on studying and practicing for DP questions is very low. Hence DP questions are less important/optional and you should only do them if you're very keen to have all bases covered.
+Practically speaking the return of investment (ROI) on studying and practicing for DP questions is very low. Hence DP questions are less important/optional and you should only do them if you have time to spare and you're very keen to have all bases covered (and interviewing with Google).
 
 - [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 - [Coin Change](https://leetcode.com/problems/coin-change/)
