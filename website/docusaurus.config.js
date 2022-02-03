@@ -56,7 +56,7 @@ module.exports = {
           'aria-label': 'Facebook page',
         },
         {
-          href: 'https://twitter.com/yangshunz',
+          href: 'https://twitter.com/techinterviewhb',
           position: 'right',
           className: 'navbar-icon navbar-icon-twitter',
           'aria-label': 'Twitter page',
@@ -125,7 +125,7 @@ module.exports = {
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/yangshunz',
+              href: 'https://twitter.com/techinterviewhb',
             },
           ],
         },
