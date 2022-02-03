@@ -3,7 +3,7 @@ id: best-practice-questions
 title: Best practice questions
 sidebar_label: 🔥 Best practice questions
 description: The best practice questions to prepare for algorithmic coding interviews by the author of Blind 75 spread across a 5-week schedule
-keywords: [algorithm, interview, questions, leetcode, blind 75]
+keywords: [algorithm, coding, interview, questions, leetcode, blind 75]
 ---
 
 <head>
@@ -13,7 +13,7 @@ keywords: [algorithm, interview, questions, leetcode, blind 75]
 
 Hey there, the author of Blind 75 here 👋!
 
-Practicing is the best way to prepare for coding interviews. Years ago, I curated a list of the most important 75 questions on [LeetCode](https://leetcode.com). Many other LeetCode questions are a mash of the techniques from these individual questions. I used this list in my last job hunt to only do the important questions.
+Practicing is the best way to prepare for coding interviews. LeetCode has over a thousand questions. Which should you practice? Hence years ago, I curated a list of the most important 75 questions on [LeetCode](https://leetcode.com). Many other LeetCode questions are a mash of the techniques from these individual questions. I used this list in my last job hunt to only do the important questions.
 
 I [shared this list on Blind](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-100-LeetCode-Questions-to-Save-Your-Time-OaM1orEU) by extracting the questions from [my freeCodeCamp article](https://www.freecodecamp.org/news/coding-interviews-for-dummies-5e048933b82b/) to save peoples' time when revising and someone reposted this list on [the LeetCode forum](https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions). It somehow blew up and became super famous in the coding interview scene, people even gave it a name - **Blind 75**. The Blind 75 questions as a LeetCode list can be found [here](https://leetcode.com/list/xi4ci4ig/).
 

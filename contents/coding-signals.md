@@ -1,13 +1,19 @@
 ---
 id: coding-signals
-title: Coding signals
+title: Coding interview signals
+keywords: [algorithm, coding, interview, signals, behavior]
 ---
+
+<head>
+  <title>Signals interviewers look out for during coding interviews | Tech Interview Handbook</title>
+  <meta property="og:title" content="Signals interviewers look out for during coding interviews | Tech Interview Handbook"/>
+</head>
 
 The point of interviews is for interviewers to extract signals from certain candidate behaviors. In coding interviews, the signals can be broadly classified into the following categories: Problem Solving, Technical Competency, Testing, and Communication.
 
 When interviewers take down interview feedback, these are likely what is on their feedback sheet.
 
-Refer to the [Facebook's Onsite Interview Guide](https://www.facebook.com/careers/swe-prep-onsite) for more information.
+Refer to the [Meta/Facebook's Onsite Interview Guide](https://www.metacareers.com/swe-prep-onsite/) for more information.
 
 ## Communication
 

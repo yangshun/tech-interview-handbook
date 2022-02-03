@@ -39,7 +39,7 @@ Alice is an Engineering Manager with 10 years of professional experience. Her ba
 
 Hence the amount of bonus you receive can be highly variable and senior employees get a higher proportion of their total compensation from bonuses.
 
-## Equity/Stocks
+## Equity/stocks
 
 Equity is what differentiates a tech job from a non-tech one. Equity means a share of the company; this signifies ownership and motivates employees to work in the best interests of the company. They can be a significant portion of one's compensation, sometimes even more than the base salary, especially for senior employees.
 

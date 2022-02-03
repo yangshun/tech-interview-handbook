@@ -1,7 +1,26 @@
 ---
 id: picking-a-language
-title: Picking a language
+title: Picking a programming language
+sidebar_label: Picking a language
+description: There are multiple programming languages you can choose from for coding interviews, which should you pick?
+keywords:
+  [
+    algorithms,
+    programming,
+    language,
+    coding,
+    interview,
+    python,
+    java,
+    c++,
+    javascript,
+  ]
 ---
+
+<head>
+  <title>Which programming language is best for coding interviews? | Tech Interview Handbook</title>
+  <meta property="og:title" content="Which programming language is best for coding interviews? | Tech Interview Handbook"/>
+</head>
 
 Before anything else, you need to pick a programming language to do your interviews in. Most companies will let you code in any language you want, the only exception I know being Google, where they only allow candidates to pick from Java, C++, JavaScript or Python for their algorithmic coding interviews.
 

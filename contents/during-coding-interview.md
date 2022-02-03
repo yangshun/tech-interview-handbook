@@ -1,9 +1,15 @@
 ---
 id: during-coding-interview
 title: During the coding interview
+description: The coding interview can be divided into stages, follow these recommended steps for each stage to ace the coding interview
 ---
 
-Congratulations, you are ready to put your skills into practice! In a real coding interview, you will be given a technical question (or questions) by the interviewer, write code in a real-time collaborative editor (phone screen/virtual onsite) or on a whiteboard (onsite) to solve the problem within 30–45 minutes. This is where the real fun begins!
+<head>
+  <title>What to do during the coding interview | Tech Interview Handbook</title>
+  <meta property="og:title" content="What to do during the coding interview | Tech Interview Handbook"/>
+</head>
+
+Congratulations, you are ready to put your practice to the test! In a real coding interview, you will be given a technical question (or questions) by the interviewer, write code in a real-time collaborative editor (phone screen/virtual onsite) or on a whiteboard (onsite) to solve the problem within 30–45 minutes. This is where the real fun begins!
 
 Your interviewer will be looking out for signals that suggest you fit the requirements of the role and it is up to you to display those signals to them. Initially it may feel weird to be talking while you are coding as most programmers do not have the habit of explaining out loud as they are typing code. However, it is hard for the interviewer to know what you are thinking just by looking at the code that you type. If you communicate your approach to the interviewer before you start coding, you can validate your approach with them and the both of you can agree upon an acceptable approach.
 
@@ -32,6 +38,7 @@ Some common questions you can ask:
 - What are some extreme cases of the input?
 - Can I destroy the original array/graph/data structure?
 - How is the input stored? If you are given a dictionary of words, is it a list of strings or a Trie?
+- If the input appears to be sorted, clarify if that is expected
 
 After you have sufficiently clarified the scope and intention of the problem, explain your high level approach to the interviewer even if it is a naive solution. If you are stuck, consider various approaches and explain out loud why it will/will not work. Sometimes your interviewer might drop hints and lead you towards the right path.
 
@@ -50,8 +57,9 @@ Getting stuck during coding interviews is extremely common. But do not worry, th
 - Think about how you would solve it without a program
   - You may spot a pattern and come up with a general algorithm for it
 - Recall past questions related to the topic, what similar questions in the past have you encountered and what techniques did you use to solve them?
-- Enumerate through the common data structures and whether they can be applied to the question. There really aren't that many - stack, queue, dictionary, heap, graph, etc.
+- Enumerate through the common data structures and algorithms whether they can be applied to the question. There really aren't that many - stack, queue, dictionary, heap, graph, etc.
   - Dictionaries/maps are extremely common in making algorithms more efficient
+  - If the input appears to be sorted (or partially sorted), binary search should be one of the first things to try
 - Look out for repeated work and determine if you can cache those computations
   - Trade off memory for speed
 

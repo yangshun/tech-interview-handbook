@@ -274,7 +274,7 @@ function HowToUseStep({index, title, ctaLink, contents}) {
       </div>
       <div class="card__footer">
         <a
-          class="button button--secondary button--block"
+          class="button button--primary button--block"
           href={useBaseUrl(ctaLink)}>
           Read now →
         </a>

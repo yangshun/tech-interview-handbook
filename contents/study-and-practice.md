@@ -1,11 +1,27 @@
 ---
 id: study-and-practice
 title: Study and practice
+description: Mastery of Computer Science fundamentals, identifying question patterns, practicing good coding style is the key to improving in coding interviews
+keywords:
+  [
+    algorithm,
+    coding,
+    question,
+    pattern,
+    computer science,
+    coding style,
+    interview,
+  ]
 ---
 
-## Recap computer science fundamentals
+<head>
+  <title>Efficient ways to study and practice for coding interviews | Tech Interview Handbook</title>
+  <meta property="og:title" content="Efficient ways to study and practice for coding interviews | Tech Interview Handbook"/>
+</head>
 
-If you have been out of college for a while, it is highly advisable to review CS fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work on algorithm problems from LeetCode and Cracking the Coding Interview.
+## Recap Computer Science fundamentals
+
+If you have been out of college for a while, it is highly advisable to review Computer Science fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work on algorithm problems from LeetCode.
 
 This [interviews repository](https://github.com/kdn251/interviews) by Kevin Naughton Jr. served as a quick refresher for me.
 
@@ -19,7 +35,21 @@ Next, gain familiarity and mastery of the algorithms and data structures in your
 
 ### Practice coding questions
 
-Practice coding algorithms using your chosen language. While [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) is a good resource for practice, I prefer being able to type code, run it and get instant feedback. There are various Online Judges such as [LeetCode](https://leetcode.com/), [HackerRank](https://www.hackerrank.com/) and [CodeForces](http://codeforces.com/) for you to practice questions online and get used to the language. From experience, LeetCode questions are the most similar to the kind of questions being asked in interviews whereas HackerRank and CodeForces questions resemble competitive programming questions. If you practice enough LeetCode questions, there is a good chance that you would have seen/done your actual interview question (or some variant) on LeetCode before. If you are more of a visual person, [Coderust](https://www.educative.io/collection/5642554087309312/5679846214598656?aff=x23W) explains the common algorithm questions through step-by-step visualizations which makes understanding the solutions much easier.
+Practice coding algorithms using your chosen language. While "Cracking the Coding Interview" is a good resource for practice, I prefer being able to type code, run it and get instant feedback. There are various Online Judges such as [LeetCode](https://leetcode.com/), [HackerRank](https://www.hackerrank.com/) and [CodeForces](http://codeforces.com/) for you to practice questions online and get used to the language. From experience, LeetCode questions are the most similar to the kind of questions being asked in interviews whereas HackerRank and CodeForces questions resemble competitive programming questions. If you practice enough LeetCode questions, there is a good chance that you would have seen/done your actual interview question (or some variant) on LeetCode before. If you are more of a visual person, [Coderust](https://www.educative.io/collection/5642554087309312/5679846214598656?aff=x23W) explains the common algorithm questions through step-by-step visualizations which makes understanding the solutions much easier.
+
+### Broaden exposure
+
+Gain a broad exposure to questions from various topics. In the second half of the article I mention algorithm topics and practice questions for each topic. If you can spare the time, do around 100–200 LeetCode questions of varying topics and you should be good. If you are short on time or not sure where to start, the [Best Practice Questions](./best-practice-questions.md) page tells you the best LeetCode questions to practice.
+
+### Identify question patterns
+
+As of writing, LeetCode has thousands of questions available. Which should you practice? It is not a good use of time to practice too many questions as after a while, you will realize that some questions are variants of one another and involve using similar techniques you've seen before. The trick here is to identify the question pattern and the technique you can use to solve variants of this question. Once you're familiar with a pattern, you'll be able to solve dozens of problems with a technique. Some techniques include - sliding window, two pointers, matrix traversal. The ["Grokking the coding interview" course by Educative](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W) shows you more techniques.
+
+:::tip Expert tip
+
+Learn and understand patterns, not memorize answers!
+
+:::
 
 ### Space/time complexities
 
@@ -33,8 +63,4 @@ Read up on the recommended coding style for your language and stick to it. If yo
 
 Find out and be familiar with the common pitfalls and caveats of the language. If you point them out during the interview and intelligently avoid falling into them, you will usually impress the interviewer and that results in bonus points for your feedback, regardless of whether the interviewer is familiar with the language or not.
 
-### Broaden exposure
-
-Gain a broad exposure to questions from various topics. In the second half of the article I mention algorithm topics and practice questions for each topic. If you can spare the time, do around 100–200 LeetCode questions of varying topics and you should be good.
-
-**Practice, practice and more practice!**
+**The key to interview success is practice, practice and more practice!**

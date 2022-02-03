@@ -1,6 +1,7 @@
 ---
 id: interview-formats
 title: Interview formats overview
+description: Common interview formats of tech companies and what they entail
 sidebar_label: Overview
 ---
 

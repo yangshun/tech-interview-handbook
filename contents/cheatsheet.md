@@ -1,9 +1,17 @@
 ---
 id: cheatsheet
-title: Cheatsheet
+title: Coding interview cheatsheet
+description: Things you should and shouldn't do during the coding interview
+sidebar_label: Cheatsheet
+keywords: [algorithm, coding, interview, cheatsheet, checklist]
 ---
 
-This is a straight-to-the-point, distilled list of technical interview Do's and Don'ts, mainly for algorithmic interviews. Some of these may apply to only phone screens or whiteboard interviews, but most will apply to both. I revise this list before each of my interviews to remind myself of them and eventually internalized all of them to the point I do not have to rely on it anymore.
+<head>
+  <title>Coding interview cheatsheet | Tech Interview Handbook</title>
+  <meta property="og:title" content="Coding interview cheatsheet | Tech Interview Handbook"/>
+</head>
+
+This is a straight-to-the-point, distilled list of technical interview Do's and Don'ts, mainly for algorithmic coding interviews. Some of these may apply to only phone screens or whiteboard interviews, but most will apply to both. I revise this list before each of my interviews to remind myself of them and eventually internalized all of them to the point I do not have to rely on it anymore.
 
 #### Legend
 

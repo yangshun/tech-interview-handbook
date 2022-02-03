@@ -145,6 +145,7 @@ export default React.memo(function SidebarAd() {
           path.includes('coding') ||
           path.startsWith('/best-practice-questions') ||
           path.startsWith('/cheatsheet') ||
+          path.startsWith('/mock-interviews') ||
           path.startsWith('/algorithms')
         ) {
           return (
