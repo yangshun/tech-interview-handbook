@@ -1,7 +1,7 @@
 ---
 id: final-tips
 title: Final resume tips
-description: Final tips for writing your FAANG software engineering resume
+description: Final tips for writing your software engineering resume for FAANG
 keywords:
   [
     FAANG,

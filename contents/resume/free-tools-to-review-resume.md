@@ -1,7 +1,7 @@
 ---
 id: free-tools-to-review-resume
 title: Free tools to review your resume
-description: Learn how to test and review your resume for FAANG software engineer roles
+description: Learn which free tools you can use to test and review your software engineering resume for FAANG
 keywords:
   [
     FAANG,

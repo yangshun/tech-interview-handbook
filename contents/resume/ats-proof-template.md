@@ -1,7 +1,7 @@
 ---
 id: ats-proof-template
 title: Set up your ATS-proof resume template
-description: Learn how to create an ATS-proof resume for FAANG software engineer roles
+description: Learn how to create an ATS-proof software engineering resume for FAANG
 keywords:
   [
     FAANG,

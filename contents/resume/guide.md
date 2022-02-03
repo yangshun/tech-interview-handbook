@@ -1,7 +1,7 @@
 ---
 id: guide
 title: Step-by-step resume guide
-description: No nonsense, step-by-step guide for writing your resume for FAANG software engineering roles
+description: No nonsense, step-by-step guide for writing your FAANG-ready software engineering resume
 keywords:
   [
     FAANG,

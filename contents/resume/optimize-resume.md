@@ -1,7 +1,7 @@
 ---
 id: optimize-resume
 title: Optimize your resume
-description: Learn how to effectively optimize your resume for FAANG software engineer roles
+description: Learn how to effectively optimize your software engineering resume for FAANG
 keywords:
   [
     FAANG,

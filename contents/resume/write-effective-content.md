@@ -1,7 +1,7 @@
 ---
 id: write-effective-content
 title: Write effective resume content
-description: Learn how to effectively write your resume for FAANG software engineer roles
+description: Learn how to effectively write your software engineering resume for FAANG
 keywords:
   [
     FAANG,
