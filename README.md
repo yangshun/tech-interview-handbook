@@ -4,33 +4,12 @@
   <a href="https://www.techinterviewhandbook.org/">
     <img src="website/static/img/logo.svg" alt="Tech Interview Handbook" width="400">
   </a>
-  <br>
-  <a href="https://gitpod.io/#https://github.com/yangshun/tech-interview-handbook">
-    <img src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod" alt="Gitpod Ready to Code">
-  </a>
-  <br>
-  <p>
-    <em>Credits: <a href="https://dribbble.com/shots/3831443-Tech-Interview-Handbook">Illustration</a> by <a href="https://dribbble.com/leftaligned">@leftaligned</a></em>
-  </p>
+  <br />
   <h3>
-    <a href="https://www.techinterviewhandbook.org/">Read on the website</a> | <a href="https://facebook.com/techinterviewhandbook">Follow us on Facebook</a> 
+    <a href="https://www.techinterviewhandbook.org/">Read on the website</a>
   </h3>
-</div>
-
----
-
-<div align="center">
   <p>
-    <a href="https://simplify.jobs/?utm_source=github&utm_medium=tech_interview_handbook">
-      <strong>Applying to jobs or internships?</strong>
-      <br>
-      Autofill all your applications in a single click.
-      <br>
-      <div>
-        <img src="https://res.cloudinary.com/dpeo4xcnc/image/upload/v1637058958/simplify_banner.png" width="450"  alt="Simplify">
-      </div>
-    </a>
-    <sub><i>Stop manually re-entering your information. Simplify’s extension helps you autofill job applications on millions of sites.</i></sub>
+    Follow us on <a href="https://facebook.com/techinterviewhandbook">Facebook</a> | <a href="https://twitter.com/techinterviewhb">Twitter</a> | <a href="https://t.me/techinterviewhandbook">Telegram</a>
   </p>
 </div>
 
@@ -38,25 +17,27 @@
 
 ## What is this?
 
-No one has time to do a few hundred LeetCode questions. Here are _free and curated_ technical interview preparation materials for busy engineers, brought to you by the author of the [Blind 75 List](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU).
+Not everyone has the time to do a few hundred LeetCode questions. Here are _free and curated_ technical interview preparation materials for busy engineers, brought to you by the author of the [Blind 75 list](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU). Over 500,000 people have benefitted from this handbook!
 
 Besides the usual algorithm questions, other **awesome** stuff includes:
 
 - [Best practice questions](https://techinterviewhandbook.org/best-practice-questions/) for coding interviews
 - [How to prepare](https://www.techinterviewhandbook.org/coding-interview/) for coding interviews
-- [Interview cheatsheet](https://www.techinterviewhandbook.org/cheatsheet/) - Straight-to-the-point Do's and Don'ts
+- [Coding interview cheatsheet](https://www.techinterviewhandbook.org/cheatsheet/) - Straight-to-the-point Do's and Don'ts
 - [Algorithm tips](https://www.techinterviewhandbook.org/algorithms/introduction/) categorized by topic
 - [Interview formats](https://www.techinterviewhandbook.org/interview-formats/) of the top tech companies
+- [Step-by-step resume guide](https://www.techinterviewhandbook.org/resume/guide/) to prepare a FAANG-ready resume
 - [Behavioral questions](https://www.techinterviewhandbook.org/behavioral-questions/) asked by the top tech companies
 - [Good questions to ask your interviewers](https://www.techinterviewhandbook.org/questions-to-ask/) at the end of the interviews
-- [Helpful resume tips](https://www.techinterviewhandbook.org/resume/) to get your resume noticed and the Do's and Don'ts
 - [Front end interview preparation](https://www.frontendinterviewhandbook.com)
 
 Help from you in contributing content would be very much appreciated!
 
-## Why do I want this?
+## Why would you read this?
 
-This repository has _practical_ content that covers all phases of a technical interview, from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful as well.
+This repository has **practical** content that covers all phases of a technical interview, from applying for a job to passing the interviews to offer negotiation. Technically competent candidates might still find the non-technical content helpful.
+
+The information in this repository is condensed. Ultimately, the key to succeeding in technical interviews is consistent practice and I don't want to bore you with too many words. I tell you the minimum you need to know on how to go about navigating the interview process, you go and practice and land your dream job.
 
 ## Who is this for?
 
@@ -96,18 +77,6 @@ If you are interested in how data structures are implemented, check out [Lago](h
 
 There are no formal contributing guidelines at the moment as things are still in flux and we might find a better approach to structure content as we go along. You are welcome to contribute whatever you think will be helpful to fellow engineers. If you would like to contribute content for different domains, feel free to create an issue or submit a pull request and we can discuss further.
 
-### Online one-click setup for contributing
-
-You can use Gitpod (A free online VS Code-like IDE) for contributing online. With a single click it will launch a workspace and automatically:
-
-- clone the tech-interview-handbook repo.
-- install the dependencies.
-- run `yarn start`.
-
-So that you can start straight away.
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/yangshun/tech-interview-handbook)
-
 ### Contributors
 
 This project exists thanks to all the people who contributed. [[Contribute](CONTRIBUTING.md)]. <a href="https://github.com/yangshun/tech-interview-handbook/graphs/contributors"><img src="https://opencollective.com/tech-interview-handbook/contributors.svg?width=890&button=false"></a>
@@ -126,11 +95,6 @@ Support this project by becoming a sponsor. Your logo/profile picture will show 
 
 <a href="https://opencollective.com/tech-interview-handbook/sponsor/0/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/0/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/1/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/1/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/2/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/2/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/3/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/3/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/4/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/4/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/5/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/5/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/6/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/6/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/7/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/7/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/8/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/8/avatar.svg"></a> <a href="https://opencollective.com/tech-interview-handbook/sponsor/9/website" target="_blank"><img src="https://opencollective.com/tech-interview-handbook/sponsor/9/avatar.svg"></a>
 
-## Maintainers
-
-- [Yangshun Tay](https://github.com/yangshun)
-- [Louie Tan](https://github.com/louietyj)
-
 ## Disclaimer
 
-I am providing code in the repository to you under an open source license. Because this is my personal repository, the license you receive to my code is from me and not my employer (Facebook).
+I am providing code in the repository to you under an open source license. Because this is my personal repository, the license you receive to my code is from me and not my employer (Meta).
