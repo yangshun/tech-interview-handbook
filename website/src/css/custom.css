@@ -118,6 +118,7 @@ html[data-theme='dark'] .navbar-icon-github:before {
 html[data-theme='dark'] .navbar-icon-twitter:before {
   background-image: url('/img/icons8-twitter-light.svg');
 }
+
 .navbar-icon-facebook:before {
   background-image: url('/img/icons8-facebook.svg');
 }
@@ -126,4 +127,14 @@ html[data-theme='dark'] .navbar-icon-facebook:before {
   background-image: url('/img/icons8-facebook-light.svg');
   height: 28px;
   width: 28px;
+}
+
+.navbar-icon-telegram:before {
+  background-image: url('/img/icons8-telegram.svg');
+}
+
+html[data-theme='dark'] .navbar-icon-telegram:before {
+  background-image: url('/img/icons8-telegram-light.svg');
+  height: 28px;
+  width: 24px;
 }

@@ -44,6 +44,12 @@ module.exports = {
           'aria-label': 'GitHub repository',
         },
         {
+          href: 'https://t.me/techinterviewhandbook',
+          position: 'right',
+          className: 'navbar-icon navbar-icon-telegram',
+          'aria-label': 'Telegram channel',
+        },
+        {
           href: 'https://www.facebook.com/techinterviewhandbook',
           position: 'right',
           className: 'navbar-icon navbar-icon-facebook',
@@ -108,6 +114,10 @@ module.exports = {
             {
               label: 'GitHub',
               href: 'https://github.com/yangshun/tech-interview-handbook',
+            },
+            {
+              label: 'Telegram',
+              href: 'https://t.me/techinterviewhandbook',
             },
             {
               label: 'Facebook',
