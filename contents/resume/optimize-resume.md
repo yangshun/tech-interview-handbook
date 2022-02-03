@@ -34,7 +34,7 @@ With the basic resume up, we can next try to optimize the resume content. Here a
 
 Imagine you are a hiring manager or recruiter screening a resume while juggling many other tasks in your job - you simply won't have much time on each resume! When a hiring manager is looking at any resume, they are in fact quickly scanning for keywords of skills or experiences that they value, before paying any additional attention to your resume.
 
-Recruiters and ATS do that as well, but based on the job description (JD) that the hiring manager helped to write. That is why optimizing your resume based on JDs is very important.
+Recruiters and ATS do that as well, but based on the job description that the hiring manager helped to write. That is why optimizing your resume based on job descriptions is very important.
 
 :::info
 
@@ -44,11 +44,11 @@ For instance, if your previous job experience was 3 years long and you mentioned
 
 :::
 
-### Include keywords from JDs into your resume
+### Include keywords from job descriptions into your resume
 
 You should always analyze the job description for must-have and good-to-have skills or experiences and ensure the keywords are added to your resume.
 
-Include them under the "Core Competencies" or "Areas of Expertise" section and pepper the same keywords into the "Work Experience" and "Education" sections. Be sure to closely imitate the language within the JD.
+Include them under the "Skills" section and pepper the same keywords into the "Work Experience" and "Education" sections. Be sure to closely imitate the language within the job description.
 
 Remember to include common abbreviations as well e.g. "SEM" - Search engine marketing
 
@@ -56,7 +56,7 @@ However, do not do keyword stuffing for the sake of it - always remember that th
 
 ### Optimize keyword frequency and placement
 
-Analyze the JD and determine how important each skill and experience is, then optimize the frequency of the keyword according to its importance.
+Analyze the job description and determine how important each skill and experience is, then optimize the frequency of the keyword according to its importance.
 
 :::tip Expert tip
 
