@@ -50,16 +50,16 @@ module.exports = {
           'aria-label': 'Telegram channel',
         },
         {
-          href: 'https://www.facebook.com/techinterviewhandbook',
-          position: 'right',
-          className: 'navbar-icon navbar-icon-facebook',
-          'aria-label': 'Facebook page',
-        },
-        {
           href: 'https://twitter.com/techinterviewhb',
           position: 'right',
           className: 'navbar-icon navbar-icon-twitter',
           'aria-label': 'Twitter page',
+        },
+        {
+          href: 'https://www.facebook.com/techinterviewhandbook',
+          position: 'right',
+          className: 'navbar-icon navbar-icon-facebook',
+          'aria-label': 'Facebook page',
         },
       ],
     },

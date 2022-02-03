@@ -22,6 +22,8 @@
     'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
   --ifm-font-size-base: 16px;
+
+  --ifm-footer-padding-vertical: 3rem;
 }
 
 html[data-theme='dark'] {
@@ -32,6 +34,14 @@ html[data-theme='dark'] {
   --ifm-color-primary-light: rgb(146, 146, 242);
   --ifm-color-primary-lighter: rgb(165, 165, 245);
   --ifm-color-primary-lightest: rgb(191, 191, 248);
+}
+
+.footer__links {
+  margin-bottom: 3rem;
+}
+
+.footer__copyright {
+  text-align: start;
 }
 
 .markdown h1 {
@@ -98,7 +108,7 @@ div[class^='announcementBar_'] {
 }
 
 .navbar-icon:hover {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .navbar-icon-github:before {

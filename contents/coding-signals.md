@@ -2,6 +2,7 @@
 id: coding-signals
 title: Coding interview signals
 keywords: [algorithm, coding, interview, signals, behavior]
+toc_max_heading_level: 2
 ---
 
 <head>
