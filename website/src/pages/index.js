@@ -724,17 +724,17 @@ function SponsorshipSection() {
             </p>
             <div className={styles.sectionTagline}>
               <div className="row">
-                <div className="col col--4 col--offset-2">
-                  <ul>
-                    <li>Top banner of every page</li>
-                    <li>Homepage</li>
-                    <li>Sidebar of every page</li>
+                <div className="col col--5 col--offset-1">
+                  <ul className={styles.sponsorshipList}>
+                    <li>✅ Top banner of every page</li>
+                    <li>✅ Homepage</li>
+                    <li>✅ Sidebar of every page</li>
                   </ul>
                 </div>
-                <div className="col col--4">
-                  <ul>
-                    <li>Navigation menu</li>
-                    <li>Bottom of every page</li>
+                <div className="col col--5">
+                  <ul className={styles.sponsorshipList}>
+                    <li>✅ Navigation menu</li>
+                    <li>✅ Bottom of every page</li>
                   </ul>
                 </div>
               </div>

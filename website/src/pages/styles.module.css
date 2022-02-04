@@ -116,3 +116,9 @@ html[data-theme='light'] .sectionAlt2 {
 .tweetMeta:hover {
   color: var(--ifm-color-emphasis-700);
 }
+
+.sponsorshipList {
+  list-style-type: none;
+  margin-bottom: 0;
+  padding-left: 0;
+}
