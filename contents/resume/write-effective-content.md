@@ -38,11 +38,34 @@ To maximize efficiency in applying for several job types, create and keep update
 
 :::
 
-## 1. Contact information
+## 1. Professional summary
+
+The professional summary, if written well, will be the most effective and important part of your resume. From my experience as an interviewer, I generally may not have the time to read into the detail of resumes - hence summaries which directly address why a candidate is a good fit for the job greatly improves their chances of capturing my attention.
+
+**Start with a resume headline**
+
+Always start with a concise, one line description of yourself
+
+- Fewer than 10 words
+- Summarizes your experience relevant to the job description
+
+Examples:
+
+- Software Engineer at Company X with strong fundamentals in front-end technologies
+
+**Summarize your best selling points**
+
+Below the resume headline, include a summary of yourself which expands on your resume headline.
+
+- 4 or fewer points, in bullet or paragraph form
+- Include most important skills and experiences relevant to the job applied, quantifying them where possible
+- Keep in mind to answer the question of "Why am I a good fit for this job?" - while writing the summary
+
+## 2. Contact information
 
 **Must-haves**
 
-- Name
+- Name (Should be included at the very top of the resume)
 - Personal phone number
   - Never include your work phone number here
 - Location - City, State, Zip
@@ -62,51 +85,39 @@ To maximize efficiency in applying for several job types, create and keep update
   - Codechef
   - Hackerrank
 
+If a divider is required between information, use "|" or tabs
+
 Where relevant, indicate achievements in coding platforms, for example, max ratings, ranking, number of stars, badges.
-
-## 2. Professional summary
-
-The professional summary, if written well, will be the most effective and important part of your resume. From my experience as an interviewer, I generally may not have the time to read into the detail of resumes - hence summaries which directly address why a candidate is a good fit for the job greatly improves their chances of capturing my attention.
-
-**Start with a resume headline**
-
-Always start with a concise, one line description of yourself
-
-- Fewer than 10 words
-- Summarizes your experience relevant to the job description
-
-Examples:
-
-- Staff Software Engineer at Facebook with over 5 years experience leading teams
-
-**Summarize your best selling points**
-
-Below the resume headline, include a summary of yourself which expands on your resume headline.
-
-- 4 or less points, in bullet or paragraph form
-- Include most important skills and experiences relevant to the job applied, quantifying them where possible
-- Keep in mind to answer the question of "Why am I a good fit for this job?" - while writing the summary
 
 ## 3. Skills
 
 Include programming languages and tech stacks:
 
-- Structure in the following manner: `[Skill summary] : [List skills separated by "|"]`
-  - Programming languages - If impressive, include your familiarity by the number of lines you have written, for example "Over 10,000 lines"
-  - Frameworks
-  - Databases
+Structure in the following manner:
+
+> [Skill summary] : [List skills separated by "|"]
+
+- Programming languages - If impressive, include your familiarity by the number of lines you have written, for example "Over 10,000 lines"
+- Frameworks
+- Databases
 
 ## 4. Work experience
 
 List your work experience in a familiar format and reverse chronological order. Every job listed should have:
 
-- The company, location, title, duration worked following this structure
-  - `[Company or Organization], [Location] | [Job Title] | [Start and end dates formatted as MM/YYYY]`
-  - e.g. `Facebook, Singapore | Front End Engineering Lead | 08/2018 - Present`
-- List of top accomplishments, including
-  - Scope of job and skills required
-  - Accomplishments listed following this structure
-    - `[Accomplishment summary] : [Action] that resulted in [quantifiable outcome]`
+The company, location, title, duration worked following this structure
+
+> [Company or Organization], [Location] | [Job Title] | [Start and end dates formatted as MM/YYYY]
+
+Example
+
+> Facebook, Singapore | Front End Engineering Lead | 08/2018 - Present
+
+List of top accomplishments, including:
+
+- Scope of job and skills required
+- Accomplishments listed following this structure
+  - > [Accomplishment summary] : [Action] that resulted in [quantifiable outcome]
 
 ## 5. Education
 
@@ -114,45 +125,24 @@ Most software engineering jobs will require at least an undergraduate degree. Ho
 
 Use the following format, eliminating information where it is not relevant:
 
-```
-[Degree Name], [Year of Graduation - write expected graduation date if not graduated]
-
-[University Name], [Location]
-
-- GPA: X.XX / 4.0 (List GPA if more than 3.50/4.00, or more than 4.3 under a 5-point system)
-- List key achievements, including leadership positions, skills, societies, projects, awards, etc.
-```
+> [Degree Name], [Year of Graduation - write expected graduation date if not graduated]<br/>[University Name], [Location]<br/>GPA: X.XX / 4.0 (List GPA if more than 3.50/4.00, or more than 4.3 under a 5-point system)<br/>List key achievements, including leadership positions, skills, societies, projects, awards, etc.
 
 Example:
 
-```
-BSc in Computing, Computer Science, Graduation Year 2015
-National University of Singapore, Singapore
-
-- GPA: 3.82 / 4.00 (Magna cum laude)
-- Dean's List, Valedictorian
-- President of hacker society
-```
+> BSc in Computing, Computer Science, Graduation Year 2015<br/> National University of Singapore, Singapore <br/>GPA: 3.82 / 4.00 (Magna cum laude)<br/>Dean's List, Valedictorian<br/>President of hacker society
 
 ## 6. Projects
 
-Include at least 2 projects you have contributed to, outlining your key contributions.
+Include at least 2 projects you have contributed to, outlining your key contributions. Always try to link your project name to GitHub or somewhere the hiring manager can view your project.
 
-```
-Docusaurus, Menlo Park, CA
-Lead maintainer 01/2018 - 04/2020
-
-- Maintainer and lead engineer for Docusaurus v2, a static site generator which powers the documentation of many of Meta's Open Source Projects - React Native, Jest, Relay, Reason, etc
-- Used by 7.6k projects on GitHub
-```
+> [facebook/docusaurus](https://github.com/facebook/docusaurus) <br/>Maintainer and lead engineer for Docusaurus v2, a static site generator which powers the documentation of many of Meta’s Open Source Projects - React Native, Jest, Relay, Reason, etc. Used by 7.6k > projects on GitHub.
 
 ## 7. Awards, accolades and certifications
 
-Only include achievements related to the job application:
+Only include achievements related to the job application and try to quantify your achievements. A good format to use would be
 
-- Always quantify your achievements
-- A good format to use would be: `[Year] [Quantification] [Competition]`
+> [Year] [Quantification] [Competition]
 
-```
-2016 | Best All-Round Product out of 50 teams | Facebook Hackathon
-```
+Example
+
+> 2016 | Best All-Round Product out of 50 teams | Facebook Hackathon
