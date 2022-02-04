@@ -1,7 +1,8 @@
 ---
 id: coding-interview
-title: Coding interviews
-sidebar_label: Overview
+title: Step-by-step coding interview guide
+description: Coding interviews are tough. But fortunately, there's a tried and proven method to get better at them. With a combination of studying, practicing questions and doing mock interviews, getting that dream job can become a reality.
+sidebar_label: Step-by-step guide
 keywords:
   [
     algorithm,
