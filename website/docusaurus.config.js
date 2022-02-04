@@ -29,15 +29,15 @@ module.exports = {
           position: 'left',
         },
         {
-          label: 'Coding interview guide',
+          label: 'Coding',
           href: '/coding-interview',
         },
         {
-          label: 'Algorithms 101',
+          label: 'Algorithms',
           href: '/algorithms/introduction',
         },
         {label: 'Blog', to: 'blog', position: 'left'},
-        {label: 'Advertise with us', to: '/advertise', position: 'left'},
+        {label: 'Advertise', to: '/advertise', position: 'left'},
         {
           href: 'https://github.com/yangshun/tech-interview-handbook',
           position: 'right',
@@ -133,6 +133,7 @@ module.exports = {
         {
           title: 'More',
           items: [
+            {label: 'Advertise', href: '/advertise'},
             {
               label: 'Contact us',
               href: 'mailto:contact@techinterviewhandbook.org',

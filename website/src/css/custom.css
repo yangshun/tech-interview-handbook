@@ -36,6 +36,10 @@ html[data-theme='dark'] {
   --ifm-color-primary-lightest: rgb(191, 191, 248);
 }
 
+.navbar__items {
+  font-size: 0.9rem;
+}
+
 .footer__links {
   margin-bottom: 3rem;
 }
