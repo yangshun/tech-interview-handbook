@@ -37,6 +37,7 @@ module.exports = {
           href: '/algorithms/introduction',
         },
         {label: 'Blog', to: 'blog', position: 'left'},
+        {label: 'Advertise with us', to: '/advertise', position: 'left'},
         {
           href: 'https://github.com/yangshun/tech-interview-handbook',
           position: 'right',

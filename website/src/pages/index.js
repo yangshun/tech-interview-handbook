@@ -179,7 +179,7 @@ function WhatIsThisSection() {
                 styles.sectionTitle,
               )}>
               The fastest way to prepare effectively for your software
-              engineering interviews, used by >500,000 engineers
+              engineering interviews, used by over 500,000 engineers
             </h3>
             <p
               className={classnames(
@@ -699,44 +699,58 @@ function SuccessStoriesSection() {
 
 function SponsorshipSection() {
   return (
-    <div className={classnames('padding-vert--xl', 'text--center')}>
+    <div className={classnames('padding-vert--xl')}>
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
-            <h2 className={classnames('margin-vert--lg', styles.sectionTitle)}>
-              Enjoying Tech Interview Handbook so far?
+            <h2 className="text--center margin-bottom--lg">
+              <span class="badge badge--primary">Advertise with us</span>
             </h2>
-            <p className={classnames(styles.sectionTagline)}>
-              Support this project by becoming a sponsor! Your logo/profile
-              picture will show up here with a link to your website.
+            <h3
+              className={classnames(
+                'margin-vert--lg',
+                'text--center',
+                styles.sectionTitle,
+              )}>
+              Interested in advertising on Tech Interview Handbook?
+            </h3>
+            <p className={classnames(styles.sectionTagline, 'text--center')}>
+              Leverage on more than 200,000 monthly page views from 40,000 to
+              50,000 unique software engineers.
             </p>
-            <div>
-              <a
-                href="https://opencollective.com/tech-interview-handbook/sponsor/0/website"
-                rel="noopener"
-                target="_blank">
-                <img
-                  alt="Sponsor"
-                  src="https://opencollective.com/tech-interview-handbook/sponsor/0/avatar.svg"
-                />
-              </a>
-              <a
-                href="https://opencollective.com/tech-interview-handbook/sponsor/1/website"
-                rel="noopener"
-                target="_blank">
-                <img
-                  alt="Sponsor"
-                  src="https://opencollective.com/tech-interview-handbook/sponsor/1/avatar.svg"
-                />
-              </a>
+            <p className={classnames(styles.sectionTagline, 'text--center')}>
+              Sponsors can choose any or all of the following positions to
+              advertise with us:
+            </p>
+            <div className={styles.sectionTagline}>
+              <div className="row">
+                <div className="col col--4 col--offset-2">
+                  <ul>
+                    <li>Top banner of every page</li>
+                    <li>Homepage</li>
+                    <li>Sidebar of every page</li>
+                  </ul>
+                </div>
+                <div className="col col--4">
+                  <ul>
+                    <li>Navigation menu</li>
+                    <li>Bottom of every page</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div className="margin-top--lg">
+            <div className="margin-top--lg text--center">
+              <a
+                className="button button--primary button--lg margin-right--md"
+                href="mailto:contact@techinterviewhandbook.org"
+                rel="noopener"
+                target="_blank">
+                Advertise with us!
+              </a>
               <a
                 className="button button--secondary button--lg"
-                href="https://opencollective.com/tech-interview-handbook"
-                rel="noopener"
-                target="_blank">
-                Become a sponsor!
+                href="/advertise">
+                Find out more
               </a>
             </div>
           </div>
