@@ -11,7 +11,7 @@ hide_table_of_contents: true
 ---
 
 <head>
-  <link rel="canonical" href="https://yangshun.im/blog/are-front-end-development-skills-enough-for-a-career" />
+  <link rel="canonical" href="https://yangshuntay.com/blog/are-front-end-development-skills-enough-for-a-career" />
 </head>
 
 Recently, an undergrad freshmen I met at an event asked me a question regarding Front End development as a career.

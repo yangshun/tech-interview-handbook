@@ -10,7 +10,7 @@ hide_table_of_contents: true
 ---
 
 <head>
-  <link rel="canonical" href="https://yangshun.im/blog/importance-of-communicating-effectively-as-engineers" />
+  <link rel="canonical" href="https://yangshuntay.com/blog/importance-of-communicating-effectively-as-engineers" />
 </head>
 
 import BadCommunicationURL from '@site/static/img/bad-communication.jpg';

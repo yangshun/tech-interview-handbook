@@ -10,7 +10,7 @@ hide_table_of_contents: true
 ---
 
 <head>
-  <link rel="canonical" href="https://yangshun.im/blog/front-end-career-questions" />
+  <link rel="canonical" href="https://yangshuntay.com/blog/front-end-career-questions" />
 </head>
 
 Recently a junior front end engineer at a startup in Singapore reached out to me to ask me how front end development as a career.
