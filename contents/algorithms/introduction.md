@@ -1,6 +1,7 @@
 ---
 id: algorithms-introduction
-title: Introduction to algorithms
+title: Algorithms tips
+description: Here are practical tips for each algorithm topic and data structure which appear frequently in coding interviews
 sidebar_label: Introduction
 slug: introduction
 ---
@@ -46,13 +47,15 @@ Hashmaps are probably the most commonly used data structure for algorithm questi
 
 If you are cutting corners in your code, state that out loud to your interviewer and say what you would do in a non-interview setting (no time constraints). E.g., I would write a regex to parse this string rather than using `split()` which may not cover all cases.
 
-## Algorithm courses
+## Recommended courses
 
-If you want more structured algorithms practice, I recommend [Educative's Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W) course. This course essentially expands upon the questions here but approaches the practicing from a questions pattern perspective rather than data structures, which is an approach I agree with for learning and getting better at algorithmic problems.
+import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
 
-## References
+<AlgorithmCourses />
+
+<!-- ## References
 
 - [Educative's Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
 - http://blog.triplebyte.com/how-to-pass-a-programming-interview
 - http://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/
-- https://medium.com/basecs
+- https://medium.com/basecs -->

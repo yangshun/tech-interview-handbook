@@ -6,6 +6,8 @@ description: The best practice questions to prepare for algorithmic coding inter
 keywords: [algorithm, coding, interview, questions, leetcode, blind 75]
 ---
 
+import AlgorithmCourses from './\_courses/AlgorithmCourses.md'
+
 <head>
   <title>Best practice questions by the author of Blind 75 | Tech Interview Handbook</title>
   <meta property="og:title" content="Best practice questions by the author of Blind 75 | Tech Interview Handbook"/>
@@ -22,6 +24,12 @@ Years later, I further distilled the list down into only 50 questions and spread
 When practicing, you are advised to treat it like a real coding interview and check through thoroughly before submitting. Consider even manually coming up with some test cases and running through them to verify correctness!
 
 I've created a [LeetCode list](https://leetcode.com/list/9h4lgwl2) for the following questions (except the Premium ones). Feel free to use it to track your practice progress.
+
+:::tip
+
+If you're running low on time, the [Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W) course essentially expands upon the questions on this page but approaches the practicing from a questions pattern perspective rather than data structures. **Learn and understand patterns, not memorize answers!**
+
+:::
 
 ## Week 1 - Sequences
 
@@ -130,4 +138,4 @@ Practically speaking the return of investment (ROI) on studying and practicing f
 
 If you want more structured algorithms practice, I recommend the following courses:
 
-- ["Grokking the Coding Interview: Patterns for Coding Questions" by Educative](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W) - This course essentially expands upon the questions on this page but approaches the practicing from a questions pattern perspective rather than data structures, which is an approach I also agree with for learning and have personally used to get better at algorithmic problems. **Learn and understand patterns, not memorize answers!**
+<AlgorithmCourses />

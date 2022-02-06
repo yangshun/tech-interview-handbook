@@ -21,3 +21,9 @@ Be familiar with implementing, from scratch, a `Trie` class and its `add`, `remo
 - [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree)
 - [Add and Search Word](https://leetcode.com/problems/add-and-search-word-data-structure-design)
 - [Word Search II](https://leetcode.com/problems/word-search-ii/)
+
+## Recommended courses
+
+import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
+
+<AlgorithmCourses />

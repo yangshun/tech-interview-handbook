@@ -35,3 +35,9 @@ transposed_matrix = zip(*matrix)
 - [Rotate Image](https://leetcode.com/problems/rotate-image/)
 - [Word Search](https://leetcode.com/problems/word-search/)
 - [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
+
+## Recommended courses
+
+import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
+
+<AlgorithmCourses />

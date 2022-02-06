@@ -23,7 +23,7 @@ Two pointer approaches are also common for linked lists. For example:
 - Detecting cycles - Have two pointers, where one pointer increments twice as much as the other, if the two pointers meet, means that there is a cycle
 - Getting the middle node - Have two pointers, where one pointer increments twice as much as the other. When the faster node reaches the end of the list, the slower node will be at the middle
 
-## Common Routines
+## Common routines
 
 Be familiar with the following routines because many linked list questions make use of one or more of these routines in the solution:
 
@@ -46,3 +46,9 @@ Be familiar with the following routines because many linked list questions make 
 - [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
 - [Remove Nth Node From End Of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
 - [Reorder List](https://leetcode.com/problems/reorder-list/)
+
+## Recommended courses
+
+import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
+
+<AlgorithmCourses />

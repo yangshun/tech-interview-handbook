@@ -29,3 +29,9 @@ If the question asks to implement an operator such as power, squareroot or divis
 - [Pow(x, n)](https://leetcode.com/problems/powx-n/)
 - [Sqrt(x)](https://leetcode.com/problems/sqrtx/)
 - [Integer to English Words](https://leetcode.com/problems/integer-to-english-words/)
+
+## Recommended courses
+
+import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
+
+<AlgorithmCourses />

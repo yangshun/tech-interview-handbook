@@ -15,3 +15,9 @@ To find out if two circles overlap, check that the distance between the two cent
 - Which data structure would you use to query the k-nearest points of a set on a 2D plane?
 - Given many points, find k points that are closest to the origin.
 - How would you triangulate a polygon?
+
+## Recommended courses
+
+import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
+
+<AlgorithmCourses />

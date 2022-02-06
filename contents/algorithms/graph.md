@@ -115,3 +115,9 @@ For additional tips on BFS and DFS, you can refer to this [LeetCode post](https:
 - [Alien Dictionary (LeetCode Premium)](https://leetcode.com/problems/alien-dictionary/)
 - [Graph Valid Tree (LeetCode Premium)](https://leetcode.com/problems/graph-valid-tree/)
 - [Number of Connected Components in an Undirected Graph (LeetCode Premium)](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
+
+## Recommended courses
+
+import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
+
+<AlgorithmCourses />

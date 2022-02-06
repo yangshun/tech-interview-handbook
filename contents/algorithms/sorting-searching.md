@@ -20,3 +20,9 @@ When a given sequence is in a sorted order (be it ascending or descending), usin
 - Find the minimum element in a sorted rotated array in faster than O(n) time.
 - Write a function that takes a number as input and outputs the biggest number with the same set of digits.
   - [Source](http://blog.gainlo.co/index.php/2017/01/20/arrange-given-numbers-to-form-the-biggest-number-possible/)
+
+## Recommended courses
+
+import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
+
+<AlgorithmCourses />

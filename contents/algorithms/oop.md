@@ -13,6 +13,6 @@ title: Object-oriented programming
 - How would you implement an Elevator system?
 - How would you implement a Parking Lot system?
 
-## Courses
+## Recommended courses
 
 - [Grokking the Object Oriented Design Interview](https://www.educative.io/courses/grokking-the-object-oriented-design-interview?aff=x23W)

@@ -48,3 +48,9 @@ When you are given two arrays to process, it is common to have one index per arr
 - [3Sum](https://leetcode.com/problems/3sum/)
 - [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
 - [Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)
+
+## Recommended courses
+
+import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
+
+<AlgorithmCourses />

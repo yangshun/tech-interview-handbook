@@ -14,3 +14,9 @@ title: Permutation
   - [Source](http://blog.gainlo.co/index.php/2016/12/23/uber-interview-questions-permutations-parentheses/)
 - Given a list of arrays, return a list of arrays, where each array is a combination of one element in each given array.
   - E.g. If the input is `[[1, 2, 3], [4], [5, 6]]`, the output should be `[[1, 4, 5], [1, 4, 6], [2, 4, 5], [2, 4, 6], [3, 4, 5], [3, 4, 6]]`.
+
+## Recommended courses
+
+import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
+
+<AlgorithmCourses />

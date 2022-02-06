@@ -18,7 +18,7 @@ Some helpful utility snippets:
 - Turn off k<sup>th</sup> bit: `num &= ~(1 << k)`.
 - Toggle the k<sup>th</sup> bit: `num ^= (1 << k)`.
 - To check if a number is a power of 2, `(num & num - 1) == 0` or `(num & (-num)) == num`.
-- Swapping two variables: `num1 ^= num2; num2 ^= num1; num1 ^= num2` 
+- Swapping two variables: `num1 ^= num2; num2 ^= num1; num1 ^= num2`
 
 ## Corner cases
 
@@ -32,3 +32,9 @@ Some helpful utility snippets:
 - [Counting Bits](https://leetcode.com/problems/counting-bits/)
 - [Missing Number](https://leetcode.com/problems/missing-number/)
 - [Reverse Bits](https://leetcode.com/problems/reverse-bits/)
+
+## Recommended courses
+
+import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
+
+<AlgorithmCourses />

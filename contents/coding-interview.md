@@ -25,7 +25,9 @@ Coding interviews are tough. But fortunately, there's a tried and proven method 
 
 1. Decide on a [programming language](./picking-a-language.md)
 1. Study [Computer Science fundamentals](./study-and-practice.md)
+   1. Take online courses
 1. [Practice](./study-and-practice.md) solving algorithm questions
+   1. Do the [best practice questions](./best-practice-questions.md)
 1. Internalize the [Do's and Don'ts of interviews](./cheatsheet.md)
 1. Know what [signals and behaviors](./coding-signals.md) interviewers are looking out for
 1. Practice doing [mock interviews](./mock-interviews.md)
