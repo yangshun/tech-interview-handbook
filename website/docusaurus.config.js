@@ -147,7 +147,7 @@ module.exports = {
       indexName: 'techinterviewhandbook',
     },
     metadata: [
-      {name: 'fo-verify', content: '6993fa63-071e-4d11-8b10-a247c54c6061'},
+      {name: 'fo-verify', content: '2cc93525-ece8-402e-a4b8-d1d0853175e8'},
     ],
   },
   presets: [
