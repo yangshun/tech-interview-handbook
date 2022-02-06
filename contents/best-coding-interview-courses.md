@@ -6,7 +6,7 @@ sidebar_label: 🔥 Best interview courses
 keywords: [algorithm, coding, interview, questions]
 ---
 
-If you prefer courses where the learning is more structured, here are a few recommendations.
+If you prefer courses where the learning is more structured, here are a few recommendations. **In no way is taking online courses a must in order to pass interviews.**
 
 ## General
 
@@ -32,5 +32,5 @@ import AlgorithmCourses from './\_courses/AlgorithmCourses.md'
 
 | Course | Reviews | Duration | Price | Contents |
 | :-- | --- | --- | --- | --- |
-| [Master the Coding Interview: Data Structures + Algorithms](https://fxo.co/DQpY) | 4.6/5 | 19.5h | $$ | Basic data structures and algorithms, job application, behavioral interview, negotiation |
 | [JavaScript Data Structures and Algorithms Masterclass](https://fxo.co/DQpZ) | 4.5/5 | 45h | $ | Basic and advanced data structures and algorithms |
+| [Master the Coding Interview: Data Structures + Algorithms](https://fxo.co/DQpY) | 4.6/5 | 19.5h | $$ | Basic data structures and algorithms, job application, behavioral interview, negotiation |
