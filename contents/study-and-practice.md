@@ -1,7 +1,7 @@
 ---
 id: study-and-practice
-title: Practical tips
-description: Mastery of Computer Science fundamentals, identifying question patterns, practicing good coding style is the key to improving in coding interviews
+title: Study and practice
+description: Mastery of Computer Science fundamentals, identifying question patterns, practicing good coding style is the key to improving in coding interviews.
 keywords:
   [
     algorithm,

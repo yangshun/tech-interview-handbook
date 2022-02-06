@@ -29,12 +29,9 @@ module.exports = {
           '🔥 Coding interviews': [
             'coding-interview',
             'picking-a-language',
-            {
-              'Study and practice': [
-                'study-and-practice',
-                'best-practice-questions',
-              ],
-            },
+            'study-and-practice',
+            'best-coding-interview-courses',
+            'best-practice-questions',
             'during-coding-interview',
             'cheatsheet',
             'coding-signals',
