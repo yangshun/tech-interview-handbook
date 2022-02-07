@@ -43,6 +43,29 @@ export default [
     ),
   },
   {
+    name: 'Zhenghao He',
+    title: 'Senior Software Engineer, Instacart',
+    thumbnail: 'https://github.com/zhenghaohe.png',
+    quote: (
+      <>
+        Tech Interview Handbook was the best resource I used during my coding
+        interview prep. Its structure and hand-picked questions and detailed
+        explanations really set it apart from other resources out there. I
+        helped me go into my interviews with confidence. I ended up landing
+        offers at Meta, Amazon, Twitch, Microsoft, Coinbase, Splunk, etc. I
+        highly recommend Tech Interview Handbook to anyone looking to secure an
+        offer from big tech companies.
+        <br />
+        <br />
+        I've learnt a few things and blogged about them on{' '}
+        <a href="https://zhenghao.io" rel="noopener">
+          https://zhenghao.io
+        </a>
+        , check them out if you're interested!
+      </>
+    ),
+  },
+  {
     name: 'Kevin Huang',
     title: 'Software Engineer, Uber',
     thumbnail: 'https://avatars1.githubusercontent.com/u/25380336?s=460&v=4',
@@ -75,12 +98,12 @@ export default [
     thumbnail: 'https://avatars.githubusercontent.com/u/19870898?s=400&v=4',
     quote: (
       <>
-        I have not been preparing much for my interviews before my final year in 
+        I have not been preparing much for my interviews before my final year in
         university. As I set my sights on my full time job, I referred heavily
-        to this handbook about things to prepare and look out for during my 
+        to this handbook about things to prepare and look out for during my
         applicaion. It has helped me so much in many stages of my application.
-        My personal favorite is the best algorithm practice questions, which
-        is helpful in the future if I want to switch jobs.
+        My personal favorite is the best algorithm practice questions, which is
+        helpful in the future if I want to switch jobs.
         <br />
         <br />
         With the help of this handbook, I successfully land offers from
