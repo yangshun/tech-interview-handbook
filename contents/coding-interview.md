@@ -48,7 +48,7 @@ If you are new to coding interviews (e.g. first time interviewing for an interns
 1. Do [mock interviews](./mock-interviews.md)
 1. Interview successfully to get the job
 
-## Have passed interviews before {#returning}
+## Passed interviews before {#returning}
 
 _Recommended for college juniors/seniors looking for their second internship or first full-time job._
 
