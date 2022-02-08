@@ -9,10 +9,11 @@ module.exports = {
   projectName: 'tech-interview-handbook',
   themeConfig: {
     announcementBar: {
-      id: 'announcement-1', // Increment on change
+      id: 'algomonster', // Increment on change
       content: `Stop the grind and study with a plan! Developed by Google engineers, 
       <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">AlgoMonster</a> is the fastest way to get a software engineering job. 
       <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">Try it today!</a>`,
+      isCloseable: false,
     },
     prism: {
       theme: require('prism-react-renderer/themes/github'),
