@@ -25,9 +25,9 @@ When practicing, you are advised to treat it like a real coding interview and ch
 
 I've created a [LeetCode list](https://leetcode.com/list/9h4lgwl2) for the following questions (except the Premium ones). Feel free to use it to track your practice progress.
 
-:::tip
+:::tip Expert tip
 
-If you're running low on time, the [Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W) course essentially expands upon the questions on this page but approaches the practicing from a questions pattern perspective rather than data structures. **Learn and understand patterns, not memorize answers!**
+If you're running low on time, [AlgoMonster](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=) aims to help you ace the technical interview **in the shortest time possible**. By Google engineers, [AlgoMonster](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=) uses a data-driven approach to teach you most useful key question patterns and has contents to help you quickly revise basic data structures and algorithms. **Learn and understand patterns, not memorize answers!**
 
 :::
 

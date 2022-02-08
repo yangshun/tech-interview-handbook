@@ -10,7 +10,9 @@ module.exports = {
   themeConfig: {
     announcementBar: {
       id: 'announcement-1', // Increment on change
-      content: `⭐️ Bring your interview skills to the next level with Educative. <a href="https://www.educative.io/explore?search_string=interview&aff=x23W">Join today for a discount!</a> ⭐️`,
+      content: `Stop the grind and study with a plan! Developed by Google engineers, 
+      <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">AlgoMonster</a> is the fastest way to get a software engineering job. 
+      <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">Try it today!</a>`,
     },
     prism: {
       theme: require('prism-react-renderer/themes/github'),

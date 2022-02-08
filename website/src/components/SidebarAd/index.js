@@ -34,6 +34,26 @@ function TopResume({className}) {
   );
 }
 
+function AlgoMonster({className}) {
+  return (
+    <a
+      className={clsx(styles.container, className)}
+      href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack="
+      target="_blank"
+      rel="noopener"
+      onClick={() => {
+        window.gtag('event', 'algomonster.sidebar.click');
+      }}>
+      <p className={styles.tagline}>
+        <strong>Stop grinding and study with a plan! </strong>
+        <br />
+        Developed by Google engineers, <u>AlgoMonster</u> is the fastest way to
+        get a software engineering job. <u>Try it today</u>!
+      </p>
+    </a>
+  );
+}
+
 function Moonchaser({className}) {
   return (
     <a
@@ -148,7 +168,9 @@ export default React.memo(function SidebarAd() {
           path.startsWith('/mock-interviews') ||
           path.startsWith('/algorithms')
         ) {
-          return (
+          return Math.random() > 0.5 ? (
+            <AlgoMonster className={backgroundClass} key={Math.random()} />
+          ) : (
             <EducativeCoding className={backgroundClass} key={Math.random()} />
           );
         }
