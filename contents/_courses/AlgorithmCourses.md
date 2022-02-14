@@ -8,4 +8,4 @@ This course by Educative expands upon the questions on the recommended practice 
 
 ### [Master the Coding Interview: Data Structures + Algorithms](https://fxo.co/DQpY)
 
-This Udemy bestseller is one of the highest-rated interview preparation course (4.6 stars, 21.5k ratings, 135k students) and packs **19 hours** worth of contents into it. Like Tech Interview Handbook, it goes beyond coding interviews and covers resume, non-technical interviews, negotiations. It's an all-in-one package! Note that JavaScript is being used for the coding demos. [**Check it out →**;](https://fxo.co/DQpY)
+This Udemy bestseller is one of the highest-rated interview preparation course (4.6 stars, 21.5k ratings, 135k students) and packs **19 hours** worth of contents into it. Like Tech Interview Handbook, it goes beyond coding interviews and covers resume, non-technical interviews, negotiations. It's an all-in-one package! Note that JavaScript is being used for the coding demos. [**Check it out →**](https://fxo.co/DQpY)
