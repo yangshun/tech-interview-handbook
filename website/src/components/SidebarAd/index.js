@@ -150,23 +150,18 @@ export default React.memo(function SidebarAd() {
       {() => {
         const path = window.location.pathname;
         // Ugly hack to show conditional sidebar content.
-        if (path.startsWith('/resume')) {
-          return <TopResume className={backgroundClass} key={Math.random()} />;
-        }
 
-        if (
-          path.includes('negotiation') ||
-          path.startsWith('/understanding-compensation')
-        ) {
+        if (path.includes('negotiation') || path.includes('compensation')) {
           return <Moonchaser className={backgroundClass} key={Math.random()} />;
         }
 
         if (
+          path.includes('resume') ||
           path.includes('coding') ||
-          path.startsWith('/best-practice-questions') ||
-          path.startsWith('/cheatsheet') ||
-          path.startsWith('/mock-interviews') ||
-          path.startsWith('/algorithms')
+          path.includes('best-practice-questions') ||
+          path.includes('cheatsheet') ||
+          path.includes('mock-interviews') ||
+          path.includes('algorithms')
         ) {
           return Math.random() > 0.5 ? (
             <AlgoMonster className={backgroundClass} key={Math.random()} />
