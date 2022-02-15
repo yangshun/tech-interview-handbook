@@ -89,7 +89,7 @@ const DocSidebarMobileSecondaryMenu = ({toggleSidebar, sidebar, path}) => {
         level={1}
       />
       <div className="margin--md">
-        <SidebarAd />
+        <SidebarAd position="mobile_sidebar" />
       </div>
     </ul>
   );

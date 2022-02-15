@@ -86,7 +86,7 @@ export default function DocItem(props) {
             </article>
             <DocPaginator previous={metadata.previous} next={metadata.next} />
             <div className="margin-top--md">
-              <SidebarAd />
+              <SidebarAd position="docs_bottom" />
             </div>
           </div>
         </div>

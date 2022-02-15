@@ -12,7 +12,7 @@ function TOC({className, ...props}) {
   return (
     <div className={clsx(styles.tableOfContents, 'thin-scrollbar', className)}>
       <div className="margin--md">
-        <SidebarAd />
+        <SidebarAd position="table_of_contents" />
       </div>
       <TOCItems
         {...props}

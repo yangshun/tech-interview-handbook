@@ -13,7 +13,7 @@ const BACKGROUNDS = [
   styles.backgroundRed,
 ];
 
-function TopResume({className}) {
+function TopResume({className, position}) {
   return (
     <a
       className={clsx(styles.container, className)}
@@ -21,7 +21,7 @@ function TopResume({className}) {
       target="_blank"
       rel="noopener"
       onClick={() => {
-        window.gtag('event', 'topresume.sidebar.click');
+        window.gtag('event', `topresume.${position}.click`);
       }}>
       <p className={styles.tagline}>
         <strong>Best resume service for FAANG</strong>
@@ -34,7 +34,7 @@ function TopResume({className}) {
   );
 }
 
-function AlgoMonster({className}) {
+function AlgoMonster({className, position}) {
   return (
     <a
       className={clsx(styles.container, className)}
@@ -42,7 +42,7 @@ function AlgoMonster({className}) {
       target="_blank"
       rel="noopener"
       onClick={() => {
-        window.gtag('event', 'algomonster.sidebar.click');
+        window.gtag('event', `algomonster.${position}.click`);
       }}>
       <p className={styles.tagline}>
         <strong>Stop grinding and study with a plan! </strong>
@@ -54,7 +54,7 @@ function AlgoMonster({className}) {
   );
 }
 
-function Moonchaser({className}) {
+function Moonchaser({className, position}) {
   return (
     <a
       className={clsx(styles.container, className)}
@@ -63,7 +63,7 @@ function Moonchaser({className}) {
       target="_blank"
       rel="noopener"
       onClick={() => {
-        window.gtag('event', 'moonchaser.sidebar.click');
+        window.gtag('event', `moonchaser.${position}.click`);
       }}>
       <p className={styles.tagline}>
         <strong>Get paid more.</strong> Receive risk-free salary negotiation
@@ -74,7 +74,7 @@ function Moonchaser({className}) {
   );
 }
 
-function Educative({className}) {
+function Educative({className, position}) {
   return (
     <a
       className={clsx(styles.container, className)}
@@ -83,7 +83,7 @@ function Educative({className}) {
       target="_blank"
       rel="noopener"
       onClick={() => {
-        window.gtag('event', 'educative.sidebar.click');
+        window.gtag('event', `educative.${position}.click`);
       }}>
       <p className={styles.tagline}>
         <strong>Looking to get hired at FAANG?</strong>
@@ -95,7 +95,7 @@ function Educative({className}) {
   );
 }
 
-function EducativeCoding({className}) {
+function EducativeCoding({className, position}) {
   return (
     <a
       className={clsx(styles.container, className)}
@@ -104,7 +104,7 @@ function EducativeCoding({className}) {
       target="_blank"
       rel="noopener"
       onClick={() => {
-        window.gtag('event', 'educative.coding.sidebar.click');
+        window.gtag('event', `educative.coding.${position}.click`);
       }}>
       <p className={styles.tagline}>
         <strong>Get the job at FAANG</strong>
@@ -117,7 +117,7 @@ function EducativeCoding({className}) {
   );
 }
 
-function EducativeSystemDesign({className}) {
+function EducativeSystemDesign({className, position}) {
   return (
     <a
       className={clsx(styles.container, className)}
@@ -126,7 +126,7 @@ function EducativeSystemDesign({className}) {
       target="_blank"
       rel="noopener"
       onClick={() => {
-        window.gtag('event', 'educative.coding.sidebar.click');
+        window.gtag('event', `educative.system_design.${position}.click`);
       }}>
       <p className={styles.tagline}>
         <strong>Get the job at FAANG</strong>
@@ -139,7 +139,7 @@ function EducativeSystemDesign({className}) {
   );
 }
 
-export default React.memo(function SidebarAd() {
+export default React.memo(function SidebarAd({position}) {
   const backgroundClass =
     BACKGROUNDS[Math.floor(Math.random() * BACKGROUNDS.length)];
 
@@ -152,7 +152,13 @@ export default React.memo(function SidebarAd() {
         // Ugly hack to show conditional sidebar content.
 
         if (path.includes('negotiation') || path.includes('compensation')) {
-          return <Moonchaser className={backgroundClass} key={Math.random()} />;
+          return (
+            <Moonchaser
+              className={backgroundClass}
+              key={Math.random()}
+              position={position}
+            />
+          );
         }
 
         if (
@@ -164,9 +170,17 @@ export default React.memo(function SidebarAd() {
           path.includes('algorithms')
         ) {
           return Math.random() > 0.5 ? (
-            <AlgoMonster className={backgroundClass} key={Math.random()} />
+            <AlgoMonster
+              className={backgroundClass}
+              key={Math.random()}
+              position={position}
+            />
           ) : (
-            <EducativeCoding className={backgroundClass} key={Math.random()} />
+            <EducativeCoding
+              className={backgroundClass}
+              key={Math.random()}
+              position={position}
+            />
           );
         }
 
@@ -175,14 +189,23 @@ export default React.memo(function SidebarAd() {
             <EducativeSystemDesign
               className={backgroundClass}
               key={Math.random()}
+              position={position}
             />
           );
         }
 
         return Math.random() > 0.5 ? (
-          <Moonchaser className={backgroundClass} key={Math.random()} />
+          <Moonchaser
+            className={backgroundClass}
+            key={Math.random()}
+            position={position}
+          />
         ) : (
-          <Educative className={backgroundClass} key={Math.random()} />
+          <Educative
+            className={backgroundClass}
+            key={Math.random()}
+            position={position}
+          />
         );
       }}
     </BrowserOnly>
