@@ -48,7 +48,7 @@ function AlgoMonster({className}) {
         <strong>Stop grinding and study with a plan! </strong>
         <br />
         Developed by Google engineers, <u>AlgoMonster</u> is the fastest way to
-        get a software engineering job. <u>Try it today</u>!
+        get a software engineering job. <u>Join today for a 70% discount!</u>!
       </p>
     </a>
   );
