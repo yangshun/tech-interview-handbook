@@ -106,8 +106,8 @@ Week 4 builds up on knowledge from previous weeks but questions are of increased
 | :-- | --- | --- |
 | Subtree of Another Tree | Easy | [Link](https://leetcode.com/problems/subtree-of-another-tree/) |
 | Lowest Common Ancestor of BST | Easy | [Link](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/) |
-| Add and Search Word | Medium | [Link](https://leetcode.com/problems/add-and-search-word-data-structure-design/) |
 | Implement Trie (Prefix Tree) | Medium | [Link](https://leetcode.com/problems/implement-trie-prefix-tree/) |
+| Add and Search Word | Medium | [Link](https://leetcode.com/problems/add-and-search-word-data-structure-design/) |
 | Kth Smallest Element in a BST | Medium | [Link](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) |
 | Merge K Sorted Lists | Hard | [Link](https://leetcode.com/problems/merge-k-sorted-lists/) |
 | Find Median from Data Stream | Hard | [Link](https://leetcode.com/problems/find-median-from-data-stream/) |
