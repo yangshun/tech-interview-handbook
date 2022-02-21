@@ -29,6 +29,6 @@ From my experience as a FAANG interviewer as well as my discussions with countle
 
 :::tip Expert tip
 
-If you are running low on time, I recommend [TopResume's Resume Writing Service](https://tidd.ly/3oezgOo), which has helped countless software engineers I know get interviews at FAANG. TopResume's also offers a [free resume screening](https://tidd.ly/3GxVIs9) service that you can use to quickly get tips on improving your resume from professional resume writers.
+To maximize your chances of being shortlisted, I recommend getting your resume reviewed by [FAANG Tech Leads - a team of ex-FAANG hiring managers](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=resume_guide&aff=1e80c401fe7e2). I personally used their service during my applications and it helped me get shortlisted at multiple Bay Area FAANG companies (and more). It is currently **70% off as part of a limited time promotion**.
 
 :::

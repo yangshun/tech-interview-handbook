@@ -17,6 +17,20 @@ keywords:
 
 Most companies these days automate their resume screening process through Applicant Tracking Systems (ATS). 75% of resumes sent to top companies are never seen by human eyes. Always ensure your resume is easily readable by an ATS to maximize job opportunities throughout your career.
 
+:::tip Expert tip
+
+[FAANG Tech Leads](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) is currently offering templates and references at only **$28 (70% off)**.
+
+Their templates
+
+- Are created by ex-FAANG hiring managers based on top resumes received from thousands of candidate applications
+- Have guaranteed readability by FAANG ATS
+- Are tailored by experience level
+
+They also offer resume references from candidates who have received multiple offers from Bay Area FAANG companies - which are helpful in helping you craft content that meets the same bar. [Check it out](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2)!
+
+:::
+
 ## Use Microsoft Word or Google Docs to create and edit your resume
 
 **Do's**
