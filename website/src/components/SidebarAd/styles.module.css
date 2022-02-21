@@ -10,20 +10,44 @@
     var(--ifm-transition-timing-default);
 }
 
-.backgroundPurple {
-  background-image: linear-gradient(138deg, rgb(69, 104, 220), rgb(176, 106, 179));
+.backgroundPurplin {
+  background-image: linear-gradient(
+    138deg,
+    rgb(69, 104, 220),
+    rgb(176, 106, 179)
+  );
 }
 
-.backgroundRed {
-  background-image: linear-gradient(39deg, rgb(188, 78, 156), rgb(248, 7, 89));
+.backgroundFirewatch {
+  background-image: linear-gradient(139deg, #cb2d3e, #ef473a);
 }
 
-.backgroundOrange {
-  background-image: linear-gradient(39deg, rgb(255, 81, 47), rgb(240, 152, 25));
+.backgroundLush {
+  background-image: linear-gradient(139deg, #56ab2f, #a8e063);
 }
 
-.backgroundBlue {
-  background-image: linear-gradient(153deg, rgb(116, 116, 191), rgb(52, 138, 199));
+.backgroundSweetMorning {
+  background-image: linear-gradient(139deg, #ff5f6d, #ffc371);
+}
+
+.backgroundViceCity {
+  background-image: linear-gradient(139deg, #3494e6, #ec6ead);
+}
+
+.backgroundRadar {
+  background-image: linear-gradient(139deg, #a770ef, #cf8bf3, #fdb99b);
+}
+
+.backgroundCosmicFusion {
+  background-image: linear-gradient(139deg, #333399, #ff00cc);
+}
+
+.backgroundAzurePop {
+  background-image: linear-gradient(138deg, #ef32d9, #89fffd);
+}
+
+.backgroundTranquil {
+  background-image: linear-gradient(138deg, #ef629f, #eecda3);
 }
 
 .container:hover {

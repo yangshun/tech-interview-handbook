@@ -7,31 +7,58 @@ import clsx from 'clsx';
 import styles from './styles.module.css';
 
 const BACKGROUNDS = [
-  styles.backgroundBlue,
-  styles.backgroundOrange,
-  styles.backgroundPurple,
-  styles.backgroundRed,
+  styles.backgroundPurplin,
+  styles.backgroundFirewatch,
+  styles.backgroundLush,
+  styles.backgroundSweetMorning,
+  styles.backgroundViceCity,
+  styles.backgroundRadar,
+  styles.backgroundCosmicFusion,
+  styles.backgroundAzurePop,
+  styles.backgroundTranquil,
 ];
 
-function TopResume({className, position}) {
-  return (
-    <a
-      className={clsx(styles.container, className)}
-      href="https://tidd.ly/3oezgOo"
-      target="_blank"
-      rel="noopener"
-      onClick={() => {
-        window.gtag('event', `topresume.${position}.click`);
-      }}>
-      <p className={styles.tagline}>
-        <strong>Best resume service for FAANG</strong>
-        <br />
-        If you are running low on time, I recommend TopResume's{' '}
-        <u>free resume review</u> services, which has helped countless software
-        engineers get interviews at FAANG.
-      </p>
-    </a>
-  );
+function FAANGTechLeads({className, position}) {
+  switch (position) {
+    case 'docs_bottom':
+      return (
+        <a
+          className={clsx(styles.container, className)}
+          href={`https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=1e80c401fe7e2`}
+          target="_blank"
+          rel="noopener"
+          onClick={() => {
+            window.gtag('event', `faangtechleads.${position}.click`);
+          }}>
+          <p className={styles.tagline}>
+            <strong>Best resume service for FAANG</strong>
+            <br />
+            FAANG Tech Leads' <u>resume review service</u> helped me get
+            shortlisted at top Bay Area companies. Their resume templates are
+            only <u>$28 now (70% off)</u> and tailored to your experience level.
+          </p>
+        </a>
+      );
+    default:
+      return (
+        <a
+          className={clsx(styles.container, className)}
+          href={`https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=1e80c401fe7e2`}
+          target="_blank"
+          rel="noopener"
+          onClick={() => {
+            window.gtag('event', `faangtechleads.${position}.click`);
+          }}>
+          <p className={styles.tagline}>
+            <strong>Get shortlisted at FAANG</strong>
+            <br />
+            FAANG Tech Leads' <u>resume review service</u> helped me get
+            shortlisted at top Bay Area companies. Their resume templates are
+            only <u>$28 now (70% off)</u> and tailored to your experience level.
+          </p>
+        </a>
+      );
+  }
 }
 
 function AlgoMonster({className, position}) {
@@ -58,7 +85,7 @@ function Moonchaser({className, position}) {
   return (
     <a
       className={clsx(styles.container, className)}
-      href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_docs_sidebar"
+      href={`https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}`}
       key={Math.random()}
       target="_blank"
       rel="noopener"
@@ -78,7 +105,7 @@ function Educative({className, position}) {
   return (
     <a
       className={clsx(styles.container, className)}
-      href="https://educative.io/tech-interview-handbook"
+      href={`https://educative.io/tech-interview-handbook?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=x23W`}
       key={Math.random()}
       target="_blank"
       rel="noopener"
@@ -99,7 +126,7 @@ function EducativeCoding({className, position}) {
   return (
     <a
       className={clsx(styles.container, className)}
-      href="https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W"
+      href={`https://www.educative.io/courses/grokking-the-coding-interview?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=x23W`}
       key={Math.random()}
       target="_blank"
       rel="noopener"
@@ -121,7 +148,7 @@ function EducativeSystemDesign({className, position}) {
   return (
     <a
       className={clsx(styles.container, className)}
-      href="https://www.educative.io/courses/grokking-the-system-design-interview?aff=x23W"
+      href={`https://www.educative.io/courses/grokking-the-system-design-interview?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=x23W`}
       key={Math.random()}
       target="_blank"
       rel="noopener"
@@ -151,6 +178,16 @@ export default React.memo(function SidebarAd({position}) {
         const path = window.location.pathname;
         // Ugly hack to show conditional sidebar content.
 
+        if (path.includes('resume')) {
+          return (
+            <FAANGTechLeads
+              className={backgroundClass}
+              key={Math.random()}
+              position={position}
+            />
+          );
+        }
+
         if (path.includes('negotiation') || path.includes('compensation')) {
           return (
             <Moonchaser
@@ -162,7 +199,6 @@ export default React.memo(function SidebarAd({position}) {
         }
 
         if (
-          path.includes('resume') ||
           path.includes('coding') ||
           path.includes('best-practice-questions') ||
           path.includes('cheatsheet') ||

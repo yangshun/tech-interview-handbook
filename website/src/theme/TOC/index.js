@@ -22,7 +22,7 @@ function TOC({className, ...props}) {
       <div className="margin--md">
         <div className={clsx('padding--md', styles.socialLinksContainer)}>
           <div className={styles.socialLinks}>
-            Follow us
+            Follow
             <a
               href="https://t.me/techinterviewhandbook"
               target="_blank"
