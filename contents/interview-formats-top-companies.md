@@ -20,7 +20,7 @@ Are there companies you would like to know more about? Email us at [contact{at}t
   - 1 or 2 x Algorithm/front end on CoderPad/CodePen
 - Onsite (General):
   - 2 x Algorithm coding on CoderPad
-  - 1 x System design/architecture
+  - 1 x System Design/architecture
   - 1 x Past experience/project
   - 2 x Cross functional
 - Onsite (Front End):
@@ -39,12 +39,12 @@ Are there companies you would like to know more about? Email us at [contact{at}t
 - Recruiter phone screen
 - Technical phone interview
 - Onsite (Product Engineer):
-  - 3 x Algorithm and system design on whiteboard within the same session
-  - 1 x Algorithm on laptop and system design. This session involves writing code on your own laptop to solve 3 well-defined algorithm problems in around 45 minutes after which an engineer will come in and review the code with you. You are not supposed to run the code while working on the problem
+  - 3 x Algorithm and System Design on whiteboard within the same session
+  - 1 x Algorithm on laptop and System Design. This session involves writing code on your own laptop to solve 3 well-defined algorithm problems in around 45 minutes after which an engineer will come in and review the code with you. You are not supposed to run the code while working on the problem
 - Tips:
   - No front end questions were asked
   - Asana places high emphasis on System Design and makes heavy use of the whiteboard. You do not necessarily have to write code for the algorithm question of the first three interviews
-  - All 4 sessions involve algorithms and system design. One of the sessions will be conducted by an Engineering Manager
+  - All 4 sessions involve algorithms and System Design. One of the sessions will be conducted by an Engineering Manager
   - The last session will involve coding on your own laptop. Prepare your development environment in advance
   - Regardless of Product Engineer or Engineering Generalist position, their interview format and questions are similar
 
@@ -66,7 +66,7 @@ Are there companies you would like to know more about? Email us at [contact{at}t
 
 - Recruiter phone screen
 - Technical phone interview:
-  - 1 or 2 x algorithm on Google Doc
+  - 1 or 2 x Algorithm on Google Doc
 - Onsite:
   - 1 or 2 x Front end on whiteboard. May be required to use Vanilla JS (or at the most, jQuery) depending on the question. (Front End only)
   - 2 to 4 x Algorithm on whiteboard
@@ -76,6 +76,22 @@ Are there companies you would like to know more about? Email us at [contact{at}t
 - Tips:
   - In rare cases, candidates may even be allowed to skip the phone interview round and advanced to onsite directly
   - For non-fresh grads, you only receive an offer if you are successfully matched with a team
+
+## Indeed
+
+- Recruiter phone screen
+- Technical phone interview (optional)
+- Onsite:
+  - 1 x Online Assessment on HackerRank (for L0 - L2)
+  - 1 x Resume discussion
+  - 1 or 2 x Algorithm on HackerRank
+  - 1 x Code Review on GitHub
+  - 1 or 2 x System Design (for L3+)
+  - 1 x Technical Presentation (for L4+)
+- Tips:
+  - If you are interviewing for a specific role, the bar varies
+  - Hiring decision and leveling are separate discussions; leveling is determined by experience and leadership signals
+  - If you do well in the interviews but the position is already filled, other hiring managers can pick up your packet
 
 ## Lyft
 
@@ -113,10 +129,10 @@ Are there companies you would like to know more about? Email us at [contact{at}t
   - 1 x Algorithm over HackerRank CodePair and Skype
 - Onsite (General):
   - 2 x Algorithm on whiteboard
-  - 1 x Decomposition (system design) on whiteboard
+  - 1 x Decomposition (System Design) on whiteboard
 - Onsite (Front End):
   - 1 x Front end on your own laptop. This session lasts about 1.5 hours. Use any library/framework
-  - 1 x Decomposition (system design) on whiteboard
+  - 1 x Decomposition (System Design) on whiteboard
 - Tips:
   - I opted to use React and had to set up projects on the spot using `create-react-app`
   - You may be asked to meet with Engineering Managers after the technical sessions and it's not necessarily a good/bad thing
