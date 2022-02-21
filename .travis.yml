@@ -1,5 +1,0 @@
-install:
-  - gem install awesome_bot
-
-script:
-  - awesome_bot **/*.md --allow-dupe --allow-redirect --allow 429 --skip-save-results
