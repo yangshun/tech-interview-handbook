@@ -192,9 +192,10 @@ module.exports = {
   ],
   scripts: [
     {
-      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4984084888641317',
-      crossorigin: 'anonymous',
+      src: '//scripts.mediavine.com/tags/tech-interview-handbook.js',
       async: true,
+      'data-noptimize': 1,
+      'data-cfasync': 'false',
     },
   ],
 };
