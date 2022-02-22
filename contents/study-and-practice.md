@@ -21,9 +21,15 @@ keywords:
 
 ## Recap Computer Science fundamentals
 
-If you have been out of college for a while, it is highly advisable to review Computer Science fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work on algorithm problems from LeetCode.
+If you have been out of college for a while, it is highly advisable to review Computer Science fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work on algorithm problems from LeetCode. If you are looking for a central place to revise, here are some resources:
 
-I collated a list of practical tips for the common algorithm and data structure topics under the [Algorithms tips](./algorithms/introduction.md) section.
+- [The Algorithms and Data Structures Interview Crash Course](https://www.educative.io/courses/algorithms-ds-interview?aff=x23W), a course by Educative which is estimated to take 12h to complete
+- [AlgoMonster](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=), one of the most efficient way to study and practice for coding interviews
+- [Master the Coding Interview: Data Structures + Algorithms on Udemy](https://fxo.co/DQpY)
+- [DSA Revision](https://dsarevision.com/) - Free 100-page PDF with question patterns and example questions
+- [Top 50 Data Structure and Algorithms Interview Questions for Programmers](https://medium.com/javarevisited/50-data-structure-and-algorithms-interview-questions-for-programmers-b4b1ac61f5b0)
+
+After you have revised the basic concepts at least once, you can find a list of practical tips I collated for the common algorithm and data structure topics under the [Algorithms tips](./algorithms/introduction.md) section.
 
 ## Mastery through practice
 
