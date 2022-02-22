@@ -17,7 +17,7 @@
 
 ## What is this?
 
-Not everyone has the time to do a few hundred LeetCode questions. Here are _free and curated_ technical interview preparation materials for busy engineers, brought to you by the author of the [Blind 75 list](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU). Over 500,000 people have benefitted from this handbook!
+Not everyone has the time to do a few hundred LeetCode questions. Here are _free and curated_ technical interview preparation materials for busy engineers, brought to you by me, the author of the [Blind 75 list](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU). Over 500,000 people have benefitted from this handbook!
 
 Besides the usual algorithm questions, other **awesome** stuff includes:
 
@@ -57,6 +57,16 @@ There are many awesome books like [Cracking the Coding Interview](http://www.cra
 
 Also, existing resources focus mainly on algorithm questions and lack coverage for more domain-specific and non-technical questions. This handbook aims to cover content beyond the typical algorithmic coding questions. 😎
 
+## Looking for interview courses?
+
+### [AlgoMonster](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=)
+
+AlgoMonster aims to help you ace the technical interview **in the shortest time possible**. By Google engineers, AlgoMonster uses a data-driven approach to teach you the most useful key question patterns and has contents to help you quickly revise basic data structures and algorithms. Best of all, AlgoMonster is not subscription-based - pay a one-time fee and get **lifetime access**. [**Join today for a 70% discount →**](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=)
+
+### [Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
+
+This course by Educative expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages. **Learn and understand patterns, not memorize answers!** [**Join today for a 10% discount →**](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
+
 ## Looking for Front End content?
 
 Front-end-related content has been moved to a separate website - [Front End Interview Handbook](https://frontendinterviewhandbook.com).
@@ -68,6 +78,14 @@ We're still working on System Design content. In the meanwhile, check out Educat
 ## Contents
 
 A [Docusaurus](https://github.com/facebook/docusaurus) website has been created to provide a better reading experience. Check out the website [here](https://www.techinterviewhandbook.org)!
+
+---
+
+<div align="center">
+  <h3>💡 Stop the grind and study with a plan! Developed by Google engineers, <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=">AlgoMonster</a> is the fastest way to get a software engineering job. <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=">Join today for a 70% discount!</a> 💡</h3>
+</div>
+
+---
 
 ## Related
 
