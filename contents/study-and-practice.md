@@ -23,7 +23,7 @@ keywords:
 
 If you have been out of college for a while, it is highly advisable to review Computer Science fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work on algorithm problems from LeetCode.
 
-I collated a list of practical tips for the common algorithm and data structure topics under the [Algorithms tips](./algorithms/introduction) section.
+I collated a list of practical tips for the common algorithm and data structure topics under the [Algorithms tips](./algorithms/introduction.md) section.
 
 ## Mastery through practice
 
