@@ -11,7 +11,7 @@ Over 500,000 people have benefitted from this handbook! I have lost count of the
 
 ## Who am I?
 
-I'm [Yangshun](https://twitter.com/yangshunz), a Senior Software Engineer at Meta/Facebook. In 2017, I was frustrated at my job at Grab, a regional ridehailing company and wanted to break into FAANG but I didn't know how to. After few months of research, studying and practicing, I interviewed at 11 companies and managed to get [9 offers from top tech companies in the Bay Area](https://www.teamblind.com/post/Sharing-my-offer-numbers-from-big-companies-for-your-reference-yNgqUPQR) - Facebook, Google, Airbnb, Palantir, Dropbox, Lyft, and some startups.
+I'm [Yangshun](https://twitter.com/yangshunz), a Staff Software Engineer at Meta/Facebook. In 2017, I was frustrated at my job at Grab, a regional ridehailing company and wanted to break into FAANG but I didn't know how to. After few months of research, studying and practicing, I interviewed at 11 companies and managed to get [9 offers from top tech companies in the Bay Area](https://www.teamblind.com/post/Sharing-my-offer-numbers-from-big-companies-for-your-reference-yNgqUPQR) - Facebook, Google, Airbnb, Palantir, Dropbox, Lyft, and some startups.
 
 It was a tedious process which I don't ever want to go through again. **I went through that process but with this handbook, you don't have to.** This handbook contains the essence of technical interviewing which will benefit you in your job hunt.
 
