@@ -68,7 +68,7 @@ module.exports = {
       ],
     },
     footer: {
-      copyright: `Copyright © ${new Date().getFullYear()} Yangshun Tay. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Tech Interview Handbook. Built with Docusaurus.`,
       links: [
         {
           title: 'General',
@@ -161,7 +161,7 @@ module.exports = {
           path: '../contents',
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          showLastUpdateAuthor: true,
+          // showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
         theme: {

@@ -136,7 +136,7 @@ function HeroSection() {
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">
           {siteConfig.tagline} <br />
-          Brought to you by FAANG engineers and the author of the{' '}
+          Brought to by the author of the{' '}
           <a href={BLIND_75_URL} rel="noopener" target="_blank">
             Blind 75 list
           </a>
@@ -192,20 +192,16 @@ function WhatIsThisSection() {
               technical interviews.
               <br />
               <br />
-              As a Senior Software Engineer and Tech Lead at Meta/Facebook, I
-              have personally gone through the frustrating process of browsing
-              through many unorganized resources to prepare for my technical
-              interviews.
+              Having personally gone through the interviewing process, it was
+              frustrating to have to find resources from everywhere to prepare
+              for my technical interviews.
               <br />
               <br />
               This handbook contains the essence of technical interviewing I
-              gathered over my last job hunt, which allowed me to clinch{' '}
-              <a href={BLIND_OFFER_NUMBERS_URL}>
-                9 offers out of 11 top Bay Area companies
-              </a>{' '}
-              -{' '}
-              <strong>Facebook, Google, Airbnb, Palantir, Dropbox, Lyft</strong>
-              , and some startups!
+              gathered over my last job hunt, which allowed me to clinch 9
+              offers out of 11 top Bay Area companies -{' '}
+              <strong>Google, Airbnb, Palantir, Dropbox, Lyft</strong>, and some
+              startups!
             </p>
           </div>
         </div>

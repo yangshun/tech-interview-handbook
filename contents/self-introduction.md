@@ -66,15 +66,15 @@ Prepare a self introduction that follows the following outline (inspired by "Cra
 
 ## Examples
 
-### Example 1: Front End Engineer at Facebook
+### Example 1: Front End Engineer at Meta
 
 #### Self introduction
 
-> "Hi I'm Yangshun and I graduated from National University of Singapore in 2015 with a degree in Computer Science. My interests are in Front End Engineering and I love to create beautiful and performant products with delightful user experiences.
+> "Hi I'm XXX and I graduated from National University of Singapore in 2015 with a degree in Computer Science. My interests are in Front End Engineering and I love to create beautiful and performant products with delightful user experiences.
 >
 > Back in school, I designed and built a web application, NUSMods which solves a huge problem of class and timetable planning every semester. It receives over a million pageviews a month and is used by over 40,000 NUS students and even some professors. It is built using a modern web technology stack - React, Redux, Jest, Babel, Flow, webpack and is mobile-responsive."
 >
-> I'm interested in the Front End Engineer role at Facebook because I have been using Facebook Open Source Front End technologies for a while now and am inspired by Facebook's mission and Open Source culture.
+> I'm interested in the Front End Engineer role at Meta because I have been using Meta Open Source Front End technologies for a while now and am inspired by Meta's mission and Open Source culture.
 
 #### Breakdown
 
@@ -83,13 +83,13 @@ Prepare a self introduction that follows the following outline (inspired by "Cra
 - "It receives over a million pageviews a month and is used by over 30,000 NUS undergraduates and even some professors."
   - Mention something about the project which stands out
 - "It is built using a modern web technology stack - React, Redux, Jest, Babel, Flow, webpack and is mobile-responsive."
-  - Facebook tech stack! Also hints that you keep yourself updated with modern web technologies
+  - Meta tech stack! Also hints that you keep yourself updated with modern web technologies
 
 ### Example 2: Front End Engineer at Lyft
 
 #### Self introduction
 
-> "Hi I'm Yangshun and I graduated from National University of Singapore in 2015 with a degree in Computer Science. My interests are in Front End Engineering and I love to create beautiful performant products with delightful user experiences.
+> "Hi I'm XXX and I graduated from National University of Singapore in 2015 with a degree in Computer Science. My interests are in Front End Engineering and I love to create beautiful performant products with delightful user experiences.
 >
 > I previously worked at Grab where I led the Grab for Work project. Grab for Work was a service for companies to make corporate transportation expenses convenient. Companies can create employee groups, set ride policies and share corporate payment methods with their employees. I built the project with another engineer over the period of 3 months on a React/Redux and Golang stack."
 >

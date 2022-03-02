@@ -37,8 +37,8 @@ export default [
         section was an absolutely invaluable resource and a great overall
         reference to brush up my fundamentals with the helpful hints and tips
         provided, and also solve some of the most popular questions categorized
-        by type. I certainly have Yangshun to thank for helping me land my dream
-        job at Google!
+        by type. I certainly have this handbook to thank for helping me land my
+        dream job at Google!
       </>
     ),
   },
@@ -86,9 +86,8 @@ export default [
         <br />
         With the help of Tech Interview Handbook, I was able to land offers from
         Google, Amazon, Uber and several other great companies. Really
-        appreciate Yangshun and other contributors for putting out such quality
-        content for the community. I'd wholeheartedly recommend this handbook to
-        anyone!
+        appreciate the contributors for putting out such quality content for the
+        community. I'd wholeheartedly recommend this handbook to anyone!
       </>
     ),
   },

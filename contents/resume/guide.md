@@ -29,6 +29,6 @@ From my experience as a FAANG interviewer as well as my discussions with countle
 
 :::tip Expert tip
 
-To maximize your chances of being shortlisted, I recommend getting your resume reviewed by [FAANG Tech Leads - a team of ex-FAANG hiring managers](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=resume_guide&aff=1e80c401fe7e2). I personally used their service during my applications and it helped me get shortlisted at multiple Bay Area FAANG companies (and more). It is currently **70% off as part of a limited time promotion**.
+To maximize your chances of being shortlisted, consider getting your resume reviewed by [FAANG Tech Leads - a team of ex-FAANG hiring managers](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=resume_guide&aff=1e80c401fe7e2). It is currently **70% off as part of a limited time promotion**.
 
 :::

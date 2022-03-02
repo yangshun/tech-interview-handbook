@@ -33,9 +33,10 @@ function FAANGTechLeads({className, position}) {
           <p className={styles.tagline}>
             <strong>Best resume service for FAANG</strong>
             <br />
-            FAANG Tech Leads' <u>resume review service</u> helped me get
-            shortlisted at top Bay Area companies. Their resume templates are
-            only <u>$28 now (70% off)</u> and tailored to your experience level.
+            FAANG Tech Leads' <u>resume review service</u> helped many people
+            get shortlisted at top Bay Area companies. Their resume templates
+            are only <u>$28 now (70% off)</u> and tailored to your experience
+            level.
           </p>
         </a>
       );
@@ -52,9 +53,10 @@ function FAANGTechLeads({className, position}) {
           <p className={styles.tagline}>
             <strong>Get shortlisted at FAANG</strong>
             <br />
-            FAANG Tech Leads' <u>resume review service</u> helped me get
-            shortlisted at top Bay Area companies. Their resume templates are
-            only <u>$28 now (70% off)</u> and tailored to your experience level.
+            FAANG Tech Leads' <u>resume review service</u> helped many people
+            get shortlisted at top Bay Area companies. Their resume templates
+            are only <u>$28 now (70% off)</u> and tailored to your experience
+            level.
           </p>
         </a>
       );
@@ -96,27 +98,6 @@ function Moonchaser({className, position}) {
         <strong>Get paid more.</strong> Receive risk-free salary negotiation
         advice from <u>Moonchaser</u>. You pay nothing unless your offer is
         increased. <u>Book a free consultation today!</u>
-      </p>
-    </a>
-  );
-}
-
-function Educative({className, position}) {
-  return (
-    <a
-      className={clsx(styles.container, className)}
-      href={`https://educative.io/tech-interview-handbook?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=x23W`}
-      key={Math.random()}
-      target="_blank"
-      rel="noopener"
-      onClick={() => {
-        window.gtag('event', `educative.${position}.click`);
-      }}>
-      <p className={styles.tagline}>
-        <strong>Looking to get hired at FAANG?</strong>
-        <br />
-        <u>Educative</u> offers many great courses to improve your interview
-        game. <u>Join today for a 10% discount!</u>
       </p>
     </a>
   );
@@ -231,13 +212,13 @@ export default React.memo(function SidebarAd({position}) {
         }
 
         return Math.random() > 0.5 ? (
-          <Moonchaser
+          <AlgoMonster
             className={backgroundClass}
             key={Math.random()}
             position={position}
           />
         ) : (
-          <Educative
+          <EducativeCoding
             className={backgroundClass}
             key={Math.random()}
             position={position}
