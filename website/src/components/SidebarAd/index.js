@@ -19,48 +19,25 @@ const BACKGROUNDS = [
 ];
 
 function FAANGTechLeads({className, position}) {
-  switch (position) {
-    case 'docs_bottom':
-      return (
-        <a
-          className={clsx(styles.container, className)}
-          href={`https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=1e80c401fe7e2`}
-          target="_blank"
-          rel="noopener"
-          onClick={() => {
-            window.gtag('event', `faangtechleads.${position}.click`);
-          }}>
-          <p className={styles.tagline}>
-            <strong>Best resume service for FAANG</strong>
-            <br />
-            FAANG Tech Leads' <u>resume review service</u> helped many people
-            get shortlisted at top Bay Area companies. Their resume templates
-            are only <u>$28 now (70% off)</u> and tailored to your experience
-            level.
-          </p>
-        </a>
-      );
-    default:
-      return (
-        <a
-          className={clsx(styles.container, className)}
-          href={`https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=1e80c401fe7e2`}
-          target="_blank"
-          rel="noopener"
-          onClick={() => {
-            window.gtag('event', `faangtechleads.${position}.click`);
-          }}>
-          <p className={styles.tagline}>
-            <strong>Get shortlisted at FAANG</strong>
-            <br />
-            FAANG Tech Leads' <u>resume review service</u> helped many people
-            get shortlisted at top Bay Area companies. Their resume templates
-            are only <u>$28 now (70% off)</u> and tailored to your experience
-            level.
-          </p>
-        </a>
-      );
-  }
+  return (
+    <a
+      className={clsx(styles.container, className)}
+      href={`https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=1e80c401fe7e2`}
+      target="_blank"
+      rel="noopener"
+      onClick={() => {
+        window.gtag('event', `faangtechleads.${position}.click`);
+      }}>
+      <p className={styles.tagline}>
+        <strong>Craft the perfect resume for FAANG</strong>
+        <br />
+        Save time crafting your resume with FAANG Tech Leads'{' '}
+        <u>FAANG-ready resume templates and examples</u> which have helped many
+        Software Engineers get shortlisted at top Bay Area companies. Grab their
+        resume templates now for only <strong>$28 (70% off)</strong>!
+      </p>
+    </a>
+  );
 }
 
 function AlgoMonster({className, position}) {
