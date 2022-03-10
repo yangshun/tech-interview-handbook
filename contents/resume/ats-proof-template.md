@@ -19,15 +19,15 @@ Most companies these days automate their resume screening process through Applic
 
 :::tip Expert tip
 
-[FAANG Tech Leads](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) is currently offering templates and references at only **$28 (70% off)**.
+[FAANG Tech Leads](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) is currently offering templates and references at only **70% off**.
 
-Their templates are:
+Their templates:
 
-- Created by ex-FAANG hiring managers based on top resumes received from thousands of candidate applications
-- Guaranteed readability by FAANG ATS
-- Catered to various experience levels
+- Are created by ex-FAANG hiring managers based on top resumes received from hundreds of candidate applications
+- Guarantees readability by FAANG ATS
+- Cater to various experience levels
 
-They also offer resume references from candidates who have received multiple offers from Bay Area FAANG companies - which are helpful in helping you craft content that meets the same bar. [Check it out](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2)!
+They also offer resume references from candidates who have received multiple offers from FAANG companies - which are helpful in helping you craft content that meets the same bar. [Check it out](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2)!
 
 :::
 
@@ -48,7 +48,7 @@ They also offer resume references from candidates who have received multiple off
 
 New fonts may convert letters into special characters which are not readable by the ATS. Fonts you should use - **Arial, Calibri, Garamond**.
 
-Ensure your font size remains readable for humans later on in the hiring process - nothing less than the minimum size of **10px** for readability.
+Ensure your font size remains readable for humans later on in the hiring process - use a minimum size of **10px** for readability.
 
 ## Add sections with standard headings and ordering
 

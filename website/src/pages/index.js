@@ -112,9 +112,9 @@ function Home() {
       <WhatIsThisSection />
       <TweetsSection />
       <HowToUseSection />
-      <EducativeSection />
+      <AlgoMonsterSection />
       <FeaturesSection />
-      <MoonchaserSection />
+      <EducativeSection />
       <SuccessStoriesSection />
       <SponsorshipSection />
       <PreFooterSection />
@@ -434,7 +434,7 @@ function FeaturesSection() {
 
 function EducativeSection() {
   return (
-    <div className={classnames('padding-vert--lg', styles.sectionSponsorAlt)}>
+    <div className={classnames('padding-vert--lg', styles.sectionSponsor)}>
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -442,9 +442,9 @@ function EducativeSection() {
               <div>
                 <h2 className={styles.sectionSponsorTitle}>
                   <strong>
-                    Looking to get hired at FAANG? Educative offers a ton of
-                    great courses to improve your interview game. Join today for
-                    a 10% discount!
+                    Looking to get hired at FAANG? Educative's interview courses
+                    helped many people get the job at FAANG. Join today for a
+                    10% discount!
                   </strong>
                 </h2>
                 <div className="margin-vert--lg">
@@ -457,6 +457,41 @@ function EducativeSection() {
                       window.gtag('event', 'educative.homepage.click');
                     }}>
                     Check out courses&nbsp;&nbsp;→
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+function AlgoMonsterSection() {
+  return (
+    <div className={classnames('padding-vert--lg', styles.sectionSponsorAlt)}>
+      <div className="container">
+        <div className="row">
+          <div className="col col--8 col--offset-2">
+            <div className="margin-vert--lg text--center">
+              <div>
+                <h2 className={styles.sectionSponsorTitle}>
+                  <strong>
+                    Developed by Google engineers, AlgoMonster is the fastest
+                    way to get a software engineering job. Join today for a 70%
+                    discount!
+                  </strong>
+                </h2>
+                <div className="margin-vert--lg">
+                  <a
+                    className="button button--secondary button--lg"
+                    href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack="
+                    rel="noopener"
+                    target="_blank"
+                    onClick={() => {
+                      window.gtag('event', 'algomonster.homepage.click');
+                    }}>
+                    Stop grinding and study with a plan&nbsp;&nbsp;→
                   </a>
                 </div>
               </div>

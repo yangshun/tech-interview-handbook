@@ -29,12 +29,13 @@ function FAANGTechLeads({className, position}) {
         window.gtag('event', `faangtechleads.${position}.click`);
       }}>
       <p className={styles.tagline}>
-        <strong>Craft the perfect resume for FAANG</strong>
-        <br />
+        <strong className={styles.title}>
+          Craft the perfect resume for FAANG
+        </strong>
         Save time crafting your resume with FAANG Tech Leads'{' '}
         <u>FAANG-ready resume templates and examples</u> which have helped many
-        Software Engineers get shortlisted at top Bay Area companies. Grab their
-        resume templates now for only <strong>$28 (70% off)</strong>!
+        Software Engineers get interviews at top Bay Area companies. Grab them
+        now for a whopping <strong>70% off</strong>!
       </p>
     </a>
   );
@@ -51,8 +52,9 @@ function AlgoMonster({className, position}) {
         window.gtag('event', `algomonster.${position}.click`);
       }}>
       <p className={styles.tagline}>
-        <strong>Stop grinding and study with a plan! </strong>
-        <br />
+        <strong className={styles.title}>
+          Stop grinding. Study with a plan
+        </strong>
         Developed by Google engineers, <u>AlgoMonster</u> is the fastest way to
         get a software engineering job. <u>Join today for a 70% discount!</u>!
       </p>
@@ -72,9 +74,10 @@ function Moonchaser({className, position}) {
         window.gtag('event', `moonchaser.${position}.click`);
       }}>
       <p className={styles.tagline}>
-        <strong>Get paid more.</strong> Receive risk-free salary negotiation
-        advice from <u>Moonchaser</u>. You pay nothing unless your offer is
-        increased. <u>Book a free consultation today!</u>
+        <strong className={styles.title}>Get paid more.</strong> Receive
+        risk-free salary negotiation advice from <u>Moonchaser</u>. You pay
+        nothing unless your offer is increased.{' '}
+        <u>Book a free consultation today!</u>
       </p>
     </a>
   );
@@ -92,8 +95,7 @@ function EducativeCoding({className, position}) {
         window.gtag('event', `educative.coding.${position}.click`);
       }}>
       <p className={styles.tagline}>
-        <strong>Get the job at FAANG</strong>
-        <br />
+        <strong className={styles.title}>Get the job at FAANG</strong>
         "Grokking the Coding Interview: Patterns for Coding Questions" by
         Educative is the best course for improving your algorithms interview
         game. <u>Join today for a 10% discount!</u>
@@ -114,8 +116,7 @@ function EducativeSystemDesign({className, position}) {
         window.gtag('event', `educative.system_design.${position}.click`);
       }}>
       <p className={styles.tagline}>
-        <strong>Get the job at FAANG</strong>
-        <br />
+        <strong className={styles.title}>Get the job at FAANG</strong>
         "Grokking the System Design Interview" by Educative is a highly
         recommended course for improving your system design interview game.{' '}
         <u>Join today for a 10% discount!</u>

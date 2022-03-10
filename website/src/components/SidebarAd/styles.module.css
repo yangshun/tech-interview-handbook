@@ -61,6 +61,12 @@
   margin-bottom: 0;
 }
 
+.title {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.1rem;
+}
+
 .logo {
   width: 96px;
 }
