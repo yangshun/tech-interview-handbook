@@ -25,7 +25,7 @@ TopResume provides a [free all-in-one review](https://tidd.ly/3GxVIs9) of your r
 
 ## 2. Test readability with industry-standard ATS
 
-Test the readability of your resume with an industry-standard ATS using this [free resume parser tool](https://www.faangtechleads.com/resume/check?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=resume_parser&aff=1e80c401fe7e2) by FAANG Tech Leads. Most big companies (Figma, Palantir, Netflix, Twitch, Yelp and several others) use such resume parsers.
+Test the readability and formatting of your resume using [FAANG Tech Leads' free resume parser tool](https://www.faangtechleads.com/resume/check?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=resume_parser&aff=1e80c401fe7e2). Most big companies use such resume parsers, including but not limited to Figma, Palantir, Netflix, Twitch, and Yelp.
 
 ## 3. The plain text file test
 

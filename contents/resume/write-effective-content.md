@@ -34,7 +34,7 @@ It is daunting to start on a fresh slate, so I recommend you start by making a l
 
 :::tip Expert tip
 
-To maximize efficiency in applying for several job types, create and keep updated a "Master resume" which you basically use to maintain an exhaustive list of all points under every section of your resume. When applying for each job, you can make a copy of the Master and eliminate or optimize points as necessary.
+To maximize efficiency in applying for several job types, create and keep a "Master resume" updated which will basically contain an exhaustive list of all points under every section of your resume. When applying for each job, you can make a copy of the Master document and eliminate or optimize points as necessary.
 
 :::
 

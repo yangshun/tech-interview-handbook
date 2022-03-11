@@ -19,15 +19,15 @@ Most companies these days automate their resume screening process through Applic
 
 :::tip Expert tip
 
-[FAANG Tech Leads](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) is currently offering templates and references at only **70% off**.
+[FAANG Tech Leads](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) is currently offering resume templates and references at **70% off**.
 
 Their templates:
 
 - Are created by ex-FAANG hiring managers based on top resumes received from hundreds of candidate applications
-- Guarantees readability by FAANG ATS
+- Guarantee readability by FAANG ATS
 - Cater to various experience levels
 
-They also offer resume references from candidates who have received multiple offers from FAANG companies - which are helpful in helping you craft content that meets the same bar. [Check it out](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2)!
+They also offer resume examples/references from candidates who have received multiple offers from FAANG companies - which are helpful in helping you craft content that meets the same bar. [Check it out](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2)!
 
 :::
 

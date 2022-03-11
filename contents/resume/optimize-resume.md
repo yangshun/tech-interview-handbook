@@ -23,7 +23,7 @@ With the basic resume up, we can next try to optimize the resume content. Here a
 
 **Do's**
 
-- Including more points of "average" achievements in your resume is worse than just minimizing to a few points of your best achievements to better highlight them
+- Highlighting a few of your best achievements is better than including many "average" achievements in your resume
 - Use only 1 page for your resume
 
 **Don'ts**
@@ -32,7 +32,7 @@ With the basic resume up, we can next try to optimize the resume content. Here a
 
 ## 2. Keyword optimization
 
-Imagine you are a hiring manager or recruiter screening a resume while juggling many other tasks in your job - you simply won't have much time on each resume! When a hiring manager is looking at any resume, they are in fact quickly scanning for keywords of skills or experiences that they value, before paying any additional attention to your resume.
+Imagine you are a hiring manager or recruiter screening a resume while juggling many other tasks in your job - you simply won't have much time on each resume! When a hiring manager looks at a resume, they are in fact quickly scanning for keywords of skills or experiences that they value, before paying any additional attention to your resume.
 
 Recruiters and ATS do that as well, but based on the job description that the hiring manager helped to write. That is why optimizing your resume based on job descriptions is very important.
 
@@ -50,7 +50,7 @@ You should always analyze the job description for must-have and good-to-have ski
 
 Include them under the "Skills" section and pepper the same keywords into the "Work Experience" and "Education" sections. Be sure to closely imitate the language within the job description.
 
-Remember to include common abbreviations as well e.g. "SEM" - Search engine marketing
+Remember to include the full version of common abbreviations as well. E.g. Amazon Web Services instead of AWS, Google Cloud Platform instead of GCP.
 
 However, do not do keyword stuffing for the sake of it - always remember that the resume will be read by a recruiter or hiring manager eventually.
 
@@ -62,9 +62,9 @@ Analyze the job description and determine how important each skill and experienc
 
 While optimizing for every application is ideal, you can generalize your resume to a type of position.
 
-- First, collate 3 to 5 job descriptions for that position
-- Then, copy and paste them into a .txt file and upload it into a free word and phrase frequency tool like Online-Utility.org's [Text Analyzer](https://www.online-utility.org/text/analyzer.jsp) to identify regularly used keywords
-- Incorporate skills and experiences that you have into the resume
+1. Collate 3 to 5 job descriptions for that position
+1. Copy and paste them into a `.txt` file and upload it into a free "word and phrase" frequency tool like [Online-Utility.org's Text Analyzer](https://www.online-utility.org/text/analyzer.jsp) to identify regularly used keywords
+1. Incorporate skills and experiences that you have into the resume
 
 :::
 
