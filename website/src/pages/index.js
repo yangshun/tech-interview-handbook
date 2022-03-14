@@ -564,6 +564,20 @@ function TweetsSection() {
           </div>
           <div className="col col--4">
             <Tweet
+              url="https://twitter.com/MSFTImagine/status/1502675788335886344"
+              handle="MSFTImagine"
+              name="Microsoft Imagine Cup"
+              date="Mar 13, 2022"
+              avatar="https://pbs.twimg.com/profile_images/1268173752745046016/nW2kPbvp_400x400.png"
+              content={
+                <>
+                  Ready to rock your #Coding interviews? Follow along as
+                  @yangshunz shares tips on how to land your dream job from
+                  personal experience.
+                </>
+              }
+            />
+            <Tweet
               url="https://twitter.com/palashv2/status/1452981345899085833"
               handle="palashv2"
               name="Palash"
@@ -599,14 +613,6 @@ function TweetsSection() {
                   And it's free.
                 </>
               }
-            />
-            <Tweet
-              url="https://twitter.com/rwenderlich/status/1166336060533727232"
-              handle="rwenderlich"
-              name="raywenderlich.com"
-              date="Aug 27, 2019"
-              avatar="https://pbs.twimg.com/profile_images/1445056225478021122/2jTrV6Fi_400x400.jpg"
-              content={<>Nice open source tech interview handbook</>}
             />
           </div>
           <div className="col col--4">
@@ -651,6 +657,14 @@ function TweetsSection() {
                   to help you ace your next technical interview.
                 </>
               }
+            />
+            <Tweet
+              url="https://twitter.com/rwenderlich/status/1166336060533727232"
+              handle="rwenderlich"
+              name="raywenderlich.com"
+              date="Aug 27, 2019"
+              avatar="https://pbs.twimg.com/profile_images/1501959146568101895/gAeUOeXe_400x400.png"
+              content={<>Nice open source tech interview handbook</>}
             />
           </div>
         </div>
