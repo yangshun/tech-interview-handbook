@@ -10,20 +10,8 @@ import TOCCollapsible from '@theme/TOCCollapsible';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 import {ThemeClassNames, useWindowSize} from '@docusaurus/theme-common';
+import CarbonAd from '../../components/CarbonAd';
 import SidebarAd from '../../components/SidebarAd';
-
-const CarbonAd = React.memo(() => {
-  return (
-    <div>
-      <script
-        async
-        type="text/javascript"
-        src="//cdn.carbonads.com/carbon.js?serve=CEAI4537&placement=wwwtechinterviewhandbookorg"
-        id="_carbonads_js"
-      />
-    </div>
-  );
-});
 
 export default function DocItem(props) {
   const {content: DocContent} = props;

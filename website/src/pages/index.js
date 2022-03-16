@@ -7,6 +7,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
 import successStories from '../data/successStories';
+import CarbonAd from '../components/CarbonAd';
 
 const BLIND_75_URL =
   'https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU';
@@ -110,6 +111,7 @@ function Home() {
       description={siteConfig.tagline}>
       <HeroSection />
       <WhatIsThisSection />
+      <CarbonAdSection />
       <TweetsSection />
       <HowToUseSection />
       <AlgoMonsterSection />
@@ -210,6 +212,20 @@ function WhatIsThisSection() {
   );
 }
 
+function CarbonAdSection() {
+  return (
+    <div className={classnames('padding-vert--lg', styles.section)}>
+      <div className="container">
+        <div className="row">
+          <div className="col col--8 col--offset-2">
+            <CarbonAd />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function MoonchaserSection() {
   // Because the SSR and client output can differ and hydration doesn't patch attribute differences,
   // we'll render this on the browser only.
@@ -281,7 +297,7 @@ function HowToUseStep({index, title, ctaLink, contents}) {
 
 function HowToUseSection() {
   return (
-    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+    <div className={classnames('padding-vert--xl', styles.sectionAlt2)}>
       <div className="container">
         <div className="row">
           <div className="col col--10 col--offset-1">
@@ -505,7 +521,7 @@ function AlgoMonsterSection() {
 
 function TweetsSection() {
   return (
-    <div className={classnames('padding-vert--xl', styles.sectionAlt2)}>
+    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
       <div className="container">
         <h2
           className={classnames(
@@ -807,7 +823,7 @@ function SponsorshipSection() {
 
 function PreFooterSection() {
   return (
-    <div className={classnames('padding-vert--xl', styles.sectionAlt2)}>
+    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
       <div className="container">
         <div className="row">
           <div className="col col--4">
