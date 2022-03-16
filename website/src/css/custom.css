@@ -168,13 +168,17 @@ html[data-theme='dark'] .navbar-icon-telegram:before {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial,
     sans-serif;
-}
-#carbonads {
   display: flex;
-  max-width: 330px;
   background-color: hsl(0, 0%, 98%);
   box-shadow: 0 1px 4px 1px hsla(0, 0%, 0%, 0.1);
   z-index: 100;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+html[data-theme='dark'] #carbonads {
+  background-color: hsl(0, 0%, 15%);
+  box-shadow: 0 0 1px hsl(0deg 0% 0% / 0.085), 0 0 2px hsl(0deg 0% 0% / 0.085),
+    0 0 4px hsl(0deg 0% 0% / 0.085), 0 0 8px hsl(0deg 0% 0% / 0.085);
 }
 #carbonads a {
   color: inherit;
@@ -220,4 +224,7 @@ html[data-theme='dark'] .navbar-icon-telegram:before {
   position: absolute;
   bottom: 0;
   right: 0;
+}
+html[data-theme='dark'] #carbonads .carbon-poweredby {
+  background: #1e2021;
 }

@@ -78,7 +78,8 @@ export default function DocItem(props) {
                     <Heading as="h1">{title}</Heading>
                   </header>
                 )}
-                <div className="margin--md">
+                <DocItemFooter {...props} />
+                <div className="margin-top--md">
                   <script
                     async
                     type="text/javascript"
@@ -86,9 +87,9 @@ export default function DocItem(props) {
                     id="_carbonads_js"
                   />
                 </div>
-                <DocItemFooter {...props} />
-                <br />
-                <DocContent />
+                <div className="margin-top--md">
+                  <DocContent />
+                </div>
               </div>
             </article>
             <DocPaginator previous={metadata.previous} next={metadata.next} />
