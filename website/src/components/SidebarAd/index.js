@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
 import clsx from 'clsx';

@@ -78,7 +78,14 @@ export default function DocItem(props) {
                     <Heading as="h1">{title}</Heading>
                   </header>
                 )}
-
+                <div className="margin--md">
+                  <script
+                    async
+                    type="text/javascript"
+                    src="//cdn.carbonads.com/carbon.js?serve=CEAI4537&placement=wwwtechinterviewhandbookorg"
+                    id="_carbonads_js"
+                  />
+                </div>
                 <DocItemFooter {...props} />
                 <br />
                 <DocContent />
