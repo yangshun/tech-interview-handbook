@@ -7,7 +7,6 @@ export default React.memo(() => {
       {() => (
         <div>
           <script
-            async
             type="text/javascript"
             src="//cdn.carbonads.com/carbon.js?serve=CEAI4537&placement=wwwtechinterviewhandbookorg"
             id="_carbonads_js"
