@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import Layout from '@theme/Layout';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
@@ -144,11 +145,11 @@ function HeroSection() {
           </a>
         </p>
         <div className={styles.buttons}>
-          <a
+          <Link
             className={classnames('button button--primary button--lg')}
-            href={useBaseUrl('introduction')}>
+            to="/introduction">
             Start reading now&nbsp;&nbsp;→
-          </a>
+          </Link>
         </div>
         <div className="margin-top--lg">
           <iframe
@@ -285,11 +286,9 @@ function HowToUseStep({index, title, ctaLink, contents}) {
         </ul>
       </div>
       <div class="card__footer">
-        <a
-          class="button button--primary button--block"
-          href={useBaseUrl(ctaLink)}>
+        <Link class="button button--primary button--block" to={ctaLink}>
           Read now →
-        </a>
+        </Link>
       </div>
     </div>
   );
@@ -431,11 +430,9 @@ function FeaturesSection() {
                       {description}
                     </p>
                     {link && (
-                      <a
-                        className={styles.featuresRowItemLink}
-                        href={useBaseUrl(link)}>
+                      <Link className={styles.featuresRowItemLink} to={link}>
                         <strong>Read now →</strong>
-                      </a>
+                      </Link>
                     )}
                   </div>
                 </div>
@@ -808,11 +805,11 @@ function SponsorshipSection() {
                 target="_blank">
                 Advertise with us!
               </a>
-              <a
+              <Link
                 className="button button--secondary button--lg"
-                href="/advertise">
+                to="/advertise">
                 Find out more
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -834,11 +831,11 @@ function PreFooterSection() {
               It's free! Start improving your interview game today and get the
               job at the company of your dreams.
             </p>
-            <a
+            <Link
               className={classnames('button button--primary button--lg')}
-              href={useBaseUrl('introduction')}>
+              to="/introduction">
               Start reading now&nbsp;&nbsp;→
-            </a>
+            </Link>
           </div>
         </div>
       </div>

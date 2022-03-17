@@ -151,12 +151,12 @@ function DocSidebarItemLink({item, onItemClick, activePath, level, ...props}) {
         className,
       )}
       key={label}>
-      <a
+      <Link
         className={clsx('menu__link', {
           'menu__link--active': isActive,
         })}
         aria-current={isActive ? 'page' : undefined}
-        href={href}
+        to={href}
         {...(isInternalUrl(href) && {
           onClick: onItemClick,
         })}
@@ -169,7 +169,7 @@ function DocSidebarItemLink({item, onItemClick, activePath, level, ...props}) {
             <IconExternalLink />
           </span>
         )}
-      </a>
+      </Link>
     </li>
   );
 }
