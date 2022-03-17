@@ -14,6 +14,8 @@ A number of the folks I referred have completed their interviews and are in the 
 
 ![Meta logo](/img/meta-facebook.jpg)
 
+**Disclaimer: Opinions are my own and do not represent the views of my employer (Meta)**
+
 <!--truncate-->
 
 ## Products
@@ -24,31 +26,31 @@ The impact is huge - every line of code you write has the potential to impact mi
 
 ### Teams in Meta Singapore
 
-Let's talk about some of the teams in Meta Singapore since I currently work in Singapore and many of the readers are based in Singapore.
+Let's talk about some of the teams in Meta Singapore since I currently work in Singapore and many of the readers are based in Singapore. **Note that this section will go out of date as priorities shift. Last update: 2022/03/17.**
 
-In Meta SG we have two huge organizations - Commerce Engineering and Ads & Business Growth. Both organizations, like most organizations in Meta, have global impact where the number of users are in the order of millions or more.
+In Meta SG we have two teams belonging to two organizations - Commerce Engineering and Ads & Business Platform. Both organizations, like most organizations in Meta, have global impact where the number of users are in the order of millions or more.
 
-Commerce Engineering (hardware sales) is Meta's next up and coming revenue stream and is also the team I work in. Commerce Engineering primarily deals with sale of Meta's hardware devices, from discovery to purchase to warranties, returns and support. If you heard of the Oculus Quest device, which is Meta's flagship VR device, my team is in-charge of building the web storefronts to sell them (currently https://www.oculus.com). In my team, I built the web infrastructure for the Oculus website which tens of other Oculus teams build on top of, built the React components for the web version of the Oculus Design System and also rearchitected the Content Management Platform to be compatible with React. It's definitely one of the highlights of my career to be building a product that contributed to Meta's 2nd highest revenue stream (and still growing)!
+Commerce Engineering (hardware sales) is Meta's next up and coming revenue stream and is also the organization which I work in. Commerce Engineering primarily deals with bringing Meta's hardware products to market - from building immersive digital storefronts and highly optimized checkout flows to delivering great post-sales experiences to platforms that manage the demand, production, testing and shipping of Meta hardware products across the entire supply chain. If you have heard of the Quest headset device, which is Meta's flagship VR device, my team is in-charge of building the web storefronts to sell them (currently https://www.oculus.com and https://portal.facebook.com). In my team, I built the web infrastructure for the Quest website which tens of other Oculus teams build on top of, built the React components for the web version of the Oculus Design System and also rearchitected the Content Management Platform rendering system to be compatible with React. It's definitely one of the highlights of my career to be building a product that contributed to Meta's 2nd highest revenue stream (and still growing)!
 
-On the Ads and Business side, there are multiple teams:
+On the Ads and Business organization, there are multiple teams:
 
-- Business Integrity Review - They work on building tools to catch bad advertisers (advertisers who create ads which violate our policies). They want to maximize Business Integrity outcomes by building a human review system for ads & commerce on Meta, driving end-to-end improvements in the workflows, and providing best-in-class tools to IP rights holders, etc.
+- Business Integrity - They work on building tools to catch bad advertisers (advertisers who create ads which violate our policies). They want to maximize Business Integrity outcomes by building a human review system for ads & commerce on Meta, driving end-to-end improvements in the workflows, and providing best-in-class tools to IP rights holders, etc.
 - Business Support Platform - They redefine the support experience across all Meta business products, making it available, effective and effortless for all businesses. They make sure businesses can identify the help resources available to them when they need assistance in accomplishing their goals across Meta's suite of business tools. Their tools will also effortlessly help marketers diagnose their issues and connect them to the best solution to solve their problem. They have also some investment into the machine learning space.
-- Small Businesses and Growth - They have Multiple sub-projects. There's a system for managing the delivery of communications to businesses, advertisers and creators across Meta's products. The system is used by hundreds of internal teams, manages few hundred million communications a day and supports delivery to hundred over channels on Facebook, Instagram, Email, Push notifications and out-of-app surfaces such as Ads Manager, Meta Business Suite, Commerce Manager, etc. There's also a team working on adding an appointment booking system and restaurant menus to relevant businesses on Meta.
+- Business Messaging Commerce - They build products that enable the Business Messaging ecosystem across Messenger, Instagram and WhatsApp.
 
-## Career Progression/Compensation
+## Career progression/compensation
 
-Meta is one of the best companies for ambitious people who want to grow their careers quickly. At Meta, promotions come sooner and we encourage employees to be at their top form. At Meta, our terminal level (level at which there is no pressure to promote) is E5 and most people get from E3 to E4 within 1-1.5 years and from E4 to E5 within 2-2.5 years (this is a pessimistic estimate, I've seen people go from E3 to E5 in under 2 years). As an E5 in Meta SG your annual compensation will be at least 300k annually, which is on par, if not higher than most director-level roles in non-tech industries in SG. Imagine getting to that level of pay within 5 years of your career!
+Meta is one of the best companies for ambitious people who want to grow their careers quickly. At Meta, promotions come sooner and we encourage employees to be at their top form. At Meta, our terminal level (level at which there is no pressure to promote) is E5 and most people get from E3 to E4 within 1-1.5 years and from E4 to E5 within 2-2.5 years (this is a conservative estimate - I've seen top performers go from E3 to E5 in under 2 years). As an E5 in Meta SG your annual compensation will be at least 300k annually, which is on par, if not higher than most director-level roles in non-tech industries in SG. Imagine getting to that level of pay within 5 years of your career!
 
 For comparison, Google, which is a similar company to Meta in many ways, has a slower promotion cycle - the average engineer at Google takes more than 2 years to get from L3 to L4, more than 3 years to get from L4 to L5 and more than 4 years to get from L5 to L6. At Google the terminal level is L4 so there's no pressure to promote. None of my peers are L6 at Google but a few are already E6 at Meta and it is quite achievable.
 
 Faster promotions also lead to better pay, so in most cases, Meta pays more than most other companies. Meta is one of the top companies in terms of reputation and prestige especially for engineers.
 
-## Company Prospects
+## Company prospects
 
-Meta is a tech giant products have over 3 billion active monthly users and Meta relies on ads as their primary source of revenue. Whether you like it or not, Meta products are around to stay for the next couple of years. Even if they are going to die off, it won't be that soon. Stock growth has been relatively strong over the past few years (doubled since I joined in Nov 2017), especially since 2020.
+Meta is a tech giant and their products have over 3 billion active monthly users. The company relies on ads as their primary source of revenue. Whether you like it or not, Meta products are around to stay for the next couple of years. Even if they are going to die off, it won't be that soon. Stock growth has been relatively strong over the past few years (doubled since I joined in Nov 2017), especially since 2020.
 
-Mark Zuckerberg is also betting on the [metaverse](https://about.fb.com/news/2021/10/founders-letter/). Personally I'm undecided on whether the metaverse is the future.
+Mark Zuckerberg is also betting on the [Metaverse](https://about.fb.com/news/2021/10/founders-letter/), which is obvious from the decision to change the company name from Facebook to Meta. Personally I'm undecided on whether the Metaverse is the future.
 
 ## Culture
 
@@ -62,9 +64,9 @@ There's so much to say about a company's culture, but hopefully you can infer so
 - Building cool internal tools - At Meta scale, it sometimes make sense for us to build our own internal tooling that has tight integration with our internal ecosystem as opposed to using an external service which might incur significant expenses and also pose security risks. We have teams building and maintaining our own tasks tool, code browsing and reviewing tool, a Q&A tool similar to Stack Overflow, a customized version of VS Code, an interview question bank, interview feedback tool, data visualization and querying tool, and a workflow automation tool similar to IFTTT/Zapier! Someone built a Pokedex app where you can catch a random Pokemon every time you close a task (I'm at 807/899 now!). I also have to mention that we have an internal meme maker which we can use to add customized internal memes to use in our comments in diff reviews and group posts
 - Code wins arguments - It's not gender, race or your background that wins debates, it's the work that you produce. Instead of spending time arguing over technical decisions, it is more convincing to write some code to demonstrate the point.
 - Beyond coding - We are also expected to contribute to the company beyond our coding, as in our perf evaluation we have a People axis, which measures how much you help and grow the people around you. People give talks, organize events, summits, do interviews, to score in this axis.
-- Fun Social Groups - Workplace is Meta's enterprise offering, it's essentially Facebook for companies. We have various interest groups where we can find colleagues to play board games, share cat photos, memes when we want to procrastinate on writing performance reviews, interesting puns, investing tips, and more!
+- Fun social groups - Workplace is Meta's enterprise offering, it's essentially Facebook for companies. We have various interest groups where we can find colleagues to play board games, share cat photos, memes when we want to procrastinate on writing performance reviews, interesting puns, investing tips, and more!
 
-## Mentorship and Growth
+## Mentorship and growth
 
 Mentorship is readily available at Meta all the way from interns to senior executives. One thing that stood out to me when I first joined Meta was the focus on mentorship. When I first joined the company and was in the Bootcamp program, I had a Bootcamp mentor. After joining a team, I was assigned a senior engineer as my mentor who was also my tech lead. Employees will have weekly 1:1s with their mentor and manager. For interns, each intern at Meta is assigned an intern manager, who will act as their mentor and is usually the person who came up with their internship project. The intern manager will be the main person evaluating the intern's work and they ultimately determine the intern's performance and if they receive a return offer at the end of their internship.
 
@@ -72,13 +74,13 @@ These days, as a tech lead myself, I have around 4 1:1s weekly with mentees and 
 
 There are also specialized mentorship programs for those who need it, technical mentorship, career growth mentorship, managerial role transition mentorship, etc.
 
-## Work-Life Balance
+## Work-life balance
 
 At Meta, you get to choose how fast you want to accelerate your career. Some people choose to take up more responsibilities, work more and ship more impact, usually resulting in faster professional growth, higher ratings and pay, while others work at their own comfortable pace; it's really up to the individual. The top performer on my team now is nearly getting to E5 with just around 2 years of working experience. They don't work beyond working hours, they're doing well because they're working smart and working on the most impactful and challenging problems.
 
 Every Meta employee has 21 days of leave/paid time off every year and this year the company gave everyone three company-wide paid holidays on Friday in the summer and also two Meta choice days - effectively more paid time off but they cannot be accrued.
 
-## Transfers and Mobility
+## Transfers and mobility
 
 It is extremely easy to move around in Meta because Meta understands that mobility is important to the happiness and welfare of employees. People move around quite often and people are eligible to consider team changes from their second year at the company onwards. Meta is a large company comprising of many organizations and each organization has their own unique culture. It can be refreshing to move to another part of the company, working on different domains, different products, experiencing a slightly different engineering culture, yet still be productive because you are using the same engineering tools as before. When engineers move around the company, positive things can happen - they bring the good practices from their previous organizations to the new organizations, networks are strengthened and new connections are formed. Because Meta has offices around the globe, it is also possible to transfer to different countries as long as there are no work authorization issues. Personally I relocated back to Meta Singapore office after working for 2 years in Meta Menlo Park and my manager has worked in **4 different offices** (Menlo Park, London, New York, Singapore) throughout her 9 years at Meta!
 
