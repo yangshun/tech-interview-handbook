@@ -190,12 +190,4 @@ module.exports = {
       },
     ],
   ],
-  scripts: [
-    {
-      src: '//scripts.mediavine.com/tags/tech-interview-handbook.js',
-      async: true,
-      'data-noptimize': 1,
-      'data-cfasync': 'false',
-    },
-  ],
 };
