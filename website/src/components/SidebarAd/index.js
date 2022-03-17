@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
 import clsx from 'clsx';
 
 import styles from './styles.module.css';
+
+const AD_REFRESH_RATE = 20 * 1000;
 
 const BACKGROUNDS = [
   styles.backgroundPurplin,
@@ -125,13 +127,22 @@ function EducativeSystemDesign({className, position}) {
 }
 
 export default React.memo(function SidebarAd({position}) {
+  const [counter, setCounter] = useState(0);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCounter((counter) => counter + 1);
+    }, AD_REFRESH_RATE);
+
+    return () => clearTimeout(timer);
+  }, [counter]);
+
   const backgroundClass =
     BACKGROUNDS[Math.floor(Math.random() * BACKGROUNDS.length)];
 
   // Because the SSR and client output can differ and hydration doesn't patch attribute differences,
   // we'll render this on the browser only.
   return (
-    <BrowserOnly>
+    <BrowserOnly key={counter}>
       {() => {
         const path = window.location.pathname;
         // Ugly hack to show conditional sidebar content.
