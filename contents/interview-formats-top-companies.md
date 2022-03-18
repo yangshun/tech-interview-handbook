@@ -5,6 +5,8 @@ description: Interview formats of the top tech companies. Know what to expect an
 sidebar_label: Top companies
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 :::info
 
 Due to COVID travel restrictions, many companies hold interviews remotely even for the onsite rounds, so the instructions might differ.
@@ -76,6 +78,8 @@ Are there companies you would like to know more about? Email us at [contact{at}t
 - Tips:
   - In rare cases, candidates may even be allowed to skip the phone interview round and advanced to onsite directly
   - For non-fresh grads, you only receive an offer if you are successfully matched with a team
+
+<InDocAd/>
 
 ## Indeed
 

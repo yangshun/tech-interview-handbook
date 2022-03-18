@@ -16,6 +16,8 @@ keywords:
   ]
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 Key points extracted from "Ten Rules for Negotiating a Job Offer" [Part 1](http://haseebq.com/my-ten-rules-for-negotiating-a-job-offer/) and [Part 2](https://haseebq.com/how-not-to-bomb-your-offer-negotiation/) by Haseeb Qureshi.
 
 ## Get everything in writing
@@ -45,6 +47,8 @@ Even if you don't particularly care what your friends/family/husband/mother thin
 > I'll look over some of these details and discuss it with my [FAMILY/CLOSE_FRIENDS/SIGNIFICANT_OTHER]. I'll reach out to you if I have any questions. Thanks so much for sharing the good news with me, and I'll be in touch!
 
 It's much harder to pressure someone if they're not the final decision-maker. So take advantage of that.
+
+<InDocAd/ >
 
 ## Have alternatives
 
@@ -79,6 +83,8 @@ It's kind of a brain-hack, both for yourself and for your negotiating partner. J
 The more unobjectionable and sympathetic your reason, the better. If it's medical expenses, or paying off student loans, or taking care of family, you'll bring tears to their eyes.
 
 Just go with it, state a reason for everything, and you'll find recruiters more willing to become your advocate.
+
+<InDocAd/ >
 
 ## Be motivated by more than just money
 

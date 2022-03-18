@@ -18,6 +18,8 @@ keywords:
 toc_max_heading_level: 2
 ---
 
+import InDocAd from '../\_components/InDocAd';
+
 Next, fill up your template!
 
 It is daunting to start on a fresh slate, so I recommend you start by making a laundry list of bullet points under each section, then optimizing it accordingly. This prevents excessive attention placed on premature optimization.
@@ -100,6 +102,8 @@ Structure in the following manner:
 - Programming languages - If impressive, include your familiarity by the number of lines you have written, for example "Over 10,000 lines"
 - Frameworks
 - Databases
+
+<InDocAd/>
 
 ## 4. Work experience
 

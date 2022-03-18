@@ -3,6 +3,8 @@ id: choosing-between-companies
 title: Choosing between companies
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 If you have passed the interviews and received multiple offers, congratulations on the feat! Now you are faced with yet another problem (albeit a good one!) of choosing between companies. Here we will provide some insights into the factors you should be considering when deciding on the company to join. Every individual is different and certain factors matter more/less to others, so only you can decide what is best for you.
 
 Do your due diligence by researching on the companies before deciding!
@@ -38,6 +40,8 @@ Do find out what products and teams your intended location works on so that you 
 ## Company prospects
 
 If you are awarded stocks, the company's prospects will affect your compensation! Is the company poised to be successful in the coming years or are there factors hindering the company's progress?
+
+<InDocAd/>
 
 ## Career growth
 
@@ -75,6 +79,8 @@ Since most readers are in tech roles, the tech culture of a company deserves spe
 It's no surprise that the FAANG companies hit all 12 points. Read more about it on [his blog post](https://blog.pragmaticengineer.com/pragmatic-engineer-test/).
 
 Which company's culture resonates with you the most?
+
+<InDocAd/>
 
 ## Work-life balance
 

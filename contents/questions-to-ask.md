@@ -3,6 +3,8 @@ id: questions-to-ask
 title: Questions to ask
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 Here are some good questions to ask at the end of the interview, extracted from various sources. The ones in **bold** are the ones that tend to make the interviewer go "That's a good question" and pause and think for a bit.
 
 ## General
@@ -55,6 +57,8 @@ These questions are suitable for any technical role.
 - There's "C++" (or Python, Swift or any other tech) in the job description. How will you estimate my proficiency in this tech in 3 months?
 - How do you think my expertise would be relevant to this team? What unique value can I add?
 
+<InDocAd/>
+
 ## Product
 
 - Tell me about the main products of your company.
@@ -93,6 +97,8 @@ These questions are suitable for asking Engineering Managers, especially useful 
 - What would be the most important problem you would want me to solve if I joined your team?
 - What opportunities for growth will your team provide?
 - What would I work on if I joined this team and who would I work most closely with?
+
+<InDocAd/>
 
 ## Leadership
 

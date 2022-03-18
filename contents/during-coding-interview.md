@@ -4,6 +4,8 @@ title: During the coding interview
 description: The coding interview can be divided into stages, follow these recommended steps for each stage to ace the coding interview
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 <head>
   <title>What to do during the coding interview | Tech Interview Handbook</title>
   <meta property="og:title" content="What to do during the coding interview | Tech Interview Handbook"/>
@@ -45,6 +47,8 @@ After you have sufficiently clarified the scope and intention of the problem, ex
 Start with a brute force approach, communicate it to the interviewer, explain the time and space complexity and why it is bad. It is unlikely that the brute force approach will be one that you will be coding. At this point, the interviewer will usually pop the dreaded "Can we do better?" question, meaning that they are looking for a more optimal approach. In my opinion, this is usually the hardest part of the interview. In general, look for repeated work and try to optimize them by potentially caching the calculated result somewhere and reference it later, rather than having to compute it all over again. There are some tips on tackling topic-specific questions that I dive into details below.
 
 Only start coding after you and your interviewer have agreed on an approach and they have given you the green light.
+
+<InDocAd/>
 
 ## What to do when stuck
 

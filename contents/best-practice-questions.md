@@ -8,6 +8,8 @@ keywords: [algorithm, coding, interview, questions, leetcode, blind 75]
 
 import AlgorithmCourses from './\_courses/AlgorithmCourses.md'
 
+import InDocAd from './\_components/InDocAd';
+
 <head>
   <title>Best practice questions by the author of Blind 75 | Tech Interview Handbook</title>
   <meta property="og:title" content="Best practice questions by the author of Blind 75 | Tech Interview Handbook"/>
@@ -73,6 +75,8 @@ The focus of week 2 is on linked lists, strings and matrix-based questions. The 
 | Pacific Atlantic Water Flow | Medium | [Link](https://leetcode.com/problems/pacific-atlantic-water-flow/) |
 | Minimum Window Substring | Hard | [Link](https://leetcode.com/problems/minimum-window-substring/) |
 
+<InDocAd/>
+
 ## Week 3 - Non-linear data structures
 
 The focus of week 3 is on non-linear data structures like trees, graphs and heaps. You should be familiar with the various tree traversal (in-order, pre-order, post-order) algorithms and graph traversal algorithms such as breadth-first search and depth-first search. In my experience, using more advanced graph algorithms (Dijkstra's and Floyd-Warshall) is quite rare and usually not necessary.
@@ -124,6 +128,8 @@ Week 4 builds up on knowledge from previous weeks but questions are of increased
 | Graph Valid Tree | Medium | [Link](https://leetcode.com/problems/graph-valid-tree/) (Premium) |
 | Number of Connected Components in an Undirected Graph | Medium | [Link](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/) (Premium) |
 | Alien Dictionary | Hard | [Link](https://leetcode.com/problems/alien-dictionary/) (Premium) |
+
+<InDocAd/>
 
 ## Week 5 - Dynamic programming
 

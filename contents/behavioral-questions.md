@@ -4,6 +4,8 @@ title: Behavioral interview common questions
 sidebar_label: Common questions
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 Here's a list of common behavioral questions to prepare for. If you prepare well for the general questions and apply the STAR format along with demonstrating qualities, you will be fine.
 
 ## General
@@ -102,6 +104,8 @@ Source: [Glassdoor](https://www.glassdoor.sg/Interview/ByteDance-Interview-Quest
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Dropbox-Interview-Questions-E415350.htm)
 
+<InDocAd />
+
 ## Hired
 
 - Tell me about yourself.
@@ -143,6 +147,8 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Lyft-Interview-Questions
 - Tell me the story of how you became who you are today and what made you apply to Palantir.
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Palantir-Technologies-Interview-Questions-E236375.htm)
+
+<InDocAd/>
 
 ## Slack
 

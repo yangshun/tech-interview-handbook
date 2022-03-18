@@ -3,6 +3,8 @@ id: landscape
 title: Landscape
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 import InternshipSalariesURL from '@site/static/img/internship-salaries.jpg';
 
 Most of the content covered here will be specific to the Bay Area. Landscape differences due to geographical location are mentioned briefly [below](#geographical-location).
@@ -24,6 +26,8 @@ Technology industry is an extremely fast-moving one. Many technologies used toda
 ### Flexible
 
 A software engineering job is perhaps the most flexible job that exists in terms of hours, location and environment. Physical location is usually not an issue and there are many tech companies that are fully remote. There's no formal attire to be worn and working hours are generally flexible. Your co-workers would stare at you weirdly if you came to work wearing a shirt and tie.
+
+<InDocAd />
 
 ## Internships vs full-time
 

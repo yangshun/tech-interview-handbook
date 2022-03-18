@@ -3,6 +3,8 @@ id: understanding-compensation
 title: Understanding compensation
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 Compensation is one of the largest factors when it comes to deciding between job offers. This section gives you a breakdown of the common components of compensation in the tech industry.
 
 In most companies, your compensation will consist of base salary, a performance bonus and equity/stocks. For compensation data, check out [Levels.fyi](https://www.levels.fyi?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation).
@@ -39,6 +41,8 @@ Alice is an Engineering Manager with 10 years of professional experience. Her ba
 
 Hence the amount of bonus you receive can be highly variable and senior employees get a higher proportion of their total compensation from bonuses.
 
+<InDocAd/>
+
 ## Equity/stocks
 
 Equity is what differentiates a tech job from a non-tech one. Equity means a share of the company; this signifies ownership and motivates employees to work in the best interests of the company. They can be a significant portion of one's compensation, sometimes even more than the base salary, especially for senior employees.
@@ -66,6 +70,8 @@ More reading on the topic can be done on the [equity compensation guide](https:/
 This is a one-time lump sum that is paid to you when you join a company. This amount is typically in the range of USD 10,000 to USD 20,000 but can even go up to USD 50,000 (Google) and USD 100,000 (Facebook).
 
 There can be conditions attached to signing bonuses, such as having to return a pro-rated amount if an employee leaves before the one-year mark. Make sure you are aware of them before you sign the offer.
+
+<InDocAd/>
 
 ## Misc bonuses/perks
 

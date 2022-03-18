@@ -5,6 +5,8 @@ description: Common interview formats of tech companies and what they entail
 sidebar_label: Overview
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 Interviews are a multi-stage process and each stage can consist of vastly different formats.
 
 ## Various formats
@@ -33,6 +35,8 @@ Examples
 - Build a flights listing app
 - Build a kanban app
 - Build a snake game
+
+<InDocAd/>
 
 ### Phone interview
 

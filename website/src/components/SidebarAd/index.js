@@ -57,7 +57,7 @@ function AlgoMonster({className, position}) {
           Stop grinding. Study with a plan
         </strong>
         Developed by Google engineers, <u>AlgoMonster</u> is the fastest way to
-        get a software engineering job. <u>Join today for a 70% discount!</u>!
+        get a software engineering job. <u>Join today for a 70% discount!</u>
       </p>
     </a>
   );
@@ -97,9 +97,9 @@ function EducativeCoding({className, position}) {
       }}>
       <p className={styles.tagline}>
         <strong className={styles.title}>Get the job at FAANG</strong>
-        "Grokking the Coding Interview: Patterns for Coding Questions" by
-        Educative is the best course for improving your algorithms interview
-        game. <u>Join today for a 10% discount!</u>
+        <u>Grokking the Coding Interview</u> teaches you techniques and question
+        patterns to be good at coding interviews.{' '}
+        <u>Get your 10% discount now!</u>
       </p>
     </a>
   );
@@ -118,8 +118,8 @@ function EducativeSystemDesign({className, position}) {
       }}>
       <p className={styles.tagline}>
         <strong className={styles.title}>Get the job at FAANG</strong>
-        "Grokking the System Design Interview" by Educative is a highly
-        recommended course for improving your system design interview game.{' '}
+        <u>Grokking the System Design Interview</u> is a highly recommended
+        course to get better at system design interviews.{' '}
         <u>Join today for a 10% discount!</u>
       </p>
     </a>
