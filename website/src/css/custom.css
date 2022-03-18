@@ -83,6 +83,10 @@ div[class^='announcementBar_'] {
   font-weight: bold;
 }
 
+.menu {
+  font-size: 0.875rem;
+}
+
 .theme-doc-markdown details {
   --ifm-alert-background-color: transparent;
   border: 1px solid var(--ifm-color-primary);

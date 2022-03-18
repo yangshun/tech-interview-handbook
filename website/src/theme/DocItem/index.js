@@ -10,7 +10,6 @@ import TOCCollapsible from '@theme/TOCCollapsible';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 import {ThemeClassNames, useWindowSize} from '@docusaurus/theme-common';
-import CarbonAd from '../../components/CarbonAd';
 import SidebarAd from '../../components/SidebarAd';
 
 export default function DocItem(props) {
@@ -30,7 +29,7 @@ export default function DocItem(props) {
 
   const shouldAddTitle =
     !hideTitle && typeof DocContent.contentTitle === 'undefined';
-  const windowSize = useWindowSize();
+  // const windowSize = useWindowSize();
   const canRenderTOC =
     !hideTableOfContents && DocContent.toc && DocContent.toc.length > 0;
   // const renderTocDesktop =
@@ -55,7 +54,6 @@ export default function DocItem(props) {
           <div className={styles.docItemContainer}>
             <article>
               <DocVersionBadge />
-
               {canRenderTOC && (
                 <TOCCollapsible
                   toc={DocContent.toc}
@@ -81,9 +79,6 @@ export default function DocItem(props) {
                 )}
                 <DocItemFooter {...props} />
                 <div className="margin-top--md">
-                  <CarbonAd />
-                </div>
-                <div className="margin-top--md">
                   <DocContent />
                 </div>
               </div>
@@ -94,7 +89,7 @@ export default function DocItem(props) {
             </div>
           </div>
         </div>
-        <div className="col col--3">
+        <div className="col col--4">
           {/* Change it such that sidebar ad is shown regardless whether there's a TOC */}
           <TOC
             toc={DocContent.toc}

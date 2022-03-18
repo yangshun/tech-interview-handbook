@@ -14,6 +14,7 @@ import {translate} from '@docusaurus/Translate';
 import {DocSidebarItems} from '@theme/DocSidebarItem';
 import styles from './styles.module.css';
 import SidebarAd from '../../components/SidebarAd';
+import CarbonAd from '../../components/CarbonAd';
 
 function useShowAnnouncementBar() {
   const {isActive} = useAnnouncementBar();

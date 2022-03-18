@@ -30,5 +30,19 @@ export default React.memo(() => {
     ref.current.appendChild(script);
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      [...ref.current.children].forEach((child) => {
+        if (child.id.startsWith('carbonads_')) {
+          ref.current.removeChild(child);
+        }
+      });
+    }, 100);
+
+    return () => {
+      clearInterval(interval);
+    };
+  });
+
   return <div ref={ref} />;
 });
