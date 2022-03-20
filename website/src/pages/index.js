@@ -139,9 +139,9 @@ function HeroSection() {
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">
           {siteConfig.tagline} <br />
-          Brought to by the author of the{' '}
+          Brought to you by the author of{' '}
           <a href={BLIND_75_URL} rel="noopener" target="_blank">
-            Blind 75 list
+            Blind 75
           </a>
         </p>
         <div className={styles.buttons}>

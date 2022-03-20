@@ -176,8 +176,7 @@ html[data-theme='dark'] .navbar-icon-telegram:before {
   background-color: hsl(0, 0%, 98%);
   box-shadow: 0 1px 4px 1px hsla(0, 0%, 0%, 0.1);
   z-index: 100;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin: 1rem auto;
 }
 html[data-theme='dark'] #carbonads {
   background-color: hsl(0, 0%, 15%);
