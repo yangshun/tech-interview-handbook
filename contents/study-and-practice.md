@@ -23,8 +23,8 @@ keywords:
 
 If you have been out of college for a while, it is highly advisable to review Computer Science fundamentals — Algorithms and Data Structures. Personally, I prefer to review as I practice, so I scan through my college notes and review the various algorithms as I work on algorithm problems from LeetCode. If you are looking for a central place to revise, here are some resources:
 
-- [The Algorithms and Data Structures Interview Crash Course](https://www.educative.io/courses/algorithms-ds-interview?aff=x23W), a course by Educative which is estimated to take 12h to complete
-- [AlgoMonster](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=), one of the most efficient way to study and practice for coding interviews
+- [The Algorithms and Data Structures Interview Crash Course](https://www.educative.io/courses/algorithms-ds-interview?aff=x23W), a course on Educative which is estimated to take 12h to complete
+- [AlgoMonster](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=), one of the most efficient ways to study and practice for coding interviews
 - [Master the Coding Interview: Data Structures + Algorithms on Udemy](https://fxo.co/DQpY)
 - [DSA Revision](https://dsarevision.com/) - Free 100-page PDF with question patterns and example questions
 - [Top 50 Data Structure and Algorithms Interview Questions for Programmers](https://medium.com/javarevisited/50-data-structure-and-algorithms-interview-questions-for-programmers-b4b1ac61f5b0)
@@ -47,7 +47,7 @@ Gain a broad exposure to questions from various topics. If you can spare the tim
 
 ### Identify question patterns
 
-As of writing, LeetCode has thousands of questions available. Which should you practice? It is not a good use of time to practice too many questions as after a while, you will realize that some questions are variants of one another and involve using similar techniques you've seen before. The trick here is to identify the question pattern and techniques you can use to solve variants of this question. Once you're familiar with a pattern, you'll be able to solve dozens of similar problems. Some techniques include - sliding window, two pointers, matrix traversal. The ["Grokking the Coding Interview: Patterns for Coding Questions" course by Educative](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W) shows you even more techniques and is highly recommended.
+As of writing, LeetCode has thousands of questions available. Which should you practice? It is not a good use of time to practice too many questions as after a while, you will realize that some questions are variants of one another and involve using similar techniques you've seen before. The trick here is to identify the question pattern and techniques you can use to solve variants of this question. Once you're familiar with a pattern, you'll be able to solve dozens of similar problems. Some techniques include - sliding window, two pointers, matrix traversal. The ["Grokking the Coding Interview: Patterns for Coding Questions" course on Educative](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W) shows you even more techniques and is highly recommended.
 
 :::tip Expert tip
 

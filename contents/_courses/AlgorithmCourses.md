@@ -4,7 +4,7 @@ AlgoMonster aims to help you ace the technical interview **in the shortest time 
 
 ### [Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
 
-This course by Educative expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages. **Learn and understand patterns, not memorize answers!** [**Join today for a 10% discount →**](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
+This course on Educative expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages. **Learn and understand patterns, not memorize answers!** [**Join today for a 10% discount →**](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
 
 ### [Master the Coding Interview: Data Structures + Algorithms](https://fxo.co/DQpY)
 
