@@ -31,21 +31,21 @@ function TOC({className, ...props}) {
               href="https://t.me/techinterviewhandbook"
               target="_blank"
               rel="noopener noreferrer"
-              class="navbar-icon navbar-icon-telegram"
+              className="navbar-icon navbar-icon-telegram"
               aria-label="Telegram channel"
             />
             <a
               href="https://twitter.com/techinterviewhb"
               target="_blank"
               rel="noopener noreferrer"
-              class="navbar-icon navbar-icon-twitter"
+              className="navbar-icon navbar-icon-twitter"
               aria-label="Twitter"
             />
             <a
               href="https://www.facebook.com/techinterviewhandbook"
               target="_blank"
               rel="noopener noreferrer"
-              class="navbar-icon navbar-icon-facebook"
+              className="navbar-icon navbar-icon-facebook"
               aria-label="Facebook page"
             />
           </div>

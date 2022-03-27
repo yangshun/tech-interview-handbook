@@ -33,7 +33,7 @@ export default React.memo(() => {
   useEffect(() => {
     const interval = setInterval(() => {
       [...ref.current.children].forEach((child) => {
-        if (child.id.startsWith('carbonads_')) {
+        if (child && child.id && child.id.startsWith('carbonads_')) {
           ref.current.removeChild(child);
         }
       });

@@ -173,7 +173,7 @@ function WhatIsThisSection() {
         <div className="row">
           <div className="col col--8 col--offset-2">
             <h2 className="text--center margin-bottom--lg">
-              <span class="badge badge--primary">What is this</span>
+              <span className="badge badge--primary">What is this</span>
             </h2>
             <h3
               className={classnames(
@@ -285,8 +285,8 @@ function HowToUseStep({index, title, ctaLink, contents}) {
           ))}
         </ul>
       </div>
-      <div class="card__footer">
-        <Link class="button button--primary button--block" to={ctaLink}>
+      <div className="card__footer">
+        <Link className="button button--primary button--block" to={ctaLink}>
           Read now →
         </Link>
       </div>
@@ -301,7 +301,7 @@ function HowToUseSection() {
         <div className="row">
           <div className="col col--10 col--offset-1">
             <h2 className="text--center margin-bottom--lg">
-              <span class="badge badge--primary">How to use</span>
+              <span className="badge badge--primary">How to use</span>
             </h2>
             <h3
               className={classnames(
@@ -406,7 +406,7 @@ function FeaturesSection() {
         <div className="row">
           <div className="col col--10 col--offset-1">
             <h2 className="text--center margin-bottom--lg">
-              <span class="badge badge--primary">Why this guide</span>
+              <span className="badge badge--primary">Why this guide</span>
             </h2>
             <h3
               className={classnames(
@@ -417,8 +417,9 @@ function FeaturesSection() {
               We have everything you need - all straight to the point
             </h3>
             <div className={classnames('row', styles.featuresRow)}>
-              {FEATURES.map(({title, description, link}) => (
+              {FEATURES.map(({title, description, link}, idx) => (
                 <div
+                  key={idx}
                   className={classnames(
                     'col',
                     'col--4',
@@ -715,7 +716,7 @@ function SuccessStoriesSection() {
         <div className="row">
           <div className="col col--6 col--offset-3">
             <h2 className="text--center margin-bottom--lg">
-              <span class="badge badge--primary">Success stories</span>
+              <span className="badge badge--primary">Success stories</span>
             </h2>
             <h3
               className={classnames(
@@ -762,7 +763,7 @@ function SponsorshipSection() {
         <div className="row">
           <div className="col col--8 col--offset-2">
             <h2 className="text--center margin-bottom--lg">
-              <span class="badge badge--primary">Advertise with us</span>
+              <span className="badge badge--primary">Advertise with us</span>
             </h2>
             <h3
               className={classnames(

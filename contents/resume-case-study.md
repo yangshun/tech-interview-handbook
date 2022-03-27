@@ -10,9 +10,9 @@ To put the points mentioned in the [previous section](./resume.md) in practice. 
 
 Here's the initial version of Teik Jun's resume I received from him.
 
-<div class="text--center">
+<div className="text--center">
   <figure>
-    <img alt="Teik Jun's initial resume" class="shadow--md" src={TeikjunResumeOldURL} />
+    <img alt="Teik Jun's initial resume" className="shadow--md" src={TeikjunResumeOldURL} />
     <figcaption>Teik Jun's initial resume</figcaption>
   </figure>
 </div>
@@ -52,9 +52,9 @@ Here's an improved version of Teik Jun's resume which I feel which better highli
 
 In my opinion, this improved resume is sure to capture the eyes of any recruiter in the world!
 
-<div class="text--center">
+<div className="text--center">
   <figure>
-    <img alt="Teik Jun's improved resume" class="shadow--md" src={TeikjunResumeNewURL} />
+    <img alt="Teik Jun's improved resume" className="shadow--md" src={TeikjunResumeNewURL} />
     <figcaption>Teik Jun's improved resume</figcaption>
   </figure>
 </div>

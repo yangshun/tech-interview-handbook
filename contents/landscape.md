@@ -37,7 +37,7 @@ Top tech companies pay a ridiculous amount even for junior candidates:
 
 ### United States
 
-<div class="text--center">
+<div className="text--center">
 
 <figure>
 <img alt="Salaries of top tech internships in 2016" src={InternshipSalariesURL} />
