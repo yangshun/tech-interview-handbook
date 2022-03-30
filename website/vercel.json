@@ -8,6 +8,10 @@
       "destination": "https://grind75.vercel.app/grind75"
     },
     {
+      "source": "/grind75/",
+      "destination": "https://grind75.vercel.app/grind75/"
+    },
+    {
       "source": "/grind75/:asset*",
       "destination": "https://grind75.vercel.app/grind75/:asset*"
     }
