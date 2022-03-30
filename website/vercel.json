@@ -4,12 +4,12 @@
   },
   "rewrites": [
     {
-      "source": "/grind75/:asset*",
-      "destination": "https://www.grind75.com/:asset*"
+      "source": "/grind75",
+      "destination": "https://grind75.vercel.app/grind75"
     },
     {
-      "source": "/_next/:asset*",
-      "destination": "https://www.grind75.com/_next/:asset*"
+      "source": "/grind75/:asset*",
+      "destination": "https://grind75.vercel.app/grind75/:asset*"
     }
   ]
 }
