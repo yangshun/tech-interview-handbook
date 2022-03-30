@@ -1,5 +1,15 @@
 {
   "github": {
     "silent": true
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/grind75/:asset*",
+      "destination": "https://www.grind75.com/:asset*"
+    },
+    {
+      "source": "/_next/:asset*",
+      "destination": "https://www.grind75.com/_next/:asset*"
+    }
+  ]
 }
