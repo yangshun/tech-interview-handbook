@@ -17,7 +17,7 @@ keywords:
   ]
 ---
 
-I recommend using all of these free tools to optimize your resume:
+I recommend using these free tools to optimize your resume:
 
 ## 1. Free resume review by professional resume writers
 
@@ -25,7 +25,7 @@ TopResume provides a [free all-in-one review](https://tidd.ly/3GxVIs9) of your r
 
 ## 2. Test readability with industry-standard ATS
 
-Test the readability and formatting of your resume using [FAANG Tech Leads' free resume parser tool](https://www.faangtechleads.com/resume/check?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=resume_parser&aff=1e80c401fe7e2). Most big companies use such resume parsers, including but not limited to Figma, Palantir, Netflix, Twitch, and Yelp.
+Test the readability and formatting of your resume using [Resume Worded's free ATS resume scan](https://resumeworded.com/resume-scanner). Most big companies use such resume scanners.
 
 ## 3. The plain text file test
 

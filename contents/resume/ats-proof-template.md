@@ -19,7 +19,7 @@ Most companies these days automate their resume screening process through Applic
 
 :::tip Expert tip
 
-[FAANG Tech Leads](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) is currently offering resume templates and references at **70% off**.
+[FAANG Tech Leads](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) is currently offering resume templates and examples at **70% off**.
 
 Their templates:
 

@@ -37,9 +37,3 @@ Finding a job is a two-way fit — the company wants someone with the releva
 There is a delicate balance between finding the right job vs. finding a job. Getting rejected does not always mean you are not good enough. Sometimes, it just means you are not a right fit for what the company is looking for.
 
 When hiring fresh grads, I know that many of them will not have as much experience as someone who has years of industry experience. Hence, I would look out more for soft skills, such as attention to detail, initiative, passion, ability to get things done, etc. Note: this applies only if you have met the minimum threshold of proficiency/competency in the skill set checklist.
-
-:::tip
-
-Use this [resume parser tool by FAANG Tech Leads](https://www.faangtechleads.com/resume/check?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=resume_parser&aff=1e80c401fe7e2) to see how an industry-standard ATS parses your resume, then improve it accordingly!
-
-:::

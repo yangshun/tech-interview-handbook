@@ -34,9 +34,9 @@ function FAANGTechLeads({className, position}) {
           Craft the perfect resume for FAANG
         </strong>
         Save time crafting your resume with FAANG Tech Leads'{' '}
-        <u>FAANG-ready resume templates and examples</u> which have helped many
-        Software Engineers get interviews at top Bay Area companies. Grab them
-        now for a whopping <strong>70% off</strong>!
+        <u>FAANG-quality resume templates and examples</u> which have helped
+        many Software Engineers get interviews at top Bay Area companies. Grab
+        them now for a <u>whopping 70% off</u>!
       </p>
     </a>
   );
