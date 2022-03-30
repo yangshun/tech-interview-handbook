@@ -40,6 +40,11 @@ module.exports = {
           href: '/algorithms/introduction',
         },
         {label: 'Blog', to: 'blog', position: 'left'},
+        {
+          label: 'Grind 75',
+          href: 'https://www.techinterviewhandbook.org/grind75',
+          position: 'left',
+        },
         // {label: 'Advertise', to: '/advertise', position: 'left'},
         {
           href: 'https://github.com/yangshun/tech-interview-handbook',
@@ -136,6 +141,10 @@ module.exports = {
         {
           title: 'More',
           items: [
+            {
+              label: 'Grind 75',
+              href: 'https://www.techinterviewhandbook.org/grind75',
+            },
             {label: 'Advertise', href: '/advertise'},
             {
               label: 'Contact us',
