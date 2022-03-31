@@ -68,9 +68,9 @@ Everyone wants the cream of the crop. In the absence of a standardized test, GPA
 
 If your GPA is rather low, but you have loads of technical experiences, you can try not listing your GPA in the resume. This kinda "forces" the recruiter to read through your projects/job experience, and perhaps grant you a first interview. If you manage to impress them, who cares about your GPA? But if your GPA is low and you do not have skills for the job... maybe you should work on one of them and revisit job applications later.
 
-In a different scenario, some students have low GPA, but it might be due to some irrelevant classes which they did badly in. E.g. Student X is scoring A for all his programming classes, but did not do well for his language classes. If I am hiring a developer, Student X would still be a suitable candidate despite his low GPA. In such cases, it might even be recommended to attach a transcript along with the resume.
+In a different scenario, some students have low GPA, but it might be due to some irrelevant classes which they did badly in. E.g. Student X is scoring A for all their programming classes, but did not do well for their language classes. If I am hiring a developer, Student X would still be a suitable candidate despite their low GPA. In such cases, it might even be recommended to attach a transcript along with the resume.
 
-Also, when you list your GPA/results, try to benchmark it. Instead of simply listing 4.6, write 4.6/5.0 (First Class Honors or Summa Cum Laude). To the recruiter, 4.6 does not mean anything if he/she is not familiar with your grading system.
+Also, when you list your GPA/results, try to benchmark it. Instead of simply listing 4.6, write 4.6/5.0 (First Class Honors or Summa Cum Laude). To the recruiter, 4.6 does not mean anything if they/they is not familiar with your grading system.
 
 </details>
 

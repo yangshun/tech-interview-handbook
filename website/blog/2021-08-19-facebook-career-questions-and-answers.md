@@ -163,7 +163,7 @@ As of writing, internships in FB SG are run annually so if you fail this year yo
 
 For all roles, there should be an initial contact (e.g. phone call) with recruiters. For interns, it would be 2 rounds of online coding interviews where the focus is on DSA. For fresh graduates, it would be 2 rounds of online coding interviews and 1 behavioral round.
 
-### Based on your past experience, if a candidate does not get full marks for the online coding test, what are the chances of him or her getting a face to face interview? Just curious about the level of competition haha (This is because I'm not that worried about whiteboard interviews but afraid that I may not even get a chance to go through it)
+### Based on your past experience, if a candidate does not get full marks for the online coding test, what are the chances of them or them getting a face to face interview? Just curious about the level of competition haha (This is because I'm not that worried about whiteboard interviews but afraid that I may not even get a chance to go through it)
 
 I don't even think there's an online coding test for Facebook. Can't answer this.
 

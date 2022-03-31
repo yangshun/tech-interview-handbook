@@ -31,6 +31,6 @@ I really like all aspects of Front End development, maybe except optimizing perf
 
 Learn your fundamentals well. There are many UI and CSS libraries out there, but a good Front End developer still needs to know how to build a website without them. Peek beneath the abstraction layers and understand the problems these libraries are trying to solve, do not use them blindly. Keep building stuff - try to build a simple version of the libraries you frequently use, build interesting user interfaces and products, etc.
 
-### What do you think about developing breadth-wise vs depth-wise? For example, do you think it's important for a software engineer to know more about other fields besides the end he/she is currently working at? In particular, what do you think about an Front End engineer that knows BE (i.e. a full-stack developer), or an Front End engineer that knows mobile development (with the advent of React Native or Flutter)?
+### What do you think about developing breadth-wise vs depth-wise? For example, do you think it's important for a software engineer to know more about other fields besides the end they/they is currently working at? In particular, what do you think about an Front End engineer that knows BE (i.e. a full-stack developer), or an Front End engineer that knows mobile development (with the advent of React Native or Flutter)?
 
 I somewhat answered this in another [blog post](/blog/are-front-end-development-skills-enough-for-a-career). Lemme know if your question isn't answered after reading it.

@@ -42,7 +42,7 @@ Despite whatever is happening in the negotiation, give the company the impressio
 
 ## Don't be the decision maker
 
-Even if you don't particularly care what your friends/family/husband/mother thinks, by mentioning them, you're no longer the only person the recruiter needs to win over. There's no point in them trying to bully and intimidate you; the "true decision-maker" is beyond their reach. This is a classic technique in customer support and remediation. It's never the person on the phone's fault, they're just some poor schmuck doing their job. It's not their decision to make. This helps to defuse tension and give them more control of the situation.
+Even if you don't particularly care what your friends/family/spouse/parent thinks, by mentioning them, you're no longer the only person the recruiter needs to win over. There's no point in them trying to bully and intimidate you; the "true decision-maker" is beyond their reach. This is a classic technique in customer support and remediation. It's never the person on the phone's fault, they're just some poor schmuck doing their job. It's not their decision to make. This helps to defuse tension and give them more control of the situation.
 
 > I'll look over some of these details and discuss it with my [FAMILY/CLOSE_FRIENDS/SIGNIFICANT_OTHER]. I'll reach out to you if I have any questions. Thanks so much for sharing the good news with me, and I'll be in touch!
 

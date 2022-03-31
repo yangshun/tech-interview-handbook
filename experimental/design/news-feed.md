@@ -58,7 +58,7 @@ TODO
 
 > There are two basic objects: user and feed. For user object, we can store userID, name, registration date and so on so forth. And for feed object, there are feedId, feedType, content, metadata etc., which should support images and videos as well.
 >
-> If we are using a relational database, we also need to model two relations: user-feed relation and friend relation. The former is pretty straightforward. We can create a user-feed table that stores userID and corresponding feedID. For a single user, it can contain multiple entries if he has published many feeds.
+> If we are using a relational database, we also need to model two relations: user-feed relation and friend relation. The former is pretty straightforward. We can create a user-feed table that stores userID and corresponding feedID. For a single user, it can contain multiple entries if they has published many feeds.
 >
 > For friend relation, adjacency list is one of the most common approaches. If we see all the users as nodes in a giant graph, edges that connect nodes denote friend relation. We can use a friend table that contains two userIDs in each entry to model the edge (friend relation). By doing this, most operations are quite convenient like fetch all friends of a user, check if two people are friends.
 >
@@ -97,7 +97,7 @@ TODO
 
 - First select features/signals that are relevant and then figure out how to combine them to calculate a final score.
 - How do you show the relevant posts that the user is interested in?
-  - Chronological - While a chronological approach works, it may not be the most engaging approach. For example, if a person posts 30 times within the last hour, his followers will have their news feed clogged up with his posts. Maybe set a cap on the number of time a person's posts can appear within the feed.
+  - Chronological - While a chronological approach works, it may not be the most engaging approach. For example, if a person posts 30 times within the last hour, their followers will have their news feed clogged up with their posts. Maybe set a cap on the number of time a person's posts can appear within the feed.
   - Popularity - How many likes and comments does the post have? Does the user usually like posts by that person?
 - How do you determine which are the more important posts? A user might be more interested in a few-hour old post from a good friend than a very recent post from an acquaintance.
 - A common strategy is to calculate a post score based on various features and rank posts by its score.

@@ -22,7 +22,7 @@ It is probably not a good idea to spend valuable time talking about things which
 
 ## The elevator pitch
 
-An "elevator pitch" originates from a journalist trying to pitch an idea to an editor. The only time to catch the editor was in the elevator and she had only around 30 seconds to do so. The key elements of elevator pitches include:
+An "elevator pitch" originates from a journalist trying to pitch an idea to an editor. The only time to catch the editor was in the elevator and they had only around 30 seconds to do so. The key elements of elevator pitches include:
 
 - **Short** - You have limited time!
 - **Direct** - As you only have limited time, you should get to the point
@@ -104,6 +104,6 @@ Prepare a self introduction that follows the following outline (inspired by "Cra
 - "I love to create beautiful and performant products with delightful user experiences."
   - Same as above, qualities that a Front End engineer should possess.
 - "I previously worked at Grab where I led the Grab for Work project."
-  - Lyft was Grab's sister company! In fact they even had a partnership in the past. Most Lyft engineers would have heard of Grab before and mentioning this catches their attention.
+  - Lyft was Grab's sibling company! In fact they even had a partnership in the past. Most Lyft engineers would have heard of Grab before and mentioning this catches their attention.
 - "I built the project with another engineer over the period of 4 months on a React/Redux and Golang stack."
   - Acknowledge that you work with others. Building a non-trivial system with just 2 people in 3 months is quite good for a non-trivial system. Lyft also uses Golang for their high performance systems.

@@ -1,7 +1,7 @@
 ---
 title: Front End vs. Back End System Design Interviews
 slug: front-end-vs-back-end-system-design-interviews
-author: Zhenghao He
+author: Zhenghao They
 author_title: Senior Software Engineer at Instacart
 author_url: https://twitter.com/he_zhenghao
 author_image_url: https://pbs.twimg.com/profile_images/1489749168767660032/M_us3Mu2_400x400.jpg

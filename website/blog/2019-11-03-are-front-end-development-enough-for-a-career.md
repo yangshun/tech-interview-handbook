@@ -40,7 +40,7 @@ The web is incredibly cross-platform!
 
 ## Jack of all trades, master of one
 
-However, I think that being a Front End development in many regards, is considered a specialized position. That's why it's important to be "T-shaped". I first got introduced to this term through my ex-manager at Grab, Tim Goh. He advised me to have a specialization (front end), yet still know a bit about everything. In other words, you are strong in your core fundamentals, but you also specialize in a particular area.
+However, I think that being a Front End development in many regards, is considered a specialized position. That's why it's important to be "T-shaped". I first got introduced to this term through my ex-manager at Grab, Tim Goh. They advised me to have a specialization (front end), yet still know a bit about everything. In other words, you are strong in your core fundamentals, but you also specialize in a particular area.
 
 This is good advice and it's not new advice. In most university courses, students are expected to study the fundamental courses before choosing their area of specialization. In the context of a School of Computing in National University of Singapore, students start their in school by taking basic classes in Algorithms, Data Structures, Software Engineering, Operating Systems, Computer Networks, before choosing their specialization in deeper areas like Compilers, Computer Graphics, AI and Machine Learning, Media, Networking and more.
 
