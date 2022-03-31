@@ -25,7 +25,7 @@ TopResume provides a [free all-in-one review](https://tidd.ly/3GxVIs9) of your r
 
 ## 2. Test readability with industry-standard ATS
 
-Test the readability and formatting of your resume using [Resume Worded's free ATS resume scan](https://resumeworded.com/resume-scanner). Most big companies use such resume scanners.
+Test the readability and formatting of your resume using [Resume Worded's free ATS resume scan](https://a.paddle.com/v2/click/29828/144522?link=1861). Most big companies use such resume scanners.
 
 ## 3. The plain text file test
 
