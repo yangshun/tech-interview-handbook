@@ -35,7 +35,7 @@ Bob is a Software Engineer fresh out of college. Their base salary is $100,000, 
 
 **Bonus:** 100,000 x 50% (half a year) x 10% (seniority) x 200% (individual performance) x 120% (company performance) = 12000
 
-Alice is an Engineering Manager with 10 years of professional experience. Them base salary is $220,000, is an experienced engineering manager (seniority multiplier: 20%), exceeded expectations for the half (individual performance multiplier: 150%) and them company did pretty awesome (company performance multiplier: 130%). For that half, them bonus will be as follows:
+Alice is an Engineering Manager with 10 years of professional experience. Their base salary is $220,000, is an experienced engineering manager (seniority multiplier: 20%), exceeded expectations for the half (individual performance multiplier: 150%) and their company did pretty awesome (company performance multiplier: 130%). For that half, them bonus will be as follows:
 
 **Bonus:** 220,000 x 50% (half a year) x 20% (seniority) x 150% (individual performance) x 130% (company performance) = 42900
 
