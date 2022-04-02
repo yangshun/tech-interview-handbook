@@ -16,6 +16,7 @@ def graph_topo_sort(num_nodes, edges):
             if nodes[outgoing_id]['in'] == 0:
                 queue.append(outgoing_id)
         order.append(node_id)
-    return order if len(order) == num_nodes else []
+    return order if len(order) == num_nodes else None
 
-print(graph_topo_sort(3, [[0, 1], [0, 2]]))
+print(graph_topo_sort(4, [[0, 1], [0, 2], [2, 1], [3, 0]]))
+# [1, 2, 0,3 ]

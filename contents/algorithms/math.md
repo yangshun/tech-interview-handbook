@@ -1,30 +1,51 @@
 ---
 id: math
 title: Math
+toc_max_heading_level: 2
 ---
 
-## Notes
+## Introduction
 
-If code involves division or modulo, remember to check for division or modulo by 0 case.
+Math is a foundational aspect of Computer Science and every programmer and computer scientist needs to have basic mathematical knowledge. Thankfully, for the purpose of coding interviews, there usually won't be that much math involved, but some basic math techniques is helpful to know as you may be asked to implement mathematical operations.
 
-When a question involves "a multiple of a number", perhaps modulo might be useful.
+## Things to look out for during interviews
 
-Check for and handle overflow/underflow if you are using a typed language like Java and C++. At the very least, mention that overflow/underflow is possible and ask whether you need to handle it.
+- If code involves division or modulo, remember to check for division or modulo by 0 case.
+- Check for and handle overflow/underflow if you are using a typed language like Java and C++. At the very least, mention that overflow/underflow is possible and ask whether you need to handle it.
+- Consider negative numbers and floating point numbers. This may sound obvious, but under interview pressure, many obvious cases go unnoticed.
 
-Consider negative numbers and floating point numbers. This may sound obvious, but under interview pressure, many obvious cases go unnoticed.
+## Common formulas
 
-When dealing with floating point numbers, take note of rounding mistakes. Consider using epsilon comparisons instead of equality checks. E.g. `abs(x - y) <= 10e7` instead of `x == y`).
+|  | Formula |
+| --- | --- |
+| Check if a number is even | `num % 2 == 0` |
+| Sum of 1 to N | 1 + 2 + ... + (N - 1) + N = (N+1) \* N/2 |
+| Sum of Geometric Progression | 2<sup>0</sup> + 2<sup>1</sup> + 2<sup>2</sup> + 2<sup>3</sup> + ... 2<sup>n</sup> = 2<sup>n+1</sup> - 1 |
+| Permutations of N | N! / (N-K)! |
+| Combinations of N | N! / (K! \* (N-K)!) |
 
-If the question asks to implement an operator such as power, squareroot or division and want it to be faster than O(n), binary search is usually the approach to go.
+## Techniques
 
-#### Some common formulas:
+### Multiples of a number
 
-- Sum of 1 to N = (n+1) \* n/2
-- Sum of GP = 2<sup>0</sup> + 2<sup>1</sup> + 2<sup>2</sup> + 2<sup>3</sup> + ... 2<sup>n</sup> = 2<sup>n+1</sup> - 1
-- Permutations of N = N! / (N-K)!
-- Combinations of N = N! / (K! \* (N-K)!)
+When a question involves "whether a number is a multiple of X", the modulo operator would be useful.
 
-## Recommended LeetCode questions
+### Comparing floats
+
+When dealing with floating point numbers, take note of rounding mistakes. Consider using epsilon comparisons instead of equality checks. E.g. `abs(x - y) <= 10e7` instead of `x == y`.
+
+### Fast operators
+
+If the question asks you to implement an operator such as power, square root or division and want it to be faster than O(n), some sort of doubling (fast exponentiation) or halving (binary search) is usually the approach to go. Examples: [Pow(x, n)](https://leetcode.com/problems/powx-n/), [Sqrt(x)](https://leetcode.com/problems/sqrtx/)
+
+## Corner cases
+
+- Division by 0
+- Multiplication by 1
+- Negative numbers
+- Floats
+
+## Recommended questions
 
 - [Pow(x, n)](https://leetcode.com/problems/powx-n/)
 - [Sqrt(x)](https://leetcode.com/problems/sqrtx/)

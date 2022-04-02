@@ -19,7 +19,7 @@ Some common questions include:
 - Design a jobs portal (e.g. LinkedIn, Indeed)
 - Design a web crawler (e.g. Google)
 
-:::note
+:::info
 
 System design content is still work-in-progress, but the following are some resources to help you in the meanwhile.
 

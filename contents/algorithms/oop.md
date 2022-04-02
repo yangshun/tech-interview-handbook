@@ -1,6 +1,7 @@
 ---
 id: oop
 title: Object-oriented programming
+toc_max_heading_level: 2
 ---
 
 ## Sample questions

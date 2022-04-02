@@ -8,13 +8,13 @@ slug: introduction
 
 import InDocAd from '../\_components/InDocAd';
 
-This section dives deep into practical tips for specific topics of algorithms and data structures which appear frequently in coding questions. Many algorithm questions involve techniques that can be applied to questions of similar nature. The more techniques you have in your arsenal, the higher the chances of passing the interview. They may lead you to discover corner cases you might have missed out or even lead you towards the optimal approach!
+This section dives deep into practical knowledge and techniques for algorithms and data structures which appear frequently in algorithm interviews. The more techniques you have in your arsenal, the higher the chances of passing the interview. They may lead you to discover corner cases you might have missed out or even lead you towards the optimal approach!
 
-For each topic, study links are recommended to help you master the topic. There is a list of recommended common questions to practice which in my opinion is highly valuable for mastering the core concepts for the topic.
+For each topic, a brief introduction is given, along with language-specific libraries to use, time complexities cheatsheet, corner cases, things to look out for during interviews, useful techniques, and recommended resources to help you master the topic. Lastly, there is a list of recommended common questions to practice which in my opinion is highly valuable for mastering the core concepts for the topic.
 
-If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), a Data Structures and Algorithms library for JavaScript. It is pretty much still WIP but I intend to make it into a library that is able to be used in production and also a reference resource for revising Data Structures and Algorithms.
+If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), a Data Structures and Algorithms library for JavaScript.
 
-## General tips
+## General interview tips
 
 Clarify any assumptions you made subconsciously. Many questions are under-specified on purpose.
 

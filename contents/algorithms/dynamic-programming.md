@@ -1,21 +1,25 @@
 ---
 id: dynamic-programming
 title: Dynamic programming
+toc_max_heading_level: 2
 ---
 
-## Study links
-
-- [Demystifying Dynamic Programming](https://medium.freecodecamp.org/demystifying-dynamic-programming-3efafb8d4296)
-- [Dynamic Programming – 7 Steps to Solve any DP Interview Problem](https://dev.to/nikolaotasevic/dynamic-programming--7-steps-to-solve-any-dp-interview-problem-3870)
-- [Less Repetition, More Dynamic Programming](https://medium.com/basecs/less-repetition-more-dynamic-programming-43d29830a630)
-
-## Notes
+## Introduction
 
 Dynamic Programming (DP) is usually used to solve optimization problems. The only way to get better at DP is to practice. It takes some amount of practice to be able to recognize that a problem can be solved by DP.
 
+## Learning resources
+
+- [Demystifying Dynamic Programming](https://medium.freecodecamp.org/demystifying-dynamic-programming-3efafb8d4296)
+- [Dynamic Programming – 7 Steps to Solve any DP Interview Problem](https://dev.to/nikolaotasevic/dynamic-programming--7-steps-to-solve-any-dp-interview-problem-3870)
+- [Less Repetition, More Dynamic Programming](https://medium.com/basecs/less-repetition-more-dynamic-programming-43d29830a630), basecs
+- [Dynamic Programming](http://www.cs.yale.edu/homes/aspnes/classes/223/notes.html#dynamicProgramming), James Aspnes, Yale University
+
+## Techniques
+
 Sometimes you do not need to store the whole DP table in memory, the last two values or the last two rows of the matrix will suffice.
 
-## Recommended LeetCode questions
+## Recommended questions
 
 - [0/1 Knapsack or Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/)
 - [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
