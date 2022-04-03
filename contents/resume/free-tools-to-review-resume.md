@@ -19,13 +19,15 @@ keywords:
 
 I recommend using these free tools to optimize your resume:
 
-## 1. Free resume review by professional resume writers
+## 1. Free resume review
 
-TopResume provides a [free all-in-one review](https://tidd.ly/3GxVIs9) of your resume - where their professional resume writers will provide feedback on your style and organization, writing and mechanics, as well as a free ATS readability analysis, where you can view a sample output of how an industry-standard ATS would interpret your experience and skills. Highly recommended to try this out!
+[Resume Worded](https://a.paddle.com/v2/click/29828/144522?link=1861) uses AI to give instant expert feedback on your resume.
+
+We previously recommended [TopResume's free all-in-one review](https://tidd.ly/3GxVIs9) of your resume, but received some feedback that that their reviewers are not technical and do not give feedback relevant to engineering roles. In that regard, we recommend [FAANG Tech Leads' Resume Review service (paid)](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) where your resume will be reviewed by ex-FAANG hiring managers and engineers, not random writers who don't understand technology.
 
 ## 2. Test readability with industry-standard ATS
 
-Test the readability and formatting of your resume using [Resume Worded's free ATS resume scan](https://a.paddle.com/v2/click/29828/144522?link=1861). Most big companies use such resume scanners.
+Test the readability and formatting of your resume using . Most big companies use such resume scanners.
 
 ## 3. The plain text file test
 
