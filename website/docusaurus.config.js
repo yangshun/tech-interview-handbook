@@ -155,6 +155,7 @@ module.exports = {
       ],
     },
     algolia: {
+      appId: 'Y09P1J4IPV',
       apiKey: '4dabb055be464346fcb6877f086f08e8',
       indexName: 'techinterviewhandbook',
     },

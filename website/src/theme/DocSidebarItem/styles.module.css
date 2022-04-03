@@ -1,8 +1,0 @@
-@media (min-width: 997px) {
-  .menuLinkText {
-    cursor: initial;
-  }
-  .menuLinkText:hover {
-    background: none;
-  }
-}

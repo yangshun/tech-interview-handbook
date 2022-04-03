@@ -1,3 +1,4 @@
+// Swizzled to remove the prev button.
 import React from 'react';
 import Translate, {translate} from '@docusaurus/Translate';
 import PaginatorNavLink from '@theme/PaginatorNavLink';

@@ -1,3 +1,4 @@
+// Swizzled to change the appearance of a paginator nav link.
 import React from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
