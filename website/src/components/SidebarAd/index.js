@@ -35,8 +35,7 @@ function FAANGTechLeads({className, position}) {
         </strong>
         Save time crafting your resume with FAANG Tech Leads'{' '}
         <u>FAANG-quality resume templates and examples</u> which have helped
-        many Software Engineers get interviews at top Bay Area companies. Grab
-        them now for a <u>whopping 70% off</u>!
+        many Software Engineers get interviews at top Bay Area companies!
       </p>
     </a>
   );
@@ -57,7 +56,7 @@ function AlgoMonster({className, position}) {
           Stop grinding. Study with a plan
         </strong>
         Developed by Google engineers, <u>AlgoMonster</u> is the fastest way to
-        get a software engineering job. <u>Join today for a 70% discount!</u>
+        get a software engineering job. <u>Check it out for free!</u>
       </p>
     </a>
   );
@@ -78,7 +77,7 @@ function Moonchaser({className, position}) {
         <strong className={styles.title}>Get paid more.</strong> Receive
         risk-free salary negotiation advice from <u>Moonchaser</u>. You pay
         nothing unless your offer is increased.{' '}
-        <u>Book a free consultation today!</u>
+        <u>Book your free consultation today!</u>
       </p>
     </a>
   );
@@ -98,8 +97,7 @@ function EducativeCoding({className, position}) {
       <p className={styles.tagline}>
         <strong className={styles.title}>Get the job at FAANG</strong>
         <u>Grokking the Coding Interview</u> teaches you techniques and question
-        patterns to be good at coding interviews.{' '}
-        <u>Get your 10% discount now!</u>
+        patterns to be good at coding interviews.
       </p>
     </a>
   );
@@ -119,8 +117,7 @@ function EducativeSystemDesign({className, position}) {
       <p className={styles.tagline}>
         <strong className={styles.title}>Get the job at FAANG</strong>
         <u>Grokking the System Design Interview</u> is a highly recommended
-        course to get better at system design interviews.{' '}
-        <u>Join today for a 10% discount!</u>
+        course to get better at system design interviews. <u>Find out more!</u>
       </p>
     </a>
   );
