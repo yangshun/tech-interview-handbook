@@ -2,6 +2,7 @@
   "github": {
     "silent": true
   },
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/grind75",
