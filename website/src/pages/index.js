@@ -8,7 +8,6 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
 import successStories from '../data/successStories';
-import CarbonAd from '../components/CarbonAd';
 
 const BLIND_75_URL =
   'https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU';
@@ -112,7 +111,6 @@ function Home() {
       description={siteConfig.tagline}>
       <HeroSection />
       <WhatIsThisSection />
-      <CarbonAdSection />
       <TweetsSection />
       <HowToUseSection />
       <AlgoMonsterSection />
@@ -206,20 +204,6 @@ function WhatIsThisSection() {
               <strong>Google, Airbnb, Palantir, Dropbox, Lyft</strong>, and some
               startups!
             </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CarbonAdSection() {
-  return (
-    <div className={classnames('padding-vert--lg', styles.section)}>
-      <div className="container">
-        <div className="row">
-          <div className="col col--8 col--offset-2">
-            <CarbonAd />
           </div>
         </div>
       </div>

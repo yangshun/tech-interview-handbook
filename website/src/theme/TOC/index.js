@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import TOCItems from '@theme/TOCItems';
 import styles from './styles.module.css'; // Using a custom className
 import SidebarAd from '../../components/SidebarAd';
-import CarbonAd from '../../components/CarbonAd';
 // This prevents TOC highlighting to highlight TOCInline/TOCCollapsible by mistake
 
 const LINK_CLASS_NAME = 'table-of-contents__link toc-highlight';
@@ -15,42 +14,14 @@ function TOC({className, ...props}) {
       <div className="margin--md">
         <SidebarAd position="table_of_contents" />
       </div>
+      <h3 className="padding-left--md padding-top--md margin-bottom--none">
+        Table of Contents
+      </h3>
       <TOCItems
         {...props}
         linkClassName={LINK_CLASS_NAME}
         linkActiveClassName={LINK_ACTIVE_CLASS_NAME}
       />
-      <div className="padding-horiz--md">
-        <CarbonAd />
-      </div>
-      <div className="margin--md">
-        <div className={clsx('padding--md', styles.socialLinksContainer)}>
-          <div className={styles.socialLinks}>
-            Follow
-            <a
-              href="https://t.me/techinterviewhandbook"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="navbar-icon navbar-icon-telegram"
-              aria-label="Telegram channel"
-            />
-            <a
-              href="https://twitter.com/techinterviewhb"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="navbar-icon navbar-icon-twitter"
-              aria-label="Twitter"
-            />
-            <a
-              href="https://www.facebook.com/techinterviewhandbook"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="navbar-icon navbar-icon-facebook"
-              aria-label="Facebook page"
-            />
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
