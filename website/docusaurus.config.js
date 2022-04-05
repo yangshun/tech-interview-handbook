@@ -3,7 +3,7 @@ module.exports = {
   tagline: 'Free curated interview preparation materials for busy people',
   url: 'https://www.techinterviewhandbook.org',
   baseUrl: '/',
-  trailingSlash: true,
+  trailingSlash: false,
   favicon: 'img/favicon.png',
   organizationName: 'yangshun',
   projectName: 'tech-interview-handbook',
