@@ -1,6 +1,17 @@
 ---
 id: stack
-title: Stack
+title: Stack cheatsheet for coding interviews
+description: Stack study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    stack coding interview study guide,
+    stack tips for coding interviews,
+    stack practice questions,
+    stack useful techniques,
+    stack time complexity,
+    stack recommended study resources,
+  ]
+sidebar_label: Stack
 toc_max_heading_level: 2
 ---
 

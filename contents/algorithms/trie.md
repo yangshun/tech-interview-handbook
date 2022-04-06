@@ -1,6 +1,17 @@
 ---
 id: trie
-title: Trie
+title: Trie cheatsheet for coding interviews
+description: Trie study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    trie coding interview study guide,
+    trie tips for coding interviews,
+    trie practice questions,
+    trie useful techniques,
+    trie time complexity,
+    trie recommended study resources,
+  ]
+sidebar_label: Trie
 toc_max_heading_level: 2
 ---
 

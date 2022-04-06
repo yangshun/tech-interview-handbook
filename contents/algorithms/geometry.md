@@ -1,6 +1,17 @@
 ---
 id: geometry
-title: Geometry
+title: Geometry cheatsheet for coding interviews
+description: Geometry study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    geometry coding interview study guide,
+    geometry tips for coding interviews,
+    geometry practice questions,
+    geometry useful techniques,
+    geometry time complexity,
+    geometry recommended study resources,
+  ]
+sidebar_label: Geometry
 toc_max_heading_level: 2
 ---
 

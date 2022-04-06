@@ -1,6 +1,17 @@
 ---
 id: binary
-title: Binary
+title: Binary cheatsheet for coding interviews
+description: binary study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    binary coding interview study guide,
+    binary tips for coding interviews,
+    binary practice questions,
+    binary useful techniques,
+    binary time complexity,
+    binary recommended study resources,
+  ]
+sidebar_label: Binary
 toc_max_heading_level: 2
 ---
 

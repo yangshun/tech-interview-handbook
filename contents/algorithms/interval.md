@@ -1,6 +1,17 @@
 ---
 id: interval
-title: Interval
+title: Interval cheatsheet for coding interviews
+description: Interval study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    interval coding interview study guide,
+    interval tips for coding interviews,
+    interval practice questions,
+    interval useful techniques,
+    interval time complexity,
+    interval recommended study resources,
+  ]
+sidebar_label: Interval
 toc_max_heading_level: 2
 ---
 

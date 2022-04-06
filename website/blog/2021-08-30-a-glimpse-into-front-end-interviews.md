@@ -144,7 +144,7 @@ Implementation rounds feel very similar to algorithms, as you need to actively f
 
 ## Algorithm Rounds
 
-As software engineers, we are not unfamiliar with algorithm questions. Leetcode and Hackerrank are common resources used for practicing such questions.
+As software engineers, we are not unfamiliar with algorithm questions. LeetCode and Hackerrank are common resources used for practicing such questions.
 
 As I knew this was my weakness, this was where I spent the most time. It may be a little ironic that I chose Python over JavaScript as my language of choice for tackling algorithms. JavaScript's lack of a native minheap and binary search implementation made it a slightly worse choice.
 

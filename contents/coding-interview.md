@@ -38,7 +38,7 @@ If you are new to coding interviews (e.g. first time interviewing for an interns
 1. Decide on a [programming language](./picking-a-language.md)
 1. Study and revise
    - Revise your [Computer Science fundamentals](./study-and-practice.md)
-   - Go over the [algorithm tips](./algorithms/introduction.md)
+   - Go over the [algorithm tips](.//algorithms/study-cheatsheet.md)
    - Take [online courses](./best-coding-interview-courses.md) if you need more materials
 1. Practice solving algorithm questions
    - Do the [best practice questions](./best-practice-questions.md)
@@ -56,7 +56,7 @@ You have successfully passed coding interviews before and it is not your first t
 
 1. Study and revise
    - Revise your [Computer Science fundamentals](./study-and-practice.md)
-   - Go over the [algorithm tips](./algorithms/introduction.md)
+   - Go over the [algorithm tips](.//algorithms/study-cheatsheet.md)
    - Take [online courses](./best-coding-interview-courses.md) if you need more materials
 1. Practice solving algorithm questions
    - Do the [best practice questions](./best-practice-questions.md)

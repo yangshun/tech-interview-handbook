@@ -139,7 +139,7 @@ Example:
 
 Include at least 2 projects you have contributed to, outlining your key contributions. Always try to link your project name to GitHub or somewhere the hiring manager can view your project.
 
-> [facebook/docusaurus](https://github.com/facebook/docusaurus) <br/>Maintainer and lead engineer for Docusaurus v2, a static site generator which powers the documentation of many of Meta’s Open Source Projects - React Native, Jest, Relay, Reason, etc. Used by 7.6k > projects on GitHub.
+> [facebook/docusaurus](https://github.com/facebook/docusaurus) <br/>Maintainer and lead engineer for Docusaurus v2, a static site generator which powers the documentation of many of Meta's Open Source Projects - React Native, Jest, Relay, Reason, etc. Used by 7.6k > projects on GitHub.
 
 ## 7. Awards, accolades and certifications
 

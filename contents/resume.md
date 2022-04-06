@@ -1,39 +1,318 @@
 ---
 id: resume
-title: Resume overview
-sidebar_label: Overview
+title: Practical guide to writing FAANG-ready software engineer resumes
+description: How to write a top-tier, ATS-friendly resume good enough to pass resume screenings by Google, Amazon, Facebook and Microsoft
+keywords:
+  [
+    software engineer resume,
+    FAANG software engineer resume,
+    software engineer resume template,
+    software engineer resume examples,
+    software engineer resume sample,
+    software engineer resume best practices,
+    how to write software engineer resume,
+  ]
+sidebar_label: Writing your software engineer resume
 ---
 
-Resume screening is the first stage in the interview process. It doesn't matter how strong you are in CS, algorithms or LeetCode, if you submit a poorly-written resume that doesn't pass the resume screening stage, your hopes are dashed. Hence it is important to nail this stage.
+Not sure why you're still not getting shortlisted at some or all of the top tech companies? Your software engineer resume could be the issue.
 
-The following content is by Christina Ng and rephrased for the purpose of this handbook. You can follow her on [Medium](https://medium.com/@christinang89) or [Quora](https://www.quora.com/profile/Christina-Ng).
+Having read tons of software engineering resumes as a FAANG interviewer, even some of the most qualified candidates I know fail to get shortlisted due to bad resumes. The mistake most people make is to immediately assume that they weren't qualified enough - but that could be far from the truth.
 
-## How your resume is screened
+Thankfully, there are specific steps and requirements you can fulfill to write a good software engineer resume. From your resume structure, content, to free tools you can use to test your resume, I have collated a very concise summary of the best practices to prepare your resume for a FAANG software engineering job application:
 
-While many engineers can be rather qualified for the role they are applying for, they miss out on getting a shot at the interview as they might never get past resume screening. The main issue was that they do not understand how recruiters worked.
+1. Set up an ATS-friendly resume template
+1. Fill up your template with well-framed content in a meaningful order
+1. Optimize your resume with prioritization and keywords
+1. Test out resume using free tools
 
-Before writing your resume, it is important to understand the recruiting structure and how recruiting is done.
+## How to set up an ATS-friendly software engineer resume
 
-## The skill set checklist
+Something most candidates may not realize is that most top tech companies are using some form of Applicant Tracking Systems (ATS) to parse and screen thousands of resumes even before they reach human eyes. In many companies, the ATS may even use certain rules to reject candidates automatically.
 
-Before opening up a position/starting the search for candidates, I usually consult very closely with the team manager/decision maker to find out the specific skill sets that are relevant for the position. These skill sets are typically grouped into "Must have", "Good to have", and "Special bonus".
+While different companies could be using different types of ATS, it is possible to ensure that your software engineer resume is read favorably by most ATS. This section ensures your resume is at least perfectly readable by the ATS, while the next few sections improve your chances of passing ATS screenings.
 
-- "Must have" — Typically, most of the must-haves include a degree (or not) in a relevant technical field, some years (or not) of experience in a particular programming language or technology
-- "Good to have" — Includes experience/familiarity with secondary languages/technologies which may not be directly relevant to what the candidate would be working on, but could be required due to some interfacing with other components of the project. It could also include softer skills such as being a good team player, clear communication, etc
-- "Special bonus" — Recognized skill sets/experiences which are difficult to come by. Probably not a requirement, but would definitely be useful for the position
+:::tip Expert tip
 
-Now that I am armed with this list, the search for candidates begin.
+[FAANG Tech Leads](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) is currently offering resume templates and examples at **70% off**.
 
-Typically, I do not seek that "one perfect candidate". What I seek for is the "best fit candidate". The search is essentially a numbers game. I know that for a specific job posting, there would perhaps be X applicants. At each stage of the interview process, some percentage of the candidates will be eliminated, leaving only a final Y% of the initial pool to choose from. Since Y tends to be a rather small number, recruiters will try to maximize X.
+Their templates:
 
-## The 10 seconds glance
+- Are created by ex-FAANG hiring managers based on top resumes received from hundreds of candidate applications
+- Guarantee readability by FAANG ATS
+- Cater to various experience levels
 
-When I am looking at your resume, I am doing a keyword match against the skill set checklist. If I see a good amount of the right keywords in your resume, it is a pass. If I need to spend more than 10 seconds trying to figure out what you are writing about, it is a fail. If I see an excessive amount of keywords (much looking like spam), it signals a red flag and goes into the "maybe". Depending on whether I think I have enough candidates for the day, you could eventually go into the pass or fail stack.
+They also offer resume examples/references from candidates who have received multiple offers from FAANG companies - which are helpful in helping you craft content that meets the same bar. [Check it out](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2)!
 
-There are lots of articles writing about how recruiters only spend an average of about 10 seconds to screen each resume. The news is, this is true because resume screening is such a menial, robotic and repetitive task. In fact, many applicant tracking systems (ATS) now are so advanced that they can parse your resume automatically, search for specific keywords in your resume, and score your resume based on the weights pre-assigned to each keyword.
+:::
 
-Finding a job is a two-way fit — the company wants someone with the relevant skills required, but it is also important for the applicant to fit in the company culture, and be able to gain something out of their stint. Hence, honesty is the single most important criteria in a resume.
+### Only use Microsoft Word or Google Docs to create and edit your resume
 
-There is a delicate balance between finding the right job vs. finding a job. Getting rejected does not always mean you are not good enough. Sometimes, it just means you are not a right fit for what the company is looking for.
+**Do's**
 
-When hiring fresh grads, I know that many of them will not have as much experience as someone who has years of industry experience. Hence, I would look out more for soft skills, such as attention to detail, initiative, passion, ability to get things done, etc. Note: this applies only if you have met the minimum threshold of proficiency/competency in the skill set checklist.
+- Submit your resume as a PDF file to preserve formatting, but always create it from Microsoft Word or Google Docs. It is important to ensure that the text in your resume is easily highlightable, which is a precondition for easy parsing.
+- ATS tools are always trying to improve their readability of standard resume formats - hence the more commonplace your resume format is, the better.
+- To maximize space on your resume, rather than using header or footers, reduce the margins of the page - narrow margins are 0.5 on each side.
+
+**Don'ts**
+
+- Do not use Photoshop, other graphic design tools or online resume builders to build your resume
+- Do not use the header or footer sections in a Word/Google Docs file - reduce margins instead and just write the information in the body.
+
+### Only use standard fonts of readable sizes
+
+New fonts may convert letters into special characters which are not readable by the ATS. Fonts you should use - **Arial, Calibri, Garamond**.
+
+Ensure your font size remains readable for humans later on in the hiring process - use a minimum size of **10px** for readability.
+
+### Add sections with standard headings and ordering
+
+ATS readers need to identify and parse standard types of information from your resume. Using standard header titles and ordering can help them do that better.
+
+This is the order which has worked well for me and recommended by recruiters:
+
+| Section | Heading Name |
+| --- | --- |
+| Professional summary | (Use resume headline as section title, for e.g. "Senior Software Engineer at Google with over 5 years of experience leading teams") |
+| Contact information | "Contact Information" |
+| Skills - programming languages, frameworks, etc. | "Skills" |
+| Experience | "Work Experience" |
+| Education (Note: if you are still in school or have less than 3 years of experience, you may put Education first) | "Education" |
+| Projects | "Projects" |
+| Other optional sections - e.g. Certifications, Awards, etc | "Awards and Accolades" / "Certifications" / "Awards, Accolades and Certifications" |
+
+:::caution
+
+Never add symbols to your headers to avoid ATS readability issues.
+
+:::
+
+## How to write good Software Engineer resume content
+
+As software engineering is inherently different from other careers in terms of its required skills and experiences, the content expectations for a software engineer resume is also unique. Each of the following paragraphs will cover the content usually expected for software engineers within each resume section:
+
+### How to write a professional summary for a software engineer
+
+A good professional summary can be a game changer. Not only does it summarize your entire professional experience in a manner that individual sections cannot, it can also leave a pleasant impression on the hiring manager.
+
+From my personal experience as a software engineering interviewer, I highly recommend professional summaries, as interviewers generally may not have the time to read into the detail - hence summaries which directly address why a candidate is a good fit for the job greatly improves their chances of capturing attention.
+
+Here are my top tips for writing a great software engineering resume summary.
+
+#### Before you start: List down your best selling points
+
+From your entire professional experience, list down the most important points that fulfill the job descriptions that you are applying for. This can include job experiences or skills.
+
+#### Summarize the selling points into your resume summary
+
+Summarizing the selling points as much as possible, frame them into a short summary of less than 50 words:
+
+Ensure you do these:
+
+- ✅ Answer why you are a good fit for the job
+- ✅ Use an active voice
+- ✅ Use action words
+- ✅ Start with the noun describing your job role e.g. "Software Engineer", "Front End Engineer"
+
+#### Write a headline for your resume summary
+
+Instead of writing "Professional Summary" as the title of the section, further concise your experience into a headline with fewer than 10 words. Treat it like a slightly more elaborate version of your LinkedIn profile headline. Some examples"
+
+##### Software Engineer (Full Stack)
+
+Software Engineer with X years of full stack web development experience specializing in Ruby on Rails and PostgreSQL. Domain expert in e-commerce and payments field as a result of working at multiple e-commerce companies.
+
+##### Senior Front End Engineer
+
+Front End Engineer with X years of experience and strong fundamentals in Front End technologies. Likes building scalable web infrastructure and making websites fast. Passionate about programming languages, compilers, and developer tooling.
+
+##### Software Engineering Lead
+
+Software Engineer with X years of experience in back end, scaling complex distributed systems, and various cloud platforms. Led over 5 engineering teams with an average size of 6 members across two companies and mentored over 20 junior members.
+
+##### Senior at University X
+
+Senior Year student at University X with a focus on Artificial Intelligence and Machine Learning (ML). Interned at X companies and worked on full stack development and ML engineering roles.
+
+### How to write contact information for a Software Engineer
+
+#### Must-haves
+
+- Name (Should be included at the very top of the resume)
+- Personal phone number
+  - Never include your work phone number here
+- Location - City, State, Zip
+  - Just enough for recruiters to determine if you are a local or international candidate
+- Email address
+  - Never include your work email here
+  - I recommend Gmail if you are using other email services
+- LinkedIn profile
+
+#### Good-to-haves
+
+- GitHub profile URL
+- Personal website URL
+- Stack Overflow profile URL
+- Medium profile URL
+- Competitive coding profile
+  - Codechef
+  - Hackerrank
+
+If a divider is required between information, use "|" or tabs
+
+Where relevant, indicate achievements in coding platforms, for example, max ratings, ranking, number of stars, badges.
+
+### How to write skills for a Software Engineer
+
+Include programming languages and tech stacks:
+
+Structure in the following manner:
+
+> [Skill summary] : [List skills separated by "|"]
+
+- Programming languages - If impressive, include your familiarity by the number of lines you have written, for example "Over 10,000 lines"
+- Frameworks
+- Databases
+
+### How to write work experience for a Software Engineer
+
+List your work experience in a familiar format and reverse chronological order. Every job listed should have:
+
+The company, location, title, duration worked following this structure
+
+> [Company or Organization], [Location] | [Job Title] | [Start and end dates formatted as MM/YYYY]
+
+Example
+
+> Facebook, Singapore | Front End Engineering Lead | 08/2018 - Present
+
+List of top accomplishments, including:
+
+- Scope of job and skills required
+- Accomplishments listed following this structure
+  - > [Accomplishment summary] : [Action] that resulted in [quantifiable outcome]
+
+### How to write education for a Software Engineer
+
+Most software engineering jobs will require at least an undergraduate degree. However, unless you are a recent graduate or do not have much work experience, it should not be prioritized above your work experience.
+
+Use the following format, eliminating information where it is not relevant:
+
+> [Degree Name], [Year of Graduation - write expected graduation date if not graduated]<br/>[University Name], [Location]<br/>GPA: X.XX / 4.0 (List GPA if more than 3.50/4.00, or more than 4.3 under a 5-point system)<br/>List key achievements, including leadership positions, skills, societies, projects, awards, etc.
+
+Example:
+
+> BSc in Computing, Computer Science, Graduation Year 2015<br/> National University of Singapore, Singapore <br/>GPA: 3.82 / 4.00 (Magna cum laude)<br/>Dean's List, Valedictorian<br/>President of hacker society
+
+### How to write projects for a Software Engineer
+
+Include at least 2 projects you have contributed to, outlining your key contributions. Always try to link your project name to GitHub or somewhere the hiring manager can view your project.
+
+> [facebook/docusaurus](https://github.com/facebook/docusaurus) <br/>Maintainer and lead engineer for Docusaurus v2, a static site generator which powers the documentation of many of Meta's Open Source Projects - React Native, Jest, Relay, Reason, etc. Used by 7.6k > projects on GitHub.
+
+### How to write awards, accolades and certifications for a Software Engineer
+
+Only include achievements related to the job application and try to quantify your achievements. A good format to use would be
+
+> [Year] [Quantification] [Competition]
+
+Example
+
+> 2016 | Best All-Round Product out of 50 teams | Facebook Hackathon
+
+## Optimize your resume with keywords
+
+must-haves to optimize your content:
+
+### Less is more
+
+**Do's**
+
+- Highlighting a few of your best achievements is better than including many "average" achievements in your resume
+- Use only 1 page for your resume
+
+**Don'ts**
+
+- Do not list all your achievements just to showcase a greater quantity without filtering
+
+### Keyword optimization
+
+Imagine you are a hiring manager or recruiter screening a resume while juggling many other tasks in your job - you simply won't have much time on each resume! When a hiring manager looks at a resume, they are in fact quickly scanning for keywords of skills or experiences that they value, before paying any additional attention to your resume.
+
+Recruiters and ATS do that as well, but based on the job description that the hiring manager helped to write. That is why optimizing your resume based on job descriptions is very important.
+
+:::info
+
+Some ATS will determine the strength of your skills based on the frequency of a keyword in your resume, and others assign an estimated amount of experience for a skill based on its placement in your resume.
+
+For instance, if your previous job experience was 3 years long and you mentioned handling Search engine marketing (SEM), the ATS will assume 5 years of SEM experience.
+
+:::
+
+#### Include keywords from job descriptions into your resume
+
+You should always analyze the job description for must-have and good-to-have skills or experiences and ensure the keywords are added to your resume.
+
+Include them under the "Skills" section and pepper the same keywords into the "Work Experience" and "Education" sections. Be sure to closely imitate the language within the job description.
+
+Remember to include the full version of common abbreviations as well. E.g. Amazon Web Services instead of AWS, Google Cloud Platform instead of GCP.
+
+However, do not do keyword stuffing for the sake of it - always remember that the resume will be read by a recruiter or hiring manager eventually.
+
+#### Optimize keyword frequency and placement
+
+Analyze the job description and determine how important each skill and experience is, then optimize the frequency of the keyword according to its importance.
+
+:::tip Expert tip
+
+While optimizing for every application is ideal, you can generalize your resume to a type of position.
+
+1. Collate 3 to 5 job descriptions for that position
+1. Copy and paste them into a `.txt` file and upload it into a free "word and phrase" frequency tool like [Online-Utility.org's Text Analyzer](https://www.online-utility.org/text/analyzer.jsp) to identify regularly used keywords
+1. Incorporate skills and experiences that you have into the resume
+
+:::
+
+## Free tools to review your resume
+
+I recommend using these free tools to optimize your resume:
+
+### 1. Free resume review
+
+[Resume Worded](https://a.paddle.com/v2/click/29828/144522?link=1861) uses AI to give instant expert feedback on your resume.
+
+We previously recommended [TopResume's free all-in-one review](https://tidd.ly/3GxVIs9) of your resume, but received some feedback that that their reviewers are not technical and do not give feedback relevant to engineering roles. In that regard, we recommend [FAANG Tech Leads' Resume Review service (paid)](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) where your resume will be reviewed by ex-FAANG hiring managers and engineers, not random writers who don't understand technology.
+
+### 2. Test readability with industry-standard ATS
+
+Test the readability and formatting of your resume using . Most big companies use such resume scanners.
+
+### 3. The plain text file test
+
+Simply copy the content from your resume and paste it into a plain text document! Make edits if:
+
+- There are points missing from your original resume
+- Characters are displaying incorrectly in plain text
+- Sections are disorganized
+
+## Final tips
+
+### Do not take job application forms lightly
+
+If the company you are applying for requires you to fill in the "Work Experience" and "Education" sections into their own form, do not take it lightly! Most of the time, these are internal HR applications which help parse job applications and filter out candidates from the information provided. In fact, it is possible that your resume is never seen by the recruiter or hiring manager - only the information that you fill up in their forms!
+
+### Do not apply to many jobs at the same company
+
+The ATS also allows recruiters to see all the roles you have applied to at their company. Try not to apply to too many jobs as a recruiter wouldn't be able to tell if you're actually interested in or if you're self-aware about your abilities. E.g. applying for a Software Engineer and a Data Scientist role at the same company is not a good idea.
+
+---
+
+And that is it from me in terms of resume preparation - hope this helps! If you have any other tips you would like to share with others on Tech Interview Handbook, do reach out to me at contact@techinterviewhandbook.org or create a new [GitHub discussion item](https://github.com/yangshun/tech-interview-handbook/discussions).
+
+<div className="text--center margin-vert--lg">
+  <figure>
+    <img alt="Summary of the 4 steps to create a great software engineering resume, in checklist format"
+    title="Summary checklist of the four key steps to create a great software engineering resume" className="shadow--md" src={require('@site/static/img/four-steps-to-create-a-software-engineer-resume.jpg').default} style={{maxWidth: 'min(100%, 420px)'}} />
+    <figcaption>Summary checklist of the four key steps to create a great software engineering resume</figcaption>
+  </figure>
+</div>

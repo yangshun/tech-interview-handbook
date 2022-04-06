@@ -1,6 +1,17 @@
 ---
 id: sorting-searching
-title: Sorting and searching
+title: Sorting and searching cheatsheet for coding interviews
+description: Sorting and searching study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    sorting searching coding interview study guide,
+    sorting searching tips for coding interviews,
+    sorting searching practice questions,
+    sorting searching useful techniques,
+    sorting searching time complexity,
+    sorting searching recommended study resources,
+  ]
+sidebar_label: Sorting and searching
 toc_max_heading_level: 2
 ---
 

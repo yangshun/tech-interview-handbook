@@ -1,6 +1,17 @@
 ---
 id: queue
-title: Queue
+title: Queue cheatsheet for coding interviews
+description: Queue study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    queue coding interview study guide,
+    queue tips for coding interviews,
+    queue practice questions,
+    queue useful techniques,
+    queue time complexity,
+    queue recommended study resources,
+  ]
+sidebar_label: Queue
 toc_max_heading_level: 2
 ---
 

@@ -28,16 +28,16 @@ module.exports = {
       items: [
         {
           label: 'Start reading',
-          href: '/introduction',
+          href: '/software-engineering-interview-guide/',
           position: 'left',
         },
         {
           label: 'Coding',
-          href: '/coding-interview',
+          href: '/coding-interview-prep/',
         },
         {
           label: 'Algorithms',
-          href: '/algorithms/introduction',
+          href: '/algorithms/study-cheatsheet',
         },
         {label: 'Blog', to: 'blog', position: 'left'},
         {
@@ -80,15 +80,15 @@ module.exports = {
           items: [
             {
               label: 'Start reading',
-              href: '/introduction',
+              href: '/software-engineering-interview-guide/',
             },
             {
               label: 'Resume preparation',
-              href: '/resume/guide',
+              href: '/resume/',
             },
             {
               label: 'Algorithms',
-              href: '/algorithms/introduction',
+              href: '/algorithms/study-cheatsheet',
             },
             {
               label: 'Blog',
@@ -100,20 +100,20 @@ module.exports = {
           title: 'Interviews',
           items: [
             {
-              label: 'Interview cheatsheet',
-              href: '/cheatsheet',
+              label: 'Coding interviews',
+              href: '/coding-interview-prep/',
             },
             {
-              label: 'Coding interviews',
-              href: '/coding-interview',
+              label: 'Study plan',
+              href: '/coding-interview-study-plan/',
             },
             {
               label: 'System design interviews',
-              href: '/system-design',
+              href: '/system-design/',
             },
             {
               label: 'Behavioral interviews',
-              href: '/behavioral-interview',
+              href: '/behavioral-interview/',
             },
           ],
         },

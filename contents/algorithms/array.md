@@ -1,6 +1,17 @@
 ---
 id: array
-title: Array
+title: Array cheatsheet for coding interviews
+description: Array study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    array coding interview study guide,
+    array tips for coding interviews,
+    array practice questions,
+    array useful techniques,
+    array time complexity,
+    array recommended study resources,
+  ]
+sidebar_label: Array
 toc_max_heading_level: 2
 ---
 

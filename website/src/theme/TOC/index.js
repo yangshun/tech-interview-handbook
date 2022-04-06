@@ -14,7 +14,14 @@ function TOC({className, ...props}) {
       <div className="margin--md">
         <SidebarAd position="table_of_contents" />
       </div>
-      <h3 className="padding-left--md padding-top--md margin-bottom--none">
+      <h3
+        className="padding-left--md padding-top--md margin-bottom--none"
+        style={{
+          textTransform: 'uppercase',
+          fontSize: '0.75em',
+          color: 'var(--ifm-color-emphasis-700)',
+          letterSpacing: '0.5px',
+        }}>
         Table of Contents
       </h3>
       <TOCItems

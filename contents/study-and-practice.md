@@ -29,7 +29,7 @@ If you have been out of college for a while, it is highly advisable to review Co
 - [DSA Revision](https://dsarevision.com/) - Free 100-page PDF with question patterns and example questions
 - [Top 50 Data Structure and Algorithms Interview Questions for Programmers](https://medium.com/javarevisited/50-data-structure-and-algorithms-interview-questions-for-programmers-b4b1ac61f5b0)
 
-After you have revised the basic concepts at least once, you can find a list of practical tips I collated for the common algorithm and data structure topics under the [Algorithms tips](./algorithms/introduction.md) section.
+After you have revised the basic concepts at least once, you can find a list of practical tips I collated for the common algorithm and data structure topics under the [Algorithms tips](.//algorithms/study-cheatsheet.md) section.
 
 ## Mastery through practice
 

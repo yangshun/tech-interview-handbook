@@ -1,6 +1,17 @@
 ---
 id: hash-table
-title: Hash Table
+title: Hash table cheatsheet for coding interviews
+description: Hash table study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    hash table coding interview study guide,
+    hash table tips for coding interviews,
+    hash table practice questions,
+    hash table useful techniques,
+    hash table time complexity,
+    hash table recommended study resources,
+  ]
+sidebar_label: Hash table
 toc_max_heading_level: 2
 ---
 

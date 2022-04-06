@@ -1,6 +1,17 @@
 ---
 id: heap
-title: Heap
+title: Heap cheatsheet for coding interviews
+description: Heap study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    heap coding interview study guide,
+    heap tips for coding interviews,
+    heap practice questions,
+    heap useful techniques,
+    heap time complexity,
+    heap recommended study resources,
+  ]
+sidebar_label: Heap
 toc_max_heading_level: 2
 ---
 

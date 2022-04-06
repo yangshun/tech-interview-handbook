@@ -56,7 +56,32 @@ html[data-theme='dark'] {
 }
 
 .markdown h1 {
-  margin-top: 1rem;
+  font-size: 2.25em;
+  margin-top: 1em;
+}
+
+.markdown h2 {
+  font-size: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.markdown h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+}
+
+.markdown blockquote {
+  border-left-color: var(--ifm-color-emphasis-200);
+  border-left-width: 0.5rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.markdown ul blockquote {
+  font-size: 0.9em;
+  margin-top: 0.5em;
 }
 
 @media screen and (max-width: 767px) {
@@ -163,4 +188,3 @@ html[data-theme='dark'] .navbar-icon-telegram:before {
   height: 28px;
   width: 24px;
 }
-

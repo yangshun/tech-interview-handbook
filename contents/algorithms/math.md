@@ -1,6 +1,17 @@
 ---
 id: math
-title: Math
+title: Math cheatsheet for coding interviews
+description: Math study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    math coding interview study guide,
+    math tips for coding interviews,
+    math practice questions,
+    math useful techniques,
+    math time complexity,
+    math recommended study resources,
+  ]
+sidebar_label: Math
 toc_max_heading_level: 2
 ---
 

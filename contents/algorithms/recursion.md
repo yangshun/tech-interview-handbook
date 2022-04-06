@@ -1,6 +1,17 @@
 ---
 id: recursion
-title: Recursion
+title: Recursion cheatsheet for coding interviews
+description: Recursion study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    recursion coding interview study guide,
+    recursion tips for coding interviews,
+    recursion practice questions,
+    recursion useful techniques,
+    recursion time complexity,
+    recursion recommended study resources,
+  ]
+sidebar_label: Recursion
 toc_max_heading_level: 2
 ---
 

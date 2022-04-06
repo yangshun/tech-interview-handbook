@@ -21,14 +21,14 @@ Not everyone has the time to do a few hundred LeetCode questions. Here are _free
 
 Besides the usual algorithm questions, other **awesome** stuff includes:
 
-- [Best practice questions](https://techinterviewhandbook.org/best-practice-questions/) for coding interviews
-- [How to prepare](https://www.techinterviewhandbook.org/coding-interview/) for coding interviews
-- [Coding interview cheatsheet](https://www.techinterviewhandbook.org/cheatsheet/) - Straight-to-the-point Do's and Don'ts
-- [Algorithm tips](https://www.techinterviewhandbook.org/algorithms/introduction/) categorized by topic
+- [Best practice questions](https://www.techinterviewhandbook.org/coding-interview-study-plan/) for coding interviews
+- [How to prepare](https://www.techinterviewhandbook.org/coding-interview-prep/) for coding interviews
+- [Coding interview best practices](https://www.techinterviewhandbook.org/coding-interview-best-practices/) - Straight-to-the-point Do's and Don'ts
+- [Algorithm cheatsheets and tips](https://www.techinterviewhandbook.org/algorithms/study-cheatsheet/) categorized by topic
 - [Interview formats](https://www.techinterviewhandbook.org/interview-formats/) of the top tech companies
-- [Step-by-step resume guide](https://www.techinterviewhandbook.org/resume/guide/) to prepare a FAANG-ready resume
-- [Behavioral questions](https://www.techinterviewhandbook.org/behavioral-questions/) asked by the top tech companies
-- [Good questions to ask your interviewers](https://www.techinterviewhandbook.org/questions-to-ask/) at the end of the interviews
+- [Step-by-step resume guide](https://www.techinterviewhandbook.org/resume/) to prepare a FAANG-ready resume
+- [Behavioral questions](https://www.techinterviewhandbook.org/behavioral-interview-questions/) asked by the top tech companies
+- [Good questions to ask your interviewers](https://www.techinterviewhandbook.org/final-questions/) at the end of the interviews
 - [Front end interview preparation](https://www.frontendinterviewhandbook.com)
 
 Help from you in contributing content would be very much appreciated!

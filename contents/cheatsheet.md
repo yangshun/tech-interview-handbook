@@ -55,7 +55,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ✅ | Explain a high level approach even if it is a brute force one. |
 | ✅ | Improve upon the approach and optimize. Reduce duplicated work and cache repeated computations. |
 | ✅ | Think carefully, then state and explain the time and space complexity of your approaches. |
-| ✅ | If stuck, think about related problems you have seen before and how they were solved. Check out the [tips](algorithms/introduction.md) in this section. |
+| ✅ | If stuck, think about related problems you have seen before and how they were solved. Check out the [tips](/algorithms/study-cheatsheet.md) in this section. |
 | ❌ | Ignore information given to you. Every piece is important. |
 | ❌ | Jump into coding straightaway. |
 | ❌ | Start coding without interviewer's green light. |

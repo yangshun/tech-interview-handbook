@@ -1,6 +1,17 @@
 ---
 id: graph
-title: Graph
+title: Graph cheatsheet for coding interviews
+description: Graph study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    graph coding interview study guide,
+    graph tips for coding interviews,
+    graph practice questions,
+    graph useful techniques,
+    graph time complexity,
+    graph recommended study resources,
+  ]
+sidebar_label: Graph
 toc_max_heading_level: 2
 ---
 

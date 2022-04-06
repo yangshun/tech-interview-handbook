@@ -23,7 +23,7 @@ const FEATURES = [
         interview experience needed.
       </>
     ),
-    link: '/introduction',
+    link: '/software-engineering-interview-guide/',
   },
   {
     title: <>📝 Curated practice questions</>,
@@ -36,17 +36,17 @@ const FEATURES = [
         to tell you which the best questions are.
       </>
     ),
-    link: '/best-practice-questions',
+    link: '/coding-interview-study-plan/',
   },
   {
-    title: <>📋 Interview cheatsheet</>,
+    title: <>📋 Interview best practices</>,
     description: (
       <>
         Straight-to-the-point Do's and Don'ts during an interview. The battle is
         already half won.
       </>
     ),
-    link: '/cheatsheet',
+    link: '/coding-interview-best-practices/',
   },
   {
     title: <>💁‍♀️ Practical algorithm tips</>,
@@ -56,7 +56,7 @@ const FEATURES = [
         cases to look out for.
       </>
     ),
-    link: '/algorithms/introduction',
+    link: '/algorithms/study-cheatsheet/',
   },
   {
     title: <>💬 Behavioral questions</>,
@@ -66,7 +66,7 @@ const FEATURES = [
         prepare your answers ahead of time.
       </>
     ),
-    link: '/behavioral-questions',
+    link: '/behavioral-interview-questions/',
   },
   {
     title: <>🧪 Tested and proven</>,
@@ -145,7 +145,7 @@ function HeroSection() {
         <div className={styles.buttons}>
           <Link
             className={classnames('button button--primary button--lg')}
-            to="/introduction">
+            to="/software-engineering-interview-guide/">
             Start reading now&nbsp;&nbsp;→
           </Link>
         </div>
@@ -324,7 +324,7 @@ function HowToUseSection() {
                 <>Software engineering specific resume content</>,
                 <>Optimizing and and testing your resume</>,
               ]}
-              ctaLink="/resume/guide"
+              ctaLink="/resume/"
             />
           </div>
           <div
@@ -342,7 +342,7 @@ function HowToUseSection() {
                 <>System design interview preparation</>,
                 <>Behavioral interview preparation</>,
               ]}
-              ctaLink="/interview-formats"
+              ctaLink="/coding-interview-prep/"
             />
           </div>
           <div
@@ -358,7 +358,7 @@ function HowToUseSection() {
                 <>Negotiation strategies for software engineers</>,
                 <>Guide on how compensation works for software engineers</>,
               ]}
-              ctaLink="/understanding-compensation"
+              ctaLink="/understanding-compensation/"
             />
           </div>
           <div
@@ -818,7 +818,7 @@ function PreFooterSection() {
             </p>
             <Link
               className={classnames('button button--primary button--lg')}
-              to="/introduction">
+              to="/software-engineering-interview-guide/">
               Start reading now&nbsp;&nbsp;→
             </Link>
           </div>

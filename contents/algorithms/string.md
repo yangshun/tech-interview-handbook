@@ -1,6 +1,17 @@
 ---
 id: string
-title: String
+title: String cheatsheet for coding interviews
+description: String study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    string coding interview study guide,
+    string tips for coding interviews,
+    string practice questions,
+    string useful techniques,
+    string time complexity,
+    string recommended study resources,
+  ]
+sidebar_label: String
 toc_max_heading_level: 2
 ---
 

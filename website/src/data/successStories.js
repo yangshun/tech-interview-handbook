@@ -11,7 +11,7 @@ export default [
         wasn't sure what to expect and where to start. This handbook together
         with the{' '}
         <a
-          href="https://frontendinterviewhandbook.com"
+          href="https://www.frontendinterviewhandbook.com"
           target="_blank"
           rel="noreferrer noopener">
           Front End Interview Handbook

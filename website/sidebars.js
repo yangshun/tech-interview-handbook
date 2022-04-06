@@ -66,7 +66,7 @@ module.exports = {
     },
     {
       'Algorithms cheatsheets': [
-        'algorithms/algorithms-introduction',
+        'algorithms/study-cheatsheet',
         {
           Basics: [
             'algorithms/array',
@@ -99,6 +99,82 @@ module.exports = {
     },
     {
       Misc: ['interviewer-cheatsheet'],
+    },
+  ],
+  docsRevamp: [
+    {
+      type: 'category',
+      label: 'Introduction',
+      collapsible: false,
+      items: ['software-engineering-interview-guide'],
+    },
+    {
+      type: 'category',
+      label: 'Getting an interview',
+      collapsible: false,
+      items: ['resume'],
+    },
+    {
+      type: 'category',
+      label: 'Coding interview preparation',
+      collapsible: false,
+      items: [
+        'coding-interview-prep',
+        'programming-languages-for-coding-interviews',
+        'coding-interview-study-plan',
+        'coding-interview-best-practices',
+        'coding-interview-techniques',
+        'mock-interviews',
+        'coding-interview-rubrics',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'System design interview preparation',
+      collapsible: false,
+      items: ['system-design'],
+    },
+    {
+      type: 'category',
+      label: 'Behavioral interview preparation',
+      collapsible: false,
+      items: [
+        'behavioral-interview',
+        'behavioral-interview-questions',
+        'self-introduction',
+        'final-questions',
+      ],
+    },
+    {
+      'Salary and offer negotiation preparation': [
+        'understanding-compensation',
+        'negotiation',
+        'negotiation-rules',
+        'choosing-between-companies',
+      ],
+    },
+    {
+      'Algorithms study cheatsheets': [
+        'algorithms/study-cheatsheet',
+        'algorithms/array',
+        'algorithms/string',
+        'algorithms/hash-table',
+        'algorithms/recursion',
+        'algorithms/sorting-searching',
+        'algorithms/matrix',
+        'algorithms/linked-list',
+        'algorithms/queue',
+        'algorithms/stack',
+        'algorithms/tree',
+        'algorithms/graph',
+        'algorithms/heap',
+        'algorithms/trie',
+        'algorithms/interval',
+        'algorithms/dynamic-programming',
+        'algorithms/binary',
+        'algorithms/math',
+        'algorithms/geometry',
+      ],
     },
   ],
 };

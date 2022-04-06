@@ -1,6 +1,17 @@
 ---
 id: matrix
-title: Matrix
+title: Matrix cheatsheet for coding interviews
+description: Matrix study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    matrix coding interview study guide,
+    matrix tips for coding interviews,
+    matrix practice questions,
+    matrix useful techniques,
+    matrix time complexity,
+    matrix recommended study resources,
+  ]
+sidebar_label: Matrix
 toc_max_heading_level: 2
 ---
 

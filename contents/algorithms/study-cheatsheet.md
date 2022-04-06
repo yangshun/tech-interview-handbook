@@ -1,18 +1,53 @@
 ---
-id: algorithms-introduction
-title: Algorithms tips
-description: Here are practical tips for each algorithm topic and data structure which appear frequently in coding interviews
+id: study-cheatsheet
+title: Data structures and algorithms study cheatsheets for coding interviews
+description: Study guides for coding interviews with focus on data structures and algorithms, including practice questions, techniques, time complexity and recommended resources
+keywords: [coding interview algorithms, coding interview data structures]
 sidebar_label: Introduction
-slug: introduction
 ---
 
 import InDocAd from '../\_components/InDocAd';
 
+## What is this
+
 This section dives deep into practical knowledge and techniques for algorithms and data structures which appear frequently in algorithm interviews. The more techniques you have in your arsenal, the higher the chances of passing the interview. They may lead you to discover corner cases you might have missed out or even lead you towards the optimal approach!
 
-For each topic, a brief introduction is given, along with language-specific libraries to use, time complexities cheatsheet, things to look out for during interviews, corner cases, useful techniques, and recommended resources to help you master the topic. Lastly, there is a list of recommended common questions to practice which in my opinion is highly valuable for mastering the core concepts for the topic.
+## Contents of each study guide
 
-If you are interested in how data structures are implemented, check out [Lago](https://github.com/yangshun/lago), a Data Structures and Algorithms library for JavaScript.
+For each topic, you can expect to find:
+
+1. A brief overview
+1. Learning resources
+1. Language-specific libraries to use
+1. Time complexities cheatsheet
+1. Things to look out for during interviews
+1. Corner cases
+1. Useful techniques vRecommended questions to practice
+
+## Study guides list
+
+Here is the list of data structures and algorithms you should prepare for coding interviews and their corresponding study guides:
+
+| Topic                                                      | Priority |
+| ---------------------------------------------------------- | -------- |
+| [Array](./algorithms/array.md)                             | High     |
+| [String](./algorithms/string.md)                           | High     |
+| [Hash Table](./algorithms/hash-table.md)                   | Mid      |
+| [Recursion](./algorithms/recursion.md)                     | Mid      |
+| [Sorting and searching](./algorithms/sorting-searching.md) | High     |
+| [Matrix](./algorithms/matrix.md)                           | High     |
+| [Linked List](./algorithms/linked-list.md)                 | Mid      |
+| [Queue](./algorithms/queue.md)                             | Mid      |
+| [Stack](./algorithms/stack.md)                             | Mid      |
+| [Tree](./algorithms/tree.md)                               | High     |
+| [Graph](./algorithms/graph.md)                             | High     |
+| [Heap](./algorithms/heap.md)                               | Mid      |
+| [Trie](./algorithms/trie.md)                               | Mid      |
+| [Interval](./algorithms/interval.md)                       | Mid      |
+| [Dynamic programming](./algorithms/dynamic-programming.md) | Low      |
+| [Binary](./algorithms/binary.md)                           | Low      |
+| [Math](./algorithms/math.md)                               | Low      |
+| [Geometry](./algorithms/geometry.md)                       | Low      |
 
 ## General interview tips
 

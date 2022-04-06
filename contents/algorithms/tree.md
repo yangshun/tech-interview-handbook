@@ -1,6 +1,17 @@
 ---
 id: tree
-title: Tree
+title: Tree cheatsheet for coding interviews
+description: Tree study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    tree coding interview study guide,
+    tree tips for coding interviews,
+    tree practice questions,
+    tree useful techniques,
+    tree time complexity,
+    tree recommended study resources,
+  ]
+sidebar_label: Tree
 toc_max_heading_level: 2
 ---
 

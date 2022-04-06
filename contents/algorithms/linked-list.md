@@ -1,6 +1,17 @@
 ---
 id: linked-list
-title: Linked list
+title: Linked list cheatsheet for coding interviews
+description: Linked list study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    linked list coding interview study guide,
+    linked list tips for coding interviews,
+    linked list practice questions,
+    linked list useful techniques,
+    linked list time complexity,
+    linked list recommended study resources,
+  ]
+sidebar_label: Linked list
 toc_max_heading_level: 2
 ---
 

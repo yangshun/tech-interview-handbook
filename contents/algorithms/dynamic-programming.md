@@ -1,6 +1,17 @@
 ---
 id: dynamic-programming
-title: Dynamic programming
+title: Dynamic programming cheatsheet for coding interviews
+description: Dynamic programming study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources
+keywords:
+  [
+    dynamic programming coding interview study guide,
+    dynamic programming tips for coding interviews,
+    dynamic programming practice questions,
+    dynamic programming useful techniques,
+    dynamic programming time complexity,
+    dynamic programming recommended study resources,
+  ]
+sidebar_label: Dynamic programming
 toc_max_heading_level: 2
 ---
 

@@ -107,7 +107,7 @@ function DocItemContent(props) {
         </div>
       </div>
       {renderTocDesktop && (
-        <div className="col col--4">
+        <div className="col col--3">
           <TOC
             toc={DocContent.toc}
             minHeadingLevel={tocMinHeadingLevel}
