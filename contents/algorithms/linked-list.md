@@ -18,6 +18,17 @@ Insertion and deletion of a node in the list (given its location) is O(1) wherea
 
 Access time is linear because directly accessing elements by its position in the list is not possible (in arrays you can do `arr[4]` for example). You have to traverse from the start.
 
+## Learning resources
+
+- Readings
+  - [What's a Linked List, Anyway? [Part 1]](https://medium.com/basecs/whats-a-linked-list-anyway-part-1-d8b7e6508b9d), basecs
+  - [What's a Linked List, Anyway? [Part 2]](https://medium.com/basecs/whats-a-linked-list-anyway-part-2-131d96f71996), basecs
+- Videos
+  - [Singly-linked lists](https://www.coursera.org/lecture/data-structures/singly-linked-lists-kHhgK), University of California San Diego
+  - [Doubly linked lists](https://www.coursera.org/lecture/data-structures/doubly-linked-lists-jpGKD), University of California San Diego
+
+## Types of linked lists
+
 ### Singly linked list
 
 A linked list where each node points to the next node and the last node points to `null`.
@@ -28,9 +39,7 @@ A linked list where each node has two pointers, `next` which points to the next 
 
 ### Circular linked list
 
-A singly linked list where the last node points back to the first node.
-
-There is a circular doubly linked list variant where the `prev` pointer of the first node points to the last node and the `next` pointer of the last node points to the first node.
+A singly linked list where the last node points back to the first node. There is a circular doubly linked list variant where the `prev` pointer of the first node points to the last node and the `next` pointer of the last node points to the first node.
 
 ## Implementations
 
@@ -51,15 +60,6 @@ Out of the common languages, only Java provides a linked list implementation. Th
 | Search    | O(n)  |                                                      |
 | Insert    | O(1)  | Assumes you have traversed to the insertion position |
 | Remove    | O(1)  | Assumes you have traversed to the node to be removed |
-
-## Learning resources
-
-- Readings
-  - [What's a Linked List, Anyway? [Part 1]](https://medium.com/basecs/whats-a-linked-list-anyway-part-1-d8b7e6508b9d), basecs
-  - [What's a Linked List, Anyway? [Part 2]](https://medium.com/basecs/whats-a-linked-list-anyway-part-2-131d96f71996), basecs
-- Videos
-  - [Singly-linked lists](https://www.coursera.org/lecture/data-structures/singly-linked-lists-kHhgK), University of California San Diego
-  - [Doubly linked lists](https://www.coursera.org/lecture/data-structures/doubly-linked-lists-jpGKD), University of California San Diego
 
 ## Common routines
 

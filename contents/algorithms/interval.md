@@ -12,16 +12,20 @@ An example interval array: `[[1, 2], [4, 7]]`.
 
 Interval questions can be tricky to those who have not tried them before because of the sheer number of cases to consider when they overlap.
 
-## Corner cases
-
-- Single interval
-- Non-overlapping intervals
-- An interval totally consumed within another interval
-- Duplicate intervals
-
 ## Things to look out for during interviews
 
-- Do clarify with the interviewer whether `[1, 2]` and `[2, 3]` are considered overlapping intervals as it affects how you will write your equality checks.
+- Clarify with the interviewer whether `[1, 2]` and `[2, 3]` are considered overlapping intervals as it affects how you will write your equality checks.
+- Clarify whether an interval of `[a, b]` will strictly follow `a` < `b` (`a` is smaller than `b`)
+
+## Corner cases
+
+- No intervals
+- Single interval
+- Two intervals
+- Non-overlapping intervals
+- An interval totally consumed within another interval
+- Duplicate intervals (exactly the same start and end)
+- Intervals which start right where another interval ends - `[[1, 2], [2, 3]]`
 
 ## Techniques
 

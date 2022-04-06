@@ -12,23 +12,6 @@ A number of basic algorithms run in O(n<sup>2</sup>) and should not be used in i
 
 On a sorted array of elements, by leveraging on its sorted property, searching can be done on them in faster than O(n) time by using a binary search. Binary search compares the target value with the middle element of the array, which informs the algorithm whether the target value lies in the left half or the right half, and this comparison proceeds on the remaining half until the target is found or the remaining half is empty.
 
-## Time complexity
-
-| Algorithm      | Time             | Space     |
-| -------------- | ---------------- | --------- |
-| Bubble sort    | O(n<sup>2</sup>) | O(1)      |
-| Insertion sort | O(n<sup>2</sup>) | O(1)      |
-| Selection sort | O(n<sup>2</sup>) | O(1)      |
-| Quicksort      | O(nlog(n))       | O(log(n)) |
-| Mergesort      | O(nlog(n))       | O(n)      |
-| Heapsort       | O(nlog(n))       | O(1)      |
-| Counting sort  | O(n + k)         | O(k)      |
-| Radix sort     | O(nk)            | O(n + k)  |
-
-| Algorithm     | Big-O     |
-| ------------- | --------- |
-| Binary search | O(log(n)) |
-
 ## Learning resources
 
 While you're unlikely to be asked to implement a sorting algorithm from scratch during an interview, it is good to know the various time complexities of the different sorting algorithms.
@@ -47,16 +30,33 @@ While you're unlikely to be asked to implement a sorting algorithm from scratch 
   - [Counting Linearly With Counting Sort](https://medium.com/basecs/counting-linearly-with-counting-sort-cd8516ae09b3), basecs
   - [Getting To The Root Of Sorting With Radix Sort](https://medium.com/basecs/getting-to-the-root-of-sorting-with-radix-sort-f8e9240d4224), basecs
 
+## Time complexity
+
+| Algorithm      | Time             | Space     |
+| -------------- | ---------------- | --------- |
+| Bubble sort    | O(n<sup>2</sup>) | O(1)      |
+| Insertion sort | O(n<sup>2</sup>) | O(1)      |
+| Selection sort | O(n<sup>2</sup>) | O(1)      |
+| Quicksort      | O(nlog(n))       | O(log(n)) |
+| Mergesort      | O(nlog(n))       | O(n)      |
+| Heapsort       | O(nlog(n))       | O(1)      |
+| Counting sort  | O(n + k)         | O(k)      |
+| Radix sort     | O(nk)            | O(n + k)  |
+
+| Algorithm     | Big-O     |
+| ------------- | --------- |
+| Binary search | O(log(n)) |
+
+## Things to look out for during interviews
+
+Make sure you know the time and space complexity of the language's default sorting algorithm! The time complexity is almost definitely O(nlog(n))). Bonus points if you can name the sort. In Python, it's [Timsort](https://en.wikipedia.org/wiki/Timsort).
+
 ## Corner cases
 
 - Empty sequence
 - Sequence with one element
 - Sequence with two elements
 - Sequence containing duplicate elements.
-
-## Things to look out for during interviews
-
-Make sure you know the time and space complexity of the language's default sorting algorithm! The time complexity is almost definitely O(nlog(n))). Bonus points if you can name the sort. In Python, it's [Timsort](https://en.wikipedia.org/wiki/Timsort).
 
 ## Techniques
 

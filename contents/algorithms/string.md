@@ -41,16 +41,16 @@ Here we assume the other string is of length m.
 | Split (by token) | O(m) |  |
 | Strip (remove leading and trailing whitespaces) | O(n) |  |
 
+## Things to look out for during interviews
+
+Ask about input character set and case sensitivity. Usually the characters are limited to lowercase Latin characters, for example a to z.
+
 ## Corner cases
 
 - Empty string
 - String with 1 or 2 characters
 - String with repeated characters
 - Strings with only distinct characters
-
-## Things to look out for during interviews
-
-Ask about input character set and case sensitivity. Usually the characters are limited to lowercase Latin characters, for example a to z.
 
 ## Techniques
 

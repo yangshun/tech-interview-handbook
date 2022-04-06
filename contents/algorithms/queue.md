@@ -12,6 +12,13 @@ This behavior is commonly called FIFO (first in, first out). The name "queue" fo
 
 Breadth-first search is commonly implemented using queues.
 
+## Learning resources
+
+- Readings
+  - [To Queue Or Not To Queue](https://medium.com/basecs/to-queue-or-not-to-queue-2653bcde5b04), basecs
+- Videos
+  - [Queues](https://www.coursera.org/lecture/data-structures/queues-EShpq), University of California San Diego
+
 ## Implementations
 
 | Language | API |
@@ -31,22 +38,15 @@ Breadth-first search is commonly implemented using queues.
 | Back          | O(1)  |
 | isEmpty       | O(1)  |
 
-## Learning resources
+## Things to look out for during interviews
 
-- Readings
-  - [To Queue Or Not To Queue](https://medium.com/basecs/to-queue-or-not-to-queue-2653bcde5b04), basecs
-- Videos
-  - [Queues](https://www.coursera.org/lecture/data-structures/queues-EShpq), University of California San Diego
+Most languages don't have a built in Queue class which to be used, and candidates often use arrays (JavaScript) or lists (Python) as a queue. However, note that the enqueue operation in such a scenario will be O(n) because it requires shifting of all other elements by one. In such cases, you can flag this to the interviewer and say that you assume that there's a queue data structure to use which has an efficient enqueue operation.
 
 ## Corner cases
 
 - Empty queue
 - Queue with one item
 - Queue with two items
-
-## Things to look out for during interviews
-
-Most languages don't have a built in Queue class which to be used, and candidates often use arrays (JavaScript) or lists (Python) as a queue. However, note that the enqueue operation in such a scenario will be O(n) because it requires shifting of all other elements by one. In such cases, you can flag this to the interviewer and say that you assume that there's a queue data structure to use which has an efficient enqueue operation.
 
 ## Recommended questions
 

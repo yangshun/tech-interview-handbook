@@ -13,6 +13,12 @@ A heap is a specialized tree-based data structure which is a complete tree that 
 
 In the context of algorithm interviews, heaps and priority queues can be treated as the same data structure. A heap is a useful data structure when it is necessary to repeatedly remove the object with the highest (or lowest) priority, or when insertions need to be interspersed with removals of the root node.
 
+## Learning resources
+
+- [Learning to Love Heaps](https://medium.com/basecs/learning-to-love-heaps-cef2b273a238), basecs
+- [Heapify All The Things With Heap Sort](https://medium.com/basecs/heapify-all-the-things-with-heap-sort-55ee1c93af82), basecs
+- [Heaps](http://www.cs.yale.edu/homes/aspnes/classes/223/notes.html#heaps), James Aspnes, Yale University
+
 ## Implementations
 
 | Language | API |
@@ -30,12 +36,6 @@ In the context of algorithm interviews, heaps and priority queues can be treated
 | Insert                                                 | O(log(n)) |
 | Remove                                                 | O(log(n)) |
 | Heapify (create a heap out of given array of elements) | O(n)      |
-
-## Learning resources
-
-- [Learning to Love Heaps](https://medium.com/basecs/learning-to-love-heaps-cef2b273a238), basecs
-- [Heapify All The Things With Heap Sort](https://medium.com/basecs/heapify-all-the-things-with-heap-sort-55ee1c93af82), basecs
-- [Heaps](http://www.cs.yale.edu/homes/aspnes/classes/223/notes.html#heaps), James Aspnes, Yale University
 
 ## Techniques
 

@@ -23,6 +23,10 @@
 
 TODO
 
+## Learning resources
+
+TODO
+
 ## Implementations
 
 | Language   | API  |
@@ -43,15 +47,11 @@ TODO
 | Insert    | O(1)  |      |
 | Remove    | O(1)  |      |
 
-## Learning resources
+## Things to look out for during interviews
 
 TODO
 
 ## Corner cases
-
-TODO
-
-## Things to look out for during interviews
 
 TODO
 

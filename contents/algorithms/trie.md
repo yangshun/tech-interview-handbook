@@ -10,6 +10,14 @@ Tries are special trees (prefix trees) that make searching and storing strings m
 
 Be familiar with implementing from scratch, a `Trie` class and its `add`, `remove` and `search` methods.
 
+## Learning resources
+
+- Readings
+  - [Trying to Understand Tries](https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014), basecs
+  - [Implement Trie (Prefix Tree)](https://leetcode.com/articles/implement-trie-prefix-tree/), LeetCode
+- Additional (only if you have time)
+  - [Compressing Radix Trees Without (Too Many) Tears](https://medium.com/basecs/compressing-radix-trees-without-too-many-tears-a2e658adb9a0), basecs
+
 ## Time complexity
 
 `m` is the length of the string used in the operation.
@@ -19,14 +27,6 @@ Be familiar with implementing from scratch, a `Trie` class and its `add`, `remov
 | Search    | O(m)  |      |
 | Insert    | O(m)  |      |
 | Remove    | O(m)  |      |
-
-## Learning resources
-
-- Readings
-  - [Trying to Understand Tries](https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014), basecs
-  - [Implement Trie (Prefix Tree)](https://leetcode.com/articles/implement-trie-prefix-tree/), LeetCode
-- Additional (only if you have time)
-  - [Compressing Radix Trees Without (Too Many) Tears](https://medium.com/basecs/compressing-radix-trees-without-too-many-tears-a2e658adb9a0), basecs
 
 ## Corner cases
 

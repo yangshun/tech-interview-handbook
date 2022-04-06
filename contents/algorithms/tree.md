@@ -14,6 +14,18 @@ For the purpose of interviews, you will usually be asked on binary trees as oppo
 
 Trees are commonly used to represent hierarchical data, e.g. file systems, JSON, and HTML documents. Do check out the section on [Trie](trie.md), which is an advanced tree used for efficiently storing and searching strings.
 
+## Learning resources
+
+- Videos
+  - [Trees](https://www.coursera.org/lecture/data-structures/trees-95qda), University of California San Diego
+- Readings
+  - [How To Not Be Stumped By Trees](https://medium.com/basecs/how-to-not-be-stumped-by-trees-5f36208f68a7), basecs
+  - [Leaf It Up To Binary Trees](https://medium.com/basecs/leaf-it-up-to-binary-trees-11001aaf746d), basecs
+- Additional (only if you have time)
+  - [The Little AVL Tree That Could](https://medium.com/basecs/the-little-avl-tree-that-could-86a3cae410c7), basecs
+  - [Busying Oneself With B-Trees](https://medium.com/basecs/busying-oneself-with-b-trees-78bbf10522e7), basecs
+  - [Painting Nodes Black With Red-Black Trees](https://medium.com/basecs/painting-nodes-black-with-red-black-trees-60eacb2be9a5), basecs
+
 ## Common terms you need to know
 
 - **Neighbor** - Parent or child of a node
@@ -68,17 +80,9 @@ When a question involves a BST, the interviewer is usually looking for a solutio
 
 Space complexity of traversing balanced trees is O(n) while traversing very skewed trees (which is essentially a linked list) will be O(n).
 
-## Learning resources
+## Things to look out for during interviews
 
-- Videos
-  - [Trees](https://www.coursera.org/lecture/data-structures/trees-95qda), University of California San Diego
-- Readings
-  - [How To Not Be Stumped By Trees](https://medium.com/basecs/how-to-not-be-stumped-by-trees-5f36208f68a7), basecs
-  - [Leaf It Up To Binary Trees](https://medium.com/basecs/leaf-it-up-to-binary-trees-11001aaf746d), basecs
-- Additional (only if you have time)
-  - [The Little AVL Tree That Could](https://medium.com/basecs/the-little-avl-tree-that-could-86a3cae410c7), basecs
-  - [Busying Oneself With B-Trees](https://medium.com/basecs/busying-oneself-with-b-trees-78bbf10522e7), basecs
-  - [Painting Nodes Black With Red-Black Trees](https://medium.com/basecs/painting-nodes-black-with-red-black-trees-60eacb2be9a5), basecs
+You should be very familiar with writing pre-order, in-order, and post-order traversal recursively. As an extension, challenge yourself by writing them iteratively. Sometimes interviewers ask candidates for the iterative approach, especially if the candidate finishes writing the recursive approach too quickly.
 
 ## Corner cases
 
@@ -86,10 +90,6 @@ Space complexity of traversing balanced trees is O(n) while traversing very skew
 - Single node
 - Two nodes
 - Very skewed tree (like a linked list)
-
-## Things to look out for during interviews
-
-You should be very familiar with writing pre-order, in-order, and post-order traversal recursively. As an extension, challenge yourself by writing them iteratively. Sometimes interviewers ask candidates for the iterative approach, especially if the candidate finishes writing the recursive approach too quickly.
 
 ## Common routines
 

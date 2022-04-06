@@ -27,8 +27,6 @@ def fib(n):
 
 Many algorithms relevant in coding interviews make heavy use of recursion - binary search, merge sort, tree traversal, depth-first search, etc. In this article, we focus on questions which use recursion but aren't part of other well known algorithms.
 
-<!-- TODO: Talk about backtracking -->
-
 ## Learning resources
 
 - Readings
@@ -36,11 +34,7 @@ Many algorithms relevant in coding interviews make heavy use of recursion - bina
 - Videos
   - [Tail Recursion](https://www.coursera.org/lecture/programming-languages/tail-recursion-YZic1), University of Washington
 
-## Corner cases
-
-- `n = 0`
-- `n = 1`
-- Make sure you have enough base cases to cover all possible invocations of the recursive function
+<!-- TODO: Talk about backtracking -->
 
 ## Things to look out for during interviews
 
@@ -48,6 +42,12 @@ Many algorithms relevant in coding interviews make heavy use of recursion - bina
 - Recursion is useful for permutation, because it generates all combinations and tree-based questions. You should know how to generate all permutations of a sequence as well as how to handle duplicates.
 - Recursion implicitly uses a stack. Hence all recursive approaches can be rewritten iteratively using a stack. Beware of cases where the recursion level goes too deep and causes a stack overflow (the default limit in Python is 1000). You may get bonus points for pointing this out to the interviewer. Recursion will never be O(1) space complexity because a stack is involved, unless there is [tail-call optimization](https://stackoverflow.com/questions/310974/what-is-tail-call-optimization) (TCO). Find out if your chosen language supports TCO.
 - Number of base cases - In the fibonacci example above, note that one of our recursive calls invoke `fib(n - 2)`. This indicates that you should have 2 base cases defined so that your code covers all possible invocations of the function within the input range. If your recursive function only invokes `fn(n - 1)`, then only one base case is needed
+
+## Corner cases
+
+- `n = 0`
+- `n = 1`
+- Make sure you have enough base cases to cover all possible invocations of the recursive function
 
 ## Techniques
 

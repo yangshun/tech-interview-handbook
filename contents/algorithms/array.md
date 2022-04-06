@@ -20,7 +20,14 @@ Arrays are among the most common data structures encountered during interviews. 
 - Addition and removal of elements into/from the middle an array is slow because they remaining elements need to be shifted to accommodate the new/missing element. An exception to this is if the position to be inserted/removed is at the end of the array.
 - For certain languages where the array size is fixed, it cannot alter its size after initialization. if an insertion causes the total number of elements to exceed the size, a new array has to be allocated and the existing elements have to be copied over. The act of creating a new array and transferring elements over takes O(n) time.
 
-**Definitions**
+## Learning resources
+
+- Readings
+  - [Array in Data Structure: What is, Arrays Operations](https://www.guru99.com/array-data-structure.html), Guru99
+- Videos
+  - [Arrays](https://www.coursera.org/lecture/data-structures/arrays-OsBSF), University of California San Diego
+
+## Common terms
 
 Common terms you see when doing problems involving arrays:
 
@@ -41,12 +48,11 @@ Common terms you see when doing problems involving arrays:
 | Remove | O(n) | Removal would require shifting all the subsequent elements to the left by one and that takes O(n) |
 | Remove (at the end) | O(1) | Special case of removal where no other element needs to be shifted |
 
-## Learning resources
+## Things to look out for during interviews
 
-- Readings
-  - [Array in Data Structure: What is, Arrays Operations](https://www.guru99.com/array-data-structure.html), Guru99
-- Videos
-  - [Arrays](https://www.coursera.org/lecture/data-structures/arrays-OsBSF), University of California San Diego
+- Clarify if there are duplicate values in the array. Would the presence of duplicate values affect the answer? Does it make the question simpler or harder?
+- When using an index to iterate through array elements, be careful not to go out of bounds.
+- Be mindful about slicing or concatenating arrays in your code. Typically, slicing and concatenating arrays would take O(n) time. Use start and end indices to demarcate a subarray/range where possible.
 
 ## Corner cases
 
@@ -54,12 +60,6 @@ Common terms you see when doing problems involving arrays:
 - Sequence with 1 or 2 elements
 - Sequence with repeated elements
 - Duplicated values in the sequence
-
-## Things to look out for during interviews
-
-- Clarify if there are duplicate values in the array. Would the presence of duplicate values affect the answer? Does it make the question simpler or harder?
-- When using an index to iterate through array elements, be careful not to go out of bounds.
-- Be mindful about slicing or concatenating arrays in your code. Typically, slicing and concatenating arrays would take O(n) time. Use start and end indices to demarcate a subarray/range where possible.
 
 ## Techniques
 

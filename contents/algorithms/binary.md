@@ -8,6 +8,16 @@ toc_max_heading_level: 2
 
 Knowledge of binary number system and bit manipulation is less important in coding interviews as most Software Engineers do not have to deal with bits, which is more commonly used when dealing with lower level systems and programming languages. They are still asked sometimes, so you should at least still know how to convert a number from decimal form into binary form, and vice versa, in your chosen programming language.
 
+## Learning resources
+
+- Readings
+  - [Bits, Bytes, Building With Binary](https://medium.com/basecs/bits-bytes-building-with-binary-13cb4289aafa), basecs
+  - [Bitwise operation](https://en.wikipedia.org/wiki/Bitwise_operation), Wikipedia
+- Videos
+  - [Algorithms: Bit Manipulation](https://www.youtube.com/watch?v=NLKQEOgBAnw), HackerRank
+- Practice
+  - [Practice with bit operations](https://pconrad.github.io/old_pconrad_cs16/topics/bitOps/)
+
 ## Corner cases
 
 - Be aware and check for overflow/underflow
@@ -29,16 +39,6 @@ Some helpful utility snippets:
 | Divide by 2<sup>k</sup> | `num >> k` |
 | Check if a number is a power of 2 | `(num & num - 1) == 0` or `(num & (-num)) == num` |
 | Swapping two variables | `num1 ^= num2; num2 ^= num1; num1 ^= num2` |
-
-## Learning resources
-
-- Readings
-  - [Bits, Bytes, Building With Binary](https://medium.com/basecs/bits-bytes-building-with-binary-13cb4289aafa), basecs
-  - [Bitwise operation](https://en.wikipedia.org/wiki/Bitwise_operation), Wikipedia
-- Videos
-  - [Algorithms: Bit Manipulation](https://www.youtube.com/watch?v=NLKQEOgBAnw), HackerRank
-- Practice
-  - [Practice with bit operations](https://pconrad.github.io/old_pconrad_cs16/topics/bitOps/)
 
 ## Recommended questions
 

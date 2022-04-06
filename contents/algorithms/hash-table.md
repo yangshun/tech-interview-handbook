@@ -15,6 +15,14 @@ In the case of hash collisions, there are a number of collision resolution techn
 - **Separate chaining** - A linked list is used for each value, so that it stores all the collided items.
 - **Open addressing** - All entry records are stored in the bucket array itself. When a new entry has to be inserted, the buckets are examined, starting with the hashed-to slot and proceeding in some probe sequence, until an unoccupied slot is found
 
+## Learning resources
+
+- Readings
+  - [Taking Hash Tables Off The Shelf](https://medium.com/basecs/taking-hash-tables-off-the-shelf-139cbf4752f0), basecs
+  - [Hashing Out Hash Functions](https://medium.com/basecs/hashing-out-hash-functions-ea5dd8beb4dd), basecs
+- Videos
+  - [Core: Hash Tables](https://www.coursera.org/lecture/data-structures-optimizing-performance/core-hash-tables-m7UuP), University of California San Diego
+
 ## Implementations
 
 | Language | API |
@@ -34,14 +42,6 @@ In the case of hash collisions, there are a number of collision resolution techn
 | Remove    | O(1)\* |                                                      |
 
 _\* This is the average case, but in interviews we only care about the average case for hash tables._
-
-## Learning resources
-
-- Readings
-  - [Taking Hash Tables Off The Shelf](https://medium.com/basecs/taking-hash-tables-off-the-shelf-139cbf4752f0), basecs
-  - [Hashing Out Hash Functions](https://medium.com/basecs/hashing-out-hash-functions-ea5dd8beb4dd), basecs
-- Videos
-  - [Core: Hash Tables](https://www.coursera.org/lecture/data-structures-optimizing-performance/core-hash-tables-m7UuP), University of California San Diego
 
 ## Sample questions
 

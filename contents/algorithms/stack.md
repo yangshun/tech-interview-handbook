@@ -12,6 +12,13 @@ This behavior is commonly called LIFO (last in, first out). The name "stack" for
 
 Stacks are an important way of supporting nested or recursive function calls and is used to implement depth-first search. Depth-first search can be implemented using recursion or a manual stack.
 
+## Learning resources
+
+- Readings
+  - [Stacks and Overflows](https://medium.com/basecs/stacks-and-overflows-dbcf7854dc67), basecs
+- Videos
+  - [Stacks](https://www.coursera.org/lecture/data-structures/stacks-UdKzQ), University of California San Diego
+
 ## Implementations
 
 | Language | API |
@@ -30,13 +37,6 @@ Stacks are an important way of supporting nested or recursive function calls and
 | Pop       | O(1)  |
 | isEmpty   | O(1)  |
 | Search    | O(n)  |
-
-## Learning resources
-
-- Readings
-  - [Stacks and Overflows](https://medium.com/basecs/stacks-and-overflows-dbcf7854dc67), basecs
-- Videos
-  - [Stacks](https://www.coursera.org/lecture/data-structures/stacks-UdKzQ), University of California San Diego
 
 ## Corner cases
 
