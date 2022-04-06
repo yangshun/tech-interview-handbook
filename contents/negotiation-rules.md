@@ -48,7 +48,7 @@ Even if you don't particularly care what your friends/family/husband/mother thin
 
 It's much harder to pressure someone if they're not the final decision-maker. So take advantage of that.
 
-<InDocAd/ >
+<InDocAd />
 
 ## Have alternatives
 
@@ -84,7 +84,7 @@ The more unobjectionable and sympathetic your reason, the better. If it's medica
 
 Just go with it, state a reason for everything, and you'll find recruiters more willing to become your advocate.
 
-<InDocAd/ >
+<InDocAd />
 
 ## Be motivated by more than just money
 
