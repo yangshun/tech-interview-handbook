@@ -15,5 +15,131 @@
       "source": "/grind75/:asset*",
       "destination": "https://grind75.vercel.app/grind75/:asset*"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/behavioral-questions",
+      "destination": "/behavioral-interview-questions/"
+    },
+    {
+      "source": "/behavioral-questions/",
+      "destination": "/behavioral-interview-questions/"
+    },
+    {
+      "source": "/cheatsheet",
+      "destination": "/coding-interview-best-practices/"
+    },
+    {
+      "source": "/cheatsheet/",
+      "destination": "/coding-interview-best-practices/"
+    },
+    {
+      "source": "/coding-signals",
+      "destination": "/coding-interview-rubrics/"
+    },
+    {
+      "source": "/coding-signals/",
+      "destination": "/coding-interview-rubrics/"
+    },
+    {
+      "source": "/coding-interview",
+      "destination": "/coding-interview-prep/"
+    },
+    {
+      "source": "/coding-interview/",
+      "destination": "/coding-interview-prep/"
+    },
+    {
+      "source": "/introduction",
+      "destination": "/software-engineering-interview-guide/"
+    },
+    {
+      "source": "/introduction/",
+      "destination": "/software-engineering-interview-guide/"
+    },
+    {
+      "source": "/psychological-tricks",
+      "destination": "/software-engineering-interview-guide/"
+    },
+    {
+      "source": "/psychological-tricks/",
+      "destination": "/software-engineering-interview-guide/"
+    },
+    {
+      "source": "/picking-a-language",
+      "destination": "/programming-languages-for-coding-interviews/"
+    },
+    {
+      "source": "/picking-a-language/",
+      "destination": "/programming-languages-for-coding-interviews/"
+    },
+    {
+      "source": "/questions-to-ask",
+      "destination": "/final-questions/"
+    },
+    {
+      "source": "/questions-to-ask/",
+      "destination": "/final-questions/"
+    },
+    {
+      "source": "/resume/:blah*",
+      "destination": "/resume/"
+    },
+    {
+      "source": "/resume-checklist",
+      "destination": "/resume/"
+    },
+    {
+      "source": "/resume-checklist/",
+      "destination": "/resume/"
+    },
+    {
+      "source": "/star-format",
+      "destination": "/behavioral-interview/"
+    },
+    {
+      "source": "/star-format/",
+      "destination": "/behavioral-interview/"
+    },
+    {
+      "source": "/interview-formats",
+      "destination": "/software-engineering-interview-guide/"
+    },
+    {
+      "source": "/interview-formats/",
+      "destination": "/software-engineering-interview-guide/"
+    },
+    {
+      "source": "/coding-round-overview",
+      "destination": "/coding-interview-prep/"
+    },
+    {
+      "source": "/coding-round-overview/",
+      "destination": "/coding-interview-prep/"
+    },
+    {
+      "source": "/behavioral-round-overview",
+      "destination": "/behavioral-interview/"
+    },
+    {
+      "source": "/behavioral-round-overview/",
+      "destination": "/behavioral-interview/"
+    },
+    {
+      "source": "/during-coding-interview",
+      "destination": "/coding-interview-best-practices/"
+    },
+    {
+      "source": "/during-coding-interview/",
+      "destination": "/coding-interview-best-practices/"
+    },
+    {
+      "source": "/algorithms/introduction",
+      "destination": "/algorithms/study-cheatsheet/"
+    },
+    {
+      "source": "/algorithms/introduction/",
+      "destination": "/algorithms/study-cheatsheet/"
+    }
   ]
 }

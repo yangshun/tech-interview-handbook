@@ -183,21 +183,4 @@ module.exports = {
       },
     ],
   ],
-  plugins: [
-    [
-      '@docusaurus/plugin-client-redirects',
-      {
-        redirects: [
-          {
-            from: '/coding-round-overview',
-            to: '/coding-interview',
-          },
-          {
-            from: '/behavioral-round-overview',
-            to: '/behavioral-interview',
-          },
-        ],
-      },
-    ],
-  ],
 };
