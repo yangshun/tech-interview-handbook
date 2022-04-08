@@ -10,13 +10,13 @@ tags: [front end, career]
 hide_table_of_contents: true
 ---
 
-<head>
-  <link rel="canonical" href="https://yangshuntay.com/blog/are-front-end-development-skills-enough-for-a-career" />
-</head>
-
 Recently, an undergrad freshmen I met at an event asked me a question regarding Front End development as a career.
 
 <!--truncate-->
+
+<head>
+  <link rel="canonical" href="https://yangshuntay.com/blog/are-front-end-development-skills-enough-for-a-career" />
+</head>
 
 > I'm honestly quite into front end development — web technologies, UI/UX, web design and stuff. But with there being more and more accessible to new developers (create-react-app, parcel and such), I just can't help but wonder if these skills are sufficient to survive in the tech industry today. Not that it's a bad thing! Lowering the barrier to entry for programmers is always good. However, for those like myself who would like to pursue front end development as a career, I'm just wondering if having these skills are enough.
 

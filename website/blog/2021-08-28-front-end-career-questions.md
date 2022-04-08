@@ -9,13 +9,13 @@ tags: [front end, career]
 hide_table_of_contents: true
 ---
 
-<head>
-  <link rel="canonical" href="https://yangshuntay.com/blog/front-end-career-questions" />
-</head>
-
 Recently a junior front end engineer at a startup in Singapore reached out to me to ask me how front end development as a career.
 
 <!--truncate-->
+
+<head>
+  <link rel="canonical" href="https://yangshuntay.com/blog/front-end-career-questions" />
+</head>
 
 ### My manager told me that currently it's a bit hard to define requirements & expectations for higher tier / higher Individual Contributor (IC) level for Front End engineers in the organization. Since you are working at Facebook, I am wondering what are some requirements & expectations for higher IC level there for Front End engineers (maybe around IC4, IC5 and above if that's kinda the level you use there)?
 

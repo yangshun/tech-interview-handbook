@@ -9,13 +9,13 @@ tags: [front end, back end, system design, interview]
 hide_table_of_contents: true
 ---
 
-<head>
-  <link rel="canonical" href="https://www.zhenghao.io/posts/system-design-interviews" />
-</head>
-
 Walkthrough of similarities and differences between front end vs. back end system design interviews and my thoughts on a front end career ceiling.
 
 <!-- truncate -->
+
+<head>
+  <link rel="canonical" href="https://www.zhenghao.io/posts/system-design-interviews" />
+</head>
 
 ## Context
 

@@ -9,13 +9,13 @@ tags: [front end, leetcode]
 hide_table_of_contents: true
 ---
 
-<head>
-  <link rel="canonical" href="https://lik.ai/blog/my-experience-with-front-end-interviews" />
-</head>
-
 A glimpse into the front end interview process and questions that frequently come up.
 
 <!--truncate-->
+
+<head>
+  <link rel="canonical" href="https://lik.ai/blog/my-experience-with-front-end-interviews" />
+</head>
 
 ## Interview Process
 
