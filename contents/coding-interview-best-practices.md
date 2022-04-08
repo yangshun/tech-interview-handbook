@@ -63,7 +63,7 @@ You should read and familiarize with this guide even before you start practicing
 - ✅ Request for the option to use Zoom/Google Meet/Hangouts or Skype instead of a phone call.
   > It is easier to send links or text across.
 
-## For onsite whiteboarding coding interviews
+### For onsite whiteboarding coding interviews
 
 - ✅ Learn about whiteboard space management.
   > Leave space between lines of code in case you need to insert lines between existing code.
