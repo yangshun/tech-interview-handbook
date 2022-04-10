@@ -21,7 +21,7 @@ The biggest fear most candidates will have during a coding interview is: what if
 
 When given a coding interview question, candidates should start by asking clarifying questions and discussing a few possible approaches with their interviewers. However, this is where most candidates tend to get stuck. Thankfully, there are ways to do this in a structured manner.
 
-Note that not all techniques will apply to every coding interview problem. As you apply these techniques during your practice, you will develop the intuition for which technique will be useful for the problem at hand.
+Note that not all techniques will apply to every coding interview problem, and you can also use multiple techniques on one single problem! As you apply these techniques during your practice, you will develop the intuition for which technique will be useful for the problem at hand.
 
 ### 1. Visualize the problem by drawing it out
 
@@ -31,7 +31,7 @@ This technique is especially useful if the input involves trees, graphs, matrice
 
 #### Example
 
-How would you [return all elements of a matrix in spiral order](https://leetcode.com/problems/spiral-matrix/)? Drawing out the matrix and the path your iterator needs to take will help tremendously by allowing you to see the pattern.
+How would you [return all elements of a matrix in spiral order](https://leetcode.com/problems/spiral-matrix/)? Drawing out the matrix and the steps your iterator needs to take in each direction will help tremendously in allowing you to see the pattern.
 
 ### 2. Think about how you would solve the problem by hand
 
@@ -45,7 +45,7 @@ How do you [validate if a tree is a valid Binary Search Tree](https://leetcode.c
 
 ### 3. Come up with more examples
 
-Coming up with more examples is something useful you can do regardless of whether you are stuck or not. It helps you to reinforce your understanding of the question, prevents you from prematurely jumping into coding, and having multiple examples is helpful when verifying your solution later. Coming up with more examples and then solving them by hand also helps you to identify a pattern which can be generalized to any input, which is the solution!
+Coming up with more examples is something useful you can do regardless of whether you are stuck or not. It helps you to reinforce your understanding of the question, prevents you from prematurely jumping into coding, helps you to identify a pattern which can be generalized to any input, which is the solution! Lastly, the multiple examples can be used as test cases at the end when verifying your solution.
 
 ### 4. Break the question down into smaller independent parts
 
@@ -60,9 +60,11 @@ The [Group Anagrams](https://leetcode.com/problems/group-anagrams/) problem can 
 ```py
 def group_anagrams(strings):
   def hash(string):
+    # Fill in later
     pass
 
   def group_strings(strings_hashes):
+    # Fill in later
     pass
 
   strings_hashes = [(string, hash(string)) for string in strings]
@@ -77,16 +79,16 @@ Unlike real-world software engineering where the problems are usually open-ended
 
 These are the data structures to keep in mind and try, in order of frequency they appear in coding interview questions:
 
-- Hash Maps - Useful for making lookup efficient. This is the most common data structure used in interviews and you are guaranteed to have to use it
-- Graphs - If the data is presented to you as associations between entities, you might be able to model the question as a graph and use some common graph algorithm to solve the problem
-- Stack and Queue
-- Heap - Question involves scheduling/ordering based on some priority. Also useful for finding the max K/min K/median elements in a set
-- Tree/Trie - Do you need to store strings in a space-efficient manner and look for the existence of strings (or at least part of them) very quickly?
+- **Hash Maps**: Useful for making lookup efficient. This is the most common data structure used in interviews and you are guaranteed to have to use it.
+- **Graphs**: If the data is presented to you as associations between entities, you might be able to model the question as a graph and use some common graph algorithm to solve the problem.
+- **Stack and Queue**: If you need to parse a string with nested properties (such as a mathematical equation), you will almost definitely need to use stacks.
+- **Heap**: Question involves scheduling/ordering based on some priority. Also useful for finding the max K/min K/median elements in a set.
+- **Tree/Trie**: Do you need to store strings in a space-efficient manner and look for the existence of strings (or at least part of them) very quickly?
 
 **Routines**
 
 - Sorting
-- Binary search - Useful if the input array is sorted and you need to do faster than O(n) searches
+- Binary search: Useful if the input array is sorted and you need to do faster than O(n) searches
 - Sliding window
 - Two pointers
 - Union find
@@ -143,7 +145,7 @@ There's a ton of duplicated work in computing the `result[n]` vs `result[n + 1]`
 
 Choice of data structures is key to coding interviews. It can help you to reach a solution for the problem, it can also help you to optimize your existing solution. Sometimes it's worth going through the exercise of iterating through the data structures you know once again.
 
-Is lookup time slowing your algorithm down? In general, most lookup operations should be O(1) with the help of a hashmap. If the lookup operation in your solution is the bottleneck to your solution's time complexity, more often than not, you can use a hashmap to optimize the lookup.
+Is lookup time slowing your algorithm down? In general, most lookup operations should be O(1) with the help of a hash table. If the lookup operation in your solution is the bottleneck to your solution's time complexity, more often than not, you can use a hash table to optimize the lookup.
 
 ##### Example
 
@@ -153,54 +155,89 @@ The [K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-
 
 Here are a few examples of code which is doing redundant work. Although making these mistakes might not change the overall time complexity of your code, you are also evaluated on coding abilities, so it is important to write as efficient code as possible.
 
-##### Example
+##### Don't check conditions unnecessarily
 
-<!-- TODO elaborate on examples -->
+These are Python examples where the second check is redundant.
 
-Don't check conditions unnecessarily. These are examples where the second check is redundant.
+- `if not arr and len(arr) == 0` - the first check already ensures that the array is empty so there is no need for the second check.
+- `x < 5 and x < 10` - the second check is a subcondition of the first check.
 
-- `if not arr and len(arr) == 0`
-- `x < 5 and x < 10`
+##### Mind the order of checks
 
-Don't invoke methods unnecessarily
+- `if slow() or fast()` - There are two operations in this check, of varying durations. As long as one of the operations evaluates to `true`, the condition will evaluate to `true`. Most computers execute operations in order from left to right, hence it is more efficient to put the `fast()` on the left.
+- `if likely() and unlikely()` - This example uses a similar argument as above. If we execute `unlikely()` first and it is `false`, we don't have to execute `likely()`.
 
-- `len(arr)` in many parts of the function. If the len doesn't change, declare a variable at the start
+##### Don't invoke methods unnecessarily
 
-Minimize work inside loops / Don't redo work you have already done
+If you have to refer to a property multiple times in your function and that property has to be derived from a function call, cache the result as a variable if the value doesn't change throughout the lifetime of the function. The length of the input array is the most common example. Most of the time, the length of the input array doesn't change, declare a variable at the start called `length = len(array)` and use `length` in your function instead of calling `len(array)` every time you need it.
 
-- Transforming a string within a for loop. Transform the string outside the for loop!
+##### Early termination
 
-Be lazy. Use lazy evaluation - only evaluate expressions when you need it
-
-- `slow() or fast()`
-- `likely() and unlikely()`
-
-Lazy initialization - only create objects when you know you're going to need them
-
-Do early termination. Stop after you already know the answer.
-
-Consider this basic question "Determine if an array contains an even number" and the code for it:
+Early termination. Stop after you already have the answer, return the answer immediately. Here's an example of leveraging early termination. Consider this basic question "Determine if an array of strings contain a string regardless of case sensitivity". The code for it:
 
 ```py
-def has_even(nums):
-  has_even = False
-  for num in nums:
-    if num % 2 == 0:
-      has_even = True
-  return has_even
+def contains_string(search_term, strings):
+  result = False
+  for string in strings:
+    if string.lower() == search_term.lower():
+      result = True
+  return result
 ```
 
-Does this code work? Definitely. Is this code as efficient as it can be? Nope. We only need to know if an even value exists in the array. We can stop iterating as soon as we know that there exists an even value.
+Does this code work? Definitely. Is this code as efficient as it can be? Nope. We only need to know if the search term exists in the array of strings. We can stop iterating as soon as we know that there exists the value.
 
 ```py
-def has_even(nums):
-  for num in nums:
-    if num % 2 == 0:
-       return True
+def contains_string(search_term, strings):
+  for string in strings:
+    if string.lower() == search_term.lower():
+      return True # Stop comparing the rest of the array/list because the result won't change.
   return False
 ```
 
 Most people already know this and already do this outside of an interview. However, in a stressful interview environment, people tend to forget the most obvious things. Terminate early from loops where you can.
+
+##### Minimize work inside loops
+
+Let's further improve on the example above to solve the question "Determine if an array of strings contain a string regardless of case sensitivity".
+
+```py
+def contains_string(search_term, strings):
+  for string in strings:
+    if string.lower() == search_term.lower():
+      return True
+  return False
+```
+
+Note that you are calling `search_term.lower()` once per loop of the for loop! It's a waste because the `search_term` doesn't change throughout the lifecycle of the function.
+
+```py
+def contains_string(search_term, strings):
+  search_term_lowercase = search_term.lower()
+  for string in strings:
+    if string.lower() == search_term_lowercase:
+      return True
+  return False
+```
+
+Minimize work inside loops and don't redo work you have already done if it doesn't change.
+
+##### Be lazy
+
+Lazy evaluation is an evaluation strategy which delays the evaluation of an expression until its value is needed. Let's use the same example as above. We could technically improve it a little bit:
+
+```py
+def contains_string(search_term, strings):
+  if len(strings) == 0:
+    return False
+  # Don't have to change the search term to lower case if there are no strings at all.
+  search_term_lowercase = search_term.lower()
+  for string in strings:
+    if string.lower() == search_term_lowercase:
+      return True
+  return False
+```
+
+This is considered a micro-optimization and most of the time, `strings` won't be empty, but I'm using it to illustrate the example where you don't have to do certain computations if they aren't needed. This also applies to initialization of objects that you will need in your code (usually hash tables). If the input is empty, there's no need to initialize any variables!
 
 ### How to optimize space complexity
 
@@ -210,7 +247,7 @@ Most of the time, time complexity is more important than space complexity. But w
 
 If your solution contains code to create new data structures to do intermediate processing/caching, memory space is being allocated and can sometimes be seen as a negative. A trick to get around this is by overwriting values in the original input array so that you are not allocating any new space in your code. However, be careful not to destroy the input data in irreversible ways if you need to use it in subsequent parts of your code.
 
-A possible way which works (but you should never use outside of coding interviews) is to mutate the original array and use it as a hashmap to store intermediate data. Refer to the example below.
+A possible way which works (but you should never use outside of coding interviews) is to mutate the original array and use it as a hash table to store intermediate data. Refer to the example below.
 
 Note that in Software Engineering, mutating input data is generally frowned upon and makes your code harder to read and maintain, so changing data in-place is mostly something you should do only in coding interviews.
 
@@ -234,4 +271,4 @@ If you haven't already, I recommend you check out my [free structured guide for 
 
 - [How to make an efficient plan for your coding interview preparation](./coding-interview-study-plan.md) - including priority of topics and questions to study, based on the time you have left
 - [Coding interview best practices cheatsheet](./coding-interview-cheatsheet.md) - including how to behave during a coding interview to exhibit hire signals
-- [Algorithms cheatsheets](.//algorithms/study-cheatsheet.md) - including the must-remembers that you should internalize for every data structure
+- [Algorithms cheatsheets](./algorithms/study-cheatsheet.md) - including the must-remembers that you should internalize for every data structure
