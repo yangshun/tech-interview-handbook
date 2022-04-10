@@ -5,7 +5,7 @@ sidebar_label: 🔥 Best practice questions
 description: The best practice questions to prepare for algorithmic coding interviews by the author of Blind 75 spread across a 5-week schedule
 keywords: [algorithm, coding, interview, questions, leetcode, blind 75]
 displayed_sidebar: docs
-pagination_next: coding-interview-best-practices
+pagination_next: coding-interview-cheatsheet
 ---
 
 import AlgorithmCourses from './\_courses/AlgorithmCourses.md'

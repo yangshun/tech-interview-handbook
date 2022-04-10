@@ -20,7 +20,7 @@ module.exports = {
         'coding-interview-prep',
         'programming-languages-for-coding-interviews',
         'coding-interview-study-plan',
-        'coding-interview-best-practices',
+        'coding-interview-cheatsheet',
         'coding-interview-techniques',
         'mock-interviews',
         'coding-interview-rubrics',

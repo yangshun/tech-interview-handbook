@@ -84,7 +84,7 @@ Phone interviews are the most common format and every candidate will face this a
 
 You are usually not allowed to execute the code even if the editor supports execution. So don't rely on that for verifying the correctness of your solution. Formats would differ slightly depending on the roles you are applying to. Many companies like to use [CoderPad](https://coderpad.io) for collaborative code editing. CoderPad supports running of the program, so it is possible that you will be asked to fix your code such that it can be run. For front end interviews, many companies like to use [CodePen](https://codepen.io), and it will be worth your time to familiarize yourself with the user interfaces of such web-based coding environments.
 
-Check out [coding interview best practices](./coding-interview-best-practices.md) as well for do's and don'ts before your phone screen interviews.
+Check out [coding interview best practices](./coding-interview-cheatsheet.md) as well for do's and don'ts before your phone screen interviews.
 
 ### 5. Onsite
 
@@ -147,7 +147,7 @@ This course on Educative expands upon the questions on the recommended practice 
 
 If you have read the [coding interview evaluation rubric](./coding-interview-rubrics.md) used at top tech companies, you may be overwhelmed by the number of items evaluated and how to demonstrate hire behaviors consistently.
 
-This [coding interview best practices guide](./coding-interview-best-practices.md) synthesizes actionable recommendations of what to do before, during and after your coding interviews to demonstrate hire signals.
+This [coding interview best practices guide](./coding-interview-cheatsheet.md) synthesizes actionable recommendations of what to do before, during and after your coding interviews to demonstrate hire signals.
 
 I recommend to internalize and use the guide as an accompaniment while you practice coding interview questions - to ensure that you cultivate good habits and muscle memory with regards to interviews right from the beginning.
 

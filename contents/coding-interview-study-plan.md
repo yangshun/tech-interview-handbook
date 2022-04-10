@@ -53,7 +53,7 @@ Keep the estimate relatively conservative so you don't end up burning out.
 
 These are all the topics you should study, in order of priority. The learning resources linked are my algorithm cheatsheets - which give you an overview of must-remembers like time complexity, corner cases and topic-specific useful techniques, as well as must-do practice questions.
 
-Don't forget to apply behaviors from [coding interview best practices](./coding-interview-best-practices.md) and methods from [coding interview techniques](./coding-interview-techniques.md) early on while you practice!
+Don't forget to apply behaviors from [coding interview best practices](./coding-interview-cheatsheet.md) and methods from [coding interview techniques](./coding-interview-techniques.md) early on while you practice!
 
 #### Week 1
 
@@ -99,7 +99,7 @@ Here, I listed 75 questions that you should do to be fully prepared for your cod
 
 Feel free to skip the dynamic programming questions if you haven't studied them or feel that they won't be relevant. Many dynamic programming questions can be solved with recursion / backtracking anyway.
 
-Don't forget to apply behaviors from [coding interview best practices](./coding-interview-best-practices.md) and methods from [coding interview techniques](./coding-interview-techniques.md) early on while you practice!
+Don't forget to apply behaviors from [coding interview best practices](./coding-interview-cheatsheet.md) and methods from [coding interview techniques](./coding-interview-techniques.md) early on while you practice!
 
 <QuestionList />
 

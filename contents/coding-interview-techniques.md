@@ -233,5 +233,5 @@ You're given a list of strings and want to find how many of these strings start 
 If you haven't already, I recommend you check out my [free structured guide for coding interviews](./software-engineering-interview-guide.md), which contains step by step guidance such as:
 
 - [How to make an efficient plan for your coding interview preparation](./coding-interview-study-plan.md) - including priority of topics and questions to study, based on the time you have left
-- [Coding interview best practices cheatsheet](./coding-interview-best-practices.md) - including how to behave during a coding interview to exhibit hire signals
+- [Coding interview best practices cheatsheet](./coding-interview-cheatsheet.md) - including how to behave during a coding interview to exhibit hire signals
 - [Algorithms cheatsheets](.//algorithms/study-cheatsheet.md) - including the must-remembers that you should internalize for every data structure

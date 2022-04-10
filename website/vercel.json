@@ -27,11 +27,19 @@
     },
     {
       "source": "/cheatsheet",
-      "destination": "/coding-interview-best-practices/"
+      "destination": "/coding-interview-cheatsheet/"
     },
     {
       "source": "/cheatsheet/",
-      "destination": "/coding-interview-best-practices/"
+      "destination": "/coding-interview-cheatsheet/"
+    },
+    {
+      "source": "/coding-interview-best-practices",
+      "destination": "/coding-interview-cheatsheet/"
+    },
+    {
+      "source": "/coding-interview-best-practices/",
+      "destination": "/coding-interview-cheatsheet/"
     },
     {
       "source": "/coding-signals",
@@ -127,11 +135,11 @@
     },
     {
       "source": "/during-coding-interview",
-      "destination": "/coding-interview-best-practices/"
+      "destination": "/coding-interview-cheatsheet/"
     },
     {
       "source": "/during-coding-interview/",
-      "destination": "/coding-interview-best-practices/"
+      "destination": "/coding-interview-cheatsheet/"
     },
     {
       "source": "/algorithms/introduction",

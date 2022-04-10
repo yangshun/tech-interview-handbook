@@ -1,6 +1,6 @@
 ---
-id: coding-interview-best-practices
-title: 'Coding interview best practices: What to do to display hire signals'
+id: coding-interview-cheatsheet
+title: 'Coding interview cheatsheet: Best practices before, during and after'
 description: Tips on what to do before, during and after coding interviews to display hire signals according to coding interview evaluation criteria
 keywords:
   [
@@ -12,7 +12,7 @@ keywords:
     how to display hire behavior in coding interview,
     how to pass coding interview,
   ]
-sidebar_label: Best practices during coding interviews
+sidebar_label: Best practices cheatsheet
 ---
 
 As coding interviews mature over the years, there are now firmer expectations on how candidates should behave during a coding interview. Some of these practices also help you to exhibit "hire" signals to the interviewer by displaying your ability to communicate well and deal with roadblocks.

@@ -46,7 +46,7 @@ const FEATURES = [
         already half won.
       </>
     ),
-    link: '/coding-interview-best-practices/',
+    link: '/coding-interview-cheatsheet/',
   },
   {
     title: <>💁‍♀️ Practical algorithm tips</>,

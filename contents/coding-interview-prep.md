@@ -37,7 +37,7 @@ I have collated evaluation criteria across top tech companies and generalized th
 1. **Technical competency** - Translating discussed solutions to working code with no significant struggle. Clean, correct implementation with strong knowledge of language constructs.
 1. **Testing** - Ability to test code against normal and corner cases, self-correcting issues in code.
 
-Read more about [how you should behave in a coding interview to display hire signals](./coding-interview-best-practices.md).
+Read more about [how you should behave in a coding interview to display hire signals](./coding-interview-cheatsheet.md).
 
 ## How to best prepare for a coding interview?
 

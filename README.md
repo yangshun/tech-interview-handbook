@@ -23,7 +23,7 @@ Besides the usual algorithm questions, other **awesome** stuff includes:
 
 - [Best practice questions](https://www.techinterviewhandbook.org/coding-interview-study-plan/) for coding interviews
 - [How to prepare](https://www.techinterviewhandbook.org/coding-interview-prep/) for coding interviews
-- [Coding interview best practices](https://www.techinterviewhandbook.org/coding-interview-best-practices/) - Straight-to-the-point Do's and Don'ts
+- [Coding interview best practices](https://www.techinterviewhandbook.org/coding-interview-cheatsheet/) - Straight-to-the-point Do's and Don'ts
 - [Algorithm cheatsheets and tips](https://www.techinterviewhandbook.org/algorithms/study-cheatsheet/) categorized by topic
 - [Interview formats](https://www.techinterviewhandbook.org/interview-formats/) of the top tech companies
 - [Step-by-step resume guide](https://www.techinterviewhandbook.org/resume/) to prepare a FAANG-ready resume

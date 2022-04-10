@@ -19,7 +19,7 @@ Across top tech companies, coding interview evaluation criteria actually does no
 
 I will go into detail on the general coding interview evaluation process across big tech companies in this guide. I've also included an [example rubric](./coding-interview-rubrics.md) you can use while practicing on your own or with your peers.
 
-If you haven't done so already, do refer to my [Coding interview best practices cheatsheet](./coding-interview-best-practices.md) which basically synthesizes what candidates should do to fulfill the evaluated criteria in coding interviews.
+If you haven't done so already, do refer to my [Coding interview best practices cheatsheet](./coding-interview-cheatsheet.md) which basically synthesizes what candidates should do to fulfill the evaluated criteria in coding interviews.
 
 ## Candidate scoring methodology
 
