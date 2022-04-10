@@ -440,9 +440,9 @@ function EducativeSection() {
               <div>
                 <h2 className={styles.sectionSponsorTitle}>
                   <strong>
-                    Looking to get hired at FAANG? Educative's interview courses
-                    helped many people get the job at FAANG. Join today for a
-                    10% discount!
+                    Tired of grinding LeetCode? Grokking the Coding Interview is
+                    the recommended way to quickly learn coding question
+                    patterns to help you ace the coding interviews.
                   </strong>
                 </h2>
                 <div className="margin-vert--lg">
@@ -454,7 +454,7 @@ function EducativeSection() {
                     onClick={() => {
                       window.gtag('event', 'educative.homepage.click');
                     }}>
-                    Check out courses&nbsp;&nbsp;→
+                    Learn efficiently&nbsp;&nbsp;→
                   </a>
                 </div>
               </div>

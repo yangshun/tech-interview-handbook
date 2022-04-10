@@ -53,7 +53,7 @@ function AlgoMonster({className, position}) {
       }}>
       <p className={styles.tagline}>
         <strong className={styles.title}>
-          Stop grinding. Study with a plan
+          Stop grinding LeetCode. Study with a plan
         </strong>
         Developed by Google engineers, <u>AlgoMonster</u> is the fastest way to
         get a software engineering job. <u>Check it out for free!</u>
@@ -95,9 +95,12 @@ function EducativeCoding({className, position}) {
         window.gtag('event', `educative.coding.${position}.click`);
       }}>
       <p className={styles.tagline}>
-        <strong className={styles.title}>Get the job at FAANG</strong>
+        <strong className={styles.title}>
+          Get better at Coding Interviews
+        </strong>
         <u>Grokking the Coding Interview</u> teaches you techniques and question
-        patterns to be good at coding interviews.
+        patterns to be good at coding interviews. Grab your limited time
+        discount today!
       </p>
     </a>
   );
@@ -123,6 +126,29 @@ function EducativeSystemDesign({className, position}) {
   );
 }
 
+function Interviewingio({className, position}) {
+  return (
+    <a
+      className={clsx(styles.container, className)}
+      href="https://iio.sh/r/DMCa"
+      key={Math.random()}
+      target="_blank"
+      rel="noopener"
+      onClick={() => {
+        window.gtag('event', `interviewingio.${position}.click`);
+      }}>
+      <p className={styles.tagline}>
+        <strong className={styles.title}>
+          Practice interviewing with Google engineers
+        </strong>
+        interviewing.io provides anonymous technical mock interviews with
+        engineers from Google, Facebook, and other top companies.{' '}
+        <u>Give it a try!</u>
+      </p>
+    </a>
+  );
+}
+
 export default React.memo(function SidebarAd({position}) {
   const [counter, setCounter] = useState(0);
   useEffect(() => {
@@ -141,6 +167,8 @@ export default React.memo(function SidebarAd({position}) {
   return (
     <BrowserOnly key={counter}>
       {() => {
+        const rand = Math.random();
+
         const path = window.location.pathname;
         // Ugly hack to show conditional sidebar content.
 
@@ -167,11 +195,16 @@ export default React.memo(function SidebarAd({position}) {
         if (
           path.includes('coding') ||
           path.includes('best-practice-questions') ||
-          path.includes('cheatsheet') ||
           path.includes('mock-interviews') ||
           path.includes('algorithms')
         ) {
-          return Math.random() > 0.5 ? (
+          return rand < 0.3 ? (
+            <Interviewingio
+              className={backgroundClass}
+              key={Math.random()}
+              position={position}
+            />
+          ) : rand < 0.6 ? (
             <AlgoMonster
               className={backgroundClass}
               key={Math.random()}
@@ -196,7 +229,19 @@ export default React.memo(function SidebarAd({position}) {
           );
         }
 
-        return Math.random() > 0.5 ? (
+        return rand < 0.25 ? (
+          <FAANGTechLeads
+            className={backgroundClass}
+            key={Math.random()}
+            position={position}
+          />
+        ) : rand < 0.5 ? (
+          <Interviewingio
+            className={backgroundClass}
+            key={Math.random()}
+            position={position}
+          />
+        ) : rand < 0.75 ? (
           <AlgoMonster
             className={backgroundClass}
             key={Math.random()}

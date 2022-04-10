@@ -129,8 +129,8 @@ If you have less than 3 months to prepare, you can generate your own study plans
 
 In the market, there are plenty of resources vying for your attention, plenty of them just vying for your money but not providing any value. If I had to prioritize - these are the top coding interview preparation resources I would use in tandem:
 
-1. [AlgoMonster](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=)
 1. [Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
+1. [AlgoMonster](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=)
 1. My (free) coding interview best practices guide
 1. My (free) coding interview techniques guide
 1. My (free) algorithms study guide

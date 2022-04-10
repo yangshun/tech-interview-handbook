@@ -46,7 +46,8 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 ---
 
 <div align="center">
-  <h3>💡 Looking for high-quality interview courses? <a href="https://www.educative.io/explore?search_string=interview&aff=x23W">Educative</a> offers a ton of great courses to improve your interview game 💡</h3>
+  <h3>💡 Stop grinding LeetCode aimlessly! Study coding question patterns efficiently with 
+    <a href="https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W">Grokking the Coding Interview</a> on Educative 💡 </h3>
 </div>
 
 ---
