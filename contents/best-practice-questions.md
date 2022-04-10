@@ -4,6 +4,8 @@ title: Best practice questions
 sidebar_label: 🔥 Best practice questions
 description: The best practice questions to prepare for algorithmic coding interviews by the author of Blind 75 spread across a 5-week schedule
 keywords: [algorithm, coding, interview, questions, leetcode, blind 75]
+displayed_sidebar: docs
+pagination_next: coding-interview-best-practices
 ---
 
 import AlgorithmCourses from './\_courses/AlgorithmCourses.md'
@@ -14,6 +16,12 @@ import InDocAd from './\_components/InDocAd';
   <title>Best practice questions by the author of Blind 75 | Tech Interview Handbook</title>
   <meta property="og:title" content="Best practice questions by the author of Blind 75 | Tech Interview Handbook"/>
 </head>
+
+:::tip
+
+As of April 2022, I've developed a [12-week study plan](./coding-interview-study-plan.md) which includes a curriculum for revision and practice questions. If you want to customize your own practice questions, I've also developed [Grind 75](https://www.techinterviewhandbook.org/grind75) which is a modern version of Blind 75 that you can customize.
+
+:::
 
 Hey there, the author of Blind 75 here 👋!
 

@@ -52,11 +52,11 @@ In algorithm interviews, graphs are commonly given in the input as 2D matrices w
 
 `|V|` is the number of vertices while `|E|` is the number of edges.
 
-| Algorithm            | Big-O                             |
-| -------------------- | --------------------------------- |
-| Depth-first search   | O(&#124;V&#124; + O&#124;E&#124;) |
-| Breadth-first search | O(&#124;V&#124; + O&#124;E&#124;) |
-| Topological sort     | O(&#124;V&#124; + O&#124;E&#124;) |
+| Algorithm            | Big-O                            |
+| -------------------- | -------------------------------- |
+| Depth-first search   | O(&#124;V&#124; + &#124;E&#124;) |
+| Breadth-first search | O(&#124;V&#124; + &#124;E&#124;) |
+| Topological sort     | O(&#124;V&#124; + &#124;E&#124;) |
 
 ## Things to look out for during interviews
 
