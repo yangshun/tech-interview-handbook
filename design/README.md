@@ -1,5 +1,5 @@
 # System Design
 
-## Specific topics
+[Contents have been moved to the website. Click here.](https://www.techinterviewhandbook.org/system-design/).
 
-The contents have been moved to a different [location](../experimental/design#specific-topics).
+<!-- TODO: Remove in future -->

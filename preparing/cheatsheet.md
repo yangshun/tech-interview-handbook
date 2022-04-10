@@ -1,3 +1,5 @@
 # Cheatsheet
 
-The contents have been moved to the [website](https://www.techinterviewhandbook.org/cheatsheet).
+[Contents have been moved to the website. Click here.](https://www.techinterviewhandbook.org/coding-interview-cheatsheet/).
+
+<!-- TODO: Remove in future -->
