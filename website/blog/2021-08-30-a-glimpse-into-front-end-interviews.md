@@ -14,7 +14,7 @@ A glimpse into the front end interview process and questions that frequently com
 <!--truncate-->
 
 <head>
-  <link rel="canonical" href="https://lik.ai/blog/my-experience-with-front-end-interviews" />
+  <link rel="canonical" href="https://lik.ai/blog/my-experience-with-front-end-interviews/" />
 </head>
 
 ## Interview Process

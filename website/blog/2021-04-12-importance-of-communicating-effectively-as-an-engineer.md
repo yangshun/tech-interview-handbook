@@ -18,7 +18,7 @@ At Facebook where I work at, strong communication is crucial for a successful ca
 <!--truncate-->
 
 <head>
-  <link rel="canonical" href="https://yangshuntay.com/blog/importance-of-communicating-effectively-as-engineers" />
+  <link rel="canonical" href="https://yangshuntay.com/blog/importance-of-communicating-effectively-as-engineers/" />
 </head>
 
 I love to code. Personally, I would love to shut off all communication channels and focus entirely on coding if I could. However, doing that will probably have disastrous effects. Communication is super important and I learnt that the hard way when I first started at Facebook. In my first year at Facebook, I made a few painful mistakes related to communication. I changed the project plans and timeline without informing my tech lead, resulting in my teammate having to cover me at the last minute and do the work I reprioritized without telling anyone. In another instance, I didn't communicate that I was going to do some work that my teammate had planned to do, resulting in wasted efforts. From then on, I made a mental note to myself to communicate broadly and early wherever possible and seek alignment. I'd err on the side of over-communicating rather than under-communicating (though sometimes I still forget).
