@@ -12,7 +12,7 @@ keywords:
     optimize space complexity,
     optimize time and space complexity,
   ]
-sidebar_label: Techniques to solve coding interview questions
+sidebar_label: Techniques to solve questions
 ---
 
 The biggest fear most candidates will have during a coding interview is: what if I get stuck on the question and don't know how to do it? Fortunately, there are structured ways to approach coding interview questions that will increase your chances of solving them. From how to find a solution or approach, to optimizing time and space complexity, here are some of the top tips and best practices that will help you solve coding interview questions.

@@ -10,7 +10,7 @@ keywords:
     what practice questions to do for coding interviews,
     how to prepare for coding interviews in 3 months,
   ]
-sidebar_label: Coding interview study and practice plan
+sidebar_label: Study and practice plan
 ---
 
 import QuestionList from './\_components/QuestionList';

@@ -12,7 +12,7 @@ keywords:
     behavioral interview software engineer,
     how to prepare for behavioral interview software engineer,
   ]
-sidebar_label: Most common behavioral questions to prepare
+sidebar_label: Common behavioral questions to practice
 ---
 
 In the software engineer interview process, behavioral interviews may seem so much more varied and unstructured as compared to technical interviews. However, in most cases, the interviewer is actually just trying to get to know you better and there's always a set of common questions that need to be asked to achieve that.

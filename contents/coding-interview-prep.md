@@ -15,7 +15,7 @@ keywords:
     how to prepare for coding interview,
     how to prepare for technical interview,
   ]
-sidebar_label: 'Coding interviews: Step-by-step'
+sidebar_label: Step-by-step how to prepare
 ---
 
 _The ultimate guide on how to efficiently prepare for your software engineering technical interview - coding test round._

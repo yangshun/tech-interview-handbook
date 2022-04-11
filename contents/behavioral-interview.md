@@ -13,7 +13,7 @@ keywords:
     amazon behavioral interview,
     microsoft behavioral interview,
   ]
-sidebar_label: 'Behavioral interviews: How to prepare'
+sidebar_label: Step-by-step how to prepare
 ---
 
 ## What are behavioral interviews

@@ -9,6 +9,7 @@ keywords:
     software engineer questions to ask interviewer,
     software engineer interview questions to ask,
   ]
+sidebar_label: Preparing final questions to ask
 ---
 
 Something you can always count on to happen at the end of your Software Engineer interview - both technical and non-technical rounds - is for the interviewer to ask you if you "have any final questions?".

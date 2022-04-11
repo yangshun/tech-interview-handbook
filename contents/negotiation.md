@@ -13,6 +13,7 @@ keywords:
     total compensation,
     salary,
   ]
+sidebar_label: Complete salary negotiation guide
 ---
 
 <head>
