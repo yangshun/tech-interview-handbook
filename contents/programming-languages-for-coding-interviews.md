@@ -16,7 +16,7 @@ sidebar_label: Picking a programming language
 
 Does the programming language you use for coding interviews matter? The answer is yes.
 
-Most languages let you code in any language you want - the only exception I know being Google, where they only allow candidates to pick from Java, C++, JavaScript or Python for their algorithmic coding interviews.
+Most companies let you code in any language you want - the only exception I know being Google, where they only allow candidates to pick from Java, C++, JavaScript or Python for their algorithmic coding interviews.
 
 However, the choice you make can impact your performance much more than you'd like to believe - and this is why it is important to pick a suitable programming language early on in your coding interview preparation - and use regularly in practice.
 
