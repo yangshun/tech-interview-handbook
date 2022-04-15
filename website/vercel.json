@@ -42,6 +42,14 @@
       "destination": "/coding-interview-cheatsheet/"
     },
     {
+      "source": "/study-and-practice",
+      "destination": "/coding-interview-study-plan/"
+    },
+    {
+      "source": "/study-and-practice/",
+      "destination": "/coding-interview-study-plan/"
+    },
+    {
       "source": "/coding-signals",
       "destination": "/coding-interview-rubrics/"
     },
