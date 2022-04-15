@@ -57,20 +57,27 @@ html[data-theme='dark'] {
 
 .markdown h1 {
   font-size: 2.25em;
-  margin-top: 1em;
+  margin-top: 0.5em;
 }
 
 .markdown h2 {
   font-size: 1.5em;
   margin-top: 2em;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 
 .markdown h3 {
   font-size: 1.25em;
   font-weight: 600;
+  margin-top: 1.8em;
+  margin-bottom: 0.5em;
+}
+
+.markdown h4 {
+  font-size: 1.2em;
+  font-weight: 600;
   margin-top: 1.6em;
-  margin-bottom: 0.6em;
+  margin-bottom: 0.4em;
 }
 
 .markdown blockquote {
@@ -88,19 +95,20 @@ html[data-theme='dark'] {
   :root {
     --ifm-font-size-base: 16px;
   }
-
-  .markdown h1 {
-    --ifm-h1-font-size: 1.5rem;
-  }
-
-  .markdown h2 {
-    --ifm-h2-font-size: 1.375rem;
-  }
-
-  .markdown h3 {
-    --ifm-h3-font-size: 1.25rem;
-  }
 }
+
+.markdown h1 {
+  --ifm-h1-font-size: 1.5rem;
+}
+
+.markdown h2 {
+  --ifm-h2-font-size: 1.375rem;
+}
+
+.markdown h3 {
+  --ifm-h3-font-size: 1.25rem;
+}
+
 
 div[class^='announcementBar_'] {
   background-color: var(--ifm-color-primary);
@@ -110,6 +118,16 @@ div[class^='announcementBar_'] {
 
 .menu {
   font-size: 0.875rem;
+}
+
+.table-of-contents {
+  font-size: 0.75rem;
+}
+
+@media screen and (min-width: 768px) {
+  .theme-doc-markdown {
+    font-size: 18px;
+  }
 }
 
 .theme-doc-markdown details {

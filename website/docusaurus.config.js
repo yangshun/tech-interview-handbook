@@ -15,6 +15,7 @@ module.exports = {
       <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">Check it out now!</a>`,
       isCloseable: false,
     },
+    hideableSidebar: true,
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),
@@ -22,9 +23,10 @@ module.exports = {
     navbar: {
       title: 'Tech Interview Handbook',
       logo: {
-        alt: '',
+        alt: 'Tech Interview Handbook Logo',
         src: 'img/logo.svg',
       },
+      hideOnScroll: true,
       items: [
         {
           label: 'Start reading',
@@ -159,9 +161,6 @@ module.exports = {
       apiKey: 'e12588cbae68d752469921cc46e9cb66',
       indexName: 'techinterviewhandbook',
     },
-    metadata: [
-      {name: 'fo-verify', content: '2cc93525-ece8-402e-a4b8-d1d0853175e8'},
-    ],
   },
   presets: [
     [
