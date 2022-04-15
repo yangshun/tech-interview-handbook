@@ -189,6 +189,7 @@ html[data-theme='dark'] .navbar-icon-twitter:before {
 
 .navbar-icon-facebook:before {
   background-image: url('/img/icons8-facebook.svg');
+  width: 28px;
 }
 
 html[data-theme='dark'] .navbar-icon-facebook:before {
@@ -205,4 +206,13 @@ html[data-theme='dark'] .navbar-icon-telegram:before {
   background-image: url('/img/icons8-telegram-light.svg');
   height: 28px;
   width: 24px;
+}
+
+.navbar-icon-instagram:before {
+  background-image: url('/img/instagram.svg');
+  width: 24px;
+}
+
+html[data-theme='dark'] .navbar-icon-instagram:before {
+  background-image: url('/img/instagram-light.svg');
 }

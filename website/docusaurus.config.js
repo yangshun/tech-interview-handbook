@@ -67,6 +67,12 @@ module.exports = {
           'aria-label': 'Twitter page',
         },
         {
+          href: 'https://www.instagram.com/techinterviewhandbook',
+          position: 'right',
+          className: 'navbar-icon navbar-icon-instagram',
+          'aria-label': 'Instagram page',
+        },
+        {
           href: 'https://www.facebook.com/techinterviewhandbook',
           position: 'right',
           className: 'navbar-icon navbar-icon-facebook',
