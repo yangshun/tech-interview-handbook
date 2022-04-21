@@ -95,10 +95,10 @@ Advanced problem solving signals:
 
 | Score | Overall evaluation |
 | --- | --- |
-| Strong hire | Demonstrated testing signals effortlessly. |
-| Leaning hire | Had some difficulty demonstrating testing signals, such as not being able to identify all the relevant corner cases. |
-| Leaning no hire | Conducted testing but did not handle corner cases. Not able to identify or correct bugs in code. |
-| Strong no hire | Did not even test code against typical cases. Did not spot glaring bugs in the code and announced they are done |
+| Strong hire | No trouble achieving all basic problem solving signals and did so with enough time to achieve most advanced problem solving signals. |
+| Leaning hire | Managed to achieve all basic problem solving signals but did not have sufficient time to achieve advanced problem solving signals. |
+| Leaning no hire | Showed only some basic problem solving signals, failing to achieve the rest.  |
+| Strong no hire | Unable to solve the problem or did it without much explanation of their thought process. Approach was disorganized and incorrect. |
 
 ### 3. Technical competency
 
@@ -115,10 +115,11 @@ Advanced technical competency signals:
 
 | Score | Overall evaluation |
 | --- | --- |
-| Strong hire | Demonstrated testing signals effortlessly. |
-| Leaning hire | Had some difficulty demonstrating testing signals, such as not being able to identify all the relevant corner cases. |
-| Leaning no hire | Conducted testing but did not handle corner cases. Not able to identify or correct bugs in code. |
-| Strong no hire | Did not even test code against typical cases. Did not spot glaring bugs in the code and announced they are done |
+| Strong hire | Demonstrated basic and advanced competency signals effortlessly. |
+| Leaning hire | Demonstrated only basic technical competency signals, with some difficulty seen in translating approach to code. Suboptimal usage of language paradigms. |
+| Leaning no hire | Struggled to produce a working solution in code. Multiple syntax errors and bad use of language paradigms. |
+| Strong no hire | Could not produce a working solution in code. Major syntax errors and very bad use of language paradigms. |
+
 
 ### 4. Testing
 
