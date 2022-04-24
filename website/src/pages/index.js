@@ -520,7 +520,7 @@ function TweetsSection() {
               handle="Insharamin"
               name="Insha"
               date="Jul 8, 2021"
-              avatar="https://pbs.twimg.com/profile_images/1468474545891774464/jENKPsRG_400x400.jpg"
+              avatar="https://pbs.twimg.com/profile_images/1513932354552619009/w5MTxjG2_400x400.jpg"
               content={
                 <>
                   1️⃣ Tech Interview Handbook
