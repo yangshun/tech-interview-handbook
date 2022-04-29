@@ -1,12 +1,19 @@
 ---
-id: resume-case-study
-title: Resume case study
-sidebar_label: Case study
+title: Resume improvement case study
+slug: resume-improvement-case-study
+author: Yangshun Tay
+author_title: Engineering Lead at Facebook
+author_url: https://github.com/yangshun
+author_image_url: https://github.com/yangshun.png
+tags: [career, resume]
+hide_table_of_contents: true
 ---
 
 import TeikjunResumeOldURL from '@site/static/img/teik-jun-resume-old.png'; import TeikjunResumeNewURL from '@site/static/img/teik-jun-resume-new.png';
 
-To put the points mentioned in the [previous section](./resume.md) in practice. Here we will be reviewing [Teik Jun's](https://github.com/teikjun) resume, critiquing it and improving it. At the time of writing, Teik Jun is a Year 4 undergraduate at National University of Singapore and is looking for a Software Engineering (SWE) internship for the summer of 2022.
+As an example of putting the Resume tips to practice, let's reviewing [Teik Jun's](https://github.com/teikjun) resume, critiquing it and improving it. At the time of writing, Teik Jun is a Year 4 undergraduate at National University of Singapore and is looking for a Software Engineering (SWE) internship for the summer of 2022.
+
+<!-- truncate -->
 
 Here's the initial version of Teik Jun's resume I received from him.
 

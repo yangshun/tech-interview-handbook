@@ -106,7 +106,7 @@ _Data as of Aug 2021. Source: [Levels.fyi](https://www.levels.fyi/company/Google
 | E3 (Entry Level)      | $180,000    | $122,000 | $14,000 | $43,000     |
 | E4 (SWE)              | $267,000    | $162,000 | $18,000 | $85,000     |
 | E5 (Senior SWE)       | $390,000    | $197,000 | $35,000 | $157,000    |
-| E6 (Staff SWE)        | $598,000    | $234,000 | $54,000 | $309,000       |
+| E6 (Staff SWE)        | $598,000    | $234,000 | $54,000 | $309,000    |
 | E7 (Senior Staff SWE) | $921,000    | $272,000 | $81,000 | $567,000    |
 
 _Data as of Aug 2021. Source: [Levels.fyi](https://www.levels.fyi/company/Facebook/salaries/Software-Engineer/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation)_
