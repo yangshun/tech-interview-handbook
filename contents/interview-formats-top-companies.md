@@ -2,7 +2,7 @@
 id: interview-formats-top-companies
 title: Interview format at top companies
 description: Interview formats of the top tech companies. Know what to expect and prepare well for them
-sidebar_label: Top companies
+sidebar_label: Company interview formats
 ---
 
 import InDocAd from './\_components/InDocAd';

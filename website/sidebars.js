@@ -103,7 +103,12 @@ module.exports = {
       ],
     },
     {
-      Misc: ['interviewer-cheatsheet'],
+      Misc: [
+        'interview-formats-top-companies',
+        'interviewer-cheatsheet',
+        'landscape',
+        'engineering-levels',
+      ],
     },
   ],
 };
