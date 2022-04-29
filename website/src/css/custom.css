@@ -55,31 +55,37 @@ html[data-theme='dark'] {
   text-align: start;
 }
 
-.markdown h1 {
+.markdown > h1 {
   font-size: 2.25em;
   margin-top: 0.5em;
 }
 
-.markdown h2 {
+.markdown > h2 {
   font-size: 1.5em;
   margin-top: 2em;
   margin-bottom: 0.5em;
 }
 
-.markdown h3 {
+.markdown > h3 {
   font-size: 1.25em;
   font-weight: 600;
   margin-top: 1.8em;
   margin-bottom: 0.5em;
 }
 
-.markdown h4 {
-  font-size: 1.2em;
+.markdown > h4 {
+  font-size: 1.15em;
   font-weight: 600;
   margin-top: 1.6em;
   margin-bottom: 0.4em;
 }
 
+.markdown > h5 {
+  font-size: 1em;
+  font-weight: 600;
+  margin-top: 1.4em;
+  margin-bottom: 0.3em;
+}
 .markdown blockquote {
   border-left-color: var(--ifm-color-emphasis-200);
   border-left-width: 0.5rem;
@@ -108,7 +114,6 @@ html[data-theme='dark'] {
 .markdown h3 {
   --ifm-h3-font-size: 1.25rem;
 }
-
 
 div[class^='announcementBar_'] {
   background-color: var(--ifm-color-primary);
