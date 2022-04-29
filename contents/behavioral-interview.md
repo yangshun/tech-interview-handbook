@@ -16,6 +16,8 @@ keywords:
 sidebar_label: Step-by-step how to prepare
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 ## What are behavioral interviews
 
 Succeeding in an engineering career involves more than just technical skills. People skills become more important as an engineer becomes more senior. Senior engineers should have the ability to lead and influence, resolve conflicts, anticipate risks, plan the roadmap, and more.
@@ -42,6 +44,8 @@ Some examples of common values evaluated are:
 - **Proactivity and willingness to wear multiple hats** - Steps up when the situation requires it
 - **Project management** - Able to orchestrate multiple work streams to meet timelines and unblock tasks
 - **Conflict management** - Able to manage conflict between themselves and or between other parties, by explaining and ensuring no hard feelings remain
+
+<InDocAd />
 
 ## How to prepare for behavioral interviews
 

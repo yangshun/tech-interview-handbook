@@ -22,6 +22,8 @@ _The ultimate guide on how to efficiently prepare for your software engineering 
 
 If you have decided to embark on the arduous process of preparing for your coding interviews and you don't know how to maximize your time, this is the only guide you need to go from zero to hero on your coding test.
 
+import InDocAd from './\_components/InDocAd';
+
 ## What is a Software Engineering coding interview?
 
 Coding interviews are a form of technical interviews used to access a potential software engineer candidate's competencies through presenting them with programming problems. Typically, coding interviews have a focus on data structures and algorithms, while other technical rounds may encompass [system design](./system-design.md) (especially for middle to senior level candidates).
@@ -38,6 +40,8 @@ I have collated evaluation criteria across top tech companies and generalized th
 1. **Testing** - Ability to test code against normal and corner cases, self-correcting issues in code.
 
 Read more about [how you should behave in a coding interview to display hire signals](./coding-interview-cheatsheet.md).
+
+<InDocAd />
 
 ## How to best prepare for a coding interview?
 
@@ -115,8 +119,6 @@ Using this guide to accompany practice ensures that you cultivate good habits an
 #### Algorithms study cheatsheets for coding interviews
 
 These are actually the notes I personally collated for my own coding interview preparation. I have organized them into 1-pagers of the best study resources, best LeetCode questions to practice, and must-remembers (tips, corner cases) for every data structure and algorithm. They ensure that you internalize the most important concepts and get the most out of your preparation.
-
---
 
 ### 5. Prepare a good self introduction and final questions {#prepare-self-introduction}
 

@@ -15,6 +15,8 @@ keywords:
 sidebar_label: Best practices before, during, and after
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 As coding interviews mature over the years, there are now firmer expectations on how candidates should behave during a coding interview. Some of these practices also help you to exhibit "hire" signals to the interviewer by displaying your ability to communicate well and deal with roadblocks.
 
 Deriving the best practices from top candidates and also based on [how you will be evaluated during a coding interview](./coding-interview-rubrics.md), we have summarized some of the top tips for how to behave during a coding interview in an exhaustive checklist - including top mistakes to avoid.
@@ -67,6 +69,8 @@ You should read and familiarize with this guide even before you start practicing
 
 - ✅ Learn about whiteboard space management.
   > Leave space between lines of code in case you need to insert lines between existing code.
+
+<InDocAd />
 
 ## What to do _during_ your coding interview
 
@@ -122,6 +126,8 @@ This discussion can range from a few minutes to up to 5-10 minutes depending on 
 - ❌ Do not ignore any piece of information given.
 - ❌ Do not appear unsure about your approach or analysis.
 
+<InDocAd />
+
 ### 4. Code out your solution while talking through it
 
 - ✅ Only start coding after you have explained your approach and the interviewer has given you the green light.
@@ -170,6 +176,8 @@ Once you are done coding, do not announce that you are done. Interviewers expect
   > Read tips and [sample final questions to ask](./final-questions.md).
 - ✅ Thank the interviewer
 - ❌ Do not end the interview without asking any questions.
+
+<InDocAd />
 
 ## What to do _after_ your coding interview
 

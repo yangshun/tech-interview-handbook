@@ -14,6 +14,8 @@ keywords:
 sidebar_label: Picking a programming language
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 Does the programming language you use for coding interviews matter? The answer is yes.
 
 Most companies let you code in any language you want - the only exception I know being Google, where they only allow candidates to pick from Java, C++, JavaScript or Python for their algorithmic coding interviews.
@@ -40,6 +42,8 @@ Java is a decent choice too but having to constantly declare types in your code 
 - Acceptable (but prefer recommended if you are familiar): Go, Ruby, PHP, C#, Swift, Kotlin
 - Avoid: Haskell, Erlang, Perl, C, Matlab
 - You must be mad: Brainfuck, Assembly
+
+<InDocAd />
 
 ## 2. Your familiarity with the language
 

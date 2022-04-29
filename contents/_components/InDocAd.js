@@ -3,7 +3,7 @@ import SidebarAd from '@site/src/components/SidebarAd';
 
 export default function InDocAd() {
   return (
-    <div className="padding-top--lg padding-bottom--xl">
+    <div className="padding-top--lg">
       <SidebarAd position="in_doc" />
     </div>
   );

@@ -13,6 +13,8 @@ keywords:
 sidebar_label: Coding interview rubrics
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 Ever wondered how coding interviews are evaluated at top tech companies like Google, Amazon, Apple and Netflix?
 
 Across top tech companies, coding interview evaluation criteria actually does not differ to a great extent. While the exact terms used in the rubric could be different, the dimensions evaluated are roughly similar.
@@ -43,6 +45,8 @@ Regardless of the method used, the scoring bands are generally:
 - Strong no hire
 
 Some companies may have a middle band for indecision when the interviewer feels that the candidate requires more assessment.
+
+<InDocAd />
 
 ## How does your score impact the result?
 
@@ -99,6 +103,8 @@ Advanced problem solving signals:
 | Leaning hire | Managed to achieve all basic problem solving signals but did not have sufficient time to achieve advanced problem solving signals. |
 | Leaning no hire | Showed only some basic problem solving signals, failing to achieve the rest.  |
 | Strong no hire | Unable to solve the problem or did it without much explanation of their thought process. Approach was disorganized and incorrect. |
+
+<InDocAd />
 
 ### 3. Technical competency
 

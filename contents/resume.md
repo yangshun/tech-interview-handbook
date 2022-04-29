@@ -15,6 +15,8 @@ keywords:
 sidebar_label: Writing your software engineer resume
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 Not sure why you're still not getting shortlisted at some or all of the top tech companies? Your software engineer resume could be the issue.
 
 Having read tons of software engineering resumes as a FAANG interviewer, even some of the most qualified candidates I know fail to get shortlisted due to bad resumes. The mistake most people make is to immediately assume that they weren't qualified enough - but that could be far from the truth.
@@ -86,6 +88,8 @@ This is the order which has worked well for me and recommended by recruiters:
 Never add symbols to your headers to avoid ATS readability issues.
 
 :::
+
+<InDocAd />
 
 ## How to write good Software Engineer resume content
 
@@ -220,6 +224,8 @@ Example
 
 > 2016 | Best All-Round Product out of 50 teams | Facebook Hackathon
 
+<InDocAd />
+
 ## Optimize your resume with keywords
 
 must-haves to optimize your content:
@@ -272,6 +278,8 @@ While optimizing for every application is ideal, you can generalize your resume 
 1. Incorporate skills and experiences that you have into the resume
 
 :::
+
+<InDocAd />
 
 ## Free tools to review your resume
 

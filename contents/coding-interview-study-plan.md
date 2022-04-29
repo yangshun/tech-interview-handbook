@@ -13,6 +13,7 @@ keywords:
 sidebar_label: Study and practice plan
 ---
 
+import InDocAd from './\_components/InDocAd';
 import QuestionList from './\_components/QuestionList';
 
 One of the most important questions to answer at the start of your coding interview preparation is: What study topics and practice questions should you do to most efficiently prepare for your coding interviews?
@@ -40,6 +41,8 @@ Regardless of how long you have, if you are unfamiliar with core data structures
 1. **Depth-first-then-breadth preparation** - Tackle one topic at a time - revise materials for a topic, practice a few questions for that topic. After ensuring mastery, move on to the next topic. Repeat for all topics. At the end, practice a variety of questions across all topics. This strategy takes more time than others, so it's recommended if you have more than a month.
 
 My personal recommendation would be the **Breadth-first preparation** or **Depth-first-then-breadth preparation**. It's important to have some form of breadth-level studying / practicing in your schedule so that you don't forget about the earlier topics as you move on to later topics.
+
+<InDocAd />
 
 ## The 3 month study plan - with recommended study resources and practice question links
 
@@ -92,6 +95,8 @@ Don't forget to apply behaviors from [coding interview best practices](./coding-
 | [Binary](./algorithms/binary.md) | Low | 2 hours |
 | [Math](./algorithms/math.md) | Low | 1 hour |
 | [Geometry](./algorithms/geometry.md) | Low | 1 hour |
+
+<InDocAd />
 
 ### Week 5 - 12: In-depth practice
 

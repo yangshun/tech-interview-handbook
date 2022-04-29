@@ -15,6 +15,8 @@ keywords:
 sidebar_label: Techniques to solve questions
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 The biggest fear most candidates will have during a coding interview is: what if I get stuck on the question and don't know how to do it? Fortunately, there are structured ways to approach coding interview questions that will increase your chances of solving them. From how to find a solution or approach, to optimizing time and space complexity, here are some of the top tips and best practices that will help you solve coding interview questions.
 
 ## How to find solutions to coding interview problems
@@ -46,6 +48,8 @@ How do you [validate if a tree is a valid Binary Search Tree](https://leetcode.c
 ### 3. Come up with more examples
 
 Coming up with more examples is something useful you can do regardless of whether you are stuck or not. It helps you to reinforce your understanding of the question, prevents you from prematurely jumping into coding, helps you to identify a pattern which can be generalized to any input, which is the solution! Lastly, the multiple examples can be used as test cases at the end when verifying your solution.
+
+<InDocAd />
 
 ### 4. Break the question down into smaller independent parts
 
@@ -97,6 +101,8 @@ These are the data structures to keep in mind and try, in order of frequency the
 - Topological Sorting
 
 In future we will add tips on how to better identify the most relevant data structures and routines based on the problem.
+
+<InDocAd />
 
 ## How to optimize your approach or solution
 
@@ -238,6 +244,8 @@ def contains_string(search_term, strings):
 ```
 
 This is considered a micro-optimization and most of the time, `strings` won't be empty, but I'm using it to illustrate the example where you don't have to do certain computations if they aren't needed. This also applies to initialization of objects that you will need in your code (usually hash tables). If the input is empty, there's no need to initialize any variables!
+
+<InDocAd />
 
 ### How to optimize space complexity
 

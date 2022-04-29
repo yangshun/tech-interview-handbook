@@ -12,6 +12,8 @@ keywords:
 sidebar_label: Preparing final questions to ask
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 Something you can always count on to happen at the end of your Software Engineer interview - both technical and non-technical rounds - is for the interviewer to ask you if you "have any final questions?".
 
 This question actually isn't a real question at all - candidates are generally expected to ask questions. As an interviewer myself, candidates who don't have any questions might come off as less interested in the role.
@@ -37,6 +39,8 @@ Here, I present questions to ask at the end of your software engineer interviews
 - What are the strengths and weaknesses of the current team? What is being done to improve upon the weaknesses?
 - What resources does the company have for new hires to study its product and processes? Are there specifications, requirements, documentation?
 - What would I work on if I joined this team and who would I work most closely with?
+
+<InDocAd />
 
 ## Best questions to ask for knowing more culture and welfare
 

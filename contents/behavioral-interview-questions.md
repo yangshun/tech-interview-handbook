@@ -15,6 +15,8 @@ keywords:
 sidebar_label: Common behavioral questions to practice
 ---
 
+import InDocAd from './\_components/InDocAd';
+
 In the software engineer interview process, behavioral interviews may seem so much more varied and unstructured as compared to technical interviews. However, in most cases, the interviewer is actually just trying to get to know you better and there's always a set of common questions that need to be asked to achieve that.
 
 ## Most commonly asked behavioral questions across top tech companies

@@ -60,6 +60,8 @@ After coming up with your self introduction, keep it somewhere where you can ref
 
 Having an elevator pitch on hand is a great way to create a network and chance upon new job opportunities. There will often be times when you can't prepare for an interview or meeting and it is incredibly handy to have a practiced pitch.
 
+<InDocAd />
+
 ## Good examples of software engineer self introductions
 
 ### Example 1: Front End Engineer at Meta
