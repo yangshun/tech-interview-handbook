@@ -5,6 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+@media (min-width: 768px) {
+  .docItemContainer {
+    padding: 0 3rem;
+  }
+}
 .docItemContainer header + *,
 .docItemContainer article > *:first-child {
   margin-top: 0;

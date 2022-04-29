@@ -118,7 +118,7 @@ Using this guide to accompany practice ensures that you cultivate good habits an
 
 #### Algorithms study cheatsheets for coding interviews
 
-These are actually the notes I personally collated for my own coding interview preparation. I have organized them into 1-pagers of the best study resources, best LeetCode questions to practice, and must-remembers (tips, corner cases) for every data structure and algorithm. They ensure that you internalize the most important concepts and get the most out of your preparation.
+These are actually the notes I personally collated for my own coding interview preparation. I have organized them into 1-pagers of the best study resources, best LeetCode questions to practice, and must-remembers (tips, corner cases) for every data structure and algorithm. They ensure that you internalize the most important concepts and get the most out of your preparation. [Check them out](./algorithms/study-cheatsheet.md).
 
 ### 5. Prepare a good self introduction and final questions {#prepare-self-introduction}
 
@@ -130,7 +130,7 @@ For the best software self introduction samples and tips, check out this [self i
 
 Coding right in front of your interviewer can be a nerve-wracking experience especially if you have never done it before - which is why getting hands-on experience is so important.
 
-[interviewing.io](https://iio.sh/r/DMCa) is currently the best mock technical interview resource in the market currently. It allows you to book mock coding interviews with real Google and Facebook engineers, albeit anonymously. You could even book interviews for specific roles like Mobile, Front End, Engineering Management. Even better - if you want to have an easier transition into real world coding interview - you could view recorded interviews and see what phone interviews are like.
+[interviewing.io](https://iio.sh/r/DMCa) is currently the best mock technical interview resource in the market. It allows you to book mock coding interviews with real Google and Facebook engineers, albeit anonymously. You could even book interviews for specific roles like Mobile, Front End, Engineering Management. Even better - if you want to have an easier transition into real world coding interview - you could view recorded interviews and see what phone interviews are like.
 
 Moreover, if you were to do very well on your mock interviews, you will be able to unlock the "jobs page" which allows you to book interviews directly with top companies like Uber, Lyft, Quora, Asana and more. I've used [interviewing.io](https://iio.sh/r/DMCa) both as an interviewer and an interviewee and found the experience to be excellent.
 
