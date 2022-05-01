@@ -4,56 +4,50 @@
   border-radius: var(--ifm-global-radius);
   color: #fff;
   display: block;
-  opacity: 0.95;
+  opacity: 0.9;
   padding: 1rem;
   transition: opacity var(--ifm-transition-fast)
     var(--ifm-transition-timing-default);
-}
-
-.backgroundPurplin {
-  background-image: linear-gradient(
-    138deg,
-    rgb(69, 104, 220),
-    rgb(176, 106, 179)
-  );
-}
-
-.backgroundFirewatch {
-  background-image: linear-gradient(139deg, #cb2d3e, #ef473a);
-}
-
-.backgroundLush {
-  background-image: linear-gradient(139deg, #56ab2f, #a8e063);
-}
-
-.backgroundSweetMorning {
-  background-image: linear-gradient(139deg, #ff5f6d, #ffc371);
-}
-
-.backgroundViceCity {
-  background-image: linear-gradient(139deg, #3494e6, #ec6ead);
-}
-
-.backgroundRadar {
-  background-image: linear-gradient(139deg, #a770ef, #cf8bf3, #fdb99b);
-}
-
-.backgroundCosmicFusion {
-  background-image: linear-gradient(139deg, #333399, #ff00cc);
-}
-
-.backgroundAzurePop {
-  background-image: linear-gradient(138deg, #ef32d9, #89fffd);
-}
-
-.backgroundTranquil {
-  background-image: linear-gradient(138deg, #ef629f, #eecda3);
 }
 
 .container:hover {
   color: #fff;
   opacity: 1;
   text-decoration: none;
+}
+
+.backgroundFTL {
+  background-color: rgb(244, 63, 94);
+}
+
+.backgroundGrokkingCoding {
+  background-color: #6fc8cc;
+  color: #083436;
+}
+
+.backgroundGrokkingCoding:hover {
+  color: #083436;
+}
+
+.backgroundGrokkingSystemDesign {
+  background-color: #58527b;
+}
+
+.backgroundMoonchaser {
+  background-color: #1574f9;
+}
+
+.backgroundAlgoMonster {
+  background-image: linear-gradient(270deg, #3e1792, #6a45b9);
+}
+
+.backgroundInterviewingio {
+  background-color: #ffd829;
+  color: rgb(10, 10, 10);
+}
+
+.backgroundInterviewingio:hover {
+  color: rgb(10, 10, 10);
 }
 
 .tagline {

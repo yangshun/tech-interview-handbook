@@ -7,22 +7,10 @@ import styles from './styles.module.css';
 
 const AD_REFRESH_RATE = 20 * 1000;
 
-const BACKGROUNDS = [
-  styles.backgroundPurplin,
-  styles.backgroundFirewatch,
-  styles.backgroundLush,
-  styles.backgroundSweetMorning,
-  styles.backgroundViceCity,
-  styles.backgroundRadar,
-  styles.backgroundCosmicFusion,
-  styles.backgroundAzurePop,
-  styles.backgroundTranquil,
-];
-
-function FAANGTechLeads({className, position}) {
+function FAANGTechLeads({position}) {
   return (
     <a
-      className={clsx(styles.container, className)}
+      className={clsx(styles.container, styles.backgroundFTL)}
       href={`https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=1e80c401fe7e2`}
       target="_blank"
       rel="noopener"
@@ -31,7 +19,7 @@ function FAANGTechLeads({className, position}) {
       }}>
       <p className={styles.tagline}>
         <strong className={styles.title}>
-          Craft the perfect resume for FAANG
+          Craft the perfect resume for Google and Facebook
         </strong>
         Save time crafting your resume with FAANG Tech Leads'{' '}
         <u>FAANG-quality resume templates and examples</u> which have helped
@@ -41,10 +29,10 @@ function FAANGTechLeads({className, position}) {
   );
 }
 
-function AlgoMonster({className, position}) {
+function AlgoMonster({position}) {
   return (
     <a
-      className={clsx(styles.container, className)}
+      className={clsx(styles.container, styles.backgroundAlgoMonster)}
       href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack="
       target="_blank"
       rel="noopener"
@@ -62,10 +50,10 @@ function AlgoMonster({className, position}) {
   );
 }
 
-function Moonchaser({className, position}) {
+function Moonchaser({position}) {
   return (
     <a
-      className={clsx(styles.container, className)}
+      className={clsx(styles.container, styles.backgroundMoonchaser)}
       href={`https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}`}
       key={Math.random()}
       target="_blank"
@@ -74,19 +62,21 @@ function Moonchaser({className, position}) {
         window.gtag('event', `moonchaser.${position}.click`);
       }}>
       <p className={styles.tagline}>
-        <strong className={styles.title}>Get paid more.</strong> Receive
-        risk-free salary negotiation advice from <u>Moonchaser</u>. You pay
-        nothing unless your offer is increased.{' '}
+        <strong className={styles.title}>
+          Risk-free salary negotiation help
+        </strong>{' '}
+        Receive risk-free salary negotiation advice from <u>Moonchaser</u>. You
+        pay nothing unless your offer is increased.{' '}
         <u>Book your free consultation today!</u>
       </p>
     </a>
   );
 }
 
-function EducativeCoding({className, position}) {
+function EducativeCoding({position}) {
   return (
     <a
-      className={clsx(styles.container, className)}
+      className={clsx(styles.container, styles.backgroundGrokkingCoding)}
       href={`https://www.educative.io/courses/grokking-the-coding-interview?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=x23W`}
       key={Math.random()}
       target="_blank"
@@ -95,21 +85,19 @@ function EducativeCoding({className, position}) {
         window.gtag('event', `educative.coding.${position}.click`);
       }}>
       <p className={styles.tagline}>
-        <strong className={styles.title}>
-          Get better at Coding Interviews
-        </strong>
+        <strong className={styles.title}>Stop memorizing solutions</strong>
         <u>Grokking the Coding Interview</u> teaches you techniques and question
-        patterns to be good at coding interviews. Grab your limited time
-        discount today!
+        patterns to ace coding interviews. Grab your limited time discount
+        today!
       </p>
     </a>
   );
 }
 
-function EducativeSystemDesign({className, position}) {
+function EducativeSystemDesign({position}) {
   return (
     <a
-      className={clsx(styles.container, className)}
+      className={clsx(styles.container, styles.backgroundGrokkingSystemDesign)}
       href={`https://www.educative.io/courses/grokking-the-system-design-interview?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=x23W`}
       key={Math.random()}
       target="_blank"
@@ -126,10 +114,10 @@ function EducativeSystemDesign({className, position}) {
   );
 }
 
-function Interviewingio({className, position}) {
+function Interviewingio({position}) {
   return (
     <a
-      className={clsx(styles.container, className)}
+      className={clsx(styles.container, styles.backgroundInterviewingio)}
       href="https://iio.sh/r/DMCa"
       key={Math.random()}
       target="_blank"
@@ -141,7 +129,7 @@ function Interviewingio({className, position}) {
         <strong className={styles.title}>
           Practice interviewing with Google engineers
         </strong>
-        interviewing.io provides anonymous technical mock interviews with
+        <u>interviewing.io</u> provides anonymous technical mock interviews with
         engineers from Google, Facebook, and other top companies.{' '}
         <u>Give it a try!</u>
       </p>
@@ -159,9 +147,6 @@ export default React.memo(function SidebarAd({position}) {
     return () => clearTimeout(timer);
   }, [counter]);
 
-  const backgroundClass =
-    BACKGROUNDS[Math.floor(Math.random() * BACKGROUNDS.length)];
-
   // Because the SSR and client output can differ and hydration doesn't patch attribute differences,
   // we'll render this on the browser only.
   return (
@@ -173,86 +158,42 @@ export default React.memo(function SidebarAd({position}) {
         // Ugly hack to show conditional sidebar content.
 
         if (path.includes('resume')) {
-          return (
-            <FAANGTechLeads
-              className={backgroundClass}
-              key={Math.random()}
-              position={position}
-            />
-          );
+          return <FAANGTechLeads key={Math.random()} position={position} />;
         }
 
         if (path.includes('negotiation') || path.includes('compensation')) {
-          return (
-            <Moonchaser
-              className={backgroundClass}
-              key={Math.random()}
-              position={position}
-            />
-          );
-        }
-
-        if (
-          path.includes('coding') ||
-          path.includes('best-practice-questions') ||
-          path.includes('mock-interviews') ||
-          path.includes('algorithms')
-        ) {
-          return rand < 0.3 ? (
-            <Interviewingio
-              className={backgroundClass}
-              key={Math.random()}
-              position={position}
-            />
-          ) : rand < 0.6 ? (
-            <AlgoMonster
-              className={backgroundClass}
-              key={Math.random()}
-              position={position}
-            />
-          ) : (
-            <EducativeCoding
-              className={backgroundClass}
-              key={Math.random()}
-              position={position}
-            />
-          );
+          return <Moonchaser key={Math.random()} position={position} />;
         }
 
         if (path.includes('system-design')) {
           return (
-            <EducativeSystemDesign
-              className={backgroundClass}
-              key={Math.random()}
-              position={position}
-            />
+            <EducativeSystemDesign key={Math.random()} position={position} />
           );
         }
 
-        return rand < 0.25 ? (
-          <FAANGTechLeads
-            className={backgroundClass}
-            key={Math.random()}
-            position={position}
-          />
-        ) : rand < 0.5 ? (
-          <Interviewingio
-            className={backgroundClass}
-            key={Math.random()}
-            position={position}
-          />
-        ) : rand < 0.75 ? (
-          <AlgoMonster
-            className={backgroundClass}
-            key={Math.random()}
-            position={position}
-          />
+        // if (
+        //   path.includes('coding') ||
+        //   path.includes('best-practice-questions') ||
+        //   path.includes('mock-interviews') ||
+        //   path.includes('algorithms')
+        // ) {
+        //   return rand < 0.3 ? (
+        //     <Interviewingio key={Math.random()} position={position} />
+        //   ) : rand < 0.6 ? (
+        //     <AlgoMonster key={Math.random()} position={position} />
+        //   ) : (
+        //     <EducativeCoding key={Math.random()} position={position} />
+        //   );
+        // }
+
+        return rand < 0.4 ? (
+          <FAANGTechLeads key={Math.random()} position={position} />
+        ) : rand < 0.6 ? (
+          <Interviewingio key={Math.random()} position={position} />
+        ) : rand < 0.8 ? (
+          <AlgoMonster key={Math.random()} position={position} />
         ) : (
-          <EducativeCoding
-            className={backgroundClass}
-            key={Math.random()}
-            position={position}
-          />
+          <EducativeCoding key={Math.random()} position={position} />
         );
       }}
     </BrowserOnly>
