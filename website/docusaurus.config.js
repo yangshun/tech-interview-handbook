@@ -9,10 +9,10 @@ module.exports = {
   projectName: 'tech-interview-handbook',
   themeConfig: {
     announcementBar: {
-      id: 'algomonster-1', // Increment on change
-      content: `Stop grinding LeetCode and study with a plan! Developed by Google engineers, 
-      <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">AlgoMonster</a> is the fastest way to get a software engineering job. 
-      <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">Check it out now!</a>`,
+      id: 'design-gurus-1', // Increment on change
+      content: `Stop memorizing solutions. Start learning coding interview patterns with <a href="https://www.designgurus.org/?utm_source=tih_header&utm_medium=ref&utm_campaign=tp&utm_id=tih" target="_blank" rel="noopener">Grokking the Coding Interview</a> by Design Gurus`,
+      backgroundColor: '#6fc8cc',
+      textColor: '#000',
       isCloseable: false,
     },
     hideableSidebar: true,
