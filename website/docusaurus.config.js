@@ -185,6 +185,9 @@ module.exports = {
         gtag: {
           trackingID: 'UA-44622716-2',
         },
+        blog: {
+          blogSidebarCount: 15,
+        },
       },
     ],
   ],
