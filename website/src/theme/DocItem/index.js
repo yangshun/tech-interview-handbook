@@ -92,6 +92,13 @@ function DocItemContent(props) {
                 </header>
               )}
               <div className="margin-bottom--lg">
+                <iframe
+                  src="https://ghbtns.com/github-btn.html?user=yangshun&amp;repo=tech-interview-handbook&amp;type=star&amp;count=true&amp;size=large"
+                  frameBorder={0}
+                  width={160}
+                  height={30}
+                  title="GitHub Stars"
+                />
                 <DocItemFooter {...props} />
               </div>
               <MDXContent>
