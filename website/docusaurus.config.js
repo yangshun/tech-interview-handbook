@@ -183,7 +183,7 @@ module.exports = {
           customCss: require.resolve('./src/css/custom.css'),
         },
         gtag: {
-          trackingID: 'UA-44622716-2',
+          trackingID: 'G-9F86L298EX',
         },
         blog: {
           blogSidebarCount: 15,
