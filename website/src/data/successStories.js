@@ -66,22 +66,6 @@ export default [
     ),
   },
   {
-    name: 'Rosa Tamarindus',
-    title: 'Software Engineer, Amazon',
-    thumbnail: '/img/rosa.png',
-    quote: (
-      <>
-        I'm so grateful to know this amazing "Tech Interview Handbook"! It
-        really helped me to understand the entire recruitment process starting
-        from the very beginning stage until getting the offer (and negotiation).
-        Furthermore, I really love "Algorithms study cheatsheets" section since
-        it's really concise and helpful. Following the advice in this handbook
-        helps me to ace and get the offers from FAANG and other top tech
-        companies.
-      </>
-    ),
-  },
-  {
     name: 'Kevin Huang',
     title: 'Software Engineer, Uber',
     thumbnail: 'https://avatars1.githubusercontent.com/u/25380336?s=460&v=4',
