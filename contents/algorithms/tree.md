@@ -15,6 +15,10 @@ sidebar_label: Tree
 toc_max_heading_level: 2
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/algorithms/algorithms/algorithms-tree.png" />
+</head>
+
 ## Introduction
 
 A tree is a widely used abstract data type that represents a hierarchical structure with a set of connected nodes. Each node in the tree can be connected to many children, but must be connected to exactly one parent, except for the root node, which has no parent.

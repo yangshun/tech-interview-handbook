@@ -16,6 +16,10 @@ keywords:
 sidebar_label: Mock coding interviews
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/mock-interviews.png" />
+</head>
+
 Interviewing is a skill that you can get better at. The steps mentioned above can be rehearsed over and over again until you have fully internalized them and following those steps become second nature to you. A good way to practice is to find a friend to partner with and the both of you can take turns to interview each other.
 
 ## [interviewing.io](https://iio.sh/r/DMCa)

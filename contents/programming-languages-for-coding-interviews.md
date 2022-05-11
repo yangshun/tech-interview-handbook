@@ -14,6 +14,10 @@ keywords:
 sidebar_label: Picking a programming language
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/programming-languages-for-coding-interviews.png" />
+</head>
+
 import InDocAd from './\_components/InDocAd';
 
 Does the programming language you use for coding interviews matter? The answer is yes.

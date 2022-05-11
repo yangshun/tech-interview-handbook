@@ -18,6 +18,10 @@ keywords:
 sidebar_label: Step-by-step how to prepare
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/coding-interview-prep.png" />
+</head>
+
 _The ultimate guide on how to efficiently prepare for your software engineering technical interview - coding test round._
 
 If you have decided to embark on the arduous process of preparing for your coding interviews and you don't know how to maximize your time, this is the only guide you need to go from zero to hero on your coding test.

@@ -15,6 +15,10 @@ sidebar_label: String
 toc_max_heading_level: 2
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/algorithms/algorithms/algorithms-string.png" />
+</head>
+
 ## Introduction
 
 A string is a sequence of characters. Many tips that apply to arrays also apply to strings. You're recommended to read the page on [Arrays](./array.md) before reading this page.

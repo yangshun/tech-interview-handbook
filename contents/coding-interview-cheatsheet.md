@@ -15,6 +15,10 @@ keywords:
 sidebar_label: Best practices before, during, and after
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/coding-interview-cheatsheet.png" />
+</head>
+
 import InDocAd from './\_components/InDocAd';
 
 As coding interviews mature over the years, there are now firmer expectations on how candidates should behave during a coding interview. Some of these practices also help you to exhibit "hire" signals to the interviewer by displaying your ability to communicate well and deal with roadblocks.

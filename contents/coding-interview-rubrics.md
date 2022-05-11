@@ -13,6 +13,10 @@ keywords:
 sidebar_label: Coding interview rubrics
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/coding-interview-rubrics.png" />
+</head>
+
 import InDocAd from './\_components/InDocAd';
 
 Ever wondered how coding interviews are evaluated at top tech companies like Google, Amazon, Apple and Netflix?

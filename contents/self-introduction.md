@@ -13,6 +13,10 @@ keywords:
 sidebar_label: Preparing a self introduction
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/self-introduction.png" />
+</head>
+
 import InDocAd from './\_components/InDocAd';
 
 "Tell me about yourself" or "give me a quick introduction of your profile" is almost always the first question encountered in your software engineer interviews. This guide teaches you how to maximize this chance to impress the interviewer by crafting the perfect self introduction.

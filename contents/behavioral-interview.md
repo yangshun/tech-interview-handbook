@@ -16,6 +16,10 @@ keywords:
 sidebar_label: Step-by-step how to prepare
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/behavioral-interview.png" />
+</head>
+
 import InDocAd from './\_components/InDocAd';
 
 ## What are behavioral interviews

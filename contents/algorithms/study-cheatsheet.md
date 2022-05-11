@@ -6,6 +6,10 @@ keywords: [coding interview algorithms, coding interview data structures]
 sidebar_label: Introduction
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/algorithms/algorithms-study-cheatsheet.png" />
+</head>
+
 import InDocAd from '../\_components/InDocAd';
 
 ## What is this

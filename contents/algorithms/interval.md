@@ -15,6 +15,10 @@ sidebar_label: Interval
 toc_max_heading_level: 2
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/algorithms/algorithms/algorithms-interval.png" />
+</head>
+
 ## Introduction
 
 Interval questions are a subset of [array](./array.md) questions where you are given an array of two-element arrays (an interval) and the two values represent a start and an end value. Interval questions are considered part of the array family but they involve some common techniques hence they are extracted out to this special section of their own.

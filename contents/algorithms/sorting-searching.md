@@ -15,6 +15,10 @@ sidebar_label: Sorting and searching
 toc_max_heading_level: 2
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/algorithms/algorithms/algorithms-sorting-searching.png" />
+</head>
+
 ## Introduction
 
 Sorting is the act of rearranging elements in a sequence in order, either in numerical or lexicographical order, and either ascending or descending.

@@ -15,6 +15,10 @@ sidebar_label: Trie
 toc_max_heading_level: 2
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/algorithms/algorithms/algorithms-trie.png" />
+</head>
+
 ## Introduction
 
 Tries are special trees (prefix trees) that make searching and storing strings more efficient. Tries have many practical applications, such as conducting searches and providing autocomplete. It is helpful to know these common applications so that you can easily identify when a problem can be efficiently solved using a trie.

@@ -13,6 +13,10 @@ keywords:
 sidebar_label: Study and practice plan
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/coding-interview-study-plan.png" />
+</head>
+
 import InDocAd from './\_components/InDocAd';
 import QuestionList from './\_components/QuestionList';
 

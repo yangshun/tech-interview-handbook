@@ -15,6 +15,10 @@ sidebar_label: Geometry
 toc_max_heading_level: 2
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/algorithms/algorithms/algorithms-geometry.png" />
+</head>
+
 ## Introduction
 
 Geometry is a branch of mathematics that is concerned with properties of space that are related with distance, shape, size, and relative position of figures. Advanced geometry (e.g. 3D geometry) is not taught in most Computer Science courses, so you can expect that you will only be asked on 2D geometry.

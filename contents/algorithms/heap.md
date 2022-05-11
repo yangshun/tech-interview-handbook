@@ -15,6 +15,10 @@ sidebar_label: Heap
 toc_max_heading_level: 2
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/algorithms/algorithms/algorithms-heap.png" />
+</head>
+
 ## Introduction
 
 A heap is a specialized tree-based data structure which is a complete tree that satisfies the heap property.

@@ -12,6 +12,10 @@ keywords:
 sidebar_label: Preparing final questions to ask
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/final-questions.png" />
+</head>
+
 import InDocAd from './\_components/InDocAd';
 
 Something you can always count on to happen at the end of your Software Engineer interview - both technical and non-technical rounds - is for the interviewer to ask you if you "have any final questions?".

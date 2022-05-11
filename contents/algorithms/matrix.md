@@ -15,6 +15,10 @@ sidebar_label: Matrix
 toc_max_heading_level: 2
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/algorithms/algorithms/algorithms-matrix.png" />
+</head>
+
 ## Introduction
 
 A matrix is a 2-dimensional array. Questions involving matrices are usually related to [dynamic programming](./dynamic-programming.md) or [graph](./graph.md) traversal.

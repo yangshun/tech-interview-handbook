@@ -15,6 +15,10 @@ sidebar_label: Recursion
 toc_max_heading_level: 2
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/algorithms/algorithms/algorithms-recursion.png" />
+</head>
+
 ## Introduction
 
 Recursion is a method of solving a computational problem where the solution depends on solutions to smaller instances of the same problem.

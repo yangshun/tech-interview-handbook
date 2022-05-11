@@ -15,6 +15,10 @@ keywords:
 sidebar_label: Writing your software engineer resume
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/resume.png" />
+</head>
+
 import InDocAd from './\_components/InDocAd';
 
 Not sure why you're still not getting shortlisted at some or all of the top tech companies? Your software engineer resume could be the issue.

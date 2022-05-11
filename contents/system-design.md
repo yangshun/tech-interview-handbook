@@ -11,6 +11,10 @@ keywords:
 sidebar_label: System design preparation guide
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/system-design.png" />
+</head>
+
 The objective of system design interviews is to evaluate a candidate's skill at designing real-world software systems involving multiple components. System design questions are typically given to more senior candidates (with a few years of experience). Interns aren't typically given system design questions as it is hard to expect interns to have sufficient and relevant industry experience to answer this type of questions well.
 
 Some common questions include:

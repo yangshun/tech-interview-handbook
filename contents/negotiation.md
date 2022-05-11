@@ -19,6 +19,7 @@ sidebar_label: Complete salary negotiation guide
 <head>
   <title>What you need to know about negotiation | Tech Interview Handbook</title>
   <meta property="og:title" content="What you need to know about negotiation | Tech Interview Handbook"/>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/negotiation.png" />
 </head>
 
 ## Always negotiate

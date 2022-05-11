@@ -15,6 +15,10 @@ sidebar_label: Dynamic programming
 toc_max_heading_level: 2
 ---
 
+<head>
+  <meta property="og:image" content="https://www.techinterviewhandbook.org/social/algorithms/algorithms/algorithms-dynamic-programming.png" />
+</head>
+
 ## Introduction
 
 Dynamic Programming (DP) is usually used to solve optimization problems. The only way to get better at DP is to practice. It takes some amount of practice to be able to recognize that a problem can be solved by DP.
