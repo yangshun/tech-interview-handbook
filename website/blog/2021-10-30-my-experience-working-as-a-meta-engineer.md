@@ -26,17 +26,29 @@ The impact is huge - every line of code you write has the potential to impact mi
 
 ### Teams in Meta Singapore
 
-Let's talk about some of the teams in Meta Singapore since I currently work in Singapore and many of the readers are based in Singapore. **Note that this section will go out of date as priorities shift. Last update: 2022/03/17.**
+Let's talk about some of the teams in Meta Singapore since I currently work in Singapore and many of the readers are based in Singapore. **Note that this section will go out of date as priorities shift. Last update: 2022/05/12.**
 
-In Meta SG we have two teams belonging to two organizations - Commerce Engineering and Ads & Business Platform. Both organizations, like most organizations in Meta, have global impact where the number of users are in the order of millions or more.
+In Meta SG we have two teams belonging to two organizations - Commerce Engineering and Ads & Business Platform. Both organizations, like most organizations in Meta, have global impact where the number of users is in the order of millions or more.
 
-Commerce Engineering (hardware sales) is Meta's next up and coming revenue stream and is also the organization which I work in. Commerce Engineering primarily deals with bringing Meta's hardware products to market - from building immersive digital storefronts and highly optimized checkout flows to delivering great post-sales experiences to platforms that manage the demand, production, testing and shipping of Meta hardware products across the entire supply chain. If you have heard of the Quest headset device, which is Meta's flagship VR device, my team is in-charge of building the web storefronts to sell them (currently https://www.oculus.com and https://portal.facebook.com). In my team, I built the web infrastructure for the Quest website which tens of other Oculus teams build on top of, built the React components for the web version of the Oculus Design System and also rearchitected the Content Management Platform rendering system to be compatible with React. It's definitely one of the highlights of my career to be building a product that contributed to Meta's 2nd highest revenue stream (and still growing)!
+Commerce Engineering (hardware sales) is Meta's next up and coming revenue stream and is also the organization which I work in. Commerce Engineering primarily deals with bringing Meta's hardware products to market - from building immersive digital storefronts and highly optimized checkout flows to delivering great post-sales experiences to platforms that manage the demand, production, testing and shipping of Meta hardware products across the entire supply chain. If you have heard of the Quest headset device, which is Meta's flagship VR device, my team spent the entire of 2021 building the Meta Store website to sell them (https://store.facebook.com/quest/ and https://store.facebook.com/portal/). I led the organization's migration from our existing separate Meta Quest and Portal websites to the unified Meta Store website, by building the web infrastructure, the React components for the web version of the Meta Store Design System, and developed migration guides + new APIs to help teams quickly migrate their products onto the Meta Store website. In April 2022, Meta announced the [Meta Store in Burlingame, California](https://about.fb.com/news/2022/04/meta-retail-store/) and the Meta Store website, which is one of the most visible products from the Singapore engineering office. It's definitely one of the highlights of my career to be building a product that contributed to Meta's 2nd highest revenue stream (and still growing)! We have even bigger plans for the Meta Store website. Stay tuned.
 
-On the Ads and Business organization, there are multiple teams:
+Some stories from engineers in Commerce Engineering:
 
-- Business Integrity - They work on building tools to catch bad advertisers (advertisers who create ads which violate our policies). They want to maximize Business Integrity outcomes by building a human review system for ads & commerce on Meta, driving end-to-end improvements in the workflows, and providing best-in-class tools to IP rights holders, etc.
-- Business Support Platform - They redefine the support experience across all Meta business products, making it available, effective and effortless for all businesses. They make sure businesses can identify the help resources available to them when they need assistance in accomplishing their goals across Meta's suite of business tools. Their tools will also effortlessly help marketers diagnose their issues and connect them to the best solution to solve their problem. They have also some investment into the machine learning space.
-- Business Messaging Commerce - They build products that enable the Business Messaging ecosystem across Messenger, Instagram and WhatsApp.
+- [Help 10 People—or Billions? Engineering Impact on a Global Scale](https://www.metacareers.com/life/help-10-peopleor-billions/), Nishita A., Software Engineering Manager, Commerce Engineering
+- [Embracing Change to Evolve Her Engineering Journey](https://www.metacareers.com/life/embracing-change-to-evolve-her-engineering-journey), Michelle T., Software Engineer, Commerce Engineering
+
+On the Ads and Business organization, there are these teams:
+
+- **Business Integrity**: They work on building tools to catch bad advertisers (advertisers who create ads which violate our policies). They want to maximize Business Integrity outcomes by building a human review system for ads & commerce on Meta, driving end-to-end improvements in the workflows, and providing best-in-class tools to IP rights holders, etc.
+  - [Software Engineering in APAC: Building for Rapid Growth](https://www.metacareers.com/life/software-engineering-in-apac)
+  - [Curiosity and Passion: Software Engineering at Facebook](https://www.metacareers.com/life/curiosity-and-passion-software-engineering-at-facebook), Henry B., Software Engineer, Business Integrity
+- **Business Support Platform**: They redefine the support experience across all Meta business products, making it available, effective and effortless for all businesses. They make sure businesses can identify the help resources available to them when they need assistance in accomplishing their goals across Meta's suite of business tools. Their tools will also effortlessly help marketers diagnose their issues and connect them to the best solution to solve their problem. They have also some investment into the machine learning space.
+- **Business Messaging Commerce**: They build products that enable the Business Messaging ecosystem across Messenger, Instagram, and WhatsApp.
+
+Enterprise Engineering has a sizable presence in Singapore as well:
+
+- [Enterprise Engineering in APAC: Building Products That Scale](https://www.metacareers.com/life/enterprise-engineering-in-apac)
+- [Opportunity and Trust: Growing an Engineering Career at Meta](https://www.metacareers.com/life/opportunity-and-trust-growing-an-engineering-career-at-facebook), Shuhong W., Enterprise Engineering Manager
 
 ## Career progression/compensation
 
