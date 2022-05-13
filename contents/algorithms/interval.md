@@ -64,10 +64,17 @@ def merge_overlapping_intervals(a, b):
   return [min(a[0], b[0]), max(a[1], b[1])]
 ```
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
 
 - [Merge Intervals](https://leetcode.com/problems/merge-intervals/)
 - [Insert Interval](https://leetcode.com/problems/insert-interval/)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
 - [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
 - [Meeting Rooms (LeetCode Premium)](https://leetcode.com/problems/meeting-rooms/)
 - [Meeting Rooms II (LeetCode Premium)](https://leetcode.com/problems/meeting-rooms-ii/)

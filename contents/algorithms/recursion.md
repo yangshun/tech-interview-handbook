@@ -70,12 +70,19 @@ Many algorithms relevant in coding interviews make heavy use of recursion - bina
 
 In some cases, you may be computing the result for previously computed inputs. Let's look at the Fibonacci example again. `fib(5)` calls `fib(4)` and `fib(3)`, and `fib(4)` calls `fib(3)` and `fib(2)`. `fib(3)` is being called twice! If the value for `fib(3)` is memoized and used again, that greatly improves the efficiency of the algorithm and the time complexity becomes O(n).
 
-## Recommended questions
+## Essential questions
 
-- [Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
+_These are essential questions to practice if you're studying for this topic._
+
 - [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
 - [Combinations](https://leetcode.com/problems/combinations/)
 - [Subsets](https://leetcode.com/problems/subsets/)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
+- [Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
 - [Subsets II](https://leetcode.com/problems/subsets-ii/)
 - [Permutations](https://leetcode.com/problems/permutations/)
 - [Sudoku Solver](https://leetcode.com/problems/sudoku-solver/)

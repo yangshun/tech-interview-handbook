@@ -115,11 +115,18 @@ When a question is about counting the number of palindromes, a common trick is t
 - For substrings, you can terminate early once there is no match
 - For subsequences, use dynamic programming as there are overlapping subproblems. Check out [this question](https://leetcode.com/problems/longest-palindromic-subsequence/)
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
 
 - [Valid Anagram](https://leetcode.com/problems/valid-anagram)
 - [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
 - [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
 - [Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/)
 - [Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string)
 - [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/description/)

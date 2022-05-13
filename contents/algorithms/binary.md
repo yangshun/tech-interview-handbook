@@ -55,10 +55,17 @@ Some helpful utility snippets:
 | Check if a number is a power of 2 | `(num & num - 1) == 0` or `(num & (-num)) == num` |
 | Swapping two variables | `num1 ^= num2; num2 ^= num1; num1 ^= num2` |
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
 
 - [Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/)
 - [Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
 - [Counting Bits](https://leetcode.com/problems/counting-bits/)
 - [Missing Number](https://leetcode.com/problems/missing-number/)
 - [Reverse Bits](https://leetcode.com/problems/reverse-bits/)

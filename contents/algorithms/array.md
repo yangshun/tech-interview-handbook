@@ -112,13 +112,20 @@ If you are given a sequence and the interviewer asks for O(1) space, it might be
 
 This might be obvious, but traversing the array twice/thrice (as long as fewer than n times) is still O(n). Sometimes traversing the array more than once can help you solve the problem while keeping the time complexity to O(n).
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
 
 - [Two Sum](https://leetcode.com/problems/two-sum/)
 - [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
-- [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
 - [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
 - [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
+- [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
 - [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
 - [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
 - [3Sum](https://leetcode.com/problems/3sum/)

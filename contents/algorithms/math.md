@@ -60,10 +60,17 @@ If the question asks you to implement an operator such as power, square root or 
 - Negative numbers
 - Floats
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
 
 - [Pow(x, n)](https://leetcode.com/problems/powx-n/)
 - [Sqrt(x)](https://leetcode.com/problems/sqrtx/)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
 - [Integer to English Words](https://leetcode.com/problems/integer-to-english-words/)
 
 ## Recommended courses

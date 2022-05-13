@@ -59,6 +59,14 @@ TODO
 
 TODO
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
+
+TODO
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
 
 TODO

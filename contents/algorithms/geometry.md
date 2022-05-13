@@ -59,9 +59,16 @@ Here's a [nice visualization](https://silentmatt.com/rectangle-intersection/). E
 - Given many points, find k points that are closest to the origin.
 - How would you triangulate a polygon?
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
 
 - [Rectangle Overlap](https://leetcode.com/problems/rectangle-overlap/)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
 - [K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
 - [Rectangle Area](https://leetcode.com/problems/rectangle-area/)
 

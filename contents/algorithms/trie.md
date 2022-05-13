@@ -52,9 +52,16 @@ Be familiar with implementing from scratch, a `Trie` class and its `add`, `remov
 
 Sometimes preprocessing a dictionary of words (given in a list) into a trie, will improve the efficiency of searching for a word of length k, among n words. Searching becomes O(k) instead of O(n).
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
 
 - [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
 - [Add and Search Word](https://leetcode.com/problems/add-and-search-word-data-structure-design)
 - [Word Break](https://leetcode.com/problems/word-break)
 - [Word Search II](https://leetcode.com/problems/word-search-ii/)

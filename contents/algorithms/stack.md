@@ -63,10 +63,17 @@ Stacks are an important way of supporting nested or recursive function calls and
 
 TODO: Monotonic stacks -->
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
 
 - [Valid Parentheses](https://leetcode.com/problems/valid-parentheses)
 - [Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
 - [Implement Stack using Queues](https://leetcode.com/problems/implement-queue-using-stacks)
 - [Min Stack](https://leetcode.com/problems/min-stack)
 - [Asteroid Collision](https://leetcode.com/problems/asteroid-collision)

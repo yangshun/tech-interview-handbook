@@ -60,9 +60,17 @@ If you see a top or lowest _k_ being mentioned in the question, it is usually a 
 
 If you require the top _k_ elements use a Min Heap of size _k_. Iterate through each element, pushing it into the heap (for python `heapq`, invert the value before pushing to find the max). Whenever the heap size exceeds _k_, remove the minimum element, that will guarantee that you have the _k_ largest elements.
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
 
 - [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+- [K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
 - [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
 - [Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)
 

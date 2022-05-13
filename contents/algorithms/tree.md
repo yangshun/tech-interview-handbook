@@ -138,12 +138,22 @@ When you are asked to traverse a tree by level, use breadth-first search.
 
 If the question involves summation of nodes along the way, be sure to check whether nodes can be negative.
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
+
+- Binary Tree
+  - [Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+  - [Invert/Flip Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
+- Binary Search Tree
+  - [Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
 
 - Binary tree
-  - [Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
   - [Same Tree](https://leetcode.com/problems/same-tree/)
-  - [Invert/Flip Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
   - [Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
   - [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
   - [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
@@ -152,7 +162,6 @@ If the question involves summation of nodes along the way, be sure to check whet
   - [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
   - [Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
 - Binary search tree
-  - [Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
   - [Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
   - [Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
 

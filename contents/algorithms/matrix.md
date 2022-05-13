@@ -62,10 +62,17 @@ Transposing a matrix in Python is simply:
 transposed_matrix = zip(*matrix)
 ```
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
 
 - [Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)
 - [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
 - [Rotate Image](https://leetcode.com/problems/rotate-image/)
 - [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
 

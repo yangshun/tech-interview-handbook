@@ -34,16 +34,24 @@ Dynamic Programming (DP) is usually used to solve optimization problems. The onl
 
 Sometimes you do not need to store the whole DP table in memory, the last two values or the last two rows of the matrix will suffice.
 
-## Recommended questions
+## Essential questions
 
-- [0/1 Knapsack or Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/)
+_These are essential questions to practice if you're studying for this topic._
+
 - [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 - [Coin Change](https://leetcode.com/problems/coin-change/)
+- [House Robber](https://leetcode.com/problems/house-robber/)
 - [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
+- [0/1 Knapsack or Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/)
 - [Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/)
 - [Word Break Problem](https://leetcode.com/problems/word-break/)
 - [Combination Sum](https://leetcode.com/problems/combination-sum-iv/)
-- [House Robber](https://leetcode.com/problems/house-robber/) and [House Robber II](https://leetcode.com/problems/house-robber-ii/)
+- [House Robber II](https://leetcode.com/problems/house-robber-ii/)
 - [Decode Ways](https://leetcode.com/problems/decode-ways/)
 - [Unique Paths](https://leetcode.com/problems/unique-paths/)
 - [Jump Game](https://leetcode.com/problems/jump-game/)

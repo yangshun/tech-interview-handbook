@@ -17,8 +17,7 @@ sidebar_label: Study and practice plan
   <meta property="og:image" content="https://www.techinterviewhandbook.org/social/coding-interview-study-plan.png" />
 </head>
 
-import InDocAd from './\_components/InDocAd';
-import QuestionList from './\_components/QuestionList';
+import InDocAd from './\_components/InDocAd'; import QuestionList from './\_components/QuestionList';
 
 One of the most important questions to answer at the start of your coding interview preparation is: What study topics and practice questions should you do to most efficiently prepare for your coding interviews?
 
@@ -58,7 +57,7 @@ Keep the estimate relatively conservative so you don't end up burning out.
 
 ### Week 1 - 4: Topical study + practice
 
-These are all the topics you should study, in order of priority. The learning resources linked are my algorithm cheatsheets - which give you an overview of must-remembers like time complexity, corner cases and topic-specific useful techniques, as well as must-do practice questions.
+These are all the topics you should study, in order of priority. The learning resources linked are my algorithm cheatsheets - which give you an overview of must-remembers like time complexity, corner cases, and topic-specific useful techniques, as well as essential and recommended practice questions.
 
 Don't forget to apply behaviors from [coding interview best practices](./coding-interview-cheatsheet.md) and methods from [coding interview techniques](./coding-interview-techniques.md) early on while you practice!
 
@@ -106,9 +105,12 @@ Don't forget to apply behaviors from [coding interview best practices](./coding-
 
 Here, I listed 75 questions that you should do to be fully prepared for your coding interviews. This list of questions are generated from the [**Grind 75 tool**](https://www.techinterviewhandbook.org/grind75/) (built by me), which generates recommended study plans for coding interviews based on the time you have left. More options like filtering by difficulty, topics, alternative grouping of questions can be found there.
 
-Feel free to skip the dynamic programming questions if you haven't studied them or feel that they won't be relevant. Many dynamic programming questions can be solved with recursion / backtracking anyway.
+- If you followed the Week 1 - 4 study plan, you would have done some of these questions here. Feel free to skip them or do them again.
+- Feel free to skip the dynamic programming questions if you haven't studied them or feel that they won't be relevant. Many dynamic programming questions can be solved with recursion / backtracking anyway.
 
 Don't forget to apply behaviors from [coding interview best practices](./coding-interview-cheatsheet.md) and methods from [coding interview techniques](./coding-interview-techniques.md) early on while you practice!
+
+We recommend using the [**Grind 75**](https://www.techinterviewhandbook.org/grind75/) tool which allows you to keep track of your practice progress.
 
 <QuestionList />
 

@@ -63,10 +63,17 @@ _\* This is the average case, but in interviews we only care about the average c
 - Describe an implementation of a least-used cache, and big-O notation of it.
 - A question involving an API's integration with hash map where the buckets of hash map are made up of linked lists.
 
-## Recommended questions
+## Essential questions
+
+_These are essential questions to practice if you're studying for this topic._
 
 - [Two Sum](https://leetcode.com/problems/two-sum)
 - [Ransom Note](https://leetcode.com/problems/ransom-note)
+
+## Recommended practice questions
+
+_These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
+
 - [Group Anagrams](https://leetcode.com/problems/group-anagrams/)
 - [Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/)
 - [First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
