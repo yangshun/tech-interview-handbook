@@ -50,7 +50,7 @@ Some helpful utility snippets:
 | Set k<sup>th</sup> bit | <code>num &#124;= (1 << k)</code> |
 | Turn off k<sup>th</sup> bit | `num &= ~(1 << k)`. |
 | Toggle the k<sup>th</sup> bit | `num ^= (1 << k)`. |
-| Multiple by 2<sup>k</sup> | `num << k` |
+| Multiply by 2<sup>k</sup> | `num << k` |
 | Divide by 2<sup>k</sup> | `num >> k` |
 | Check if a number is a power of 2 | `(num & num - 1) == 0` or `(num & (-num)) == num` |
 | Swapping two variables | `num1 ^= num2; num2 ^= num1; num1 ^= num2` |

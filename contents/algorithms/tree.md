@@ -93,7 +93,7 @@ When a question involves a BST, the interviewer is usually looking for a solutio
 | Insert    | O(log(n)) |
 | Remove    | O(log(n)) |
 
-Space complexity of traversing balanced trees is O(n) while traversing very skewed trees (which is essentially a linked list) will be O(n).
+Space complexity of traversing balanced trees is O(h) where h is the height of the tree, while traversing very skewed trees (which is essentially a linked list) will be O(n).
 
 ## Things to look out for during interviews
 

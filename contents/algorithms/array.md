@@ -32,8 +32,8 @@ Arrays are among the most common data structures encountered during interviews. 
 
 **Disadvantages**
 
-- Addition and removal of elements into/from the middle an array is slow because they remaining elements need to be shifted to accommodate the new/missing element. An exception to this is if the position to be inserted/removed is at the end of the array.
-- For certain languages where the array size is fixed, it cannot alter its size after initialization. if an insertion causes the total number of elements to exceed the size, a new array has to be allocated and the existing elements have to be copied over. The act of creating a new array and transferring elements over takes O(n) time.
+- Addition and removal of elements into/from the middle of an array is slow because the remaining elements need to be shifted to accommodate the new/missing element. An exception to this is if the position to be inserted/removed is at the end of the array.
+- For certain languages where the array size is fixed, it cannot alter its size after initialization. If an insertion causes the total number of elements to exceed the size, a new array has to be allocated and the existing elements have to be copied over. The act of creating a new array and transferring elements over takes O(n) time.
 
 ## Learning resources
 
