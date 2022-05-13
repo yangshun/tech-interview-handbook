@@ -40,7 +40,7 @@ For questions involving traversal or dynamic programming, you almost always want
 This can be done easily in Python in one line.
 
 ```py
-# Assumes that the matrix is is non-empty
+# Assumes that the matrix is non-empty
 zero_matrix = [[0 for _ in range(len(matrix[0]))] for _ in range(len(matrix))]
 ```
 
