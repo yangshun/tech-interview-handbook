@@ -42,7 +42,7 @@ Be familiar with the various graph representations, graph search algorithms and 
 
 ## Graph representations
 
-You can be given a list of edges and you have to build your own graph from the edges so that you can perform a traversal on. them The common graph representations are:
+You can be given a list of edges and you have to build your own graph from the edges so that you can perform a traversal on them. The common graph representations are:
 
 - Adjacency matrix
 - Adjacency list

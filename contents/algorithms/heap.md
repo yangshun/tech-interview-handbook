@@ -47,7 +47,7 @@ In the context of algorithm interviews, heaps and priority queues can be treated
 
 | Operation                                              | Big-O     |
 | ------------------------------------------------------ | --------- |
-| Finx max/min                                           | O(1)      |
+| Find max/min                                           | O(1)      |
 | Insert                                                 | O(log(n)) |
 | Remove                                                 | O(log(n)) |
 | Heapify (create a heap out of given array of elements) | O(n)      |
@@ -58,7 +58,7 @@ In the context of algorithm interviews, heaps and priority queues can be treated
 
 If you see a top or lowest _k_ being mentioned in the question, it is usually a signal that a heap can be used to solve the problem, such as in [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/).
 
-If you require the top _k_ elements use a Min Heap of size _k_. Iterate through each element, pushing it into the heap. Whenever the heap size exceeds _k_, remove the minimum element, that will guarantee that you have the _k_ largest elements.
+If you require the top _k_ elements use a Min Heap of size _k_. Iterate through each element, pushing it into the heap (for python `heapq`, invert the value before pushing to find the max). Whenever the heap size exceeds _k_, remove the minimum element, that will guarantee that you have the _k_ largest elements.
 
 ## Recommended questions
 

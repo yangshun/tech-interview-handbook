@@ -26,7 +26,7 @@ For each topic, you can expect to find:
 1. Time complexities cheatsheet
 1. Things to look out for during interviews
 1. Corner cases
-1. Useful techniques vRecommended questions to practice
+1. Useful techniques with recommended questions to practice
 
 ## Study guides list
 
