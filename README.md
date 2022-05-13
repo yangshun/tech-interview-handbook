@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://www.techinterviewhandbook.org/">
-    <img src="website/static/img/logo.svg" alt="Tech Interview Handbook" width="400">
+    <img src="website/static/img/logo.svg" alt="Tech Interview Handbook" width="400" />
   </a>
   <br />
   <h3>
@@ -15,20 +15,23 @@
 
 ---
 
+<a href="https://www.techinterviewhandbook.org/software-engineering-interview-guide/">
+  <img src="assets/start-reading-button.jpg" alt="Start Reading Tech Interview Handbook" />
+</a>
+
 ## What is this?
 
-Not everyone has the time to do a few hundred LeetCode questions. Here are _free and curated_ technical interview preparation materials for busy engineers, brought to you by me, the author of the [Blind 75 list](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU). Over 500,000 people have benefitted from this handbook!
+Not everyone has the time to do a few hundred LeetCode questions. Here are _free and curated_ technical interview preparation materials for busy engineers, brought to you by me, the author of [Blind 75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU). Over 500,000 people have benefitted from this handbook!
 
 Besides the usual algorithm questions, other **awesome** stuff includes:
 
 - [Best practice questions](https://www.techinterviewhandbook.org/coding-interview-study-plan/) for coding interviews
+- [Grind 75](https://www.techinterviewhandbook.org/grind75) the next evolution of Blind 75, bigger and better.
 - [How to prepare](https://www.techinterviewhandbook.org/coding-interview-prep/) for coding interviews
 - [Coding interview best practices](https://www.techinterviewhandbook.org/coding-interview-cheatsheet/) - Straight-to-the-point Do's and Don'ts
 - [Algorithm cheatsheets and tips](https://www.techinterviewhandbook.org/algorithms/study-cheatsheet/) categorized by topic
-- [Interview formats](https://www.techinterviewhandbook.org/interview-formats/) of the top tech companies
-- [Step-by-step resume guide](https://www.techinterviewhandbook.org/resume/) to prepare a FAANG-ready resume
+- [Step-by-step Software Engineer resume guide](https://www.techinterviewhandbook.org/resume/) to prepare a FAANG-ready resume
 - [Behavioral questions](https://www.techinterviewhandbook.org/behavioral-interview-questions/) asked by the top tech companies
-- [Good questions to ask your interviewers](https://www.techinterviewhandbook.org/final-questions/) at the end of the interviews
 - [Front end interview preparation](https://www.frontendinterviewhandbook.com)
 
 Help from you in contributing content would be very much appreciated!
@@ -47,7 +50,8 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 
 <div align="center">
   <h3>💡 Stop grinding LeetCode aimlessly! Study coding question patterns efficiently with 
-    <a href="https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W">Grokking the Coding Interview</a> on Educative 💡 </h3>
+    <a href="https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W">Grokking the Coding Interview</a> on Educative 💡
+  </h3>
 </div>
 
 ---

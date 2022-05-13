@@ -81,6 +81,7 @@ module.exports = {
       ],
     },
     footer: {
+      style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} Tech Interview Handbook. Built with Docusaurus.`,
       links: [
         {
