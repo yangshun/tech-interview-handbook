@@ -192,4 +192,14 @@ module.exports = {
       },
     ],
   ],
+  plugins: [
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        id: 'universal-analytics',
+        trackingID: 'UA-44622716-2',
+        anonymizeIP: true,
+      },
+    ],
+  ],
 };
