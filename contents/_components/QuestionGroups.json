@@ -15,7 +15,9 @@
       "priority": 0,
       "id": 1,
       "topic": "array",
-      "routines": ["hashing"]
+      "routines": [
+        "hashing"
+      ]
     },
     {
       "slug": "valid-parentheses",
@@ -83,7 +85,9 @@
       "priority": 0,
       "id": 125,
       "topic": "string",
-      "routines": ["palindrome"]
+      "routines": [
+        "palindrome"
+      ]
     },
     {
       "slug": "invert-binary-tree",
@@ -117,7 +121,9 @@
       "priority": 0,
       "id": 242,
       "topic": "string",
-      "routines": ["anagram"]
+      "routines": [
+        "anagram"
+      ]
     },
     {
       "slug": "binary-search",
@@ -151,7 +157,10 @@
       "priority": 0,
       "id": 733,
       "topic": "graph",
-      "routines": ["matrix", "depth-first-search"]
+      "routines": [
+        "matrix",
+        "depth-first-search"
+      ]
     },
     {
       "slug": "maximum-subarray",
@@ -188,59 +197,6 @@
       "routines": []
     },
     {
-      "slug": "insert-interval",
-      "title": "Insert Interval",
-      "url": "https://leetcode.com/problems/insert-interval",
-      "duration": 25,
-      "epi": null,
-      "difficulty": "Medium",
-      "premium": false,
-      "frequency": 0.807,
-      "likes": 0.612,
-      "companies": 0.861,
-      "leetCodeScore": 42.5,
-      "priority": 0,
-      "id": 57,
-      "topic": "array",
-      "routines": ["interval"]
-    }
-  ],
-  "Week 2": [
-    {
-      "slug": "01-matrix",
-      "title": "01 Matrix",
-      "url": "https://leetcode.com/problems/01-matrix",
-      "duration": 30,
-      "epi": null,
-      "difficulty": "Medium",
-      "premium": false,
-      "frequency": 0.654,
-      "likes": 0.737,
-      "companies": 0.861,
-      "leetCodeScore": 41.5,
-      "priority": 0,
-      "id": 542,
-      "topic": "graph",
-      "routines": ["breadth-first-search"]
-    },
-    {
-      "slug": "k-closest-points-to-origin",
-      "title": "K Closest Points to Origin",
-      "url": "https://leetcode.com/problems/k-closest-points-to-origin",
-      "duration": 30,
-      "epi": 1,
-      "difficulty": "Medium",
-      "premium": false,
-      "frequency": 0.985,
-      "likes": 0.812,
-      "companies": 0.928,
-      "leetCodeScore": 74.2,
-      "priority": 0,
-      "id": 1014,
-      "topic": "heap",
-      "routines": ["geometry"]
-    },
-    {
       "slug": "balanced-binary-tree",
       "title": "Balanced Binary Tree",
       "url": "https://leetcode.com/problems/balanced-binary-tree",
@@ -272,8 +228,12 @@
       "priority": 1,
       "id": 141,
       "topic": "linked-list",
-      "routines": ["two-pointers"]
-    },
+      "routines": [
+        "two-pointers"
+      ]
+    }
+  ],
+  "Week 2": [
     {
       "slug": "implement-queue-using-stacks",
       "title": "Implement Queue using Stacks",
@@ -326,6 +286,244 @@
       "routines": []
     },
     {
+      "slug": "climbing-stairs",
+      "title": "Climbing Stairs",
+      "url": "https://leetcode.com/problems/climbing-stairs",
+      "duration": 20,
+      "epi": null,
+      "difficulty": "Easy",
+      "premium": false,
+      "frequency": 0.942,
+      "likes": 0.871,
+      "companies": 0.99,
+      "leetCodeScore": 81.2,
+      "priority": 2,
+      "id": 70,
+      "topic": "dynamic-programming",
+      "routines": []
+    },
+    {
+      "slug": "longest-palindrome",
+      "title": "Longest Palindrome",
+      "url": "https://leetcode.com/problems/longest-palindrome",
+      "duration": 20,
+      "epi": 2,
+      "difficulty": "Easy",
+      "premium": false,
+      "frequency": 0.482,
+      "likes": 0.67,
+      "companies": 0,
+      "leetCodeScore": 0,
+      "priority": 2,
+      "id": 409,
+      "topic": "string",
+      "routines": [
+        "palindrome"
+      ]
+    },
+    {
+      "slug": "min-stack",
+      "title": "Min Stack",
+      "url": "https://leetcode.com/problems/min-stack",
+      "duration": 20,
+      "epi": 0,
+      "difficulty": "Easy",
+      "premium": false,
+      "frequency": 0.892,
+      "likes": 0.588,
+      "companies": 0.983,
+      "leetCodeScore": 51.6,
+      "priority": 2,
+      "id": 155,
+      "topic": "stack",
+      "routines": []
+    },
+    {
+      "slug": "reverse-linked-list",
+      "title": "Reverse Linked List",
+      "url": "https://leetcode.com/problems/reverse-linked-list",
+      "duration": 20,
+      "epi": 1,
+      "difficulty": "Easy",
+      "premium": false,
+      "frequency": 0.899,
+      "likes": 0.969,
+      "companies": 0.966,
+      "leetCodeScore": 84.2,
+      "priority": 2,
+      "id": 206,
+      "topic": "linked-list",
+      "routines": []
+    },
+    {
+      "slug": "majority-element",
+      "title": "Majority Element",
+      "url": "https://leetcode.com/problems/majority-element",
+      "duration": 20,
+      "epi": 2,
+      "difficulty": "Easy",
+      "premium": false,
+      "frequency": 0.906,
+      "likes": 0.832,
+      "companies": 0.95,
+      "leetCodeScore": 71.6,
+      "priority": 3,
+      "id": 169,
+      "topic": "array",
+      "routines": [
+        "sorting"
+      ]
+    },
+    {
+      "slug": "add-binary",
+      "title": "Add Binary",
+      "url": "https://leetcode.com/problems/add-binary",
+      "duration": 15,
+      "epi": null,
+      "difficulty": "Easy",
+      "premium": false,
+      "frequency": 0.859,
+      "likes": 0.489,
+      "companies": 0.861,
+      "leetCodeScore": 36.2,
+      "priority": 3,
+      "id": 67,
+      "topic": "binary",
+      "routines": []
+    },
+    {
+      "slug": "diameter-of-binary-tree",
+      "title": "Diameter of Binary Tree",
+      "url": "https://leetcode.com/problems/diameter-of-binary-tree",
+      "duration": 30,
+      "epi": null,
+      "difficulty": "Easy",
+      "premium": false,
+      "frequency": 0.943,
+      "likes": 0.654,
+      "companies": 0.95,
+      "leetCodeScore": 58.6,
+      "priority": 3,
+      "id": 543,
+      "topic": "binary-tree",
+      "routines": []
+    },
+    {
+      "slug": "middle-of-the-linked-list",
+      "title": "Middle of the Linked List",
+      "url": "https://leetcode.com/problems/middle-of-the-linked-list",
+      "duration": 20,
+      "epi": null,
+      "difficulty": "Easy",
+      "premium": false,
+      "frequency": 0.796,
+      "likes": 0.914,
+      "companies": 0.9,
+      "leetCodeScore": 65.5,
+      "priority": 3,
+      "id": 908,
+      "topic": "linked-list",
+      "routines": [
+        "two-pointers"
+      ]
+    },
+    {
+      "slug": "maximum-depth-of-binary-tree",
+      "title": "Maximum Depth of Binary Tree",
+      "url": "https://leetcode.com/problems/maximum-depth-of-binary-tree",
+      "duration": 15,
+      "epi": null,
+      "difficulty": "Easy",
+      "premium": false,
+      "frequency": 0.715,
+      "likes": 0.957,
+      "companies": 0.9,
+      "leetCodeScore": 61.6,
+      "priority": 4,
+      "id": 104,
+      "topic": "binary-tree",
+      "routines": []
+    }
+  ],
+  "Week 3": [
+    {
+      "slug": "contains-duplicate",
+      "title": "Contains Duplicate",
+      "url": "https://leetcode.com/problems/contains-duplicate",
+      "duration": 15,
+      "epi": null,
+      "difficulty": "Easy",
+      "premium": false,
+      "frequency": 0.973,
+      "likes": 0.311,
+      "companies": 0.966,
+      "leetCodeScore": 29.2,
+      "priority": 4,
+      "id": 217,
+      "topic": "array",
+      "routines": [
+        "hash-table",
+        "sorting"
+      ]
+    },
+    {
+      "slug": "insert-interval",
+      "title": "Insert Interval",
+      "url": "https://leetcode.com/problems/insert-interval",
+      "duration": 25,
+      "epi": null,
+      "difficulty": "Medium",
+      "premium": false,
+      "frequency": 0.807,
+      "likes": 0.612,
+      "companies": 0.861,
+      "leetCodeScore": 42.5,
+      "priority": 0,
+      "id": 57,
+      "topic": "array",
+      "routines": [
+        "interval"
+      ]
+    },
+    {
+      "slug": "01-matrix",
+      "title": "01 Matrix",
+      "url": "https://leetcode.com/problems/01-matrix",
+      "duration": 30,
+      "epi": null,
+      "difficulty": "Medium",
+      "premium": false,
+      "frequency": 0.654,
+      "likes": 0.737,
+      "companies": 0.861,
+      "leetCodeScore": 41.5,
+      "priority": 0,
+      "id": 542,
+      "topic": "graph",
+      "routines": [
+        "breadth-first-search"
+      ]
+    },
+    {
+      "slug": "k-closest-points-to-origin",
+      "title": "K Closest Points to Origin",
+      "url": "https://leetcode.com/problems/k-closest-points-to-origin",
+      "duration": 30,
+      "epi": 1,
+      "difficulty": "Medium",
+      "premium": false,
+      "frequency": 0.985,
+      "likes": 0.812,
+      "companies": 0.928,
+      "leetCodeScore": 74.2,
+      "priority": 0,
+      "id": 1014,
+      "topic": "heap",
+      "routines": [
+        "geometry"
+      ]
+    },
+    {
       "slug": "longest-substring-without-repeating-characters",
       "title": "Longest Substring Without Repeating Characters",
       "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters",
@@ -340,7 +538,9 @@
       "priority": 1,
       "id": 3,
       "topic": "string",
-      "routines": ["sliding-window"]
+      "routines": [
+        "sliding-window"
+      ]
     },
     {
       "slug": "3sum",
@@ -357,7 +557,9 @@
       "priority": 1,
       "id": 15,
       "topic": "array",
-      "routines": ["two-pointers"]
+      "routines": [
+        "two-pointers"
+      ]
     },
     {
       "slug": "binary-tree-level-order-traversal",
@@ -375,9 +577,7 @@
       "id": 102,
       "topic": "binary-tree",
       "routines": []
-    }
-  ],
-  "Week 3": [
+    },
     {
       "slug": "clone-graph",
       "title": "Clone Graph",
@@ -393,7 +593,10 @@
       "priority": 1,
       "id": 133,
       "topic": "graph",
-      "routines": ["depth-first-search", "breadth-first-search"]
+      "routines": [
+        "depth-first-search",
+        "breadth-first-search"
+      ]
     },
     {
       "slug": "evaluate-reverse-polish-notation",
@@ -411,7 +614,9 @@
       "id": 150,
       "topic": "stack",
       "routines": []
-    },
+    }
+  ],
+  "Week 4": [
     {
       "slug": "course-schedule",
       "title": "Course Schedule",
@@ -427,7 +632,9 @@
       "priority": 1,
       "id": 207,
       "topic": "graph",
-      "routines": ["topo-sort"]
+      "routines": [
+        "topo-sort"
+      ]
     },
     {
       "slug": "implement-trie-prefix-tree",
@@ -478,77 +685,9 @@
       "priority": 1,
       "id": 238,
       "topic": "array",
-      "routines": ["prefix-sum"]
-    },
-    {
-      "slug": "climbing-stairs",
-      "title": "Climbing Stairs",
-      "url": "https://leetcode.com/problems/climbing-stairs",
-      "duration": 20,
-      "epi": null,
-      "difficulty": "Easy",
-      "premium": false,
-      "frequency": 0.942,
-      "likes": 0.871,
-      "companies": 0.99,
-      "leetCodeScore": 81.2,
-      "priority": 2,
-      "id": 70,
-      "topic": "dynamic-programming",
-      "routines": []
-    },
-    {
-      "slug": "longest-palindrome",
-      "title": "Longest Palindrome",
-      "url": "https://leetcode.com/problems/longest-palindrome",
-      "duration": 20,
-      "epi": 2,
-      "difficulty": "Easy",
-      "premium": false,
-      "frequency": 0.482,
-      "likes": 0.67,
-      "companies": 0,
-      "leetCodeScore": 0,
-      "priority": 2,
-      "id": 409,
-      "topic": "string",
-      "routines": ["palindrome"]
-    },
-    {
-      "slug": "min-stack",
-      "title": "Min Stack",
-      "url": "https://leetcode.com/problems/min-stack",
-      "duration": 20,
-      "epi": 0,
-      "difficulty": "Easy",
-      "premium": false,
-      "frequency": 0.892,
-      "likes": 0.588,
-      "companies": 0.983,
-      "leetCodeScore": 51.6,
-      "priority": 2,
-      "id": 155,
-      "topic": "stack",
-      "routines": []
-    }
-  ],
-  "Week 4": [
-    {
-      "slug": "reverse-linked-list",
-      "title": "Reverse Linked List",
-      "url": "https://leetcode.com/problems/reverse-linked-list",
-      "duration": 20,
-      "epi": 1,
-      "difficulty": "Easy",
-      "premium": false,
-      "frequency": 0.899,
-      "likes": 0.969,
-      "companies": 0.966,
-      "leetCodeScore": 84.2,
-      "priority": 2,
-      "id": 206,
-      "topic": "linked-list",
-      "routines": []
+      "routines": [
+        "prefix-sum"
+      ]
     },
     {
       "slug": "validate-binary-search-tree",
@@ -582,7 +721,10 @@
       "priority": 2,
       "id": 200,
       "topic": "graph",
-      "routines": ["depth-first-search", " breadth-first-search"]
+      "routines": [
+        "depth-first-search",
+        " breadth-first-search"
+      ]
     },
     {
       "slug": "rotting-oranges",
@@ -599,7 +741,9 @@
       "priority": 2,
       "id": 1036,
       "topic": "graph",
-      "routines": ["breadth-first-search"]
+      "routines": [
+        "breadth-first-search"
+      ]
     },
     {
       "slug": "search-in-rotated-sorted-array",
@@ -617,7 +761,9 @@
       "id": 33,
       "topic": "binary-search",
       "routines": []
-    },
+    }
+  ],
+  "Week 5": [
     {
       "slug": "combination-sum",
       "title": "Combination Sum",
@@ -633,7 +779,9 @@
       "priority": 2,
       "id": 39,
       "topic": "array",
-      "routines": ["backtracking"]
+      "routines": [
+        "backtracking"
+      ]
     },
     {
       "slug": "permutations",
@@ -650,7 +798,9 @@
       "priority": 2,
       "id": 46,
       "topic": "recursion",
-      "routines": ["backtracking"]
+      "routines": [
+        "backtracking"
+      ]
     },
     {
       "slug": "merge-intervals",
@@ -667,7 +817,9 @@
       "priority": 2,
       "id": 56,
       "topic": "array",
-      "routines": ["interval"]
+      "routines": [
+        "interval"
+      ]
     },
     {
       "slug": "lowest-common-ancestor-of-a-binary-tree",
@@ -685,9 +837,7 @@
       "id": 236,
       "topic": "binary-tree",
       "routines": []
-    }
-  ],
-  "Week 5": [
+    },
     {
       "slug": "time-based-key-value-store",
       "title": "Time Based Key-Value Store",
@@ -706,144 +856,6 @@
       "routines": []
     },
     {
-      "slug": "minimum-window-substring",
-      "title": "Minimum Window Substring",
-      "url": "https://leetcode.com/problems/minimum-window-substring",
-      "duration": 30,
-      "epi": 3,
-      "difficulty": "Hard",
-      "premium": false,
-      "frequency": 0.916,
-      "likes": 0.704,
-      "companies": 0.966,
-      "leetCodeScore": 62.3,
-      "priority": 2,
-      "id": 76,
-      "topic": "string",
-      "routines": ["sliding-window"]
-    },
-    {
-      "slug": "serialize-and-deserialize-binary-tree",
-      "title": "Serialize and Deserialize Binary Tree",
-      "url": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree",
-      "duration": 40,
-      "epi": null,
-      "difficulty": "Hard",
-      "premium": false,
-      "frequency": 0.967,
-      "likes": 0.817,
-      "companies": 0.95,
-      "leetCodeScore": 75.1,
-      "priority": 2,
-      "id": 297,
-      "topic": "binary-tree",
-      "routines": []
-    },
-    {
-      "slug": "trapping-rain-water",
-      "title": "Trapping Rain Water",
-      "url": "https://leetcode.com/problems/trapping-rain-water",
-      "duration": 35,
-      "epi": null,
-      "difficulty": "Hard",
-      "premium": false,
-      "frequency": 0.998,
-      "likes": 0.985,
-      "companies": 0.99,
-      "leetCodeScore": 97.3,
-      "priority": 2,
-      "id": 42,
-      "topic": "stack",
-      "routines": ["monotonic-stack"]
-    },
-    {
-      "slug": "find-median-from-data-stream",
-      "title": "Find Median from Data Stream",
-      "url": "https://leetcode.com/problems/find-median-from-data-stream",
-      "duration": 30,
-      "epi": 3,
-      "difficulty": "Hard",
-      "premium": false,
-      "frequency": 0.955,
-      "likes": 0.956,
-      "companies": 0.966,
-      "leetCodeScore": 88.2,
-      "priority": 2,
-      "id": 295,
-      "topic": "heap",
-      "routines": []
-    },
-    {
-      "slug": "majority-element",
-      "title": "Majority Element",
-      "url": "https://leetcode.com/problems/majority-element",
-      "duration": 20,
-      "epi": 2,
-      "difficulty": "Easy",
-      "premium": false,
-      "frequency": 0.906,
-      "likes": 0.832,
-      "companies": 0.95,
-      "leetCodeScore": 71.6,
-      "priority": 3,
-      "id": 169,
-      "topic": "array",
-      "routines": ["sorting"]
-    },
-    {
-      "slug": "add-binary",
-      "title": "Add Binary",
-      "url": "https://leetcode.com/problems/add-binary",
-      "duration": 15,
-      "epi": null,
-      "difficulty": "Easy",
-      "premium": false,
-      "frequency": 0.859,
-      "likes": 0.489,
-      "companies": 0.861,
-      "leetCodeScore": 36.2,
-      "priority": 3,
-      "id": 67,
-      "topic": "binary",
-      "routines": []
-    },
-    {
-      "slug": "diameter-of-binary-tree",
-      "title": "Diameter of Binary Tree",
-      "url": "https://leetcode.com/problems/diameter-of-binary-tree",
-      "duration": 30,
-      "epi": null,
-      "difficulty": "Easy",
-      "premium": false,
-      "frequency": 0.943,
-      "likes": 0.654,
-      "companies": 0.95,
-      "leetCodeScore": 58.6,
-      "priority": 3,
-      "id": 543,
-      "topic": "binary-tree",
-      "routines": []
-    }
-  ],
-  "Week 6": [
-    {
-      "slug": "middle-of-the-linked-list",
-      "title": "Middle of the Linked List",
-      "url": "https://leetcode.com/problems/middle-of-the-linked-list",
-      "duration": 20,
-      "epi": null,
-      "difficulty": "Easy",
-      "premium": false,
-      "frequency": 0.796,
-      "likes": 0.914,
-      "companies": 0.9,
-      "leetCodeScore": 65.5,
-      "priority": 3,
-      "id": 908,
-      "topic": "linked-list",
-      "routines": ["two-pointers"]
-    },
-    {
       "slug": "accounts-merge",
       "title": "Accounts Merge",
       "url": "https://leetcode.com/problems/accounts-merge",
@@ -858,7 +870,10 @@
       "priority": 3,
       "id": 721,
       "topic": "graph",
-      "routines": ["depth-first-search", "union-find"]
+      "routines": [
+        "depth-first-search",
+        "union-find"
+      ]
     },
     {
       "slug": "sort-colors",
@@ -875,7 +890,9 @@
       "priority": 3,
       "id": 75,
       "topic": "array",
-      "routines": ["two-pointers"]
+      "routines": [
+        "two-pointers"
+      ]
     },
     {
       "slug": "word-break",
@@ -893,7 +910,9 @@
       "id": 139,
       "topic": "trie",
       "routines": []
-    },
+    }
+  ],
+  "Week 6": [
     {
       "slug": "partition-equal-subset-sum",
       "title": "Partition Equal Subset Sum",
@@ -960,7 +979,9 @@
       "priority": 3,
       "id": 78,
       "topic": "recursion",
-      "routines": ["backtracking"]
+      "routines": [
+        "backtracking"
+      ]
     },
     {
       "slug": "binary-tree-right-side-view",
@@ -978,9 +999,7 @@
       "id": 199,
       "topic": "binary-tree",
       "routines": []
-    }
-  ],
-  "Week 7": [
+    },
     {
       "slug": "longest-palindromic-substring",
       "title": "Longest Palindromic Substring",
@@ -996,128 +1015,11 @@
       "priority": 3,
       "id": 5,
       "topic": "string",
-      "routines": ["palindrome", "two-pointer", "dynamic-programming"]
-    },
-    {
-      "slug": "word-ladder",
-      "title": "Word Ladder",
-      "url": "https://leetcode.com/problems/word-ladder",
-      "duration": 45,
-      "epi": null,
-      "difficulty": "Hard",
-      "premium": false,
-      "frequency": 0.974,
-      "likes": 0.322,
-      "companies": 0.998,
-      "leetCodeScore": 31.3,
-      "priority": 3,
-      "id": 127,
-      "topic": "graph",
-      "routines": ["breadth-first-search"]
-    },
-    {
-      "slug": "basic-calculator",
-      "title": "Basic Calculator",
-      "url": "https://leetcode.com/problems/basic-calculator",
-      "duration": 40,
-      "epi": null,
-      "difficulty": "Hard",
-      "premium": false,
-      "frequency": 0.96,
-      "likes": 0.567,
-      "companies": 0.928,
-      "leetCodeScore": 50.5,
-      "priority": 3,
-      "id": 224,
-      "topic": "stack",
-      "routines": ["parsing"]
-    },
-    {
-      "slug": "maximum-profit-in-job-scheduling",
-      "title": "Maximum Profit in Job Scheduling",
-      "url": "https://leetcode.com/problems/maximum-profit-in-job-scheduling",
-      "duration": 45,
-      "epi": null,
-      "difficulty": "Hard",
-      "premium": false,
-      "frequency": 0.993,
-      "likes": 0.993,
-      "companies": 0.9,
-      "leetCodeScore": 88.7,
-      "priority": 3,
-      "id": 1352,
-      "topic": "binary-search",
-      "routines": ["dynamic-programming"]
-    },
-    {
-      "slug": "merge-k-sorted-lists",
-      "title": "Merge k Sorted Lists",
-      "url": "https://leetcode.com/problems/merge-k-sorted-lists",
-      "duration": 30,
-      "epi": null,
-      "difficulty": "Hard",
-      "premium": false,
-      "frequency": 0.986,
-      "likes": 0.808,
-      "companies": 0.983,
-      "leetCodeScore": 78.3,
-      "priority": 3,
-      "id": 23,
-      "topic": "heap",
-      "routines": []
-    },
-    {
-      "slug": "largest-rectangle-in-histogram",
-      "title": "Largest Rectangle in Histogram",
-      "url": "https://leetcode.com/problems/largest-rectangle-in-histogram",
-      "duration": 35,
-      "epi": 3,
-      "difficulty": "Hard",
-      "premium": false,
-      "frequency": 0.957,
-      "likes": 0.982,
-      "companies": 0.928,
-      "leetCodeScore": 87.2,
-      "priority": 3,
-      "id": 84,
-      "topic": "stack",
-      "routines": ["monotonic-stack"]
-    },
-    {
-      "slug": "maximum-depth-of-binary-tree",
-      "title": "Maximum Depth of Binary Tree",
-      "url": "https://leetcode.com/problems/maximum-depth-of-binary-tree",
-      "duration": 15,
-      "epi": null,
-      "difficulty": "Easy",
-      "premium": false,
-      "frequency": 0.715,
-      "likes": 0.957,
-      "companies": 0.9,
-      "leetCodeScore": 61.6,
-      "priority": 4,
-      "id": 104,
-      "topic": "binary-tree",
-      "routines": []
-    }
-  ],
-  "Week 8": [
-    {
-      "slug": "contains-duplicate",
-      "title": "Contains Duplicate",
-      "url": "https://leetcode.com/problems/contains-duplicate",
-      "duration": 15,
-      "epi": null,
-      "difficulty": "Easy",
-      "premium": false,
-      "frequency": 0.973,
-      "likes": 0.311,
-      "companies": 0.966,
-      "leetCodeScore": 29.2,
-      "priority": 4,
-      "id": 217,
-      "topic": "array",
-      "routines": ["hash-table", "sorting"]
+      "routines": [
+        "palindrome",
+        "two-pointer",
+        "dynamic-programming"
+      ]
     },
     {
       "slug": "unique-paths",
@@ -1168,8 +1070,13 @@
       "priority": 4,
       "id": 11,
       "topic": "array",
-      "routines": ["greedy", "two-pointers"]
-    },
+      "routines": [
+        "greedy",
+        "two-pointers"
+      ]
+    }
+  ],
+  "Week 7": [
     {
       "slug": "letter-combinations-of-a-phone-number",
       "title": "Letter Combinations of a Phone Number",
@@ -1185,7 +1092,9 @@
       "priority": 4,
       "id": 17,
       "topic": "recursion",
-      "routines": ["backtracking"]
+      "routines": [
+        "backtracking"
+      ]
     },
     {
       "slug": "word-search",
@@ -1202,7 +1111,9 @@
       "priority": 4,
       "id": 79,
       "topic": "graph",
-      "routines": ["backtracking"]
+      "routines": [
+        "backtracking"
+      ]
     },
     {
       "slug": "find-all-anagrams-in-a-string",
@@ -1219,7 +1130,9 @@
       "priority": 4,
       "id": 438,
       "topic": "string",
-      "routines": ["anagram"]
+      "routines": [
+        "anagram"
+      ]
     },
     {
       "slug": "minimum-height-trees",
@@ -1236,7 +1149,9 @@
       "priority": 4,
       "id": 310,
       "topic": "graph",
-      "routines": ["topo-sort"]
+      "routines": [
+        "topo-sort"
+      ]
     },
     {
       "slug": "task-scheduler",
@@ -1270,7 +1185,9 @@
       "priority": 4,
       "id": 146,
       "topic": "linked-list",
-      "routines": ["hash-table"]
+      "routines": [
+        "hash-table"
+      ]
     },
     {
       "slug": "kth-smallest-element-in-a-bst",
@@ -1288,6 +1205,173 @@
       "id": 230,
       "topic": "binary-search-tree",
       "routines": []
+    },
+    {
+      "slug": "minimum-window-substring",
+      "title": "Minimum Window Substring",
+      "url": "https://leetcode.com/problems/minimum-window-substring",
+      "duration": 30,
+      "epi": 3,
+      "difficulty": "Hard",
+      "premium": false,
+      "frequency": 0.916,
+      "likes": 0.704,
+      "companies": 0.966,
+      "leetCodeScore": 62.3,
+      "priority": 2,
+      "id": 76,
+      "topic": "string",
+      "routines": [
+        "sliding-window"
+      ]
+    }
+  ],
+  "Week 8": [
+    {
+      "slug": "serialize-and-deserialize-binary-tree",
+      "title": "Serialize and Deserialize Binary Tree",
+      "url": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree",
+      "duration": 40,
+      "epi": null,
+      "difficulty": "Hard",
+      "premium": false,
+      "frequency": 0.967,
+      "likes": 0.817,
+      "companies": 0.95,
+      "leetCodeScore": 75.1,
+      "priority": 2,
+      "id": 297,
+      "topic": "binary-tree",
+      "routines": []
+    },
+    {
+      "slug": "trapping-rain-water",
+      "title": "Trapping Rain Water",
+      "url": "https://leetcode.com/problems/trapping-rain-water",
+      "duration": 35,
+      "epi": null,
+      "difficulty": "Hard",
+      "premium": false,
+      "frequency": 0.998,
+      "likes": 0.985,
+      "companies": 0.99,
+      "leetCodeScore": 97.3,
+      "priority": 2,
+      "id": 42,
+      "topic": "stack",
+      "routines": [
+        "monotonic-stack"
+      ]
+    },
+    {
+      "slug": "find-median-from-data-stream",
+      "title": "Find Median from Data Stream",
+      "url": "https://leetcode.com/problems/find-median-from-data-stream",
+      "duration": 30,
+      "epi": 3,
+      "difficulty": "Hard",
+      "premium": false,
+      "frequency": 0.955,
+      "likes": 0.956,
+      "companies": 0.966,
+      "leetCodeScore": 88.2,
+      "priority": 2,
+      "id": 295,
+      "topic": "heap",
+      "routines": []
+    },
+    {
+      "slug": "word-ladder",
+      "title": "Word Ladder",
+      "url": "https://leetcode.com/problems/word-ladder",
+      "duration": 45,
+      "epi": null,
+      "difficulty": "Hard",
+      "premium": false,
+      "frequency": 0.974,
+      "likes": 0.322,
+      "companies": 0.998,
+      "leetCodeScore": 31.3,
+      "priority": 3,
+      "id": 127,
+      "topic": "graph",
+      "routines": [
+        "breadth-first-search"
+      ]
+    },
+    {
+      "slug": "basic-calculator",
+      "title": "Basic Calculator",
+      "url": "https://leetcode.com/problems/basic-calculator",
+      "duration": 40,
+      "epi": null,
+      "difficulty": "Hard",
+      "premium": false,
+      "frequency": 0.96,
+      "likes": 0.567,
+      "companies": 0.928,
+      "leetCodeScore": 50.5,
+      "priority": 3,
+      "id": 224,
+      "topic": "stack",
+      "routines": [
+        "parsing"
+      ]
+    },
+    {
+      "slug": "maximum-profit-in-job-scheduling",
+      "title": "Maximum Profit in Job Scheduling",
+      "url": "https://leetcode.com/problems/maximum-profit-in-job-scheduling",
+      "duration": 45,
+      "epi": null,
+      "difficulty": "Hard",
+      "premium": false,
+      "frequency": 0.993,
+      "likes": 0.993,
+      "companies": 0.9,
+      "leetCodeScore": 88.7,
+      "priority": 3,
+      "id": 1352,
+      "topic": "binary-search",
+      "routines": [
+        "dynamic-programming"
+      ]
+    },
+    {
+      "slug": "merge-k-sorted-lists",
+      "title": "Merge k Sorted Lists",
+      "url": "https://leetcode.com/problems/merge-k-sorted-lists",
+      "duration": 30,
+      "epi": null,
+      "difficulty": "Hard",
+      "premium": false,
+      "frequency": 0.986,
+      "likes": 0.808,
+      "companies": 0.983,
+      "leetCodeScore": 78.3,
+      "priority": 3,
+      "id": 23,
+      "topic": "heap",
+      "routines": []
+    },
+    {
+      "slug": "largest-rectangle-in-histogram",
+      "title": "Largest Rectangle in Histogram",
+      "url": "https://leetcode.com/problems/largest-rectangle-in-histogram",
+      "duration": 35,
+      "epi": 3,
+      "difficulty": "Hard",
+      "premium": false,
+      "frequency": 0.957,
+      "likes": 0.982,
+      "companies": 0.928,
+      "leetCodeScore": 87.2,
+      "priority": 3,
+      "id": 84,
+      "topic": "stack",
+      "routines": [
+        "monotonic-stack"
+      ]
     }
   ]
 }

@@ -2,6 +2,22 @@ import React from 'react';
 
 import QuestionGroups from './QuestionGroups.json';
 
+function DifficultyLabel({difficulty}) {
+  return (
+    <span
+      style={{
+        fontWeight: 600,
+        color: {
+          Easy: 'rgb(0, 184, 163)',
+          Medium: 'rgb(255, 192, 30)',
+          Hard: 'rgb(255, 55, 95)',
+        }[difficulty],
+      }}>
+      {difficulty}
+    </span>
+  );
+}
+
 export default function QuestionList() {
   return (
     <div className="padding-vert--lg">
@@ -28,7 +44,9 @@ export default function QuestionList() {
                         {question.title}
                       </a>
                     </td>
-                    <td>{question.difficulty}</td>
+                    <td>
+                      <DifficultyLabel difficulty={question.difficulty} />
+                    </td>
                     <td>{question.duration} mins</td>
                   </tr>
                 ))}
