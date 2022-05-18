@@ -47,7 +47,7 @@ When a question involves "whether a number is a multiple of X", the modulo opera
 
 ### Comparing floats
 
-When dealing with floating point numbers, take note of rounding mistakes. Consider using epsilon comparisons instead of equality checks. E.g. `abs(x - y) <= 10e7` instead of `x == y`.
+When dealing with floating point numbers, take note of rounding mistakes. Consider using epsilon comparisons instead of equality checks. E.g. `abs(x - y) <= 1e-6` instead of `x == y`.
 
 ### Fast operators
 
