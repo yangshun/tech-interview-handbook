@@ -323,7 +323,7 @@ function HowToUseSection() {
               contents={[
                 <>Create an ATS-proof resume</>,
                 <>Software engineering specific resume content</>,
-                <>Optimizing and and testing your resume</>,
+                <>Optimizing and testing your resume</>,
               ]}
               ctaLink="/resume/"
             />
