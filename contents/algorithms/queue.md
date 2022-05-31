@@ -67,7 +67,7 @@ Most languages don't have a built in Queue class which to be used, and candidate
 
 _These are essential questions to practice if you're studying for this topic._
 
-- [Implement Stack using Queues](https://leetcode.com/problems/implement-queue-using-stacks)
+- [Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues)
 
 ## Recommended practice questions
 
