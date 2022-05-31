@@ -20,7 +20,8 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ✅ | Make sure your surroundings are well-lit. |
 | ✅ | Find a quiet environment with good Internet connection. |
 | ✅ | Ensure webcam and audio are working. Test that your VC app is working well. |
-| ✅ | Prepare two to three questions and be familiar with the different approaches for solving the questions. |
+| ✅ | Prepare two to three questions and be familiar with the different approaches for solving the questions. Good questions have multiple solutions each with different tradeoffs. |
+| ✅ | Choose questions from different topics to identify possible knowledge gaps. |
 | ✅ | Familiarize yourself with the coding environment (CoderPad/CodePen). Set up the coding shortcuts, turn on autocompletion, tab spacing, etc. |
 
 ### Introduction
@@ -30,7 +31,7 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 | ✅ | Check if candidate wants to use the restroom or take a break. |
 | ✅ | Give an overview of the interview format (introduction, duration, programming languages available, 5 min at the end for Q&A). |
 | ✅ | Do a self-introduction and get the candidate to introduce themselves. |
-| ✅ | Explain to candidate that they do not have to finish all questions and you might interrupt them abruptly. |
+| ✅ | Explain to candidate that there will be multiple questions (where relevant), they do not have to finish all questions and you might interrupt them abruptly. |
 | ❌ | Allow the candidate to spend too long introducing themselves. |
 
 ### Upon delivering the question
@@ -47,8 +48,9 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 
 |  | Things |
 | --- | --- |
-| ✅ | If whiteboard interview, stand alongside candidate but also giving them space, instead of being distant, e.g seated down. |
-| ✅ | Take note of all the positive and negative signals. |
+| ✅ | If whiteboard interview, stand alongside candidate but also giving them space, instead of being distant, e.g. seated down. |
+| ✅ | Take note of all the [positive and negative signals](./coding-interview-rubrics.md). |
+| ✅ | If you have multiple questions, don't let the candidate spend too long on one question, especially if the first question is an Easy one. |
 | ❌ | Check the time in an overly-obvious manner. |
 
 ### After coding
@@ -56,8 +58,8 @@ This is a straight-to-the-point, distilled list of technical interview Do's and 
 |  | Things |
 | --- | --- |
 | ✅ | Ask for candidate to provide test cases and run through the code with them. |
-| ✅ | Point out edge cases candidate missed and ask the candidate to address them. |
-| ✅ | Take note of the duration TC spent on each question to include in the feedback. |
+| ✅ | Identify edge cases the candidate missed and ask the candidate to address them. Ask the candidate "What if X was the input? What would your code produce?" instead of pointing the issue out directly. |
+| ✅ | Take note of the duration the candidate spent on each question to include in the feedback. |
 | ✅ | Ask for time complexity and space analysis. |
 | ✅ | Preserve the code somewhere - take a picture or copy the code out. |
 | ✅ | Stop the candidate when there is 5 minutes left. e.g. ("I'll stop you here and let's go to the next section") |
