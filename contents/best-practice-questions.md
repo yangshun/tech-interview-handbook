@@ -8,7 +8,6 @@ displayed_sidebar: docs
 pagination_next: coding-interview-cheatsheet
 ---
 
-
 import AlgorithmCourses from './\_courses/AlgorithmCourses.md'
 
 import InDocAd from './\_components/InDocAd';
@@ -163,7 +162,7 @@ Practically speaking the return of investment (ROI) on studying and practicing f
 
 #### Dynamic programming course
 
-- [Grokking the Dynamic Programming Patterns for Coding Interviews](https://www.educative.io/courses/grokking-dynamic-programming-patterns-for-coding-interviews?aff=x23W)
+- [Grokking the Dynamic Programming Patterns for Coding Interviews](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-dynamic-programming)
 
 ## Quality courses
 

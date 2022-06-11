@@ -116,7 +116,7 @@ function Home() {
       <HowToUseSection />
       <AlgoMonsterSection />
       <FeaturesSection />
-      <EducativeSection />
+      <DesignGurusSection />
       <SuccessStoriesSection />
       <SponsorshipSection />
       <PreFooterSection />
@@ -431,7 +431,7 @@ function FeaturesSection() {
   );
 }
 
-function EducativeSection() {
+function DesignGurusSection() {
   return (
     <div
       className={classnames('padding-vert--lg')}
@@ -451,11 +451,11 @@ function EducativeSection() {
                 <div className="margin-vert--lg">
                   <a
                     className="button button--secondary button--lg"
-                    href="https://www.educative.io/explore?search_string=interview&aff=x23W"
+                    href="https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview"
                     rel="noopener"
                     target="_blank"
                     onClick={() => {
-                      window.gtag('event', 'educative.homepage.click');
+                      window.gtag('event', 'designgurus.homepage.click');
                     }}>
                     Learn efficiently&nbsp;&nbsp;→
                   </a>

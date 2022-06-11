@@ -90,15 +90,15 @@ For the sake of memory retention and efficiency, it is best to study for a singl
 Fortunately, there are already excellent coding interview preparation resources which enable you to do this very easily and systematically:
 
 1. [AlgoMonster](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=)
-1. [Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
+1. [Grokking the Coding Interview: Patterns for Coding Questions](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview)
 
 #### [AlgoMonster](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=)
 
 Apart from helping you master important coding interview data structures and algorithm questions through practice and easy to understand guides, AlgoMonster has the added perk of synthesizing [common interview question patterns](https://algo.monster/problems/stats) that you could apply to solve any other questions you have never encountered before. Made by Google engineers, this is definitely a quality platform to use as compared to the unstructured nature of LeetCode grinding. Data structures and algorithms questions are covered in all the common languages - Python, Java, C#, JavaScript, C++, Golang, and more. [**Join today for a 70% discount →**](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=)
 
-#### [Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
+#### [Grokking the Coding Interview: Patterns for Coding Questions](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview)
 
-This course on Educative expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages along with step-by-step visualizations. **Learn and understand patterns, not memorize answers!** [**Join today for a 10% discount →**](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
+This course by Design Gurus expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages along with step-by-step visualizations. **Learn and understand patterns, not memorize answers!** [**Get lifetime access today →**](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview)
 
 ### 4. Accompany practice with coding interview cheatsheets to internalize the must-dos and must-remembers {#practice-with-cheatsheets}
 
@@ -152,9 +152,9 @@ Best of all, AlgoMonster is not subscription-based - pay a one-time fee and get 
 
 #### Grokking the Coding Interview: Patterns for Coding Questions
 
-This course on Educative expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages.
+This course by Design Gurus expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages.
 
-Learn and understand patterns, not memorize answers! [Join today for a 10% discount →](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
+Learn and understand patterns, not memorize answers! [Join today for a 10% discount →](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview)
 
 ---
 

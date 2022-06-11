@@ -16,4 +16,4 @@ toc_max_heading_level: 2
 
 ## Recommended courses
 
-- [Grokking the Object Oriented Design Interview](https://www.educative.io/courses/grokking-the-object-oriented-design-interview?aff=x23W)
+- [Grokking the Object Oriented Design Interview](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-object-oriented-design-interview)

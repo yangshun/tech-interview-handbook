@@ -60,4 +60,8 @@ _These are recommended questions to practice after you have studied for the topi
 
 import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
 
+### [Grokking Dynamic Programming Patterns for Coding Interviews](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-dynamic-programming)
+
+Brought to you by the same folks behind the famous ["Grokking the Coding Interview"](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview), this is one of the rare few courses focused on helping you get better at Dynamic Programming questions. If you are interviewing for companies who are famous for asking Dynamic Programming questions (-cough- Google -cough-), this course should be helpful.
+
 <AlgorithmCourses />

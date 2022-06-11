@@ -73,37 +73,36 @@ function Moonchaser({position}) {
   );
 }
 
-function EducativeCoding({position}) {
+function DesignGurusCoding({position}) {
   return (
     <a
       className={clsx(styles.container, styles.backgroundGrokkingCoding)}
-      href={`https://www.educative.io/courses/grokking-the-coding-interview?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=x23W`}
+      href="https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview"
       key={Math.random()}
       target="_blank"
       rel="noopener"
       onClick={() => {
-        window.gtag('event', `educative.coding.${position}.click`);
+        window.gtag('event', `designgurus.coding.${position}.click`);
       }}>
       <p className={styles.tagline}>
         <strong className={styles.title}>Stop memorizing solutions</strong>
         <u>Grokking the Coding Interview</u> teaches you techniques and question
-        patterns to ace coding interviews. Grab your limited time discount
-        today!
+        patterns to ace coding interviews. Grab your lifetime access today!
       </p>
     </a>
   );
 }
 
-function EducativeSystemDesign({position}) {
+function DesignGurusSystemDesign({position}) {
   return (
     <a
       className={clsx(styles.container, styles.backgroundGrokkingSystemDesign)}
-      href={`https://www.educative.io/courses/grokking-the-system-design-interview?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=x23W`}
+      href="https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-system-design-interview"
       key={Math.random()}
       target="_blank"
       rel="noopener"
       onClick={() => {
-        window.gtag('event', `educative.system_design.${position}.click`);
+        window.gtag('event', `designgurus.system_design.${position}.click`);
       }}>
       <p className={styles.tagline}>
         <strong className={styles.title}>Get the job at FAANG</strong>
@@ -167,7 +166,7 @@ export default React.memo(function SidebarAd({position}) {
 
         if (path.includes('system-design')) {
           return (
-            <EducativeSystemDesign key={Math.random()} position={position} />
+            <DesignGurusSystemDesign key={Math.random()} position={position} />
           );
         }
 
@@ -182,18 +181,18 @@ export default React.memo(function SidebarAd({position}) {
         //   ) : rand < 0.6 ? (
         //     <AlgoMonster key={Math.random()} position={position} />
         //   ) : (
-        //     <EducativeCoding key={Math.random()} position={position} />
+        //     <DesignGurusCoding key={Math.random()} position={position} />
         //   );
         // }
 
-        return rand < 0.4 ? (
+        return rand < 0.5 ? (
           <FAANGTechLeads key={Math.random()} position={position} />
         ) : rand < 0.6 ? (
           <Interviewingio key={Math.random()} position={position} />
         ) : rand < 0.8 ? (
           <AlgoMonster key={Math.random()} position={position} />
         ) : (
-          <EducativeCoding key={Math.random()} position={position} />
+          <DesignGurusCoding key={Math.random()} position={position} />
         );
       }}
     </BrowserOnly>

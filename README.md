@@ -50,7 +50,7 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 
 <div align="center">
   <h3>💡 Stop grinding LeetCode aimlessly! Study coding question patterns efficiently with 
-    <a href="https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W">Grokking the Coding Interview</a> on Educative 💡
+    <a href="https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview">Grokking the Coding Interview</a> by Design Gurus 💡
   </h3>
 </div>
 
@@ -58,7 +58,7 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 
 ## How is this repository different?
 
-There are many awesome books like [Cracking the Coding Interview](http://www.crackingthecodinginterview.com/) and interview-related repositories out there on GitHub, what makes this repository different? The difference is that many existing interview repositories contain mainly links to external resources whereas this repository contains top-quality curated content directly for your consumption.
+There are many awesome books like "Cracking the Coding Interview" and interview-related repositories out there on GitHub, what makes this repository different? The difference is that many existing interview repositories contain mainly links to external resources whereas this repository contains top-quality curated content directly for your consumption.
 
 Also, existing resources focus mainly on algorithm questions and lack coverage for more domain-specific and non-technical questions. This handbook aims to cover content beyond the typical algorithmic coding questions. 😎
 
@@ -68,9 +68,9 @@ Also, existing resources focus mainly on algorithm questions and lack coverage f
 
 AlgoMonster aims to help you ace the technical interview **in the shortest time possible**. By Google engineers, AlgoMonster uses a data-driven approach to teach you the most useful key question patterns and has contents to help you quickly revise basic data structures and algorithms. Best of all, AlgoMonster is not subscription-based - pay a one-time fee and get **lifetime access**. [**Join today for a 70% discount →**](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=)
 
-### [Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
+### [Grokking the Coding Interview: Patterns for Coding Questions](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview)
 
-This course by Educative expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages. **Learn and understand patterns, not memorize answers!** [**Join today for a 10% discount →**](https://www.educative.io/courses/grokking-the-coding-interview?aff=x23W)
+This course by Design Gurus expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages. **Learn and understand patterns, not memorize answers!** [**Get lifetime access today →**](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview)
 
 ## Looking for Front End content?
 
@@ -78,7 +78,7 @@ Front-end-related content has been moved to a separate website - [Front End Inte
 
 ## Looking for System Design content?
 
-We're still working on System Design content. In the meanwhile, check out Educative's [Grokking the System Design Interview course](https://www.educative.io/courses/grokking-the-system-design-interview?aff=x23W), which in our opinion is one of the most useful resources for getting started on system design interviews preparation.
+We're still working on System Design content. In the meanwhile, check out Design Gurus' [Grokking the System Design Interview course](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-system-design-interview), which in our opinion is one of the most useful resources for getting started on system design interviews preparation.
 
 ## Contents
 
