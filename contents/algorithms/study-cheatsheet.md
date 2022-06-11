@@ -32,26 +32,26 @@ For each topic, you can expect to find:
 
 Here is the list of data structures and algorithms you should prepare for coding interviews and their corresponding study guides:
 
-| Topic                                                      | Priority |
-| ---------------------------------------------------------- | -------- |
-| [Array](./algorithms/array.md)                             | High     |
-| [String](./algorithms/string.md)                           | High     |
-| [Hash Table](./algorithms/hash-table.md)                   | Mid      |
-| [Recursion](./algorithms/recursion.md)                     | Mid      |
-| [Sorting and searching](./algorithms/sorting-searching.md) | High     |
-| [Matrix](./algorithms/matrix.md)                           | High     |
-| [Linked List](./algorithms/linked-list.md)                 | Mid      |
-| [Queue](./algorithms/queue.md)                             | Mid      |
-| [Stack](./algorithms/stack.md)                             | Mid      |
-| [Tree](./algorithms/tree.md)                               | High     |
-| [Graph](./algorithms/graph.md)                             | High     |
-| [Heap](./algorithms/heap.md)                               | Mid      |
-| [Trie](./algorithms/trie.md)                               | Mid      |
-| [Interval](./algorithms/interval.md)                       | Mid      |
-| [Dynamic programming](./algorithms/dynamic-programming.md) | Low      |
-| [Binary](./algorithms/binary.md)                           | Low      |
-| [Math](./algorithms/math.md)                               | Low      |
-| [Geometry](./algorithms/geometry.md)                       | Low      |
+| Topic                                           | Priority |
+| ----------------------------------------------- | -------- |
+| [Array](./array.md)                             | High     |
+| [String](./string.md)                           | High     |
+| [Hash Table](./hash-table.md)                   | Mid      |
+| [Recursion](./recursion.md)                     | Mid      |
+| [Sorting and searching](./sorting-searching.md) | High     |
+| [Matrix](./matrix.md)                           | High     |
+| [Linked List](./linked-list.md)                 | Mid      |
+| [Queue](./queue.md)                             | Mid      |
+| [Stack](./stack.md)                             | Mid      |
+| [Tree](./tree.md)                               | High     |
+| [Graph](./graph.md)                             | High     |
+| [Heap](./heap.md)                               | Mid      |
+| [Trie](./trie.md)                               | Mid      |
+| [Interval](./interval.md)                       | Mid      |
+| [Dynamic programming](./dynamic-programming.md) | Low      |
+| [Binary](./binary.md)                           | Low      |
+| [Math](./math.md)                               | Low      |
+| [Geometry](./geometry.md)                       | Low      |
 
 ## General interview tips
 
