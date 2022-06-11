@@ -204,6 +204,13 @@ function WhatIsThisSection() {
               offers out of 11 top Bay Area companies -{' '}
               <strong>Google, Airbnb, Palantir, Dropbox, Lyft</strong>, and some
               startups!
+              <br />
+              <br />A senior Netflix engineer used Tech Interview Handbook and
+              got{' '}
+              <a href="https://www.teamblind.com/post/7-onsites-7-offers-aAFTykAD">
+                7 offers from 7 companies
+              </a>{' '}
+              with the top offer being $800k USD 🤯!
             </p>
           </div>
         </div>
