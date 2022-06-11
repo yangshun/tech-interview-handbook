@@ -224,3 +224,7 @@ html[data-theme='dark'] .navbar-icon-instagram:before {
 .admonition-heading h5 {
   margin-top: 0;
 }
+
+.pagination-nav {
+  grid-template-columns: repeat(1, 1fr);
+}

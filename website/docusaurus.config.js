@@ -15,7 +15,6 @@ module.exports = {
       <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">Check it out now!</a>`,
       isCloseable: false,
     },
-    hideableSidebar: true,
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),
@@ -167,6 +166,11 @@ module.exports = {
       appId: 'Y09P1J4IPV',
       apiKey: 'e12588cbae68d752469921cc46e9cb66',
       indexName: 'techinterviewhandbook',
+    },
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
     },
   },
   presets: [
