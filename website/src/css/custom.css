@@ -55,32 +55,43 @@ html[data-theme='dark'] {
   text-align: start;
 }
 
-.markdown > h1 {
-  font-size: 2.25em;
-  margin-top: 0.5em;
+.markdown h1:first-child {
+  --ifm-h1-font-size: 1.5em;
 }
 
-.markdown > h2 {
-  font-size: 1.5em;
+@media screen and (min-width: 768px) {
+  .markdown h1:first-child {
+    --ifm-h1-font-size: 2.25em;
+  }
+}
+
+.markdown h2 {
+  --ifm-h2-font-size: 1.375em;
   margin-top: 2em;
   margin-bottom: 0.5em;
 }
 
-.markdown > h3 {
-  font-size: 1.25em;
+@media screen and (min-width: 768px) {
+  .markdown h2 {
+    --ifm-h2-font-size: 1.5em;
+  }
+}
+
+.markdown h3 {
+  --ifm-h3-font-size: 1.25em;
   font-weight: 600;
   margin-top: 1.8em;
   margin-bottom: 0.5em;
 }
 
-.markdown > h4 {
+.markdown h4 {
   font-size: 1.15em;
   font-weight: 600;
   margin-top: 1.6em;
   margin-bottom: 0.4em;
 }
 
-.markdown > h5 {
+.markdown h5 {
   font-size: 1em;
   font-weight: 600;
   margin-top: 1.4em;
@@ -101,18 +112,6 @@ html[data-theme='dark'] {
   :root {
     --ifm-font-size-base: 16px;
   }
-}
-
-.markdown h1 {
-  --ifm-h1-font-size: 1.5rem;
-}
-
-.markdown h2 {
-  --ifm-h2-font-size: 1.375rem;
-}
-
-.markdown h3 {
-  --ifm-h3-font-size: 1.25rem;
 }
 
 div[class^='announcementBar_'] {
@@ -220,4 +219,8 @@ html[data-theme='dark'] .navbar-icon-telegram:before {
 
 html[data-theme='dark'] .navbar-icon-instagram:before {
   background-image: url('/img/instagram-light.svg');
+}
+
+.admonition-heading h5 {
+  margin-top: 0;
 }
