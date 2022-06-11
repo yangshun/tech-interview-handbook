@@ -163,8 +163,8 @@ Senior Year student at University X with a focus on Artificial Intelligence and 
 - Stack Overflow profile URL
 - Medium profile URL
 - Competitive coding profile
-  - Codechef
-  - Hackerrank
+  - CodeChef
+  - HackerRank
 
 If a divider is required between information, use "|" or tabs
 
