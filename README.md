@@ -64,7 +64,7 @@ Also, existing resources focus mainly on algorithm questions and lack coverage f
 
 ## Looking for interview courses?
 
-### [AlgoMonster](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=)
+### [AlgoMonster](https://algo.monster)
 
 AlgoMonster aims to help you ace the technical interview **in the shortest time possible**. By Google engineers, AlgoMonster uses a data-driven approach to teach you the most useful key question patterns and has contents to help you quickly revise basic data structures and algorithms. Best of all, AlgoMonster is not subscription-based - pay a one-time fee and get **lifetime access**. [**Join today for a 70% discount →**](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=)
 
