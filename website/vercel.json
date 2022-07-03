@@ -156,6 +156,14 @@
     {
       "source": "/algorithms/introduction/",
       "destination": "/algorithms/study-cheatsheet/"
+    },
+    {
+      "source": "/algorithms/algorithms-introduction",
+      "destination": "/algorithms/study-cheatsheet/"
+    },
+    {
+      "source": "/algorithms/algorithms-introduction/",
+      "destination": "/algorithms/study-cheatsheet/"
     }
   ]
 }
