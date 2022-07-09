@@ -147,19 +147,6 @@ div[class^='announcementBar_'] {
   margin-bottom: 0 !important;
 }
 
-.docs-doc-page .pagination-nav__item:first-child .pagination-nav__label::before,
-.docs-doc-page .pagination-nav__item--next .pagination-nav__label::after {
-  content: '';
-}
-
-.pagination-nav__item .pagination-nav__label {
-  font-size: 1.5rem;
-}
-
-.docs-doc-page .pagination-nav__item {
-  max-width: 100%;
-}
-
 .navbar-icon:before {
   background-repeat: no-repeat;
   content: '';
@@ -232,8 +219,4 @@ html[data-theme='dark'] .navbar-icon-discord:before {
 
 .admonition-heading h5 {
   margin-top: 0;
-}
-
-.pagination-nav {
-  grid-template-columns: repeat(1, 1fr);
 }

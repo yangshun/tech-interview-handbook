@@ -11,7 +11,7 @@
 }
 
 .container:hover {
-  color: #fff;
+  color: #fff !important;
   opacity: 1;
   text-decoration: none;
 }
@@ -22,11 +22,11 @@
 
 .backgroundGrokkingCoding {
   background-color: #6fc8cc;
-  color: #083436;
+  color: #083436 !important;
 }
 
 .backgroundGrokkingCoding:hover {
-  color: #083436;
+  color: #083436 !important;
 }
 
 .backgroundGrokkingSystemDesign {
@@ -43,11 +43,11 @@
 
 .backgroundInterviewingio {
   background-color: #ffd829;
-  color: rgb(10, 10, 10);
+  color: rgb(10, 10, 10) !important;
 }
 
 .backgroundInterviewingio:hover {
-  color: rgb(10, 10, 10);
+  color: rgb(10, 10, 10) !important;
 }
 
 .backgroundByteByteGo {

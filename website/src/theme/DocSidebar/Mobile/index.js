@@ -1,15 +1,12 @@
-// Swizzled to add sidebar ad below mobile nav items.
 import React from 'react';
 import clsx from 'clsx';
 import {
   NavbarSecondaryMenuFiller,
   ThemeClassNames,
-  useNavbarMobileSidebar,
 } from '@docusaurus/theme-common';
+import {useNavbarMobileSidebar} from '@docusaurus/theme-common/internal';
 import DocSidebarItems from '@theme/DocSidebarItems';
-
 import SidebarAd from '../../../components/SidebarAd';
-
 // eslint-disable-next-line react/function-component-definition
 const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
   const mobileSidebar = useNavbarMobileSidebar();
@@ -23,20 +20,19 @@ const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
           if (item.type === 'category' && item.href) {
             mobileSidebar.toggle();
           }
-
           if (item.type === 'link') {
             mobileSidebar.toggle();
           }
         }}
         level={1}
       />
+      {/* TIH: Add SidebarAd */}
       <div className="margin--md">
         <SidebarAd position="mobile_sidebar" />
       </div>
     </ul>
   );
 };
-
 function DocSidebarMobile(props) {
   return (
     <NavbarSecondaryMenuFiller
@@ -45,5 +41,4 @@ function DocSidebarMobile(props) {
     />
   );
 }
-
 export default React.memo(DocSidebarMobile);
