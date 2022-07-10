@@ -51,7 +51,7 @@ I am about to recommend relevant sections to go in sequentially and how to syste
    - Now with virtual interviews, some companies tend to use HackerRank live to conduct whiteboard interviews. Prepare a pen and paper beside you as you work along. Prepare to remote desktop protocol (RDP) into your computer to show step-by-step workings.
    - Do not blurt out the solution straightaway as interviewers can tell that you memorize.
 
-4. Last but not least for algorithms heavy interviews, you might really want to save your time looking at [Grind 75](/grind75). It's a useful curated source of questions to note how much you can prepare for your interview.
+4. Last but not least for algorithms heavy interviews, you might really want to save your time looking at [Grind 75](https://techinterviewhandbook.org/grind75). It's a useful curated source of questions to note how much you can prepare for your interview.
 
 5. Always be prepared for even system design questions! You will never know what comes your way and this is where your projects come in and how much of good practices you apply in them and what do you learn. The [System Design Primer](https://github.com/donnemartin/system-design-primer) is a good start.
 
