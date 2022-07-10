@@ -49,3 +49,6 @@ _Work in progress_
 
 - [Software Engineering Salaries at Google](https://careerkarma.com/blog/software-engineering-salary-google/)
 - [Dropbox Engineering Career Framework](https://dropbox.github.io/dbx-career-framework/overview.html)
+- [Engineering Levels at SoundCloud](https://developers.soundcloud.com/blog/engineering-levels)
+- [Every Public Engineering Career Ladder](https://www.swyx.io/career-ladders)
+- [progression.fyi](https://progression.fyi/)
