@@ -221,6 +221,15 @@ html[data-theme='dark'] .navbar-icon-instagram:before {
   background-image: url('/img/instagram-light.svg');
 }
 
+.navbar-icon-discord:before {
+  background-image: url('/img/discord.svg');
+  width: 31px;
+}
+
+html[data-theme='dark'] .navbar-icon-discord:before {
+  background-image: url('/img/discord-light.svg');
+}
+
 .admonition-heading h5 {
   margin-top: 0;
 }

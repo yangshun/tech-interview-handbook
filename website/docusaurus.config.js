@@ -46,12 +46,17 @@ module.exports = {
           href: 'https://www.techinterviewhandbook.org/grind75',
           position: 'left',
         },
-        // {label: 'Advertise', to: '/advertise', position: 'left'},
         {
           href: 'https://github.com/yangshun/tech-interview-handbook',
           position: 'right',
           className: 'navbar-icon navbar-icon-github',
           'aria-label': 'GitHub repository',
+        },
+        {
+          href: 'https://discord.gg/usMqNaPczq',
+          position: 'right',
+          className: 'navbar-icon navbar-icon-discord',
+          'aria-label': 'Discord channel',
         },
         {
           href: 'https://t.me/techinterviewhandbook',
@@ -64,18 +69,6 @@ module.exports = {
           position: 'right',
           className: 'navbar-icon navbar-icon-twitter',
           'aria-label': 'Twitter page',
-        },
-        {
-          href: 'https://www.instagram.com/techinterviewhandbook',
-          position: 'right',
-          className: 'navbar-icon navbar-icon-instagram',
-          'aria-label': 'Instagram page',
-        },
-        {
-          href: 'https://www.facebook.com/techinterviewhandbook',
-          position: 'right',
-          className: 'navbar-icon navbar-icon-facebook',
-          'aria-label': 'Facebook page',
         },
       ],
     },
@@ -126,7 +119,7 @@ module.exports = {
           ],
         },
         {
-          title: 'About',
+          title: 'Community',
           items: [
             {
               label: 'GitHub',
@@ -137,8 +130,8 @@ module.exports = {
               href: 'https://t.me/techinterviewhandbook',
             },
             {
-              label: 'Facebook',
-              href: 'https://www.facebook.com/techinterviewhandbook',
+              label: 'Discord',
+              href: 'https://discord.gg/usMqNaPczq',
             },
             {
               label: 'Twitter',
