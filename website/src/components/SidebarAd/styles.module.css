@@ -50,6 +50,15 @@
   color: rgb(10, 10, 10);
 }
 
+.backgroundByteByteGo {
+  background-color: #35cea0;
+  color: rgb(10, 10, 10);
+}
+
+.backgroundByteByteGo:hover {
+  color: rgb(10, 10, 10);
+}
+
 .tagline {
   font-size: 0.75rem;
   margin-bottom: 0;

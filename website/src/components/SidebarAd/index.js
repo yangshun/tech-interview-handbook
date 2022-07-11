@@ -113,6 +113,29 @@ function DesignGurusSystemDesign({position}) {
   );
 }
 
+function ByteByteGoSystemDesign({position}) {
+  return (
+    <a
+      className={clsx(styles.container, styles.backgroundByteByteGo)}
+      href="https://bytebytego.com?fpr=techinterviewhandbook"
+      key={Math.random()}
+      target="_blank"
+      rel="noopener"
+      onClick={() => {
+        window.gtag('event', `bytebytego.system_design.${position}.click`);
+      }}>
+      <p className={styles.tagline}>
+        <strong className={styles.title}>
+          Ace Your Next System Design Interview
+        </strong>
+        <u>ByteByteGo's</u> system design interview course is everything you
+        need to take your system design skill to the next level.{' '}
+        <u>Find out more!</u>
+      </p>
+    </a>
+  );
+}
+
 function Interviewingio({position}) {
   return (
     <a
@@ -165,7 +188,9 @@ export default React.memo(function SidebarAd({position}) {
         }
 
         if (path.includes('system-design')) {
-          return (
+          return rand < 0.5 ? (
+            <ByteByteGoSystemDesign key={Math.random()} position={position} />
+          ) : (
             <DesignGurusSystemDesign key={Math.random()} position={position} />
           );
         }
@@ -187,9 +212,7 @@ export default React.memo(function SidebarAd({position}) {
 
         return rand < 0.5 ? (
           <FAANGTechLeads key={Math.random()} position={position} />
-        ) : rand < 0.6 ? (
-          <Interviewingio key={Math.random()} position={position} />
-        ) : rand < 0.8 ? (
+        ) : rand < 0.75 ? (
           <AlgoMonster key={Math.random()} position={position} />
         ) : (
           <DesignGurusCoding key={Math.random()} position={position} />

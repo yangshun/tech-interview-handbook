@@ -78,7 +78,7 @@ Front-end-related content has been moved to a separate website - [Front End Inte
 
 ## Looking for System Design content?
 
-We're still working on System Design content. In the meanwhile, check out Design Gurus' [Grokking the System Design Interview course](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-system-design-interview), which in our opinion is one of the most useful resources for getting started on system design interviews preparation.
+We're still working on System Design content. In the meanwhile, check out [ByteByteGo's System Design Interview course](https://bytebytego.com?fpr=techinterviewhandbook) or Design Gurus' [Grokking the System Design Interview course](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-system-design-interview), which in our opinion are among the most useful resources for getting started on system design interviews preparation.
 
 ## Contents
 
