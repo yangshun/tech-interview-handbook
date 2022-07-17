@@ -53,7 +53,7 @@ Here we assume the other string is of length m.
 | Find substring | O(n.m) | This is the most naive case. There are more efficient algorithms for string searching such as the [KMP algorithm](https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm) |
 | Concatenating strings | O(n + m) |  |
 | Slice | O(m) |  |
-| Split (by token) | O(m) |  |
+| Split (by token) | O(n + m) |  |
 | Strip (remove leading and trailing whitespaces) | O(n) |  |
 
 ## Things to look out for during interviews
