@@ -2,7 +2,7 @@
 title: Take Control Over Your Coding Interview
 slug: take-control-over-your-coding-interview
 author: Zhenghao He
-author_title: Senior Software Engineer at Instacart
+author_title: Senior Software Engineer at Instacart, ex-Amazon
 author_url: https://twitter.com/he_zhenghao
 author_image_url: https://pbs.twimg.com/profile_images/1489749168767660032/M_us3Mu2_400x400.jpg
 tags: [interview]
