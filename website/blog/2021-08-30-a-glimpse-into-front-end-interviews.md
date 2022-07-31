@@ -2,7 +2,7 @@
 title: A Glimpse into Front End Interviews
 slug: a-glimpse-into-front-end-interviews
 author: Kai Li
-author_title: Software Engineer at Quora
+author_title: Software Engineer at Stripe, ex-Quora
 author_url: https://github.com/li-kai
 author_image_url: https://github.com/li-kai.png
 tags: [front end, leetcode]

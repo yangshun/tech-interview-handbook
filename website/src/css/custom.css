@@ -147,74 +147,21 @@ div[class^='announcementBar_'] {
   margin-bottom: 0 !important;
 }
 
-.navbar-icon:before {
-  background-repeat: no-repeat;
-  content: '';
+.navbar-icon {
+  border-radius: 50%;
   display: flex;
-  height: 24px;
-  width: 24px;
-  transition: all 300ms ease-in-out;
+  height: 32px;
+  width: 32px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  padding: 0;
+  transition: background var(--ifm-transition-fast);
 }
 
 .navbar-icon:hover {
-  opacity: 0.8;
-}
-
-.navbar-icon-github:before {
-  background-image: url('/img/icons8-github.svg');
-}
-
-html[data-theme='dark'] .navbar-icon-github:before {
-  background-image: url('/img/icons8-github-light.svg');
-  height: 28px;
-  width: 28px;
-}
-
-.navbar-icon-twitter:before {
-  background-image: url('/img/icons8-twitter.svg');
-}
-
-html[data-theme='dark'] .navbar-icon-twitter:before {
-  background-image: url('/img/icons8-twitter-light.svg');
-}
-
-.navbar-icon-facebook:before {
-  background-image: url('/img/icons8-facebook.svg');
-  width: 28px;
-}
-
-html[data-theme='dark'] .navbar-icon-facebook:before {
-  background-image: url('/img/icons8-facebook-light.svg');
-  height: 28px;
-  width: 28px;
-}
-
-.navbar-icon-telegram:before {
-  background-image: url('/img/icons8-telegram.svg');
-}
-
-html[data-theme='dark'] .navbar-icon-telegram:before {
-  background-image: url('/img/icons8-telegram-light.svg');
-  height: 28px;
-  width: 24px;
-}
-
-.navbar-icon-instagram:before {
-  background-image: url('/img/instagram.svg');
-  width: 24px;
-}
-
-html[data-theme='dark'] .navbar-icon-instagram:before {
-  background-image: url('/img/instagram-light.svg');
-}
-
-.navbar-icon-discord:before {
-  background-image: url('/img/discord.svg');
-  width: 31px;
-}
-
-html[data-theme='dark'] .navbar-icon-discord:before {
-  background-image: url('/img/discord-light.svg');
+  background: var(--ifm-color-emphasis-200);
+  color: inherit;
 }
 
 .admonition-heading h5 {
