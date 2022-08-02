@@ -111,4 +111,29 @@ export default [
       </>
     ),
   },
+  {
+  name: 'Rahul Senguttuvan',
+  title: 'Software Engineer Intern, Meta',
+  thumbnail: 'https://avatars.githubusercontent.com/u/26223361?v=4',
+  quote: (
+    <>
+      I started my interview preparation sometime during September of 2021. I was introduced
+      to the famous Blind 75 list while browsing through leetcode forums. The author of Blind 75, 
+      Yangshun Tay, had mentioned The Tech Interview Handbook in one of the comments. I immidiately
+      checked out the website and was extremely impressed. 
+      <br />
+      <br />
+      The most used section for me was the Coding and Algorithms along with Company interview
+      formats where I learnt the process beforehand. The questions covered in the list 
+      along with the resources helped me get a broad understanding of concepts like BFS, DFS and
+      array operations which I struggled with earlier. This helped me get into Mathworks, Microsoft and
+      Meta for my internships.
+      <br />
+      <br />
+      Moving forward, I will continue to use this resource along with Grind 75 ( A list of coding questions 
+      created by the same author ) for my full time job hunt! I'm also excited to try out the System Design
+      material aswell!
+    </>
+  ),
+},
 ];
