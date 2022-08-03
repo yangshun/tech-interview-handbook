@@ -97,11 +97,11 @@ module.exports = {
               href: '/software-engineering-interview-guide/',
             },
             {
-              label: 'Resume preparation',
+              label: 'Prepare a FAANG-ready resume',
               href: '/resume/',
             },
             {
-              label: 'Algorithms',
+              label: 'Algorithms cheatsheets',
               href: '/algorithms/study-cheatsheet',
             },
             {
@@ -118,7 +118,7 @@ module.exports = {
               href: '/coding-interview-prep/',
             },
             {
-              label: 'Study plan',
+              label: 'Coding interview study plan',
               href: '/coding-interview-study-plan/',
             },
             {
@@ -139,12 +139,12 @@ module.exports = {
               href: 'https://github.com/yangshun/tech-interview-handbook',
             },
             {
-              label: 'Telegram',
-              href: 'https://t.me/techinterviewhandbook',
-            },
-            {
               label: 'Discord',
               href: 'https://discord.gg/usMqNaPczq',
+            },
+            {
+              label: 'Telegram',
+              href: 'https://t.me/techinterviewhandbook',
             },
             {
               label: 'Twitter',
@@ -159,10 +159,14 @@ module.exports = {
               label: 'Grind 75',
               href: 'https://www.techinterviewhandbook.org/grind75',
             },
-            {label: 'Advertise', href: '/advertise'},
+            // {label: 'Advertise', href: '/advertise'},
             {
               label: 'Contact us',
               href: 'mailto:contact@techinterviewhandbook.org',
+            },
+            {
+              label: 'Facebook',
+              href: 'https://www.facebook.com/techinterviewhandbook',
             },
           ],
         },
