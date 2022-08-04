@@ -1,5 +1,5 @@
 import React from 'react';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -81,7 +81,7 @@ const FEATURES = [
 
 function Tweet({url, handle, name, content, avatar, date}) {
   return (
-    <div className={classnames('card', styles.tweet)}>
+    <div className={clsx('card', styles.tweet)}>
       <div className="card__header">
         <div className="avatar">
           <img alt={name} className="avatar__photo" src={avatar} />
@@ -128,11 +128,11 @@ function HeroSection() {
   const {siteConfig = {}} = useDocusaurusContext();
 
   return (
-    <header className={classnames('hero', styles.heroBanner)}>
+    <header className={clsx('hero', styles.heroBanner)}>
       <div className="container">
         <img
           alt={siteConfig.title}
-          className={classnames(styles.heroBannerLogo, 'margin-vert--md')}
+          className={clsx(styles.heroBannerLogo, 'margin-vert--md')}
           src={useBaseUrl('img/logo.svg')}
         />
         <h1 className="hero__title">{siteConfig.title}</h1>
@@ -145,7 +145,7 @@ function HeroSection() {
         </p>
         <div className={styles.buttons}>
           <Link
-            className={classnames('button button--primary button--lg')}
+            className={clsx('button button--primary button--lg')}
             to="/software-engineering-interview-guide/">
             Start reading now&nbsp;&nbsp;→
           </Link>
@@ -167,7 +167,7 @@ function HeroSection() {
 
 function WhatIsThisSection() {
   return (
-    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+    <div className={clsx('padding-vert--xl', styles.sectionAlt)}>
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -175,7 +175,7 @@ function WhatIsThisSection() {
               <span className="badge badge--primary">What is this</span>
             </h2>
             <h3
-              className={classnames(
+              className={clsx(
                 'text--center',
                 'margin-bottom--lg',
                 styles.sectionTitle,
@@ -183,11 +183,7 @@ function WhatIsThisSection() {
               The fastest way to prepare effectively for your software
               engineering interviews, used by over 500,000 engineers
             </h3>
-            <p
-              className={classnames(
-                'margin-bottom--lg',
-                styles.sectionTagline,
-              )}>
+            <p className={clsx('margin-bottom--lg', styles.sectionTagline)}>
               Tech Interview Handbook goes{' '}
               <strong>straight to the point</strong> and tells you the{' '}
               <strong>minimum</strong> you need to know to excel in your
@@ -225,7 +221,7 @@ function MoonchaserSection() {
   return (
     <BrowserOnly>
       {() => (
-        <div className={classnames('padding-vert--lg', styles.sectionSponsor)}>
+        <div className={clsx('padding-vert--lg', styles.sectionSponsor)}>
           <div className="container">
             <div className="row">
               <div className="col col--8 col--offset-2">
@@ -263,7 +259,7 @@ function MoonchaserSection() {
 
 function HowToUseStep({index, title, ctaLink, contents}) {
   return (
-    <div className={classnames('card', styles.howToUseStep)}>
+    <div className={clsx('card', styles.howToUseStep)}>
       <div className="card__header">
         <div className="margin-bottom--sm">
           <small className={styles.howToUseStepLabel}>STEP {index}</small>
@@ -288,7 +284,7 @@ function HowToUseStep({index, title, ctaLink, contents}) {
 
 function HowToUseSection() {
   return (
-    <div className={classnames('padding-vert--xl', styles.sectionAlt2)}>
+    <div className={clsx('padding-vert--xl', styles.sectionAlt2)}>
       <div className="container">
         <div className="row">
           <div className="col col--10 col--offset-1">
@@ -296,7 +292,7 @@ function HowToUseSection() {
               <span className="badge badge--primary">How to use</span>
             </h2>
             <h3
-              className={classnames(
+              className={clsx(
                 'text--center',
                 'margin-bottom--lg',
                 styles.sectionTitle,
@@ -305,7 +301,7 @@ function HowToUseSection() {
               <br /> We've got you covered.
             </h3>
             <p
-              className={classnames(
+              className={clsx(
                 'text--center',
                 'margin-bottom--lg',
                 styles.sectionTagline,
@@ -317,13 +313,9 @@ function HowToUseSection() {
             </p>
           </div>
         </div>
-        <div className={classnames('row', styles.featuresRow)}>
+        <div className={clsx('row', styles.featuresRow)}>
           <div
-            className={classnames(
-              'col',
-              'col--3',
-              styles.featuresRowItemContainer,
-            )}>
+            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}>
             <HowToUseStep
               index={1}
               title={<>Prepare a FAANG-ready resume</>}
@@ -336,11 +328,7 @@ function HowToUseSection() {
             />
           </div>
           <div
-            className={classnames(
-              'col',
-              'col--3',
-              styles.featuresRowItemContainer,
-            )}>
+            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}>
             <HowToUseStep
               index={2}
               title={<>Ace the interviews</>}
@@ -354,11 +342,7 @@ function HowToUseSection() {
             />
           </div>
           <div
-            className={classnames(
-              'col',
-              'col--3',
-              styles.featuresRowItemContainer,
-            )}>
+            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}>
             <HowToUseStep
               index={3}
               title={<>Negotiate the best offer</>}
@@ -370,11 +354,7 @@ function HowToUseSection() {
             />
           </div>
           <div
-            className={classnames(
-              'col',
-              'col--3',
-              styles.featuresRowItemContainer,
-            )}>
+            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}>
             <HowToUseStep
               index={4}
               title={<>Prepare for the job</>}
@@ -393,7 +373,7 @@ function HowToUseSection() {
 
 function FeaturesSection() {
   return (
-    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+    <div className={clsx('padding-vert--xl', styles.sectionAlt)}>
       <div className="container">
         <div className="row">
           <div className="col col--10 col--offset-1">
@@ -401,23 +381,23 @@ function FeaturesSection() {
               <span className="badge badge--primary">Why this guide</span>
             </h2>
             <h3
-              className={classnames(
+              className={clsx(
                 'text--center',
                 'margin-vert--lg',
                 styles.sectionTitle,
               )}>
               We have everything you need - all straight to the point
             </h3>
-            <div className={classnames('row', styles.featuresRow)}>
+            <div className={clsx('row', styles.featuresRow)}>
               {FEATURES.map(({title, description, link}, idx) => (
                 <div
                   key={idx}
-                  className={classnames(
+                  className={clsx(
                     'col',
                     'col--4',
                     styles.featuresRowItemContainer,
                   )}>
-                  <div className={classnames('card', styles.featuresRowItem)}>
+                  <div className={clsx('card', styles.featuresRowItem)}>
                     <h3 className={styles.featuresRowItemTitle}>{title}</h3>
                     <p className={styles.featuresRowItemDescription}>
                       {description}
@@ -441,7 +421,7 @@ function FeaturesSection() {
 function DesignGurusSection() {
   return (
     <div
-      className={classnames('padding-vert--lg')}
+      className={clsx('padding-vert--lg')}
       style={{backgroundColor: '#6fc8cc'}}>
       <div className="container">
         <div className="row">
@@ -479,7 +459,7 @@ function DesignGurusSection() {
 function FAANGTechLeadsSection() {
   return (
     <div
-      className={classnames('padding-vert--lg')}
+      className={clsx('padding-vert--lg')}
       style={{backgroundColor: 'rgb(244, 63, 94)'}}>
       <div className="container">
         <div className="row">
@@ -516,7 +496,7 @@ function FAANGTechLeadsSection() {
 function AlgoMonsterSection() {
   return (
     <div
-      className={classnames('padding-vert--lg')}
+      className={clsx('padding-vert--lg')}
       style={{backgroundImage: 'linear-gradient(270deg, #3e1792, #6a45b9)'}}>
       <div className="container">
         <div className="row">
@@ -553,17 +533,17 @@ function AlgoMonsterSection() {
 
 function TweetsSection() {
   return (
-    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+    <div className={clsx('padding-vert--xl', styles.sectionAlt)}>
       <div className="container">
         <h2
-          className={classnames(
+          className={clsx(
             'margin-bottom--lg',
             'text--center',
             styles.sectionTitle,
           )}>
           Over 500,000 people have benefitted from this handbook!
         </h2>
-        <div className={classnames('row', styles.tweetsSection)}>
+        <div className={clsx('row', styles.tweetsSection)}>
           <div className="col col--4">
             <Tweet
               url="https://twitter.com/Insharamin/status/1412978510788915205"
@@ -745,7 +725,7 @@ function SuccessStoriesSection() {
   successStories.forEach((tweet, i) => storiesColumns[i % 2].push(tweet));
 
   return (
-    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+    <div className={clsx('padding-vert--xl', styles.sectionAlt)}>
       <div className="container">
         <div className="row">
           <div className="col col--6 col--offset-3">
@@ -753,7 +733,7 @@ function SuccessStoriesSection() {
               <span className="badge badge--primary">Success stories</span>
             </h2>
             <h3
-              className={classnames(
+              className={clsx(
                 'margin-vert--lg',
                 'text--center',
                 styles.sectionTitle,
@@ -763,7 +743,7 @@ function SuccessStoriesSection() {
             </h3>
           </div>
         </div>
-        <div className={classnames('row', styles.tweetsSection)}>
+        <div className={clsx('row', styles.tweetsSection)}>
           <div className="col col--offset-2 col--4">
             {storiesColumns[0].map((user) => (
               <SuccessStory key={user.name} {...user} />
@@ -792,7 +772,7 @@ function SuccessStoriesSection() {
 
 function SponsorshipSection() {
   return (
-    <div className={classnames('padding-vert--xl')}>
+    <div className={clsx('padding-vert--xl')}>
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -800,18 +780,18 @@ function SponsorshipSection() {
               <span className="badge badge--primary">Advertise with us</span>
             </h2>
             <h3
-              className={classnames(
+              className={clsx(
                 'margin-vert--lg',
                 'text--center',
                 styles.sectionTitle,
               )}>
               Interested in advertising on Tech Interview Handbook?
             </h3>
-            <p className={classnames(styles.sectionTagline, 'text--center')}>
+            <p className={clsx(styles.sectionTagline, 'text--center')}>
               Leverage on more than 200,000 monthly page views from 40,000 to
               50,000 unique software engineers.
             </p>
-            <p className={classnames(styles.sectionTagline, 'text--center')}>
+            <p className={clsx(styles.sectionTagline, 'text--center')}>
               Sponsors can choose any or all of the following positions to
               advertise with us:
             </p>
@@ -855,19 +835,19 @@ function SponsorshipSection() {
 
 function PreFooterSection() {
   return (
-    <div className={classnames('padding-vert--xl', styles.sectionAlt)}>
+    <div className={clsx('padding-vert--xl', styles.sectionAlt)}>
       <div className="container">
         <div className="row">
           <div className="col col--4">
             <h2>Take the next step</h2>
           </div>
           <div className="col col--8">
-            <p className={classnames(styles.sectionTagline)}>
+            <p className={clsx(styles.sectionTagline)}>
               It's free! Start improving your interview game today and get the
               job at the company of your dreams.
             </p>
             <Link
-              className={classnames('button button--primary button--lg')}
+              className={clsx('button button--primary button--lg')}
               to="/software-engineering-interview-guide/">
               Start reading now&nbsp;&nbsp;→
             </Link>
