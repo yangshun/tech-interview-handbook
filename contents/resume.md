@@ -142,6 +142,12 @@ Software Engineer with X years of experience in back end, scaling complex distri
 
 Senior Year student at University X with a focus on Artificial Intelligence and Machine Learning (ML). Interned at X companies and worked on full stack development and ML engineering roles.
 
+:::info
+
+Read more about how to make your Professional Summary stand out on [FAANG Tech Leads' Resume Handbook](https://www.faangtechleads.com/resume/professional-summary).
+
+:::
+
 ### How to write contact information for a Software Engineer
 
 #### Must-haves
@@ -170,6 +176,12 @@ If a divider is required between information, use "|" or tabs
 
 Where relevant, indicate achievements in coding platforms, for example, max ratings, ranking, number of stars, badges.
 
+:::info
+
+Read more about getting your contact information section right with [FAANG Tech Leads' Resume Handbook](https://www.faangtechleads.com/resume/contact-information).
+
+:::
+
 ### How to write skills for a Software Engineer
 
 Include programming languages and tech stacks:
@@ -181,6 +193,12 @@ Structure in the following manner:
 - Programming languages - If impressive, include your familiarity by the number of lines you have written, for example "Over 10,000 lines"
 - Frameworks
 - Databases
+
+:::info
+
+Read more about listing your skills accurately right with [FAANG Tech Leads' Resume Handbook](https://www.faangtechleads.com/resume/skills).
+
+:::
 
 ### How to write work experience for a Software Engineer
 
@@ -200,6 +218,12 @@ List of top accomplishments, including:
 - Accomplishments listed following this structure
   - > [Accomplishment summary] : [Action] that resulted in [quantifiable outcome]
 
+:::info
+
+Read more about presenting your conveying job experience well on [FAANG Tech Leads' Resume Handbook](https://www.faangtechleads.com/resume/work-experience).
+
+:::
+
 ### How to write education for a Software Engineer
 
 Most software engineering jobs will require at least an undergraduate degree. However, unless you are a recent graduate or do not have much work experience, it should not be prioritized above your work experience.
@@ -211,6 +235,12 @@ Use the following format, eliminating information where it is not relevant:
 Example:
 
 > BSc in Computing, Computer Science, Graduation Year 2015<br/> National University of Singapore, Singapore <br/>GPA: 3.82 / 4.00 (Magna cum laude)<br/>Dean's List, Valedictorian<br/>President of hacker society
+
+:::info
+
+Read more about writing your education history on [FAANG Tech Leads' Resume Handbook](https://www.faangtechleads.com/resume/education).
+
+:::
 
 ### How to write projects for a Software Engineer
 
@@ -227,6 +257,12 @@ Only include achievements related to the job application and try to quantify you
 Example
 
 > 2016 | Best All-Round Product out of 50 teams | Facebook Hackathon
+
+:::info
+
+Read more about presenting your projects effectively on [FAANG Tech Leads' Resume Handbook](https://www.faangtechleads.com/resume/projects).
+
+:::
 
 <InDocAd />
 

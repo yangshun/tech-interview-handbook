@@ -164,6 +164,10 @@ div[class^='announcementBar_'] {
   color: inherit;
 }
 
+.theme-doc-markdown .theme-admonition {
+  font-size: 16px;
+}
+
 .admonition-heading h5 {
   margin-top: 0;
 }
