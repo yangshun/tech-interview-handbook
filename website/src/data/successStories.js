@@ -139,4 +139,36 @@ export default [
       </>
     ),
   },
+  {
+    name: 'Jeanne Toh',
+    title: 'Software Engineer Intern, Meta, Google',
+    thumbnail: 'https://avatars.githubusercontent.com/u/54509483?v=4',
+    quote: (
+      <>
+        I remember not knowing what to expect when preparing for my first ever
+        tech interview. Tech Interview Handbook was a lifesaver. It covers all
+        the most important steps in applying for a tech role -- from resume
+        preparation to offer negotiation.
+        <br />
+        <br />
+        My favourite part is the{' '}
+        <a
+          href="https://www.techinterviewhandbook.org/grind75"
+          target="_blank"
+          rel="noreferrer noopener">
+          Grind 75 Tool
+        </a>,
+        which provides customisable coding interview study plans. This not only
+        helped to sharpen my problem-solving skills, but also assured me that
+        I covered sufficient breadth and depth.
+        <br />
+        <br />
+        Even now, after interviewing for a couple of years, I still go back to
+        the Tech Interview Handbook for a quick refresher before an interview,
+        and it continues to help me land great offers. This is an incredible
+        resource, created by someone who really wishes the best for you, and I
+        highly recommend it!
+      </>
+    ),
+  },
 ];
