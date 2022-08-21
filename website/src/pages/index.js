@@ -180,8 +180,8 @@ function WhatIsThisSection() {
                 'margin-bottom--lg',
                 styles.sectionTitle,
               )}>
-              The fastest way to prepare effectively for your software
-              engineering interviews, used by over 500,000 engineers
+              Fastest way to prepare effectively for your software engineering
+              interviews, used by over 1,000,000 engineers
             </h3>
             <p className={clsx('margin-bottom--lg', styles.sectionTagline)}>
               Tech Interview Handbook goes{' '}
@@ -541,7 +541,7 @@ function TweetsSection() {
             'text--center',
             styles.sectionTitle,
           )}>
-          Over 500,000 people have benefitted from this handbook!
+          Over 1,000,000 people have benefitted from this handbook!
         </h2>
         <div className={clsx('row', styles.tweetsSection)}>
           <div className="col col--4">
@@ -550,7 +550,7 @@ function TweetsSection() {
               handle="Insharamin"
               name="Insha"
               date="Jul 8, 2021"
-              avatar="https://pbs.twimg.com/profile_images/1513932354552619009/w5MTxjG2_400x400.jpg"
+              avatar="/img/tweets/Insharamin.jpg"
               content={
                 <>
                   1️⃣ Tech Interview Handbook
@@ -563,25 +563,38 @@ function TweetsSection() {
               }
             />
             <Tweet
-              url="https://twitter.com/Justyna_Adam/status/1186166253830004736"
-              handle="Justyna_Adam"
-              name="Justyna_Adamczyk"
-              date="Oct 21, 2019"
-              avatar="https://pbs.twimg.com/profile_images/1328613502571978753/bTkdJhPt_400x400.jpg"
+              url="https://twitter.com/ravinwashere/status/1328381097277681665"
+              handle="ravinwashere"
+              name="Ravin"
+              date="Nov 17, 2020"
+              avatar="/img/tweets/ravinwashere.jpg"
               content={
                 <>
-                  Another excellent tech interview handbook! If you need to
-                  prepare yourself for a tech interview or you're an interviewer
-                  and need additional inspiration. Happy Monday! #techinterviews
+                  Preparing for a job interview?
+                  <br />
+                  <br />
+                  The tech interview handbook contains carefully curated to help
+                  you ace your next technical interview.
+                  <br />
+                  <br />
+                  And it's free.
                 </>
               }
+            />
+            <Tweet
+              url="https://twitter.com/rwenderlich/status/1166336060533727232"
+              handle="rwenderlich"
+              name="raywenderlich.com"
+              date="Aug 27, 2019"
+              avatar="/img/tweets/rwenderlich.jpg"
+              content={<>Nice open source tech interview handbook</>}
             />
             <Tweet
               url="https://twitter.com/umaar/status/913425809108606976"
               handle="umaar"
               name="Umar Hansa"
               date="Sep 28, 2017"
-              avatar="https://pbs.twimg.com/profile_images/1305935669705965568/vS_bpIuu_400x400.jpg"
+              avatar="/img/tweets/umaar.jpg"
               content={
                 <>
                   Tech Interview Handbook 💻 - Content to help you ace your next
@@ -596,7 +609,7 @@ function TweetsSection() {
               handle="MSFTImagine"
               name="Microsoft Imagine Cup"
               date="Mar 13, 2022"
-              avatar="https://pbs.twimg.com/profile_images/1268173752745046016/nW2kPbvp_400x400.png"
+              avatar="/img/tweets/MSFTImagine.png"
               content={
                 <>
                   Ready to rock your #Coding interviews? Follow along as
@@ -610,7 +623,7 @@ function TweetsSection() {
               handle="palashv2"
               name="Palash"
               date="Oct 26, 2021"
-              avatar="https://pbs.twimg.com/profile_images/1435103134842454016/DfF093MF_400x400.jpg"
+              avatar="/img/tweets/palashv2.jpg"
               content={
                 <>
                   5. Tech Interview Handbook
@@ -624,38 +637,38 @@ function TweetsSection() {
               }
             />
             <Tweet
-              url="https://twitter.com/ravinwashere/status/1328381097277681665"
-              handle="ravinwashere"
-              name="Ravin"
-              date="Nov 17, 2020"
-              avatar="https://pbs.twimg.com/profile_images/1314872679195799552/80_xRIEF_400x400.jpg"
+              url="https://twitter.com/Justyna_Adam/status/1186166253830004736"
+              handle="Justyna_Adam"
+              name="Justyna_Adamczyk"
+              date="Oct 21, 2019"
+              avatar="/img/tweets/Justyna_Adam.jpg"
               content={
                 <>
-                  Preparing for a job interview?
-                  <br />
-                  <br />
-                  The tech interview handbook contains carefully curated to help
-                  you ace your next technical interview.
-                  <br />
-                  <br />
-                  And it's free.
+                  Another excellent tech interview handbook! If you need to
+                  prepare yourself for a tech interview or you're an interviewer
+                  and need additional inspiration. Happy Monday! #techinterviews
                 </>
               }
             />
           </div>
           <div className="col col--4">
             <Tweet
-              url="https://twitter.com/khalalw/status/1469496702365159431"
-              handle="khalalw"
-              name="Khalal Walker"
-              date="Dec 11, 2021"
-              avatar="https://pbs.twimg.com/profile_images/1479884864543285255/pcE_Nl12_400x400.jpg"
+              url="https://twitter.com/freeCodeCamp/status/1494658460830552065"
+              handle="freeCodeCamp"
+              name="freeCodeCamp.org"
+              date="Feb 18, 2022"
+              avatar="/img/tweets/freeCodeCamp.jpg"
               content={
                 <>
-                  Lastly, the Tech Interview Handbook. This is a pretty solid
-                  comprehensive resource from your initial introduction, to
-                  resumes, system design, coding, etc. Points to other solid
-                  resources that can be a great help.
+                  Back in 2017, @yangshunz was interviewing for developer jobs.
+                  <br />
+                  <br />
+                  He put in a lot of work, aced his interviews, & got offers
+                  from Google, Airbnb, Dropbox, and more.
+                  <br />
+                  <br />
+                  And he just updated this in-depth guide to help you also rock
+                  your next coding interview.
                 </>
               }
             />
@@ -664,7 +677,7 @@ function TweetsSection() {
               handle="Vinaystwt"
               name="Vinay Sharma"
               date="Sep 12, 2021"
-              avatar="https://pbs.twimg.com/profile_images/1413766958281990145/--os1eLq_400x400.jpg"
+              avatar="/img/tweets/Vinaystwt.jpg"
               content={
                 <>
                   🔹Tech Interview Handbook: Another useful resource that covers
@@ -678,21 +691,13 @@ function TweetsSection() {
               handle="sitepointdotcom"
               name="SitePoint"
               date="Aug 21, 2019"
-              avatar="https://pbs.twimg.com/profile_images/1425900902783668228/eJF_2-Ds_400x400.jpg"
+              avatar="/img/tweets/sitepointdotcom.jpg"
               content={
                 <>
                   The Tech Interview Handbook provides carefully curated content
                   to help you ace your next technical interview.
                 </>
               }
-            />
-            <Tweet
-              url="https://twitter.com/rwenderlich/status/1166336060533727232"
-              handle="rwenderlich"
-              name="raywenderlich.com"
-              date="Aug 27, 2019"
-              avatar="https://pbs.twimg.com/profile_images/1501959146568101895/gAeUOeXe_400x400.png"
-              content={<>Nice open source tech interview handbook</>}
             />
           </div>
         </div>
