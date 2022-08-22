@@ -57,37 +57,6 @@ Here are some of the 30 most commonly asked behavioral interview questions acros
 1. What would you hope to achieve in the first six months after being hired?
 1. Tell me why you will be a good fit for the position.
 
-## Airbnb Software Engineer behavioral interview questions
-
-While loving to travel or appreciating Airbnb's growth may be good answers, try to demonstrate the deep connection you have with the product.
-
-- What does "belong anywhere" mean to you?
-- What large problems in the world would you solve today?
-- Why do you like Airbnb?
-- If you had an unlimited budget and you could buy one gift for one person, what would you buy and who would you buy it for?
-- If you had an unlimited budget and you could go somewhere, where would you go?
-- Share one of your trips with us.
-- What is the most challenging project in or out of school that you have worked on in the last 6 months.
-- What is something that you don't want from your last internship/job?
-- Give me an example of when you've been a good host.
-- What's something you'd like to remove from the Airbnb experience?
-- What is something new that you can teach your interviewer in a few minutes?
-- Tell me about why you want to work here.
-- What is the best gift you have ever given or received?
-- Tell me about a time you were uncomfortable and how you dealt with it.
-- Explain a project that you worked on recently.
-- What do you think of Airbnb?
-- Tell me something about yourself and why you'd be a good fit for the position.
-- Name a situation where you were impressed by a company's customer service.
-- How did you work with senior management on large projects as well as multiple internal teams?
-- Tell me about a time you had to give someone terrible news.
-- If you were a gerbil, which gerbil would you be?
-- What excites you about the company?
-- How does Airbnb impact our guests and hosts?
-- What part of our mission resonates the most with you?
-
-Source: [Glassdoor](https://www.glassdoor.com/Interview/Airbnb-Interview-Questions-E391850.htm)
-
 ## Amazon Software Engineer behavioral interview questions
 
 - How do you deal with a failed deadline?
