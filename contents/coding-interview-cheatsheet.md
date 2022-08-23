@@ -176,7 +176,7 @@ Once you are done coding, do not announce that you are done. Interviewers expect
 
 ### 6. At the end of the interview, leave a good impression
 
-- ✅Ask good final questions that are tailored to the company.
+- ✅ Ask good final questions that are tailored to the company.
   > Read tips and [sample final questions to ask](./final-questions.md).
 - ✅ Thank the interviewer
 - ❌ Do not end the interview without asking any questions.
