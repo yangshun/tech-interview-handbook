@@ -430,8 +430,8 @@ function DesignGurusSection() {
               <div>
                 <h2 style={{color: '#083436'}}>
                   <strong>
-                    Tired of grinding LeetCode? Grokking the Coding Interview is
-                    the recommended way to quickly learn coding question
+                    Tired of grinding mindlessly? Grokking the Coding Interview
+                    is the recommended way to quickly learn coding question
                     patterns to help you ace the coding interviews.
                   </strong>
                 </h2>

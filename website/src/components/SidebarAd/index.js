@@ -41,7 +41,7 @@ function AlgoMonster({position}) {
       }}>
       <p className={styles.tagline}>
         <strong className={styles.title}>
-          Stop grinding LeetCode. Study with a plan
+          Stop grinding mindlessly. Study with a plan
         </strong>
         Developed by Google engineers, <u>AlgoMonster</u> is the fastest way to
         get a software engineering job. <u>Check it out for free!</u>

@@ -49,7 +49,7 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 ---
 
 <div align="center">
-  <h3>💡 Stop grinding LeetCode aimlessly! Study coding question patterns efficiently with 
+  <h3>💡 Stop grinding mindlessly! Study coding question patterns efficiently with 
     <a href="https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview">Grokking the Coding Interview</a> by Design Gurus 💡
   </h3>
 </div>
