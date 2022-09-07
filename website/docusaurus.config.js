@@ -47,6 +47,11 @@ module.exports = {
           position: 'left',
         },
         {
+          label: 'Front End',
+          href: 'https://www.frontendinterviewhandbook.com',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/yangshun/tech-interview-handbook',
           position: 'right',
           className: 'navbar-icon',
@@ -159,7 +164,10 @@ module.exports = {
               label: 'Grind 75',
               href: 'https://www.techinterviewhandbook.org/grind75',
             },
-            // {label: 'Advertise', href: '/advertise'},
+            {
+              label: 'Front End Interview Handbook',
+              href: 'https://www.frontendinterviewhandbook.com',
+            },
             {
               label: 'Contact us',
               href: 'mailto:contact@techinterviewhandbook.org',

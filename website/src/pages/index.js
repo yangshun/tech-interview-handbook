@@ -150,6 +150,12 @@ function HeroSection() {
             Start reading now&nbsp;&nbsp;→
           </Link>
         </div>
+        <p className="margin-top--md" style={{fontSize: 16, fontWeight: 600}}>
+          Or check out our{' '}
+          <a href="https://www.frontendinterviewhandbook.com">
+            Front End Interview Handbook
+          </a>
+        </p>
         <div className="margin-top--lg">
           <iframe
             src="https://ghbtns.com/github-btn.html?user=yangshun&amp;repo=tech-interview-handbook&amp;type=star&amp;count=true&amp;size=large"
