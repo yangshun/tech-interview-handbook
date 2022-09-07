@@ -22,11 +22,13 @@ sidebar_label: Step-by-step how to prepare
   <meta property="og:image" content="https://www.techinterviewhandbook.org/social/coding-interview-prep.png" />
 </head>
 
+import InDocAd from './\_components/InDocAd';
+
 _The ultimate guide on how to efficiently prepare for your software engineering technical interview - coding test round._
 
 If you have decided to embark on the arduous process of preparing for your coding interviews and you don't know how to maximize your time, this is the only guide you need to go from zero to hero on your coding test.
 
-import InDocAd from './\_components/InDocAd';
+<InDocAd />
 
 ## What is a Software Engineering coding interview?
 
@@ -99,6 +101,8 @@ Apart from helping you master important coding interview data structures and alg
 #### [Grokking the Coding Interview: Patterns for Coding Questions](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview)
 
 This course by Design Gurus expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages along with step-by-step visualizations. **Learn and understand patterns, not memorize answers!** [**Get lifetime access today →**](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview)
+
+<InDocAd />
 
 ### 4. Accompany practice with coding interview cheatsheets to internalize the must-dos and must-remembers {#practice-with-cheatsheets}
 

@@ -29,6 +29,25 @@ function FAANGTechLeads({ position }) {
   );
 }
 
+function GreatFrontEnd({ position }) {
+  return (
+    <a
+      className={clsx(styles.container, styles.backgroundGreatFrontEnd)}
+      href={`https://www.greatfrontend.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&fpr=techinterviewhandbook`}
+      target="_blank"
+      rel="noopener"
+      onClick={() => {
+        window.gtag('event', `greatfrontend.${position}.click`);
+      }}>
+      <p className={styles.tagline}>
+        <strong className={styles.title}>LeetCode for Front End</strong>
+        Prepare with <u>Great Front End</u>'s large pool of high quality front
+        end interview questions and solutions!
+      </p>
+    </a>
+  );
+}
+
 function AlgoMonster({ position }) {
   return (
     <a
@@ -175,9 +194,16 @@ export default React.memo(function SidebarAd({ position }) {
     <BrowserOnly key={counter}>
       {() => {
         const rand = Math.random();
-
         const path = window.location.pathname;
+
         // Ugly hack to show conditional sidebar content.
+        if (
+          (path.includes('software-engineering-interview-guide') ||
+            path.includes('coding-interview-prep')) &&
+          position === 'in_doc'
+        ) {
+          return <GreatFrontEnd key={Math.random()} position={position} />;
+        }
 
         if (path.includes('resume')) {
           return <FAANGTechLeads key={Math.random()} position={position} />;

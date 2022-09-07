@@ -111,13 +111,14 @@ function Home() {
       description={siteConfig.tagline}>
       <HeroSection />
       <WhatIsThisSection />
-      <FAANGTechLeadsSection />
+      <GreatFrontEndSection />
       <TweetsSection />
       <HowToUseSection />
-      <AlgoMonsterSection />
+      <FAANGTechLeadsSection />
       <FeaturesSection />
-      <DesignGurusSection />
+      <AlgoMonsterSection />
       <SuccessStoriesSection />
+      <DesignGurusSection />
       <SponsorshipSection />
       <PreFooterSection />
     </Layout>
@@ -488,6 +489,72 @@ function FAANGTechLeadsSection() {
                       window.gtag('event', 'faangtechleads.homepage.click');
                     }}>
                     Improve your resume now &nbsp;&nbsp;→
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GreatFrontEndSection() {
+  return (
+    <div
+      className={clsx('padding-vert--lg')}
+      style={{backgroundColor: 'rgb(79, 70, 229)'}}>
+      <div className="container">
+        <div className="row">
+          <div className="col col--8 col--offset-2">
+            <div className="margin-vert--lg text--center">
+              <div>
+                <h2>
+                  <span class="badge badge--secondary">
+                    LeetCode for Front End Interviews
+                  </span>
+                </h2>
+                <h3
+                  className={styles.sectionSponsorTitle}
+                  style={{fontSize: 'var(--ifm-h2-font-size)'}}>
+                  <strong>
+                    Spend less time but prepare better for your Front End
+                    Interviews with{' '}
+                    <a
+                      href="https://www.greatfrontend.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=homepage&fpr=techinterviewhandbook"
+                      style={{color: '#fff', textDecoration: 'underline'}}>
+                      Great Front End's
+                    </a>{' '}
+                    large pool of high quality practice questions and solutions.
+                  </strong>
+                </h3>
+                <div className="margin-vert--lg">
+                  <a
+                    className="button button--secondary button--lg"
+                    href="https://www.greatfrontend.com/questions/javascript/flatten?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=homepage&fpr=techinterviewhandbook"
+                    rel="noopener"
+                    target="_blank"
+                    onClick={() => {
+                      window.gtag(
+                        'event',
+                        'greatfrontend.homepage.question.click',
+                      );
+                    }}>
+                    Try a question &nbsp;&nbsp;→
+                  </a>{' '}
+                  <a
+                    className="button button--secondary button--lg"
+                    href="https://www.greatfrontend.com/get-started?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=homepage&fpr=techinterviewhandbook"
+                    rel="noopener"
+                    target="_blank"
+                    onClick={() => {
+                      window.gtag(
+                        'event',
+                        'greatfrontend.homepage.study_plan.click',
+                      );
+                    }}>
+                    View study plans &nbsp;&nbsp;→
                   </a>
                 </div>
               </div>
