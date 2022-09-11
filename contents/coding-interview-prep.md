@@ -81,7 +81,7 @@ To start preparing for your coding interviews, always begin with a plan. Calcula
 
 But how do you know which are the most important topics and questions to practice based on the time you have left? You may use the free [Grind 75 tool](https://www.techinterviewhandbook.org/grind75) (built by me) which produces coding interview study plans for varying lengths of preparation time. The algorithm behind it includes a ranking of questions by priority and also a balance between breadth and depth of topics covered.
 
-If you have the luxury of time to prepare, it is recommended to spend around 3 months (2-3 hours per day) to prepare more holistically. I have outlined my personal 3-month study plan here, which takes you from start to finish on which topics and questions to complete.
+If you have the luxury of time to prepare, it is recommended to spend around 3 months (2-3 hours per day) to prepare more holistically. I came up with a [personal 3-month study plan](./coding-interview-study-plan.md), which takes you from start to finish on which topics and questions to complete.
 
 ### 3. Combine studying and practicing for a single topic {#study-and-practice}
 
