@@ -100,17 +100,6 @@
       "routines": ["matrix", "depth-first-search"]
     },
     {
-      "slug": "maximum-subarray",
-      "title": "Maximum Subarray",
-      "url": "https://leetcode.com/problems/maximum-subarray",
-      "duration": 20,
-      "epi": null,
-      "difficulty": "Easy",
-      "id": 53,
-      "topic": "dynamic-programming",
-      "routines": []
-    },
-    {
       "slug": "lowest-common-ancestor-of-a-binary-search-tree",
       "title": "Lowest Common Ancestor of a Binary Search Tree",
       "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree",
@@ -288,6 +277,17 @@
       "difficulty": "Medium",
       "id": 155,
       "topic": "stack",
+      "routines": []
+    },
+    {
+      "slug": "maximum-subarray",
+      "title": "Maximum Subarray",
+      "url": "https://leetcode.com/problems/maximum-subarray",
+      "duration": 20,
+      "epi": null,
+      "difficulty": "Medium",
+      "id": 53,
+      "topic": "dynamic-programming",
       "routines": []
     },
     {
