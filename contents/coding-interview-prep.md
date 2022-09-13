@@ -104,19 +104,19 @@ This course by Design Gurus expands upon the questions on the recommended practi
 
 To maximize what you get out of your practice, I recommend referring to the following coding interview cheatsheets _while_ you are studying and practicing:
 
-- **Coding interview techniques** - how to find a solution and optimize your approach
-- **Coding interview best practices** - how to behave through the interview to exhibit hire signals
-- **Algorithms study cheatsheets** - covers the best learning resources, must remembers (tips, corner cases) and must do practice questions for every data structure and algorithm
+- **Coding interview techniques**: how to find a solution and optimize your approach
+- **Coding interview best practices**: how to behave through the interview to exhibit hire signals
+- **Algorithms study cheatsheets**: covers the best learning resources, must remembers (tips, corner cases) and must do practice questions for every data structure and algorithm
 
 #### Coding interview techniques
 
-This cheatsheet provides you with ~10 techniques to do the 2 most important things you need to do in a coding interview: finding approaches to solve the problem presented, and optimizing the time and space complexity of your approaches.
+Here is [list of around 10 techniques](./coding-interview-techniques.md) to do the 2 most important things you need to do in a coding interview: finding approaches to solve the problem presented, and optimizing the time and space complexity of your approaches.
 
 These techniques are useful to apply when you are given questions which you have never encountered before, and to get out of being stuck.
 
 #### Coding interview best practices
 
-Top tech companies evaluate candidates on 4 main criteria: communication, problem solving, technical competency and testing. To exhibit behaviors that fulfill these criteria, I have prepared a coding interview best practices cheatsheet which outlines what you should do before, during and after coding interviews. This is based on my personal experience as an interviewee as well as my observation of top candidates as an interviewer at Facebook.
+Top tech companies evaluate candidates on 4 main criteria: communication, problem solving, technical competency and testing. To exhibit behaviors that fulfill these criteria, I have prepared a [coding interview best practices cheatsheet](./coding-interview-cheatsheet.md) which outlines what you should do before, during and after coding interviews. This is based on my personal experience as an interviewee as well as my observation of top candidates as an interviewer at Facebook.
 
 Using this guide to accompany practice ensures that you cultivate good habits and muscle memory with regards to interviews right from the beginning.
 
