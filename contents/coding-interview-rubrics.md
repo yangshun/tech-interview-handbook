@@ -105,7 +105,7 @@ Advanced problem solving signals:
 | --- | --- |
 | Strong hire | No trouble achieving all basic problem solving signals and did so with enough time to achieve most advanced problem solving signals. |
 | Leaning hire | Managed to achieve all basic problem solving signals but did not have sufficient time to achieve advanced problem solving signals. |
-| Leaning no hire | Showed only some basic problem solving signals, failing to achieve the rest.  |
+| Leaning no hire | Showed only some basic problem solving signals, failing to achieve the rest. |
 | Strong no hire | Unable to solve the problem or did it without much explanation of their thought process. Approach was disorganized and incorrect. |
 
 <InDocAd />
@@ -129,7 +129,6 @@ Advanced technical competency signals:
 | Leaning hire | Demonstrated only basic technical competency signals, with some difficulty seen in translating approach to code. Suboptimal usage of language paradigms. |
 | Leaning no hire | Struggled to produce a working solution in code. Multiple syntax errors and bad use of language paradigms. |
 | Strong no hire | Could not produce a working solution in code. Major syntax errors and very bad use of language paradigms. |
-
 
 ### 4. Testing
 

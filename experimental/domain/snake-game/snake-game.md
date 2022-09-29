@@ -4,11 +4,9 @@ Design a snake game that is to be played in web browser.
 
 Client: React + Redux
 
-Rendering:
-Pixel-based graphics. Depending on the intended resolution, can divide the screen into N \* M pixels. Can dynamically calculate the size of each pixel.
+Rendering: Pixel-based graphics. Depending on the intended resolution, can divide the screen into N \* M pixels. Can dynamically calculate the size of each pixel.
 
-Fruit: One pixel.
-Snake body: One pixel width made up of connected pixels.
+Fruit: One pixel. Snake body: One pixel width made up of connected pixels.
 
 Model:
 
@@ -59,7 +57,7 @@ function generateFruit() {
   // Second approach: brute force
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      let point = { x: i, y: j };
+      let point = {x: i, y: j};
       if (snake.points.find(next_fruit_location) === -1) {
         fruit = point;
       }
@@ -70,7 +68,7 @@ function generateFruit() {
   const available_points = [];
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      let point = { x: i, y: j };
+      let point = {x: i, y: j};
       if (snake.points.find(next_fruit_location) === -1) {
         available_points.push(point);
       }
