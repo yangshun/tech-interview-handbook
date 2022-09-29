@@ -57,7 +57,7 @@ function generateFruit() {
   // Second approach: brute force
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      let point = {x: i, y: j};
+      let point = { x: i, y: j };
       if (snake.points.find(next_fruit_location) === -1) {
         fruit = point;
       }
@@ -68,7 +68,7 @@ function generateFruit() {
   const available_points = [];
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      let point = {x: i, y: j};
+      let point = { x: i, y: j };
       if (snake.points.find(next_fruit_location) === -1) {
         available_points.push(point);
       }

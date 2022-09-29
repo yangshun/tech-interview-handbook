@@ -1,0 +1,44 @@
+{
+  "name": "@tih/portal",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "tsc": "tsc",
+    "postinstall": "prisma generate",
+    "prisma": "prisma"
+  },
+  "dependencies": {
+    "@next-auth/prisma-adapter": "^1.0.4",
+    "@prisma/client": "^4.4.0",
+    "@tih/ui": "*",
+    "@trpc/client": "^9.27.2",
+    "@trpc/next": "^9.27.2",
+    "@trpc/react": "^9.27.2",
+    "@trpc/server": "^9.27.2",
+    "next": "12.3.1",
+    "next-auth": "~4.10.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-query": "^3.39.2",
+    "superjson": "^1.10.0",
+    "zod": "^3.18.0"
+  },
+  "devDependencies": {
+    "@tih/tsconfig": "*",
+    "@types/node": "18.0.0",
+    "@types/react": "18.0.21",
+    "@types/react-dom": "18.0.6",
+    "autoprefixer": "^10.4.12",
+    "postcss": "^8.4.16",
+    "prisma": "^4.4.0",
+    "tailwindcss": "^3.1.8",
+    "typescript": "4.8.3"
+  },
+  "ct3aMetadata": {
+    "initVersion": "5.13.1"
+  }
+}

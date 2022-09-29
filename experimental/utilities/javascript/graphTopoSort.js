@@ -3,10 +3,10 @@ function graphTopoSort(numberNodes, edges) {
   const order = [];
   const queue = [];
   for (let i = 0; i < numberNodes; i++) {
-    nodes.set(i, {in: 0, out: new Set()});
+    nodes.set(i, { in: 0, out: new Set() });
   }
 
-  edges.forEach(edge => {
+  edges.forEach((edge) => {
     const [node_id, pre_id] = edge;
     nodes.get(node_id).in += 1;
     nodes.get(pre_id).out.add(node_id);
@@ -32,4 +32,9 @@ function graphTopoSort(numberNodes, edges) {
   return order.length == numberNodes ? order : [];
 }
 
-console.log(graphTopoSort(3, [[0, 1], [0, 2]]));
+console.log(
+  graphTopoSort(3, [
+    [0, 1],
+    [0, 2],
+  ]),
+);

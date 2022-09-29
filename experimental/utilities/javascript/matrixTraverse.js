@@ -1,14 +1,19 @@
 function traverse(matrix) {
-  const DIRECTIONS = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+  const DIRECTIONS = [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0],
+  ];
   const rows = matrix.length;
   const cols = matrix[0].length;
-  const visited = matrix.map(row => Array(row.length).fill(false));
+  const visited = matrix.map((row) => Array(row.length).fill(false));
   function dfs(i, j) {
     if (visited[i][j]) {
       return;
     }
     visited[i][j] = true;
-    DIRECTIONS.forEach(dir => {
+    DIRECTIONS.forEach((dir) => {
       const row = i + dir[0],
         col = j + dir[1];
       // Boundary check.

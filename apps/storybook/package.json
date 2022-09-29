@@ -1,0 +1,30 @@
+{
+  "name": "@tih/storybook",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "start-storybook -p 6001",
+    "build": "build-storybook --docs",
+    "preview-storybook": "serve storybook-static",
+    "clean": "rm -rf .turbo && rm -rf node_modules"
+  },
+  "dependencies": {
+    "@tih/ui": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.4.18",
+    "@storybook/addon-docs": "^6.4.22",
+    "@storybook/addon-essentials": "^6.4.18",
+    "@storybook/addon-links": "^6.4.18",
+    "@storybook/builder-vite": "^0.1.33",
+    "@storybook/react": "^6.4.18",
+    "@tih/tsconfig": "*",
+    "@vitejs/plugin-react": "^1.3.2",
+    "eslint-config-tih": "*",
+    "serve": "^13.0.2",
+    "typescript": "^4.8.3",
+    "vite": "^2.9.9"
+  }
+}

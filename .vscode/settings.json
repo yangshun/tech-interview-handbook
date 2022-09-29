@@ -1,0 +1,19 @@
+{
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "cSpell.autoFormatConfigFile": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "javascript.format.enable": true,
+  "json.format.enable": true,
+  "eslint.format.enable": false,
+  "css.format.enable": true,
+  "css.format.newlineBetweenRules": true,
+  "css.format.newlineBetweenSelectors": true,
+  "css.format.preserveNewLines": true,
+  "typescript.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  }
+}
