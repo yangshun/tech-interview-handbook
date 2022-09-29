@@ -130,14 +130,14 @@ Depending on where the pricing data comes from, one possible variation of the ta
 ```javascript
 // config.js
 export const priceByRanges = [
-  {min: 1, max: 5, price: '5'},
-  {min: 6, max: 10, price: '4'},
-  {min: 11, max: 20, price: '3'},
-  {min: 21, max: Number.MAX_SAFE_INTEGER, price: '2.5'},
+  { min: 1, max: 5, price: '5' },
+  { min: 6, max: 10, price: '4' },
+  { min: 11, max: 20, price: '3' },
+  { min: 21, max: Number.MAX_SAFE_INTEGER, price: '2.5' },
 ];
 
 // app.js
-import {priceByRanges} from './config.js';
+import { priceByRanges } from './config.js';
 
 function getPrice(amount) {
   // error handling for amount outside the range
@@ -155,10 +155,10 @@ If the array `priceByRanges` is always sorted in terms of the price ranges, we c
 
 ```javascript
 const priceByRanges = [
-  {min: 1, max: 5, price: '5'},
-  {min: 6, max: 10, price: '4'},
-  {min: 11, max: 20, price: '3'},
-  {min: 21, max: Number.MAX_SAFE_INTEGER, price: '2.5'},
+  { min: 1, max: 5, price: '5' },
+  { min: 6, max: 10, price: '4' },
+  { min: 11, max: 20, price: '3' },
+  { min: 21, max: Number.MAX_SAFE_INTEGER, price: '2.5' },
 ];
 
 function getPrice(amount) {

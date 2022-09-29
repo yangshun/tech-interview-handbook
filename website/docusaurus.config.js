@@ -40,7 +40,7 @@ module.exports = {
           label: 'Algorithms',
           href: '/algorithms/study-cheatsheet',
         },
-        {label: 'Blog', to: 'blog', position: 'left'},
+        { label: 'Blog', to: 'blog', position: 'left' },
         {
           label: 'Grind 75',
           href: 'https://www.techinterviewhandbook.org/grind75',

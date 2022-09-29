@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import {useWindowSize} from '@docusaurus/theme-common';
-import {useDoc} from '@docusaurus/theme-common/internal';
+import { useWindowSize } from '@docusaurus/theme-common';
+import { useDoc } from '@docusaurus/theme-common/internal';
 import DocItemPaginator from '@theme/DocItem/Paginator';
 import DocVersionBanner from '@theme/DocVersionBanner';
 import DocVersionBadge from '@theme/DocVersionBadge';
@@ -17,7 +17,7 @@ import SidebarAd from '../../../components/SidebarAd';
  * Decide if the toc should be rendered, on mobile or desktop viewports
  */
 function useDocTOC() {
-  const {frontMatter, toc} = useDoc();
+  const { frontMatter, toc } = useDoc();
   const windowSize = useWindowSize();
   const hidden = frontMatter.hide_table_of_contents;
   const canRender = !hidden && toc.length > 0;
@@ -32,7 +32,7 @@ function useDocTOC() {
     desktop,
   };
 }
-export default function DocItemLayout({children}) {
+export default function DocItemLayout({ children }) {
   const docTOC = useDocTOC();
   return (
     <div className="row">

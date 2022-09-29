@@ -157,10 +157,10 @@ export default [
           target="_blank"
           rel="noreferrer noopener">
           Grind 75 Tool
-        </a>,
-        which provides customisable coding interview study plans. This not only
-        helped to sharpen my problem-solving skills, but also assured me that
-        I covered sufficient breadth and depth.
+        </a>
+        , which provides customisable coding interview study plans. This not
+        only helped to sharpen my problem-solving skills, but also assured me
+        that I covered sufficient breadth and depth.
         <br />
         <br />
         Even now, after interviewing for a couple of years, I still go back to

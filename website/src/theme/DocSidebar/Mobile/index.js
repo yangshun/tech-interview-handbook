@@ -4,11 +4,11 @@ import {
   NavbarSecondaryMenuFiller,
   ThemeClassNames,
 } from '@docusaurus/theme-common';
-import {useNavbarMobileSidebar} from '@docusaurus/theme-common/internal';
+import { useNavbarMobileSidebar } from '@docusaurus/theme-common/internal';
 import DocSidebarItems from '@theme/DocSidebarItems';
 import SidebarAd from '../../../components/SidebarAd';
 // eslint-disable-next-line react/function-component-definition
-const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
+const DocSidebarMobileSecondaryMenu = ({ sidebar, path }) => {
   const mobileSidebar = useNavbarMobileSidebar();
   return (
     <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list')}>

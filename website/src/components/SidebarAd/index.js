@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
 import clsx from 'clsx';
@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const AD_REFRESH_RATE = 20 * 1000;
 
-function FAANGTechLeads({position}) {
+function FAANGTechLeads({ position }) {
   return (
     <a
       className={clsx(styles.container, styles.backgroundFTL)}
@@ -29,7 +29,7 @@ function FAANGTechLeads({position}) {
   );
 }
 
-function AlgoMonster({position}) {
+function AlgoMonster({ position }) {
   return (
     <a
       className={clsx(styles.container, styles.backgroundAlgoMonster)}
@@ -50,7 +50,7 @@ function AlgoMonster({position}) {
   );
 }
 
-function Moonchaser({position}) {
+function Moonchaser({ position }) {
   return (
     <a
       className={clsx(styles.container, styles.backgroundMoonchaser)}
@@ -73,7 +73,7 @@ function Moonchaser({position}) {
   );
 }
 
-function DesignGurusCoding({position}) {
+function DesignGurusCoding({ position }) {
   return (
     <a
       className={clsx(styles.container, styles.backgroundGrokkingCoding)}
@@ -93,7 +93,7 @@ function DesignGurusCoding({position}) {
   );
 }
 
-function DesignGurusSystemDesign({position}) {
+function DesignGurusSystemDesign({ position }) {
   return (
     <a
       className={clsx(styles.container, styles.backgroundGrokkingSystemDesign)}
@@ -113,7 +113,7 @@ function DesignGurusSystemDesign({position}) {
   );
 }
 
-function ByteByteGoSystemDesign({position}) {
+function ByteByteGoSystemDesign({ position }) {
   return (
     <a
       className={clsx(styles.container, styles.backgroundByteByteGo)}
@@ -136,7 +136,7 @@ function ByteByteGoSystemDesign({position}) {
   );
 }
 
-function Interviewingio({position}) {
+function Interviewingio({ position }) {
   return (
     <a
       className={clsx(styles.container, styles.backgroundInterviewingio)}
@@ -159,7 +159,7 @@ function Interviewingio({position}) {
   );
 }
 
-export default React.memo(function SidebarAd({position}) {
+export default React.memo(function SidebarAd({ position }) {
   const [counter, setCounter] = useState(0);
   useEffect(() => {
     const timer = setTimeout(() => {

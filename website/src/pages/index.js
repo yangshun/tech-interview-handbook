@@ -79,7 +79,7 @@ const FEATURES = [
   },
 ];
 
-function Tweet({url, handle, name, content, avatar, date}) {
+function Tweet({ url, handle, name, content, avatar, date }) {
   return (
     <div className={clsx('card', styles.tweet)}>
       <div className="card__header">
@@ -104,7 +104,7 @@ function Tweet({url, handle, name, content, avatar, date}) {
 }
 
 function Home() {
-  const {siteConfig = {}} = useDocusaurusContext();
+  const { siteConfig = {} } = useDocusaurusContext();
   return (
     <Layout
       title="Technical Interview Guide for Busy Engineers"
@@ -125,7 +125,7 @@ function Home() {
 }
 
 function HeroSection() {
-  const {siteConfig = {}} = useDocusaurusContext();
+  const { siteConfig = {} } = useDocusaurusContext();
 
   return (
     <header className={clsx('hero', styles.heroBanner)}>
@@ -150,7 +150,7 @@ function HeroSection() {
             Start reading now&nbsp;&nbsp;→
           </Link>
         </div>
-        <p className="margin-top--md" style={{fontSize: 16, fontWeight: 600}}>
+        <p className="margin-top--md" style={{ fontSize: 16, fontWeight: 600 }}>
           Or check out our{' '}
           <a href="https://www.frontendinterviewhandbook.com">
             Front End Interview Handbook
@@ -263,7 +263,7 @@ function MoonchaserSection() {
   );
 }
 
-function HowToUseStep({index, title, ctaLink, contents}) {
+function HowToUseStep({ index, title, ctaLink, contents }) {
   return (
     <div className={clsx('card', styles.howToUseStep)}>
       <div className="card__header">
@@ -395,7 +395,7 @@ function FeaturesSection() {
               We have everything you need - all straight to the point
             </h3>
             <div className={clsx('row', styles.featuresRow)}>
-              {FEATURES.map(({title, description, link}, idx) => (
+              {FEATURES.map(({ title, description, link }, idx) => (
                 <div
                   key={idx}
                   className={clsx(
@@ -428,13 +428,13 @@ function DesignGurusSection() {
   return (
     <div
       className={clsx('padding-vert--lg')}
-      style={{backgroundColor: '#6fc8cc'}}>
+      style={{ backgroundColor: '#6fc8cc' }}>
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
             <div className="margin-vert--lg text--center">
               <div>
-                <h2 style={{color: '#083436'}}>
+                <h2 style={{ color: '#083436' }}>
                   <strong>
                     Tired of grinding mindlessly? Grokking the Coding Interview
                     is the recommended way to quickly learn coding question
@@ -466,7 +466,7 @@ function FAANGTechLeadsSection() {
   return (
     <div
       className={clsx('padding-vert--lg')}
-      style={{backgroundColor: 'rgb(244, 63, 94)'}}>
+      style={{ backgroundColor: 'rgb(244, 63, 94)' }}>
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -503,7 +503,7 @@ function AlgoMonsterSection() {
   return (
     <div
       className={clsx('padding-vert--lg')}
-      style={{backgroundImage: 'linear-gradient(270deg, #3e1792, #6a45b9)'}}>
+      style={{ backgroundImage: 'linear-gradient(270deg, #3e1792, #6a45b9)' }}>
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -712,7 +712,7 @@ function TweetsSection() {
   );
 }
 
-function SuccessStory({name, quote, thumbnail, title}) {
+function SuccessStory({ name, quote, thumbnail, title }) {
   return (
     <div className="card margin-vert--lg">
       <div className="card__body">

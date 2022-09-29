@@ -2,7 +2,7 @@ import React from 'react';
 
 import QuestionGroups from './QuestionGroups.json';
 
-function DifficultyLabel({difficulty}) {
+function DifficultyLabel({ difficulty }) {
   return (
     <span
       style={{
