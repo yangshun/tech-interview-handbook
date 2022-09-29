@@ -13,7 +13,9 @@ export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
     session({ session, user }) {
-      if (session.user) {
+      if (session.user != null) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         session.user.id = user.id;
       }
       return session;

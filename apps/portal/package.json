@@ -12,6 +12,8 @@
     "prisma": "prisma"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.2",
+    "@heroicons/react": "^2.0.11",
     "@next-auth/prisma-adapter": "^1.0.4",
     "@prisma/client": "^4.4.0",
     "@tih/ui": "*",
@@ -19,6 +21,7 @@
     "@trpc/next": "^9.27.2",
     "@trpc/react": "^9.27.2",
     "@trpc/server": "^9.27.2",
+    "clsx": "^1.2.1",
     "next": "12.3.1",
     "next-auth": "~4.10.3",
     "react": "18.2.0",
@@ -28,6 +31,10 @@
     "zod": "^3.18.0"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/line-clamp": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.7",
     "@tih/tsconfig": "*",
     "@types/node": "18.0.0",
     "@types/react": "18.0.21",

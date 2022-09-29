@@ -13,6 +13,9 @@ function defineNextConfig(config) {
 }
 
 export default defineNextConfig({
+  experimental: {
+    newNextLinkBehavior: true,
+  },
   reactStrictMode: true,
   swcMinify: true,
 });

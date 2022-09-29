@@ -1,10 +1,13 @@
 import type { AppType } from 'next/app';
 import type { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
+import React from 'react';
 import superjson from 'superjson';
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import { loggerLink } from '@trpc/client/links/loggerLink';
 import { withTRPC } from '@trpc/next';
+
+import AppShell from '~/components/global/AppShell';
 
 import type { AppRouter } from '~/server/router';
 
@@ -16,7 +19,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <AppShell>
+        <Component {...pageProps} />
+      </AppShell>
     </SessionProvider>
   );
 };
