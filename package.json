@@ -1,4 +1,8 @@
 {
+  "name": "tech-interview-handbook",
+  "repository": "git@github.com:yangshun/tech-interview-handbook.git",
+  "author": "Yangshun Tay <tay.yang.shun@gmail.com>",
+  "license": "MIT",
   "private": true,
   "workspaces": [
     "packages/*",
