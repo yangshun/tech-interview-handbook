@@ -2275,13 +2275,6 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^26.0.22":
-  "resolved" "https://registry.npmjs.org/@types/jest/-/jest-26.0.24.tgz"
-  "version" "26.0.24"
-  dependencies:
-    "jest-diff" "^26.0.0"
-    "pretty-format" "^26.0.0"
-
 "@types/json-schema@*", "@types/json-schema@^7.0.4", "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.8", "@types/json-schema@^7.0.9":
   "resolved" "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.11.tgz"
   "version" "7.0.11"
@@ -2878,7 +2871,7 @@
   "resolved" "https://registry.npmjs.org/ansi-regex/-/ansi-regex-2.1.1.tgz"
   "version" "2.1.1"
 
-"ansi-regex@^5.0.0", "ansi-regex@^5.0.1":
+"ansi-regex@^5.0.1":
   "resolved" "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz"
   "version" "5.0.1"
 
@@ -4304,10 +4297,6 @@
   "resolved" "https://registry.npmjs.org/didyoumean/-/didyoumean-1.2.2.tgz"
   "version" "1.2.2"
 
-"diff-sequences@^26.6.2":
-  "resolved" "https://registry.npmjs.org/diff-sequences/-/diff-sequences-26.6.2.tgz"
-  "version" "26.6.2"
-
 "diffie-hellman@^5.0.0":
   "resolved" "https://registry.npmjs.org/diffie-hellman/-/diffie-hellman-5.0.3.tgz"
   "version" "5.0.3"
@@ -4667,15 +4656,7 @@
   optionalDependencies:
     "source-map" "~0.6.1"
 
-"eslint-config-custom@*":
-  "resolved" "https://registry.npmjs.org/eslint-config-custom/-/eslint-config-custom-0.0.0.tgz"
-  "version" "0.0.0"
-  dependencies:
-    "eslint-config-next" "^12.0.8"
-    "eslint-config-prettier" "^8.3.0"
-    "eslint-plugin-react" "7.28.0"
-
-"eslint-config-next@^12.0.8", "eslint-config-next@^12.3.1":
+"eslint-config-next@^12.3.1":
   "resolved" "https://registry.npmjs.org/eslint-config-next/-/eslint-config-next-12.3.1.tgz"
   "version" "12.3.1"
   dependencies:
@@ -4689,7 +4670,7 @@
     "eslint-plugin-react" "^7.31.7"
     "eslint-plugin-react-hooks" "^4.5.0"
 
-"eslint-config-prettier@^8.3.0", "eslint-config-prettier@^8.5.0":
+"eslint-config-prettier@^8.5.0":
   "resolved" "https://registry.npmjs.org/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz"
   "version" "8.5.0"
 
@@ -6458,19 +6439,6 @@
     "es-get-iterator" "^1.0.2"
     "iterate-iterator" "^1.0.1"
 
-"jest-diff@^26.0.0":
-  "resolved" "https://registry.npmjs.org/jest-diff/-/jest-diff-26.6.2.tgz"
-  "version" "26.6.2"
-  dependencies:
-    "chalk" "^4.0.0"
-    "diff-sequences" "^26.6.2"
-    "jest-get-type" "^26.3.0"
-    "pretty-format" "^26.6.2"
-
-"jest-get-type@^26.3.0":
-  "resolved" "https://registry.npmjs.org/jest-get-type/-/jest-get-type-26.3.0.tgz"
-  "version" "26.3.0"
-
 "jest-haste-map@^26.6.2":
   "resolved" "https://registry.npmjs.org/jest-haste-map/-/jest-haste-map-26.6.2.tgz"
   "version" "26.6.2"
@@ -8038,15 +8006,6 @@
     "lodash" "^4.17.20"
     "renderkid" "^2.0.4"
 
-"pretty-format@^26.0.0", "pretty-format@^26.6.2":
-  "resolved" "https://registry.npmjs.org/pretty-format/-/pretty-format-26.6.2.tgz"
-  "version" "26.6.2"
-  dependencies:
-    "@jest/types" "^26.6.2"
-    "ansi-regex" "^5.0.0"
-    "ansi-styles" "^4.0.0"
-    "react-is" "^17.0.1"
-
 "pretty-format@^3.8.0":
   "resolved" "https://registry.npmjs.org/pretty-format/-/pretty-format-3.8.0.tgz"
   "version" "3.8.0"
@@ -8312,7 +8271,7 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
-"react-is@^17.0.1", "react-is@17.0.2":
+"react-is@17.0.2":
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   "version" "17.0.2"
 
@@ -9149,15 +9108,6 @@
 "store2@^2.12.0":
   "resolved" "https://registry.npmjs.org/store2/-/store2-2.14.2.tgz"
   "version" "2.14.2"
-
-"storefront@file:/Users/yangshun/Developer/tech-interview-handbook/apps/storefront":
-  "resolved" "file:apps/storefront"
-  "version" "0.0.0"
-  dependencies:
-    "@tih/ui" "*"
-    "next" "^12.3.0"
-    "react" "^18.2.0"
-    "react-dom" "^18.2.0"
 
 "stream-browserify@^2.0.1":
   "resolved" "https://registry.npmjs.org/stream-browserify/-/stream-browserify-2.0.2.tgz"
