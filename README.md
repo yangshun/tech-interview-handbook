@@ -2,14 +2,14 @@
 
 <div align="center">
   <a href="https://www.techinterviewhandbook.org/">
-    <img src="website/static/img/logo.svg" alt="Tech Interview Handbook" width="400" />
+    <img src="assets/logo.svg" alt="Tech Interview Handbook" width="400" />
   </a>
   <br />
   <h3>
     <a href="https://www.techinterviewhandbook.org/">Read on the website</a>
   </h3>
   <p>
-    Join/follow us on <a href="https://discord.gg/usMqNaPczq" target="_blank">Discord</a> | <a href="https://twitter.com/techinterviewhb" target="_blank">Twitter</a> | <a href="https://t.me/techinterviewhandbook" target="_blank">Telegram</a> |  <a href="https://facebook.com/techinterviewhandbook" target="_blank">Facebook</a> 
+    Join/follow us on <a href="https://discord.gg/usMqNaPczq" target="_blank">Discord</a> | <a href="https://twitter.com/techinterviewhb" target="_blank">Twitter</a> | <a href="https://t.me/techinterviewhandbook" target="_blank">Telegram</a> |  <a href="https://facebook.com/techinterviewhandbook" target="_blank">Facebook</a>
   </p>
 </div>
 
@@ -49,7 +49,7 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 ---
 
 <div align="center">
-  <h3>💡 Stop grinding mindlessly! Study coding question patterns efficiently with 
+  <h3>💡 Stop grinding mindlessly! Study coding question patterns efficiently with
     <a href="https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview">Grokking the Coding Interview</a> by Design Gurus 💡
   </h3>
 </div>
