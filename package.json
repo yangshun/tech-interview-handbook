@@ -9,13 +9,16 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "clean": "turbo run clean",
-    "dev": "turbo run dev --no-cache --parallel --continue",
+    "build": "turbo build",
+    "clean": "turbo clean",
+    "dev": "turbo dev --filter=portal...",
+    "dev:ui": "turbo dev --filter=storybook...",
+    "dev:handbook": "turbo dev --filter=storybook...",
+    "dev:all": "turbo dev --no-cache --parallel --continue",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "lint": "turbo run lint",
-    "test": "turbo run test",
-    "tsc": "turbo run tsc"
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "tsc": "turbo tsc"
   },
   "devDependencies": {
     "prettier": "^2.7.1",
