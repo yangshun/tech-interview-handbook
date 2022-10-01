@@ -1,5 +1,5 @@
 {
-  "name": "website",
+  "name": "@tih/website",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -15,8 +15,8 @@
     "@docusaurus/plugin-client-redirects": "^2.0.1",
     "@docusaurus/preset-classic": "^2.0.1",
     "clsx": "^1.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "browserslist": {
     "production": [
