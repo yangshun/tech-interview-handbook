@@ -112,7 +112,7 @@ export default function AppShell({ children }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen h-full">
+    <div className="flex h-full min-h-screen">
       {/* Narrow sidebar */}
       <div className="hidden w-28 overflow-y-auto bg-indigo-700 md:block">
         <div className="flex w-full flex-col items-center py-6">
@@ -132,7 +132,7 @@ export default function AppShell({ children }: Props) {
                   item.current
                     ? 'bg-indigo-800 text-white'
                     : 'text-indigo-100 hover:bg-indigo-800 hover:text-white',
-                  'group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium',
+                  'group flex w-full flex-col items-center rounded-md p-3 text-xs font-medium',
                 )}
                 href={item.href}>
                 <item.icon
@@ -217,7 +217,7 @@ export default function AppShell({ children }: Props) {
                             item.current
                               ? 'bg-indigo-800 text-white'
                               : 'text-indigo-100 hover:bg-indigo-800 hover:text-white',
-                            'group py-2 px-3 rounded-md flex items-center text-sm font-medium',
+                            'group flex items-center rounded-md py-2 px-3 text-sm font-medium',
                           )}
                           href={item.href}>
                           <item.icon
