@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "tsc": "tsc",
-    "postinstall": "prisma generate",
-    "prisma": "prisma"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.2",
