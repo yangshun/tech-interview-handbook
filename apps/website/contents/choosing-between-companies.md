@@ -70,7 +70,7 @@ Since most readers are in tech roles, the tech culture of a company deserves spe
 1. **CI and engineers pushing to prod** - Is there continuous integration or a way for engineers to deploy to production?
 1. **Internal open source** - Can engineers access and contribute to code bases across the company?
 1. **Healthy oncall as a priority** - Is the oncall load manageable?
-1. **Technical managers** - Do the engineering managers possess technical background adn skills?
+1. **Technical managers** - Do the engineering managers possess technical background and skills?
 1. **Career ladder (when above 10 engineers)** - Are career ladders and expectations for each level well-defined?
 1. **Parallel IC & manager tracks (when above 30 engineers)** - Can one rise up the career ladder as an IC?
 1. **Feedback culture** - Is it the practice to give feedback to each other/the company?
