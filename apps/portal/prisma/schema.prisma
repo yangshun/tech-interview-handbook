@@ -1,5 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Refer to the Prisma schema docs: https://pris.ly/d/prisma-schema
 
 generator client {
     provider = "prisma-client-js"
@@ -7,26 +6,22 @@ generator client {
 
 datasource db {
     provider = "postgresql"
-    // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
 }
 
-// Necessary for Next auth
+// Necessary for NextAuth.
 model Account {
     id                String  @id @default(cuid())
     userId            String
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String? //@db.Text
-    access_token      String? //@db.Text
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String? //@db.Text
+    id_token          String? @db.Text
     session_state     String?
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -74,3 +69,21 @@ enum TodoStatus {
     INCOMPLETE
     COMPLETE
 }
+
+// Start of Resumes project models.
+// Add Resumes project models here, prefix all models with "Resumes",
+// use camelCase for field names, and try to name them consistently
+// across all models in this file.
+// End of Resumes project models.
+
+// Start of Offers project models.
+// Add Offers project models here, prefix all models with "Offer",
+// use camelCase for field names, and try to name them consistently
+// across all models in this file.
+// End of Offers project models.
+
+// Start of Questions project models.
+// Add Questions project models here, prefix all models with "Questions",
+// use camelCase for field names, and try to name them consistently
+// across all models in this file.
+// End of Questions project models.
