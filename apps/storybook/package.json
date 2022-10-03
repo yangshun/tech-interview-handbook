@@ -20,6 +20,7 @@
     "@storybook/addon-links": "^6.4.18",
     "@storybook/builder-vite": "^0.1.33",
     "@storybook/react": "^6.4.18",
+    "@tih/tailwind-config": "*",
     "@tih/tsconfig": "*",
     "@vitejs/plugin-react": "^1.3.2",
     "eslint-config-tih": "*",

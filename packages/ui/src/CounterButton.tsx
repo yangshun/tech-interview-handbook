@@ -10,7 +10,7 @@ export function CounterButton() {
         fontWeight: 500,
         padding: '1.5rem',
       }}>
-      <p style={{ margin: '0 0 1.5rem 0' }}>
+      <p className="text-green-500" style={{ margin: '0 0 1.5rem 0' }}>
         This component is from{' '}
         <code
           style={{

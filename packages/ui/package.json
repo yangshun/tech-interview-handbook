@@ -7,20 +7,30 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist",
+    "./styles.css": "./dist/styles.css"
+  },
   "files": [
     "dist/**"
   ],
   "scripts": {
-    "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
+    "build": "tsup src/index.tsx --format esm,cjs --dts --external react && tailwindcss -i ./src/styles.css -o ./dist/styles.css",
+    "dev": "concurrently \"tsup src/index.tsx --format esm,cjs --dts --external react --watch\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
     "clean": "rm -rf dist",
     "tsc": "tsc",
-    "dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
     "lint": "eslint src/**/*.ts* --fix"
   },
+  "dependencies": {
+    "clsx": "^1.2.1",
+    "next": "^12.3.1"
+  },
   "devDependencies": {
+    "@tih/tailwind-config": "*",
     "@tih/tsconfig": "*",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "concurrently": "^7.4.0",
     "eslint": "^8.24.0",
     "eslint-config-tih": "*",
     "prettier-plugin-tailwindcss": "^0.1.13",
