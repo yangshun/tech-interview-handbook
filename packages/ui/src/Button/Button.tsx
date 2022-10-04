@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import type { UrlObject } from 'url';
 
-import Spinner from '../Spinner';
+import { Spinner } from '../';
 
 export type ButtonAddOnPosition = 'end' | 'start';
 export type ButtonDisplay = 'block' | 'inline';
