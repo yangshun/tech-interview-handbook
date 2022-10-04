@@ -1,0 +1,106 @@
+import { useState } from 'react';
+import {
+  AcademicCapIcon,
+  BriefcaseIcon,
+  CalendarIcon,
+  InformationCircleIcon,
+  MapPinIcon,
+  StarIcon,
+} from '@heroicons/react/20/solid';
+import { Button, Tabs } from '@tih/ui';
+
+export default function ResumeReviewPage() {
+  const [tab, setTab] = useState('general');
+  return (
+    <main className="m-4 flex-1 overflow-y-auto">
+      <div className="flex flex-row md:space-x-8">
+        <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+          Please help moi, applying for medtech startups in Singapore
+        </h1>
+        <button
+          className="isolate inline-flex max-h-10 items-center space-x-4 rounded-md rounded-l-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          type="button">
+          <span className="relative inline-flex">
+            <StarIcon
+              aria-hidden="true"
+              className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+            />
+            Star
+          </span>
+          <span className="relative -ml-px inline-flex">12k</span>
+        </button>
+      </div>
+      <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-8">
+        <div className="mt-2 flex items-center text-sm text-gray-500">
+          <BriefcaseIcon
+            aria-hidden="true"
+            className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+          />
+          Software Engineer (Backend)
+        </div>
+        <div className="mt-2 flex items-center text-sm text-gray-500">
+          <MapPinIcon
+            aria-hidden="true"
+            className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+          />
+          Singapore
+        </div>
+        <div className="mt-2 flex items-center text-sm text-gray-500">
+          <AcademicCapIcon
+            aria-hidden="true"
+            className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+          />
+          Fresh Grad
+        </div>
+        <div className="mt-2 flex items-center text-sm text-gray-500">
+          <CalendarIcon
+            aria-hidden="true"
+            className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+          />
+          Uploaded 2 days ago by Git Ji Ra
+        </div>
+      </div>
+      <div className="mt-2 flex items-center text-sm text-gray-500">
+        <InformationCircleIcon
+          aria-hidden="true"
+          className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+        />
+        Looking to break into SWE roles after doing engineering for the past 2
+        years
+      </div>
+      <div className="mt-4 flex h-full w-full flex-row">
+        <div className="w-1/2">Hello</div>
+        <div className="mx-8 w-1/2">
+          <Button display="block" label="Add your review" variant="tertiary" />
+          <Tabs
+            label="comments"
+            tabs={[
+              {
+                label: 'General',
+                value: 'general',
+              },
+              {
+                label: 'Experience',
+                value: 'experience',
+              },
+              {
+                label: 'Education',
+                value: 'education',
+              },
+              {
+                label: 'Project',
+                value: 'project',
+              },
+              {
+                label: 'Skills',
+                value: 'skills',
+              },
+            ]}
+            value={tab}
+            onChange={(value) => setTab(value)}
+          />
+        </div>
+      </div>
+    </main>
+  );
+}

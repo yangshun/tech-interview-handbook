@@ -11,6 +11,7 @@ import AppShell from '~/components/global/AppShell';
 
 import type { AppRouter } from '~/server/router';
 
+import '@tih/ui/styles.css';
 import '~/styles/globals.css';
 
 const MyApp: AppType<{ session: Session | null }> = ({

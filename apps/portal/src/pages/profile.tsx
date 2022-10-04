@@ -9,8 +9,8 @@ export default function ProfilePage() {
   }
 
   return (
-    <main className="flex-1 overflow-y-auto p-6 space-y-6">
-      <h1 className="font-bold text-4xl">Profile</h1>
+    <main className="flex-1 space-y-6 overflow-y-auto p-6">
+      <h1 className="text-4xl font-bold">Profile</h1>
       {session?.user?.image && (
         <img
           alt={session?.user?.email ?? session?.user?.name ?? ''}
