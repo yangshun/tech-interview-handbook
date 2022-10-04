@@ -20,7 +20,7 @@ export default {
       control: { type: 'select' },
     },
     label: {
-      control: 'string',
+      control: 'text',
     },
     size: {
       options: spinnerSizes,

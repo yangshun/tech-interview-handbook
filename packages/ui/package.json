@@ -22,6 +22,8 @@
     "lint": "eslint src/**/*.ts* --fix"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.3",
+    "@heroicons/react": "^2.0.11",
     "clsx": "^1.2.1",
     "next": "^12.3.1"
   },

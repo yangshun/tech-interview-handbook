@@ -45,7 +45,7 @@ export default {
       control: 'boolean',
     },
     label: {
-      control: 'string',
+      control: 'text',
     },
     size: {
       options: buttonSizes,

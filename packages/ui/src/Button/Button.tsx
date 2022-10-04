@@ -73,7 +73,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   secondary:
     'border-transparent text-primary-700 bg-primary-100 hover:bg-primary-200',
   special: 'border-slate-900 text-white bg-slate-900 hover:bg-slate-700',
-  success: 'border-transparent text-white bg-emerald-600 hover:bg-emerald-500',
+  success: 'border-transparent text-white bg-success-600 hover:bg-success-500',
   tertiary: 'border-slate-300 text-slate-700 bg-white hover:bg-slate-50',
 };
 
@@ -150,8 +150,7 @@ export default function Button({
   }
 
   return (
-    <Link href={href}>
-      <a {...commonProps} />
-    </Link>
+    // TODO: Allow passing in of Link component.
+    <Link href={href} {...commonProps} />
   );
 }
