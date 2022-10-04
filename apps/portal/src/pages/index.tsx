@@ -1,4 +1,4 @@
-import { Button, CounterButton } from '@tih/ui';
+import { Button, Spinner } from '@tih/ui';
 
 export default function HomePage() {
   return (
@@ -8,8 +8,8 @@ export default function HomePage() {
           <h1 className="text-center text-4xl font-bold text-red-600">
             Homepage
           </h1>
-          <CounterButton />
           <Button label="Button text" size="md" variant="primary" />
+          <Spinner size="md" />
         </div>
       </div>
     </main>

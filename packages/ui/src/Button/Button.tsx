@@ -4,8 +4,10 @@ import type { UrlObject } from 'url';
 
 import Spinner from '../Spinner';
 
+export type ButtonAddOnPosition = 'end' | 'start';
 export type ButtonDisplay = 'block' | 'inline';
 export type ButtonSize = 'lg' | 'md' | 'sm';
+export type ButtonType = 'button' | 'reset' | 'submit';
 export type ButtonVariant =
   | 'primary'
   | 'secondary'
@@ -14,7 +16,7 @@ export type ButtonVariant =
   | 'tertiary';
 
 type Props = Readonly<{
-  addonPosition?: 'end' | 'start';
+  addonPosition?: ButtonAddOnPosition;
   'aria-controls'?: string;
   className?: string;
   display?: ButtonDisplay;
@@ -26,7 +28,7 @@ type Props = Readonly<{
   label: string;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   size?: ButtonSize;
-  type?: 'button' | 'submit';
+  type?: ButtonType;
   variant: ButtonVariant;
 }>;
 

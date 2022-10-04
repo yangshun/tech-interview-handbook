@@ -14,17 +14,21 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@heroicons/react": "^2.0.11",
     "@storybook/addon-actions": "^6.4.18",
     "@storybook/addon-docs": "^6.4.22",
     "@storybook/addon-essentials": "^6.4.18",
     "@storybook/addon-links": "^6.4.18",
+    "@storybook/addon-postcss": "^2.0.0",
     "@storybook/builder-vite": "^0.1.33",
     "@storybook/react": "^6.4.18",
     "@tih/tailwind-config": "*",
     "@tih/tsconfig": "*",
     "@vitejs/plugin-react": "^1.3.2",
+    "autoprefixer": "^10.4.12",
     "eslint-config-tih": "*",
     "serve": "^13.0.2",
+    "tailwindcss": "^3.1.8",
     "typescript": "^4.8.3",
     "vite": "^2.9.9"
   }

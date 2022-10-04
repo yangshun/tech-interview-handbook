@@ -30,6 +30,7 @@
     "@tih/tsconfig": "*",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "autoprefixer": "^10.4.12",
     "concurrently": "^7.4.0",
     "eslint": "^8.24.0",
     "eslint-config-tih": "*",
