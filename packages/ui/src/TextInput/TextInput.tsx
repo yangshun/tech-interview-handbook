@@ -34,7 +34,6 @@ type Props = Readonly<{
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
   onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void;
   startIcon?: React.ComponentType<React.ComponentProps<'svg'>>;
-  value?: string;
 }> &
   Readonly<Attributes>;
 
@@ -58,7 +57,6 @@ function TextInput(
     label,
     startIcon: StartIcon,
     type = 'text',
-    value,
     onChange,
     ...props
   }: Props,
@@ -102,7 +100,6 @@ function TextInput(
           disabled={disabled}
           id={id}
           type={type}
-          value={value != null ? value : undefined}
           onChange={(event) => {
             if (!onChange) {
               return;

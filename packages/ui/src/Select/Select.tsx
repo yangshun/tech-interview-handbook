@@ -35,7 +35,6 @@ function Select<T>(
     label,
     isLabelHidden,
     options,
-    value,
     onChange,
     ...props
   }: Props<T>,
