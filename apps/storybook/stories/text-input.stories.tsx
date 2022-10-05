@@ -14,11 +14,11 @@ export default {
     autoComplete: {
       control: 'text',
     },
+    disabled: {
+      control: 'boolean',
+    },
     errorMessage: {
       control: 'text',
-    },
-    isDisabled: {
-      control: 'boolean',
     },
     isLabelHidden: {
       control: 'boolean',
@@ -103,7 +103,7 @@ export function Icon() {
 export function Disabled() {
   return (
     <TextInput
-      isDisabled={true}
+      disabled={true}
       label="Disabled input"
       placeholder="John Doe"
       type="text"

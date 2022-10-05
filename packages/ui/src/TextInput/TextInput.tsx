@@ -1,23 +1,46 @@
 import clsx from 'clsx';
-import type { ChangeEvent } from 'react';
-import React, { useId } from 'react';
+import type {
+  ChangeEvent,
+  FocusEvent,
+  ForwardedRef,
+  InputHTMLAttributes,
+} from 'react';
+import React, { forwardRef, useId } from 'react';
+
+type TextInputInputAttributes = Pick<
+  InputHTMLAttributes<HTMLInputElement>,
+  | 'autoComplete'
+  | 'disabled'
+  | 'max'
+  | 'maxLength'
+  | 'min'
+  | 'minLength'
+  | 'name'
+  | 'pattern'
+  | 'placeholder'
+  | 'required'
+  | 'type'
+>;
+
+type TextInputDOMAttributes = Pick<
+  InputHTMLAttributes<HTMLInputElement>,
+  'onBlur' | 'onFocus'
+>;
 
 type Props = Readonly<{
-  autoComplete?: string;
   defaultValue?: string;
   endIcon?: React.ComponentType<React.ComponentProps<'svg'>>;
   errorMessage?: React.ReactNode;
   id?: string;
-  isDisabled?: boolean;
   isLabelHidden?: boolean;
   label: string;
-  name?: string;
+  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
   onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
   startIcon?: React.ComponentType<React.ComponentProps<'svg'>>;
-  type?: 'email' | 'password' | 'text';
   value?: string;
-}>;
+}> &
+  Readonly<TextInputDOMAttributes> &
+  Readonly<TextInputInputAttributes>;
 
 type State = 'error' | 'normal';
 
@@ -28,22 +51,23 @@ const stateClasses: Record<State, string> = {
     'placeholder:text-slate-400 focus:ring-primary-500 focus:border-primary-500 border-slate-300',
 };
 
-export default function TextInput({
-  autoComplete,
-  defaultValue,
-  endIcon: EndIcon,
-  errorMessage,
-  id: idParam,
-  isDisabled,
-  isLabelHidden = false,
-  label,
-  name,
-  placeholder,
-  startIcon: StartIcon,
-  type = 'text',
-  value,
-  onChange,
-}: Props) {
+function TextInput(
+  {
+    defaultValue,
+    disabled,
+    endIcon: EndIcon,
+    errorMessage,
+    id: idParam,
+    isLabelHidden = false,
+    label,
+    startIcon: StartIcon,
+    type = 'text',
+    value,
+    onChange,
+    ...props
+  }: Props,
+  ref: ForwardedRef<HTMLInputElement>,
+) {
   const hasError = errorMessage != null;
   const generatedId = useId();
   const id = idParam ?? generatedId;
@@ -68,21 +92,19 @@ export default function TextInput({
           </div>
         )}
         <input
+          ref={ref}
           aria-describedby={hasError ? errorId : undefined}
           aria-invalid={hasError ? true : undefined}
-          autoComplete={autoComplete}
           className={clsx(
             'block w-full rounded-md sm:text-sm',
             StartIcon && 'pl-10',
             EndIcon && 'pr-10',
             stateClasses[state],
-            isDisabled && 'bg-slate-100',
+            disabled && 'bg-slate-100',
           )}
           defaultValue={defaultValue}
-          disabled={isDisabled}
+          disabled={disabled}
           id={id}
-          name={name}
-          placeholder={placeholder}
           type={type}
           value={value != null ? value : undefined}
           onChange={(event) => {
@@ -92,6 +114,7 @@ export default function TextInput({
 
             onChange(event.target.value, event);
           }}
+          {...props}
         />
         {EndIcon && (
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -107,3 +130,5 @@ export default function TextInput({
     </div>
   );
 }
+
+export default forwardRef(TextInput);
