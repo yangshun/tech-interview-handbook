@@ -6,7 +6,8 @@
     "dev": "start-storybook -p 6001",
     "build": "build-storybook --docs",
     "preview-storybook": "serve storybook-static",
-    "clean": "rm -rf .turbo && rm -rf node_modules"
+    "clean": "rm -rf .turbo && rm -rf node_modules",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@tih/ui": "*",

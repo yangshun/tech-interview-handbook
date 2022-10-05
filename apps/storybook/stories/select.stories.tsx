@@ -24,7 +24,15 @@ export default {
   },
 } as ComponentMeta<typeof Select>;
 
-export function Basic({ display, isLabelHidden, label, name }) {
+export function Basic({
+  display,
+  isLabelHidden,
+  label,
+  name,
+}: Pick<
+  React.ComponentProps<typeof Select>,
+  'display' | 'isLabelHidden' | 'label' | 'name'
+>) {
   const [value, setValue] = useState('apple');
 
   return (

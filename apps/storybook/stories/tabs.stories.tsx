@@ -12,7 +12,9 @@ export default {
   },
 } as ComponentMeta<typeof Tabs>;
 
-export function Basic({ label }) {
+export function Basic({
+  label,
+}: Pick<React.ComponentProps<typeof Tabs>, 'label'>) {
   const [value, setValue] = useState('apple');
 
   return (

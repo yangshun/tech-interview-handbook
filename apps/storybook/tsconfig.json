@@ -1,0 +1,13 @@
+{
+  "exclude": ["node_modules"],
+  "extends": "@tih/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "rootDir": "stories",
+    "outDir": "dist",
+    "baseUrl": "./stories",
+    "paths": {
+      "~/*": ["*"]
+    }
+  },
+  "include": ["stories"]
+}

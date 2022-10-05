@@ -35,7 +35,14 @@ export default {
   },
 } as ComponentMeta<typeof DropdownMenu>;
 
-export function Basic({ align, label, size }) {
+export function Basic({
+  align,
+  label,
+  size,
+}: Pick<
+  React.ComponentProps<typeof DropdownMenu>,
+  'align' | 'label' | 'size'
+>) {
   const menuItems = [
     {
       label: 'Apple',

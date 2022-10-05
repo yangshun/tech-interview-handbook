@@ -23,7 +23,15 @@ export default {
   },
 } as ComponentMeta<typeof SlideOut>;
 
-export function Basic({ children, enterFrom, size, title }) {
+export function Basic({
+  children,
+  enterFrom,
+  size,
+  title,
+}: Pick<
+  React.ComponentProps<typeof SlideOut>,
+  'children' | 'enterFrom' | 'size' | 'title'
+>) {
   const [isShown, setIsShown] = useState(false);
 
   return (

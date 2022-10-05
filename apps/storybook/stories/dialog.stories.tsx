@@ -12,7 +12,10 @@ export default {
   },
 } as ComponentMeta<typeof Dialog>;
 
-export function Basic({ children, title }) {
+export function Basic({
+  children,
+  title,
+}: Pick<React.ComponentProps<typeof Dialog>, 'children' | 'title'>) {
   const [isShown, setIsShown] = useState(false);
 
   return (
@@ -43,14 +46,3 @@ export function Basic({ children, title }) {
     </div>
   );
 }
-
-Basic.args = {
-  title: 'Lorem ipsum, dolor sit amet',
-  children: (
-    <div>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius aliquam
-      laudantium explicabo pariatur iste dolorem animi vitae error totam. At
-      sapiente aliquam accusamus facere veritatis.
-    </div>
-  ),
-};
