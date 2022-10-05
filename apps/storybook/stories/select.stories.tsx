@@ -1,16 +1,15 @@
-import { ComponentMeta } from '@storybook/react';
-import { Select, SelectDisplay } from '@tih/ui';
 import React, { useState } from 'react';
+import type { ComponentMeta } from '@storybook/react';
+import type { SelectDisplay } from '@tih/ui';
+import { Select } from '@tih/ui';
 
 const SelectDisplays: ReadonlyArray<SelectDisplay> = ['inline', 'block'];
 
 export default {
-  title: 'Select',
-  component: Select,
   argTypes: {
     display: {
-      options: SelectDisplays,
       control: { type: 'select' },
+      options: SelectDisplays,
     },
     isLabelHidden: {
       control: 'boolean',
@@ -22,6 +21,8 @@ export default {
       control: 'text',
     },
   },
+  component: Select,
+  title: 'Select',
 } as ComponentMeta<typeof Select>;
 
 export function Basic({
@@ -40,7 +41,6 @@ export function Basic({
       display={display}
       isLabelHidden={isLabelHidden}
       label={label}
-      onChange={setValue}
       name={name}
       options={[
         {
@@ -57,14 +57,15 @@ export function Basic({
         },
       ]}
       value={value}
+      onChange={setValue}
     />
   );
 }
 
 Basic.args = {
-  label: 'Select fruit',
   display: 'inline',
   isLabelHidden: false,
+  label: 'Select fruit',
 };
 
 export function Display() {
@@ -74,7 +75,6 @@ export function Display() {
     <div className="space-x-4">
       <Select
         label="Select a fruit"
-        onChange={setValue}
         options={[
           {
             label: 'Apple',
@@ -90,6 +90,7 @@ export function Display() {
           },
         ]}
         value={value}
+        onChange={setValue}
       />
     </div>
   );

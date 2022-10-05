@@ -1,15 +1,13 @@
+import React, { useState } from 'react';
 import {
   EnvelopeIcon,
   KeyIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/solid';
-import { ComponentMeta } from '@storybook/react';
+import type { ComponentMeta } from '@storybook/react';
 import { TextInput } from '@tih/ui';
-import React, { useState } from 'react';
 
 export default {
-  title: 'TextInput',
-  component: TextInput,
   argTypes: {
     autoComplete: {
       control: 'text',
@@ -36,6 +34,8 @@ export default {
       control: 'text',
     },
   },
+  component: TextInput,
+  title: 'TextInput',
 } as ComponentMeta<typeof TextInput>;
 
 export const Basic = {
@@ -89,9 +89,9 @@ export function Icon() {
         onChange={setValue}
       />
       <TextInput
-        startIcon={QuestionMarkCircleIcon}
         label="Account number"
         placeholder="000-00-0000"
+        startIcon={QuestionMarkCircleIcon}
         type="text"
         value={value}
         onChange={setValue}
@@ -116,10 +116,10 @@ export function Error() {
 
   return (
     <TextInput
-      label="Email"
       errorMessage={
         value.length < 6 ? 'Password must be at least 6 characters' : undefined
       }
+      label="Email"
       startIcon={KeyIcon}
       type="password"
       value={value}

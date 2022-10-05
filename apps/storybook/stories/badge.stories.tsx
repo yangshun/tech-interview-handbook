@@ -1,6 +1,7 @@
-import { ComponentMeta } from '@storybook/react';
-import { Badge, BadgeVariant } from '@tih/ui';
 import React from 'react';
+import type { ComponentMeta } from '@storybook/react';
+import type { BadgeVariant } from '@tih/ui';
+import { Badge } from '@tih/ui';
 
 const badgeVariants: ReadonlyArray<BadgeVariant> = [
   'primary',
@@ -11,14 +12,14 @@ const badgeVariants: ReadonlyArray<BadgeVariant> = [
 ];
 
 export default {
-  title: 'Badge',
-  component: Badge,
   argTypes: {
     variant: {
-      options: badgeVariants,
       control: { type: 'select' },
+      options: badgeVariants,
     },
   },
+  component: Badge,
+  title: 'Badge',
 } as ComponentMeta<typeof Badge>;
 
 export const Basic = {

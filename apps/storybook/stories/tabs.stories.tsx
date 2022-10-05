@@ -1,15 +1,15 @@
-import { ComponentMeta } from '@storybook/react';
-import { Tabs } from '@tih/ui';
 import React, { useState } from 'react';
+import type { ComponentMeta } from '@storybook/react';
+import { Tabs } from '@tih/ui';
 
 export default {
-  title: 'Tabs',
-  component: Tabs,
   argTypes: {
     label: {
       control: 'text',
     },
   },
+  component: Tabs,
+  title: 'Tabs',
 } as ComponentMeta<typeof Tabs>;
 
 export function Basic({
@@ -20,7 +20,6 @@ export function Basic({
   return (
     <Tabs
       label={label}
-      onChange={setValue}
       tabs={[
         {
           label: 'Apple',
@@ -36,6 +35,7 @@ export function Basic({
         },
       ]}
       value={value}
+      onChange={setValue}
     />
   );
 }

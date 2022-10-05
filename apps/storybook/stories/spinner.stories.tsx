@@ -1,32 +1,32 @@
-import { ComponentMeta } from '@storybook/react';
-
-import { Spinner, SpinnerColor, SpinnerSize, SpinnerDisplay } from '@tih/ui';
 import React from 'react';
+import type { ComponentMeta } from '@storybook/react';
+import type { SpinnerColor, SpinnerDisplay,SpinnerSize } from '@tih/ui';
+import { Spinner } from '@tih/ui';
 
 const spinnerColors: ReadonlyArray<SpinnerColor> = ['default', 'inherit'];
 const spinnerDisplays: ReadonlyArray<SpinnerDisplay> = ['block', 'inline'];
 const spinnerSizes: ReadonlyArray<SpinnerSize> = ['xs', 'sm', 'md', 'lg'];
 
 export default {
-  title: 'Spinner',
-  component: Spinner,
   argTypes: {
     color: {
-      options: spinnerColors,
       control: { type: 'select' },
+      options: spinnerColors,
     },
     display: {
-      options: spinnerDisplays,
       control: { type: 'select' },
+      options: spinnerDisplays,
     },
     label: {
       control: 'text',
     },
     size: {
-      options: spinnerSizes,
       control: { type: 'select' },
+      options: spinnerSizes,
     },
   },
+  component: Spinner,
+  title: 'Spinner',
 } as ComponentMeta<typeof Spinner>;
 
 export const Basic = {

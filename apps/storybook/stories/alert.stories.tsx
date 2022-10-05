@@ -1,6 +1,7 @@
-import { ComponentMeta } from '@storybook/react';
-import { Alert, AlertVariant } from '@tih/ui';
 import React from 'react';
+import type { ComponentMeta } from '@storybook/react';
+import type { AlertVariant } from '@tih/ui';
+import { Alert } from '@tih/ui';
 
 const alertVariants: ReadonlyArray<AlertVariant> = [
   'info',
@@ -10,24 +11,24 @@ const alertVariants: ReadonlyArray<AlertVariant> = [
 ];
 
 export default {
-  title: 'Alert',
-  component: Alert,
   argTypes: {
     title: {
       control: 'text',
     },
     variant: {
-      options: alertVariants,
       control: { type: 'select' },
+      options: alertVariants,
     },
   },
+  component: Alert,
+  title: 'Alert',
 } as ComponentMeta<typeof Alert>;
 
 export const Basic = {
   args: {
+    children: 'This is something you should pay your full attention to.',
     title: 'Please pay attention',
     variant: 'info',
-    children: 'This is something you should pay your full attention to.',
   },
 };
 

@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import React from 'react';
-
 import { Menu } from '@headlessui/react';
 
 type Props = Readonly<{

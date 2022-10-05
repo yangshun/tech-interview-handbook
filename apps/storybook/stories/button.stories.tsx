@@ -1,15 +1,15 @@
-import { ComponentMeta } from '@storybook/react';
-
-import {
-  Button,
+import React from 'react';
+import { EnvelopeIcon } from '@heroicons/react/24/solid';
+import type { ComponentMeta } from '@storybook/react';
+import type {
   ButtonAddOnPosition,
   ButtonDisplay,
   ButtonSize,
   ButtonType,
-  ButtonVariant,
+  ButtonVariant} from '@tih/ui';
+import {
+  Button
 } from '@tih/ui';
-import React from 'react';
-import { EnvelopeIcon } from '@heroicons/react/24/solid';
 
 const buttonTypes: ReadonlyArray<ButtonType> = ['button', 'reset', 'submit'];
 const buttonSizes: ReadonlyArray<ButtonSize> = ['sm', 'md', 'lg'];
@@ -27,16 +27,14 @@ const buttonVariants: ReadonlyArray<ButtonVariant> = [
 ];
 
 export default {
-  title: 'Button',
-  component: Button,
   argTypes: {
     addonPosition: {
-      options: buttonAddOnPositions,
       control: { type: 'select' },
+      options: buttonAddOnPositions,
     },
     display: {
-      options: buttonDisplays,
       control: { type: 'select' },
+      options: buttonDisplays,
     },
     isDisabled: {
       control: 'boolean',
@@ -48,18 +46,20 @@ export default {
       control: 'text',
     },
     size: {
-      options: buttonSizes,
       control: { type: 'select' },
+      options: buttonSizes,
     },
     type: {
-      options: buttonTypes,
       control: { type: 'select' },
+      options: buttonTypes,
     },
     variant: {
-      options: buttonVariants,
       control: { type: 'select' },
+      options: buttonVariants,
     },
   },
+  component: Button,
+  title: 'Button',
 } as ComponentMeta<typeof Button>;
 
 export const Basic = {
@@ -111,8 +111,8 @@ export function Disabled() {
     <div className="space-x-4">
       {buttonVariants.map((variant) => (
         <Button
-          isDisabled={true}
           key={variant}
+          isDisabled={true}
           label="Click Me"
           size="md"
           variant={variant}
@@ -128,8 +128,8 @@ export function Loading() {
       <div className="space-x-4">
         {buttonVariants.map((variant) => (
           <Button
-            isLoading={true}
             key={variant}
+            isLoading={true}
             label="Click Me"
             size="md"
             variant={variant}
@@ -139,9 +139,9 @@ export function Loading() {
       <div className="space-x-4">
         {buttonVariants.map((variant) => (
           <Button
+            key={variant}
             isDisabled={true}
             isLoading={true}
-            key={variant}
             label="Click Me"
             size="md"
             variant={variant}

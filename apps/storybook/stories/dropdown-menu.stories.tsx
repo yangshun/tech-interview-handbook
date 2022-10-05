@@ -1,6 +1,7 @@
-import { ComponentMeta } from '@storybook/react';
-import { DropdownMenu, DropdownMenuAlignment, DropdownMenuSize } from '@tih/ui';
 import React, { useState } from 'react';
+import type { ComponentMeta } from '@storybook/react';
+import type { DropdownMenuAlignment, DropdownMenuSize } from '@tih/ui';
+import { DropdownMenu } from '@tih/ui';
 
 const DropdownMenuAlignments: ReadonlyArray<DropdownMenuAlignment> = [
   'start',
@@ -12,27 +13,27 @@ const DropdownMenuSizes: ReadonlyArray<DropdownMenuSize> = [
 ];
 
 export default {
-  title: 'DropdownMenu',
-  component: DropdownMenu,
-  parameters: {
-    docs: {
-      inlineStories: false,
-      iframeHeight: 300,
-    },
-  },
   argTypes: {
     align: {
-      options: DropdownMenuAlignments,
       control: { type: 'select' },
+      options: DropdownMenuAlignments,
     },
     label: {
       control: 'text',
     },
     size: {
-      options: DropdownMenuSizes,
       control: { type: 'select' },
+      options: DropdownMenuSizes,
     },
   },
+  component: DropdownMenu,
+  parameters: {
+    docs: {
+      iframeHeight: 300,
+      inlineStories: false,
+    },
+  },
+  title: 'DropdownMenu',
 } as ComponentMeta<typeof DropdownMenu>;
 
 export function Basic({
@@ -62,11 +63,11 @@ export function Basic({
 
   return (
     <DropdownMenu align={align} label={label} size={size}>
-      {menuItems.map(({ label, value }) => (
+      {menuItems.map(({ label: itemLabel, value }) => (
         <DropdownMenu.Item
           key={value}
           isSelected={value === selectedValue}
-          label={label}
+          label={itemLabel}
           onClick={() => {
             setSelectedValue(value);
           }}

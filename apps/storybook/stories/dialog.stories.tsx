@@ -1,15 +1,15 @@
-import { ComponentMeta } from '@storybook/react';
-import { Button, Dialog } from '@tih/ui';
 import React, { useState } from 'react';
+import type { ComponentMeta } from '@storybook/react';
+import { Button, Dialog } from '@tih/ui';
 
 export default {
-  title: 'Dialog',
-  component: Dialog,
   argTypes: {
     title: {
       control: 'text',
     },
   },
+  component: Dialog,
+  title: 'Dialog',
 } as ComponentMeta<typeof Dialog>;
 
 export function Basic({
