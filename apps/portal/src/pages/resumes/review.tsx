@@ -8,16 +8,17 @@ import {
 } from '@heroicons/react/20/solid';
 
 import CommentsSection from '~/components/resumes/CommentsSection';
+import ResumePdf from '~/components/resumes/ResumePdf';
 
 export default function ResumeReviewPage() {
   return (
-    <main className="m-4 flex-1 overflow-y-auto">
+    <main className="m-4 flex-1">
       <div className="flex flex-row md:space-x-8">
         <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
           Please help moi, applying for medtech startups in Singapore
         </h1>
         <button
-          className="isolate inline-flex max-h-10 items-center space-x-4 rounded-md rounded-l-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="isolate inline-flex max-h-10 items-center space-x-4 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           type="button">
           <span className="relative inline-flex">
             <StarIcon
@@ -67,8 +68,10 @@ export default function ResumeReviewPage() {
         Looking to break into SWE roles after doing engineering for the past 2
         years
       </div>
-      <div className="mt-4 flex h-full w-full flex-row">
-        <div className="w-1/2">Hello</div>
+      <div className="my-4 flex max-h-full w-full flex-row">
+        <div className="max-h-screen w-1/2 overflow-scroll">
+          <ResumePdf />
+        </div>
         <div className="mx-8 w-1/2">
           <CommentsSection />
         </div>
