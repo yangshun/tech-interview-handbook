@@ -7,6 +7,9 @@ const SelectDisplays: ReadonlyArray<SelectDisplay> = ['inline', 'block'];
 
 export default {
   argTypes: {
+    disabled: {
+      control: 'boolean',
+    },
     display: {
       control: { type: 'select' },
       options: SelectDisplays,
@@ -72,8 +75,86 @@ export function Display() {
   const [value, setValue] = useState('apple');
 
   return (
+    <div className="space-y-4">
+      <Select
+        label="Select a fruit"
+        options={[
+          {
+            label: 'Apple',
+            value: 'apple',
+          },
+          {
+            label: 'Banana',
+            value: 'banana',
+          },
+          {
+            label: 'Orange',
+            value: 'orange',
+          },
+        ]}
+        value={value}
+        onChange={setValue}
+      />
+      <Select
+        display="block"
+        label="Select a fruit"
+        options={[
+          {
+            label: 'Apple',
+            value: 'apple',
+          },
+          {
+            label: 'Banana',
+            value: 'banana',
+          },
+          {
+            label: 'Orange',
+            value: 'orange',
+          },
+        ]}
+        value={value}
+        onChange={setValue}
+      />
+    </div>
+  );
+}
+
+export function HiddenLabel() {
+  const [value, setValue] = useState('apple');
+
+  return (
     <div className="space-x-4">
       <Select
+        isLabelHidden={true}
+        label="Select a fruit"
+        options={[
+          {
+            label: 'Apple',
+            value: 'apple',
+          },
+          {
+            label: 'Banana',
+            value: 'banana',
+          },
+          {
+            label: 'Orange',
+            value: 'orange',
+          },
+        ]}
+        value={value}
+        onChange={setValue}
+      />
+    </div>
+  );
+}
+
+export function Disabled() {
+  const [value, setValue] = useState('apple');
+
+  return (
+    <div className="space-x-4">
+      <Select
+        disabled={true}
         label="Select a fruit"
         options={[
           {

@@ -1,5 +1,12 @@
 import clsx from 'clsx';
+import type { ForwardedRef, SelectHTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 import { useId } from 'react';
+
+type Attributes = Pick<
+  SelectHTMLAttributes<HTMLSelectElement>,
+  'disabled' | 'name' | 'onBlur' | 'onFocus' | 'required'
+>;
 
 export type SelectItem<T> = Readonly<{
   label: string;
@@ -16,17 +23,22 @@ type Props<T> = Readonly<{
   onChange: (value: string) => void;
   options: ReadonlyArray<SelectItem<T>>;
   value: T;
-}>;
+}> &
+  Readonly<Attributes>;
 
-export default function Select<T>({
-  display,
-  label,
-  isLabelHidden,
-  name,
-  options,
-  value,
-  onChange,
-}: Props<T>) {
+function Select<T>(
+  {
+    display,
+    disabled,
+    label,
+    isLabelHidden,
+    options,
+    value,
+    onChange,
+    ...props
+  }: Props<T>,
+  ref: ForwardedRef<HTMLSelectElement>,
+) {
   const id = useId();
 
   return (
@@ -40,17 +52,20 @@ export default function Select<T>({
         {label}
       </label>
       <select
+        ref={ref}
         aria-label={isLabelHidden ? label : undefined}
         className={clsx(
           display === 'block' && 'block w-full',
           'focus:border-primary-500 focus:ring-primary-500 rounded-md border-slate-300 py-2 pl-3 pr-10 text-base focus:outline-none sm:text-sm',
+          disabled && 'bg-slate-100',
         )}
+        disabled={disabled}
         id={id}
-        name={name ?? undefined}
         value={String(value)}
         onChange={(event) => {
           onChange(event.target.value);
-        }}>
+        }}
+        {...props}>
         {options.map(({ label: optionLabel, value: optionValue }) => (
           <option key={String(optionValue)} value={String(optionValue)}>
             {optionLabel}
@@ -60,3 +75,5 @@ export default function Select<T>({
     </div>
   );
 }
+
+export default forwardRef(Select);

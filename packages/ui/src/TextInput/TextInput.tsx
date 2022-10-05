@@ -7,7 +7,7 @@ import type {
 } from 'react';
 import React, { forwardRef, useId } from 'react';
 
-type TextInputInputAttributes = Pick<
+type Attributes = Pick<
   InputHTMLAttributes<HTMLInputElement>,
   | 'autoComplete'
   | 'disabled'
@@ -16,15 +16,12 @@ type TextInputInputAttributes = Pick<
   | 'min'
   | 'minLength'
   | 'name'
+  | 'onBlur'
+  | 'onFocus'
   | 'pattern'
   | 'placeholder'
   | 'required'
   | 'type'
->;
-
-type TextInputDOMAttributes = Pick<
-  InputHTMLAttributes<HTMLInputElement>,
-  'onBlur' | 'onFocus'
 >;
 
 type Props = Readonly<{
@@ -39,8 +36,7 @@ type Props = Readonly<{
   startIcon?: React.ComponentType<React.ComponentProps<'svg'>>;
   value?: string;
 }> &
-  Readonly<TextInputDOMAttributes> &
-  Readonly<TextInputInputAttributes>;
+  Readonly<Attributes>;
 
 type State = 'error' | 'normal';
 
