@@ -46,3 +46,14 @@ export function Basic({
     </div>
   );
 }
+
+Basic.args = {
+  children: (
+    <div>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius aliquam
+      laudantium explicabo pariatur iste dolorem animi vitae error totam. At
+      sapiente aliquam accusamus facere veritatis.
+    </div>
+  ),
+  title: 'Lorem ipsum, dolor sit amet',
+};

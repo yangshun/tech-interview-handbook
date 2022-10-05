@@ -46,16 +46,16 @@ export function Basic({
 >) {
   const menuItems = [
     {
-      label: 'Apple',
-      value: 'apple',
+      label: 'Profile',
+      value: 'profile',
     },
     {
-      label: 'Banana',
-      value: 'banana',
+      label: 'Settings',
+      value: 'settings',
     },
     {
-      label: 'Orange',
-      value: 'orange',
+      label: 'Sign Out',
+      value: 'sign-out',
     },
   ];
 
@@ -79,23 +79,23 @@ export function Basic({
 
 Basic.args = {
   align: 'start',
-  label: 'Select fruitzz',
+  label: 'More actions',
   size: 'regular',
 };
 
 export function Align() {
   const menuItems = [
     {
-      label: 'Apple',
-      value: 'apple',
+      label: 'Profile',
+      value: 'profile',
     },
     {
-      label: 'Banana',
-      value: 'banana',
+      label: 'Settings',
+      value: 'settings',
     },
     {
-      label: 'Orange',
-      value: 'orange',
+      label: 'Sign Out',
+      value: 'sign-out',
     },
   ];
 
@@ -103,7 +103,7 @@ export function Align() {
 
   return (
     <div className="flex justify-between">
-      <DropdownMenu align="start" label="Select fruit" size="regular">
+      <DropdownMenu align="start" label="Select an action" size="regular">
         {menuItems.map(({ label, value }) => (
           <DropdownMenu.Item
             key={value}
@@ -115,7 +115,7 @@ export function Align() {
           />
         ))}
       </DropdownMenu>
-      <DropdownMenu align="end" label="Select fruit" size="regular">
+      <DropdownMenu align="end" label="Select an action" size="regular">
         {menuItems.map(({ label, value }) => (
           <DropdownMenu.Item
             key={value}
