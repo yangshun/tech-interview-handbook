@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   AcademicCapIcon,
   BriefcaseIcon,
@@ -7,10 +6,10 @@ import {
   MapPinIcon,
   StarIcon,
 } from '@heroicons/react/20/solid';
-import { Button, Tabs } from '@tih/ui';
+
+import CommentsSection from '~/components/resumes/CommentsSection';
 
 export default function ResumeReviewPage() {
-  const [tab, setTab] = useState('general');
   return (
     <main className="m-4 flex-1 overflow-y-auto">
       <div className="flex flex-row md:space-x-8">
@@ -71,34 +70,7 @@ export default function ResumeReviewPage() {
       <div className="mt-4 flex h-full w-full flex-row">
         <div className="w-1/2">Hello</div>
         <div className="mx-8 w-1/2">
-          <Button display="block" label="Add your review" variant="tertiary" />
-          <Tabs
-            label="comments"
-            tabs={[
-              {
-                label: 'General',
-                value: 'general',
-              },
-              {
-                label: 'Experience',
-                value: 'experience',
-              },
-              {
-                label: 'Education',
-                value: 'education',
-              },
-              {
-                label: 'Project',
-                value: 'project',
-              },
-              {
-                label: 'Skills',
-                value: 'skills',
-              },
-            ]}
-            value={tab}
-            onChange={(value) => setTab(value)}
-          />
+          <CommentsSection />
         </div>
       </div>
     </main>
