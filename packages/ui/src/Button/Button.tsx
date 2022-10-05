@@ -19,10 +19,10 @@ type Props = Readonly<{
   addonPosition?: ButtonAddOnPosition;
   'aria-controls'?: string;
   className?: string;
+  disabled?: boolean;
   display?: ButtonDisplay;
   href?: UrlObject | string;
   icon?: (props: React.ComponentProps<'svg'>) => JSX.Element;
-  isDisabled?: boolean;
   isLabelHidden?: boolean;
   isLoading?: boolean;
   label: string;
@@ -92,7 +92,7 @@ export default function Button({
   display = 'inline',
   href,
   icon: Icon,
-  isDisabled = false,
+  disabled = false,
   isLabelHidden = false,
   isLoading = false,
   label,
@@ -133,13 +133,13 @@ export default function Button({
     className: clsx(
       display === 'block' ? 'flex w-full justify-center' : 'inline-flex',
       'whitespace-nowrap items-center border font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
-      isDisabled ? variantDisabledClasses[variant] : variantClasses[variant],
-      isDisabled && 'pointer-events-none',
+      disabled ? variantDisabledClasses[variant] : variantClasses[variant],
+      disabled && 'pointer-events-none',
       isLabelHidden ? iconOnlySizeClasses[size] : sizeClasses[size],
       baseClasses[size],
       className,
     ),
-    disabled: isDisabled,
+    disabled,
     onClick,
   };
 

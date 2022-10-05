@@ -18,3 +18,5 @@ public/dist
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+tsconfig.tsbuildinfo

@@ -6,10 +6,9 @@ import type {
   ButtonDisplay,
   ButtonSize,
   ButtonType,
-  ButtonVariant} from '@tih/ui';
-import {
-  Button
+  ButtonVariant,
 } from '@tih/ui';
+import { Button } from '@tih/ui';
 
 const buttonTypes: ReadonlyArray<ButtonType> = ['button', 'reset', 'submit'];
 const buttonSizes: ReadonlyArray<ButtonSize> = ['sm', 'md', 'lg'];
@@ -32,12 +31,12 @@ export default {
       control: { type: 'select' },
       options: buttonAddOnPositions,
     },
+    disabled: {
+      control: 'boolean',
+    },
     display: {
       control: { type: 'select' },
       options: buttonDisplays,
-    },
-    isDisabled: {
-      control: 'boolean',
     },
     isLoading: {
       control: 'boolean',
@@ -112,7 +111,7 @@ export function Disabled() {
       {buttonVariants.map((variant) => (
         <Button
           key={variant}
-          isDisabled={true}
+          disabled={true}
           label="Click Me"
           size="md"
           variant={variant}
@@ -140,7 +139,7 @@ export function Loading() {
         {buttonVariants.map((variant) => (
           <Button
             key={variant}
-            isDisabled={true}
+            disabled={true}
             isLoading={true}
             label="Click Me"
             size="md"
@@ -166,8 +165,8 @@ export function Icons() {
           />
         ))}
         <Button
+          disabled={true}
           icon={EnvelopeIcon}
-          isDisabled={true}
           label="Click Me"
           size="lg"
           variant="primary"
@@ -186,8 +185,8 @@ export function Icons() {
         ))}
         <Button
           addonPosition="start"
+          disabled={true}
           icon={EnvelopeIcon}
-          isDisabled={true}
           label="Click Me"
           size="lg"
           variant="primary"
@@ -205,9 +204,9 @@ export function Icons() {
           />
         ))}
         <Button
+          disabled={true}
           display="block"
           icon={EnvelopeIcon}
-          isDisabled={true}
           label="Click Me"
           size="lg"
           variant="primary"
@@ -231,8 +230,8 @@ export function HiddenLabel() {
         />
       ))}
       <Button
+        disabled={true}
         icon={EnvelopeIcon}
-        isDisabled={true}
         isLabelHidden={true}
         label="Click Me"
         size="lg"
