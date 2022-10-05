@@ -129,7 +129,6 @@ export default function SubmitResumeForm() {
               <div className="mb-4">
                 <TextInput
                   {...register('title', { required: true })}
-                  defaultValue=""
                   errorMessage={errors?.title && 'Title cannot be empty!'}
                   label="Title"
                   placeholder={TITLE_PLACEHOLDER}
@@ -198,7 +197,6 @@ export default function SubmitResumeForm() {
                 {/* TODO: Use TextInputArea instead */}
                 <TextInput
                   {...register('additionalInformation')}
-                  defaultValue=""
                   label="Additional Information"
                   placeholder={ADDITIONAL_INFO_PLACEHOLDER}
                   onChange={(val) => setValue('additionalInformation', val)}
