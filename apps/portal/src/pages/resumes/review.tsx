@@ -7,7 +7,7 @@ import {
   StarIcon,
 } from '@heroicons/react/20/solid';
 
-import CommentsSection from '~/components/resumes/CommentsSection';
+import CommentsSection from '~/components/resumes/comments/CommentsSection';
 import ResumePdf from '~/components/resumes/ResumePdf';
 
 export default function ResumeReviewPage() {
