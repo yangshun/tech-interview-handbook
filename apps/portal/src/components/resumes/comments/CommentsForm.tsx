@@ -57,18 +57,45 @@ export default function CommentsForm({
         onSubmit={onFormSubmit}>
         {/* TODO: Convert TextInput to TextArea */}
         <div className="mt-4 space-y-4">
-          {COMMENTS_SECTIONS.map(({ label, value, placeholder }) => {
-            return (
-              <TextInput
-                key={value}
-                id={value}
-                label={label}
-                name={value}
-                placeholder={placeholder}
-                type="text"
-              />
-            );
-          })}
+          <TextInput
+            id="general"
+            label="General"
+            name="general"
+            placeholder="General comments about the resume"
+            type="text"
+          />
+
+          <TextInput
+            id="education"
+            label="Education"
+            name="education"
+            placeholder="Comments about the Education section"
+            type="text"
+          />
+
+          <TextInput
+            id="experience"
+            label="Experience"
+            name="experience"
+            placeholder="Comments about the Experience section"
+            type="text"
+          />
+
+          <TextInput
+            id="projects"
+            label="Projects"
+            name="projects"
+            placeholder="Comments about the Projects section"
+            type="text"
+          />
+
+          <TextInput
+            id="skills"
+            label="Skills"
+            name="skills"
+            placeholder="Comments about the Skills section"
+            type="text"
+          />
         </div>
 
         <div className="flex justify-end space-x-2 pt-4">
