@@ -1,50 +1,56 @@
-import type { FormEvent } from 'react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Button, Dialog, TextInput } from '@tih/ui';
-
-import { COMMENTS_SECTIONS } from './constants';
 
 type CommentsFormProps = Readonly<{
   setShowCommentsForm: (show: boolean) => void;
 }>;
 
+type IFormInput = {
+  education: string;
+  experience: string;
+  general: string;
+  projects: string;
+  skills: string;
+};
+
+type InputKeys = keyof IFormInput;
+
 export default function CommentsForm({
   setShowCommentsForm,
 }: CommentsFormProps) {
   const [showDialog, setShowDialog] = useState(false);
-  const formRef = useRef<HTMLFormElement | null>(null);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { isDirty },
+  } = useForm<IFormInput>({
+    defaultValues: {
+      education: '',
+      experience: '',
+      general: '',
+      projects: '',
+      skills: '',
+    },
+  });
 
-  // TODO: Implement form validation. Disable Submit button until one input field is filled up
-  const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!formRef.current) {
-      return;
-    }
-
-    const formData = new FormData(formRef.current);
-
-    COMMENTS_SECTIONS.forEach(({ value }) => {
-      const comment = (formData.get(value) as string | null)?.trim();
-
-      if (!comment) {
-        return;
-      }
-
-      // TODO: Store comment in database & handle errors
-      /* eslint-disable no-console */
-      console.log(`Storing ${value} comment ${comment} in database`);
-      /* eslint-enable no-console */
-    });
-
-    // TODO: Handle form submission success
-    // Show alert & goto CommentsList
+  // TODO: Implement mutation to database
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    alert(JSON.stringify(data));
   };
 
-  // TODO: Form validation
-  // If form is empty, goto CommentsList
-  // If form not empty, show dialog
   const onCancel = () => {
-    setShowDialog(true);
+    if (isDirty) {
+      setShowDialog(true);
+    } else {
+      setShowCommentsForm(false);
+    }
+  };
+
+  const onValueChange = (section: InputKeys, value: string) => {
+    setValue(section, value.trim(), { shouldDirty: true });
   };
 
   return (
@@ -52,49 +58,48 @@ export default function CommentsForm({
       <h2 className="text-xl font-semibold text-gray-800">Add your review</h2>
 
       <form
-        ref={formRef}
         className="w-full space-y-8 divide-y divide-gray-200"
-        onSubmit={onFormSubmit}>
+        onSubmit={handleSubmit(onSubmit)}>
         {/* TODO: Convert TextInput to TextArea */}
         <div className="mt-4 space-y-4">
           <TextInput
-            id="general"
+            {...(register('general'), {})}
             label="General"
-            name="general"
             placeholder="General comments about the resume"
             type="text"
+            onChange={(value) => onValueChange('general', value)}
           />
 
           <TextInput
-            id="education"
+            {...(register('education'), {})}
             label="Education"
-            name="education"
             placeholder="Comments about the Education section"
             type="text"
+            onChange={(value) => onValueChange('education', value)}
           />
 
           <TextInput
-            id="experience"
+            {...(register('experience'), {})}
             label="Experience"
-            name="experience"
             placeholder="Comments about the Experience section"
             type="text"
+            onChange={(value) => onValueChange('experience', value)}
           />
 
           <TextInput
-            id="projects"
+            {...(register('projects'), {})}
             label="Projects"
-            name="projects"
             placeholder="Comments about the Projects section"
             type="text"
+            onChange={(value) => onValueChange('projects', value)}
           />
 
           <TextInput
-            id="skills"
+            {...(register('skills'), {})}
             label="Skills"
-            name="skills"
             placeholder="Comments about the Skills section"
             type="text"
+            onChange={(value) => onValueChange('skills', value)}
           />
         </div>
 
@@ -106,7 +111,12 @@ export default function CommentsForm({
             onClick={onCancel}
           />
 
-          <Button label="Submit" type="submit" variant="primary" />
+          <Button
+            disabled={!isDirty}
+            label="Submit"
+            type="submit"
+            variant="primary"
+          />
         </div>
       </form>
 
