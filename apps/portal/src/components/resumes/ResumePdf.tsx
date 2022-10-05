@@ -15,32 +15,35 @@ export default function ResumePdf() {
   };
 
   return (
-    <div className="mb-12 h-screen">
+    <div className="flex h-full flex-col">
       <Document
+        className="max-h-full basis-5/6 overflow-y-scroll"
         file="/test_resume.pdf"
         loading={<Spinner display="block" label="" size="lg" />}
         onLoadSuccess={onPdfLoadSuccess}>
         <Page pageNumber={pageNumber} />
       </Document>
 
-      <div className="m-4 flex h-10 flex-row items-center justify-between">
-        <Button
-          icon={ArrowLeftIcon}
-          isDisabled={pageNumber === 1}
-          isLabelHidden={true}
-          label="Previous"
-          variant="tertiary"
-        />
-        <p className="text-md text-gray-600">
-          Page {pageNumber} of {numPages}
-        </p>
-        <Button
-          icon={ArrowRightIcon}
-          isDisabled={pageNumber === numPages}
-          isLabelHidden={true}
-          label="Next"
-          variant="tertiary"
-        />
+      <div className="basis-1/6">
+        <div className="flex flex-row items-center justify-between p-4">
+          <Button
+            disabled={pageNumber === 1}
+            icon={ArrowLeftIcon}
+            isLabelHidden={true}
+            label="Previous"
+            variant="tertiary"
+          />
+          <p className="text-md text-gray-600">
+            Page {pageNumber} of {numPages}
+          </p>
+          <Button
+            disabled={pageNumber === numPages}
+            icon={ArrowRightIcon}
+            isLabelHidden={true}
+            label="Next"
+            variant="tertiary"
+          />
+        </div>
       </div>
     </div>
   );

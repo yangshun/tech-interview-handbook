@@ -12,7 +12,7 @@ import ResumePdf from '~/components/resumes/ResumePdf';
 
 export default function ResumeReviewPage() {
   return (
-    <main className="m-4 flex-1">
+    <main className="h-full w-full flex-1 p-4">
       <div className="flex flex-row md:space-x-8">
         <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
           Please help moi, applying for medtech startups in Singapore
@@ -30,7 +30,7 @@ export default function ResumeReviewPage() {
           <span className="relative -ml-px inline-flex">12k</span>
         </button>
       </div>
-      <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-8">
+      <div className="flex flex-col pt-1 sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-8">
         <div className="mt-2 flex items-center text-sm text-gray-500">
           <BriefcaseIcon
             aria-hidden="true"
@@ -38,21 +38,21 @@ export default function ResumeReviewPage() {
           />
           Software Engineer (Backend)
         </div>
-        <div className="mt-2 flex items-center text-sm text-gray-500">
+        <div className="flex items-center pt-2 text-sm text-gray-500">
           <MapPinIcon
             aria-hidden="true"
             className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
           />
           Singapore
         </div>
-        <div className="mt-2 flex items-center text-sm text-gray-500">
+        <div className="flex items-center pt-2 text-sm text-gray-500">
           <AcademicCapIcon
             aria-hidden="true"
             className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
           />
           Fresh Grad
         </div>
-        <div className="mt-2 flex items-center text-sm text-gray-500">
+        <div className="flex items-center pt-2 text-sm text-gray-500">
           <CalendarIcon
             aria-hidden="true"
             className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
@@ -60,7 +60,7 @@ export default function ResumeReviewPage() {
           Uploaded 2 days ago by Git Ji Ra
         </div>
       </div>
-      <div className="mt-2 flex items-center text-sm text-gray-500">
+      <div className="flex items-center pt-2 text-sm text-gray-500">
         <InformationCircleIcon
           aria-hidden="true"
           className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
@@ -68,8 +68,8 @@ export default function ResumeReviewPage() {
         Looking to break into SWE roles after doing engineering for the past 2
         years
       </div>
-      <div className="my-4 flex max-h-full w-full flex-row">
-        <div className="max-h-screen w-1/2 overflow-scroll">
+      <div className="flex h-full w-full flex-row py-4">
+        <div className="w-1/2">
           <ResumePdf />
         </div>
         <div className="mx-8 w-1/2">
