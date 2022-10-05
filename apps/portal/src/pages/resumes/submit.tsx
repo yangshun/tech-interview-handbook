@@ -6,6 +6,8 @@ import { Button, Select, TextInput } from '@tih/ui';
 const TITLE_PLACEHOLDER =
   'e.g. Applying for Company XYZ, please help me to review!';
 const ADDITIONAL_INFO_PLACEHOLDER = `e.g. I’m applying for company XYZ. I have been resume-rejected by N companies that I have applied for. Please help me to review so company XYZ gives me an interview!`;
+const FILE_UPLOAD_ERROR = 'Please upload a PDF file that is less than 10MB.';
+
 const MAX_FILE_SIZE_LIMIT = 10485760;
 
 export default function SubmitResumeForm() {
@@ -59,6 +61,7 @@ export default function SubmitResumeForm() {
   const [experience, setExperience] = useState(experienceItems[0].label);
   const [location, setLocation] = useState(locationItems[0].label);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [invalidFileUploadError, setInvalidFileUploadError] = useState('');
 
   const onUploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.item(0);
@@ -66,8 +69,10 @@ export default function SubmitResumeForm() {
       return;
     }
     if (file.type !== 'application/pdf' || file.size > MAX_FILE_SIZE_LIMIT) {
+      setInvalidFileUploadError(FILE_UPLOAD_ERROR);
       return;
     }
+    setInvalidFileUploadError('');
     setResumeFile(file);
   };
 
@@ -122,6 +127,11 @@ export default function SubmitResumeForm() {
               </div>
               <p className="text-sm font-medium text-slate-700">
                 Upload resume (PDF format)
+                {invalidFileUploadError && (
+                  <span className="text-danger-600 ml-4 text-sm font-medium">
+                    {invalidFileUploadError}
+                  </span>
+                )}
               </p>
               <div className="mb-4 mt-2 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                 <div className="space-y-1 text-center">
@@ -147,7 +157,6 @@ export default function SubmitResumeForm() {
                   <p className="text-xs text-gray-500">PDF up to 10MB</p>
                 </div>
               </div>
-
               <p className="mb-2 text-sm font-medium text-slate-700">
                 Additional Information
               </p>
@@ -156,14 +165,24 @@ export default function SubmitResumeForm() {
                 name="additonal_information"
                 placeholder={ADDITIONAL_INFO_PLACEHOLDER}
               />
-              <Button
-                addonPosition="start"
-                display="inline"
-                label="Click Me"
-                size="md"
-                type="submit"
-                variant="primary"
-              />
+              <div className="mt-4 flex justify-end gap-4">
+                <Button
+                  addonPosition="start"
+                  display="inline"
+                  label="Clear"
+                  size="md"
+                  type="reset"
+                  variant="tertiary"
+                />
+                <Button
+                  addonPosition="start"
+                  display="inline"
+                  label="Submit"
+                  size="md"
+                  type="submit"
+                  variant="tertiary"
+                />
+              </div>
             </form>
           </div>
         </section>
