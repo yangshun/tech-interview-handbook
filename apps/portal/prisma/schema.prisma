@@ -95,9 +95,7 @@ model ResumesResume {
     userId         String
     title          String           @db.Text
     additionalInfo String           @db.Text
-    // TODO: role
-    // TODO: experience
-    // TODO: location
+    // TODO: Add role, experience, location from Enums
     url            String
     createdAt      DateTime         @default(now())
     updatedAt      DateTime         @updatedAt
@@ -106,20 +104,11 @@ model ResumesResume {
     comments       ResumesComment[]
 }
 
-enum Section {
-    GENERAL
-    EDUCATION
-    EXPERIENCE
-    PROJECTS
-    SKILLS
-}
-
 model ResumesStar {
     id        String        @id @default(cuid())
     resumeId  String
     userId    String
     createdAt DateTime      @default(now())
-    updatedAt DateTime      @updatedAt
     user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
     resume    ResumesResume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 }
@@ -129,12 +118,20 @@ model ResumesComment {
     resumeId    String
     userId      String
     description String               @db.Text
-    section     Section
+    section     ResumesSection
     createdAt   DateTime             @default(now())
     updatedAt   DateTime             @updatedAt
     user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
     resume      ResumesResume        @relation(fields: [resumeId], references: [id], onDelete: Cascade)
     votes       ResumesCommentVote[]
+}
+
+enum ResumesSection {
+    GENERAL
+    EDUCATION
+    EXPERIENCE
+    PROJECTS
+    SKILLS
 }
 
 model ResumesCommentVote {
