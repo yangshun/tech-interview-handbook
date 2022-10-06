@@ -56,6 +56,7 @@ function TextInput(
     id: idParam,
     isLabelHidden = false,
     label,
+    required,
     startIcon: StartIcon,
     type = 'text',
     value,
@@ -80,6 +81,7 @@ function TextInput(
         )}
         htmlFor={id}>
         {label}
+        {required && <span className="text-danger-500 not-sr-only"> *</span>}
       </label>
       <div className="relative mt-1">
         {StartIcon && (
@@ -101,6 +103,7 @@ function TextInput(
           defaultValue={defaultValue}
           disabled={disabled}
           id={id}
+          required={required}
           type={type}
           value={value != null ? value : undefined}
           onChange={(event) => {

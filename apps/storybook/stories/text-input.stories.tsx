@@ -30,6 +30,9 @@ export default {
     placeholder: {
       control: 'text',
     },
+    required: {
+      control: 'boolean',
+    },
     type: {
       control: 'text',
     },
@@ -106,6 +109,17 @@ export function Disabled() {
       disabled={true}
       label="Disabled input"
       placeholder="John Doe"
+      type="text"
+    />
+  );
+}
+
+export function Required() {
+  return (
+    <TextInput
+      label="Required input"
+      placeholder="John Doe"
+      required={true}
       type="text"
     />
   );
