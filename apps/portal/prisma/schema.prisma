@@ -94,9 +94,12 @@ model ResumesResume {
     id             String           @id @default(cuid())
     userId         String
     title          String           @db.Text
-    additionalInfo String           @db.Text
-    // TODO: Add role, experience, location from Enums
+    // TODO: Update role, experience, location to use Enums
+    role           String           @db.Text
+    experience     String           @db.Text
+    location       String           @db.Text
     url            String
+    additionalInfo String?          @db.Text
     createdAt      DateTime         @default(now())
     updatedAt      DateTime         @updatedAt
     user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
