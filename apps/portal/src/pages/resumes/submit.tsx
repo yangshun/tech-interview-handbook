@@ -1,9 +1,12 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { PaperClipIcon } from '@heroicons/react/24/outline';
 import { Button, Select, TextInput } from '@tih/ui';
+
+import { trpc } from '~/utils/trpc';
 
 const TITLE_PLACEHOLDER =
   'e.g. Applying for Company XYZ, please help me to review!';
@@ -13,7 +16,7 @@ const FILE_UPLOAD_ERROR = 'Please upload a PDF file that is less than 10MB.';
 const MAX_FILE_SIZE_LIMIT = 10485760;
 
 type IFormInput = {
-  additionalInformation?: string;
+  additionalInfo?: string;
   experience: string;
   file: File;
   location: string;
@@ -68,6 +71,9 @@ export default function SubmitResumeForm() {
     },
   ];
 
+  const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
+  const router = useRouter();
+
   const [resumeFile, setResumeFile] = useState<File | null>();
   const [invalidFileUploadError, setInvalidFileUploadError] = useState<
     string | null
@@ -81,10 +87,11 @@ export default function SubmitResumeForm() {
     formState: { errors },
   } = useForm<IFormInput>();
 
-  // TODO: Add Create resume mutation
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    alert(JSON.stringify(data));
-    onClickReset();
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    await resumeCreateMutation.mutate({
+      ...data,
+    });
+    router.push('/resumes');
   };
 
   const onUploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -196,10 +203,10 @@ export default function SubmitResumeForm() {
               <div className="mb-4">
                 {/* TODO: Use TextInputArea instead */}
                 <TextInput
-                  {...register('additionalInformation')}
+                  {...register('additionalInfo')}
                   label="Additional Information"
                   placeholder={ADDITIONAL_INFO_PLACEHOLDER}
-                  onChange={(val) => setValue('additionalInformation', val)}
+                  onChange={(val) => setValue('additionalInfo', val)}
                 />
               </div>
               <div className="mt-4 flex justify-end gap-4">

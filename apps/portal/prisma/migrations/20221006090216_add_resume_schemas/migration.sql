@@ -6,8 +6,11 @@ CREATE TABLE "ResumesResume" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "additionalInfo" TEXT NOT NULL,
+    "role" TEXT NOT NULL,
+    "experience" TEXT NOT NULL,
+    "location" TEXT NOT NULL,
     "url" TEXT NOT NULL,
+    "additionalInfo" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
