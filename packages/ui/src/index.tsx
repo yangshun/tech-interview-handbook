@@ -7,6 +7,9 @@ export { default as Badge } from './Badge/Badge';
 // Button
 export * from './Button/Button';
 export { default as Button } from './Button/Button';
+// Collapsible
+export * from './Collapsible/Collapsible';
+export { default as Collapsible } from './Collapsible/Collapsible';
 // Dialog
 export * from './Dialog/Dialog';
 export { default as Dialog } from './Dialog/Dialog';
