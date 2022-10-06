@@ -176,3 +176,28 @@ export function Disabled() {
     </div>
   );
 }
+
+export function Uncontrolled() {
+  return (
+    <div className="space-x-4">
+      <Select
+        defaultValue="apple"
+        label="Select a fruit"
+        options={[
+          {
+            label: 'Apple',
+            value: 'apple',
+          },
+          {
+            label: 'Banana',
+            value: 'banana',
+          },
+          {
+            label: 'Orange',
+            value: 'orange',
+          },
+        ]}
+      />
+    </div>
+  );
+}

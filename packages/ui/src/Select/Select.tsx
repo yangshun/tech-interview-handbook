@@ -16,18 +16,20 @@ export type SelectItem<T> = Readonly<{
 export type SelectDisplay = 'block' | 'inline';
 
 type Props<T> = Readonly<{
+  defaultValue?: T;
   display?: SelectDisplay;
   isLabelHidden?: boolean;
   label: string;
   name?: string;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   options: ReadonlyArray<SelectItem<T>>;
-  value: T;
+  value?: T;
 }> &
   Readonly<Attributes>;
 
 function Select<T>(
   {
+    defaultValue,
     display,
     disabled,
     label,
@@ -59,11 +61,12 @@ function Select<T>(
           'focus:border-primary-500 focus:ring-primary-500 rounded-md border-slate-300 py-2 pl-3 pr-10 text-base focus:outline-none sm:text-sm',
           disabled && 'bg-slate-100',
         )}
+        defaultValue={defaultValue != null ? String(defaultValue) : undefined}
         disabled={disabled}
         id={id}
-        value={String(value)}
+        value={value != null ? String(value) : undefined}
         onChange={(event) => {
-          onChange(event.target.value);
+          onChange?.(event.target.value);
         }}
         {...props}>
         {options.map(({ label: optionLabel, value: optionValue }) => (
