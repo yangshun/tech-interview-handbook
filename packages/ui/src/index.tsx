@@ -16,6 +16,9 @@ export { default as Dialog } from './Dialog/Dialog';
 // DropdownMenu
 export * from './DropdownMenu/DropdownMenu';
 export { default as DropdownMenu } from './DropdownMenu/DropdownMenu';
+// HorizontalDivider
+export * from './HorizontalDivider/HorizontalDivider';
+export { default as HorizontalDivider } from './HorizontalDivider/HorizontalDivider';
 // Select
 export * from './Select/Select';
 export { default as Select } from './Select/Select';
