@@ -49,6 +49,8 @@ model User {
     resumesStars        ResumesStar[]
     resumesComments     ResumesComment[]
     resumesCommentVotes ResumesCommentVote[]
+
+    offerProfiles OffersProfile[]
 }
 
 model VerificationToken {
@@ -152,6 +154,149 @@ model ResumesCommentVote {
 // Add Offers project models here, prefix all models with "Offer",
 // use camelCase for field names, and try to name them consistently
 // across all models in this file.
+
+model OffersProfile {
+    id String @id @default(cuid())
+
+    background OffersBackground?
+
+    editToken String
+
+    replies OffersReply[]
+
+    offers OffersOffer[]
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String
+}
+
+model OffersBackground {
+    id String @id @default(cuid())
+
+    totalYoe     Int?
+    specificYoes OffersSpecificYoe[]
+
+    experiences OffersExperience[] // For extensibility in the future
+
+    educations OffersEducation[] // For extensibility in the future
+
+    profile         OffersProfile @relation(fields: [offersProfileId], references: [id])
+    offersProfileId String        @unique
+}
+
+model OffersSpecificYoe {
+    id String @id @default(cuid())
+
+    yoe    Int
+    domain String
+
+    background   OffersBackground @relation(fields: [backgroundId], references: [id])
+    backgroundId String
+}
+
+model OffersExperience {
+    id String @id @default(cuid())
+
+    company   Company? @relation(fields: [companyId], references: [id])
+    companyId String?
+
+    jobType  JobType?
+    title    String?
+    currency String?
+
+    // Add more fields
+    durationInMonths Int?
+    specialization   String?
+
+    // FULLTIME fields
+    level             String?
+    totalCompensation BigInt?
+
+    // INTERN fields
+    monthlySalary BigInt?
+
+    background   OffersBackground @relation(fields: [backgroundId], references: [id])
+    backgroundId String
+}
+
+enum JobType {
+    INTERN
+    FULLTIME
+}
+
+model OffersEducation {
+    id        String   @id @default(cuid())
+    type      String?
+    field     String?
+    attending Boolean?
+
+    // Add more fields
+    school    String?
+    startDate DateTime?
+    endDate   DateTime?
+
+    background   OffersBackground @relation(fields: [backgroundId], references: [id])
+    backgroundId String
+}
+
+model OffersReply {
+    id String @id @default(cuid())
+
+    message String
+    upvotes Int // CHECK: Need log in to upvote?
+
+    parentReplyId String?
+    parentReply   OffersReply?  @relation("ReplyThread", fields: [parentReplyId], references: [id])
+    replies       OffersReply[] @relation("ReplyThread")
+
+    profile   OffersProfile @relation(fields: [profileId], references: [id])
+    profileId String
+}
+
+model OffersOffer {
+    id String @id @default(cuid())
+
+    profile   OffersProfile @relation(fields: [profileId], references: [id])
+    profileId String
+
+    company   OffersCompany @relation(fields: [companyId], references: [id])
+    companyId String
+
+    title               String
+    specialization      String
+    monthYearReceived   DateTime
+    location            String
+    negotiationStrategy String?
+    comments            String?
+
+    jobType JobType
+
+    OffersIntern   OffersIntern?
+    OffersFullTime OffersFullTime?
+}
+
+model OffersIntern {
+    offerId String      @id
+    offer   OffersOffer @relation(fields: [offerId], references: [id])
+
+    internshipCycle String
+    startYear       Int
+    monthlySalary   BigInt
+    currency        String
+}
+
+model OffersFullTime {
+    offerId String      @id
+    offer   OffersOffer @relation(fields: [offerId], references: [id])
+
+    level             String
+    totalCompensation BigInt
+    baseSalary        BigInt
+    bonus             BigInt
+    stocks            BigInt // CHECK: What to store stocks as? String or Int
+    currency          String
+}
+
 // End of Offers project models.
 
 // Start of Questions project models.
