@@ -3,12 +3,25 @@ import { useState } from 'react';
 import CommentsForm from './CommentsForm';
 import CommentsList from './CommentsList';
 
-export default function CommentsSection() {
+type ICommentsSectionProps = {
+  resumeId: string;
+};
+
+// TODO: Retrieve resumeId for CommentsSection
+export default function CommentsSection({
+  resumeId = '',
+}: ICommentsSectionProps) {
   const [showCommentsForm, setShowCommentsForm] = useState(false);
 
   return showCommentsForm ? (
-    <CommentsForm setShowCommentsForm={setShowCommentsForm} />
+    <CommentsForm
+      resumeId={resumeId}
+      setShowCommentsForm={setShowCommentsForm}
+    />
   ) : (
-    <CommentsList setShowCommentsForm={setShowCommentsForm} />
+    <CommentsList
+      resumeId={resumeId}
+      setShowCommentsForm={setShowCommentsForm}
+    />
   );
 }

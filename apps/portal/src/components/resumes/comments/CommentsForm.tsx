@@ -20,9 +20,8 @@ type IFormInput = {
 
 type InputKeys = keyof IFormInput;
 
-// TODO: Retrieve resumeId and remove default
 export default function CommentsForm({
-  resumeId = '',
+  resumeId,
   setShowCommentsForm,
 }: CommentsFormProps) {
   const [showDialog, setShowDialog] = useState(false);
