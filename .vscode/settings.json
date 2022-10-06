@@ -15,5 +15,8 @@
   "typescript.format.enable": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": true
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
   }
 }

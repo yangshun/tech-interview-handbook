@@ -37,14 +37,18 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    todos         Todo[]
+    id                  String               @id @default(cuid())
+    name                String?
+    email               String?              @unique
+    emailVerified       DateTime?
+    image               String?
+    accounts            Account[]
+    sessions            Session[]
+    todos               Todo[]
+    resumesResumes      ResumesResume[]
+    resumesStars        ResumesStar[]
+    resumesComments     ResumesComment[]
+    resumesCommentVotes ResumesCommentVote[]
 }
 
 model VerificationToken {
@@ -85,6 +89,61 @@ model Company {
 // use camelCase for field names, and try to name them consistently
 // across all models in this file.
 // End of Resumes project models.
+
+model ResumesResume {
+    id             String           @id @default(cuid())
+    userId         String
+    title          String           @db.Text
+    additionalInfo String           @db.Text
+    // TODO: Add role, experience, location from Enums
+    url            String
+    createdAt      DateTime         @default(now())
+    updatedAt      DateTime         @updatedAt
+    user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+    stars          ResumesStar[]
+    comments       ResumesComment[]
+}
+
+model ResumesStar {
+    id        String        @id @default(cuid())
+    resumeId  String
+    userId    String
+    createdAt DateTime      @default(now())
+    user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+    resume    ResumesResume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+}
+
+model ResumesComment {
+    id          String               @id @default(cuid())
+    resumeId    String
+    userId      String
+    description String               @db.Text
+    section     ResumesSection
+    createdAt   DateTime             @default(now())
+    updatedAt   DateTime             @updatedAt
+    user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+    resume      ResumesResume        @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+    votes       ResumesCommentVote[]
+}
+
+enum ResumesSection {
+    GENERAL
+    EDUCATION
+    EXPERIENCE
+    PROJECTS
+    SKILLS
+}
+
+model ResumesCommentVote {
+    id        String         @id @default(cuid())
+    commentId String
+    userId    String
+    value     Int
+    createdAt DateTime       @default(now())
+    updatedAt DateTime       @updatedAt
+    user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+    comment   ResumesComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+}
 
 // Start of Offers project models.
 // Add Offers project models here, prefix all models with "Offer",
