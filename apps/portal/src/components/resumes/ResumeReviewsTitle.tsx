@@ -1,3 +1,13 @@
+import { Badge } from '@tih/ui';
+
 export default function ResumeReviewsTitle() {
-  return <h1 className="text-center text-4xl font-bold">Resume Reviews</h1>;
+  return (
+    <div>
+      <h1 className="text-2xl font-bold">Resume Reviews</h1>
+      <Badge
+        label="Check out reviewed resumes or look for resumes to review"
+        variant="info"
+      />
+    </div>
+  );
 }
