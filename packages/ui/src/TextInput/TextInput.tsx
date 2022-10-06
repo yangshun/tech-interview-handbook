@@ -24,7 +24,43 @@ type Attributes = Pick<
   | 'type'
 >;
 
-type Props = Readonly<{
+type StartAddOnProps =
+  | Readonly<{
+      startAddOn: React.ComponentType<React.ComponentProps<'svg'>>;
+      startAddOnType: 'icon';
+    }>
+  | Readonly<{
+      startAddOn: React.ReactNode;
+      startAddOnType: 'element';
+    }>
+  | Readonly<{
+      startAddOn: string;
+      startAddOnType: 'label';
+    }>
+  | Readonly<{
+      startAddOn?: undefined;
+      startAddOnType?: undefined;
+    }>;
+
+type EndAddOnProps =
+  | Readonly<{
+      endAddOn: React.ComponentType<React.ComponentProps<'svg'>>;
+      endAddOnType: 'icon';
+    }>
+  | Readonly<{
+      endAddOn: React.ReactNode;
+      endAddOnType: 'element';
+    }>
+  | Readonly<{
+      endAddOn: string;
+      endAddOnType: 'label';
+    }>
+  | Readonly<{
+      endAddOn?: undefined;
+      endAddOnType?: undefined;
+    }>;
+
+type BaseProps = Readonly<{
   defaultValue?: string;
   endIcon?: React.ComponentType<React.ComponentProps<'svg'>>;
   errorMessage?: React.ReactNode;
@@ -33,31 +69,46 @@ type Props = Readonly<{
   label: string;
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
   onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void;
-  startIcon?: React.ComponentType<React.ComponentProps<'svg'>>;
   value?: string;
 }> &
   Readonly<Attributes>;
 
+type Props = BaseProps & EndAddOnProps & StartAddOnProps;
+
 type State = 'error' | 'normal';
 
-const stateClasses: Record<State, string> = {
-  error:
-    'border-danger-300 text-danger-900 placeholder-danger-300 focus:outline-none focus:ring-danger-500 focus:border-danger-500',
-  normal:
-    'placeholder:text-slate-400 focus:ring-primary-500 focus:border-primary-500 border-slate-300',
+const stateClasses: Record<
+  State,
+  Readonly<{
+    container: string;
+    input: string;
+  }>
+> = {
+  error: {
+    container:
+      'border-danger-300 focus-within:outline-none focus-within:ring-danger-500 focus-within:border-danger-500',
+    input: 'text-danger-900 placeholder-danger-300',
+  },
+  normal: {
+    container:
+      'focus-within:ring-primary-500 focus-within:border-primary-500 border-slate-300',
+    input: 'placeholder:text-slate-400',
+  },
 };
 
 function TextInput(
   {
     defaultValue,
     disabled,
-    endIcon: EndIcon,
+    endAddOn,
+    endAddOnType,
     errorMessage,
     id: idParam,
     isLabelHidden = false,
     label,
     required,
-    startIcon: StartIcon,
+    startAddOn,
+    startAddOnType,
     type = 'text',
     value,
     onChange,
@@ -70,6 +121,7 @@ function TextInput(
   const id = idParam ?? generatedId;
   const errorId = useId();
   const state: State = hasError ? 'error' : 'normal';
+  const { input: inputClass, container: containerClass } = stateClasses[state];
 
   return (
     <div>
@@ -81,24 +133,55 @@ function TextInput(
         )}
         htmlFor={id}>
         {label}
-        {required && <span className="text-danger-500 not-sr-only"> *</span>}
-      </label>
-      <div className="relative mt-1">
-        {StartIcon && (
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <StartIcon aria-hidden="true" className="h-5 w-5 text-slate-400" />
-          </div>
+        {required && (
+          <span aria-hidden="true" className="text-danger-500">
+            {' '}
+            *
+          </span>
         )}
+      </label>
+      <div
+        className={clsx(
+          'flex w-full overflow-hidden rounded-md border focus-within:ring-1 sm:text-sm',
+          !isLabelHidden && 'mt-1',
+          disabled && 'pointer-events-none select-none bg-slate-100',
+          containerClass,
+        )}>
+        {(() => {
+          if (startAddOnType == null) {
+            return;
+          }
+
+          switch (startAddOnType) {
+            case 'label':
+              return (
+                <div className="pointer-events-none flex items-center pl-3 text-slate-500">
+                  {startAddOn}
+                </div>
+              );
+            case 'icon': {
+              const StartAddOn = startAddOn;
+              return (
+                <div className="pointer-events-none flex items-center pl-3">
+                  <StartAddOn
+                    aria-hidden="true"
+                    className="h-5 w-5 text-slate-400"
+                  />
+                </div>
+              );
+            }
+            case 'element':
+              return startAddOn;
+          }
+        })()}
         <input
           ref={ref}
           aria-describedby={hasError ? errorId : undefined}
           aria-invalid={hasError ? true : undefined}
           className={clsx(
-            'block w-full rounded-md sm:text-sm',
-            StartIcon && 'pl-10',
-            EndIcon && 'pr-10',
-            stateClasses[state],
-            disabled && 'bg-slate-100',
+            'flex-1 border-none focus:outline-none focus:ring-0 sm:text-sm',
+            inputClass,
+            disabled && 'bg-transparent',
           )}
           defaultValue={defaultValue}
           disabled={disabled}
@@ -115,11 +198,33 @@ function TextInput(
           }}
           {...props}
         />
-        {EndIcon && (
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <EndIcon aria-hidden="true" className="h-5 w-5 text-slate-400" />
-          </div>
-        )}
+        {(() => {
+          if (endAddOnType == null) {
+            return;
+          }
+
+          switch (endAddOnType) {
+            case 'label':
+              return (
+                <div className="pointer-events-none flex items-center pr-3 text-slate-500">
+                  {endAddOn}
+                </div>
+              );
+            case 'icon': {
+              const EndAddOn = endAddOn;
+              return (
+                <div className="pointer-events-none flex items-center pr-3">
+                  <EndAddOn
+                    aria-hidden="true"
+                    className="h-5 w-5 text-slate-400"
+                  />
+                </div>
+              );
+            }
+            case 'element':
+              return endAddOn;
+          }
+        })()}
       </div>
       {errorMessage && (
         <p className="text-danger-600 mt-2 text-sm" id={errorId}>
