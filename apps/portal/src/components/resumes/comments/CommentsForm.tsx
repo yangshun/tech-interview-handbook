@@ -3,7 +3,10 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { Button, Dialog, TextInput } from '@tih/ui';
 
+import { trpc } from '~/utils/trpc';
+
 type CommentsFormProps = Readonly<{
+  resumeId: string;
   setShowCommentsForm: (show: boolean) => void;
 }>;
 
@@ -17,7 +20,9 @@ type IFormInput = {
 
 type InputKeys = keyof IFormInput;
 
+// TODO: Retrieve resumeId and remove default
 export default function CommentsForm({
+  resumeId = '',
   setShowCommentsForm,
 }: CommentsFormProps) {
   const [showDialog, setShowDialog] = useState(false);
@@ -35,10 +40,16 @@ export default function CommentsForm({
       skills: '',
     },
   });
+  const reviewCreateMutation = trpc.useMutation('resumes.reviews.user.create');
 
-  // TODO: Implement mutation to database
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    alert(JSON.stringify(data));
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    await reviewCreateMutation.mutate({
+      resumeId,
+      ...data,
+    });
+
+    // Redirect back to comments section
+    setShowCommentsForm(false);
   };
 
   const onCancel = () => {
