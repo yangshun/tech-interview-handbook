@@ -27,6 +27,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.36.1",
+    "react-pdf": "^5.7.2",
     "react-query": "^3.39.2",
     "superjson": "^1.10.0",
     "zod": "^3.18.0"
@@ -37,6 +38,7 @@
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "@types/react-pdf": "^5.7.2",
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.16",
     "prettier-plugin-tailwindcss": "^0.1.13",
