@@ -16,11 +16,10 @@ export default function CommentsList({
 }: CommentsListProps) {
   const [tab, setTab] = useState(COMMENTS_SECTIONS[0].value);
 
-  // TODO: Render comments
   const commentsQuery = trpc.useQuery(['resumes.reviews.list', { resumeId }]);
 
   /* eslint-disable no-console */
-  console.log(commentsQuery);
+  console.log(commentsQuery.data);
   /* eslint-enable no-console */
 
   return (

@@ -28,6 +28,7 @@ export const resumeReviewsRouter = createRouter().query('list', {
           },
         },
         votes: {
+          take: 1,
           where: {
             userId,
           },
