@@ -112,7 +112,7 @@ export default function AppShell({ children }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-full min-h-screen">
       {/* Narrow sidebar */}
       <div className="hidden w-28 overflow-y-auto bg-indigo-700 md:block">
         <div className="flex w-full flex-col items-center py-6">

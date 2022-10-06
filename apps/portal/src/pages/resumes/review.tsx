@@ -12,7 +12,7 @@ import ResumePdf from '~/components/resumes/ResumePdf';
 
 export default function ResumeReviewPage() {
   return (
-    <main className="h-full w-full flex-1 p-4">
+    <main className="flex-1 p-4">
       <div className="flex flex-row md:space-x-8">
         <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
           Please help moi, applying for medtech startups in Singapore
