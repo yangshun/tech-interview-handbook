@@ -9,5 +9,11 @@
       "~/*": ["*"]
     }
   },
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
   "include": ["src", "next-env.d.ts"]
 }

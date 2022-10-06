@@ -70,6 +70,16 @@ enum TodoStatus {
     COMPLETE
 }
 
+model Company {
+    id          String   @id @default(cuid())
+    name        String   @db.Text
+    slug        String   @unique
+    description String?  @db.Text
+    logoUrl     String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
 // Start of Resumes project models.
 // Add Resumes project models here, prefix all models with "Resumes",
 // use camelCase for field names, and try to name them consistently
