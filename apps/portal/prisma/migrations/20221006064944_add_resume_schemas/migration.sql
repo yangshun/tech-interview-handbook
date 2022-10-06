@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Section" AS ENUM ('GENERAL', 'EDUCATION', 'EXPERIENCE', 'PROJECTS', 'SKILLS');
+CREATE TYPE "ResumesSection" AS ENUM ('GENERAL', 'EDUCATION', 'EXPERIENCE', 'PROJECTS', 'SKILLS');
 
 -- CreateTable
 CREATE TABLE "ResumesResume" (
@@ -20,7 +20,6 @@ CREATE TABLE "ResumesStar" (
     "resumeId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "ResumesStar_pkey" PRIMARY KEY ("id")
 );
@@ -31,7 +30,7 @@ CREATE TABLE "ResumesComment" (
     "resumeId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "section" "Section" NOT NULL,
+    "section" "ResumesSection" NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
