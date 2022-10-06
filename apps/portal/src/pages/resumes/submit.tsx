@@ -217,7 +217,7 @@ export default function SubmitResumeForm() {
                   label="Submit"
                   size="md"
                   type="submit"
-                  variant="tertiary"
+                  variant="primary"
                 />
               </div>
             </form>
