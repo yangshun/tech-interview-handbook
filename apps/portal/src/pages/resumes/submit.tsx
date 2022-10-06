@@ -68,25 +68,23 @@ export default function SubmitResumeForm() {
     },
   ];
 
-  const [title, setTitle] = useState('');
-  const [role, setRole] = useState(roleItems[0].label);
-  const [experience, setExperience] = useState(experienceItems[0].label);
-  const [location, setLocation] = useState(locationItems[0].label);
-  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeFile, setResumeFile] = useState<File | null>();
   const [invalidFileUploadError, setInvalidFileUploadError] = useState<
     string | null
   >(null);
-  const [additionalInfo, setAdditionalInfo] = useState('');
 
   const {
     register,
     handleSubmit,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm<IFormInput>();
 
   // TODO: Add Create resume mutation
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     alert(JSON.stringify(data));
+    onClickReset();
   };
 
   const onUploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,6 +100,11 @@ export default function SubmitResumeForm() {
     setResumeFile(file);
   };
 
+  const onClickReset = () => {
+    reset();
+    setResumeFile(null);
+  };
+
   const fileUploadError = useMemo(() => {
     if (invalidFileUploadError != null) {
       return invalidFileUploadError;
@@ -110,15 +113,6 @@ export default function SubmitResumeForm() {
       return 'Resume cannot be empty!';
     }
   }, [errors?.file, invalidFileUploadError]);
-
-  const onReset = () => {
-    setTitle('');
-    setLocation(locationItems[0].label);
-    setExperience(experienceItems[0].label);
-    setRole(roleItems[0].label);
-    setResumeFile(null);
-    setAdditionalInfo('');
-  };
 
   return (
     <>
@@ -138,8 +132,7 @@ export default function SubmitResumeForm() {
                   errorMessage={errors?.title && 'Title cannot be empty!'}
                   label="Title"
                   placeholder={TITLE_PLACEHOLDER}
-                  value={title}
-                  onChange={setTitle}
+                  onChange={(val) => setValue('title', val)}
                 />
               </div>
               <div className="mb-4">
@@ -147,8 +140,7 @@ export default function SubmitResumeForm() {
                   {...register('role', { required: true })}
                   label="Role"
                   options={roleItems}
-                  value={role}
-                  onChange={setRole}
+                  onChange={(val) => setValue('role', val)}
                 />
               </div>
               <div className="mb-4">
@@ -156,8 +148,7 @@ export default function SubmitResumeForm() {
                   {...register('experience', { required: true })}
                   label="Experience Level"
                   options={experienceItems}
-                  value={experience}
-                  onChange={setExperience}
+                  onChange={(val) => setValue('experience', val)}
                 />
               </div>
               <div className="mb-4">
@@ -166,8 +157,7 @@ export default function SubmitResumeForm() {
                   label="Location"
                   name="location"
                   options={locationItems}
-                  value={location}
-                  onChange={setLocation}
+                  onChange={(val) => setValue('location', val)}
                 />
               </div>
               <p className="text-sm font-medium text-slate-700">
@@ -209,8 +199,7 @@ export default function SubmitResumeForm() {
                   {...register('additionalInformation')}
                   label="Additional Information"
                   placeholder={ADDITIONAL_INFO_PLACEHOLDER}
-                  value={additionalInfo}
-                  onChange={setAdditionalInfo}
+                  onChange={(val) => setValue('additionalInformation', val)}
                 />
               </div>
               <div className="mt-4 flex justify-end gap-4">
@@ -220,7 +209,7 @@ export default function SubmitResumeForm() {
                   label="Clear"
                   size="md"
                   variant="tertiary"
-                  onClick={onReset}
+                  onClick={onClickReset}
                 />
                 <Button
                   addonPosition="start"
@@ -228,7 +217,7 @@ export default function SubmitResumeForm() {
                   label="Submit"
                   size="md"
                   type="submit"
-                  variant="tertiary"
+                  variant="primary"
                 />
               </div>
             </form>
