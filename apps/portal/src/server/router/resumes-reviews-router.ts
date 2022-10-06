@@ -2,7 +2,6 @@ import { z } from 'zod';
 
 import { createRouter } from './context';
 
-// TODO: Test this -> Not sure if it works
 export const resumeReviewsRouter = createRouter().query('list', {
   input: z.object({
     resumeId: z.string(),
