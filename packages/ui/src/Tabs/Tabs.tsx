@@ -19,46 +19,39 @@ export default function Tabs<T>({ label, tabs, value, onChange }: Props<T>) {
   return (
     <div className="w-full">
       <div role="tablist">
-        <div className="border-b border-slate-200">
-          <nav aria-label={label} className="-mb-px flex space-x-4">
-            {tabs.map((tab) => {
-              const isSelected = tab.value === value;
-              const commonProps = {
-                'aria-label': tab.label,
-                'aria-selected': isSelected,
-                children: tab.label,
-                className: clsx(
-                  isSelected
-                    ? 'border-primary-500 text-primary-600'
-                    : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300',
-                  'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm',
-                ),
-                onClick:
-                  onChange != null ? () => onChange(tab.value) : undefined,
-                role: 'tab',
-              };
+        <nav aria-label={label} className="flex space-x-2">
+          {tabs.map((tab) => {
+            const isSelected = tab.value === value;
+            const commonProps = {
+              'aria-label': tab.label,
+              'aria-selected': isSelected,
+              children: tab.label,
+              className: clsx(
+                isSelected
+                  ? 'bg-indigo-100 text-indigo-700'
+                  : 'hover:bg-slate-100 text-slate-500 hover:text-slate-700',
+                'px-3 py-2 font-medium text-sm rounded-md',
+              ),
+              onClick: onChange != null ? () => onChange(tab.value) : undefined,
+              role: 'tab',
+            };
 
-              if (tab.href != null) {
-                // TODO: Allow passing in of Link component.
-                return (
-                  <Link
-                    key={String(tab.value)}
-                    href={tab.href}
-                    {...commonProps}
-                  />
-                );
-              }
-
+            if (tab.href != null) {
+              // TODO: Allow passing in of Link component.
               return (
-                <button
+                <Link
                   key={String(tab.value)}
-                  type="button"
+                  href={tab.href}
                   {...commonProps}
                 />
               );
-            })}
-          </nav>
-        </div>
+            }
+
+            return (
+              <button key={String(tab.value)} type="button" {...commonProps} />
+            );
+          })}
+        </nav>
       </div>
     </div>
   );
