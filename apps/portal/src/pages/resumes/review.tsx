@@ -74,7 +74,7 @@ export default function ResumeReviewPage() {
         </div>
         <div className="mx-8 w-1/2">
           {/* TODO: Update resumeId */}
-          <CommentsSection resumeId="cl8x8zc5z0001yeokhwa7cs0a" />
+          <CommentsSection resumeId="cl8y6gtez0009yedbne9qp5zi" />
         </div>
       </div>
     </main>
