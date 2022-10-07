@@ -20,8 +20,8 @@ export default function QuestionSearchBar<
   sortValue,
 }: QuestionSearchBarProps<SortOptions>) {
   return (
-    <div className="flex items-end gap-2">
-      <div className="flex-1">
+    <div className="flex items-center gap-2">
+      <div className="flex-1 pt-1">
         <TextInput
           isLabelHidden={true}
           label="Search by content"
@@ -30,9 +30,10 @@ export default function QuestionSearchBar<
           startAddOnType="icon"
         />
       </div>
+      <span className="pl-3">Sort by</span>
       <Select
         display="inline"
-        label="Sort by"
+        label=""
         options={sortOptions}
         value={sortValue}
         onChange={onSortChange}></Select>
