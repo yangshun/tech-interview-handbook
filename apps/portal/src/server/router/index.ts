@@ -2,6 +2,7 @@ import superjson from 'superjson';
 
 import { createRouter } from './context';
 import { protectedExampleRouter } from './protected-example-router';
+import { resumesRouter } from './resumes';
 import { resumesDetailsRouter } from './resumes-details-router';
 import { resumesResumeUserRouter } from './resumes-resume-user-router';
 import { resumeReviewsRouter } from './resumes-reviews-router';
@@ -17,6 +18,7 @@ export const appRouter = createRouter()
   .merge('auth.', protectedExampleRouter)
   .merge('todos.', todosRouter)
   .merge('todos.user.', todosUserRouter)
+  .merge('resumes.resume.', resumesRouter)
   .merge('resumes.details.', resumesDetailsRouter)
   .merge('resumes.resume.user.', resumesResumeUserRouter)
   .merge('resumes.reviews.', resumeReviewsRouter)

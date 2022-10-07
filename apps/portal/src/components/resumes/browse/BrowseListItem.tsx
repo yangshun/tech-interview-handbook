@@ -3,19 +3,11 @@ import type { UrlObject } from 'url';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { ChatBubbleLeftIcon, StarIcon } from '@heroicons/react/24/outline';
 
-type ResumeInfo = Readonly<{
-  createdAt: Date;
-  experience: string;
-  numComments: number;
-  numStars: number;
-  role: string;
-  title: string;
-  user: string;
-}>;
+import type { Resume } from '~/types/resume';
 
 type Props = Readonly<{
   href: UrlObject | string;
-  resumeInfo: ResumeInfo;
+  resumeInfo: Resume;
 }>;
 
 export default function BrowseListItem({ href, resumeInfo }: Props) {
@@ -42,6 +34,7 @@ export default function BrowseListItem({ href, resumeInfo }: Props) {
           </div>
         </div>
         <div className="self-center text-sm text-slate-500">
+          {/* TODO: Replace hardcoded days ago with calculated days ago*/}
           Uploaded 2 days ago by {resumeInfo.user}
         </div>
         <ChevronRightIcon className="w-8" />
