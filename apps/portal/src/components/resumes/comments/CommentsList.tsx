@@ -27,7 +27,6 @@ export default function CommentsList({
   ]);
 
   // TODO: Add loading prompt
-  console.log(commentsQuery.data);
 
   return (
     <div className="space-y-3">
