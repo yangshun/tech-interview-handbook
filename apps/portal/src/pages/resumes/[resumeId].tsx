@@ -1,6 +1,9 @@
+import clsx from 'clsx';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 import {
   AcademicCapIcon,
   BriefcaseIcon,
@@ -20,13 +23,42 @@ export default function ResumeReviewPage() {
   const ErrorPage = (
     <Error statusCode={404} title="Requested resume does not exist." />
   );
+  const { data: session } = useSession();
   const router = useRouter();
   const { resumeId } = router.query;
+  const utils = trpc.useContext();
   // Safe to assert resumeId type as string because query is only sent if so
   const detailsQuery = trpc.useQuery(
-    ['resumes.details.find', { resumeId: resumeId as string }],
-    { enabled: typeof resumeId === 'string' },
+    [
+      'resumes.details.find',
+      { resumeId: resumeId as string, userId: session?.user?.id },
+    ],
+    {
+      enabled: typeof resumeId === 'string' && session?.user?.id !== undefined,
+    },
   );
+  const starMutation = trpc.useMutation('resumes.details.update_star', {
+    onSuccess() {
+      utils.invalidateQueries();
+    },
+  });
+
+  useEffect(() => {
+    if (detailsQuery.data?.stars.length) {
+      document.getElementById('star-button')?.focus();
+    } else {
+      document.getElementById('star-button')?.blur();
+    }
+  }, [detailsQuery.data?.stars]);
+
+  const onStarButtonClick = () => {
+    // Star button only rendered if resume exists
+    // Star button only clickable if user exists
+    starMutation.mutate({
+      resumeId: resumeId as string,
+      userId: session!.user!.id!,
+    });
+  };
 
   return (
     <>
@@ -40,11 +72,20 @@ export default function ResumeReviewPage() {
             </h1>
             <button
               className="isolate inline-flex max-h-10 items-center space-x-4 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-              type="button">
+              disabled={session?.user === null}
+              id="star-button"
+              type="button"
+              onClick={onStarButtonClick}>
               <span className="relative inline-flex">
                 <StarIcon
                   aria-hidden="true"
-                  className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                  className={clsx(
+                    detailsQuery.data?.stars.length
+                      ? 'text-orange-400'
+                      : 'text-gray-400',
+                    '-ml-1 mr-2 h-5 w-5',
+                  )}
+                  id="star-icon"
                 />
                 Star
               </span>
@@ -83,7 +124,7 @@ export default function ResumeReviewPage() {
               {`Uploaded ${formatDistanceToNow(
                 new Date(detailsQuery.data.createdAt),
                 { addSuffix: true },
-              )} by ${detailsQuery.data.resumesProfile.user.name}`}
+              )} by ${detailsQuery.data.user.name}`}
             </div>
           </div>
           {detailsQuery.data.additionalInfo && (
