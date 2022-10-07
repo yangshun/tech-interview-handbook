@@ -73,7 +73,7 @@ export default function ResumeReviewPage() {
           <ResumePdf />
         </div>
         <div className="mx-8 w-1/2">
-          <CommentsSection />
+          <CommentsSection resumeId="" />
         </div>
       </div>
     </main>
