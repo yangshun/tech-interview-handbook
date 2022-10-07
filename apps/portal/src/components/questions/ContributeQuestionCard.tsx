@@ -57,7 +57,7 @@ export default function ContributeQuestionCard({
         {...register('questionContent')}
       />
       <div className="flex items-end justify-center gap-x-2">
-        <div className="flex-1">
+        <div className="min-w-[150px] flex-1">
           <FormTextInput
             label="Company"
             startAddOn={BuildingOffice2Icon}
@@ -65,7 +65,7 @@ export default function ContributeQuestionCard({
             {...register('company')}
           />
         </div>
-        <div className="flex-1">
+        <div className="min-w-[150px] flex-1">
           <FormTextInput
             label="Question type"
             startAddOn={QuestionMarkCircleIcon}
@@ -73,7 +73,7 @@ export default function ContributeQuestionCard({
             {...register('questionType')}
           />
         </div>
-        <div className="flex-1">
+        <div className="min-w-[150px] flex-1">
           <FormTextInput
             label="Date"
             startAddOn={CalendarDaysIcon}
