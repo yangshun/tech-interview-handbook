@@ -24,9 +24,11 @@ export default function CommentsList({
   const { data: session } = useSession();
 
   // Fetch the most updated comments to render
-  trpc.useQuery(['resumes.reviews.list', { resumeId, tab }], {
+  trpc.useQuery(['resumes.reviews.list', { resumeId, section: tab }], {
     onSuccess: setComments,
   });
+
+  // TODO: Add loading prompt
 
   return (
     <div className="space-y-3">
