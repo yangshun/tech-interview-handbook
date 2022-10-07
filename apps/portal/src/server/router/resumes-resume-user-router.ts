@@ -27,8 +27,6 @@ export const resumesResumeUserRouter = createProtectedRouter().mutation(
 
       // TODO: Store file in file storage and retrieve URL
 
-      await ctx.prisma.resumesResume.findMany;
-
       return await ctx.prisma.resumesResume.create({
         data: {
           ...input,
