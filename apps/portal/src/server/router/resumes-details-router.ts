@@ -6,10 +6,10 @@ export const resumesDetailsRouter = createRouter()
   .query('find', {
     input: z.object({
       resumeId: z.string(),
-      userId: z.string().optional(),
     }),
     async resolve({ ctx, input }) {
-      const { resumeId, userId } = input;
+      const { resumeId } = input;
+      const userId = ctx.session?.user?.id;
 
       // Use the resumeId to query all related information of a single resume
       // from Resumesresume:
@@ -40,10 +40,11 @@ export const resumesDetailsRouter = createRouter()
   .mutation('update_star', {
     input: z.object({
       resumeId: z.string(),
-      userId: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const { resumeId, userId } = input;
+      const { resumeId } = input;
+      // Update_star will only be called if user is logged in
+      const userId = ctx.session!.user!.id;
 
       // Use the resumeId and resumeProfileId to check if star exists
       const resumesStar = await ctx.prisma.resumesStar.findUnique({

@@ -29,10 +29,7 @@ export default function ResumeReviewPage() {
   const utils = trpc.useContext();
   // Safe to assert resumeId type as string because query is only sent if so
   const detailsQuery = trpc.useQuery(
-    [
-      'resumes.details.find',
-      { resumeId: resumeId as string, userId: session?.user?.id },
-    ],
+    ['resumes.details.find', { resumeId: resumeId as string }],
     {
       enabled: typeof resumeId === 'string' && session?.user?.id !== undefined,
     },
@@ -56,7 +53,6 @@ export default function ResumeReviewPage() {
     // Star button only clickable if user exists
     starMutation.mutate({
       resumeId: resumeId as string,
-      userId: session!.user!.id!,
     });
   };
 
