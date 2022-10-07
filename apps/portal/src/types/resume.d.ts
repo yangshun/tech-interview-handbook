@@ -8,7 +8,6 @@ export type Resume = {
   numStars: number;
   role: string;
   title: string;
-  updatedAt: Date;
   url: string;
   user: string;
 };

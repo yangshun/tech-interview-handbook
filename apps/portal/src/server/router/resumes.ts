@@ -37,7 +37,6 @@ export const resumesRouter = createRouter().query('list', {
         numStars: r._count.stars,
         role: r.role,
         title: r.title,
-        updatedAt: r.updatedAt,
         url: r.url,
         user: r.resumesProfile.user.name!,
       };
