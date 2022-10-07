@@ -12,13 +12,9 @@ export const resumesRouter = createRouter().query('list', {
             stars: true,
           },
         },
-        resumesProfile: {
+        user: {
           select: {
-            user: {
-              select: {
-                name: true,
-              },
-            },
+            name: true,
           },
         },
       },
@@ -38,7 +34,7 @@ export const resumesRouter = createRouter().query('list', {
         role: r.role,
         title: r.title,
         url: r.url,
-        user: r.resumesProfile.user.name!,
+        user: r.user.name!,
       };
       return resume;
     });
