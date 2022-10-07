@@ -1,23 +1,24 @@
-// TODO: Move to a general enums/constants file? For resumes
+import { ResumesSection } from '@prisma/client';
+
 export const COMMENTS_SECTIONS = [
   {
     label: 'General',
-    value: 'general',
+    value: ResumesSection.GENERAL,
   },
   {
     label: 'Education',
-    value: 'education',
+    value: ResumesSection.EDUCATION,
   },
   {
     label: 'Experience',
-    value: 'experience',
+    value: ResumesSection.EXPERIENCE,
   },
   {
     label: 'Projects',
-    value: 'projects',
+    value: ResumesSection.PROJECTS,
   },
   {
     label: 'Skills',
-    value: 'skills',
+    value: ResumesSection.SKILLS,
   },
 ];

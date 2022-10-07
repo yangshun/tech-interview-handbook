@@ -3,7 +3,10 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { Button, Dialog, TextInput } from '@tih/ui';
 
+import { trpc } from '~/utils/trpc';
+
 type CommentsFormProps = Readonly<{
+  resumeId: string;
   setShowCommentsForm: (show: boolean) => void;
 }>;
 
@@ -18,6 +21,7 @@ type IFormInput = {
 type InputKeys = keyof IFormInput;
 
 export default function CommentsForm({
+  resumeId,
   setShowCommentsForm,
 }: CommentsFormProps) {
   const [showDialog, setShowDialog] = useState(false);
@@ -35,10 +39,17 @@ export default function CommentsForm({
       skills: '',
     },
   });
+  const reviewCreateMutation = trpc.useMutation('resumes.reviews.user.create');
 
-  // TODO: Implement mutation to database
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    alert(JSON.stringify(data));
+  // TODO: Give a feedback to the user if the action succeeds/fails
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    await reviewCreateMutation.mutate({
+      resumeId,
+      ...data,
+    });
+
+    // Redirect back to comments section
+    setShowCommentsForm(false);
   };
 
   const onCancel = () => {
@@ -54,8 +65,11 @@ export default function CommentsForm({
   };
 
   return (
-    <>
+    <div className="h-[calc(100vh-13rem)] overflow-y-scroll">
       <h2 className="text-xl font-semibold text-gray-800">Add your review</h2>
+      <p className="text-gray-800">
+        Please fill in at least one section to submit your review
+      </p>
 
       <form
         className="w-full space-y-8 divide-y divide-gray-200"
@@ -144,6 +158,6 @@ export default function CommentsForm({
         }}>
         <div>Note that your review will not be saved!</div>
       </Dialog>
-    </>
+    </div>
   );
 }
