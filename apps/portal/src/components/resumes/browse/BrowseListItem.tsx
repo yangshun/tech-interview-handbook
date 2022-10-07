@@ -3,19 +3,11 @@ import type { UrlObject } from 'url';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { ChatBubbleLeftIcon, StarIcon } from '@heroicons/react/24/outline';
 
-type ResumeInfo = Readonly<{
-  createdAt: Date;
-  experience: string;
-  numComments: number;
-  numStars: number;
-  role: string;
-  title: string;
-  user: string;
-}>;
+import type { Resume } from '~/types/resume';
 
 type Props = Readonly<{
   href: UrlObject | string;
-  resumeInfo: ResumeInfo;
+  resumeInfo: Resume;
 }>;
 
 export default function BrowseListItem({ href, resumeInfo }: Props) {
