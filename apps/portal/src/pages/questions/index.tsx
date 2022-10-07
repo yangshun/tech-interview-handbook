@@ -97,12 +97,12 @@ export default function QuestionsHomePage() {
   }, [selectedLocations]);
 
   return (
-    <main className="flex flex-1 flex-col justify-center items-center overflow-y-auto p-4">
-      <div className="w-full pb-4">
+    <main className="flex flex-1 flex-col items-stretch overflow-y-auto">
+      <div className="pb-4">
         <NavBar></NavBar>
       </div>
-      <div className="flex max-w-6xl flex-1 gap-x-4">
-        <section className=" w-[300px] border-r px-4">
+      <div className="flex">
+        <section className="w-[300px] border-r px-4">
           <h2 className="text-xl font-semibold">Filter by</h2>
           <div className="divide-y divide-slate-200">
             <FilterSection
@@ -163,35 +163,39 @@ export default function QuestionsHomePage() {
             />
           </div>
         </section>
-        <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
-          <ContributeQuestionCard
-            onSubmit={(data) => {
-              // eslint-disable-next-line no-console
-              console.log(data);
-            }}
-          />
-          <QuestionSearchBar
-            sortOptions={[
-              {
-                label: 'Most recent',
-                value: 'most-recent',
-              },
-              {
-                label: 'Most upvotes',
-                value: 'most-upvotes',
-              },
-            ]}
-            sortValue="most-recent"
-          />
-          <QuestionOverviewCard
-            answerCount={0}
-            content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and"
-            location="Menlo Park, CA"
-            role="Senior Engineering Manager"
-            similarCount={0}
-            timestamp=""
-            upvoteCount={0}
-          />
+        <div className="flex flex-1 justify-center">
+          <div className="flex max-w-3xl flex-1 gap-x-4">
+            <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
+              <ContributeQuestionCard
+                onSubmit={(data) => {
+                  // eslint-disable-next-line no-console
+                  console.log(data);
+                }}
+              />
+              <QuestionSearchBar
+                sortOptions={[
+                  {
+                    label: 'Most recent',
+                    value: 'most-recent',
+                  },
+                  {
+                    label: 'Most upvotes',
+                    value: 'most-upvotes',
+                  },
+                ]}
+                sortValue="most-recent"
+              />
+              <QuestionOverviewCard
+                answerCount={0}
+                content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and"
+                location="Menlo Park, CA"
+                role="Senior Engineering Manager"
+                similarCount={0}
+                timestamp=""
+                upvoteCount={0}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </main>
