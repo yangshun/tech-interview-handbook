@@ -137,8 +137,7 @@ export default function ResumeReviewPage() {
               <ResumePdf url={detailsQuery.data.url} />
             </div>
             <div className="mx-8 w-1/2">
-              {/* TODO: Update resumeId */}
-              <CommentsSection resumeId="cl8y6gtez0009yedbne9qp5zi" />
+              <CommentsSection resumeId={resumeId as string} />
             </div>
           </div>
         </main>
