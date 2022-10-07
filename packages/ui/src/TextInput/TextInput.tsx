@@ -155,14 +155,14 @@ function TextInput(
           switch (startAddOnType) {
             case 'label':
               return (
-                <div className="pointer-events-none flex items-center pl-3 text-slate-500">
+                <div className="pointer-events-none flex items-center px-2 text-slate-500">
                   {startAddOn}
                 </div>
               );
             case 'icon': {
               const StartAddOn = startAddOn;
               return (
-                <div className="pointer-events-none flex items-center pl-3">
+                <div className="pointer-events-none flex items-center px-2">
                   <StartAddOn
                     aria-hidden="true"
                     className="h-5 w-5 text-slate-400"
@@ -206,14 +206,14 @@ function TextInput(
           switch (endAddOnType) {
             case 'label':
               return (
-                <div className="pointer-events-none flex items-center pr-3 text-slate-500">
+                <div className="pointer-events-none flex items-center px-2 text-slate-500">
                   {endAddOn}
                 </div>
               );
             case 'icon': {
               const EndAddOn = endAddOn;
               return (
-                <div className="pointer-events-none flex items-center pr-3">
+                <div className="pointer-events-none flex items-center px-2">
                   <EndAddOn
                     aria-hidden="true"
                     className="h-5 w-5 text-slate-400"
