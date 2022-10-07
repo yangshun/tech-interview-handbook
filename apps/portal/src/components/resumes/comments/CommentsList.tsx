@@ -1,8 +1,10 @@
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Tabs } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
+import Comment from './comment/Comment';
 import CommentsListButton from './CommentsListButton';
 import { COMMENTS_SECTIONS } from './constants';
 
@@ -16,12 +18,15 @@ export default function CommentsList({
   setShowCommentsForm,
 }: CommentsListProps) {
   const [tab, setTab] = useState(COMMENTS_SECTIONS[0].value);
+  const { data: session } = useSession();
 
-  const commentsQuery = trpc.useQuery(['resumes.reviews.list', { resumeId }]);
+  // Fetch the most updated comments to render
+  const commentsQuery = trpc.useQuery([
+    'resumes.reviews.list',
+    { resumeId, section: tab },
+  ]);
 
-  /* eslint-disable no-console */
-  console.log(commentsQuery.data);
-  /* eslint-enable no-console */
+  // TODO: Add loading prompt
 
   return (
     <div className="space-y-3">
@@ -32,7 +37,18 @@ export default function CommentsList({
         value={tab}
         onChange={(value) => setTab(value)}
       />
-      {/* TODO: Add comments lists */}
+
+      <div className="m-2 flow-root h-[calc(100vh-20rem)] w-full flex-col space-y-3 overflow-y-scroll">
+        {commentsQuery.data?.map((comment) => {
+          return (
+            <Comment
+              key={comment.id}
+              comment={comment}
+              userId={session?.user?.id}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
