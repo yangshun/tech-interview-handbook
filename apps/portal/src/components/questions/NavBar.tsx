@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 const navigation = [
-  { href: '/questions/landing', name: 'Landing' },
-  { href: '#', name: 'Home' },
+  { href: '/questions/landing', name: '*Landing*' },
+  { href: '/questions', name: 'Home' },
   { href: '#', name: 'My Lists' },
   { href: '#', name: 'My Questions' },
   { href: '#', name: 'History' },

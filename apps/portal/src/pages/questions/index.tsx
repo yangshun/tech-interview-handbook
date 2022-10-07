@@ -5,7 +5,7 @@ import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
 export default function QuestionsHomePage() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center overflow-y-auto p-4">
+    <main className="flex flex-1 flex-col items-center justify-center overflow-y-auto">
       <div className="w-full pb-4">
         <NavBar></NavBar>
       </div>
