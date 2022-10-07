@@ -26,7 +26,8 @@ export default function QuestionSearchBar<
           isLabelHidden={true}
           label="Search by content"
           placeholder="Search by content"
-          startIcon={MagnifyingGlassIcon}
+          startAddOn={MagnifyingGlassIcon}
+          startAddOnType="icon"
         />
       </div>
       <Select
