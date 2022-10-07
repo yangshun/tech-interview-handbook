@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
@@ -36,10 +37,6 @@ const filters = [
     options: LOCATION,
   },
 ];
-
-function classNames(...classes: Array<string>) {
-  return classes.filter(Boolean).join(' ');
-}
 
 export default function BrowsePageBody() {
   const [tabsValue, setTabsValue] = useState('all');
@@ -112,7 +109,7 @@ export default function BrowsePageBody() {
                         <Menu.Item key={option.name}>
                           {({ active }) => (
                             <a
-                              className={classNames(
+                              className={clsx(
                                 option.current
                                   ? 'font-medium text-gray-900'
                                   : 'text-gray-500',
