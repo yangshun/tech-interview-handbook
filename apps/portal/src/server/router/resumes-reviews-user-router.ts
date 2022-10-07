@@ -6,8 +6,8 @@ import { createProtectedRouter } from './context';
 type IResumeCommentInput = Readonly<{
   description: string;
   resumeId: string;
-  resumesProfileId: string;
   section: ResumesSection;
+  userId: string;
 }>;
 
 export const resumesReviewsUserRouter = createProtectedRouter().mutation(
@@ -22,18 +22,9 @@ export const resumesReviewsUserRouter = createProtectedRouter().mutation(
       skills: z.string(),
     }),
     async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
       const { resumeId, education, experience, general, projects, skills } =
         input;
-
-      const { resumesProfileId } =
-        await ctx.prisma.resumesResume.findUniqueOrThrow({
-          select: {
-            resumesProfileId: true,
-          },
-          where: {
-            id: resumeId,
-          },
-        });
 
       // For each section, convert them into ResumesComment model if provided
       const comments: Array<IResumeCommentInput> = [
@@ -50,8 +41,8 @@ export const resumesReviewsUserRouter = createProtectedRouter().mutation(
           return {
             description,
             resumeId,
-            resumesProfileId,
             section,
+            userId,
           };
         });
 
