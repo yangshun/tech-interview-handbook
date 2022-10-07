@@ -12,14 +12,18 @@ export const resumesResumeUserRouter = createProtectedRouter().mutation(
       location: z.string(),
       role: z.string(),
       title: z.string(),
+      url: z.string(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user.id;
-      // TODO: Store file in file storage and retrieve URL
       return await ctx.prisma.resumesResume.create({
         data: {
-          ...input,
-          url: '',
+          additionalInfo: input.additionalInfo,
+          experience: input.experience,
+          location: input.location,
+          role: input.role,
+          title: input.title,
+          url: input.url,
           userId,
         },
       });

@@ -13,6 +13,7 @@ import {
   ROLES,
 } from '~/components/resumes/browse/constants';
 
+import { supabase } from '~/utils/supabaseClient';
 import { trpc } from '~/utils/trpc';
 
 const TITLE_PLACEHOLDER =
@@ -49,8 +50,24 @@ export default function SubmitResumeForm() {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    if (resumeFile == null) {
+      // TODO: Handle error
+      return;
+    }
+    // TODO: Generate unique URL
+    const url = resumeFile.name;
+
+    const { error } = await supabase.storage
+      .from('resumes')
+      .upload(url, resumeFile);
+
+    if (error) {
+      console.error(error);
+    }
+
     await resumeCreateMutation.mutate({
       ...data,
+      url,
     });
     router.push('/resumes');
   };
