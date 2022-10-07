@@ -1,4 +1,4 @@
-import type { ComponentProps, Ref } from 'react';
+import type { ComponentProps, ForwardedRef } from 'react';
 import { forwardRef } from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
@@ -16,16 +16,22 @@ export type ContributeQuestionData = {
   questionType: string;
 };
 
-type FormTextInputProps = Omit<ComponentProps<typeof TextInput>, 'onChange'> &
+type TextInputProps = ComponentProps<typeof TextInput>;
+
+type FormTextInputProps = Omit<TextInputProps, 'onChange'> &
   Pick<UseFormRegisterReturn<never>, 'onChange'>;
 
 function FormTextInputWithRef(
   props: FormTextInputProps,
-  ref?: Ref<HTMLInputElement>,
+  ref?: ForwardedRef<HTMLInputElement>,
 ) {
   const { onChange, ...rest } = props;
   return (
-    <TextInput onChange={(_, event) => onChange(event)} {...rest} ref={ref} />
+    <TextInput
+      {...(rest as TextInputProps)}
+      ref={ref}
+      onChange={(_, event) => onChange(event)}
+    />
   );
 }
 
@@ -54,21 +60,24 @@ export default function ContributeQuestionCard({
         <div className="flex-1">
           <FormTextInput
             label="Company"
-            startIcon={BuildingOffice2Icon}
+            startAddOn={BuildingOffice2Icon}
+            startAddOnType="icon"
             {...register('company')}
           />
         </div>
         <div className="flex-1">
           <FormTextInput
             label="Question type"
-            startIcon={QuestionMarkCircleIcon}
+            startAddOn={QuestionMarkCircleIcon}
+            startAddOnType="icon"
             {...register('questionType')}
           />
         </div>
         <div className="flex-1">
           <FormTextInput
             label="Date"
-            startIcon={CalendarDaysIcon}
+            startAddOn={CalendarDaysIcon}
+            startAddOnType="icon"
             {...register('date')}
           />
         </div>
