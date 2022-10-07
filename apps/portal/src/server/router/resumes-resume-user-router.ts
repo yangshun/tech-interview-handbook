@@ -15,23 +15,12 @@ export const resumesResumeUserRouter = createProtectedRouter().mutation(
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user.id;
-      const resumeProfile = await ctx.prisma.resumesProfile.upsert({
-        create: {
-          userId,
-        },
-        update: {},
-        where: {
-          userId,
-        },
-      });
-
       // TODO: Store file in file storage and retrieve URL
-
       return await ctx.prisma.resumesResume.create({
         data: {
           ...input,
-          resumesProfileId: resumeProfile.id,
           url: '',
+          userId,
         },
       });
     },
