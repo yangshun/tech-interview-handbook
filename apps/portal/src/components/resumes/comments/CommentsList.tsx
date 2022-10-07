@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Button, Tabs } from '@tih/ui';
+import { Tabs } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
+import CommentsListButton from './CommentsListButton';
 import { COMMENTS_SECTIONS } from './constants';
 
 type CommentsListProps = Readonly<{
@@ -23,13 +24,8 @@ export default function CommentsList({
   /* eslint-enable no-console */
 
   return (
-    <>
-      <Button
-        display="block"
-        label="Add your review"
-        variant="tertiary"
-        onClick={() => setShowCommentsForm(true)}
-      />
+    <div className="space-y-3">
+      <CommentsListButton setShowCommentsForm={setShowCommentsForm} />
       <Tabs
         label="comments"
         tabs={COMMENTS_SECTIONS}
@@ -37,6 +33,6 @@ export default function CommentsList({
         onChange={(value) => setTab(value)}
       />
       {/* TODO: Add comments lists */}
-    </>
+    </div>
   );
 }

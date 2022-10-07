@@ -65,8 +65,11 @@ export default function CommentsForm({
   };
 
   return (
-    <>
+    <div className="h-[calc(100vh-13rem)] overflow-y-scroll">
       <h2 className="text-xl font-semibold text-gray-800">Add your review</h2>
+      <p className="text-gray-800">
+        Please fill in at least one section to submit your review
+      </p>
 
       <form
         className="w-full space-y-8 divide-y divide-gray-200"
@@ -155,6 +158,6 @@ export default function CommentsForm({
         }}>
         <div>Note that your review will not be saved!</div>
       </Dialog>
-    </>
+    </div>
   );
 }
