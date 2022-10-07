@@ -10,7 +10,7 @@ export const resumeReviewsRouter = createRouter().query('list', {
     const { resumeId } = input;
 
     const { resumesProfileId } =
-      await ctx.prisma.resumesResume.findFirstOrThrow({
+      await ctx.prisma.resumesResume.findUniqueOrThrow({
         select: {
           resumesProfileId: true,
         },

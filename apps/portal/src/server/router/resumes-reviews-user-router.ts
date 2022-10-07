@@ -26,7 +26,7 @@ export const resumesReviewsUserRouter = createProtectedRouter().mutation(
         input;
 
       const { resumesProfileId } =
-        await ctx.prisma.resumesResume.findFirstOrThrow({
+        await ctx.prisma.resumesResume.findUniqueOrThrow({
           select: {
             resumesProfileId: true,
           },
