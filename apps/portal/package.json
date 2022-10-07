@@ -32,6 +32,7 @@
     "react-pdf": "^5.7.2",
     "react-query": "^3.39.2",
     "superjson": "^1.10.0",
+    "uuid": "^9.0.0",
     "zod": "^3.18.0"
   },
   "devDependencies": {
@@ -41,6 +42,7 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "@types/react-pdf": "^5.7.2",
+    "@types/uuid": "^8.3.4",
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.16",
     "prettier-plugin-tailwindcss": "^0.1.13",

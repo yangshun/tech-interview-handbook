@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
 import { PaperClipIcon } from '@heroicons/react/24/outline';
 import { Button, Select, TextArea, TextInput } from '@tih/ui';
 
@@ -51,12 +52,11 @@ export default function SubmitResumeForm() {
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     if (resumeFile == null) {
-      // TODO: Handle error
       return;
     }
-    // TODO: Generate unique URL
-    const url = resumeFile.name;
 
+    // Prefix with uuid so that it is always unique
+    const url = `${uuidv4()}-${resumeFile.name}`;
     const { error } = await supabase.storage
       .from('resumes')
       .upload(url, resumeFile);
