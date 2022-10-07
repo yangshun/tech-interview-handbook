@@ -11,7 +11,6 @@ export type ResumeComment = {
   id: string;
   numVotes: number;
   resumeId: string;
-  resumesProfileId: string;
   section: ResumesSection;
   updatedAt: Date;
   user: {

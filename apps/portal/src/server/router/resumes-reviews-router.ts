@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ResumesSection } from '@prisma/client';
 
 import { createRouter } from './context';
 
@@ -7,10 +8,11 @@ import type { ResumeComment } from '~/types/resume-comments';
 export const resumeReviewsRouter = createRouter().query('list', {
   input: z.object({
     resumeId: z.string(),
+    tab: z.nativeEnum(ResumesSection),
   }),
   async resolve({ ctx, input }) {
     const userId = ctx.session?.user?.id;
-    const { resumeId } = input;
+    const { resumeId, tab } = input;
 
     // For this resume, we retrieve every comment's information, along with:
     // The user's name and image to render
@@ -40,6 +42,7 @@ export const resumeReviewsRouter = createRouter().query('list', {
       },
       where: {
         resumeId,
+        section: tab,
       },
     });
 
@@ -54,13 +57,12 @@ export const resumeReviewsRouter = createRouter().query('list', {
         id: data.id,
         numVotes,
         resumeId: data.resumeId,
-        resumesProfileId: data.resumesProfileId,
         section: data.section,
         updatedAt: data.updatedAt,
         user: {
-          image: data.resumesProfile.user.image,
-          name: data.resumesProfile.user.name,
-          userId: data.resumesProfile.userId,
+          image: data.user.image,
+          name: data.user.name,
+          userId: data.userId,
         },
       };
 

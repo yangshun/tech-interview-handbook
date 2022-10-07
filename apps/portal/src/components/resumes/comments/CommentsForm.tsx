@@ -40,13 +40,22 @@ export default function CommentsForm({
     },
   });
   const reviewCreateMutation = trpc.useMutation('resumes.reviews.user.create');
+  const trpcContext = trpc.useContext();
 
   // TODO: Give a feedback to the user if the action succeeds/fails
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    await reviewCreateMutation.mutate({
-      resumeId,
-      ...data,
-    });
+    await reviewCreateMutation.mutate(
+      {
+        resumeId,
+        ...data,
+      },
+      {
+        onSuccess: () => {
+          // New review added, invalidate query to trigger refetch
+          trpcContext.invalidateQueries(['resumes.reviews.list']);
+        },
+      },
+    );
 
     // Redirect back to comments section
     setShowCommentsForm(false);

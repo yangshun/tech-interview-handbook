@@ -1,8 +1,10 @@
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Tabs } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
+import Comment from './comment/Comment';
 import CommentsListButton from './CommentsListButton';
 import { COMMENTS_SECTIONS } from './constants';
 
@@ -19,17 +21,11 @@ export default function CommentsList({
 }: CommentsListProps) {
   const [tab, setTab] = useState(COMMENTS_SECTIONS[0].value);
   const [comments, setComments] = useState<Array<ResumeComment>>([]);
+  const { data: session } = useSession();
 
-  const onFetchComments = (data: Array<ResumeComment>) => {
-    const filteredComments = data.filter((comment) => {
-      return comment.section === tab;
-    });
-
-    setComments(filteredComments);
-  };
-
-  trpc.useQuery(['resumes.reviews.list', { resumeId }], {
-    onSuccess: onFetchComments,
+  // Fetch the most updated comments to render
+  trpc.useQuery(['resumes.reviews.list', { resumeId, tab }], {
+    onSuccess: setComments,
   });
 
   return (
@@ -41,7 +37,18 @@ export default function CommentsList({
         value={tab}
         onChange={(value) => setTab(value)}
       />
-      {/* TODO: Add comments lists */}
+
+      <div className="m-2 flow-root h-[calc(100vh-20rem)] w-full flex-col space-y-3 overflow-y-scroll">
+        {comments.map((comment) => {
+          return (
+            <Comment
+              key={comment.id}
+              comment={comment}
+              userId={session?.user?.id}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
