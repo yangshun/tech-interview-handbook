@@ -18,6 +18,15 @@ export const resumesDetailsRouter = createRouter().query('find', {
             stars: true,
           },
         },
+        resumesProfile: {
+          select: {
+            user: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
       },
       where: {
         id: resumeId,

@@ -6,7 +6,11 @@ import { Button, Spinner } from '@tih/ui';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-export default function ResumePdf() {
+type Props = Readonly<{
+  url: string;
+}>;
+
+export default function ResumePdf({ url }: Props) {
   const [numPages, setNumPages] = useState(0);
   const [pageNumber] = useState(1);
 
@@ -18,7 +22,7 @@ export default function ResumePdf() {
     <div>
       <Document
         className="h-[calc(100vh-17rem)] overflow-scroll"
-        file="/test_resume.pdf"
+        file={url}
         loading={<Spinner display="block" label="" size="lg" />}
         onLoadSuccess={onPdfLoadSuccess}>
         <Page pageNumber={pageNumber} />
