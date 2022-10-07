@@ -1,10 +1,14 @@
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
+import NavBar from '~/components/questions/NavBar';
 import QuestionOverviewCard from '~/components/questions/QuestionOverviewCard';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
 export default function QuestionsHomePage() {
   return (
-    <main className="flex flex-1 justify-center overflow-y-auto p-4">
+    <main className="flex flex-1 flex-col items-center justify-center overflow-y-auto p-4">
+      <div className="w-full pb-4">
+        <NavBar></NavBar>
+      </div>
       <div className="flex max-w-4xl flex-1 gap-x-4">
         <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
           <ContributeQuestionCard
