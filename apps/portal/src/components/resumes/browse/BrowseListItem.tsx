@@ -34,6 +34,7 @@ export default function BrowseListItem({ href, resumeInfo }: Props) {
           </div>
         </div>
         <div className="self-center text-sm text-slate-500">
+          {/* TODO: Replace hardcoded days ago with calculated days ago*/}
           Uploaded 2 days ago by {resumeInfo.user}
         </div>
         <ChevronRightIcon className="w-8" />
