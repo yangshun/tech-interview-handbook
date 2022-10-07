@@ -19,6 +19,9 @@ export { default as DropdownMenu } from './DropdownMenu/DropdownMenu';
 // HorizontalDivider
 export * from './HorizontalDivider/HorizontalDivider';
 export { default as HorizontalDivider } from './HorizontalDivider/HorizontalDivider';
+// Pagination
+export * from './Pagination/Pagination';
+export { default as Pagination } from './Pagination/Pagination';
 // Select
 export * from './Select/Select';
 export { default as Select } from './Select/Select';
