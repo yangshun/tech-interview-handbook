@@ -176,7 +176,7 @@ export default function BrowsePageBody() {
                   role="list">
                   {TOP_HITS.map((category) => (
                     <li key={category.name}>
-                      {/* TODO: Replace onSelect with filtering function */}
+                      {/* TODO: Replace onClick with filtering function */}
                       <FilterPill title={category.name} onClick={() => true} />
                     </li>
                   ))}
