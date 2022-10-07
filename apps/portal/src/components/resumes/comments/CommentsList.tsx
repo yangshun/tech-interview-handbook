@@ -8,8 +8,6 @@ import Comment from './comment/Comment';
 import CommentsListButton from './CommentsListButton';
 import { COMMENTS_SECTIONS } from './constants';
 
-import type { ResumeComment } from '~/types/resume-comments';
-
 type CommentsListProps = Readonly<{
   resumeId: string;
   setShowCommentsForm: (show: boolean) => void;
@@ -20,15 +18,16 @@ export default function CommentsList({
   setShowCommentsForm,
 }: CommentsListProps) {
   const [tab, setTab] = useState(COMMENTS_SECTIONS[0].value);
-  const [comments, setComments] = useState<Array<ResumeComment>>([]);
   const { data: session } = useSession();
 
   // Fetch the most updated comments to render
-  trpc.useQuery(['resumes.reviews.list', { resumeId, section: tab }], {
-    onSuccess: setComments,
-  });
+  const commentsQuery = trpc.useQuery([
+    'resumes.reviews.list',
+    { resumeId, section: tab },
+  ]);
 
   // TODO: Add loading prompt
+  console.log(commentsQuery.data);
 
   return (
     <div className="space-y-3">
@@ -41,7 +40,7 @@ export default function CommentsList({
       />
 
       <div className="m-2 flow-root h-[calc(100vh-20rem)] w-full flex-col space-y-3 overflow-y-scroll">
-        {comments.map((comment) => {
+        {commentsQuery.data?.map((comment) => {
           return (
             <Comment
               key={comment.id}
