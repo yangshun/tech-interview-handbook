@@ -7,10 +7,7 @@ type ICommentsSectionProps = {
   resumeId: string;
 };
 
-// TODO: Retrieve resumeId for CommentsSection
-export default function CommentsSection({
-  resumeId = '',
-}: ICommentsSectionProps) {
+export default function CommentsSection({ resumeId }: ICommentsSectionProps) {
   const [showCommentsForm, setShowCommentsForm] = useState(false);
 
   return showCommentsForm ? (

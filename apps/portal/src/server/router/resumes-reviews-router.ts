@@ -7,8 +7,17 @@ export const resumeReviewsRouter = createRouter().query('list', {
     resumeId: z.string(),
   }),
   async resolve({ ctx, input }) {
-    const userId = ctx.session?.user?.id;
     const { resumeId } = input;
+
+    const { resumesProfileId } =
+      await ctx.prisma.resumesResume.findUniqueOrThrow({
+        select: {
+          resumesProfileId: true,
+        },
+        where: {
+          id: resumeId,
+        },
+      });
 
     // For this resume, we retrieve every comment's information, along with:
     // The user's name and image to render
@@ -20,16 +29,20 @@ export const resumeReviewsRouter = createRouter().query('list', {
             votes: true,
           },
         },
-        user: {
-          select: {
-            image: true,
-            name: true,
+        resumesProfile: {
+          include: {
+            user: {
+              select: {
+                image: true,
+                name: true,
+              },
+            },
           },
         },
         votes: {
           take: 1,
           where: {
-            userId,
+            resumesProfileId,
           },
         },
       },

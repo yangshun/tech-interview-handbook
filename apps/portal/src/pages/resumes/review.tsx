@@ -73,7 +73,8 @@ export default function ResumeReviewPage() {
           <ResumePdf />
         </div>
         <div className="mx-8 w-1/2">
-          <CommentsSection resumeId="" />
+          {/* TODO: Update resumeId */}
+          <CommentsSection resumeId="cl8y6gtez0009yedbne9qp5zi" />
         </div>
       </div>
     </main>
