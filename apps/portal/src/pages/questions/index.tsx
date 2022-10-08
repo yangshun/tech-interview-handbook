@@ -77,9 +77,13 @@ export default function QuestionsHomePage() {
   // Set url query params
   useEffect(() => {
     if (router.isReady && !isSearchInitialized) {
+      const paramQuestionAge = router.query.questionAge;
+      const questionAge = Array.isArray(paramQuestionAge)
+        ? paramQuestionAge[0]
+        : paramQuestionAge ?? 'all';
       setSelectedCompanies(paramToArray(router.query.companies));
       setSelectedQuestionTypes(paramToArray(router.query.questionTypes));
-      setSelectedQuestionAge(router.query.questionAge as string);
+      setSelectedQuestionAge(questionAge);
       setSelectedLocations(paramToArray(router.query.locations));
       setIsSearchInitialized(true);
 
@@ -111,8 +115,12 @@ export default function QuestionsHomePage() {
           query: {
             companies: selectedCompanies,
             locations: selectedLocations,
-            questionAge: selectedQuestionAge,
             questionTypes: selectedQuestionTypes,
+            ...(selectedQuestionAge !== 'all'
+              ? {
+                  questionAge: selectedQuestionAge,
+                }
+              : {}),
           },
         },
         undefined,
