@@ -195,7 +195,7 @@ model QuestionsQuestion {
     user               User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
     questionEncounters QuestionsQuestionEncounter[]
     questionVotes      QuestionsQuestionVote[]
-    questionComment    QuestionsQuestionComment[]
+    questionComments   QuestionsQuestionComment[]
     questionsAnswers   QuestionsAnswer[]
 }
 
