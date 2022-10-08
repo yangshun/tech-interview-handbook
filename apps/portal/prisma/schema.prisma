@@ -192,11 +192,11 @@ model QuestionsQuestion {
     createdAt    DateTime              @default(now())
     updatedAt    DateTime              @updatedAt
 
-    user               User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
-    questionEncounters QuestionsQuestionEncounter[]
-    questionVotes      QuestionsQuestionVote[]
-    questionComments   QuestionsQuestionComment[]
-    questionsAnswers   QuestionsAnswer[]
+    user       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+    encounters QuestionsQuestionEncounter[]
+    votes      QuestionsQuestionVote[]
+    comments   QuestionsQuestionComment[]
+    answers    QuestionsAnswer[]
 }
 
 model QuestionsQuestionEncounter {
@@ -236,9 +236,9 @@ model QuestionsQuestionComment {
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
 
-    user                 User?                          @relation(fields: [userId], references: [id], onDelete: SetNull)
-    question             QuestionsQuestion              @relation(fields: [questionId], references: [id], onDelete: Cascade)
-    questionCommentVotes QuestionsQuestionCommentVote[]
+    user     User?                          @relation(fields: [userId], references: [id], onDelete: SetNull)
+    question QuestionsQuestion              @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    votes    QuestionsQuestionCommentVote[]
 }
 
 model QuestionsQuestionCommentVote {
@@ -249,8 +249,8 @@ model QuestionsQuestionCommentVote {
     createdAt         DateTime      @default(now())
     updatedAt         DateTime      @updatedAt
 
-    user            User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
-    questionComment QuestionsQuestionComment @relation(fields: [questionCommentId], references: [id], onDelete: Cascade)
+    user    User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
+    comment QuestionsQuestionComment @relation(fields: [questionCommentId], references: [id], onDelete: Cascade)
 
     @@unique([questionCommentId, userId])
 }
@@ -263,10 +263,10 @@ model QuestionsAnswer {
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
 
-    user           User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
-    question       QuestionsQuestion        @relation(fields: [questionId], references: [id], onDelete: Cascade)
-    answerVotes    QuestionsAnswerVote[]
-    answerComments QuestionsAnswerComment[]
+    user     User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
+    question QuestionsQuestion        @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    votes    QuestionsAnswerVote[]
+    comments QuestionsAnswerComment[]
 }
 
 model QuestionsAnswerVote {
@@ -291,9 +291,9 @@ model QuestionsAnswerComment {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    user               User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
-    answer             QuestionsAnswer              @relation(fields: [answerId], references: [id], onDelete: Cascade)
-    snswerCommentVotes QuestionsAnswerCommentVote[]
+    user   User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+    answer QuestionsAnswer              @relation(fields: [answerId], references: [id], onDelete: Cascade)
+    votes  QuestionsAnswerCommentVote[]
 }
 
 model QuestionsAnswerCommentVote {
@@ -304,8 +304,8 @@ model QuestionsAnswerCommentVote {
     createdAt       DateTime      @default(now())
     updatedAt       DateTime      @updatedAt
 
-    user          User?                  @relation(fields: [userId], references: [id], onDelete: SetNull)
-    answerComment QuestionsAnswerComment @relation(fields: [answerCommentId], references: [id], onDelete: Cascade)
+    user    User?                  @relation(fields: [userId], references: [id], onDelete: SetNull)
+    comment QuestionsAnswerComment @relation(fields: [answerCommentId], references: [id], onDelete: Cascade)
 
     @@unique([answerCommentId, userId])
 }
