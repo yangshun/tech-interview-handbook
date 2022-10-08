@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ArrowSmallRightIcon } from '@heroicons/react/24/outline';
 import { Button, Select } from '@tih/ui';
 
 import NavBar from '~/components/questions/NavBar';
@@ -48,15 +49,15 @@ export default function LandingComponent({
       <div className="flex flex-1 flex-col justify-center gap-3">
         <div className="flex items-center justify-center">
           <img alt="app logo" className=" h-20 w-20" src="/logo.svg"></img>
-          <h1 className="text-primary-600 px-4 text-center text-5xl font-bold">
+          <h1 className="text-primary-600 p-4 text-center text-5xl font-bold">
             Tech Interview Question Bank
           </h1>
         </div>
-        <p className="mx-auto max-w-lg py-6 px-4 text-center text-xl text-black sm:max-w-3xl">
+        <p className="mx-auto max-w-lg p-6 text-center text-xl text-black sm:max-w-3xl">
           Get to know the latest SWE interview questions asked by top companies
         </p>
 
-        <div className="mx-auto mt-6 flex max-w-lg items-baseline gap-3 px-4 text-center text-xl text-black sm:max-w-3xl">
+        <div className="mx-auto flex max-w-lg items-baseline gap-3 p-4 text-center text-xl text-black sm:max-w-3xl">
           <p>Find</p>
           <div className=" space-x-2">
             <Select
@@ -84,12 +85,25 @@ export default function LandingComponent({
             onChange={handleChangeLocation}
           />
           <Button
+            addonPosition="end"
+            icon={ArrowSmallRightIcon}
             label="Go"
+            size="md"
             variant="primary"
             onClick={() => handleLandingQuery(landingQueryData)}></Button>
         </div>
+        <div className="flex justify-center p-4">
+          <iframe
+            height={30}
+            src="https://ghbtns.com/github-btn.html?user=yangshun&amp;repo=tech-interview-handbook&amp;type=star&amp;count=true&amp;size=large"
+            title="GitHub Stars"
+            width={160}
+          />
+        </div>
         <div>
-          <p className="py-20 text-center">CAROUSELL PLACEHOLDER</p>
+          <p className="py-20 text-center text-black ">
+            TODO questions Carousel
+          </p>
         </div>
       </div>
     </main>
