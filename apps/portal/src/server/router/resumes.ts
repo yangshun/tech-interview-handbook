@@ -2,7 +2,7 @@ import { createRouter } from './context';
 
 import type { Resume } from '~/types/resume';
 
-export const resumesRouter = createRouter().query('list', {
+export const resumesRouter = createRouter().query('all', {
   async resolve({ ctx }) {
     const resumesData = await ctx.prisma.resumesResume.findMany({
       include: {

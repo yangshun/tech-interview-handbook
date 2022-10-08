@@ -1,3 +1,9 @@
+export const BROWSE_TABS_VALUES = {
+  ALL: 'all',
+  MY: 'my',
+  STARRED: 'starred',
+};
+
 export const SORT_OPTIONS = [
   { current: true, href: '#', name: 'Latest' },
   { current: false, href: '#', name: 'Popular' },
