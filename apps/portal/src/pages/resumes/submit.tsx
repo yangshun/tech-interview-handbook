@@ -7,6 +7,12 @@ import { useForm } from 'react-hook-form';
 import { PaperClipIcon } from '@heroicons/react/24/outline';
 import { Button, Select, TextArea, TextInput } from '@tih/ui';
 
+import {
+  EXPERIENCE,
+  LOCATION,
+  ROLES,
+} from '~/components/resumes/browse/constants';
+
 import { trpc } from '~/utils/trpc';
 
 const TITLE_PLACEHOLDER =
@@ -26,52 +32,6 @@ type IFormInput = {
 };
 
 export default function SubmitResumeForm() {
-  // TODO: Use enums instead
-  const roleItems = [
-    {
-      label: 'Frontend Engineer',
-      value: 'Frontend Engineer',
-    },
-    {
-      label: 'Full-Stack Engineer',
-      value: 'Full-Stack Engineer',
-    },
-    {
-      label: 'Backend Engineer',
-      value: 'Backend Engineer',
-    },
-  ];
-
-  const experienceItems = [
-    {
-      label: 'Fresh Graduate (0 - 1 years)',
-      value: 'Fresh Graduate (0 - 1 years)',
-    },
-    {
-      label: 'Mid',
-      value: 'Mid',
-    },
-    {
-      label: 'Senior',
-      value: 'Senior',
-    },
-  ];
-
-  const locationItems = [
-    {
-      label: 'United States',
-      value: 'United States',
-    },
-    {
-      label: 'Singapore',
-      value: 'Singapore',
-    },
-    {
-      label: 'India',
-      value: 'India',
-    },
-  ];
-
   const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
   const router = useRouter();
 
@@ -148,7 +108,7 @@ export default function SubmitResumeForm() {
                 <Select
                   {...register('role', { required: true })}
                   label="Role"
-                  options={roleItems}
+                  options={ROLES}
                   required={true}
                   onChange={(val) => setValue('role', val)}
                 />
@@ -157,7 +117,7 @@ export default function SubmitResumeForm() {
                 <Select
                   {...register('experience', { required: true })}
                   label="Experience Level"
-                  options={experienceItems}
+                  options={EXPERIENCE}
                   required={true}
                   onChange={(val) => setValue('experience', val)}
                 />
@@ -167,7 +127,7 @@ export default function SubmitResumeForm() {
                   {...register('location', { required: true })}
                   label="Location"
                   name="location"
-                  options={locationItems}
+                  options={LOCATION}
                   required={true}
                   onChange={(val) => setValue('location', val)}
                 />
