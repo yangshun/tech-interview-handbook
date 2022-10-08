@@ -82,7 +82,7 @@ export default function QuestionCard({
         </div>
       )}
       <div className="flex flex-col gap-2">
-        <div className="flex items-start justify-between">
+        <div className="flex items-baseline justify-between">
           <div className="flex items-center gap-2 text-slate-500">
             <Badge label="Technical" variant="primary" />
             <p className="text-xs">
@@ -92,12 +92,15 @@ export default function QuestionCard({
           {showActionButton && (
             <Button
               label={actionButtonLabel}
+              size="sm"
               variant="tertiary"
               onClick={onActionButtonClick}
             />
           )}
         </div>
-        <p className="line-clamp-2 text-ellipsis">{content}</p>
+        <div className="ml-2">
+          <p className="line-clamp-2 text-ellipsis ">{content}</p>
+        </div>
         {showUserStatistics && (
           <div className="flex gap-2">
             <Button
