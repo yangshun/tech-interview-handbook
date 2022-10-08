@@ -43,15 +43,15 @@ export type QuestionCardProps = ActionButtonProps &
   UpvoteProps & {
     content: string;
     location: string;
+    receivedCount: number;
     role: string;
-    similarCount: number;
     timestamp: string;
   };
 
 export default function QuestionCard({
   answerCount,
   content,
-  similarCount,
+  receivedCount,
   showVoteButtons,
   showUserStatistics,
   showActionButton,
@@ -63,7 +63,7 @@ export default function QuestionCard({
   location,
 }: QuestionCardProps) {
   return (
-    <article className="flex gap-4 rounded-md border border-slate-300 p-4 bg-white">
+    <article className="flex gap-4 rounded-md border border-slate-300 bg-white p-4">
       {showVoteButtons && (
         <div className="flex flex-col items-center">
           <Button
@@ -110,7 +110,7 @@ export default function QuestionCard({
             <Button
               addonPosition="start"
               icon={EyeIcon}
-              label={`${similarCount} received this`}
+              label={`${receivedCount} received this`}
               size="sm"
               variant="tertiary"
             />

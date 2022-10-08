@@ -222,8 +222,8 @@ export default function QuestionsHomePage() {
                   answerCount={0}
                   content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and"
                   location="Menlo Park, CA"
+                  receivedCount={0}
                   role="Senior Engineering Manager"
-                  similarCount={0}
                   timestamp="Last month"
                   upvoteCount={0}
                 />
