@@ -47,7 +47,7 @@ export default function ContributeQuestionForm({
   };
   return (
     <form
-      className="flex flex-col items-stretch justify-center gap-2 pb-[100px]"
+      className="mt-3 flex flex-col items-stretch justify-center pb-[100px]"
       onSubmit={handleSubmit(onSubmit)}>
       <TextArea
         isLabelHidden={true}
@@ -56,7 +56,7 @@ export default function ContributeQuestionForm({
         rows={5}
         {...register('questionContent')}
       />
-      <div className="flex flex-wrap items-end justify-center gap-2">
+      <div className="mt-3 mb-2 flex flex-wrap items-end justify-center gap-2">
         <div className="min-w-[150px] flex-1">
           <TextInput
             label="Company"
@@ -94,7 +94,7 @@ export default function ContributeQuestionForm({
           </div>
           <div className="min-w-[150px] flex-1">
             <TextInput
-              label="Position"
+              label="Position <TODO>"
               startAddOn={UserIcon}
               startAddOnType="icon"
               {...register('position')}
@@ -104,6 +104,22 @@ export default function ContributeQuestionForm({
       </Collapsible>
       <div className="w-full">
         <HorizontalDivider />
+      </div>
+      <h1 className="mb-3">
+        Are these questions the same as yours? TODO:Change to list
+      </h1>
+      <div>
+        <SimilarQuestionCard
+          content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices"
+          location="Menlo Park, CA"
+          receivedCount={0}
+          role="Senior Engineering Manager"
+          timestamp="Today"
+          onSimilarQuestionClick={() => {
+            // eslint-disable-next-line no-console
+            console.log('hi!');
+          }}
+        />
       </div>
       <div className="bg-primary-50 fixed bottom-0 left-0 w-full px-4 py-3 sm:flex sm:flex-row sm:justify-between sm:px-6">
         <div className="mb-1 flex">
@@ -126,20 +142,6 @@ export default function ContributeQuestionForm({
             type="submit"
             variant="primary"></Button>
         </div>
-      </div>
-      <h1>Are these questions the same as yours?</h1>
-      <div>
-        <SimilarQuestionCard
-          content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices"
-          location="Menlo Park, CA"
-          role="Senior Engineering Manager"
-          similarCount={0}
-          timestamp="Today"
-          onSimilarQuestionClick={() => {
-            // eslint-disable-next-line no-console
-            console.log('hi!');
-          }}
-        />
       </div>
     </form>
   );

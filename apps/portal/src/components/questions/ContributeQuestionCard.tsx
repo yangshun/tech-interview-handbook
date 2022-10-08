@@ -15,19 +15,20 @@ export default function ContributeQuestionCard() {
     setShowDraftDialog(false);
   };
 
-  const handleOnFocus = () => {
-    (document.activeElement as HTMLElement).blur();
+  const handleOpenContribute = () => {
     setShowDraftDialog(true);
   };
 
   return (
     <>
-      <div className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4">
+      <div
+        className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4 hover:bg-gray-100"
+        onClick={handleOpenContribute}>
         <TextInput
           isLabelHidden={true}
           label="Question"
           placeholder="Contribute a question"
-          onFocus={handleOnFocus}
+          onChange={handleOpenContribute}
         />
         <div className="flex items-end justify-center gap-x-2">
           <div className="min-w-[150px] flex-1">
@@ -35,7 +36,7 @@ export default function ContributeQuestionCard() {
               label="Company"
               startAddOn={BuildingOffice2Icon}
               startAddOnType="icon"
-              onFocus={handleOnFocus}
+              onChange={handleOpenContribute}
             />
           </div>
           <div className="min-w-[150px] flex-1">
@@ -43,7 +44,7 @@ export default function ContributeQuestionCard() {
               label="Question type"
               startAddOn={QuestionMarkCircleIcon}
               startAddOnType="icon"
-              onFocus={handleOnFocus}
+              onChange={handleOpenContribute}
             />
           </div>
           <div className="min-w-[150px] flex-1">
@@ -51,14 +52,14 @@ export default function ContributeQuestionCard() {
               label="Date"
               startAddOn={CalendarDaysIcon}
               startAddOnType="icon"
-              onFocus={handleOnFocus}
+              onChange={handleOpenContribute}
             />
           </div>
           <Button
             label="Contribute"
             type="submit"
             variant="primary"
-            onClick={handleOnFocus}
+            onClick={handleOpenContribute}
           />
         </div>
       </div>
