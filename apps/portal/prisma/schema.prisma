@@ -204,9 +204,9 @@ model QuestionsQuestionEncounter {
     questionId String
     userId     String?
     // TODO: sync with models
-    // company    String
-    // location   String
-    // role       String
+    company    String   @db.Text
+    location   String   @db.Text
+    role       String   @db.Text
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
 
