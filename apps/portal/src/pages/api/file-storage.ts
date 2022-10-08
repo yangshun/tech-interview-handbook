@@ -1,4 +1,3 @@
-import axios from 'axios';
 import formidable from 'formidable';
 import * as fs from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -6,8 +5,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { env } from '~/env/server.mjs';
 import { supabase } from '~/utils/supabase';
 
-const BASE_URL = `${env.SUPABASE_URL}/storage/v1/object`;
-const BASE_FILE_URL = `${BASE_URL}/public`;
+const BASE_URL = `${env.SUPABASE_URL}/storage/v1/object/public`;
 
 export const config = {
   api: {
@@ -35,10 +33,16 @@ export default async function handler(
         const filePath = `${Date.now()}-${parsedFile.originalFilename}`;
         const convertedFile = fs.readFileSync(parsedFile.filepath);
 
-        supabase.storage.from(key as string).upload(filePath, convertedFile);
+        const { error } = await supabase.storage
+          .from(key as string)
+          .upload(filePath, convertedFile);
+
+        if (error) {
+          throw error;
+        }
 
         return res.status(200).json({
-          url: `${BASE_FILE_URL}/${key}/${filePath}`,
+          url: `${BASE_URL}/${key}/${filePath}`,
         });
       });
     } catch (error: unknown) {
@@ -46,9 +50,18 @@ export default async function handler(
     }
   }
 
+  // See if we need this
   if (req.method === 'GET') {
     const { key, filePath } = req.query;
-    const data = await axios.get(`${BASE_URL}/public/${key}/${filePath}`);
-    res.status(200).json(data);
+
+    const { data, error } = await supabase.storage
+      .from(key as string)
+      .download(filePath as string);
+
+    if (error) {
+      throw error;
+    }
+
+    res.status(200).write(data);
   }
 }

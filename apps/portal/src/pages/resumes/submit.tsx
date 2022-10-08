@@ -58,13 +58,11 @@ export default function SubmitResumeForm() {
     formData.append('key', 'resumes');
     formData.append('file', resumeFile);
 
-    // Prefix with uuid so that it is always unique
     const res = await axios.post('/api/file-storage', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-
     const { url } = res.data;
 
     await resumeCreateMutation.mutate({
@@ -72,7 +70,6 @@ export default function SubmitResumeForm() {
       url,
     });
     router.push('/resumes');
-    reset();
   };
 
   const onUploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
