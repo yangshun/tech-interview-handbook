@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 
+import QuestionOverviewCard from '~/components/questions/card/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
 import type { FilterOptions } from '~/components/questions/filter/FilterSection';
 import FilterSection from '~/components/questions/filter/FilterSection';
-import QuestionOverviewCard from '~/components/questions/QuestionOverviewCard';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
 type FilterChoices = Array<Omit<FilterOptions, 'checked'>>;

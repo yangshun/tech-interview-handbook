@@ -1,39 +1,38 @@
-import type { Dispatch, SetStateAction } from 'react';
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 import ContributeQuestionForm from './ContributeQuestionForm';
-import DiscardDraftModal from './DiscardDraftModal';
+import DiscardDraftDialog from './DiscardDraftDialog';
 
-export type ContributeQuestionModalProps = {
-  contributeState: boolean;
-  setContributeState: Dispatch<SetStateAction<boolean>>;
+export type ContributeQuestionDialogProps = {
+  onCancel: () => void;
+  show: boolean;
 };
 
-export default function ContributeQuestionModal({
-  contributeState,
-  setContributeState,
-}: ContributeQuestionModalProps) {
-  const [isDiscardOpen, setIsDiscardOpen] = useState<boolean>(false);
+export default function ContributeQuestionDialog({
+  show,
+  onCancel,
+}: ContributeQuestionDialogProps) {
+  const [showDiscardDialog, setShowDiscardDialog] = useState(false);
 
-  const handleDiscardDraft = () => {
-    // eslint-disable-next-line no-console
-    console.log('discarded draft');
-    setContributeState(false);
-    setIsDiscardOpen(false);
+  const handleDraftDiscard = () => {
+    setShowDiscardDialog(false);
+    onCancel();
   };
 
-  const handleCancelDiscard = () => {
-    setIsDiscardOpen(false);
+  const handleDiscardCancel = () => {
+    setShowDiscardDialog(false);
   };
 
   return (
     <div>
-      <Transition.Root as={Fragment} show={contributeState}>
+      <Transition.Root as={Fragment} show={show}>
         <Dialog
           as="div"
           className="relative z-10"
-          onClose={() => setContributeState(false)}>
+          onClose={() => {
+            // Todo: save state
+          }}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -65,7 +64,7 @@ export default function ContributeQuestionModal({
                         </Dialog.Title>
                         <div className="mt-2">
                           <ContributeQuestionForm
-                            onDiscard={() => setIsDiscardOpen(true)}
+                            onDiscard={() => setShowDiscardDialog(true)}
                             onSubmit={(data) => {
                               // eslint-disable-next-line no-console
                               console.log(data);
@@ -81,10 +80,10 @@ export default function ContributeQuestionModal({
           </div>
         </Dialog>
       </Transition.Root>
-      <DiscardDraftModal
-        handleCancelDiscard={handleCancelDiscard}
-        handleDiscardDraft={handleDiscardDraft}
-        isDiscardOpen={isDiscardOpen}></DiscardDraftModal>
+      <DiscardDraftDialog
+        show={showDiscardDialog}
+        onCancel={handleDiscardCancel}
+        onDiscard={handleDraftDiscard}></DiscardDraftDialog>
     </div>
   );
 }

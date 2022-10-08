@@ -10,7 +10,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { Button, TextInput } from '@tih/ui';
 
-import ContributeQuestionModal from './ContributeQuestionModal';
+import ContributeQuestionDialog from './ContributeQuestionDialog';
 
 export type ContributeQuestionData = {
   company: string;
@@ -48,7 +48,12 @@ export default function ContributeQuestionCard({
   onSubmit,
 }: ContributeQuestionCardProps) {
   const { register, handleSubmit } = useForm<ContributeQuestionData>();
-  const [isOpen, setOpen] = useState<boolean>(false);
+  const [showDraftDialog, setShowDraftDialog] = useState(false);
+
+  const handleDraftDialogCancel = () => {
+    setShowDraftDialog(false);
+  };
+
   return (
     <>
       <form
@@ -89,14 +94,14 @@ export default function ContributeQuestionCard({
             label="Contribute"
             type="submit"
             variant="primary"
-            onClick={() => setOpen(true)}
+            onClick={() => setShowDraftDialog(true)}
           />
         </div>
       </form>
-
-      <ContributeQuestionModal
-        contributeState={isOpen}
-        setContributeState={setOpen}></ContributeQuestionModal>
+      <ContributeQuestionDialog
+        show={showDraftDialog}
+        onCancel={handleDraftDialogCancel}
+      />
     </>
   );
 }

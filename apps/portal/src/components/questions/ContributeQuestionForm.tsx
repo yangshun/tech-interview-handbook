@@ -7,8 +7,15 @@ import {
   QuestionMarkCircleIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
-import { Button, HorizontalDivider, TextArea, TextInput } from '@tih/ui';
+import {
+  Button,
+  Collapsible,
+  HorizontalDivider,
+  TextArea,
+  TextInput,
+} from '@tih/ui';
 
+import SimilarQuestionCard from './card/SimilarQuestionCard';
 import Checkbox from './ui-patch/Checkbox';
 
 export type ContributeQuestionData = {
@@ -50,7 +57,7 @@ export default function ContributeQuestionForm({
 
   return (
     <form
-      className="flex flex-col items-stretch justify-center gap-2"
+      className="flex flex-col items-stretch justify-center gap-2 pb-[100px]"
       onSubmit={handleSubmit(onSubmit)}>
       <TextArea
         isLabelHidden={true}
@@ -59,7 +66,7 @@ export default function ContributeQuestionForm({
         rows={5}
         {...register('questionContent')}
       />
-      <div className="flex flex-wrap items-end justify-center gap-x-2">
+      <div className="flex flex-wrap items-end justify-center gap-2">
         <div className="min-w-[150px] flex-1">
           <TextInput
             label="Company"
@@ -85,28 +92,31 @@ export default function ContributeQuestionForm({
           />
         </div>
       </div>
+      <Collapsible defaultOpen={true} label="Additional info">
+        <div className="flex flex-wrap items-end justify-center gap-2">
+          <div className="min-w-[150px] flex-1">
+            <TextInput
+              label="Location"
+              startAddOn={CalendarDaysIcon}
+              startAddOnType="icon"
+              {...register('location')}
+            />
+          </div>
+          <div className="min-w-[150px] flex-1">
+            <TextInput
+              label="Position"
+              startAddOn={UserIcon}
+              startAddOnType="icon"
+              {...register('position')}
+            />
+          </div>
+          {/* <Button label="Contribute" type="submit" variant="primary" /> */}
+        </div>
+      </Collapsible>
       <div className="w-full">
         <HorizontalDivider />
       </div>
-      <div className="flex flex-wrap items-end justify-center gap-x-2">
-        <div className="min-w-[150px] flex-1">
-          <TextInput
-            label="Location"
-            startAddOn={CalendarDaysIcon}
-            startAddOnType="icon"
-            {...register('location')}
-          />
-        </div>
-        <div className="min-w-[150px] flex-1">
-          <TextInput
-            label="Position"
-            startAddOn={UserIcon}
-            startAddOnType="icon"
-            {...register('position')}
-          />
-        </div>
-      </div>
-      <div className="bg-primary-50 px-4 py-3 sm:flex sm:flex-row sm:justify-between sm:px-6">
+      <div className="bg-primary-50 fixed bottom-0 left-0 w-full px-4 py-3 sm:flex sm:flex-row sm:justify-between sm:px-6">
         <div className="mb-1 flex">
           <Checkbox
             checked={canSubmit}
@@ -127,6 +137,20 @@ export default function ContributeQuestionForm({
             type="submit"
             variant="primary"></Button>
         </div>
+      </div>
+      <h1>Are these questions the same as yours?</h1>
+      <div>
+        <SimilarQuestionCard
+          content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices"
+          location="Menlo Park, CA"
+          role="Senior Engineering Manager"
+          similarCount={0}
+          timestamp="Today"
+          onSimilarQuestionClick={() => {
+            // eslint-disable-next-line no-console
+            console.log('hi!');
+          }}
+        />
       </div>
     </form>
   );
