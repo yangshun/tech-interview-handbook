@@ -4,6 +4,7 @@ import { createRouter } from './context';
 import { protectedExampleRouter } from './protected-example-router';
 import { resumesRouter } from './resumes';
 import { resumesDetailsRouter } from './resumes-details-router';
+import { resumesResumeProtectedTabsRouter } from './resumes-resume-protected-tabs-router';
 import { resumesResumeUserRouter } from './resumes-resume-user-router';
 import { resumeReviewsRouter } from './resumes-reviews-router';
 import { resumesReviewsUserRouter } from './resumes-reviews-user-router';
@@ -21,6 +22,7 @@ export const appRouter = createRouter()
   .merge('resumes.resume.', resumesRouter)
   .merge('resumes.details.', resumesDetailsRouter)
   .merge('resumes.resume.user.', resumesResumeUserRouter)
+  .merge('resumes.resume.browse.', resumesResumeProtectedTabsRouter)
   .merge('resumes.reviews.', resumeReviewsRouter)
   .merge('resumes.reviews.user.', resumesReviewsUserRouter);
 
