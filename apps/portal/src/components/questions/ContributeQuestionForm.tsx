@@ -1,5 +1,4 @@
-import type { ChangeEvent } from 'react';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   BuildingOffice2Icon,
@@ -14,6 +13,8 @@ import {
   TextArea,
   TextInput,
 } from '@tih/ui';
+
+import { useFormRegister } from '~/utils/questions/useFormRegister';
 
 import SimilarQuestionCard from './card/SimilarQuestionCard';
 import Checkbox from './ui-patch/Checkbox';
@@ -38,23 +39,12 @@ export default function ContributeQuestionForm({
 }: ContributeQuestionFormProps) {
   const { register: formRegister, handleSubmit } =
     useForm<ContributeQuestionData>();
+  const register = useFormRegister(formRegister);
+
   const [canSubmit, setCanSubmit] = useState<boolean>(false);
   const handleCheckSimilarQuestions = (checked: boolean) => {
     setCanSubmit(checked);
   };
-  const register = useCallback(
-    (...args: Parameters<typeof formRegister>) => {
-      const { onChange, ...rest } = formRegister(...args);
-      return {
-        ...rest,
-        onChange: (value: string, event: ChangeEvent<unknown>) => {
-          onChange(event);
-        },
-      };
-    },
-    [formRegister],
-  );
-
   return (
     <form
       className="flex flex-col items-stretch justify-center gap-2 pb-[100px]"

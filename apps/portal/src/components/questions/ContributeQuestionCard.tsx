@@ -1,7 +1,4 @@
-import type { ComponentProps, ForwardedRef } from 'react';
 import { useState } from 'react';
-import { forwardRef } from 'react';
-import type { UseFormRegisterReturn } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import {
   BuildingOffice2Icon,
@@ -9,6 +6,8 @@ import {
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button, TextInput } from '@tih/ui';
+
+import { useFormRegister } from '~/utils/questions/useFormRegister';
 
 import ContributeQuestionDialog from './ContributeQuestionDialog';
 
@@ -19,27 +18,6 @@ export type ContributeQuestionData = {
   questionType: string;
 };
 
-type TextInputProps = ComponentProps<typeof TextInput>;
-
-type FormTextInputProps = Omit<TextInputProps, 'onChange'> &
-  Pick<UseFormRegisterReturn<never>, 'onChange'>;
-
-function FormTextInputWithRef(
-  props: FormTextInputProps,
-  ref?: ForwardedRef<HTMLInputElement>,
-) {
-  const { onChange, ...rest } = props;
-  return (
-    <TextInput
-      {...(rest as TextInputProps)}
-      ref={ref}
-      onChange={(_, event) => onChange(event)}
-    />
-  );
-}
-
-const FormTextInput = forwardRef(FormTextInputWithRef);
-
 export type ContributeQuestionCardProps = {
   onSubmit: (data: ContributeQuestionData) => void;
 };
@@ -47,7 +25,9 @@ export type ContributeQuestionCardProps = {
 export default function ContributeQuestionCard({
   onSubmit,
 }: ContributeQuestionCardProps) {
-  const { register, handleSubmit } = useForm<ContributeQuestionData>();
+  const { register: formRegister, handleSubmit } =
+    useForm<ContributeQuestionData>();
+  const register = useFormRegister(formRegister);
   const [showDraftDialog, setShowDraftDialog] = useState(false);
 
   const handleDraftDialogCancel = () => {
@@ -59,7 +39,7 @@ export default function ContributeQuestionCard({
       <form
         className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 p-4"
         onSubmit={handleSubmit(onSubmit)}>
-        <FormTextInput
+        <TextInput
           isLabelHidden={true}
           label="Question"
           placeholder="Contribute a question"
@@ -67,7 +47,7 @@ export default function ContributeQuestionCard({
         />
         <div className="flex items-end justify-center gap-x-2">
           <div className="min-w-[150px] flex-1">
-            <FormTextInput
+            <TextInput
               label="Company"
               startAddOn={BuildingOffice2Icon}
               startAddOnType="icon"
@@ -75,7 +55,7 @@ export default function ContributeQuestionCard({
             />
           </div>
           <div className="min-w-[150px] flex-1">
-            <FormTextInput
+            <TextInput
               label="Question type"
               startAddOn={QuestionMarkCircleIcon}
               startAddOnType="icon"
@@ -83,7 +63,7 @@ export default function ContributeQuestionCard({
             />
           </div>
           <div className="min-w-[150px] flex-1">
-            <FormTextInput
+            <TextInput
               label="Date"
               startAddOn={CalendarDaysIcon}
               startAddOnType="icon"
