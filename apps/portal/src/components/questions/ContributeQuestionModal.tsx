@@ -2,7 +2,8 @@ import type { Dispatch, SetStateAction } from 'react';
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
-import DiscardDraftModal from './DisacrdDraftModal';
+import ContributeQuestionForm from './ContributeQuestionForm';
+import DiscardDraftModal from './DiscardDraftModal';
 import Checkbox from './ui-patch/Checkbox';
 
 export type ContributeQuestionModalProps = {
@@ -68,9 +69,12 @@ export default function ContributeQuestionModal({
                           Question Draft
                         </Dialog.Title>
                         <div className="mt-2">
-                          <p className="text-sm text-gray-500">
-                            Question Contribution form
-                          </p>
+                          <ContributeQuestionForm
+                            onSubmit={(data) => {
+                              // eslint-disable-next-line no-console
+                              console.log(data);
+                            }}
+                          />
                         </div>
                       </div>
                     </div>
