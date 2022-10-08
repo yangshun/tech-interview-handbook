@@ -3,62 +3,17 @@ import { useEffect, useMemo, useState } from 'react';
 
 import QuestionOverviewCard from '~/components/questions/card/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
-import type { FilterOptions } from '~/components/questions/filter/FilterSection';
 import FilterSection from '~/components/questions/filter/FilterSection';
 import type { LandingQueryData } from '~/components/questions/LandingComponent';
 import LandingComponent from '~/components/questions/LandingComponent';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
-type FilterChoices = Array<Omit<FilterOptions, 'checked'>>;
-
-const COMPANIES: FilterChoices = [
-  {
-    label: 'Google',
-    value: 'google',
-  },
-  {
-    label: 'Meta',
-    value: 'meta',
-  },
-];
-
-// Code, design, behavioral
-const QUESTION_TYPES: FilterChoices = [
-  {
-    label: 'Coding',
-    value: 'coding',
-  },
-  {
-    label: 'Design',
-    value: 'design',
-  },
-  {
-    label: 'Behavioral',
-    value: 'behavioral',
-  },
-];
-
-const QUESTION_AGES: FilterChoices = [
-  {
-    label: 'Last month',
-    value: 'last-month',
-  },
-  {
-    label: 'Last 6 months',
-    value: 'last-6-months',
-  },
-  {
-    label: 'Last year',
-    value: 'last-year',
-  },
-];
-
-const LOCATIONS: FilterChoices = [
-  {
-    label: 'Singapore',
-    value: 'singapore',
-  },
-];
+import {
+  COMPANIES,
+  LOCATIONS,
+  QUESTION_AGES,
+  QUESTION_TYPES,
+} from '~/utils/questions/constants';
 
 export default function QuestionsHomePage() {
   const router = useRouter();

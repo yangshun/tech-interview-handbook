@@ -3,6 +3,12 @@ import { Button, Select } from '@tih/ui';
 
 import NavBar from '~/components/questions/NavBar';
 
+import {
+  COMPANIES,
+  LOCATIONS,
+  QUESTION_TYPES,
+} from '~/utils/questions/constants';
+
 export type LandingQueryData = {
   company: string;
   location: string;
@@ -53,20 +59,7 @@ export default function LandingComponent({
             <Select
               isLabelHidden={true}
               label="Type"
-              options={[
-                {
-                  label: 'Coding',
-                  value: 'coding',
-                },
-                {
-                  label: 'Behavioral',
-                  value: 'behavioral',
-                },
-                {
-                  label: 'System Design',
-                  value: 'system design',
-                },
-              ]}
+              options={QUESTION_TYPES}
               value={landingQueryData.questionType}
               onChange={handleChangeType}
             />
@@ -75,20 +68,7 @@ export default function LandingComponent({
           <Select
             isLabelHidden={true}
             label="Company"
-            options={[
-              {
-                label: 'Google',
-                value: 'google',
-              },
-              {
-                label: 'Meta',
-                value: 'meta',
-              },
-              {
-                label: 'Amazon',
-                value: 'amazon',
-              },
-            ]}
+            options={COMPANIES}
             value={landingQueryData.company}
             onChange={handleChangeCompany}
           />
@@ -96,20 +76,7 @@ export default function LandingComponent({
           <Select
             isLabelHidden={true}
             label="Location"
-            options={[
-              {
-                label: 'Singapore',
-                value: 'singapore',
-              },
-              {
-                label: 'California',
-                value: 'california',
-              },
-              {
-                label: 'Menlo Park',
-                value: 'menlo park',
-              },
-            ]}
+            options={LOCATIONS}
             value={landingQueryData.location}
             onChange={handleChangeLocation}
           />

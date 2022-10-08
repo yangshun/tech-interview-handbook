@@ -9,6 +9,8 @@ export type FilterOptions = {
   value: string;
 };
 
+export type FilterChoices = Array<Omit<FilterOptions, 'checked'>>;
+
 export type FilterSectionProps = {
   label: string;
   onOptionChange: (optionValue: string, checked: boolean) => void;
