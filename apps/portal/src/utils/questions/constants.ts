@@ -40,6 +40,10 @@ export const QUESTION_AGES: FilterChoices = [
     label: 'Last year',
     value: 'last-year',
   },
+  {
+    label: 'All',
+    value: 'all',
+  },
 ];
 
 export const LOCATIONS: FilterChoices = [

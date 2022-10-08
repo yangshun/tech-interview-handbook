@@ -23,9 +23,7 @@ export default function QuestionsHomePage() {
   const [selectedQuestionTypes, setSelectedQuestionTypes] = useState<
     Array<string>
   >([]);
-  const [selectedQuestionAges, setSelectedQuestionAges] = useState<
-    Array<string>
-  >([]);
+  const [selectedQuestionAge, setSelectedQuestionAge] = useState<string>('all');
   const [selectedLocations, setSelectedLocations] = useState<Array<string>>([]);
   const [hasLanded, setHasLanded] = useState(false);
 
@@ -46,9 +44,9 @@ export default function QuestionsHomePage() {
   const questionAgeFilterOptions = useMemo(() => {
     return QUESTION_AGES.map((questionAge) => ({
       ...questionAge,
-      checked: selectedQuestionAges.includes(questionAge.value),
+      checked: selectedQuestionAge === questionAge.value,
     }));
-  }, [selectedQuestionAges]);
+  }, [selectedQuestionAge]);
 
   const locationFilterOptions = useMemo(() => {
     return LOCATIONS.map((location) => ({
@@ -81,14 +79,14 @@ export default function QuestionsHomePage() {
     if (router.isReady && !isSearchInitialized) {
       setSelectedCompanies(paramToArray(router.query.companies));
       setSelectedQuestionTypes(paramToArray(router.query.questionTypes));
-      setSelectedQuestionAges(paramToArray(router.query.questionAges));
+      setSelectedQuestionAge(router.query.questionAge as string);
       setSelectedLocations(paramToArray(router.query.locations));
       setIsSearchInitialized(true);
 
       const hasFilter =
         router.query.companies ||
         router.query.questionTypes ||
-        router.query.questionAges ||
+        router.query.questionAge ||
         router.query.locations;
       if (hasFilter) {
         setHasLanded(true);
@@ -101,7 +99,7 @@ export default function QuestionsHomePage() {
     hasLanded,
     selectedCompanies,
     selectedQuestionTypes,
-    selectedQuestionAges,
+    selectedQuestionAge,
     selectedLocations,
   ]);
 
@@ -113,7 +111,7 @@ export default function QuestionsHomePage() {
           query: {
             companies: selectedCompanies,
             locations: selectedLocations,
-            questionAges: selectedQuestionAges,
+            questionAge: selectedQuestionAge,
             questionTypes: selectedQuestionTypes,
           },
         },
@@ -124,7 +122,7 @@ export default function QuestionsHomePage() {
   }, [
     selectedCompanies,
     selectedQuestionTypes,
-    selectedQuestionAges,
+    selectedQuestionAge,
     selectedLocations,
     router,
     router.isReady,
@@ -168,17 +166,12 @@ export default function QuestionsHomePage() {
               }}
             />
             <FilterSection
+              isSingleSelect={true}
               label="Question age"
               options={questionAgeFilterOptions}
               showAll={true}
-              onOptionChange={(optionValue, checked) => {
-                if (checked) {
-                  setSelectedQuestionAges((prev) => [...prev, optionValue]);
-                } else {
-                  setSelectedQuestionAges((prev) =>
-                    prev.filter((questionAge) => questionAge !== optionValue),
-                  );
-                }
+              onOptionChange={(optionValue) => {
+                setSelectedQuestionAge(optionValue);
               }}
             />
             <FilterSection
