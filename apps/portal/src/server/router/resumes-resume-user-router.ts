@@ -18,12 +18,7 @@ export const resumesResumeUserRouter = createProtectedRouter().mutation(
       const userId = ctx.session?.user.id;
       return await ctx.prisma.resumesResume.create({
         data: {
-          additionalInfo: input.additionalInfo,
-          experience: input.experience,
-          location: input.location,
-          role: input.role,
-          title: input.title,
-          url: input.url,
+          ...input,
           userId,
         },
       });

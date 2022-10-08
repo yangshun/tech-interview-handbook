@@ -29,8 +29,7 @@ export default function ResumePdf({ url }: Props) {
           responseType: 'blob',
         })
         .then((res) => {
-          const fileObject = res.data;
-          setFile(fileObject);
+          setFile(res.data);
         });
     }
     fetchData();
