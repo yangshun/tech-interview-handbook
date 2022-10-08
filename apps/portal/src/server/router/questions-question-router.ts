@@ -106,14 +106,14 @@ export const questionsQuestionsRouter = createProtectedRouter()
           id: input.id,
         },});
 
-        if (questionToUpdate?.id !== userId) {
-          throw new TRPCError({
-            code: 'UNAUTHORIZED',
-            message: 'User have no authorization to record.',
-            // Optional: pass the original error to retain stack trace
+      if (questionToUpdate?.id !== userId) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'User have no authorization to record.',
+          // Optional: pass the original error to retain stack trace
         });
-        }
-      // TODO: Check if session user owns this Question.
+      }
+
       return await ctx.prisma.questionsQuestion.update({
         data: {
           ...input,
@@ -130,7 +130,21 @@ export const questionsQuestionsRouter = createProtectedRouter()
       id: z.string(),
     }),
     async resolve({ ctx, input }) {
-      // TODO: Check if session user owns this Todo.
+      const userId = ctx.session?.user?.id;
+
+      const questionToUpdate = await ctx.prisma.questionsQuestion.findUnique({
+        where: {
+          id: input.id,
+        },});
+
+      if (questionToUpdate?.id !== userId) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'User have no authorization to record.',
+          // Optional: pass the original error to retain stack trace
+        });
+      }
+
       return await ctx.prisma.questionsQuestion.delete({
         where: {
           id: input.id,
