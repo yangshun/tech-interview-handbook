@@ -22,6 +22,9 @@ export { default as HorizontalDivider } from './HorizontalDivider/HorizontalDivi
 // Pagination
 export * from './Pagination/Pagination';
 export { default as Pagination } from './Pagination/Pagination';
+// RadioList
+export * from './RadioList/RadioList';
+export { default as RadioList } from './RadioList/RadioList';
 // Select
 export * from './Select/Select';
 export { default as Select } from './Select/Select';
