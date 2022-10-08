@@ -60,6 +60,11 @@ model User {
     questionsAnswerCommentVotes   QuestionsAnswerCommentVote[]
 }
 
+enum Vote {
+    UPVOTE
+    DOWNVOTE
+}
+
 model VerificationToken {
     identifier String
     token      String   @unique
@@ -172,12 +177,6 @@ model ResumesCommentVote {
 // use camelCase for field names, and try to name them consistently
 // across all models in this file.
 
-enum QuestionsVote {
-    NO_VOTE
-    UPVOTE
-    DOWNVOTE
-}
-
 enum QuestionsQuestionType {
     CODING
     SYSTEM_DESIGN
@@ -215,12 +214,12 @@ model QuestionsQuestionEncounter {
 }
 
 model QuestionsQuestionVote {
-    id         String        @id @default(cuid())
+    id         String   @id @default(cuid())
     questionId String
     userId     String?
-    vote       QuestionsVote
-    createdAt  DateTime      @default(now())
-    updatedAt  DateTime      @updatedAt
+    vote       Vote
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
 
     user     User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
     question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
@@ -242,12 +241,12 @@ model QuestionsQuestionComment {
 }
 
 model QuestionsQuestionCommentVote {
-    id                String        @id @default(cuid())
+    id                String   @id @default(cuid())
     questionCommentId String
     userId            String?
-    vote              QuestionsVote
-    createdAt         DateTime      @default(now())
-    updatedAt         DateTime      @updatedAt
+    vote              Vote
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
 
     user    User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
     comment QuestionsQuestionComment @relation(fields: [questionCommentId], references: [id], onDelete: Cascade)
@@ -270,12 +269,12 @@ model QuestionsAnswer {
 }
 
 model QuestionsAnswerVote {
-    id        String        @id @default(cuid())
+    id        String   @id @default(cuid())
     answerId  String
     userId    String?
-    vote      QuestionsVote
-    createdAt DateTime      @default(now())
-    updatedAt DateTime      @updatedAt
+    vote      Vote
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     user   User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
     answer QuestionsAnswer @relation(fields: [answerId], references: [id], onDelete: Cascade)
@@ -297,12 +296,12 @@ model QuestionsAnswerComment {
 }
 
 model QuestionsAnswerCommentVote {
-    id              String        @id @default(cuid())
+    id              String   @id @default(cuid())
     answerCommentId String
     userId          String?
-    vote            QuestionsVote
-    createdAt       DateTime      @default(now())
-    updatedAt       DateTime      @updatedAt
+    vote            Vote
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
 
     user    User?                  @relation(fields: [userId], references: [id], onDelete: SetNull)
     comment QuestionsAnswerComment @relation(fields: [answerCommentId], references: [id], onDelete: Cascade)
