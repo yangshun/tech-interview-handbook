@@ -10,11 +10,11 @@ export type LandingQueryData = {
 };
 
 export type LandingComponentProps = {
-  handleLandingQuery: (data: LandingQueryData) => void;
+  onLanded: (data: LandingQueryData) => void;
 };
 
 export default function LandingComponent({
-  handleLandingQuery,
+  onLanded: handleLandingQuery,
 }: LandingComponentProps) {
   const [landingQueryData, setLandingQueryData] = useState<LandingQueryData>({
     company: 'google',

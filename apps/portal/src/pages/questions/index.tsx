@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useMemo, useState } from 'react';
 
 import QuestionOverviewCard from '~/components/questions/card/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
@@ -10,10 +11,10 @@ import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
 type FilterChoices = Array<Omit<FilterOptions, 'checked'>>;
 
-const companies: FilterChoices = [
+const COMPANIES: FilterChoices = [
   {
     label: 'Google',
-    value: 'Google',
+    value: 'google',
   },
   {
     label: 'Meta',
@@ -22,7 +23,7 @@ const companies: FilterChoices = [
 ];
 
 // Code, design, behavioral
-const questionTypes: FilterChoices = [
+const QUESTION_TYPES: FilterChoices = [
   {
     label: 'Coding',
     value: 'coding',
@@ -37,7 +38,7 @@ const questionTypes: FilterChoices = [
   },
 ];
 
-const questionAges: FilterChoices = [
+const QUESTION_AGES: FilterChoices = [
   {
     label: 'Last month',
     value: 'last-month',
@@ -52,7 +53,7 @@ const questionAges: FilterChoices = [
   },
 ];
 
-const locations: FilterChoices = [
+const LOCATIONS: FilterChoices = [
   {
     label: 'Singapore',
     value: 'singapore',
@@ -60,7 +61,10 @@ const locations: FilterChoices = [
 ];
 
 export default function QuestionsHomePage() {
+  const router = useRouter();
+
   const [selectedCompanies, setSelectedCompanies] = useState<Array<string>>([]);
+
   const [selectedQuestionTypes, setSelectedQuestionTypes] = useState<
     Array<string>
   >([]);
@@ -71,45 +75,109 @@ export default function QuestionsHomePage() {
   const [hasLanded, setHasLanded] = useState(false);
 
   const companyFilterOptions = useMemo(() => {
-    return companies.map((company) => ({
+    return COMPANIES.map((company) => ({
       ...company,
       checked: selectedCompanies.includes(company.value),
     }));
   }, [selectedCompanies]);
 
   const questionTypeFilterOptions = useMemo(() => {
-    return questionTypes.map((questionType) => ({
+    return QUESTION_TYPES.map((questionType) => ({
       ...questionType,
       checked: selectedQuestionTypes.includes(questionType.value),
     }));
   }, [selectedQuestionTypes]);
 
   const questionAgeFilterOptions = useMemo(() => {
-    return questionAges.map((questionAge) => ({
+    return QUESTION_AGES.map((questionAge) => ({
       ...questionAge,
       checked: selectedQuestionAges.includes(questionAge.value),
     }));
   }, [selectedQuestionAges]);
 
   const locationFilterOptions = useMemo(() => {
-    return locations.map((location) => ({
+    return LOCATIONS.map((location) => ({
       ...location,
       checked: selectedLocations.includes(location.value),
     }));
   }, [selectedLocations]);
 
   const handleLandingQuery = (data: LandingQueryData) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
-    setSelectedCompanies([data.company]);
-    setSelectedLocations([data.location]);
-    setSelectedQuestionTypes([data.questionType]);
+    const { company, location, questionType } = data;
+    setSelectedCompanies([company]);
+    setSelectedLocations([location]);
+    setSelectedQuestionTypes([questionType]);
     setHasLanded(true);
   };
 
+  const paramToArray = (
+    param: Array<string> | string | undefined,
+  ): Array<string> => {
+    if (typeof param === 'string') {
+      return [param];
+    }
+    return param ?? [];
+  };
+
+  const [isSearchInitialized, setIsSearchInitialized] = useState(false);
+
+  // Set url query params
+  useEffect(() => {
+    if (router.isReady && !isSearchInitialized) {
+      setSelectedCompanies(paramToArray(router.query.companies));
+      setSelectedQuestionTypes(paramToArray(router.query.questionTypes));
+      setSelectedQuestionAges(paramToArray(router.query.questionAges));
+      setSelectedLocations(paramToArray(router.query.locations));
+      setIsSearchInitialized(true);
+
+      const hasFilter =
+        router.query.companies ||
+        router.query.questionTypes ||
+        router.query.questionAges ||
+        router.query.locations;
+      if (hasFilter) {
+        setHasLanded(true);
+      }
+    }
+  }, [
+    router.isReady,
+    router.query,
+    isSearchInitialized,
+    hasLanded,
+    selectedCompanies,
+    selectedQuestionTypes,
+    selectedQuestionAges,
+    selectedLocations,
+  ]);
+
+  // Update url query params
+  useEffect(() => {
+    if (router.isReady && isSearchInitialized) {
+      router.replace(
+        {
+          query: {
+            companies: selectedCompanies,
+            locations: selectedLocations,
+            questionAges: selectedQuestionAges,
+            questionTypes: selectedQuestionTypes,
+          },
+        },
+        undefined,
+        { shallow: true },
+      );
+    }
+  }, [
+    selectedCompanies,
+    selectedQuestionTypes,
+    selectedQuestionAges,
+    selectedLocations,
+    router,
+    router.isReady,
+    isSearchInitialized,
+  ]);
+
   return !hasLanded ? (
-    <LandingComponent
-      handleLandingQuery={handleLandingQuery}></LandingComponent>
+    <LandingComponent onLanded={handleLandingQuery}></LandingComponent>
   ) : (
     <main className="flex flex-1 flex-col items-stretch overflow-y-auto">
       <div className="flex pt-4">
