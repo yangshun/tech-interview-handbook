@@ -84,7 +84,7 @@ export default function ResumeHomePage() {
   ]);
 
   return (
-    <main className="h-full flex-1 overflow-y-auto">
+    <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
       <div className="ml-4 py-4">
         <ResumeReviewsTitle />
       </div>
