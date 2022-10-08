@@ -46,9 +46,12 @@ export default function LandingComponent({
         <NavBar></NavBar>
       </div>
       <div className="flex flex-1 flex-col justify-center gap-3">
-        <h1 className="text-primary-600 px-4 text-center text-4xl font-bold">
-          Tech Interview Question Bank
-        </h1>
+        <div className="flex items-center justify-center">
+          <img alt="app logo" className=" h-20 w-20" src="/logo.svg"></img>
+          <h1 className="text-primary-600 px-4 text-center text-5xl font-bold">
+            Tech Interview Question Bank
+          </h1>
+        </div>
         <p className="mx-auto max-w-lg py-6 px-4 text-center text-xl text-black sm:max-w-3xl">
           Get to know the latest SWE interview questions asked by top companies
         </p>
