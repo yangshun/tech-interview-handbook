@@ -37,18 +37,32 @@ model Session {
 }
 
 model User {
-    id                  String               @id @default(cuid())
-    name                String?
-    email               String?              @unique
-    emailVerified       DateTime?
-    image               String?
-    accounts            Account[]
-    sessions            Session[]
-    todos               Todo[]
-    resumesResumes      ResumesResume[]
-    resumesStars        ResumesStar[]
-    resumesComments     ResumesComment[]
-    resumesCommentVotes ResumesCommentVote[]
+    id                            String                         @id @default(cuid())
+    name                          String?
+    email                         String?                        @unique
+    emailVerified                 DateTime?
+    image                         String?
+    accounts                      Account[]
+    sessions                      Session[]
+    todos                         Todo[]
+    resumesResumes                ResumesResume[]
+    resumesStars                  ResumesStar[]
+    resumesComments               ResumesComment[]
+    resumesCommentVotes           ResumesCommentVote[]
+    questionsQuestions            QuestionsQuestion[]
+    questionsQuestionEncounters   QuestionsQuestionEncounter[]
+    questionsQuestionVotes        QuestionsQuestionVote[]
+    questionsQuestionComments     QuestionsQuestionComment[]
+    questionsQuestionCommentVotes QuestionsQuestionCommentVote[]
+    questionsAnswers              QuestionsAnswer[]
+    questionsAnswerVotes          QuestionsAnswerVote[]
+    questionsAnswerComments       QuestionsAnswerComment[]
+    questionsAnswerCommentVotes   QuestionsAnswerCommentVote[]
+}
+
+enum Vote {
+    UPVOTE
+    DOWNVOTE
 }
 
 model VerificationToken {
@@ -162,4 +176,137 @@ model ResumesCommentVote {
 // Add Questions project models here, prefix all models with "Questions",
 // use camelCase for field names, and try to name them consistently
 // across all models in this file.
+
+enum QuestionsQuestionType {
+    CODING
+    SYSTEM_DESIGN
+    BEHAVIORAL
+}
+
+model QuestionsQuestion {
+    id           String                @id @default(cuid())
+    userId       String?
+    content      String                @db.Text
+    questionType QuestionsQuestionType
+    createdAt    DateTime              @default(now())
+    updatedAt    DateTime              @updatedAt
+
+    user       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+    encounters QuestionsQuestionEncounter[]
+    votes      QuestionsQuestionVote[]
+    comments   QuestionsQuestionComment[]
+    answers    QuestionsAnswer[]
+}
+
+model QuestionsQuestionEncounter {
+    id         String   @id @default(cuid())
+    questionId String
+    userId     String?
+    // TODO: sync with models
+    company    String   @db.Text
+    location   String   @db.Text
+    role       String   @db.Text
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    user     User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+    question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+model QuestionsQuestionVote {
+    id         String   @id @default(cuid())
+    questionId String
+    userId     String?
+    vote       Vote
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    user     User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+    question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+    @@unique([questionId, userId])
+}
+
+model QuestionsQuestionComment {
+    id         String   @id @default(cuid())
+    questionId String
+    userId     String?
+    content    String   @db.Text
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    user     User?                          @relation(fields: [userId], references: [id], onDelete: SetNull)
+    question QuestionsQuestion              @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    votes    QuestionsQuestionCommentVote[]
+}
+
+model QuestionsQuestionCommentVote {
+    id                String   @id @default(cuid())
+    questionCommentId String
+    userId            String?
+    vote              Vote
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+
+    user    User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
+    comment QuestionsQuestionComment @relation(fields: [questionCommentId], references: [id], onDelete: Cascade)
+
+    @@unique([questionCommentId, userId])
+}
+
+model QuestionsAnswer {
+    id         String   @id @default(cuid())
+    questionId String
+    userId     String?
+    content    String   @db.Text
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    user     User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
+    question QuestionsQuestion        @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    votes    QuestionsAnswerVote[]
+    comments QuestionsAnswerComment[]
+}
+
+model QuestionsAnswerVote {
+    id        String   @id @default(cuid())
+    answerId  String
+    userId    String?
+    vote      Vote
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    user   User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+    answer QuestionsAnswer @relation(fields: [answerId], references: [id], onDelete: Cascade)
+
+    @@unique([answerId, userId])
+}
+
+model QuestionsAnswerComment {
+    id        String   @id @default(cuid())
+    answerId  String
+    userId    String?
+    content   String   @db.Text
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    user   User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+    answer QuestionsAnswer              @relation(fields: [answerId], references: [id], onDelete: Cascade)
+    votes  QuestionsAnswerCommentVote[]
+}
+
+model QuestionsAnswerCommentVote {
+    id              String   @id @default(cuid())
+    answerCommentId String
+    userId          String?
+    vote            Vote
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+
+    user    User?                  @relation(fields: [userId], references: [id], onDelete: SetNull)
+    comment QuestionsAnswerComment @relation(fields: [answerCommentId], references: [id], onDelete: Cascade)
+
+    @@unique([answerCommentId, userId])
+}
+
 // End of Questions project models.
