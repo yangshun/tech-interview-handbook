@@ -23,19 +23,33 @@ export const ROLES = [
     label: 'Full-Stack Engineer',
     value: 'Full-Stack Engineer',
   },
-  { checked: false, label: 'Frontend Engineer', value: 'frontend-engineer' },
-  { checked: false, label: 'Backend Engineer', value: 'backend-engineer' },
-  { checked: false, label: 'DevOps Engineer', value: 'devops-engineer' },
-  { checked: false, label: 'iOS Engineer', value: 'ios-engineer' },
-  { checked: false, label: 'Android Engineer', value: 'android-engineer' },
+  { checked: false, label: 'Frontend Engineer', value: 'Frontend Engineer' },
+  { checked: false, label: 'Backend Engineer', value: 'Backend Engineer' },
+  { checked: false, label: 'DevOps Engineer', value: 'DevOps Engineer' },
+  { checked: false, label: 'iOS Engineer', value: 'iOS Engineer' },
+  { checked: false, label: 'Android Engineer', value: 'Android Engineer' },
 ];
 
 export const EXPERIENCE = [
-  { checked: false, label: 'Freshman', value: 'freshman' },
-  { checked: false, label: 'Sophomore', value: 'sophomore' },
-  { checked: false, label: 'Junior', value: 'junior' },
-  { checked: false, label: 'Senior', value: 'senior' },
-  { checked: false, label: 'Fresh Grad (0-1 years)', value: 'freshgrad' },
+  { checked: false, label: 'Freshman', value: 'Freshman' },
+  { checked: false, label: 'Sophomore', value: 'Sophomore' },
+  { checked: false, label: 'Junior', value: 'Junior' },
+  { checked: false, label: 'Senior', value: 'Senior' },
+  {
+    checked: false,
+    label: 'Fresh Grad (0-1 years)',
+    value: 'Fresh Grad (0-1 years)',
+  },
+  {
+    checked: false,
+    label: 'Mid-level (2 - 5 years)',
+    value: 'Mid-level (2 - 5 years)',
+  },
+  {
+    checked: false,
+    label: 'Senior (5+ years)',
+    value: 'Senior (5+ years)',
+  },
 ];
 
 export const LOCATION = [

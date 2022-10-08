@@ -1,10 +1,17 @@
+import clsx from 'clsx';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { PaperClipIcon } from '@heroicons/react/24/outline';
-import { Button, Select, TextInput } from '@tih/ui';
+import { Button, Select, TextArea, TextInput } from '@tih/ui';
+
+import {
+  EXPERIENCE,
+  LOCATION,
+  ROLES,
+} from '~/components/resumes/browse/constants';
 
 import { trpc } from '~/utils/trpc';
 
@@ -13,7 +20,7 @@ const TITLE_PLACEHOLDER =
 const ADDITIONAL_INFO_PLACEHOLDER = `e.g. I’m applying for company XYZ. I have been resume-rejected by N companies that I have applied for. Please help me to review so company XYZ gives me an interview!`;
 const FILE_UPLOAD_ERROR = 'Please upload a PDF file that is less than 10MB.';
 
-const MAX_FILE_SIZE_LIMIT = 10485760;
+const MAX_FILE_SIZE_LIMIT = 10000000;
 
 type IFormInput = {
   additionalInfo?: string;
@@ -25,52 +32,6 @@ type IFormInput = {
 };
 
 export default function SubmitResumeForm() {
-  // TODO: Use enums instead
-  const roleItems = [
-    {
-      label: 'Frontend Engineer',
-      value: 'Frontend Engineer',
-    },
-    {
-      label: 'Full-Stack Engineer',
-      value: 'Full-Stack Engineer',
-    },
-    {
-      label: 'Backend Engineer',
-      value: 'Backend Engineer',
-    },
-  ];
-
-  const experienceItems = [
-    {
-      label: 'Fresh Graduate (0 - 1 years)',
-      value: 'Fresh Graduate (0 - 1 years)',
-    },
-    {
-      label: 'Mid',
-      value: 'Mid',
-    },
-    {
-      label: 'Senior',
-      value: 'Senior',
-    },
-  ];
-
-  const locationItems = [
-    {
-      label: 'United States',
-      value: 'United States',
-    },
-    {
-      label: 'Singapore',
-      value: 'Singapore',
-    },
-    {
-      label: 'India',
-      value: 'India',
-    },
-  ];
-
   const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
   const router = useRouter();
 
@@ -139,6 +100,7 @@ export default function SubmitResumeForm() {
                   errorMessage={errors?.title && 'Title cannot be empty!'}
                   label="Title"
                   placeholder={TITLE_PLACEHOLDER}
+                  required={true}
                   onChange={(val) => setValue('title', val)}
                 />
               </div>
@@ -146,7 +108,8 @@ export default function SubmitResumeForm() {
                 <Select
                   {...register('role', { required: true })}
                   label="Role"
-                  options={roleItems}
+                  options={ROLES}
+                  required={true}
                   onChange={(val) => setValue('role', val)}
                 />
               </div>
@@ -154,7 +117,8 @@ export default function SubmitResumeForm() {
                 <Select
                   {...register('experience', { required: true })}
                   label="Experience Level"
-                  options={experienceItems}
+                  options={EXPERIENCE}
+                  required={true}
                   onChange={(val) => setValue('experience', val)}
                 />
               </div>
@@ -163,27 +127,39 @@ export default function SubmitResumeForm() {
                   {...register('location', { required: true })}
                   label="Location"
                   name="location"
-                  options={locationItems}
+                  options={LOCATION}
+                  required={true}
                   onChange={(val) => setValue('location', val)}
                 />
               </div>
               <p className="text-sm font-medium text-slate-700">
                 Upload resume (PDF format)
+                <span aria-hidden="true" className="text-danger-500">
+                  {' '}
+                  *
+                </span>
               </p>
               <div className="mb-4">
-                <div className="mt-2 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+                <div
+                  className={clsx(
+                    fileUploadError ? 'border-danger-600' : 'border-gray-300',
+                    'mt-2 flex justify-center rounded-md border-2 border-dashed  px-6 pt-5 pb-6',
+                  )}>
                   <div className="space-y-1 text-center">
                     <div className="flex gap-2">
                       <PaperClipIcon className="m-auto h-8 w-8 text-gray-600" />
                       {resumeFile && <p>{resumeFile.name}</p>}
                     </div>
-                    <div className="flex text-sm text-gray-600">
+                    <div className="flex justify-center text-sm">
                       <label
-                        className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                        className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
                         htmlFor="file-upload">
-                        <span>Upload a file</span>
+                        <p className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-500">
+                          Upload a file
+                        </p>
                         <input
                           {...register('file', { required: true })}
+                          accept="application/pdf"
                           className="sr-only"
                           id="file-upload"
                           name="file-upload"
@@ -191,7 +167,6 @@ export default function SubmitResumeForm() {
                           onChange={onUploadFile}
                         />
                       </label>
-                      <p className="pl-1">or drag and drop</p>
                     </div>
                     <p className="text-xs text-gray-500">PDF up to 10MB</p>
                   </div>
@@ -201,8 +176,7 @@ export default function SubmitResumeForm() {
                 )}
               </div>
               <div className="mb-4">
-                {/* TODO: Use TextInputArea instead */}
-                <TextInput
+                <TextArea
                   {...register('additionalInfo')}
                   label="Additional Information"
                   placeholder={ADDITIONAL_INFO_PLACEHOLDER}
