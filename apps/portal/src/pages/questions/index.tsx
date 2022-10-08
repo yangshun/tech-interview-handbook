@@ -191,7 +191,7 @@ export default function QuestionsHomePage() {
                 location="Menlo Park, CA"
                 role="Senior Engineering Manager"
                 similarCount={0}
-                timestamp=""
+                timestamp="Last month"
                 upvoteCount={0}
               />
             </div>

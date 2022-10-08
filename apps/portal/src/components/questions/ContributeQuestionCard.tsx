@@ -49,7 +49,6 @@ export default function ContributeQuestionCard({
 }: ContributeQuestionCardProps) {
   const { register, handleSubmit } = useForm<ContributeQuestionData>();
   const [isOpen, setOpen] = useState<boolean>(false);
-
   return (
     <>
       <form
