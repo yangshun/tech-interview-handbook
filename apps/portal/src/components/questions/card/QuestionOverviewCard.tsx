@@ -1,19 +1,17 @@
 import type { QuestionCardProps } from './QuestionCard';
 import QuestionCard from './QuestionCard';
 
-export type QuestionOverviewCardProps = Required<
-  Omit<
-    QuestionCardProps & {
-      showActionButton: false;
-      showUserStatistics: true;
-      showVoteButtons: true;
-    },
-    | 'actionButtonLabel'
-    | 'onActionButtonClick'
-    | 'showActionButton'
-    | 'showUserStatistics'
-    | 'showVoteButtons'
-  >
+export type QuestionOverviewCardProps = Omit<
+  QuestionCardProps & {
+    showActionButton: false;
+    showUserStatistics: true;
+    showVoteButtons: true;
+  },
+  | 'actionButtonLabel'
+  | 'onActionButtonClick'
+  | 'showActionButton'
+  | 'showUserStatistics'
+  | 'showVoteButtons'
 >;
 
 export default function QuestionOverviewCard(props: QuestionOverviewCardProps) {

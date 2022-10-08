@@ -13,6 +13,7 @@ import {
   LOCATIONS,
   QUESTION_AGES,
   QUESTION_TYPES,
+  SAMPLE_QUESTION,
 } from '~/utils/questions/constants';
 
 export default function QuestionsHomePage() {
@@ -219,13 +220,8 @@ export default function QuestionsHomePage() {
                 <QuestionOverviewCard
                   // eslint-disable-next-line react/no-array-index-key
                   key={index}
-                  answerCount={0}
-                  content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and"
-                  location="Menlo Park, CA"
-                  receivedCount={0}
-                  role="Senior Engineering Manager"
-                  timestamp="Last month"
-                  upvoteCount={0}
+                  href="/questions/1/1"
+                  {...SAMPLE_QUESTION}
                 />
               ))}
             </div>

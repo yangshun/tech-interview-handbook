@@ -1,21 +1,19 @@
 import type { QuestionCardProps } from './QuestionCard';
 import QuestionCard from './QuestionCard';
 
-export type SimilarQuestionCardProps = Required<
-  Omit<
-    QuestionCardProps & {
-      showActionButton: true;
-      showUserStatistics: false;
-      showVoteButtons: false;
-    },
-    | 'actionButtonLabel'
-    | 'answerCount'
-    | 'onActionButtonClick'
-    | 'showActionButton'
-    | 'showUserStatistics'
-    | 'showVoteButtons'
-    | 'upvoteCount'
-  >
+export type SimilarQuestionCardProps = Omit<
+  QuestionCardProps & {
+    showActionButton: true;
+    showUserStatistics: false;
+    showVoteButtons: false;
+  },
+  | 'actionButtonLabel'
+  | 'answerCount'
+  | 'onActionButtonClick'
+  | 'showActionButton'
+  | 'showUserStatistics'
+  | 'showVoteButtons'
+  | 'upvoteCount'
 > & {
   onSimilarQuestionClick: () => void;
 };

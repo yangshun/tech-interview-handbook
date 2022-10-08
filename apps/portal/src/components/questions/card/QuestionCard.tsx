@@ -1,10 +1,10 @@
 import {
   ChatBubbleBottomCenterTextIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
   EyeIcon,
 } from '@heroicons/react/24/outline';
 import { Badge, Button } from '@tih/ui';
+
+import VotingButtons from '../VotingButtons';
 
 type UpvoteProps =
   | {
@@ -42,6 +42,7 @@ export type QuestionCardProps = ActionButtonProps &
   StatisticsProps &
   UpvoteProps & {
     content: string;
+    href?: string;
     location: string;
     receivedCount: number;
     role: string;
@@ -61,26 +62,11 @@ export default function QuestionCard({
   timestamp,
   role,
   location,
+  href,
 }: QuestionCardProps) {
-  return (
+  const mainCard = (
     <article className="flex gap-4 rounded-md border border-slate-300 bg-white p-4">
-      {showVoteButtons && (
-        <div className="flex flex-col items-center">
-          <Button
-            icon={ChevronUpIcon}
-            isLabelHidden={true}
-            label="Upvote"
-            variant="tertiary"
-          />
-          <p>{upvoteCount}</p>
-          <Button
-            icon={ChevronDownIcon}
-            isLabelHidden={true}
-            label="Downvote"
-            variant="tertiary"
-          />
-        </div>
-      )}
+      {showVoteButtons && <VotingButtons upvoteCount={upvoteCount} />}
       <div className="flex flex-col gap-2">
         <div className="flex items-baseline justify-between">
           <div className="flex items-center gap-2 text-slate-500">
@@ -121,5 +107,15 @@ export default function QuestionCard({
         )}
       </div>
     </article>
+  );
+
+  return href ? (
+    <a
+      className="ring-primary-500 rounded-md hover:bg-slate-50 focus:ring-2 focus-visible:outline-none active:bg-slate-100"
+      href={href}>
+      {mainCard}
+    </a>
+  ) : (
+    mainCard
   );
 }

@@ -68,3 +68,14 @@ export const LOCATIONS: FilterChoices = [
     value: 'taiwan',
   },
 ];
+
+export const SAMPLE_QUESTION = {
+  answerCount: 10,
+  content:
+    'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and',
+  location: 'Menlo Park, CA',
+  receivedCount: 12,
+  role: 'Software Engineer',
+  timestamp: 'Last month',
+  upvoteCount: 5,
+};
