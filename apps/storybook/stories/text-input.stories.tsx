@@ -5,7 +5,7 @@ import {
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/solid';
 import type { ComponentMeta } from '@storybook/react';
-import { TextInput } from '@tih/ui';
+import { Select, TextInput } from '@tih/ui';
 
 export default {
   argTypes: {
@@ -29,6 +29,9 @@ export default {
     },
     placeholder: {
       control: 'text',
+    },
+    required: {
+      control: 'boolean',
     },
     type: {
       control: 'text',
@@ -67,7 +70,8 @@ export function Email() {
     <TextInput
       label="Email"
       placeholder="john.doe@email.com"
-      startIcon={EnvelopeIcon}
+      startAddOn={EnvelopeIcon}
+      startAddOnType="icon"
       type="email"
       value={value}
       onChange={setValue}
@@ -91,7 +95,8 @@ export function Icon() {
       <TextInput
         label="Account number"
         placeholder="000-00-0000"
-        startIcon={QuestionMarkCircleIcon}
+        startAddOn={QuestionMarkCircleIcon}
+        startAddOnType="icon"
         type="text"
         value={value}
         onChange={setValue}
@@ -102,10 +107,53 @@ export function Icon() {
 
 export function Disabled() {
   return (
+    <div className="space-y-4">
+      <TextInput
+        disabled={true}
+        label="Disabled input"
+        placeholder="John Doe"
+        type="text"
+      />
+      <TextInput
+        disabled={true}
+        endAddOn={
+          <Select
+            borderStyle="borderless"
+            isLabelHidden={true}
+            label="Currency"
+            options={[
+              {
+                label: 'USD',
+                value: 'USD',
+              },
+              {
+                label: 'SGD',
+                value: 'SGD',
+              },
+              {
+                label: 'EUR',
+                value: 'EUR',
+              },
+            ]}
+          />
+        }
+        endAddOnType="element"
+        label="Price"
+        placeholder="0.00"
+        startAddOn="$"
+        startAddOnType="label"
+        type="text"
+      />
+    </div>
+  );
+}
+
+export function Required() {
+  return (
     <TextInput
-      disabled={true}
-      label="Disabled input"
+      label="Required input"
       placeholder="John Doe"
+      required={true}
       type="text"
     />
   );
@@ -119,11 +167,98 @@ export function Error() {
       errorMessage={
         value.length < 6 ? 'Password must be at least 6 characters' : undefined
       }
-      label="Email"
-      startIcon={KeyIcon}
+      label="Password"
+      startAddOn={KeyIcon}
+      startAddOnType="icon"
       type="password"
       value={value}
       onChange={setValue}
     />
+  );
+}
+
+export function AddOns() {
+  return (
+    <div className="space-y-4">
+      <TextInput
+        label="Price"
+        placeholder="0.00"
+        startAddOn="$"
+        startAddOnType="label"
+        type="text"
+      />
+      <TextInput
+        endAddOn="USD"
+        endAddOnType="label"
+        label="Price"
+        placeholder="0.00"
+        type="text"
+      />
+      <TextInput
+        endAddOn="USD"
+        endAddOnType="label"
+        label="Price"
+        placeholder="0.00"
+        startAddOn="$"
+        startAddOnType="label"
+        type="text"
+      />
+      <TextInput
+        label="Phone Number"
+        placeholder="+1 (123) 456-7890"
+        startAddOn={
+          <Select
+            borderStyle="borderless"
+            isLabelHidden={true}
+            label="country"
+            options={[
+              {
+                label: 'US',
+                value: 'US',
+              },
+              {
+                label: 'SG',
+                value: 'SG',
+              },
+              {
+                label: 'JP',
+                value: 'JP',
+              },
+            ]}
+          />
+        }
+        startAddOnType="element"
+        type="text"
+      />
+      <TextInput
+        endAddOn={
+          <Select
+            borderStyle="borderless"
+            isLabelHidden={true}
+            label="Currency"
+            options={[
+              {
+                label: 'USD',
+                value: 'USD',
+              },
+              {
+                label: 'SGD',
+                value: 'SGD',
+              },
+              {
+                label: 'EUR',
+                value: 'EUR',
+              },
+            ]}
+          />
+        }
+        endAddOnType="element"
+        label="Price"
+        placeholder="0.00"
+        startAddOn="$"
+        startAddOnType="label"
+        type="text"
+      />
+    </div>
   );
 }

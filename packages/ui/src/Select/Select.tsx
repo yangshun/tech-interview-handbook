@@ -14,8 +14,10 @@ export type SelectItem<T> = Readonly<{
 }>;
 
 export type SelectDisplay = 'block' | 'inline';
+export type SelectBorderStyle = 'bordered' | 'borderless';
 
 type Props<T> = Readonly<{
+  borderStyle?: SelectBorderStyle;
   defaultValue?: T;
   display?: SelectDisplay;
   isLabelHidden?: boolean;
@@ -27,8 +29,14 @@ type Props<T> = Readonly<{
 }> &
   Readonly<Attributes>;
 
+const borderClasses: Record<SelectBorderStyle, string> = {
+  bordered: 'border-slate-300',
+  borderless: 'border-transparent bg-transparent',
+};
+
 function Select<T>(
   {
+    borderStyle = 'bordered',
     defaultValue,
     display,
     disabled,
@@ -45,20 +53,20 @@ function Select<T>(
 
   return (
     <div>
-      <label
-        className={clsx(
-          'mb-1 block text-sm font-medium text-slate-700',
-          isLabelHidden && 'sr-only',
-        )}
-        htmlFor={id ?? undefined}>
-        {label}
-      </label>
+      {!isLabelHidden && (
+        <label
+          className={clsx('mb-1 block text-sm font-medium text-slate-700')}
+          htmlFor={id ?? undefined}>
+          {label}
+        </label>
+      )}
       <select
         ref={ref}
         aria-label={isLabelHidden ? label : undefined}
         className={clsx(
           display === 'block' && 'block w-full',
-          'focus:border-primary-500 focus:ring-primary-500 rounded-md border-slate-300 py-2 pl-3 pr-10 text-base focus:outline-none sm:text-sm',
+          'focus:border-primary-500 focus:ring-primary-500 rounded-md py-2 pl-3 pr-8 text-base focus:outline-none sm:text-sm',
+          borderClasses[borderStyle],
           disabled && 'bg-slate-100',
         )}
         defaultValue={defaultValue != null ? String(defaultValue) : undefined}

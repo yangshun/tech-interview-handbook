@@ -97,15 +97,16 @@ model Company {
 // Add Resumes project models here, prefix all models with "Resumes",
 // use camelCase for field names, and try to name them consistently
 // across all models in this file.
-// End of Resumes project models.
-
 model ResumesResume {
     id             String           @id @default(cuid())
     userId         String
     title          String           @db.Text
-    additionalInfo String           @db.Text
-    // TODO: Add role, experience, location from Enums
+    // TODO: Update role, experience, location to use Enums
+    role           String           @db.Text
+    experience     String           @db.Text
+    location       String           @db.Text
     url            String
+    additionalInfo String?          @db.Text
     createdAt      DateTime         @default(now())
     updatedAt      DateTime         @updatedAt
     user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -115,24 +116,26 @@ model ResumesResume {
 
 model ResumesStar {
     id        String        @id @default(cuid())
-    resumeId  String
     userId    String
+    resumeId  String
     createdAt DateTime      @default(now())
-    user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
     resume    ResumesResume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+    user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, resumeId])
 }
 
 model ResumesComment {
     id          String               @id @default(cuid())
-    resumeId    String
     userId      String
+    resumeId    String
     description String               @db.Text
     section     ResumesSection
     createdAt   DateTime             @default(now())
     updatedAt   DateTime             @updatedAt
-    user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
     resume      ResumesResume        @relation(fields: [resumeId], references: [id], onDelete: Cascade)
     votes       ResumesCommentVote[]
+    user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum ResumesSection {
@@ -145,14 +148,18 @@ enum ResumesSection {
 
 model ResumesCommentVote {
     id        String         @id @default(cuid())
-    commentId String
     userId    String
+    commentId String
     value     Int
     createdAt DateTime       @default(now())
     updatedAt DateTime       @updatedAt
-    user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
     comment   ResumesComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+    user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, commentId])
 }
+
+// End of Resumes project models.
 
 // Start of Offers project models.
 // Add Offers project models here, prefix all models with "Offer",
