@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import {
   BuildingOffice2Icon,
   CalendarDaysIcon,
@@ -7,43 +6,28 @@ import {
 } from '@heroicons/react/24/outline';
 import { Button, TextInput } from '@tih/ui';
 
-import { useFormRegister } from '~/utils/questions/useFormRegister';
-
 import ContributeQuestionDialog from './ContributeQuestionDialog';
 
-export type ContributeQuestionData = {
-  company: string;
-  date: Date;
-  questionContent: string;
-  questionType: string;
-};
-
-export type ContributeQuestionCardProps = {
-  onSubmit: (data: ContributeQuestionData) => void;
-};
-
-export default function ContributeQuestionCard({
-  onSubmit,
-}: ContributeQuestionCardProps) {
-  const { register: formRegister, handleSubmit } =
-    useForm<ContributeQuestionData>();
-  const register = useFormRegister(formRegister);
+export default function ContributeQuestionCard() {
   const [showDraftDialog, setShowDraftDialog] = useState(false);
 
   const handleDraftDialogCancel = () => {
     setShowDraftDialog(false);
   };
 
+  const handleOnFocus = () => {
+    (document.activeElement as HTMLElement).blur();
+    setShowDraftDialog(true);
+  };
+
   return (
     <>
-      <form
-        className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 p-4"
-        onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 p-4">
         <TextInput
           isLabelHidden={true}
           label="Question"
           placeholder="Contribute a question"
-          {...register('questionContent')}
+          onFocus={handleOnFocus}
         />
         <div className="flex items-end justify-center gap-x-2">
           <div className="min-w-[150px] flex-1">
@@ -51,7 +35,7 @@ export default function ContributeQuestionCard({
               label="Company"
               startAddOn={BuildingOffice2Icon}
               startAddOnType="icon"
-              {...register('company')}
+              onFocus={handleOnFocus}
             />
           </div>
           <div className="min-w-[150px] flex-1">
@@ -59,7 +43,7 @@ export default function ContributeQuestionCard({
               label="Question type"
               startAddOn={QuestionMarkCircleIcon}
               startAddOnType="icon"
-              {...register('questionType')}
+              onFocus={handleOnFocus}
             />
           </div>
           <div className="min-w-[150px] flex-1">
@@ -67,17 +51,17 @@ export default function ContributeQuestionCard({
               label="Date"
               startAddOn={CalendarDaysIcon}
               startAddOnType="icon"
-              {...register('date')}
+              onFocus={handleOnFocus}
             />
           </div>
           <Button
             label="Contribute"
             type="submit"
             variant="primary"
-            onClick={() => setShowDraftDialog(true)}
+            onClick={handleOnFocus}
           />
         </div>
-      </form>
+      </div>
       <ContributeQuestionDialog
         show={showDraftDialog}
         onCancel={handleDraftDialogCancel}
