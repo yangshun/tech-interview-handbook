@@ -2,10 +2,7 @@ import formidable from 'formidable';
 import * as fs from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { env } from '~/env/server.mjs';
 import { supabase } from '~/utils/supabase';
-
-const BASE_URL = `${env.SUPABASE_URL}/storage/v1/object/public`;
 
 export const config = {
   api: {
@@ -42,7 +39,7 @@ export default async function handler(
         }
 
         return res.status(200).json({
-          url: `${BASE_URL}/${key}/${filePath}`,
+          url: filePath,
         });
       });
     } catch (error: unknown) {
@@ -50,18 +47,19 @@ export default async function handler(
     }
   }
 
-  // See if we need this
   if (req.method === 'GET') {
-    const { key, filePath } = req.query;
+    const { key, url } = req.query;
 
     const { data, error } = await supabase.storage
-      .from(key as string)
-      .download(filePath as string);
+      .from(`public/${key as string}`)
+      .download(url as string);
 
-    if (error) {
+    if (error || data == null) {
       throw error;
     }
 
-    res.status(200).write(data);
+    const arrayBuffer = await data.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    res.status(200).send(buffer);
   }
 }

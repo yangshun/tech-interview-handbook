@@ -14,6 +14,7 @@ import {
   ROLES,
 } from '~/components/resumes/browse/constants';
 
+import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
 import { trpc } from '~/utils/trpc';
 
 const TITLE_PLACEHOLDER =
@@ -55,7 +56,7 @@ export default function SubmitResumeForm() {
     }
 
     const formData = new FormData();
-    formData.append('key', 'resumes');
+    formData.append('key', RESUME_STORAGE_KEY);
     formData.append('file', resumeFile);
 
     const res = await axios.post('/api/file-storage', formData, {
