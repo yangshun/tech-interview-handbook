@@ -1,10 +1,10 @@
+import axios from 'axios';
 import clsx from 'clsx';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { v4 as uuidv4 } from 'uuid';
 import { PaperClipIcon } from '@heroicons/react/24/outline';
 import { Button, Select, TextArea, TextInput } from '@tih/ui';
 
@@ -14,7 +14,6 @@ import {
   ROLES,
 } from '~/components/resumes/browse/constants';
 
-import { supabase } from '~/utils/supabaseClient';
 import { trpc } from '~/utils/trpc';
 
 const TITLE_PLACEHOLDER =
@@ -55,21 +54,25 @@ export default function SubmitResumeForm() {
       return;
     }
 
-    // Prefix with uuid so that it is always unique
-    const url = `${uuidv4()}-${resumeFile.name}`;
-    const { error } = await supabase.storage
-      .from('resumes')
-      .upload(url, resumeFile);
+    const formData = new FormData();
+    formData.append('key', 'resumes');
+    formData.append('file', resumeFile);
 
-    if (error) {
-      console.error(error);
-    }
+    // Prefix with uuid so that it is always unique
+    const res = await axios.post('/api/file-storage', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    const { url } = res.data;
 
     await resumeCreateMutation.mutate({
       ...data,
       url,
     });
-    router.push('/resumes');
+    // Router.push('/resumes');
+    reset();
   };
 
   const onUploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
