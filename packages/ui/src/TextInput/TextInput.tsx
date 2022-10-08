@@ -129,7 +129,7 @@ function TextInput(
         className={clsx(
           isLabelHidden
             ? 'sr-only'
-            : 'block text-sm font-medium text-slate-700',
+            : 'mb-1 block text-sm font-medium text-slate-700',
         )}
         htmlFor={id}>
         {label}
@@ -143,7 +143,6 @@ function TextInput(
       <div
         className={clsx(
           'flex w-full overflow-hidden rounded-md border focus-within:ring-1 sm:text-sm',
-          !isLabelHidden && 'mt-1',
           disabled && 'pointer-events-none select-none bg-slate-100',
           containerClass,
         )}>

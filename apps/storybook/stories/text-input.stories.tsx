@@ -167,7 +167,7 @@ export function Error() {
       errorMessage={
         value.length < 6 ? 'Password must be at least 6 characters' : undefined
       }
-      label="Email"
+      label="Password"
       startAddOn={KeyIcon}
       startAddOnType="icon"
       type="password"

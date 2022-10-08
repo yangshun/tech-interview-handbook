@@ -34,6 +34,9 @@ export { default as Spinner } from './Spinner/Spinner';
 // Tabs
 export * from './Tabs/Tabs';
 export { default as Tabs } from './Tabs/Tabs';
+// TextArea
+export * from './TextArea/TextArea';
+export { default as TextArea } from './TextArea/TextArea';
 // TextInput
 export * from './TextInput/TextInput';
 export { default as TextInput } from './TextInput/TextInput';
