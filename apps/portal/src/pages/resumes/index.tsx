@@ -1,4 +1,6 @@
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import { Fragment, useEffect, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
@@ -44,6 +46,8 @@ import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
 import { trpc } from '~/utils/trpc';
 
 export default function ResumeHomePage() {
+  const { data } = useSession();
+  const router = useRouter();
   const [tabsValue, setTabsValue] = useState(BROWSE_TABS_VALUES.ALL);
   const [searchValue, setSearchValue] = useState('');
   const [resumes, setResumes] = useState(Array<Resume>());
@@ -82,6 +86,14 @@ export default function ResumeHomePage() {
     myResumesQuery.data,
     tabsValue,
   ]);
+
+  const onClickNew = () => {
+    if (data?.user?.id) {
+      router.push('/resumes/submit');
+    } else {
+      // TODO: Handle non-logged in user behaviour
+    }
+  };
 
   return (
     <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
@@ -177,7 +189,8 @@ export default function ResumeHomePage() {
                 <div className="col-span-1">
                   <button
                     className="rounded-md bg-indigo-500 py-1 px-3 text-sm text-white"
-                    type="button">
+                    type="button"
+                    onClick={onClickNew}>
                     New
                   </button>
                 </div>

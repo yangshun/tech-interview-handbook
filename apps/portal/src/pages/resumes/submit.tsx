@@ -126,7 +126,7 @@ export default function SubmitResumeForm() {
       <Head>
         <title>Upload a resume</title>
       </Head>
-      <main className="flex-1 overflow-y-auto">
+      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
         <section
           aria-labelledby="primary-heading"
           className="flex h-full min-w-0 flex-1 flex-col lg:order-last">
