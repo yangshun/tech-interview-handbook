@@ -71,7 +71,7 @@ export default function SubmitResumeForm() {
       ...data,
       url,
     });
-    // Router.push('/resumes');
+    router.push('/resumes');
     reset();
   };
 

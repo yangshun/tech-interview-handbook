@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { formidable } from 'formidable';
+import formidable from 'formidable';
+import * as fs from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { v4 as uuidv4 } from 'uuid';
 
 import { env } from '~/env/server.mjs';
+import { supabase } from '~/utils/supabase';
 
 const BASE_URL = `${env.SUPABASE_URL}/storage/v1/object`;
+const BASE_FILE_URL = `${BASE_URL}/public`;
 
 export const config = {
   api: {
@@ -17,33 +19,26 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const headers = {
-    'Content-Type': 'multipart/form-data',
-    apiKey: env.SUPABASE_ANON_KEY,
-    authorization: 'Bearer ' + env.SUPABASE_ANON_KEY,
-  };
-
   if (req.method === 'POST') {
     try {
-      const form = formidable({ multiples: false });
+      const form = formidable({ keepExtensions: true });
       form.parse(req, async (err, fields, files) => {
         if (err) {
           throw err;
         }
-        const { file } = files;
-        const actualFile = file instanceof Array ? file[0] : file;
-        const filePath = `${uuidv4()}-${actualFile.originalFilename}`;
-        const { key } = fields;
 
-        const data = await axios.post(
-          `${BASE_URL}/${key}/${filePath}`,
-          actualFile,
-          {
-            headers,
-          },
-        );
+        const { key } = fields;
+        const { file } = files;
+
+        const parsedFile: formidable.File =
+          file instanceof Array ? file[0] : file;
+        const filePath = `${Date.now()}-${parsedFile.originalFilename}`;
+        const convertedFile = fs.readFileSync(parsedFile.filepath);
+
+        supabase.storage.from(key as string).upload(filePath, convertedFile);
+
         return res.status(200).json({
-          url: data.data.key,
+          url: `${BASE_FILE_URL}/${key}/${filePath}`,
         });
       });
     } catch (error: unknown) {
