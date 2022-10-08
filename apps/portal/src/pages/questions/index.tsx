@@ -4,6 +4,8 @@ import QuestionOverviewCard from '~/components/questions/card/QuestionOverviewCa
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
 import type { FilterOptions } from '~/components/questions/filter/FilterSection';
 import FilterSection from '~/components/questions/filter/FilterSection';
+import type { LandingQueryData } from '~/components/questions/LandingComponent';
+import LandingComponent from '~/components/questions/LandingComponent';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
 type FilterChoices = Array<Omit<FilterOptions, 'checked'>>;
@@ -22,8 +24,8 @@ const companies: FilterChoices = [
 // Code, design, behavioral
 const questionTypes: FilterChoices = [
   {
-    label: 'Code',
-    value: 'code',
+    label: 'Coding',
+    value: 'coding',
   },
   {
     label: 'Design',
@@ -66,6 +68,7 @@ export default function QuestionsHomePage() {
     Array<string>
   >([]);
   const [selectedLocations, setSelectedLocations] = useState<Array<string>>([]);
+  const [hasLanded, setHasLanded] = useState(false);
 
   const companyFilterOptions = useMemo(() => {
     return companies.map((company) => ({
@@ -95,7 +98,19 @@ export default function QuestionsHomePage() {
     }));
   }, [selectedLocations]);
 
-  return (
+  const handleLandingQuery = (data: LandingQueryData) => {
+    // eslint-disable-next-line no-console
+    console.log(data);
+    setSelectedCompanies([data.company]);
+    setSelectedLocations([data.location]);
+    setSelectedQuestionTypes([data.questionType]);
+    setHasLanded(true);
+  };
+
+  return !hasLanded ? (
+    <LandingComponent
+      handleLandingQuery={handleLandingQuery}></LandingComponent>
+  ) : (
     <main className="flex flex-1 flex-col items-stretch overflow-y-auto">
       <div className="flex pt-4">
         <section className="w-[300px] border-r px-4">

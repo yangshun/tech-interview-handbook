@@ -1,19 +1,37 @@
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import { Button, Select } from '@tih/ui';
 
 import NavBar from '~/components/questions/NavBar';
 
 export type LandingQueryData = {
-  date: string;
+  company: string;
   location: string;
   questionType: string;
 };
-export default function LandingPage() {
-  const { register, handleSubmit } = useForm<LandingQueryData>();
 
-  const onSubmit = (data: LandingQueryData) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+export type LandingComponentProps = {
+  handleLandingQuery: (data: LandingQueryData) => void;
+};
+
+export default function LandingComponent({
+  handleLandingQuery,
+}: LandingComponentProps) {
+  const [landingQueryData, setLandingQueryData] = useState<LandingQueryData>({
+    company: 'google',
+    location: 'singapore',
+    questionType: 'coding',
+  });
+
+  const handleChangeCompany = (company: string) => {
+    setLandingQueryData((prev) => ({ ...prev, company }));
+  };
+
+  const handleChangeLocation = (location: string) => {
+    setLandingQueryData((prev) => ({ ...prev, location }));
+  };
+
+  const handleChangeType = (questionType: string) => {
+    setLandingQueryData((prev) => ({ ...prev, questionType }));
   };
 
   return (
@@ -29,13 +47,10 @@ export default function LandingPage() {
           Get to know the latest SWE interview questions asked by top companies
         </p>
 
-        <form
-          className="mx-auto mt-6 flex max-w-lg items-baseline gap-3 px-4 text-center text-xl text-black sm:max-w-3xl"
-          onSubmit={handleSubmit(onSubmit)}>
+        <div className="mx-auto mt-6 flex max-w-lg items-baseline gap-3 px-4 text-center text-xl text-black sm:max-w-3xl">
           <p>Find</p>
           <div className=" space-x-2">
             <Select
-              //   {...register('questionType')}
               isLabelHidden={true}
               label="Type"
               options={[
@@ -52,12 +67,12 @@ export default function LandingPage() {
                   value: 'system design',
                 },
               ]}
-              value="coding"
+              value={landingQueryData.questionType}
+              onChange={handleChangeType}
             />
           </div>
           <p>questions from</p>
           <Select
-            //   {...register('company')}
             isLabelHidden={true}
             label="Company"
             options={[
@@ -74,13 +89,13 @@ export default function LandingPage() {
                 value: 'amazon',
               },
             ]}
-            value="google"
+            value={landingQueryData.company}
+            onChange={handleChangeCompany}
           />
           <p>in</p>
           <Select
-            //   {...register('location')}
             isLabelHidden={true}
-            label="Select a category"
+            label="Location"
             options={[
               {
                 label: 'Singapore',
@@ -95,13 +110,14 @@ export default function LandingPage() {
                 value: 'menlo park',
               },
             ]}
-            value="singapore"
+            value={landingQueryData.location}
+            onChange={handleChangeLocation}
           />
           <Button
             label="Go"
             variant="primary"
-            onClick={handleSubmit(onSubmit)}></Button>
-        </form>
+            onClick={() => handleLandingQuery(landingQueryData)}></Button>
+        </div>
         <div>
           <p className="py-20 text-center">CAROUSELL PLACEHOLDER</p>
         </div>
