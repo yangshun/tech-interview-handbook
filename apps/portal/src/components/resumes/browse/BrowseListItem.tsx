@@ -13,8 +13,8 @@ type Props = Readonly<{
 export default function BrowseListItem({ href, resumeInfo }: Props) {
   return (
     <Link href={href}>
-      <div className="flex justify-between border-b border-slate-200 p-4">
-        <div>
+      <div className="grid grid-cols-8 border-b border-slate-200 p-4">
+        <div className="col-span-4">
           {resumeInfo.title}
           <div className="mt-2 flex items-center justify-start text-xs text-indigo-500">
             {resumeInfo.role}
@@ -33,11 +33,11 @@ export default function BrowseListItem({ href, resumeInfo }: Props) {
             </div>
           </div>
         </div>
-        <div className="self-center text-sm text-slate-500">
+        <div className="col-span-2 self-center text-sm text-slate-500">
           {/* TODO: Replace hardcoded days ago with calculated days ago*/}
           Uploaded 2 days ago by {resumeInfo.user}
         </div>
-        <ChevronRightIcon className="w-8" />
+        <ChevronRightIcon className="col-span-2 w-8 self-center justify-self-center" />
       </div>
     </Link>
   );
