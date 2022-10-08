@@ -134,7 +134,7 @@ export default function QuestionsHomePage() {
   ) : (
     <main className="flex flex-1 flex-col items-stretch overflow-y-auto">
       <div className="flex pt-4">
-        <section className="w-[300px] border-r px-4">
+        <aside className="w-[300px] border-r px-4">
           <h2 className="text-xl font-semibold">Filter by</h2>
           <div className="divide-y divide-slate-200">
             <FilterSection
@@ -189,9 +189,9 @@ export default function QuestionsHomePage() {
               }}
             />
           </div>
-        </section>
-        <div className="flex flex-1 justify-center">
-          <div className="flex max-w-3xl flex-1 gap-x-4">
+        </aside>
+        <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto pt-4">
+          <div className="flex min-h-0 max-w-3xl flex-1 gap-x-4">
             <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
               <ContributeQuestionCard />
               <QuestionSearchBar
@@ -207,18 +207,22 @@ export default function QuestionsHomePage() {
                 ]}
                 sortValue="most-recent"
               />
-              <QuestionOverviewCard
-                answerCount={0}
-                content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and"
-                location="Menlo Park, CA"
-                role="Senior Engineering Manager"
-                similarCount={0}
-                timestamp="Last month"
-                upvoteCount={0}
-              />
+              {Array.from({ length: 10 }).map((_, index) => (
+                <QuestionOverviewCard
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={index}
+                  answerCount={0}
+                  content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and"
+                  location="Menlo Park, CA"
+                  role="Senior Engineering Manager"
+                  similarCount={0}
+                  timestamp="Last month"
+                  upvoteCount={0}
+                />
+              ))}
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </main>
   );

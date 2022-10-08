@@ -63,7 +63,7 @@ export default function QuestionCard({
   location,
 }: QuestionCardProps) {
   return (
-    <article className="flex gap-2 rounded-md border border-slate-300 p-4">
+    <article className="flex gap-4 rounded-md border border-slate-300 p-4 bg-white">
       {showVoteButtons && (
         <div className="flex flex-col items-center">
           <Button

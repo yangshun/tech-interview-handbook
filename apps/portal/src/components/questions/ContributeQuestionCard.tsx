@@ -22,7 +22,7 @@ export default function ContributeQuestionCard() {
 
   return (
     <>
-      <div className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 p-4">
+      <div className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4">
         <TextInput
           isLabelHidden={true}
           label="Question"
