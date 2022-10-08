@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import type { ChangeEvent } from 'react';
+import { useId } from 'react';
 
 import { RadioListContext } from './RadioListContext';
 import RadioListItem from './RadioListItem';
@@ -10,11 +11,13 @@ type Props<T> = Readonly<{
   children: ReadonlyArray<React.ReactElement<typeof RadioListItem>>;
   defaultValue?: T;
   description?: string;
+  disabled?: boolean;
   isLabelHidden?: boolean;
   label: string;
   name?: string;
   onChange?: (value: T, event: ChangeEvent<HTMLInputElement>) => void;
   orientation?: RadioListOrientation;
+  required?: boolean;
   value?: T;
 }>;
 
@@ -24,35 +27,47 @@ export default function RadioList<T>({
   children,
   defaultValue,
   description,
+  disabled,
   orientation = 'vertical',
   isLabelHidden,
   name,
   label,
+  required,
   value,
   onChange,
 }: Props<T>) {
+  const labelId = useId();
   return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore TODO: Figure out how to type the onChange.
-    <RadioListContext.Provider value={{ defaultValue, name, onChange, value }}>
+    <RadioListContext.Provider
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore TODO: Figure out how to type the onChange.
+      value={{ defaultValue, disabled, name, onChange, value }}>
       <div>
-        <div className={clsx(isLabelHidden ? 'sr-only' : 'mb-4')}>
-          <label className="text-base font-medium text-gray-900">{label}</label>
+        <div className={clsx(isLabelHidden ? 'sr-only' : 'mb-2')}>
+          <label className="text-sm font-medium text-gray-900" id={labelId}>
+            {label}
+            {required && (
+              <span aria-hidden="true" className="text-danger-500">
+                {' '}
+                *
+              </span>
+            )}
+          </label>
           {description && (
-            <p className="text-sm leading-5 text-gray-500">{description}</p>
+            <p className="text-xs leading-5 text-gray-500">{description}</p>
           )}
         </div>
-        <fieldset>
-          <legend className="sr-only">TODO</legend>
-          <div
-            className={clsx(
-              'space-y-4',
-              orientation === 'horizontal' &&
-                'sm:flex sm:items-center sm:space-y-0 sm:space-x-10',
-            )}>
-            {children}
-          </div>
-        </fieldset>
+        <div
+          aria-labelledby={labelId}
+          aria-required={required != null ? required : undefined}
+          className={clsx(
+            'space-y-2',
+            orientation === 'horizontal' &&
+              'sm:flex sm:items-center sm:space-y-0 sm:space-x-10',
+          )}
+          role="radiogroup">
+          {children}
+        </div>
       </div>
     </RadioListContext.Provider>
   );

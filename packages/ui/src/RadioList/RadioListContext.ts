@@ -3,6 +3,7 @@ import { createContext, useContext } from 'react';
 
 type RadioListContextValue<T = unknown> = {
   defaultValue?: T;
+  disabled?: boolean;
   name?: string;
   onChange?: (
     value: T,
