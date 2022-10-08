@@ -9,12 +9,14 @@ import type { Question } from '~/types/questions-question';
 export const questionsQuestionsRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
-      content: z.string(),
+      company: z.string().optional(),
+      location: z.string().optional(),
       questionType: z.nativeEnum(QuestionsQuestionType),
+      role: z.string().optional(),
     }),
     async resolve({ ctx, input }) {
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
-      include: {
+        include: {
         _count: {
           select: {
             answers: true,
@@ -28,8 +30,11 @@ export const questionsQuestionsRouter = createProtectedRouter()
         },
         votes: true,
       },
-      orderBy: {
+        orderBy: {
         createdAt: 'desc',
+      },
+      where: {
+          ...input,
       },
     });
     return questionsData.map((data) => {
@@ -104,7 +109,8 @@ export const questionsQuestionsRouter = createProtectedRouter()
       const questionToUpdate = await ctx.prisma.questionsQuestion.findUnique({
         where: {
           id: input.id,
-        },});
+        },
+      });
 
       if (questionToUpdate?.id !== userId) {
         throw new TRPCError({
