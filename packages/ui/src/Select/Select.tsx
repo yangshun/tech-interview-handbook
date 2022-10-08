@@ -43,6 +43,7 @@ function Select<T>(
     label,
     isLabelHidden,
     options,
+    required,
     value,
     onChange,
     ...props
@@ -58,6 +59,12 @@ function Select<T>(
           className={clsx('mb-1 block text-sm font-medium text-slate-700')}
           htmlFor={id ?? undefined}>
           {label}
+          {required && (
+            <span aria-hidden="true" className="text-danger-500">
+              {' '}
+              *
+            </span>
+          )}
         </label>
       )}
       <select
@@ -72,6 +79,7 @@ function Select<T>(
         defaultValue={defaultValue != null ? String(defaultValue) : undefined}
         disabled={disabled}
         id={id}
+        required={required}
         value={value != null ? String(value) : undefined}
         onChange={(event) => {
           onChange?.(event.target.value);

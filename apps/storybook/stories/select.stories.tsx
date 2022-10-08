@@ -177,6 +177,35 @@ export function Disabled() {
   );
 }
 
+export function Required() {
+  const [value, setValue] = useState('apple');
+
+  return (
+    <div className="space-x-4">
+      <Select
+        label="Select a fruit"
+        options={[
+          {
+            label: 'Apple',
+            value: 'apple',
+          },
+          {
+            label: 'Banana',
+            value: 'banana',
+          },
+          {
+            label: 'Orange',
+            value: 'orange',
+          },
+        ]}
+        required={true}
+        value={value}
+        onChange={setValue}
+      />
+    </div>
+  );
+}
+
 export function Uncontrolled() {
   return (
     <div className="space-x-4">
