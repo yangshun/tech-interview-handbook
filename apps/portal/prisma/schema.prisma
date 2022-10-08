@@ -37,27 +37,27 @@ model Session {
 }
 
 model User {
-    id                           String                         @id @default(cuid())
-    name                         String?
-    email                        String?                        @unique
-    emailVerified                DateTime?
-    image                        String?
-    accounts                     Account[]
-    sessions                     Session[]
-    todos                        Todo[]
-    resumesResumes               ResumesResume[]
-    resumesStars                 ResumesStar[]
-    resumesComments              ResumesComment[]
-    resumesCommentVotes          ResumesCommentVote[]
-    QuestionsQuestion            QuestionsQuestion[]
-    QuestionsQuestionEncounter   QuestionsQuestionEncounter[]
-    QuestionsQuestionVote        QuestionsQuestionVote[]
-    QuestionsQuestionComment     QuestionsQuestionComment[]
-    QuestionsQuestionCommentVote QuestionsQuestionCommentVote[]
-    QuestionsAnswer              QuestionsAnswer[]
-    QuestionsAnswerVote          QuestionsAnswerVote[]
-    QuestionsAnswerComment       QuestionsAnswerComment[]
-    QuestionsAnswerCommentVote   QuestionsAnswerCommentVote[]
+    id                            String                         @id @default(cuid())
+    name                          String?
+    email                         String?                        @unique
+    emailVerified                 DateTime?
+    image                         String?
+    accounts                      Account[]
+    sessions                      Session[]
+    todos                         Todo[]
+    resumesResumes                ResumesResume[]
+    resumesStars                  ResumesStar[]
+    resumesComments               ResumesComment[]
+    resumesCommentVotes           ResumesCommentVote[]
+    questionsQuestions            QuestionsQuestion[]
+    questionsQuestionEncounters   QuestionsQuestionEncounter[]
+    questionsQuestionVotes        QuestionsQuestionVote[]
+    questionsQuestionComments     QuestionsQuestionComment[]
+    questionsQuestionCommentVotes QuestionsQuestionCommentVote[]
+    questionsAnswers              QuestionsAnswer[]
+    questionsAnswerVotes          QuestionsAnswerVote[]
+    questionsAnswerComments       QuestionsAnswerComment[]
+    questionsAnswerCommentVotes   QuestionsAnswerCommentVote[]
 }
 
 model VerificationToken {
@@ -192,11 +192,11 @@ model QuestionsQuestion {
     createdAt    DateTime              @default(now())
     updatedAt    DateTime              @updatedAt
 
-    user                       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
-    QuestionsQuestionEncounter QuestionsQuestionEncounter[]
-    QuestionsQuestionVote      QuestionsQuestionVote[]
-    QuestionsQuestionComment   QuestionsQuestionComment[]
-    QuestionsAnswer            QuestionsAnswer[]
+    user               User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+    questionEncounters QuestionsQuestionEncounter[]
+    questionVotes      QuestionsQuestionVote[]
+    questionComment    QuestionsQuestionComment[]
+    questionsAnswers   QuestionsAnswer[]
 }
 
 model QuestionsQuestionEncounter {
@@ -236,9 +236,9 @@ model QuestionsQuestionComment {
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
 
-    user                         User?                          @relation(fields: [userId], references: [id], onDelete: SetNull)
-    question                     QuestionsQuestion              @relation(fields: [questionId], references: [id], onDelete: Cascade)
-    QuestionsQuestionCommentVote QuestionsQuestionCommentVote[]
+    user                 User?                          @relation(fields: [userId], references: [id], onDelete: SetNull)
+    question             QuestionsQuestion              @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    questionCommentVotes QuestionsQuestionCommentVote[]
 }
 
 model QuestionsQuestionCommentVote {
@@ -263,10 +263,10 @@ model QuestionsAnswer {
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
 
-    user                   User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
-    question               QuestionsQuestion        @relation(fields: [questionId], references: [id], onDelete: Cascade)
-    QuestionsAnswerVote    QuestionsAnswerVote[]
-    QuestionsAnswerComment QuestionsAnswerComment[]
+    user           User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
+    question       QuestionsQuestion        @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    answerVotes    QuestionsAnswerVote[]
+    answerComments QuestionsAnswerComment[]
 }
 
 model QuestionsAnswerVote {
@@ -291,9 +291,9 @@ model QuestionsAnswerComment {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    user                       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
-    answer                     QuestionsAnswer              @relation(fields: [answerId], references: [id], onDelete: Cascade)
-    QuestionsAnswerCommentVote QuestionsAnswerCommentVote[]
+    user               User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+    answer             QuestionsAnswer              @relation(fields: [answerId], references: [id], onDelete: Cascade)
+    snswerCommentVotes QuestionsAnswerCommentVote[]
 }
 
 model QuestionsAnswerCommentVote {
