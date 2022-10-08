@@ -283,10 +283,7 @@ export default function ResumeHomePage() {
                 <ul role="list">
                   {resumes.map((resumeObj) => (
                     <li key={resumeObj.id}>
-                      <BrowseListItem
-                        href={`/resumes/${resumeObj.id}`}
-                        resumeInfo={resumeObj}
-                      />
+                      <BrowseListItem href="#" resumeInfo={resumeObj} />
                     </li>
                   ))}
                 </ul>
