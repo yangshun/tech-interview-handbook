@@ -200,12 +200,7 @@ export default function QuestionsHomePage() {
         <div className="flex flex-1 justify-center">
           <div className="flex max-w-3xl flex-1 gap-x-4">
             <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
-              <ContributeQuestionCard
-                onSubmit={(data) => {
-                  // eslint-disable-next-line no-console
-                  console.log(data);
-                }}
-              />
+              <ContributeQuestionCard />
               <QuestionSearchBar
                 sortOptions={[
                   {

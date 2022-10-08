@@ -100,7 +100,6 @@ export default function ContributeQuestionForm({
               {...register('position')}
             />
           </div>
-          {/* <Button label="Contribute" type="submit" variant="primary" /> */}
         </div>
       </Collapsible>
       <div className="w-full">

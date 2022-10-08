@@ -47,4 +47,20 @@ export const LOCATIONS: FilterChoices = [
     label: 'Singapore',
     value: 'singapore',
   },
+  {
+    label: 'Menlo Park',
+    value: 'menlopark',
+  },
+  {
+    label: 'California',
+    value: 'california',
+  },
+  {
+    label: 'Hong Kong',
+    value: 'hongkong',
+  },
+  {
+    label: 'Taiwan',
+    value: 'taiwan',
+  },
 ];
