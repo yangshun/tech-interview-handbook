@@ -1,3 +1,4 @@
+import { formatDistanceToNow } from 'date-fns';
 import Link from 'next/link';
 import type { UrlObject } from 'url';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
@@ -33,11 +34,11 @@ export default function BrowseListItem({ href, resumeInfo }: Props) {
             </div>
           </div>
         </div>
-        <div className="col-span-2 self-center text-sm text-slate-500">
-          {/* TODO: Replace hardcoded days ago with calculated days ago*/}
-          Uploaded 2 days ago by {resumeInfo.user}
+        <div className="col-span-3 self-center text-sm text-slate-500">
+          Uploaded {formatDistanceToNow(resumeInfo.createdAt)} ago by{' '}
+          {resumeInfo.user}
         </div>
-        <ChevronRightIcon className="col-span-2 w-8 self-center justify-self-center" />
+        <ChevronRightIcon className="col-span-1 w-8 self-center justify-self-center" />
       </div>
     </Link>
   );
