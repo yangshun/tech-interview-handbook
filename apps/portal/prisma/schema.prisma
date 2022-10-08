@@ -178,12 +178,19 @@ enum QuestionsVote {
     DOWNVOTE
 }
 
+enum QuestionsQuestionType {
+    CODING
+    SYSTEM_DESIGN
+    BEHAVIORAL
+}
+
 model QuestionsQuestion {
-    id        String   @id @default(cuid())
-    userId    String?
-    content   String   @db.Text
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id           String                @id @default(cuid())
+    userId       String?
+    content      String                @db.Text
+    questionType QuestionsQuestionType
+    createdAt    DateTime              @default(now())
+    updatedAt    DateTime              @updatedAt
 
     user                       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
     QuestionsQuestionEncounter QuestionsQuestionEncounter[]
