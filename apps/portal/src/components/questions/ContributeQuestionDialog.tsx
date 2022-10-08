@@ -32,6 +32,8 @@ export default function ContributeQuestionDialog({
           className="relative z-10"
           onClose={() => {
             // Todo: save state
+            setShowDiscardDialog(false);
+            onCancel();
           }}>
           <Transition.Child
             as={Fragment}
