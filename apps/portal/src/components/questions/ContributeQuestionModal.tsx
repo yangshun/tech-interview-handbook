@@ -4,7 +4,6 @@ import { Dialog, Transition } from '@headlessui/react';
 
 import ContributeQuestionForm from './ContributeQuestionForm';
 import DiscardDraftModal from './DiscardDraftModal';
-import Checkbox from './ui-patch/Checkbox';
 
 export type ContributeQuestionModalProps = {
   contributeState: boolean;
@@ -15,11 +14,7 @@ export default function ContributeQuestionModal({
   contributeState,
   setContributeState,
 }: ContributeQuestionModalProps) {
-  const [canSubmit, setCanSubmit] = useState<boolean>(false);
   const [isDiscardOpen, setIsDiscardOpen] = useState<boolean>(false);
-  const handleCheckSimilarQuestions = (checked: boolean) => {
-    setCanSubmit(checked);
-  };
 
   const handleDiscardDraft = () => {
     // eslint-disable-next-line no-console
@@ -70,6 +65,7 @@ export default function ContributeQuestionModal({
                         </Dialog.Title>
                         <div className="mt-2">
                           <ContributeQuestionForm
+                            onDiscard={() => setIsDiscardOpen(true)}
                             onSubmit={(data) => {
                               // eslint-disable-next-line no-console
                               console.log(data);
@@ -77,29 +73,6 @@ export default function ContributeQuestionModal({
                           />
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="bg-primary-50 px-4 py-3 sm:flex sm:flex-row sm:justify-between sm:px-6">
-                    <div className="mb-1 flex">
-                      <Checkbox
-                        checked={canSubmit}
-                        label="I have checked that my question is new"
-                        onChange={handleCheckSimilarQuestions}></Checkbox>
-                    </div>
-                    <div className=" flex gap-x-2">
-                      <button
-                        className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                        type="button"
-                        onClick={() => setIsDiscardOpen(true)}>
-                        Discard
-                      </button>
-                      <button
-                        className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-gray-400 sm:ml-3 sm:w-auto sm:text-sm"
-                        disabled={!canSubmit}
-                        type="button"
-                        onClick={() => setContributeState(false)}>
-                        Contribute
-                      </button>
                     </div>
                   </div>
                 </Dialog.Panel>
