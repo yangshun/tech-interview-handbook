@@ -1,6 +1,8 @@
 import type { ProductNavigationItems } from '~/components/global/ProductNavigation';
 
 const navigation: ProductNavigationItems = [
+  { href: '/offers', name: 'Offers' },
+  { href: '/questions', name: 'Question Bank' },
   {
     children: [
       { href: '/resumes', name: 'View Resumes' },
@@ -9,8 +11,6 @@ const navigation: ProductNavigationItems = [
     href: '#',
     name: 'Resumes',
   },
-  { href: '/questions', name: 'Question Bank' },
-  { href: '/offers', name: 'Offers' },
 ];
 
 const config = {
