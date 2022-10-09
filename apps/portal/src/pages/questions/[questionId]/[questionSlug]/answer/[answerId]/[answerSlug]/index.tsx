@@ -12,6 +12,7 @@ import {
   SAMPLE_QUESTION,
 } from '~/utils/questions/constants';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
+import { trpc } from '~/utils/trpc';
 
 export type AnswerCommentData = {
   commentContent: string;
@@ -29,6 +30,14 @@ export default function QuestionPage() {
 
   const question = SAMPLE_QUESTION;
   const comment = SAMPLE_ANSWER_COMMENT;
+
+  const { answerId } = router.query;
+
+  const { data: answer } = trpc.useQuery([
+    'questions.answers.getAnswerById',
+    { answerId: answerId as string },
+  ]);
+
   const handleBackNavigation = () => {
     router.back();
   };
@@ -37,6 +46,11 @@ export default function QuestionPage() {
     // eslint-disable-next-line no-console
     console.log(data);
   };
+
+  if (!answer) {
+    // TODO: Make this look nicer
+    return <div>Answer not found</div>;
+  }
 
   return (
     <div className="flex w-full flex-1 items-stretch pb-4">
@@ -51,7 +65,13 @@ export default function QuestionPage() {
       </div>
       <div className="flex w-full  justify-center overflow-y-auto py-4 px-5">
         <div className="flex max-w-7xl flex-1 flex-col gap-2">
-          <FullAnswerCard {...SAMPLE_ANSWER} />
+          <FullAnswerCard
+            authorImageUrl={SAMPLE_ANSWER.authorImageUrl}
+            authorName={answer.user}
+            content={answer.content}
+            createdAt={answer.createdAt}
+            upvoteCount={0}
+          />
           <div className="mx-2">
             <form
               className="mb-2"

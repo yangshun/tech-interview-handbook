@@ -25,6 +25,7 @@ export type Answer = {
   id: string;
   numComments: number;
   numVotes: number;
+  user: string;
 };
 
 export type QuestionComment = {

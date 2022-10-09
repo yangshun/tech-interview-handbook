@@ -78,12 +78,6 @@ export const questionsQuestionRouter = createProtectedRouter()
             0,
           );
 
-          let userName = '';
-
-          if (data.user) {
-            userName = data.user.name!;
-          }
-
           const question: Question = {
             company: data.encounters[0].company,
             content: data.content,
@@ -95,7 +89,7 @@ export const questionsQuestionRouter = createProtectedRouter()
             role: data.encounters[0].role ?? 'Unknown role',
             seenAt: data.encounters[0].seenAt,
             updatedAt: data.updatedAt,
-            user: userName,
+            user: data.user?.name ?? '',
           };
           return question;
         });
@@ -156,12 +150,6 @@ export const questionsQuestionRouter = createProtectedRouter()
         0,
       );
 
-      let userName = '';
-
-      if (questionData.user) {
-        userName = questionData.user.name!;
-      }
-
       const question: Question = {
         company: questionData.encounters[0].company,
         content: questionData.content,
@@ -173,7 +161,7 @@ export const questionsQuestionRouter = createProtectedRouter()
         role: questionData.encounters[0].role ?? 'Unknown role',
         seenAt: questionData.encounters[0].seenAt,
         updatedAt: questionData.updatedAt,
-        user: userName,
+        user: questionData.user?.name ?? '',
       };
       return question;
     },

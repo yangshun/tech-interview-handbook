@@ -47,18 +47,12 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
           0,
         );
 
-        let userName = '';
-
-        if (data.user) {
-          userName = data.user.name!;
-        }
-
         const questionComment: QuestionComment = {
           content: data.content,
           createdAt: data.createdAt,
           id: data.id,
           numVotes: votes,
-          user: userName,
+          user: data.user?.name ?? '',
         };
         return questionComment;
       });

@@ -14,17 +14,17 @@ export const questionsAnswerRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const answersData = await ctx.prisma.questionsAnswer.findMany({
         include: {
-        _count: {
-          select: {
-            comments: true,
+          _count: {
+            select: {
+              comments: true,
+            },
           },
-        },
-        user: {
-          select: {
-            name: true,
+          user: {
+            select: {
+              name: true,
+            },
           },
-        },
-        votes: true,
+          votes: true,
         },
         orderBy: {
           createdAt: 'desc',
@@ -32,43 +32,93 @@ export const questionsAnswerRouter = createProtectedRouter()
         where: {
           ...input,
         },
-    });
-    return answersData.map((data) => {
-      const votes:number = data.votes.reduce(
-        (previousValue:number, currentValue) => {
-          let result:number = previousValue;
+      });
+      return answersData.map((data) => {
+        const votes: number = data.votes.reduce(
+          (previousValue: number, currentValue) => {
+            let result: number = previousValue;
 
-          switch(currentValue.vote) {
-          case Vote.UPVOTE:
-            result += 1
-            break;
-          case Vote.DOWNVOTE:
-            result -= 1
-            break;
+            switch (currentValue.vote) {
+              case Vote.UPVOTE:
+                result += 1;
+                break;
+              case Vote.DOWNVOTE:
+                result -= 1;
+                break;
+            }
+            return result;
+          },
+          0,
+        );
+
+        const answer: Answer = {
+          content: data.content,
+          createdAt: data.createdAt,
+          id: data.id,
+          numComments: data._count.comments,
+          numVotes: votes,
+          user: data.user?.name ?? '',
+        };
+        return answer;
+      });
+    },
+  })
+  .query('getAnswerById', {
+    input: z.object({
+      answerId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const answerData = await ctx.prisma.questionsAnswer.findUnique({
+        include: {
+          _count: {
+            select: {
+              comments: true,
+            },
+          },
+          user: {
+            select: {
+              name: true,
+            },
+          },
+          votes: true,
+        },
+        where: {
+          id: input.answerId,
+        },
+      });
+      if (!answerData) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Answer not found',
+        });
+      }
+      const votes: number = answerData.votes.reduce(
+        (previousValue: number, currentValue) => {
+          let result: number = previousValue;
+
+          switch (currentValue.vote) {
+            case Vote.UPVOTE:
+              result += 1;
+              break;
+            case Vote.DOWNVOTE:
+              result -= 1;
+              break;
           }
           return result;
         },
-        0
-        );
-
-      let userName = "";
-
-      if (data.user) {
-        userName = data.user.name!;
-      }
-
+        0,
+      );
 
       const answer: Answer = {
-        content: data.content,
-        createdAt: data.createdAt,
-        id: data.id,
-        numComments: data._count.comments,
+        content: answerData.content,
+        createdAt: answerData.createdAt,
+        id: answerData.id,
+        numComments: answerData._count.comments,
         numVotes: votes,
-        user: userName,
+        user: answerData.user?.name ?? '',
       };
       return answer;
-    });
-    }
+    },
   })
   .mutation('create', {
     input: z.object({
@@ -93,7 +143,7 @@ export const questionsAnswerRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
-      const {content, id} = input
+      const { content, id } = input;
 
       const answerToUpdate = await ctx.prisma.questionsAnswer.findUnique({
         where: {
@@ -128,7 +178,8 @@ export const questionsAnswerRouter = createProtectedRouter()
       const answerToDelete = await ctx.prisma.questionsAnswer.findUnique({
         where: {
           id: input.id,
-        },});
+        },
+      });
 
       if (answerToDelete?.id !== userId) {
         throw new TRPCError({
@@ -150,11 +201,11 @@ export const questionsAnswerRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
-      const {answerId} = input
+      const { answerId } = input;
 
       return await ctx.prisma.questionsAnswerVote.findUnique({
         where: {
-          answerId_userId : { answerId, userId },
+          answerId_userId: { answerId, userId },
         },
       });
     },
@@ -182,7 +233,7 @@ export const questionsAnswerRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
-      const {id, vote} = input
+      const { id, vote } = input;
 
       const voteToUpdate = await ctx.prisma.questionsAnswerVote.findUnique({
         where: {
@@ -217,7 +268,8 @@ export const questionsAnswerRouter = createProtectedRouter()
       const voteToDelete = await ctx.prisma.questionsAnswerVote.findUnique({
         where: {
           id: input.id,
-        },});
+        },
+      });
 
       if (voteToDelete?.id !== userId) {
         throw new TRPCError({

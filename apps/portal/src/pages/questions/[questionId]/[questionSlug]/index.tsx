@@ -11,6 +11,7 @@ import {
   SAMPLE_ANSWER,
   SAMPLE_QUESTION_COMMENT,
 } from '~/utils/questions/constants';
+import createSlug from '~/utils/questions/createSlug';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
 import { trpc } from '~/utils/trpc';
 
@@ -64,6 +65,17 @@ export default function QuestionPage() {
     },
   );
 
+  const { data: answers } = trpc.useQuery([
+    'questions.answers.getAnswers',
+    { questionId: questionId as string },
+  ]);
+
+  const { mutate: addAnswer } = trpc.useMutation('questions.answers.create', {
+    onSuccess: () => {
+      utils.invalidateQueries('questions.answers.getAnswers');
+    },
+  });
+
   const handleBackNavigation = () => {
     router.back();
   };
@@ -71,6 +83,10 @@ export default function QuestionPage() {
   const handleSubmitAnswer = (data: AnswerQuestionData) => {
     // eslint-disable-next-line no-console
     console.log(data);
+    addAnswer({
+      content: data.answerContent,
+      questionId: questionId as string,
+    });
   };
 
   const handleSubmitComment = (data: QuestionCommentData) => {
@@ -214,13 +230,18 @@ export default function QuestionPage() {
               />
             </div>
           </form>
-
-          {Array.from({ length: question.numAnswers }).map((_, index) => (
+          {(answers ?? []).map((answer) => (
             <AnswerCard
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              {...SAMPLE_ANSWER}
-              href={`${router.asPath}/answer/1/1`}
+              key={answer.id}
+              authorImageUrl={SAMPLE_ANSWER.authorImageUrl}
+              authorName={answer.user}
+              commentCount={0}
+              content={answer.content}
+              createdAt={answer.createdAt}
+              href={`${router.asPath}/answer/${answer.id}/${createSlug(
+                answer.content,
+              )}`}
+              upvoteCount={0}
             />
           ))}
         </div>
