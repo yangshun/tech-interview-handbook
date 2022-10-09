@@ -103,7 +103,7 @@ export default function SubmitResumeForm() {
   return (
     <>
       <Head>
-        <title>Upload a resume</title>
+        <title>Upload a Resume</title>
       </Head>
       <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
         <section
