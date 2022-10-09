@@ -1,3 +1,5 @@
+import type { QuestionsQuestionType } from '@prisma/client';
+
 import type { FilterChoices } from '~/components/questions/filter/FilterSection';
 
 export const COMPANIES: FilterChoices = [
@@ -12,18 +14,18 @@ export const COMPANIES: FilterChoices = [
 ];
 
 // Code, design, behavioral
-export const QUESTION_TYPES: FilterChoices = [
+export const QUESTION_TYPES: FilterChoices<QuestionsQuestionType> = [
   {
     label: 'Coding',
-    value: 'coding',
+    value: 'CODING',
   },
   {
     label: 'Design',
-    value: 'design',
+    value: 'SYSTEM_DESIGN',
   },
   {
     label: 'Behavioral',
-    value: 'behavioral',
+    value: 'BEHAVIORAL',
   },
 ];
 

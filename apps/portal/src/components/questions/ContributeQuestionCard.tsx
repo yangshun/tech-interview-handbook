@@ -7,8 +7,16 @@ import {
 import { TextInput } from '@tih/ui';
 
 import ContributeQuestionDialog from './ContributeQuestionDialog';
+import type { ContributeQuestionFormProps } from './ContributeQuestionForm';
 
-export default function ContributeQuestionCard() {
+export type ContributeQuestionCardProps = Pick<
+  ContributeQuestionFormProps,
+  'onSubmit'
+>;
+
+export default function ContributeQuestionCard({
+  onSubmit,
+}: ContributeQuestionCardProps) {
   const [showDraftDialog, setShowDraftDialog] = useState(false);
 
   const handleDraftDialogCancel = () => {
@@ -68,6 +76,7 @@ export default function ContributeQuestionCard() {
       <ContributeQuestionDialog
         show={showDraftDialog}
         onCancel={handleDraftDialogCancel}
+        onSubmit={onSubmit}
       />
     </div>
   );
