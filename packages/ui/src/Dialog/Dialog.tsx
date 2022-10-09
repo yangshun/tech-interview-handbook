@@ -4,7 +4,7 @@ import { Dialog as HeadlessDialog, Transition } from '@headlessui/react';
 
 type Props = Readonly<{
   children: React.ReactNode;
-  isShown?: boolean;
+  isShown: boolean;
   onClose: () => void;
   primaryButton: React.ReactNode;
   secondaryButton?: React.ReactNode;

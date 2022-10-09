@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { ResumesSection } from '@prisma/client';
 
-import { createProtectedRouter } from './context';
+import { createProtectedRouter } from '../context';
 
 type IResumeCommentInput = Readonly<{
   description: string;

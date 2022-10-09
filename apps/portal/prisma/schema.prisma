@@ -206,6 +206,7 @@ model QuestionsQuestionEncounter {
     company    String   @db.Text
     location   String   @db.Text
     role       String   @db.Text
+    seenAt     DateTime
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
 
