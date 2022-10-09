@@ -4,7 +4,7 @@ import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button, Collapsible, Select, TextArea } from '@tih/ui';
 
 import AnswerCard from '~/components/questions/card/AnswerCard';
-import QuestionOverviewCard from '~/components/questions/card/QuestionOverviewCard';
+import FullQuestionCard from '~/components/questions/card/FullQuestionCard';
 
 import { SAMPLE_QUESTION } from '~/utils/questions/constants';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
@@ -45,10 +45,12 @@ export default function QuestionPage() {
       </div>
       <div className="flex flex-col items-center overflow-y-auto py-4 px-5">
         <div className="flex max-w-7xl flex-col gap-2">
-          <QuestionOverviewCard {...question} />
-          <Collapsible label="256 comments">
-            <div>Comment placeholder</div>
-          </Collapsible>
+          <FullQuestionCard {...question} showVoteButtons={true} />
+          <div className="mx-2">
+            <Collapsible label="256 comments">
+              <div>Comment placeholder</div>
+            </Collapsible>
+          </div>
           <form onSubmit={handleSubmit(handleSubmitAnswer)}>
             <TextArea
               {...register('answerContent', { minLength: 1, required: true })}
@@ -98,8 +100,11 @@ export default function QuestionPage() {
             <AnswerCard
               // eslint-disable-next-line react/no-array-index-key
               key={index}
-              author="James Smith"
+              authorImageUrl="https://avatars.githubusercontent.com/u/66356390?v=4"
+              authorName="James Smith"
               content="Hello"
+              createdAt={new Date()}
+              href={`${router.asPath}/answer/1/1`}
               upvoteCount={10}
             />
           ))}
