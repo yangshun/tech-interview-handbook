@@ -25,11 +25,11 @@ export default function ProductNavigation({ items, title }: Props) {
         {items.map((item) =>
           item.children != null && item.children.length > 0 ? (
             <Menu key={item.name} as="div" className="relative text-left">
-              <Menu.Button className="focus:ring-primary-600 flex items-center rounded-md text-sm font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2">
+              <Menu.Button className="focus:ring-primary-600 flex items-center rounded-md text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2">
                 <span>{item.name}</span>
                 <ChevronDownIcon
                   aria-hidden="true"
-                  className="ml-1 h-5 w-5 text-gray-500"
+                  className="ml-1 h-5 w-5 text-slate-500"
                 />
               </Menu.Button>
               <Transition
@@ -47,8 +47,8 @@ export default function ProductNavigation({ items, title }: Props) {
                         {({ active }) => (
                           <Link
                             className={clsx(
-                              active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700',
+                              active ? 'bg-slate-100' : '',
+                              'block px-4 py-2 text-sm text-slate-700',
                             )}
                             href={child.href}>
                             {child.name}
@@ -63,7 +63,7 @@ export default function ProductNavigation({ items, title }: Props) {
           ) : (
             <Link
               key={item.name}
-              className="hover:text-primary-600 text-sm font-medium text-gray-900"
+              className="hover:text-primary-600 text-sm font-medium text-slate-900"
               href={item.href}>
               {item.name}
             </Link>

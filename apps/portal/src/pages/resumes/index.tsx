@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
   ChevronDownIcon,
@@ -10,9 +10,8 @@ import {
   PlusIcon,
 } from '@heroicons/react/20/solid';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Spinner, Tabs, TextInput } from '@tih/ui';
+import { Tabs, TextInput } from '@tih/ui';
 
-import BrowseListItem from '~/components/resumes/browse/BrowseListItem';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCE,
@@ -22,6 +21,10 @@ import {
   TOP_HITS,
 } from '~/components/resumes/browse/constants';
 import FilterPill from '~/components/resumes/browse/FilterPill';
+import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
+import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
+
+import { trpc } from '~/utils/trpc';
 
 import type { Resume } from '~/types/resume';
 
@@ -42,54 +45,41 @@ const filters = [
     options: LOCATION,
   },
 ];
-import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
-
-import { trpc } from '~/utils/trpc';
 
 export default function ResumeHomePage() {
-  const { data } = useSession();
+  const { data: sessionData } = useSession();
   const router = useRouter();
   const [tabsValue, setTabsValue] = useState(BROWSE_TABS_VALUES.ALL);
   const [searchValue, setSearchValue] = useState('');
   const [resumes, setResumes] = useState<Array<Resume>>([]);
 
-  const allResumesQuery = trpc.useQuery(['resumes.resume.all'], {
+  const allResumesQuery = trpc.useQuery(['resumes.resume.findAll'], {
     enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
+    onSuccess: (data) => {
+      setResumes(data);
+    },
   });
-  const starredResumesQuery = trpc.useQuery(['resumes.resume.browse.stars'], {
-    enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
-  });
-  const myResumesQuery = trpc.useQuery(['resumes.resume.browse.my'], {
-    enabled: tabsValue === BROWSE_TABS_VALUES.MY,
-  });
-
-  useEffect(() => {
-    switch (tabsValue) {
-      case BROWSE_TABS_VALUES.ALL: {
-        setResumes(allResumesQuery.data ?? []);
-        break;
-      }
-      case BROWSE_TABS_VALUES.STARRED: {
-        setResumes(starredResumesQuery.data ?? []);
-        break;
-      }
-      case BROWSE_TABS_VALUES.MY: {
-        setResumes(myResumesQuery.data ?? []);
-        break;
-      }
-      default: {
-        setResumes([]);
-      }
-    }
-  }, [
-    allResumesQuery.data,
-    starredResumesQuery.data,
-    myResumesQuery.data,
-    tabsValue,
-  ]);
+  const starredResumesQuery = trpc.useQuery(
+    ['resumes.resume.user.findUserStarred'],
+    {
+      enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
+      onSuccess: (data) => {
+        setResumes(data);
+      },
+    },
+  );
+  const myResumesQuery = trpc.useQuery(
+    ['resumes.resume.user.findUserCreated'],
+    {
+      enabled: tabsValue === BROWSE_TABS_VALUES.MY,
+      onSuccess: (data) => {
+        setResumes(data);
+      },
+    },
+  );
 
   const onClickNew = () => {
-    if (data?.user?.id) {
+    if (sessionData?.user?.id) {
       router.push('/resumes/submit');
     } else {
       // TODO: Handle non-logged in user behaviour
@@ -150,6 +140,7 @@ export default function ResumeHomePage() {
                   <div className="col-span-1 justify-self-center">
                     <Menu as="div" className="relative inline-block text-left">
                       <div>
+                        {/* TODO: Sort logic */}
                         <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                           Sort
                           <ChevronDownIcon
@@ -279,26 +270,14 @@ export default function ResumeHomePage() {
                   </form>
                 </div>
               </div>
-              {allResumesQuery.isLoading ||
-              starredResumesQuery.isLoading ||
-              myResumesQuery.isLoading ? (
-                <div className="col-span-10 pt-4">
-                  <Spinner display="block" size="lg" />
-                </div>
-              ) : (
-                <div className="col-span-10 pr-8">
-                  <ul role="list">
-                    {resumes.map((resumeObj) => (
-                      <li key={resumeObj.id}>
-                        <BrowseListItem
-                          href={`resumes/${resumeObj.id}`}
-                          resumeInfo={resumeObj}
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <ResumeListItems
+                isLoading={
+                  allResumesQuery.isFetching ||
+                  starredResumesQuery.isFetching ||
+                  myResumesQuery.isFetching
+                }
+                resumes={resumes}
+              />
             </div>
           </div>
         </div>

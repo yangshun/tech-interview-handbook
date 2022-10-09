@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { createRouter } from './context';
+import { createRouter } from '../context';
 
 import type { ResumeComment } from '~/types/resume-comments';
 
