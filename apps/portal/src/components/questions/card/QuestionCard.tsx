@@ -1,6 +1,6 @@
 import {
   ChatBubbleBottomCenterTextIcon,
-  EyeIcon,
+  // EyeIcon,
 } from '@heroicons/react/24/outline';
 import { Badge, Button } from '@tih/ui';
 
@@ -52,7 +52,7 @@ export type QuestionCardProps = ActionButtonProps &
 export default function QuestionCard({
   answerCount,
   content,
-  receivedCount,
+  // ReceivedCount,
   showVoteButtons,
   showUserStatistics,
   showActionButton,
@@ -62,9 +62,8 @@ export default function QuestionCard({
   timestamp,
   role,
   location,
-  href,
 }: QuestionCardProps) {
-  const mainCard = (
+  return (
     <article className="flex gap-4 rounded-md border border-slate-300 bg-white p-4">
       {showVoteButtons && <VotingButtons upvoteCount={upvoteCount} />}
       <div className="flex flex-col gap-2">
@@ -96,26 +95,16 @@ export default function QuestionCard({
               size="sm"
               variant="tertiary"
             />
-            <Button
+            {/* <Button
               addonPosition="start"
               icon={EyeIcon}
               label={`${receivedCount} received this`}
               size="sm"
               variant="tertiary"
-            />
+            /> */}
           </div>
         )}
       </div>
     </article>
-  );
-
-  return href ? (
-    <a
-      className="ring-primary-500 rounded-md hover:bg-slate-50 focus:ring-2 focus-visible:outline-none active:bg-slate-100"
-      href={href}>
-      {mainCard}
-    </a>
-  ) : (
-    mainCard
   );
 }

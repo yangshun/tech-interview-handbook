@@ -1,3 +1,5 @@
+import withHref from '~/utils/questions/withHref';
+
 import type { QuestionCardProps } from './QuestionCard';
 import QuestionCard from './QuestionCard';
 
@@ -14,7 +16,7 @@ export type QuestionOverviewCardProps = Omit<
   | 'showVoteButtons'
 >;
 
-export default function QuestionOverviewCard(props: QuestionOverviewCardProps) {
+function QuestionOverviewCardWithoutHref(props: QuestionOverviewCardProps) {
   return (
     <QuestionCard
       {...props}
@@ -24,3 +26,6 @@ export default function QuestionOverviewCard(props: QuestionOverviewCardProps) {
     />
   );
 }
+
+const QuestionOverviewCard = withHref(QuestionOverviewCardWithoutHref);
+export default QuestionOverviewCard;
