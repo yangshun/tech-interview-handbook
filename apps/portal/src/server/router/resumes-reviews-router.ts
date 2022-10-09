@@ -8,11 +8,10 @@ import type { ResumeComment } from '~/types/resume-comments';
 export const resumeReviewsRouter = createRouter().query('list', {
   input: z.object({
     resumeId: z.string(),
-    section: z.nativeEnum(ResumesSection),
   }),
   async resolve({ ctx, input }) {
     const userId = ctx.session?.user?.id;
-    const { resumeId, section } = input;
+    const { resumeId } = input;
 
     // For this resume, we retrieve every comment's information, along with:
     // The user's name and image to render
@@ -42,7 +41,6 @@ export const resumeReviewsRouter = createRouter().query('list', {
       },
       where: {
         resumeId,
-        section,
       },
     });
 
