@@ -71,6 +71,7 @@ export const LOCATIONS: FilterChoices = [
 
 export const SAMPLE_QUESTION = {
   answerCount: 10,
+  commentCount: 10,
   company: 'Google',
   content:
     'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and',
@@ -79,4 +80,29 @@ export const SAMPLE_QUESTION = {
   role: 'Software Engineer',
   timestamp: 'Last month',
   upvoteCount: 5,
+};
+
+export const SAMPLE_ANSWER = {
+  authorImageUrl: 'https://avatars.githubusercontent.com/u/66356390?v=4',
+  authorName: 'Jeff Sieu',
+  commentCount: 10,
+  content: 'This is a sample answer',
+  createdAt: new Date(),
+  upvoteCount: 10,
+};
+
+export const SAMPLE_QUESTION_COMMENT = {
+  authorImageUrl: 'https://avatars.githubusercontent.com/u/66356390?v=4',
+  authorName: 'Jeff Sieu',
+  content: 'This is a sample question comment',
+  createdAt: new Date(),
+  upvoteCount: 10,
+};
+
+export const SAMPLE_ANSWER_COMMENT = {
+  authorImageUrl: 'https://avatars.githubusercontent.com/u/66356390?v=4',
+  authorName: 'Jeff Sieu',
+  content: 'This is an sample answer comment',
+  createdAt: new Date(),
+  upvoteCount: 10,
 };
