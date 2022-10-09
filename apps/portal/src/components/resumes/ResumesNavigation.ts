@@ -2,16 +2,11 @@ import type { ProductNavigationItems } from '~/components/global/ProductNavigati
 
 const navigation: ProductNavigationItems = [
   {
-    children: [
-      { href: '#', name: 'Technical Support' },
-      { href: '#', name: 'Sales' },
-      { href: '#', name: 'General' },
-    ],
-    href: '#',
-    name: 'Inboxes',
+    children: [],
+    href: '/resumes',
+    name: 'Browse',
   },
-  { children: [], href: '#', name: 'Reporting' },
-  { children: [], href: '#', name: 'Settings' },
+  { children: [], href: '/resumes/submit', name: 'Submit for review' },
 ];
 
 const config = {

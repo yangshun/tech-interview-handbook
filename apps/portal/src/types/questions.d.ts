@@ -17,3 +17,19 @@ export type AnswerComment = {
   id: string;
   numVotes: number;
 };
+
+export type Answer = {
+  content: string;
+  createdAt: Date;
+  id: string;
+  numComments: number;
+  numVotes: number;
+};
+
+export type QuestionComment = {
+  content: string;
+  createdAt: Date;
+  id: string;
+  numVotes: number;
+  user: string;
+};
