@@ -11,3 +11,10 @@ export type Question = {
   updatedAt: Date;
   user: string;
 };
+
+export type QuestionComment = {
+  content: string;
+  createdAt: Date;
+  id: string;
+  numVotes: number;
+};
