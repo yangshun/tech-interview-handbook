@@ -14,30 +14,51 @@ type Props = Readonly<{
   disabled?: boolean;
   isLabelHidden?: boolean;
   label: string;
+  noResultsMessage?: string;
+  nullable?: boolean;
   onQueryChange: (
     value: string,
     event: React.ChangeEvent<HTMLInputElement>,
   ) => void;
-  onSelectOption: (option: TypeaheadOption) => void;
+  onSelect: (option: TypeaheadOption) => void;
   options: ReadonlyArray<TypeaheadOption>;
-  selectedOption: TypeaheadOption;
+  value?: TypeaheadOption;
 }>;
 
 export default function Typeahead({
   disabled = false,
   isLabelHidden,
   label,
+  noResultsMessage = 'No results',
+  nullable = false,
   options,
   onQueryChange,
-  selectedOption,
-  onSelectOption,
+  value,
+  onSelect,
 }: Props) {
   const [query, setQuery] = useState('');
   return (
     <Combobox
+      by="id"
       disabled={disabled}
-      value={selectedOption}
-      onChange={onSelectOption}>
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      multiple={false}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      nullable={nullable}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      value={value}
+      onChange={(newValue) => {
+        if (newValue == null) {
+          return;
+        }
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        onSelect(newValue as TypeaheadOption);
+      }}>
       <Combobox.Label
         className={clsx(
           isLabelHidden
@@ -54,10 +75,11 @@ export default function Typeahead({
               disabled && 'pointer-events-none select-none bg-slate-100',
             )}
             displayValue={(option) =>
-              (option as unknown as TypeaheadOption).label
+              (option as unknown as TypeaheadOption)?.label
             }
             onChange={(event) => {
-              !disabled && onQueryChange(event.target.value, event);
+              setQuery(event.target.value);
+              onQueryChange(event.target.value, event);
             }}
           />
           <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -76,7 +98,7 @@ export default function Typeahead({
           <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {options.length === 0 && query !== '' ? (
               <div className="relative cursor-default select-none py-2 px-4 text-slate-700">
-                Nothing found.
+                {noResultsMessage}
               </div>
             ) : (
               options.map((option) => (

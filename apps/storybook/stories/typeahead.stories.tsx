@@ -14,6 +14,9 @@ export default {
     label: {
       control: 'text',
     },
+    noResultsMessage: {
+      control: 'text',
+    },
   },
   component: Typeahead,
   parameters: {
@@ -62,9 +65,9 @@ export function Basic({
       isLabelHidden={isLabelHidden}
       label={label}
       options={filteredPeople}
-      selectedOption={selectedEntry}
+      value={selectedEntry}
       onQueryChange={setQuery}
-      onSelectOption={setSelectedEntry}
+      onSelect={setSelectedEntry}
     />
   );
 }
