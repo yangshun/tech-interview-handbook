@@ -4,15 +4,15 @@ import { TRPCError } from '@trpc/server';
 
 import { createProtectedRouter } from './context';
 
-import type { Answer } from '~/types/questions-question';
+import type { Answer } from '~/types/questions';
 
-export const questionsQuestionAnswerRouter = createProtectedRouter()
+export const questionsAnswerRouter = createProtectedRouter()
   .query('getAnswers', {
     input: z.object({
       questionId: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const questionAnswersData = await ctx.prisma.questionsAnswer.findMany({
+      const answersData = await ctx.prisma.questionsAnswer.findMany({
         include: {
         _count: {
           select: {
@@ -33,7 +33,7 @@ export const questionsQuestionAnswerRouter = createProtectedRouter()
           ...input,
         },
     });
-    return questionAnswersData.map((data) => {
+    return answersData.map((data) => {
       const votes:number = data.votes.reduce(
         (previousValue:number, currentValue) => {
           let result:number = previousValue;
@@ -58,7 +58,7 @@ export const questionsQuestionAnswerRouter = createProtectedRouter()
       }
 
 
-      const question: Answer = {
+      const answer: Answer = {
         content: data.content,
         createdAt: data.createdAt,
         id: data.id,
@@ -66,7 +66,7 @@ export const questionsQuestionAnswerRouter = createProtectedRouter()
         numVotes: votes,
         user: userName,
       };
-      return question;
+      return answer;
     });
     }
   })
@@ -94,13 +94,13 @@ export const questionsQuestionAnswerRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const questionCommentToUpdate = await ctx.prisma.questionsAnswer.findUnique({
+      const answerToUpdate = await ctx.prisma.questionsAnswer.findUnique({
         where: {
           id: input.id,
         },
       });
 
-      if (questionCommentToUpdate?.id !== userId) {
+      if (answerToUpdate?.id !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -110,7 +110,6 @@ export const questionsQuestionAnswerRouter = createProtectedRouter()
       return await ctx.prisma.questionsAnswer.update({
         data: {
           ...input,
-          userId,
         },
         where: {
           id: input.id,
@@ -125,12 +124,12 @@ export const questionsQuestionAnswerRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const questionCommentToUpdate = await ctx.prisma.questionsAnswer.findUnique({
+      const answerToDelete = await ctx.prisma.questionsAnswer.findUnique({
         where: {
           id: input.id,
         },});
 
-      if (questionCommentToUpdate?.id !== userId) {
+      if (answerToDelete?.id !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
