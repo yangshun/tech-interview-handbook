@@ -35,8 +35,11 @@ export default function BrowseListItem({ href, resumeInfo }: Props) {
           </div>
         </div>
         <div className="col-span-3 self-center text-sm text-slate-500">
-          Uploaded {formatDistanceToNow(resumeInfo.createdAt)} ago by{' '}
-          {resumeInfo.user}
+          <div>
+            Uploaded {formatDistanceToNow(resumeInfo.createdAt)} ago by{' '}
+            {resumeInfo.user}
+          </div>
+          <div className="mt-2 text-slate-400">{resumeInfo.location}</div>
         </div>
         <ChevronRightIcon className="col-span-1 w-8 self-center justify-self-center" />
       </div>

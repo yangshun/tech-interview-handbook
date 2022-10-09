@@ -1,9 +1,31 @@
-import { createProtectedRouter } from './context';
+import { z } from 'zod';
+
+import { createProtectedRouter } from '../context';
 
 import type { Resume } from '~/types/resume';
 
-export const resumesResumeProtectedTabsRouter = createProtectedRouter()
-  .query('stars', {
+export const resumesResumeUserRouter = createProtectedRouter()
+  .mutation('create', {
+    // TODO: Use enums for experience, location, role
+    input: z.object({
+      additionalInfo: z.string().optional(),
+      experience: z.string(),
+      location: z.string(),
+      role: z.string(),
+      title: z.string(),
+      url: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user.id;
+      return await ctx.prisma.resumesResume.create({
+        data: {
+          ...input,
+          userId,
+        },
+      });
+    },
+  })
+  .query('findUserStarred', {
     async resolve({ ctx }) {
       const userId = ctx.session?.user?.id;
       const resumeStarsData = await ctx.prisma.resumesStar.findMany({
@@ -16,11 +38,11 @@ export const resumesResumeProtectedTabsRouter = createProtectedRouter()
                   stars: true,
                 },
               },
-            },
-          },
-          user: {
-            select: {
-              name: true,
+              user: {
+                select: {
+                  name: true,
+                },
+              },
             },
           },
         },
@@ -36,20 +58,20 @@ export const resumesResumeProtectedTabsRouter = createProtectedRouter()
           additionalInfo: rs.resume.additionalInfo,
           createdAt: rs.resume.createdAt,
           experience: rs.resume.experience,
-          id: rs.id,
+          id: rs.resume.id,
           location: rs.resume.location,
           numComments: rs.resume._count.comments,
           numStars: rs.resume._count.stars,
           role: rs.resume.role,
           title: rs.resume.title,
           url: rs.resume.url,
-          user: rs.user.name!,
+          user: rs.resume.user.name!,
         };
         return resume;
       });
     },
   })
-  .query('my', {
+  .query('findUserCreated', {
     async resolve({ ctx }) {
       const userId = ctx.session?.user?.id;
       const resumesData = await ctx.prisma.resumesResume.findMany({

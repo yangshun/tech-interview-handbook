@@ -49,3 +49,6 @@ export { default as TextArea } from './TextArea/TextArea';
 // TextInput
 export * from './TextInput/TextInput';
 export { default as TextInput } from './TextInput/TextInput';
+// Typeahead
+export * from './Typeahead/Typeahead';
+export { default as Typeahead } from './Typeahead/Typeahead';

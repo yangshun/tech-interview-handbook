@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import type { ChangeEvent } from 'react';
-import { useId } from 'react';
+import type { ForwardedRef } from 'react';
+import { forwardRef, useId } from 'react';
 
 type Props = Readonly<{
   defaultValue?: boolean;
@@ -15,15 +16,18 @@ type Props = Readonly<{
   value?: boolean;
 }>;
 
-export default function CheckboxInput({
-  defaultValue,
-  description,
-  disabled = false,
-  label,
-  name,
-  value,
-  onChange,
-}: Props) {
+function CheckboxInput(
+  {
+    defaultValue,
+    description,
+    disabled = false,
+    label,
+    name,
+    value,
+    onChange,
+  }: Props,
+  ref: ForwardedRef<HTMLInputElement>,
+) {
   const id = useId();
   const descriptionId = useId();
 
@@ -36,6 +40,7 @@ export default function CheckboxInput({
       )}>
       <div className="flex h-5 items-center">
         <input
+          ref={ref}
           aria-describedby={description != null ? descriptionId : undefined}
           checked={value}
           className={clsx(
@@ -81,3 +86,5 @@ export default function CheckboxInput({
     </div>
   );
 }
+
+export default forwardRef(CheckboxInput);
