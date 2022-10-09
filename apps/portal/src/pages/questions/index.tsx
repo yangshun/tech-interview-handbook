@@ -1,104 +1,122 @@
-import { useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useMemo, useState } from 'react';
 
+import QuestionOverviewCard from '~/components/questions/card/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
-import type { FilterOptions } from '~/components/questions/filter/FilterSection';
 import FilterSection from '~/components/questions/filter/FilterSection';
-import QuestionOverviewCard from '~/components/questions/QuestionOverviewCard';
+import type { LandingQueryData } from '~/components/questions/LandingComponent';
+import LandingComponent from '~/components/questions/LandingComponent';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
-type FilterChoices = Array<Omit<FilterOptions, 'checked'>>;
-
-const companies: FilterChoices = [
-  {
-    label: 'Google',
-    value: 'Google',
-  },
-  {
-    label: 'Meta',
-    value: 'meta',
-  },
-];
-
-// Code, design, behavioral
-const questionTypes: FilterChoices = [
-  {
-    label: 'Code',
-    value: 'code',
-  },
-  {
-    label: 'Design',
-    value: 'design',
-  },
-  {
-    label: 'Behavioral',
-    value: 'behavioral',
-  },
-];
-
-const questionAges: FilterChoices = [
-  {
-    label: 'Last month',
-    value: 'last-month',
-  },
-  {
-    label: 'Last 6 months',
-    value: 'last-6-months',
-  },
-  {
-    label: 'Last year',
-    value: 'last-year',
-  },
-];
-
-const locations: FilterChoices = [
-  {
-    label: 'Singapore',
-    value: 'singapore',
-  },
-];
+import {
+  COMPANIES,
+  LOCATIONS,
+  QUESTION_AGES,
+  QUESTION_TYPES,
+  SAMPLE_QUESTION,
+} from '~/utils/questions/constants';
+import {
+  useSearchFilter,
+  useSearchFilterSingle,
+} from '~/utils/questions/useSearchFilter';
 
 export default function QuestionsHomePage() {
-  const [selectedCompanies, setSelectedCompanies] = useState<Array<string>>([]);
-  const [selectedQuestionTypes, setSelectedQuestionTypes] = useState<
-    Array<string>
-  >([]);
-  const [selectedQuestionAges, setSelectedQuestionAges] = useState<
-    Array<string>
-  >([]);
-  const [selectedLocations, setSelectedLocations] = useState<Array<string>>([]);
+  const router = useRouter();
+
+  const [selectedCompanies, setSelectedCompanies, areCompaniesInitialized] =
+    useSearchFilter('companies');
+
+  const [
+    selectedQuestionTypes,
+    setSelectedQuestionTypes,
+    areQuestionTypesInitialized,
+  ] = useSearchFilter('questionTypes');
+  const [
+    selectedQuestionAge,
+    setSelectedQuestionAge,
+    isQuestionAgeInitialized,
+  ] = useSearchFilterSingle('questionAge', 'all');
+  const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
+    useSearchFilter('locations');
+
+  const [hasLanded, setHasLanded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const companyFilterOptions = useMemo(() => {
-    return companies.map((company) => ({
+    return COMPANIES.map((company) => ({
       ...company,
       checked: selectedCompanies.includes(company.value),
     }));
   }, [selectedCompanies]);
 
   const questionTypeFilterOptions = useMemo(() => {
-    return questionTypes.map((questionType) => ({
+    return QUESTION_TYPES.map((questionType) => ({
       ...questionType,
       checked: selectedQuestionTypes.includes(questionType.value),
     }));
   }, [selectedQuestionTypes]);
 
   const questionAgeFilterOptions = useMemo(() => {
-    return questionAges.map((questionAge) => ({
+    return QUESTION_AGES.map((questionAge) => ({
       ...questionAge,
-      checked: selectedQuestionAges.includes(questionAge.value),
+      checked: selectedQuestionAge === questionAge.value,
     }));
-  }, [selectedQuestionAges]);
+  }, [selectedQuestionAge]);
 
   const locationFilterOptions = useMemo(() => {
-    return locations.map((location) => ({
+    return LOCATIONS.map((location) => ({
       ...location,
       checked: selectedLocations.includes(location.value),
     }));
   }, [selectedLocations]);
 
-  return (
+  const handleLandingQuery = (data: LandingQueryData) => {
+    const { company, location, questionType } = data;
+    setSelectedCompanies([company]);
+    setSelectedLocations([location]);
+    setSelectedQuestionTypes([questionType]);
+    setHasLanded(true);
+  };
+
+  const areFiltersInitialized = useMemo(() => {
+    return (
+      areCompaniesInitialized &&
+      areQuestionTypesInitialized &&
+      isQuestionAgeInitialized &&
+      areLocationsInitialized
+    );
+  }, [
+    areCompaniesInitialized,
+    areQuestionTypesInitialized,
+    isQuestionAgeInitialized,
+    areLocationsInitialized,
+  ]);
+
+  useEffect(() => {
+    if (areFiltersInitialized) {
+      const hasFilter =
+        router.query.companies ||
+        router.query.questionTypes ||
+        router.query.questionAge ||
+        router.query.locations;
+      if (hasFilter) {
+        setHasLanded(true);
+      }
+      // Console.log('landed', hasLanded);
+      setLoaded(true);
+    }
+  }, [areFiltersInitialized, hasLanded, router.query]);
+
+  if (!loaded) {
+    return null;
+  }
+
+  return !hasLanded ? (
+    <LandingComponent onLanded={handleLandingQuery}></LandingComponent>
+  ) : (
     <main className="flex flex-1 flex-col items-stretch overflow-y-auto">
       <div className="flex pt-4">
-        <section className="w-[300px] border-r px-4">
+        <aside className="w-[300px] border-r px-4">
           <h2 className="text-xl font-semibold">Filter by</h2>
           <div className="divide-y divide-slate-200">
             <FilterSection
@@ -107,10 +125,12 @@ export default function QuestionsHomePage() {
               searchPlaceholder="Add company filter"
               onOptionChange={(optionValue, checked) => {
                 if (checked) {
-                  setSelectedCompanies((prev) => [...prev, optionValue]);
+                  setSelectedCompanies([...selectedCompanies, optionValue]);
                 } else {
-                  setSelectedCompanies((prev) =>
-                    prev.filter((company) => company !== optionValue),
+                  setSelectedCompanies(
+                    selectedCompanies.filter(
+                      (company) => company !== optionValue,
+                    ),
                   );
                 }
               }}
@@ -121,26 +141,26 @@ export default function QuestionsHomePage() {
               showAll={true}
               onOptionChange={(optionValue, checked) => {
                 if (checked) {
-                  setSelectedQuestionTypes((prev) => [...prev, optionValue]);
+                  setSelectedQuestionTypes([
+                    ...selectedQuestionTypes,
+                    optionValue,
+                  ]);
                 } else {
-                  setSelectedQuestionTypes((prev) =>
-                    prev.filter((questionType) => questionType !== optionValue),
+                  setSelectedQuestionTypes(
+                    selectedQuestionTypes.filter(
+                      (questionType) => questionType !== optionValue,
+                    ),
                   );
                 }
               }}
             />
             <FilterSection
+              isSingleSelect={true}
               label="Question age"
               options={questionAgeFilterOptions}
               showAll={true}
-              onOptionChange={(optionValue, checked) => {
-                if (checked) {
-                  setSelectedQuestionAges((prev) => [...prev, optionValue]);
-                } else {
-                  setSelectedQuestionAges((prev) =>
-                    prev.filter((questionAge) => questionAge !== optionValue),
-                  );
-                }
+              onOptionChange={(optionValue) => {
+                setSelectedQuestionAge(optionValue);
               }}
             />
             <FilterSection
@@ -149,25 +169,22 @@ export default function QuestionsHomePage() {
               searchPlaceholder="Add location filter"
               onOptionChange={(optionValue, checked) => {
                 if (checked) {
-                  setSelectedLocations((prev) => [...prev, optionValue]);
+                  setSelectedLocations([...selectedLocations, optionValue]);
                 } else {
-                  setSelectedLocations((prev) =>
-                    prev.filter((location) => location !== optionValue),
+                  setSelectedLocations(
+                    selectedLocations.filter(
+                      (location) => location !== optionValue,
+                    ),
                   );
                 }
               }}
             />
           </div>
-        </section>
-        <div className="flex flex-1 justify-center">
-          <div className="flex max-w-3xl flex-1 gap-x-4">
-            <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
-              <ContributeQuestionCard
-                onSubmit={(data) => {
-                  // eslint-disable-next-line no-console
-                  console.log(data);
-                }}
-              />
+        </aside>
+        <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto pt-4">
+          <div className="flex min-h-0 max-w-3xl flex-1">
+            <div className="flex flex-1 flex-col items-stretch justify-start gap-4 pb-4">
+              <ContributeQuestionCard />
               <QuestionSearchBar
                 sortOptions={[
                   {
@@ -180,19 +197,22 @@ export default function QuestionsHomePage() {
                   },
                 ]}
                 sortValue="most-recent"
+                onSortChange={(value) => {
+                  // eslint-disable-next-line no-console
+                  console.log(value);
+                }}
               />
-              <QuestionOverviewCard
-                answerCount={0}
-                content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and"
-                location="Menlo Park, CA"
-                role="Senior Engineering Manager"
-                similarCount={0}
-                timestamp="Last month"
-                upvoteCount={0}
-              />
+              {Array.from({ length: 10 }).map((_, index) => (
+                <QuestionOverviewCard
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={index}
+                  href="/questions/1/1"
+                  {...SAMPLE_QUESTION}
+                />
+              ))}
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </main>
   );

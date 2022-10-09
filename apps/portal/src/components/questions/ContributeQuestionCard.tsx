@@ -1,102 +1,74 @@
-import type { ComponentProps, ForwardedRef } from 'react';
 import { useState } from 'react';
-import { forwardRef } from 'react';
-import type { UseFormRegisterReturn } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
 import {
   BuildingOffice2Icon,
   CalendarDaysIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/outline';
-import { Button, TextInput } from '@tih/ui';
+import { TextInput } from '@tih/ui';
 
-import ContributeQuestionModal from './ContributeQuestionModal';
+import ContributeQuestionDialog from './ContributeQuestionDialog';
 
-export type ContributeQuestionData = {
-  company: string;
-  date: Date;
-  questionContent: string;
-  questionType: string;
-};
+export default function ContributeQuestionCard() {
+  const [showDraftDialog, setShowDraftDialog] = useState(false);
 
-type TextInputProps = ComponentProps<typeof TextInput>;
+  const handleDraftDialogCancel = () => {
+    setShowDraftDialog(false);
+  };
 
-type FormTextInputProps = Omit<TextInputProps, 'onChange'> &
-  Pick<UseFormRegisterReturn<never>, 'onChange'>;
+  const handleOpenContribute = () => {
+    setShowDraftDialog(true);
+  };
 
-function FormTextInputWithRef(
-  props: FormTextInputProps,
-  ref?: ForwardedRef<HTMLInputElement>,
-) {
-  const { onChange, ...rest } = props;
   return (
-    <TextInput
-      {...(rest as TextInputProps)}
-      ref={ref}
-      onChange={(_, event) => onChange(event)}
-    />
-  );
-}
-
-const FormTextInput = forwardRef(FormTextInputWithRef);
-
-export type ContributeQuestionCardProps = {
-  onSubmit: (data: ContributeQuestionData) => void;
-};
-
-export default function ContributeQuestionCard({
-  onSubmit,
-}: ContributeQuestionCardProps) {
-  const { register, handleSubmit } = useForm<ContributeQuestionData>();
-  const [isOpen, setOpen] = useState<boolean>(false);
-  return (
-    <>
-      <form
-        className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 p-4"
-        onSubmit={handleSubmit(onSubmit)}>
-        <FormTextInput
+    <div>
+      <button
+        className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4 text-left hover:bg-gray-100"
+        type="button"
+        onClick={handleOpenContribute}>
+        <TextInput
+          disabled={true}
           isLabelHidden={true}
           label="Question"
           placeholder="Contribute a question"
-          {...register('questionContent')}
+          onChange={handleOpenContribute}
         />
         <div className="flex items-end justify-center gap-x-2">
           <div className="min-w-[150px] flex-1">
-            <FormTextInput
+            <TextInput
+              disabled={true}
               label="Company"
               startAddOn={BuildingOffice2Icon}
               startAddOnType="icon"
-              {...register('company')}
+              onChange={handleOpenContribute}
             />
           </div>
           <div className="min-w-[150px] flex-1">
-            <FormTextInput
+            <TextInput
+              disabled={true}
               label="Question type"
               startAddOn={QuestionMarkCircleIcon}
               startAddOnType="icon"
-              {...register('questionType')}
+              onChange={handleOpenContribute}
             />
           </div>
           <div className="min-w-[150px] flex-1">
-            <FormTextInput
+            <TextInput
+              disabled={true}
               label="Date"
               startAddOn={CalendarDaysIcon}
               startAddOnType="icon"
-              {...register('date')}
+              onChange={handleOpenContribute}
             />
           </div>
-          <Button
-            label="Contribute"
-            type="submit"
-            variant="primary"
-            onClick={() => setOpen(true)}
-          />
+          <h1 className="bg-primary-600 hover:bg-primary-700 rounded-full px-3 py-2 text-white">
+            Contribute
+          </h1>
         </div>
-      </form>
-
-      <ContributeQuestionModal
-        contributeState={isOpen}
-        setContributeState={setOpen}></ContributeQuestionModal>
-    </>
+      </button>
+      <ContributeQuestionDialog
+        show={showDraftDialog}
+        onCancel={handleDraftDialogCancel}
+      />
+    </div>
   );
 }

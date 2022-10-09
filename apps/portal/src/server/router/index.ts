@@ -4,6 +4,7 @@ import { companiesRouter } from './companies-router';
 import { createRouter } from './context';
 import { protectedExampleRouter } from './protected-example-router';
 import { questionsAnswerRouter } from './questions-answer-router';
+import { questionsQuestionCommentRouter } from './questions-question-comment-router';
 import { questionsQuestionRouter } from './questions-question-router';
 import { resumesRouter } from './resumes/resumes-resume-router';
 import { resumesResumeUserRouter } from './resumes/resumes-resume-user-router';
@@ -28,6 +29,7 @@ export const appRouter = createRouter()
   .merge('resumes.reviews.', resumeReviewsRouter)
   .merge('resumes.reviews.user.', resumesReviewsUserRouter)
   .merge('questions.answers.', questionsAnswerRouter)
+  .merge('questions.questions.comments.', questionsQuestionCommentRouter)
   .merge('questions.questions.', questionsQuestionRouter);
 
 // Export type definition of API
