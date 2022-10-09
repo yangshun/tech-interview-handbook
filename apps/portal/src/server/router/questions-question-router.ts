@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { date, z } from 'zod';
 import {QuestionsQuestionType, Vote } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
@@ -9,10 +9,12 @@ import type { Question } from '~/types/questions';
 export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
-      company: z.string().optional(),
-      location: z.string().optional(),
+      company: z.string().array().optional(),
+      endDate: z.date(),
+      location: z.string().array().optional(),
       questionType: z.nativeEnum(QuestionsQuestionType),
-      role: z.string().optional(),
+      role: z.string().array().optional(),
+      startDate: z.date()
     }),
     async resolve({ ctx, input }) {
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
@@ -28,6 +30,7 @@ export const questionsQuestionRouter = createProtectedRouter()
             company: true,
             location: true,
             role: true,
+            seenAt: true,
           },
         },
         user: {
@@ -48,10 +51,11 @@ export const questionsQuestionRouter = createProtectedRouter()
         .filter((data) => {
           for (let i = 0; i < data.encounters.length; i++) {
             const encounter = data.encounters[i]
-            const matchCompany = (!input.company || (encounter.company === input.company));
-            const matchLocation = (!input.location || (encounter.location === input.location));
-            const matchRole = (!input.company || (encounter.role === input.role));
-            if (matchCompany && matchLocation && matchRole) {return true};
+            const matchCompany = (!input.company || (input.company.includes(encounter.company)));
+            const matchLocation = (!input.location || (input.location.includes(encounter.location)));
+            const matchRole = (!input.role || (input.role.includes(encounter.role)));
+            const matchDate = encounter.seenAt >= input.startDate && encounter.seenAt <= input.endDate;
+            if (matchCompany && matchLocation && matchRole && matchDate) {return true};
           }
           return false;
         })
@@ -97,16 +101,32 @@ export const questionsQuestionRouter = createProtectedRouter()
   })
   .mutation('create', {
     input: z.object({
+      company: z.string(),
       content: z.string(),
+      location: z.string(),
       questionType: z.nativeEnum(QuestionsQuestionType),
+      role: z.string(),
+      seenAt: z.date(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
       return await ctx.prisma.questionsQuestion.create({
         data: {
-          ...input,
-          userId,
+          content: input.content,
+          encounters: {
+            create: [
+              {
+                company :input.company,
+                location: input.location,
+                role: input.role,
+                seenAt: input.seenAt,
+                userId
+              }
+            ],
+          },
+          questionType: input.questionType,
+          userId
         },
       });
     },
