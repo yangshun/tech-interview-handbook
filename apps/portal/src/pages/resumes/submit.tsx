@@ -20,9 +20,9 @@ import { trpc } from '~/utils/trpc';
 const TITLE_PLACEHOLDER =
   'e.g. Applying for Company XYZ, please help me to review!';
 const ADDITIONAL_INFO_PLACEHOLDER = `e.g. I’m applying for company XYZ. I have been resume-rejected by N companies that I have applied for. Please help me to review so company XYZ gives me an interview!`;
-const FILE_UPLOAD_ERROR = 'Please upload a PDF file that is less than 10MB.';
+const FILE_UPLOAD_ERROR = 'Please upload a PDF file that is less than 3MB.';
 
-const MAX_FILE_SIZE_LIMIT = 10000000;
+const MAX_FILE_SIZE_LIMIT = 3000000;
 
 type IFormInput = {
   additionalInfo?: string;
@@ -186,7 +186,7 @@ export default function SubmitResumeForm() {
                         />
                       </label>
                     </div>
-                    <p className="text-xs text-gray-500">PDF up to 10MB</p>
+                    <p className="text-xs text-gray-500">PDF up to 3MB</p>
                   </div>
                 </div>
                 {fileUploadError && (
