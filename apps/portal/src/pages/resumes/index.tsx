@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
   ChevronDownIcon,
@@ -22,6 +22,7 @@ import {
   TOP_HITS,
 } from '~/components/resumes/browse/constants';
 import FilterPill from '~/components/resumes/browse/FilterPill';
+import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
 
 import type { Resume } from '~/types/resume';
 
@@ -42,12 +43,11 @@ const filters = [
     options: LOCATION,
   },
 ];
-import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
 
 import { trpc } from '~/utils/trpc';
 
 export default function ResumeHomePage() {
-  const { data } = useSession();
+  const { data: sessionData } = useSession();
   const router = useRouter();
   const [tabsValue, setTabsValue] = useState(BROWSE_TABS_VALUES.ALL);
   const [searchValue, setSearchValue] = useState('');
@@ -55,41 +55,25 @@ export default function ResumeHomePage() {
 
   const allResumesQuery = trpc.useQuery(['resumes.resume.all'], {
     enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
+    onSuccess: (data) => {
+      setResumes(data);
+    },
   });
   const starredResumesQuery = trpc.useQuery(['resumes.resume.browse.stars'], {
     enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
+    onSuccess: (data) => {
+      setResumes(data);
+    },
   });
   const myResumesQuery = trpc.useQuery(['resumes.resume.browse.my'], {
     enabled: tabsValue === BROWSE_TABS_VALUES.MY,
+    onSuccess: (data) => {
+      setResumes(data);
+    },
   });
 
-  useEffect(() => {
-    switch (tabsValue) {
-      case BROWSE_TABS_VALUES.ALL: {
-        setResumes(allResumesQuery.data ?? []);
-        break;
-      }
-      case BROWSE_TABS_VALUES.STARRED: {
-        setResumes(starredResumesQuery.data ?? []);
-        break;
-      }
-      case BROWSE_TABS_VALUES.MY: {
-        setResumes(myResumesQuery.data ?? []);
-        break;
-      }
-      default: {
-        setResumes([]);
-      }
-    }
-  }, [
-    allResumesQuery.data,
-    starredResumesQuery.data,
-    myResumesQuery.data,
-    tabsValue,
-  ]);
-
   const onClickNew = () => {
-    if (data?.user?.id) {
+    if (sessionData?.user?.id) {
       router.push('/resumes/submit');
     } else {
       // TODO: Handle non-logged in user behaviour
