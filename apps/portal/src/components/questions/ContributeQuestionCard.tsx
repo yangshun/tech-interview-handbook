@@ -4,7 +4,7 @@ import {
   CalendarDaysIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/outline';
-import { Button, TextInput } from '@tih/ui';
+import { TextInput } from '@tih/ui';
 
 import ContributeQuestionDialog from './ContributeQuestionDialog';
 
@@ -21,10 +21,12 @@ export default function ContributeQuestionCard() {
 
   return (
     <div>
-      <div
-        className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4 hover:bg-gray-100"
+      <button
+        className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4 text-left hover:bg-gray-100"
+        type="button"
         onClick={handleOpenContribute}>
         <TextInput
+          disabled={true}
           isLabelHidden={true}
           label="Question"
           placeholder="Contribute a question"
@@ -33,6 +35,7 @@ export default function ContributeQuestionCard() {
         <div className="flex items-end justify-center gap-x-2">
           <div className="min-w-[150px] flex-1">
             <TextInput
+              disabled={true}
               label="Company"
               startAddOn={BuildingOffice2Icon}
               startAddOnType="icon"
@@ -41,6 +44,7 @@ export default function ContributeQuestionCard() {
           </div>
           <div className="min-w-[150px] flex-1">
             <TextInput
+              disabled={true}
               label="Question type"
               startAddOn={QuestionMarkCircleIcon}
               startAddOnType="icon"
@@ -49,20 +53,18 @@ export default function ContributeQuestionCard() {
           </div>
           <div className="min-w-[150px] flex-1">
             <TextInput
+              disabled={true}
               label="Date"
               startAddOn={CalendarDaysIcon}
               startAddOnType="icon"
               onChange={handleOpenContribute}
             />
           </div>
-          <Button
-            label="Contribute"
-            type="submit"
-            variant="primary"
-            onClick={handleOpenContribute}
-          />
+          <h1 className="bg-primary-600 hover:bg-primary-700 rounded-full px-3 py-2 text-white">
+            Contribute
+          </h1>
         </div>
-      </div>
+      </button>
       <ContributeQuestionDialog
         show={showDraftDialog}
         onCancel={handleDraftDialogCancel}
