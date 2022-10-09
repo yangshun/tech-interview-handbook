@@ -3,6 +3,7 @@ import superjson from 'superjson';
 import { companiesRouter } from './companies-router';
 import { createRouter } from './context';
 import { protectedExampleRouter } from './protected-example-router';
+import { questionsAnswerCommentRouter } from './questions-answer-comment-router';
 import { questionsQuestionRouter } from './questions-question-router';
 import { resumesRouter } from './resumes/resumes-resume-router';
 import { resumesResumeUserRouter } from './resumes/resumes-resume-user-router';
@@ -26,11 +27,8 @@ export const appRouter = createRouter()
   .merge('resumes.star.user.', resumesStarUserRouter)
   .merge('resumes.reviews.', resumeReviewsRouter)
   .merge('resumes.reviews.user.', resumesReviewsUserRouter)
-<<<<<<< HEAD
-  .merge('questions.answers.comments.', questionsAnswerCommentRouter);
-=======
+  .merge('questions.answers.comments.', questionsAnswerCommentRouter)
   .merge('questions.questions.', questionsQuestionRouter);
->>>>>>> main
 
 // Export type definition of API
 export type AppRouter = typeof appRouter;
