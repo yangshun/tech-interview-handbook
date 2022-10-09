@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { Button, Dialog, TextInput } from '@tih/ui';
+import { Button, Dialog, TextArea } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
@@ -86,45 +86,39 @@ export default function CommentsForm({
       <form
         className="w-full space-y-8 divide-y divide-gray-200"
         onSubmit={handleSubmit(onSubmit)}>
-        {/* TODO: Convert TextInput to TextArea */}
         <div className="mt-4 space-y-4">
-          <TextInput
+          <TextArea
             {...(register('general'), {})}
             label="General"
             placeholder="General comments about the resume"
-            type="text"
             onChange={(value) => onValueChange('general', value)}
           />
 
-          <TextInput
+          <TextArea
             {...(register('education'), {})}
             label="Education"
             placeholder="Comments about the Education section"
-            type="text"
             onChange={(value) => onValueChange('education', value)}
           />
 
-          <TextInput
+          <TextArea
             {...(register('experience'), {})}
             label="Experience"
             placeholder="Comments about the Experience section"
-            type="text"
             onChange={(value) => onValueChange('experience', value)}
           />
 
-          <TextInput
+          <TextArea
             {...(register('projects'), {})}
             label="Projects"
             placeholder="Comments about the Projects section"
-            type="text"
             onChange={(value) => onValueChange('projects', value)}
           />
 
-          <TextInput
+          <TextArea
             {...(register('skills'), {})}
             label="Skills"
             placeholder="Comments about the Skills section"
-            type="text"
             onChange={(value) => onValueChange('skills', value)}
           />
         </div>

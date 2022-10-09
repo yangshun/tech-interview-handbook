@@ -23,7 +23,7 @@ export default function Collapsible({ children, defaultOpen, label }: Props) {
             />
             <span className="flex-1">{label}</span>
           </Disclosure.Button>
-          <Disclosure.Panel className="pt-1 pb-2 text-sm text-gray-500">
+          <Disclosure.Panel className="w-full pt-1 pb-2 text-sm text-gray-500">
             {children}
           </Disclosure.Panel>
         </>

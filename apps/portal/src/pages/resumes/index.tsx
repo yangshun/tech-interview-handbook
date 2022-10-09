@@ -1,5 +1,7 @@
 import clsx from 'clsx';
-import { Fragment, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import { Fragment, useEffect, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
   ChevronDownIcon,
@@ -11,6 +13,7 @@ import { Tabs, TextInput } from '@tih/ui';
 
 import BrowseListItem from '~/components/resumes/browse/BrowseListItem';
 import {
+  BROWSE_TABS_VALUES,
   EXPERIENCE,
   LOCATION,
   ROLES,
@@ -18,6 +21,8 @@ import {
   TOP_HITS,
 } from '~/components/resumes/browse/constants';
 import FilterPill from '~/components/resumes/browse/FilterPill';
+
+import type { Resume } from '~/types/resume';
 
 const filters = [
   {
@@ -41,12 +46,57 @@ import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
 import { trpc } from '~/utils/trpc';
 
 export default function ResumeHomePage() {
-  const [tabsValue, setTabsValue] = useState('all');
+  const { data } = useSession();
+  const router = useRouter();
+  const [tabsValue, setTabsValue] = useState(BROWSE_TABS_VALUES.ALL);
   const [searchValue, setSearchValue] = useState('');
-  const resumesQuery = trpc.useQuery(['resumes.resume.list']);
+  const [resumes, setResumes] = useState(Array<Resume>());
+
+  const allResumesQuery = trpc.useQuery(['resumes.resume.all'], {
+    enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
+  });
+  const starredResumesQuery = trpc.useQuery(['resumes.resume.browse.stars'], {
+    enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
+  });
+  const myResumesQuery = trpc.useQuery(['resumes.resume.browse.my'], {
+    enabled: tabsValue === BROWSE_TABS_VALUES.MY,
+  });
+
+  useEffect(() => {
+    switch (tabsValue) {
+      case BROWSE_TABS_VALUES.ALL: {
+        setResumes(allResumesQuery.data ?? Array<Resume>());
+        break;
+      }
+      case BROWSE_TABS_VALUES.STARRED: {
+        setResumes(starredResumesQuery.data ?? Array<Resume>());
+        break;
+      }
+      case BROWSE_TABS_VALUES.MY: {
+        setResumes(myResumesQuery.data ?? Array<Resume>());
+        break;
+      }
+      default: {
+        setResumes(Array<Resume>());
+      }
+    }
+  }, [
+    allResumesQuery.data,
+    starredResumesQuery.data,
+    myResumesQuery.data,
+    tabsValue,
+  ]);
+
+  const onClickNew = () => {
+    if (data?.user?.id) {
+      router.push('/resumes/submit');
+    } else {
+      // TODO: Handle non-logged in user behaviour
+    }
+  };
 
   return (
-    <main className="h-full flex-1 overflow-y-auto">
+    <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
       <div className="ml-4 py-4">
         <ResumeReviewsTitle />
       </div>
@@ -64,15 +114,15 @@ export default function ResumeHomePage() {
                     tabs={[
                       {
                         label: 'All Resumes',
-                        value: 'all',
+                        value: BROWSE_TABS_VALUES.ALL,
                       },
                       {
                         label: 'Starred Resumes',
-                        value: 'starred',
+                        value: BROWSE_TABS_VALUES.STARRED,
                       },
                       {
                         label: 'My Resumes',
-                        value: 'my',
+                        value: BROWSE_TABS_VALUES.MY,
                       },
                     ]}
                     value={tabsValue}
@@ -139,7 +189,8 @@ export default function ResumeHomePage() {
                 <div className="col-span-1">
                   <button
                     className="rounded-md bg-indigo-500 py-1 px-3 text-sm text-white"
-                    type="button">
+                    type="button"
+                    onClick={onClickNew}>
                     New
                   </button>
                 </div>
@@ -223,14 +274,19 @@ export default function ResumeHomePage() {
                 </form>
               </div>
             </div>
-            {resumesQuery.isLoading ? (
+            {allResumesQuery.isLoading ||
+            starredResumesQuery.isLoading ||
+            myResumesQuery.isLoading ? (
               <div>Loading...</div>
             ) : (
               <div className="col-span-10 pr-8">
                 <ul role="list">
-                  {resumesQuery.data?.map((resumeObj) => (
+                  {resumes.map((resumeObj) => (
                     <li key={resumeObj.id}>
-                      <BrowseListItem href="#" resumeInfo={resumeObj} />
+                      <BrowseListItem
+                        href={`resumes/${resumeObj.id}`}
+                        resumeInfo={resumeObj}
+                      />
                     </li>
                   ))}
                 </ul>
