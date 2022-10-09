@@ -1,43 +1,10 @@
 import { z } from 'zod';
 
-import { createRouter } from './context';
+import { createProtectedRouter } from '../context';
 
-export const resumesDetailsRouter = createRouter()
-  .query('find', {
-    input: z.object({
-      resumeId: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const { resumeId } = input;
-      const userId = ctx.session?.user?.id;
-
-      // Use the resumeId to query all related information of a single resume
-      // from Resumesresume:
-      return await ctx.prisma.resumesResume.findUnique({
-        include: {
-          _count: {
-            select: {
-              stars: true,
-            },
-          },
-          stars: {
-            where: {
-              userId,
-            },
-          },
-          user: {
-            select: {
-              name: true,
-            },
-          },
-        },
-        where: {
-          id: resumeId,
-        },
-      });
-    },
-  })
-  .mutation('update_star', {
+export const resumesStarUserRouter = createProtectedRouter().mutation(
+  'create_or_delete',
+  {
     input: z.object({
       resumeId: z.string(),
     }),
@@ -76,4 +43,5 @@ export const resumesDetailsRouter = createRouter()
         },
       });
     },
-  });
+  },
+);
