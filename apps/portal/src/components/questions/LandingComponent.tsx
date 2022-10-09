@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { ArrowSmallRightIcon } from '@heroicons/react/24/outline';
 import { Button, Select } from '@tih/ui';
 
-import NavBar from '~/components/questions/NavBar';
-
 import {
   COMPANIES,
   LOCATIONS,
@@ -43,9 +41,7 @@ export default function LandingComponent({
 
   return (
     <main className="flex flex-1 flex-col items-stretch overflow-y-auto bg-white">
-      <div className="pb-4">
-        <NavBar></NavBar>
-      </div>
+      <div className="pb-4"></div>
       <div className="flex flex-1 flex-col justify-center gap-3">
         <div className="flex items-center justify-center">
           <img alt="app logo" className=" h-20 w-20" src="/logo.svg"></img>
