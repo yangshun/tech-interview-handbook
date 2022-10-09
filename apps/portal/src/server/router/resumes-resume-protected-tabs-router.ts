@@ -36,7 +36,7 @@ export const resumesResumeProtectedTabsRouter = createProtectedRouter()
           additionalInfo: rs.resume.additionalInfo,
           createdAt: rs.resume.createdAt,
           experience: rs.resume.experience,
-          id: rs.id,
+          id: rs.resume.id,
           location: rs.resume.location,
           numComments: rs.resume._count.comments,
           numStars: rs.resume._count.stars,
