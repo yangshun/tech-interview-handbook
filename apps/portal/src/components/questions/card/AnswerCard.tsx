@@ -7,6 +7,7 @@ import VotingButtons from '../VotingButtons';
 export type AnswerCardProps = {
   authorImageUrl: string;
   authorName: string;
+  commentCount: number;
   content: string;
   createdAt: Date;
   upvoteCount: number;
@@ -18,9 +19,10 @@ function AnswerCardWithoutHref({
   upvoteCount,
   content,
   createdAt,
+  commentCount,
 }: AnswerCardProps) {
   return (
-    <div className="flex gap-4 rounded-md border p-2">
+    <div className="flex gap-4 rounded-md border bg-white p-2 hover:bg-slate-50">
       <VotingButtons size="sm" upvoteCount={upvoteCount} />
       <div className="mt-1 flex flex-col gap-1">
         <div className="flex items-center gap-2">
@@ -34,6 +36,9 @@ function AnswerCardWithoutHref({
           </p>
         </div>
         <p className="pl-1 pt-1">{content}</p>
+        <p className="py-1 pl-3 text-sm font-light underline	underline-offset-4">
+          {commentCount} comment(s)
+        </p>
       </div>
     </div>
   );

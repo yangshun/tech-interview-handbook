@@ -64,7 +64,7 @@ export default function QuestionCard({
   location,
 }: QuestionCardProps) {
   return (
-    <article className="flex gap-4 rounded-md border border-slate-300 bg-white p-4">
+    <article className="flex gap-4 rounded-md border border-slate-300 bg-white p-4 hover:bg-slate-50">
       {showVoteButtons && <VotingButtons upvoteCount={upvoteCount} />}
       <div className="flex flex-col gap-2">
         <div className="flex items-baseline justify-between">
