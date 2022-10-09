@@ -34,6 +34,7 @@ export default function QuestionPage() {
   const {
     register: comRegister,
     handleSubmit: handleCommentSubmit,
+    reset: resetComment,
     formState: { isDirty: isCommentDirty, isValid: isCommentValid },
   } = useForm<QuestionCommentData>({ mode: 'onChange' });
   const commentRegister = useFormRegister(comRegister);
@@ -45,7 +46,24 @@ export default function QuestionPage() {
     { id: questionId as string },
   ]);
 
-  const comment = SAMPLE_QUESTION_COMMENT;
+  const utils = trpc.useContext();
+
+  const { data: comments } = trpc.useQuery([
+    'questions.questions.comments.getQuestionComments',
+    { questionId: questionId as string },
+  ]);
+
+  const { mutate: addComment } = trpc.useMutation(
+    'questions.questions.comments.create',
+    {
+      onSuccess: () => {
+        utils.invalidateQueries(
+          'questions.questions.comments.getQuestionComments',
+        );
+      },
+    },
+  );
+
   const handleBackNavigation = () => {
     router.back();
   };
@@ -56,8 +74,11 @@ export default function QuestionPage() {
   };
 
   const handleSubmitComment = (data: QuestionCommentData) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+    addComment({
+      content: data.commentContent,
+      questionId: questionId as string,
+    });
+    resetComment();
   };
 
   if (!question) {
@@ -134,11 +155,14 @@ export default function QuestionPage() {
                 </div>
               </form>
 
-              {Array.from({ length: question.numComments }).map((_, index) => (
+              {(comments ?? []).map((comment) => (
                 <CommentListItem
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={index}
-                  {...comment}
+                  key={comment.id}
+                  authorImageUrl={SAMPLE_QUESTION_COMMENT.authorImageUrl}
+                  authorName={comment.user}
+                  content={comment.content}
+                  createdAt={comment.createdAt}
+                  upvoteCount={0}
                 />
               ))}
             </Collapsible>
