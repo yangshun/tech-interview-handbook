@@ -215,6 +215,10 @@ export default function QuestionsHomePage() {
                   },
                 ]}
                 sortValue="most-recent"
+                onSortChange={(value) => {
+                  // eslint-disable-next-line no-console
+                  console.log(value);
+                }}
               />
               {Array.from({ length: 10 }).map((_, index) => (
                 <QuestionOverviewCard
