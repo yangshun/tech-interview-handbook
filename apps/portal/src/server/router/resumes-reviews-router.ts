@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { ResumesSection } from '@prisma/client';
 
 import { createRouter } from './context';
 
