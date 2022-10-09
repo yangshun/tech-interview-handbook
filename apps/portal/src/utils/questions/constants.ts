@@ -87,7 +87,7 @@ export const SAMPLE_ANSWER = {
   authorName: 'Jeff Sieu',
   commentCount: 10,
   content: 'This is a sample answer',
-  createdAt: new Date(),
+  createdAt: new Date(2014, 8, 1, 11, 30, 40),
   upvoteCount: 10,
 };
 
@@ -95,7 +95,7 @@ export const SAMPLE_QUESTION_COMMENT = {
   authorImageUrl: 'https://avatars.githubusercontent.com/u/66356390?v=4',
   authorName: 'Jeff Sieu',
   content: 'This is a sample question comment',
-  createdAt: new Date(),
+  createdAt: new Date(2014, 8, 1, 11, 30, 40),
   upvoteCount: 10,
 };
 
@@ -103,6 +103,6 @@ export const SAMPLE_ANSWER_COMMENT = {
   authorImageUrl: 'https://avatars.githubusercontent.com/u/66356390?v=4',
   authorName: 'Jeff Sieu',
   content: 'This is an sample answer comment',
-  createdAt: new Date(),
+  createdAt: new Date(2014, 8, 1, 11, 30, 40),
   upvoteCount: 10,
 };
