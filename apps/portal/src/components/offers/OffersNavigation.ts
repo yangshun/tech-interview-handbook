@@ -2,7 +2,7 @@ import type { ProductNavigationItems } from '~/components/global/ProductNavigati
 
 const navigation: ProductNavigationItems = [
   { href: '/offers', name: 'Home' },
-  { href: '/submit', name: 'Benchmark your offer' },
+  { href: '/offers/submit', name: 'Benchmark your offer' },
 ];
 
 const config = {
