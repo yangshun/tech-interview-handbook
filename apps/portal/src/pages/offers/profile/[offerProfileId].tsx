@@ -5,10 +5,12 @@ import {
   BriefcaseIcon,
   BuildingOffice2Icon,
   CalendarDaysIcon,
+  ClipboardDocumentIcon,
   PencilSquareIcon,
+  ShareIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
-import { Button, Tabs, TextArea } from '@tih/ui';
+import { Button, Dialog, Tabs } from '@tih/ui';
 
 import { EducationBackgroundType } from '~/components/offers/profile/EducationCard';
 import EducationCard from '~/components/offers/profile/EducationCard';
@@ -17,44 +19,9 @@ import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
 
 export default function OfferProfile() {
   const [selectedTab, setSelectedTab] = useState('offers');
-  //   Const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   function renderActionList() {
     return (
-      //   <div>
-      //     <Button
-      //       label="Open"
-      //       variant="primary"
-      //       onClick={() => setIsDialogOpen(true)}
-      //     />
-      //     {isDialogOpen && (
-      //       <Dialog
-      //         primaryButton={
-      //           <Button
-      //             display="block"
-      //             label="OK"
-      //             variant="primary"
-      //             onClick={() => setIsDialogOpen(false)}
-      //           />
-      //         }
-      //         secondaryButton={
-      //           <Button
-      //             display="block"
-      //             label="Cancel"
-      //             variant="tertiary"
-      //             onClick={() => setIsDialogOpen(false)}
-      //           />
-      //         }
-      //         title="Lorem ipsum, dolor sit amet"
-      //         onClose={() => setIsDialogOpen(false)}>
-      //         <div>
-      //           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius
-      //           aliquam laudantium explicabo pariatur iste dolorem animi vitae
-      //           error totam. At sapiente aliquam accusamus facere veritatis.
-      //         </div>
-      //       </Dialog>
-      //     )}
-      //   </div>
-
       <div className="space-x-2">
         <Button
           icon={BookmarkSquareIcon}
@@ -76,7 +43,35 @@ export default function OfferProfile() {
           label="Delete"
           size="md"
           variant="tertiary"
+          onClick={() => setIsDialogOpen(true)}
         />
+        {isDialogOpen && (
+          <Dialog
+            isShown={isDialogOpen}
+            primaryButton={
+              <Button
+                display="block"
+                label="Delete"
+                variant="primary"
+                onClick={() => setIsDialogOpen(false)}
+              />
+            }
+            secondaryButton={
+              <Button
+                display="block"
+                label="Cancel"
+                variant="tertiary"
+                onClick={() => setIsDialogOpen(false)}
+              />
+            }
+            title="Are you sure you want to delete this offer profile?"
+            onClose={() => setIsDialogOpen(false)}>
+            <div>
+              All comments will gone. You will not be able to access or recover
+              it.
+            </div>
+          </Dialog>
+        )}
       </div>
     );
   }
@@ -219,8 +214,28 @@ export default function OfferProfile() {
   function ProfileComments() {
     return (
       <div className="m-4">
-        <h2 className="text-2xl font-bold">Discussions</h2>
-        <TextArea label="Comment" placeholder="Type your comment here" />
+        <div className="flex-end flex justify-end space-x-4">
+          <Button
+            addonPosition="start"
+            icon={ClipboardDocumentIcon}
+            isLabelHidden={false}
+            label="Copy profile edit link"
+            size="sm"
+            variant="secondary"
+          />
+          <Button
+            addonPosition="start"
+            icon={ShareIcon}
+            isLabelHidden={false}
+            label="Copy public link"
+            size="sm"
+            variant="secondary"
+          />
+        </div>
+        <h2 className="mt-2 text-2xl font-bold">
+          Discussions feature coming soon
+        </h2>
+        {/* <TextArea label="Comment" placeholder="Type your comment here" /> */}
       </div>
     );
   }

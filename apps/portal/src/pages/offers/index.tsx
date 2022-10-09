@@ -1,10 +1,10 @@
-import OffersTitle from '~/components/offers/OffersTitle';
+import OffersTable from '~/components/offers/OffersTable';
 
 export default function OffersHomePage() {
   return (
     <main className="flex-1 overflow-y-auto">
       <div className="flex h-full items-center justify-center">
-        <OffersTitle />
+        <OffersTable />
       </div>
     </main>
   );

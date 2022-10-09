@@ -1,0 +1,30 @@
+import { Select } from '@tih/ui';
+
+import { Currency } from '~/components/offers/util/currency/CurrencyEnum';
+
+const currencyOptions = Object.entries(Currency).map(([key, value]) => ({
+  label: key,
+  value,
+}));
+
+type Props = Readonly<{
+  handleCurrencyChange: (currency: string) => void;
+  selectedCurrency: string;
+}>;
+
+export default function CurrencySelector({
+  selectedCurrency,
+  handleCurrencyChange,
+}: Props) {
+  return (
+    <Select
+      display="inline"
+      isLabelHidden={true}
+      label="Select fruit"
+      name=""
+      options={currencyOptions}
+      value={selectedCurrency}
+      onChange={(currency: string) => handleCurrencyChange(currency)}
+    />
+  );
+}
