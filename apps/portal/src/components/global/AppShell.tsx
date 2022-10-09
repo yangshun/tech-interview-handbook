@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import type { ReactNode } from 'react';
 import { Fragment, useState } from 'react';
@@ -12,6 +13,14 @@ import {
   HomeIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+
+import HomeNavigation from '~/components/global/HomeNavigation';
+import OffersNavigation from '~/components/offers/OffersNavigation';
+import QuestionsNavigation from '~/components/questions/QuestionsNavigation';
+import ResumesNavigation from '~/components/resumes/ResumesNavigation';
+
+import type { ProductNavigationItems } from './ProductNavigation';
+import ProductNavigation from './ProductNavigation';
 
 const sidebarNavigation = [
   { current: false, href: '/', icon: HomeIcon, name: 'Home' },
@@ -39,14 +48,15 @@ function ProfileJewel() {
 
   if (session == null) {
     return (
-      <a
+      <Link
+        className="text-sm font-medium"
         href="/api/auth/signin"
         onClick={(event) => {
           event.preventDefault();
           signIn();
         }}>
         Sign in
-      </a>
+      </Link>
     );
   }
 
@@ -65,7 +75,7 @@ function ProfileJewel() {
   return (
     <Menu as="div" className="relative flex-shrink-0">
       <div>
-        <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+        <Menu.Button className="focus:ring-primary-500 flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-offset-2">
           <span className="sr-only">Open user menu</span>
           {session?.user?.image == null ? (
             <span>Render some icon</span>
@@ -110,18 +120,41 @@ function ProfileJewel() {
 
 export default function AppShell({ children }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const currentProductNavigation: Readonly<{
+    navigation: ProductNavigationItems;
+    title: string;
+  }> = (() => {
+    const path = router.pathname;
+    if (path.startsWith('/resumes')) {
+      return ResumesNavigation;
+    }
+
+    if (path.startsWith('/offers')) {
+      return OffersNavigation;
+    }
+
+    if (path.startsWith('/questions')) {
+      return QuestionsNavigation;
+    }
+
+    return HomeNavigation;
+  })();
 
   return (
     <div className="flex h-full min-h-screen">
       {/* Narrow sidebar */}
-      <div className="hidden w-28 overflow-y-auto bg-indigo-700 md:block">
+      <div className="hidden w-28 overflow-y-auto border-r border-slate-200 bg-white md:block">
         <div className="flex w-full flex-col items-center py-6">
           <div className="flex flex-shrink-0 items-center">
-            <img
-              alt="Your Company"
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=white"
-            />
+            <Link href="/">
+              <img
+                alt="Tech Interview Handbook"
+                className="h-8 w-auto"
+                src="/logo.svg"
+              />
+            </Link>
           </div>
           <div className="mt-6 w-full flex-1 space-y-1 px-2">
             {sidebarNavigation.map((item) => (
@@ -130,8 +163,8 @@ export default function AppShell({ children }: Props) {
                 aria-current={item.current ? 'page' : undefined}
                 className={clsx(
                   item.current
-                    ? 'bg-indigo-800 text-white'
-                    : 'text-indigo-100 hover:bg-indigo-800 hover:text-white',
+                    ? 'bg-primary-50 text-slate-700'
+                    : 'text-slate-700 hover:bg-slate-200',
                   'group flex w-full flex-col items-center rounded-md p-3 text-xs font-medium',
                 )}
                 href={item.href}>
@@ -139,8 +172,8 @@ export default function AppShell({ children }: Props) {
                   aria-hidden="true"
                   className={clsx(
                     item.current
-                      ? 'text-white'
-                      : 'text-indigo-300 group-hover:text-white',
+                      ? 'text-primary-500'
+                      : 'text-slate-500 group-hover:text-slate-700',
                     'h-6 w-6',
                   )}
                 />
@@ -177,7 +210,7 @@ export default function AppShell({ children }: Props) {
               leave="transition ease-in-out duration-300 transform"
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full">
-              <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-indigo-700 pt-5 pb-4">
+              <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-white pt-5 pb-4">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-300"
@@ -200,11 +233,13 @@ export default function AppShell({ children }: Props) {
                   </div>
                 </Transition.Child>
                 <div className="flex flex-shrink-0 items-center px-4">
-                  <img
-                    alt="Your Company"
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=white"
-                  />
+                  <Link href="/">
+                    <img
+                      alt="Tech Interview Handbook"
+                      className="h-8 w-auto"
+                      src="/logo.svg"
+                    />
+                  </Link>
                 </div>
                 <div className="mt-5 h-0 flex-1 overflow-y-auto px-2">
                   <nav className="flex h-full flex-col">
@@ -215,8 +250,8 @@ export default function AppShell({ children }: Props) {
                           aria-current={item.current ? 'page' : undefined}
                           className={clsx(
                             item.current
-                              ? 'bg-indigo-800 text-white'
-                              : 'text-indigo-100 hover:bg-indigo-800 hover:text-white',
+                              ? 'bg-primary-50 text-slate-700'
+                              : 'text-slate-700 hover:bg-slate-200',
                             'group flex items-center rounded-md py-2 px-3 text-sm font-medium',
                           )}
                           href={item.href}>
@@ -224,8 +259,8 @@ export default function AppShell({ children }: Props) {
                             aria-hidden="true"
                             className={clsx(
                               item.current
-                                ? 'text-white'
-                                : 'text-indigo-300 group-hover:text-white',
+                                ? 'text-primary-500'
+                                : 'text-slate-500 group-hover:text-slate-700',
                               'mr-3 h-6 w-6',
                             )}
                           />
@@ -249,14 +284,19 @@ export default function AppShell({ children }: Props) {
         <header className="w-full">
           <div className="relative z-10 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white shadow-sm">
             <button
-              className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
+              className="focus:ring-primary-500 border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset md:hidden"
               type="button"
               onClick={() => setMobileMenuOpen(true)}>
               <span className="sr-only">Open sidebar</span>
               <Bars3BottomLeftIcon aria-hidden="true" className="h-6 w-6" />
             </button>
             <div className="flex flex-1 justify-between px-4 sm:px-6">
-              <div className="flex flex-1 items-center">Some menu items</div>
+              <div className="flex flex-1 items-center">
+                <ProductNavigation
+                  items={currentProductNavigation.navigation}
+                  title={currentProductNavigation.title}
+                />
+              </div>
               <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
                 <ProfileJewel />
               </div>
