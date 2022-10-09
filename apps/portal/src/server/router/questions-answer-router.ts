@@ -93,6 +93,7 @@ export const questionsAnswerRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
+      const {content, id} = input
 
       const answerToUpdate = await ctx.prisma.questionsAnswer.findUnique({
         where: {
@@ -109,10 +110,10 @@ export const questionsAnswerRouter = createProtectedRouter()
 
       return await ctx.prisma.questionsAnswer.update({
         data: {
-          ...input,
+          content,
         },
         where: {
-          id: input.id,
+          id,
         },
       });
     },
@@ -137,6 +138,92 @@ export const questionsAnswerRouter = createProtectedRouter()
       }
 
       return await ctx.prisma.questionsAnswer.delete({
+        where: {
+          id: input.id,
+        },
+      });
+    },
+  })
+  .query('getVote', {
+    input: z.object({
+      id: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.questionsAnswerVote.findUnique({
+        where: {
+          ...input,
+        },
+      });
+    },
+  })
+  .mutation('createVote', {
+    input: z.object({
+      answerId: z.string(),
+      vote: z.nativeEnum(Vote),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+
+      return await ctx.prisma.questionsAnswerVote.create({
+        data: {
+          ...input,
+          userId,
+        },
+      });
+    },
+  })
+  .mutation('updateVote', {
+    input: z.object({
+      id: z.string(),
+      vote: z.nativeEnum(Vote),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+      const {id, vote} = input
+
+      const voteToUpdate = await ctx.prisma.questionsAnswerVote.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+
+      if (voteToUpdate?.id !== userId) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'User have no authorization to record.',
+        });
+      }
+
+      return await ctx.prisma.questionsAnswerVote.update({
+        data: {
+          vote,
+        },
+        where: {
+          id,
+        },
+      });
+    },
+  })
+  .mutation('deleteVote', {
+    input: z.object({
+      id: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+
+      const voteToDelete = await ctx.prisma.questionsAnswerVote.findUnique({
+        where: {
+          id: input.id,
+        },});
+
+      if (voteToDelete?.id !== userId) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'User have no authorization to record.',
+        });
+      }
+
+      return await ctx.prisma.questionsAnswerVote.delete({
         where: {
           id: input.id,
         },
