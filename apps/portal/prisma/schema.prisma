@@ -84,6 +84,9 @@ model Company {
     logoUrl     String?
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
+
+    OffersExperience OffersExperience[]
+    OffersOffer      OffersOffer[]
 }
 
 // Start of Resumes project models.
@@ -156,18 +159,20 @@ model ResumesCommentVote {
 // across all models in this file.
 
 model OffersProfile {
-    id String @id @default(cuid())
+    id          String   @id @default(cuid())
+    profileName String
+    createdAt   DateTime @default(now())
 
     background OffersBackground?
 
     editToken String
 
-    replies OffersReply[]
+    discussion OffersReply[]
 
     offers OffersOffer[]
 
-    user   User   @relation(fields: [userId], references: [id])
-    userId String
+    user   User?   @relation(fields: [userId], references: [id])
+    userId String?
 }
 
 model OffersBackground {
@@ -200,23 +205,43 @@ model OffersExperience {
     company   Company? @relation(fields: [companyId], references: [id])
     companyId String?
 
-    jobType  JobType?
-    title    String?
-    currency String?
+    jobType JobType?
+    title   String?
 
     // Add more fields
     durationInMonths Int?
     specialization   String?
 
     // FULLTIME fields
-    level             String?
-    totalCompensation BigInt?
+    level               String?
+    totalCompensation   OffersCurrency? @relation("ExperienceTotalCompensation", fields: [totalCompensationId], references: [id])
+    totalCompensationId String?         @unique
 
     // INTERN fields
-    monthlySalary BigInt?
+    monthlySalary   OffersCurrency? @relation("ExperienceMonthlySalary", fields: [monthlySalaryId], references: [id])
+    monthlySalaryId String?         @unique
 
     background   OffersBackground @relation(fields: [backgroundId], references: [id])
     backgroundId String
+}
+
+model OffersCurrency {
+    id       String @id @default(cuid())
+    value    Int
+    currency String
+
+    // Experience
+    OffersExperienceTotalCompensation OffersExperience? @relation("ExperienceTotalCompensation")
+    OffersExperienceMonthlySalary     OffersExperience? @relation("ExperienceMonthlySalary")
+
+    // Full Time
+    OffersTotalCompensation OffersFullTime? @relation("OfferTotalCompensation")
+    OffersBaseSalary        OffersFullTime? @relation("OfferBaseSalary")
+    OffersBonus             OffersFullTime? @relation("OfferBonus")
+    OffersStocks            OffersFullTime? @relation("OfferStocks")
+
+    // Intern
+    OffersMonthlySalary OffersIntern?
 }
 
 enum JobType {
@@ -225,10 +250,10 @@ enum JobType {
 }
 
 model OffersEducation {
-    id        String   @id @default(cuid())
-    type      String?
-    field     String?
-    attending Boolean?
+    id          String   @id @default(cuid())
+    type        String?
+    field       String?
+    isAttending Boolean?
 
     // Add more fields
     school    String?
@@ -240,14 +265,14 @@ model OffersEducation {
 }
 
 model OffersReply {
-    id String @id @default(cuid())
+    id        String   @id @default(cuid())
+    creator   String
+    createdAt DateTime @default(now())
+    message   String
 
-    message String
-    upvotes Int // CHECK: Need log in to upvote?
-
-    parentReplyId String?
-    parentReply   OffersReply?  @relation("ReplyThread", fields: [parentReplyId], references: [id])
-    replies       OffersReply[] @relation("ReplyThread")
+    replyingToId String?
+    replyingTo   OffersReply?  @relation("ReplyThread", fields: [replyingToId], references: [id])
+    replies      OffersReply[] @relation("ReplyThread")
 
     profile   OffersProfile @relation(fields: [profileId], references: [id])
     profileId String
@@ -259,11 +284,9 @@ model OffersOffer {
     profile   OffersProfile @relation(fields: [profileId], references: [id])
     profileId String
 
-    company   OffersCompany @relation(fields: [companyId], references: [id])
+    company   Company @relation(fields: [companyId], references: [id])
     companyId String
 
-    title               String
-    specialization      String
     monthYearReceived   DateTime
     location            String
     negotiationStrategy String?
@@ -279,22 +302,29 @@ model OffersIntern {
     offerId String      @id
     offer   OffersOffer @relation(fields: [offerId], references: [id])
 
+    title           String
+    specialization  String
     internshipCycle String
     startYear       Int
-    monthlySalary   BigInt
-    currency        String
+    monthlySalary   OffersCurrency @relation(fields: [monthlySalaryId], references: [id])
+    monthlySalaryId String         @unique
 }
 
 model OffersFullTime {
     offerId String      @id
     offer   OffersOffer @relation(fields: [offerId], references: [id])
 
-    level             String
-    totalCompensation BigInt
-    baseSalary        BigInt
-    bonus             BigInt
-    stocks            BigInt // CHECK: What to store stocks as? String or Int
-    currency          String
+    title               String
+    specialization      String
+    level               String
+    totalCompensation   OffersCurrency @relation("OfferTotalCompensation", fields: [totalCompensationId], references: [id])
+    totalCompensationId String         @unique
+    baseSalary          OffersCurrency @relation("OfferBaseSalary", fields: [baseSalaryId], references: [id])
+    baseSalaryId        String         @unique
+    bonus               OffersCurrency @relation("OfferBonus", fields: [bonusId], references: [id])
+    bonusId             String         @unique
+    stocks              OffersCurrency @relation("OfferStocks", fields: [stocksId], references: [id])
+    stocksId            String         @unique
 }
 
 // End of Offers project models.
