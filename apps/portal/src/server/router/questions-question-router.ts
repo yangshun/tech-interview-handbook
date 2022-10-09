@@ -23,59 +23,76 @@ export const questionsQuestionsRouter = createProtectedRouter()
             comments: true,
           },
         },
+        encounters: {
+          select: {
+            company: true,
+            location: true,
+            role: true,
+          },
+        },
         user: {
           select: {
             name: true,
           },
         },
         votes: true,
-      },
+        },
         orderBy: {
         createdAt: 'desc',
-      },
-      where: {
-          ...input,
-      },
-    });
-    return questionsData.map((data) => {
-      const votes:number = data.votes.reduce(
-        (previousValue:number, currentValue) => {
-          let result:number = previousValue;
-
-          switch(currentValue.vote) {
-          case Vote.UPVOTE:
-            result += 1
-            break;
-          case Vote.DOWNVOTE:
-            result -= 1
-            break;
-          }
-          return result;
         },
-        0
-        );
+        where: {
+          questionType: input.questionType,
+        },
+      });
+      return questionsData
+        .filter((data) => {
+          for (let i = 0; i < data.encounters.length; i++) {
+            const encounter = data.encounters[i]
+            const matchCompany = (!input.company || (encounter.company === input.company));
+            const matchLocation = (!input.location || (encounter.location === input.location));
+            const matchRole = (!input.company || (encounter.role === input.role));
+            if (matchCompany && matchLocation && matchRole) {return true};
+          }
+          return false;
+        })
+        .map((data) => {
+          const votes:number = data.votes.reduce(
+            (previousValue:number, currentValue) => {
+              let result:number = previousValue;
 
-      let userName = "";
+              switch(currentValue.vote) {
+              case Vote.UPVOTE:
+                result += 1
+                break;
+              case Vote.DOWNVOTE:
+                result -= 1
+                break;
+              }
+              return result;
+            },
+            0
+            );
 
-      if (data.user) {
-        userName = data.user.name!;
-      }
+          let userName = "";
 
+          if (data.user) {
+            userName = data.user.name!;
+          }
 
-      const question: Question = {
-        company: "",
-        content: data.content,
-        id: data.id,
-        location: "",
-        numAnswers: data._count.answers,
-        numComments: data._count.comments,
-        numVotes: votes,
-        role: "",
-        updatedAt: data.updatedAt,
-        user: userName,
-      };
-      return question;
-    });
+          const question: Question = {
+            company: "",
+            content: data.content,
+            id: data.id,
+            location: "",
+            numAnswers: data._count.answers,
+            numComments: data._count.comments,
+            numVotes: votes,
+            role: "",
+            updatedAt: data.updatedAt,
+            user: userName,
+          };
+          return question;
+      });
     }
   })
   .mutation('create', {
