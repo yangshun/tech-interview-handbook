@@ -15,18 +15,32 @@ import {
   QUESTION_TYPES,
   SAMPLE_QUESTION,
 } from '~/utils/questions/constants';
+import {
+  useSearchFilter,
+  useSearchFilterSingle,
+} from '~/utils/questions/useSearchFilter';
 
 export default function QuestionsHomePage() {
   const router = useRouter();
 
-  const [selectedCompanies, setSelectedCompanies] = useState<Array<string>>([]);
+  const [selectedCompanies, setSelectedCompanies, areCompaniesInitialized] =
+    useSearchFilter('companies');
 
-  const [selectedQuestionTypes, setSelectedQuestionTypes] = useState<
-    Array<string>
-  >([]);
-  const [selectedQuestionAge, setSelectedQuestionAge] = useState<string>('all');
-  const [selectedLocations, setSelectedLocations] = useState<Array<string>>([]);
+  const [
+    selectedQuestionTypes,
+    setSelectedQuestionTypes,
+    areQuestionTypesInitialized,
+  ] = useSearchFilter('questionTypes');
+  const [
+    selectedQuestionAge,
+    setSelectedQuestionAge,
+    isQuestionAgeInitialized,
+  ] = useSearchFilterSingle('questionAge', 'all');
+  const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
+    useSearchFilter('locations');
+
   const [hasLanded, setHasLanded] = useState(false);
+  // Const [loaded, setLoaded] = useState(false);
 
   const companyFilterOptions = useMemo(() => {
     return COMPANIES.map((company) => ({
@@ -64,30 +78,22 @@ export default function QuestionsHomePage() {
     setHasLanded(true);
   };
 
-  const paramToArray = (
-    param: Array<string> | string | undefined,
-  ): Array<string> => {
-    if (typeof param === 'string') {
-      return [param];
-    }
-    return param ?? [];
-  };
+  const areFiltersInitialized = useMemo(() => {
+    return (
+      areCompaniesInitialized &&
+      areQuestionTypesInitialized &&
+      isQuestionAgeInitialized &&
+      areLocationsInitialized
+    );
+  }, [
+    areCompaniesInitialized,
+    areQuestionTypesInitialized,
+    isQuestionAgeInitialized,
+    areLocationsInitialized,
+  ]);
 
-  const [isSearchInitialized, setIsSearchInitialized] = useState(false);
-
-  // Set url query params
   useEffect(() => {
-    if (router.isReady && !isSearchInitialized) {
-      const paramQuestionAge = router.query.questionAge;
-      const questionAge = Array.isArray(paramQuestionAge)
-        ? paramQuestionAge[0]
-        : paramQuestionAge ?? 'all';
-      setSelectedCompanies(paramToArray(router.query.companies));
-      setSelectedQuestionTypes(paramToArray(router.query.questionTypes));
-      setSelectedQuestionAge(questionAge);
-      setSelectedLocations(paramToArray(router.query.locations));
-      setIsSearchInitialized(true);
-
+    if (areFiltersInitialized) {
       const hasFilter =
         router.query.companies ||
         router.query.questionTypes ||
@@ -96,21 +102,14 @@ export default function QuestionsHomePage() {
       if (hasFilter) {
         setHasLanded(true);
       }
+      // Console.log('shit');
+      // setLoaded(true);
     }
-  }, [
-    router.isReady,
-    router.query,
-    isSearchInitialized,
-    hasLanded,
-    selectedCompanies,
-    selectedQuestionTypes,
-    selectedQuestionAge,
-    selectedLocations,
-  ]);
+  }, [areFiltersInitialized, router.query]);
 
   // Update url query params
   useEffect(() => {
-    if (router.isReady && isSearchInitialized) {
+    if (router.isReady && areFiltersInitialized) {
       router.replace(
         {
           query: {
@@ -135,8 +134,12 @@ export default function QuestionsHomePage() {
     selectedLocations,
     router,
     router.isReady,
-    isSearchInitialized,
+    areFiltersInitialized,
   ]);
+
+  // If (!loaded) {
+  //   return <div>hi</div>;
+  // }
 
   return !hasLanded ? (
     <LandingComponent onLanded={handleLandingQuery}></LandingComponent>
@@ -152,10 +155,12 @@ export default function QuestionsHomePage() {
               searchPlaceholder="Add company filter"
               onOptionChange={(optionValue, checked) => {
                 if (checked) {
-                  setSelectedCompanies((prev) => [...prev, optionValue]);
+                  setSelectedCompanies([...selectedCompanies, optionValue]);
                 } else {
-                  setSelectedCompanies((prev) =>
-                    prev.filter((company) => company !== optionValue),
+                  setSelectedCompanies(
+                    selectedCompanies.filter(
+                      (company) => company !== optionValue,
+                    ),
                   );
                 }
               }}
@@ -166,10 +171,15 @@ export default function QuestionsHomePage() {
               showAll={true}
               onOptionChange={(optionValue, checked) => {
                 if (checked) {
-                  setSelectedQuestionTypes((prev) => [...prev, optionValue]);
+                  setSelectedQuestionTypes([
+                    ...selectedQuestionTypes,
+                    optionValue,
+                  ]);
                 } else {
-                  setSelectedQuestionTypes((prev) =>
-                    prev.filter((questionType) => questionType !== optionValue),
+                  setSelectedQuestionTypes(
+                    selectedQuestionTypes.filter(
+                      (questionType) => questionType !== optionValue,
+                    ),
                   );
                 }
               }}
@@ -189,10 +199,12 @@ export default function QuestionsHomePage() {
               searchPlaceholder="Add location filter"
               onOptionChange={(optionValue, checked) => {
                 if (checked) {
-                  setSelectedLocations((prev) => [...prev, optionValue]);
+                  setSelectedLocations([...selectedLocations, optionValue]);
                 } else {
-                  setSelectedLocations((prev) =>
-                    prev.filter((location) => location !== optionValue),
+                  setSelectedLocations(
+                    selectedLocations.filter(
+                      (location) => location !== optionValue,
+                    ),
                   );
                 }
               }}
