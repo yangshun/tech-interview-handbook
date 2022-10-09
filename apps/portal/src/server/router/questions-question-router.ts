@@ -28,6 +28,7 @@ export const questionsQuestionRouter = createProtectedRouter()
               company: true,
               location: true,
               role: true,
+              seenAt: true,
             },
           },
           user: {
@@ -92,11 +93,89 @@ export const questionsQuestionRouter = createProtectedRouter()
             numComments: data._count.comments,
             numVotes: votes,
             role: data.encounters[0].role ?? 'Unknown role',
+            seenAt: data.encounters[0].seenAt,
             updatedAt: data.updatedAt,
             user: userName,
           };
           return question;
         });
+    },
+  })
+  .query('getQuestionById', {
+    input: z.object({
+      id: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const questionData = await ctx.prisma.questionsQuestion.findUnique({
+        include: {
+          _count: {
+            select: {
+              answers: true,
+              comments: true,
+            },
+          },
+          encounters: {
+            select: {
+              company: true,
+              location: true,
+              role: true,
+              seenAt: true,
+            },
+          },
+          user: {
+            select: {
+              name: true,
+            },
+          },
+          votes: true,
+        },
+        where: {
+          id: input.id,
+        },
+      });
+      if (!questionData) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Question not found',
+        });
+      }
+      const votes: number = questionData.votes.reduce(
+        (previousValue: number, currentValue) => {
+          let result: number = previousValue;
+
+          switch (currentValue.vote) {
+            case Vote.UPVOTE:
+              result += 1;
+              break;
+            case Vote.DOWNVOTE:
+              result -= 1;
+              break;
+          }
+          return result;
+        },
+        0,
+      );
+
+      let userName = '';
+
+      if (questionData.user) {
+        userName = questionData.user.name!;
+      }
+
+      const question: Question = {
+        company: questionData.encounters[0].company,
+        content: questionData.content,
+        id: questionData.id,
+        location: questionData.encounters[0].location ?? 'Unknown location',
+        numAnswers: questionData._count.answers,
+        numComments: questionData._count.comments,
+        numVotes: votes,
+        role: questionData.encounters[0].role ?? 'Unknown role',
+        seenAt: questionData.encounters[0].seenAt,
+        updatedAt: questionData.updatedAt,
+        user: userName,
+      };
+      return question;
     },
   })
   .mutation('create', {

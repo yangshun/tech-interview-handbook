@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
-import { Button, Collapsible, Select, TextArea } from '@tih/ui';
+import { Button, Collapsible, Select, Spinner, TextArea } from '@tih/ui';
 
 import AnswerCard from '~/components/questions/card/AnswerCard';
 import FullQuestionCard from '~/components/questions/card/FullQuestionCard';
@@ -9,10 +9,10 @@ import CommentListItem from '~/components/questions/CommentListItem';
 
 import {
   SAMPLE_ANSWER,
-  SAMPLE_QUESTION,
   SAMPLE_QUESTION_COMMENT,
 } from '~/utils/questions/constants';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
+import { trpc } from '~/utils/trpc';
 
 export type AnswerQuestionData = {
   answerContent: string;
@@ -38,7 +38,13 @@ export default function QuestionPage() {
   } = useForm<QuestionCommentData>({ mode: 'onChange' });
   const commentRegister = useFormRegister(comRegister);
 
-  const question = SAMPLE_QUESTION;
+  const { questionId } = router.query;
+
+  const { data: question } = trpc.useQuery([
+    'questions.questions.getQuestionById',
+    { id: questionId as string },
+  ]);
+
   const comment = SAMPLE_QUESTION_COMMENT;
   const handleBackNavigation = () => {
     router.back();
@@ -54,6 +60,10 @@ export default function QuestionPage() {
     console.log(data);
   };
 
+  if (!question) {
+    return <Spinner size="lg" />;
+  }
+
   return (
     <div className="flex w-full flex-1 items-stretch pb-4">
       <div className="flex items-baseline gap-2 py-4 pl-4">
@@ -67,9 +77,15 @@ export default function QuestionPage() {
       </div>
       <div className="flex w-full  justify-center overflow-y-auto py-4 px-5">
         <div className="flex max-w-7xl flex-1 flex-col gap-2">
-          <FullQuestionCard {...question} showVoteButtons={true} />
+          <FullQuestionCard
+            {...question}
+            receivedCount={0} // TODO: Change to actual value
+            showVoteButtons={true}
+            timestamp={question.seenAt.toLocaleDateString()}
+            upvoteCount={question.numVotes}
+          />
           <div className="mx-2">
-            <Collapsible label={`${question.commentCount} comment(s)`}>
+            <Collapsible label={`${question.numComments} comment(s)`}>
               <form
                 className="mb-2"
                 onSubmit={handleCommentSubmit(handleSubmitComment)}>
@@ -118,7 +134,7 @@ export default function QuestionPage() {
                 </div>
               </form>
 
-              {Array.from({ length: question.commentCount }).map((_, index) => (
+              {Array.from({ length: question.numComments }).map((_, index) => (
                 <CommentListItem
                   // eslint-disable-next-line react/no-array-index-key
                   key={index}
@@ -140,7 +156,7 @@ export default function QuestionPage() {
             />
             <div className="mt-3 mb-1 flex justify-between">
               <div className="flex items-baseline justify-start gap-2">
-                <p>{question.answerCount} answers</p>
+                <p>{question.numAnswers} answers</p>
                 <div className="flex items-baseline gap-2">
                   <span aria-hidden={true} className="text-sm">
                     Sort by:
@@ -175,7 +191,7 @@ export default function QuestionPage() {
             </div>
           </form>
 
-          {Array.from({ length: question.answerCount }).map((_, index) => (
+          {Array.from({ length: question.numAnswers }).map((_, index) => (
             <AnswerCard
               // eslint-disable-next-line react/no-array-index-key
               key={index}

@@ -247,7 +247,7 @@ export default function QuestionsHomePage() {
                   location={question.location}
                   receivedCount={0} // TODO: Implement received count
                   role={question.role}
-                  timestamp="TODO"
+                  timestamp={question.seenAt.toLocaleDateString()}
                   upvoteCount={question.numVotes}
                 />
               ))}
