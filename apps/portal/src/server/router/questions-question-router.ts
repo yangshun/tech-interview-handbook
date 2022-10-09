@@ -1,4 +1,4 @@
-import { date, z } from 'zod';
+import { z } from 'zod';
 import {QuestionsQuestionType, Vote } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
