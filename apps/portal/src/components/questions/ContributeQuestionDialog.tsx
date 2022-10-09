@@ -1,6 +1,8 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
+import { HorizontalDivider } from '~/../../../packages/ui/dist';
+
 import ContributeQuestionForm from './ContributeQuestionForm';
 import DiscardDraftDialog from './DiscardDraftDialog';
 
@@ -55,14 +57,17 @@ export default function ContributeQuestionDialog({
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
                 <Dialog.Panel className="relative max-w-5xl transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full">
-                  <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <div className="bg-white  p-6 pt-5 sm:pb-4">
+                    <div className="flex flex-1 items-stretch">
+                      <div className="mt-3 w-full sm:mt-0 sm:ml-4 sm:text-left">
                         <Dialog.Title
                           as="h3"
                           className="text-lg font-medium leading-6 text-gray-900">
                           Question Draft
                         </Dialog.Title>
+                        <div className="w-full">
+                          <HorizontalDivider />
+                        </div>
                         <div className="mt-2">
                           <ContributeQuestionForm
                             onDiscard={() => setShowDiscardDialog(true)}

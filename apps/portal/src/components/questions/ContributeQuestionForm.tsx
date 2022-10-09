@@ -3,20 +3,24 @@ import { useForm } from 'react-hook-form';
 import {
   BuildingOffice2Icon,
   CalendarDaysIcon,
-  QuestionMarkCircleIcon,
-  UserIcon,
+  // UserIcon,
 } from '@heroicons/react/24/outline';
 import {
   Button,
   Collapsible,
-  HorizontalDivider,
+  Select,
+  // HorizontalDivider,
   TextArea,
   TextInput,
 } from '@tih/ui';
 
-import { useFormRegister } from '~/utils/questions/useFormRegister';
+import { QUESTION_TYPES } from '~/utils/questions/constants';
+import {
+  useFormRegister,
+  useSelectRegister,
+} from '~/utils/questions/useFormRegister';
 
-import SimilarQuestionCard from './card/SimilarQuestionCard';
+// Import SimilarQuestionCard from './card/SimilarQuestionCard';
 import Checkbox from './ui-patch/Checkbox';
 
 export type ContributeQuestionData = {
@@ -40,6 +44,7 @@ export default function ContributeQuestionForm({
   const { register: formRegister, handleSubmit } =
     useForm<ContributeQuestionData>();
   const register = useFormRegister(formRegister);
+  const selectRegister = useSelectRegister(formRegister);
 
   const [canSubmit, setCanSubmit] = useState<boolean>(false);
   const handleCheckSimilarQuestions = (checked: boolean) => {
@@ -47,35 +52,39 @@ export default function ContributeQuestionForm({
   };
   return (
     <form
-      className="mt-3 flex flex-col items-stretch justify-center pb-[100px]"
+      className=" flex flex-1 flex-col items-stretch justify-center pb-[50px]"
       onSubmit={handleSubmit(onSubmit)}>
       <TextArea
-        isLabelHidden={true}
-        label="Question"
+        label="Question Prompt"
         placeholder="Contribute a question"
+        required={true}
         rows={5}
         {...register('questionContent')}
       />
-      <div className="mt-3 mb-2 flex flex-wrap items-end justify-center gap-2">
-        <div className="min-w-[150px] flex-1">
+      <div className="mt-3 mb-1 flex flex-wrap items-end gap-2">
+        <div className="mr-2 min-w-[113px] max-w-[113px] flex-1">
+          <Select
+            defaultValue="coding"
+            label="Type"
+            options={QUESTION_TYPES}
+            required={true}
+            {...selectRegister('questionType')}
+          />
+        </div>
+        <div className="min-w-[150px] max-w-[300px] flex-1">
           <TextInput
             label="Company"
+            required={true}
             startAddOn={BuildingOffice2Icon}
             startAddOnType="icon"
             {...register('company')}
           />
         </div>
-        <div className="min-w-[150px] flex-1">
-          <TextInput
-            label="Type"
-            startAddOn={QuestionMarkCircleIcon}
-            startAddOnType="icon"
-            {...register('questionType')}
-          />
-        </div>
-        <div className="min-w-[150px] flex-1">
+
+        <div className="min-w-[150px] max-w-[300px] flex-1">
           <TextInput
             label="Date"
+            required={true}
             startAddOn={CalendarDaysIcon}
             startAddOnType="icon"
             {...register('date')}
@@ -83,8 +92,8 @@ export default function ContributeQuestionForm({
         </div>
       </div>
       <Collapsible defaultOpen={true} label="Additional info">
-        <div className="flex flex-wrap items-end justify-center gap-2">
-          <div className="min-w-[150px] flex-1">
+        <div className="justify-left flex flex-wrap items-end gap-2">
+          <div className="min-w-[150px] max-w-[300px] flex-1">
             <TextInput
               label="Location"
               startAddOn={CalendarDaysIcon}
@@ -92,17 +101,17 @@ export default function ContributeQuestionForm({
               {...register('location')}
             />
           </div>
-          <div className="min-w-[150px] flex-1">
+          {/* <div className="min-w-[150px] max-w-[200px] flex-1">
             <TextInput
               label="Position <TODO>"
               startAddOn={UserIcon}
               startAddOnType="icon"
               {...register('position')}
             />
-          </div>
+          </div> */}
         </div>
       </Collapsible>
-      <div className="w-full">
+      {/* <div className="w-full">
         <HorizontalDivider />
       </div>
       <h1 className="mb-3">
@@ -120,7 +129,7 @@ export default function ContributeQuestionForm({
             console.log('hi!');
           }}
         />
-      </div>
+      </div> */}
       <div className="bg-primary-50 fixed bottom-0 left-0 w-full px-4 py-3 sm:flex sm:flex-row sm:justify-between sm:px-6">
         <div className="mb-1 flex">
           <Checkbox

@@ -19,3 +19,25 @@ export const useFormRegister = <TFieldValues extends FieldValues>(
   );
   return formRegister;
 };
+
+export const useSelectRegister = <TFieldValues extends FieldValues>(
+  register: UseFormRegister<TFieldValues>,
+) => {
+  const formRegister = useCallback(
+    (...args: Parameters<typeof register>) => {
+      const { onChange, ...rest } = register(...args);
+      return {
+        ...rest,
+        onChange: (value: string) => {
+          onChange({
+            target: {
+              value,
+            },
+          });
+        },
+      };
+    },
+    [register],
+  );
+  return formRegister;
+};

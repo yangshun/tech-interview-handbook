@@ -97,7 +97,7 @@ export default function LandingComponent({
           />
         </div>
         <div>
-          <p className="py-20 text-center text-black ">
+          <p className="py-20 text-center text-white ">
             TODO questions Carousel
           </p>
         </div>
