@@ -6,7 +6,7 @@ import { useMemo, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { PaperClipIcon } from '@heroicons/react/24/outline';
-import { Button, Select, TextArea, TextInput } from '@tih/ui';
+import { Button, CheckboxInput, Select, TextArea, TextInput } from '@tih/ui';
 
 import {
   EXPERIENCE,
@@ -17,17 +17,19 @@ import {
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
 import { trpc } from '~/utils/trpc';
 
+const FILE_SIZE_LIMIT_MB = 3;
+const FILE_SIZE_LIMIT_BYTES = FILE_SIZE_LIMIT_MB * 1000000;
+
 const TITLE_PLACEHOLDER =
   'e.g. Applying for Company XYZ, please help me to review!';
 const ADDITIONAL_INFO_PLACEHOLDER = `e.g. I’m applying for company XYZ. I have been resume-rejected by N companies that I have applied for. Please help me to review so company XYZ gives me an interview!`;
-const FILE_UPLOAD_ERROR = 'Please upload a PDF file that is less than 3MB.';
-
-const MAX_FILE_SIZE_LIMIT = 3000000;
+const FILE_UPLOAD_ERROR = `Please upload a PDF file that is less than ${FILE_SIZE_LIMIT_MB}MB.`;
 
 type IFormInput = {
   additionalInfo?: string;
   experience: string;
   file: File;
+  isChecked: boolean;
   location: string;
   role: string;
   title: string;
@@ -67,7 +69,11 @@ export default function SubmitResumeForm() {
     const { url } = res.data;
 
     await resumeCreateMutation.mutate({
-      ...data,
+      additionalInfo: data.additionalInfo,
+      experience: data.experience,
+      location: data.location,
+      role: data.role,
+      title: data.title,
       url,
     });
     router.push('/resumes');
@@ -78,7 +84,7 @@ export default function SubmitResumeForm() {
     if (file == null) {
       return;
     }
-    if (file.type !== 'application/pdf' || file.size > MAX_FILE_SIZE_LIMIT) {
+    if (file.type !== 'application/pdf' || file.size > FILE_SIZE_LIMIT_BYTES) {
       setInvalidFileUploadError(FILE_UPLOAD_ERROR);
       return;
     }
@@ -186,14 +192,16 @@ export default function SubmitResumeForm() {
                         />
                       </label>
                     </div>
-                    <p className="text-xs text-gray-500">PDF up to 3MB</p>
+                    <p className="text-xs text-gray-500">
+                      PDF up to {FILE_SIZE_LIMIT_MB}MB
+                    </p>
                   </div>
                 </div>
                 {fileUploadError && (
                   <p className="text-danger-600 text-sm">{fileUploadError}</p>
                 )}
               </div>
-              <div className="mb-4">
+              <div className="mb-8">
                 <TextArea
                   {...register('additionalInfo')}
                   label="Additional Information"
@@ -201,6 +209,40 @@ export default function SubmitResumeForm() {
                   onChange={(val) => setValue('additionalInfo', val)}
                 />
               </div>
+              <div className="mb-4 text-left text-sm text-slate-700">
+                <h2 className="mb-2 text-xl font-medium">
+                  Submission Guidelines
+                </h2>
+                <p>
+                  Before you submit, please review and acknolwedge our
+                  <span className="font-bold"> submission guidelines </span>
+                  stated below.
+                </p>
+                <p>
+                  <span className="text-lg font-bold">• </span>
+                  Ensure that you do not divulge any of your
+                  <span className="font-bold"> personal particulars</span>.
+                </p>
+                <p>
+                  <span className="text-lg font-bold">• </span>
+                  Ensure that you do not divulge any
+                  <span className="font-bold">
+                    {' '}
+                    company's proprietary and confidential information
+                  </span>
+                  .
+                </p>
+                <p>
+                  <span className="text-lg font-bold">• </span>
+                  Proof-read your resumes to look for grammatical/spelling
+                  errors.
+                </p>
+              </div>
+              <CheckboxInput
+                {...register('isChecked', { required: true })}
+                label="I have read and will follow the guidelines stated."
+                onChange={(val) => setValue('isChecked', val)}
+              />
               <div className="mt-4 flex justify-end gap-4">
                 <Button
                   addonPosition="start"
