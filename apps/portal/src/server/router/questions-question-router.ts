@@ -135,13 +135,13 @@ export const questionsQuestionsRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const questionToUpdate = await ctx.prisma.questionsQuestion.findUnique({
+      const questionToDelete = await ctx.prisma.questionsQuestion.findUnique({
         where: {
           id: input.id,
         },
       });
 
-      if (questionToUpdate?.id !== userId) {
+      if (questionToDelete?.id !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
