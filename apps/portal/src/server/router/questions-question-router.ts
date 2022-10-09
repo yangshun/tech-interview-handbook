@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import {QuestionsQuestionType, QuestionsVote } from '@prisma/client';
+import {QuestionsQuestionType, Vote } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
 import { createProtectedRouter } from './context';
 
-import type { Question } from '~/types/questions-question';
+import type { Question } from '~/types/questions';
 
 export const questionsQuestionsRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
@@ -43,12 +43,10 @@ export const questionsQuestionsRouter = createProtectedRouter()
           let result:number = previousValue;
 
           switch(currentValue.vote) {
-          case QuestionsVote.NO_VOTE:
-            break;
-          case QuestionsVote.UPVOTE:
+          case Vote.UPVOTE:
             result += 1
             break;
-          case QuestionsVote.DOWNVOTE:
+          case Vote.DOWNVOTE:
             result -= 1
             break;
           }
@@ -123,7 +121,6 @@ export const questionsQuestionsRouter = createProtectedRouter()
       return await ctx.prisma.questionsQuestion.update({
         data: {
           ...input,
-          userId,
         },
         where: {
           id: input.id,
@@ -141,7 +138,8 @@ export const questionsQuestionsRouter = createProtectedRouter()
       const questionToUpdate = await ctx.prisma.questionsQuestion.findUnique({
         where: {
           id: input.id,
-        },});
+        },
+      });
 
       if (questionToUpdate?.id !== userId) {
         throw new TRPCError({
