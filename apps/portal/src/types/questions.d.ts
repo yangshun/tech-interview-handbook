@@ -12,6 +12,12 @@ export type Question = {
   user: string;
 };
 
+export type AnswerComment = {
+  content: string;
+  id: string;
+  numVotes: number;
+};
+
 export type Answer = {
   content: string;
   createdAt: Date;

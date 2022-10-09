@@ -3,6 +3,7 @@ import superjson from 'superjson';
 import { companiesRouter } from './companies-router';
 import { createRouter } from './context';
 import { protectedExampleRouter } from './protected-example-router';
+import { questionsAnswerCommentRouter } from './questions-answer-comment-router';
 import { questionsAnswerRouter } from './questions-answer-router';
 import { questionsQuestionCommentRouter } from './questions-question-comment-router';
 import { questionsQuestionRouter } from './questions-question-router';
@@ -28,6 +29,7 @@ export const appRouter = createRouter()
   .merge('resumes.star.user.', resumesStarUserRouter)
   .merge('resumes.reviews.', resumeReviewsRouter)
   .merge('resumes.reviews.user.', resumesReviewsUserRouter)
+  .merge('questions.answers.comments.', questionsAnswerCommentRouter)
   .merge('questions.answers.', questionsAnswerRouter)
   .merge('questions.questions.comments.', questionsQuestionCommentRouter)
   .merge('questions.questions.', questionsQuestionRouter);
