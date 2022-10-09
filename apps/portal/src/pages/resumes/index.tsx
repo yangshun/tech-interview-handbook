@@ -10,9 +10,8 @@ import {
   PlusIcon,
 } from '@heroicons/react/20/solid';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Spinner, Tabs, TextInput } from '@tih/ui';
+import { Tabs, TextInput } from '@tih/ui';
 
-import BrowseListItem from '~/components/resumes/browse/BrowseListItem';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCE,
@@ -22,7 +21,10 @@ import {
   TOP_HITS,
 } from '~/components/resumes/browse/constants';
 import FilterPill from '~/components/resumes/browse/FilterPill';
+import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
+
+import { trpc } from '~/utils/trpc';
 
 import type { Resume } from '~/types/resume';
 
@@ -43,8 +45,6 @@ const filters = [
     options: LOCATION,
   },
 ];
-
-import { trpc } from '~/utils/trpc';
 
 export default function ResumeHomePage() {
   const { data: sessionData } = useSession();
@@ -140,6 +140,7 @@ export default function ResumeHomePage() {
                   <div className="col-span-1 justify-self-center">
                     <Menu as="div" className="relative inline-block text-left">
                       <div>
+                        {/* TODO: Sort logic */}
                         <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                           Sort
                           <ChevronDownIcon
@@ -269,26 +270,14 @@ export default function ResumeHomePage() {
                   </form>
                 </div>
               </div>
-              {allResumesQuery.isLoading ||
-              starredResumesQuery.isLoading ||
-              myResumesQuery.isLoading ? (
-                <div className="col-span-10 pt-4">
-                  <Spinner display="block" size="lg" />
-                </div>
-              ) : (
-                <div className="col-span-10 pr-8">
-                  <ul role="list">
-                    {resumes.map((resumeObj) => (
-                      <li key={resumeObj.id}>
-                        <BrowseListItem
-                          href={`resumes/${resumeObj.id}`}
-                          resumeInfo={resumeObj}
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <ResumeListItems
+                isLoading={
+                  allResumesQuery.isFetching ||
+                  starredResumesQuery.isFetching ||
+                  myResumesQuery.isFetching
+                }
+                resumes={resumes}
+              />
             </div>
           </div>
         </div>
