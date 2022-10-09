@@ -7,6 +7,12 @@ export { default as Badge } from './Badge/Badge';
 // Button
 export * from './Button/Button';
 export { default as Button } from './Button/Button';
+// CheckboxInput
+export * from './CheckboxInput/CheckboxInput';
+export { default as CheckboxInput } from './CheckboxInput/CheckboxInput';
+// CheckboxList
+export * from './CheckboxList/CheckboxList';
+export { default as CheckboxList } from './CheckboxList/CheckboxList';
 // Collapsible
 export * from './Collapsible/Collapsible';
 export { default as Collapsible } from './Collapsible/Collapsible';
@@ -43,3 +49,6 @@ export { default as TextArea } from './TextArea/TextArea';
 // TextInput
 export * from './TextInput/TextInput';
 export { default as TextInput } from './TextInput/TextInput';
+// Typeahead
+export * from './Typeahead/Typeahead';
+export { default as Typeahead } from './Typeahead/Typeahead';

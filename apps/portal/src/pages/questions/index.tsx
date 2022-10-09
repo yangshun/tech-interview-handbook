@@ -3,7 +3,6 @@ import { useMemo, useState } from 'react';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
 import type { FilterOptions } from '~/components/questions/filter/FilterSection';
 import FilterSection from '~/components/questions/filter/FilterSection';
-import NavBar from '~/components/questions/NavBar';
 import QuestionOverviewCard from '~/components/questions/QuestionOverviewCard';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
@@ -98,10 +97,7 @@ export default function QuestionsHomePage() {
 
   return (
     <main className="flex flex-1 flex-col items-stretch overflow-y-auto">
-      <div className="pb-4">
-        <NavBar></NavBar>
-      </div>
-      <div className="flex">
+      <div className="flex pt-4">
         <section className="w-[300px] border-r px-4">
           <h2 className="text-xl font-semibold">Filter by</h2>
           <div className="divide-y divide-slate-200">

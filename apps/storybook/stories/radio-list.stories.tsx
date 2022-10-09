@@ -29,7 +29,11 @@ export default {
 export function Basic({
   description,
   label,
-}: Pick<React.ComponentProps<typeof RadioList>, 'description' | 'label'>) {
+  orientation,
+}: Pick<
+  React.ComponentProps<typeof RadioList>,
+  'description' | 'label' | 'orientation'
+>) {
   const items = [
     {
       label: 'Apple',
@@ -50,7 +54,8 @@ export function Basic({
       defaultValue="apple"
       description={description}
       label={label}
-      name="fruit">
+      name="fruit"
+      orientation={orientation}>
       {items.map(({ label: itemLabel, value }) => (
         <RadioList.Item key={itemLabel} label={itemLabel} value={value} />
       ))}
@@ -61,6 +66,7 @@ export function Basic({
 Basic.args = {
   description: 'Your favorite fruit',
   label: 'Choose a fruit',
+  orientation: 'vertical',
 };
 
 export function Controlled() {
@@ -148,22 +154,10 @@ export function Disabled() {
     },
   ];
 
-  const [value, setValue] = useState('apple');
-
   return (
     <div className="space-y-4">
       <RadioList
-        disabled={true}
-        label="Choose a fruit (all fruits disabled)"
-        value={value}
-        onChange={(newValue: string) => setValue(newValue)}>
-        {items.map(({ label: itemLabel, value: itemValue }) => (
-          <RadioList.Item key={itemLabel} label={itemLabel} value={itemValue} />
-        ))}
-      </RadioList>
-      <HorizontalDivider />
-      <RadioList
-        defaultValue={value}
+        defaultValue="apple"
         label="Choose a fruit (some fruits disabled)"
         name="fruit-5">
         {items.map(

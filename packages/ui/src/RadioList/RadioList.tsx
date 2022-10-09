@@ -11,7 +11,6 @@ type Props<T> = Readonly<{
   children: ReadonlyArray<React.ReactElement<typeof RadioListItem>>;
   defaultValue?: T;
   description?: string;
-  disabled?: boolean;
   isLabelHidden?: boolean;
   label: string;
   name?: string;
@@ -27,10 +26,9 @@ export default function RadioList<T>({
   children,
   defaultValue,
   description,
-  disabled,
-  orientation = 'vertical',
   isLabelHidden,
   name,
+  orientation = 'vertical',
   label,
   required,
   value,
@@ -41,7 +39,7 @@ export default function RadioList<T>({
     <RadioListContext.Provider
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore TODO: Figure out how to type the onChange.
-      value={{ defaultValue, disabled, name, onChange, value }}>
+      value={{ defaultValue, name, onChange, value }}>
       <div>
         <div className={clsx(isLabelHidden ? 'sr-only' : 'mb-2')}>
           <label className="text-sm font-medium text-gray-900" id={labelId}>
