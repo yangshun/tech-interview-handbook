@@ -16,4 +16,4 @@ export type AnswerComment = {
   content: string;
   id: string;
   numVotes: number;
-}
+};
