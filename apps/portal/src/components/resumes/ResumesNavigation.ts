@@ -16,6 +16,7 @@ const navigation: ProductNavigationItems = [
 
 const config = {
   navigation,
+  showGlobalNav: false,
   title: 'Resumes',
 };
 

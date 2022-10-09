@@ -15,6 +15,7 @@ const navigation: ProductNavigationItems = [
 
 const config = {
   navigation,
+  showGlobalNav: true,
   title: 'Tech Interview Handbook',
 };
 

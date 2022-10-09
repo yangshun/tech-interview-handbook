@@ -107,6 +107,7 @@ export default function AppShell({ children }: Props) {
 
   const currentProductNavigation: Readonly<{
     navigation: ProductNavigationItems;
+    showGlobalNav: boolean;
     title: string;
   }> = (() => {
     const path = router.pathname;
@@ -128,39 +129,41 @@ export default function AppShell({ children }: Props) {
   return (
     <div className="flex h-full min-h-screen">
       {/* Narrow sidebar */}
-      <div className="hidden w-28 overflow-y-auto border-r border-slate-200 bg-white md:block">
-        <div className="flex w-full flex-col items-center py-6">
-          <div className="flex flex-shrink-0 items-center">
-            <Link href="/">
-              <img
-                alt="Tech Interview Handbook"
-                className="h-8 w-auto"
-                src="/logo.svg"
-              />
-            </Link>
-          </div>
-          <div className="mt-6 w-full flex-1 space-y-1 px-2">
-            {GlobalNavigation.map((item) => (
-              <Link
-                key={item.name}
-                className={clsx(
-                  'text-slate-700 hover:bg-slate-100',
-                  'group flex w-full flex-col items-center rounded-md p-3 text-xs font-medium',
-                )}
-                href={item.href}>
-                <item.icon
-                  aria-hidden="true"
-                  className={clsx(
-                    'text-slate-500 group-hover:text-slate-700',
-                    'h-6 w-6',
-                  )}
+      {currentProductNavigation.showGlobalNav && (
+        <div className="hidden w-28 overflow-y-auto border-r border-slate-200 bg-white md:block">
+          <div className="flex w-full flex-col items-center py-6">
+            <div className="flex flex-shrink-0 items-center">
+              <Link href="/">
+                <img
+                  alt="Tech Interview Handbook"
+                  className="h-8 w-auto"
+                  src="/logo.svg"
                 />
-                <span className="mt-2">{item.name}</span>
               </Link>
-            ))}
+            </div>
+            <div className="mt-6 w-full flex-1 space-y-1 px-2">
+              {GlobalNavigation.map((item) => (
+                <Link
+                  key={item.name}
+                  className={clsx(
+                    'text-slate-700 hover:bg-slate-100',
+                    'group flex w-full flex-col items-center rounded-md p-3 text-xs font-medium',
+                  )}
+                  href={item.href}>
+                  <item.icon
+                    aria-hidden="true"
+                    className={clsx(
+                      'text-slate-500 group-hover:text-slate-700',
+                      'h-6 w-6',
+                    )}
+                  />
+                  <span className="mt-2">{item.name}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Mobile menu */}
       <MobileNavigation
