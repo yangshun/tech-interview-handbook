@@ -1,9 +1,31 @@
-import { createProtectedRouter } from './context';
+import { z } from 'zod';
+
+import { createProtectedRouter } from '../context';
 
 import type { Resume } from '~/types/resume';
 
-export const resumesResumeProtectedTabsRouter = createProtectedRouter()
-  .query('stars', {
+export const resumesResumeUserRouter = createProtectedRouter()
+  .mutation('create', {
+    // TODO: Use enums for experience, location, role
+    input: z.object({
+      additionalInfo: z.string().optional(),
+      experience: z.string(),
+      location: z.string(),
+      role: z.string(),
+      title: z.string(),
+      url: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user.id;
+      return await ctx.prisma.resumesResume.create({
+        data: {
+          ...input,
+          userId,
+        },
+      });
+    },
+  })
+  .query('findUserStarred', {
     async resolve({ ctx }) {
       const userId = ctx.session?.user?.id;
       const resumeStarsData = await ctx.prisma.resumesStar.findMany({
@@ -49,7 +71,7 @@ export const resumesResumeProtectedTabsRouter = createProtectedRouter()
       });
     },
   })
-  .query('my', {
+  .query('findUserCreated', {
     async resolve({ ctx }) {
       const userId = ctx.session?.user?.id;
       const resumesData = await ctx.prisma.resumesResume.findMany({

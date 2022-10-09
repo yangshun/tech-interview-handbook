@@ -53,24 +53,30 @@ export default function ResumeHomePage() {
   const [searchValue, setSearchValue] = useState('');
   const [resumes, setResumes] = useState<Array<Resume>>([]);
 
-  const allResumesQuery = trpc.useQuery(['resumes.resume.all'], {
+  const allResumesQuery = trpc.useQuery(['resumes.resume.findAll'], {
     enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
     onSuccess: (data) => {
       setResumes(data);
     },
   });
-  const starredResumesQuery = trpc.useQuery(['resumes.resume.browse.stars'], {
-    enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
-    onSuccess: (data) => {
-      setResumes(data);
+  const starredResumesQuery = trpc.useQuery(
+    ['resumes.resume.user.findUserStarred'],
+    {
+      enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
+      onSuccess: (data) => {
+        setResumes(data);
+      },
     },
-  });
-  const myResumesQuery = trpc.useQuery(['resumes.resume.browse.my'], {
-    enabled: tabsValue === BROWSE_TABS_VALUES.MY,
-    onSuccess: (data) => {
-      setResumes(data);
+  );
+  const myResumesQuery = trpc.useQuery(
+    ['resumes.resume.user.findUserCreated'],
+    {
+      enabled: tabsValue === BROWSE_TABS_VALUES.MY,
+      onSuccess: (data) => {
+        setResumes(data);
+      },
     },
-  });
+  );
 
   const onClickNew = () => {
     if (sessionData?.user?.id) {

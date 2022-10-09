@@ -27,17 +27,17 @@ export default function ResumeReviewPage() {
   const { data: session } = useSession();
   const router = useRouter();
   const { resumeId } = router.query;
-  const utils = trpc.useContext();
+  const trpcContext = trpc.useContext();
   // Safe to assert resumeId type as string because query is only sent if so
   const detailsQuery = trpc.useQuery(
-    ['resumes.details.find', { resumeId: resumeId as string }],
+    ['resumes.resume.findOne', { resumeId: resumeId as string }],
     {
-      enabled: typeof resumeId === 'string' && session?.user?.id !== undefined,
+      enabled: typeof resumeId === 'string',
     },
   );
-  const starMutation = trpc.useMutation('resumes.details.update_star', {
+  const starMutation = trpc.useMutation('resumes.star.user.create_or_delete', {
     onSuccess() {
-      utils.invalidateQueries();
+      trpcContext.invalidateQueries(['resumes.resume.findOne']);
     },
   });
 

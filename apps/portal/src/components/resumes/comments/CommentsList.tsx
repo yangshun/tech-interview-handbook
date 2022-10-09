@@ -20,7 +20,6 @@ export default function CommentsList({
   const [tab, setTab] = useState(COMMENTS_SECTIONS[0].value);
   const { data: session } = useSession();
 
-  // Fetch the most updated comments to render
   const commentsQuery = trpc.useQuery(['resumes.reviews.list', { resumeId }]);
 
   // TODO: Add loading prompt
