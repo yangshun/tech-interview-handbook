@@ -5,6 +5,7 @@ import { Button, Select, TextArea } from '@tih/ui';
 
 import FullAnswerCard from '~/components/questions/card/FullAnswerCard';
 import CommentListItem from '~/components/questions/CommentListItem';
+import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 
 import {
   SAMPLE_ANSWER,
@@ -67,8 +68,7 @@ export default function QuestionPage() {
   };
 
   if (!answer) {
-    // TODO: Make this look nicer
-    return <div>Answer not found</div>;
+    return <FullScreenSpinner />;
   }
 
   return (

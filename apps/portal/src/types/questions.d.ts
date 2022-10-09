@@ -9,6 +9,7 @@ export type Question = {
   numVotes: number;
   role: string;
   seenAt: Date;
+  type: stringl;
   updatedAt: Date;
   user: string;
 };

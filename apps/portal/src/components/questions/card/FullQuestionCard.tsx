@@ -19,6 +19,7 @@ export type FullQuestionCardProps = UpvoteProps & {
   receivedCount: number;
   role: string;
   timestamp: string;
+  type: string;
 };
 
 export default function FullQuestionCard({
@@ -29,6 +30,7 @@ export default function FullQuestionCard({
   timestamp,
   role,
   location,
+  type,
 }: FullQuestionCardProps) {
   const altText = company + ' logo';
   return (
@@ -41,7 +43,7 @@ export default function FullQuestionCard({
         </div>
         <div className="flex items-baseline justify-between">
           <div className="flex items-center gap-2 text-slate-500">
-            <Badge label="Technical" variant="primary" />
+            <Badge label={type} variant="primary" />
             <p className="text-xs">
               {timestamp} · {location} · {role}
             </p>
@@ -53,14 +55,4 @@ export default function FullQuestionCard({
       </div>
     </article>
   );
-
-  // Return href ? (
-  //   <a
-  //     className="ring-primary-500 rounded-md hover:bg-slate-50 focus:ring-2 focus-visible:outline-none active:bg-slate-100"
-  //     href={href}>
-  //     {mainCard}
-  //   </a>
-  // ) : (
-  //   mainCard
-  // );
 }

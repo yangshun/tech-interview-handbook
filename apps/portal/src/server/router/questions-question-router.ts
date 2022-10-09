@@ -88,6 +88,7 @@ export const questionsQuestionRouter = createProtectedRouter()
             numVotes: votes,
             role: data.encounters[0].role ?? 'Unknown role',
             seenAt: data.encounters[0].seenAt,
+            type: data.questionType,
             updatedAt: data.updatedAt,
             user: data.user?.name ?? '',
           };
@@ -160,6 +161,7 @@ export const questionsQuestionRouter = createProtectedRouter()
         numVotes: votes,
         role: questionData.encounters[0].role ?? 'Unknown role',
         seenAt: questionData.encounters[0].seenAt,
+        type: questionData.questionType,
         updatedAt: questionData.updatedAt,
         user: questionData.user?.name ?? '',
       };

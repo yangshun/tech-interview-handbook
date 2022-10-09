@@ -47,12 +47,14 @@ export type QuestionCardProps = ActionButtonProps &
     receivedCount: number;
     role: string;
     timestamp: string;
+    type: string;
   };
 
 export default function QuestionCard({
   answerCount,
   content,
   // ReceivedCount,
+  type,
   showVoteButtons,
   showUserStatistics,
   showActionButton,
@@ -69,7 +71,7 @@ export default function QuestionCard({
       <div className="flex flex-col gap-2">
         <div className="flex items-baseline justify-between">
           <div className="flex items-center gap-2 text-slate-500">
-            <Badge label="Technical" variant="primary" />
+            <Badge label={type} variant="primary" />
             <p className="text-xs">
               {timestamp} · {location} · {role}
             </p>

@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
-import { Button, Collapsible, Select, Spinner, TextArea } from '@tih/ui';
+import { Button, Collapsible, Select, TextArea } from '@tih/ui';
 
 import AnswerCard from '~/components/questions/card/AnswerCard';
 import FullQuestionCard from '~/components/questions/card/FullQuestionCard';
 import CommentListItem from '~/components/questions/CommentListItem';
+import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 
 import {
   SAMPLE_ANSWER,
@@ -96,11 +97,7 @@ export default function QuestionPage() {
   };
 
   if (!question) {
-    return (
-      <div className="flex h-full w-full items-center justify-center">
-        <Spinner size="lg" />
-      </div>
-    );
+    return <FullScreenSpinner />;
   }
 
   return (
