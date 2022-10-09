@@ -9,7 +9,7 @@ const navigation: ProductNavigationItems = [
 
 const config = {
   navigation,
-  showGlobalNav: true,
+  showGlobalNav: false,
   title: 'Questions Bank',
 };
 
