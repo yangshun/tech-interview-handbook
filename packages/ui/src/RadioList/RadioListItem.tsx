@@ -12,14 +12,13 @@ type Props<T> = Readonly<{
 
 export default function RadioListItem<T>({
   description,
-  disabled: disabledProp = false,
+  disabled = false,
   label,
   value,
 }: Props<T>) {
   const id = useId();
   const descriptionId = useId();
   const context = useRadioListContext();
-  const disabled = context?.disabled ?? disabledProp;
 
   return (
     <div
@@ -67,7 +66,10 @@ export default function RadioListItem<T>({
         </label>
         {description && (
           <p
-            className={clsx(disabled ? 'text-slate-400' : 'text-slate-500')}
+            className={clsx(
+              'text-xs',
+              disabled ? 'text-slate-400' : 'text-slate-500',
+            )}
             id={descriptionId}>
             {description}
           </p>
