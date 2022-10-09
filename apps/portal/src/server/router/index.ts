@@ -26,7 +26,7 @@ export const appRouter = createRouter()
   .merge('resumes.resume.browse.', resumesResumeProtectedTabsRouter)
   .merge('resumes.reviews.', resumeReviewsRouter)
   .merge('resumes.reviews.user.', resumesReviewsUserRouter)
-  .merge('questions.questions.comments', questionsQuestionCommentRouter);
+  .merge('questions.questions.comments.', questionsQuestionCommentRouter);
 
 // Export type definition of API
 export type AppRouter = typeof appRouter;
