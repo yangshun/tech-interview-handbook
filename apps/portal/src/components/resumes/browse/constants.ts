@@ -53,9 +53,9 @@ export const EXPERIENCE = [
 ];
 
 export const LOCATION = [
-  { checked: false, label: 'Singapore', value: 'singapore' },
-  { checked: false, label: 'United States', value: 'usa' },
-  { checked: false, label: 'India', value: 'india' },
+  { checked: false, label: 'Singapore', value: 'Singapore' },
+  { checked: false, label: 'United States', value: 'Usa' },
+  { checked: false, label: 'India', value: 'India' },
 ];
 
 export const TEST_RESUMES = [
