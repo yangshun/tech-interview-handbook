@@ -10,10 +10,10 @@ export default function OffersHomePage() {
 
   return (
     <main className="flex-1 overflow-y-auto">
-      <div className="grid-rows grid h-1/3 bg-gray-100">
+      <div className="grid-rows grid h-1/2 bg-gray-100">
         <OffersTitle />
         <div className="flex items-start justify-center">
-          <div className="flex items-center">
+          <div className="mt-4 flex items-center">
             Viewing offers for
             <div className="mx-4">
               <Select
@@ -42,7 +42,7 @@ export default function OffersHomePage() {
               />
             </div>
             in
-            <div className="mx-4">
+            <div className="ml-4">
               <Select
                 isLabelHidden={true}
                 label="Select a company"
@@ -67,7 +67,7 @@ export default function OffersHomePage() {
           </div>
         </div>
       </div>
-      <div className="mt-10 flex justify-center">
+      <div className="flex justify-center bg-white pb-20 pt-10">
         <OffersTable />
       </div>
     </main>
