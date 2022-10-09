@@ -11,3 +11,9 @@ export type Question = {
   updatedAt: Date;
   user: string;
 };
+
+export type AggregatedQuestionEncounter = {
+  companyCount: Record<string, number>;
+  locationCount: Record<string, number>;
+  roleCount:Record<string, number>;
+}
