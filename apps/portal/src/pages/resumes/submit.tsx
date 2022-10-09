@@ -40,6 +40,7 @@ export default function SubmitResumeForm() {
   const router = useRouter();
 
   const [resumeFile, setResumeFile] = useState<File | null>();
+  const [isLoading, setIsLoading] = useState(false);
   const [invalidFileUploadError, setInvalidFileUploadError] = useState<
     string | null
   >(null);
@@ -50,12 +51,18 @@ export default function SubmitResumeForm() {
     setValue,
     reset,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<IFormInput>({
+    defaultValues: {
+      isChecked: false,
+    },
+  });
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     if (resumeFile == null) {
+      console.error('Resume file is empty');
       return;
     }
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append('key', RESUME_STORAGE_KEY);
@@ -68,15 +75,27 @@ export default function SubmitResumeForm() {
     });
     const { url } = res.data;
 
-    await resumeCreateMutation.mutate({
-      additionalInfo: data.additionalInfo,
-      experience: data.experience,
-      location: data.location,
-      role: data.role,
-      title: data.title,
-      url,
-    });
-    router.push('/resumes');
+    resumeCreateMutation.mutate(
+      {
+        additionalInfo: data.additionalInfo,
+        experience: data.experience,
+        location: data.location,
+        role: data.role,
+        title: data.title,
+        url,
+      },
+      {
+        onError: (error) => {
+          console.error(error);
+        },
+        onSettled: () => {
+          setIsLoading(false);
+        },
+        onSuccess: () => {
+          router.push('/resumes');
+        },
+      },
+    );
   };
 
   const onUploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -255,6 +274,7 @@ export default function SubmitResumeForm() {
                 <Button
                   addonPosition="start"
                   display="inline"
+                  isLoading={isLoading}
                   label="Submit"
                   size="md"
                   type="submit"
