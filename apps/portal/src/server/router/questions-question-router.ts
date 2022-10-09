@@ -6,7 +6,7 @@ import { createProtectedRouter } from './context';
 
 import type { Question } from '~/types/questions';
 
-export const questionsQuestionsRouter = createProtectedRouter()
+export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
       company: z.string().optional(),
