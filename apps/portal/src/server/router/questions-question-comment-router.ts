@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import {QuestionsVote } from '@prisma/client';
+import { Vote } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
 import { createProtectedRouter } from './context';
 
-import type { QuestionComment } from '~/types/questions-question';
+import type { QuestionComment } from '~/types/questions';
 
 export const questionsQuestionCommentRouter = createProtectedRouter()
   .query('getQuestionComments', {
@@ -14,11 +14,6 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const questionCommentsData = await ctx.prisma.questionsQuestionComment.findMany({
         include: {
-        _count: {
-          select: {
-            votes: true,
-          },
-        },
         user: {
           select: {
             name: true,
@@ -39,12 +34,10 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
           let result:number = previousValue;
 
           switch(currentValue.vote) {
-          case QuestionsVote.NO_VOTE:
-            break;
-          case QuestionsVote.UPVOTE:
+          case Vote.UPVOTE:
             result += 1
             break;
-          case QuestionsVote.DOWNVOTE:
+          case Vote.DOWNVOTE:
             result -= 1
             break;
           }
@@ -59,15 +52,14 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
         userName = data.user.name!;
       }
 
-
-      const question: QuestionComment = {
+      const questionComment: QuestionComment = {
         content: data.content,
         createdAt: data.createdAt,
         id: data.id,
         numVotes: votes,
         user: userName,
       };
-      return question;
+      return questionComment;
     });
     }
   })
@@ -105,14 +97,12 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
-          // Optional: pass the original error to retain stack trace
         });
       }
 
       return await ctx.prisma.questionsQuestionComment.update({
         data: {
           ...input,
-          userId,
         },
         where: {
           id: input.id,
@@ -130,13 +120,13 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
       const questionCommentToUpdate = await ctx.prisma.questionsQuestionComment.findUnique({
         where: {
           id: input.id,
-        },});
+        },
+      });
 
       if (questionCommentToUpdate?.id !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
-          // Optional: pass the original error to retain stack trace
         });
       }
 
