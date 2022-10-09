@@ -146,12 +146,15 @@ export const questionsAnswerRouter = createProtectedRouter()
   })
   .query('getVote', {
     input: z.object({
-      id: z.string(),
+      answerId: z.string(),
     }),
     async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+      const {answerId} = input
+
       return await ctx.prisma.questionsAnswerVote.findUnique({
         where: {
-          ...input,
+          answerId_userId : { answerId, userId },
         },
       });
     },
