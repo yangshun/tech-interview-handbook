@@ -1,3 +1,4 @@
+import axios from 'axios';
 import clsx from 'clsx';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -13,6 +14,7 @@ import {
   ROLES,
 } from '~/components/resumes/browse/constants';
 
+import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
 import { trpc } from '~/utils/trpc';
 
 const TITLE_PLACEHOLDER =
@@ -49,8 +51,24 @@ export default function SubmitResumeForm() {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    if (resumeFile == null) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('key', RESUME_STORAGE_KEY);
+    formData.append('file', resumeFile);
+
+    const res = await axios.post('/api/file-storage', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    const { url } = res.data;
+
     await resumeCreateMutation.mutate({
       ...data,
+      url,
     });
     router.push('/resumes');
   };
