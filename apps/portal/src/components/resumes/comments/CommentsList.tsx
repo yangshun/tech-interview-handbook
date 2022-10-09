@@ -21,10 +21,7 @@ export default function CommentsList({
   const { data: session } = useSession();
 
   // Fetch the most updated comments to render
-  const commentsQuery = trpc.useQuery([
-    'resumes.reviews.list',
-    { resumeId, section: tab },
-  ]);
+  const commentsQuery = trpc.useQuery(['resumes.reviews.list', { resumeId }]);
 
   // TODO: Add loading prompt
 
@@ -39,15 +36,17 @@ export default function CommentsList({
       />
 
       <div className="m-2 flow-root h-[calc(100vh-20rem)] w-full flex-col space-y-3 overflow-y-scroll">
-        {commentsQuery.data?.map((comment) => {
-          return (
-            <Comment
-              key={comment.id}
-              comment={comment}
-              userId={session?.user?.id}
-            />
-          );
-        })}
+        {commentsQuery.data
+          ?.filter((c) => c.section === tab)
+          .map((comment) => {
+            return (
+              <Comment
+                key={comment.id}
+                comment={comment}
+                userId={session?.user?.id}
+              />
+            );
+          })}
       </div>
     </div>
   );
