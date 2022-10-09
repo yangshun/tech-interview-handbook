@@ -1,24 +1,31 @@
 import clsx from 'clsx';
+import type { ChangeEvent } from 'react';
 import { useId } from 'react';
 
-import { useRadioListContext } from './RadioListContext';
-
-type Props<T> = Readonly<{
+type Props = Readonly<{
+  defaultValue?: boolean;
   description?: string;
   disabled?: boolean;
   label: string;
-  value: T;
+  name?: string;
+  onChange?: (
+    value: boolean,
+    event: ChangeEvent<HTMLInputElement>,
+  ) => undefined | void;
+  value?: boolean;
 }>;
 
-export default function RadioListItem<T>({
+export default function CheckboxInput({
+  defaultValue,
   description,
   disabled = false,
   label,
+  name,
   value,
-}: Props<T>) {
+  onChange,
+}: Props) {
   const id = useId();
   const descriptionId = useId();
-  const context = useRadioListContext();
 
   return (
     <div
@@ -30,26 +37,22 @@ export default function RadioListItem<T>({
       <div className="flex h-5 items-center">
         <input
           aria-describedby={description != null ? descriptionId : undefined}
-          checked={
-            context?.value != null ? value === context?.value : undefined
-          }
+          checked={value}
           className={clsx(
-            'text-primary-600 focus:ring-primary-500 h-4 w-4 border-slate-300',
-            disabled && 'bg-slate-100',
+            'h-4 w-4 rounded border-slate-300',
+            disabled
+              ? 'bg-slate-100 text-slate-400'
+              : 'text-primary-600 focus:ring-primary-500',
           )}
-          defaultChecked={
-            context?.defaultValue != null
-              ? value === context?.defaultValue
-              : undefined
-          }
+          defaultChecked={defaultValue}
           disabled={disabled}
           id={id}
-          name={context?.name}
-          type="radio"
+          name={name}
+          type="checkbox"
           onChange={
-            context?.onChange != null
+            onChange != null
               ? (event) => {
-                  context?.onChange?.(value, event);
+                  onChange?.(event.target.checked, event);
                 }
               : undefined
           }
