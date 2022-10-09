@@ -15,8 +15,11 @@ export type Question = {
 
 export type AnswerComment = {
   content: string;
+  createdAt: Date;
   id: string;
   numVotes: number;
+  updatedAt: Date;
+  user: string;
 };
 
 export type Answer = {

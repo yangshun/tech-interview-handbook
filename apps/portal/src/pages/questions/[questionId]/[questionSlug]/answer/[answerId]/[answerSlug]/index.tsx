@@ -9,7 +9,6 @@ import CommentListItem from '~/components/questions/CommentListItem';
 import {
   SAMPLE_ANSWER,
   SAMPLE_ANSWER_COMMENT,
-  SAMPLE_QUESTION,
 } from '~/utils/questions/constants';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
 import { trpc } from '~/utils/trpc';
@@ -23,28 +22,48 @@ export default function QuestionPage() {
 
   const {
     register: comRegister,
+    reset: resetComment,
     handleSubmit: handleCommentSubmit,
     formState: { isDirty: isCommentDirty, isValid: isCommentValid },
   } = useForm<AnswerCommentData>({ mode: 'onChange' });
   const commentRegister = useFormRegister(comRegister);
 
-  const question = SAMPLE_QUESTION;
-  const comment = SAMPLE_ANSWER_COMMENT;
-
   const { answerId } = router.query;
+
+  const utils = trpc.useContext();
 
   const { data: answer } = trpc.useQuery([
     'questions.answers.getAnswerById',
     { answerId: answerId as string },
   ]);
 
+  const { data: comments } = trpc.useQuery([
+    'questions.answers.comments.getAnswerComments',
+    { answerId: answerId as string },
+  ]);
+
+  const { mutate: addComment } = trpc.useMutation(
+    'questions.answers.comments.create',
+    {
+      onSuccess: () => {
+        utils.invalidateQuery([
+          'questions.answers.comments.getAnswerComments',
+          { answerId: answerId as string },
+        ]);
+      },
+    },
+  );
+
   const handleBackNavigation = () => {
     router.back();
   };
 
   const handleSubmitComment = (data: AnswerCommentData) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+    resetComment();
+    addComment({
+      answerId: answerId as string,
+      content: data.commentContent,
+    });
   };
 
   if (!answer) {
@@ -109,7 +128,8 @@ export default function QuestionPage() {
                     onChange={(value) => {
                       // eslint-disable-next-line no-console
                       console.log(value);
-                    }}></Select>
+                    }}
+                  />
                 </div>
 
                 <Button
@@ -121,11 +141,14 @@ export default function QuestionPage() {
               </div>
             </form>
 
-            {Array.from({ length: question.commentCount }).map((_, index) => (
+            {(comments ?? []).map((comment) => (
               <CommentListItem
-                // eslint-disable-next-line react/no-array-index-key
-                key={index}
-                {...comment}
+                key={comment.id}
+                authorImageUrl={SAMPLE_ANSWER_COMMENT.authorImageUrl}
+                authorName={comment.user}
+                content={comment.content}
+                createdAt={comment.createdAt}
+                upvoteCount={comment.numVotes}
               />
             ))}
           </div>

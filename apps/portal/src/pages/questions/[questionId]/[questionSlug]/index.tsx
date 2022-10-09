@@ -81,8 +81,6 @@ export default function QuestionPage() {
   };
 
   const handleSubmitAnswer = (data: AnswerQuestionData) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
     addAnswer({
       content: data.answerContent,
       questionId: questionId as string,
@@ -98,7 +96,11 @@ export default function QuestionPage() {
   };
 
   if (!question) {
-    return <Spinner size="lg" />;
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <Spinner size="lg" />
+      </div>
+    );
   }
 
   return (
@@ -159,7 +161,8 @@ export default function QuestionPage() {
                       onChange={(value) => {
                         // eslint-disable-next-line no-console
                         console.log(value);
-                      }}></Select>
+                      }}
+                    />
                   </div>
 
                   <Button
@@ -219,7 +222,8 @@ export default function QuestionPage() {
                     onChange={(value) => {
                       // eslint-disable-next-line no-console
                       console.log(value);
-                    }}></Select>
+                    }}
+                  />
                 </div>
               </div>
               <Button
@@ -235,13 +239,13 @@ export default function QuestionPage() {
               key={answer.id}
               authorImageUrl={SAMPLE_ANSWER.authorImageUrl}
               authorName={answer.user}
-              commentCount={0}
+              commentCount={answer.numComments}
               content={answer.content}
               createdAt={answer.createdAt}
               href={`${router.asPath}/answer/${answer.id}/${createSlug(
                 answer.content,
               )}`}
-              upvoteCount={0}
+              upvoteCount={answer.numVotes}
             />
           ))}
         </div>
