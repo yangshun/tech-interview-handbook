@@ -16,11 +16,11 @@ export const resumesResumeProtectedTabsRouter = createProtectedRouter()
                   stars: true,
                 },
               },
-            },
-          },
-          user: {
-            select: {
-              name: true,
+              user: {
+                select: {
+                  name: true,
+                },
+              },
             },
           },
         },
@@ -43,7 +43,7 @@ export const resumesResumeProtectedTabsRouter = createProtectedRouter()
           role: rs.resume.role,
           title: rs.resume.title,
           url: rs.resume.url,
-          user: rs.user.name!,
+          user: rs.resume.user.name!,
         };
         return resume;
       });
