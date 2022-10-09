@@ -32,7 +32,6 @@ export default function ContributeQuestionDialog({
           className="relative z-10"
           onClose={() => {
             // Todo: save state
-            setShowDiscardDialog(false);
             onCancel();
           }}>
           <Transition.Child
@@ -70,6 +69,7 @@ export default function ContributeQuestionDialog({
                             onSubmit={(data) => {
                               // eslint-disable-next-line no-console
                               console.log(data);
+                              onCancel();
                             }}
                           />
                         </div>

@@ -20,7 +20,7 @@ export default function ContributeQuestionCard() {
   };
 
   return (
-    <>
+    <div>
       <div
         className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4 hover:bg-gray-100"
         onClick={handleOpenContribute}>
@@ -67,6 +67,6 @@ export default function ContributeQuestionCard() {
         show={showDraftDialog}
         onCancel={handleDraftDialogCancel}
       />
-    </>
+    </div>
   );
 }

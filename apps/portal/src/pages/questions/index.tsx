@@ -200,8 +200,8 @@ export default function QuestionsHomePage() {
           </div>
         </aside>
         <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto pt-4">
-          <div className="flex min-h-0 max-w-3xl flex-1 gap-x-4">
-            <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
+          <div className="flex min-h-0 max-w-3xl flex-1">
+            <div className="flex flex-1 flex-col items-stretch justify-start gap-4 pb-4">
               <ContributeQuestionCard />
               <QuestionSearchBar
                 sortOptions={[
