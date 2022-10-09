@@ -13,98 +13,16 @@ import { Button } from '@tih/ui';
 import FormSelect from './FormSelect';
 import FormTextArea from './FormTextArea';
 import FormTextInput from './FormTextInput';
-
-// eslint-disable-next-line no-shadow
-export enum JobType {
-  FullTime = 'Full-time',
-  Internship = 'Internship',
-}
-
-export const titleOptions = [
-  {
-    label: 'Software engineer',
-    value: 'Software engineer',
-  },
-  {
-    label: 'Frontend engineer',
-    value: 'Frontend engineer',
-  },
-  {
-    label: 'Backend engineer',
-    value: 'Backend engineer',
-  },
-  {
-    label: 'Full-stack engineer',
-    value: 'Full-stack engineer',
-  },
-];
-
-export const currencyOptions = [
-  {
-    label: 'USD',
-    value: 'USD',
-  },
-  {
-    label: 'SGD',
-    value: 'SGD',
-  },
-  {
-    label: 'EUR',
-    value: 'EUR',
-  },
-];
-
-export const companyOptions = [
-  {
-    label: 'Shopee',
-    value: 'id-abc123',
-  },
-];
-
-export const locationOptions = [
-  {
-    label: 'Singapore, Singapore',
-    value: 'Singapore, Singapore',
-  },
-];
-
-const internshipCycleOptions = [
-  {
-    label: 'Summer',
-    value: 'Summer',
-  },
-  {
-    label: 'Winter',
-    value: 'Winter',
-  },
-  {
-    label: 'Spring',
-    value: 'Spring',
-  },
-  {
-    label: 'Fall',
-    value: 'Fall',
-  },
-];
-
-const yearOptions = [
-  {
-    label: '2021',
-    value: '2021',
-  },
-  {
-    label: '2022',
-    value: '2022',
-  },
-  {
-    label: '2023',
-    value: '2023',
-  },
-  {
-    label: '2024',
-    value: '2024',
-  },
-];
+import {
+  companyOptions,
+  currencyOptions,
+  internshipCycleOptions,
+  locationOptions,
+  titleOptions,
+  yearOptions,
+} from '../constants';
+import type { FullTimeOfferFormData, InternshipOfferFormData } from '../types';
+import { JobType } from '../types';
 
 type FullTimeOfferDetailsFormProps = Readonly<{
   index: number;
@@ -115,7 +33,10 @@ function FullTimeOfferDetailsForm({
   index,
   remove,
 }: FullTimeOfferDetailsFormProps) {
-  const { register } = useFormContext();
+  const { register } = useFormContext<{
+    offers: Array<FullTimeOfferFormData>;
+  }>();
+
   return (
     <div className="my-5 rounded-lg border border-gray-200 px-10 py-5">
       <div className="mb-5 grid grid-cols-3 space-x-3">
@@ -124,13 +45,17 @@ function FullTimeOfferDetailsForm({
           label="Title"
           options={titleOptions}
           required={true}
-          {...register(`offers.${index}.job.title`, { required: true })}
+          {...register(`offers.${index}.job.title`, {
+            required: true,
+          })}
         />
         <FormTextInput
           label="Focus / Specialization"
           placeholder="e.g. Front End"
           required={true}
-          {...register(`offers.${index}.job.specialization`)}
+          {...register(`offers.${index}.job.specialization`, {
+            required: true,
+          })}
         />
         <FormSelect
           display="block"
@@ -152,7 +77,7 @@ function FullTimeOfferDetailsForm({
           label="Location"
           options={locationOptions}
           required={true}
-          {...register(`offers.${index}.job.location`, { required: true })}
+          {...register(`offers.${index}.location`, { required: true })}
         />
         <FormTextInput
           label="Month Received"
@@ -321,7 +246,9 @@ function InternshipOfferDetailsForm({
   index,
   remove,
 }: InternshipOfferDetailsFormProps) {
-  const { register } = useFormContext();
+  const { register } = useFormContext<{
+    offers: Array<InternshipOfferFormData>;
+  }>();
 
   return (
     <div className="my-5 rounded-lg border border-gray-200 px-10 py-5">

@@ -7,9 +7,11 @@ import FormTextInput from './FormTextInput';
 import {
   companyOptions,
   currencyOptions,
+  educationFieldOptions,
+  educationLevelOptions,
   locationOptions,
   titleOptions,
-} from './OfferDetailsForm';
+} from '../constants';
 
 function YoeSection() {
   const { register } = useFormContext();
@@ -187,7 +189,9 @@ function InternshipJobFields() {
 }
 
 function CurrentJobSection() {
-  const { register, getValues } = useFormContext();
+  const { register, watch } = useFormContext();
+  const watchJobType = watch('background.experience.jobType', 'FULLTIME');
+
   return (
     <>
       <h6 className="mb-2 text-left text-xl font-medium text-gray-400">
@@ -213,7 +217,7 @@ function CurrentJobSection() {
             />
           </FormRadioList>
         </div>
-        {getValues('background.experience.jobType') === 'Full-time' ? (
+        {watchJobType === 'Full-time' ? (
           <FullTimeJobFields />
         ) : (
           <InternshipJobFields />
@@ -222,36 +226,6 @@ function CurrentJobSection() {
     </>
   );
 }
-
-const educationLevelOptions = [
-  {
-    label: 'Bachelor',
-    value: 'Bachelor',
-  },
-  {
-    label: 'Masters',
-    value: 'Masters',
-  },
-  {
-    label: 'Doctorate',
-    value: 'Doctorate',
-  },
-];
-
-const fieldOptions = [
-  {
-    label: 'Computer Science',
-    value: 'Computer Science',
-  },
-  {
-    label: 'Information Security',
-    value: 'Information Security',
-  },
-  {
-    label: 'Business Analytics',
-    value: 'Business Analytics',
-  },
-];
 
 function EducationSection() {
   const { register } = useFormContext();
@@ -271,7 +245,7 @@ function EducationSection() {
           <FormSelect
             display="block"
             label="Field"
-            options={fieldOptions}
+            options={educationFieldOptions}
             {...register(`background.education.field`)}
           />
         </div>

@@ -7,8 +7,7 @@ type RadioListProps = ComponentProps<typeof RadioList>;
 
 type FormRadioListProps = Omit<RadioListProps, 'onChange'>;
 
-function FormRadioListWithRef(props: FormRadioListProps) {
-  const { name, ...rest } = props;
+function FormRadioListWithRef({ name, ...rest }: FormRadioListProps) {
   const { setValue } = useFormContext();
   return (
     <RadioList

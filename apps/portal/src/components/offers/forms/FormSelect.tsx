@@ -8,14 +8,13 @@ type SelectProps = ComponentProps<typeof Select>;
 type FormSelectProps = Omit<SelectProps, 'onChange'>;
 
 function FormSelectWithRef(
-  props: FormSelectProps,
+  { name, ...rest }: FormSelectProps,
   ref?: ForwardedRef<HTMLSelectElement>,
 ) {
-  const { name } = props;
   const { setValue } = useFormContext();
   return (
     <Select
-      {...(props as SelectProps)}
+      {...(rest as SelectProps)}
       ref={ref}
       onChange={(val) => setValue(name || '', val)}
     />

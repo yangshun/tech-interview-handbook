@@ -9,10 +9,9 @@ type FormTextInputProps = Omit<TextInputProps, 'onChange'> &
   Pick<UseFormRegisterReturn<never>, 'onChange'>;
 
 function FormTextInputWithRef(
-  props: FormTextInputProps,
+  { onChange, ...rest }: FormTextInputProps,
   ref?: ForwardedRef<HTMLInputElement>,
 ) {
-  const { onChange, ...rest } = props;
   return (
     <TextInput
       {...(rest as TextInputProps)}

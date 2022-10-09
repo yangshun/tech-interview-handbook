@@ -8,98 +8,7 @@ import BackgroundForm from '~/components/offers/forms/BackgroundForm';
 import OfferAnalysis from '~/components/offers/forms/OfferAnalysis';
 import OfferDetailsForm from '~/components/offers/forms/OfferDetailsForm';
 import OfferProfileSave from '~/components/offers/forms/OfferProfileSave';
-
-type Money = {
-  currency: string;
-  value: number;
-};
-
-type FullTimeJobData = {
-  base: Money;
-  bonus: Money;
-  level: string;
-  specialization: string;
-  stocks: Money;
-  title: string;
-  totalCompensation: Money;
-};
-
-type FullTimeOfferFormData = {
-  comments: string;
-  companyId: string;
-  job: FullTimeJobData;
-  jobType: string;
-  location: string;
-  monthYearReceived: string;
-  negotiationStrategy: string;
-};
-
-type InternshipJobData = {
-  internshipCycle: string;
-  monthlySalary: Money;
-  specialization: string;
-  startYear: number;
-  title: string;
-};
-
-type InternshipOfferFormData = {
-  comments: string;
-  companyId: string;
-  job: InternshipJobData;
-  jobType: string;
-  location: string;
-  monthYearReceived: string;
-  negotiationStrategy: string;
-};
-
-type OfferDetailsFormData = FullTimeOfferFormData | InternshipOfferFormData;
-
-type SpecificYoe = {
-  domain: string;
-  yoe: number;
-};
-
-type FullTimeExperience = {
-  level: string;
-  totalCompensation: Money;
-};
-
-type InternshipExperience = {
-  monthlySalary: Money;
-};
-
-type GeneralExperience = {
-  companyId: string;
-  durationInMonths: number;
-  jobType: string;
-  specialization: string;
-  title: string;
-};
-
-type Experience =
-  | (FullTimeExperience & GeneralExperience)
-  | (GeneralExperience & InternshipExperience);
-
-type Education = {
-  endDate: Date;
-  field: string;
-  school: string;
-  startDate: Date;
-  type: string;
-};
-
-type BackgroundFormData = {
-  education: Education;
-  experience: Experience;
-  specificYoes: Array<SpecificYoe>;
-  totalYoe: number;
-};
-
-// Export type SubmitOfferFormData
-export type SubmitOfferFormData = {
-  background: BackgroundFormData;
-  offers: Array<OfferDetailsFormData>;
-};
+import type { SubmitOfferFormData } from '~/components/offers/types';
 
 function Breadcrumbs() {
   return (
@@ -109,45 +18,48 @@ function Breadcrumbs() {
   );
 }
 
+const defaultOfferValues = {
+  offers: [
+    {
+      comments: '',
+      companyId: 'Shopee',
+      job: {
+        base: {
+          currency: 'USD',
+          value: 0,
+        },
+        bonus: {
+          currency: 'USD',
+          value: 0,
+        },
+        level: '',
+        specialization: '',
+        stocks: {
+          currency: 'USD',
+          value: 0,
+        },
+        title: '',
+        totalCompensation: {
+          currency: 'USD',
+          value: 0,
+        },
+      },
+      jobType: 'FULLTIME',
+      monthYearReceived: '',
+      negotiationStrategy: '',
+    },
+  ],
+};
+
 export default function OffersSubmissionPage() {
   const [formStep, setFormStep] = useState(0);
   const formMethods = useForm<SubmitOfferFormData>({
-    defaultValues: {
-      offers: [
-        {
-          comments: '',
-          companyId: 'Shopee',
-          job: {
-            base: {
-              currency: 'USD',
-              value: 0,
-            },
-            bonus: {
-              currency: 'USD',
-              value: 0,
-            },
-            level: '',
-            specialization: '',
-            stocks: {
-              currency: 'USD',
-              value: 0,
-            },
-            title: '',
-            totalCompensation: {
-              currency: 'USD',
-              value: 0,
-            },
-          },
-          jobType: 'FULLTIME',
-          monthYearReceived: '',
-          negotiationStrategy: '',
-        },
-      ],
-    },
+    defaultValues: defaultOfferValues,
   });
 
   const nextStep = () => setFormStep(formStep + 1);
   const previousStep = () => setFormStep(formStep - 1);
+
   const formComponents = [
     <OfferDetailsForm key={0} />,
     <BackgroundForm key={1} />,

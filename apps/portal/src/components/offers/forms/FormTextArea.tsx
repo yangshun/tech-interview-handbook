@@ -10,10 +10,9 @@ type FormTextAreaProps = Omit<TextAreaProps, 'onChange'> &
   Pick<UseFormRegisterReturn<never>, 'onChange'>;
 
 function FormTextAreaWithRef(
-  props: FormTextAreaProps,
+  { onChange, ...rest }: FormTextAreaProps,
   ref?: ForwardedRef<HTMLTextAreaElement>,
 ) {
-  const { onChange, ...rest } = props;
   return (
     <TextArea
       {...(rest as TextAreaProps)}
