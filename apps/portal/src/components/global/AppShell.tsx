@@ -175,7 +175,7 @@ export default function AppShell({ children }: Props) {
       />
 
       {/* Content area */}
-      <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex h-screen flex-1 flex-col overflow-hidden">
         <header className="w-full">
           <div className="relative z-10 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white shadow-sm">
             <button
