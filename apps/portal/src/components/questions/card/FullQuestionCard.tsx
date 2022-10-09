@@ -15,7 +15,6 @@ type UpvoteProps =
 export type FullQuestionCardProps = UpvoteProps & {
   company: string;
   content: string;
-  href?: string;
   location: string;
   receivedCount: number;
   role: string;
@@ -30,10 +29,9 @@ export default function FullQuestionCard({
   timestamp,
   role,
   location,
-  href,
 }: FullQuestionCardProps) {
   const altText = company + ' logo';
-  const mainCard = (
+  return (
     <article className="flex gap-4 rounded-md border border-slate-300 bg-white p-4">
       {showVoteButtons && <VotingButtons upvoteCount={upvoteCount} />}
       <div className="flex flex-col gap-2">
@@ -56,13 +54,13 @@ export default function FullQuestionCard({
     </article>
   );
 
-  return href ? (
-    <a
-      className="ring-primary-500 rounded-md hover:bg-slate-50 focus:ring-2 focus-visible:outline-none active:bg-slate-100"
-      href={href}>
-      {mainCard}
-    </a>
-  ) : (
-    mainCard
-  );
+  // Return href ? (
+  //   <a
+  //     className="ring-primary-500 rounded-md hover:bg-slate-50 focus:ring-2 focus-visible:outline-none active:bg-slate-100"
+  //     href={href}>
+  //     {mainCard}
+  //   </a>
+  // ) : (
+  //   mainCard
+  // );
 }

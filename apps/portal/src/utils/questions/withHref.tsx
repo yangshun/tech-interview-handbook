@@ -10,7 +10,7 @@ const withHref = <Props extends Record<string, unknown>>(
 
     return (
       <a
-        className="ring-primary-500 rounded-md hover:bg-slate-50 focus:ring-2 focus-visible:outline-none active:bg-slate-100"
+        className="ring-primary-500 rounded-md focus:ring-2 focus-visible:outline-none active:bg-slate-100"
         href={href}>
         <Component {...(others as unknown as Props)} />
       </a>
