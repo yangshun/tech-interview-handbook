@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-export type QuestionComment = {
-  content: string;
-  createdAt: Date;
-  id: string;
-  numVotes: number;
-=======
 export type Question = {
   // TODO: company, location, role maps
   company: string;
@@ -16,6 +9,12 @@ export type Question = {
   numVotes: number;
   role: string;
   updatedAt: Date;
->>>>>>> main
   user: string;
+};
+
+export type QuestionComment = {
+  content: string;
+  createdAt: Date;
+  id: string;
+  numVotes: number;
 };
