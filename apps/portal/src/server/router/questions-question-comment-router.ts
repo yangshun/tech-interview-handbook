@@ -136,4 +136,93 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
         },
       });
     },
+  })
+  .query('getVote', {
+    input: z.object({
+      questionCommentId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+      const {questionCommentId} = input
+
+      return await ctx.prisma.questionsQuestionCommentVote.findUnique({
+        where: {
+          questionCommentId_userId : {questionCommentId,userId },
+        },
+      });
+    },
+  })
+  .mutation('createVote', {
+    input: z.object({
+      questionCommentId: z.string(),
+      vote: z.nativeEnum(Vote),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+
+      return await ctx.prisma.questionsQuestionCommentVote.create({
+        data: {
+          ...input,
+          userId,
+        },
+      });
+    },
+  })
+  .mutation('updateVote', {
+    input: z.object({
+      id: z.string(),
+      vote: z.nativeEnum(Vote),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+      const {id, vote} = input
+
+      const voteToUpdate = await ctx.prisma.questionsQuestionCommentVote.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+
+      if (voteToUpdate?.id !== userId) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'User have no authorization to record.',
+        });
+      }
+
+      return await ctx.prisma.questionsQuestionCommentVote.update({
+        data: {
+          vote,
+        },
+        where: {
+          id,
+        },
+      });
+    },
+  })
+  .mutation('deleteVote', {
+    input: z.object({
+      id: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+
+      const voteToDelete = await ctx.prisma.questionsQuestionCommentVote.findUnique({
+        where: {
+          id: input.id,
+        },});
+
+      if (voteToDelete?.id !== userId) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'User have no authorization to record.',
+        });
+      }
+
+      return await ctx.prisma.questionsQuestionCommentVote.delete({
+        where: {
+          id: input.id,
+        },
+      });
+    },
   });
