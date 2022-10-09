@@ -21,22 +21,37 @@ export const useSearchFilter = (
         // Try to load from local storage
         const localStorageValue = localStorage.getItem(name);
         if (localStorageValue !== null) {
-          setFilters(JSON.parse(localStorageValue));
+          const loadedFilters = JSON.parse(localStorageValue);
+          setFilters(loadedFilters);
+          router.replace({
+            pathname: router.pathname,
+            query: {
+              ...router.query,
+              [name]: loadedFilters,
+            },
+          });
         }
       }
       setIsInitialized(true);
     }
-  }, [router.isReady, isInitialized, router.query, name]);
+  }, [isInitialized, name, router]);
 
-  const setFiltersAndSaveToLocalStorage = useCallback(
+  const setFiltersCallback = useCallback(
     (newFilters: Array<string>) => {
       setFilters(newFilters);
       localStorage.setItem(name, JSON.stringify(newFilters));
+      router.replace({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          [name]: newFilters,
+        },
+      });
     },
-    [name],
+    [name, router],
   );
 
-  return [filters, setFiltersAndSaveToLocalStorage, isInitialized] as const;
+  return [filters, setFiltersCallback, isInitialized] as const;
 };
 
 export const useSearchFilterSingle = (name: string, defaultValue: string) => {

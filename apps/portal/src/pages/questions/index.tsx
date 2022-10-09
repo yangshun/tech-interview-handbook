@@ -40,7 +40,7 @@ export default function QuestionsHomePage() {
     useSearchFilter('locations');
 
   const [hasLanded, setHasLanded] = useState(false);
-  // Const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const companyFilterOptions = useMemo(() => {
     return COMPANIES.map((company) => ({
@@ -102,44 +102,14 @@ export default function QuestionsHomePage() {
       if (hasFilter) {
         setHasLanded(true);
       }
-      // Console.log('shit');
-      // setLoaded(true);
+      // Console.log('landed', hasLanded);
+      setLoaded(true);
     }
-  }, [areFiltersInitialized, router.query]);
+  }, [areFiltersInitialized, hasLanded, router.query]);
 
-  // Update url query params
-  useEffect(() => {
-    if (router.isReady && areFiltersInitialized) {
-      router.replace(
-        {
-          query: {
-            companies: selectedCompanies,
-            locations: selectedLocations,
-            questionTypes: selectedQuestionTypes,
-            ...(selectedQuestionAge !== 'all'
-              ? {
-                  questionAge: selectedQuestionAge,
-                }
-              : {}),
-          },
-        },
-        undefined,
-        { shallow: true },
-      );
-    }
-  }, [
-    selectedCompanies,
-    selectedQuestionTypes,
-    selectedQuestionAge,
-    selectedLocations,
-    router,
-    router.isReady,
-    areFiltersInitialized,
-  ]);
-
-  // If (!loaded) {
-  //   return <div>hi</div>;
-  // }
+  if (!loaded) {
+    return null;
+  }
 
   return !hasLanded ? (
     <LandingComponent onLanded={handleLandingQuery}></LandingComponent>
