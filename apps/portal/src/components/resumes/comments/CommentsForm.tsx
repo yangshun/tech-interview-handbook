@@ -88,7 +88,7 @@ export default function CommentsForm({
         onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-4 space-y-4">
           <TextArea
-            {...register('general')}
+            {...(register('general'), {})}
             disabled={reviewCreateMutation.isLoading}
             label="General"
             placeholder="General comments about the resume"
@@ -96,7 +96,7 @@ export default function CommentsForm({
           />
 
           <TextArea
-            {...register('education')}
+            {...(register('education'), {})}
             disabled={reviewCreateMutation.isLoading}
             label="Education"
             placeholder="Comments about the Education section"
@@ -104,7 +104,7 @@ export default function CommentsForm({
           />
 
           <TextArea
-            {...register('experience')}
+            {...(register('experience'), {})}
             disabled={reviewCreateMutation.isLoading}
             label="Experience"
             placeholder="Comments about the Experience section"
@@ -112,7 +112,7 @@ export default function CommentsForm({
           />
 
           <TextArea
-            {...register('projects')}
+            {...(register('projects'), {})}
             disabled={reviewCreateMutation.isLoading}
             label="Projects"
             placeholder="Comments about the Projects section"
@@ -120,7 +120,7 @@ export default function CommentsForm({
           />
 
           <TextArea
-            {...register('skills')}
+            {...(register('skills'), {})}
             disabled={reviewCreateMutation.isLoading}
             label="Skills"
             placeholder="Comments about the Skills section"
