@@ -9,7 +9,7 @@ import type { Question } from '~/types/questions';
 export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
-      companies: z.string().array(),
+      companyIds: z.string().array(),
       endDate: z.date(),
       locations: z.string().array(),
       questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
@@ -58,8 +58,8 @@ export const questionsQuestionRouter = createProtectedRouter()
           for (let i = 0; i < data.encounters.length; i++) {
             const encounter = data.encounters[i];
             const matchCompany =
-              input.companies.length === 0 ||
-              input.companies.includes(encounter.company!.id);
+              input.companyIds.length === 0 ||
+              input.companyIds.includes(encounter.company!.id);
             const matchLocation =
               input.locations.length === 0 ||
               input.locations.includes(encounter.location);
