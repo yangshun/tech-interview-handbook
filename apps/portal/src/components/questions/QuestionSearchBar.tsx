@@ -25,8 +25,8 @@ export default function QuestionSearchBar<
   onFilterOptionsToggle,
 }: QuestionSearchBarProps<SortOptions>) {
   return (
-    <div className="flex items-center gap-2">
-      <div className="flex-1 pt-1">
+    <div className="flex items-center gap-4">
+      <div className="flex-1">
         <TextInput
           isLabelHidden={true}
           label="Search by content"
@@ -35,17 +35,19 @@ export default function QuestionSearchBar<
           startAddOnType="icon"
         />
       </div>
-      <span aria-hidden={true} className="pl-3 pr-1 pt-1 text-sm">
-        Sort by:
-      </span>
-      <Select
-        display="inline"
-        isLabelHidden={true}
-        label="Sort by"
-        options={sortOptions}
-        value={sortValue}
-        onChange={onSortChange}
-      />
+      <div className="flex items-center gap-2">
+        <span aria-hidden={true} className="align-middle text-sm font-medium">
+          Sort by:
+        </span>
+        <Select
+          display="inline"
+          isLabelHidden={true}
+          label="Sort by"
+          options={sortOptions}
+          value={sortValue}
+          onChange={onSortChange}
+        />
+      </div>
       <div className="lg:hidden">
         <Button
           addonPosition="start"

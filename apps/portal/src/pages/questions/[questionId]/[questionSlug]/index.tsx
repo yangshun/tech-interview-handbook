@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button, Collapsible, Select, TextArea } from '@tih/ui';
 
-import AnswerCard from '~/components/questions/card/AnswerCard';
 import FullQuestionCard from '~/components/questions/card/FullQuestionCard';
+import QuestionAnswerCard from '~/components/questions/card/QuestionAnswerCard';
 import CommentListItem from '~/components/questions/CommentListItem';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 
@@ -233,7 +233,7 @@ export default function QuestionPage() {
             </div>
           </form>
           {(answers ?? []).map((answer) => (
-            <AnswerCard
+            <QuestionAnswerCard
               key={answer.id}
               authorImageUrl={answer.userImage}
               authorName={answer.user}

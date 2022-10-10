@@ -302,7 +302,7 @@ export default function QuestionsHomePage() {
                   upvoteCount={question.numVotes}
                 />
               ))}
-              {(questions ?? []).length === 0 && (
+              {questions?.length === 0 && (
                 <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
                   <NoSymbolIcon className="h-6 w-6" />
                   <p>Nothing found. Try changing your search filters.</p>

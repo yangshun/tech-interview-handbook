@@ -1,9 +1,8 @@
-import {
-  ChatBubbleBottomCenterTextIcon,
-  // EyeIcon,
-} from '@heroicons/react/24/outline';
+import { ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
+import type { QuestionsQuestionType } from '@prisma/client';
 import { Badge, Button } from '@tih/ui';
 
+import QuestionTypeBadge from '../QuestionTypeBadge';
 import VotingButtons from '../VotingButtons';
 
 type UpvoteProps =
@@ -48,7 +47,7 @@ export type QuestionCardProps = ActionButtonProps &
     receivedCount: number;
     role: string;
     timestamp: string;
-    type: string;
+    type: QuestionsQuestionType;
   };
 
 export default function QuestionCard({
@@ -73,8 +72,8 @@ export default function QuestionCard({
       <div className="flex flex-col gap-2">
         <div className="flex items-baseline justify-between">
           <div className="flex items-baseline gap-2 text-slate-500">
-            <h2 className="ml-1 text-lg">{company}</h2>
-            <Badge label={type} variant="primary" />
+            <Badge label={company} variant="primary" />
+            <QuestionTypeBadge type={type} />
             <p className="text-xs">
               {timestamp} · {location} · {role}
             </p>
