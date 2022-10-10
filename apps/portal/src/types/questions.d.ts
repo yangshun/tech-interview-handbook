@@ -15,9 +15,9 @@ export type Question = {
 };
 
 export type AggregatedQuestionEncounter = {
-  companyCount: Record<string, number>;
-  locationCount: Record<string, number>;
-  roleCount:Record<string, number>;
+  companyCounts: Record<string, number>;
+  locationCounts: Record<string, number>;
+  roleCounts: Record<string, number>;
 }
 
 export type AnswerComment = {

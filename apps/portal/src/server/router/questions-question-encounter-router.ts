@@ -12,6 +12,9 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const questionEncountersData = await ctx.prisma.questionsQuestionEncounter.findMany({
+        include: {
+          company : true,
+        },
         where: {
           ...input,
         },
@@ -19,39 +22,39 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
 
       const companyCounts: Record<string, number> = {};
       const locationCounts: Record<string, number> = {};
-      const roleCount:Record<string, number> = {};
+      const roleCounts:Record<string, number> = {};
 
       for (let i = 0; i < questionEncountersData.length; i++) {
         const encounter = questionEncountersData[i];
 
-        if (!(encounter.company in companyCounts)) {
-            companyCounts[encounter.company] = 1;
+        if (!(encounter.company!.name in companyCounts)) {
+            companyCounts[encounter.company!.name] = 1;
         }
-        companyCounts[encounter.company] += 1;
+        companyCounts[encounter.company!.name] += 1;
 
         if (!(encounter.location in locationCounts)) {
             locationCounts[encounter.location] = 1;
         }
         locationCounts[encounter.location] += 1;
 
-        if (!(encounter.role in roleCount)) {
-            roleCount[encounter.role] = 1;
+        if (!(encounter.role in roleCounts)) {
+            roleCounts[encounter.role] = 1;
         }
-        roleCount[encounter.role] += 1;
+        roleCounts[encounter.role] += 1;
 
       }
 
       const questionEncounter:AggregatedQuestionEncounter = {
-        companyCount: companyCounts,
-        locationCount: locationCounts,
-        roleCount,
+        companyCounts,
+        locationCounts,
+        roleCounts,
       }
       return questionEncounter;
     }
   })
   .mutation('create', {
     input: z.object({
-      company: z.string(),
+      companyId: z.string(),
       location: z.string(),
       questionId: z.string(),
       role: z.string(),
@@ -69,8 +72,9 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
     },
   })
   .mutation('update', {
+    //
     input: z.object({
-      company: z.string().optional(),
+      companyId: z.string().optional(),
       id: z.string(),
       location: z.string().optional(),
       role: z.string().optional(),
