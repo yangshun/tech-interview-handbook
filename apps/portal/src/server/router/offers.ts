@@ -20,7 +20,9 @@ const getYoeRange = (yoeCategory: number) => {
     : null;
 };
 
-const sortingKeys = ['date', 'tc', 'yoe'];
+const ascOrder = '+';
+const descOrder = '-';
+const sortingKeys = ['monthYearReceived', 'totalCompensation', 'yoe'];
 
 const createSortByValidationRegex = () => {
   const startsWithPlusOrMinusOnly = '^[+-]{1}';
@@ -38,7 +40,7 @@ export const offersRouter = createRouter().query('list', {
     offset: z.number().nonnegative(),
     salaryMax: z.number().nullish(),
     salaryMin: z.number().nonnegative().nullish(),
-    sortby: z.string().regex(createSortByValidationRegex()).nullish(),
+    sortBy: z.string().regex(createSortByValidationRegex()).nullish(),
     title: z.string().nullish(),
     yoeCategory: z.number().min(0).max(3),
   }),
@@ -222,6 +224,72 @@ export const offersRouter = createRouter().query('list', {
       }
 
       return validRecord;
+    });
+
+    data = data.sort((offer1, offer2) => {
+      const defaultReturn =
+        offer2.monthYearReceived.getTime() - offer1.monthYearReceived.getTime();
+
+      if (!input.sortBy) {
+        return defaultReturn;
+      }
+
+      const order = input.sortBy.charAt(0);
+      const sortingKey = input.sortBy.substring(1);
+
+      if (order === ascOrder) {
+        return (() => {
+          if (sortingKey === 'monthYearReceived') {
+            return (
+              offer1.monthYearReceived.getTime() -
+              offer2.monthYearReceived.getTime()
+            );
+          }
+
+          if (sortingKey === 'totalCompensation') {
+            const salary1 = offer1.OffersFullTime?.totalCompensation.value
+              ? offer1.OffersFullTime?.totalCompensation.value
+              : offer1.OffersIntern?.monthlySalary.value;
+
+            const salary2 = offer2.OffersFullTime?.totalCompensation.value
+              ? offer2.OffersFullTime?.totalCompensation.value
+              : offer2.OffersIntern?.monthlySalary.value;
+
+            if (salary1 && salary2) {
+              return salary1 - salary2;
+            }
+          }
+          return defaultReturn;
+        })();
+      }
+
+      if (order === descOrder) {
+        return (() => {
+          if (sortingKey === 'monthYearReceived') {
+            return (
+              offer2.monthYearReceived.getTime() -
+              offer1.monthYearReceived.getTime()
+            );
+          }
+
+          if (sortingKey === 'totalCompensation') {
+            const salary1 = offer1.OffersFullTime?.totalCompensation.value
+              ? offer1.OffersFullTime?.totalCompensation.value
+              : offer1.OffersIntern?.monthlySalary.value;
+
+            const salary2 = offer2.OffersFullTime?.totalCompensation.value
+              ? offer2.OffersFullTime?.totalCompensation.value
+              : offer2.OffersIntern?.monthlySalary.value;
+
+            if (salary1 && salary2) {
+              return salary2 - salary1;
+            }
+          }
+
+          return defaultReturn;
+        })();
+      }
+      return defaultReturn;
     });
 
     return data;
