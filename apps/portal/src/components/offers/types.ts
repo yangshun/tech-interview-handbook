@@ -1,11 +1,21 @@
+/* eslint-disable no-shadow */
 /*
- *  Offer Profile Submission
+ *  Offer Profile
  */
 
-// eslint-disable-next-line no-shadow
 export enum JobType {
   FullTime = 'FULLTIME',
   Internship = 'INTERNSHIP',
+}
+
+export enum EducationBackgroundType {
+  Bachelor = 'Bachelor',
+  Diploma = 'Diploma',
+  Masters = 'Masters',
+  PhD = 'PhD',
+  Professional = 'Professional',
+  Seconday = 'Secondary',
+  SelfTaught = 'Self-taught',
 }
 
 type Money = {

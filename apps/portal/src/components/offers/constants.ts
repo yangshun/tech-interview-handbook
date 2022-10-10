@@ -1,5 +1,13 @@
+import { EducationBackgroundType } from './types';
+
+const emptyOption = {
+  label: '----',
+  value: '',
+};
+
 // TODO: use enums
 export const titleOptions = [
+  emptyOption,
   {
     label: 'Software engineer',
     value: 'Software engineer',
@@ -18,36 +26,48 @@ export const titleOptions = [
   },
 ];
 
-export const currencyOptions = [
-  {
-    label: 'USD',
-    value: 'USD',
-  },
-  {
-    label: 'SGD',
-    value: 'SGD',
-  },
-  {
-    label: 'EUR',
-    value: 'EUR',
-  },
-];
-
 export const companyOptions = [
+  emptyOption,
+  {
+    label: 'Bytedance',
+    value: 'id-abc123',
+  },
+  {
+    label: 'Google',
+    value: 'id-abc567',
+  },
+  {
+    label: 'Meta',
+    value: 'id-abc456',
+  },
   {
     label: 'Shopee',
-    value: 'id-abc123',
+    value: 'id-abc345',
+  },
+  {
+    label: 'Tik Tok',
+    value: 'id-abc678',
   },
 ];
 
 export const locationOptions = [
+  emptyOption,
   {
     label: 'Singapore, Singapore',
     value: 'Singapore, Singapore',
   },
+  {
+    label: 'New York, US',
+    value: 'New York, US',
+  },
+  {
+    label: 'San Francisco, US',
+    value: 'San Francisco, US',
+  },
 ];
 
 export const internshipCycleOptions = [
+  emptyOption,
   {
     label: 'Summer',
     value: 'Summer',
@@ -65,12 +85,13 @@ export const internshipCycleOptions = [
     value: 'Fall',
   },
   {
-    label: 'Full-year',
-    value: 'Full-year',
+    label: 'Full year',
+    value: 'Full year',
   },
 ];
 
 export const yearOptions = [
+  emptyOption,
   {
     label: '2021',
     value: '2021',
@@ -89,22 +110,17 @@ export const yearOptions = [
   },
 ];
 
-export const educationLevelOptions = [
-  {
-    label: 'Bachelor',
-    value: 'Bachelor',
-  },
-  {
-    label: 'Masters',
-    value: 'Masters',
-  },
-  {
-    label: 'Doctorate',
-    value: 'Doctorate',
-  },
-];
+const educationBackgroundTypes = Object.entries(EducationBackgroundType).map(
+  ([key, value]) => ({
+    label: key,
+    value,
+  }),
+);
+
+export const educationLevelOptions = [emptyOption, ...educationBackgroundTypes];
 
 export const educationFieldOptions = [
+  emptyOption,
   {
     label: 'Computer Science',
     value: 'Computer Science',

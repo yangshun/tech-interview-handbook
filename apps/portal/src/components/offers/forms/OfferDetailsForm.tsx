@@ -15,7 +15,6 @@ import FormTextArea from './FormTextArea';
 import FormTextInput from './FormTextInput';
 import {
   companyOptions,
-  currencyOptions,
   internshipCycleOptions,
   locationOptions,
   titleOptions,
@@ -23,6 +22,7 @@ import {
 } from '../constants';
 import type { FullTimeOfferFormData, InternshipOfferFormData } from '../types';
 import { JobType } from '../types';
+import { CURRENCY_OPTIONS } from '../util/currency/CurrencyEnum';
 
 type FullTimeOfferDetailsFormProps = Readonly<{
   index: number;
@@ -39,7 +39,7 @@ function FullTimeOfferDetailsForm({
 
   return (
     <div className="my-5 rounded-lg border border-gray-200 px-10 py-5">
-      <div className="mb-5 grid grid-cols-3 space-x-3">
+      <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
           label="Title"
@@ -57,6 +57,8 @@ function FullTimeOfferDetailsForm({
             required: true,
           })}
         />
+      </div>
+      <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
           label="Company"
@@ -64,14 +66,14 @@ function FullTimeOfferDetailsForm({
           required={true}
           {...register(`offers.${index}.companyId`, { required: true })}
         />
-      </div>
-      <div className="mb-5 grid grid-cols-3 space-x-3">
         <FormTextInput
           label="Level"
           placeholder="e.g. L4, Junior"
           required={true}
           {...register(`offers.${index}.job.level`, { required: true })}
         />
+      </div>
+      <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
           label="Location"
@@ -93,7 +95,7 @@ function FullTimeOfferDetailsForm({
               borderStyle="borderless"
               isLabelHidden={true}
               label="Currency"
-              options={currencyOptions}
+              options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.totalCompensation.currency`, {
                 required: true,
               })}
@@ -111,14 +113,14 @@ function FullTimeOfferDetailsForm({
           })}
         />
       </div>
-      <div className="mb-5 grid grid-cols-3 space-x-3">
+      <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormTextInput
           endAddOn={
             <FormSelect
               borderStyle="borderless"
               isLabelHidden={true}
               label="Currency"
-              options={currencyOptions}
+              options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.base.currency`)}
             />
           }
@@ -137,7 +139,7 @@ function FullTimeOfferDetailsForm({
               borderStyle="borderless"
               isLabelHidden={true}
               label="Currency"
-              options={currencyOptions}
+              options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.bonus.currency`)}
             />
           }
@@ -150,13 +152,15 @@ function FullTimeOfferDetailsForm({
           type="number"
           {...register(`offers.${index}.job.bonus.value`)}
         />
+      </div>
+      <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormTextInput
           endAddOn={
             <FormSelect
               borderStyle="borderless"
               isLabelHidden={true}
               label="Currency"
-              options={currencyOptions}
+              options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.stocks.currency`)}
             />
           }
@@ -316,7 +320,7 @@ function InternshipOfferDetailsForm({
               borderStyle="borderless"
               isLabelHidden={true}
               label="Currency"
-              options={currencyOptions}
+              options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.monthlySalary.currency`)}
             />
           }
@@ -381,7 +385,7 @@ export default function OfferDetailsForm() {
         <div className="mx-5 w-1/3">
           <Button
             display="block"
-            label={JobType.FullTime}
+            label="Full-time"
             size="md"
             variant={jobType === JobType.FullTime ? 'secondary' : 'tertiary'}
             onClick={changeJobType(JobType.FullTime)}
@@ -391,7 +395,7 @@ export default function OfferDetailsForm() {
         <div className="mx-5 w-1/3">
           <Button
             display="block"
-            label={JobType.Internship}
+            label="Internship"
             size="md"
             variant={jobType === JobType.Internship ? 'secondary' : 'tertiary'}
             onClick={changeJobType(JobType.Internship)}

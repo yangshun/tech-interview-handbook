@@ -1,4 +1,4 @@
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { Collapsible, RadioList } from '@tih/ui';
 
 import FormRadioList from './FormRadioList';
@@ -6,12 +6,13 @@ import FormSelect from './FormSelect';
 import FormTextInput from './FormTextInput';
 import {
   companyOptions,
-  currencyOptions,
   educationFieldOptions,
   educationLevelOptions,
   locationOptions,
   titleOptions,
 } from '../constants';
+import { JobType } from '../types';
+import { CURRENCY_OPTIONS } from '../util/currency/CurrencyEnum';
 
 function YoeSection() {
   const { register } = useFormContext();
@@ -25,6 +26,7 @@ function YoeSection() {
         <div className="mb-2 grid grid-cols-3 space-x-3">
           <FormTextInput
             label="Total YOE"
+            placeholder="0"
             type="number"
             {...register(`background.totalYoe`)}
           />
@@ -87,7 +89,7 @@ function FullTimeJobFields() {
               borderStyle="borderless"
               isLabelHidden={true}
               label="Currency"
-              options={currencyOptions}
+              options={CURRENCY_OPTIONS}
               {...register(`background.experience.totalCompensation.currency`)}
             />
           }
@@ -156,7 +158,7 @@ function InternshipJobFields() {
               borderStyle="borderless"
               isLabelHidden={true}
               label="Currency"
-              options={currencyOptions}
+              options={CURRENCY_OPTIONS}
               {...register(`background.experience.monthlySalary.currency`)}
             />
           }
@@ -189,8 +191,11 @@ function InternshipJobFields() {
 }
 
 function CurrentJobSection() {
-  const { register, watch } = useFormContext();
-  const watchJobType = watch('background.experience.jobType', 'FULLTIME');
+  const { register } = useFormContext();
+  const watchJobType = useWatch({
+    defaultValue: JobType.FullTime,
+    name: 'background.experience.jobType',
+  });
 
   return (
     <>
@@ -200,7 +205,7 @@ function CurrentJobSection() {
       <div className="mb-5 rounded-lg border border-gray-200 px-10 py-5">
         <div className="mb-5">
           <FormRadioList
-            defaultValue="Full-time"
+            defaultValue={JobType.FullTime}
             isLabelHidden={true}
             label="Job Type"
             orientation="horizontal"
@@ -208,16 +213,16 @@ function CurrentJobSection() {
             <RadioList.Item
               key="Full-time"
               label="Full-time"
-              value="Full-time"
+              value={JobType.FullTime}
             />
             <RadioList.Item
               key="Internship"
               label="Internship"
-              value="Internship"
+              value={JobType.Internship}
             />
           </FormRadioList>
         </div>
-        {watchJobType === 'Full-time' ? (
+        {watchJobType === JobType.FullTime ? (
           <FullTimeJobFields />
         ) : (
           <InternshipJobFields />
@@ -250,7 +255,7 @@ function EducationSection() {
           />
         </div>
         <Collapsible label="Add more details">
-          <div className="mb-5 grid grid-cols-3 space-x-3">
+          <div className="mb-5">
             <FormTextInput
               label="School"
               placeholder="e.g. National University of Singapore"
@@ -269,7 +274,7 @@ export default function BackgroundForm() {
       <h5 className="mb-2 text-center text-4xl font-bold text-gray-900">
         Help us better gauge your offers
       </h5>
-      <h6 className="mb-8 text-center text-xl font-light ">
+      <h6 className="mx-10 mb-8 text-center text-lg font-light text-gray-600">
         This section is optional, but your background information helps us
         benchmark your offers.
       </h6>

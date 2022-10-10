@@ -3,17 +3,7 @@ import {
   LightBulbIcon,
 } from '@heroicons/react/24/outline';
 
-// To be replaced by form enums
-// eslint-disable-next-line no-shadow
-export enum EducationBackgroundType {
-  Bachelor = 'Bachelor',
-  Diploma = 'Diploma',
-  Masters = 'Masters',
-  PhD = 'PhD',
-  Professional = 'Professional',
-  Seconday = 'Secondary',
-  SelfTaught = 'Self-taught',
-}
+import type { EducationBackgroundType } from '../types';
 
 type EducationEntity = {
   backgroundType?: EducationBackgroundType;

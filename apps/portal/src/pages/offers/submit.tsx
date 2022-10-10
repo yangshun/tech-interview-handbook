@@ -22,7 +22,7 @@ const defaultOfferValues = {
   offers: [
     {
       comments: '',
-      companyId: 'Shopee',
+      companyId: '',
       job: {
         base: {
           currency: 'USD',
@@ -45,6 +45,7 @@ const defaultOfferValues = {
         },
       },
       jobType: 'FULLTIME',
+      location: '',
       monthYearReceived: '',
       negotiationStrategy: '',
     },
@@ -74,7 +75,7 @@ export default function OffersSubmissionPage() {
   return (
     <div className="fixed h-full w-full overflow-y-scroll">
       <div className="mb-20 flex justify-center">
-        <div className="my-5 block w-3/4 rounded-lg bg-white py-10 px-10 shadow-lg">
+        <div className="my-5 block w-full max-w-screen-md rounded-lg bg-white py-10 px-10 shadow-lg">
           <Breadcrumbs />
           <FormProvider {...formMethods}>
             <form onSubmit={formMethods.handleSubmit(onSubmit)}>
