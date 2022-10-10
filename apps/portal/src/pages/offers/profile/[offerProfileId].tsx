@@ -12,10 +12,10 @@ import {
 } from '@heroicons/react/24/outline';
 import { Button, Dialog, Tabs } from '@tih/ui';
 
-import { EducationBackgroundType } from '~/components/offers/profile/EducationCard';
 import EducationCard from '~/components/offers/profile/EducationCard';
 import OfferCard from '~/components/offers/profile/OfferCard';
 import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
+import { EducationBackgroundType } from '~/components/offers/types';
 
 export default function OfferProfile() {
   const [selectedTab, setSelectedTab] = useState('offers');
