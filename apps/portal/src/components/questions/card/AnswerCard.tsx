@@ -1,5 +1,8 @@
 import { format } from 'date-fns';
-import { ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
+import {
+  ChatBubbleBottomCenterTextIcon,
+  ChatBubbleLeftRightIcon,
+} from '@heroicons/react/24/outline';
 
 import type { VotingButtonsProps } from '../VotingButtons';
 import VotingButtons from '../VotingButtons';
@@ -40,7 +43,7 @@ export default function AnswerCard({
         <p>{content}</p>
         {commentCount !== undefined && (
           <div className="flex items-center gap-2 text-slate-500">
-            <ChatBubbleBottomCenterTextIcon className="h-6 w-6" />
+            <ChatBubbleLeftRightIcon className="h-6 w-6" />
             <p className="text-sm font-medium">
               {commentCount} {commentCount === 1 ? 'comment' : 'comments'}
             </p>
