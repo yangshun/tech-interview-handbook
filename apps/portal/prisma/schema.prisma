@@ -160,7 +160,7 @@ model ResumesCommentVote {
 
 model OffersProfile {
     id          String   @id @default(cuid())
-    profileName String
+    profileName String   @unique
     createdAt   DateTime @default(now())
 
     background OffersBackground?
@@ -250,10 +250,9 @@ enum JobType {
 }
 
 model OffersEducation {
-    id          String   @id @default(cuid())
-    type        String?
-    field       String?
-    isAttending Boolean?
+    id    String  @id @default(cuid())
+    type  String?
+    field String?
 
     // Add more fields
     school    String?

@@ -1,6 +1,7 @@
 import superjson from 'superjson';
 
 import { createRouter } from './context';
+import { offersRouter } from './offers';
 import { protectedExampleRouter } from './protected-example-router';
 import { resumesResumeUserRouter } from './resumes-resume-user-router';
 import { todosRouter } from './todos';
@@ -14,7 +15,8 @@ export const appRouter = createRouter()
   .merge('auth.', protectedExampleRouter)
   .merge('todos.', todosRouter)
   .merge('todos.user.', todosUserRouter)
-  .merge('resumes.resume.user.', resumesResumeUserRouter);
+  .merge('resumes.resume.user.', resumesResumeUserRouter)
+  .merge('offers.', offersRouter);
 
 // Export type definition of API
 export type AppRouter = typeof appRouter;
