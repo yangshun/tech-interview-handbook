@@ -140,7 +140,7 @@ export default function SubmitResumeForm() {
               <div className="mb-4">
                 <TextInput
                   {...register('title', { required: true })}
-                  errorMessage={errors?.title && 'Title cannot be empty!'}
+                  disabled={isLoading}
                   label="Title"
                   placeholder={TITLE_PLACEHOLDER}
                   required={true}
@@ -150,6 +150,7 @@ export default function SubmitResumeForm() {
               <div className="mb-4">
                 <Select
                   {...register('role', { required: true })}
+                  disabled={isLoading}
                   label="Role"
                   options={ROLES}
                   required={true}
@@ -159,6 +160,7 @@ export default function SubmitResumeForm() {
               <div className="mb-4">
                 <Select
                   {...register('experience', { required: true })}
+                  disabled={isLoading}
                   label="Experience Level"
                   options={EXPERIENCE}
                   required={true}
@@ -168,6 +170,7 @@ export default function SubmitResumeForm() {
               <div className="mb-4">
                 <Select
                   {...register('location', { required: true })}
+                  disabled={isLoading}
                   label="Location"
                   name="location"
                   options={LOCATION}
@@ -204,6 +207,7 @@ export default function SubmitResumeForm() {
                           {...register('file', { required: true })}
                           accept="application/pdf"
                           className="sr-only"
+                          disabled={isLoading}
                           id="file-upload"
                           name="file-upload"
                           type="file"
@@ -223,6 +227,7 @@ export default function SubmitResumeForm() {
               <div className="mb-8">
                 <TextArea
                   {...register('additionalInfo')}
+                  disabled={isLoading}
                   label="Additional Information"
                   placeholder={ADDITIONAL_INFO_PLACEHOLDER}
                   onChange={(val) => setValue('additionalInfo', val)}
@@ -259,12 +264,14 @@ export default function SubmitResumeForm() {
               </div>
               <CheckboxInput
                 {...register('isChecked', { required: true })}
+                disabled={isLoading}
                 label="I have read and will follow the guidelines stated."
                 onChange={(val) => setValue('isChecked', val)}
               />
               <div className="mt-4 flex justify-end gap-4">
                 <Button
                   addonPosition="start"
+                  disabled={isLoading}
                   display="inline"
                   label="Clear"
                   size="md"
@@ -273,6 +280,7 @@ export default function SubmitResumeForm() {
                 />
                 <Button
                   addonPosition="start"
+                  disabled={isLoading}
                   display="inline"
                   isLoading={isLoading}
                   label="Submit"
