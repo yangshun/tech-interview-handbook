@@ -2,8 +2,9 @@ import { ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
 import { Badge, Button } from '@tih/ui';
 
+import { useQuestionVote } from '~/utils/questions/useVote';
+
 import QuestionTypeBadge from '../QuestionTypeBadge';
-import type { VotingButtonsCallbackProps } from '../VotingButtons';
 import VotingButtons from '../VotingButtons';
 
 type UpvoteProps =
@@ -40,12 +41,11 @@ type ActionButtonProps =
 
 export type QuestionCardProps = ActionButtonProps &
   StatisticsProps &
-  UpvoteProps &
-  VotingButtonsCallbackProps & {
+  UpvoteProps & {
     company: string;
     content: string;
-    href?: string;
     location: string;
+    questionId: string;
     receivedCount: number;
     role: string;
     timestamp: string;
@@ -53,9 +53,7 @@ export type QuestionCardProps = ActionButtonProps &
   };
 
 export default function QuestionCard({
-  voteState,
-  onDownvote,
-  onUpvote,
+  questionId,
   company,
   answerCount,
   content,
@@ -71,14 +69,16 @@ export default function QuestionCard({
   role,
   location,
 }: QuestionCardProps) {
+  const { handleDownvote, handleUpvote, vote } = useQuestionVote(questionId);
+
   return (
-    <article className="flex gap-4 rounded-md border border-slate-300 bg-white p-4 hover:bg-slate-50">
+    <article className="flex gap-4 rounded-md border border-slate-300 bg-white p-4">
       {showVoteButtons && (
         <VotingButtons
           upvoteCount={upvoteCount}
-          voteState={voteState}
-          onDownvote={onDownvote}
-          onUpvote={onUpvote}
+          vote={vote}
+          onDownvote={handleDownvote}
+          onUpvote={handleUpvote}
         />
       )}
       <div className="flex flex-col gap-2">

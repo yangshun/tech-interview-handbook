@@ -3,14 +3,13 @@ import { useForm } from 'react-hook-form';
 import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button, Collapsible, Select, TextArea } from '@tih/ui';
 
+import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullQuestionCard from '~/components/questions/card/FullQuestionCard';
 import QuestionAnswerCard from '~/components/questions/card/QuestionAnswerCard';
-import CommentListItem from '~/components/questions/CommentListItem';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 
 import createSlug from '~/utils/questions/createSlug';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
-import { useVote } from '~/utils/questions/useVote';
 import { trpc } from '~/utils/trpc';
 
 export type AnswerQuestionData = {
@@ -40,7 +39,6 @@ export default function QuestionPage() {
   const commentRegister = useFormRegister(comRegister);
 
   const { questionId } = router.query;
-  const [handleUpvote, handleDownvote, voteState] = useVote();
 
   const { data: question } = trpc.useQuery([
     'questions.questions.getQuestionById',
@@ -114,12 +112,9 @@ export default function QuestionPage() {
       <div className="flex w-full  justify-center overflow-y-auto py-4 px-5">
         <div className="flex max-w-7xl flex-1 flex-col gap-2">
           <FullQuestionCard
-            voteState={voteState}
-            onDownvote={() => handleDownvote(questionId as string)}
-            onUpvote={() => handleUpvote(questionId as string)}
             {...question}
-            receivedCount={0} // TODO: Change to actual value
-            showVoteButtons={true}
+            questionId={question.id}
+            receivedCount={0}
             timestamp={question.seenAt.toLocaleDateString(undefined, {
               month: 'short',
               year: 'numeric',
@@ -178,8 +173,9 @@ export default function QuestionPage() {
               </form>
 
               {(comments ?? []).map((comment) => (
-                <CommentListItem
+                <AnswerCommentListItem
                   key={comment.id}
+                  answerCommentId={comment.id}
                   authorImageUrl={comment.userImage}
                   authorName={comment.user}
                   content={comment.content}
@@ -240,6 +236,7 @@ export default function QuestionPage() {
           {(answers ?? []).map((answer) => (
             <QuestionAnswerCard
               key={answer.id}
+              answerId={answer.id}
               authorImageUrl={answer.userImage}
               authorName={answer.user}
               commentCount={answer.numComments}

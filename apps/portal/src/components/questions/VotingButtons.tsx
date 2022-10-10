@@ -1,14 +1,18 @@
 import React from 'react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
+import type { Vote } from '@prisma/client';
 import type { ButtonSize } from '@tih/ui';
 import { Button } from '@tih/ui';
 
-import { VoteState } from '~/utils/questions/useVote';
+export type BackendVote = {
+  id: string;
+  vote: Vote;
+};
 
 export type VotingButtonsCallbackProps = {
   onDownvote: () => void;
   onUpvote: () => void;
-  voteState: VoteState;
+  vote: BackendVote | null;
 };
 
 export type VotingButtonsProps = VotingButtonsCallbackProps & {
@@ -17,16 +21,16 @@ export type VotingButtonsProps = VotingButtonsCallbackProps & {
 };
 
 export default function VotingButtons({
-  voteState,
+  vote,
   onDownvote,
   onUpvote,
   upvoteCount,
   size = 'md',
 }: VotingButtonsProps) {
-  const upvoteButtonVarient =
-    voteState === VoteState.UPVOTE ? 'secondary' : 'tertiary';
-  const downvoteButtonVarient =
-    voteState === VoteState.DOWNVOTE ? 'secondary' : 'tertiary';
+  const upvoteButtonVariant =
+    vote?.vote === 'UPVOTE' ? 'secondary' : 'tertiary';
+  const downvoteButtonVariant =
+    vote?.vote === 'DOWNVOTE' ? 'secondary' : 'tertiary';
   return (
     <div className="flex flex-col items-center">
       <Button
@@ -34,7 +38,7 @@ export default function VotingButtons({
         isLabelHidden={true}
         label="Upvote"
         size={size}
-        variant={upvoteButtonVarient}
+        variant={upvoteButtonVariant}
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
@@ -47,7 +51,7 @@ export default function VotingButtons({
         isLabelHidden={true}
         label="Downvote"
         size={size}
-        variant={downvoteButtonVarient}
+        variant={downvoteButtonVariant}
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();

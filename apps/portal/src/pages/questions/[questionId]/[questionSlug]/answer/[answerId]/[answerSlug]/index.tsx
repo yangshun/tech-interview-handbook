@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button, Select, TextArea } from '@tih/ui';
 
+import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullAnswerCard from '~/components/questions/card/FullAnswerCard';
-import CommentListItem from '~/components/questions/CommentListItem';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 
 import { useFormRegister } from '~/utils/questions/useFormRegister';
@@ -81,6 +81,7 @@ export default function QuestionPage() {
       <div className="flex w-full  justify-center overflow-y-auto py-4 px-5">
         <div className="flex max-w-7xl flex-1 flex-col gap-2">
           <FullAnswerCard
+            answerId={answer.id}
             authorImageUrl={answer.userImage}
             authorName={answer.user}
             content={answer.content}
@@ -138,8 +139,9 @@ export default function QuestionPage() {
             </form>
 
             {(comments ?? []).map((comment) => (
-              <CommentListItem
+              <AnswerCommentListItem
                 key={comment.id}
+                answerCommentId={comment.id}
                 authorImageUrl={comment.userImage}
                 authorName={comment.user}
                 content={comment.content}

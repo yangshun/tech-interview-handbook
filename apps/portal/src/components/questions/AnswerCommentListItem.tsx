@@ -1,8 +1,11 @@
 import { format } from 'date-fns';
 
+import { useAnswerCommentVote } from '~/utils/questions/useVote';
+
 import VotingButtons from './VotingButtons';
 
-export type CommentListItemProps = {
+export type AnswerCommentListItemProps = {
+  answerCommentId: string;
   authorImageUrl: string;
   authorName: string;
   content: string;
@@ -10,16 +13,26 @@ export type CommentListItemProps = {
   upvoteCount: number;
 };
 
-export default function CommentListItem({
+export default function AnswerCommentListItem({
   authorImageUrl,
   authorName,
   content,
   createdAt,
   upvoteCount,
-}: CommentListItemProps) {
+  answerCommentId,
+}: AnswerCommentListItemProps) {
+  const { handleDownvote, handleUpvote, vote } =
+    useAnswerCommentVote(answerCommentId);
+
   return (
     <div className="flex gap-4 border bg-white p-2 ">
-      <VotingButtons size="sm" upvoteCount={upvoteCount} />
+      <VotingButtons
+        size="sm"
+        upvoteCount={upvoteCount}
+        vote={vote}
+        onDownvote={handleDownvote}
+        onUpvote={handleUpvote}
+      />
       <div className="mt-1 flex flex-col gap-1">
         <div className="flex items-center gap-2">
           <img

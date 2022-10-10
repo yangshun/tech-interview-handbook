@@ -1,13 +1,13 @@
 import { format } from 'date-fns';
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 
-import type {
-  VotingButtonsCallbackProps,
-  VotingButtonsProps,
-} from '../VotingButtons';
+import { useAnswerVote } from '~/utils/questions/useVote';
+
+import type { VotingButtonsProps } from '../VotingButtons';
 import VotingButtons from '../VotingButtons';
 
-export type AnswerCardProps = VotingButtonsCallbackProps & {
+export type AnswerCardProps = {
+  answerId: string;
   authorImageUrl: string;
   authorName: string;
   commentCount?: number;
@@ -18,25 +18,24 @@ export type AnswerCardProps = VotingButtonsCallbackProps & {
 };
 
 export default function AnswerCard({
-  voteState,
-  onDownvote,
-  onUpvote,
+  answerId,
   authorName,
   authorImageUrl,
-  upvoteCount,
   content,
   createdAt,
   commentCount,
   votingButtonsSize,
+  upvoteCount,
 }: AnswerCardProps) {
+  const { handleUpvote, handleDownvote, vote } = useAnswerVote(answerId);
   return (
     <article className="flex gap-4 rounded-md border bg-white p-2">
       <VotingButtons
         size={votingButtonsSize}
         upvoteCount={upvoteCount}
-        voteState={voteState}
-        onDownvote={onDownvote}
-        onUpvote={onUpvote}
+        vote={vote}
+        onDownvote={handleDownvote}
+        onUpvote={handleUpvote}
       />
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">

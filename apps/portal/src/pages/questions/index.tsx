@@ -24,7 +24,6 @@ import {
   useSearchFilter,
   useSearchFilterSingle,
 } from '~/utils/questions/useSearchFilter';
-import { useVote } from '~/utils/questions/useVote';
 import { trpc } from '~/utils/trpc';
 
 export default function QuestionsHomePage() {
@@ -145,7 +144,6 @@ export default function QuestionsHomePage() {
   ]);
 
   const { pathname } = router;
-  const [handleDownvote, handleUpvote, voteState] = useVote();
   useEffect(() => {
     if (areFiltersInitialized) {
       // Router.replace used instead of router.replace to avoid
@@ -293,6 +291,7 @@ export default function QuestionsHomePage() {
                     question.content,
                   )}`}
                   location={question.location}
+                  questionId={question.id}
                   receivedCount={0}
                   role={question.role}
                   timestamp={question.seenAt.toLocaleDateString(undefined, {
@@ -301,9 +300,6 @@ export default function QuestionsHomePage() {
                   })}
                   type={question.type} // TODO: Implement received count
                   upvoteCount={question.numVotes}
-                  voteState={voteState}
-                  onDownvote={() => handleDownvote(question.id)}
-                  onUpvote={() => handleUpvote(question.id)}
                 />
               ))}
               {questions?.length === 0 && (
