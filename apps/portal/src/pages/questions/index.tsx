@@ -48,10 +48,6 @@ export default function QuestionsHomePage() {
   const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
     useSearchFilter('locations');
 
-  // TODO: Implement filtering
-
-  // const questions = useMemo(() => {
-
   const today = useMemo(() => new Date(), []);
   const startDate = useMemo(() => {
     return selectedQuestionAge === 'last-year'
@@ -75,16 +71,12 @@ export default function QuestionsHomePage() {
     },
   ]);
 
-  // Const questions = [];
-  // Return data;
-  // }, [selectedQuestionTypes, selectedQuestionAge]);
-
   const utils = trpc.useContext();
   const { mutate: createQuestion } = trpc.useMutation(
     'questions.questions.create',
     {
       onSuccess: () => {
-        // Utils.invalidateQueries('questions.questions.getQuestionsByFilter');
+        utils.invalidateQueries('questions.questions.getQuestionsByFilter');
       },
     },
   );

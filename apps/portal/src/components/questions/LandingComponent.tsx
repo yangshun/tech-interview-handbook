@@ -62,7 +62,9 @@ export default function LandingComponent({
               label="Type"
               options={QUESTION_TYPES}
               value={landingQueryData.questionType}
-              onChange={handleChangeType}
+              onChange={(value) => {
+                handleChangeType(value.toUpperCase() as QuestionsQuestionType);
+              }}
             />
           </div>
           <p>questions from</p>
