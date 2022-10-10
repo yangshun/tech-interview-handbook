@@ -86,8 +86,7 @@ export default function OfferAnalysis() {
       <h5 className="mb-2 text-center text-4xl font-bold text-gray-900">
         Result
       </h5>
-
-      <div className="mx-40">
+      <div>
         <Tabs
           label="Result Navigation"
           tabs={tabs}

@@ -1,9 +1,9 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 import { Collapsible, RadioList } from '@tih/ui';
 
-import FormRadioList from './FormRadioList';
-import FormSelect from './FormSelect';
-import FormTextInput from './FormTextInput';
+import FormRadioList from './components/FormRadioList';
+import FormSelect from './components/FormSelect';
+import FormTextInput from './components/FormTextInput';
 import {
   companyOptions,
   educationFieldOptions,

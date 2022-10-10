@@ -3,9 +3,11 @@ import { Select } from '@tih/ui';
 
 import OffersTable from '~/components/offers/OffersTable';
 import OffersTitle from '~/components/offers/OffersTitle';
+import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 
 export default function OffersHomePage() {
   const [jobTitleFilter, setjobTitleFilter] = useState('Software engineers');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [companyFilter, setCompanyFilter] = useState('All companies');
 
   return (
@@ -13,7 +15,7 @@ export default function OffersHomePage() {
       <div className="grid-rows grid h-1/2 bg-gray-100">
         <OffersTitle />
         <div className="flex items-start justify-center">
-          <div className="mt-4 flex items-center">
+          <div className="mt-4 flex items-end">
             Viewing offers for
             <div className="mx-4">
               <Select
@@ -43,25 +45,8 @@ export default function OffersHomePage() {
             </div>
             in
             <div className="ml-4">
-              <Select
-                isLabelHidden={true}
-                label="Select a company"
-                options={[
-                  {
-                    label: 'All companies',
-                    value: 'All companies',
-                  },
-                  {
-                    label: 'Shopee',
-                    value: 'Shopee',
-                  },
-                  {
-                    label: 'Meta',
-                    value: 'Meta',
-                  },
-                ]}
-                value={companyFilter}
-                onChange={setCompanyFilter}
+              <CompaniesTypeahead
+                onSelect={({ value }) => setCompanyFilter(value)}
               />
             </div>
           </div>

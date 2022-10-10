@@ -3,6 +3,8 @@
  *  Offer Profile
  */
 
+import type { MonthYear } from '../shared/MonthYearPicker';
+
 export enum JobType {
   FullTime = 'FULLTIME',
   Internship = 'INTERNSHIP',
@@ -33,16 +35,6 @@ type FullTimeJobData = {
   totalCompensation: Money;
 };
 
-export type FullTimeOfferFormData = {
-  comments: string;
-  companyId: string;
-  job: FullTimeJobData;
-  jobType: string;
-  location: string;
-  monthYearReceived: string;
-  negotiationStrategy: string;
-};
-
 type InternshipJobData = {
   internshipCycle: string;
   monthlySalary: Money;
@@ -51,17 +43,15 @@ type InternshipJobData = {
   title: string;
 };
 
-export type InternshipOfferFormData = {
+export type OfferDetailsFormData = {
   comments: string;
   companyId: string;
-  job: InternshipJobData;
+  job: FullTimeJobData | InternshipJobData;
   jobType: string;
   location: string;
-  monthYearReceived: string;
+  monthYearReceived: MonthYear;
   negotiationStrategy: string;
 };
-
-type OfferDetailsFormData = FullTimeOfferFormData | InternshipOfferFormData;
 
 type SpecificYoe = {
   domain: string;

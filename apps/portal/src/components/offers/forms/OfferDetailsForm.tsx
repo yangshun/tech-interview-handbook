@@ -10,9 +10,10 @@ import { PlusIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { Button } from '@tih/ui';
 
-import FormSelect from './FormSelect';
-import FormTextArea from './FormTextArea';
-import FormTextInput from './FormTextInput';
+import FormMonthYearPicker from './components/FormMonthYearPicker';
+import FormSelect from './components/FormSelect';
+import FormTextArea from './components/FormTextArea';
+import FormTextInput from './components/FormTextInput';
 import {
   companyOptions,
   internshipCycleOptions,
@@ -20,7 +21,7 @@ import {
   titleOptions,
   yearOptions,
 } from '../constants';
-import type { FullTimeOfferFormData, InternshipOfferFormData } from '../types';
+import type { OfferDetailsFormData } from '../types';
 import { JobType } from '../types';
 import { CURRENCY_OPTIONS } from '../util/currency/CurrencyEnum';
 
@@ -34,7 +35,7 @@ function FullTimeOfferDetailsForm({
   remove,
 }: FullTimeOfferDetailsFormProps) {
   const { register } = useFormContext<{
-    offers: Array<FullTimeOfferFormData>;
+    offers: Array<OfferDetailsFormData>;
   }>();
 
   return (
@@ -81,10 +82,7 @@ function FullTimeOfferDetailsForm({
           required={true}
           {...register(`offers.${index}.location`, { required: true })}
         />
-        <FormTextInput
-          label="Month Received"
-          placeholder="MMM/YYYY"
-          required={true}
+        <FormMonthYearPicker
           {...register(`offers.${index}.monthYearReceived`, { required: true })}
         />
       </div>
@@ -121,7 +119,9 @@ function FullTimeOfferDetailsForm({
               isLabelHidden={true}
               label="Currency"
               options={CURRENCY_OPTIONS}
-              {...register(`offers.${index}.job.base.currency`)}
+              {...register(`offers.${index}.job.base.currency`, {
+                required: true,
+              })}
             />
           }
           endAddOnType="element"
@@ -131,7 +131,7 @@ function FullTimeOfferDetailsForm({
           startAddOn="$"
           startAddOnType="label"
           type="number"
-          {...register(`offers.${index}.job.base.value`)}
+          {...register(`offers.${index}.job.base.value`, { required: true })}
         />
         <FormTextInput
           endAddOn={
@@ -140,7 +140,9 @@ function FullTimeOfferDetailsForm({
               isLabelHidden={true}
               label="Currency"
               options={CURRENCY_OPTIONS}
-              {...register(`offers.${index}.job.bonus.currency`)}
+              {...register(`offers.${index}.job.bonus.currency`, {
+                required: true,
+              })}
             />
           }
           endAddOnType="element"
@@ -150,7 +152,7 @@ function FullTimeOfferDetailsForm({
           startAddOn="$"
           startAddOnType="label"
           type="number"
-          {...register(`offers.${index}.job.bonus.value`)}
+          {...register(`offers.${index}.job.bonus.value`, { required: true })}
         />
       </div>
       <div className="mb-5 grid grid-cols-2 space-x-3">
@@ -161,7 +163,9 @@ function FullTimeOfferDetailsForm({
               isLabelHidden={true}
               label="Currency"
               options={CURRENCY_OPTIONS}
-              {...register(`offers.${index}.job.stocks.currency`)}
+              {...register(`offers.${index}.job.stocks.currency`, {
+                required: true,
+              })}
             />
           }
           endAddOnType="element"
@@ -171,7 +175,7 @@ function FullTimeOfferDetailsForm({
           startAddOn="$"
           startAddOnType="label"
           type="number"
-          {...register(`offers.${index}.job.stocks.value`)}
+          {...register(`offers.${index}.job.stocks.value`, { required: true })}
         />
       </div>
       <div className="mb-5">
@@ -251,7 +255,7 @@ function InternshipOfferDetailsForm({
   remove,
 }: InternshipOfferDetailsFormProps) {
   const { register } = useFormContext<{
-    offers: Array<InternshipOfferFormData>;
+    offers: Array<OfferDetailsFormData>;
   }>();
 
   return (
@@ -262,13 +266,19 @@ function InternshipOfferDetailsForm({
           label="Title"
           options={titleOptions}
           required={true}
-          {...register(`offers.${index}.job.title`)}
+          {...register(`offers.${index}.job.title`, {
+            minLength: 1,
+            required: true,
+          })}
         />
         <FormTextInput
           label="Focus / Specialization"
           placeholder="e.g. Front End"
           required={true}
-          {...register(`offers.${index}.job.specialization`)}
+          {...register(`offers.${index}.job.specialization`, {
+            minLength: 1,
+            required: true,
+          })}
         />
       </div>
       <div className="mb-5 grid grid-cols-2 space-x-3">
@@ -289,13 +299,7 @@ function InternshipOfferDetailsForm({
           {...register(`offers.${index}.location`)}
         />
       </div>
-      <div className="mb-5 grid grid-cols-3 space-x-3">
-        <FormTextInput
-          label="Date Received"
-          placeholder="MMM/YYYY"
-          required={true}
-          {...register(`offers.${index}.monthYearReceived`)}
-        />
+      <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
           label="Internship Cycle"
@@ -311,6 +315,12 @@ function InternshipOfferDetailsForm({
           required={true}
           value="2023"
           {...register(`offers.${index}.job.startYear`)}
+        />
+      </div>
+      <div className="mb-5 flex items-center space-x-9">
+        <p className="text-sm">Date received:</p>
+        <FormMonthYearPicker
+          {...register(`offers.${index}.monthYearReceived`, { required: true })}
         />
       </div>
       <div className="mb-5">
