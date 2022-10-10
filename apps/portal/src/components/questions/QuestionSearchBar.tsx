@@ -1,5 +1,8 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Select, TextInput } from '@tih/ui';
+import {
+  AdjustmentsHorizontalIcon,
+  MagnifyingGlassIcon,
+} from '@heroicons/react/24/outline';
+import { Button, Select, TextInput } from '@tih/ui';
 
 export type SortOption = {
   label: string;
@@ -7,6 +10,7 @@ export type SortOption = {
 };
 
 export type QuestionSearchBarProps<SortOptions extends Array<SortOption>> = {
+  onFilterOptionsToggle: () => void;
   onSortChange?: (sortValue: SortOptions[number]['value']) => void;
   sortOptions: SortOptions;
   sortValue: SortOptions[number]['value'];
@@ -18,6 +22,7 @@ export default function QuestionSearchBar<
   onSortChange,
   sortOptions,
   sortValue,
+  onFilterOptionsToggle,
 }: QuestionSearchBarProps<SortOptions>) {
   return (
     <div className="flex items-center gap-2">
@@ -39,7 +44,15 @@ export default function QuestionSearchBar<
         label="Sort by"
         options={sortOptions}
         value={sortValue}
-        onChange={onSortChange}></Select>
+        onChange={onSortChange}
+      />
+      <Button
+        addonPosition="start"
+        icon={AdjustmentsHorizontalIcon}
+        label="Filter options"
+        variant="tertiary"
+        onClick={onFilterOptionsToggle}
+      />
     </div>
   );
 }
