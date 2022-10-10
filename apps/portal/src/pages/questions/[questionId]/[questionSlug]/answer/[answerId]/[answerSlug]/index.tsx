@@ -86,7 +86,7 @@ export default function QuestionPage() {
             authorName={answer.user}
             content={answer.content}
             createdAt={answer.createdAt}
-            upvoteCount={0}
+            upvoteCount={answer.numVotes}
           />
           <div className="mx-2">
             <form

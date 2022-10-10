@@ -124,7 +124,16 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
   const utils = trpc.useContext();
 
   const onVoteUpdate = useCallback(() => {
+    // TODO: Optimise query invalidation
     utils.invalidateQueries([query, { [idKey]: id } as any]);
+    utils.invalidateQueries(['questions.questions.getQuestionsByFilter']);
+    utils.invalidateQueries(['questions.questions.getQuestionById']);
+    utils.invalidateQueries(['questions.answers.getAnswers']);
+    utils.invalidateQueries(['questions.answers.getAnswerById']);
+    utils.invalidateQueries([
+      'questions.questions.comments.getQuestionComments',
+    ]);
+    utils.invalidateQueries(['questions.answers.comments.getAnswerComments']);
   }, [id, idKey, utils, query]);
 
   const { data } = trpc.useQuery([
