@@ -8,6 +8,34 @@ export type Question = {
   numComments: number;
   numVotes: number;
   role: string;
+  seenAt: Date;
+  type: stringl;
   updatedAt: Date;
+  user: string;
+};
+
+export type AnswerComment = {
+  content: string;
+  createdAt: Date;
+  id: string;
+  numVotes: number;
+  updatedAt: Date;
+  user: string;
+};
+
+export type Answer = {
+  content: string;
+  createdAt: Date;
+  id: string;
+  numComments: number;
+  numVotes: number;
+  user: string;
+};
+
+export type QuestionComment = {
+  content: string;
+  createdAt: Date;
+  id: string;
+  numVotes: number;
   user: string;
 };

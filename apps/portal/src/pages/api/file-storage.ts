@@ -2,6 +2,7 @@ import formidable from 'formidable';
 import * as fs from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { env } from '~/env/server.mjs';
 import { supabase } from '~/utils/supabase';
 
 export const config = {
@@ -9,6 +10,8 @@ export const config = {
     bodyParser: false,
   },
 };
+
+const BASE_FILE_URL = `${env.SUPABASE_URL}/storage/v1/object/public`;
 
 export default async function handler(
   req: NextApiRequest,
@@ -38,28 +41,12 @@ export default async function handler(
           throw error;
         }
 
-        return res.status(200).json({
-          url: filePath,
+        return res.status(201).json({
+          url: `${BASE_FILE_URL}/${key}/${filePath}`,
         });
       });
     } catch (error: unknown) {
       return Promise.reject(error);
     }
-  }
-
-  if (req.method === 'GET') {
-    const { key, url } = req.query;
-
-    const { data, error } = await supabase.storage
-      .from(`public/${key as string}`)
-      .download(url as string);
-
-    if (error || data == null) {
-      throw error;
-    }
-
-    const arrayBuffer = await data.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-    res.status(200).send(buffer);
   }
 }

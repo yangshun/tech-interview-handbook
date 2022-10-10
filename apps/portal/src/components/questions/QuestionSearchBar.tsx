@@ -30,10 +30,13 @@ export default function QuestionSearchBar<
           startAddOnType="icon"
         />
       </div>
-      <span className="pl-3 pr-1 pt-1 text-sm">Sort by:</span>
+      <span aria-hidden={true} className="pl-3 pr-1 pt-1 text-sm">
+        Sort by:
+      </span>
       <Select
         display="inline"
-        label=""
+        isLabelHidden={true}
+        label="Sort by"
         options={sortOptions}
         value={sortValue}
         onChange={onSortChange}></Select>

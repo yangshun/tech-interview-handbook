@@ -2,14 +2,14 @@ import type { ProductNavigationItems } from '~/components/global/ProductNavigati
 
 const navigation: ProductNavigationItems = [
   { href: '/questions', name: 'Home' },
-  { href: '#', name: 'My Lists' },
-  { href: '#', name: 'My Questions' },
-  { href: '#', name: 'History' },
+  { href: '/questions', name: 'My Lists' },
+  { href: '/questions', name: 'My Questions' },
+  { href: '/questions', name: 'History' },
 ];
 
 const config = {
   navigation,
-  showGlobalNav: true,
+  showGlobalNav: false,
   title: 'Questions Bank',
 };
 

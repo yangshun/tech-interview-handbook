@@ -23,6 +23,9 @@ const buttonVariants: ReadonlyArray<ButtonVariant> = [
   'tertiary',
   'special',
   'success',
+  'danger',
+  'warning',
+  'info',
 ];
 
 export default {
