@@ -2,7 +2,7 @@ import crypto, { randomUUID } from "crypto";
 import { z } from "zod";
 import { Prisma } from "@prisma/client";
 
-import { createProtectedRouter } from "./context";
+import { createRouter } from "./context";
 
 const valuation = z.object({
     currency: z.string(),
@@ -50,7 +50,7 @@ const education = z.object({
     type: z.string().optional(),
 })
 
-export const offersProfileRouter = createProtectedRouter().mutation(
+export const offersProfileRouter = createRouter().mutation(
     'create',
     {
         input: z.object({
