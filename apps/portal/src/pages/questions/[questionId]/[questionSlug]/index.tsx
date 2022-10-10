@@ -126,7 +126,7 @@ export default function QuestionPage() {
             upvoteCount={question.numVotes}
           />
           <div className="mx-2">
-            <Collapsible label={`${question.numComments} comment(s)`}>
+            <Collapsible label={`${(comments ?? []).length} comment(s)`}>
               <form
                 className="mb-2"
                 onSubmit={handleCommentSubmit(handleSubmitComment)}>
@@ -201,7 +201,7 @@ export default function QuestionPage() {
             />
             <div className="mt-3 mb-1 flex justify-between">
               <div className="flex items-baseline justify-start gap-2">
-                <p>{question.numAnswers} answers</p>
+                <p>{(answers ?? []).length} answers</p>
                 <div className="flex items-baseline gap-2">
                   <span aria-hidden={true} className="text-sm">
                     Sort by:
