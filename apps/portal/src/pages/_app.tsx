@@ -53,13 +53,18 @@ export default withTRPC<AppRouter>({
         }),
         httpBatchLink({ url }),
       ],
+      /**
+       * @link https://tanstack.com/query/v4/docs/reference/QueryClient
+       */
+      queryClientConfig: {
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      },
       transformer: superjson,
       url,
-      /**
-       * @link https://react-query.tanstack.com/reference/QueryClient
-       */
-      // queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
-
       // To use SSR properly you need to forward the client's headers to the server
       // headers: () => {
       //   if (ctx?.req) {
