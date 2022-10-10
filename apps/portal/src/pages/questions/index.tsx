@@ -310,18 +310,17 @@ export default function QuestionsHomePage() {
           <h2 className="px-4 text-xl font-semibold">Filter by</h2>
           {filterSidebar}
         </aside>
-        <div className="lg:hidden">
-          <SlideOut
-            enterFrom="end"
-            isShown={filterDrawerOpen}
-            size="sm"
-            title="Filter by"
-            onClose={() => {
-              setFilterDrawerOpen(false);
-            }}>
-            {filterSidebar}
-          </SlideOut>
-        </div>
+        <SlideOut
+          className="lg:hidden"
+          enterFrom="end"
+          isShown={filterDrawerOpen}
+          size="sm"
+          title="Filter by"
+          onClose={() => {
+            setFilterDrawerOpen(false);
+          }}>
+          {filterSidebar}
+        </SlideOut>
       </div>
     </main>
   );
