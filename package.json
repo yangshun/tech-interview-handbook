@@ -16,7 +16,7 @@
     "dev:ui": "turbo dev --filter=storybook... --filter=ui...",
     "dev:website": "turbo dev --filter=website...",
     "dev:all": "turbo dev --no-cache --parallel --continue",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{js,jsx,cjs,mjs,ts,tsx,md,mdx}\"",
     "lint": "turbo lint",
     "test": "turbo test",
     "tsc": "turbo tsc"
