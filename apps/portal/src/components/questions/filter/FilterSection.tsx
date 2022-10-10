@@ -10,7 +10,7 @@ export type FilterOption<V extends string = string> = {
   value: V;
 };
 
-export type FilterChoices<V extends string = string> = Array<
+export type FilterChoices<V extends string = string> = ReadonlyArray<
   Omit<FilterOption<V>, 'checked'>
 >;
 

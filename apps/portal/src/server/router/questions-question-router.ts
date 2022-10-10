@@ -9,10 +9,12 @@ import type { Question } from '~/types/questions';
 export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
-      company: z.string().optional(),
-      location: z.string().optional(),
-      questionType: z.nativeEnum(QuestionsQuestionType),
-      role: z.string().optional(),
+      companies: z.string().array(),
+      endDate: z.date(),
+      locations: z.string().array(),
+      questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
+      roles: z.string().array(),
+      startDate: z.date().optional(),
     }),
     async resolve({ ctx, input }) {
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
@@ -42,7 +44,13 @@ export const questionsQuestionRouter = createProtectedRouter()
           createdAt: 'desc',
         },
         where: {
-          questionType: input.questionType,
+          ...(input.questionTypes.length > 0
+            ? {
+                questionType: {
+                  in: input.questionTypes,
+                },
+              }
+            : {}),
         },
       });
       return questionsData
@@ -50,11 +58,17 @@ export const questionsQuestionRouter = createProtectedRouter()
           for (let i = 0; i < data.encounters.length; i++) {
             const encounter = data.encounters[i];
             const matchCompany =
-              !input.company || encounter.company === input.company;
+              input.companies.length === 0 ||
+              input.companies.includes(encounter.company);
             const matchLocation =
-              !input.location || encounter.location === input.location;
-            const matchRole = !input.company || encounter.role === input.role;
-            if (matchCompany && matchLocation && matchRole) {
+              input.locations.length === 0 ||
+              input.locations.includes(encounter.location);
+            const matchRole =
+              input.roles.length === 0 || input.roles.includes(encounter.role);
+            const matchDate =
+              (!input.startDate || encounter.seenAt >= input.startDate) &&
+              encounter.seenAt <= input.endDate;
+            if (matchCompany && matchLocation && matchRole && matchDate) {
               return true;
             }
           }
@@ -174,7 +188,7 @@ export const questionsQuestionRouter = createProtectedRouter()
       content: z.string(),
       location: z.string(),
       questionType: z.nativeEnum(QuestionsQuestionType),
-      role: z.string().optional(),
+      role: z.string(),
       seenAt: z.date(),
     }),
     async resolve({ ctx, input }) {
@@ -183,6 +197,17 @@ export const questionsQuestionRouter = createProtectedRouter()
       const question = await ctx.prisma.questionsQuestion.create({
         data: {
           content: input.content,
+          encounters: {
+            create: [
+              {
+                company: input.company,
+                location: input.location,
+                role: input.role,
+                seenAt: input.seenAt,
+                userId,
+              },
+            ],
+          },
           questionType: input.questionType,
           userId,
         },

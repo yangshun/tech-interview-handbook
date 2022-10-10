@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowSmallRightIcon } from '@heroicons/react/24/outline';
+import type { QuestionsQuestionType } from '@prisma/client';
 import { Button, Select } from '@tih/ui';
 
 import {
@@ -11,7 +12,7 @@ import {
 export type LandingQueryData = {
   company: string;
   location: string;
-  questionType: string;
+  questionType: QuestionsQuestionType;
 };
 
 export type LandingComponentProps = {
@@ -22,9 +23,9 @@ export default function LandingComponent({
   onLanded: handleLandingQuery,
 }: LandingComponentProps) {
   const [landingQueryData, setLandingQueryData] = useState<LandingQueryData>({
-    company: 'google',
-    location: 'singapore',
-    questionType: 'coding',
+    company: 'Google',
+    location: 'Singapore',
+    questionType: 'CODING',
   });
 
   const handleChangeCompany = (company: string) => {
@@ -35,7 +36,7 @@ export default function LandingComponent({
     setLandingQueryData((prev) => ({ ...prev, location }));
   };
 
-  const handleChangeType = (questionType: string) => {
+  const handleChangeType = (questionType: QuestionsQuestionType) => {
     setLandingQueryData((prev) => ({ ...prev, questionType }));
   };
 
@@ -61,7 +62,9 @@ export default function LandingComponent({
               label="Type"
               options={QUESTION_TYPES}
               value={landingQueryData.questionType}
-              onChange={handleChangeType}
+              onChange={(value) => {
+                handleChangeType(value.toUpperCase() as QuestionsQuestionType);
+              }}
             />
           </div>
           <p>questions from</p>

@@ -1,3 +1,4 @@
+import { subMonths, subYears } from 'date-fns';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import type { QuestionsQuestionType } from '@prisma/client';
@@ -9,6 +10,7 @@ import type { LandingQueryData } from '~/components/questions/LandingComponent';
 import LandingComponent from '~/components/questions/LandingComponent';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
+import type { QuestionAge } from '~/utils/questions/constants';
 import {
   COMPANIES,
   LOCATIONS,
@@ -31,24 +33,41 @@ export default function QuestionsHomePage() {
     selectedQuestionTypes,
     setSelectedQuestionTypes,
     areQuestionTypesInitialized,
-  ] = useSearchFilter<QuestionsQuestionType>('questionTypes');
+  ] = useSearchFilter<QuestionsQuestionType>('questionTypes', {
+    queryParamToValue: (param) => {
+      return param.toUpperCase() as QuestionsQuestionType;
+    },
+  });
   const [
     selectedQuestionAge,
     setSelectedQuestionAge,
     isQuestionAgeInitialized,
-  ] = useSearchFilterSingle<string>('questionAge', 'all');
+  ] = useSearchFilterSingle<QuestionAge>('questionAge', {
+    defaultValue: 'all',
+  });
   const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
     useSearchFilter('locations');
 
-  // TODO: Implement filtering
+  const today = useMemo(() => new Date(), []);
+  const startDate = useMemo(() => {
+    return selectedQuestionAge === 'last-year'
+      ? subYears(new Date(), 1)
+      : selectedQuestionAge === 'last-6-months'
+      ? subMonths(new Date(), 6)
+      : selectedQuestionAge === 'last-month'
+      ? subMonths(new Date(), 1)
+      : undefined;
+  }, [selectedQuestionAge]);
+
   const { data: questions } = trpc.useQuery([
     'questions.questions.getQuestionsByFilter',
     {
-      // TODO: Update when query accepts multiple question types
-      questionType:
-        selectedQuestionTypes.length > 0
-          ? (selectedQuestionTypes[0].toUpperCase() as QuestionsQuestionType)
-          : 'CODING',
+      companies: selectedCompanies,
+      endDate: today,
+      locations: selectedLocations,
+      questionTypes: selectedQuestionTypes,
+      roles: [],
+      startDate,
     },
   ]);
 
@@ -214,6 +233,7 @@ export default function QuestionsHomePage() {
                     content: data.questionContent,
                     location: data.location,
                     questionType: data.questionType,
+                    role: data.role,
                     seenAt: data.date,
                   });
                 }}

@@ -3,17 +3,10 @@ import { useForm } from 'react-hook-form';
 import {
   BuildingOffice2Icon,
   CalendarDaysIcon,
-  // UserIcon,
+  UserIcon,
 } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
-import {
-  Button,
-  Collapsible,
-  Select,
-  // HorizontalDivider,
-  TextArea,
-  TextInput,
-} from '@tih/ui';
+import { Button, Collapsible, Select, TextArea, TextInput } from '@tih/ui';
 
 import { QUESTION_TYPES } from '~/utils/questions/constants';
 import {
@@ -21,7 +14,6 @@ import {
   useSelectRegister,
 } from '~/utils/questions/useFormRegister';
 
-// Import SimilarQuestionCard from './card/SimilarQuestionCard';
 import Checkbox from './ui-patch/Checkbox';
 
 export type ContributeQuestionData = {
@@ -31,6 +23,7 @@ export type ContributeQuestionData = {
   position: string;
   questionContent: string;
   questionType: QuestionsQuestionType;
+  role: string;
 };
 
 export type ContributeQuestionFormProps = {
@@ -99,19 +92,21 @@ export default function ContributeQuestionForm({
           <div className="min-w-[150px] max-w-[300px] flex-1">
             <TextInput
               label="Location"
+              required={true}
               startAddOn={CalendarDaysIcon}
               startAddOnType="icon"
               {...register('location')}
             />
           </div>
-          {/* <div className="min-w-[150px] max-w-[200px] flex-1">
+          <div className="min-w-[150px] max-w-[200px] flex-1">
             <TextInput
-              label="Position <TODO>"
+              label="Role"
+              required={true}
               startAddOn={UserIcon}
               startAddOnType="icon"
-              {...register('position')}
+              {...register('role')}
             />
-          </div> */}
+          </div>
         </div>
       </Collapsible>
       {/* <div className="w-full">

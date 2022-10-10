@@ -5,13 +5,13 @@ import type { FilterChoices } from '~/components/questions/filter/FilterSection'
 export const COMPANIES: FilterChoices = [
   {
     label: 'Google',
-    value: 'google',
+    value: 'Google',
   },
   {
     label: 'Meta',
-    value: 'meta',
+    value: 'Meta',
   },
-];
+] as const;
 
 // Code, design, behavioral
 export const QUESTION_TYPES: FilterChoices<QuestionsQuestionType> = [
@@ -27,9 +27,11 @@ export const QUESTION_TYPES: FilterChoices<QuestionsQuestionType> = [
     label: 'Behavioral',
     value: 'BEHAVIORAL',
   },
-];
+] as const;
 
-export const QUESTION_AGES: FilterChoices = [
+export type QuestionAge = 'all' | 'last-6-months' | 'last-month' | 'last-year';
+
+export const QUESTION_AGES: FilterChoices<QuestionAge> = [
   {
     label: 'Last month',
     value: 'last-month',
@@ -46,16 +48,16 @@ export const QUESTION_AGES: FilterChoices = [
     label: 'All',
     value: 'all',
   },
-];
+] as const;
 
 export const LOCATIONS: FilterChoices = [
   {
     label: 'Singapore',
-    value: 'singapore',
+    value: 'Singapore',
   },
   {
     label: 'Menlo Park',
-    value: 'menlopark',
+    value: 'Menlo Park',
   },
   {
     label: 'California',
@@ -63,13 +65,13 @@ export const LOCATIONS: FilterChoices = [
   },
   {
     label: 'Hong Kong',
-    value: 'hongkong',
+    value: 'Hong Kong',
   },
   {
     label: 'Taiwan',
-    value: 'taiwan',
+    value: 'Taiwan',
   },
-];
+] as const;
 
 export const SAMPLE_QUESTION = {
   answerCount: 10,

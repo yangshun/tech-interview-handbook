@@ -3,8 +3,12 @@ import { useCallback, useEffect, useState } from 'react';
 
 export const useSearchFilter = <Value extends string = string>(
   name: string,
-  defaultValues?: Array<Value>,
+  opts: {
+    defaultValues?: Array<Value>;
+    queryParamToValue?: (param: string) => Value;
+  } = {},
 ) => {
+  const { defaultValues, queryParamToValue = (param) => param } = opts;
   const [isInitialized, setIsInitialized] = useState(false);
   const router = useRouter();
 
@@ -16,7 +20,7 @@ export const useSearchFilter = <Value extends string = string>(
       const query = router.query[name];
       if (query) {
         const queryValues = Array.isArray(query) ? query : [query];
-        setFilters(queryValues as Array<Value>);
+        setFilters(queryValues.map(queryParamToValue) as Array<Value>);
       } else {
         // Try to load from local storage
         const localStorageValue = localStorage.getItem(name);
@@ -34,7 +38,7 @@ export const useSearchFilter = <Value extends string = string>(
       }
       setIsInitialized(true);
     }
-  }, [isInitialized, name, router]);
+  }, [isInitialized, name, queryParamToValue, router]);
 
   const setFiltersCallback = useCallback(
     (newFilters: Array<Value>) => {
@@ -56,11 +60,16 @@ export const useSearchFilter = <Value extends string = string>(
 
 export const useSearchFilterSingle = <Value extends string = string>(
   name: string,
-  defaultValue: Value,
+  opts: {
+    defaultValue?: Value;
+    queryParamToValue?: (param: string) => Value;
+  } = {},
 ) => {
-  const [filters, setFilters, isInitialized] = useSearchFilter(name, [
-    defaultValue,
-  ]);
+  const { defaultValue, queryParamToValue } = opts;
+  const [filters, setFilters, isInitialized] = useSearchFilter(name, {
+    defaultValues: defaultValue !== undefined ? [defaultValue] : undefined,
+    queryParamToValue,
+  });
 
   return [
     filters[0],
