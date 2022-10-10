@@ -29,6 +29,7 @@ export default function QuestionPage() {
   const {
     register: ansRegister,
     handleSubmit,
+    reset: resetAnswer,
     formState: { isDirty, isValid },
   } = useForm<AnswerQuestionData>({ mode: 'onChange' });
   const answerRegister = useFormRegister(ansRegister);
@@ -86,6 +87,7 @@ export default function QuestionPage() {
       content: data.answerContent,
       questionId: questionId as string,
     });
+    resetAnswer();
   };
 
   const handleSubmitComment = (data: QuestionCommentData) => {

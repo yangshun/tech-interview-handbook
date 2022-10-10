@@ -41,6 +41,7 @@ type ActionButtonProps =
 export type QuestionCardProps = ActionButtonProps &
   StatisticsProps &
   UpvoteProps & {
+    company: string;
     content: string;
     href?: string;
     location: string;
@@ -51,6 +52,7 @@ export type QuestionCardProps = ActionButtonProps &
   };
 
 export default function QuestionCard({
+  company,
   answerCount,
   content,
   // ReceivedCount,
@@ -70,7 +72,8 @@ export default function QuestionCard({
       {showVoteButtons && <VotingButtons upvoteCount={upvoteCount} />}
       <div className="flex flex-col gap-2">
         <div className="flex items-baseline justify-between">
-          <div className="flex items-center gap-2 text-slate-500">
+          <div className="flex items-baseline gap-2 text-slate-500">
+            <h2 className="ml-1 text-lg">{company}</h2>
             <Badge label={type} variant="primary" />
             <p className="text-xs">
               {timestamp} · {location} · {role}

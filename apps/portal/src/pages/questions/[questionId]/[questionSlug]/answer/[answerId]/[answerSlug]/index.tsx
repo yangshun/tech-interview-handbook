@@ -47,7 +47,7 @@ export default function QuestionPage() {
     'questions.answers.comments.create',
     {
       onSuccess: () => {
-        utils.invalidateQuery([
+        utils.invalidateQueries([
           'questions.answers.comments.getAnswerComments',
           { answerId: answerId as string },
         ]);
