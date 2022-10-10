@@ -46,13 +46,15 @@ export default function QuestionSearchBar<
         value={sortValue}
         onChange={onSortChange}
       />
-      <Button
-        addonPosition="start"
-        icon={AdjustmentsHorizontalIcon}
-        label="Filter options"
-        variant="tertiary"
-        onClick={onFilterOptionsToggle}
-      />
+      <div className="lg:hidden">
+        <Button
+          addonPosition="start"
+          icon={AdjustmentsHorizontalIcon}
+          label="Filter options"
+          variant="tertiary"
+          onClick={onFilterOptionsToggle}
+        />
+      </div>
     </div>
   );
 }

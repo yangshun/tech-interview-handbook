@@ -27,13 +27,6 @@ export const useSearchFilter = <Value extends string = string>(
         if (localStorageValue !== null) {
           const loadedFilters = JSON.parse(localStorageValue);
           setFilters(loadedFilters);
-          router.replace({
-            pathname: router.pathname,
-            query: {
-              ...router.query,
-              [name]: loadedFilters,
-            },
-          });
         }
       }
       setIsInitialized(true);
