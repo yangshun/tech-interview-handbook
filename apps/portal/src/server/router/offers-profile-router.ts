@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import crypto, { randomUUID } from "crypto";
 import { z } from "zod";
 import { Prisma } from "@prisma/client";
 
@@ -61,7 +61,7 @@ export const offersProfileRouter = createProtectedRouter().mutation(
                     domain: z.string(),
                     yoe: z.number()
                 })),
-                totalYoe: z.number(),
+                totalYoe: z.number().optional(),
             }),
             offers: z.array(offer)
         }),
@@ -90,9 +90,9 @@ export const offersProfileRouter = createProtectedRouter().mutation(
                             experiences: {
                                 create:
                                     input.background.experiences.map((x) => {
-                                        if (x.jobType === "INTERN" && x.totalCompensation?.currency !== undefined && x.totalCompensation.value !== undefined) {
+                                        if (x.jobType === "FULLTIME" && x.totalCompensation?.currency !== undefined && x.totalCompensation.value !== undefined) {
                                             return {
-                                                companyId: {
+                                                company: {
                                                     connect: {
                                                         id: x.companyId
                                                     }
@@ -110,9 +110,9 @@ export const offersProfileRouter = createProtectedRouter().mutation(
                                                 },
                                             }
                                         }
-                                        if (x.jobType === "FULLTIME" && x.monthlySalary?.currency !== undefined && x.monthlySalary.value !== undefined) {
+                                        if (x.jobType === "INTERN" && x.monthlySalary?.currency !== undefined && x.monthlySalary.value !== undefined) {
                                             return {
-                                                companyId: {
+                                                company: {
                                                     connect: {
                                                         id: x.companyId
                                                     }
@@ -148,22 +148,22 @@ export const offersProfileRouter = createProtectedRouter().mutation(
                     offers: {
                         create:
                             input.offers.map((x) => {
-                                if (x.jobType === "INTERN" || x.jobType === "FULLTIME") {
+                                if (x.jobType === "INTERN"  && x.job.internshipCycle !== undefined && x.job.monthlySalary?.currency !== undefined && x.job.monthlySalary.value !== undefined && x.job.startYear !== undefined) {
                                     return {
-                                        // OffersIntern: {
-                                        //     create: {
-                                        //         internshipCycle: x.job.internshipCycle,
-                                        //         monthlySalary: {
-                                        //             create: {
-                                        //                 currency: x.job.monthlySalary?.currency,
-                                        //                 value: x.job.monthlySalary?.value
-                                        //             }
-                                        //         },
-                                        //         specialization: x.job.specialization,
-                                        //         startYear: x.job.startYear,
-                                        //         title: x.job.title,
-                                        //     }
-                                        // },
+                                        OffersIntern: {
+                                            create: {
+                                                internshipCycle: x.job.internshipCycle,
+                                                monthlySalary: {
+                                                    create: {
+                                                        currency: x.job.monthlySalary?.currency,
+                                                        value: x.job.monthlySalary?.value
+                                                    }
+                                                },
+                                                specialization: x.job.specialization,
+                                                startYear: x.job.startYear,
+                                                title: x.job.title,
+                                            }
+                                        },
                                         comments: x.comments,
                                         company: {
                                             connect: {
@@ -176,123 +176,91 @@ export const offersProfileRouter = createProtectedRouter().mutation(
                                         negotiationStrategy: x.negotiationStrategy
                                     }
                                 }
-                                // If (x.jobType === "FULLTIME") {
-                                //     return {
-                                //         // OffersFullTime: {
-                                //         //         create: {
-                                //         //             baseSalaryId: {
-                                //         //                 create: {
-                                //         //                     currency: x.job.base?.currency,
-                                //         //                     value: x.job.base?.value
-                                //         //                 }
-                                //         //             },
-                                //         //             bonusId: {
-                                //         //                 create: {
-                                //         //                     currency: x.job.bonus?.currency,
-                                //         //                     value: x.job.bonus?.value
-                                //         //                 }
-                                //         //             },
-                                //         //             level: x.job.level,
-                                //         //             specialization: x.job.specialization,
-                                //         //             startYear: x.job.startYear,
-                                //         //             stocks: {
-                                //         //                 create: {
-                                //         //                     currency: x.job.stocks?.currency,
-                                //         //                     value: x.job.stocks?.value,
-                                //         //                 }
-                                //         //             },
-                                //         //             title: x.job.title,
-                                //         //         }
-                                //         //     },
-                                //         comments: x.comments,
-                                //         company: {
-                                //             connect: {
-                                //                 id: x.companyId
-                                //             }
-                                //         },
-                                //         jobType: x.jobType,
-                                //         location: x.location,
-                                //         monthYearReceived: x.monthYearReceived,
-                                //         negotiationStrategy: x.negotiationStrategy
-                                //     }
-                                // }
+                                if (x.jobType === "FULLTIME" && x.job.base?.currency !== undefined && x.job.base?.value !== undefined && x.job.bonus?.currency !== undefined && x.job.bonus?.value !== undefined && x.job.stocks?.currency !== undefined && x.job.stocks?.value !== undefined && x.job.totalCompensation?.currency !== undefined && x.job.totalCompensation?.value !== undefined && x.job.level !== undefined) {
+                                    return {
+                                        OffersFullTime: {
+                                                create: {
+                                                    baseSalary: {
+                                                        create: {
+                                                            currency: x.job.base?.currency,
+                                                            value: x.job.base?.value
+                                                        }
+                                                    },
+                                                    bonus: {
+                                                        create: {
+                                                            currency: x.job.bonus?.currency,
+                                                            value: x.job.bonus?.value
+                                                        }
+                                                    },
+                                                    level: x.job.level,
+                                                    specialization: x.job.specialization,
+                                                    stocks: {
+                                                        create: {
+                                                            currency: x.job.stocks?.currency,
+                                                            value: x.job.stocks?.value,
+                                                        }
+                                                    },
+                                                    title: x.job.title,
+                                                    totalCompensation: {
+                                                        create: {
+                                                            currency: x.job.totalCompensation?.currency,
+                                                            value: x.job.totalCompensation?.value,
+                                                        }
+                                                    },
+                                                }
+                                            },
+                                        comments: x.comments,
+                                        company: {
+                                            connect: {
+                                                id: x.companyId
+                                            }
+                                        },
+                                        jobType: x.jobType,
+                                        location: x.location,
+                                        monthYearReceived: x.monthYearReceived,
+                                        negotiationStrategy: x.negotiationStrategy
+                                    }
+                                }
 
                                 // Throw error
                                 throw Prisma.PrismaClientKnownRequestError
                             })
                     },
-                    profileName: "anonymous account",
+                    profileName: randomUUID(),
                 },
-                // Include: {
-                //     select: {
-                //         id: true
-                //     }
-                // }
+                include: {
+                    background: {
+                        include: {
+                            educations: true,
+                            experiences: {
+                                include: {
+                                    company: true,
+                                    monthlySalary: true,
+                                    totalCompensation: true
+                                }
+                            },
+                            specificYoes: true
+                        }
+                    },
+                    offers: {
+                        include: {
+                            OffersFullTime: {
+                                include: {
+                                    baseSalary: true,
+                                    bonus: true,
+                                    stocks: true,
+                                    totalCompensation: true
+                                }
+                            },
+                            OffersIntern: {
+                                include: {
+                                    monthlySalary: true
+                                }
+                            }
+                        }
+                    }
+                },
             });
-
-            // Create specific jobs
-            input.offers.map((x) => {
-                if (x.jobType === "INTERN" && x.job.internshipCycle !== undefined && x.job.monthlySalary?.currency !== undefined && x.job.monthlySalary.value !== undefined && x.job.startYear !== undefined) {
-                    ctx.prisma.offersIntern.create({
-                        data: {
-                            internshipCycle: x.job.internshipCycle,
-                            monthlySalary: {
-                                create: {
-                                    currency: x.job.monthlySalary?.currency,
-                                    value: x.job.monthlySalary?.value
-                                }
-                            },
-                            offer: {
-                                connect: {
-                                    id: profile.id
-                                }
-                            },
-                            specialization: x.job.specialization,
-                            startYear: x.job.startYear,
-                            title: x.job.title,
-                        }
-                    })
-                } else if (x.jobType === "FULLTIME" && x.job.startYear !== undefined && x.job.base?.currency !== undefined && x.job.base?.value !== undefined && x.job.bonus?.currency !== undefined && x.job.bonus?.value !== undefined && x.job.stocks?.currency !== undefined && x.job.stocks?.value !== undefined && x.job.totalCompensation?.currency !== undefined && x.job.totalCompensation?.value !== undefined && x.job.level !== undefined) {
-                    ctx.prisma.offersFullTime.create({
-                        data: {
-                            baseSalary: {
-                                create: {
-                                    currency: x.job.base?.currency,
-                                    value: x.job.base?.value
-                                }
-                            },
-                            bonus: {
-                                create: {
-                                    currency: x.job.bonus?.currency,
-                                    value: x.job.bonus?.value
-                                }
-                            },
-                            level: x.job.level,
-                            offer: {
-                                connect: {
-                                    id: profile.id
-                                }
-                            },
-                            specialization: x.job.specialization,
-                            stocks: {
-                                create: {
-                                    currency: x.job.stocks?.currency,
-                                    value: x.job.stocks?.value,
-                                }
-                            },
-                            title: x.job.title,
-                            totalCompensation: {
-                                create: {
-                                    currency: x.job.totalCompensation?.currency,
-                                    value: x.job.totalCompensation?.value,
-                                }
-                            },
-                        }
-                    })
-                }
-
-                throw Prisma.PrismaClientKnownRequestError
-            })
 
             // TODO: add analysis to profile object then return
             return profile

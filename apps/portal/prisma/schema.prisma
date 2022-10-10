@@ -309,13 +309,15 @@ model OffersOffer {
 
     jobType JobType
 
-    OffersIntern   OffersIntern?
-    OffersFullTime OffersFullTime?
+    OffersIntern   OffersIntern? @relation(fields: [offersInternId], references: [id])
+    offersInternId String?       @unique
+
+    OffersFullTime   OffersFullTime? @relation(fields: [offersFullTimeId], references: [id])
+    offersFullTimeId String?         @unique
 }
 
 model OffersIntern {
-    offerId String      @id
-    offer   OffersOffer @relation(fields: [offerId], references: [id])
+    id String @id @default(cuid())
 
     title           String
     specialization  String
@@ -323,12 +325,12 @@ model OffersIntern {
     startYear       Int
     monthlySalary   OffersCurrency @relation(fields: [monthlySalaryId], references: [id])
     monthlySalaryId String         @unique
+
+    OffersOffer OffersOffer?
 }
 
 model OffersFullTime {
-    offerId String      @id
-    offer   OffersOffer @relation(fields: [offerId], references: [id])
-
+    id                  String         @id @default(cuid())
     title               String
     specialization      String
     level               String
@@ -340,6 +342,8 @@ model OffersFullTime {
     bonusId             String         @unique
     stocks              OffersCurrency @relation("OfferStocks", fields: [stocksId], references: [id])
     stocksId            String         @unique
+
+    OffersOffer OffersOffer?
 }
 
 // End of Offers project models.
