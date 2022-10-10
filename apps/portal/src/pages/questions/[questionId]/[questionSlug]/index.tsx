@@ -10,6 +10,7 @@ import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 
 import createSlug from '~/utils/questions/createSlug';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
+import { useVote } from '~/utils/questions/useVote';
 import { trpc } from '~/utils/trpc';
 
 export type AnswerQuestionData = {
@@ -39,6 +40,7 @@ export default function QuestionPage() {
   const commentRegister = useFormRegister(comRegister);
 
   const { questionId } = router.query;
+  const [handleUpvote, handleDownvote, voteState] = useVote();
 
   const { data: question } = trpc.useQuery([
     'questions.questions.getQuestionById',
@@ -112,6 +114,9 @@ export default function QuestionPage() {
       <div className="flex w-full  justify-center overflow-y-auto py-4 px-5">
         <div className="flex max-w-7xl flex-1 flex-col gap-2">
           <FullQuestionCard
+            voteState={voteState}
+            onDownvote={() => handleDownvote(questionId as string)}
+            onUpvote={() => handleUpvote(questionId as string)}
             {...question}
             receivedCount={0} // TODO: Change to actual value
             showVoteButtons={true}

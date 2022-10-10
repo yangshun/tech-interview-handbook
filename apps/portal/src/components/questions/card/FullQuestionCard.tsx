@@ -2,6 +2,7 @@ import type { QuestionsQuestionType } from '@prisma/client';
 import { Badge } from '@tih/ui';
 
 import QuestionTypeBadge from '../QuestionTypeBadge';
+import type { VotingButtonsCallbackProps } from '../VotingButtons';
 import VotingButtons from '../VotingButtons';
 
 type UpvoteProps =
@@ -14,17 +15,21 @@ type UpvoteProps =
       upvoteCount?: never;
     };
 
-export type FullQuestionCardProps = UpvoteProps & {
-  company: string;
-  content: string;
-  location: string;
-  receivedCount: number;
-  role: string;
-  timestamp: string;
-  type: QuestionsQuestionType;
-};
+export type FullQuestionCardProps = UpvoteProps &
+  VotingButtonsCallbackProps & {
+    company: string;
+    content: string;
+    location: string;
+    receivedCount: number;
+    role: string;
+    timestamp: string;
+    type: QuestionsQuestionType;
+  };
 
 export default function FullQuestionCard({
+  voteState,
+  onDownvote,
+  onUpvote,
   company,
   content,
   showVoteButtons,
@@ -37,7 +42,14 @@ export default function FullQuestionCard({
   const altText = `${company} logo`;
   return (
     <article className="flex gap-4 rounded-md border border-slate-300 bg-white p-4">
-      {showVoteButtons && <VotingButtons upvoteCount={upvoteCount} />}
+      {showVoteButtons && (
+        <VotingButtons
+          upvoteCount={upvoteCount}
+          voteState={voteState}
+          onDownvote={onDownvote}
+          onUpvote={onUpvote}
+        />
+      )}
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <img alt={altText} src="https://logo.clearbit.com/google.com"></img>

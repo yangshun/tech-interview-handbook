@@ -3,6 +3,7 @@ import type { QuestionsQuestionType } from '@prisma/client';
 import { Badge, Button } from '@tih/ui';
 
 import QuestionTypeBadge from '../QuestionTypeBadge';
+import type { VotingButtonsCallbackProps } from '../VotingButtons';
 import VotingButtons from '../VotingButtons';
 
 type UpvoteProps =
@@ -39,7 +40,8 @@ type ActionButtonProps =
 
 export type QuestionCardProps = ActionButtonProps &
   StatisticsProps &
-  UpvoteProps & {
+  UpvoteProps &
+  VotingButtonsCallbackProps & {
     company: string;
     content: string;
     href?: string;
@@ -51,6 +53,9 @@ export type QuestionCardProps = ActionButtonProps &
   };
 
 export default function QuestionCard({
+  voteState,
+  onDownvote,
+  onUpvote,
   company,
   answerCount,
   content,
@@ -68,7 +73,14 @@ export default function QuestionCard({
 }: QuestionCardProps) {
   return (
     <article className="flex gap-4 rounded-md border border-slate-300 bg-white p-4 hover:bg-slate-50">
-      {showVoteButtons && <VotingButtons upvoteCount={upvoteCount} />}
+      {showVoteButtons && (
+        <VotingButtons
+          upvoteCount={upvoteCount}
+          voteState={voteState}
+          onDownvote={onDownvote}
+          onUpvote={onUpvote}
+        />
+      )}
       <div className="flex flex-col gap-2">
         <div className="flex items-baseline justify-between">
           <div className="flex items-baseline gap-2 text-slate-500">

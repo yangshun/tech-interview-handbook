@@ -1,13 +1,13 @@
 import { format } from 'date-fns';
-import {
-  ChatBubbleBottomCenterTextIcon,
-  ChatBubbleLeftRightIcon,
-} from '@heroicons/react/24/outline';
+import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 
-import type { VotingButtonsProps } from '../VotingButtons';
+import type {
+  VotingButtonsCallbackProps,
+  VotingButtonsProps,
+} from '../VotingButtons';
 import VotingButtons from '../VotingButtons';
 
-export type AnswerCardProps = {
+export type AnswerCardProps = VotingButtonsCallbackProps & {
   authorImageUrl: string;
   authorName: string;
   commentCount?: number;
@@ -18,6 +18,9 @@ export type AnswerCardProps = {
 };
 
 export default function AnswerCard({
+  voteState,
+  onDownvote,
+  onUpvote,
   authorName,
   authorImageUrl,
   upvoteCount,
@@ -28,7 +31,13 @@ export default function AnswerCard({
 }: AnswerCardProps) {
   return (
     <article className="flex gap-4 rounded-md border bg-white p-2">
-      <VotingButtons size={votingButtonsSize} upvoteCount={upvoteCount} />
+      <VotingButtons
+        size={votingButtonsSize}
+        upvoteCount={upvoteCount}
+        voteState={voteState}
+        onDownvote={onDownvote}
+        onUpvote={onUpvote}
+      />
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <img
