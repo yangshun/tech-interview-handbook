@@ -184,7 +184,6 @@ export default function QuestionsHomePage() {
   if (!loaded) {
     return null;
   }
-
   const filterSidebar = (
     <div className="mt-2 divide-y divide-slate-200 px-4">
       <FilterSection
@@ -287,6 +286,7 @@ export default function QuestionsHomePage() {
                 <QuestionOverviewCard
                   key={question.id}
                   answerCount={question.numAnswers}
+                  company={question.company}
                   content={question.content}
                   href={`/questions/${question.id}/${createSlug(
                     question.content,
