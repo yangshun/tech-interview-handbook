@@ -58,6 +58,7 @@ model User {
     questionsAnswerVotes          QuestionsAnswerVote[]
     questionsAnswerComments       QuestionsAnswerComment[]
     questionsAnswerCommentVotes   QuestionsAnswerCommentVote[]
+    OffersProfile                 OffersProfile[]
 }
 
 enum Vote {
@@ -89,13 +90,15 @@ enum TodoStatus {
 }
 
 model Company {
-    id          String   @id @default(cuid())
-    name        String   @db.Text
-    slug        String   @unique
-    description String?  @db.Text
-    logoUrl     String?
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    id               String             @id @default(cuid())
+    name             String             @db.Text
+    slug             String             @unique
+    description      String?            @db.Text
+    logoUrl          String?
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    OffersExperience OffersExperience[]
+    OffersOffer      OffersOffer[]
 }
 
 // Start of Resumes project models.
@@ -170,6 +173,179 @@ model ResumesCommentVote {
 // Add Offers project models here, prefix all models with "Offer",
 // use camelCase for field names, and try to name them consistently
 // across all models in this file.
+
+model OffersProfile {
+    id          String   @id @default(cuid())
+    profileName String   @unique
+    createdAt   DateTime @default(now())
+
+    background OffersBackground?
+
+    editToken String
+
+    discussion OffersReply[]
+
+    offers OffersOffer[]
+
+    user   User?   @relation(fields: [userId], references: [id])
+    userId String?
+}
+
+model OffersBackground {
+    id String @id @default(cuid())
+
+    totalYoe     Int?
+    specificYoes OffersSpecificYoe[]
+
+    experiences OffersExperience[] // For extensibility in the future
+
+    educations OffersEducation[] // For extensibility in the future
+
+    profile         OffersProfile @relation(fields: [offersProfileId], references: [id])
+    offersProfileId String        @unique
+}
+
+model OffersSpecificYoe {
+    id String @id @default(cuid())
+
+    yoe    Int
+    domain String
+
+    background   OffersBackground @relation(fields: [backgroundId], references: [id])
+    backgroundId String
+}
+
+model OffersExperience {
+    id String @id @default(cuid())
+
+    company   Company? @relation(fields: [companyId], references: [id])
+    companyId String?
+
+    jobType JobType?
+    title   String?
+
+    // Add more fields
+    durationInMonths Int?
+    specialization   String?
+
+    // FULLTIME fields
+    level               String?
+    totalCompensation   OffersCurrency? @relation("ExperienceTotalCompensation", fields: [totalCompensationId], references: [id])
+    totalCompensationId String?         @unique
+
+    // INTERN fields
+    monthlySalary   OffersCurrency? @relation("ExperienceMonthlySalary", fields: [monthlySalaryId], references: [id])
+    monthlySalaryId String?         @unique
+
+    background   OffersBackground @relation(fields: [backgroundId], references: [id])
+    backgroundId String
+}
+
+model OffersCurrency {
+    id       String @id @default(cuid())
+    value    Int
+    currency String
+
+    // Experience
+    OffersExperienceTotalCompensation OffersExperience? @relation("ExperienceTotalCompensation")
+    OffersExperienceMonthlySalary     OffersExperience? @relation("ExperienceMonthlySalary")
+
+    // Full Time
+    OffersTotalCompensation OffersFullTime? @relation("OfferTotalCompensation")
+    OffersBaseSalary        OffersFullTime? @relation("OfferBaseSalary")
+    OffersBonus             OffersFullTime? @relation("OfferBonus")
+    OffersStocks            OffersFullTime? @relation("OfferStocks")
+
+    // Intern
+    OffersMonthlySalary OffersIntern?
+}
+
+enum JobType {
+    INTERN
+    FULLTIME
+}
+
+model OffersEducation {
+    id    String  @id @default(cuid())
+    type  String?
+    field String?
+
+    // Add more fields
+    school    String?
+    startDate DateTime?
+    endDate   DateTime?
+
+    background   OffersBackground @relation(fields: [backgroundId], references: [id])
+    backgroundId String
+}
+
+model OffersReply {
+    id        String   @id @default(cuid())
+    creator   String
+    createdAt DateTime @default(now())
+    message   String
+
+    replyingToId String?
+    replyingTo   OffersReply?  @relation("ReplyThread", fields: [replyingToId], references: [id])
+    replies      OffersReply[] @relation("ReplyThread")
+
+    profile   OffersProfile @relation(fields: [profileId], references: [id])
+    profileId String
+}
+
+model OffersOffer {
+    id String @id @default(cuid())
+
+    profile   OffersProfile @relation(fields: [profileId], references: [id])
+    profileId String
+
+    company   Company @relation(fields: [companyId], references: [id])
+    companyId String
+
+    monthYearReceived   DateTime
+    location            String
+    negotiationStrategy String?
+    comments            String?
+
+    jobType JobType
+
+    OffersIntern   OffersIntern? @relation(fields: [offersInternId], references: [id])
+    offersInternId String?       @unique
+
+    OffersFullTime   OffersFullTime? @relation(fields: [offersFullTimeId], references: [id])
+    offersFullTimeId String?         @unique
+}
+
+model OffersIntern {
+    id String @id @default(cuid())
+
+    title           String
+    specialization  String
+    internshipCycle String
+    startYear       Int
+    monthlySalary   OffersCurrency @relation(fields: [monthlySalaryId], references: [id])
+    monthlySalaryId String         @unique
+
+    OffersOffer OffersOffer?
+}
+
+model OffersFullTime {
+    id                  String         @id @default(cuid())
+    title               String
+    specialization      String
+    level               String
+    totalCompensation   OffersCurrency @relation("OfferTotalCompensation", fields: [totalCompensationId], references: [id])
+    totalCompensationId String         @unique
+    baseSalary          OffersCurrency @relation("OfferBaseSalary", fields: [baseSalaryId], references: [id])
+    baseSalaryId        String         @unique
+    bonus               OffersCurrency @relation("OfferBonus", fields: [bonusId], references: [id])
+    bonusId             String         @unique
+    stocks              OffersCurrency @relation("OfferStocks", fields: [stocksId], references: [id])
+    stocksId            String         @unique
+
+    OffersOffer OffersOffer?
+}
+
 // End of Offers project models.
 
 // Start of Questions project models.
