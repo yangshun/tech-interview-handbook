@@ -22,7 +22,7 @@ const getYoeRange = (yoeCategory: number) => {
 
 const ascOrder = '+';
 const descOrder = '-';
-const sortingKeys = ['monthYearReceived', 'totalCompensation', 'yoe'];
+const sortingKeys = ['monthYearReceived', 'totalCompensation', 'totalYoe'];
 
 const createSortByValidationRegex = () => {
   const startsWithPlusOrMinusOnly = '^[+-]{1}';
@@ -65,9 +65,12 @@ export const offersRouter = createRouter().query('list', {
               },
             },
             company: true,
+            profile: {
+              include: {
+                background: true,
+              },
+            },
           },
-          skip: input.limit * input.offset,
-          take: input.limit,
           where: {
             AND: [
               {
@@ -103,10 +106,13 @@ export const offersRouter = createRouter().query('list', {
               },
             },
             company: true,
+            profile: {
+              include: {
+                background: true,
+              },
+            },
           },
           // Junior, Mid
-          skip: input.limit * input.offset,
-          take: input.limit,
           where: {
             AND: [
               {
@@ -160,9 +166,12 @@ export const offersRouter = createRouter().query('list', {
               },
             },
             company: true,
+            profile: {
+              include: {
+                background: true,
+              },
+            },
           },
-          skip: input.limit * input.offset,
-          take: input.limit,
           where: {
             AND: [
               {
@@ -259,6 +268,16 @@ export const offersRouter = createRouter().query('list', {
               return salary1 - salary2;
             }
           }
+
+          if (sortingKey === 'totalYoe') {
+            const yoe1 = offer1.profile.background?.totalYoe;
+            const yoe2 = offer2.profile.background?.totalYoe;
+
+            if (yoe1 && yoe2) {
+              return yoe1 - yoe2;
+            }
+          }
+
           return defaultReturn;
         })();
       }
@@ -286,12 +305,35 @@ export const offersRouter = createRouter().query('list', {
             }
           }
 
+          if (sortingKey === 'totalYoe') {
+            const yoe1 = offer1.profile.background?.totalYoe;
+            const yoe2 = offer2.profile.background?.totalYoe;
+
+            if (yoe1 && yoe2) {
+              return yoe2 - yoe1;
+            }
+          }
+
           return defaultReturn;
         })();
       }
       return defaultReturn;
     });
 
-    return data;
+    const startRecordIndex: number = input.limit * input.offset;
+    const endRecordIndex: number =
+      startRecordIndex + input.limit <= data.length
+        ? startRecordIndex + input.limit
+        : data.length;
+    const paginatedData = data.slice(startRecordIndex, endRecordIndex);
+
+    return {
+      data: paginatedData,
+      paging: {
+        currPage: input.offset,
+        numOfItemsInPage: paginatedData.length,
+        numOfPages: Math.ceil(data.length / input.limit),
+      },
+    };
   },
 });
