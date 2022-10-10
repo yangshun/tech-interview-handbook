@@ -9,11 +9,14 @@ export type ButtonDisplay = 'block' | 'inline';
 export type ButtonSize = 'lg' | 'md' | 'sm';
 export type ButtonType = 'button' | 'reset' | 'submit';
 export type ButtonVariant =
+  | 'danger'
+  | 'info'
   | 'primary'
   | 'secondary'
   | 'special'
   | 'success'
-  | 'tertiary';
+  | 'tertiary'
+  | 'warning';
 
 type Props = Readonly<{
   addonPosition?: ButtonAddOnPosition;
@@ -69,20 +72,32 @@ const sizeIconClasses: Record<ButtonSize, string> = {
 };
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'border-transparent text-white bg-primary-600 hover:bg-primary-500',
+  danger:
+    'border-transparent text-white bg-danger-600 hover:bg-danger-500 focus:ring-danger-500',
+  info: 'border-transparent text-white bg-info-600 hover:bg-info-500 focus:ring-info-500',
+  primary:
+    'border-transparent text-white bg-primary-600 hover:bg-primary-500 focus:ring-primary-500',
   secondary:
-    'border-transparent text-primary-700 bg-primary-100 hover:bg-primary-200',
-  special: 'border-slate-900 text-white bg-slate-900 hover:bg-slate-700',
-  success: 'border-transparent text-white bg-success-600 hover:bg-success-500',
-  tertiary: 'border-slate-300 text-slate-700 bg-white hover:bg-slate-50',
+    'border-transparent text-primary-700 bg-primary-100 hover:bg-primary-200 focus:ring-primary-500',
+  special:
+    'border-slate-900 text-white bg-slate-900 hover:bg-slate-700 focus:ring-slate-900',
+  success:
+    'border-transparent text-white bg-success-600 hover:bg-success-500 focus:ring-success-500',
+  tertiary:
+    'border-slate-300 text-slate-700 bg-white hover:bg-slate-50 focus:ring-slate-600',
+  warning:
+    'border-transparent text-white bg-warning-600 hover:bg-warning-500 focus:ring-warning-500',
 };
 
 const variantDisabledClasses: Record<ButtonVariant, string> = {
+  danger: 'border-transparent text-slate-500 bg-slate-300',
+  info: 'border-transparent text-slate-500 bg-slate-300',
   primary: 'border-transparent text-slate-500 bg-slate-300',
   secondary: 'border-transparent text-slate-400 bg-slate-200',
   special: 'border-transparent text-slate-500 bg-slate-300',
   success: 'border-transparent text-slate-500 bg-slate-300',
   tertiary: 'border-slate-300 text-slate-400 bg-slate-100',
+  warning: 'border-transparent text-slate-500 bg-slate-300',
 };
 
 export default function Button({
@@ -132,7 +147,7 @@ export default function Button({
     children,
     className: clsx(
       display === 'block' ? 'flex w-full justify-center' : 'inline-flex',
-      'whitespace-nowrap items-center border font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
+      'whitespace-nowrap items-center border font-medium focus:outline-none focus:ring-2 focus:ring-offset-2',
       disabled ? variantDisabledClasses[variant] : variantClasses[variant],
       disabled && 'pointer-events-none',
       isLabelHidden ? iconOnlySizeClasses[size] : sizeClasses[size],

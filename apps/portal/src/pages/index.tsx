@@ -3,14 +3,14 @@ import type { TypeaheadOption } from '@tih/ui';
 import { HorizontalDivider } from '@tih/ui';
 
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
-import type { MonthYear } from '~/components/shared/MonthYearPicker';
+import type { Month, MonthYear } from '~/components/shared/MonthYearPicker';
 import MonthYearPicker from '~/components/shared/MonthYearPicker';
 
 export default function HomePage() {
   const [selectedCompany, setSelectedCompany] =
     useState<TypeaheadOption | null>(null);
   const [monthYear, setMonthYear] = useState<MonthYear>({
-    month: new Date().getMonth() + 1,
+    month: (new Date().getMonth() + 1) as Month,
     year: new Date().getFullYear(),
   });
 
