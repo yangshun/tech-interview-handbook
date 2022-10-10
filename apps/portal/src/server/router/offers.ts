@@ -333,6 +333,7 @@ export const offersRouter = createRouter().query('list', {
         currPage: input.offset,
         numOfItemsInPage: paginatedData.length,
         numOfPages: Math.ceil(data.length / input.limit),
+        totalNumberOfOffers: data.length,
       },
     };
   },

@@ -14,17 +14,7 @@ function Test() {
     },
   ]);
 
-  return (
-    <>
-      <ul>
-        {data.data?.data.map((x) => {
-          return <li key={x.id}>{JSON.stringify(x)}</li>;
-        })}
-      </ul>
-      <br />
-      <p>{JSON.stringify(data.data?.paging)}</p>
-    </>
-  );
+  return <>{JSON.stringify(data.data)}</>;
 }
 
 export default Test;
