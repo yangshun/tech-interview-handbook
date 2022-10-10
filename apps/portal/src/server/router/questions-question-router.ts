@@ -59,7 +59,7 @@ export const questionsQuestionRouter = createProtectedRouter()
             const encounter = data.encounters[i];
             const matchCompany =
               input.companies.length === 0 ||
-              input.companies.includes(encounter.company);
+              input.companies.includes(encounter.company!.id);
             const matchLocation =
               input.locations.length === 0 ||
               input.locations.includes(encounter.location);
@@ -93,7 +93,7 @@ export const questionsQuestionRouter = createProtectedRouter()
           );
 
           const question: Question = {
-            company: data.encounters[0].company,
+            company: data.encounters[0].company!.name ?? 'Unknown company',
             content: data.content,
             id: data.id,
             location: data.encounters[0].location ?? 'Unknown location',
@@ -166,7 +166,7 @@ export const questionsQuestionRouter = createProtectedRouter()
       );
 
       const question: Question = {
-        company: questionData.encounters[0].company,
+        company: questionData.encounters[0].company!.name ?? 'Unknown company',
         content: questionData.content,
         id: questionData.id,
         location: questionData.encounters[0].location ?? 'Unknown location',
@@ -184,7 +184,7 @@ export const questionsQuestionRouter = createProtectedRouter()
   })
   .mutation('create', {
     input: z.object({
-      company: z.string(),
+      companyId: z.string(),
       content: z.string(),
       location: z.string(),
       questionType: z.nativeEnum(QuestionsQuestionType),
@@ -194,13 +194,13 @@ export const questionsQuestionRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const question = await ctx.prisma.questionsQuestion.create({
+      return await ctx.prisma.questionsQuestion.create({
         data: {
           content: input.content,
           encounters: {
             create: [
               {
-                company: input.company,
+                company: input.companyId,
                 location: input.location,
                 role: input.role,
                 seenAt: input.seenAt,
@@ -212,20 +212,6 @@ export const questionsQuestionRouter = createProtectedRouter()
           userId,
         },
       });
-
-      // Create question encounter
-      await ctx.prisma.questionsQuestionEncounter.create({
-        data: {
-          company: input.company,
-          location: input.location,
-          questionId: question.id,
-          role: input.role,
-          seenAt: input.seenAt,
-          userId,
-        },
-      });
-
-      return question;
     },
   })
   .mutation('update', {
