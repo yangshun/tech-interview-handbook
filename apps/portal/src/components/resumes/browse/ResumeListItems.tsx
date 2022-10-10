@@ -19,17 +19,15 @@ export default function ResumeListItems({ isLoading, resumes }: Props) {
   }
 
   return (
-    <div className="col-span-10 pr-8">
-      <ul role="list">
-        {resumes.map((resumeObj: Resume) => (
-          <li key={resumeObj.id}>
-            <ResumseListItem
-              href={`resumes/${resumeObj.id}`}
-              resumeInfo={resumeObj}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul role="list">
+      {resumes.map((resumeObj: Resume) => (
+        <li key={resumeObj.id}>
+          <ResumseListItem
+            href={`resumes/${resumeObj.id}`}
+            resumeInfo={resumeObj}
+          />
+        </li>
+      ))}
+    </ul>
   );
 }
