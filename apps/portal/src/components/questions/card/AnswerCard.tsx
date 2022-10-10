@@ -32,7 +32,7 @@ function AnswerCardWithoutHref({
             src={authorImageUrl}></img>
           <h1 className="font-bold">{authorName}</h1>
           <p className="pt-1 text-xs font-extralight">
-            Posted on: {format(createdAt, 'Pp')}
+            Posted on: {format(createdAt, 'h:mm a, MMMM dd, yyyy')}
           </p>
         </div>
         <p className="pl-1 pt-1">{content}</p>
