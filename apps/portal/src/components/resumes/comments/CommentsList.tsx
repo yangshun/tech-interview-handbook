@@ -1,12 +1,13 @@
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Tabs } from '@tih/ui';
+import { Button } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
 import Comment from './comment/Comment';
-import CommentsListButton from './CommentsListButton';
 import { COMMENTS_SECTIONS } from './constants';
+import SignInButton from '../SignInButton';
 
 type CommentsListProps = Readonly<{
   resumeId: string;
@@ -22,11 +23,25 @@ export default function CommentsList({
 
   const commentsQuery = trpc.useQuery(['resumes.reviews.list', { resumeId }]);
 
+  const renderButton = () => {
+    if (session === null) {
+      return <SignInButton text="to join discussion" />;
+    }
+    return (
+      <Button
+        display="block"
+        label="Add your review"
+        variant="tertiary"
+        onClick={() => setShowCommentsForm(true)}
+      />
+    );
+  };
+
   // TODO: Add loading prompt
 
   return (
     <div className="space-y-3">
-      <CommentsListButton setShowCommentsForm={setShowCommentsForm} />
+      {renderButton()}
       <Tabs
         label="comments"
         tabs={COMMENTS_SECTIONS}
