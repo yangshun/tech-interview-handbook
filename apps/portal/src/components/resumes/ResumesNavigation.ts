@@ -7,6 +7,11 @@ const navigation: ProductNavigationItems = [
     name: 'Browse',
   },
   { children: [], href: '/resumes/submit', name: 'Submit for review' },
+  {
+    children: [],
+    href: 'https://www.techinterviewhandbook.org/resume/',
+    name: 'Resume Guide',
+  },
 ];
 
 const config = {
