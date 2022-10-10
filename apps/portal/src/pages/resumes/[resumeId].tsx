@@ -4,7 +4,7 @@ import Error from 'next/error';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   AcademicCapIcon,
   BriefcaseIcon,
@@ -27,7 +27,6 @@ export default function ResumeReviewPage() {
   const { data: session } = useSession();
   const router = useRouter();
   const { resumeId } = router.query;
-  const trpcContext = trpc.useContext();
   // Safe to assert resumeId type as string because query is only sent if so
   const detailsQuery = trpc.useQuery(
     ['resumes.resume.findOne', { resumeId: resumeId as string }],
@@ -35,26 +34,62 @@ export default function ResumeReviewPage() {
       enabled: typeof resumeId === 'string',
     },
   );
-  const starMutation = trpc.useMutation('resumes.star.user.create_or_delete', {
-    onSuccess() {
-      trpcContext.invalidateQueries(['resumes.resume.findOne']);
+  const starMutation = trpc.useMutation('resumes.resume.star', {
+    onError() {
+      setStarDetails({
+        isStarred: false,
+        numStars: starDetails.numStars - 1,
+      });
     },
+  });
+  const unstarMutation = trpc.useMutation('resumes.resume.unstar', {
+    onError() {
+      setStarDetails({
+        isStarred: true,
+        numStars: starDetails.numStars + 1,
+      });
+    },
+  });
+  const [starDetails, setStarDetails] = useState({
+    isStarred: false,
+    numStars: 0,
   });
 
   useEffect(() => {
-    if (detailsQuery.data?.stars.length) {
+    if (starDetails.isStarred) {
       document.getElementById('star-button')?.focus();
     } else {
       document.getElementById('star-button')?.blur();
     }
-  }, [detailsQuery.data?.stars]);
+  }, [starDetails]);
+
+  useEffect(() => {
+    if (detailsQuery?.data !== undefined) {
+      setStarDetails({
+        isStarred: !!detailsQuery.data?.stars.length,
+        numStars: detailsQuery.data?._count.stars ?? 0,
+      });
+    }
+  }, [detailsQuery.data]);
 
   const onStarButtonClick = () => {
     // Star button only rendered if resume exists
     // Star button only clickable if user exists
-    starMutation.mutate({
-      resumeId: resumeId as string,
+    setStarDetails({
+      isStarred: !starDetails.isStarred,
+      numStars: starDetails.isStarred
+        ? starDetails.numStars - 1
+        : starDetails.numStars + 1,
     });
+    if (starDetails.isStarred) {
+      unstarMutation.mutate({
+        resumeId: resumeId as string,
+      });
+    } else {
+      starMutation.mutate({
+        resumeId: resumeId as string,
+      });
+    }
   };
 
   return (
@@ -78,7 +113,7 @@ export default function ResumeReviewPage() {
               </h1>
               <button
                 className="isolate inline-flex max-h-10 items-center space-x-4 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                disabled={session?.user === null}
+                disabled={session?.user === undefined}
                 id="star-button"
                 type="button"
                 onClick={onStarButtonClick}>
@@ -86,7 +121,7 @@ export default function ResumeReviewPage() {
                   <StarIcon
                     aria-hidden="true"
                     className={clsx(
-                      detailsQuery.data?.stars.length
+                      starDetails.isStarred
                         ? 'text-orange-400'
                         : 'text-gray-400',
                       '-ml-1 mr-2 h-5 w-5',
@@ -96,7 +131,7 @@ export default function ResumeReviewPage() {
                   Star
                 </span>
                 <span className="relative -ml-px inline-flex">
-                  {detailsQuery.data._count.stars}
+                  {starDetails.numStars}
                 </span>
               </button>
             </div>
