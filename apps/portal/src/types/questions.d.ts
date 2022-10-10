@@ -21,6 +21,7 @@ export type AnswerComment = {
   numVotes: number;
   updatedAt: Date;
   user: string;
+  userImage: string;
 };
 
 export type Answer = {
@@ -30,6 +31,7 @@ export type Answer = {
   numComments: number;
   numVotes: number;
   user: string;
+  userImage: string;
 };
 
 export type QuestionComment = {
@@ -38,4 +40,5 @@ export type QuestionComment = {
   id: string;
   numVotes: number;
   user: string;
+  userImage: string;
 };

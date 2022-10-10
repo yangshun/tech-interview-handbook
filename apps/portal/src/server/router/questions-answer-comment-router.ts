@@ -17,6 +17,7 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
           include: {
             user: {
               select: {
+                image: true,
                 name: true,
               },
             },
@@ -54,6 +55,7 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
           numVotes: votes,
           updatedAt: data.updatedAt,
           user: data.user?.name ?? '',
+          userImage: data.user?.image ?? '',
         };
         return answerComment;
       });

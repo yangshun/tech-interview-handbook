@@ -21,6 +21,7 @@ export const questionsAnswerRouter = createProtectedRouter()
           },
           user: {
             select: {
+              image: true,
               name: true,
             },
           },
@@ -58,6 +59,7 @@ export const questionsAnswerRouter = createProtectedRouter()
           numComments: data._count.comments,
           numVotes: votes,
           user: data.user?.name ?? '',
+          userImage: data.user?.image ?? '',
         };
         return answer;
       });
@@ -77,6 +79,7 @@ export const questionsAnswerRouter = createProtectedRouter()
           },
           user: {
             select: {
+              image: true,
               name: true,
             },
           },
@@ -116,6 +119,7 @@ export const questionsAnswerRouter = createProtectedRouter()
         numComments: answerData._count.comments,
         numVotes: votes,
         user: answerData.user?.name ?? '',
+        userImage: answerData.user?.image ?? '',
       };
       return answer;
     },

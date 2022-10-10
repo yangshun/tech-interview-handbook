@@ -8,10 +8,6 @@ import FullQuestionCard from '~/components/questions/card/FullQuestionCard';
 import CommentListItem from '~/components/questions/CommentListItem';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 
-import {
-  SAMPLE_ANSWER,
-  SAMPLE_QUESTION_COMMENT,
-} from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
 import { trpc } from '~/utils/trpc';
@@ -179,7 +175,7 @@ export default function QuestionPage() {
               {(comments ?? []).map((comment) => (
                 <CommentListItem
                   key={comment.id}
-                  authorImageUrl={SAMPLE_QUESTION_COMMENT.authorImageUrl}
+                  authorImageUrl={comment.userImage}
                   authorName={comment.user}
                   content={comment.content}
                   createdAt={comment.createdAt}
@@ -239,7 +235,7 @@ export default function QuestionPage() {
           {(answers ?? []).map((answer) => (
             <AnswerCard
               key={answer.id}
-              authorImageUrl={SAMPLE_ANSWER.authorImageUrl}
+              authorImageUrl={answer.userImage}
               authorName={answer.user}
               commentCount={answer.numComments}
               content={answer.content}

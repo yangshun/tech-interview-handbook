@@ -7,10 +7,6 @@ import FullAnswerCard from '~/components/questions/card/FullAnswerCard';
 import CommentListItem from '~/components/questions/CommentListItem';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 
-import {
-  SAMPLE_ANSWER,
-  SAMPLE_ANSWER_COMMENT,
-} from '~/utils/questions/constants';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
 import { trpc } from '~/utils/trpc';
 
@@ -85,7 +81,7 @@ export default function QuestionPage() {
       <div className="flex w-full  justify-center overflow-y-auto py-4 px-5">
         <div className="flex max-w-7xl flex-1 flex-col gap-2">
           <FullAnswerCard
-            authorImageUrl={SAMPLE_ANSWER.authorImageUrl}
+            authorImageUrl={answer.userImage}
             authorName={answer.user}
             content={answer.content}
             createdAt={answer.createdAt}
@@ -144,7 +140,7 @@ export default function QuestionPage() {
             {(comments ?? []).map((comment) => (
               <CommentListItem
                 key={comment.id}
-                authorImageUrl={SAMPLE_ANSWER_COMMENT.authorImageUrl}
+                authorImageUrl={comment.userImage}
                 authorName={comment.user}
                 content={comment.content}
                 createdAt={comment.createdAt}
