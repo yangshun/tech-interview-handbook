@@ -9,7 +9,7 @@ function Test() {
       limit: 5,
       location: 'Singapore, Singapore',
       offset: 0,
-      sortBy: '-totalYoe',
+      sortBy: '-monthYearReceived',
       yoeCategory: 1,
     },
   ]);

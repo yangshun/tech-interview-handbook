@@ -38,7 +38,7 @@ function Test() {
     ],
     "experiences": [
       {
-        "companyId": "cl92ly8xm0000w3mwh5ymyqmx",
+        "companyId": "cl92szctf0008i9nfxk54bhxn",
         "durationInMonths": 24,
         "jobType": "FULLTIME",
         "level": "Junior",
@@ -66,7 +66,7 @@ function Test() {
   "offers": [
     {
       "comments": "",
-      "companyId": "cl92ly8xm0000w3mwh5ymyqmx",
+      "companyId": "cl92szctf0008i9nfxk54bhxn",
       "job": {
         "base": {
           "currency": "SGD",
@@ -95,7 +95,7 @@ function Test() {
     },
     {
       "comments": "",
-      "companyId": "cl92ly8xm0000w3mwh5ymyqmx",
+      "companyId": "cl92szctf0008i9nfxk54bhxn",
       "job": {
         "base": {
           "currency": "SGD",
@@ -126,6 +126,14 @@ function Test() {
         });
     };
 
+    const data = trpc.useQuery([
+      `offers.profile.listOne`,
+      {
+        profileId: "cl92wc64a004gw3hgq4pfln2m"
+      }
+    ])
+
+
   return (
     // <ul>
     //   {createdData.map((x) => {
@@ -136,8 +144,11 @@ function Test() {
       <div>
           {createdData}
       </div>
-          <button type="button" onClick={handleClick}>Click me</button>
-          </>
+      <button type="button" onClick={handleClick}>Click Me!</button>
+      <div>{JSON.stringify(data.data)}</div>
+
+          {/* <button type="button" onClick}>Get One</button> */}
+    </>
   );
 }
 

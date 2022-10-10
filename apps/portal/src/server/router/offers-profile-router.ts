@@ -50,7 +50,59 @@ const education = z.object({
     type: z.string().optional(),
 })
 
-export const offersProfileRouter = createRouter().mutation(
+export const offersProfileRouter = createRouter()
+    .query('listOne', {
+        input: z.object({
+            profileId: z.string(),
+        }),
+        async resolve({ ctx, input }) {
+            return await ctx.prisma.offersProfile.findFirst({
+                include: {
+                    background: {
+                        include: {
+                            educations: true,
+                            experiences: {
+                                include: {
+                                    company: true,
+                                    monthlySalary: true,
+                                    totalCompensation: true
+                                }
+                            },
+                            specificYoes: true
+                        }
+                    },
+                    discussion: {
+                        include: {
+                            replies: true,
+                            replyingTo: true
+                        }
+                    },
+                    offers: {
+                        include: {
+                            OffersFullTime: {
+                                include: {
+                                    baseSalary: true,
+                                    bonus: true,
+                                    stocks: true,
+                                    totalCompensation: true
+                                }
+                            },
+                            OffersIntern: {
+                                include: {
+                                    monthlySalary: true
+                                }
+                            },
+                            company: true
+                        }
+                    }
+                },
+                where: {
+                    id: input.profileId
+                }
+            })
+        }
+    })
+    .mutation(
     'create',
     {
         input: z.object({
@@ -59,7 +111,7 @@ export const offersProfileRouter = createRouter().mutation(
                 experiences: z.array(experience),
                 specificYoes: z.array(z.object({
                     domain: z.string(),
-                    yoe: z.number()
+                    yoe: z.number(),
                 })),
                 totalYoe: z.number().optional(),
             }),
@@ -136,10 +188,12 @@ export const offersProfileRouter = createRouter().mutation(
                             },
                             specificYoes: {
                                 create:
-                                    input.background.specificYoes.map((x) => ({
-                                        domain: x.domain,
-                                        yoe: x.yoe
-                                    }))
+                                    input.background.specificYoes.map((x) => {
+                                        return {
+                                            domain: x.domain,
+                                            yoe: x.yoe
+                                        }
+                                    })
                             },
                             totalYoe: input.background.totalYoe,
                         }
@@ -226,7 +280,7 @@ export const offersProfileRouter = createRouter().mutation(
                                 throw Prisma.PrismaClientKnownRequestError
                             })
                     },
-                    profileName: randomUUID(),
+                    profileName: randomUUID().substring(0,10),
                 },
                 include: {
                     background: {
