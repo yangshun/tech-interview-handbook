@@ -3,7 +3,14 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { CalendarDaysIcon, UserIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
-import { Button, Collapsible, Select, TextArea, TextInput } from '@tih/ui';
+import {
+  Button,
+  CheckboxInput,
+  Collapsible,
+  Select,
+  TextArea,
+  TextInput,
+} from '@tih/ui';
 
 import { QUESTION_TYPES } from '~/utils/questions/constants';
 import {
@@ -11,7 +18,6 @@ import {
   useSelectRegister,
 } from '~/utils/questions/useFormRegister';
 
-import Checkbox from './ui-patch/Checkbox';
 import CompaniesTypeahead from '../shared/CompaniesTypeahead';
 import type { Month } from '../shared/MonthYearPicker';
 import MonthYearPicker from '../shared/MonthYearPicker';
@@ -148,10 +154,11 @@ export default function ContributeQuestionForm({
       </div> */}
       <div className="bg-primary-50 fixed bottom-0 left-0 w-full px-4 py-3 sm:flex sm:flex-row sm:justify-between sm:px-6">
         <div className="mb-1 flex">
-          <Checkbox
-            checked={canSubmit}
+          <CheckboxInput
             label="I have checked that my question is new"
-            onChange={handleCheckSimilarQuestions}></Checkbox>
+            value={canSubmit}
+            onChange={handleCheckSimilarQuestions}
+          />
         </div>
         <div className=" flex gap-x-2">
           <button
