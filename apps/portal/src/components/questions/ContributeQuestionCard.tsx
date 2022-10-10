@@ -40,7 +40,7 @@ export default function ContributeQuestionCard({
           placeholder="Contribute a question"
           onChange={handleOpenContribute}
         />
-        <div className="flex items-end justify-center gap-x-2">
+        <div className="flex flex-wrap items-end justify-center gap-x-2">
           <div className="min-w-[150px] flex-1">
             <TextInput
               disabled={true}

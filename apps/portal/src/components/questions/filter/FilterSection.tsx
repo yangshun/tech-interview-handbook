@@ -1,8 +1,5 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Collapsible, TextInput } from '@tih/ui';
-
-import Checkbox from '../ui-patch/Checkbox';
-import RadioGroup from '../ui-patch/RadioGroup';
+import { CheckboxInput, Collapsible, RadioList, TextInput } from '@tih/ui';
 
 export type FilterOption<V extends string = string> = {
   checked: boolean;
@@ -66,17 +63,29 @@ export default function FilterSection<
             />
           )}
           {isSingleSelect ? (
-            <RadioGroup
-              radioData={options}
-              onChange={(value) => {
-                onOptionChange(value);
-              }}></RadioGroup>
+            <div className="px-1.5">
+              <RadioList
+                label=""
+                value={options.find((option) => option.checked)?.value}
+                onChange={(value) => {
+                  onOptionChange(value);
+                }}>
+                {options.map((option) => (
+                  <RadioList.Item
+                    key={option.value}
+                    label={option.label}
+                    value={option.value}
+                  />
+                ))}
+              </RadioList>
+            </div>
           ) : (
-            <div className="mx-1">
+            <div className="px-1.5">
               {options.map((option) => (
-                <Checkbox
+                <CheckboxInput
                   key={option.value}
-                  {...option}
+                  label={option.label}
+                  value={option.checked}
                   onChange={(checked) => {
                     onOptionChange(option.value, checked);
                   }}

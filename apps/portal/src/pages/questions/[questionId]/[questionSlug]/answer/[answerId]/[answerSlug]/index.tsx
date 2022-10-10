@@ -3,14 +3,10 @@ import { useForm } from 'react-hook-form';
 import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button, Select, TextArea } from '@tih/ui';
 
+import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullAnswerCard from '~/components/questions/card/FullAnswerCard';
-import CommentListItem from '~/components/questions/CommentListItem';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 
-import {
-  SAMPLE_ANSWER,
-  SAMPLE_ANSWER_COMMENT,
-} from '~/utils/questions/constants';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
 import { trpc } from '~/utils/trpc';
 
@@ -47,7 +43,7 @@ export default function QuestionPage() {
     'questions.answers.comments.create',
     {
       onSuccess: () => {
-        utils.invalidateQuery([
+        utils.invalidateQueries([
           'questions.answers.comments.getAnswerComments',
           { answerId: answerId as string },
         ]);
@@ -85,11 +81,12 @@ export default function QuestionPage() {
       <div className="flex w-full  justify-center overflow-y-auto py-4 px-5">
         <div className="flex max-w-7xl flex-1 flex-col gap-2">
           <FullAnswerCard
-            authorImageUrl={SAMPLE_ANSWER.authorImageUrl}
+            answerId={answer.id}
+            authorImageUrl={answer.userImage}
             authorName={answer.user}
             content={answer.content}
             createdAt={answer.createdAt}
-            upvoteCount={0}
+            upvoteCount={answer.numVotes}
           />
           <div className="mx-2">
             <form
@@ -142,9 +139,10 @@ export default function QuestionPage() {
             </form>
 
             {(comments ?? []).map((comment) => (
-              <CommentListItem
+              <AnswerCommentListItem
                 key={comment.id}
-                authorImageUrl={SAMPLE_ANSWER_COMMENT.authorImageUrl}
+                answerCommentId={comment.id}
+                authorImageUrl={comment.userImage}
                 authorName={comment.user}
                 content={comment.content}
                 createdAt={comment.createdAt}

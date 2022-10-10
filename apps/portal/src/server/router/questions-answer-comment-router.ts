@@ -17,6 +17,7 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
           include: {
             user: {
               select: {
+                image: true,
                 name: true,
               },
             },
@@ -54,6 +55,7 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
           numVotes: votes,
           updatedAt: data.updatedAt,
           user: data.user?.name ?? '',
+          userImage: data.user?.image ?? '',
         };
         return answerComment;
       });
@@ -182,7 +184,7 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
           },
         });
 
-      if (voteToUpdate?.id !== userId) {
+      if (voteToUpdate?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -213,7 +215,7 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
           },
         });
 
-      if (voteToDelete?.id !== userId) {
+      if (voteToDelete?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
