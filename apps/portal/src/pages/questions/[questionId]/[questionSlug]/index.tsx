@@ -117,7 +117,10 @@ export default function QuestionPage() {
             {...question}
             receivedCount={0} // TODO: Change to actual value
             showVoteButtons={true}
-            timestamp={question.seenAt.toLocaleDateString()}
+            timestamp={question.seenAt.toLocaleDateString(undefined, {
+              month: 'short',
+              year: 'numeric',
+            })}
             upvoteCount={question.numVotes}
           />
           <div className="mx-2">

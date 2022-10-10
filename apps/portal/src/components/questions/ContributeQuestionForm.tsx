@@ -1,10 +1,7 @@
+import { startOfMonth } from 'date-fns';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import {
-  BuildingOffice2Icon,
-  CalendarDaysIcon,
-  UserIcon,
-} from '@heroicons/react/24/outline';
+import { Controller, useForm } from 'react-hook-form';
+import { CalendarDaysIcon, UserIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
 import { Button, Collapsible, Select, TextArea, TextInput } from '@tih/ui';
 
@@ -15,6 +12,9 @@ import {
 } from '~/utils/questions/useFormRegister';
 
 import Checkbox from './ui-patch/Checkbox';
+import CompaniesTypeahead from '../shared/CompaniesTypeahead';
+import type { Month } from '../shared/MonthYearPicker';
+import MonthYearPicker from '../shared/MonthYearPicker';
 
 export type ContributeQuestionData = {
   company: string;
@@ -35,8 +35,15 @@ export default function ContributeQuestionForm({
   onSubmit,
   onDiscard,
 }: ContributeQuestionFormProps) {
-  const { register: formRegister, handleSubmit } =
-    useForm<ContributeQuestionData>();
+  const {
+    control,
+    register: formRegister,
+    handleSubmit,
+  } = useForm<ContributeQuestionData>({
+    defaultValues: {
+      date: startOfMonth(new Date()),
+    },
+  });
   const register = useFormRegister(formRegister);
   const selectRegister = useSelectRegister(formRegister);
 
@@ -66,24 +73,35 @@ export default function ContributeQuestionForm({
           />
         </div>
         <div className="min-w-[150px] max-w-[300px] flex-1">
-          <TextInput
-            label="Company"
-            required={true}
-            startAddOn={BuildingOffice2Icon}
-            startAddOnType="icon"
-            {...register('company')}
+          <Controller
+            control={control}
+            name="company"
+            render={({ field }) => (
+              <CompaniesTypeahead
+                onSelect={({ label }) => {
+                  // TODO: To change from using company name to company id (i.e., value)
+                  field.onChange(label);
+                }}
+              />
+            )}
           />
         </div>
 
         <div className="min-w-[150px] max-w-[300px] flex-1">
-          <TextInput
-            label="Date"
-            required={true}
-            startAddOn={CalendarDaysIcon}
-            startAddOnType="icon"
-            {...register('date', {
-              valueAsDate: true,
-            })}
+          <Controller
+            control={control}
+            name="date"
+            render={({ field }) => (
+              <MonthYearPicker
+                value={{
+                  month: (field.value.getMonth() + 1) as Month,
+                  year: field.value.getFullYear(),
+                }}
+                onChange={({ month, year }) =>
+                  field.onChange(startOfMonth(new Date(year, month - 1)))
+                }
+              />
+            )}
           />
         </div>
       </div>
