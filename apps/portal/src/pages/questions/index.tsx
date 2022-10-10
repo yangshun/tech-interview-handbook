@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
+import type { QuestionsQuestionType } from '@prisma/client';
 
 import QuestionOverviewCard from '~/components/questions/card/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
@@ -13,31 +14,53 @@ import {
   LOCATIONS,
   QUESTION_AGES,
   QUESTION_TYPES,
-  SAMPLE_QUESTION,
 } from '~/utils/questions/constants';
+import createSlug from '~/utils/questions/createSlug';
 import {
   useSearchFilter,
   useSearchFilterSingle,
 } from '~/utils/questions/useSearchFilter';
+import { trpc } from '~/utils/trpc';
 
 export default function QuestionsHomePage() {
   const router = useRouter();
 
   const [selectedCompanies, setSelectedCompanies, areCompaniesInitialized] =
     useSearchFilter('companies');
-
   const [
     selectedQuestionTypes,
     setSelectedQuestionTypes,
     areQuestionTypesInitialized,
-  ] = useSearchFilter('questionTypes');
+  ] = useSearchFilter<QuestionsQuestionType>('questionTypes');
   const [
     selectedQuestionAge,
     setSelectedQuestionAge,
     isQuestionAgeInitialized,
-  ] = useSearchFilterSingle('questionAge', 'all');
+  ] = useSearchFilterSingle<string>('questionAge', 'all');
   const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
     useSearchFilter('locations');
+
+  // TODO: Implement filtering
+  const { data: questions } = trpc.useQuery([
+    'questions.questions.getQuestionsByFilter',
+    {
+      // TODO: Update when query accepts multiple question types
+      questionType:
+        selectedQuestionTypes.length > 0
+          ? (selectedQuestionTypes[0].toUpperCase() as QuestionsQuestionType)
+          : 'CODING',
+    },
+  ]);
+
+  const utils = trpc.useContext();
+  const { mutate: createQuestion } = trpc.useMutation(
+    'questions.questions.create',
+    {
+      onSuccess: () => {
+        utils.invalidateQueries('questions.questions.getQuestionsByFilter');
+      },
+    },
+  );
 
   const [hasLanded, setHasLanded] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -74,7 +97,7 @@ export default function QuestionsHomePage() {
     const { company, location, questionType } = data;
     setSelectedCompanies([company]);
     setSelectedLocations([location]);
-    setSelectedQuestionTypes([questionType]);
+    setSelectedQuestionTypes([questionType as QuestionsQuestionType]);
     setHasLanded(true);
   };
 
@@ -184,7 +207,17 @@ export default function QuestionsHomePage() {
         <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto pt-4">
           <div className="flex min-h-0 max-w-3xl flex-1">
             <div className="flex flex-1 flex-col items-stretch justify-start gap-4 pb-4">
-              <ContributeQuestionCard />
+              <ContributeQuestionCard
+                onSubmit={(data) => {
+                  createQuestion({
+                    company: data.company,
+                    content: data.questionContent,
+                    location: data.location,
+                    questionType: data.questionType,
+                    seenAt: data.date,
+                  });
+                }}
+              />
               <QuestionSearchBar
                 sortOptions={[
                   {
@@ -202,12 +235,21 @@ export default function QuestionsHomePage() {
                   console.log(value);
                 }}
               />
-              {Array.from({ length: 10 }).map((_, index) => (
+              {(questions ?? []).map((question) => (
                 <QuestionOverviewCard
                   // eslint-disable-next-line react/no-array-index-key
-                  key={index}
-                  href="/questions/1/1"
-                  {...SAMPLE_QUESTION}
+                  key={question.id}
+                  answerCount={question.numAnswers}
+                  content={question.content}
+                  href={`/questions/${question.id}/${createSlug(
+                    question.content,
+                  )}`}
+                  location={question.location}
+                  receivedCount={0} // TODO: Implement received count
+                  role={question.role}
+                  timestamp={question.seenAt.toLocaleDateString()}
+                  type={question.type}
+                  upvoteCount={question.numVotes}
                 />
               ))}
             </div>

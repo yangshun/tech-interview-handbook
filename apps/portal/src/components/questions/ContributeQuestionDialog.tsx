@@ -3,16 +3,21 @@ import { Dialog, Transition } from '@headlessui/react';
 
 import { HorizontalDivider } from '~/../../../packages/ui/dist';
 
+import type { ContributeQuestionFormProps } from './ContributeQuestionForm';
 import ContributeQuestionForm from './ContributeQuestionForm';
 import DiscardDraftDialog from './DiscardDraftDialog';
 
-export type ContributeQuestionDialogProps = {
+export type ContributeQuestionDialogProps = Pick<
+  ContributeQuestionFormProps,
+  'onSubmit'
+> & {
   onCancel: () => void;
   show: boolean;
 };
 
 export default function ContributeQuestionDialog({
   show,
+  onSubmit,
   onCancel,
 }: ContributeQuestionDialogProps) {
   const [showDiscardDialog, setShowDiscardDialog] = useState(false);
@@ -72,8 +77,7 @@ export default function ContributeQuestionDialog({
                           <ContributeQuestionForm
                             onDiscard={() => setShowDiscardDialog(true)}
                             onSubmit={(data) => {
-                              // eslint-disable-next-line no-console
-                              console.log(data);
+                              onSubmit(data);
                               onCancel();
                             }}
                           />

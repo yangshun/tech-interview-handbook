@@ -12,56 +12,51 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
       questionId: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const questionCommentsData = await ctx.prisma.questionsQuestionComment.findMany({
-        include: {
-        user: {
-          select: {
-            name: true,
+      const questionCommentsData =
+        await ctx.prisma.questionsQuestionComment.findMany({
+          include: {
+            user: {
+              select: {
+                name: true,
+              },
+            },
+            votes: true,
           },
-        },
-        votes: true,
-        },
-        orderBy: {
-          createdAt: 'desc',
-        },
-        where: {
-          ...input,
-        },
-    });
-    return questionCommentsData.map((data) => {
-      const votes:number = data.votes.reduce(
-        (previousValue:number, currentValue) => {
-          let result:number = previousValue;
+          orderBy: {
+            createdAt: 'desc',
+          },
+          where: {
+            ...input,
+          },
+        });
+      return questionCommentsData.map((data) => {
+        const votes: number = data.votes.reduce(
+          (previousValue: number, currentValue) => {
+            let result: number = previousValue;
 
-          switch(currentValue.vote) {
-          case Vote.UPVOTE:
-            result += 1
-            break;
-          case Vote.DOWNVOTE:
-            result -= 1
-            break;
-          }
-          return result;
-        },
-        0
+            switch (currentValue.vote) {
+              case Vote.UPVOTE:
+                result += 1;
+                break;
+              case Vote.DOWNVOTE:
+                result -= 1;
+                break;
+            }
+            return result;
+          },
+          0,
         );
 
-      let userName = "";
-
-      if (data.user) {
-        userName = data.user.name!;
-      }
-
-      const questionComment: QuestionComment = {
-        content: data.content,
-        createdAt: data.createdAt,
-        id: data.id,
-        numVotes: votes,
-        user: userName,
-      };
-      return questionComment;
-    });
-    }
+        const questionComment: QuestionComment = {
+          content: data.content,
+          createdAt: data.createdAt,
+          id: data.id,
+          numVotes: votes,
+          user: data.user?.name ?? '',
+        };
+        return questionComment;
+      });
+    },
   })
   .mutation('create', {
     input: z.object({
@@ -87,11 +82,12 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const questionCommentToUpdate = await ctx.prisma.questionsQuestionComment.findUnique({
-        where: {
-          id: input.id,
-        },
-      });
+      const questionCommentToUpdate =
+        await ctx.prisma.questionsQuestionComment.findUnique({
+          where: {
+            id: input.id,
+          },
+        });
 
       if (questionCommentToUpdate?.id !== userId) {
         throw new TRPCError({
@@ -117,11 +113,12 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const questionCommentToDelete = await ctx.prisma.questionsQuestionComment.findUnique({
-        where: {
-          id: input.id,
-        },
-      });
+      const questionCommentToDelete =
+        await ctx.prisma.questionsQuestionComment.findUnique({
+          where: {
+            id: input.id,
+          },
+        });
 
       if (questionCommentToDelete?.id !== userId) {
         throw new TRPCError({
@@ -143,11 +140,11 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
-      const {questionCommentId} = input
+      const { questionCommentId } = input;
 
       return await ctx.prisma.questionsQuestionCommentVote.findUnique({
         where: {
-          questionCommentId_userId : {questionCommentId,userId },
+          questionCommentId_userId: { questionCommentId, userId },
         },
       });
     },
@@ -175,13 +172,14 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
-      const {id, vote} = input
+      const { id, vote } = input;
 
-      const voteToUpdate = await ctx.prisma.questionsQuestionCommentVote.findUnique({
-        where: {
-          id: input.id,
-        },
-      });
+      const voteToUpdate =
+        await ctx.prisma.questionsQuestionCommentVote.findUnique({
+          where: {
+            id: input.id,
+          },
+        });
 
       if (voteToUpdate?.id !== userId) {
         throw new TRPCError({
@@ -207,10 +205,12 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const voteToDelete = await ctx.prisma.questionsQuestionCommentVote.findUnique({
-        where: {
-          id: input.id,
-        },});
+      const voteToDelete =
+        await ctx.prisma.questionsQuestionCommentVote.findUnique({
+          where: {
+            id: input.id,
+          },
+        });
 
       if (voteToDelete?.id !== userId) {
         throw new TRPCError({

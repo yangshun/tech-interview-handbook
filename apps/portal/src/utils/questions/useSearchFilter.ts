@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
-export const useSearchFilter = (
+export const useSearchFilter = <Value extends string = string>(
   name: string,
-  defaultValues?: Array<string>,
+  defaultValues?: Array<Value>,
 ) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const router = useRouter();
 
-  const [filters, setFilters] = useState<Array<string>>(defaultValues || []);
+  const [filters, setFilters] = useState<Array<Value>>(defaultValues || []);
 
   useEffect(() => {
     if (router.isReady && !isInitialized) {
@@ -16,7 +16,7 @@ export const useSearchFilter = (
       const query = router.query[name];
       if (query) {
         const queryValues = Array.isArray(query) ? query : [query];
-        setFilters(queryValues);
+        setFilters(queryValues as Array<Value>);
       } else {
         // Try to load from local storage
         const localStorageValue = localStorage.getItem(name);
@@ -37,7 +37,7 @@ export const useSearchFilter = (
   }, [isInitialized, name, router]);
 
   const setFiltersCallback = useCallback(
-    (newFilters: Array<string>) => {
+    (newFilters: Array<Value>) => {
       setFilters(newFilters);
       localStorage.setItem(name, JSON.stringify(newFilters));
       router.replace({
@@ -54,14 +54,17 @@ export const useSearchFilter = (
   return [filters, setFiltersCallback, isInitialized] as const;
 };
 
-export const useSearchFilterSingle = (name: string, defaultValue: string) => {
+export const useSearchFilterSingle = <Value extends string = string>(
+  name: string,
+  defaultValue: Value,
+) => {
   const [filters, setFilters, isInitialized] = useSearchFilter(name, [
     defaultValue,
   ]);
 
   return [
     filters[0],
-    (value: string) => {
+    (value: Value) => {
       setFilters([value]);
     },
     isInitialized,

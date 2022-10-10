@@ -5,6 +5,7 @@ import {
   CalendarDaysIcon,
   // UserIcon,
 } from '@heroicons/react/24/outline';
+import type { QuestionsQuestionType } from '@prisma/client';
 import {
   Button,
   Collapsible,
@@ -29,7 +30,7 @@ export type ContributeQuestionData = {
   location: string;
   position: string;
   questionContent: string;
-  questionType: string;
+  questionType: QuestionsQuestionType;
 };
 
 export type ContributeQuestionFormProps = {
@@ -87,7 +88,9 @@ export default function ContributeQuestionForm({
             required={true}
             startAddOn={CalendarDaysIcon}
             startAddOnType="icon"
-            {...register('date')}
+            {...register('date', {
+              valueAsDate: true,
+            })}
           />
         </div>
       </div>

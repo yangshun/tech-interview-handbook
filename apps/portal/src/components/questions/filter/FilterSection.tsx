@@ -4,13 +4,15 @@ import { Collapsible, TextInput } from '@tih/ui';
 import Checkbox from '../ui-patch/Checkbox';
 import RadioGroup from '../ui-patch/RadioGroup';
 
-export type FilterOption = {
+export type FilterOption<V extends string = string> = {
   checked: boolean;
   label: string;
-  value: string;
+  value: V;
 };
 
-export type FilterChoices = Array<Omit<FilterOption, 'checked'>>;
+export type FilterChoices<V extends string = string> = Array<
+  Omit<FilterOption<V>, 'checked'>
+>;
 
 type FilterSectionType<FilterOptions extends Array<FilterOption>> =
   | {
