@@ -63,22 +63,24 @@ export default function FilterSection<
             />
           )}
           {isSingleSelect ? (
-            <RadioList
-              label=""
-              value={options.find((option) => option.checked)?.value}
-              onChange={(value) => {
-                onOptionChange(value);
-              }}>
-              {options.map((option) => (
-                <RadioList.Item
-                  key={option.value}
-                  label={option.label}
-                  value={option.value}
-                />
-              ))}
-            </RadioList>
+            <div className="px-1.5">
+              <RadioList
+                label=""
+                value={options.find((option) => option.checked)?.value}
+                onChange={(value) => {
+                  onOptionChange(value);
+                }}>
+                {options.map((option) => (
+                  <RadioList.Item
+                    key={option.value}
+                    label={option.label}
+                    value={option.value}
+                  />
+                ))}
+              </RadioList>
+            </div>
           ) : (
-            <div className="mx-1">
+            <div className="px-1.5">
               {options.map((option) => (
                 <CheckboxInput
                   key={option.value}

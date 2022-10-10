@@ -1,5 +1,5 @@
 import { subMonths, subYears } from 'date-fns';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { NoSymbolIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
@@ -120,8 +120,9 @@ export default function QuestionsHomePage() {
     }));
   }, [selectedLocations]);
 
-  const handleLandingQuery = (data: LandingQueryData) => {
+  const handleLandingQuery = async (data: LandingQueryData) => {
     const { company, location, questionType } = data;
+
     setSelectedCompanies([company]);
     setSelectedLocations([location]);
     setSelectedQuestionTypes([questionType as QuestionsQuestionType]);
@@ -142,11 +143,15 @@ export default function QuestionsHomePage() {
     areLocationsInitialized,
   ]);
 
+  const { pathname } = router;
+
   useEffect(() => {
-    if (areFiltersInitialized && !loaded) {
-      // Update query params
-      router.replace({
-        pathname: router.pathname,
+    if (areFiltersInitialized) {
+      // Router.replace used instead of router.replace to avoid
+      // the page reloading itself since the router.replace
+      // callback changes on every page load
+      Router.replace({
+        pathname,
         query: {
           companies: selectedCompanies,
           locations: selectedLocations,
@@ -169,7 +174,7 @@ export default function QuestionsHomePage() {
     areFiltersInitialized,
     hasLanded,
     loaded,
-    router,
+    pathname,
     selectedCompanies,
     selectedLocations,
     selectedQuestionAge,
@@ -181,7 +186,7 @@ export default function QuestionsHomePage() {
   }
 
   const filterSidebar = (
-    <div className="divide-y divide-slate-200 px-4">
+    <div className="mt-2 divide-y divide-slate-200 px-4">
       <FilterSection
         label="Company"
         options={companyFilterOptions}
