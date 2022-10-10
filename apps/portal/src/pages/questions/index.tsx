@@ -143,19 +143,38 @@ export default function QuestionsHomePage() {
   ]);
 
   useEffect(() => {
-    if (areFiltersInitialized) {
+    if (areFiltersInitialized && !loaded) {
+      // Update query params
+      router.replace({
+        pathname: router.pathname,
+        query: {
+          companies: selectedCompanies,
+          locations: selectedLocations,
+          questionAge: selectedQuestionAge,
+          questionTypes: selectedQuestionTypes,
+        },
+      });
       const hasFilter =
-        router.query.companies ||
-        router.query.questionTypes ||
-        router.query.questionAge ||
-        router.query.locations;
+        selectedCompanies.length > 0 ||
+        selectedLocations.length > 0 ||
+        selectedQuestionAge !== 'all' ||
+        selectedQuestionTypes.length > 0;
       if (hasFilter) {
         setHasLanded(true);
       }
-      // Console.log('landed', hasLanded);
+
       setLoaded(true);
     }
-  }, [areFiltersInitialized, hasLanded, router.query]);
+  }, [
+    areFiltersInitialized,
+    hasLanded,
+    loaded,
+    router,
+    selectedCompanies,
+    selectedLocations,
+    selectedQuestionAge,
+    selectedQuestionTypes,
+  ]);
 
   if (!loaded) {
     return null;
@@ -291,18 +310,17 @@ export default function QuestionsHomePage() {
           <h2 className="px-4 text-xl font-semibold">Filter by</h2>
           {filterSidebar}
         </aside>
-        <div className="hidden">
-          <SlideOut
-            enterFrom="end"
-            isShown={filterDrawerOpen}
-            size="sm"
-            title="Filter by"
-            onClose={() => {
-              setFilterDrawerOpen(false);
-            }}>
-            {filterSidebar}
-          </SlideOut>
-        </div>
+        <SlideOut
+          className="lg:hidden"
+          enterFrom="end"
+          isShown={filterDrawerOpen}
+          size="sm"
+          title="Filter by"
+          onClose={() => {
+            setFilterDrawerOpen(false);
+          }}>
+          {filterSidebar}
+        </SlideOut>
       </div>
     </main>
   );

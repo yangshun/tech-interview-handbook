@@ -23,6 +23,7 @@ import {
 import FilterPill from '~/components/resumes/browse/FilterPill';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
+import SignInButton from '~/components/resumes/SignInButton';
 
 import { trpc } from '~/utils/trpc';
 
@@ -52,29 +53,44 @@ export default function ResumeHomePage() {
   const [tabsValue, setTabsValue] = useState(BROWSE_TABS_VALUES.ALL);
   const [searchValue, setSearchValue] = useState('');
   const [resumes, setResumes] = useState<Array<Resume>>([]);
+  const [renderSignInButton, setRenderSignInButton] = useState(false);
+  const [signInButtonText, setSignInButtonText] = useState('');
 
   const allResumesQuery = trpc.useQuery(['resumes.resume.findAll'], {
     enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
     onSuccess: (data) => {
       setResumes(data);
+      setRenderSignInButton(false);
     },
   });
   const starredResumesQuery = trpc.useQuery(
     ['resumes.resume.user.findUserStarred'],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
+      onError: () => {
+        setResumes([]);
+        setRenderSignInButton(true);
+        setSignInButtonText('to view starred resumes');
+      },
       onSuccess: (data) => {
         setResumes(data);
       },
+      retry: false,
     },
   );
   const myResumesQuery = trpc.useQuery(
     ['resumes.resume.user.findUserCreated'],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.MY,
+      onError: () => {
+        setResumes([]);
+        setRenderSignInButton(true);
+        setSignInButtonText('to view your submitted resumes');
+      },
       onSuccess: (data) => {
         setResumes(data);
       },
+      retry: false,
     },
   );
 
@@ -270,14 +286,17 @@ export default function ResumeHomePage() {
                   </form>
                 </div>
               </div>
-              <ResumeListItems
-                isLoading={
-                  allResumesQuery.isFetching ||
-                  starredResumesQuery.isFetching ||
-                  myResumesQuery.isFetching
-                }
-                resumes={resumes}
-              />
+              <div className="col-span-10 pr-8">
+                {renderSignInButton && <SignInButton text={signInButtonText} />}
+                <ResumeListItems
+                  isLoading={
+                    allResumesQuery.isFetching ||
+                    starredResumesQuery.isFetching ||
+                    myResumesQuery.isFetching
+                  }
+                  resumes={resumes}
+                />
+              </div>
             </div>
           </div>
         </div>

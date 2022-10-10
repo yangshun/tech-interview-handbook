@@ -1,23 +1,14 @@
 import type { ProductNavigationItems } from '~/components/global/ProductNavigation';
 
 const navigation: ProductNavigationItems = [
-  {
-    children: [
-      { href: '#', name: 'Technical Support' },
-      { href: '#', name: 'Sales' },
-      { href: '#', name: 'General' },
-    ],
-    href: '#',
-    name: 'Inboxes',
-  },
-  { children: [], href: '#', name: 'Reporting' },
-  { children: [], href: '#', name: 'Settings' },
+  { href: '/offers', name: 'Home' },
+  { href: '/offers/submit', name: 'Benchmark your offer' },
 ];
 
 const config = {
   navigation,
-  showGlobalNav: true,
-  title: 'Offers',
+  showGlobalNav: false,
+  title: 'Tech Offers Repo',
 };
 
 export default config;

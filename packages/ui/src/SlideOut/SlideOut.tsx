@@ -8,6 +8,7 @@ export type SlideOutEnterFrom = 'end' | 'start';
 
 type Props = Readonly<{
   children: React.ReactNode;
+  className: string;
   enterFrom?: SlideOutEnterFrom;
   isShown?: boolean;
   onClose?: () => void;
@@ -40,6 +41,7 @@ const enterFromClasses: Record<
 
 export default function SlideOut({
   children,
+  className,
   enterFrom = 'end',
   isShown = false,
   size,
@@ -50,7 +52,10 @@ export default function SlideOut({
 
   return (
     <Transition.Root as={Fragment} show={isShown}>
-      <Dialog as="div" className="relative z-40" onClose={() => onClose?.()}>
+      <Dialog
+        as="div"
+        className={clsx('relative z-40', className)}
+        onClose={() => onClose?.()}>
         <Transition.Child
           as={Fragment}
           enter="transition-opacity ease-linear duration-300"
