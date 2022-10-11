@@ -4,6 +4,8 @@ import {
 } from '@heroicons/react/20/solid';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
 
+import CommentDescription from './CommentDescription';
+
 import type { ResumeComment } from '~/types/resume-comments';
 
 type CommentBodyProps = {
@@ -49,7 +51,7 @@ export default function CommentBody({
         </div>
 
         {/* Description */}
-        <div className="whitespace-pre-wrap text-sm">{comment.description}</div>
+        <CommentDescription>{comment.description}</CommentDescription>
 
         {/* Upvote and edit */}
         <div className="flex flex-row space-x-1 pt-1 align-middle">
