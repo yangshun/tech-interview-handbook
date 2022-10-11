@@ -1,9 +1,9 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 import { Collapsible, RadioList } from '@tih/ui';
 
-import FormRadioList from './FormRadioList';
-import FormSelect from './FormSelect';
-import FormTextInput from './FormTextInput';
+import FormRadioList from './components/FormRadioList';
+import FormSelect from './components/FormSelect';
+import FormTextInput from './components/FormTextInput';
 import {
   companyOptions,
   educationFieldOptions,
@@ -12,7 +12,7 @@ import {
   titleOptions,
 } from '../constants';
 import { JobType } from '../types';
-import { CURRENCY_OPTIONS } from '../util/currency/CurrencyEnum';
+import { CURRENCY_OPTIONS } from '../../../utils/offers/currency/CurrencyEnum';
 
 function YoeSection() {
   const { register } = useFormContext();
@@ -28,7 +28,9 @@ function YoeSection() {
             label="Total YOE"
             placeholder="0"
             type="number"
-            {...register(`background.totalYoe`)}
+            {...register(`background.totalYoe`, {
+              valueAsNumber: true,
+            })}
           />
         </div>
         <div className="grid grid-cols-1 space-x-3">
@@ -37,7 +39,9 @@ function YoeSection() {
               <FormTextInput
                 label="Specific YOE 1"
                 type="number"
-                {...register(`background.specificYoes.0.yoe`)}
+                {...register(`background.specificYoes.0.yoe`, {
+                  valueAsNumber: true,
+                })}
               />
               <FormTextInput
                 label="Specific Domain 1"
@@ -49,7 +53,9 @@ function YoeSection() {
               <FormTextInput
                 label="Specific YOE 2"
                 type="number"
-                {...register(`background.specificYoes.1.yoe`)}
+                {...register(`background.specificYoes.1.yoe`, {
+                  valueAsNumber: true,
+                })}
               />
               <FormTextInput
                 label="Specific Domain 2"
@@ -73,13 +79,13 @@ function FullTimeJobFields() {
           display="block"
           label="Title"
           options={titleOptions}
-          {...register(`background.experience.title`)}
+          {...register(`background.experiences.0.title`)}
         />
         <FormSelect
           display="block"
           label="Company"
           options={companyOptions}
-          {...register(`background.experience.companyId`)}
+          {...register(`background.experiences.0.companyId`)}
         />
       </div>
       <div className="mb-5 grid grid-cols-1 space-x-3">
@@ -90,7 +96,9 @@ function FullTimeJobFields() {
               isLabelHidden={true}
               label="Currency"
               options={CURRENCY_OPTIONS}
-              {...register(`background.experience.totalCompensation.currency`)}
+              {...register(
+                `background.experiences.0.totalCompensation.currency`,
+              )}
             />
           }
           endAddOnType="element"
@@ -99,7 +107,9 @@ function FullTimeJobFields() {
           startAddOn="$"
           startAddOnType="label"
           type="number"
-          {...register(`background.experience.totalCompensation.value`)}
+          {...register(`background.experiences.0.totalCompensation.value`, {
+            valueAsNumber: true,
+          })}
         />
       </div>
       <Collapsible label="Add more details">
@@ -107,12 +117,12 @@ function FullTimeJobFields() {
           <FormTextInput
             label="Focus / Specialization"
             placeholder="e.g. Front End"
-            {...register(`background.experience.specialization`)}
+            {...register(`background.experiences.0.specialization`)}
           />
           <FormTextInput
             label="Level"
             placeholder="e.g. L4, Junior"
-            {...register(`background.experience.level`)}
+            {...register(`background.experiences.0.level`)}
           />
         </div>
         <div className="mb-5 grid grid-cols-2 space-x-3">
@@ -120,12 +130,14 @@ function FullTimeJobFields() {
             display="block"
             label="Location"
             options={locationOptions}
-            {...register(`background.experience.location`)}
+            {...register(`background.experiences.0.location`)}
           />
           <FormTextInput
             label="Duration (months)"
             type="number"
-            {...register(`background.experience.durationInMonths`)}
+            {...register(`background.experiences.0.durationInMonths`, {
+              valueAsNumber: true,
+            })}
           />
         </div>
       </Collapsible>
@@ -142,13 +154,13 @@ function InternshipJobFields() {
           display="block"
           label="Title"
           options={titleOptions}
-          {...register(`background.experience.title`)}
+          {...register(`background.experiences.0.title`)}
         />
         <FormSelect
           display="block"
           label="Company"
           options={companyOptions}
-          {...register(`background.experience.company`)}
+          {...register(`background.experiences.0.company`)}
         />
       </div>
       <div className="mb-5 grid grid-cols-1 space-x-3">
@@ -159,7 +171,7 @@ function InternshipJobFields() {
               isLabelHidden={true}
               label="Currency"
               options={CURRENCY_OPTIONS}
-              {...register(`background.experience.monthlySalary.currency`)}
+              {...register(`background.experiences.0.monthlySalary.currency`)}
             />
           }
           endAddOnType="element"
@@ -168,7 +180,7 @@ function InternshipJobFields() {
           startAddOn="$"
           startAddOnType="label"
           type="number"
-          {...register(`background.experience.monthlySalary.value`)}
+          {...register(`background.experiences.0.monthlySalary.value`)}
         />
       </div>
       <Collapsible label="Add more details">
@@ -176,13 +188,13 @@ function InternshipJobFields() {
           <FormTextInput
             label="Focus / Specialization"
             placeholder="e.g. Front End"
-            {...register(`background.experience.specialization`)}
+            {...register(`background.experiences.0.specialization`)}
           />
           <FormSelect
             display="block"
             label="Location"
             options={locationOptions}
-            {...register(`background.experience.location`)}
+            {...register(`background.experiences.0.location`)}
           />
         </div>
       </Collapsible>
@@ -194,7 +206,7 @@ function CurrentJobSection() {
   const { register } = useFormContext();
   const watchJobType = useWatch({
     defaultValue: JobType.FullTime,
-    name: 'background.experience.jobType',
+    name: 'background.experiences.0.jobType',
   });
 
   return (
@@ -209,7 +221,7 @@ function CurrentJobSection() {
             isLabelHidden={true}
             label="Job Type"
             orientation="horizontal"
-            {...register('background.experience.jobType')}>
+            {...register('background.experiences.0.jobType')}>
             <RadioList.Item
               key="Full-time"
               label="Full-time"
@@ -245,13 +257,13 @@ function EducationSection() {
             display="block"
             label="Education Level"
             options={educationLevelOptions}
-            {...register(`background.education.type`)}
+            {...register(`background.educations.0.type`)}
           />
           <FormSelect
             display="block"
             label="Field"
             options={educationFieldOptions}
-            {...register(`background.education.field`)}
+            {...register(`background.educations.0.field`)}
           />
         </div>
         <Collapsible label="Add more details">
@@ -259,7 +271,7 @@ function EducationSection() {
             <FormTextInput
               label="School"
               placeholder="e.g. National University of Singapore"
-              {...register(`background.experience.specialization`)}
+              {...register(`background.educations.0.school`)}
             />
           </div>
         </Collapsible>

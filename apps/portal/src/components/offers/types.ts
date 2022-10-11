@@ -1,4 +1,6 @@
 /* eslint-disable no-shadow */
+import type { MonthYear } from '../shared/MonthYearPicker';
+
 /*
  *  Offer Profile
  */
@@ -18,7 +20,7 @@ export enum EducationBackgroundType {
   SelfTaught = 'Self-taught',
 }
 
-type Money = {
+export type Money = {
   currency: string;
   value: number;
 };
@@ -33,16 +35,6 @@ type FullTimeJobData = {
   totalCompensation: Money;
 };
 
-export type FullTimeOfferFormData = {
-  comments: string;
-  companyId: string;
-  job: FullTimeJobData;
-  jobType: string;
-  location: string;
-  monthYearReceived: string;
-  negotiationStrategy: string;
-};
-
 type InternshipJobData = {
   internshipCycle: string;
   monthlySalary: Money;
@@ -51,17 +43,22 @@ type InternshipJobData = {
   title: string;
 };
 
-export type InternshipOfferFormData = {
+export type OfferDetailsFormData = {
   comments: string;
   companyId: string;
-  job: InternshipJobData;
+  job: FullTimeJobData | InternshipJobData;
   jobType: string;
   location: string;
-  monthYearReceived: string;
+  monthYearReceived: MonthYear;
   negotiationStrategy: string;
 };
 
-type OfferDetailsFormData = FullTimeOfferFormData | InternshipOfferFormData;
+export type OfferDetailsPostData = Omit<
+  OfferDetailsFormData,
+  'monthYearReceived'
+> & {
+  monthYearReceived: Date;
+};
 
 type SpecificYoe = {
   domain: string;
@@ -98,8 +95,8 @@ type Education = {
 };
 
 type BackgroundFormData = {
-  education: Education;
-  experience: Experience;
+  educations: Array<Education>;
+  experiences: Array<Experience>;
   specificYoes: Array<SpecificYoe>;
   totalYoe: number;
 };
@@ -107,4 +104,9 @@ type BackgroundFormData = {
 export type SubmitOfferFormData = {
   background: BackgroundFormData;
   offers: Array<OfferDetailsFormData>;
+};
+
+export type OfferPostData = {
+  background: BackgroundFormData;
+  offers: Array<OfferDetailsPostData>;
 };

@@ -1,6 +1,6 @@
 import { Select } from '@tih/ui';
 
-import { Currency } from '~/components/offers/util/currency/CurrencyEnum';
+import { Currency } from '~/utils/offers/currency/CurrencyEnum';
 
 const currencyOptions = Object.entries(Currency).map(([key, value]) => ({
   label: key,
