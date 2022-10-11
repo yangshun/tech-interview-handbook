@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { Prisma } from '@prisma/client';
 
 import { createRouter } from './context';
+import type { offersProfile } from '../../types/offers-profile';
 
 const valuation = z.object({
   currency: z.string(),
@@ -53,54 +54,70 @@ const education = z.object({
 export const offersProfileRouter = createRouter()
   .query('listOne', {
     input: z.object({
-      profileId: z.string(),
+        profileId: z.string(),
+        token: z.string().optional()
     }),
-    async resolve({ ctx, input }) {
-      return await ctx.prisma.offersProfile.findFirst({
-        include: {
-          background: {
-            include: {
-              educations: true,
-              experiences: {
-                include: {
-                  company: true,
-                  monthlySalary: true,
-                  totalCompensation: true,
-                },
+      async resolve({ ctx, input }) {
+          const result = await ctx.prisma.offersProfile.findFirst({
+              include: {
+                  background: {
+                      include: {
+                          educations: true,
+                          experiences: {
+                              include: {
+                                  company: true,
+                                  monthlySalary: true,
+                                  totalCompensation: true,
+                              },
+                          },
+                          specificYoes: true,
+                      },
+                  },
+                  discussion: {
+                      include: {
+                          replies: true,
+                          replyingTo: true,
+                      },
+                  },
+                  offers: {
+                      include: {
+                          OffersFullTime: {
+                              include: {
+                                  baseSalary: true,
+                                  bonus: true,
+                                  stocks: true,
+                                  totalCompensation: true,
+                              },
+                          },
+                          OffersIntern: {
+                              include: {
+                                  monthlySalary: true,
+                              },
+                          },
+                          company: true,
+                      },
+                  },
               },
-              specificYoes: true,
-            },
-          },
-          discussion: {
-            include: {
-              replies: true,
-              replyingTo: true,
-            },
-          },
-          offers: {
-            include: {
-              OffersFullTime: {
-                include: {
-                  baseSalary: true,
-                  bonus: true,
-                  stocks: true,
-                  totalCompensation: true,
-                },
-              },
-              OffersIntern: {
-                include: {
-                  monthlySalary: true,
-                },
-              },
-              company: true,
-            },
-          },
-        },
-        where: {
-          id: input.profileId,
-        },
-      });
-    },
+              where: {
+                  id: input.profileId,
+              }
+          });
+      // Extend the T generic with the fullName attribute
+        type WithIsEditable<T> = T & {
+        isEditable: boolean
+        }
+
+        // Take objects that satisfy FirstLastName and computes a full name
+        function computeIsEditable(
+        profileInput: offersProfile
+        ): WithIsEditable<offersProfile> {
+        return {
+            ...profileInput,
+            isEditable: profileInput["editToken" as keyof typeof profileInput] === input.token,
+        }
+        }
+        return result ? computeIsEditable(result) : result;
+      },
   })
   .mutation('create', {
     input: z.object({
@@ -334,7 +351,6 @@ export const offersProfileRouter = createRouter()
           },
         },
       });
-
       // TODO: add analysis to profile object then return
       return profile;
     },
