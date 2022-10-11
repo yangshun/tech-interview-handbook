@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
-import type { MonthYear } from '../shared/MonthYearPicker';
+import type { OfferEntity } from '~/components/offers/profile/OfferCard';
+import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
 /*
  *  Offer Profile
@@ -82,7 +83,7 @@ type GeneralExperience = {
   title: string;
 };
 
-type Experience =
+export type Experience =
   | (FullTimeExperience & GeneralExperience)
   | (GeneralExperience & InternshipExperience);
 
@@ -109,4 +110,20 @@ export type SubmitOfferFormData = {
 export type OfferPostData = {
   background: BackgroundFormData;
   offers: Array<OfferDetailsPostData>;
+};
+
+type EducationDisplay = {
+  endDate?: string;
+  field: string;
+  school: string;
+  startDate?: string;
+  type: string;
+};
+
+export type BackgroundCard = {
+  educations: Array<EducationDisplay>;
+  experiences: Array<OfferEntity>;
+  profileName: string;
+  specificYoes: Array<SpecificYoe>;
+  totalYoe: string;
 };

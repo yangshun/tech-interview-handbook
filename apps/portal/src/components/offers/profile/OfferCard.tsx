@@ -6,18 +6,19 @@ import {
 } from '@heroicons/react/24/outline';
 import { HorizontalDivider } from '@tih/ui';
 
-type OfferEntity = {
+export type OfferEntity = {
   base?: string;
   bonus?: string;
   companyName: string;
-  duration?: string; // For background
+  duration?: string;
+  id?: string;
   jobLevel?: string;
   jobTitle: string;
-  location: string;
+  location?: string;
   monthlySalary?: string;
   negotiationStrategy?: string;
   otherComment?: string;
-  receivedMonth: string;
+  receivedMonth?: string;
   stocks?: string;
   totalCompensation?: string;
 };
@@ -57,14 +58,14 @@ export default function OfferCard({
             <p>{jobLevel ? `${jobTitle}, ${jobLevel}` : jobTitle}</p>
           </div>
         </div>
-        {receivedMonth && (
+        {!duration && receivedMonth && (
           <div className="font-light text-gray-400">
             <p>{receivedMonth}</p>
           </div>
         )}
         {duration && (
           <div className="font-light text-gray-400">
-            <p>{duration}</p>
+            <p>{`${duration} months`}</p>
           </div>
         )}
       </div>

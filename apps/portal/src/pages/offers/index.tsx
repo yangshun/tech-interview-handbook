@@ -6,8 +6,7 @@ import OffersTitle from '~/components/offers/OffersTitle';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 
 export default function OffersHomePage() {
-  const [jobTitleFilter, setjobTitleFilter] = useState('Software engineers');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [jobTitleFilter, setjobTitleFilter] = useState('Software Engineer');
   const [companyFilter, setCompanyFilter] = useState('All companies');
 
   return (
@@ -23,20 +22,20 @@ export default function OffersHomePage() {
                 label="Select a job title"
                 options={[
                   {
-                    label: 'Software engineers',
-                    value: 'Software engineers',
+                    label: 'Software Engineer',
+                    value: 'Software Engineer',
                   },
                   {
-                    label: 'Frontend engineers',
-                    value: 'Frontend engineers',
+                    label: 'Frontend Engineer',
+                    value: 'Frontend Engineer',
                   },
                   {
-                    label: 'Backend engineers',
-                    value: 'Backend engineers',
+                    label: 'Backend Engineer',
+                    value: 'Backend Engineer',
                   },
                   {
-                    label: 'Full-stack engineers',
-                    value: 'Full-stack engineers',
+                    label: 'Full-stack Engineer',
+                    value: 'Full-stack Engineer',
                   },
                 ]}
                 value={jobTitleFilter}
@@ -53,7 +52,10 @@ export default function OffersHomePage() {
         </div>
       </div>
       <div className="flex justify-center bg-white pb-20 pt-10">
-        <OffersTable />
+        <OffersTable
+          companyFilter={companyFilter}
+          jobTitleFilter={jobTitleFilter}
+        />
       </div>
     </main>
   );
