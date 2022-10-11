@@ -67,20 +67,20 @@ type SpecificYoe = {
 };
 
 type FullTimeExperience = {
-  level: string;
-  totalCompensation: Money;
+  level?: string;
+  totalCompensation?: Money;
 };
 
 type InternshipExperience = {
-  monthlySalary: Money;
+  monthlySalary?: Money;
 };
 
 type GeneralExperience = {
-  companyId: string;
-  durationInMonths: number;
-  jobType: string;
-  specialization: string;
-  title: string;
+  companyId?: string;
+  durationInMonths?: number;
+  jobType?: string;
+  specialization?: string;
+  title?: string;
 };
 
 export type Experience =
@@ -88,26 +88,26 @@ export type Experience =
   | (GeneralExperience & InternshipExperience);
 
 type Education = {
-  endDate: Date;
-  field: string;
-  school: string;
-  startDate: Date;
-  type: string;
+  endDate?: Date;
+  field?: string;
+  school?: string;
+  startDate?: Date;
+  type?: string;
 };
 
 type BackgroundFormData = {
   educations: Array<Education>;
   experiences: Array<Experience>;
   specificYoes: Array<SpecificYoe>;
-  totalYoe: number;
+  totalYoe?: number;
 };
 
-export type SubmitOfferFormData = {
+export type OfferProfileFormData = {
   background: BackgroundFormData;
   offers: Array<OfferDetailsFormData>;
 };
 
-export type OfferPostData = {
+export type OfferProfilePostData = {
   background: BackgroundFormData;
   offers: Array<OfferDetailsPostData>;
 };

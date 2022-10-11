@@ -46,7 +46,11 @@ export function removeInvalidMoneyData(object: any) {
     if (k === 'currency') {
       if (object.value === undefined) {
         delete object[k];
-      } else if (object.value === null || object.value !== object.value) {
+      } else if (
+        object.value === null ||
+        object.value !== object.value ||
+        object.value === ''
+      ) {
         delete object[k];
         delete object.value;
       }

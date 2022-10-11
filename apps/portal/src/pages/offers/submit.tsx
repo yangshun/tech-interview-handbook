@@ -4,35 +4,34 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from '@tih/ui';
 
+import { Breadcrumbs } from '~/components/offers/Breadcrumb';
 import BackgroundForm from '~/components/offers/forms/BackgroundForm';
 import OfferAnalysis from '~/components/offers/forms/OfferAnalysis';
 import OfferDetailsForm from '~/components/offers/forms/OfferDetailsForm';
 import OfferProfileSave from '~/components/offers/forms/OfferProfileSave';
 import type {
   OfferDetailsFormData,
-  SubmitOfferFormData,
+  OfferProfileFormData,
 } from '~/components/offers/types';
+import { JobType } from '~/components/offers/types';
 import type { Month } from '~/components/shared/MonthYearPicker';
 
 import { cleanObject, removeInvalidMoneyData } from '~/utils/offers/form';
 import { getCurrentMonth, getCurrentYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
-function Breadcrumbs() {
-  return (
-    <p className="mb-4 text-right text-sm text-gray-400">
-      {'Offer details > Background > Analysis > Save'}
-    </p>
-  );
-}
-
 const defaultOfferValues = {
+  background: {
+    educations: [],
+    experiences: [{ jobType: JobType.FullTime }],
+    specificYoes: [],
+  },
   offers: [
     {
       comments: '',
       companyId: '',
       job: {},
-      jobType: 'FULLTIME',
+      jobType: JobType.FullTime,
       location: '',
       monthYearReceived: {
         month: getCurrentMonth() as Month,
@@ -47,11 +46,12 @@ type FormStep = {
   component: JSX.Element;
   hasNext: boolean;
   hasPrevious: boolean;
+  label: string;
 };
 
 export default function OffersSubmissionPage() {
   const [formStep, setFormStep] = useState(0);
-  const formMethods = useForm<SubmitOfferFormData>({
+  const formMethods = useForm<OfferProfileFormData>({
     defaultValues: defaultOfferValues,
     mode: 'all',
   });
@@ -62,19 +62,29 @@ export default function OffersSubmissionPage() {
       component: <OfferDetailsForm key={0} />,
       hasNext: true,
       hasPrevious: false,
+      label: 'Offer details',
     },
     {
       component: <BackgroundForm key={1} />,
       hasNext: false,
       hasPrevious: true,
+      label: 'Background',
     },
-    { component: <OfferAnalysis key={2} />, hasNext: true, hasPrevious: false },
+    {
+      component: <OfferAnalysis key={2} />,
+      hasNext: true,
+      hasPrevious: false,
+      label: 'Analysis',
+    },
     {
       component: <OfferProfileSave key={3} />,
       hasNext: false,
       hasPrevious: false,
+      label: 'Save',
     },
   ];
+
+  const formStepsLabels = formSteps.map((step) => step.label);
 
   const nextStep = async (currStep: number) => {
     if (currStep === 0) {
@@ -98,7 +108,7 @@ export default function OffersSubmissionPage() {
     },
   });
 
-  const onSubmit: SubmitHandler<SubmitOfferFormData> = async (data) => {
+  const onSubmit: SubmitHandler<OfferProfileFormData> = async (data) => {
     const result = await trigger();
     if (!result) {
       return;
@@ -118,6 +128,9 @@ export default function OffersSubmissionPage() {
       (specificYoe) => specificYoe.domain && specificYoe.yoe > 0,
     );
 
+    if (Object.entries(postData.background.experiences[0]).length === 1) {
+      postData.background.experiences = [];
+    }
     createMutation.mutate(postData);
   };
 
@@ -125,7 +138,9 @@ export default function OffersSubmissionPage() {
     <div className="fixed h-full w-full overflow-y-scroll">
       <div className="mb-20 flex justify-center">
         <div className="my-5 block w-full max-w-screen-md rounded-lg bg-white py-10 px-10 shadow-lg">
-          <Breadcrumbs />
+          <div className="mb-4 flex justify-end">
+            <Breadcrumbs currentStep={formStep} stepLabels={formStepsLabels} />
+          </div>
           <FormProvider {...formMethods}>
             <form onSubmit={handleSubmit(onSubmit)}>
               {formSteps[formStep].component}
