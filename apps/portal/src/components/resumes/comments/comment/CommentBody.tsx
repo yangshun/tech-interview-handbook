@@ -49,7 +49,7 @@ export default function CommentBody({
         </div>
 
         {/* Description */}
-        <div className="text-sm">{comment.description}</div>
+        <div className="whitespace-pre-wrap text-sm">{comment.description}</div>
 
         {/* Upvote and edit */}
         <div className="flex flex-row space-x-1 pt-1 align-middle">
