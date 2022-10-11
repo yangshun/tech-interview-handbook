@@ -22,7 +22,7 @@ import { trpc } from '~/utils/trpc';
 
 export default function ResumeReviewPage() {
   const ErrorPage = (
-    <Error statusCode={404} title="Requested resume does not exist." />
+    <Error statusCode={404} title="Requested resume does not exist" />
   );
   const { data: session } = useSession();
   const router = useRouter();
@@ -56,14 +56,6 @@ export default function ResumeReviewPage() {
   });
 
   useEffect(() => {
-    if (starDetails.isStarred) {
-      document.getElementById('star-button')?.focus();
-    } else {
-      document.getElementById('star-button')?.blur();
-    }
-  }, [starDetails]);
-
-  useEffect(() => {
     if (detailsQuery?.data !== undefined) {
       setStarDetails({
         isStarred: !!detailsQuery.data?.stars.length,
@@ -73,14 +65,14 @@ export default function ResumeReviewPage() {
   }, [detailsQuery.data]);
 
   const onStarButtonClick = () => {
-    // Star button only rendered if resume exists
-    // Star button only clickable if user exists
     setStarDetails({
       isStarred: !starDetails.isStarred,
       numStars: starDetails.isStarred
         ? starDetails.numStars - 1
         : starDetails.numStars + 1,
     });
+    // Star button only rendered if resume exists
+    // Star button only clickable if user exists
     if (starDetails.isStarred) {
       unstarMutation.mutate({
         resumeId: resumeId as string,
@@ -94,7 +86,7 @@ export default function ResumeReviewPage() {
 
   return (
     <>
-      {detailsQuery.isError && ErrorPage}
+      {(detailsQuery.isError || detailsQuery.data === null) && ErrorPage}
       {detailsQuery.isLoading && (
         <div className="w-full pt-4">
           {' '}
@@ -106,13 +98,18 @@ export default function ResumeReviewPage() {
           <Head>
             <title>{detailsQuery.data.title}</title>
           </Head>
-          <main className="h-[calc(100vh-2rem)] flex-1 overflow-y-scroll p-4">
+          <main className="h-[calc(100vh-2rem)] flex-1 overflow-y-auto p-4">
             <div className="flex flex-row space-x-8">
               <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                 {detailsQuery.data.title}
               </h1>
               <button
-                className="isolate inline-flex max-h-10 items-center space-x-4 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className={clsx(
+                  starDetails.isStarred
+                    ? 'z-10 border-indigo-500 outline-none ring-1 ring-indigo-500'
+                    : '',
+                  'isolate inline-flex max-h-10 items-center space-x-4 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50  disabled:hover:bg-white',
+                )}
                 disabled={session?.user === undefined}
                 id="star-button"
                 type="button"

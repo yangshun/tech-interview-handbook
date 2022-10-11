@@ -22,7 +22,7 @@ export default function CommentListItems({ comments, isLoading }: Props) {
   }
 
   return (
-    <div className="m-2 flow-root h-[calc(100vh-20rem)] w-full flex-col space-y-3 overflow-y-scroll">
+    <div className="m-2 flow-root h-[calc(100vh-20rem)] w-full flex-col space-y-3 overflow-y-auto">
       {comments.map((comment) => (
         <Comment
           key={comment.id}

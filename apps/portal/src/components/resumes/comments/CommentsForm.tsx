@@ -77,7 +77,7 @@ export default function CommentsForm({
   };
 
   return (
-    <div className="h-[calc(100vh-13rem)] overflow-y-scroll">
+    <div className="h-[calc(100vh-13rem)] overflow-y-auto">
       <h2 className="text-xl font-semibold text-gray-800">Add your review</h2>
       <p className="text-gray-800">
         Please fill in at least one section to submit your review
