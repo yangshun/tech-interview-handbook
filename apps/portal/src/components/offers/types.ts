@@ -1,9 +1,9 @@
 /* eslint-disable no-shadow */
+import type { MonthYear } from '../shared/MonthYearPicker';
+
 /*
  *  Offer Profile
  */
-
-import type { MonthYear } from '../shared/MonthYearPicker';
 
 export enum JobType {
   FullTime = 'FULLTIME',
@@ -20,7 +20,7 @@ export enum EducationBackgroundType {
   SelfTaught = 'Self-taught',
 }
 
-type Money = {
+export type Money = {
   currency: string;
   value: number;
 };
@@ -51,6 +51,13 @@ export type OfferDetailsFormData = {
   location: string;
   monthYearReceived: MonthYear;
   negotiationStrategy: string;
+};
+
+export type OfferDetailsPostData = Omit<
+  OfferDetailsFormData,
+  'monthYearReceived'
+> & {
+  monthYearReceived: Date;
 };
 
 type SpecificYoe = {
@@ -88,8 +95,8 @@ type Education = {
 };
 
 type BackgroundFormData = {
-  education: Education;
-  experience: Experience;
+  educations: Array<Education>;
+  experiences: Array<Experience>;
   specificYoes: Array<SpecificYoe>;
   totalYoe: number;
 };
@@ -97,4 +104,9 @@ type BackgroundFormData = {
 export type SubmitOfferFormData = {
   background: BackgroundFormData;
   offers: Array<OfferDetailsFormData>;
+};
+
+export type OfferPostData = {
+  background: BackgroundFormData;
+  offers: Array<OfferDetailsPostData>;
 };

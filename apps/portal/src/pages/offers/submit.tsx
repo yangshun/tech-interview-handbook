@@ -8,9 +8,15 @@ import BackgroundForm from '~/components/offers/forms/BackgroundForm';
 import OfferAnalysis from '~/components/offers/forms/OfferAnalysis';
 import OfferDetailsForm from '~/components/offers/forms/OfferDetailsForm';
 import OfferProfileSave from '~/components/offers/forms/OfferProfileSave';
-import type { SubmitOfferFormData } from '~/components/offers/types';
-import { getCurrentMonth, getCurrentYear } from '~/components/offers/util/time';
+import type {
+  OfferDetailsFormData,
+  SubmitOfferFormData,
+} from '~/components/offers/types';
 import type { Month } from '~/components/shared/MonthYearPicker';
+
+import { cleanObject, removeInvalidMoneyData } from '~/utils/offers/form';
+import { getCurrentMonth, getCurrentYear } from '~/utils/offers/time';
+import { trpc } from '~/utils/trpc';
 
 function Breadcrumbs() {
   return (
@@ -82,12 +88,37 @@ export default function OffersSubmissionPage() {
 
   const previousStep = () => setFormStep(formStep - 1);
 
-  const onSubmit: SubmitHandler<SubmitOfferFormData> = async () => {
+  const createMutation = trpc.useMutation(['offers.profile.create'], {
+    onError(error) {
+      console.error(error.message);
+    },
+    onSuccess() {
+      alert('offer profile submit success!');
+      setFormStep(formStep + 1);
+    },
+  });
+
+  const onSubmit: SubmitHandler<SubmitOfferFormData> = async (data) => {
     const result = await trigger();
     if (!result) {
       return;
     }
-    setFormStep(formStep + 1);
+    data = removeInvalidMoneyData(data);
+    const background = cleanObject(data.background);
+    const offers = data.offers.map((offer: OfferDetailsFormData) => ({
+      ...offer,
+      monthYearReceived: new Date(
+        offer.monthYearReceived.year,
+        offer.monthYearReceived.month,
+      ),
+    }));
+    const postData = { background, offers };
+
+    postData.background.specificYoes = data.background.specificYoes.filter(
+      (specificYoe) => specificYoe.domain && specificYoe.yoe > 0,
+    );
+
+    createMutation.mutate(postData);
   };
 
   return (

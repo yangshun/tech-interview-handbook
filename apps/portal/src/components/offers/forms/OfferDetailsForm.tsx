@@ -23,7 +23,7 @@ import {
 } from '../constants';
 import type { OfferDetailsFormData } from '../types';
 import { JobType } from '../types';
-import { CURRENCY_OPTIONS } from '../util/currency/CurrencyEnum';
+import { CURRENCY_OPTIONS } from '../../../utils/offers/currency/CurrencyEnum';
 
 type FullTimeOfferDetailsFormProps = Readonly<{
   index: number;
@@ -108,6 +108,7 @@ function FullTimeOfferDetailsForm({
           type="number"
           {...register(`offers.${index}.job.totalCompensation.value`, {
             required: true,
+            valueAsNumber: true,
           })}
         />
       </div>
@@ -131,7 +132,10 @@ function FullTimeOfferDetailsForm({
           startAddOn="$"
           startAddOnType="label"
           type="number"
-          {...register(`offers.${index}.job.base.value`, { required: true })}
+          {...register(`offers.${index}.job.base.value`, {
+            required: true,
+            valueAsNumber: true,
+          })}
         />
         <FormTextInput
           endAddOn={
@@ -152,7 +156,10 @@ function FullTimeOfferDetailsForm({
           startAddOn="$"
           startAddOnType="label"
           type="number"
-          {...register(`offers.${index}.job.bonus.value`, { required: true })}
+          {...register(`offers.${index}.job.bonus.value`, {
+            required: true,
+            valueAsNumber: true,
+          })}
         />
       </div>
       <div className="mb-5 grid grid-cols-2 space-x-3">
@@ -175,7 +182,10 @@ function FullTimeOfferDetailsForm({
           startAddOn="$"
           startAddOnType="label"
           type="number"
-          {...register(`offers.${index}.job.stocks.value`, { required: true })}
+          {...register(`offers.${index}.job.stocks.value`, {
+            required: true,
+            valueAsNumber: true,
+          })}
         />
       </div>
       <div className="mb-5">
@@ -287,16 +297,18 @@ function InternshipOfferDetailsForm({
           label="Company"
           options={companyOptions}
           required={true}
-          value="Shopee"
-          {...register(`offers.${index}.companyId`)}
+          {...register(`offers.${index}.companyId`, {
+            required: true,
+          })}
         />
         <FormSelect
           display="block"
           label="Location"
           options={locationOptions}
           required={true}
-          value="Singapore, Singapore"
-          {...register(`offers.${index}.location`)}
+          {...register(`offers.${index}.location`, {
+            required: true,
+          })}
         />
       </div>
       <div className="mb-5 grid grid-cols-2 space-x-3">
@@ -305,16 +317,18 @@ function InternshipOfferDetailsForm({
           label="Internship Cycle"
           options={internshipCycleOptions}
           required={true}
-          value="Summer"
-          {...register(`offers.${index}.job.internshipCycle`)}
+          {...register(`offers.${index}.job.internshipCycle`, {
+            required: true,
+          })}
         />
         <FormSelect
           display="block"
           label="Internship Year"
           options={yearOptions}
           required={true}
-          value="2023"
-          {...register(`offers.${index}.job.startYear`)}
+          {...register(`offers.${index}.job.startYear`, {
+            required: true,
+          })}
         />
       </div>
       <div className="mb-5 flex items-center space-x-9">
@@ -331,7 +345,9 @@ function InternshipOfferDetailsForm({
               isLabelHidden={true}
               label="Currency"
               options={CURRENCY_OPTIONS}
-              {...register(`offers.${index}.job.monthlySalary.currency`)}
+              {...register(`offers.${index}.job.monthlySalary.currency`, {
+                required: true,
+              })}
             />
           }
           endAddOnType="element"
@@ -341,7 +357,10 @@ function InternshipOfferDetailsForm({
           startAddOn="$"
           startAddOnType="label"
           type="number"
-          {...register(`offers.${index}.job.monthlySalary.value`)}
+          {...register(`offers.${index}.job.monthlySalary.value`, {
+            required: true,
+            valueAsNumber: true,
+          })}
         />
       </div>
       <div className="mb-5">

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { HorizontalDivider, Pagination, Select, Tabs } from '@tih/ui';
 
-import CurrencySelector from '~/components/offers/util/currency/CurrencySelector';
+import CurrencySelector from '~/utils/offers/currency/CurrencySelector';
 
 type TableRow = {
   company: string;

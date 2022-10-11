@@ -1,10 +1,9 @@
 import type { ComponentProps } from 'react';
-import { forwardRef } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import MonthYearPicker from '~/components/shared/MonthYearPicker';
 
-import { getCurrentMonth, getCurrentYear } from '../../util/time';
+import { getCurrentMonth, getCurrentYear } from '../../../../utils/offers/time';
 
 type MonthYearPickerProps = ComponentProps<typeof MonthYearPicker>;
 
@@ -15,7 +14,7 @@ type FormMonthYearPickerProps = Omit<
   name: string;
 };
 
-function FormMonthYearPickerWithRef({
+export default function FormMonthYearPicker({
   name,
   ...rest
 }: FormMonthYearPickerProps) {
@@ -36,7 +35,3 @@ function FormMonthYearPickerWithRef({
     />
   );
 }
-
-const FormMonthYearPicker = forwardRef(FormMonthYearPickerWithRef);
-
-export default FormMonthYearPicker;
