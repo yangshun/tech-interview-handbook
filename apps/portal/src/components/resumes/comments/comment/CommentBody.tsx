@@ -30,9 +30,16 @@ export default function CommentBody({
       <div className="flex w-full flex-col space-y-1">
         {/* Name and creation time */}
         <div className="flex flex-row justify-between">
-          <div className="font-medium">
-            {comment.user.name ?? 'Reviewer ABC'}
+          <div className="flex flex-row items-center space-x-1">
+            <div className="font-medium">
+              {comment.user.name ?? 'Reviewer ABC'}
+            </div>
+
+            <div className="text-primary-800 text-xs font-medium">
+              {isCommentOwner ? '(Me)' : ''}
+            </div>
           </div>
+
           <div className="text-xs text-gray-600">
             {comment.createdAt.toLocaleString('en-US', {
               dateStyle: 'medium',
