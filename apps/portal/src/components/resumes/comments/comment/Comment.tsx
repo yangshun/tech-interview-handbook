@@ -11,7 +11,7 @@ type CommentProps = {
 export default function Comment({ comment, userId }: CommentProps) {
   const isCommentOwner = userId === comment.user.userId;
   return (
-    <CommentCard isCommentOwner={isCommentOwner}>
+    <CommentCard>
       <CommentBody comment={comment} isCommentOwner={isCommentOwner} />
     </CommentCard>
   );
