@@ -9,6 +9,7 @@ const config = {
   navigation,
   showGlobalNav: false,
   title: 'Tech Offers Repo',
+  titleHref: '/offers',
 };
 
 export default config;

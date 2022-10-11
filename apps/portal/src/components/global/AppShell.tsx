@@ -109,6 +109,7 @@ export default function AppShell({ children }: Props) {
     navigation: ProductNavigationItems;
     showGlobalNav: boolean;
     title: string;
+    titleHref: string;
   }> = (() => {
     const path = router.pathname;
     if (path.startsWith('/resumes')) {
@@ -190,6 +191,7 @@ export default function AppShell({ children }: Props) {
                 <ProductNavigation
                   items={currentProductNavigation.navigation}
                   title={currentProductNavigation.title}
+                  titleHref={currentProductNavigation.titleHref}
                 />
               </div>
               <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">

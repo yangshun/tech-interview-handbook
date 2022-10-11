@@ -11,6 +11,7 @@ const navigation: ProductNavigationItems = [
     children: [],
     href: 'https://www.techinterviewhandbook.org/resume/',
     name: 'Resume Guide',
+    target: '_blank',
   },
 ];
 
@@ -18,6 +19,7 @@ const config = {
   navigation,
   showGlobalNav: false,
   title: 'Resumes',
+  titleHref: '/resumes',
 };
 
 export default config;
