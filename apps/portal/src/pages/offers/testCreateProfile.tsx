@@ -38,7 +38,7 @@ function Test() {
         ],
         experiences: [
           {
-            companyId: 'cl93m87pl0000tx1ofbafqz6f',
+            companyId: 'cl93patjt0003txewyiaky7xx',
             durationInMonths: 24,
             jobType: 'FULLTIME',
             level: 'Junior',
@@ -65,8 +65,8 @@ function Test() {
       },
       offers: [
         {
-          comments: '',
-          companyId: 'cl93m87pl0000tx1ofbafqz6f',
+          // Comments: '',
+          companyId: 'cl93patjt0003txewyiaky7xx',
           job: {
             base: {
               currency: 'SGD',
@@ -94,8 +94,8 @@ function Test() {
           negotiationStrategy: 'Leveraged having multiple offers',
         },
         {
-          comments: '',
-          companyId: 'cl93m87pl0000tx1ofbafqz6f',
+          comments: undefined,
+          companyId: 'cl93patjt0003txewyiaky7xx',
           job: {
             base: {
               currency: 'SGD',
@@ -120,13 +120,13 @@ function Test() {
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
-          negotiationStrategy: 'Leveraged having multiple offers',
+          // NegotiationStrategy: 'Leveraged having multiple offers',
         },
       ],
     });
   };
 
-  const profileId = 'cl92wiw30006vw3hg7dxa14fo'; // Remember to change this filed after testing deleting
+  const profileId = 'cl93qtuyc0000w3ideermqtcz'; // Remember to change this filed after testing deleting
   const data = trpc.useQuery([
     `offers.profile.listOne`,
     {

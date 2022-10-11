@@ -11,7 +11,7 @@ const valuation = z.object({
 
 // TODO: handle both full time and intern
 const offer = z.object({
-  comments: z.string(),
+  comments: z.string().optional(),
   companyId: z.string(),
   job: z.object({
     base: valuation.optional(), // Full time
@@ -28,7 +28,7 @@ const offer = z.object({
   jobType: z.string(),
   location: z.string(),
   monthYearReceived: z.date(),
-  negotiationStrategy: z.string(),
+  negotiationStrategy: z.string().optional(),
 });
 
 const experience = z.object({
