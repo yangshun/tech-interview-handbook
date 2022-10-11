@@ -200,6 +200,7 @@ export const offersRouter = createRouter().query('list', {
           },
         });
 
+    // FILTERING
     data = data.filter((offer) => {
       let validRecord = true;
 
@@ -235,6 +236,7 @@ export const offersRouter = createRouter().query('list', {
       return validRecord;
     });
 
+    // SORTING
     data = data.sort((offer1, offer2) => {
       const defaultReturn =
         offer2.monthYearReceived.getTime() - offer1.monthYearReceived.getTime();

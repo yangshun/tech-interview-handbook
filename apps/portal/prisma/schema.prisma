@@ -201,7 +201,7 @@ model OffersBackground {
 
     educations OffersEducation[] // For extensibility in the future
 
-    profile         OffersProfile @relation(fields: [offersProfileId], references: [id])
+    profile         OffersProfile @relation(fields: [offersProfileId], references: [id], onDelete: Cascade)
     offersProfileId String        @unique
 }
 
@@ -211,7 +211,7 @@ model OffersSpecificYoe {
     yoe    Int
     domain String
 
-    background   OffersBackground @relation(fields: [backgroundId], references: [id])
+    background   OffersBackground @relation(fields: [backgroundId], references: [id], onDelete: Cascade)
     backgroundId String
 }
 
@@ -237,7 +237,7 @@ model OffersExperience {
     monthlySalary   OffersCurrency? @relation("ExperienceMonthlySalary", fields: [monthlySalaryId], references: [id])
     monthlySalaryId String?         @unique
 
-    background   OffersBackground @relation(fields: [backgroundId], references: [id])
+    background   OffersBackground @relation(fields: [backgroundId], references: [id], onDelete: Cascade)
     backgroundId String
 }
 
@@ -270,12 +270,11 @@ model OffersEducation {
     type  String?
     field String?
 
-    // Add more fields
     school    String?
     startDate DateTime?
     endDate   DateTime?
 
-    background   OffersBackground @relation(fields: [backgroundId], references: [id])
+    background   OffersBackground @relation(fields: [backgroundId], references: [id], onDelete: Cascade)
     backgroundId String
 }
 
@@ -289,14 +288,14 @@ model OffersReply {
     replyingTo   OffersReply?  @relation("ReplyThread", fields: [replyingToId], references: [id])
     replies      OffersReply[] @relation("ReplyThread")
 
-    profile   OffersProfile @relation(fields: [profileId], references: [id])
+    profile   OffersProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
     profileId String
 }
 
 model OffersOffer {
     id String @id @default(cuid())
 
-    profile   OffersProfile @relation(fields: [profileId], references: [id])
+    profile   OffersProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
     profileId String
 
     company   Company @relation(fields: [companyId], references: [id])
@@ -309,10 +308,10 @@ model OffersOffer {
 
     jobType JobType
 
-    OffersIntern   OffersIntern? @relation(fields: [offersInternId], references: [id])
+    OffersIntern   OffersIntern? @relation(fields: [offersInternId], references: [id], onDelete: Cascade)
     offersInternId String?       @unique
 
-    OffersFullTime   OffersFullTime? @relation(fields: [offersFullTimeId], references: [id])
+    OffersFullTime   OffersFullTime? @relation(fields: [offersFullTimeId], references: [id], onDelete: Cascade)
     offersFullTimeId String?         @unique
 }
 
@@ -323,7 +322,7 @@ model OffersIntern {
     specialization  String
     internshipCycle String
     startYear       Int
-    monthlySalary   OffersCurrency @relation(fields: [monthlySalaryId], references: [id])
+    monthlySalary   OffersCurrency @relation(fields: [monthlySalaryId], references: [id], onDelete: Cascade)
     monthlySalaryId String         @unique
 
     OffersOffer OffersOffer?
@@ -334,13 +333,13 @@ model OffersFullTime {
     title               String
     specialization      String
     level               String
-    totalCompensation   OffersCurrency @relation("OfferTotalCompensation", fields: [totalCompensationId], references: [id])
+    totalCompensation   OffersCurrency @relation("OfferTotalCompensation", fields: [totalCompensationId], references: [id], onDelete: Cascade)
     totalCompensationId String         @unique
-    baseSalary          OffersCurrency @relation("OfferBaseSalary", fields: [baseSalaryId], references: [id])
+    baseSalary          OffersCurrency @relation("OfferBaseSalary", fields: [baseSalaryId], references: [id], onDelete: Cascade)
     baseSalaryId        String         @unique
-    bonus               OffersCurrency @relation("OfferBonus", fields: [bonusId], references: [id])
+    bonus               OffersCurrency @relation("OfferBonus", fields: [bonusId], references: [id], onDelete: Cascade)
     bonusId             String         @unique
-    stocks              OffersCurrency @relation("OfferStocks", fields: [stocksId], references: [id])
+    stocks              OffersCurrency @relation("OfferStocks", fields: [stocksId], references: [id], onDelete: Cascade)
     stocksId            String         @unique
 
     OffersOffer OffersOffer?
