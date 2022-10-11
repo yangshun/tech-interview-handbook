@@ -1,16 +1,22 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { HorizontalDivider, Pagination, Select, Tabs } from '@tih/ui';
 
 import CurrencySelector from '~/utils/offers/currency/CurrencySelector';
+import { formatDate } from '~/utils/offers/time';
+import { trpc } from '~/utils/trpc';
 
-type TableRow = {
+type OfferTableRow = {
   company: string;
   date: string;
-  salary: string;
+  id: string;
+  profileId: string;
+  salary: number | undefined;
   title: string;
-  yoe: string;
+  yoe: number;
 };
 
+// To be changed to backend enum
 // eslint-disable-next-line no-shadow
 enum YOE_CATEGORY {
   INTERN = 0,
@@ -19,10 +25,81 @@ enum YOE_CATEGORY {
   SENIOR = 3,
 }
 
-export default function OffersTable() {
-  const [currency, setCurrency] = useState('SGD');
+type OffersTableProps = {
+  companyFilter: string;
+  jobTitleFilter: string;
+};
+
+type Pagination = {
+  currentPage: number;
+  numOfItems: number;
+  numOfPages: number;
+  totalItems: number;
+};
+
+const NUMBER_OF_OFFERS_IN_PAGE = 10;
+
+export default function OffersTable({ jobTitleFilter }: OffersTableProps) {
+  const router = useRouter();
+  const [currency, setCurrency] = useState('SGD'); // TODO
   const [selectedTab, setSelectedTab] = useState(YOE_CATEGORY.ENTRY);
-  const [selectedPage, setSelectedPage] = useState(1);
+  const [pagination, setPagination] = useState<Pagination>({
+    currentPage: 1,
+    numOfItems: 1,
+    numOfPages: 0,
+    totalItems: 0,
+  });
+  const [offers, setOffers] = useState<Array<OfferTableRow>>([]);
+
+  useEffect(() => {
+    setPagination({
+      currentPage: 1,
+      numOfItems: 1,
+      numOfPages: 0,
+      totalItems: 0,
+    });
+  }, [selectedTab]);
+  trpc.useQuery(
+    [
+      'offers.list',
+      {
+        // Company: companyFilter, // TODO
+        limit: NUMBER_OF_OFFERS_IN_PAGE,
+
+        location: 'Singapore, Singapore',
+        offset: pagination.currentPage - 1,
+        sortBy: '-monthYearReceived',
+        title: jobTitleFilter,
+        yoeCategory: selectedTab,
+      },
+    ],
+    {
+      onSuccess: (response) => {
+        const filteredData = response.data.map((res) => {
+          return {
+            company: res.company.name,
+            date: formatDate(res.monthYearReceived),
+            id: res.OffersFullTime
+              ? res.OffersFullTime!.id
+              : res.OffersIntern!.id,
+            profileId: res.profileId,
+            salary: res.OffersFullTime
+              ? res.OffersFullTime?.totalCompensation.value
+              : res.OffersIntern?.monthlySalary.value,
+            title: res.OffersFullTime ? res.OffersFullTime?.level : '',
+            yoe: 100,
+          };
+        });
+        setOffers(filteredData);
+        setPagination({
+          currentPage: (response.paging.currPage as number) + 1,
+          numOfItems: response.paging.numOfItemsInPage,
+          numOfPages: response.paging.numOfPages,
+          totalItems: response.paging.totalNumberOfOffers,
+        });
+      },
+    },
+  );
 
   function renderTabs() {
     return (
@@ -103,9 +180,27 @@ export default function OffersTable() {
     );
   }
 
-  function renderRow({ company, title, yoe, salary, date }: TableRow) {
+  const handleClickViewProfile = (profileId: string) => {
+    router.push(`/offers/profile/${profileId}`);
+  };
+
+  const handlePageChange = (currPage: number) => {
+    setPagination({ ...pagination, currentPage: currPage });
+  };
+
+  function renderRow({
+    company,
+    title,
+    yoe,
+    salary,
+    date,
+    profileId,
+    id,
+  }: OfferTableRow) {
     return (
-      <tr className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
+      <tr
+        key={id}
+        className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
         <th
           className="whitespace-nowrap py-4 px-6 font-medium text-gray-900 dark:text-white"
           scope="row">
@@ -118,14 +213,14 @@ export default function OffersTable() {
         <td className="space-x-4 py-4 px-6">
           <a
             className="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
-            href="#">
+            onClick={() => handleClickViewProfile(profileId)}>
             View Profile
           </a>
-          <a
+          {/* <a
             className="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
             href="#">
             Comment
-          </a>
+          </a> */}
         </td>
       </tr>
     );
@@ -137,22 +232,30 @@ export default function OffersTable() {
         aria-label="Table navigation"
         className="flex items-center justify-between p-4">
         <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-          Showing{' '}
+          Showing
           <span className="font-semibold text-gray-900 dark:text-white">
-            1-10
-          </span>{' '}
-          of{' '}
+            {` ${
+              (pagination.currentPage - 1) * NUMBER_OF_OFFERS_IN_PAGE + 1
+            } - ${
+              (pagination.currentPage - 1) * NUMBER_OF_OFFERS_IN_PAGE +
+              offers.length
+            } `}
+          </span>
+          {`of `}
           <span className="font-semibold text-gray-900 dark:text-white">
-            1000
+            {pagination.totalItems}
+            {/* {pagination.numOfPages * NUMBER_OF_OFFERS_IN_PAGE} */}
           </span>
         </span>
         <Pagination
-          current={selectedPage}
-          end={10}
+          current={pagination.currentPage}
+          end={pagination.numOfPages}
           label="Pagination"
           pagePadding={1}
           start={1}
-          onSelect={(page) => setSelectedPage(page)}
+          onSelect={(currPage) => {
+            handlePageChange(currPage);
+          }}
         />
       </nav>
     );
@@ -167,20 +270,7 @@ export default function OffersTable() {
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
           {renderHeader()}
           <tbody>
-            {renderRow({
-              company: 'Shopee',
-              date: 'May 2022',
-              salary: 'TC/yr',
-              title: 'SWE',
-              yoe: '5',
-            })}
-            {renderRow({
-              company: 'Shopee',
-              date: 'May 2022',
-              salary: 'TC/yr',
-              title: 'SWE',
-              yoe: '5',
-            })}
+            {offers.map((offer: OfferTableRow) => renderRow(offer))}
           </tbody>
         </table>
         {renderPagination()}
