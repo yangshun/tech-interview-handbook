@@ -62,7 +62,9 @@ export const resumesRouter = createRouter()
           },
           stars: {
             where: {
-              userId,
+              OR: {
+                userId,
+              },
             },
           },
           user: {
