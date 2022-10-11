@@ -161,48 +161,79 @@ export const offersProfileRouter = createRouter()
                     x.totalCompensation?.currency !== undefined &&
                     x.totalCompensation.value !== undefined
                   ) {
-                    return {
-                      company: {
-                        connect: {
-                          id: x.companyId,
-                        },
-                      },
-                      durationInMonths: x.durationInMonths,
-                      jobType: x.jobType,
-                      level: x.level,
-                      specialization: x.specialization,
-                      title: x.title,
-                      totalCompensation: {
-                        create: {
-                          currency: x.totalCompensation?.currency,
-                          value: x.totalCompensation?.value,
-                        },
-                      },
-                    };
+                      if (x.companyId) {
+                          return {
+                              company: {
+                                  connect: {
+                                      id: x.companyId,
+                                  },
+                              },
+                              durationInMonths: x.durationInMonths,
+                              jobType: x.jobType,
+                              level: x.level,
+                              specialization: x.specialization,
+                              title: x.title,
+                              totalCompensation: {
+                                  create: {
+                                      currency: x.totalCompensation?.currency,
+                                      value: x.totalCompensation?.value,
+                                  },
+                              },
+                          };
+                      }
+                      return {
+                              durationInMonths: x.durationInMonths,
+                              jobType: x.jobType,
+                              level: x.level,
+                              specialization: x.specialization,
+                              title: x.title,
+                              totalCompensation: {
+                                  create: {
+                                      currency: x.totalCompensation?.currency,
+                                      value: x.totalCompensation?.value,
+                                  },
+                              },
+                       };
+
                   }
-                  if (
-                    x.jobType === 'INTERN' &&
-                    x.monthlySalary?.currency !== undefined &&
-                    x.monthlySalary.value !== undefined
-                  ) {
-                    return {
-                      company: {
-                        connect: {
-                          id: x.companyId,
-                        },
-                      },
-                      durationInMonths: x.durationInMonths,
-                      jobType: x.jobType,
-                      monthlySalary: {
-                        create: {
-                          currency: x.monthlySalary?.currency,
-                          value: x.monthlySalary?.value,
-                        },
-                      },
-                      specialization: x.specialization,
-                      title: x.title,
-                    };
-                  }
+                    if (
+                        x.jobType === 'INTERN' &&
+                        x.monthlySalary?.currency !== undefined &&
+                        x.monthlySalary.value !== undefined
+                    ) {
+                        if (x.companyId) {
+                            return {
+                                company: {
+                                    connect: {
+                                        id: x.companyId,
+                                    },
+                                },
+                                durationInMonths: x.durationInMonths,
+                                jobType: x.jobType,
+                                monthlySalary: {
+                                    create: {
+                                        currency: x.monthlySalary?.currency,
+                                        value: x.monthlySalary?.value,
+                                    },
+                                },
+                                specialization: x.specialization,
+                                title: x.title,
+                            };
+                        }
+                        return {
+                            durationInMonths: x.durationInMonths,
+                            jobType: x.jobType,
+                            monthlySalary: {
+                                create: {
+                                    currency: x.monthlySalary?.currency,
+                                    value: x.monthlySalary?.value,
+                                },
+                            },
+                            specialization: x.specialization,
+                            title: x.title,
+                        };
+
+                    }
 
                   throw Prisma.PrismaClientKnownRequestError;
                 }),
