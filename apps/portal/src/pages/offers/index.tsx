@@ -14,7 +14,7 @@ export default function OffersHomePage() {
       <div className="grid-rows grid h-1/2 bg-gray-100">
         <OffersTitle />
         <div className="flex items-start justify-center">
-          <div className="mt-4 flex items-end">
+          <div className="mt-4 flex items-center">
             Viewing offers for
             <div className="mx-4">
               <Select
@@ -45,6 +45,8 @@ export default function OffersHomePage() {
             in
             <div className="ml-4">
               <CompaniesTypeahead
+                isLabelHidden={true}
+                placeHolder="All companies"
                 onSelect={({ value }) => setCompanyFilter(value)}
               />
             </div>
