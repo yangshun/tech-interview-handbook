@@ -22,6 +22,7 @@ type Props = Readonly<{
   ) => void;
   onSelect: (option: TypeaheadOption) => void;
   options: ReadonlyArray<TypeaheadOption>;
+  placeholder?: string;
   value?: TypeaheadOption;
 }>;
 
@@ -35,6 +36,7 @@ export default function Typeahead({
   onQueryChange,
   value,
   onSelect,
+  placeholder,
 }: Props) {
   const [query, setQuery] = useState('');
   return (
@@ -77,6 +79,7 @@ export default function Typeahead({
             displayValue={(option) =>
               (option as unknown as TypeaheadOption)?.label
             }
+            placeholder={placeholder}
             onChange={(event) => {
               setQuery(event.target.value);
               onQueryChange(event.target.value, event);

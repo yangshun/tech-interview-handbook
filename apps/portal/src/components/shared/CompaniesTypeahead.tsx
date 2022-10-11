@@ -6,10 +6,17 @@ import { trpc } from '~/utils/trpc';
 
 type Props = Readonly<{
   disabled?: boolean;
+  isLabelHidden?: boolean;
   onSelect: (option: TypeaheadOption) => void;
+  placeHolder?: string;
 }>;
 
-export default function CompaniesTypeahead({ disabled, onSelect }: Props) {
+export default function CompaniesTypeahead({
+  disabled,
+  onSelect,
+  isLabelHidden,
+  placeHolder,
+}: Props) {
   const [query, setQuery] = useState('');
   const companies = trpc.useQuery([
     'companies.list',
@@ -23,6 +30,7 @@ export default function CompaniesTypeahead({ disabled, onSelect }: Props) {
   return (
     <Typeahead
       disabled={disabled}
+      isLabelHidden={isLabelHidden}
       label="Company"
       noResultsMessage="No companies found"
       nullable={true}
@@ -33,6 +41,7 @@ export default function CompaniesTypeahead({ disabled, onSelect }: Props) {
           value: id,
         })) ?? []
       }
+      placeholder={placeHolder}
       onQueryChange={setQuery}
       onSelect={onSelect}
     />
