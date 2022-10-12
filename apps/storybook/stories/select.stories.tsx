@@ -14,6 +14,9 @@ export default {
       control: { type: 'select' },
       options: SelectDisplays,
     },
+    errorMessage: {
+      control: 'text',
+    },
     isLabelHidden: {
       control: 'boolean',
     },
@@ -21,6 +24,9 @@ export default {
       control: 'text',
     },
     name: {
+      control: 'text',
+    },
+    placeholder: {
       control: 'text',
     },
   },
@@ -181,28 +187,78 @@ export function Required() {
   const [value, setValue] = useState('apple');
 
   return (
-    <div className="space-x-4">
-      <Select
-        label="Select a fruit"
-        options={[
-          {
-            label: 'Apple',
-            value: 'apple',
-          },
-          {
-            label: 'Banana',
-            value: 'banana',
-          },
-          {
-            label: 'Orange',
-            value: 'orange',
-          },
-        ]}
-        required={true}
-        value={value}
-        onChange={setValue}
-      />
-    </div>
+    <Select
+      label="Select a fruit"
+      options={[
+        {
+          label: 'Apple',
+          value: 'apple',
+        },
+        {
+          label: 'Banana',
+          value: 'banana',
+        },
+        {
+          label: 'Orange',
+          value: 'orange',
+        },
+      ]}
+      required={true}
+      value={value}
+      onChange={setValue}
+    />
+  );
+}
+
+export function Placeholder() {
+  return (
+    <Select
+      label="Select a fruit"
+      options={[
+        {
+          label: 'Apple',
+          value: 'apple',
+        },
+        {
+          label: 'Banana',
+          value: 'banana',
+        },
+        {
+          label: 'Orange',
+          value: 'orange',
+        },
+      ]}
+      placeholder="Select a fruit"
+      required={true}
+    />
+  );
+}
+
+export function Error() {
+  const [value, setValue] = useState('banana');
+
+  return (
+    <Select
+      errorMessage={value !== 'apple' ? 'Must select apple' : undefined}
+      label="Select a fruit"
+      options={[
+        {
+          label: 'Apple',
+          value: 'apple',
+        },
+        {
+          label: 'Banana',
+          value: 'banana',
+        },
+        {
+          label: 'Orange',
+          value: 'orange',
+        },
+      ]}
+      required={true}
+      value={value}
+      onChange={setValue}
+    />
   );
 }
 
