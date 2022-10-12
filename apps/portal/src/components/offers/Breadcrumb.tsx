@@ -7,7 +7,7 @@ export function Breadcrumbs({ stepLabels, currentStep }: BreadcrumbsProps) {
   return (
     <div className="flex space-x-1">
       {stepLabels.map((label, index) => (
-        <div key={label}>
+        <div key={label} className="flex space-x-1">
           {index === currentStep ? (
             <p className="text-sm text-purple-700">{label}</p>
           ) : (

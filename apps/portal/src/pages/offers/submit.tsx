@@ -21,25 +21,35 @@ import { getCurrentMonth, getCurrentYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
 const defaultOfferValues = {
+  comments: '',
+  companyId: '',
+  job: {},
+  jobType: JobType.FullTime,
+  location: '',
+  monthYearReceived: {
+    month: getCurrentMonth() as Month,
+    year: getCurrentYear(),
+  },
+  negotiationStrategy: '',
+};
+
+export const defaultFullTimeOfferValues = {
+  ...defaultOfferValues,
+  jobType: JobType.FullTime,
+};
+
+export const defaultInternshipOfferValues = {
+  ...defaultOfferValues,
+  jobType: JobType.Internship,
+};
+
+const defaultOfferProfileValues = {
   background: {
     educations: [],
     experiences: [{ jobType: JobType.FullTime }],
     specificYoes: [],
   },
-  offers: [
-    {
-      comments: '',
-      companyId: '',
-      job: {},
-      jobType: JobType.FullTime,
-      location: '',
-      monthYearReceived: {
-        month: getCurrentMonth() as Month,
-        year: getCurrentYear(),
-      },
-      negotiationStrategy: '',
-    },
-  ],
+  offers: [defaultOfferValues],
 };
 
 type FormStep = {
@@ -55,7 +65,7 @@ export default function OffersSubmissionPage() {
   const scrollToTop = () =>
     pageRef.current?.scrollTo({ behavior: 'smooth', top: 0 });
   const formMethods = useForm<OfferProfileFormData>({
-    defaultValues: defaultOfferValues,
+    defaultValues: defaultOfferProfileValues,
     mode: 'all',
   });
   const { handleSubmit, trigger } = formMethods;
@@ -121,8 +131,17 @@ export default function OffersSubmissionPage() {
     if (!result) {
       return;
     }
+
     data = removeInvalidMoneyData(data);
+
     const background = cleanObject(data.background);
+    background.specificYoes = data.background.specificYoes.filter(
+      (specificYoe) => specificYoe.domain && specificYoe.yoe > 0,
+    );
+    if (Object.entries(background.experiences[0]).length === 1) {
+      background.experiences = [];
+    }
+
     const offers = data.offers.map((offer: OfferDetailsFormData) => ({
       ...offer,
       monthYearReceived: new Date(
@@ -130,15 +149,9 @@ export default function OffersSubmissionPage() {
         offer.monthYearReceived.month,
       ),
     }));
+
     const postData = { background, offers };
 
-    postData.background.specificYoes = data.background.specificYoes.filter(
-      (specificYoe) => specificYoe.domain && specificYoe.yoe > 0,
-    );
-
-    if (Object.entries(postData.background.experiences[0]).length === 1) {
-      postData.background.experiences = [];
-    }
     createMutation.mutate(postData);
   };
 

@@ -7,6 +7,11 @@ import { PlusIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { Button, Dialog } from '@tih/ui';
 
+import {
+  defaultFullTimeOfferValues,
+  defaultInternshipOfferValues,
+} from '~/pages/offers/submit';
+
 import FormMonthYearPicker from './components/FormMonthYearPicker';
 import FormSelect from './components/FormSelect';
 import FormTextArea from './components/FormTextArea';
@@ -479,7 +484,13 @@ function OfferDetailsFormArray({
         label="Add another offer"
         size="lg"
         variant="tertiary"
-        onClick={() => append({})}
+        onClick={() =>
+          append(
+            jobType === JobType.FullTime
+              ? defaultFullTimeOfferValues
+              : defaultInternshipOfferValues,
+          )
+        }
       />
     </div>
   );
@@ -488,16 +499,18 @@ function OfferDetailsFormArray({
 export default function OfferDetailsForm() {
   const [jobType, setJobType] = useState(JobType.FullTime);
   const [isDialogOpen, setDialogOpen] = useState(false);
-  const { control, register } = useFormContext();
+  const { control } = useFormContext();
   const fieldArrayValues = useFieldArray({ control, name: 'offers' });
 
   const toggleJobType = () => {
+    fieldArrayValues.remove();
     if (jobType === JobType.FullTime) {
       setJobType(JobType.Internship);
+      fieldArrayValues.append(defaultInternshipOfferValues);
     } else {
       setJobType(JobType.FullTime);
+      fieldArrayValues.append(defaultFullTimeOfferValues);
     }
-    fieldArrayValues.remove();
   };
 
   const switchJobTypeLabel = () =>
@@ -523,7 +536,6 @@ export default function OfferDetailsForm() {
               }
               setDialogOpen(true);
             }}
-            {...register(`offers.${0}.jobType`)}
           />
         </div>
         <div className="mx-5 w-1/3">
@@ -538,7 +550,6 @@ export default function OfferDetailsForm() {
               }
               setDialogOpen(true);
             }}
-            {...register(`offers.${0}.jobType`)}
           />
         </div>
       </div>
