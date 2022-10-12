@@ -13,6 +13,7 @@ import FormTextArea from './components/FormTextArea';
 import FormTextInput from './components/FormTextInput';
 import {
   companyOptions,
+  emptyOption,
   FieldError,
   internshipCycleOptions,
   locationOptions,
@@ -39,7 +40,7 @@ function FullTimeOfferDetailsForm({
   const { register, formState, setValue } = useFormContext<{
     offers: Array<FullTimeOfferDetailsFormData>;
   }>();
-  const jobFields = formState.errors.offers?.[index]?.job;
+  const offerFields = formState.errors.offers?.[index];
 
   const watchCurrency = useWatch({
     name: `offers.${index}.job.totalCompensation.currency`,
@@ -56,15 +57,17 @@ function FullTimeOfferDetailsForm({
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.job?.title?.message}
           label="Title"
           options={titleOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.job.title`, {
             required: FieldError.Required,
           })}
         />
         <FormTextInput
-          errorMessage={jobFields?.specialization?.message}
+          errorMessage={offerFields?.job?.specialization?.message}
           label="Focus / Specialization"
           placeholder="e.g. Front End"
           required={true}
@@ -76,15 +79,17 @@ function FullTimeOfferDetailsForm({
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.companyId?.message}
           label="Company"
           options={companyOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.companyId`, {
             required: FieldError.Required,
           })}
         />
         <FormTextInput
-          errorMessage={jobFields?.level?.message}
+          errorMessage={offerFields?.job?.level?.message}
           label="Level"
           placeholder="e.g. L4, Junior"
           required={true}
@@ -96,14 +101,19 @@ function FullTimeOfferDetailsForm({
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.location?.message}
           label="Location"
           options={locationOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.location`, {
             required: FieldError.Required,
           })}
         />
         <FormMonthYearPicker
+          monthLabel="Date Received"
+          monthRequired={true}
+          yearLabel=""
           {...register(`offers.${index}.monthYearReceived`, {
             required: FieldError.Required,
           })}
@@ -123,9 +133,9 @@ function FullTimeOfferDetailsForm({
             />
           }
           endAddOnType="element"
-          errorMessage={jobFields?.totalCompensation?.value?.message}
+          errorMessage={offerFields?.job?.totalCompensation?.value?.message}
           label="Total Compensation (Annual)"
-          placeholder="0.00"
+          placeholder="0"
           required={true}
           startAddOn="$"
           startAddOnType="label"
@@ -151,9 +161,9 @@ function FullTimeOfferDetailsForm({
             />
           }
           endAddOnType="element"
-          errorMessage={jobFields?.base?.value?.message}
+          errorMessage={offerFields?.job?.base?.value?.message}
           label="Base Salary (Annual)"
-          placeholder="0.00"
+          placeholder="0"
           required={true}
           startAddOn="$"
           startAddOnType="label"
@@ -177,9 +187,9 @@ function FullTimeOfferDetailsForm({
             />
           }
           endAddOnType="element"
-          errorMessage={jobFields?.bonus?.value?.message}
+          errorMessage={offerFields?.job?.bonus?.value?.message}
           label="Bonus (Annual)"
-          placeholder="0.00"
+          placeholder="0"
           required={true}
           startAddOn="$"
           startAddOnType="label"
@@ -205,9 +215,9 @@ function FullTimeOfferDetailsForm({
             />
           }
           endAddOnType="element"
-          errorMessage={jobFields?.stocks?.value?.message}
+          errorMessage={offerFields?.job?.stocks?.value?.message}
           label="Stocks (Annual)"
-          placeholder="0.00"
+          placeholder="0"
           required={true}
           startAddOn="$"
           startAddOnType="label"
@@ -260,15 +270,17 @@ function InternshipOfferDetailsForm({
     offers: Array<InternshipOfferDetailsFormData>;
   }>();
 
-  const jobFields = formState.errors.offers?.[index]?.job;
+  const offerFields = formState.errors.offers?.[index];
 
   return (
     <div className="my-5 rounded-lg border border-gray-200 px-10 py-5">
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.job?.title?.message}
           label="Title"
           options={titleOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.job.title`, {
             minLength: 1,
@@ -276,7 +288,7 @@ function InternshipOfferDetailsForm({
           })}
         />
         <FormTextInput
-          errorMessage={jobFields?.specialization?.message}
+          errorMessage={offerFields?.job?.specialization?.message}
           label="Focus / Specialization"
           placeholder="e.g. Front End"
           required={true}
@@ -289,8 +301,10 @@ function InternshipOfferDetailsForm({
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.companyId?.message}
           label="Company"
           options={companyOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.companyId`, {
             required: FieldError.Required,
@@ -298,8 +312,10 @@ function InternshipOfferDetailsForm({
         />
         <FormSelect
           display="block"
+          errorMessage={offerFields?.location?.message}
           label="Location"
           options={locationOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.location`, {
             required: FieldError.Required,
@@ -309,8 +325,10 @@ function InternshipOfferDetailsForm({
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.job?.internshipCycle?.message}
           label="Internship Cycle"
           options={internshipCycleOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.job.internshipCycle`, {
             required: FieldError.Required,
@@ -318,17 +336,21 @@ function InternshipOfferDetailsForm({
         />
         <FormSelect
           display="block"
+          errorMessage={offerFields?.job?.startYear?.message}
           label="Internship Year"
           options={yearOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.job.startYear`, {
             required: FieldError.Required,
           })}
         />
       </div>
-      <div className="mb-5 flex items-center space-x-9">
-        <p className="text-sm">Date received:</p>
+      <div className="mb-5">
         <FormMonthYearPicker
+          monthLabel="Date Received"
+          monthRequired={true}
+          yearLabel=""
           {...register(`offers.${index}.monthYearReceived`, {
             required: FieldError.Required,
           })}
@@ -348,9 +370,9 @@ function InternshipOfferDetailsForm({
             />
           }
           endAddOnType="element"
-          errorMessage={jobFields?.monthlySalary?.value?.message}
+          errorMessage={offerFields?.job?.monthlySalary?.value?.message}
           label="Salary (Monthly)"
-          placeholder="0.00"
+          placeholder="0"
           required={true}
           startAddOn="$"
           startAddOnType="label"
