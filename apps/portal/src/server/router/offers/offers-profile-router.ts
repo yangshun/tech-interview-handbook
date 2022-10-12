@@ -400,13 +400,13 @@ export const offersProfileRouter = createRouter()
   })
   .mutation('delete', {
     input: z.object({
-      id: z.string(),
+      profileId: z.string(),
       token: z.string(),
     }),
     async resolve({ ctx, input }) {
       const profileToDelete = await ctx.prisma.offersProfile.findFirst({
         where: {
-          id: input.id,
+          id: input.profileId,
         },
       });
       const profileEditToken = profileToDelete?.editToken;
@@ -414,7 +414,7 @@ export const offersProfileRouter = createRouter()
       if (profileEditToken === input.token) {
         return await ctx.prisma.offersProfile.delete({
           where: {
-            id: input.id,
+            id: input.profileId,
           },
         });
       }

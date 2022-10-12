@@ -126,12 +126,12 @@ function Test() {
     });
   };
 
-  const profileId = 'cl93vo4w9009ow35mx7gemrzb'; // Remember to change this filed after testing deleting
+  const profileId = 'cl93vnvs1007aw35m9ppn7dsy'; // Remember to change this filed after testing deleting
   const data = trpc.useQuery([
     `offers.profile.listOne`,
     {
       profileId,
-      token: '6c8d53530163bb765c42bd9f441aa7e345f607c4e1892edbc64e5bbbbe7ee916',
+      token: 'e5e1951c9c301ab59bf4cad641e2e7b56c3db58aa852cee755b6ff8dd316cda6',
     },
   ]);
 
@@ -139,8 +139,8 @@ function Test() {
 
   const handleDelete = (id: string) => {
     deleteMutation.mutate({
-      id,
-      token: '6c8d53530163bb765c42bd9f441aa7e345f607c4e1892edbc64e5bbbbe7ee916',
+      profileId: id,
+      token: 'e5e1951c9c301ab59bf4cad641e2e7b56c3db58aa852cee755b6ff8dd316cda6',
     });
   };
 
