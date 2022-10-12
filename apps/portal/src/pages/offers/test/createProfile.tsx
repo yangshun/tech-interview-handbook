@@ -14,10 +14,11 @@ function Test() {
   //   ]);
 
   const [createdData, setCreatedData] = useState('');
+  const [error, setError] = useState("");
 
   const createMutation = trpc.useMutation(['offers.profile.create'], {
-    onError(error: any) {
-      alert(error);
+    onError(err: any) {
+      alert(err);
     },
     onSuccess(data) {
       setCreatedData(JSON.stringify(data));
@@ -38,7 +39,7 @@ function Test() {
         ],
         experiences: [
           {
-            companyId: 'cl93patjt0004txew88wkcqpu',
+            companyId: 'cl95u79f000007im531ysjg79',
             durationInMonths: 24,
             jobType: 'FULLTIME',
             level: 'Junior',
@@ -66,7 +67,7 @@ function Test() {
       offers: [
         {
           // Comments: '',
-          companyId: 'cl93patjt0004txew88wkcqpu',
+          companyId: 'cl95u79f000007im531ysjg79',
           job: {
             base: {
               currency: 'SGD',
@@ -95,7 +96,7 @@ function Test() {
         },
         {
           comments: undefined,
-          companyId: 'cl93patjt0004txew88wkcqpu',
+          companyId: 'cl95u79f000007im531ysjg79',
           job: {
             base: {
               currency: 'SGD',
@@ -126,30 +127,29 @@ function Test() {
     });
   };
 
-  const profileId = 'cl93vnvs1007aw35m9ppn7dsy'; // Remember to change this filed after testing deleting
+  const profileId = 'cl95u9ju500eo7ipd54kurv8d'; // Remember to change this filed after testing deleting
   const data = trpc.useQuery([
     `offers.profile.listOne`,
     {
       profileId,
-      token: 'e5e1951c9c301ab59bf4cad641e2e7b56c3db58aa852cee755b6ff8dd316cda6',
+      token: 'dccc05133962013ba8b4ee396e51baee1b53a66051732b48fd015129ae1d593e',
     },
-  ]);
+  ], {
+    onError(err) {
+      setError(err.shape?.message || "")
+    }
+  });
 
   const deleteMutation = trpc.useMutation(['offers.profile.delete']);
 
   const handleDelete = (id: string) => {
     deleteMutation.mutate({
       profileId: id,
-      token: 'e5e1951c9c301ab59bf4cad641e2e7b56c3db58aa852cee755b6ff8dd316cda6',
+      token: 'dccc05133962013ba8b4ee396e51baee1b53a66051732b48fd015129ae1d593e',
     });
   };
 
   return (
-    // <ul>
-    //   {createdData.map((x) => {
-    //     return <li key={x.id}>{JSON.stringify(x)}</li>;
-    //   })}
-    // </ul>
     <>
       <div>{createdData}</div>
       <button type="button" onClick={handleClick}>
@@ -164,8 +164,7 @@ function Test() {
         DELETE THIS PROFILE
       </button>
       <div>{JSON.stringify(data.data)}</div>
-
-      {/* <button type="button" onClick}>Get One</button> */}
+      <div>{JSON.stringify(error)}</div>
     </>
   );
 }

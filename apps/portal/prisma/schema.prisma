@@ -59,6 +59,7 @@ model User {
     questionsAnswerComments       QuestionsAnswerComment[]
     questionsAnswerCommentVotes   QuestionsAnswerCommentVote[]
     OffersProfile                 OffersProfile[]
+    offersDiscussion              OffersReply[]
 }
 
 enum Vote {
@@ -280,7 +281,6 @@ model OffersEducation {
 
 model OffersReply {
     id        String   @id @default(cuid())
-    creator   String
     createdAt DateTime @default(now())
     message   String
 
@@ -290,6 +290,9 @@ model OffersReply {
 
     profile   OffersProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
     profileId String
+
+    user   User?   @relation(fields: [userId], references: [id])
+    userId String?
 }
 
 model OffersOffer {

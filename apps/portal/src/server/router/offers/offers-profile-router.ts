@@ -1,6 +1,7 @@
 import crypto, { randomUUID } from 'crypto';
 import { z } from 'zod';
 import { Prisma } from '@prisma/client';
+import * as trpc from '@trpc/server';
 
 import { createRouter } from '../context';
 
@@ -128,9 +129,14 @@ export const offersProfileRouter = createRouter()
         },
       });
 
-      return result
-        ? exclude(computeIsEditable(result, input.token), 'editToken')
-        : result;
+      if (result) {
+        return exclude(computeIsEditable(result, input.token), 'editToken')
+      }
+
+      throw new trpc.TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Profile does not exist',
+      });
     },
   })
   .mutation('create', {
@@ -421,3 +427,6 @@ export const offersProfileRouter = createRouter()
       // TODO: Throw 401
     },
   });
+  // .mutation('update', {
+
+  // });

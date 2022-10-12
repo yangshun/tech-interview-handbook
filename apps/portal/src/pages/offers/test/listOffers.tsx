@@ -6,7 +6,7 @@ function Test() {
   const data = trpc.useQuery([
     'offers.list',
     {
-      companyId: 'cl93patjt0004txew88wkcqpu',
+      companyId: 'cl95u79f000007im531ysjg79',
       limit: 20,
       location: 'Singapore, Singapore',
       offset: 0,
