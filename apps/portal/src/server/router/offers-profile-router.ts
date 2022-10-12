@@ -51,6 +51,20 @@ const education = z.object({
   type: z.string().optional(),
 });
 
+type WithIsEditable<T> = T & {
+  isEditable: boolean
+}
+
+function computeIsEditable(
+  profileInput: offersProfile,
+  editToken?: string
+): WithIsEditable<offersProfile> {
+  return {
+      ...profileInput,
+      isEditable: profileInput.editToken === editToken,
+  }
+}
+
 export const offersProfileRouter = createRouter()
   .query('listOne', {
     input: z.object({
@@ -102,21 +116,8 @@ export const offersProfileRouter = createRouter()
                   id: input.profileId,
               }
           });
-      // Extend the T generic with the fullName attribute
-        type WithIsEditable<T> = T & {
-        isEditable: boolean
-        }
 
-        // Take objects that satisfy FirstLastName and computes a full name
-        function computeIsEditable(
-        profileInput: offersProfile
-        ): WithIsEditable<offersProfile> {
-        return {
-            ...profileInput,
-            isEditable: profileInput["editToken" as keyof typeof profileInput] === input.token,
-        }
-        }
-        return result ? computeIsEditable(result) : result;
+        return result ? computeIsEditable(result, input.token) : result;
       },
   })
   .mutation('create', {
