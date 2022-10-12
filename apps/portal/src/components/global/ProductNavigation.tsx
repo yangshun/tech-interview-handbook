@@ -60,8 +60,12 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
                               'block px-4 py-2 text-sm text-slate-700',
                             )}
                             href={child.href}
-                            rel={item.target ? 'noopener noreferrer' : ''}
-                            target={item.target}>
+                            rel={
+                              !child.href.startsWith('/')
+                                ? 'noopener noreferrer'
+                                : undefined
+                            }
+                            target={child.target}>
                             {child.name}
                           </Link>
                         )}
@@ -79,7 +83,9 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
                 isActive ? 'border-b-primary-500' : 'border-b-transparent',
               )}
               href={item.href}
-              rel={item.target ? 'noopener noreferrer' : ''}
+              rel={
+                !item.href.startsWith('/') ? 'noopener noreferrer' : undefined
+              }
               target={item.target}>
               {item.name}
               {item.target ? (
