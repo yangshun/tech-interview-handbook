@@ -32,7 +32,7 @@ const createSortByValidationRegex = () => {
 
 export const offersRouter = createRouter().query('list', {
   input: z.object({
-    company: z.string().nullish(),
+    companyId: z.string().nullish(),
     dateEnd: z.date().nullish(),
     dateStart: z.date().nullish(),
     limit: z.number().nonnegative(),
@@ -91,6 +91,7 @@ export const offersRouter = createRouter().query('list', {
         })
       : yoeRange.maxYoe
       ? await ctx.prisma.offersOffer.findMany({
+          // Junior, Mid
           include: {
             OffersFullTime: {
               include: {
@@ -112,7 +113,6 @@ export const offersRouter = createRouter().query('list', {
               },
             },
           },
-          // Junior, Mid
           where: {
             AND: [
               {
@@ -204,8 +204,8 @@ export const offersRouter = createRouter().query('list', {
     data = data.filter((offer) => {
       let validRecord = true;
 
-      if (input.company) {
-        validRecord = validRecord && offer.company.name === input.company;
+      if (input.companyId) {
+        validRecord = validRecord && offer.company.id === input.companyId;
       }
 
       if (input.title) {
