@@ -3,7 +3,8 @@ import { z } from 'zod';
 import { Prisma } from '@prisma/client';
 
 import { createRouter } from './context';
-import type { offersProfile } from '../../types/offers-profile';
+
+import type { offersProfile } from '~/types/offers-profile';
 
 const valuation = z.object({
   currency: z.string(),
@@ -65,6 +66,16 @@ function computeIsEditable(
   }
 }
 
+function exclude<Key extends keyof WithIsEditable<offersProfile>>(
+  profile: WithIsEditable<offersProfile>,
+  ...keys: Array<Key>
+): Omit<WithIsEditable<offersProfile>, Key> {
+  for (const key of keys) {
+    delete profile[key]
+  }
+  return profile
+}
+
 export const offersProfileRouter = createRouter()
   .query('listOne', {
     input: z.object({
@@ -117,7 +128,7 @@ export const offersProfileRouter = createRouter()
               }
           });
 
-        return result ? computeIsEditable(result, input.token) : result;
+        return result ? exclude(computeIsEditable(result, input.token), 'editToken') : result;
       },
   })
   .mutation('create', {
