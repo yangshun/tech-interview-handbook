@@ -8,9 +8,8 @@ import {
 } from '@heroicons/react/24/outline';
 import { Button, Dialog, Spinner, Tabs } from '@tih/ui';
 
+import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
 import type { BackgroundCard } from '~/components/offers/types';
-
-import ProfilePhotoHolder from './ProfilePhotoHolder';
 
 type ProfileHeaderProps = Readonly<{
   background?: BackgroundCard;

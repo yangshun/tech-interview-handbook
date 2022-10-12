@@ -1,54 +1,34 @@
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { HorizontalDivider, Pagination, Select, Tabs } from '@tih/ui';
+import { HorizontalDivider, Select, Spinner, Tabs } from '@tih/ui';
+
+import OffersTablePagination from '~/components/offers/table/OffersTablePagination';
+import type {
+  OfferTableRowData,
+  PaginationType,
+} from '~/components/offers/table/types';
+import { YOE_CATEGORY } from '~/components/offers/table/types';
 
 import CurrencySelector from '~/utils/offers/currency/CurrencySelector';
 import { formatDate } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
-type OfferTableRow = {
-  company: string;
-  date: string;
-  id: string;
-  profileId: string;
-  salary: number | undefined;
-  title: string;
-  yoe: number;
-};
-
-// To be changed to backend enum
-// eslint-disable-next-line no-shadow
-enum YOE_CATEGORY {
-  INTERN = 0,
-  ENTRY = 1,
-  MID = 2,
-  SENIOR = 3,
-}
-
-type OffersTableProps = {
-  companyFilter: string;
-  jobTitleFilter: string;
-};
-
-type Pagination = {
-  currentPage: number;
-  numOfItems: number;
-  numOfPages: number;
-  totalItems: number;
-};
+import OffersRow from './OffersRow';
 
 const NUMBER_OF_OFFERS_IN_PAGE = 10;
-
+export type OffersTableProps = Readonly<{
+  companyFilter: string;
+  jobTitleFilter: string;
+}>;
 export default function OffersTable({ jobTitleFilter }: OffersTableProps) {
-  const [currency, setCurrency] = useState('SGD'); // TODO
+  const [currency, setCurrency] = useState('SGD'); // TODO: Detect location
   const [selectedTab, setSelectedTab] = useState(YOE_CATEGORY.ENTRY);
-  const [pagination, setPagination] = useState<Pagination>({
+  const [pagination, setPagination] = useState<PaginationType>({
     currentPage: 1,
     numOfItems: 1,
     numOfPages: 0,
     totalItems: 0,
   });
-  const [offers, setOffers] = useState<Array<OfferTableRow>>([]);
+  const [offers, setOffers] = useState<Array<OfferTableRowData>>([]);
 
   useEffect(() => {
     setPagination({
@@ -58,7 +38,7 @@ export default function OffersTable({ jobTitleFilter }: OffersTableProps) {
       totalItems: 0,
     });
   }, [selectedTab]);
-  trpc.useQuery(
+  const offersQuery = trpc.useQuery(
     [
       'offers.list',
       {
@@ -166,7 +146,7 @@ export default function OffersTable({ jobTitleFilter }: OffersTableProps) {
             'Company',
             'Title',
             'YOE',
-            'TC/year',
+            selectedTab === YOE_CATEGORY.INTERN ? 'Monthly Salary' : 'TC/year',
             'Date offered',
             'Actions',
           ].map((header) => (
@@ -183,97 +163,37 @@ export default function OffersTable({ jobTitleFilter }: OffersTableProps) {
     setPagination({ ...pagination, currentPage: currPage });
   };
 
-  function renderRow({
-    company,
-    title,
-    yoe,
-    salary,
-    date,
-    profileId,
-    id,
-  }: OfferTableRow) {
-    return (
-      <tr
-        key={id}
-        className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
-        <th
-          className="whitespace-nowrap py-4 px-6 font-medium text-gray-900 dark:text-white"
-          scope="row">
-          {company}
-        </th>
-        <td className="py-4 px-6">{title}</td>
-        <td className="py-4 px-6">{yoe}</td>
-        <td className="py-4 px-6">{salary}</td>
-        <td className="py-4 px-6">{date}</td>
-        <td className="space-x-4 py-4 px-6">
-          {/* <a
-            className="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
-            onClick={() => handleClickViewProfile(profileId)}>
-            View Profile
-          </a> */}
-
-          <Link
-            className="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
-            href={`/offers/profile/${profileId}`}>
-            View Profile
-          </Link>
-          {/* <a
-            className="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
-            href="#">
-            Comment
-          </a> */}
-        </td>
-      </tr>
-    );
-  }
-
-  function renderPagination() {
-    return (
-      <nav
-        aria-label="Table navigation"
-        className="flex items-center justify-between p-4">
-        <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-          Showing
-          <span className="font-semibold text-gray-900 dark:text-white">
-            {` ${
-              (pagination.currentPage - 1) * NUMBER_OF_OFFERS_IN_PAGE + 1
-            } - ${
-              (pagination.currentPage - 1) * NUMBER_OF_OFFERS_IN_PAGE +
-              offers.length
-            } `}
-          </span>
-          {`of `}
-          <span className="font-semibold text-gray-900 dark:text-white">
-            {pagination.totalItems}
-          </span>
-        </span>
-        <Pagination
-          current={pagination.currentPage}
-          end={pagination.numOfPages}
-          label="Pagination"
-          pagePadding={1}
-          start={1}
-          onSelect={(currPage) => {
-            handlePageChange(currPage);
-          }}
-        />
-      </nav>
-    );
-  }
-
   return (
     <div className="w-5/6">
       {renderTabs()}
       <HorizontalDivider />
       <div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
         {renderFilters()}
-        <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-          {renderHeader()}
-          <tbody>
-            {offers.map((offer: OfferTableRow) => renderRow(offer))}
-          </tbody>
-        </table>
-        {renderPagination()}
+        {offersQuery.isLoading ? (
+          <div className="col-span-10 pt-4">
+            <Spinner display="block" size="lg" />
+          </div>
+        ) : (
+          <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+            {renderHeader()}
+            <tbody>
+              {offers.map((offer) => (
+                <OffersRow key={offer.id} row={offer} />
+              ))}
+            </tbody>
+          </table>
+        )}
+        <OffersTablePagination
+          endNumber={
+            (pagination.currentPage - 1) * NUMBER_OF_OFFERS_IN_PAGE +
+            offers.length
+          }
+          handlePageChange={handlePageChange}
+          pagination={pagination}
+          startNumber={
+            (pagination.currentPage - 1) * NUMBER_OF_OFFERS_IN_PAGE + 1
+          }
+        />
       </div>
     </div>
   );

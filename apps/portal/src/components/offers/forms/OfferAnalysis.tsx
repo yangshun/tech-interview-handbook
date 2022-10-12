@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { UserCircleIcon } from '@heroicons/react/20/solid';
-
-import { HorizontalDivider, Tabs } from '~/../../../packages/ui/dist';
+import { HorizontalDivider, Tabs } from '@tih/ui';
 
 const tabs = [
   {

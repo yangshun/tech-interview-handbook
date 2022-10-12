@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Select } from '@tih/ui';
 
-import OffersTable from '~/components/offers/OffersTable';
 import OffersTitle from '~/components/offers/OffersTitle';
+import OffersTable from '~/components/offers/table/OffersTable';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 
 export default function OffersHomePage() {

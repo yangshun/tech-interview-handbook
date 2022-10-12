@@ -1,18 +1,19 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 import { Collapsible, RadioList } from '@tih/ui';
 
-import FormRadioList from './components/FormRadioList';
-import FormSelect from './components/FormSelect';
-import FormTextInput from './components/FormTextInput';
 import {
   companyOptions,
   educationFieldOptions,
   educationLevelOptions,
   locationOptions,
   titleOptions,
-} from '../constants';
-import { JobType } from '../types';
-import { CURRENCY_OPTIONS } from '../../../utils/offers/currency/CurrencyEnum';
+} from '~/components/offers/constants';
+import FormRadioList from '~/components/offers/forms/components/FormRadioList';
+import FormSelect from '~/components/offers/forms/components/FormSelect';
+import FormTextInput from '~/components/offers/forms/components/FormTextInput';
+import { JobType } from '~/components/offers/types';
+
+import { CURRENCY_OPTIONS } from '~/utils/offers/currency/CurrencyEnum';
 
 function YoeSection() {
   const { register } = useFormContext();

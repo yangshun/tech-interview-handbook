@@ -1,7 +1,6 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-
-import { HorizontalDivider } from '~/../../../packages/ui/dist';
+import { HorizontalDivider } from '@tih/ui';
 
 import type { ContributeQuestionFormProps } from './ContributeQuestionForm';
 import ContributeQuestionForm from './ContributeQuestionForm';

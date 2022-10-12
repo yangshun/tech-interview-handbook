@@ -2,15 +2,14 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
+import ProfileComments from '~/components/offers/profile/ProfileComments';
+import ProfileDetails from '~/components/offers/profile/ProfileDetails';
 import ProfileHeader from '~/components/offers/profile/ProfileHeader';
 import type { OfferEntity } from '~/components/offers/types';
 import type { BackgroundCard } from '~/components/offers/types';
 
 import { formatDate } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
-
-import ProfileComments from '../../../components/offers/profile/ProfileComments';
-import ProfileDetails from '../../../components/offers/profile/ProfileDetails';
 export default function OfferProfile() {
   const ErrorPage = (
     <Error statusCode={404} title="Requested profile does not exist." />
