@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { HorizontalDivider, Pagination, Select, Tabs } from '@tih/ui';
 
@@ -40,7 +40,6 @@ type Pagination = {
 const NUMBER_OF_OFFERS_IN_PAGE = 10;
 
 export default function OffersTable({ jobTitleFilter }: OffersTableProps) {
-  const router = useRouter();
   const [currency, setCurrency] = useState('SGD'); // TODO
   const [selectedTab, setSelectedTab] = useState(YOE_CATEGORY.ENTRY);
   const [pagination, setPagination] = useState<Pagination>({
@@ -180,10 +179,6 @@ export default function OffersTable({ jobTitleFilter }: OffersTableProps) {
     );
   }
 
-  const handleClickViewProfile = (profileId: string) => {
-    router.push(`/offers/profile/${profileId}`);
-  };
-
   const handlePageChange = (currPage: number) => {
     setPagination({ ...pagination, currentPage: currPage });
   };
@@ -211,11 +206,17 @@ export default function OffersTable({ jobTitleFilter }: OffersTableProps) {
         <td className="py-4 px-6">{salary}</td>
         <td className="py-4 px-6">{date}</td>
         <td className="space-x-4 py-4 px-6">
-          <a
+          {/* <a
             className="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
             onClick={() => handleClickViewProfile(profileId)}>
             View Profile
-          </a>
+          </a> */}
+
+          <Link
+            className="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
+            href={`/offers/profile/${profileId}`}>
+            View Profile
+          </Link>
           {/* <a
             className="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
             href="#">
@@ -244,7 +245,6 @@ export default function OffersTable({ jobTitleFilter }: OffersTableProps) {
           {`of `}
           <span className="font-semibold text-gray-900 dark:text-white">
             {pagination.totalItems}
-            {/* {pagination.numOfPages * NUMBER_OF_OFFERS_IN_PAGE} */}
           </span>
         </span>
         <Pagination
