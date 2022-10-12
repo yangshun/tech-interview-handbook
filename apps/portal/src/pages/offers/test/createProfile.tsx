@@ -38,7 +38,7 @@ function Test() {
         ],
         experiences: [
           {
-            companyId: 'cl93patjt0003txewyiaky7xx',
+            companyId: 'cl93patjt0004txew88wkcqpu',
             durationInMonths: 24,
             jobType: 'FULLTIME',
             level: 'Junior',
@@ -66,7 +66,7 @@ function Test() {
       offers: [
         {
           // Comments: '',
-          companyId: 'cl93patjt0003txewyiaky7xx',
+          companyId: 'cl93patjt0004txew88wkcqpu',
           job: {
             base: {
               currency: 'SGD',
@@ -95,7 +95,7 @@ function Test() {
         },
         {
           comments: undefined,
-          companyId: 'cl93patjt0003txewyiaky7xx',
+          companyId: 'cl93patjt0004txew88wkcqpu',
           job: {
             base: {
               currency: 'SGD',

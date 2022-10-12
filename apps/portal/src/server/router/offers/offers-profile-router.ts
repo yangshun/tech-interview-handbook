@@ -144,7 +144,7 @@ export const offersProfileRouter = createRouter()
             yoe: z.number(),
           }),
         ),
-        totalYoe: z.number().optional(),
+        totalYoe: z.number(),
       }),
       offers: z.array(offer),
     }),
