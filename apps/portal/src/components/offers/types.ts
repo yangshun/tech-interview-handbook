@@ -137,11 +137,11 @@ type EducationDisplay = {
 export type OfferEntity = {
   base?: string;
   bonus?: string;
-  companyName: string;
+  companyName?: string;
   duration?: string;
   id?: string;
   jobLevel?: string;
-  jobTitle: string;
+  jobTitle?: string;
   location?: string;
   monthlySalary?: string;
   negotiationStrategy?: string;
