@@ -1,5 +1,4 @@
 /* eslint-disable no-shadow */
-import type { OfferEntity } from '~/components/offers/profile/OfferCard';
 import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
 /*
@@ -118,6 +117,23 @@ type EducationDisplay = {
   school: string;
   startDate?: string;
   type: string;
+};
+
+export type OfferEntity = {
+  base?: string;
+  bonus?: string;
+  companyName: string;
+  duration?: string;
+  id?: string;
+  jobLevel?: string;
+  jobTitle: string;
+  location?: string;
+  monthlySalary?: string;
+  negotiationStrategy?: string;
+  otherComment?: string;
+  receivedMonth?: string;
+  stocks?: string;
+  totalCompensation?: string;
 };
 
 export type BackgroundCard = {

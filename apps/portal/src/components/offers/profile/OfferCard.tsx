@@ -6,22 +6,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { HorizontalDivider } from '@tih/ui';
 
-export type OfferEntity = {
-  base?: string;
-  bonus?: string;
-  companyName: string;
-  duration?: string;
-  id?: string;
-  jobLevel?: string;
-  jobTitle: string;
-  location?: string;
-  monthlySalary?: string;
-  negotiationStrategy?: string;
-  otherComment?: string;
-  receivedMonth?: string;
-  stocks?: string;
-  totalCompensation?: string;
-};
+import type { OfferEntity } from '~/components/offers/types';
 
 type Props = Readonly<{
   offer: OfferEntity;
