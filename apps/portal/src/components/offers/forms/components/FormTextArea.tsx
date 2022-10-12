@@ -1,8 +1,7 @@
 import type { ComponentProps, ForwardedRef } from 'react';
 import { forwardRef } from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
-
-import { TextArea } from '~/../../../packages/ui/dist';
+import { TextArea } from '@tih/ui';
 
 type TextAreaProps = ComponentProps<typeof TextArea>;
 
