@@ -7,7 +7,7 @@ import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 
 export default function OffersHomePage() {
   const [jobTitleFilter, setjobTitleFilter] = useState('Software Engineer');
-  const [companyFilter, setCompanyFilter] = useState('All companies');
+  const [companyFilter, setCompanyFilter] = useState('');
 
   return (
     <main className="flex-1 overflow-y-auto">

@@ -19,7 +19,10 @@ export type OffersTableProps = Readonly<{
   companyFilter: string;
   jobTitleFilter: string;
 }>;
-export default function OffersTable({ jobTitleFilter }: OffersTableProps) {
+export default function OffersTable({
+  companyFilter,
+  jobTitleFilter,
+}: OffersTableProps) {
   const [currency, setCurrency] = useState('SGD'); // TODO: Detect location
   const [selectedTab, setSelectedTab] = useState(YOE_CATEGORY.ENTRY);
   const [pagination, setPagination] = useState<PaginationType>({
@@ -42,10 +45,9 @@ export default function OffersTable({ jobTitleFilter }: OffersTableProps) {
     [
       'offers.list',
       {
-        // Company: companyFilter, // TODO
+        companyId: companyFilter,
         limit: NUMBER_OF_OFFERS_IN_PAGE,
-
-        location: 'Singapore, Singapore',
+        location: 'Singapore, Singapore', // TODO: Geolocation
         offset: pagination.currentPage - 1,
         sortBy: '-monthYearReceived',
         title: jobTitleFilter,

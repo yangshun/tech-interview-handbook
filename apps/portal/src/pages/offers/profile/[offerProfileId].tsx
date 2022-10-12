@@ -8,6 +8,7 @@ import ProfileHeader from '~/components/offers/profile/ProfileHeader';
 import type { OfferEntity } from '~/components/offers/types';
 import type { BackgroundCard } from '~/components/offers/types';
 
+import { convertCurrencyToString } from '~/utils/offers/currency';
 import { formatDate } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 export default function OfferProfile() {
@@ -33,58 +34,57 @@ export default function OfferProfile() {
         if (!data) {
           router.push('/offers');
         }
+        // If the profile is not editable with a wrong token, redirect to the profile page
         if (!data?.isEditable && token !== '') {
           router.push(`/offers/profile/${offerProfileId}`);
         }
 
         setIsEditable(data?.isEditable ?? false);
 
-        const filteredOffers: Array<OfferEntity> = data
-          ? data?.offers.map((res) => {
-              if (res.OffersFullTime) {
+        if (data?.offers) {
+          const filteredOffers: Array<OfferEntity> = data
+            ? data?.offers.map((res) => {
+                if (res.OffersFullTime) {
+                  const filteredOffer: OfferEntity = {
+                    base: convertCurrencyToString(
+                      res.OffersFullTime.baseSalary.value,
+                    ),
+                    bonus: convertCurrencyToString(
+                      res.OffersFullTime.bonus.value,
+                    ),
+                    companyName: res.company.name,
+                    id: res.OffersFullTime.id,
+                    jobLevel: res.OffersFullTime.level,
+                    jobTitle: res.OffersFullTime.title,
+                    location: res.location,
+                    negotiationStrategy: res.negotiationStrategy || '',
+                    otherComment: res.comments || '',
+                    receivedMonth: formatDate(res.monthYearReceived),
+                    stocks: convertCurrencyToString(res.OffersFullTime.stocks),
+                    totalCompensation: convertCurrencyToString(
+                      res.OffersFullTime.totalCompensation,
+                    ),
+                  };
+
+                  return filteredOffer;
+                }
                 const filteredOffer: OfferEntity = {
-                  base: res.OffersFullTime.baseSalary.value
-                    ? `${res.OffersFullTime.baseSalary.value} ${res.OffersFullTime.baseSalary.currency}`
-                    : '',
-                  bonus: res.OffersFullTime.bonus.value
-                    ? `${res.OffersFullTime.bonus.value} ${res.OffersFullTime.bonus.currency}`
-                    : '',
                   companyName: res.company.name,
-                  id: res.OffersFullTime.id,
-                  jobLevel: res.OffersFullTime.level,
-                  jobTitle: res.OffersFullTime.title,
+                  id: res.OffersIntern!.id,
+                  jobTitle: res.OffersIntern!.title,
                   location: res.location,
+                  monthlySalary: convertCurrencyToString(
+                    res.OffersIntern!.monthlySalary,
+                  ),
                   negotiationStrategy: res.negotiationStrategy || '',
                   otherComment: res.comments || '',
                   receivedMonth: formatDate(res.monthYearReceived),
-                  stocks: res.OffersFullTime.stocks.value
-                    ? `${res.OffersFullTime.stocks.value} ${res.OffersFullTime.stocks.currency}`
-                    : '',
-                  totalCompensation: res.OffersFullTime.totalCompensation.value
-                    ? `${res.OffersFullTime.totalCompensation.value} ${res.OffersFullTime.totalCompensation.currency}`
-                    : '',
                 };
-
                 return filteredOffer;
-              }
-              const filteredOffer: OfferEntity = {
-                companyName: res.company.name,
-                id: res.OffersIntern!.id,
-                jobTitle: res.OffersIntern!.title,
-                location: res.location,
-                monthlySalary: res.OffersIntern!.monthlySalary.value
-                  ? `${res.OffersIntern!.monthlySalary.value} ${
-                      res.OffersIntern!.monthlySalary.currency
-                    }`
-                  : '',
-                negotiationStrategy: res.negotiationStrategy || '',
-                otherComment: res.comments || '',
-                receivedMonth: formatDate(res.monthYearReceived),
-              };
-              return filteredOffer;
-            })
-          : [];
-        setOffers(filteredOffers);
+              })
+            : [];
+          setOffers(filteredOffers);
+        }
 
         if (data?.background) {
           const transformedBackground = {
@@ -102,23 +102,29 @@ export default function OfferProfile() {
               },
             ],
             experiences: [
-              {
-                companyName:
-                  data.background.experiences[0].company?.name ?? '-',
-                duration:
-                  String(data.background.experiences[0].durationInMonths) ??
-                  '-',
-                jobLevel: data.background.experiences[0].level ?? '',
-                jobTitle: data.background.experiences[0].title ?? '-',
-                monthlySalary: data.background.experiences[0].monthlySalary
-                  ?.value
-                  ? `${data.background.experiences[0].monthlySalary?.value} ${data.background.experiences[0].monthlySalary?.currency}`
-                  : `-`,
-                totalCompensation: data.background.experiences[0]
-                  .totalCompensation?.value
-                  ? `${data.background.experiences[0].totalCompensation?.value} ${data.background.experiences[0].totalCompensation?.currency}`
-                  : ``,
-              },
+              data.background.experiences &&
+              data.background.experiences.length > 0
+                ? {
+                    companyName:
+                      data.background.experiences[0].company?.name ?? '-',
+                    duration:
+                      String(data.background.experiences[0].durationInMonths) ??
+                      '-',
+                    jobLevel: data.background.experiences[0].level ?? '',
+                    jobTitle: data.background.experiences[0].title ?? '-',
+                    monthlySalary: data.background.experiences[0].monthlySalary
+                      ? convertCurrencyToString(
+                          data.background.experiences[0].monthlySalary,
+                        )
+                      : '-',
+                    totalCompensation: data.background.experiences[0]
+                      .totalCompensation
+                      ? convertCurrencyToString(
+                          data.background.experiences[0].totalCompensation,
+                        )
+                      : '-',
+                  }
+                : {},
             ],
             profileName: data.profileName,
             specificYoes: data.background.specificYoes ?? [],
@@ -131,16 +137,22 @@ export default function OfferProfile() {
   );
 
   const trpcContext = trpc.useContext();
-  const deleteMutation = trpc.useMutation(['offers.profile.delete']);
+  const deleteMutation = trpc.useMutation(['offers.profile.delete'], {
+    onError: () => {
+      alert('Error deleting profile'); // TODO: replace with toast
+    },
+    onSuccess: () => {
+      trpcContext.invalidateQueries(['offers.profile.listOne']);
+      router.push('/offers');
+    },
+  });
 
   function handleDelete() {
     if (isEditable) {
       deleteMutation.mutate({
         profileId: offerProfileId as string,
-        token: 'CHANGE THIS PART TO URL PARAM @ ZIQING', // TODO: token: token as string,
+        token: token as string,
       });
-      trpcContext.invalidateQueries(['offers.profile.listOne']);
-      router.push('/offers');
     }
   }
 
