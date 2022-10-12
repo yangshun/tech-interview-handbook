@@ -11,6 +11,8 @@ import { PlusIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { Button, Dialog } from '@tih/ui';
 
+import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
+
 import {
   defaultFullTimeOfferValues,
   defaultInternshipOfferValues,
@@ -21,7 +23,6 @@ import FormSelect from './components/FormSelect';
 import FormTextArea from './components/FormTextArea';
 import FormTextInput from './components/FormTextInput';
 import {
-  companyOptions,
   emptyOption,
   FieldError,
   internshipCycleOptions,
@@ -85,18 +86,14 @@ function FullTimeOfferDetailsForm({
           })}
         />
       </div>
-      <div className="mb-5 grid grid-cols-2 space-x-3">
-        <FormSelect
-          display="block"
-          errorMessage={offerFields?.companyId?.message}
-          label="Company"
-          options={companyOptions}
-          placeholder={emptyOption}
-          required={true}
-          {...register(`offers.${index}.companyId`, {
-            required: FieldError.Required,
-          })}
-        />
+      <div className="mb-5 flex grid grid-cols-2 space-x-3">
+        <div>
+          <CompaniesTypeahead
+            onSelect={({ value }) =>
+              setValue(`offers.${index}.companyId`, value)
+            }
+          />
+        </div>
         <FormTextInput
           errorMessage={offerFields?.job?.level?.message}
           label="Level"
@@ -275,7 +272,7 @@ function InternshipOfferDetailsForm({
   index,
   remove,
 }: InternshipOfferDetailsFormProps) {
-  const { register, formState } = useFormContext<{
+  const { register, formState, setValue } = useFormContext<{
     offers: Array<InternshipOfferDetailsFormData>;
   }>();
 
@@ -308,17 +305,13 @@ function InternshipOfferDetailsForm({
         />
       </div>
       <div className="mb-5 grid grid-cols-2 space-x-3">
-        <FormSelect
-          display="block"
-          errorMessage={offerFields?.companyId?.message}
-          label="Company"
-          options={companyOptions}
-          placeholder={emptyOption}
-          required={true}
-          {...register(`offers.${index}.companyId`, {
-            required: FieldError.Required,
-          })}
-        />
+        <div>
+          <CompaniesTypeahead
+            onSelect={({ value }) =>
+              setValue(`offers.${index}.companyId`, value)
+            }
+          />
+        </div>
         <FormSelect
           display="block"
           errorMessage={offerFields?.location?.message}

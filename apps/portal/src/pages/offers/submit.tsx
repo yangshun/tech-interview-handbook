@@ -120,7 +120,6 @@ export default function OffersSubmissionPage() {
       console.error(error.message);
     },
     onSuccess() {
-      alert('offer profile submit success!');
       setFormStep(formStep + 1);
       scrollToTop();
     },

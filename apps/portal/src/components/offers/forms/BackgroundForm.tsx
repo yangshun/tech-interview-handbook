@@ -2,7 +2,6 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { Collapsible, RadioList } from '@tih/ui';
 
 import {
-  companyOptions,
   educationFieldOptions,
   educationLevelOptions,
   emptyOption,
@@ -14,6 +13,7 @@ import FormRadioList from '~/components/offers/forms/components/FormRadioList';
 import FormSelect from '~/components/offers/forms/components/FormSelect';
 import FormTextInput from '~/components/offers/forms/components/FormTextInput';
 import { JobType } from '~/components/offers/types';
+import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 
 import { CURRENCY_OPTIONS } from '~/utils/offers/currency/CurrencyEnum';
 
@@ -74,7 +74,7 @@ function YoeSection() {
 }
 
 function FullTimeJobFields() {
-  const { register } = useFormContext();
+  const { register, setValue } = useFormContext();
   return (
     <>
       <div className="mb-5 grid grid-cols-2 space-x-3">
@@ -85,13 +85,13 @@ function FullTimeJobFields() {
           placeholder={emptyOption}
           {...register(`background.experiences.0.title`)}
         />
-        <FormSelect
-          display="block"
-          label="Company"
-          options={companyOptions}
-          placeholder={emptyOption}
-          {...register(`background.experiences.0.companyId`)}
-        />
+        <div>
+          <CompaniesTypeahead
+            onSelect={({ value }) =>
+              setValue(`background.experiences.0.companyId`, value)
+            }
+          />
+        </div>
       </div>
       <div className="mb-5 grid grid-cols-1 space-x-3">
         <FormTextInput
@@ -151,7 +151,7 @@ function FullTimeJobFields() {
 }
 
 function InternshipJobFields() {
-  const { register } = useFormContext();
+  const { register, setValue } = useFormContext();
   return (
     <>
       <div className="mb-5 grid grid-cols-2 space-x-3">
@@ -162,13 +162,13 @@ function InternshipJobFields() {
           placeholder={emptyOption}
           {...register(`background.experiences.0.title`)}
         />
-        <FormSelect
-          display="block"
-          label="Company"
-          options={companyOptions}
-          placeholder={emptyOption}
-          {...register(`background.experiences.0.company`)}
-        />
+        <div>
+          <CompaniesTypeahead
+            onSelect={({ value }) =>
+              setValue(`background.experiences.0.companyId`, value)
+            }
+          />
+        </div>
       </div>
       <div className="mb-5 grid grid-cols-1 space-x-3">
         <FormTextInput

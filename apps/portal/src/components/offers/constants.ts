@@ -22,29 +22,6 @@ export const titleOptions = [
   },
 ];
 
-export const companyOptions = [
-  {
-    label: 'Amazon',
-    value: 'cl93patjt0000txewdi601mub',
-  },
-  {
-    label: 'Microsoft',
-    value: 'cl93patjt0001txewkglfjsro',
-  },
-  {
-    label: 'Apple',
-    value: 'cl93patjt0002txewf3ug54m8',
-  },
-  {
-    label: 'Google',
-    value: 'cl93patjt0003txewyiaky7xx',
-  },
-  {
-    label: 'Meta',
-    value: 'cl93patjt0004txew88wkcqpu',
-  },
-];
-
 export const locationOptions = [
   {
     label: 'Singapore, Singapore',
