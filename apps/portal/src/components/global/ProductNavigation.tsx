@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
 type NavigationItem = Readonly<{
   children?: ReadonlyArray<NavigationItem>;
@@ -58,7 +59,13 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
                               active ? 'bg-slate-100' : '',
                               'block px-4 py-2 text-sm text-slate-700',
                             )}
-                            href={child.href}>
+                            href={child.href}
+                            rel={
+                              !child.href.startsWith('/')
+                                ? 'noopener noreferrer'
+                                : undefined
+                            }
+                            target={child.target}>
                             {child.name}
                           </Link>
                         )}
@@ -75,8 +82,15 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
                 'hover:text-primary-600 inline-flex h-full items-center border-y-2 border-t-transparent text-sm font-medium text-slate-900',
                 isActive ? 'border-b-primary-500' : 'border-b-transparent',
               )}
-              href={item.href}>
+              href={item.href}
+              rel={
+                !item.href.startsWith('/') ? 'noopener noreferrer' : undefined
+              }
+              target={item.target}>
               {item.name}
+              {item.target ? (
+                <ArrowTopRightOnSquareIcon className="h-5 w-5 pl-1" />
+              ) : null}
             </Link>
           );
         })}
