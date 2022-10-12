@@ -11,9 +11,11 @@ export type MonthYear = Readonly<{
 type Props = Readonly<{
   errorMessage?: string;
   monthLabel?: string;
+  monthRequired?: boolean;
   onChange: (value: MonthYear) => void;
   value: MonthYear;
   yearLabel?: string;
+  yearRequired?: boolean;
 }>;
 
 const MONTH_OPTIONS = [
@@ -82,6 +84,8 @@ export default function MonthYearPicker({
   value,
   onChange,
   yearLabel = 'Year',
+  monthRequired = false,
+  yearRequired = false,
 }: Props) {
   const hasError = errorMessage != null;
   const errorId = useId();
@@ -89,10 +93,11 @@ export default function MonthYearPicker({
   return (
     <div
       aria-describedby={hasError ? errorId : undefined}
-      className="flex space-x-4">
+      className="flex items-end space-x-4">
       <Select
         label={monthLabel}
         options={MONTH_OPTIONS}
+        required={monthRequired}
         value={value.month}
         onChange={(newMonth) =>
           onChange({ month: Number(newMonth) as Month, year: value.year })
@@ -101,6 +106,7 @@ export default function MonthYearPicker({
       <Select
         label={yearLabel}
         options={YEAR_OPTIONS}
+        required={yearRequired}
         value={value.year}
         onChange={(newYear) =>
           onChange({ month: value.month, year: Number(newYear) })
