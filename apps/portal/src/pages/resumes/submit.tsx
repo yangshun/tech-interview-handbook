@@ -2,7 +2,8 @@ import axios from 'axios';
 import clsx from 'clsx';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useMemo, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useEffect, useMemo, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { PaperClipIcon } from '@heroicons/react/24/outline';
@@ -36,6 +37,7 @@ type IFormInput = {
 };
 
 export default function SubmitResumeForm() {
+  const { data: session } = useSession();
   const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
   const router = useRouter();
 
@@ -44,6 +46,12 @@ export default function SubmitResumeForm() {
   const [invalidFileUploadError, setInvalidFileUploadError] = useState<
     string | null
   >(null);
+
+  useEffect(() => {
+    if (session?.user?.id == null) {
+      router.push('/api/auth/signin');
+    }
+  }, [router, session?.user?.id]);
 
   const {
     register,
