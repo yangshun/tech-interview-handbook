@@ -3,7 +3,7 @@ type Props = Readonly<{
   title: string;
 }>;
 
-export default function FilterPill({ title, onClick }: Props) {
+export default function ResumeFilterPill({ title, onClick }: Props) {
   return (
     <button
       className="rounded-xl border border-indigo-500 border-transparent bg-white px-2 py-1 text-xs font-medium text-indigo-500 focus:bg-indigo-500 focus:text-white"

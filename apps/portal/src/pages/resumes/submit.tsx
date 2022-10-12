@@ -12,7 +12,7 @@ import {
   EXPERIENCE,
   LOCATION,
   ROLES,
-} from '~/components/resumes/browse/constants';
+} from '~/components/resumes/browse/resumeConstants';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
 import { trpc } from '~/utils/trpc';

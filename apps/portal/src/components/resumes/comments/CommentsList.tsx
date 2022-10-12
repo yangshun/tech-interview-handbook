@@ -7,7 +7,7 @@ import { trpc } from '~/utils/trpc';
 
 import CommentListItems from './CommentListItems';
 import { COMMENTS_SECTIONS } from './constants';
-import SignInButton from '../SignInButton';
+import ResumeSignInButton from '../shared/ResumeSignInButton';
 
 type CommentsListProps = Readonly<{
   resumeId: string;
@@ -24,7 +24,7 @@ export default function CommentsList({
   const commentsQuery = trpc.useQuery(['resumes.reviews.list', { resumeId }]);
   const renderButton = () => {
     if (sessionData === null) {
-      return <SignInButton text="to join discussion" />;
+      return <ResumeSignInButton text="to join discussion" />;
     }
     return (
       <Button
