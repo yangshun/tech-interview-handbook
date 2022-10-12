@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
 /*
@@ -9,6 +8,11 @@ export enum JobType {
   FullTime = 'FULLTIME',
   Internship = 'INTERNSHIP',
 }
+
+export const JobTypeLabel = {
+  FULLTIME: 'Full-time',
+  INTERNSHIP: 'Internship',
+};
 
 export enum EducationBackgroundType {
   Bachelor = 'Bachelor',

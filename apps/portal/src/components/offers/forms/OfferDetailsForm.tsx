@@ -1,14 +1,10 @@
 import { useState } from 'react';
-import type {
-  FieldValues,
-  UseFieldArrayRemove,
-  UseFieldArrayReturn,
-} from 'react-hook-form';
+import type { FieldValues, UseFieldArrayReturn } from 'react-hook-form';
 import { useFormContext } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 import { PlusIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import { Button } from '@tih/ui';
+import { Button, Dialog } from '@tih/ui';
 
 import FormMonthYearPicker from './components/FormMonthYearPicker';
 import FormSelect from './components/FormSelect';
@@ -26,17 +22,18 @@ import type {
   FullTimeOfferDetailsFormData,
   InternshipOfferDetailsFormData,
 } from '../types';
+import { JobTypeLabel } from '../types';
 import { JobType } from '../types';
 import { CURRENCY_OPTIONS } from '../../../utils/offers/currency/CurrencyEnum';
 
 type FullTimeOfferDetailsFormProps = Readonly<{
   index: number;
-  remove: UseFieldArrayRemove;
+  setDialogOpen: (isOpen: boolean) => void;
 }>;
 
 function FullTimeOfferDetailsForm({
   index,
-  remove,
+  setDialogOpen,
 }: FullTimeOfferDetailsFormProps) {
   const { register, formState } = useFormContext<{
     offers: Array<FullTimeOfferDetailsFormData>;
@@ -228,7 +225,7 @@ function FullTimeOfferDetailsForm({
             icon={TrashIcon}
             label="Delete"
             variant="secondary"
-            onClick={() => remove(index)}
+            onClick={() => setDialogOpen(true)}
           />
         )}
       </div>
@@ -236,53 +233,14 @@ function FullTimeOfferDetailsForm({
   );
 }
 
-type OfferDetailsFormArrayProps = Readonly<{
-  fieldArrayValues: UseFieldArrayReturn<FieldValues, 'offers', 'id'>;
-  jobType: JobType;
-}>;
-
-function OfferDetailsFormArray({
-  fieldArrayValues,
-  jobType,
-}: OfferDetailsFormArrayProps) {
-  const { append, remove, fields } = fieldArrayValues;
-  return (
-    <div>
-      {fields.map((item, index) =>
-        jobType === JobType.FullTime ? (
-          <FullTimeOfferDetailsForm
-            key={`offer.${item.id}`}
-            index={index}
-            remove={remove}
-          />
-        ) : (
-          <InternshipOfferDetailsForm
-            key={`offer.${item.id}`}
-            index={index}
-            remove={remove}
-          />
-        ),
-      )}
-      <Button
-        display="block"
-        icon={PlusIcon}
-        label="Add another offer"
-        size="lg"
-        variant="tertiary"
-        onClick={() => append({})}
-      />
-    </div>
-  );
-}
-
 type InternshipOfferDetailsFormProps = Readonly<{
   index: number;
-  remove: UseFieldArrayRemove;
+  setDialogOpen: (isOpen: boolean) => void;
 }>;
 
 function InternshipOfferDetailsForm({
   index,
-  remove,
+  setDialogOpen,
 }: InternshipOfferDetailsFormProps) {
   const { register, formState } = useFormContext<{
     offers: Array<InternshipOfferDetailsFormData>;
@@ -409,7 +367,9 @@ function InternshipOfferDetailsForm({
             icon={TrashIcon}
             label="Delete"
             variant="secondary"
-            onClick={() => remove(index)}
+            onClick={() => {
+              setDialogOpen(true);
+            }}
           />
         )}
       </div>
@@ -417,19 +377,98 @@ function InternshipOfferDetailsForm({
   );
 }
 
+type OfferDetailsFormArrayProps = Readonly<{
+  fieldArrayValues: UseFieldArrayReturn<FieldValues, 'offers', 'id'>;
+  jobType: JobType;
+}>;
+
+function OfferDetailsFormArray({
+  fieldArrayValues,
+  jobType,
+}: OfferDetailsFormArrayProps) {
+  const { append, remove, fields } = fieldArrayValues;
+  const [isDialogOpen, setDialogOpen] = useState(false);
+
+  return (
+    <div>
+      {fields.map((item, index) => {
+        return (
+          <>
+            {jobType === JobType.FullTime ? (
+              <FullTimeOfferDetailsForm
+                key={`offer.${item.id}`}
+                index={index}
+                setDialogOpen={setDialogOpen}
+              />
+            ) : (
+              <InternshipOfferDetailsForm
+                key={`offer.${item.id}`}
+                index={index}
+                setDialogOpen={setDialogOpen}
+              />
+            )}
+            <Dialog
+              isShown={isDialogOpen}
+              primaryButton={
+                <Button
+                  display="block"
+                  label="OK"
+                  variant="primary"
+                  onClick={() => {
+                    remove(index);
+                    setDialogOpen(false);
+                  }}
+                />
+              }
+              secondaryButton={
+                <Button
+                  display="block"
+                  label="Cancel"
+                  variant="tertiary"
+                  onClick={() => setDialogOpen(false)}
+                />
+              }
+              title="Remove this offer"
+              onClose={() => setDialogOpen(false)}>
+              <p>
+                Are you sure you want to remove this offer? This action cannot
+                be reversed.
+              </p>
+            </Dialog>
+          </>
+        );
+      })}
+      <Button
+        display="block"
+        icon={PlusIcon}
+        label="Add another offer"
+        size="lg"
+        variant="tertiary"
+        onClick={() => append({})}
+      />
+    </div>
+  );
+}
+
 export default function OfferDetailsForm() {
   const [jobType, setJobType] = useState(JobType.FullTime);
+  const [isDialogOpen, setDialogOpen] = useState(false);
   const { control, register } = useFormContext();
   const fieldArrayValues = useFieldArray({ control, name: 'offers' });
 
-  const changeJobType = (jobTypeChosen: JobType) => () => {
-    if (jobType === jobTypeChosen) {
-      return;
+  const toggleJobType = () => {
+    if (jobType === JobType.FullTime) {
+      setJobType(JobType.Internship);
+    } else {
+      setJobType(JobType.FullTime);
     }
-
-    setJobType(jobTypeChosen);
     fieldArrayValues.remove();
   };
+
+  const switchJobTypeLabel = () =>
+    jobType === JobType.FullTime
+      ? JobTypeLabel.INTERNSHIP
+      : JobTypeLabel.FULLTIME;
 
   return (
     <div className="mb-5">
@@ -440,20 +479,30 @@ export default function OfferDetailsForm() {
         <div className="mx-5 w-1/3">
           <Button
             display="block"
-            label="Full-time"
+            label={JobTypeLabel.FULLTIME}
             size="md"
             variant={jobType === JobType.FullTime ? 'secondary' : 'tertiary'}
-            onClick={changeJobType(JobType.FullTime)}
+            onClick={() => {
+              if (jobType === JobType.FullTime) {
+                return;
+              }
+              setDialogOpen(true);
+            }}
             {...register(`offers.${0}.jobType`)}
           />
         </div>
         <div className="mx-5 w-1/3">
           <Button
             display="block"
-            label="Internship"
+            label={JobTypeLabel.INTERNSHIP}
             size="md"
             variant={jobType === JobType.Internship ? 'secondary' : 'tertiary'}
-            onClick={changeJobType(JobType.Internship)}
+            onClick={() => {
+              if (jobType === JobType.Internship) {
+                return;
+              }
+              setDialogOpen(true);
+            }}
             {...register(`offers.${0}.jobType`)}
           />
         </div>
@@ -462,6 +511,32 @@ export default function OfferDetailsForm() {
         fieldArrayValues={fieldArrayValues}
         jobType={jobType}
       />
+      <Dialog
+        isShown={isDialogOpen}
+        primaryButton={
+          <Button
+            display="block"
+            label="Switch"
+            variant="primary"
+            onClick={() => {
+              toggleJobType();
+              setDialogOpen(false);
+            }}
+          />
+        }
+        secondaryButton={
+          <Button
+            display="block"
+            label="Cancel"
+            variant="tertiary"
+            onClick={() => setDialogOpen(false)}
+          />
+        }
+        title={`Switch to ${switchJobTypeLabel()}`}
+        onClose={() => setDialogOpen(false)}>
+        {`Are you sure you want to switch to ${switchJobTypeLabel()}? The data you
+        entered in the ${JobTypeLabel[jobType]} section will disappear.`}
+      </Dialog>
     </div>
   );
 }
