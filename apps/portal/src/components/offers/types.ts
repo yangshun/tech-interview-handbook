@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
 /*
@@ -9,6 +8,11 @@ export enum JobType {
   FullTime = 'FULLTIME',
   Internship = 'INTERNSHIP',
 }
+
+export const JobTypeLabel = {
+  FULLTIME: 'Full-time',
+  INTERNSHIP: 'Internship',
+};
 
 export enum EducationBackgroundType {
   Bachelor = 'Bachelor',
@@ -43,15 +47,26 @@ type InternshipJobData = {
   title: string;
 };
 
-export type OfferDetailsFormData = {
+type OfferDetailsGeneralData = {
   comments: string;
   companyId: string;
-  job: FullTimeJobData | InternshipJobData;
   jobType: string;
   location: string;
   monthYearReceived: MonthYear;
   negotiationStrategy: string;
 };
+
+export type FullTimeOfferDetailsFormData = OfferDetailsGeneralData & {
+  job: FullTimeJobData;
+};
+
+export type InternshipOfferDetailsFormData = OfferDetailsGeneralData & {
+  job: InternshipJobData;
+};
+
+export type OfferDetailsFormData =
+  | FullTimeOfferDetailsFormData
+  | InternshipOfferDetailsFormData;
 
 export type OfferDetailsPostData = Omit<
   OfferDetailsFormData,

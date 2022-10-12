@@ -7,7 +7,7 @@ export function Breadcrumbs({ stepLabels, currentStep }: BreadcrumbsProps) {
   return (
     <div className="flex space-x-1">
       {stepLabels.map((label, index) => (
-        <>
+        <div key={label}>
           {index === currentStep ? (
             <p className="text-sm text-purple-700">{label}</p>
           ) : (
@@ -16,7 +16,7 @@ export function Breadcrumbs({ stepLabels, currentStep }: BreadcrumbsProps) {
           {index !== stepLabels.length - 1 && (
             <p className="text-sm text-gray-400">{'>'}</p>
           )}
-        </>
+        </div>
       ))}
     </div>
   );

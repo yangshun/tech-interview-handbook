@@ -1,14 +1,11 @@
-import { useState } from 'react';
-import type {
-  FieldValues,
-  UseFieldArrayRemove,
-  UseFieldArrayReturn,
-} from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import type { FieldValues, UseFieldArrayReturn } from 'react-hook-form';
+import { useWatch } from 'react-hook-form';
 import { useFormContext } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 import { PlusIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import { Button } from '@tih/ui';
+import { Button, Dialog } from '@tih/ui';
 
 import FormMonthYearPicker from './components/FormMonthYearPicker';
 import FormSelect from './components/FormSelect';
@@ -16,74 +13,110 @@ import FormTextArea from './components/FormTextArea';
 import FormTextInput from './components/FormTextInput';
 import {
   companyOptions,
+  emptyOption,
+  FieldError,
   internshipCycleOptions,
   locationOptions,
   titleOptions,
   yearOptions,
 } from '../constants';
-import type { OfferDetailsFormData } from '../types';
+import type {
+  FullTimeOfferDetailsFormData,
+  InternshipOfferDetailsFormData,
+} from '../types';
+import { JobTypeLabel } from '../types';
 import { JobType } from '../types';
 import { CURRENCY_OPTIONS } from '../../../utils/offers/currency/CurrencyEnum';
 
 type FullTimeOfferDetailsFormProps = Readonly<{
   index: number;
-  remove: UseFieldArrayRemove;
+  setDialogOpen: (isOpen: boolean) => void;
 }>;
 
 function FullTimeOfferDetailsForm({
   index,
-  remove,
+  setDialogOpen,
 }: FullTimeOfferDetailsFormProps) {
-  const { register } = useFormContext<{
-    offers: Array<OfferDetailsFormData>;
+  const { register, formState, setValue } = useFormContext<{
+    offers: Array<FullTimeOfferDetailsFormData>;
   }>();
+  const offerFields = formState.errors.offers?.[index];
+
+  const watchCurrency = useWatch({
+    name: `offers.${index}.job.totalCompensation.currency`,
+  });
+
+  useEffect(() => {
+    setValue(`offers.${index}.job.base.currency`, watchCurrency);
+    setValue(`offers.${index}.job.bonus.currency`, watchCurrency);
+    setValue(`offers.${index}.job.stocks.currency`, watchCurrency);
+  }, [watchCurrency, index, setValue]);
 
   return (
     <div className="my-5 rounded-lg border border-gray-200 px-10 py-5">
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.job?.title?.message}
           label="Title"
           options={titleOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.job.title`, {
-            required: true,
+            required: FieldError.Required,
           })}
         />
         <FormTextInput
+          errorMessage={offerFields?.job?.specialization?.message}
           label="Focus / Specialization"
           placeholder="e.g. Front End"
           required={true}
           {...register(`offers.${index}.job.specialization`, {
-            required: true,
+            required: FieldError.Required,
           })}
         />
       </div>
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.companyId?.message}
           label="Company"
           options={companyOptions}
+          placeholder={emptyOption}
           required={true}
-          {...register(`offers.${index}.companyId`, { required: true })}
+          {...register(`offers.${index}.companyId`, {
+            required: FieldError.Required,
+          })}
         />
         <FormTextInput
+          errorMessage={offerFields?.job?.level?.message}
           label="Level"
           placeholder="e.g. L4, Junior"
           required={true}
-          {...register(`offers.${index}.job.level`, { required: true })}
+          {...register(`offers.${index}.job.level`, {
+            required: FieldError.Required,
+          })}
         />
       </div>
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.location?.message}
           label="Location"
           options={locationOptions}
+          placeholder={emptyOption}
           required={true}
-          {...register(`offers.${index}.location`, { required: true })}
+          {...register(`offers.${index}.location`, {
+            required: FieldError.Required,
+          })}
         />
         <FormMonthYearPicker
-          {...register(`offers.${index}.monthYearReceived`, { required: true })}
+          monthLabel="Date Received"
+          monthRequired={true}
+          yearLabel=""
+          {...register(`offers.${index}.monthYearReceived`, {
+            required: FieldError.Required,
+          })}
         />
       </div>
       <div className="mb-5">
@@ -95,19 +128,21 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.totalCompensation.currency`, {
-                required: true,
+                required: FieldError.Required,
               })}
             />
           }
           endAddOnType="element"
+          errorMessage={offerFields?.job?.totalCompensation?.value?.message}
           label="Total Compensation (Annual)"
-          placeholder="0.00"
+          placeholder="0"
           required={true}
           startAddOn="$"
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.totalCompensation.value`, {
-            required: true,
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            required: FieldError.Required,
             valueAsNumber: true,
           })}
         />
@@ -121,19 +156,21 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.base.currency`, {
-                required: true,
+                required: FieldError.Required,
               })}
             />
           }
           endAddOnType="element"
+          errorMessage={offerFields?.job?.base?.value?.message}
           label="Base Salary (Annual)"
-          placeholder="0.00"
+          placeholder="0"
           required={true}
           startAddOn="$"
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.base.value`, {
-            required: true,
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            required: FieldError.Required,
             valueAsNumber: true,
           })}
         />
@@ -145,19 +182,21 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.bonus.currency`, {
-                required: true,
+                required: FieldError.Required,
               })}
             />
           }
           endAddOnType="element"
+          errorMessage={offerFields?.job?.bonus?.value?.message}
           label="Bonus (Annual)"
-          placeholder="0.00"
+          placeholder="0"
           required={true}
           startAddOn="$"
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.bonus.value`, {
-            required: true,
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            required: FieldError.Required,
             valueAsNumber: true,
           })}
         />
@@ -171,19 +210,21 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.stocks.currency`, {
-                required: true,
+                required: FieldError.Required,
               })}
             />
           }
           endAddOnType="element"
+          errorMessage={offerFields?.job?.stocks?.value?.message}
           label="Stocks (Annual)"
-          placeholder="0.00"
+          placeholder="0"
           required={true}
           startAddOn="$"
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.stocks.value`, {
-            required: true,
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            required: FieldError.Required,
             valueAsNumber: true,
           })}
         />
@@ -208,7 +249,7 @@ function FullTimeOfferDetailsForm({
             icon={TrashIcon}
             label="Delete"
             variant="secondary"
-            onClick={() => remove(index)}
+            onClick={() => setDialogOpen(true)}
           />
         )}
       </div>
@@ -216,125 +257,103 @@ function FullTimeOfferDetailsForm({
   );
 }
 
-type OfferDetailsFormArrayProps = Readonly<{
-  fieldArrayValues: UseFieldArrayReturn<FieldValues, 'offers', 'id'>;
-  jobType: JobType;
-}>;
-
-function OfferDetailsFormArray({
-  fieldArrayValues,
-  jobType,
-}: OfferDetailsFormArrayProps) {
-  const { append, remove, fields } = fieldArrayValues;
-  return (
-    <div>
-      {fields.map((item, index) =>
-        jobType === JobType.FullTime ? (
-          <FullTimeOfferDetailsForm
-            key={`offer.${item.id}`}
-            index={index}
-            remove={remove}
-          />
-        ) : (
-          <InternshipOfferDetailsForm
-            key={`offer.${item.id}`}
-            index={index}
-            remove={remove}
-          />
-        ),
-      )}
-      <Button
-        display="block"
-        icon={PlusIcon}
-        label="Add another offer"
-        size="lg"
-        variant="tertiary"
-        onClick={() => append({})}
-      />
-    </div>
-  );
-}
-
 type InternshipOfferDetailsFormProps = Readonly<{
   index: number;
-  remove: UseFieldArrayRemove;
+  setDialogOpen: (isOpen: boolean) => void;
 }>;
 
 function InternshipOfferDetailsForm({
   index,
-  remove,
+  setDialogOpen,
 }: InternshipOfferDetailsFormProps) {
-  const { register } = useFormContext<{
-    offers: Array<OfferDetailsFormData>;
+  const { register, formState } = useFormContext<{
+    offers: Array<InternshipOfferDetailsFormData>;
   }>();
+
+  const offerFields = formState.errors.offers?.[index];
 
   return (
     <div className="my-5 rounded-lg border border-gray-200 px-10 py-5">
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.job?.title?.message}
           label="Title"
           options={titleOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.job.title`, {
             minLength: 1,
-            required: true,
+            required: FieldError.Required,
           })}
         />
         <FormTextInput
+          errorMessage={offerFields?.job?.specialization?.message}
           label="Focus / Specialization"
           placeholder="e.g. Front End"
           required={true}
           {...register(`offers.${index}.job.specialization`, {
             minLength: 1,
-            required: true,
+            required: FieldError.Required,
           })}
         />
       </div>
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.companyId?.message}
           label="Company"
           options={companyOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.companyId`, {
-            required: true,
+            required: FieldError.Required,
           })}
         />
         <FormSelect
           display="block"
+          errorMessage={offerFields?.location?.message}
           label="Location"
           options={locationOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.location`, {
-            required: true,
+            required: FieldError.Required,
           })}
         />
       </div>
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
+          errorMessage={offerFields?.job?.internshipCycle?.message}
           label="Internship Cycle"
           options={internshipCycleOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.job.internshipCycle`, {
-            required: true,
+            required: FieldError.Required,
           })}
         />
         <FormSelect
           display="block"
+          errorMessage={offerFields?.job?.startYear?.message}
           label="Internship Year"
           options={yearOptions}
+          placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.job.startYear`, {
-            required: true,
+            required: FieldError.Required,
           })}
         />
       </div>
-      <div className="mb-5 flex items-center space-x-9">
-        <p className="text-sm">Date received:</p>
+      <div className="mb-5">
         <FormMonthYearPicker
-          {...register(`offers.${index}.monthYearReceived`, { required: true })}
+          monthLabel="Date Received"
+          monthRequired={true}
+          yearLabel=""
+          {...register(`offers.${index}.monthYearReceived`, {
+            required: FieldError.Required,
+          })}
         />
       </div>
       <div className="mb-5">
@@ -346,19 +365,21 @@ function InternshipOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.monthlySalary.currency`, {
-                required: true,
+                required: FieldError.Required,
               })}
             />
           }
           endAddOnType="element"
+          errorMessage={offerFields?.job?.monthlySalary?.value?.message}
           label="Salary (Monthly)"
-          placeholder="0.00"
+          placeholder="0"
           required={true}
           startAddOn="$"
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.monthlySalary.value`, {
-            required: true,
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            required: FieldError.Required,
             valueAsNumber: true,
           })}
         />
@@ -383,7 +404,9 @@ function InternshipOfferDetailsForm({
             icon={TrashIcon}
             label="Delete"
             variant="secondary"
-            onClick={() => remove(index)}
+            onClick={() => {
+              setDialogOpen(true);
+            }}
           />
         )}
       </div>
@@ -391,19 +414,96 @@ function InternshipOfferDetailsForm({
   );
 }
 
+type OfferDetailsFormArrayProps = Readonly<{
+  fieldArrayValues: UseFieldArrayReturn<FieldValues, 'offers', 'id'>;
+  jobType: JobType;
+}>;
+
+function OfferDetailsFormArray({
+  fieldArrayValues,
+  jobType,
+}: OfferDetailsFormArrayProps) {
+  const { append, remove, fields } = fieldArrayValues;
+  const [isDialogOpen, setDialogOpen] = useState(false);
+
+  return (
+    <div>
+      {fields.map((item, index) => {
+        return (
+          <div key={item.id}>
+            {jobType === JobType.FullTime ? (
+              <FullTimeOfferDetailsForm
+                index={index}
+                setDialogOpen={setDialogOpen}
+              />
+            ) : (
+              <InternshipOfferDetailsForm
+                index={index}
+                setDialogOpen={setDialogOpen}
+              />
+            )}
+            <Dialog
+              isShown={isDialogOpen}
+              primaryButton={
+                <Button
+                  display="block"
+                  label="OK"
+                  variant="primary"
+                  onClick={() => {
+                    remove(index);
+                    setDialogOpen(false);
+                  }}
+                />
+              }
+              secondaryButton={
+                <Button
+                  display="block"
+                  label="Cancel"
+                  variant="tertiary"
+                  onClick={() => setDialogOpen(false)}
+                />
+              }
+              title="Remove this offer"
+              onClose={() => setDialogOpen(false)}>
+              <p>
+                Are you sure you want to remove this offer? This action cannot
+                be reversed.
+              </p>
+            </Dialog>
+          </div>
+        );
+      })}
+      <Button
+        display="block"
+        icon={PlusIcon}
+        label="Add another offer"
+        size="lg"
+        variant="tertiary"
+        onClick={() => append({})}
+      />
+    </div>
+  );
+}
+
 export default function OfferDetailsForm() {
   const [jobType, setJobType] = useState(JobType.FullTime);
+  const [isDialogOpen, setDialogOpen] = useState(false);
   const { control, register } = useFormContext();
   const fieldArrayValues = useFieldArray({ control, name: 'offers' });
 
-  const changeJobType = (jobTypeChosen: JobType) => () => {
-    if (jobType === jobTypeChosen) {
-      return;
+  const toggleJobType = () => {
+    if (jobType === JobType.FullTime) {
+      setJobType(JobType.Internship);
+    } else {
+      setJobType(JobType.FullTime);
     }
-
-    setJobType(jobTypeChosen);
     fieldArrayValues.remove();
   };
+
+  const switchJobTypeLabel = () =>
+    jobType === JobType.FullTime
+      ? JobTypeLabel.INTERNSHIP
+      : JobTypeLabel.FULLTIME;
 
   return (
     <div className="mb-5">
@@ -414,20 +514,30 @@ export default function OfferDetailsForm() {
         <div className="mx-5 w-1/3">
           <Button
             display="block"
-            label="Full-time"
+            label={JobTypeLabel.FULLTIME}
             size="md"
             variant={jobType === JobType.FullTime ? 'secondary' : 'tertiary'}
-            onClick={changeJobType(JobType.FullTime)}
+            onClick={() => {
+              if (jobType === JobType.FullTime) {
+                return;
+              }
+              setDialogOpen(true);
+            }}
             {...register(`offers.${0}.jobType`)}
           />
         </div>
         <div className="mx-5 w-1/3">
           <Button
             display="block"
-            label="Internship"
+            label={JobTypeLabel.INTERNSHIP}
             size="md"
             variant={jobType === JobType.Internship ? 'secondary' : 'tertiary'}
-            onClick={changeJobType(JobType.Internship)}
+            onClick={() => {
+              if (jobType === JobType.Internship) {
+                return;
+              }
+              setDialogOpen(true);
+            }}
             {...register(`offers.${0}.jobType`)}
           />
         </div>
@@ -436,6 +546,32 @@ export default function OfferDetailsForm() {
         fieldArrayValues={fieldArrayValues}
         jobType={jobType}
       />
+      <Dialog
+        isShown={isDialogOpen}
+        primaryButton={
+          <Button
+            display="block"
+            label="Switch"
+            variant="primary"
+            onClick={() => {
+              toggleJobType();
+              setDialogOpen(false);
+            }}
+          />
+        }
+        secondaryButton={
+          <Button
+            display="block"
+            label="Cancel"
+            variant="tertiary"
+            onClick={() => setDialogOpen(false)}
+          />
+        }
+        title={`Switch to ${switchJobTypeLabel()}`}
+        onClose={() => setDialogOpen(false)}>
+        {`Are you sure you want to switch to ${switchJobTypeLabel()}? The data you
+        entered in the ${JobTypeLabel[jobType]} section will disappear.`}
+      </Dialog>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react';
+import { forwardRef } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import MonthYearPicker from '~/components/shared/MonthYearPicker';
@@ -14,7 +15,7 @@ type FormMonthYearPickerProps = Omit<
   name: string;
 };
 
-export default function FormMonthYearPicker({
+function FormMonthYearPickerWithRef({
   name,
   ...rest
 }: FormMonthYearPickerProps) {
@@ -35,3 +36,7 @@ export default function FormMonthYearPicker({
     />
   );
 }
+
+const FormMonthYearPicker = forwardRef(FormMonthYearPickerWithRef);
+
+export default FormMonthYearPicker;

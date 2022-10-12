@@ -1,13 +1,9 @@
 import { EducationBackgroundType } from './types';
 
-const emptyOption = {
-  label: '----',
-  value: '',
-};
+export const emptyOption = '----';
 
 // TODO: use enums
 export const titleOptions = [
-  emptyOption,
   {
     label: 'Software engineer',
     value: 'Software engineer',
@@ -27,7 +23,6 @@ export const titleOptions = [
 ];
 
 export const companyOptions = [
-  emptyOption,
   {
     label: 'Amazon',
     value: 'cl93patjt0000txewdi601mub',
@@ -51,7 +46,6 @@ export const companyOptions = [
 ];
 
 export const locationOptions = [
-  emptyOption,
   {
     label: 'Singapore, Singapore',
     value: 'Singapore, Singapore',
@@ -67,7 +61,6 @@ export const locationOptions = [
 ];
 
 export const internshipCycleOptions = [
-  emptyOption,
   {
     label: 'Summer',
     value: 'Summer',
@@ -91,7 +84,6 @@ export const internshipCycleOptions = [
 ];
 
 export const yearOptions = [
-  emptyOption,
   {
     label: '2021',
     value: '2021',
@@ -110,17 +102,14 @@ export const yearOptions = [
   },
 ];
 
-const educationBackgroundTypes = Object.entries(EducationBackgroundType).map(
-  ([key, value]) => ({
-    label: key,
-    value,
-  }),
-);
-
-export const educationLevelOptions = [emptyOption, ...educationBackgroundTypes];
+export const educationLevelOptions = Object.entries(
+  EducationBackgroundType,
+).map(([key, value]) => ({
+  label: key,
+  value,
+}));
 
 export const educationFieldOptions = [
-  emptyOption,
   {
     label: 'Computer Science',
     value: 'Computer Science',
@@ -134,3 +123,9 @@ export const educationFieldOptions = [
     value: 'Business Analytics',
   },
 ];
+
+export enum FieldError {
+  NonNegativeNumber = 'Please fill in a non-negative number in this field.',
+  Number = 'Please fill in a number in this field.',
+  Required = 'Please fill in this field.',
+}

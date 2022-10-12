@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
@@ -51,6 +51,9 @@ type FormStep = {
 
 export default function OffersSubmissionPage() {
   const [formStep, setFormStep] = useState(0);
+  const pageRef = useRef<HTMLDivElement>(null);
+  const scrollToTop = () =>
+    pageRef.current?.scrollTo({ behavior: 'smooth', top: 0 });
   const formMethods = useForm<OfferProfileFormData>({
     defaultValues: defaultOfferValues,
     mode: 'all',
@@ -94,9 +97,13 @@ export default function OffersSubmissionPage() {
       }
     }
     setFormStep(formStep + 1);
+    scrollToTop();
   };
 
-  const previousStep = () => setFormStep(formStep - 1);
+  const previousStep = () => {
+    setFormStep(formStep - 1);
+    scrollToTop();
+  };
 
   const createMutation = trpc.useMutation(['offers.profile.create'], {
     onError(error) {
@@ -105,6 +112,7 @@ export default function OffersSubmissionPage() {
     onSuccess() {
       alert('offer profile submit success!');
       setFormStep(formStep + 1);
+      scrollToTop();
     },
   });
 
@@ -135,7 +143,7 @@ export default function OffersSubmissionPage() {
   };
 
   return (
-    <div className="fixed h-full w-full overflow-y-scroll">
+    <div ref={pageRef} className="fixed h-full w-full overflow-y-scroll">
       <div className="mb-20 flex justify-center">
         <div className="my-5 block w-full max-w-screen-md rounded-lg bg-white py-10 px-10 shadow-lg">
           <div className="mb-4 flex justify-end">
