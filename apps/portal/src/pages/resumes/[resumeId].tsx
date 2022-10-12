@@ -35,18 +35,18 @@ export default function ResumeReviewPage() {
     },
   );
   const starMutation = trpc.useMutation('resumes.resume.star', {
-    onError() {
+    onSuccess() {
       setStarDetails({
-        isStarred: false,
-        numStars: starDetails.numStars - 1,
+        isStarred: true,
+        numStars: starDetails.numStars + 1,
       });
     },
   });
   const unstarMutation = trpc.useMutation('resumes.resume.unstar', {
-    onError() {
+    onSuccess() {
       setStarDetails({
-        isStarred: true,
-        numStars: starDetails.numStars + 1,
+        isStarred: false,
+        numStars: starDetails.numStars - 1,
       });
     },
   });
@@ -65,12 +65,11 @@ export default function ResumeReviewPage() {
   }, [detailsQuery.data]);
 
   const onStarButtonClick = () => {
-    setStarDetails({
-      isStarred: !starDetails.isStarred,
-      numStars: starDetails.isStarred
-        ? starDetails.numStars - 1
-        : starDetails.numStars + 1,
-    });
+    if (session?.user?.id == null) {
+      router.push('/api/auth/signin');
+      return;
+    }
+
     // Star button only rendered if resume exists
     // Star button only clickable if user exists
     if (starDetails.isStarred) {
@@ -110,7 +109,7 @@ export default function ResumeReviewPage() {
                     : '',
                   'isolate inline-flex max-h-10 items-center space-x-4 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50  disabled:hover:bg-white',
                 )}
-                disabled={session?.user === undefined}
+                disabled={starMutation.isLoading || unstarMutation.isLoading}
                 id="star-button"
                 type="button"
                 onClick={onStarButtonClick}>
@@ -166,7 +165,7 @@ export default function ResumeReviewPage() {
               </div>
             </div>
             {detailsQuery.data.additionalInfo && (
-              <div className="flex items-center pt-2 text-sm text-gray-500">
+              <div className="flex items-start whitespace-pre-wrap pt-2 text-sm text-gray-500">
                 <InformationCircleIcon
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"

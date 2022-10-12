@@ -4,7 +4,7 @@ type Props = Readonly<{
   text: string;
 }>;
 
-export default function SignInButton({ text }: Props) {
+export default function ResumeSignInButton({ text }: Props) {
   return (
     <div className="flex justify-center pt-4">
       <p>

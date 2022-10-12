@@ -19,11 +19,11 @@ import {
   ROLES,
   SORT_OPTIONS,
   TOP_HITS,
-} from '~/components/resumes/browse/constants';
-import FilterPill from '~/components/resumes/browse/FilterPill';
+} from '~/components/resumes/browse/resumeConstants';
+import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
-import SignInButton from '~/components/resumes/SignInButton';
+import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 
 import { trpc } from '~/utils/trpc';
 
@@ -98,7 +98,7 @@ export default function ResumeHomePage() {
     if (sessionData?.user?.id) {
       router.push('/resumes/submit');
     } else {
-      // TODO: Handle non-logged in user behaviour
+      router.push('/api/auth/signin');
     }
   };
 
@@ -221,7 +221,7 @@ export default function ResumeHomePage() {
                       {TOP_HITS.map((category) => (
                         <li key={category.name}>
                           {/* TODO: Replace onClick with filtering function */}
-                          <FilterPill
+                          <ResumeFilterPill
                             title={category.name}
                             onClick={() => true}
                           />
@@ -287,7 +287,9 @@ export default function ResumeHomePage() {
                 </div>
               </div>
               <div className="col-span-10 pr-8">
-                {renderSignInButton && <SignInButton text={signInButtonText} />}
+                {renderSignInButton && (
+                  <ResumeSignInButton text={signInButtonText} />
+                )}
                 <ResumeListItems
                   isLoading={
                     allResumesQuery.isFetching ||
