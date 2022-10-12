@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { FieldValues, UseFieldArrayReturn } from 'react-hook-form';
+import { useWatch } from 'react-hook-form';
 import { useFormContext } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 import { PlusIcon } from '@heroicons/react/20/solid';
@@ -35,11 +36,20 @@ function FullTimeOfferDetailsForm({
   index,
   setDialogOpen,
 }: FullTimeOfferDetailsFormProps) {
-  const { register, formState } = useFormContext<{
+  const { register, formState, setValue } = useFormContext<{
     offers: Array<FullTimeOfferDetailsFormData>;
   }>();
-
   const jobFields = formState.errors.offers?.[index]?.job;
+
+  const watchCurrency = useWatch({
+    name: `offers.${index}.job.totalCompensation.currency`,
+  });
+
+  useEffect(() => {
+    setValue(`offers.${index}.job.base.currency`, watchCurrency);
+    setValue(`offers.${index}.job.bonus.currency`, watchCurrency);
+    setValue(`offers.${index}.job.stocks.currency`, watchCurrency);
+  }, [watchCurrency, index, setValue]);
 
   return (
     <div className="my-5 rounded-lg border border-gray-200 px-10 py-5">
@@ -50,7 +60,7 @@ function FullTimeOfferDetailsForm({
           options={titleOptions}
           required={true}
           {...register(`offers.${index}.job.title`, {
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
         <FormTextInput
@@ -59,7 +69,7 @@ function FullTimeOfferDetailsForm({
           placeholder="e.g. Front End"
           required={true}
           {...register(`offers.${index}.job.specialization`, {
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
       </div>
@@ -70,7 +80,7 @@ function FullTimeOfferDetailsForm({
           options={companyOptions}
           required={true}
           {...register(`offers.${index}.companyId`, {
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
         <FormTextInput
@@ -79,7 +89,7 @@ function FullTimeOfferDetailsForm({
           placeholder="e.g. L4, Junior"
           required={true}
           {...register(`offers.${index}.job.level`, {
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
       </div>
@@ -90,12 +100,12 @@ function FullTimeOfferDetailsForm({
           options={locationOptions}
           required={true}
           {...register(`offers.${index}.location`, {
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
         <FormMonthYearPicker
           {...register(`offers.${index}.monthYearReceived`, {
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
       </div>
@@ -108,7 +118,7 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.totalCompensation.currency`, {
-                required: FieldError.required,
+                required: FieldError.Required,
               })}
             />
           }
@@ -121,7 +131,8 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.totalCompensation.value`, {
-            required: FieldError.required,
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            required: FieldError.Required,
             valueAsNumber: true,
           })}
         />
@@ -135,7 +146,7 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.base.currency`, {
-                required: FieldError.required,
+                required: FieldError.Required,
               })}
             />
           }
@@ -148,7 +159,8 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.base.value`, {
-            required: FieldError.required,
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            required: FieldError.Required,
             valueAsNumber: true,
           })}
         />
@@ -160,7 +172,7 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.bonus.currency`, {
-                required: FieldError.required,
+                required: FieldError.Required,
               })}
             />
           }
@@ -173,7 +185,8 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.bonus.value`, {
-            required: FieldError.required,
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            required: FieldError.Required,
             valueAsNumber: true,
           })}
         />
@@ -187,7 +200,7 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.stocks.currency`, {
-                required: FieldError.required,
+                required: FieldError.Required,
               })}
             />
           }
@@ -200,7 +213,8 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.stocks.value`, {
-            required: FieldError.required,
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            required: FieldError.Required,
             valueAsNumber: true,
           })}
         />
@@ -258,7 +272,7 @@ function InternshipOfferDetailsForm({
           required={true}
           {...register(`offers.${index}.job.title`, {
             minLength: 1,
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
         <FormTextInput
@@ -268,7 +282,7 @@ function InternshipOfferDetailsForm({
           required={true}
           {...register(`offers.${index}.job.specialization`, {
             minLength: 1,
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
       </div>
@@ -279,7 +293,7 @@ function InternshipOfferDetailsForm({
           options={companyOptions}
           required={true}
           {...register(`offers.${index}.companyId`, {
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
         <FormSelect
@@ -288,7 +302,7 @@ function InternshipOfferDetailsForm({
           options={locationOptions}
           required={true}
           {...register(`offers.${index}.location`, {
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
       </div>
@@ -299,7 +313,7 @@ function InternshipOfferDetailsForm({
           options={internshipCycleOptions}
           required={true}
           {...register(`offers.${index}.job.internshipCycle`, {
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
         <FormSelect
@@ -308,7 +322,7 @@ function InternshipOfferDetailsForm({
           options={yearOptions}
           required={true}
           {...register(`offers.${index}.job.startYear`, {
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
       </div>
@@ -316,7 +330,7 @@ function InternshipOfferDetailsForm({
         <p className="text-sm">Date received:</p>
         <FormMonthYearPicker
           {...register(`offers.${index}.monthYearReceived`, {
-            required: FieldError.required,
+            required: FieldError.Required,
           })}
         />
       </div>
@@ -329,7 +343,7 @@ function InternshipOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.monthlySalary.currency`, {
-                required: FieldError.required,
+                required: FieldError.Required,
               })}
             />
           }
@@ -342,7 +356,8 @@ function InternshipOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.monthlySalary.value`, {
-            required: FieldError.required,
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            required: FieldError.Required,
             valueAsNumber: true,
           })}
         />

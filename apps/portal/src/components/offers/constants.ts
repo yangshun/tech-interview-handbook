@@ -136,5 +136,7 @@ export const educationFieldOptions = [
 ];
 
 export enum FieldError {
-  required = 'Please fill in this field.',
+  NonNegativeNumber = 'Please fill in a non-negative number in this field.',
+  Number = 'Please fill in a number in this field.',
+  Required = 'Please fill in this field.',
 }
