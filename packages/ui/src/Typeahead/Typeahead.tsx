@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Fragment, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
-import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 export type TypeaheadOption = Readonly<{
   // String value to uniquely identify the option.
@@ -86,7 +86,7 @@ export default function Typeahead({
             }}
           />
           <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
-            <ChevronUpDownIcon
+            <ChevronDownIcon
               aria-hidden="true"
               className="h-5 w-5 text-slate-400"
             />

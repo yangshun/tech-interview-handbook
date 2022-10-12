@@ -17,6 +17,9 @@ export default {
     noResultsMessage: {
       control: 'text',
     },
+    placeholder: {
+      control: 'text',
+    },
   },
   component: Typeahead,
   parameters: {
