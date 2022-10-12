@@ -5,6 +5,8 @@ import {
   companyOptions,
   educationFieldOptions,
   educationLevelOptions,
+  emptyOption,
+  FieldError,
   locationOptions,
   titleOptions,
 } from '~/components/offers/constants';
@@ -28,44 +30,44 @@ function YoeSection() {
           <FormTextInput
             label="Total YOE"
             placeholder="0"
+            required={true}
             type="number"
             {...register(`background.totalYoe`, {
+              required: FieldError.Required,
               valueAsNumber: true,
             })}
           />
         </div>
-        <div className="grid grid-cols-1 space-x-3">
-          <Collapsible label="Add specific YOEs by domain">
-            <div className="mb-5 grid grid-cols-2 space-x-3">
-              <FormTextInput
-                label="Specific YOE 1"
-                type="number"
-                {...register(`background.specificYoes.0.yoe`, {
-                  valueAsNumber: true,
-                })}
-              />
-              <FormTextInput
-                label="Specific Domain 1"
-                placeholder="e.g. Frontend"
-                {...register(`background.specificYoes.0.domain`)}
-              />
-            </div>
-            <div className="mb-5 grid grid-cols-2 space-x-3">
-              <FormTextInput
-                label="Specific YOE 2"
-                type="number"
-                {...register(`background.specificYoes.1.yoe`, {
-                  valueAsNumber: true,
-                })}
-              />
-              <FormTextInput
-                label="Specific Domain 2"
-                placeholder="e.g. Backend"
-                {...register(`background.specificYoes.1.domain`)}
-              />
-            </div>
-          </Collapsible>
-        </div>
+        <Collapsible label="Add specific YOEs by domain">
+          <div className="mb-5 grid grid-cols-2 space-x-3">
+            <FormTextInput
+              label="Specific YOE 1"
+              type="number"
+              {...register(`background.specificYoes.0.yoe`, {
+                valueAsNumber: true,
+              })}
+            />
+            <FormTextInput
+              label="Specific Domain 1"
+              placeholder="e.g. Frontend"
+              {...register(`background.specificYoes.0.domain`)}
+            />
+          </div>
+          <div className="mb-5 grid grid-cols-2 space-x-3">
+            <FormTextInput
+              label="Specific YOE 2"
+              type="number"
+              {...register(`background.specificYoes.1.yoe`, {
+                valueAsNumber: true,
+              })}
+            />
+            <FormTextInput
+              label="Specific Domain 2"
+              placeholder="e.g. Backend"
+              {...register(`background.specificYoes.1.domain`)}
+            />
+          </div>
+        </Collapsible>
       </div>
     </>
   );
@@ -80,12 +82,14 @@ function FullTimeJobFields() {
           display="block"
           label="Title"
           options={titleOptions}
+          placeholder={emptyOption}
           {...register(`background.experiences.0.title`)}
         />
         <FormSelect
           display="block"
           label="Company"
           options={companyOptions}
+          placeholder={emptyOption}
           {...register(`background.experiences.0.companyId`)}
         />
       </div>
@@ -155,12 +159,14 @@ function InternshipJobFields() {
           display="block"
           label="Title"
           options={titleOptions}
+          placeholder={emptyOption}
           {...register(`background.experiences.0.title`)}
         />
         <FormSelect
           display="block"
           label="Company"
           options={companyOptions}
+          placeholder={emptyOption}
           {...register(`background.experiences.0.company`)}
         />
       </div>
@@ -195,6 +201,7 @@ function InternshipJobFields() {
             display="block"
             label="Location"
             options={locationOptions}
+            placeholder={emptyOption}
             {...register(`background.experiences.0.location`)}
           />
         </div>
@@ -258,12 +265,14 @@ function EducationSection() {
             display="block"
             label="Education Level"
             options={educationLevelOptions}
+            placeholder={emptyOption}
             {...register(`background.educations.0.type`)}
           />
           <FormSelect
             display="block"
             label="Field"
             options={educationFieldOptions}
+            placeholder={emptyOption}
             {...register(`background.educations.0.field`)}
           />
         </div>
@@ -287,9 +296,9 @@ export default function BackgroundForm() {
       <h5 className="mb-2 text-center text-4xl font-bold text-gray-900">
         Help us better gauge your offers
       </h5>
-      <h6 className="mx-10 mb-8 text-center text-lg font-light text-gray-600">
-        This section is optional, but your background information helps us
-        benchmark your offers.
+      <h6 className="text-md mx-10 mb-8 text-center font-light text-gray-600">
+        This section is mostly optional, but your background information helps
+        us benchmark your offers.
       </h6>
       <div>
         <YoeSection />

@@ -104,8 +104,8 @@ export const yearOptions = [
 
 export const educationLevelOptions = Object.entries(
   EducationBackgroundType,
-).map(([key, value]) => ({
-  label: key,
+).map(([, value]) => ({
+  label: value,
   value,
 }));
 

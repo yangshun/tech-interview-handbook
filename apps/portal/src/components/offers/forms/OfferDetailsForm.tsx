@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import type { FieldValues, UseFieldArrayReturn } from 'react-hook-form';
+import type {
+  FieldValues,
+  UseFieldArrayRemove,
+  UseFieldArrayReturn,
+} from 'react-hook-form';
 import { useWatch } from 'react-hook-form';
 import { useFormContext } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
@@ -35,12 +39,12 @@ import { CURRENCY_OPTIONS } from '../../../utils/offers/currency/CurrencyEnum';
 
 type FullTimeOfferDetailsFormProps = Readonly<{
   index: number;
-  setDialogOpen: (isOpen: boolean) => void;
+  remove: UseFieldArrayRemove;
 }>;
 
 function FullTimeOfferDetailsForm({
   index,
-  setDialogOpen,
+  remove,
 }: FullTimeOfferDetailsFormProps) {
   const { register, formState, setValue } = useFormContext<{
     offers: Array<FullTimeOfferDetailsFormData>;
@@ -103,7 +107,7 @@ function FullTimeOfferDetailsForm({
           })}
         />
       </div>
-      <div className="mb-5 grid grid-cols-2 space-x-3">
+      <div className="mb-5 flex grid grid-cols-2 items-start space-x-3">
         <FormSelect
           display="block"
           errorMessage={offerFields?.location?.message}
@@ -254,7 +258,7 @@ function FullTimeOfferDetailsForm({
             icon={TrashIcon}
             label="Delete"
             variant="secondary"
-            onClick={() => setDialogOpen(true)}
+            onClick={() => remove(index)}
           />
         )}
       </div>
@@ -264,12 +268,12 @@ function FullTimeOfferDetailsForm({
 
 type InternshipOfferDetailsFormProps = Readonly<{
   index: number;
-  setDialogOpen: (isOpen: boolean) => void;
+  remove: UseFieldArrayRemove;
 }>;
 
 function InternshipOfferDetailsForm({
   index,
-  setDialogOpen,
+  remove,
 }: InternshipOfferDetailsFormProps) {
   const { register, formState } = useFormContext<{
     offers: Array<InternshipOfferDetailsFormData>;
@@ -410,7 +414,7 @@ function InternshipOfferDetailsForm({
             label="Delete"
             variant="secondary"
             onClick={() => {
-              setDialogOpen(true);
+              remove(index);
             }}
           />
         )}
@@ -429,7 +433,6 @@ function OfferDetailsFormArray({
   jobType,
 }: OfferDetailsFormArrayProps) {
   const { append, remove, fields } = fieldArrayValues;
-  const [isDialogOpen, setDialogOpen] = useState(false);
 
   return (
     <div>
@@ -437,44 +440,10 @@ function OfferDetailsFormArray({
         return (
           <div key={item.id}>
             {jobType === JobType.FullTime ? (
-              <FullTimeOfferDetailsForm
-                index={index}
-                setDialogOpen={setDialogOpen}
-              />
+              <FullTimeOfferDetailsForm index={index} remove={remove} />
             ) : (
-              <InternshipOfferDetailsForm
-                index={index}
-                setDialogOpen={setDialogOpen}
-              />
+              <InternshipOfferDetailsForm index={index} remove={remove} />
             )}
-            <Dialog
-              isShown={isDialogOpen}
-              primaryButton={
-                <Button
-                  display="block"
-                  label="OK"
-                  variant="primary"
-                  onClick={() => {
-                    remove(index);
-                    setDialogOpen(false);
-                  }}
-                />
-              }
-              secondaryButton={
-                <Button
-                  display="block"
-                  label="Cancel"
-                  variant="tertiary"
-                  onClick={() => setDialogOpen(false)}
-                />
-              }
-              title="Remove this offer"
-              onClose={() => setDialogOpen(false)}>
-              <p>
-                Are you sure you want to remove this offer? This action cannot
-                be reversed.
-              </p>
-            </Dialog>
           </div>
         );
       })}
@@ -501,15 +470,16 @@ export default function OfferDetailsForm() {
   const [isDialogOpen, setDialogOpen] = useState(false);
   const { control } = useFormContext();
   const fieldArrayValues = useFieldArray({ control, name: 'offers' });
+  const { append, remove } = fieldArrayValues;
 
   const toggleJobType = () => {
-    fieldArrayValues.remove();
+    remove();
     if (jobType === JobType.FullTime) {
       setJobType(JobType.Internship);
-      fieldArrayValues.append(defaultInternshipOfferValues);
+      append(defaultInternshipOfferValues);
     } else {
       setJobType(JobType.FullTime);
-      fieldArrayValues.append(defaultFullTimeOfferValues);
+      append(defaultFullTimeOfferValues);
     }
   };
 

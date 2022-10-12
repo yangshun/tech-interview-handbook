@@ -20,7 +20,7 @@ export enum EducationBackgroundType {
   Masters = 'Masters',
   PhD = 'PhD',
   Professional = 'Professional',
-  Seconday = 'Secondary',
+  Secondary = 'Secondary',
   SelfTaught = 'Self-taught',
 }
 
