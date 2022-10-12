@@ -131,7 +131,7 @@ function Test() {
     `offers.profile.listOne`,
     {
       profileId,
-      token: "6c8d53530163bb765c42bd9f441aa7e345f607c4e1892edbc64e5bbbbe7ee916"
+      token: '6c8d53530163bb765c42bd9f441aa7e345f607c4e1892edbc64e5bbbbe7ee916',
     },
   ]);
 
