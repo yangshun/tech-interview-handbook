@@ -430,16 +430,14 @@ function OfferDetailsFormArray({
     <div>
       {fields.map((item, index) => {
         return (
-          <>
+          <div key={item.id}>
             {jobType === JobType.FullTime ? (
               <FullTimeOfferDetailsForm
-                key={`offer.${item.id}`}
                 index={index}
                 setDialogOpen={setDialogOpen}
               />
             ) : (
               <InternshipOfferDetailsForm
-                key={`offer.${item.id}`}
                 index={index}
                 setDialogOpen={setDialogOpen}
               />
@@ -472,7 +470,7 @@ function OfferDetailsFormArray({
                 be reversed.
               </p>
             </Dialog>
-          </>
+          </div>
         );
       })}
       <Button
