@@ -2,8 +2,8 @@ import superjson from 'superjson';
 
 import { companiesRouter } from './companies-router';
 import { createRouter } from './context';
-import { offersRouter } from './offers';
-import { offersProfileRouter } from './offers-profile-router';
+import { offersRouter } from './offers/offers';
+import { offersProfileRouter } from './offers/offers-profile-router';
 import { protectedExampleRouter } from './protected-example-router';
 import { questionsAnswerCommentRouter } from './questions-answer-comment-router';
 import { questionsAnswerRouter } from './questions-answer-router';

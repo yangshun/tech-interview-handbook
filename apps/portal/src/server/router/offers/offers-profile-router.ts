@@ -4,6 +4,8 @@ import { Prisma } from '@prisma/client';
 
 import { createRouter } from '../context';
 
+import type { offersProfile } from '~/types/offers-profile';
+
 const valuation = z.object({
   currency: z.string(),
   value: z.number(),
@@ -11,7 +13,7 @@ const valuation = z.object({
 
 // TODO: handle both full time and intern
 const offer = z.object({
-  comments: z.string(),
+  comments: z.string().optional(),
   companyId: z.string(),
   job: z.object({
     base: valuation.optional(), // Full time
@@ -28,7 +30,7 @@ const offer = z.object({
   jobType: z.string(),
   location: z.string(),
   monthYearReceived: z.date(),
-  negotiationStrategy: z.string(),
+  negotiationStrategy: z.string().optional(),
 });
 
 const experience = z.object({
@@ -50,13 +52,38 @@ const education = z.object({
   type: z.string().optional(),
 });
 
+type WithIsEditable<T> = T & {
+  isEditable: boolean;
+};
+
+function computeIsEditable(
+  profileInput: offersProfile,
+  editToken?: string,
+): WithIsEditable<offersProfile> {
+  return {
+    ...profileInput,
+    isEditable: profileInput.editToken === editToken,
+  };
+}
+
+function exclude<Key extends keyof WithIsEditable<offersProfile>>(
+  profile: WithIsEditable<offersProfile>,
+  ...keys: Array<Key>
+): Omit<WithIsEditable<offersProfile>, Key> {
+  for (const key of keys) {
+    delete profile[key];
+  }
+  return profile;
+}
+
 export const offersProfileRouter = createRouter()
   .query('listOne', {
     input: z.object({
       profileId: z.string(),
+      token: z.string().optional(),
     }),
     async resolve({ ctx, input }) {
-      return await ctx.prisma.offersProfile.findFirst({
+      const result = await ctx.prisma.offersProfile.findFirst({
         include: {
           background: {
             include: {
@@ -100,6 +127,10 @@ export const offersProfileRouter = createRouter()
           id: input.profileId,
         },
       });
+
+      return result
+        ? exclude(computeIsEditable(result, input.token), 'editToken')
+        : result;
     },
   })
   .mutation('create', {
@@ -144,12 +175,27 @@ export const offersProfileRouter = createRouter()
                     x.totalCompensation?.currency !== undefined &&
                     x.totalCompensation.value !== undefined
                   ) {
-                    return {
-                      company: {
-                        connect: {
-                          id: x.companyId,
+                    if (x.companyId) {
+                      return {
+                        company: {
+                          connect: {
+                            id: x.companyId,
+                          },
                         },
-                      },
+                        durationInMonths: x.durationInMonths,
+                        jobType: x.jobType,
+                        level: x.level,
+                        specialization: x.specialization,
+                        title: x.title,
+                        totalCompensation: {
+                          create: {
+                            currency: x.totalCompensation?.currency,
+                            value: x.totalCompensation?.value,
+                          },
+                        },
+                      };
+                    }
+                    return {
                       durationInMonths: x.durationInMonths,
                       jobType: x.jobType,
                       level: x.level,
@@ -168,12 +214,26 @@ export const offersProfileRouter = createRouter()
                     x.monthlySalary?.currency !== undefined &&
                     x.monthlySalary.value !== undefined
                   ) {
-                    return {
-                      company: {
-                        connect: {
-                          id: x.companyId,
+                    if (x.companyId) {
+                      return {
+                        company: {
+                          connect: {
+                            id: x.companyId,
+                          },
                         },
-                      },
+                        durationInMonths: x.durationInMonths,
+                        jobType: x.jobType,
+                        monthlySalary: {
+                          create: {
+                            currency: x.monthlySalary?.currency,
+                            value: x.monthlySalary?.value,
+                          },
+                        },
+                        specialization: x.specialization,
+                        title: x.title,
+                      };
+                    }
+                    return {
                       durationInMonths: x.durationInMonths,
                       jobType: x.jobType,
                       monthlySalary: {
@@ -334,7 +394,6 @@ export const offersProfileRouter = createRouter()
           },
         },
       });
-
       // TODO: add analysis to profile object then return
       return profile;
     },
@@ -342,12 +401,23 @@ export const offersProfileRouter = createRouter()
   .mutation('delete', {
     input: z.object({
       id: z.string(),
+      token: z.string(),
     }),
     async resolve({ ctx, input }) {
-      return await ctx.prisma.offersProfile.delete({
+      const profileToDelete = await ctx.prisma.offersProfile.findFirst({
         where: {
           id: input.id,
         },
       });
+      const profileEditToken = profileToDelete?.editToken;
+
+      if (profileEditToken === input.token) {
+        return await ctx.prisma.offersProfile.delete({
+          where: {
+            id: input.id,
+          },
+        });
+      }
+      // TODO: Throw 401
     },
   });

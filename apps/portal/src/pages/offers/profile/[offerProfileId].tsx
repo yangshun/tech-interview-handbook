@@ -137,7 +137,7 @@ export default function OfferProfile() {
     if (isEditable) {
       deleteMutation.mutate({
         id: offerProfileId as string,
-        // TODO: token: token as string,
+        token: 'CHANGE THIS PART TO URL PARAM @ ZIQING', // TODO: token: token as string,
       });
       trpcContext.invalidateQueries(['offers.profile.listOne']);
       router.push('/offers');
