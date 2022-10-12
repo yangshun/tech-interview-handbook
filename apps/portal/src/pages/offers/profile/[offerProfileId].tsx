@@ -136,7 +136,7 @@ export default function OfferProfile() {
   function handleDelete() {
     if (isEditable) {
       deleteMutation.mutate({
-        id: offerProfileId as string,
+        profileId: offerProfileId as string,
         token: 'CHANGE THIS PART TO URL PARAM @ ZIQING', // TODO: token: token as string,
       });
       trpcContext.invalidateQueries(['offers.profile.listOne']);

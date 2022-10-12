@@ -17,7 +17,7 @@ function Test() {
   const deleteMutation = trpc.useMutation(['offers.profile.delete']);
 
   const handleDelete = (id: string) => {
-    deleteMutation.mutate({ id, token: ' dadaadad' });
+    deleteMutation.mutate({ profileId: id, token: ' dadaadad' });
   };
 
   return (
