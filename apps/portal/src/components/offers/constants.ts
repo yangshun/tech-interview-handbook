@@ -134,3 +134,7 @@ export const educationFieldOptions = [
     value: 'Business Analytics',
   },
 ];
+
+export enum FieldError {
+  required = 'Please fill in this field.',
+}

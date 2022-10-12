@@ -16,12 +16,16 @@ import FormTextArea from './components/FormTextArea';
 import FormTextInput from './components/FormTextInput';
 import {
   companyOptions,
+  FieldError,
   internshipCycleOptions,
   locationOptions,
   titleOptions,
   yearOptions,
 } from '../constants';
-import type { OfferDetailsFormData } from '../types';
+import type {
+  FullTimeOfferDetailsFormData,
+  InternshipOfferDetailsFormData,
+} from '../types';
 import { JobType } from '../types';
 import { CURRENCY_OPTIONS } from '../../../utils/offers/currency/CurrencyEnum';
 
@@ -34,9 +38,11 @@ function FullTimeOfferDetailsForm({
   index,
   remove,
 }: FullTimeOfferDetailsFormProps) {
-  const { register } = useFormContext<{
-    offers: Array<OfferDetailsFormData>;
+  const { register, formState } = useFormContext<{
+    offers: Array<FullTimeOfferDetailsFormData>;
   }>();
+
+  const jobFields = formState.errors.offers?.[index]?.job;
 
   return (
     <div className="my-5 rounded-lg border border-gray-200 px-10 py-5">
@@ -47,15 +53,16 @@ function FullTimeOfferDetailsForm({
           options={titleOptions}
           required={true}
           {...register(`offers.${index}.job.title`, {
-            required: true,
+            required: FieldError.required,
           })}
         />
         <FormTextInput
+          errorMessage={jobFields?.specialization?.message}
           label="Focus / Specialization"
           placeholder="e.g. Front End"
           required={true}
           {...register(`offers.${index}.job.specialization`, {
-            required: true,
+            required: FieldError.required,
           })}
         />
       </div>
@@ -65,13 +72,18 @@ function FullTimeOfferDetailsForm({
           label="Company"
           options={companyOptions}
           required={true}
-          {...register(`offers.${index}.companyId`, { required: true })}
+          {...register(`offers.${index}.companyId`, {
+            required: FieldError.required,
+          })}
         />
         <FormTextInput
+          errorMessage={jobFields?.level?.message}
           label="Level"
           placeholder="e.g. L4, Junior"
           required={true}
-          {...register(`offers.${index}.job.level`, { required: true })}
+          {...register(`offers.${index}.job.level`, {
+            required: FieldError.required,
+          })}
         />
       </div>
       <div className="mb-5 grid grid-cols-2 space-x-3">
@@ -80,10 +92,14 @@ function FullTimeOfferDetailsForm({
           label="Location"
           options={locationOptions}
           required={true}
-          {...register(`offers.${index}.location`, { required: true })}
+          {...register(`offers.${index}.location`, {
+            required: FieldError.required,
+          })}
         />
         <FormMonthYearPicker
-          {...register(`offers.${index}.monthYearReceived`, { required: true })}
+          {...register(`offers.${index}.monthYearReceived`, {
+            required: FieldError.required,
+          })}
         />
       </div>
       <div className="mb-5">
@@ -95,11 +111,12 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.totalCompensation.currency`, {
-                required: true,
+                required: FieldError.required,
               })}
             />
           }
           endAddOnType="element"
+          errorMessage={jobFields?.totalCompensation?.value?.message}
           label="Total Compensation (Annual)"
           placeholder="0.00"
           required={true}
@@ -107,7 +124,7 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.totalCompensation.value`, {
-            required: true,
+            required: FieldError.required,
             valueAsNumber: true,
           })}
         />
@@ -121,11 +138,12 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.base.currency`, {
-                required: true,
+                required: FieldError.required,
               })}
             />
           }
           endAddOnType="element"
+          errorMessage={jobFields?.base?.value?.message}
           label="Base Salary (Annual)"
           placeholder="0.00"
           required={true}
@@ -133,7 +151,7 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.base.value`, {
-            required: true,
+            required: FieldError.required,
             valueAsNumber: true,
           })}
         />
@@ -145,11 +163,12 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.bonus.currency`, {
-                required: true,
+                required: FieldError.required,
               })}
             />
           }
           endAddOnType="element"
+          errorMessage={jobFields?.bonus?.value?.message}
           label="Bonus (Annual)"
           placeholder="0.00"
           required={true}
@@ -157,7 +176,7 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.bonus.value`, {
-            required: true,
+            required: FieldError.required,
             valueAsNumber: true,
           })}
         />
@@ -171,11 +190,12 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.stocks.currency`, {
-                required: true,
+                required: FieldError.required,
               })}
             />
           }
           endAddOnType="element"
+          errorMessage={jobFields?.stocks?.value?.message}
           label="Stocks (Annual)"
           placeholder="0.00"
           required={true}
@@ -183,7 +203,7 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.stocks.value`, {
-            required: true,
+            required: FieldError.required,
             valueAsNumber: true,
           })}
         />
@@ -264,9 +284,11 @@ function InternshipOfferDetailsForm({
   index,
   remove,
 }: InternshipOfferDetailsFormProps) {
-  const { register } = useFormContext<{
-    offers: Array<OfferDetailsFormData>;
+  const { register, formState } = useFormContext<{
+    offers: Array<InternshipOfferDetailsFormData>;
   }>();
+
+  const jobFields = formState.errors.offers?.[index]?.job;
 
   return (
     <div className="my-5 rounded-lg border border-gray-200 px-10 py-5">
@@ -278,16 +300,17 @@ function InternshipOfferDetailsForm({
           required={true}
           {...register(`offers.${index}.job.title`, {
             minLength: 1,
-            required: true,
+            required: FieldError.required,
           })}
         />
         <FormTextInput
+          errorMessage={jobFields?.specialization?.message}
           label="Focus / Specialization"
           placeholder="e.g. Front End"
           required={true}
           {...register(`offers.${index}.job.specialization`, {
             minLength: 1,
-            required: true,
+            required: FieldError.required,
           })}
         />
       </div>
@@ -298,7 +321,7 @@ function InternshipOfferDetailsForm({
           options={companyOptions}
           required={true}
           {...register(`offers.${index}.companyId`, {
-            required: true,
+            required: FieldError.required,
           })}
         />
         <FormSelect
@@ -307,7 +330,7 @@ function InternshipOfferDetailsForm({
           options={locationOptions}
           required={true}
           {...register(`offers.${index}.location`, {
-            required: true,
+            required: FieldError.required,
           })}
         />
       </div>
@@ -318,7 +341,7 @@ function InternshipOfferDetailsForm({
           options={internshipCycleOptions}
           required={true}
           {...register(`offers.${index}.job.internshipCycle`, {
-            required: true,
+            required: FieldError.required,
           })}
         />
         <FormSelect
@@ -327,14 +350,16 @@ function InternshipOfferDetailsForm({
           options={yearOptions}
           required={true}
           {...register(`offers.${index}.job.startYear`, {
-            required: true,
+            required: FieldError.required,
           })}
         />
       </div>
       <div className="mb-5 flex items-center space-x-9">
         <p className="text-sm">Date received:</p>
         <FormMonthYearPicker
-          {...register(`offers.${index}.monthYearReceived`, { required: true })}
+          {...register(`offers.${index}.monthYearReceived`, {
+            required: FieldError.required,
+          })}
         />
       </div>
       <div className="mb-5">
@@ -346,11 +371,12 @@ function InternshipOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.job.monthlySalary.currency`, {
-                required: true,
+                required: FieldError.required,
               })}
             />
           }
           endAddOnType="element"
+          errorMessage={jobFields?.monthlySalary?.value?.message}
           label="Salary (Monthly)"
           placeholder="0.00"
           required={true}
@@ -358,7 +384,7 @@ function InternshipOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.job.monthlySalary.value`, {
-            required: true,
+            required: FieldError.required,
             valueAsNumber: true,
           })}
         />
