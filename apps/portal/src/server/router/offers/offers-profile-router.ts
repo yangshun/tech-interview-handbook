@@ -144,6 +144,7 @@ export const offersProfileRouter = createRouter()
             include: {
               replies: true,
               replyingTo: true,
+              user: true
             },
           },
           offers: {
