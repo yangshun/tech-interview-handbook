@@ -25,6 +25,23 @@ function Test() {
     },
   });
 
+  const addToUserProfileMutation = trpc.useMutation(['offers.profile.addToUserProfile'], {
+    onError(err: any) {
+      alert(err);
+    },
+    onSuccess(data) {
+      setCreatedData(JSON.stringify(data));
+    },
+  })
+
+  const handleLink = () => {
+    addToUserProfileMutation.mutate({
+      profileId: 'cl96stky5002ew32gx2kale2x',
+      token: 'afca11e436d21bde24543718fa957c6c625335439dc504f24ee35eae7b5ef1ba',
+      userId: 'cl97dl51k001e7iygd5v5gt58'
+    })
+  }
+
   const handleClick = () => {
     createMutation.mutate({
       background: {
@@ -524,6 +541,9 @@ function Test() {
       </button>
       <button type="button" onClick={handleUpdate}>
         UPDATE!
+      </button>
+      <button type="button" onClick={handleLink}>
+        LINKKKK!
       </button>
       <button
         className="text-danger-600"

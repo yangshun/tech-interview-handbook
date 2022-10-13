@@ -1026,4 +1026,42 @@ export const offersProfileRouter = createRouter()
         message: 'Invalid token.',
       });
     },
+  })
+  .mutation('addToUserProfile', {
+    input: z.object({
+      profileId: z.string(),
+      token: z.string(),
+      userId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const profile = await ctx.prisma.offersProfile.findFirst({
+          where: {
+            id: input.profileId,
+          },
+      });
+
+      const profileEditToken = profile?.editToken;
+
+      // To validate user editing, OP or correct user
+      // TODO: improve validation process
+      if (profileEditToken === input.token) {
+        return await ctx.prisma.offersProfile.update({
+          data: {
+            user: {
+              connect: {
+                id: input.userId
+              }
+            }
+          },
+          where: {
+            id: input.profileId
+          }
+        })
+      }
+
+      throw new trpc.TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'Invalid token.',
+      });
+     }
   });
