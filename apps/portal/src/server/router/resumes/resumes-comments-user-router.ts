@@ -3,14 +3,14 @@ import { ResumesSection } from '@prisma/client';
 
 import { createProtectedRouter } from '../context';
 
-type IResumeCommentInput = Readonly<{
+type ResumeCommentInput = Readonly<{
   description: string;
   resumeId: string;
   section: ResumesSection;
   userId: string;
 }>;
 
-export const resumesReviewsUserRouter = createProtectedRouter().mutation(
+export const resumesCommentsUserRouter = createProtectedRouter().mutation(
   'create',
   {
     input: z.object({
@@ -27,7 +27,7 @@ export const resumesReviewsUserRouter = createProtectedRouter().mutation(
         input;
 
       // For each section, convert them into ResumesComment model if provided
-      const comments: Array<IResumeCommentInput> = [
+      const comments: Array<ResumeCommentInput> = [
         { description: education, section: ResumesSection.EDUCATION },
         { description: experience, section: ResumesSection.EXPERIENCE },
         { description: general, section: ResumesSection.GENERAL },

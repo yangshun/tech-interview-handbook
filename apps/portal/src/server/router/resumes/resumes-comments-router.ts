@@ -4,7 +4,7 @@ import { createRouter } from '../context';
 
 import type { ResumeComment } from '~/types/resume-comments';
 
-export const resumeReviewsRouter = createRouter().query('list', {
+export const resumeCommentsRouter = createRouter().query('list', {
   input: z.object({
     resumeId: z.string(),
   }),

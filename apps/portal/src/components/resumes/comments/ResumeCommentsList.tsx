@@ -21,7 +21,7 @@ export default function ResumeCommentsList({
   const { data: sessionData } = useSession();
   const [tab, setTab] = useState(RESUME_COMMENTS_SECTIONS[0].value);
 
-  const commentsQuery = trpc.useQuery(['resumes.reviews.list', { resumeId }]);
+  const commentsQuery = trpc.useQuery(['resumes.comments.list', { resumeId }]);
   const renderButton = () => {
     if (sessionData === null) {
       return <ResumeSignInButton text="to join discussion" />;
