@@ -2,13 +2,13 @@ import clsx from 'clsx';
 import type { ReactNode } from 'react';
 import { useLayoutEffect, useRef, useState } from 'react';
 
-type CommentDescriptionProps = Readonly<{
+type ResumeExpandableTextProps = Readonly<{
   children: ReactNode;
 }>;
 
-export default function CommentDescription({
+export default function ResumeExpandableText({
   children,
-}: CommentDescriptionProps) {
+}: ResumeExpandableTextProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
   const [descriptionOverflow, setDescriptionOverflow] = useState(false);

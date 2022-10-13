@@ -5,7 +5,7 @@ import { Button, Dialog, TextArea } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
-type CommentsFormProps = Readonly<{
+type ResumeCommentsFormProps = Readonly<{
   resumeId: string;
   setShowCommentsForm: (show: boolean) => void;
 }>;
@@ -20,10 +20,10 @@ type IFormInput = {
 
 type InputKeys = keyof IFormInput;
 
-export default function CommentsForm({
+export default function ResumeCommentsForm({
   resumeId,
   setShowCommentsForm,
-}: CommentsFormProps) {
+}: ResumeCommentsFormProps) {
   const [showDialog, setShowDialog] = useState(false);
   const {
     register,

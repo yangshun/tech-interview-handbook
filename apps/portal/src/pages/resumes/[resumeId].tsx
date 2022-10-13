@@ -15,7 +15,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { Spinner } from '@tih/ui';
 
-import CommentsSection from '~/components/resumes/comments/CommentsSection';
+import ResumeCommentsSection from '~/components/resumes/comments/ResumeCommentsSection';
 import ResumePdf from '~/components/resumes/ResumePdf';
 
 import { trpc } from '~/utils/trpc';
@@ -178,7 +178,7 @@ export default function ResumeReviewPage() {
                 <ResumePdf url={detailsQuery.data.url} />
               </div>
               <div className="mx-8 grow">
-                <CommentsSection resumeId={resumeId as string} />
+                <ResumeCommentsSection resumeId={resumeId as string} />
               </div>
             </div>
           </main>

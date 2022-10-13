@@ -4,19 +4,19 @@ import {
 } from '@heroicons/react/20/solid';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
 
-import CommentDescription from './CommentDescription';
+import ResumeExpandableText from '../../shared/ResumeExpandableText';
 
 import type { ResumeComment } from '~/types/resume-comments';
 
-type CommentBodyProps = {
+type ResumeCommentBodyProps = {
   comment: ResumeComment;
   isCommentOwner?: boolean;
 };
 
-export default function CommentBody({
+export default function ResumeCommentBody({
   comment,
   isCommentOwner,
-}: CommentBodyProps) {
+}: ResumeCommentBodyProps) {
   return (
     <div className="flex w-full flex-row space-x-2 p-1 align-top">
       {comment.user.image ? (
@@ -51,7 +51,7 @@ export default function CommentBody({
         </div>
 
         {/* Description */}
-        <CommentDescription>{comment.description}</CommentDescription>
+        <ResumeExpandableText>{comment.description}</ResumeExpandableText>
 
         {/* Upvote and edit */}
         <div className="flex flex-row space-x-1 pt-1 align-middle">

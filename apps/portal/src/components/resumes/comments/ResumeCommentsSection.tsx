@@ -1,13 +1,15 @@
 import { useState } from 'react';
 
-import CommentsForm from './CommentsForm';
-import CommentsList from './CommentsList';
+import ResumeCommentsForm from './ResumeCommentsForm';
+import ResumeCommentsList from './ResumeCommentsList';
 
-type ICommentsSectionProps = {
+type CommentsSectionProps = {
   resumeId: string;
 };
 
-export default function CommentsSection({ resumeId }: ICommentsSectionProps) {
+export default function ResumeCommentsSection({
+  resumeId,
+}: CommentsSectionProps) {
   const [showCommentsForm, setShowCommentsForm] = useState(false);
 
   return (
@@ -23,12 +25,12 @@ export default function CommentsSection({ resumeId }: ICommentsSectionProps) {
         </div>
       </div>
       {showCommentsForm ? (
-        <CommentsForm
+        <ResumeCommentsForm
           resumeId={resumeId}
           setShowCommentsForm={setShowCommentsForm}
         />
       ) : (
-        <CommentsList
+        <ResumeCommentsList
           resumeId={resumeId}
           setShowCommentsForm={setShowCommentsForm}
         />
