@@ -159,7 +159,7 @@ model ResumesCommentVote {
     id        String         @id @default(cuid())
     userId    String
     commentId String
-    value     Int
+    value     Vote
     createdAt DateTime       @default(now())
     updatedAt DateTime       @updatedAt
     comment   ResumesComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
