@@ -1,5 +1,5 @@
-import assert from 'assert';
 import { z } from 'zod';
+import { TRPCError } from '@trpc/server';
 
 import { createRouter } from '../context';
 
@@ -227,7 +227,12 @@ export const offersRouter = createRouter().query('list', {
           ? offer.OffersFullTime?.totalCompensation.value
           : offer.OffersIntern?.monthlySalary.value;
 
-        assert(salary);
+        if (!salary) {
+          throw new TRPCError({
+            code: 'NOT_FOUND',
+            message: 'Total Compensation or Salary not found',
+          });
+        }
 
         validRecord =
           validRecord && salary >= input.salaryMin && salary <= input.salaryMax;
@@ -266,18 +271,28 @@ export const offersRouter = createRouter().query('list', {
               ? offer2.OffersFullTime?.totalCompensation.value
               : offer2.OffersIntern?.monthlySalary.value;
 
-            if (salary1 && salary2) {
-              return salary1 - salary2;
+            if (!salary1 || !salary2) {
+              throw new TRPCError({
+                code: 'NOT_FOUND',
+                message: 'Total Compensation or Salary not found',
+              });
             }
+
+            return salary1 - salary2;
           }
 
           if (sortingKey === 'totalYoe') {
             const yoe1 = offer1.profile.background?.totalYoe;
             const yoe2 = offer2.profile.background?.totalYoe;
 
-            if (yoe1 && yoe2) {
-              return yoe1 - yoe2;
+            if (!yoe1 || !yoe2) {
+              throw new TRPCError({
+                code: 'NOT_FOUND',
+                message: 'Total years of experience not found',
+              });
             }
+
+            return yoe1 - yoe2;
           }
 
           return defaultReturn;
@@ -302,18 +317,28 @@ export const offersRouter = createRouter().query('list', {
               ? offer2.OffersFullTime?.totalCompensation.value
               : offer2.OffersIntern?.monthlySalary.value;
 
-            if (salary1 && salary2) {
-              return salary2 - salary1;
+            if (!salary1 || !salary2) {
+              throw new TRPCError({
+                code: 'NOT_FOUND',
+                message: 'Total Compensation or Salary not found',
+              });
             }
+
+            return salary2 - salary1;
           }
 
           if (sortingKey === 'totalYoe') {
             const yoe1 = offer1.profile.background?.totalYoe;
             const yoe2 = offer2.profile.background?.totalYoe;
 
-            if (yoe1 && yoe2) {
-              return yoe2 - yoe1;
+            if (!yoe1 || !yoe2) {
+              throw new TRPCError({
+                code: 'NOT_FOUND',
+                message: 'Total years of experience not found',
+              });
             }
+
+            return yoe2 - yoe1;
           }
 
           return defaultReturn;
