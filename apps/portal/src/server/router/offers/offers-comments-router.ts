@@ -36,32 +36,70 @@ export const offersCommentsRouter = createProtectedRouter()
             message: z.string(),
             profileId: z.string(),
             replyingToId: z.string().optional(),
-            userId: z.string()
+            userId: z.string().optional()
         }),
         async resolve({ ctx, input }) {
-            await ctx.prisma.offersReply.create({
+            const createdReply = await ctx.prisma.offersReply.create({
                 data: {
                     message: input.message,
                     profile: {
                         connect: {
                             id: input.profileId
                         }
-                    },
-                    replyingTo: {
-                        connect: {
-                            id: input.replyingToId
-                        }
-                    },
-                    user: {
-                        connect: {
-                            id: input.userId
-                        }
                     }
                 }
             })
 
+            if (input.replyingToId) {
+                await ctx.prisma.offersReply.update({
+                    data: {
+                        replyingTo: {
+                            connect: {
+                                id: input.replyingToId
+                            }
+                        }
+                    },
+                    where: {
+                        id: createdReply.id
+                    }
+                })
+            }
+
+            if (input.userId) {
+                await ctx.prisma.offersReply.update({
+                    data: {
+                        user: {
+                            connect: {
+                                id: input.userId
+                            }
+                        }
+                    },
+                    where: {
+                        id: createdReply.id
+                    }
+                })
+            }
             // Get replies
-            return
+            const result = await ctx.prisma.offersProfile.findFirst({
+                include: {
+                    discussion: {
+                        include: {
+                            replies: true,
+                            replyingTo: true,
+                            user: true
+                        }
+                    }
+                },
+                where: {
+                    id: input.profileId
+                }
+            })
+
+            if (result) {
+                return result.discussion.filter((x) => x.replyingToId === null)
+            }
+
+            return result
         }
     })
     .mutation("update", {
@@ -90,7 +128,7 @@ export const offersCommentsRouter = createProtectedRouter()
             // To validate user editing, OP or correct user
             // TODO: improve validation process
             if (profileEditToken === input.token || messageToUpdate?.userId === input.userId) {
-                return await ctx.prisma.offersReply.update({
+                await ctx.prisma.offersReply.update({
                     data: {
                         message: input.message
                     },
@@ -98,6 +136,27 @@ export const offersCommentsRouter = createProtectedRouter()
                         id: input.id
                     }
                 })
+
+                const result = await ctx.prisma.offersProfile.findFirst({
+                    include: {
+                        discussion: {
+                            include: {
+                                replies: true,
+                                replyingTo: true,
+                                user: true
+                            }
+                        }
+                    },
+                    where: {
+                        id: input.profileId
+                    }
+                })
+
+                if (result) {
+                    return result.discussion.filter((x) => x.replyingToId === null)
+                }
+
+                return result
             }
 
             throw new trpc.TRPCError({
@@ -136,6 +195,26 @@ export const offersCommentsRouter = createProtectedRouter()
                         id: input.id
                     }
                 })
+                const result = await ctx.prisma.offersProfile.findFirst({
+                    include: {
+                        discussion: {
+                            include: {
+                                replies: true,
+                                replyingTo: true,
+                                user: true
+                            }
+                        }
+                    },
+                    where: {
+                        id: input.profileId
+                    }
+                })
+
+                if (result) {
+                    return result.discussion.filter((x) => x.replyingToId === null)
+                }
+
+                return result
             }
 
             throw new trpc.TRPCError({

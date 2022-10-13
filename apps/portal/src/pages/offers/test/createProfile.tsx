@@ -34,6 +34,59 @@ function Test() {
     },
   })
 
+  const deleteCommentMutation = trpc.useMutation(['offers.comments.delete'], {
+    onError(err: any) {
+      alert(err);
+    },
+    onSuccess(data) {
+      setCreatedData(JSON.stringify(data));
+    },
+  });
+
+  const handleDeleteComment = () => {
+    deleteCommentMutation.mutate({
+      id: 'cl97fprun001j7iyg6ev9x983',
+      profileId: 'cl96stky5002ew32gx2kale2x',
+      token: 'afca11e436d21bde24543718fa957c6c625335439dc504f24ee35eae7b5ef1',
+      userId: 'cl97dl51k001e7iygd5v5gt58'
+    })
+  }
+
+  const updateCommentMutation = trpc.useMutation(['offers.comments.update'], {
+    onError(err: any) {
+      alert(err);
+    },
+    onSuccess(data) {
+      setCreatedData(JSON.stringify(data));
+    },
+  });
+
+  const handleUpdateComment = () => {
+    updateCommentMutation.mutate({
+      id: 'cl97fxb0y001l7iyg14sdobt2',
+      message: 'hello hello',
+      profileId: 'cl96stky5002ew32gx2kale2x',
+      token: 'afca11e436d21bde24543718fa957c6c625335439dc504f24ee35eae7b5ef1ba'
+    })
+  }
+
+  const createCommentMutation = trpc.useMutation(['offers.comments.create'], {
+    onError(err: any) {
+      alert(err);
+    },
+    onSuccess(data) {
+      setCreatedData(JSON.stringify(data));
+    },
+  });
+
+  const handleCreate = () => {
+    createCommentMutation.mutate({
+      message: 'hello',
+      profileId: 'cl96stky5002ew32gx2kale2x',
+      // UserId: 'cl97dl51k001e7iygd5v5gt58'
+    })
+  }
+
   const handleLink = () => {
     addToUserProfileMutation.mutate({
       profileId: 'cl96stky5002ew32gx2kale2x',
@@ -551,6 +604,15 @@ function Test() {
       </button>
       <button type="button" onClick={handleLink}>
         LINKKKK!
+      </button>
+      <button type="button" onClick={handleCreate}>
+        CREATE COMMENT!
+      </button>
+      <button type="button" onClick={handleDeleteComment}>
+        DELETE COMMENT!
+      </button>
+      <button type="button" onClick={handleUpdateComment}>
+        UPDATE COMMENT!
       </button>
       <button
         className="text-danger-600"
