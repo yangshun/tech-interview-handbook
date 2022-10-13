@@ -1,6 +1,6 @@
 import { ResumesSection } from '@prisma/client';
 
-export const COMMENTS_SECTIONS = [
+export const RESUME_COMMENTS_SECTIONS = [
   {
     label: 'General',
     value: ResumesSection.GENERAL,

@@ -9,10 +9,10 @@ import { questionsAnswerCommentRouter } from './questions-answer-comment-router'
 import { questionsAnswerRouter } from './questions-answer-router';
 import { questionsQuestionCommentRouter } from './questions-question-comment-router';
 import { questionsQuestionRouter } from './questions-question-router';
+import { resumeCommentsRouter } from './resumes/resumes-comments-router';
+import { resumesCommentsUserRouter } from './resumes/resumes-comments-user-router';
 import { resumesRouter } from './resumes/resumes-resume-router';
 import { resumesResumeUserRouter } from './resumes/resumes-resume-user-router';
-import { resumeReviewsRouter } from './resumes/resumes-reviews-router';
-import { resumesReviewsUserRouter } from './resumes/resumes-reviews-user-router';
 import { resumesStarUserRouter } from './resumes/resumes-star-user-router';
 import { todosRouter } from './todos';
 import { todosUserRouter } from './todos-user-router';
@@ -29,8 +29,8 @@ export const appRouter = createRouter()
   .merge('resumes.resume.', resumesRouter)
   .merge('resumes.resume.user.', resumesResumeUserRouter)
   .merge('resumes.resume.', resumesStarUserRouter)
-  .merge('resumes.reviews.', resumeReviewsRouter)
-  .merge('resumes.reviews.user.', resumesReviewsUserRouter)
+  .merge('resumes.comments.', resumeCommentsRouter)
+  .merge('resumes.comments.user.', resumesCommentsUserRouter)
   .merge('questions.answers.comments.', questionsAnswerCommentRouter)
   .merge('questions.answers.', questionsAnswerRouter)
   .merge('questions.questions.comments.', questionsQuestionCommentRouter)

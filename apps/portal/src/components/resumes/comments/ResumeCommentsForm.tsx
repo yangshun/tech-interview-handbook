@@ -5,7 +5,7 @@ import { Button, Dialog, TextArea } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
-type CommentsFormProps = Readonly<{
+type ResumeCommentsFormProps = Readonly<{
   resumeId: string;
   setShowCommentsForm: (show: boolean) => void;
 }>;
@@ -20,10 +20,10 @@ type IFormInput = {
 
 type InputKeys = keyof IFormInput;
 
-export default function CommentsForm({
+export default function ResumeCommentsForm({
   resumeId,
   setShowCommentsForm,
-}: CommentsFormProps) {
+}: ResumeCommentsFormProps) {
   const [showDialog, setShowDialog] = useState(false);
   const {
     register,
@@ -41,16 +41,19 @@ export default function CommentsForm({
   });
 
   const trpcContext = trpc.useContext();
-  const reviewCreateMutation = trpc.useMutation('resumes.reviews.user.create', {
-    onSuccess: () => {
-      // New review added, invalidate query to trigger refetch
-      trpcContext.invalidateQueries(['resumes.reviews.list']);
+  const commentCreateMutation = trpc.useMutation(
+    'resumes.comments.user.create',
+    {
+      onSuccess: () => {
+        // New Comment added, invalidate query to trigger refetch
+        trpcContext.invalidateQueries(['resumes.comments.list']);
+      },
     },
-  });
+  );
 
   // TODO: Give a feedback to the user if the action succeeds/fails
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    return await reviewCreateMutation.mutate(
+    return await commentCreateMutation.mutate(
       {
         resumeId,
         ...data,
@@ -89,7 +92,7 @@ export default function CommentsForm({
         <div className="mt-4 space-y-4">
           <TextArea
             {...(register('general'), {})}
-            disabled={reviewCreateMutation.isLoading}
+            disabled={commentCreateMutation.isLoading}
             label="General"
             placeholder="General comments about the resume"
             onChange={(value) => onValueChange('general', value)}
@@ -97,7 +100,7 @@ export default function CommentsForm({
 
           <TextArea
             {...(register('education'), {})}
-            disabled={reviewCreateMutation.isLoading}
+            disabled={commentCreateMutation.isLoading}
             label="Education"
             placeholder="Comments about the Education section"
             onChange={(value) => onValueChange('education', value)}
@@ -105,7 +108,7 @@ export default function CommentsForm({
 
           <TextArea
             {...(register('experience'), {})}
-            disabled={reviewCreateMutation.isLoading}
+            disabled={commentCreateMutation.isLoading}
             label="Experience"
             placeholder="Comments about the Experience section"
             onChange={(value) => onValueChange('experience', value)}
@@ -113,7 +116,7 @@ export default function CommentsForm({
 
           <TextArea
             {...(register('projects'), {})}
-            disabled={reviewCreateMutation.isLoading}
+            disabled={commentCreateMutation.isLoading}
             label="Projects"
             placeholder="Comments about the Projects section"
             onChange={(value) => onValueChange('projects', value)}
@@ -121,7 +124,7 @@ export default function CommentsForm({
 
           <TextArea
             {...(register('skills'), {})}
-            disabled={reviewCreateMutation.isLoading}
+            disabled={commentCreateMutation.isLoading}
             label="Skills"
             placeholder="Comments about the Skills section"
             onChange={(value) => onValueChange('skills', value)}
@@ -130,7 +133,7 @@ export default function CommentsForm({
 
         <div className="flex justify-end space-x-2 pt-4">
           <Button
-            disabled={reviewCreateMutation.isLoading}
+            disabled={commentCreateMutation.isLoading}
             label="Cancel"
             type="button"
             variant="tertiary"
@@ -138,8 +141,8 @@ export default function CommentsForm({
           />
 
           <Button
-            disabled={!isDirty || reviewCreateMutation.isLoading}
-            isLoading={reviewCreateMutation.isLoading}
+            disabled={!isDirty || commentCreateMutation.isLoading}
+            isLoading={commentCreateMutation.isLoading}
             label="Submit"
             type="submit"
             variant="primary"
