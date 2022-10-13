@@ -7,7 +7,14 @@ import { useEffect, useMemo, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { PaperClipIcon } from '@heroicons/react/24/outline';
-import { Button, CheckboxInput, Select, TextArea, TextInput } from '@tih/ui';
+import {
+  Button,
+  CheckboxInput,
+  Dialog,
+  Select,
+  TextArea,
+  TextInput,
+} from '@tih/ui';
 
 import {
   EXPERIENCE,
@@ -37,7 +44,7 @@ type IFormInput = {
 };
 
 export default function SubmitResumeForm() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
   const router = useRouter();
 
@@ -46,19 +53,22 @@ export default function SubmitResumeForm() {
   const [invalidFileUploadError, setInvalidFileUploadError] = useState<
     string | null
   >(null);
+  const [isDialogShown, setIsDialogShown] = useState(false);
 
   useEffect(() => {
-    if (session?.user?.id == null) {
-      router.push('/api/auth/signin');
+    if (status !== 'loading') {
+      if (session?.user?.id == null) {
+        router.push('/api/auth/signin');
+      }
     }
-  }, [router, session?.user?.id]);
+  }, [router, session, status]);
 
   const {
     register,
     handleSubmit,
     setValue,
     reset,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<IFormInput>({
     defaultValues: {
       isChecked: false,
@@ -120,6 +130,13 @@ export default function SubmitResumeForm() {
   };
 
   const onClickReset = () => {
+    if (isDirty || resumeFile != null) {
+      setIsDialogShown(true);
+    }
+  };
+
+  const onClickProceedDialog = () => {
+    setIsDialogShown(false);
     reset();
     setResumeFile(null);
   };
@@ -142,6 +159,28 @@ export default function SubmitResumeForm() {
         <section
           aria-labelledby="primary-heading"
           className="flex h-full min-w-0 flex-1 flex-col lg:order-last">
+          <Dialog
+            isShown={isDialogShown}
+            primaryButton={
+              <Button
+                display="block"
+                label="OK"
+                variant="primary"
+                onClick={onClickProceedDialog}
+              />
+            }
+            secondaryButton={
+              <Button
+                display="block"
+                label="Cancel"
+                variant="tertiary"
+                onClick={() => setIsDialogShown(false)}
+              />
+            }
+            title="Are you sure you want to clear?"
+            onClose={() => setIsDialogShown(false)}>
+            Note that your current input will not be saved!
+          </Dialog>
           <div className="mx-20 space-y-4 py-8">
             <form onSubmit={handleSubmit(onSubmit)}>
               <h1 className="mb-4 text-2xl font-bold">Upload a resume</h1>
