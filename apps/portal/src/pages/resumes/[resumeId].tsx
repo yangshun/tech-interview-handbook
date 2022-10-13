@@ -174,7 +174,7 @@ export default function ResumeReviewPage() {
               </div>
             )}
             <div className="flex w-full flex-col py-4 lg:flex-row">
-              <div className="w-full lg:w-[800px]">
+              <div className="w-full lg:w-[780px]">
                 <ResumePdf url={detailsQuery.data.url} />
               </div>
               <div className="mx-8 grow">

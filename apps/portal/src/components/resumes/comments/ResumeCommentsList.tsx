@@ -9,6 +9,8 @@ import ResumeCommentListItem from './comment/ResumeCommentListItem';
 import { RESUME_COMMENTS_SECTIONS } from './resumeCommentConstants';
 import ResumeSignInButton from '../shared/ResumeSignInButton';
 
+import type { ResumeComment } from '~/types/resume-comments';
+
 type ResumeCommentsListProps = Readonly<{
   resumeId: string;
   setShowCommentsForm: (show: boolean) => void;
@@ -20,8 +22,23 @@ export default function ResumeCommentsList({
 }: ResumeCommentsListProps) {
   const { data: sessionData } = useSession();
   const [tab, setTab] = useState(RESUME_COMMENTS_SECTIONS[0].value);
+  const [tabs, setTabs] = useState(RESUME_COMMENTS_SECTIONS);
 
-  const commentsQuery = trpc.useQuery(['resumes.comments.list', { resumeId }]);
+  const commentsQuery = trpc.useQuery(['resumes.comments.list', { resumeId }], {
+    onSuccess: (data: Array<ResumeComment>) => {
+      const updatedTabs = RESUME_COMMENTS_SECTIONS.map(({ label, value }) => {
+        const count = data.filter(({ section }) => section === value).length;
+        const updatedLabel = count > 0 ? `${label} (${count})` : label;
+        return {
+          label: updatedLabel,
+          value,
+        };
+      });
+
+      setTabs(updatedTabs);
+    },
+  });
+
   const renderButton = () => {
     if (sessionData === null) {
       return <ResumeSignInButton text="to join discussion" />;
@@ -42,7 +59,7 @@ export default function ResumeCommentsList({
 
       <Tabs
         label="comments"
-        tabs={RESUME_COMMENTS_SECTIONS}
+        tabs={tabs}
         value={tab}
         onChange={(value) => setTab(value)}
       />

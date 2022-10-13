@@ -20,7 +20,7 @@ export default function ResumeCommentsSection({
         </div>
         <div className="relative flex justify-center">
           <span className="bg-gray-50 px-3 text-lg font-medium text-gray-900">
-            Comments
+            Reviews
           </span>
         </div>
       </div>
