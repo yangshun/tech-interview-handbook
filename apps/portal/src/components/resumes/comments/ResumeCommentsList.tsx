@@ -5,8 +5,8 @@ import { Button } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
-import ResumeCommentListItem from './comment/ResumeCommentListItem';
 import { RESUME_COMMENTS_SECTIONS } from './resumeCommentConstants';
+import ResumeCommentListItem from './ResumeCommentListItem';
 import ResumeSignInButton from '../shared/ResumeSignInButton';
 
 import type { ResumeComment } from '~/types/resume-comments';
