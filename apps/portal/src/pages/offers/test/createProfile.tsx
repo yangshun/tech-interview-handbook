@@ -3,16 +3,6 @@ import React, { useState } from 'react';
 import { trpc } from '~/utils/trpc';
 
 function Test() {
-  //   F const data = trpc.useQuery([
-  //     'offers.profile.',
-  //     {
-  //       limit: 3,
-  //       location: 'Singapore, Singapore',
-  //       offset: 0,
-  //       yoeCategory: 0,
-  //     },
-  //   ]);
-
   const [createdData, setCreatedData] = useState('');
   const [error, setError] = useState("");
 
