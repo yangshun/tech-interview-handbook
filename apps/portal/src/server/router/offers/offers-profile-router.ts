@@ -1,6 +1,5 @@
 import crypto, { randomUUID } from 'crypto';
 import { z } from 'zod';
-import { Prisma } from '@prisma/client';
 import * as trpc from '@trpc/server';
 
 import { createRouter } from '../context';
@@ -295,7 +294,10 @@ export const offersProfileRouter = createRouter()
                     };
                   }
 
-                  throw Prisma.PrismaClientKnownRequestError;
+                  throw new trpc.TRPCError({
+                    code: 'BAD_REQUEST',
+                    message: 'Missing fields.',
+                  });
                 }),
               },
               specificYoes: {
@@ -406,7 +408,10 @@ export const offersProfileRouter = createRouter()
               }
 
               // Throw error
-              throw Prisma.PrismaClientKnownRequestError;
+              throw new trpc.TRPCError({
+                code: 'BAD_REQUEST',
+                message: 'Missing fields.',
+              });
             }),
           },
           profileName: randomUUID().substring(0, 10),
@@ -469,6 +474,10 @@ export const offersProfileRouter = createRouter()
         });
       }
       // TODO: Throw 401
+      throw new trpc.TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'Invalid token.',
+      });
     },
   })
   .mutation('update', {
