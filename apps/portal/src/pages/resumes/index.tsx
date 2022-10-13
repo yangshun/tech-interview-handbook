@@ -1,22 +1,28 @@
-import clsx from 'clsx';
+import compareAsc from 'date-fns/compareAsc';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { Fragment, useState } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import {
-  ChevronDownIcon,
-  MinusIcon,
-  PlusIcon,
-} from '@heroicons/react/20/solid';
+import { useState } from 'react';
+import { Disclosure } from '@headlessui/react';
+import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Tabs, TextInput } from '@tih/ui';
+import {
+  CheckboxInput,
+  CheckboxList,
+  DropdownMenu,
+  Tabs,
+  TextInput,
+} from '@tih/ui';
 
+import type {
+  FilterOption,
+  SortOrder,
+} from '~/components/resumes/browse/resumeConstants';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCE,
   LOCATION,
-  ROLES,
+  ROLE,
   SORT_OPTIONS,
   TOP_HITS,
 } from '~/components/resumes/browse/resumeConstants';
@@ -29,11 +35,19 @@ import { trpc } from '~/utils/trpc';
 
 import type { Resume } from '~/types/resume';
 
-const filters = [
+type FilterId = 'experience' | 'location' | 'role';
+type Filter = {
+  id: FilterId;
+  name: string;
+  options: Array<FilterOption>;
+};
+type FilterState = Record<FilterId, Array<string>>;
+
+const filters: Array<Filter> = [
   {
-    id: 'roles',
-    name: 'Roles',
-    options: ROLES,
+    id: 'role',
+    name: 'Role',
+    options: ROLE,
   },
   {
     id: 'experience',
@@ -47,11 +61,47 @@ const filters = [
   },
 ];
 
+const INITIAL_FILTER_STATE: FilterState = {
+  experience: Object.values(EXPERIENCE).map(({ value }) => value),
+  location: Object.values(LOCATION).map(({ value }) => value),
+  role: Object.values(ROLE).map(({ value }) => value),
+};
+
+const filterResumes = (
+  resumes: Array<Resume>,
+  searchValue: string,
+  userFilters: FilterState,
+) =>
+  resumes
+    .filter((resume) =>
+      resume.title.toLowerCase().includes(searchValue.toLocaleLowerCase()),
+    )
+    .filter(
+      ({ experience, location, role }) =>
+        userFilters.role.includes(role) &&
+        userFilters.experience.includes(experience) &&
+        userFilters.location.includes(location),
+    );
+
+const sortComparators: Record<
+  SortOrder,
+  (resume1: Resume, resume2: Resume) => number
+> = {
+  latest: (resume1, resume2) =>
+    compareAsc(resume2.createdAt, resume1.createdAt),
+  popular: (resume1, resume2) => resume2.numStars - resume1.numStars,
+  topComments: (resume1, resume2) => resume2.numComments - resume1.numComments,
+};
+const sortResumes = (resumes: Array<Resume>, sortOrder: SortOrder) =>
+  resumes.sort(sortComparators[sortOrder]);
+
 export default function ResumeHomePage() {
   const { data: sessionData } = useSession();
   const router = useRouter();
   const [tabsValue, setTabsValue] = useState(BROWSE_TABS_VALUES.ALL);
+  const [sortOrder, setSortOrder] = useState(SORT_OPTIONS[0].value);
   const [searchValue, setSearchValue] = useState('');
+  const [userFilters, setUserFilters] = useState(INITIAL_FILTER_STATE);
   const [resumes, setResumes] = useState<Array<Resume>>([]);
   const [renderSignInButton, setRenderSignInButton] = useState(false);
   const [signInButtonText, setSignInButtonText] = useState('');
@@ -99,6 +149,26 @@ export default function ResumeHomePage() {
       router.push('/resumes/submit');
     } else {
       router.push('/api/auth/signin');
+    }
+  };
+
+  const onFilterCheckboxChange = (
+    isChecked: boolean,
+    filterSection: FilterId,
+    filterValue: string,
+  ) => {
+    if (isChecked) {
+      setUserFilters({
+        ...userFilters,
+        [filterSection]: [...userFilters[filterSection], filterValue],
+      });
+    } else {
+      setUserFilters({
+        ...userFilters,
+        [filterSection]: userFilters[filterSection].filter(
+          (value) => value !== filterValue,
+        ),
+      });
     }
   };
 
@@ -154,49 +224,17 @@ export default function ResumeHomePage() {
                     </form>
                   </div>
                   <div className="col-span-1 justify-self-center">
-                    <Menu as="div" className="relative inline-block text-left">
-                      <div>
-                        {/* TODO: Sort logic */}
-                        <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                          Sort
-                          <ChevronDownIcon
-                            aria-hidden="true"
-                            className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                          />
-                        </Menu.Button>
-                      </div>
-
-                      <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-100"
-                        enterFrom="transform opacity-0 scale-95"
-                        enterTo="transform opacity-100 scale-100"
-                        leave="transition ease-in duration-75"
-                        leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95">
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <div className="py-1">
-                            {SORT_OPTIONS.map((option) => (
-                              <Menu.Item key={option.name}>
-                                {({ active }) => (
-                                  <a
-                                    className={clsx(
-                                      option.current
-                                        ? 'font-medium text-gray-900'
-                                        : 'text-gray-500',
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm',
-                                    )}
-                                    href={option.href}>
-                                    {option.name}
-                                  </a>
-                                )}
-                              </Menu.Item>
-                            ))}
-                          </div>
-                        </Menu.Items>
-                      </Transition>
-                    </Menu>
+                    <DropdownMenu align="end" label="Sort">
+                      {SORT_OPTIONS.map((option) => (
+                        <DropdownMenu.Item
+                          key={option.name}
+                          isSelected={sortOrder === option.value}
+                          label={option.name}
+                          onClick={() =>
+                            setSortOrder(option.value)
+                          }></DropdownMenu.Item>
+                      ))}
+                    </DropdownMenu>
                   </div>
                   <div className="col-span-1">
                     <button
@@ -256,28 +294,32 @@ export default function ResumeHomePage() {
                                 </span>
                               </Disclosure.Button>
                             </h3>
-                            <Disclosure.Panel className="pt-6">
-                              <div className="space-y-4">
-                                {section.options.map((option, optionIdx) => (
+                            <Disclosure.Panel className="pt-4">
+                              <CheckboxList
+                                description=""
+                                isLabelHidden={true}
+                                label=""
+                                orientation="vertical">
+                                {section.options.map((option) => (
                                   <div
                                     key={option.value}
-                                    className="flex items-center">
-                                    <input
-                                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                      defaultChecked={option.checked}
-                                      defaultValue={option.value}
-                                      id={`filter-${section.id}-${optionIdx}`}
-                                      name={`${section.id}[]`}
-                                      type="checkbox"
+                                    className="[&>div>div:nth-child(2)>label]:font-normal [&>div>div:nth-child(1)>input]:text-indigo-600 [&>div>div:nth-child(1)>input]:ring-indigo-500">
+                                    <CheckboxInput
+                                      label={option.label}
+                                      value={userFilters[section.id].includes(
+                                        option.value,
+                                      )}
+                                      onChange={(isChecked) =>
+                                        onFilterCheckboxChange(
+                                          isChecked,
+                                          section.id,
+                                          option.value,
+                                        )
+                                      }
                                     />
-                                    <label
-                                      className="ml-3 text-sm text-gray-600"
-                                      htmlFor={`filter-${section.id}-${optionIdx}`}>
-                                      {option.label}
-                                    </label>
                                   </div>
                                 ))}
-                              </div>
+                              </CheckboxList>
                             </Disclosure.Panel>
                           </>
                         )}
@@ -296,7 +338,10 @@ export default function ResumeHomePage() {
                     starredResumesQuery.isFetching ||
                     myResumesQuery.isFetching
                   }
-                  resumes={resumes}
+                  resumes={sortResumes(
+                    filterResumes(resumes, searchValue, userFilters),
+                    sortOrder,
+                  )}
                 />
               </div>
             </div>

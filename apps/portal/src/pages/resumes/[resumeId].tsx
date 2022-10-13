@@ -4,7 +4,6 @@ import Error from 'next/error';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
 import {
   AcademicCapIcon,
   BriefcaseIcon,
@@ -27,6 +26,7 @@ export default function ResumeReviewPage() {
   const { data: session } = useSession();
   const router = useRouter();
   const { resumeId } = router.query;
+  const utils = trpc.useContext();
   // Safe to assert resumeId type as string because query is only sent if so
   const detailsQuery = trpc.useQuery(
     ['resumes.resume.findOne', { resumeId: resumeId as string }],
@@ -36,33 +36,14 @@ export default function ResumeReviewPage() {
   );
   const starMutation = trpc.useMutation('resumes.resume.star', {
     onSuccess() {
-      setStarDetails({
-        isStarred: true,
-        numStars: starDetails.numStars + 1,
-      });
+      utils.invalidateQueries(['resumes.resume.findOne']);
     },
   });
   const unstarMutation = trpc.useMutation('resumes.resume.unstar', {
     onSuccess() {
-      setStarDetails({
-        isStarred: false,
-        numStars: starDetails.numStars - 1,
-      });
+      utils.invalidateQueries(['resumes.resume.findOne']);
     },
   });
-  const [starDetails, setStarDetails] = useState({
-    isStarred: false,
-    numStars: 0,
-  });
-
-  useEffect(() => {
-    if (detailsQuery?.data !== undefined) {
-      setStarDetails({
-        isStarred: !!detailsQuery.data?.stars.length,
-        numStars: detailsQuery.data?._count.stars ?? 0,
-      });
-    }
-  }, [detailsQuery.data]);
 
   const onStarButtonClick = () => {
     if (session?.user?.id == null) {
@@ -72,7 +53,7 @@ export default function ResumeReviewPage() {
 
     // Star button only rendered if resume exists
     // Star button only clickable if user exists
-    if (starDetails.isStarred) {
+    if (detailsQuery.data?.stars.length) {
       unstarMutation.mutate({
         resumeId: resumeId as string,
       });
@@ -104,30 +85,37 @@ export default function ResumeReviewPage() {
               </h1>
               <button
                 className={clsx(
-                  starDetails.isStarred
+                  detailsQuery.data?.stars.length
                     ? 'z-10 border-indigo-500 outline-none ring-1 ring-indigo-500'
                     : '',
                   'isolate inline-flex max-h-10 items-center space-x-4 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50  disabled:hover:bg-white',
                 )}
-                disabled={starMutation.isLoading || unstarMutation.isLoading}
-                id="star-button"
+                disabled={
+                  session?.user === undefined ||
+                  starMutation.isLoading ||
+                  unstarMutation.isLoading
+                }
                 type="button"
                 onClick={onStarButtonClick}>
                 <span className="relative inline-flex">
-                  <StarIcon
-                    aria-hidden="true"
-                    className={clsx(
-                      starDetails.isStarred
-                        ? 'text-orange-400'
-                        : 'text-gray-400',
-                      '-ml-1 mr-2 h-5 w-5',
+                  <div className="-ml-1 mr-2 h-5 w-5">
+                    {starMutation.isLoading || unstarMutation.isLoading ? (
+                      <Spinner className="mt-0.5" size="xs" />
+                    ) : (
+                      <StarIcon
+                        aria-hidden="true"
+                        className={clsx(
+                          detailsQuery.data?.stars.length
+                            ? 'text-orange-400'
+                            : 'text-gray-400',
+                        )}
+                      />
                     )}
-                    id="star-icon"
-                  />
+                  </div>
                   Star
                 </span>
                 <span className="relative -ml-px inline-flex">
-                  {starDetails.numStars}
+                  {detailsQuery.data?._count.stars}
                 </span>
               </button>
             </div>

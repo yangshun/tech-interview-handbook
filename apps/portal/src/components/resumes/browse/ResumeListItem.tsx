@@ -1,4 +1,4 @@
-import { formatDistanceToNow } from 'date-fns';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Link from 'next/link';
 import type { UrlObject } from 'url';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
