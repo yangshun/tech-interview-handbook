@@ -158,6 +158,12 @@ function Test() {
     }
   });
 
+  const replies = trpc.useQuery(['offers.comments.getComments', {profileId: 'cl96stky5002ew32gx2kale2x'}], {
+    onError(err) {
+      setError(err.shape?.message || "")
+    },
+  });
+
   const deleteMutation = trpc.useMutation(['offers.profile.delete']);
 
   const handleDelete = (id: string) => {
@@ -536,6 +542,7 @@ function Test() {
   return (
     <>
       <div>{createdData}</div>
+      <div>{JSON.stringify(replies.data)}</div>
       <button type="button" onClick={handleClick}>
         Click Me!
       </button>

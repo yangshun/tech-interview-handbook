@@ -3,7 +3,67 @@ import * as trpc from '@trpc/server';
 
 import { createProtectedRouter } from '../context';
 
-export const offersProfileRouter = createProtectedRouter()
+export const offersCommentsRouter = createProtectedRouter()
+    .query('getComments', {
+        input: z.object({
+            profileId: z.string()
+        }),
+        async resolve({ ctx, input }) {
+            const result = await ctx.prisma.offersProfile.findFirst({
+                include: {
+                    discussion: {
+                        include: {
+                            replies: true,
+                            replyingTo: true,
+                            user: true
+                        }
+                    }
+                },
+                where: {
+                    id: input.profileId
+                }
+            })
+
+            if (result) {
+                return result.discussion.filter((x) => x.replyingToId === null)
+            }
+
+            return result
+        }
+    })
+    .mutation("create", {
+        input: z.object({
+            message: z.string(),
+            profileId: z.string(),
+            replyingToId: z.string().optional(),
+            userId: z.string()
+        }),
+        async resolve({ ctx, input }) {
+            await ctx.prisma.offersReply.create({
+                data: {
+                    message: input.message,
+                    profile: {
+                        connect: {
+                            id: input.profileId
+                        }
+                    },
+                    replyingTo: {
+                        connect: {
+                            id: input.replyingToId
+                        }
+                    },
+                    user: {
+                        connect: {
+                            id: input.userId
+                        }
+                    }
+                }
+            })
+
+            // Get replies
+            return
+        }
+    })
     .mutation("update", {
         input: z.object({
             id: z.string(),
@@ -30,7 +90,7 @@ export const offersProfileRouter = createProtectedRouter()
             // To validate user editing, OP or correct user
             // TODO: improve validation process
             if (profileEditToken === input.token || messageToUpdate?.userId === input.userId) {
-                await ctx.prisma.offersReply.update({
+                return await ctx.prisma.offersReply.update({
                     data: {
                         message: input.message
                     },

@@ -985,6 +985,7 @@ export const offersProfileRouter = createRouter()
               include: {
                 replies: true,
                 replyingTo: true,
+                user: true
               },
             },
             offers: {
@@ -1042,10 +1043,8 @@ export const offersProfileRouter = createRouter()
 
       const profileEditToken = profile?.editToken;
 
-      // To validate user editing, OP or correct user
-      // TODO: improve validation process
       if (profileEditToken === input.token) {
-        return await ctx.prisma.offersProfile.update({
+        const updated = await ctx.prisma.offersProfile.update({
           data: {
             user: {
               connect: {
@@ -1057,6 +1056,12 @@ export const offersProfileRouter = createRouter()
             id: input.profileId
           }
         })
+
+        return {
+          id: updated.id,
+          profileName: updated.profileName,
+          userId: updated.userId
+        }
       }
 
       throw new trpc.TRPCError({
