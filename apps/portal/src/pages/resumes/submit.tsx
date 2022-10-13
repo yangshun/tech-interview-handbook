@@ -11,7 +11,7 @@ import { Button, CheckboxInput, Select, TextArea, TextInput } from '@tih/ui';
 import {
   EXPERIENCE,
   LOCATION,
-  ROLES,
+  ROLE,
 } from '~/components/resumes/browse/resumeConstants';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
@@ -152,7 +152,7 @@ export default function SubmitResumeForm() {
                   {...register('role', { required: true })}
                   disabled={isLoading}
                   label="Role"
-                  options={ROLES}
+                  options={ROLE}
                   required={true}
                   onChange={(val) => setValue('role', val)}
                 />

@@ -10,13 +10,14 @@ import {
   PlusIcon,
 } from '@heroicons/react/20/solid';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Tabs, TextInput } from '@tih/ui';
+import { CheckboxInput, CheckboxList, Tabs, TextInput } from '@tih/ui';
 
+import type { FilterOption } from '~/components/resumes/browse/resumeConstants';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCE,
   LOCATION,
-  ROLES,
+  ROLE,
   SORT_OPTIONS,
   TOP_HITS,
 } from '~/components/resumes/browse/resumeConstants';
@@ -29,11 +30,19 @@ import { trpc } from '~/utils/trpc';
 
 import type { Resume } from '~/types/resume';
 
-const filters = [
+type FilterId = 'experience' | 'location' | 'role';
+type Filter = {
+  id: FilterId;
+  name: string;
+  options: Array<FilterOption>;
+};
+type FilterState = Record<FilterId, Array<string>>;
+
+const filters: Array<Filter> = [
   {
-    id: 'roles',
-    name: 'Roles',
-    options: ROLES,
+    id: 'role',
+    name: 'Role',
+    options: ROLE,
   },
   {
     id: 'experience',
@@ -47,11 +56,35 @@ const filters = [
   },
 ];
 
+const INITIAL_FILTER_STATE: FilterState = {
+  experience: Object.values(EXPERIENCE).map(({ value }) => value),
+  location: Object.values(LOCATION).map(({ value }) => value),
+  role: Object.values(ROLE).map(({ value }) => value),
+};
+
+const filterResumes = (
+  resumes: Array<Resume>,
+  searchValue: string,
+  userFilters: FilterState,
+) => {
+  return resumes
+    .filter((resume) =>
+      resume.title.toLowerCase().includes(searchValue.toLocaleLowerCase()),
+    )
+    .filter(
+      ({ experience, location, role }) =>
+        userFilters.role.includes(role) &&
+        userFilters.experience.includes(experience) &&
+        userFilters.location.includes(location),
+    );
+};
+
 export default function ResumeHomePage() {
   const { data: sessionData } = useSession();
   const router = useRouter();
   const [tabsValue, setTabsValue] = useState(BROWSE_TABS_VALUES.ALL);
   const [searchValue, setSearchValue] = useState('');
+  const [userFilters, setUserFilters] = useState(INITIAL_FILTER_STATE);
   const [resumes, setResumes] = useState<Array<Resume>>([]);
   const [renderSignInButton, setRenderSignInButton] = useState(false);
   const [signInButtonText, setSignInButtonText] = useState('');
@@ -99,6 +132,26 @@ export default function ResumeHomePage() {
       router.push('/resumes/submit');
     } else {
       router.push('/api/auth/signin');
+    }
+  };
+
+  const onFilterCheckboxChange = (
+    isChecked: boolean,
+    filterSection: FilterId,
+    filterValue: string,
+  ) => {
+    if (isChecked) {
+      setUserFilters({
+        ...userFilters,
+        [filterSection]: [...userFilters[filterSection], filterValue],
+      });
+    } else {
+      setUserFilters({
+        ...userFilters,
+        [filterSection]: userFilters[filterSection].filter(
+          (value) => value !== filterValue,
+        ),
+      });
     }
   };
 
@@ -256,8 +309,8 @@ export default function ResumeHomePage() {
                                 </span>
                               </Disclosure.Button>
                             </h3>
-                            <Disclosure.Panel className="pt-6">
-                              <div className="space-y-4">
+                            <Disclosure.Panel className="pt-4">
+                              {/* <div className="space-y-4">
                                 {section.options.map((option, optionIdx) => (
                                   <div
                                     key={option.value}
@@ -269,6 +322,7 @@ export default function ResumeHomePage() {
                                       id={`filter-${section.id}-${optionIdx}`}
                                       name={`${section.id}[]`}
                                       type="checkbox"
+                                      onChange={(value) => console.log(value)}
                                     />
                                     <label
                                       className="ml-3 text-sm text-gray-600"
@@ -277,7 +331,32 @@ export default function ResumeHomePage() {
                                     </label>
                                   </div>
                                 ))}
-                              </div>
+                              </div> */}
+                              <CheckboxList
+                                description=""
+                                isLabelHidden={true}
+                                label=""
+                                orientation="vertical">
+                                {section.options.map((option) => (
+                                  <div
+                                    key={option.value}
+                                    className="[&>div>div:nth-child(2)>label]:font-normal [&>div>div:nth-child(1)>input]:text-indigo-600 [&>div>div:nth-child(1)>input]:ring-indigo-500">
+                                    <CheckboxInput
+                                      label={option.label}
+                                      value={userFilters[section.id].includes(
+                                        option.value,
+                                      )}
+                                      onChange={(isChecked) =>
+                                        onFilterCheckboxChange(
+                                          isChecked,
+                                          section.id,
+                                          option.value,
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                ))}
+                              </CheckboxList>
                             </Disclosure.Panel>
                           </>
                         )}
@@ -296,7 +375,7 @@ export default function ResumeHomePage() {
                     starredResumesQuery.isFetching ||
                     myResumesQuery.isFetching
                   }
-                  resumes={resumes}
+                  resumes={filterResumes(resumes, searchValue, userFilters)}
                 />
               </div>
             </div>

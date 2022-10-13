@@ -17,7 +17,13 @@ export const TOP_HITS = [
   { href: '#', name: 'US Only' },
 ];
 
-export const ROLES = [
+export type FilterOption = {
+  checked: boolean;
+  label: string;
+  value: string;
+};
+
+export const ROLE: Array<FilterOption> = [
   {
     checked: false,
     label: 'Full-Stack Engineer',
@@ -30,7 +36,7 @@ export const ROLES = [
   { checked: false, label: 'Android Engineer', value: 'Android Engineer' },
 ];
 
-export const EXPERIENCE = [
+export const EXPERIENCE: Array<FilterOption> = [
   { checked: false, label: 'Freshman', value: 'Freshman' },
   { checked: false, label: 'Sophomore', value: 'Sophomore' },
   { checked: false, label: 'Junior', value: 'Junior' },
@@ -52,7 +58,7 @@ export const EXPERIENCE = [
   },
 ];
 
-export const LOCATION = [
+export const LOCATION: Array<FilterOption> = [
   { checked: false, label: 'Singapore', value: 'Singapore' },
   { checked: false, label: 'United States', value: 'United States' },
   { checked: false, label: 'India', value: 'India' },
