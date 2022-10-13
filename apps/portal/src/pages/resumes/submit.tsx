@@ -141,6 +141,26 @@ export default function SubmitResumeForm() {
     setResumeFile(null);
   };
 
+  const onClickDownload = async () => {
+    if (resumeFile == null) {
+      return;
+    }
+
+    const url = window.URL.createObjectURL(resumeFile);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', resumeFile.name);
+
+    // Append to html link element page
+    document.body.appendChild(link);
+
+    // Start download
+    link.click();
+
+    // Clean up and remove the link
+    link.remove();
+  };
+
   const fileUploadError = useMemo(() => {
     if (invalidFileUploadError != null) {
       return invalidFileUploadError;
@@ -240,15 +260,26 @@ export default function SubmitResumeForm() {
                   )}>
                   <div className="space-y-1 text-center">
                     <div className="flex gap-2">
-                      <PaperClipIcon className="m-auto h-8 w-8 text-gray-600" />
-                      {resumeFile && <p>{resumeFile.name}</p>}
+                      {resumeFile == null ? (
+                        <PaperClipIcon className="m-auto h-8 w-8 text-gray-600" />
+                      ) : (
+                        <div className="flex gap-2">
+                          <p
+                            className="cursor-pointer  underline underline-offset-1 hover:text-indigo-600"
+                            onClick={onClickDownload}>
+                            {resumeFile.name}
+                          </p>
+                        </div>
+                      )}
                     </div>
                     <div className="flex justify-center text-sm">
                       <label
                         className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
                         htmlFor="file-upload">
                         <p className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-500">
-                          Upload a file
+                          {resumeFile == null
+                            ? 'Upload a file'
+                            : 'Replace file'}
                         </p>
                         <input
                           {...register('file', { required: true })}
