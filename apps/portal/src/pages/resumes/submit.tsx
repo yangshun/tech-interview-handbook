@@ -18,11 +18,13 @@ import {
   TextInput,
 } from '@tih/ui';
 
+import type { FilterOption } from '~/components/resumes/browse/resumeConstants';
 import {
   EXPERIENCE,
   LOCATION,
   ROLE,
 } from '~/components/resumes/browse/resumeConstants';
+import SubmissionGuidelines from '~/components/resumes/submit-form/SubmissionGuidelines';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
 import { trpc } from '~/utils/trpc';
@@ -44,6 +46,19 @@ type IFormInput = {
   role: string;
   title: string;
 };
+
+type SelectorType = 'experience' | 'location' | 'role';
+type SelectorOptions = {
+  key: SelectorType;
+  label: string;
+  options: Array<FilterOption>;
+};
+
+const selectors: Array<SelectorOptions> = [
+  { key: 'role', label: 'Role', options: ROLE },
+  { key: 'experience', label: 'Experience Level', options: EXPERIENCE },
+  { key: 'location', label: 'Location', options: LOCATION },
+];
 
 export default function SubmitResumeForm() {
   const { data: session, status } = useSession();
@@ -125,13 +140,13 @@ export default function SubmitResumeForm() {
         url,
       },
       {
-        onError: (error) => {
+        onError(error) {
           console.error(error);
         },
-        onSettled: () => {
+        onSettled() {
           setIsLoading(false);
         },
-        onSuccess: () => {
+        onSuccess() {
           router.push('/resumes/browse');
         },
       },
@@ -191,6 +206,7 @@ export default function SubmitResumeForm() {
         <section
           aria-labelledby="primary-heading"
           className="flex h-full min-w-0 flex-1 flex-col lg:order-last">
+          {/* Reset Dialog component */}
           <Dialog
             isShown={isDialogShown}
             primaryButton={
@@ -216,6 +232,7 @@ export default function SubmitResumeForm() {
           <div className="mx-20 space-y-4 py-8">
             <form onSubmit={handleSubmit(onSubmit)}>
               <h1 className="mb-4 text-2xl font-bold">Upload a resume</h1>
+              {/*  Title Section */}
               <div className="mb-4">
                 <TextInput
                   {...register('title', { required: true })}
@@ -226,37 +243,20 @@ export default function SubmitResumeForm() {
                   onChange={(val) => setValue('title', val)}
                 />
               </div>
-              <div className="mb-4">
-                <Select
-                  {...register('role', { required: true })}
-                  disabled={isLoading}
-                  label="Role"
-                  options={ROLE}
-                  required={true}
-                  onChange={(val) => setValue('role', val)}
-                />
-              </div>
-              <div className="mb-4">
-                <Select
-                  {...register('experience', { required: true })}
-                  disabled={isLoading}
-                  label="Experience Level"
-                  options={EXPERIENCE}
-                  required={true}
-                  onChange={(val) => setValue('experience', val)}
-                />
-              </div>
-              <div className="mb-4">
-                <Select
-                  {...register('location', { required: true })}
-                  disabled={isLoading}
-                  label="Location"
-                  name="location"
-                  options={LOCATION}
-                  required={true}
-                  onChange={(val) => setValue('location', val)}
-                />
-              </div>
+              {/*  Selectors */}
+              {selectors.map((item) => (
+                <div key={item.key} className="mb-4">
+                  <Select
+                    {...register(item.key, { required: true })}
+                    disabled={isLoading}
+                    label={item.label}
+                    options={item.options}
+                    required={true}
+                    onChange={(val) => setValue(item.key, val)}
+                  />
+                </div>
+              ))}
+              {/*  Upload Resume Section */}
               <p className="text-sm font-medium text-slate-700">
                 Upload resume (PDF format)
                 <span aria-hidden="true" className="text-danger-500">
@@ -264,6 +264,7 @@ export default function SubmitResumeForm() {
                   *
                 </span>
               </p>
+              {/*  Upload Resume Box */}
               <div className="mb-4">
                 <div
                   {...getRootProps()}
@@ -320,6 +321,7 @@ export default function SubmitResumeForm() {
                   <p className="text-danger-600 text-sm">{fileUploadError}</p>
                 )}
               </div>
+              {/*  Additional Info Section */}
               <div className="mb-8">
                 <TextArea
                   {...register('additionalInfo')}
@@ -329,58 +331,28 @@ export default function SubmitResumeForm() {
                   onChange={(val) => setValue('additionalInfo', val)}
                 />
               </div>
-              <div className="mb-4 text-left text-sm text-slate-700">
-                <h2 className="mb-2 text-xl font-medium">
-                  Submission Guidelines
-                </h2>
-                <p>
-                  Before you submit, please review and acknolwedge our
-                  <span className="font-bold"> submission guidelines </span>
-                  stated below.
-                </p>
-                <p>
-                  <span className="text-lg font-bold">• </span>
-                  Ensure that you do not divulge any of your
-                  <span className="font-bold"> personal particulars</span>.
-                </p>
-                <p>
-                  <span className="text-lg font-bold">• </span>
-                  Ensure that you do not divulge any
-                  <span className="font-bold">
-                    {' '}
-                    company's proprietary and confidential information
-                  </span>
-                  .
-                </p>
-                <p>
-                  <span className="text-lg font-bold">• </span>
-                  Proof-read your resumes to look for grammatical/spelling
-                  errors.
-                </p>
-              </div>
+              {/*  Submission Guidelines */}
+              <SubmissionGuidelines />
               <CheckboxInput
                 {...register('isChecked', { required: true })}
                 disabled={isLoading}
                 label="I have read and will follow the guidelines stated."
                 onChange={(val) => setValue('isChecked', val)}
               />
+              {/*  Clear and Submit Buttons */}
               <div className="mt-4 flex justify-end gap-4">
                 <Button
                   addonPosition="start"
                   disabled={isLoading}
-                  display="inline"
                   label="Clear"
-                  size="md"
                   variant="tertiary"
                   onClick={onClickClear}
                 />
                 <Button
                   addonPosition="start"
                   disabled={isLoading}
-                  display="inline"
                   isLoading={isLoading}
                   label="Submit"
-                  size="md"
                   type="submit"
                   variant="primary"
                 />
