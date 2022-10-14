@@ -240,10 +240,10 @@ export default function ResumeHomePage() {
                   </div>
                   <div className="col-span-1">
                     <button
-                      className="rounded-md bg-indigo-500 py-1 px-3 text-sm text-white"
+                      className="rounded-md bg-indigo-500 py-1 px-3 text-sm font-medium text-white"
                       type="button"
                       onClick={onSubmitResume}>
-                      Submit
+                      Submit Resume
                     </button>
                   </div>
                 </div>
