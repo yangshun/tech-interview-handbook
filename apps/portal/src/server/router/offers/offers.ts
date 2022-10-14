@@ -16,8 +16,8 @@ const getYoeRange = (yoeCategory: number) => {
     : yoeCategoryMap[yoeCategory] === 'Mid'
     ? { maxYoe: 7, minYoe: 4 }
     : yoeCategoryMap[yoeCategory] === 'Senior'
-    ? { maxYoe: null, minYoe: 8 }
-    : null;
+    ? { maxYoe: 100, minYoe: 8 }
+    : null; // Internship
 };
 
 const ascOrder = '+';
@@ -35,7 +35,7 @@ export const offersRouter = createRouter().query('list', {
     companyId: z.string().nullish(),
     dateEnd: z.date().nullish(),
     dateStart: z.date().nullish(),
-    limit: z.number().nonnegative(),
+    limit: z.number().positive(),
     location: z.string(),
     offset: z.number().nonnegative(),
     salaryMax: z.number().nullish(),
@@ -43,9 +43,13 @@ export const offersRouter = createRouter().query('list', {
     sortBy: z.string().regex(createSortByValidationRegex()).nullish(),
     title: z.string().nullish(),
     yoeCategory: z.number().min(0).max(3),
+    yoeMax: z.number().max(100).nullish(),
+    yoeMin: z.number().min(0).nullish(),
   }),
   async resolve({ ctx, input }) {
     const yoeRange = getYoeRange(input.yoeCategory);
+    const yoeMin = input.yoeMin ? input.yoeMin : yoeRange?.minYoe;
+    const yoeMax = input.yoeMax ? input.yoeMax : yoeRange?.maxYoe;
 
     let data = !yoeRange
       ? await ctx.prisma.offersOffer.findMany({
@@ -89,68 +93,8 @@ export const offersRouter = createRouter().query('list', {
             ],
           },
         })
-      : yoeRange.maxYoe
-      ? await ctx.prisma.offersOffer.findMany({
-          // Junior, Mid
-          include: {
-            OffersFullTime: {
-              include: {
-                baseSalary: true,
-                bonus: true,
-                stocks: true,
-                totalCompensation: true,
-              },
-            },
-            OffersIntern: {
-              include: {
-                monthlySalary: true,
-              },
-            },
-            company: true,
-            profile: {
-              include: {
-                background: true,
-              },
-            },
-          },
-          where: {
-            AND: [
-              {
-                location: input.location,
-              },
-              {
-                OffersIntern: {
-                  is: null,
-                },
-              },
-              {
-                OffersFullTime: {
-                  isNot: null,
-                },
-              },
-              {
-                profile: {
-                  background: {
-                    totalYoe: {
-                      gte: yoeRange.minYoe,
-                    },
-                  },
-                },
-              },
-              {
-                profile: {
-                  background: {
-                    totalYoe: {
-                      gte: yoeRange.maxYoe,
-                    },
-                  },
-                },
-              },
-            ],
-          },
-        })
       : await ctx.prisma.offersOffer.findMany({
-          // Senior
+          // Junior, Mid, Senior
           include: {
             OffersFullTime: {
               include: {
@@ -191,7 +135,8 @@ export const offersRouter = createRouter().query('list', {
                 profile: {
                   background: {
                     totalYoe: {
-                      gte: yoeRange.minYoe,
+                      gte: yoeMin,
+                      lte: yoeMax,
                     },
                   },
                 },

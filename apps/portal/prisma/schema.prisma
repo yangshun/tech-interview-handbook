@@ -1,105 +1,105 @@
 // Refer to the Prisma schema docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // Necessary for NextAuth.
 model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? @db.Text
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-    id                            String                         @id @default(cuid())
-    name                          String?
-    email                         String?                        @unique
-    emailVerified                 DateTime?
-    image                         String?
-    accounts                      Account[]
-    sessions                      Session[]
-    todos                         Todo[]
-    resumesResumes                ResumesResume[]
-    resumesStars                  ResumesStar[]
-    resumesComments               ResumesComment[]
-    resumesCommentVotes           ResumesCommentVote[]
-    questionsQuestions            QuestionsQuestion[]
-    questionsQuestionEncounters   QuestionsQuestionEncounter[]
-    questionsQuestionVotes        QuestionsQuestionVote[]
-    questionsQuestionComments     QuestionsQuestionComment[]
-    questionsQuestionCommentVotes QuestionsQuestionCommentVote[]
-    questionsAnswers              QuestionsAnswer[]
-    questionsAnswerVotes          QuestionsAnswerVote[]
-    questionsAnswerComments       QuestionsAnswerComment[]
-    questionsAnswerCommentVotes   QuestionsAnswerCommentVote[]
-    OffersProfile                 OffersProfile[]
-    offersDiscussion              OffersReply[]
+  id                            String                         @id @default(cuid())
+  name                          String?
+  email                         String?                        @unique
+  emailVerified                 DateTime?
+  image                         String?
+  accounts                      Account[]
+  sessions                      Session[]
+  todos                         Todo[]
+  resumesResumes                ResumesResume[]
+  resumesStars                  ResumesStar[]
+  resumesComments               ResumesComment[]
+  resumesCommentVotes           ResumesCommentVote[]
+  questionsQuestions            QuestionsQuestion[]
+  questionsQuestionEncounters   QuestionsQuestionEncounter[]
+  questionsQuestionVotes        QuestionsQuestionVote[]
+  questionsQuestionComments     QuestionsQuestionComment[]
+  questionsQuestionCommentVotes QuestionsQuestionCommentVote[]
+  questionsAnswers              QuestionsAnswer[]
+  questionsAnswerVotes          QuestionsAnswerVote[]
+  questionsAnswerComments       QuestionsAnswerComment[]
+  questionsAnswerCommentVotes   QuestionsAnswerCommentVote[]
+  OffersProfile                 OffersProfile[]
+  offersDiscussion              OffersReply[]
 }
 
 enum Vote {
-    UPVOTE
-    DOWNVOTE
+  UPVOTE
+  DOWNVOTE
 }
 
 model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-    @@unique([identifier, token])
+  @@unique([identifier, token])
 }
 
 model Todo {
-    id        String     @id @default(cuid())
-    userId    String
-    text      String     @db.Text
-    status    TodoStatus @default(INCOMPLETE)
-    createdAt DateTime   @default(now())
-    updatedAt DateTime   @updatedAt
-    user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String     @id @default(cuid())
+  userId    String
+  text      String     @db.Text
+  status    TodoStatus @default(INCOMPLETE)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum TodoStatus {
-    INCOMPLETE
-    COMPLETE
+  INCOMPLETE
+  COMPLETE
 }
 
 model Company {
-    id               String             @id @default(cuid())
-    name             String             @db.Text
-    slug             String             @unique
-    description      String?            @db.Text
-    logoUrl          String?
-    createdAt        DateTime           @default(now())
-    updatedAt        DateTime           @updatedAt
-    OffersExperience OffersExperience[]
-    OffersOffer      OffersOffer[]
+  id               String             @id @default(cuid())
+  name             String             @db.Text
+  slug             String             @unique
+  description      String?            @db.Text
+  logoUrl          String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  OffersExperience OffersExperience[]
+  OffersOffer      OffersOffer[]
 }
 
 // Start of Resumes project models.
@@ -107,65 +107,65 @@ model Company {
 // use camelCase for field names, and try to name them consistently
 // across all models in this file.
 model ResumesResume {
-    id             String           @id @default(cuid())
-    userId         String
-    title          String           @db.Text
-    // TODO: Update role, experience, location to use Enums
-    role           String           @db.Text
-    experience     String           @db.Text
-    location       String           @db.Text
-    url            String
-    additionalInfo String?          @db.Text
-    createdAt      DateTime         @default(now())
-    updatedAt      DateTime         @updatedAt
-    user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-    stars          ResumesStar[]
-    comments       ResumesComment[]
+  id             String           @id @default(cuid())
+  userId         String
+  title          String           @db.Text
+  // TODO: Update role, experience, location to use Enums
+  role           String           @db.Text
+  experience     String           @db.Text
+  location       String           @db.Text
+  url            String
+  additionalInfo String?          @db.Text
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stars          ResumesStar[]
+  comments       ResumesComment[]
 }
 
 model ResumesStar {
-    id        String        @id @default(cuid())
-    userId    String
-    resumeId  String
-    createdAt DateTime      @default(now())
-    resume    ResumesResume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
-    user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String        @id @default(cuid())
+  userId    String
+  resumeId  String
+  createdAt DateTime      @default(now())
+  resume    ResumesResume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([userId, resumeId])
+  @@unique([userId, resumeId])
 }
 
 model ResumesComment {
-    id          String               @id @default(cuid())
-    userId      String
-    resumeId    String
-    description String               @db.Text
-    section     ResumesSection
-    createdAt   DateTime             @default(now())
-    updatedAt   DateTime             @updatedAt
-    resume      ResumesResume        @relation(fields: [resumeId], references: [id], onDelete: Cascade)
-    votes       ResumesCommentVote[]
-    user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          String               @id @default(cuid())
+  userId      String
+  resumeId    String
+  description String               @db.Text
+  section     ResumesSection
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  resume      ResumesResume        @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  votes       ResumesCommentVote[]
+  user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum ResumesSection {
-    GENERAL
-    EDUCATION
-    EXPERIENCE
-    PROJECTS
-    SKILLS
+  GENERAL
+  EDUCATION
+  EXPERIENCE
+  PROJECTS
+  SKILLS
 }
 
 model ResumesCommentVote {
-    id        String         @id @default(cuid())
-    userId    String
-    commentId String
-    value     Vote
-    createdAt DateTime       @default(now())
-    updatedAt DateTime       @updatedAt
-    comment   ResumesComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
-    user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String         @id @default(cuid())
+  userId    String
+  commentId String
+  value     Vote
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  comment   ResumesComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([userId, commentId])
+  @@unique([userId, commentId])
 }
 
 // End of Resumes project models.
@@ -176,176 +176,176 @@ model ResumesCommentVote {
 // across all models in this file.
 
 model OffersProfile {
-    id          String   @id @default(cuid())
-    profileName String   @unique
-    createdAt   DateTime @default(now())
+  id          String   @id @default(cuid())
+  profileName String   @unique
+  createdAt   DateTime @default(now())
 
-    background OffersBackground?
+  background OffersBackground?
 
-    editToken String
+  editToken String
 
-    discussion OffersReply[]
+  discussion OffersReply[]
 
-    offers OffersOffer[]
+  offers OffersOffer[]
 
-    user   User?   @relation(fields: [userId], references: [id])
-    userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
 }
 
 model OffersBackground {
-    id String @id @default(cuid())
+  id String @id @default(cuid())
 
-    totalYoe     Int?
-    specificYoes OffersSpecificYoe[]
+  totalYoe     Int?
+  specificYoes OffersSpecificYoe[]
 
-    experiences OffersExperience[] // For extensibility in the future
+  experiences OffersExperience[] // For extensibility in the future
 
-    educations OffersEducation[] // For extensibility in the future
+  educations OffersEducation[] // For extensibility in the future
 
-    profile         OffersProfile @relation(fields: [offersProfileId], references: [id], onDelete: Cascade)
-    offersProfileId String        @unique
+  profile         OffersProfile @relation(fields: [offersProfileId], references: [id], onDelete: Cascade)
+  offersProfileId String        @unique
 }
 
 model OffersSpecificYoe {
-    id String @id @default(cuid())
+  id String @id @default(cuid())
 
-    yoe    Int
-    domain String
+  yoe    Int
+  domain String
 
-    background   OffersBackground @relation(fields: [backgroundId], references: [id], onDelete: Cascade)
-    backgroundId String
+  background   OffersBackground @relation(fields: [backgroundId], references: [id], onDelete: Cascade)
+  backgroundId String
 }
 
 model OffersExperience {
-    id String @id @default(cuid())
+  id String @id @default(cuid())
 
-    company   Company? @relation(fields: [companyId], references: [id])
-    companyId String?
+  company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?
 
-    jobType JobType?
-    title   String?
+  jobType JobType?
+  title   String?
 
-    // Add more fields
-    durationInMonths Int?
-    specialization   String?
+  // Add more fields
+  durationInMonths Int?
+  specialization   String?
 
-    // FULLTIME fields
-    level               String?
-    totalCompensation   OffersCurrency? @relation("ExperienceTotalCompensation", fields: [totalCompensationId], references: [id])
-    totalCompensationId String?         @unique
+  // FULLTIME fields
+  level               String?
+  totalCompensation   OffersCurrency? @relation("ExperienceTotalCompensation", fields: [totalCompensationId], references: [id])
+  totalCompensationId String?         @unique
 
-    // INTERN fields
-    monthlySalary   OffersCurrency? @relation("ExperienceMonthlySalary", fields: [monthlySalaryId], references: [id])
-    monthlySalaryId String?         @unique
+  // INTERN fields
+  monthlySalary   OffersCurrency? @relation("ExperienceMonthlySalary", fields: [monthlySalaryId], references: [id])
+  monthlySalaryId String?         @unique
 
-    background   OffersBackground @relation(fields: [backgroundId], references: [id], onDelete: Cascade)
-    backgroundId String
+  background   OffersBackground @relation(fields: [backgroundId], references: [id], onDelete: Cascade)
+  backgroundId String
 }
 
 model OffersCurrency {
-    id       String @id @default(cuid())
-    value    Int
-    currency String
+  id       String @id @default(cuid())
+  value    Int
+  currency String
 
-    // Experience
-    OffersExperienceTotalCompensation OffersExperience? @relation("ExperienceTotalCompensation")
-    OffersExperienceMonthlySalary     OffersExperience? @relation("ExperienceMonthlySalary")
+  // Experience
+  OffersExperienceTotalCompensation OffersExperience? @relation("ExperienceTotalCompensation")
+  OffersExperienceMonthlySalary     OffersExperience? @relation("ExperienceMonthlySalary")
 
-    // Full Time
-    OffersTotalCompensation OffersFullTime? @relation("OfferTotalCompensation")
-    OffersBaseSalary        OffersFullTime? @relation("OfferBaseSalary")
-    OffersBonus             OffersFullTime? @relation("OfferBonus")
-    OffersStocks            OffersFullTime? @relation("OfferStocks")
+  // Full Time
+  OffersTotalCompensation OffersFullTime? @relation("OfferTotalCompensation")
+  OffersBaseSalary        OffersFullTime? @relation("OfferBaseSalary")
+  OffersBonus             OffersFullTime? @relation("OfferBonus")
+  OffersStocks            OffersFullTime? @relation("OfferStocks")
 
-    // Intern
-    OffersMonthlySalary OffersIntern?
+  // Intern
+  OffersMonthlySalary OffersIntern?
 }
 
 enum JobType {
-    INTERN
-    FULLTIME
+  INTERN
+  FULLTIME
 }
 
 model OffersEducation {
-    id    String  @id @default(cuid())
-    type  String?
-    field String?
+  id    String  @id @default(cuid())
+  type  String?
+  field String?
 
-    school    String?
-    startDate DateTime?
-    endDate   DateTime?
+  school    String?
+  startDate DateTime?
+  endDate   DateTime?
 
-    background   OffersBackground @relation(fields: [backgroundId], references: [id], onDelete: Cascade)
-    backgroundId String
+  background   OffersBackground @relation(fields: [backgroundId], references: [id], onDelete: Cascade)
+  backgroundId String
 }
 
 model OffersReply {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    message   String
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  message   String
 
-    replyingToId String?
-    replyingTo   OffersReply?  @relation("ReplyThread", fields: [replyingToId], references: [id])
-    replies      OffersReply[] @relation("ReplyThread")
+  replyingToId String?
+  replyingTo   OffersReply?  @relation("ReplyThread", fields: [replyingToId], references: [id])
+  replies      OffersReply[] @relation("ReplyThread")
 
-    profile   OffersProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
-    profileId String
+  profile   OffersProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String
 
-    user   User?   @relation(fields: [userId], references: [id])
-    userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
 }
 
 model OffersOffer {
-    id String @id @default(cuid())
+  id String @id @default(cuid())
 
-    profile   OffersProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
-    profileId String
+  profile   OffersProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String
 
-    company   Company @relation(fields: [companyId], references: [id])
-    companyId String
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId String
 
-    monthYearReceived   DateTime
-    location            String
-    negotiationStrategy String?
-    comments            String?
+  monthYearReceived   DateTime
+  location            String
+  negotiationStrategy String?
+  comments            String?
 
-    jobType JobType
+  jobType JobType
 
-    OffersIntern   OffersIntern? @relation(fields: [offersInternId], references: [id], onDelete: Cascade)
-    offersInternId String?       @unique
+  OffersIntern   OffersIntern? @relation(fields: [offersInternId], references: [id], onDelete: Cascade)
+  offersInternId String?       @unique
 
-    OffersFullTime   OffersFullTime? @relation(fields: [offersFullTimeId], references: [id], onDelete: Cascade)
-    offersFullTimeId String?         @unique
+  OffersFullTime   OffersFullTime? @relation(fields: [offersFullTimeId], references: [id], onDelete: Cascade)
+  offersFullTimeId String?         @unique
 }
 
 model OffersIntern {
-    id String @id @default(cuid())
+  id String @id @default(cuid())
 
-    title           String
-    specialization  String
-    internshipCycle String
-    startYear       Int
-    monthlySalary   OffersCurrency @relation(fields: [monthlySalaryId], references: [id], onDelete: Cascade)
-    monthlySalaryId String         @unique
+  title           String
+  specialization  String
+  internshipCycle String
+  startYear       Int
+  monthlySalary   OffersCurrency @relation(fields: [monthlySalaryId], references: [id], onDelete: Cascade)
+  monthlySalaryId String         @unique
 
-    OffersOffer OffersOffer?
+  OffersOffer OffersOffer?
 }
 
 model OffersFullTime {
-    id                  String         @id @default(cuid())
-    title               String
-    specialization      String
-    level               String
-    totalCompensation   OffersCurrency @relation("OfferTotalCompensation", fields: [totalCompensationId], references: [id], onDelete: Cascade)
-    totalCompensationId String         @unique
-    baseSalary          OffersCurrency @relation("OfferBaseSalary", fields: [baseSalaryId], references: [id], onDelete: Cascade)
-    baseSalaryId        String         @unique
-    bonus               OffersCurrency @relation("OfferBonus", fields: [bonusId], references: [id], onDelete: Cascade)
-    bonusId             String         @unique
-    stocks              OffersCurrency @relation("OfferStocks", fields: [stocksId], references: [id], onDelete: Cascade)
-    stocksId            String         @unique
+  id                  String         @id @default(cuid())
+  title               String
+  specialization      String
+  level               String
+  totalCompensation   OffersCurrency @relation("OfferTotalCompensation", fields: [totalCompensationId], references: [id], onDelete: Cascade)
+  totalCompensationId String         @unique
+  baseSalary          OffersCurrency @relation("OfferBaseSalary", fields: [baseSalaryId], references: [id], onDelete: Cascade)
+  baseSalaryId        String         @unique
+  bonus               OffersCurrency @relation("OfferBonus", fields: [bonusId], references: [id], onDelete: Cascade)
+  bonusId             String         @unique
+  stocks              OffersCurrency @relation("OfferStocks", fields: [stocksId], references: [id], onDelete: Cascade)
+  stocksId            String         @unique
 
-    OffersOffer OffersOffer?
+  OffersOffer OffersOffer?
 }
 
 // End of Offers project models.
@@ -356,136 +356,136 @@ model OffersFullTime {
 // across all models in this file.
 
 enum QuestionsQuestionType {
-    CODING
-    SYSTEM_DESIGN
-    BEHAVIORAL
+  CODING
+  SYSTEM_DESIGN
+  BEHAVIORAL
 }
 
 model QuestionsQuestion {
-    id           String                @id @default(cuid())
-    userId       String?
-    content      String                @db.Text
-    questionType QuestionsQuestionType
-    createdAt    DateTime              @default(now())
-    updatedAt    DateTime              @updatedAt
+  id           String                @id @default(cuid())
+  userId       String?
+  content      String                @db.Text
+  questionType QuestionsQuestionType
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
 
-    user       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
-    encounters QuestionsQuestionEncounter[]
-    votes      QuestionsQuestionVote[]
-    comments   QuestionsQuestionComment[]
-    answers    QuestionsAnswer[]
+  user       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  encounters QuestionsQuestionEncounter[]
+  votes      QuestionsQuestionVote[]
+  comments   QuestionsQuestionComment[]
+  answers    QuestionsAnswer[]
 }
 
 model QuestionsQuestionEncounter {
-    id         String   @id @default(cuid())
-    questionId String
-    userId     String?
-    // TODO: sync with models
-    company    String   @db.Text
-    location   String   @db.Text
-    role       String   @db.Text
-    seenAt     DateTime
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+  id         String   @id @default(cuid())
+  questionId String
+  userId     String?
+  // TODO: sync with models
+  company    String   @db.Text
+  location   String   @db.Text
+  role       String   @db.Text
+  seenAt     DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-    user     User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
-    question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  user     User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
 }
 
 model QuestionsQuestionVote {
-    id         String   @id @default(cuid())
-    questionId String
-    userId     String?
-    vote       Vote
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+  id         String   @id @default(cuid())
+  questionId String
+  userId     String?
+  vote       Vote
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-    user     User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
-    question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  user     User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
-    @@unique([questionId, userId])
+  @@unique([questionId, userId])
 }
 
 model QuestionsQuestionComment {
-    id         String   @id @default(cuid())
-    questionId String
-    userId     String?
-    content    String   @db.Text
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+  id         String   @id @default(cuid())
+  questionId String
+  userId     String?
+  content    String   @db.Text
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-    user     User?                          @relation(fields: [userId], references: [id], onDelete: SetNull)
-    question QuestionsQuestion              @relation(fields: [questionId], references: [id], onDelete: Cascade)
-    votes    QuestionsQuestionCommentVote[]
+  user     User?                          @relation(fields: [userId], references: [id], onDelete: SetNull)
+  question QuestionsQuestion              @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  votes    QuestionsQuestionCommentVote[]
 }
 
 model QuestionsQuestionCommentVote {
-    id                String   @id @default(cuid())
-    questionCommentId String
-    userId            String?
-    vote              Vote
-    createdAt         DateTime @default(now())
-    updatedAt         DateTime @updatedAt
+  id                String   @id @default(cuid())
+  questionCommentId String
+  userId            String?
+  vote              Vote
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
-    user    User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
-    comment QuestionsQuestionComment @relation(fields: [questionCommentId], references: [id], onDelete: Cascade)
+  user    User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  comment QuestionsQuestionComment @relation(fields: [questionCommentId], references: [id], onDelete: Cascade)
 
-    @@unique([questionCommentId, userId])
+  @@unique([questionCommentId, userId])
 }
 
 model QuestionsAnswer {
-    id         String   @id @default(cuid())
-    questionId String
-    userId     String?
-    content    String   @db.Text
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+  id         String   @id @default(cuid())
+  questionId String
+  userId     String?
+  content    String   @db.Text
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-    user     User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
-    question QuestionsQuestion        @relation(fields: [questionId], references: [id], onDelete: Cascade)
-    votes    QuestionsAnswerVote[]
-    comments QuestionsAnswerComment[]
+  user     User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  question QuestionsQuestion        @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  votes    QuestionsAnswerVote[]
+  comments QuestionsAnswerComment[]
 }
 
 model QuestionsAnswerVote {
-    id        String   @id @default(cuid())
-    answerId  String
-    userId    String?
-    vote      Vote
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(cuid())
+  answerId  String
+  userId    String?
+  vote      Vote
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    user   User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
-    answer QuestionsAnswer @relation(fields: [answerId], references: [id], onDelete: Cascade)
+  user   User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  answer QuestionsAnswer @relation(fields: [answerId], references: [id], onDelete: Cascade)
 
-    @@unique([answerId, userId])
+  @@unique([answerId, userId])
 }
 
 model QuestionsAnswerComment {
-    id        String   @id @default(cuid())
-    answerId  String
-    userId    String?
-    content   String   @db.Text
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(cuid())
+  answerId  String
+  userId    String?
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    user   User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
-    answer QuestionsAnswer              @relation(fields: [answerId], references: [id], onDelete: Cascade)
-    votes  QuestionsAnswerCommentVote[]
+  user   User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  answer QuestionsAnswer              @relation(fields: [answerId], references: [id], onDelete: Cascade)
+  votes  QuestionsAnswerCommentVote[]
 }
 
 model QuestionsAnswerCommentVote {
-    id              String   @id @default(cuid())
-    answerCommentId String
-    userId          String?
-    vote            Vote
-    createdAt       DateTime @default(now())
-    updatedAt       DateTime @updatedAt
+  id              String   @id @default(cuid())
+  answerCommentId String
+  userId          String?
+  vote            Vote
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
-    user    User?                  @relation(fields: [userId], references: [id], onDelete: SetNull)
-    comment QuestionsAnswerComment @relation(fields: [answerCommentId], references: [id], onDelete: Cascade)
+  user    User?                  @relation(fields: [userId], references: [id], onDelete: SetNull)
+  comment QuestionsAnswerComment @relation(fields: [answerCommentId], references: [id], onDelete: Cascade)
 
-    @@unique([answerCommentId, userId])
+  @@unique([answerCommentId, userId])
 }
 
 // End of Questions project models.
