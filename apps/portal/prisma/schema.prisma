@@ -365,12 +365,12 @@ model OffersAnalysis {
   offerId             String      @unique
 
   // OVERALL
-  overallPercentile Int
+  overallPercentile Float
   noOfSimilarOffers Int
   topOverallOffers  OffersOffer[] @relation("TopOverallOffers")
 
   // Company
-  companyPercentile        Int
+  companyPercentile        Float
   noOfSimilarCompanyOffers Int
   topCompanyOffers         OffersOffer[] @relation("TopCompanyOffers")
 }

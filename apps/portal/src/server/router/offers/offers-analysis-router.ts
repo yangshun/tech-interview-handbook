@@ -8,6 +8,7 @@ import type {
   OffersOffer,
   OffersProfile,
 } from '@prisma/client';
+import { JobType } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
 import { createRouter } from '../context';
@@ -31,14 +32,32 @@ const binarySearchOfferPercentile = (
   let start = 0;
   let end = similarOffers.length - 1;
 
+  const salary =
+    offer.jobType === JobType.FULLTIME
+      ? offer.OffersFullTime?.totalCompensation.value
+      : offer.OffersIntern?.monthlySalary.value;
+
+  if (!salary) {
+    throw new TRPCError({
+      code: 'BAD_REQUEST',
+      message: 'Cannot analyse without salary',
+    });
+  }
+
   while (start <= end) {
     const mid = Math.floor((start + end) / 2);
 
-    if (similarOffers[mid].id === offer.id) {
+    const similarOffer = similarOffers[mid];
+    const similarSalary =
+      similarOffer.jobType === JobType.FULLTIME
+        ? similarOffer.OffersFullTime?.totalCompensation.value
+        : similarOffer.OffersIntern?.monthlySalary.value;
+
+    if (similarSalary === salary) {
       return mid;
     }
 
-    if (offer.id < similarOffers[mid].id) {
+    if (salary < similarSalary) {
       end = mid - 1;
     } else {
       start = mid + 1;
@@ -199,30 +218,29 @@ export const offersAnalysisRouter = createRouter().query('generate', {
     });
 
     let similarCompanyOffers = similarOffers.filter(
-      (offer) => offer.companyId === overallHighestOffer.companyId,
+      (offer: { companyId: string }) =>
+        offer.companyId === overallHighestOffer.companyId,
     );
 
     // CALCULATE PERCENTILES
-    const highestOfferAgainstOverallIndex = binarySearchOfferPercentile(
+    const overallIndex = binarySearchOfferPercentile(
       overallHighestOffer,
       similarOffers,
     );
-    const highestOfferAgainstOverallPercentile =
-      highestOfferAgainstOverallIndex / similarOffers.length;
+    const overallPercentile = overallIndex / similarOffers.length;
 
-    const highestOfferAgainstCompanyIndex = binarySearchOfferPercentile(
+    const companyIndex = binarySearchOfferPercentile(
       overallHighestOffer,
       similarCompanyOffers,
     );
-    const highestOfferAgainstCompanyPercentile =
-      highestOfferAgainstCompanyIndex / similarCompanyOffers.length;
+    const companyPercentile = companyIndex / similarCompanyOffers.length;
 
     // FIND TOP >=90 PERCENTILE OFFERS
     similarOffers = similarOffers.filter(
-      (offer) => offer.id !== overallHighestOffer.id,
+      (offer: { id: string }) => offer.id !== overallHighestOffer.id,
     );
     similarCompanyOffers = similarCompanyOffers.filter(
-      (offer) => offer.id !== overallHighestOffer.id,
+      (offer: { id: string }) => offer.id !== overallHighestOffer.id,
     );
 
     const noOfSimilarOffers = similarOffers.length;
@@ -247,18 +265,113 @@ export const offersAnalysisRouter = createRouter().query('generate', {
           )
         : similarCompanyOffers;
 
-    return {
-      company: {
-        highestOfferAgainstCompanyPercentile,
+    const analysis = await ctx.prisma.offersAnalysis.create({
+      data: {
+        companyPercentile,
         noOfSimilarCompanyOffers,
-        topPercentileCompanyOffers,
-      },
-      overall: {
-        highestOfferAgainstOverallPercentile,
         noOfSimilarOffers,
-        topPercentileOffers,
+        overallHighestOffer: {
+          connect: {
+            id: overallHighestOffer.id,
+          },
+        },
+        overallPercentile,
+        profile: {
+          connect: {
+            id: input.profileId,
+          },
+        },
+        topCompanyOffers: {
+          connect: topPercentileCompanyOffers.map((offer) => {
+            return { id: offer.id };
+          }),
+        },
+        topOverallOffers: {
+          connect: topPercentileOffers.map((offer) => {
+            return { id: offer.id };
+          }),
+        },
       },
-      overallHighestOffer,
-    };
+      include: {
+        overallHighestOffer: {
+          include: {
+            OffersFullTime: {
+              include: {
+                totalCompensation: true,
+              },
+            },
+            OffersIntern: {
+              include: {
+                monthlySalary: true,
+              },
+            },
+            company: true,
+            profile: {
+              include: {
+                background: true,
+              },
+            },
+          },
+        },
+        topCompanyOffers: {
+          include: {
+            OffersFullTime: {
+              include: {
+                totalCompensation: true,
+              },
+            },
+            OffersIntern: {
+              include: {
+                monthlySalary: true,
+              },
+            },
+            company: true,
+            profile: {
+              include: {
+                background: {
+                  include: {
+                    experiences: {
+                      include: {
+                        company: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        topOverallOffers: {
+          include: {
+            OffersFullTime: {
+              include: {
+                totalCompensation: true,
+              },
+            },
+            OffersIntern: {
+              include: {
+                monthlySalary: true,
+              },
+            },
+            company: true,
+            profile: {
+              include: {
+                background: {
+                  include: {
+                    experiences: {
+                      include: {
+                        company: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return analysis;
   },
 });
