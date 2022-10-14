@@ -10,7 +10,7 @@ export default function ResumeExpandableText({
   children,
 }: ResumeExpandableTextProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [descriptionExpanded, setDescriptionExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [descriptionOverflow, setDescriptionOverflow] = useState(false);
 
   useLayoutEffect(() => {
@@ -20,29 +20,27 @@ export default function ResumeExpandableText({
   }, [ref]);
 
   const onSeeActionClicked = () => {
-    setDescriptionExpanded(!descriptionExpanded);
+    setIsExpanded((prevExpanded) => !prevExpanded);
   };
 
   return (
-    <>
+    <div>
       <span
         ref={ref}
         className={clsx(
           'whitespace-pre-wrap text-sm',
           'line-clamp-3',
-          descriptionExpanded ? 'line-clamp-none' : '',
+          isExpanded ? 'line-clamp-none' : '',
         )}>
         {children}
       </span>
       {descriptionOverflow && (
-        <div className="flex flex-row">
-          <div
-            className="text-xs text-indigo-500 hover:text-indigo-300"
-            onClick={onSeeActionClicked}>
-            {descriptionExpanded ? 'See Less' : 'See More'}
-          </div>
-        </div>
+        <p
+          className="mt-1 cursor-pointer text-xs text-indigo-500 hover:text-indigo-300"
+          onClick={onSeeActionClicked}>
+          {isExpanded ? 'See Less' : 'See More'}
+        </p>
       )}
-    </>
+    </div>
   );
 }

@@ -30,6 +30,7 @@
     "next-auth": "~4.10.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.36.1",
     "react-pdf": "^5.7.2",
     "react-query": "^3.39.2",

@@ -16,6 +16,7 @@ import { Spinner } from '@tih/ui';
 
 import ResumeCommentsSection from '~/components/resumes/comments/ResumeCommentsSection';
 import ResumePdf from '~/components/resumes/ResumePdf';
+import ResumeExpandableText from '~/components/resumes/shared/ResumeExpandableText';
 
 import { trpc } from '~/utils/trpc';
 
@@ -158,7 +159,9 @@ export default function ResumeReviewPage() {
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                 />
-                {detailsQuery.data.additionalInfo}
+                <ResumeExpandableText>
+                  {detailsQuery.data.additionalInfo}
+                </ResumeExpandableText>
               </div>
             )}
             <div className="flex w-full flex-col py-4 lg:flex-row">

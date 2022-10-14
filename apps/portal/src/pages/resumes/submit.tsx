@@ -3,7 +3,9 @@ import clsx from 'clsx';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import type { FileRejection } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { PaperClipIcon } from '@heroicons/react/24/outline';
@@ -16,11 +18,13 @@ import {
   TextInput,
 } from '@tih/ui';
 
+import type { FilterOption } from '~/components/resumes/browse/resumeConstants';
 import {
   EXPERIENCE,
   LOCATION,
   ROLE,
 } from '~/components/resumes/browse/resumeConstants';
+import SubmissionGuidelines from '~/components/resumes/submit-form/SubmissionGuidelines';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
 import { trpc } from '~/utils/trpc';
@@ -43,11 +47,20 @@ type IFormInput = {
   title: string;
 };
 
-export default function SubmitResumeForm() {
-  const { data: session, status } = useSession();
-  const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
-  const router = useRouter();
+type SelectorType = 'experience' | 'location' | 'role';
+type SelectorOptions = {
+  key: SelectorType;
+  label: string;
+  options: Array<FilterOption>;
+};
 
+const selectors: Array<SelectorOptions> = [
+  { key: 'role', label: 'Role', options: ROLE },
+  { key: 'experience', label: 'Experience Level', options: EXPERIENCE },
+  { key: 'location', label: 'Location', options: LOCATION },
+];
+
+export default function SubmitResumeForm() {
   const [resumeFile, setResumeFile] = useState<File | null>();
   const [isLoading, setIsLoading] = useState(false);
   const [invalidFileUploadError, setInvalidFileUploadError] = useState<
@@ -55,13 +68,9 @@ export default function SubmitResumeForm() {
   >(null);
   const [isDialogShown, setIsDialogShown] = useState(false);
 
-  useEffect(() => {
-    if (status !== 'loading') {
-      if (session?.user?.id == null) {
-        router.push('/api/auth/signin');
-      }
-    }
-  }, [router, session, status]);
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
 
   const {
     register,
@@ -75,9 +84,38 @@ export default function SubmitResumeForm() {
     },
   });
 
+  const onFileDrop = useCallback(
+    (acceptedFiles: Array<File>, fileRejections: Array<FileRejection>) => {
+      if (fileRejections.length === 0) {
+        setInvalidFileUploadError('');
+        setResumeFile(acceptedFiles[0]);
+        setValue('file', acceptedFiles[0]);
+      } else {
+        setInvalidFileUploadError(FILE_UPLOAD_ERROR);
+      }
+    },
+    [setValue],
+  );
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'application/pdf': ['.pdf'],
+    },
+    maxFiles: 1,
+    maxSize: FILE_SIZE_LIMIT_BYTES,
+    onDrop: onFileDrop,
+  });
+
+  useEffect(() => {
+    if (status !== 'loading') {
+      if (session?.user?.id == null) {
+        router.push('/api/auth/signin');
+      }
+    }
+  }, [router, session, status]);
+
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     if (resumeFile == null) {
-      console.error('Resume file is empty');
       return;
     }
     setIsLoading(true);
@@ -103,62 +141,53 @@ export default function SubmitResumeForm() {
         url,
       },
       {
-        onError: (error) => {
+        onError(error) {
           console.error(error);
         },
-        onSettled: () => {
+        onSettled() {
           setIsLoading(false);
         },
-        onSuccess: () => {
-          router.push('/resumes');
+        onSuccess() {
+          router.push('/resumes/browse');
         },
       },
     );
   };
 
-  const onUploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.item(0);
-    if (file == null) {
-      return;
-    }
-    if (file.type !== 'application/pdf' || file.size > FILE_SIZE_LIMIT_BYTES) {
-      setInvalidFileUploadError(FILE_UPLOAD_ERROR);
-      return;
-    }
-    setInvalidFileUploadError('');
-    setResumeFile(file);
-  };
-
-  const onClickReset = () => {
+  const onClickClear = () => {
     if (isDirty || resumeFile != null) {
       setIsDialogShown(true);
     }
   };
 
-  const onClickProceedDialog = () => {
+  const onClickResetDialog = () => {
     setIsDialogShown(false);
     reset();
     setResumeFile(null);
+    setInvalidFileUploadError(null);
   };
 
-  const onClickDownload = async () => {
+  const onClickDownload = async (
+    event: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
+  ) => {
     if (resumeFile == null) {
       return;
     }
+    // Prevent click event from propagating up to dropzone
+    event.stopPropagation();
 
     const url = window.URL.createObjectURL(resumeFile);
     const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', resumeFile.name);
-
-    // Append to html link element page
     document.body.appendChild(link);
 
     // Start download
     link.click();
 
-    // Clean up and remove the link
+    // Clean up and remove the link and object URL
     link.remove();
+    URL.revokeObjectURL(url);
   };
 
   const fileUploadError = useMemo(() => {
@@ -179,6 +208,7 @@ export default function SubmitResumeForm() {
         <section
           aria-labelledby="primary-heading"
           className="flex h-full min-w-0 flex-1 flex-col lg:order-last">
+          {/* Reset Dialog component */}
           <Dialog
             isShown={isDialogShown}
             primaryButton={
@@ -186,7 +216,7 @@ export default function SubmitResumeForm() {
                 display="block"
                 label="OK"
                 variant="primary"
-                onClick={onClickProceedDialog}
+                onClick={onClickResetDialog}
               />
             }
             secondaryButton={
@@ -204,6 +234,7 @@ export default function SubmitResumeForm() {
           <div className="mx-20 space-y-4 py-8">
             <form onSubmit={handleSubmit(onSubmit)}>
               <h1 className="mb-4 text-2xl font-bold">Upload a resume</h1>
+              {/*  Title Section */}
               <div className="mb-4">
                 <TextInput
                   {...register('title', { required: true })}
@@ -214,37 +245,20 @@ export default function SubmitResumeForm() {
                   onChange={(val) => setValue('title', val)}
                 />
               </div>
-              <div className="mb-4">
-                <Select
-                  {...register('role', { required: true })}
-                  disabled={isLoading}
-                  label="Role"
-                  options={ROLE}
-                  required={true}
-                  onChange={(val) => setValue('role', val)}
-                />
-              </div>
-              <div className="mb-4">
-                <Select
-                  {...register('experience', { required: true })}
-                  disabled={isLoading}
-                  label="Experience Level"
-                  options={EXPERIENCE}
-                  required={true}
-                  onChange={(val) => setValue('experience', val)}
-                />
-              </div>
-              <div className="mb-4">
-                <Select
-                  {...register('location', { required: true })}
-                  disabled={isLoading}
-                  label="Location"
-                  name="location"
-                  options={LOCATION}
-                  required={true}
-                  onChange={(val) => setValue('location', val)}
-                />
-              </div>
+              {/*  Selectors */}
+              {selectors.map((item) => (
+                <div key={item.key} className="mb-4">
+                  <Select
+                    {...register(item.key, { required: true })}
+                    disabled={isLoading}
+                    label={item.label}
+                    options={item.options}
+                    required={true}
+                    onChange={(val) => setValue(item.key, val)}
+                  />
+                </div>
+              ))}
+              {/*  Upload Resume Section */}
               <p className="text-sm font-medium text-slate-700">
                 Upload resume (PDF format)
                 <span aria-hidden="true" className="text-danger-500">
@@ -252,11 +266,13 @@ export default function SubmitResumeForm() {
                   *
                 </span>
               </p>
+              {/*  Upload Resume Box */}
               <div className="mb-4">
                 <div
+                  {...getRootProps()}
                   className={clsx(
                     fileUploadError ? 'border-danger-600' : 'border-gray-300',
-                    'mt-2 flex justify-center rounded-md border-2 border-dashed  px-6 pt-5 pb-6',
+                    'mt-2 flex justify-center rounded-md border-2  border-dashed px-6 pt-5 pb-6',
                   )}>
                   <div className="space-y-1 text-center">
                     <div className="flex gap-2">
@@ -265,7 +281,7 @@ export default function SubmitResumeForm() {
                       ) : (
                         <div className="flex gap-2">
                           <p
-                            className="cursor-pointer  underline underline-offset-1 hover:text-indigo-600"
+                            className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
                             onClick={onClickDownload}>
                             {resumeFile.name}
                           </p>
@@ -276,20 +292,25 @@ export default function SubmitResumeForm() {
                       <label
                         className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
                         htmlFor="file-upload">
-                        <p className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-500">
-                          {resumeFile == null
-                            ? 'Upload a file'
-                            : 'Replace file'}
-                        </p>
+                        <div className="flex gap-1 ">
+                          <p className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
+                            {resumeFile == null
+                              ? 'Upload a file'
+                              : 'Replace file'}
+                          </p>
+                          <span className="text-gray-500">
+                            or drag and drop
+                          </span>
+                        </div>
                         <input
                           {...register('file', { required: true })}
+                          {...getInputProps()}
                           accept="application/pdf"
                           className="sr-only"
                           disabled={isLoading}
                           id="file-upload"
                           name="file-upload"
                           type="file"
-                          onChange={onUploadFile}
                         />
                       </label>
                     </div>
@@ -302,6 +323,7 @@ export default function SubmitResumeForm() {
                   <p className="text-danger-600 text-sm">{fileUploadError}</p>
                 )}
               </div>
+              {/*  Additional Info Section */}
               <div className="mb-8">
                 <TextArea
                   {...register('additionalInfo')}
@@ -311,58 +333,28 @@ export default function SubmitResumeForm() {
                   onChange={(val) => setValue('additionalInfo', val)}
                 />
               </div>
-              <div className="mb-4 text-left text-sm text-slate-700">
-                <h2 className="mb-2 text-xl font-medium">
-                  Submission Guidelines
-                </h2>
-                <p>
-                  Before you submit, please review and acknolwedge our
-                  <span className="font-bold"> submission guidelines </span>
-                  stated below.
-                </p>
-                <p>
-                  <span className="text-lg font-bold">• </span>
-                  Ensure that you do not divulge any of your
-                  <span className="font-bold"> personal particulars</span>.
-                </p>
-                <p>
-                  <span className="text-lg font-bold">• </span>
-                  Ensure that you do not divulge any
-                  <span className="font-bold">
-                    {' '}
-                    company's proprietary and confidential information
-                  </span>
-                  .
-                </p>
-                <p>
-                  <span className="text-lg font-bold">• </span>
-                  Proof-read your resumes to look for grammatical/spelling
-                  errors.
-                </p>
-              </div>
+              {/*  Submission Guidelines */}
+              <SubmissionGuidelines />
               <CheckboxInput
                 {...register('isChecked', { required: true })}
                 disabled={isLoading}
                 label="I have read and will follow the guidelines stated."
                 onChange={(val) => setValue('isChecked', val)}
               />
+              {/*  Clear and Submit Buttons */}
               <div className="mt-4 flex justify-end gap-4">
                 <Button
                   addonPosition="start"
                   disabled={isLoading}
-                  display="inline"
                   label="Clear"
-                  size="md"
                   variant="tertiary"
-                  onClick={onClickReset}
+                  onClick={onClickClear}
                 />
                 <Button
                   addonPosition="start"
                   disabled={isLoading}
-                  display="inline"
                   isLoading={isLoading}
                   label="Submit"
-                  size="md"
                   type="submit"
                   variant="primary"
                 />
