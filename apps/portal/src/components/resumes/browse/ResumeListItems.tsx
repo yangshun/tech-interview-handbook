@@ -23,7 +23,7 @@ export default function ResumeListItems({ isLoading, resumes }: Props) {
       {resumes.map((resumeObj: Resume) => (
         <li key={resumeObj.id}>
           <ResumseListItem
-            href={`resumes/${resumeObj.id}`}
+            href={`/resumes/${resumeObj.id}`}
             resumeInfo={resumeObj}
           />
         </li>
