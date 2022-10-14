@@ -60,8 +60,26 @@ const selectors: Array<SelectorOptions> = [
   { key: 'location', label: 'Location', options: LOCATION },
 ];
 
-export default function SubmitResumeForm() {
-  const [resumeFile, setResumeFile] = useState<File | null>();
+type InitFormDetails = {
+  additionalInfo?: string;
+  experience: string;
+  location: string;
+  resumeId: string;
+  role: string;
+  title: string;
+  url: string;
+};
+
+type Props = Readonly<{
+  initFormDetails?: InitFormDetails | null;
+  onClose: () => void;
+}>;
+
+export default function SubmitResumeForm({
+  initFormDetails,
+  onClose = () => undefined,
+}: Props) {
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [invalidFileUploadError, setInvalidFileUploadError] = useState<
     string | null
@@ -70,7 +88,8 @@ export default function SubmitResumeForm() {
 
   const { data: session, status } = useSession();
   const router = useRouter();
-  const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
+  const resumeUpsertMutation = trpc.useMutation('resumes.resume.user.upsert');
+  const isNewForm = initFormDetails == null;
 
   const {
     register,
@@ -81,6 +100,7 @@ export default function SubmitResumeForm() {
   } = useForm<IFormInput>({
     defaultValues: {
       isChecked: false,
+      ...initFormDetails,
     },
   });
 
@@ -89,7 +109,9 @@ export default function SubmitResumeForm() {
       if (fileRejections.length === 0) {
         setInvalidFileUploadError('');
         setResumeFile(acceptedFiles[0]);
-        setValue('file', acceptedFiles[0]);
+        setValue('file', acceptedFiles[0], {
+          shouldDirty: true,
+        });
       } else {
         setInvalidFileUploadError(FILE_UPLOAD_ERROR);
       }
@@ -106,6 +128,30 @@ export default function SubmitResumeForm() {
     onDrop: onFileDrop,
   });
 
+  const fetchFilePdf = useCallback(async () => {
+    const fileUrl = initFormDetails?.url;
+
+    if (fileUrl == null) {
+      return;
+    }
+
+    const data = await axios
+      .get(fileUrl, {
+        responseType: 'blob',
+      })
+      .then((res) => res.data);
+
+    const keyAndFileName = fileUrl.substring(fileUrl.indexOf('resumes'));
+    const fileName = keyAndFileName.substring(keyAndFileName.indexOf('-') + 1);
+
+    const file = new File([data], fileName);
+    setResumeFile(file);
+    setValue('file', file, {
+      shouldDirty: false,
+    });
+  }, [initFormDetails?.url, setValue]);
+
+  // Route user to sign in if not logged in
   useEffect(() => {
     if (status !== 'loading') {
       if (session?.user?.id == null) {
@@ -113,6 +159,11 @@ export default function SubmitResumeForm() {
       }
     }
   }, [router, session, status]);
+
+  // Fetch initial file PDF for edit form
+  useEffect(() => {
+    fetchFilePdf();
+  }, [fetchFilePdf]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     if (resumeFile == null) {
@@ -131,10 +182,11 @@ export default function SubmitResumeForm() {
     });
     const { url } = res.data;
 
-    resumeCreateMutation.mutate(
+    resumeUpsertMutation.mutate(
       {
         additionalInfo: data.additionalInfo,
         experience: data.experience,
+        id: initFormDetails?.resumeId,
         location: data.location,
         role: data.role,
         title: data.title,
@@ -148,19 +200,26 @@ export default function SubmitResumeForm() {
           setIsLoading(false);
         },
         onSuccess() {
-          router.push('/resumes/browse');
+          if (isNewForm) {
+            router.push('/resumes/browse');
+          } else {
+            onClose();
+          }
         },
       },
     );
   };
 
   const onClickClear = () => {
-    if (isDirty || resumeFile != null) {
+    if (isDirty) {
       setIsDialogShown(true);
+    } else {
+      onClose();
     }
   };
 
   const onClickResetDialog = () => {
+    onClose();
     setIsDialogShown(false);
     reset();
     setResumeFile(null);
@@ -227,7 +286,11 @@ export default function SubmitResumeForm() {
                 onClick={() => setIsDialogShown(false)}
               />
             }
-            title="Are you sure you want to clear?"
+            title={
+              isNewForm
+                ? 'Are you sure you want to clear?'
+                : 'Are you sure you want to leave?'
+            }
             onClose={() => setIsDialogShown(false)}>
             Note that your current input will not be saved!
           </Dialog>
@@ -346,7 +409,7 @@ export default function SubmitResumeForm() {
                 <Button
                   addonPosition="start"
                   disabled={isLoading}
-                  label="Clear"
+                  label={isNewForm ? 'Clear' : 'Cancel'}
                   variant="tertiary"
                   onClick={onClickClear}
                 />
