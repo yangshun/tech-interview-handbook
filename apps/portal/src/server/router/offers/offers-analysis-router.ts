@@ -71,6 +71,12 @@ export const offersAnalysisRouter = createRouter().query('generate', {
     profileId: z.string(),
   }),
   async resolve({ ctx, input }) {
+    await ctx.prisma.offersAnalysis.deleteMany({
+      where: {
+        profileId: input.profileId,
+      },
+    });
+
     const offers = await ctx.prisma.offersOffer.findMany({
       include: {
         OffersFullTime: {

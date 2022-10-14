@@ -358,10 +358,10 @@ model OffersFullTime {
 model OffersAnalysis {
   id String @id @default(cuid())
 
-  profile   OffersProfile @relation(fields: [profileId], references: [id])
+  profile   OffersProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId String        @unique
 
-  overallHighestOffer OffersOffer @relation("HighestOverallOffer", fields: [offerId], references: [id])
+  overallHighestOffer OffersOffer @relation("HighestOverallOffer", fields: [offerId], references: [id], onDelete: Cascade)
   offerId             String      @unique
 
   // OVERALL
