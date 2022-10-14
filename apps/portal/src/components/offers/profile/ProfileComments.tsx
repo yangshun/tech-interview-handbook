@@ -1,5 +1,7 @@
 import { ClipboardDocumentIcon, ShareIcon } from '@heroicons/react/24/outline';
-import { Button, Spinner } from '@tih/ui';
+import { Button, Spinner, TextArea } from '@tih/ui';
+
+import ExpandableCommentCard from './comments/ExpandableCommentCard';
 
 type ProfileHeaderProps = Readonly<{
   handleCopyEditLink: () => void;
@@ -16,6 +18,9 @@ export default function ProfileComments({
   isEditable,
   isLoading,
 }: ProfileHeaderProps) {
+  function handleReply(replayingToId: string, userId: string) {
+    return replayingToId + userId; // To integrate with API
+  }
   if (isLoading) {
     return (
       <div className="col-span-10 pt-4">
@@ -52,7 +57,41 @@ export default function ProfileComments({
       <h2 className="mt-2 text-2xl font-bold">
         Discussions feature coming soon
       </h2>
-      {/* <TextArea label="Comment" placeholder="Type your comment here" /> */}
+      <ExpandableCommentCard
+        comment={{
+          createdAt: new Date(),
+          id: '1',
+          message: 'Test comment',
+          profileId: '123',
+          replies: [
+            {
+              createdAt: new Date(),
+              id: '123',
+              message: 'Test comment',
+              profileId: '123',
+              replies: undefined,
+              replyingToId: '12345',
+              userId: '12314',
+              username: 'nihao username',
+            },
+            {
+              createdAt: new Date(),
+              id: '12334',
+              message: 'Test comment',
+              profileId: '123',
+              replies: undefined,
+              replyingToId: '12345',
+              userId: '12314',
+              username: 'nihao username',
+            },
+          ],
+          replyingToId: '12345',
+          userId: '12314',
+          username: 'nihao username',
+        }}
+        handleReply={handleReply}
+      />
+      <TextArea label="Comment" placeholder="Type your comment here" />
     </div>
   );
 }

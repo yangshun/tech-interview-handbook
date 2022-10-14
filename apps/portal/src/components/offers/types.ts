@@ -158,3 +158,14 @@ export type BackgroundCard = {
   specificYoes: Array<SpecificYoe>;
   totalYoe: string;
 };
+
+export type CommentEntity = {
+  createdAt: Date;
+  id: string;
+  message: string;
+  profileId: string;
+  replies?: Array<CommentEntity>;
+  replyingToId: string;
+  userId: string;
+  username: string;
+};
