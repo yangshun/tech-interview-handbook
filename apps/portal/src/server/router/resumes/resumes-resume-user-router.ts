@@ -5,11 +5,12 @@ import { createProtectedRouter } from '../context';
 import type { Resume } from '~/types/resume';
 
 export const resumesResumeUserRouter = createProtectedRouter()
-  .mutation('create', {
+  .mutation('upsert', {
     // TODO: Use enums for experience, location, role
     input: z.object({
       additionalInfo: z.string().optional(),
       experience: z.string(),
+      id: z.string().optional(),
       location: z.string(),
       role: z.string(),
       title: z.string(),
@@ -17,10 +18,28 @@ export const resumesResumeUserRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user.id;
-      return await ctx.prisma.resumesResume.create({
-        data: {
-          ...input,
+
+      return await ctx.prisma.resumesResume.upsert({
+        create: {
+          additionalInfo: input.additionalInfo,
+          experience: input.experience,
+          location: input.location,
+          role: input.role,
+          title: input.title,
+          url: input.url,
           userId,
+        },
+        update: {
+          additionalInfo: input.additionalInfo,
+          experience: input.experience,
+          location: input.location,
+          role: input.role,
+          title: input.title,
+          url: input.url,
+          userId,
+        },
+        where: {
+          id: input.id ?? '',
         },
       });
     },
