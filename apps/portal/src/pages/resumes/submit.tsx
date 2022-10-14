@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { FileRejection } from 'react-dropzone';
 import { useDropzone } from 'react-dropzone';
 import type { SubmitHandler } from 'react-hook-form';
@@ -61,10 +61,6 @@ const selectors: Array<SelectorOptions> = [
 ];
 
 export default function SubmitResumeForm() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
-
   const [resumeFile, setResumeFile] = useState<File | null>();
   const [isLoading, setIsLoading] = useState(false);
   const [invalidFileUploadError, setInvalidFileUploadError] = useState<
@@ -72,17 +68,34 @@ export default function SubmitResumeForm() {
   >(null);
   const [isDialogShown, setIsDialogShown] = useState(false);
 
-  const onFileDrop = (
-    acceptedFiles: Array<File>,
-    fileRejections: Array<FileRejection>,
-  ) => {
-    if (fileRejections.length === 0) {
-      setInvalidFileUploadError('');
-      setResumeFile(acceptedFiles[0]);
-    } else {
-      setInvalidFileUploadError(FILE_UPLOAD_ERROR);
-    }
-  };
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<IFormInput>({
+    defaultValues: {
+      isChecked: false,
+    },
+  });
+
+  const onFileDrop = useCallback(
+    (acceptedFiles: Array<File>, fileRejections: Array<FileRejection>) => {
+      if (fileRejections.length === 0) {
+        setInvalidFileUploadError('');
+        setResumeFile(acceptedFiles[0]);
+        setValue('file', acceptedFiles[0]);
+      } else {
+        setInvalidFileUploadError(FILE_UPLOAD_ERROR);
+      }
+    },
+    [setValue],
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -100,18 +113,6 @@ export default function SubmitResumeForm() {
       }
     }
   }, [router, session, status]);
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    reset,
-    formState: { errors, isDirty },
-  } = useForm<IFormInput>({
-    defaultValues: {
-      isChecked: false,
-    },
-  });
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     if (resumeFile == null) {
@@ -163,6 +164,7 @@ export default function SubmitResumeForm() {
     setIsDialogShown(false);
     reset();
     setResumeFile(null);
+    setInvalidFileUploadError(null);
   };
 
   const onClickDownload = async (
