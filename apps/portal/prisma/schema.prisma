@@ -190,6 +190,8 @@ model OffersProfile {
 
   user   User?   @relation(fields: [userId], references: [id])
   userId String?
+
+  OffersAnalysis OffersAnalysis?
 }
 
 model OffersBackground {
@@ -316,6 +318,11 @@ model OffersOffer {
 
   OffersFullTime   OffersFullTime? @relation(fields: [offersFullTimeId], references: [id], onDelete: Cascade)
   offersFullTimeId String?         @unique
+
+  OffersAnalysis OffersAnalysis? @relation("HighestOverallOffer")
+
+  OffersAnalysisTopOverallOffers OffersAnalysis[] @relation("TopOverallOffers")
+  OffersAnalysisTopCompanyOffers OffersAnalysis[] @relation("TopCompanyOffers")
 }
 
 model OffersIntern {
@@ -346,6 +353,26 @@ model OffersFullTime {
   stocksId            String         @unique
 
   OffersOffer OffersOffer?
+}
+
+model OffersAnalysis {
+  id String @id @default(cuid())
+
+  profile   OffersProfile @relation(fields: [profileId], references: [id])
+  profileId String        @unique
+
+  overallHighestOffer OffersOffer @relation("HighestOverallOffer", fields: [offerId], references: [id])
+  offerId             String      @unique
+
+  // OVERALL
+  overallPercentile Int
+  noOfSimilarOffers Int
+  topOverallOffers  OffersOffer[] @relation("TopOverallOffers")
+
+  // Company
+  companyPercentile        Int
+  noOfSimilarCompanyOffers Int
+  topCompanyOffers         OffersOffer[] @relation("TopCompanyOffers")
 }
 
 // End of Offers project models.

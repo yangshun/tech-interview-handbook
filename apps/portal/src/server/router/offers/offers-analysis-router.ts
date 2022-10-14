@@ -225,22 +225,22 @@ export const offersAnalysisRouter = createRouter().query('generate', {
       (offer) => offer.id !== overallHighestOffer.id,
     );
 
-    const similarOffersCount = similarOffers.length;
+    const noOfSimilarOffers = similarOffers.length;
     const similarOffers90PercentileIndex =
-      Math.floor(similarOffersCount * 0.9) - 1;
+      Math.floor(noOfSimilarOffers * 0.9) - 1;
     const topPercentileOffers =
-      similarOffersCount > 1
+      noOfSimilarOffers > 1
         ? similarOffers.slice(
             similarOffers90PercentileIndex,
             similarOffers90PercentileIndex + 2,
           )
         : similarOffers;
 
-    const similarCompanyOffersCount = similarCompanyOffers.length;
+    const noOfSimilarCompanyOffers = similarCompanyOffers.length;
     const similarCompanyOffers90PercentileIndex =
-      Math.floor(similarCompanyOffersCount * 0.9) - 1;
+      Math.floor(noOfSimilarCompanyOffers * 0.9) - 1;
     const topPercentileCompanyOffers =
-      similarCompanyOffersCount > 1
+      noOfSimilarCompanyOffers > 1
         ? similarCompanyOffers.slice(
             similarCompanyOffers90PercentileIndex,
             similarCompanyOffers90PercentileIndex + 2,
@@ -250,12 +250,12 @@ export const offersAnalysisRouter = createRouter().query('generate', {
     return {
       company: {
         highestOfferAgainstCompanyPercentile,
-        similarCompanyOffersCount,
+        noOfSimilarCompanyOffers,
         topPercentileCompanyOffers,
       },
       overall: {
         highestOfferAgainstOverallPercentile,
-        similarOffersCount,
+        noOfSimilarOffers,
         topPercentileOffers,
       },
       overallHighestOffer,
