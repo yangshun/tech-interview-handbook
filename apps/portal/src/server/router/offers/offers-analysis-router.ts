@@ -66,6 +66,86 @@ const binarySearchOfferPercentile = (
   return -1;
 };
 
+const topPercentileDtoMapper = (topPercentileOffers: Array<any>) => {
+  return topPercentileOffers.map((offer) => {
+    const { background } = offer.profile;
+    return {
+      company: { id: offer.company.id, name: offer.company.name },
+      id: offer.id,
+      jobType: offer.jobType,
+      level: offer.OffersFullTime?.level,
+      monthYearReceived: offer.monthYearReceived,
+      monthlySalary: offer.OffersIntern?.monthlySalary?.value,
+      negotiationStrategy: offer.negotiationStrategy,
+      profile: {
+        background: {
+          experiences: background?.experiences.map(
+            (exp: { company: { id: any; name: any }; id: any }) => {
+              return {
+                company: { id: exp.company.id, name: exp.company.name },
+                id: exp.id,
+              };
+            },
+          ),
+          id: background?.id,
+          totalYoe: background?.totalYoe,
+        },
+        id: offer.profileId,
+        name: offer.profile.profileName,
+      },
+      specialization:
+        offer.jobType === JobType.FULLTIME
+          ? offer.OffersFullTime?.specialization
+          : offer.OffersIntern?.specialization,
+      title:
+        offer.jobType === JobType.FULLTIME
+          ? offer.OffersFullTime?.title
+          : offer.OffersIntern?.title,
+      totalCompensation: offer.OffersFullTime?.totalCompensation?.value,
+    };
+  });
+};
+
+const specificAnalysisDtoMapper = (
+  noOfOffers: number,
+  percentile: number,
+  topPercentileOffers: Array<any>,
+) => {
+  return {
+    noOfOffers,
+    percentile,
+    topPercentileCompanyOffers: topPercentileDtoMapper(topPercentileOffers),
+  };
+};
+
+const highestOfferDtoMapper = (
+  offer: OffersOffer & {
+    OffersFullTime:
+      | (OffersFullTime & {
+          baseSalary: OffersCurrency;
+          bonus: OffersCurrency;
+          stocks: OffersCurrency;
+          totalCompensation: OffersCurrency;
+        })
+      | null;
+    OffersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
+    company: Company;
+    profile: OffersProfile & { background: OffersBackground | null };
+  },
+) => {
+  return {
+    company: { id: offer.company.id, name: offer.company.name },
+    id: offer.id,
+    level: offer.OffersFullTime?.level,
+    location: offer.location,
+    specialization:
+      offer.jobType === JobType.FULLTIME
+        ? offer.OffersFullTime?.specialization
+        : offer.OffersIntern?.specialization,
+    totalYoe: offer.profile.background?.totalYoe,
+  };
+};
+
 export const offersAnalysisRouter = createRouter().query('generate', {
   input: z.object({
     profileId: z.string(),
@@ -378,6 +458,20 @@ export const offersAnalysisRouter = createRouter().query('generate', {
       },
     });
 
-    return analysis;
+    return {
+      companyAnalysis: specificAnalysisDtoMapper(
+        noOfSimilarCompanyOffers,
+        companyPercentile,
+        topPercentileCompanyOffers,
+      ),
+      id: analysis.id,
+      overallAnalysis: specificAnalysisDtoMapper(
+        noOfSimilarOffers,
+        overallPercentile,
+        topPercentileOffers,
+      ),
+      overallHighestOffer: highestOfferDtoMapper(overallHighestOffer),
+      profileId: analysis.profileId,
+    };
   },
 });
