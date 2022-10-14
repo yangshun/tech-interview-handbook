@@ -281,8 +281,8 @@ export default function SubmitResumeForm() {
                       ) : (
                         <div className="flex gap-2">
                           <p
-                            className="cursor-pointer  underline underline-offset-1 hover:text-indigo-600"
-                            onClick={(event) => onClickDownload(event)}>
+                            className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
+                            onClick={onClickDownload}>
                             {resumeFile.name}
                           </p>
                         </div>
@@ -293,7 +293,7 @@ export default function SubmitResumeForm() {
                         className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
                         htmlFor="file-upload">
                         <div className="flex gap-1 ">
-                          <p className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-500">
+                          <p className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
                             {resumeFile == null
                               ? 'Upload a file'
                               : 'Replace file'}
