@@ -3,7 +3,7 @@ import type { ProductNavigationItems } from '~/components/global/ProductNavigati
 const navigation: ProductNavigationItems = [
   {
     children: [],
-    href: '/resumes',
+    href: '/resumes/browse',
     name: 'Browse',
   },
   { children: [], href: '/resumes/submit', name: 'Submit for review' },
