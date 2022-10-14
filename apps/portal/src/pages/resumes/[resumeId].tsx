@@ -144,7 +144,6 @@ export default function ResumeReviewPage() {
                     {detailsQuery.data?._count.stars}
                   </span>
                 </button>
-                {/* See where we wanna put the button */}
                 {userIsOwner && (
                   <button
                     className="p h-10 rounded-md border border-gray-300 bg-white py-1 px-2 text-center"
