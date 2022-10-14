@@ -112,4 +112,18 @@ export const resumesResumeUserRouter = createProtectedRouter()
         return resume;
       });
     },
+  })
+  .query('isResumeStarred', {
+    input: z.object({
+      resumeId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+      const { resumeId } = input;
+      return await ctx.prisma.resumesStar.findUnique({
+        where: {
+          userId_resumeId: { resumeId, userId },
+        },
+      });
+    },
   });

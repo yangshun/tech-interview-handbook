@@ -144,7 +144,7 @@ export default function ResumeHomePage() {
     },
   );
 
-  const onClickNew = () => {
+  const onSubmitResume = () => {
     if (sessionData?.user?.id) {
       router.push('/resumes/submit');
     } else {
@@ -185,7 +185,9 @@ export default function ResumeHomePage() {
           <div className="w-screen sm:px-4 md:px-8">
             <div className="grid grid-cols-12">
               <div className="col-span-2 self-end">
-                <h1 className="mb-4 tracking-tight text-gray-900">Filters</h1>
+                <h3 className="text-md mb-4 font-medium tracking-tight text-gray-900">
+                  Shortcuts:
+                </h3>
               </div>
               <div className="col-span-10">
                 <div className="border-grey-200 grid grid-cols-12 items-center gap-4 border-b pb-2">
@@ -240,8 +242,8 @@ export default function ResumeHomePage() {
                     <button
                       className="rounded-md bg-indigo-500 py-1 px-3 text-sm text-white"
                       type="button"
-                      onClick={onClickNew}>
-                      New
+                      onClick={onSubmitResume}>
+                      Submit
                     </button>
                   </div>
                 </div>
@@ -252,7 +254,7 @@ export default function ResumeHomePage() {
               <div className="col-span-2">
                 <div className="w-100 pt-4 sm:pr-0 md:pr-4">
                   <form>
-                    <h3 className="sr-only">Categories</h3>
+                    <h3 className="sr-only">Shortcuts</h3>
                     <ul
                       className="flex flex-wrap justify-start gap-4 pb-6 text-sm font-medium text-gray-900"
                       role="list">
@@ -266,7 +268,9 @@ export default function ResumeHomePage() {
                         </li>
                       ))}
                     </ul>
-
+                    <h3 className="text-md my-4 font-medium tracking-tight text-gray-900">
+                      Explore these filters:
+                    </h3>
                     {filters.map((section) => (
                       <Disclosure
                         key={section.id}
@@ -328,7 +332,7 @@ export default function ResumeHomePage() {
                   </form>
                 </div>
               </div>
-              <div className="col-span-10 pr-8">
+              <div className="col-span-10 mb-6">
                 {renderSignInButton && (
                   <ResumeSignInButton text={signInButtonText} />
                 )}

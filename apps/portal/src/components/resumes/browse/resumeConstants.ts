@@ -46,16 +46,16 @@ export const EXPERIENCE: Array<FilterOption> = [
   { label: 'Junior', value: 'Junior' },
   { label: 'Senior', value: 'Senior' },
   {
-    label: 'Fresh Grad (0-1 years)',
-    value: 'Fresh Grad (0-1 years)',
+    label: 'Entry Level (0 - 2 years)',
+    value: 'Entry Level (0 - 2 years)',
   },
   {
-    label: 'Mid-level (2 - 5 years)',
-    value: 'Mid-level (2 - 5 years)',
+    label: 'Mid Level (3 - 5 years)',
+    value: 'Mid Level (3 - 5 years)',
   },
   {
-    label: 'Senior (5+ years)',
-    value: 'Senior (5+ years)',
+    label: 'Senior Level (5+ years)',
+    value: 'Senior Level (5+ years)',
   },
 ];
 
