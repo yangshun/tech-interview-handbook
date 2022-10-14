@@ -4,6 +4,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useMemo, useState } from 'react';
+import type { FileRejection } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { PaperClipIcon } from '@heroicons/react/24/outline';
@@ -45,8 +47,8 @@ type IFormInput = {
 
 export default function SubmitResumeForm() {
   const { data: session, status } = useSession();
-  const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
   const router = useRouter();
+  const resumeCreateMutation = trpc.useMutation('resumes.resume.user.create');
 
   const [resumeFile, setResumeFile] = useState<File | null>();
   const [isLoading, setIsLoading] = useState(false);
@@ -54,6 +56,27 @@ export default function SubmitResumeForm() {
     string | null
   >(null);
   const [isDialogShown, setIsDialogShown] = useState(false);
+
+  const onFileDrop = (
+    acceptedFiles: Array<File>,
+    fileRejections: Array<FileRejection>,
+  ) => {
+    if (fileRejections.length === 0) {
+      setInvalidFileUploadError('');
+      setResumeFile(acceptedFiles[0]);
+    } else {
+      setInvalidFileUploadError(FILE_UPLOAD_ERROR);
+    }
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'application/pdf': ['.pdf'],
+    },
+    maxFiles: 1,
+    maxSize: FILE_SIZE_LIMIT_BYTES,
+    onDrop: onFileDrop,
+  });
 
   useEffect(() => {
     if (status !== 'loading') {
@@ -77,7 +100,6 @@ export default function SubmitResumeForm() {
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     if (resumeFile == null) {
-      console.error('Resume file is empty');
       return;
     }
     setIsLoading(true);
@@ -110,55 +132,45 @@ export default function SubmitResumeForm() {
           setIsLoading(false);
         },
         onSuccess: () => {
-          router.push('/resumes');
+          router.push('/resumes/browse');
         },
       },
     );
   };
 
-  const onUploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.item(0);
-    if (file == null) {
-      return;
-    }
-    if (file.type !== 'application/pdf' || file.size > FILE_SIZE_LIMIT_BYTES) {
-      setInvalidFileUploadError(FILE_UPLOAD_ERROR);
-      return;
-    }
-    setInvalidFileUploadError('');
-    setResumeFile(file);
-  };
-
-  const onClickReset = () => {
+  const onClickClear = () => {
     if (isDirty || resumeFile != null) {
       setIsDialogShown(true);
     }
   };
 
-  const onClickProceedDialog = () => {
+  const onClickResetDialog = () => {
     setIsDialogShown(false);
     reset();
     setResumeFile(null);
   };
 
-  const onClickDownload = async () => {
+  const onClickDownload = async (
+    event: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
+  ) => {
     if (resumeFile == null) {
       return;
     }
+    // Prevent click event from propagating up to dropzone
+    event.stopPropagation();
 
     const url = window.URL.createObjectURL(resumeFile);
     const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', resumeFile.name);
-
-    // Append to html link element page
     document.body.appendChild(link);
 
     // Start download
     link.click();
 
-    // Clean up and remove the link
+    // Clean up and remove the link and object URL
     link.remove();
+    URL.revokeObjectURL(url);
   };
 
   const fileUploadError = useMemo(() => {
@@ -186,7 +198,7 @@ export default function SubmitResumeForm() {
                 display="block"
                 label="OK"
                 variant="primary"
-                onClick={onClickProceedDialog}
+                onClick={onClickResetDialog}
               />
             }
             secondaryButton={
@@ -254,9 +266,10 @@ export default function SubmitResumeForm() {
               </p>
               <div className="mb-4">
                 <div
+                  {...getRootProps()}
                   className={clsx(
                     fileUploadError ? 'border-danger-600' : 'border-gray-300',
-                    'mt-2 flex justify-center rounded-md border-2 border-dashed  px-6 pt-5 pb-6',
+                    'mt-2 flex justify-center rounded-md border-2  border-dashed px-6 pt-5 pb-6',
                   )}>
                   <div className="space-y-1 text-center">
                     <div className="flex gap-2">
@@ -266,7 +279,7 @@ export default function SubmitResumeForm() {
                         <div className="flex gap-2">
                           <p
                             className="cursor-pointer  underline underline-offset-1 hover:text-indigo-600"
-                            onClick={onClickDownload}>
+                            onClick={(event) => onClickDownload(event)}>
                             {resumeFile.name}
                           </p>
                         </div>
@@ -276,20 +289,25 @@ export default function SubmitResumeForm() {
                       <label
                         className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
                         htmlFor="file-upload">
-                        <p className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-500">
-                          {resumeFile == null
-                            ? 'Upload a file'
-                            : 'Replace file'}
-                        </p>
+                        <div className="flex gap-1 ">
+                          <p className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-500">
+                            {resumeFile == null
+                              ? 'Upload a file'
+                              : 'Replace file'}
+                          </p>
+                          <span className="text-gray-500">
+                            or drag and drop
+                          </span>
+                        </div>
                         <input
                           {...register('file', { required: true })}
+                          {...getInputProps()}
                           accept="application/pdf"
                           className="sr-only"
                           disabled={isLoading}
                           id="file-upload"
                           name="file-upload"
                           type="file"
-                          onChange={onUploadFile}
                         />
                       </label>
                     </div>
@@ -354,7 +372,7 @@ export default function SubmitResumeForm() {
                   label="Clear"
                   size="md"
                   variant="tertiary"
-                  onClick={onClickReset}
+                  onClick={onClickClear}
                 />
                 <Button
                   addonPosition="start"
