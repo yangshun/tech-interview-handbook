@@ -3,17 +3,31 @@ import * as trpc from '@trpc/server';
 
 import { createProtectedRouter } from '../context';
 
+import type { Reply } from '~/types/offers-profile';
+
+
 export const offersCommentsRouter = createProtectedRouter()
     .query('getComments', {
         input: z.object({
             profileId: z.string()
         }),
         async resolve({ ctx, input }) {
+
+            const profile = await ctx.prisma.offersProfile.findFirst({
+                where: {
+                    id: input.profileId
+                }
+            })
+
             const result = await ctx.prisma.offersProfile.findFirst({
                 include: {
                     discussion: {
                         include: {
-                            replies: true,
+                            replies: {
+                                include: {
+                                    user: true
+                                }
+                            },
                             replyingTo: true,
                             user: true
                         }
@@ -25,7 +39,32 @@ export const offersCommentsRouter = createProtectedRouter()
             })
 
             if (result) {
-                return result.discussion.filter((x) => x.replyingToId === null)
+                return result.discussion
+                    .filter((x: Reply) => x.replyingToId === null)
+                    .map((x: Reply) => {
+                        if (x.user == null) {
+                            x.user = {
+                                email: "",
+                                emailVerified: null,
+                                id: "",
+                                image: "",
+                                name: profile?.profileName ?? "<missing name>"
+                            }
+                        }
+
+                        x.replies?.map((y) => {
+                            if (y.user == null) {
+                                y.user = {
+                                    email: "",
+                                    emailVerified: null,
+                                    id: "",
+                                    image: "",
+                                    name: profile?.profileName ?? "<missing name>"
+                                }
+                            }
+                        })
+                        return x;
+                    })
             }
 
             return result

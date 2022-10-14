@@ -4,7 +4,7 @@ import * as trpc from '@trpc/server';
 
 import { createRouter } from '../context';
 
-import type { offersProfile } from '~/types/offers-profile';
+import type { OffersProfile } from '~/types/offers-profile';
 
 const valuation = z.object({
   currency: z.string(),
@@ -99,19 +99,19 @@ type WithIsEditable<T> = T & {
 };
 
 function computeIsEditable(
-  profileInput: offersProfile,
+  profileInput: OffersProfile,
   editToken?: string,
-): WithIsEditable<offersProfile> {
+): WithIsEditable<OffersProfile> {
   return {
     ...profileInput,
     isEditable: profileInput.editToken === editToken,
   };
 }
 
-function exclude<Key extends keyof WithIsEditable<offersProfile>>(
-  profile: WithIsEditable<offersProfile>,
+function exclude<Key extends keyof WithIsEditable<OffersProfile>>(
+  profile: WithIsEditable<OffersProfile>,
   ...keys: Array<Key>
-): Omit<WithIsEditable<offersProfile>, Key> {
+): Omit<WithIsEditable<OffersProfile>, Key> {
   for (const key of keys) {
     delete profile[key];
   }

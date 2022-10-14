@@ -1,26 +1,26 @@
-export type offersProfile = {
-  background?: background | null;
+export type OffersProfile = {
+  background?: Background | null;
   createdAt: Date;
 //   Discussions: Array<discussion>;
   editToken: string;
   id: string;
-  offers: Array<offer>;
+  offers: Array<Offer>;
   profileName: string;
   userId?: string | null;
 };
 
-export type background = {
-  educations: Array<education>;
-  experiences: Array<experience>;
+export type Background = {
+  educations: Array<Education>;
+  experiences: Array<Experience>;
   id: string;
   offersProfileId: string;
-  specificYoes: Array<specificYoe>;
+  specificYoes: Array<SpecificYoe>;
   totalYoe?: number | null;
 }
 
-export type experience = {
+export type Experience = {
   backgroundId: string;
-  company?: company | null;
+  company?: Company | null;
   companyId?: string | null;
   durationInMonths?: number | null;
   id: string;
@@ -34,7 +34,7 @@ export type experience = {
   totalCompensationId?: string | null;
 }
 
-export type company = {
+export type Company = {
   createdAt: Date;
   description: string | null;
   id: string;
@@ -44,13 +44,13 @@ export type company = {
   updatedAt: Date
 }
 
-export type valuation = {
+export type Valuation = {
     currency: string;
     id: string;
     value: number;
 }
 
-export type education = {
+export type Education = {
   backgroundId: string;
   endDate?: Date | null;
   field?: string | null;
@@ -60,54 +60,70 @@ export type education = {
   type?: string | null;
 }
 
-export type specificYoe = {
-    backgroundId: string;
-    domain: string;
-    id: string;
-    yoe: number;
+export type SpecificYoe = {
+  backgroundId: string;
+  domain: string;
+  id: string;
+  yoe: number;
 }
 
-export type offers = {
-    OffersFullTime?: offersFullTime | null;
-    OffersIntern?: offersIntern | null;
-    comments?: string | null;
-    company: company;
-    companyId: string;
-    id: string;
-    jobType: string;
-    location: string;
-    monthYearReceived: string;
-    negotiationStrategy?: string | null;
-    offersFullTimeId?: string | null;
-    offersInternId?: string | null;
-    profileId: string;
+export type Offers = {
+  OffersFullTime?: OffersFullTime | null;
+  OffersIntern?: OffersIntern | null;
+  comments?: string | null;
+  company: Company;
+  companyId: string;
+  id: string;
+  jobType: string;
+  location: string;
+  monthYearReceived: Date;
+  negotiationStrategy?: string | null;
+  offersFullTimeId?: string | null;
+  offersInternId?: string | null;
+  profileId: string;
 }
 
-export type offersFullTime = {
-    baseSalary: valuation;
-    baseSalaryId: string;
-    bonus: valuation;
-    bonusId: string;
-    id: string;
-    level: string;
-    specialization: string;
-    stocks: valuation;
-    stocksId: string;
-    title?: string | null;
-    totalCompensation: valuation;
-    totalCompensationId: string;
+export type OffersFullTime = {
+  baseSalary: valuation;
+  baseSalaryId: string;
+  bonus: valuation;
+  bonusId: string;
+  id: string;
+  level: string;
+  specialization: string;
+  stocks: valuation;
+  stocksId: string;
+  title?: string | null;
+  totalCompensation: valuation;
+  totalCompensationId: string;
 }
 
-export type offersIntern = {
-    id: string;
-    internshipCycle: string;
-    monthlySalary: valuation;
-    monthlySalaryId: string;
-    specialization: string;
-    startYear: number;
+export type OffersIntern = {
+  id: string;
+  internshipCycle: string;
+  monthlySalary: valuation;
+  monthlySalaryId: string;
+  specialization: string;
+  startYear: number;
 }
 
-// TODO: fill in next time
-export type discussion = {
-    id: string;
+export type Reply = {
+  createdAt: Date;
+  id: string;
+  message: string;
+  // Profile: OffersProfile | null;
+  profileId: string;
+  replies: Array<Discussion>?;
+  replyingTo: Discussion?;
+  replyingToId: string | null;
+  user: User?;
+  userId: string | null;
+}
+
+export type User = {
+  email: string?;
+  emailVerified: Date?;
+  id: string;
+  image: string?;
+  name: string?;
 }
