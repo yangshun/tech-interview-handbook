@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import type { PDFDocumentProxy } from 'react-pdf/node_modules/pdfjs-dist';
 import {
@@ -18,14 +19,30 @@ type Props = Readonly<{
 export default function ResumePdf({ url }: Props) {
   const [numPages, setNumPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
-  const [scale, setScale] = useState(1);
+  const [pageWidth, setPageWidth] = useState(750);
+  const [componentWidth, setComponentWidth] = useState(780);
 
   const onPdfLoadSuccess = (pdf: PDFDocumentProxy) => {
     setNumPages(pdf.numPages);
   };
 
+  useEffect(() => {
+    const onPageResize = () => {
+      setComponentWidth(
+        document.querySelector('#pdfView')?.getBoundingClientRect().width ??
+          780,
+      );
+    };
+
+    window.addEventListener('resize', onPageResize);
+
+    return () => {
+      window.removeEventListener('resize', onPageResize);
+    };
+  }, []);
+
   return (
-    <div>
+    <div id="pdfView">
       <div className="group relative">
         <Document
           className="flex h-[calc(100vh-17rem)] flex-row justify-center overflow-auto"
@@ -33,25 +50,34 @@ export default function ResumePdf({ url }: Props) {
           loading={<Spinner display="block" size="lg" />}
           noData=""
           onLoadSuccess={onPdfLoadSuccess}>
-          <Page pageNumber={pageNumber} scale={scale} width={750} />
+          <div
+            style={{
+              paddingLeft: clsx(
+                pageWidth > componentWidth
+                  ? `${pageWidth - componentWidth}px`
+                  : '',
+              ),
+            }}>
+            <Page pageNumber={pageNumber} width={pageWidth} />
+          </div>
           <div className="absolute top-2 right-5 hidden hover:block group-hover:block">
             <Button
               className="rounded-r-none focus:ring-0 focus:ring-offset-0"
-              disabled={scale === 0.5}
+              disabled={pageWidth === 450}
               icon={MagnifyingGlassMinusIcon}
               isLabelHidden={true}
               label="Zoom Out"
               variant="tertiary"
-              onClick={() => setScale(scale - 0.25)}
+              onClick={() => setPageWidth(pageWidth - 150)}
             />
             <Button
               className="rounded-l-none focus:ring-0 focus:ring-offset-0"
-              disabled={scale === 1.5}
+              disabled={pageWidth === 1050}
               icon={MagnifyingGlassPlusIcon}
               isLabelHidden={true}
               label="Zoom In"
               variant="tertiary"
-              onClick={() => setScale(scale + 0.25)}
+              onClick={() => setPageWidth(pageWidth + 150)}
             />
           </div>
         </Document>
