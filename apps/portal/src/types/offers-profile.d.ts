@@ -26,11 +26,11 @@ export type Experience = {
   id: string;
   jobType?: string | null;
   level?: string | null;
-  monthlySalary?: valuation | null;
+  monthlySalary?: Valuation | null;
   monthlySalaryId?: string | null;
   specialization?: string | null;
   title?: string | null;
-  totalCompensation?: valuation | null;
+  totalCompensation?: Valuation | null;
   totalCompensationId?: string | null;
 }
 
@@ -84,24 +84,24 @@ export type Offers = {
 }
 
 export type OffersFullTime = {
-  baseSalary: valuation;
+  baseSalary: Valuation;
   baseSalaryId: string;
-  bonus: valuation;
+  bonus: Valuation;
   bonusId: string;
   id: string;
   level: string;
   specialization: string;
-  stocks: valuation;
+  stocks: Valuation;
   stocksId: string;
   title?: string | null;
-  totalCompensation: valuation;
+  totalCompensation: Valuation;
   totalCompensationId: string;
 }
 
 export type OffersIntern = {
   id: string;
   internshipCycle: string;
-  monthlySalary: valuation;
+  monthlySalary: Valuation;
   monthlySalaryId: string;
   specialization: string;
   startYear: number;
