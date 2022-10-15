@@ -101,7 +101,7 @@ export default function ResumeReviewPage() {
   return (
     <>
       {(detailsQuery.isError || detailsQuery.data === null) && ErrorPage}
-      {detailsQuery.isFetching && (
+      {detailsQuery.isLoading && (
         <div className="w-full pt-4">
           {' '}
           <Spinner display="block" size="lg" />{' '}
