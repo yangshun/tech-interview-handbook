@@ -13,7 +13,7 @@ import { TRPCError } from '@trpc/server';
 
 import { createRouter } from '../context';
 
-const binarySearchOfferPercentile = (
+const searchOfferPercentile = (
   offer: OffersOffer & {
     OffersFullTime:
       | (OffersFullTime & {
@@ -29,40 +29,13 @@ const binarySearchOfferPercentile = (
   },
   similarOffers: Array<any> | string,
 ) => {
-  let start = 0;
-  let end = similarOffers.length - 1;
 
-  const salary =
-    offer.jobType === JobType.FULLTIME
-      ? offer.OffersFullTime?.totalCompensation.value
-      : offer.OffersIntern?.monthlySalary.value;
-
-  if (!salary) {
-    throw new TRPCError({
-      code: 'BAD_REQUEST',
-      message: 'Cannot analyse without salary',
-    });
-  }
-
-  while (start <= end) {
-    const mid = Math.floor((start + end) / 2);
-
-    const similarOffer = similarOffers[mid];
-    const similarSalary =
-      similarOffer.jobType === JobType.FULLTIME
-        ? similarOffer.OffersFullTime?.totalCompensation.value
-        : similarOffer.OffersIntern?.monthlySalary.value;
-
-    if (similarSalary === salary) {
-      return mid;
-    }
-
-    if (salary < similarSalary) {
-      end = mid - 1;
-    } else {
-      start = mid + 1;
+  for (let i = 0; i < similarOffers.length; i++) {
+    if (similarOffers[i].id === offer.id) {
+      return i;
     }
   }
+
   return -1;
 };
 
@@ -335,29 +308,32 @@ export const offersAnalysisRouter = createRouter()
       });
 
       let similarCompanyOffers = similarOffers.filter(
-        (offer: { companyId: string }) =>
-          offer.companyId === overallHighestOffer.companyId,
+        (offer) => offer.companyId === overallHighestOffer.companyId,
       );
 
       // CALCULATE PERCENTILES
-      const overallIndex = binarySearchOfferPercentile(
+      const overallIndex = searchOfferPercentile(
         overallHighestOffer,
         similarOffers,
       );
-      const overallPercentile = overallIndex / similarOffers.length;
+      const overallPercentile =
+        similarOffers.length === 0 ? 0 : overallIndex / similarOffers.length;
 
-      const companyIndex = binarySearchOfferPercentile(
+      const companyIndex = searchOfferPercentile(
         overallHighestOffer,
         similarCompanyOffers,
       );
-      const companyPercentile = companyIndex / similarCompanyOffers.length;
+      const companyPercentile =
+        similarCompanyOffers.length === 0
+          ? 0
+          : companyIndex / similarCompanyOffers.length;
 
       // FIND TOP >=90 PERCENTILE OFFERS
       similarOffers = similarOffers.filter(
-        (offer: { id: string }) => offer.id !== overallHighestOffer.id,
+        (offer) => offer.id !== overallHighestOffer.id,
       );
       similarCompanyOffers = similarCompanyOffers.filter(
-        (offer: { id: string }) => offer.id !== overallHighestOffer.id,
+        (offer) => offer.id !== overallHighestOffer.id,
       );
 
       const noOfSimilarOffers = similarOffers.length;
