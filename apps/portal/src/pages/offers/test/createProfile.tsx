@@ -190,14 +190,14 @@ function Test() {
     });
   };
 
-  const profileId = 'cl96stky5002ew32gx2kale2x'; // Remember to change this filed after testing deleting
+  const profileId = 'cl99fhrsf00007ijpbrdk8gue'; // Remember to change this filed after testing deleting
   const data = trpc.useQuery(
     [
       `offers.profile.listOne`,
       {
         profileId,
         token:
-          'afca11e436d21bde24543718fa957c6c625335439dc504f24ee35eae7b5ef1ba',
+          'e7effd2a40adba2deb1ddea4fb9f1e6c3c98ab0a85a88ed1567fc2a107fdb445',
       },
     ],
     {
@@ -208,7 +208,7 @@ function Test() {
   );
 
   const replies = trpc.useQuery(
-    ['offers.comments.getComments', { profileId: 'cl96stky5002ew32gx2kale2x' }],
+    ['offers.comments.getComments', { profileId }],
     {
       onError(err) {
         setError(err.shape?.message || '');
@@ -221,7 +221,7 @@ function Test() {
   const handleDelete = (id: string) => {
     deleteMutation.mutate({
       profileId: id,
-      token: 'afca11e436d21bde24543718fa957c6c625335439dc504f24ee35eae7b5ef1ba',
+      token: 'e7effd2a40adba2deb1ddea4fb9f1e6c3c98ab0a85a88ed1567fc2a107fdb445',
     });
   };
 

@@ -67,9 +67,9 @@ export type SpecificYoe = {
   yoe: number;
 }
 
-export type Offers = {
-  OffersFullTime?: OffersFullTime | null;
-  OffersIntern?: OffersIntern | null;
+export type Offer = {
+  OfferFullTime?: OfferFullTime | null;
+  OfferIntern?: OfferIntern | null;
   comments?: string | null;
   company: Company;
   companyId: string;
@@ -83,7 +83,7 @@ export type Offers = {
   profileId: string;
 }
 
-export type OffersFullTime = {
+export type OfferFullTime = {
   baseSalary: Valuation;
   baseSalaryId: string;
   bonus: Valuation;
@@ -93,18 +93,19 @@ export type OffersFullTime = {
   specialization: string;
   stocks: Valuation;
   stocksId: string;
-  title?: string | null;
+  title?: string;
   totalCompensation: Valuation;
   totalCompensationId: string;
 }
 
-export type OffersIntern = {
+export type OfferIntern = {
   id: string;
   internshipCycle: string;
   monthlySalary: Valuation;
   monthlySalaryId: string;
   specialization: string;
   startYear: number;
+  title?: string;
 }
 
 export type Reply = {

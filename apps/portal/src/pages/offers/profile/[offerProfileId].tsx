@@ -5,8 +5,7 @@ import { useState } from 'react';
 import ProfileComments from '~/components/offers/profile/ProfileComments';
 import ProfileDetails from '~/components/offers/profile/ProfileDetails';
 import ProfileHeader from '~/components/offers/profile/ProfileHeader';
-import type { OfferEntity } from '~/components/offers/types';
-import type { BackgroundCard } from '~/components/offers/types';
+import type { BackgroundCard, OfferEntity } from '~/components/offers/types';
 
 import { convertCurrencyToString } from '~/utils/offers/currency';
 import { formatDate } from '~/utils/offers/time';
@@ -44,25 +43,25 @@ export default function OfferProfile() {
         if (data?.offers) {
           const filteredOffers: Array<OfferEntity> = data
             ? data?.offers.map((res) => {
-                if (res.OffersFullTime) {
+                if (res.OfferFullTime) {
                   const filteredOffer: OfferEntity = {
                     base: convertCurrencyToString(
-                      res.OffersFullTime.baseSalary.value,
+                      res.OfferFullTime.baseSalary,
                     ),
                     bonus: convertCurrencyToString(
-                      res.OffersFullTime.bonus.value,
+                      res.OfferFullTime.bonus,
                     ),
                     companyName: res.company.name,
-                    id: res.OffersFullTime.id,
-                    jobLevel: res.OffersFullTime.level,
-                    jobTitle: res.OffersFullTime.title,
+                    id: res.OfferFullTime.id,
+                    jobLevel: res.OfferFullTime.level,
+                    jobTitle: res.OfferFullTime.title,
                     location: res.location,
                     negotiationStrategy: res.negotiationStrategy || '',
                     otherComment: res.comments || '',
                     receivedMonth: formatDate(res.monthYearReceived),
-                    stocks: convertCurrencyToString(res.OffersFullTime.stocks),
+                    stocks: convertCurrencyToString(res.OfferFullTime.stocks),
                     totalCompensation: convertCurrencyToString(
-                      res.OffersFullTime.totalCompensation,
+                      res.OfferFullTime.totalCompensation,
                     ),
                   };
 
@@ -70,11 +69,11 @@ export default function OfferProfile() {
                 }
                 const filteredOffer: OfferEntity = {
                   companyName: res.company.name,
-                  id: res.OffersIntern!.id,
-                  jobTitle: res.OffersIntern!.title,
+                  id: res.OfferIntern!.id,
+                  jobTitle: res.OfferIntern!.title,
                   location: res.location,
                   monthlySalary: convertCurrencyToString(
-                    res.OffersIntern!.monthlySalary,
+                    res.OfferIntern!.monthlySalary,
                   ),
                   negotiationStrategy: res.negotiationStrategy || '',
                   otherComment: res.comments || '',
