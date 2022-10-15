@@ -178,10 +178,9 @@ export default function ResumeReviewPage() {
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                 />
-                {`Uploaded ${formatDistanceToNow(
-                  new Date(detailsQuery.data.createdAt),
-                  { addSuffix: true },
-                )} by ${detailsQuery.data.user.name}`}
+                {`Uploaded ${formatDistanceToNow(detailsQuery.data.createdAt, {
+                  addSuffix: true,
+                })} by ${detailsQuery.data.user.name}`}
               </div>
             </div>
             {detailsQuery.data.additionalInfo && (

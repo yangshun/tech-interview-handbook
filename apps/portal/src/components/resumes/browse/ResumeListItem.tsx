@@ -55,8 +55,9 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
         </div>
         <div className="col-span-3 self-center text-sm text-slate-500">
           <div>
-            Uploaded {formatDistanceToNow(resumeInfo.createdAt)} ago by{' '}
-            {resumeInfo.user}
+            {`Uploaded ${formatDistanceToNow(resumeInfo.createdAt, {
+              addSuffix: true,
+            })} by ${resumeInfo.user}`}
           </div>
           <div className="mt-2 text-slate-400">{resumeInfo.location}</div>
         </div>
