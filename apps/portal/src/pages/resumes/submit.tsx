@@ -125,6 +125,8 @@ export default function SubmitResumeForm({
     },
     maxFiles: 1,
     maxSize: FILE_SIZE_LIMIT_BYTES,
+    noClick: isLoading,
+    noDrag: isLoading,
     onDrop: onFileDrop,
   });
 
