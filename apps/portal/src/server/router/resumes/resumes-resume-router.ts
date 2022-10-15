@@ -7,12 +7,20 @@ import type { Resume } from '~/types/resume';
 export const resumesRouter = createRouter()
   .query('findAll', {
     async resolve({ ctx }) {
+      const userId = ctx.session?.user?.id;
       const resumesData = await ctx.prisma.resumesResume.findMany({
         include: {
           _count: {
             select: {
               comments: true,
               stars: true,
+            },
+          },
+          stars: {
+            where: {
+              OR: {
+                userId,
+              },
             },
           },
           user: {
@@ -31,6 +39,7 @@ export const resumesRouter = createRouter()
           createdAt: r.createdAt,
           experience: r.experience,
           id: r.id,
+          isStarredByUser: r.stars.length > 0,
           location: r.location,
           numComments: r._count.comments,
           numStars: r._count.stars,

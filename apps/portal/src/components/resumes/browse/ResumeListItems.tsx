@@ -1,6 +1,6 @@
 import { Spinner } from '@tih/ui';
 
-import ResumseListItem from './ResumeListItem';
+import ResumeListItem from './ResumeListItem';
 
 import type { Resume } from '~/types/resume';
 
@@ -22,7 +22,7 @@ export default function ResumeListItems({ isLoading, resumes }: Props) {
     <ul role="list">
       {resumes.map((resumeObj: Resume) => (
         <li key={resumeObj.id}>
-          <ResumseListItem
+          <ResumeListItem
             href={`/resumes/${resumeObj.id}`}
             resumeInfo={resumeObj}
           />
