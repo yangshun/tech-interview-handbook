@@ -79,7 +79,6 @@ export default function SubmitResumeForm({
   initFormDetails,
   onClose = () => undefined,
 }: Props) {
-  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [invalidFileUploadError, setInvalidFileUploadError] = useState<
     string | null
@@ -96,6 +95,7 @@ export default function SubmitResumeForm({
     handleSubmit,
     setValue,
     reset,
+    watch,
     formState: { errors, isDirty, dirtyFields },
   } = useForm<IFormInput>({
     defaultValues: {
@@ -104,11 +104,12 @@ export default function SubmitResumeForm({
     },
   });
 
+  const resumeFile = watch('file');
+
   const onFileDrop = useCallback(
     (acceptedFiles: Array<File>, fileRejections: Array<FileRejection>) => {
       if (fileRejections.length === 0) {
         setInvalidFileUploadError('');
-        setResumeFile(acceptedFiles[0]);
         setValue('file', acceptedFiles[0], {
           shouldDirty: true,
         });
@@ -147,7 +148,6 @@ export default function SubmitResumeForm({
     const fileName = keyAndFileName.substring(keyAndFileName.indexOf('-') + 1);
 
     const file = new File([data], fileName);
-    setResumeFile(file);
     setValue('file', file, {
       shouldDirty: false,
     });
@@ -168,9 +168,6 @@ export default function SubmitResumeForm({
   }, [fetchFilePdf]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    if (resumeFile == null) {
-      return;
-    }
     setIsLoading(true);
     let fileUrl = initFormDetails?.url ?? '';
 
@@ -228,16 +225,12 @@ export default function SubmitResumeForm({
     onClose();
     setIsDialogShown(false);
     reset();
-    setResumeFile(null);
     setInvalidFileUploadError(null);
   };
 
   const onClickDownload = async (
     event: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
   ) => {
-    if (resumeFile == null) {
-      return;
-    }
     // Prevent click event from propagating up to dropzone
     event.stopPropagation();
 
