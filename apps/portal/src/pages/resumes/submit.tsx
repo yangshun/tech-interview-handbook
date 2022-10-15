@@ -96,7 +96,7 @@ export default function SubmitResumeForm({
     handleSubmit,
     setValue,
     reset,
-    formState: { errors, isDirty },
+    formState: { errors, isDirty, dirtyFields },
   } = useForm<IFormInput>({
     defaultValues: {
       isChecked: false,
@@ -170,17 +170,21 @@ export default function SubmitResumeForm({
       return;
     }
     setIsLoading(true);
+    let fileUrl = initFormDetails?.url ?? '';
 
-    const formData = new FormData();
-    formData.append('key', RESUME_STORAGE_KEY);
-    formData.append('file', resumeFile);
+    // Only update file in fs when it changes
+    if (dirtyFields.file) {
+      const formData = new FormData();
+      formData.append('key', RESUME_STORAGE_KEY);
+      formData.append('file', resumeFile);
 
-    const res = await axios.post('/api/file-storage', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    const { url } = res.data;
+      const res = await axios.post('/api/file-storage', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      fileUrl = res.data.url;
+    }
 
     resumeUpsertMutation.mutate(
       {
@@ -190,7 +194,7 @@ export default function SubmitResumeForm({
         location: data.location,
         role: data.role,
         title: data.title,
-        url,
+        url: fileUrl,
       },
       {
         onError(error) {
