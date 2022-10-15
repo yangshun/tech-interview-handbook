@@ -49,7 +49,6 @@ export default function ResumeReviewPage() {
       utils.invalidateQueries(['resumes.resume.findOne']);
     },
   });
-
   const userIsOwner =
     session?.user?.id != null && session.user.id === detailsQuery.data?.userId;
 
@@ -61,8 +60,6 @@ export default function ResumeReviewPage() {
       return;
     }
 
-    // Star button only rendered if resume exists
-    // Star button only clickable if user exists
     if (detailsQuery.data?.stars.length) {
       unstarMutation.mutate({
         resumeId: resumeId as string,

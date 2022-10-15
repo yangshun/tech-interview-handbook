@@ -17,7 +17,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
       url: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const userId = ctx.session?.user.id;
+      const userId = ctx.session.user.id;
 
       return await ctx.prisma.resumesResume.upsert({
         create: {
@@ -46,7 +46,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
   })
   .query('findUserStarred', {
     async resolve({ ctx }) {
-      const userId = ctx.session?.user?.id;
+      const userId = ctx.session.user.id;
       const resumeStarsData = await ctx.prisma.resumesStar.findMany({
         include: {
           resume: {
@@ -78,6 +78,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
           createdAt: rs.resume.createdAt,
           experience: rs.resume.experience,
           id: rs.resume.id,
+          isStarredByUser: true,
           location: rs.resume.location,
           numComments: rs.resume._count.comments,
           numStars: rs.resume._count.stars,
@@ -92,13 +93,18 @@ export const resumesResumeUserRouter = createProtectedRouter()
   })
   .query('findUserCreated', {
     async resolve({ ctx }) {
-      const userId = ctx.session?.user?.id;
+      const userId = ctx.session.user.id;
       const resumesData = await ctx.prisma.resumesResume.findMany({
         include: {
           _count: {
             select: {
               comments: true,
               stars: true,
+            },
+          },
+          stars: {
+            where: {
+              userId,
             },
           },
           user: {
@@ -120,6 +126,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
           createdAt: r.createdAt,
           experience: r.experience,
           id: r.id,
+          isStarredByUser: r.stars.length > 0,
           location: r.location,
           numComments: r._count.comments,
           numStars: r._count.stars,
@@ -129,20 +136,6 @@ export const resumesResumeUserRouter = createProtectedRouter()
           user: r.user.name!,
         };
         return resume;
-      });
-    },
-  })
-  .query('isResumeStarred', {
-    input: z.object({
-      resumeId: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const userId = ctx.session?.user?.id;
-      const { resumeId } = input;
-      return await ctx.prisma.resumesStar.findUnique({
-        where: {
-          userId_resumeId: { resumeId, userId },
-        },
       });
     },
   });

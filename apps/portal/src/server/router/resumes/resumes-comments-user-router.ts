@@ -22,7 +22,7 @@ export const resumesCommentsUserRouter = createProtectedRouter().mutation(
       skills: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const userId = ctx.session?.user?.id;
+      const userId = ctx.session.user.id;
       const { resumeId, education, experience, general, projects, skills } =
         input;
 

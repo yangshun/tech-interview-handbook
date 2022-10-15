@@ -1,16 +1,13 @@
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 import type { UrlObject } from 'url';
-import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import {
   AcademicCapIcon,
   BriefcaseIcon,
+  ChevronRightIcon,
   StarIcon as ColouredStarIcon,
 } from '@heroicons/react/20/solid';
 import { ChatBubbleLeftIcon, StarIcon } from '@heroicons/react/24/outline';
-
-import { trpc } from '~/utils/trpc';
 
 import type { Resume } from '~/types/resume';
 
@@ -19,16 +16,7 @@ type Props = Readonly<{
   resumeInfo: Resume;
 }>;
 
-export default function BrowseListItem({ href, resumeInfo }: Props) {
-  const { data: sessionData } = useSession();
-
-  // Find out if user has starred this particular resume
-  const resumeId = resumeInfo.id;
-  const isStarredQuery = trpc.useQuery([
-    'resumes.resume.user.isResumeStarred',
-    { resumeId },
-  ]);
-
+export default function ResumeListItem({ href, resumeInfo }: Props) {
   return (
     <Link href={href}>
       <div className="grid grid-cols-8 gap-4 border-b border-slate-200 p-4 hover:bg-slate-100">
@@ -56,7 +44,7 @@ export default function BrowseListItem({ href, resumeInfo }: Props) {
               {resumeInfo.numComments} comments
             </div>
             <div className="flex gap-2">
-              {isStarredQuery.data && sessionData?.user ? (
+              {resumeInfo.isStarredByUser ? (
                 <ColouredStarIcon className="w-4 text-yellow-400" />
               ) : (
                 <StarIcon className="w-4" />
