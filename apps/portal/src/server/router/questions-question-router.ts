@@ -182,6 +182,31 @@ export const questionsQuestionRouter = createProtectedRouter()
       return question;
     },
   })
+  .query('getRelatedQuestionsByContent', {
+    input: z.object({
+      content: z.string(),
+      pageNum: z.number(),
+      pageSize: z.number(),
+    }),
+    async resolve({ ctx, input }) {
+      const escapeChars = /[()|&:*!]/g;
+
+      const query =
+        input.content
+          .replace(escapeChars, " ")
+          .trim()
+          .split(/\s+/)
+          .join(" | ");
+
+      const res = await ctx.prisma.$queryRaw`
+        SELECT content FROM "Post"
+        WHERE
+          "contentSearch" @@ to_tsquery('english', ${query})
+        ORDER BY ts_rank("textSearch", to_tsquery('english', ${query})) DESC
+        LIMIT 10;
+      `;
+    }
+  })
   .mutation('create', {
     input: z.object({
       company: z.string(),

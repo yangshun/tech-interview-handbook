@@ -374,6 +374,10 @@ model QuestionsQuestion {
     votes      QuestionsQuestionVote[]
     comments   QuestionsQuestionComment[]
     answers    QuestionsAnswer[]
+
+    contentSearch Unsupported("TSVECTOR")?
+
+    @@index([contentSearch])
 }
 
 model QuestionsQuestionEncounter {
