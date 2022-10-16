@@ -18,12 +18,12 @@ import {
   TextInput,
 } from '@tih/ui';
 
-import type { FilterOption } from '~/components/resumes/browse/resumeConstants';
+import type { Filter } from '~/components/resumes/browse/resumeFilters';
 import {
   EXPERIENCE,
   LOCATION,
   ROLE,
-} from '~/components/resumes/browse/resumeConstants';
+} from '~/components/resumes/browse/resumeFilters';
 import SubmissionGuidelines from '~/components/resumes/submit-form/SubmissionGuidelines';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
@@ -47,17 +47,10 @@ type IFormInput = {
   title: string;
 };
 
-type SelectorType = 'experience' | 'location' | 'role';
-type SelectorOptions = {
-  key: SelectorType;
-  label: string;
-  options: Array<FilterOption>;
-};
-
-const selectors: Array<SelectorOptions> = [
-  { key: 'role', label: 'Role', options: ROLE },
-  { key: 'experience', label: 'Experience Level', options: EXPERIENCE },
-  { key: 'location', label: 'Location', options: LOCATION },
+const selectors: Array<Filter> = [
+  { id: 'role', label: 'Role', options: ROLE },
+  { id: 'experience', label: 'Experience Level', options: EXPERIENCE },
+  { id: 'location', label: 'Location', options: LOCATION },
 ];
 
 type InitFormDetails = {
@@ -309,14 +302,14 @@ export default function SubmitResumeForm({
               </div>
               {/*  Selectors */}
               {selectors.map((item) => (
-                <div key={item.key} className="mb-4">
+                <div key={item.id} className="mb-4">
                   <Select
-                    {...register(item.key, { required: true })}
+                    {...register(item.id, { required: true })}
                     disabled={isLoading}
                     label={item.label}
                     options={item.options}
                     required={true}
-                    onChange={(val) => setValue(item.key, val)}
+                    onChange={(val) => setValue(item.id, val)}
                   />
                 </div>
               ))}

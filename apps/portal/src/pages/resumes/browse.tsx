@@ -14,19 +14,24 @@ import {
   TextInput,
 } from '@tih/ui';
 
+import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
 import type {
-  FilterOption,
+  Filter,
+  FilterId,
+  FilterState,
+  FilterValue,
+  Shortcut,
   SortOrder,
-} from '~/components/resumes/browse/resumeConstants';
+} from '~/components/resumes/browse/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCE,
+  INITIAL_FILTER_STATE,
   LOCATION,
   ROLE,
+  SHORTCUTS,
   SORT_OPTIONS,
-  TOP_HITS,
-} from '~/components/resumes/browse/resumeConstants';
-import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
+} from '~/components/resumes/browse/resumeFilters';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
@@ -35,37 +40,23 @@ import { trpc } from '~/utils/trpc';
 
 import type { Resume } from '~/types/resume';
 
-type FilterId = 'experience' | 'location' | 'role';
-type Filter = {
-  id: FilterId;
-  name: string;
-  options: Array<FilterOption>;
-};
-type FilterState = Record<FilterId, Array<string>>;
-
 const filters: Array<Filter> = [
   {
     id: 'role',
-    name: 'Role',
+    label: 'Role',
     options: ROLE,
   },
   {
     id: 'experience',
-    name: 'Experience',
+    label: 'Experience',
     options: EXPERIENCE,
   },
   {
     id: 'location',
-    name: 'Location',
+    label: 'Location',
     options: LOCATION,
   },
 ];
-
-const INITIAL_FILTER_STATE: FilterState = {
-  experience: Object.values(EXPERIENCE).map(({ value }) => value),
-  location: Object.values(LOCATION).map(({ value }) => value),
-  role: Object.values(ROLE).map(({ value }) => value),
-};
 
 const filterResumes = (
   resumes: Array<Resume>,
@@ -78,9 +69,14 @@ const filterResumes = (
     )
     .filter(
       ({ experience, location, role }) =>
-        userFilters.role.includes(role) &&
-        userFilters.experience.includes(experience) &&
-        userFilters.location.includes(location),
+        userFilters.role.includes(role as FilterValue) &&
+        userFilters.experience.includes(experience as FilterValue) &&
+        userFilters.location.includes(location as FilterValue),
+    )
+    .filter(
+      ({ numComments }) =>
+        userFilters.numComments === undefined ||
+        numComments === userFilters.numComments,
     );
 
 const sortComparators: Record<
@@ -172,6 +168,14 @@ export default function ResumeHomePage() {
     }
   };
 
+  const onShortcutChange = ({
+    sortOrder: shortcutSortOrder,
+    filters: shortcutFilters,
+  }: Shortcut) => {
+    setSortOrder(shortcutSortOrder);
+    setUserFilters(shortcutFilters);
+  };
+
   return (
     <>
       <Head>
@@ -258,12 +262,11 @@ export default function ResumeHomePage() {
                     <ul
                       className="flex flex-wrap justify-start gap-4 pb-6 text-sm font-medium text-gray-900"
                       role="list">
-                      {TOP_HITS.map((category) => (
-                        <li key={category.name}>
-                          {/* TODO: Replace onClick with filtering function */}
+                      {SHORTCUTS.map((shortcut) => (
+                        <li key={shortcut.name}>
                           <ResumeFilterPill
-                            title={category.name}
-                            onClick={() => true}
+                            title={shortcut.name}
+                            onClick={() => onShortcutChange(shortcut)}
                           />
                         </li>
                       ))}
@@ -271,9 +274,9 @@ export default function ResumeHomePage() {
                     <h3 className="text-md my-4 font-medium tracking-tight text-gray-900">
                       Explore these filters:
                     </h3>
-                    {filters.map((section) => (
+                    {filters.map((filter) => (
                       <Disclosure
-                        key={section.id}
+                        key={filter.id}
                         as="div"
                         className="border-b border-gray-200 py-6">
                         {({ open }) => (
@@ -281,7 +284,7 @@ export default function ResumeHomePage() {
                             <h3 className="-my-3 flow-root">
                               <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500">
                                 <span className="font-medium text-gray-900">
-                                  {section.name}
+                                  {filter.label}
                                 </span>
                                 <span className="ml-6 flex items-center">
                                   {open ? (
@@ -304,19 +307,19 @@ export default function ResumeHomePage() {
                                 isLabelHidden={true}
                                 label=""
                                 orientation="vertical">
-                                {section.options.map((option) => (
+                                {filter.options.map((option) => (
                                   <div
                                     key={option.value}
                                     className="[&>div>div:nth-child(2)>label]:font-normal [&>div>div:nth-child(1)>input]:text-indigo-600 [&>div>div:nth-child(1)>input]:ring-indigo-500">
                                     <CheckboxInput
                                       label={option.label}
-                                      value={userFilters[section.id].includes(
+                                      value={userFilters[filter.id].includes(
                                         option.value,
                                       )}
                                       onChange={(isChecked) =>
                                         onFilterCheckboxChange(
                                           isChecked,
-                                          section.id,
+                                          filter.id,
                                           option.value,
                                         )
                                       }
