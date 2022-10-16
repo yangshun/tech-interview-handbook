@@ -1,5 +1,5 @@
 import { ClipboardDocumentIcon, ShareIcon } from '@heroicons/react/24/outline';
-import { Button, Spinner, TextArea } from '@tih/ui';
+import { Button, HorizontalDivider, Spinner, TextArea } from '@tih/ui';
 
 import ExpandableCommentCard from './comments/ExpandableCommentCard';
 
@@ -20,6 +20,10 @@ export default function ProfileComments({
 }: ProfileHeaderProps) {
   function handleReply(replayingToId: string, userId: string) {
     return replayingToId + userId; // To integrate with API
+  }
+
+  function handleComment() {
+    return 'profileId'; // To integrate with API
   }
   if (isLoading) {
     return (
@@ -54,9 +58,26 @@ export default function ProfileComments({
           onClick={handleCopyPublicLink}
         />
       </div>
-      <h2 className="mt-2 text-2xl font-bold">
-        Discussions feature coming soon
-      </h2>
+      <h2 className="mt-2 mb-6 text-2xl font-bold">Discussions</h2>
+      <div>
+        <TextArea
+          label="Comment as anonymous"
+          placeholder="Type your comment here"
+        />
+        <div className="mt-2 flex w-full justify-end">
+          <div className="w-fit">
+            <Button
+              display="block"
+              isLabelHidden={false}
+              label="Comment"
+              size="sm"
+              variant="primary"
+              onClick={handleComment}
+            />
+          </div>
+        </div>
+        <HorizontalDivider />
+      </div>
       <ExpandableCommentCard
         comment={{
           createdAt: new Date(),
@@ -91,7 +112,6 @@ export default function ProfileComments({
         }}
         handleReply={handleReply}
       />
-      <TextArea label="Comment" placeholder="Type your comment here" />
     </div>
   );
 }
