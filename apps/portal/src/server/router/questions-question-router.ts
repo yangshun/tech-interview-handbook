@@ -5,6 +5,8 @@ import { TRPCError } from '@trpc/server';
 import { createProtectedRouter } from './context';
 
 import type { Question } from '~/types/questions';
+import { SortOrder, SortType } from '~/types/questions';
+
 
 export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
@@ -12,9 +14,12 @@ export const questionsQuestionRouter = createProtectedRouter()
       companies: z.string().array(),
       endDate: z.date(),
       locations: z.string().array(),
+      pageSize: z.number().default(50),
       questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
       roles: z.string().array(),
-      startDate: z.date().optional(),
+      sortOrder: z.nativeEnum(SortOrder),
+      startDate: z.date().optional()
+      sortType : z.nativeEnum(SortType),
     }),
     async resolve({ ctx, input }) {
       const questionsData = await ctx.prisma.questionsQuestion.findMany({

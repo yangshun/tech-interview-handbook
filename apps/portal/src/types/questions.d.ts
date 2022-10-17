@@ -42,3 +42,14 @@ export type QuestionComment = {
   user: string;
   userImage: string;
 };
+
+export enum SortOrder {
+  ASC = 'asc',
+  DESC = 'desc',
+};
+
+export enum SortType {
+  BEST,
+  TOP,
+  NEW,
+};
