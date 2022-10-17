@@ -27,7 +27,7 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
             createdAt: 'desc',
           },
           where: {
-            ...input,
+            answerId : input.answerId,
           },
         });
       return questionAnswerCommentsData.map((data) => {
@@ -69,9 +69,12 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
+      const { answerId, content } = input;
+
       return await ctx.prisma.questionsAnswerComment.create({
         data: {
-          ...input,
+          answerId,
+          content,
           userId,
         },
       });
@@ -99,9 +102,10 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
         });
       }
 
+      const { content } = input;
       return await ctx.prisma.questionsAnswerComment.update({
         data: {
-          ...input,
+          content,
         },
         where: {
           id: input.id,
@@ -160,10 +164,13 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
+      const { answerCommentId, vote } = input;
+
       return await ctx.prisma.questionsAnswerCommentVote.create({
         data: {
-          ...input,
+          answerCommentId,
           userId,
+          vote,
         },
       });
     },

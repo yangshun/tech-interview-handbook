@@ -256,9 +256,13 @@ export const questionsQuestionRouter = createProtectedRouter()
         });
       }
 
+      const { content, questionType } = input;
+
       return await ctx.prisma.questionsQuestion.update({
+
         data: {
-          ...input,
+          content,
+          questionType,
         },
         where: {
           id: input.id,
@@ -316,11 +320,13 @@ export const questionsQuestionRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
+      const { questionId, vote } = input;
 
       return await ctx.prisma.questionsQuestionVote.create({
         data: {
-          ...input,
+          questionId,
           userId,
+          vote,
         },
       });
     },
