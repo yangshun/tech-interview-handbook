@@ -3,8 +3,6 @@ import * as trpc from '@trpc/server';
 
 import { createProtectedRouter } from '../context';
 
-import type { Reply } from '~/types/offers';
-
 export const offersCommentsRouter = createProtectedRouter()
   .query('getComments', {
     input: z.object({
@@ -38,8 +36,8 @@ export const offersCommentsRouter = createProtectedRouter()
 
       if (result) {
         return result.discussion
-          .filter((x: Reply) => x.replyingToId === null)
-          .map((x: Reply) => {
+          .filter((x) => x.replyingToId === null)
+          .map((x) => {
             if (x.user == null) {
               x.user = {
                 email: '',
