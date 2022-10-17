@@ -124,28 +124,6 @@ export default function SubmitResumeForm({
     onDrop: onFileDrop,
   });
 
-  const fetchFilePdf = useCallback(async () => {
-    const fileUrl = initFormDetails?.url;
-
-    if (fileUrl == null) {
-      return;
-    }
-
-    const data = await axios
-      .get(fileUrl, {
-        responseType: 'blob',
-      })
-      .then((res) => res.data);
-
-    const keyAndFileName = fileUrl.substring(fileUrl.indexOf('resumes'));
-    const fileName = keyAndFileName.substring(keyAndFileName.indexOf('-') + 1);
-
-    const file = new File([data], fileName);
-    setValue('file', file, {
-      shouldDirty: false,
-    });
-  }, [initFormDetails?.url, setValue]);
-
   // Route user to sign in if not logged in
   useEffect(() => {
     if (status !== 'loading') {
@@ -154,11 +132,6 @@ export default function SubmitResumeForm({
       }
     }
   }, [router, session, status]);
-
-  // Fetch initial file PDF for edit form
-  useEffect(() => {
-    fetchFilePdf();
-  }, [fetchFilePdf]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     setIsLoading(true);
@@ -313,71 +286,78 @@ export default function SubmitResumeForm({
                   />
                 </div>
               ))}
-              {/*  Upload Resume Section */}
-              <p className="text-sm font-medium text-slate-700">
-                Upload resume (PDF format)
-                <span aria-hidden="true" className="text-danger-500">
-                  {' '}
-                  *
-                </span>
-              </p>
-              {/*  Upload Resume Box */}
-              <div className="mb-4">
-                <div
-                  {...getRootProps()}
-                  className={clsx(
-                    fileUploadError ? 'border-danger-600' : 'border-gray-300',
-                    'mt-2 flex justify-center rounded-md border-2  border-dashed px-6 pt-5 pb-6',
-                  )}>
-                  <div className="space-y-1 text-center">
-                    <div className="flex gap-2">
-                      {resumeFile == null ? (
-                        <PaperClipIcon className="m-auto h-8 w-8 text-gray-600" />
-                      ) : (
+              {/* Upload resume form */}
+              {isNewForm && (
+                <>
+                  <p className="text-sm font-medium text-slate-700">
+                    Upload resume (PDF format)
+                    <span aria-hidden="true" className="text-danger-500">
+                      {' '}
+                      *
+                    </span>
+                  </p>
+                  <div className="mb-4">
+                    <div
+                      {...getRootProps()}
+                      className={clsx(
+                        fileUploadError
+                          ? 'border-danger-600'
+                          : 'border-gray-300',
+                        'mt-2 flex justify-center rounded-md border-2  border-dashed px-6 pt-5 pb-6',
+                      )}>
+                      <div className="space-y-1 text-center">
                         <div className="flex gap-2">
-                          <p
-                            className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
-                            onClick={onClickDownload}>
-                            {resumeFile.name}
-                          </p>
+                          {resumeFile == null ? (
+                            <PaperClipIcon className="m-auto h-8 w-8 text-gray-600" />
+                          ) : (
+                            <div className="flex gap-2">
+                              <p
+                                className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
+                                onClick={onClickDownload}>
+                                {resumeFile.name}
+                              </p>
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                    <div className="flex justify-center text-sm">
-                      <label
-                        className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
-                        htmlFor="file-upload">
-                        <div className="flex gap-1 ">
-                          <p className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
-                            {resumeFile == null
-                              ? 'Upload a file'
-                              : 'Replace file'}
-                          </p>
-                          <span className="text-gray-500">
-                            or drag and drop
-                          </span>
+                        <div className="flex justify-center text-sm">
+                          <label
+                            className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
+                            htmlFor="file-upload">
+                            <div className="flex gap-1 ">
+                              <p className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
+                                {resumeFile == null
+                                  ? 'Upload a file'
+                                  : 'Replace file'}
+                              </p>
+                              <span className="text-gray-500">
+                                or drag and drop
+                              </span>
+                            </div>
+                            <input
+                              {...register('file', { required: true })}
+                              {...getInputProps()}
+                              accept="application/pdf"
+                              className="sr-only"
+                              disabled={isLoading}
+                              id="file-upload"
+                              name="file-upload"
+                              type="file"
+                            />
+                          </label>
                         </div>
-                        <input
-                          {...register('file', { required: true })}
-                          {...getInputProps()}
-                          accept="application/pdf"
-                          className="sr-only"
-                          disabled={isLoading}
-                          id="file-upload"
-                          name="file-upload"
-                          type="file"
-                        />
-                      </label>
+                        <p className="text-xs text-gray-500">
+                          PDF up to {FILE_SIZE_LIMIT_MB}MB
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-xs text-gray-500">
-                      PDF up to {FILE_SIZE_LIMIT_MB}MB
-                    </p>
+                    {fileUploadError && (
+                      <p className="text-danger-600 text-sm">
+                        {fileUploadError}
+                      </p>
+                    )}
                   </div>
-                </div>
-                {fileUploadError && (
-                  <p className="text-danger-600 text-sm">{fileUploadError}</p>
-                )}
-              </div>
+                </>
+              )}
               {/*  Additional Info Section */}
               <div className="mb-8">
                 <TextArea
