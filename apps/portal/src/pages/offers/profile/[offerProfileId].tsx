@@ -43,25 +43,23 @@ export default function OfferProfile() {
         if (data?.offers) {
           const filteredOffers: Array<OfferEntity> = data
             ? data?.offers.map((res) => {
-                if (res.OfferFullTime) {
+                if (res.offersFullTime) {
                   const filteredOffer: OfferEntity = {
                     base: convertCurrencyToString(
-                      res.OfferFullTime.baseSalary,
+                      res.offersFullTime.baseSalary,
                     ),
-                    bonus: convertCurrencyToString(
-                      res.OfferFullTime.bonus,
-                    ),
+                    bonus: convertCurrencyToString(res.offersFullTime.bonus),
                     companyName: res.company.name,
-                    id: res.OfferFullTime.id,
-                    jobLevel: res.OfferFullTime.level,
-                    jobTitle: res.OfferFullTime.title,
+                    id: res.offersFullTime.id,
+                    jobLevel: res.offersFullTime.level,
+                    jobTitle: res.offersFullTime.title,
                     location: res.location,
                     negotiationStrategy: res.negotiationStrategy || '',
                     otherComment: res.comments || '',
                     receivedMonth: formatDate(res.monthYearReceived),
-                    stocks: convertCurrencyToString(res.OfferFullTime.stocks),
+                    stocks: convertCurrencyToString(res.offersFullTime.stocks),
                     totalCompensation: convertCurrencyToString(
-                      res.OfferFullTime.totalCompensation,
+                      res.offersFullTime.totalCompensation,
                     ),
                   };
 
@@ -69,11 +67,11 @@ export default function OfferProfile() {
                 }
                 const filteredOffer: OfferEntity = {
                   companyName: res.company.name,
-                  id: res.OfferIntern!.id,
-                  jobTitle: res.OfferIntern!.title,
+                  id: res.offersIntern!.id,
+                  jobTitle: res.offersIntern!.title,
                   location: res.location,
                   monthlySalary: convertCurrencyToString(
-                    res.OfferIntern!.monthlySalary,
+                    res.offersIntern!.monthlySalary,
                   ),
                   negotiationStrategy: res.negotiationStrategy || '',
                   otherComment: res.comments || '',

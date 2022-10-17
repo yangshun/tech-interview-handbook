@@ -308,8 +308,8 @@ model OffersOffer {
 
   monthYearReceived   DateTime
   location            String
-  negotiationStrategy String?
-  comments            String?
+  negotiationStrategy String
+  comments            String
 
   jobType JobType
 
