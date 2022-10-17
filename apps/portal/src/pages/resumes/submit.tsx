@@ -356,7 +356,6 @@ export default function SubmitResumeForm({
                       </p>
                     )}
                   </div>
-                  )
                 </>
               )}
               {/*  Additional Info Section */}
