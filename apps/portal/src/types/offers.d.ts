@@ -65,6 +65,7 @@ export type DashboardOffer = {
   id: string;
   income: Valuation;
   monthYearReceived: Date;
+  profileId: string;
   title: string;
   totalYoe: number;
 };
@@ -124,10 +125,10 @@ export type GetOffersResponse = {
 };
 
 export type Paging = {
-  currPage: number;
-  numOfItemsInPage: number;
+  currentPage: number;
+  numOfItems: number;
   numOfPages: number;
-  totalNumberOfOffers: number;
+  totalItems: number;
 };
 
 export type CreateOfferProfileResponse = {
@@ -136,7 +137,7 @@ export type CreateOfferProfileResponse = {
 };
 
 export type OffersDiscussion = {
-  data: Array<OReply>;
+  data: Array<Reply>;
 };
 
 export type ProfileAnalysis = {

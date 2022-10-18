@@ -22,9 +22,12 @@ import type {
   AnalysisOffer,
   Background,
   CreateOfferProfileResponse,
+  DashboardOffer,
   Education,
   Experience,
+  GetOffersResponse,
   OffersCompany,
+  Paging,
   Profile,
   ProfileAnalysis,
   ProfileOffer,
@@ -521,4 +524,53 @@ export const addToProfileResponseMapper = (updatedProfile: {
   };
 
   return addToProfileResponse;
+};
+
+export const dashboardOfferDtoMapper = (
+  offer: OffersOffer & {
+    OffersFullTime:
+      | (OffersFullTime & {
+          baseSalary: OffersCurrency;
+          bonus: OffersCurrency;
+          stocks: OffersCurrency;
+          totalCompensation: OffersCurrency;
+        })
+      | null;
+    OffersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
+    company: Company;
+    profile: OffersProfile & { background: OffersBackground | null };
+  },
+) => {
+  const dashboardOfferDto: DashboardOffer = {
+    company: offersCompanyDtoMapper(offer.company),
+    id: offer.id,
+    income: valuationDtoMapper({ currency: '', value: -1 }),
+    monthYearReceived: offer.monthYearReceived,
+    profileId: offer.profileId,
+    title: offer.OffersFullTime?.title ?? '',
+    totalYoe: offer.profile.background?.totalYoe ?? -1,
+  };
+
+  if (offer.OffersFullTime) {
+    dashboardOfferDto.income = valuationDtoMapper(
+      offer.OffersFullTime.totalCompensation,
+    );
+  } else if (offer.OffersIntern) {
+    dashboardOfferDto.income = valuationDtoMapper(
+      offer.OffersIntern.monthlySalary,
+    );
+  }
+
+  return dashboardOfferDto;
+};
+
+export const getOffersResponseMapper = (
+  data: Array<DashboardOffer>,
+  paging: Paging,
+) => {
+  const getOffersResponse: GetOffersResponse = {
+    data,
+    paging,
+  };
+  return getOffersResponse;
 };

@@ -1,6 +1,11 @@
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
 
+import {
+  dashboardOfferDtoMapper,
+  getOffersResponseMapper,
+} from '~/mappers/offers-mappers';
+
 import { createRouter } from '../context';
 
 const yoeCategoryMap: Record<number, string> = {
@@ -299,14 +304,14 @@ export const offersRouter = createRouter().query('list', {
         : data.length;
     const paginatedData = data.slice(startRecordIndex, endRecordIndex);
 
-    return {
-      data: paginatedData,
-      paging: {
-        currPage: input.offset,
-        numOfItemsInPage: paginatedData.length,
+    return getOffersResponseMapper(
+      paginatedData.map((offer) => dashboardOfferDtoMapper(offer)),
+      {
+        currentPage: input.offset,
+        numOfItems: paginatedData.length,
         numOfPages: Math.ceil(data.length / input.limit),
-        totalNumberOfOffers: data.length,
+        totalItems: data.length,
       },
-    };
+    );
   },
 });

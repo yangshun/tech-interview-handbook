@@ -73,10 +73,10 @@ export default function OffersTable({
         });
         setOffers(filteredData);
         setPagination({
-          currentPage: (response.paging.currPage as number) + 1,
-          numOfItems: response.paging.numOfItemsInPage,
+          currentPage: response.paging.currentPage + 1,
+          numOfItems: response.paging.numOfItems,
           numOfPages: response.paging.numOfPages,
-          totalItems: response.paging.totalNumberOfOffers,
+          totalItems: response.paging.totalItems,
         });
       },
     },
