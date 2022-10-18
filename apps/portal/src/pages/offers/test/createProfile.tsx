@@ -102,7 +102,7 @@ function Test() {
         ],
         experiences: [
           {
-            companyId: 'cl98yuqk80007txhgjtjp8fk4',
+            companyId: 'cl9ec1mgg0000w33hg1a3612r',
             durationInMonths: 24,
             jobType: 'FULLTIME',
             level: 'Junior',
@@ -150,8 +150,8 @@ function Test() {
               value: 104100,
             },
           },
-          // Comments: '',
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          comments: '',
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
@@ -179,25 +179,25 @@ function Test() {
               value: 104100,
             },
           },
-          comments: undefined,
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          comments: "",
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
-          // NegotiationStrategy: 'Leveraged having multiple offers',
+          negotiationStrategy: 'Leveraged having multiple offers',
         },
       ],
     });
   };
 
-  const profileId = 'cl99fhrsf00007ijpbrdk8gue'; // Remember to change this filed after testing deleting
+  const profileId = 'cl9efyn9p004ww3u42mjgl1vn'; // Remember to change this filed after testing deleting
   const data = trpc.useQuery(
     [
       `offers.profile.listOne`,
       {
         profileId,
         token:
-          'e7effd2a40adba2deb1ddea4fb9f1e6c3c98ab0a85a88ed1567fc2a107fdb445',
+          'd14666ff76e267c9e99445844b41410e83874936d0c07e664db73ff0ea76919e',
       },
     ],
     {
@@ -261,7 +261,7 @@ function Test() {
               slug: 'meta',
               updatedAt: new Date('2022-10-12T16:19:05.196Z'),
             },
-            companyId: 'cl98yuqk80007txhgjtjp8fk4',
+            companyId: 'cl9ec1mgg0000w33hg1a3612r',
             durationInMonths: 24,
             id: 'cl96stky6002iw32gpt6t87s2',
             jobType: 'FULLTIME',
@@ -368,7 +368,7 @@ function Test() {
             slug: 'meta',
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           id: 'cl976t4de00047iygl0zbce11',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
@@ -421,7 +421,7 @@ function Test() {
             slug: 'meta',
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           id: 'cl96stky80031w32gau9mu1gs',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
@@ -474,7 +474,7 @@ function Test() {
             slug: 'meta',
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           id: 'cl96stky9003bw32gc3l955vr',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
@@ -527,7 +527,7 @@ function Test() {
             slug: 'meta',
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           id: 'cl976wf28000t7iyga4noyz7s',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
@@ -580,7 +580,7 @@ function Test() {
             slug: 'meta',
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           id: 'cl96tbb3o0051w32gjrpaiiit',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',

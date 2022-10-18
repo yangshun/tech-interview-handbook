@@ -3,6 +3,8 @@ import * as trpc from '@trpc/server';
 
 import { createRouter } from '../context';
 
+import type { OffersDiscussion, Reply } from '~/types/offers';
+
 export const offersCommentsRouter = createRouter()
   .query('getComments', {
     input: z.object({
@@ -34,12 +36,22 @@ export const offersCommentsRouter = createRouter()
         },
       });
 
-      if (result) {
-        return result.discussion
-          .filter((x) => x.replyingToId === null)
-          .map((x) => {
-            if (x.user == null) {
-              x.user = {
+      result?.discussion
+        .filter((x) => x.replyingToId === null)
+        .map((x) => {
+          if (x.user == null) {
+            x.user = {
+              email: '',
+              emailVerified: null,
+              id: '',
+              image: '',
+              name: profile?.profileName ?? '<missing name>',
+            };
+          }
+
+          x.replies?.map((y) => {
+            if (y.user == null) {
+              y.user = {
                 email: '',
                 emailVerified: null,
                 id: '',
@@ -47,23 +59,15 @@ export const offersCommentsRouter = createRouter()
                 name: profile?.profileName ?? '<missing name>',
               };
             }
-
-            x.replies?.map((y) => {
-              if (y.user == null) {
-                y.user = {
-                  email: '',
-                  emailVerified: null,
-                  id: '',
-                  image: '',
-                  name: profile?.profileName ?? '<missing name>',
-                };
-              }
-            });
-            return x;
           });
-      }
+          return x;
+        });
 
-      return result;
+        const discussions: OffersDiscussion = {
+          data: result ? result.discussion : []
+        }
+
+        return discussions
     },
   })
   .mutation('create', {
@@ -124,34 +128,38 @@ export const offersCommentsRouter = createRouter()
             },
           });
         }
-        // Get replies
-        const result = await ctx.prisma.offersProfile.findFirst({
+
+        const created = await ctx.prisma.offersReply.findFirst({
           include: {
-            discussion: {
-              include: {
-                replies: true,
-                replyingTo: true,
-                user: true,
-              },
-            },
+            user: true
           },
           where: {
-            id: input.profileId,
+            id: createdReply.id,
           },
         });
 
-        if (result) {
-          return result.discussion.filter((x) => x.replyingToId === null);
+        const result: Reply = {
+          createdAt: created!.createdAt,
+          id: created!.id,
+          message: created!.message,
+          replies: [], // New message should have no replies
+          replyingToId: created!.replyingToId,
+          user: created!.user ?? {
+            email: '',
+            emailVerified: null,
+            id: '',
+            image: '',
+            name: profile?.profileName ?? '<missing name>',
+          }
         }
 
-        return result;
-    }
+        return result
+      }
 
-    throw new trpc.TRPCError({
-      code: 'UNAUTHORIZED',
-      message: 'Missing userId or wrong token.',
-    });
-
+      throw new trpc.TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'Missing userId or wrong token.',
+      });
     },
   })
   .mutation('update', {
@@ -183,35 +191,54 @@ export const offersCommentsRouter = createRouter()
         profileEditToken === input.token ||
         messageToUpdate?.userId === input.userId
       ) {
-        await ctx.prisma.offersReply.update({
+        const updated = await ctx.prisma.offersReply.update({
           data: {
             message: input.message,
+          },
+          include: {
+            replies: {
+              include: {
+                user: true
+              }
+            },
+            user: true
           },
           where: {
             id: input.id,
           },
         });
 
-        const result = await ctx.prisma.offersProfile.findFirst({
-          include: {
-            discussion: {
-              include: {
-                replies: true,
-                replyingTo: true,
-                user: true,
-              },
-            },
-          },
-          where: {
-            id: input.profileId,
-          },
-        });
-
-        if (result) {
-          return result.discussion.filter((x) => x.replyingToId === null);
+        const result: Reply = {
+          createdAt: updated!.createdAt,
+          id: updated!.id,
+          message: updated!.message,
+          replies: updated!.replies.map((x) => {
+            return {
+              createdAt: x.createdAt,
+              id: x.id,
+              message: x.message,
+              replies: [],
+              replyingToId: x.replyingToId,
+              user: x.user ?? {
+                email: '',
+                emailVerified: null,
+                id: '',
+                image: '',
+                name: profile?.profileName ?? '<missing name>',
+              }
+            }
+          }),
+          replyingToId: updated!.replyingToId,
+          user: updated!.user ?? {
+            email: '',
+            emailVerified: null,
+            id: '',
+            image: '',
+            name: profile?.profileName ?? '<missing name>',
+          }
         }
 
-        return result;
+        return result
       }
 
       throw new trpc.TRPCError({
@@ -253,7 +280,7 @@ export const offersCommentsRouter = createRouter()
             id: input.id,
           },
         });
-        const result = await ctx.prisma.offersProfile.findFirst({
+        await ctx.prisma.offersProfile.findFirst({
           include: {
             discussion: {
               include: {
@@ -268,11 +295,11 @@ export const offersCommentsRouter = createRouter()
           },
         });
 
-        if (result) {
-          return result.discussion.filter((x) => x.replyingToId === null);
-        }
+        // If (result) {
+        //   return result.discussion.filter((x) => x.replyingToId === null);
+        // }
 
-        return result;
+        // return result;
       }
 
       throw new trpc.TRPCError({
