@@ -59,11 +59,11 @@ export const BROWSE_TABS_VALUES = {
   STARRED: 'starred',
 };
 
-export const SORT_OPTIONS: Array<SortOption> = [
-  { name: 'Latest', value: 'latest' },
-  { name: 'Popular', value: 'popular' },
-  { name: 'Top Comments', value: 'topComments' },
-];
+export const SORT_OPTIONS: Record<string, string> = {
+  latest: 'Latest',
+  popular: 'Popular',
+  topComments: 'Top Comments',
+};
 
 export const ROLE: Array<FilterOption<RoleFilter>> = [
   {
