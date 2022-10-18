@@ -138,7 +138,7 @@ export type CreateOfferProfileResponse = {
 };
 
 export type OffersDiscussion = {
-  data: Array<OffersReply>;
+  data: Array<OReply>;
 };
 
 export type OffersAnalysis = {

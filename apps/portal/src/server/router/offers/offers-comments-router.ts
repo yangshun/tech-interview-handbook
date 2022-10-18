@@ -36,38 +36,57 @@ export const offersCommentsRouter = createRouter()
         },
       });
 
-      result?.discussion
-        .filter((x) => x.replyingToId === null)
-        .map((x) => {
-          if (x.user == null) {
-            x.user = {
-              email: '',
-              emailVerified: null,
-              id: '',
-              image: '',
-              name: profile?.profileName ?? '<missing name>',
-            };
-          }
+      const discussions: OffersDiscussion = {
+        data: result?.discussion
+            .filter((x) => {
+            return x.replyingToId === null
+            })
+            .map((x) => {
+              if (x.user == null) {
+                x.user = {
+                  email: '',
+                  emailVerified: null,
+                  id: '',
+                  image: '',
+                  name: profile?.profileName ?? '<missing name>',
+                };
+              }
 
-          x.replies?.map((y) => {
-            if (y.user == null) {
-              y.user = {
-                email: '',
-                emailVerified: null,
-                id: '',
-                image: '',
-                name: profile?.profileName ?? '<missing name>',
-              };
-            }
-          });
-          return x;
-        });
+              x.replies?.map((y) => {
+                if (y.user == null) {
+                  y.user = {
+                    email: '',
+                    emailVerified: null,
+                    id: '',
+                    image: '',
+                    name: profile?.profileName ?? '<missing name>',
+                  };
+                }
+              });
 
-        const discussions: OffersDiscussion = {
-          data: result ? result.discussion : []
-        }
+              const replyType: Reply = {
+                createdAt: x.createdAt,
+                id: x.id,
+                message: x.message,
+                replies: x.replies.map((reply) => {
+                  return {
+                    createdAt: reply.createdAt,
+                    id: reply.id,
+                    message: reply.message,
+                    replies: [],
+                    replyingToId: reply.replyingToId,
+                    user: reply.user
+                  }
+                }),
+                replyingToId: x.replyingToId,
+                user: x.user
+              }
 
-        return discussions
+              return replyType
+            }) ?? []
+      }
+
+      return discussions
     },
   })
   .mutation('create', {

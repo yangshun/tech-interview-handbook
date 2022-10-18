@@ -74,17 +74,18 @@ function Test() {
 
   const handleCreate = () => {
     createCommentMutation.mutate({
-      message: 'hello',
-      profileId: 'cl96stky5002ew32gx2kale2x',
-      // UserId: 'cl97dl51k001e7iygd5v5gt58'
+      message: 'wassup bro',
+      profileId: 'cl9efyn9p004ww3u42mjgl1vn',
+      replyingToId: 'cl9el4xj10001w3w21o3p2iny',
+      userId: 'cl9ehvpng0000w3ec2mpx0bdd'
     });
   };
 
   const handleLink = () => {
     addToUserProfileMutation.mutate({
-      profileId: 'cl96stky5002ew32gx2kale2x',
+      profileId: 'cl9efyn9p004ww3u42mjgl1vn',
       token: 'afca11e436d21bde24543718fa957c6c625335439dc504f24ee35eae7b5ef1ba',
-      userId: 'cl97dl51k001e7iygd5v5gt58',
+      userId: 'cl9ehvpng0000w3ec2mpx0bdd',
     });
   };
 
@@ -216,6 +217,7 @@ function Test() {
     },
   );
 
+  // Console.log(replies.data?.data)
   const deleteMutation = trpc.useMutation(['offers.profile.delete']);
 
   const handleDelete = (id: string) => {
@@ -600,7 +602,7 @@ function Test() {
   return (
     <>
       <div>{createdData}</div>
-      <div>{JSON.stringify(replies.data)}</div>
+      <div>{JSON.stringify(replies.data?.data)}</div>
       <button type="button" onClick={handleClick}>
         Click Me!
       </button>
