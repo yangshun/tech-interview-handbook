@@ -1,7 +1,6 @@
 import Head from 'next/head';
 
 import { CallToAction } from '~/components/resumes/landing/CallToAction';
-import { Footer } from '~/components/resumes/landing/Footer';
 import { Hero } from '~/components/resumes/landing/Hero';
 import { PrimaryFeatures } from '~/components/resumes/landing/PrimaryFeatures';
 import { Testimonials } from '~/components/resumes/landing/Testimonials';
@@ -18,7 +17,6 @@ export default function Home() {
         <PrimaryFeatures />
         <CallToAction />
         <Testimonials />
-        <Footer />
       </main>
     </>
   );

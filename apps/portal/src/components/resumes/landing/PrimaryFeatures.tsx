@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { Tab } from '@headlessui/react';
 
 import { Container } from './Container';
-import backgroundImage from './images/background-features.jpg';
 import screenshotExpenses from './images/screenshots/expenses.png';
 import screenshotPayroll from './images/screenshots/payroll.png';
 import screenshotVatReturns from './images/screenshots/vat-returns.png';
@@ -36,7 +35,7 @@ export function PrimaryFeatures() {
   useEffect(() => {
     const lgMediaQuery = window.matchMedia('(min-width: 1024px)');
 
-    function onMediaQueryChange({ matches }) {
+    function onMediaQueryChange({ matches }: { matches: boolean }) {
       setTabOrientation(matches ? 'vertical' : 'horizontal');
     }
 
@@ -51,16 +50,8 @@ export function PrimaryFeatures() {
   return (
     <section
       aria-label="Features for running your books"
-      className="relative overflow-hidden bg-blue-600 pt-20 pb-28 sm:py-32"
+      className="relative overflow-hidden bg-gradient-to-r from-indigo-400 to-indigo-700 pt-20 pb-28 sm:py-32"
       id="features">
-      <Image
-        alt=""
-        className="absolute top-1/2 left-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]"
-        height={1636}
-        src={backgroundImage}
-        unoptimized={true}
-        width={2245}
-      />
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
           <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">

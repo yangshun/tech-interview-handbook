@@ -1,4 +1,6 @@
-export function Logo(props) {
+import type { FC } from 'react';
+
+export const Logo: FC = (props) => {
   return (
     <svg aria-hidden="true" viewBox="0 0 109 40" {...props}>
       <path
@@ -29,4 +31,4 @@ export function Logo(props) {
       />
     </svg>
   );
-}
+};

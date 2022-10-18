@@ -1,21 +1,13 @@
-import Image from 'next/future/image';
 import Link from 'next/link';
 
-import { Button } from './Button';
 import { Container } from './Container';
-import logoLaravel from './images/logos/laravel.svg';
-import logoMirage from './images/logos/mirage.svg';
-import logoStatamic from './images/logos/statamic.svg';
-import logoStaticKit from './images/logos/statickit.svg';
-import logoTransistor from './images/logos/transistor.svg';
-import logoTuple from './images/logos/tuple.svg';
 
 export function Hero() {
   return (
-    <Container className="pt-20 pb-16 text-center lg:pt-32">
+    <Container className="pb-36 pt-20 text-center lg:pt-32">
       <h1 className="font-display mx-auto max-w-4xl text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
         Resume review{' '}
-        <span className="relative whitespace-nowrap text-blue-600">
+        <span className="relative whitespace-nowrap text-indigo-500">
           <svg
             aria-hidden="true"
             className="absolute top-2/3 left-0 h-[0.58em] w-full fill-blue-300/70"
@@ -33,40 +25,24 @@ export function Hero() {
       </p>
       <div className="mt-10 flex justify-center gap-x-4">
         <Link href="/resumes/browse">
-          <Button>Start browsing now</Button>
+          <button
+            className="rounded-md bg-indigo-500 py-2 px-3 text-sm font-medium text-white"
+            type="button">
+            Start browsing now
+          </button>
         </Link>
         <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-          <Button variant="outline">
+          <button
+            className="group inline-flex items-center justify-center py-2 px-4 text-sm ring-1 ring-slate-200 hover:text-slate-900 hover:ring-slate-300 focus:outline-none focus-visible:outline-indigo-600 focus-visible:ring-slate-300 active:bg-slate-100 active:text-slate-600"
+            type="button">
             <svg
               aria-hidden="true"
-              className="h-3 w-3 flex-none fill-blue-600 group-active:fill-current">
+              className="h-3 w-3 flex-none fill-indigo-600 group-active:fill-current">
               <path d="m9.997 6.91-7.583 3.447A1 1 0 0 1 1 9.447V2.553a1 1 0 0 1 1.414-.91L9.997 5.09c.782.355.782 1.465 0 1.82Z" />
             </svg>
             <span className="ml-3">Watch video</span>
-          </Button>
+          </button>
         </Link>
-      </div>
-      <div className="mt-36 lg:mt-44">
-        <p className="font-display text-base text-slate-900">
-          Resumes reviewed from engineers from these companies so far
-        </p>
-        <ul
-          className="mt-8 flex items-center justify-center gap-x-8 sm:flex-col sm:gap-x-0 sm:gap-y-10 xl:flex-row xl:gap-x-12 xl:gap-y-0"
-          role="list">
-          {[
-            { logo: logoTransistor, name: 'Apple' },
-            { logo: logoTuple, name: 'Meta' },
-            { logo: logoStaticKit, name: 'Google' },
-
-            { logo: logoMirage, name: 'Mirage' },
-            { logo: logoLaravel, name: 'Laravel' },
-            { logo: logoStatamic, name: 'Statamic' },
-          ].map((company) => (
-            <li key={company.name} className="flex">
-              <Image alt={company.name} src={company.logo} unoptimized={true} />
-            </li>
-          ))}
-        </ul>
       </div>
     </Container>
   );
