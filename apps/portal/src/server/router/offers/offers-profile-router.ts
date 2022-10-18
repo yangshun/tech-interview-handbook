@@ -501,11 +501,13 @@ export const offersProfileRouter = createRouter()
       const profileEditToken = profileToDelete?.editToken;
 
       if (profileEditToken === input.token) {
-        return await ctx.prisma.offersProfile.delete({
+        const deletedProfile = await ctx.prisma.offersProfile.delete({
           where: {
             id: input.profileId,
           },
         });
+
+        return deletedProfile.id;
       }
       // TODO: Throw 401
       throw new trpc.TRPCError({
