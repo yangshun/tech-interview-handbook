@@ -41,11 +41,6 @@ export type FilterState = Partial<CustomFilter> &
 
 export type SortOrder = 'latest' | 'popular' | 'topComments';
 
-type SortOption = {
-  name: string;
-  value: SortOrder;
-};
-
 export type Shortcut = {
   customFilters?: CustomFilter;
   filters: FilterState;
