@@ -1,23 +1,24 @@
 import clsx from 'clsx';
-import type { ReactNode } from 'react';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type ResumeExpandableTextProps = Readonly<{
-  children: ReactNode;
+  text: string;
 }>;
 
 export default function ResumeExpandableText({
-  children,
+  text,
 }: ResumeExpandableTextProps) {
-  const ref = useRef<HTMLSpanElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [descriptionOverflow, setDescriptionOverflow] = useState(false);
 
-  useLayoutEffect(() => {
-    if (ref.current && ref.current.clientHeight < ref.current.scrollHeight) {
+  useEffect(() => {
+    const lines = text.split(/\r\n|\r|\n/);
+    if (lines.length > 3) {
       setDescriptionOverflow(true);
+    } else {
+      setDescriptionOverflow(false);
     }
-  }, [ref]);
+  }, [text]);
 
   const onSeeActionClicked = () => {
     setIsExpanded((prevExpanded) => !prevExpanded);
@@ -26,13 +27,11 @@ export default function ResumeExpandableText({
   return (
     <div>
       <span
-        ref={ref}
         className={clsx(
-          'whitespace-pre-wrap text-sm',
-          'line-clamp-3',
+          'line-clamp-3 whitespace-pre-wrap text-sm',
           isExpanded ? 'line-clamp-none' : '',
         )}>
-        {children}
+        {text}
       </span>
       {descriptionOverflow && (
         <p

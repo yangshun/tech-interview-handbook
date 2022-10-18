@@ -189,9 +189,7 @@ export default function ResumeReviewPage() {
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                 />
-                <ResumeExpandableText>
-                  {detailsQuery.data.additionalInfo}
-                </ResumeExpandableText>
+                <ResumeExpandableText text={detailsQuery.data.additionalInfo} />
               </div>
             )}
             <div className="flex w-full flex-col py-4 lg:flex-row">

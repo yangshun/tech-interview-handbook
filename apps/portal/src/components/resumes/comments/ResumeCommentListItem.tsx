@@ -54,7 +54,7 @@ export default function ResumeCommentListItem({
           </div>
 
           {/* Description */}
-          <ResumeExpandableText>{comment.description}</ResumeExpandableText>
+          <ResumeExpandableText text={comment.description} />
 
           {/* Upvote and edit */}
           <div className="flex flex-row space-x-1 pt-1 align-middle">
