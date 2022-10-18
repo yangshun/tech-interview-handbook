@@ -10,9 +10,8 @@ type ResumeCommentInput = Readonly<{
   userId: string;
 }>;
 
-export const resumesCommentsUserRouter = createProtectedRouter().mutation(
-  'create',
-  {
+export const resumesCommentsUserRouter = createProtectedRouter()
+  .mutation('create', {
     input: z.object({
       education: z.string(),
       experience: z.string(),
@@ -50,5 +49,22 @@ export const resumesCommentsUserRouter = createProtectedRouter().mutation(
         data: comments,
       });
     },
-  },
-);
+  })
+  .mutation('update', {
+    input: z.object({
+      description: z.string(),
+      id: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const { id, description } = input;
+
+      return await ctx.prisma.resumesComment.update({
+        data: {
+          description,
+        },
+        where: {
+          id,
+        },
+      });
+    },
+  });
