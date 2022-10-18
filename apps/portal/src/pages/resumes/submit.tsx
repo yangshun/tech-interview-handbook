@@ -8,7 +8,7 @@ import type { FileRejection } from 'react-dropzone';
 import { useDropzone } from 'react-dropzone';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { PaperClipIcon } from '@heroicons/react/24/outline';
+import { ArrowUpCircleIcon } from '@heroicons/react/24/outline';
 import {
   Button,
   CheckboxInput,
@@ -303,34 +303,29 @@ export default function SubmitResumeForm({
                         fileUploadError
                           ? 'border-danger-600'
                           : 'border-gray-300',
-                        'mt-2 flex justify-center rounded-md border-2  border-dashed px-6 pt-5 pb-6',
+                        'mt-2 flex cursor-pointer justify-center rounded-md border-2 border-dashed bg-gray-100 px-6 pt-5 pb-6',
                       )}>
                       <div className="space-y-1 text-center">
-                        <div className="flex gap-2">
-                          {resumeFile == null ? (
-                            <PaperClipIcon className="m-auto h-8 w-8 text-gray-600" />
-                          ) : (
-                            <div className="flex gap-2">
-                              <p
-                                className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
-                                onClick={onClickDownload}>
-                                {resumeFile.name}
-                              </p>
-                            </div>
-                          )}
-                        </div>
+                        {resumeFile == null ? (
+                          <ArrowUpCircleIcon className="m-auto h-10 w-10 text-indigo-500" />
+                        ) : (
+                          <p
+                            className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
+                            onClick={onClickDownload}>
+                            {resumeFile.name}
+                          </p>
+                        )}
                         <div className="flex justify-center text-sm">
                           <label
                             className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
                             htmlFor="file-upload">
-                            <div className="flex gap-1 ">
-                              <p className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
+                            <p className="mt-2 font-medium">Drop files here</p>
+                            <div className="mt-2 mb-1 flex justify-center gap-1">
+                              <span className="font-light">or</span>
+                              <span className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
                                 {resumeFile == null
-                                  ? 'Upload a file'
+                                  ? 'Select file'
                                   : 'Replace file'}
-                              </p>
-                              <span className="text-gray-500">
-                                or drag and drop
                               </span>
                             </div>
                             <input
