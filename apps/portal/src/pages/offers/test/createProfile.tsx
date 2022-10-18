@@ -7,7 +7,7 @@ function Test() {
   const [error, setError] = useState('');
 
   const createMutation = trpc.useMutation(['offers.profile.create'], {
-    onError(err: any) {
+    onError(err) {
       alert(err);
     },
     onSuccess(data) {
@@ -18,7 +18,7 @@ function Test() {
   const addToUserProfileMutation = trpc.useMutation(
     ['offers.profile.addToUserProfile'],
     {
-      onError(err: any) {
+      onError(err) {
         alert(err);
       },
       onSuccess(data) {
@@ -28,7 +28,7 @@ function Test() {
   );
 
   const deleteCommentMutation = trpc.useMutation(['offers.comments.delete'], {
-    onError(err: any) {
+    onError(err) {
       alert(err);
     },
     onSuccess(data) {
@@ -46,7 +46,7 @@ function Test() {
   };
 
   const updateCommentMutation = trpc.useMutation(['offers.comments.update'], {
-    onError(err: any) {
+    onError(err) {
       alert(err);
     },
     onSuccess(data) {
@@ -64,7 +64,7 @@ function Test() {
   };
 
   const createCommentMutation = trpc.useMutation(['offers.comments.create'], {
-    onError(err: any) {
+    onError(err) {
       alert(err);
     },
     onSuccess(data) {
@@ -151,8 +151,10 @@ function Test() {
               value: 104100,
             },
           },
-          comments: '',
-          companyId: 'cl9ec1mgg0000w33hg1a3612r',
+
+          comments: 'I am a Raffles Institution almumni',
+          // Comments: '',
+          companyId: 'cl98yuqk80007txhgjtjp8fk4',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
@@ -180,8 +182,8 @@ function Test() {
               value: 104100,
             },
           },
-          comments: "",
-          companyId: 'cl9ec1mgg0000w33hg1a3612r',
+          comments: '',
+          companyId: 'cl98yuqk80007txhgjtjp8fk4',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
@@ -228,7 +230,7 @@ function Test() {
   };
 
   const updateMutation = trpc.useMutation(['offers.profile.update'], {
-    onError(err: any) {
+    onError(err) {
       alert(err);
     },
     onSuccess(response) {
@@ -412,7 +414,7 @@ function Test() {
             totalCompensationId: 'cl96stky90039w32glbpktd0o',
           },
           OffersIntern: null,
-          comments: null,
+          comments: '',
           company: {
             createdAt: new Date('2022-10-12T16:19:05.196Z'),
             description:
@@ -465,7 +467,7 @@ function Test() {
             totalCompensationId: 'cl96stky9003jw32gzumcoi7v',
           },
           OffersIntern: null,
-          comments: null,
+          comments: '',
           company: {
             createdAt: new Date('2022-10-12T16:19:05.196Z'),
             description:

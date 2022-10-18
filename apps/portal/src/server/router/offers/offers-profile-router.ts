@@ -2,9 +2,13 @@ import crypto, { randomUUID } from 'crypto';
 import { z } from 'zod';
 import * as trpc from '@trpc/server';
 
-import { createRouter } from '../context';
+import {
+  addToProfileResponseMapper,
+  createOfferProfileResponseMapper,
+  profileDtoMapper,
+} from '~/mappers/offers-mappers';
 
-import type { OffersProfile } from '~/types/offers';
+import { createRouter } from '../context';
 
 const valuation = z.object({
   currency: z.string(),
@@ -50,14 +54,14 @@ const offer = z.object({
       totalCompensation: valuation.nullish(), // Full time
     })
     .nullish(),
-  comments: z.string().nullish(),
+  comments: z.string(),
   company: company.nullish(),
   companyId: z.string(),
   id: z.string().optional(),
   jobType: z.string(),
   location: z.string(),
   monthYearReceived: z.date(),
-  negotiationStrategy: z.string().nullish(),
+  negotiationStrategy: z.string(),
   offersFullTimeId: z.string().nullish(),
   offersInternId: z.string().nullish(),
   profileId: z.string().nullish(),
@@ -98,30 +102,6 @@ const reply = z.object({
   userId: z.string().nullish(),
 });
 
-type WithIsEditable<T> = T & {
-  isEditable: boolean;
-};
-
-function computeIsEditable(
-  profileInput: OffersProfile,
-  editToken?: string,
-): WithIsEditable<OffersProfile> {
-  return {
-    ...profileInput,
-    isEditable: profileInput.editToken === editToken,
-  };
-}
-
-function exclude<Key extends keyof WithIsEditable<OffersProfile>>(
-  profile: WithIsEditable<OffersProfile>,
-  ...keys: Array<Key>
-): Omit<WithIsEditable<OffersProfile>, Key> {
-  for (const key of keys) {
-    delete profile[key];
-  }
-  return profile;
-}
-
 export const offersProfileRouter = createRouter()
   .query('listOne', {
     input: z.object({
@@ -131,6 +111,86 @@ export const offersProfileRouter = createRouter()
     async resolve({ ctx, input }) {
       const result = await ctx.prisma.offersProfile.findFirst({
         include: {
+          analysis: {
+            include: {
+              overallHighestOffer: {
+                include: {
+                  OffersFullTime: {
+                    include: {
+                      totalCompensation: true,
+                    },
+                  },
+                  OffersIntern: {
+                    include: {
+                      monthlySalary: true,
+                    },
+                  },
+                  company: true,
+                  profile: {
+                    include: {
+                      background: true,
+                    },
+                  },
+                },
+              },
+              topCompanyOffers: {
+                include: {
+                  OffersFullTime: {
+                    include: {
+                      totalCompensation: true,
+                    },
+                  },
+                  OffersIntern: {
+                    include: {
+                      monthlySalary: true,
+                    },
+                  },
+                  company: true,
+                  profile: {
+                    include: {
+                      background: {
+                        include: {
+                          experiences: {
+                            include: {
+                              company: true,
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+              topOverallOffers: {
+                include: {
+                  OffersFullTime: {
+                    include: {
+                      totalCompensation: true,
+                    },
+                  },
+                  OffersIntern: {
+                    include: {
+                      monthlySalary: true,
+                    },
+                  },
+                  company: true,
+                  profile: {
+                    include: {
+                      background: {
+                        include: {
+                          experiences: {
+                            include: {
+                              company: true,
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
           background: {
             include: {
               educations: true,
@@ -176,7 +236,7 @@ export const offersProfileRouter = createRouter()
       });
 
       if (result) {
-        return exclude(computeIsEditable(result, input.token), 'editToken');
+        return profileDtoMapper(result, input.token);
       }
 
       throw new trpc.TRPCError({
@@ -422,41 +482,9 @@ export const offersProfileRouter = createRouter()
           },
           profileName: randomUUID().substring(0, 10),
         },
-        include: {
-          background: {
-            include: {
-              educations: true,
-              experiences: {
-                include: {
-                  company: true,
-                  monthlySalary: true,
-                  totalCompensation: true,
-                },
-              },
-              specificYoes: true,
-            },
-          },
-          offers: {
-            include: {
-              OffersFullTime: {
-                include: {
-                  baseSalary: true,
-                  bonus: true,
-                  stocks: true,
-                  totalCompensation: true,
-                },
-              },
-              OffersIntern: {
-                include: {
-                  monthlySalary: true,
-                },
-              },
-            },
-          },
-        },
       });
-      // TODO: add analysis to profile object then return
-      return profile;
+
+      return createOfferProfileResponseMapper(profile, token);
     },
   })
   .mutation('delete', {
@@ -990,7 +1018,7 @@ export const offersProfileRouter = createRouter()
             }
           }
         }
-        // TODO: add analysis to profile object then return
+
         const result = await ctx.prisma.offersProfile.findFirst({
           include: {
             background: {
@@ -1038,7 +1066,7 @@ export const offersProfileRouter = createRouter()
         });
 
         if (result) {
-          return exclude(computeIsEditable(result, input.token), 'editToken');
+          return createOfferProfileResponseMapper(result, input.token);
         }
 
         throw new trpc.TRPCError({
@@ -1082,11 +1110,7 @@ export const offersProfileRouter = createRouter()
           },
         });
 
-        return {
-          id: updated.id,
-          profileName: updated.profileName,
-          userId: updated.userId,
-        };
+        return addToProfileResponseMapper(updated);
       }
 
       throw new trpc.TRPCError({

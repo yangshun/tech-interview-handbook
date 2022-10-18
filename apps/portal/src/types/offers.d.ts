@@ -1,8 +1,8 @@
 import type { JobType } from '@prisma/client';
 
-export type OffersProfile = {
-  analysis: OffersAnalysis;
-  background: Background;
+export type Profile = {
+  analysis: ProfileAnalysis?;
+  background: Background?;
   editToken: string?;
   id: string;
   isEditable: boolean;
@@ -30,7 +30,7 @@ export type Experience = {
   totalCompensation: Valuation?;
 };
 
-export type Company = {
+export type OffersCompany = {
   createdAt: Date;
   description: string;
   id: string;
@@ -55,7 +55,6 @@ export type Education = {
 };
 
 export type SpecificYoe = {
-  backgroundId: string;
   domain: string;
   id: string;
   yoe: number;
@@ -78,11 +77,11 @@ export type ProfileOffer = {
   location: string;
   monthYearReceived: Date;
   negotiationStrategy: string;
-  offersFullTime: OffersFullTime?;
-  offersIntern: OffersIntern?;
+  offersFullTime: FullTime?;
+  offersIntern: Intern?;
 };
 
-export type OffersFullTime = {
+export type FullTime = {
   baseSalary: Valuation;
   bonus: Valuation;
   id: string;
@@ -93,7 +92,7 @@ export type OffersFullTime = {
   totalCompensation: Valuation;
 };
 
-export type OffersIntern = {
+export type Intern = {
   id: string;
   internshipCycle: string;
   monthlySalary: Valuation;
@@ -132,7 +131,6 @@ export type Paging = {
 };
 
 export type CreateOfferProfileResponse = {
-  analysis: OffersAnalysis;
   id: string;
   token: string;
 };
@@ -141,7 +139,7 @@ export type OffersDiscussion = {
   data: Array<OReply>;
 };
 
-export type OffersAnalysis = {
+export type ProfileAnalysis = {
   companyAnalysis: Array<Analysis>;
   id: string;
   overallAnalysis: Analysis;
@@ -178,4 +176,10 @@ export type AnalysisOffer = {
   specialization: string;
   title: string;
   totalYoe: number;
+};
+
+export type AddToProfileResponse = {
+  id: string;
+  profileName: string;
+  userId: string;
 };
