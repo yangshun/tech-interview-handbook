@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import * as trpc from '@trpc/server';
 
-import { createProtectedRouter } from '../context';
+import { createRouter } from '../context';
 
-export const offersCommentsRouter = createProtectedRouter()
+export const offersCommentsRouter = createRouter()
   .query('getComments', {
     input: z.object({
       profileId: z.string(),
@@ -71,70 +71,87 @@ export const offersCommentsRouter = createProtectedRouter()
       message: z.string(),
       profileId: z.string(),
       replyingToId: z.string().optional(),
-      userId: z.string().optional(),
+      token: z.string().optional(),
+      userId: z.string().optional()
     }),
     async resolve({ ctx, input }) {
-      const createdReply = await ctx.prisma.offersReply.create({
-        data: {
-          message: input.message,
-          profile: {
-            connect: {
-              id: input.profileId,
-            },
-          },
-        },
-      });
-
-      if (input.replyingToId) {
-        await ctx.prisma.offersReply.update({
-          data: {
-            replyingTo: {
-              connect: {
-                id: input.replyingToId,
-              },
-            },
-          },
-          where: {
-            id: createdReply.id,
-          },
-        });
-      }
-
-      if (input.userId) {
-        await ctx.prisma.offersReply.update({
-          data: {
-            user: {
-              connect: {
-                id: input.userId,
-              },
-            },
-          },
-          where: {
-            id: createdReply.id,
-          },
-        });
-      }
-      // Get replies
-      const result = await ctx.prisma.offersProfile.findFirst({
-        include: {
-          discussion: {
-            include: {
-              replies: true,
-              replyingTo: true,
-              user: true,
-            },
-          },
-        },
+      const profile = await ctx.prisma.offersProfile.findFirst({
         where: {
           id: input.profileId,
         },
       });
 
-      if (result) {
-        return result.discussion.filter((x) => x.replyingToId === null);
-      }
+      const profileEditToken = profile?.editToken;
 
-      return result;
+      if (input.token === profileEditToken || input.userId) {
+        const createdReply = await ctx.prisma.offersReply.create({
+          data: {
+            message: input.message,
+            profile: {
+              connect: {
+                id: input.profileId,
+              },
+            },
+          },
+        });
+
+        if (input.replyingToId) {
+          await ctx.prisma.offersReply.update({
+            data: {
+              replyingTo: {
+                connect: {
+                  id: input.replyingToId,
+                },
+              },
+            },
+            where: {
+              id: createdReply.id,
+            },
+          });
+        }
+
+        if (input.userId) {
+          await ctx.prisma.offersReply.update({
+            data: {
+              user: {
+                connect: {
+                  id: input.userId,
+                },
+              },
+            },
+            where: {
+              id: createdReply.id,
+            },
+          });
+        }
+        // Get replies
+        const result = await ctx.prisma.offersProfile.findFirst({
+          include: {
+            discussion: {
+              include: {
+                replies: true,
+                replyingTo: true,
+                user: true,
+              },
+            },
+          },
+          where: {
+            id: input.profileId,
+          },
+        });
+
+        if (result) {
+          return result.discussion.filter((x) => x.replyingToId === null);
+        }
+
+        return result;
+    }
+
+    throw new trpc.TRPCError({
+      code: 'UNAUTHORIZED',
+      message: 'Missing userId or wrong token.',
+    });
+
     },
   })
   .mutation('update', {
