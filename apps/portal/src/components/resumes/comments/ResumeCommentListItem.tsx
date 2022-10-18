@@ -34,7 +34,7 @@ export default function ResumeCommentListItem({
     register,
     handleSubmit,
     setValue,
-    formState: { isDirty },
+    formState: { errors, isDirty },
     reset,
   } = useForm<ICommentInput>({
     defaultValues: {
@@ -116,10 +116,13 @@ export default function ResumeCommentListItem({
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex-column mt-1 space-y-2">
                 <TextArea
-                  required={true}
-                  {...(register('description'), {})}
+                  {...(register('description', {
+                    required: 'Comments cannot be empty!',
+                  }),
+                  {})}
                   defaultValue={comment.description}
                   disabled={commentUpdateMutation.isLoading}
+                  errorMessage={errors.description?.message}
                   label="Edit comment"
                   placeholder="Leave your comment here"
                   onChange={setFormValue}
