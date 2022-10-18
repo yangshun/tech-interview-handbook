@@ -16,7 +16,7 @@ import type { ResumeComment } from '~/types/resume-comments';
 
 type ResumeCommentListItemProps = {
   comment: ResumeComment;
-  userId?: string;
+  userId: string | undefined;
 };
 
 type ICommentInput = {
@@ -78,8 +78,8 @@ export default function ResumeCommentListItem({
   };
 
   return (
-    <div className="border-primary-300 w-3/4 rounded-md border-2 bg-white p-2 drop-shadow-md">
-      <div className="flex w-full flex-row space-x-2 p-1 align-top">
+    <div className="border-primary-300 w-11/12 min-w-fit rounded-md border-2 bg-white p-2 drop-shadow-md">
+      <div className="flex flex-row space-x-2 p-1 align-top">
         {comment.user.image ? (
           <img
             alt={comment.user.name ?? 'Reviewer'}
@@ -103,7 +103,7 @@ export default function ResumeCommentListItem({
               </div>
             </div>
 
-            <div className="text-xs text-gray-600">
+            <div className="px-2 text-xs text-gray-600">
               {comment.createdAt.toLocaleString('en-US', {
                 dateStyle: 'medium',
                 timeStyle: 'short',
@@ -123,7 +123,7 @@ export default function ResumeCommentListItem({
                   defaultValue={comment.description}
                   disabled={commentUpdateMutation.isLoading}
                   errorMessage={errors.description?.message}
-                  label="Edit comment"
+                  label=""
                   placeholder="Leave your comment here"
                   onChange={setFormValue}
                 />
