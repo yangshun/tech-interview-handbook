@@ -9,7 +9,7 @@ import type { Question } from '~/types/questions';
 export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
-      companyIds: z.string().array(),
+      companyNames: z.string().array(),
       endDate: z.date(),
       locations: z.string().array(),
       questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
@@ -51,68 +51,69 @@ export const questionsQuestionRouter = createProtectedRouter()
                 },
               }
             : {}),
-          encounters : {
+          encounters: {
             some: {
-              ...(input.companies.length > 0
+              ...(input.companyNames.length > 0
                 ? {
-                    company : {
-                      in : input.companies
-                    }
-                }
+                    company: {
+                      name: {
+                        in: input.companyNames,
+                      },
+                    },
+                  }
                 : {}),
               ...(input.locations.length > 0
                 ? {
                     location: {
-                      in: input.locations
+                      in: input.locations,
                     },
-                }
+                  }
                 : {}),
               ...(input.roles.length > 0
                 ? {
-                    role : {
-                      in: input.roles
-                    }
-                }
+                    role: {
+                      in: input.roles,
+                    },
+                  }
                 : {}),
-            }
-          }
+            },
+          },
         },
       });
-      return questionsData
-        .map((data) => {
-          const votes: number = data.votes.reduce(
-            (previousValue: number, currentValue) => {
-              let result: number = previousValue;
+      return questionsData.map((data) => {
+        const votes: number = data.votes.reduce(
+          (previousValue: number, currentValue) => {
+            let result: number = previousValue;
 
-              switch (currentValue.vote) {
-                case Vote.UPVOTE:
-                  result += 1;
-                  break;
-                case Vote.DOWNVOTE:
-                  result -= 1;
-                  break;
-              }
-              return result;
-            },
-            0,
-          );
+            switch (currentValue.vote) {
+              case Vote.UPVOTE:
+                result += 1;
+                break;
+              case Vote.DOWNVOTE:
+                result -= 1;
+                break;
+            }
+            return result;
+          },
+          0,
+        );
 
-          const question: Question = {
-            company: data.encounters[0].company!.name ?? 'Unknown company',
-            content: data.content,
-            id: data.id,
-            location: data.encounters[0].location ?? 'Unknown location',
-            numAnswers: data._count.answers,
-            numComments: data._count.comments,
-            numVotes: votes,
-            role: data.encounters[0].role ?? 'Unknown role',
-            seenAt: data.encounters[0].seenAt,
-            type: data.questionType,
-            updatedAt: data.updatedAt,
-            user: data.user?.name ?? '',
-          };
-          return question;
-        });
+        const question: Question = {
+          company: data.encounters[0].company!.name ?? 'Unknown company',
+          content: data.content,
+          id: data.id,
+          location: data.encounters[0].location ?? 'Unknown location',
+          numAnswers: data._count.answers,
+          numComments: data._count.comments,
+          numVotes: votes,
+          role: data.encounters[0].role ?? 'Unknown role',
+          seenAt: data.encounters[0].seenAt,
+          type: data.questionType,
+          updatedAt: data.updatedAt,
+          user: data.user?.name ?? '',
+        };
+        return question;
+      });
     },
   })
   .query('getQuestionById', {
@@ -205,11 +206,19 @@ export const questionsQuestionRouter = createProtectedRouter()
           encounters: {
             create: [
               {
-                company: input.companyId,
+                company: {
+                  connect: {
+                    id: input.companyId,
+                  },
+                },
                 location: input.location,
                 role: input.role,
                 seenAt: input.seenAt,
-                userId,
+                user: {
+                  connect: {
+                    id: userId,
+                  },
+                },
               },
             ],
           },
@@ -245,7 +254,6 @@ export const questionsQuestionRouter = createProtectedRouter()
       const { content, questionType } = input;
 
       return await ctx.prisma.questionsQuestion.update({
-
         data: {
           content,
           questionType,

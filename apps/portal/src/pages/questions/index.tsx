@@ -65,7 +65,7 @@ export default function QuestionsHomePage() {
     [
       'questions.questions.getQuestionsByFilter',
       {
-        companies: selectedCompanies,
+        companyNames: selectedCompanies,
         endDate: today,
         locations: selectedLocations,
         questionTypes: selectedQuestionTypes,
@@ -252,7 +252,7 @@ export default function QuestionsHomePage() {
               <ContributeQuestionCard
                 onSubmit={(data) => {
                   createQuestion({
-                    company: data.company,
+                    companyId: data.company,
                     content: data.questionContent,
                     location: data.location,
                     questionType: data.questionType,
