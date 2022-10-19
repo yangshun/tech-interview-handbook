@@ -46,7 +46,8 @@ export default function OffersHomePage() {
             <div className="ml-4">
               <CompaniesTypeahead
                 isLabelHidden={true}
-                placeHolder="All companies"
+                label="Company"
+                placeholder="All companies"
                 onSelect={({ value }) => setCompanyFilter(value)}
               />
             </div>

@@ -22,6 +22,7 @@ export default function HomePage() {
             Homepage
           </h1>
           <CompaniesTypeahead
+            label="Company"
             onSelect={(option) => setSelectedCompany(option)}
           />
           <pre>{JSON.stringify(selectedCompany, null, 2)}</pre>

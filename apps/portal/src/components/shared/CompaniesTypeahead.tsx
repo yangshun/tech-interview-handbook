@@ -1,23 +1,30 @@
 import { useState } from 'react';
-import type { TypeaheadOption } from '@tih/ui';
 import { Typeahead } from '@tih/ui';
+import type { Props as TypeaheadProps } from '@tih/ui/src/Typeahead/Typeahead';
 
 import { trpc } from '~/utils/trpc';
 
-type Props = Readonly<{
-  disabled?: boolean;
-  isLabelHidden?: boolean;
-  onSelect: (option: TypeaheadOption) => void;
-  placeHolder?: string;
-}>;
+type Props = Omit<
+  TypeaheadProps,
+  'noResultsMessage' | 'onQueryChange' | 'options' | 'query'
+> &
+  Partial<Pick<TypeaheadProps, 'noResultsMessage'>> &
+  (
+    | Required<Pick<TypeaheadProps, 'onQueryChange' | 'query'>>
+    | {
+        onQueryChange?: never;
+        query?: never;
+      }
+  );
 
 export default function CompaniesTypeahead({
-  disabled,
-  onSelect,
-  isLabelHidden,
-  placeHolder,
+  query: queryProp,
+  onQueryChange,
+  nullable = true,
+  ...typeaheadProps
 }: Props) {
-  const [query, setQuery] = useState('');
+  const [queryState, setQuery] = useState('');
+  const query = queryProp ?? queryState;
   const companies = trpc.useQuery([
     'companies.list',
     {
@@ -29,11 +36,9 @@ export default function CompaniesTypeahead({
 
   return (
     <Typeahead
-      disabled={disabled}
-      isLabelHidden={isLabelHidden}
-      label="Company"
+      {...typeaheadProps}
       noResultsMessage="No companies found"
-      nullable={true}
+      nullable={nullable}
       options={
         data?.map(({ id, name }) => ({
           id,
@@ -41,9 +46,8 @@ export default function CompaniesTypeahead({
           value: id,
         })) ?? []
       }
-      placeholder={placeHolder}
-      onQueryChange={setQuery}
-      onSelect={onSelect}
+      query={query}
+      onQueryChange={onQueryChange ?? setQuery}
     />
   );
 }

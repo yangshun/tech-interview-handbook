@@ -22,20 +22,26 @@ type Attributes = Pick<
   | 'required'
 >;
 
-type Props = Readonly<{
+export type Props = Readonly<{
   isLabelHidden?: boolean;
   label: string;
   noResultsMessage?: string;
   nullable?: boolean;
-  onQueryChange: (
-    value: string,
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => void;
   onSelect: (option: TypeaheadOption) => void;
   options: ReadonlyArray<TypeaheadOption>;
   value?: TypeaheadOption;
 }> &
-  Readonly<Attributes>;
+  Readonly<Attributes> &
+  (
+    | Record<string, never>
+    | {
+        onQueryChange: (
+          value: string,
+          event: React.ChangeEvent<HTMLInputElement>,
+        ) => void;
+        query: string;
+      }
+  );
 
 export default function Typeahead({
   disabled = false,
@@ -44,13 +50,16 @@ export default function Typeahead({
   noResultsMessage = 'No results',
   nullable = false,
   options,
+  query: queryProp,
   onQueryChange,
   required,
   value,
   onSelect,
   ...props
 }: Props) {
-  const [query, setQuery] = useState('');
+  const [queryState, setQuery] = useState('');
+  const query = queryProp ?? queryState;
+
   return (
     <Combobox
       by="id"

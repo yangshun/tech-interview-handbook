@@ -84,6 +84,7 @@ export default function ContributeQuestionForm({
             name="company"
             render={({ field }) => (
               <CompaniesTypeahead
+                label="Company"
                 onSelect={({ id }) => {
                   field.onChange(id);
                 }}
