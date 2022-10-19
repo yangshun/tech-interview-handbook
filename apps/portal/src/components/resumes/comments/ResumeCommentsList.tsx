@@ -68,7 +68,7 @@ export default function ResumeCommentsList({
     <div className="space-y-3">
       {renderButton()}
 
-      {commentsQuery.isFetching ? (
+      {commentsQuery.isLoading ? (
         <div className="col-span-10 pt-4">
           <Spinner display="block" size="lg" />
         </div>
