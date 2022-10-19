@@ -25,15 +25,21 @@ export const offersCommentsRouter = createRouter()
                 include: {
                   user: true,
                 },
+                orderBy: {
+                  createdAt: 'desc'
+                }
               },
               replyingTo: true,
               user: true,
             },
+            orderBy: {
+              createdAt: 'desc'
+            }
           },
         },
         where: {
           id: input.profileId,
-        },
+        }
       });
 
       const discussions: OffersDiscussion = {
