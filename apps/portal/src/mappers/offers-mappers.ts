@@ -219,11 +219,7 @@ export const valuationDtoMapper = (currency: {
   return valuationDto;
 };
 
-export const offersCompanyDtoMapper = (company: Company | null) => {
-  if (!company) {
-    return null;
-  }
-
+export const offersCompanyDtoMapper = (company: Company) => {
   const companyDto: OffersCompany = {
     createdAt: company.createdAt,
     description: company?.description ?? '',
@@ -264,7 +260,9 @@ export const experienceDtoMapper = (
   },
 ) => {
   const experienceDto: Experience = {
-    company: offersCompanyDtoMapper(experience.company),
+    company: experience.company
+      ? offersCompanyDtoMapper(experience.company)
+      : null,
     durationInMonths: experience.durationInMonths,
     id: experience.id,
     jobType: experience.jobType,

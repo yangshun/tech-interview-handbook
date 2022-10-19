@@ -19,7 +19,7 @@ export type Background = {
 };
 
 export type Experience = {
-  company: Company?;
+  company: OffersCompany?;
   durationInMonths: number?;
   id: string;
   jobType: JobType?;
@@ -61,7 +61,7 @@ export type SpecificYoe = {
 };
 
 export type DashboardOffer = {
-  company: Company;
+  company: OffersCompany;
   id: string;
   income: Valuation;
   monthYearReceived: Date;
@@ -72,7 +72,7 @@ export type DashboardOffer = {
 
 export type ProfileOffer = {
   comments: string;
-  company: Company;
+  company: OffersCompany;
   id: string;
   jobType: JobType;
   location: string;
@@ -155,7 +155,7 @@ export type Analysis = {
 };
 
 export type AnalysisHighestOffer = {
-  company: Company;
+  company: OffersCompany;
   id: string;
   level: string;
   location: string;
@@ -164,7 +164,7 @@ export type AnalysisHighestOffer = {
 };
 
 export type AnalysisOffer = {
-  company: Company;
+  company: OffersCompany;
   id: string;
   income: number;
   jobType: JobType;
