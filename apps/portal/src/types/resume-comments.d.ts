@@ -8,7 +8,6 @@ export type ResumeComment = Readonly<{
   createdAt: Date;
   description: string;
   id: string;
-  numVotes: number;
   resumeId: string;
   section: ResumesSection;
   updatedAt: Date;
@@ -17,5 +16,9 @@ export type ResumeComment = Readonly<{
     name: string?;
     userId: string;
   };
-  userVote: ResumesCommentVote | undefined;
+}>;
+
+export type ResumeCommentVote = Readonly<{
+  numVotes: number;
+  userVote: ResumesCommentVote?;
 }>;

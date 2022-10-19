@@ -1,6 +1,4 @@
 import { z } from 'zod';
-import type { ResumesCommentVote } from '@prisma/client';
-import { Vote } from '@prisma/client';
 
 import { createRouter } from '../context';
 
@@ -11,7 +9,6 @@ export const resumeCommentsRouter = createRouter().query('list', {
     resumeId: z.string(),
   }),
   async resolve({ ctx, input }) {
-    const userId = ctx.session?.user?.id;
     const { resumeId } = input;
 
     // For this resume, we retrieve every comment's information, along with:
@@ -36,19 +33,10 @@ export const resumeCommentsRouter = createRouter().query('list', {
     });
 
     return comments.map((data) => {
-      let userVote: ResumesCommentVote | undefined = undefined;
-      let numVotes = 0;
-
-      data.votes.forEach((vote) => {
-        numVotes += vote.value === Vote.UPVOTE ? 1 : -1;
-        userVote = vote.userId === userId ? vote : undefined;
-      });
-
       const comment: ResumeComment = {
         createdAt: data.createdAt,
         description: data.description,
         id: data.id,
-        numVotes,
         resumeId: data.resumeId,
         section: data.section,
         updatedAt: data.updatedAt,
@@ -57,7 +45,6 @@ export const resumeCommentsRouter = createRouter().query('list', {
           name: data.user.name,
           userId: data.userId,
         },
-        userVote,
       };
 
       return comment;

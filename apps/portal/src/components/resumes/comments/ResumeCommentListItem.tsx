@@ -54,25 +54,32 @@ export default function ResumeCommentListItem({
       },
     },
   );
-  const commentUpvoteUpsertMutation = trpc.useMutation(
-    'resumes.comments.upvotes.user.upsert',
+
+  // COMMENT VOTES
+  const commentVotesQuery = trpc.useQuery([
+    'resumes.comments.votes.list',
+    { commentId: comment.id },
+  ]);
+  const commentVotesUpsertMutation = trpc.useMutation(
+    'resumes.comments.votes.user.upsert',
     {
       onSuccess: () => {
         // Comment updated, invalidate query to trigger refetch
-        trpcContext.invalidateQueries(['resumes.comments.list']);
+        trpcContext.invalidateQueries(['resumes.comments.votes.list']);
       },
     },
   );
-  const commentUpvoteDeleteMutation = trpc.useMutation(
-    'resumes.comments.upvotes.user.delete',
+  const commentVotesDeleteMutation = trpc.useMutation(
+    'resumes.comments.votes.user.delete',
     {
       onSuccess: () => {
         // Comment updated, invalidate query to trigger refetch
-        trpcContext.invalidateQueries(['resumes.comments.list']);
+        trpcContext.invalidateQueries(['resumes.comments.votes.list']);
       },
     },
   );
 
+  // FORM ACTIONS
   const onCancel = () => {
     reset({ description: comment.description });
     setIsEditingComment(false);
@@ -98,14 +105,13 @@ export default function ResumeCommentListItem({
   };
 
   const onVote = async (value: Vote) => {
-    if (comment.userVote?.value === value) {
-      return commentUpvoteDeleteMutation.mutate({
+    if (commentVotesQuery.data?.userVote?.value === value) {
+      return commentVotesDeleteMutation.mutate({
         commentId: comment.id,
       });
     }
-    return commentUpvoteUpsertMutation.mutate({
+    return commentVotesUpsertMutation.mutate({
       commentId: comment.id,
-      id: comment.userVote?.id,
       value,
     });
   };
@@ -190,15 +196,16 @@ export default function ResumeCommentListItem({
             <button
               disabled={
                 !userId ||
-                commentUpvoteUpsertMutation.isLoading ||
-                commentUpvoteDeleteMutation.isLoading
+                commentVotesQuery.isLoading ||
+                commentVotesUpsertMutation.isLoading ||
+                commentVotesDeleteMutation.isLoading
               }
               type="button"
               onClick={() => onVote(Vote.UPVOTE)}>
               <ArrowUpCircleIcon
                 className={clsx(
                   'h-4 w-4',
-                  comment.userVote?.value === Vote.UPVOTE
+                  commentVotesQuery.data?.userVote?.value === Vote.UPVOTE
                     ? 'fill-indigo-500'
                     : 'fill-gray-400',
                   userId && 'hover:fill-indigo-500',
@@ -206,20 +213,23 @@ export default function ResumeCommentListItem({
               />
             </button>
 
-            <div className="text-xs">{comment.numVotes}</div>
+            <div className="text-xs">
+              {commentVotesQuery.data?.numVotes ?? 0}
+            </div>
 
             <button
               disabled={
                 !userId ||
-                commentUpvoteUpsertMutation.isLoading ||
-                commentUpvoteDeleteMutation.isLoading
+                commentVotesQuery.isLoading ||
+                commentVotesUpsertMutation.isLoading ||
+                commentVotesDeleteMutation.isLoading
               }
               type="button"
               onClick={() => onVote(Vote.DOWNVOTE)}>
               <ArrowDownCircleIcon
                 className={clsx(
                   'h-4 w-4',
-                  comment.userVote?.value === Vote.DOWNVOTE
+                  commentVotesQuery.data?.userVote?.value === Vote.DOWNVOTE
                     ? 'fill-red-500'
                     : 'fill-gray-400',
                   userId && 'hover:fill-red-500',

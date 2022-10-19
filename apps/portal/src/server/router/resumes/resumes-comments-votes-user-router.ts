@@ -3,16 +3,15 @@ import { Vote } from '@prisma/client';
 
 import { createProtectedRouter } from '../context';
 
-export const resumesCommentsUpvotesUserRouter = createProtectedRouter()
+export const resumesCommentsVotesUserRouter = createProtectedRouter()
   .mutation('upsert', {
     input: z.object({
       commentId: z.string(),
-      id: z.string().optional(),
       value: z.nativeEnum(Vote),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session.user.id;
-      const { id, commentId, value } = input;
+      const { commentId, value } = input;
 
       await ctx.prisma.resumesCommentVote.upsert({
         create: {
@@ -21,9 +20,6 @@ export const resumesCommentsUpvotesUserRouter = createProtectedRouter()
           value,
         },
         update: {
-          commentId,
-          id,
-          userId,
           value,
         },
         where: {
