@@ -315,13 +315,13 @@ model OffersOffer {
 
   jobType JobType
 
-  OffersIntern   OffersIntern? @relation(fields: [offersInternId], references: [id], onDelete: Cascade)
+  offersIntern   OffersIntern? @relation(fields: [offersInternId], references: [id], onDelete: Cascade)
   offersInternId String?       @unique
 
-  OffersFullTime   OffersFullTime? @relation(fields: [offersFullTimeId], references: [id], onDelete: Cascade)
+  offersFullTime   OffersFullTime? @relation(fields: [offersFullTimeId], references: [id], onDelete: Cascade)
   offersFullTimeId String?         @unique
 
-  OffersAnalysis OffersAnalysis? @relation("HighestOverallOffer")
+  OffersAnalysis                 OffersAnalysis?  @relation("HighestOverallOffer")
   OffersAnalysisTopOverallOffers OffersAnalysis[] @relation("TopOverallOffers")
   OffersAnalysisTopCompanyOffers OffersAnalysis[] @relation("TopCompanyOffers")
 }

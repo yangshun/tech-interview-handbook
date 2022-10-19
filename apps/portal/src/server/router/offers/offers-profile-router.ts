@@ -27,7 +27,15 @@ const company = z.object({
 });
 
 const offer = z.object({
-  OffersFullTime: z
+  comments: z.string(),
+  company: company.nullish(),
+  companyId: z.string(),
+  id: z.string().optional(),
+  jobType: z.string(),
+  location: z.string(),
+  monthYearReceived: z.date(),
+  negotiationStrategy: z.string(),
+  offersFullTime: z
     .object({
       baseSalary: valuation.nullish(),
       baseSalaryId: z.string().nullish(),
@@ -43,7 +51,8 @@ const offer = z.object({
       totalCompensationId: z.string().nullish(),
     })
     .nullish(),
-  OffersIntern: z
+  offersFullTimeId: z.string().nullish(),
+  offersIntern: z
     .object({
       id: z.string().optional(),
       internshipCycle: z.string().nullish(),
@@ -54,15 +63,6 @@ const offer = z.object({
       totalCompensation: valuation.nullish(), // Full time
     })
     .nullish(),
-  comments: z.string(),
-  company: company.nullish(),
-  companyId: z.string(),
-  id: z.string().optional(),
-  jobType: z.string(),
-  location: z.string(),
-  monthYearReceived: z.date(),
-  negotiationStrategy: z.string(),
-  offersFullTimeId: z.string().nullish(),
   offersInternId: z.string().nullish(),
   profileId: z.string().nullish(),
 });
@@ -115,17 +115,17 @@ export const offersProfileRouter = createRouter()
             include: {
               overallHighestOffer: {
                 include: {
-                  OffersFullTime: {
+                  company: true,
+                  offersFullTime: {
                     include: {
                       totalCompensation: true,
                     },
                   },
-                  OffersIntern: {
+                  offersIntern: {
                     include: {
                       monthlySalary: true,
                     },
                   },
-                  company: true,
                   profile: {
                     include: {
                       background: true,
@@ -135,17 +135,17 @@ export const offersProfileRouter = createRouter()
               },
               topCompanyOffers: {
                 include: {
-                  OffersFullTime: {
+                  company: true,
+                  offersFullTime: {
                     include: {
                       totalCompensation: true,
                     },
                   },
-                  OffersIntern: {
+                  offersIntern: {
                     include: {
                       monthlySalary: true,
                     },
                   },
-                  company: true,
                   profile: {
                     include: {
                       background: {
@@ -163,17 +163,17 @@ export const offersProfileRouter = createRouter()
               },
               topOverallOffers: {
                 include: {
-                  OffersFullTime: {
+                  company: true,
+                  offersFullTime: {
                     include: {
                       totalCompensation: true,
                     },
                   },
-                  OffersIntern: {
+                  offersIntern: {
                     include: {
                       monthlySalary: true,
                     },
                   },
-                  company: true,
                   profile: {
                     include: {
                       background: {
@@ -213,7 +213,8 @@ export const offersProfileRouter = createRouter()
           },
           offers: {
             include: {
-              OffersFullTime: {
+              company: true,
+              offersFullTime: {
                 include: {
                   baseSalary: true,
                   bonus: true,
@@ -221,12 +222,11 @@ export const offersProfileRouter = createRouter()
                   totalCompensation: true,
                 },
               },
-              OffersIntern: {
+              offersIntern: {
                 include: {
                   monthlySalary: true,
                 },
               },
-              company: true,
             },
           },
         },
@@ -381,27 +381,13 @@ export const offersProfileRouter = createRouter()
             create: input.offers.map((x) => {
               if (
                 x.jobType === 'INTERN' &&
-                x.OffersIntern &&
-                x.OffersIntern.internshipCycle &&
-                x.OffersIntern.monthlySalary?.currency &&
-                x.OffersIntern.monthlySalary.value &&
-                x.OffersIntern.startYear
+                x.offersIntern &&
+                x.offersIntern.internshipCycle &&
+                x.offersIntern.monthlySalary?.currency &&
+                x.offersIntern.monthlySalary.value &&
+                x.offersIntern.startYear
               ) {
                 return {
-                  OffersIntern: {
-                    create: {
-                      internshipCycle: x.OffersIntern.internshipCycle,
-                      monthlySalary: {
-                        create: {
-                          currency: x.OffersIntern.monthlySalary?.currency,
-                          value: x.OffersIntern.monthlySalary?.value,
-                        },
-                      },
-                      specialization: x.OffersIntern.specialization,
-                      startYear: x.OffersIntern.startYear,
-                      title: x.OffersIntern.title,
-                    },
-                  },
                   comments: x.comments,
                   company: {
                     connect: {
@@ -412,54 +398,36 @@ export const offersProfileRouter = createRouter()
                   location: x.location,
                   monthYearReceived: x.monthYearReceived,
                   negotiationStrategy: x.negotiationStrategy,
+                  offersIntern: {
+                    create: {
+                      internshipCycle: x.offersIntern.internshipCycle,
+                      monthlySalary: {
+                        create: {
+                          currency: x.offersIntern.monthlySalary?.currency,
+                          value: x.offersIntern.monthlySalary?.value,
+                        },
+                      },
+                      specialization: x.offersIntern.specialization,
+                      startYear: x.offersIntern.startYear,
+                      title: x.offersIntern.title,
+                    },
+                  },
                 };
               }
               if (
                 x.jobType === 'FULLTIME' &&
-                x.OffersFullTime &&
-                x.OffersFullTime.baseSalary?.currency &&
-                x.OffersFullTime.baseSalary?.value &&
-                x.OffersFullTime.bonus?.currency &&
-                x.OffersFullTime.bonus?.value &&
-                x.OffersFullTime.stocks?.currency &&
-                x.OffersFullTime.stocks?.value &&
-                x.OffersFullTime.totalCompensation?.currency &&
-                x.OffersFullTime.totalCompensation?.value &&
-                x.OffersFullTime.level
+                x.offersFullTime &&
+                x.offersFullTime.baseSalary?.currency &&
+                x.offersFullTime.baseSalary?.value &&
+                x.offersFullTime.bonus?.currency &&
+                x.offersFullTime.bonus?.value &&
+                x.offersFullTime.stocks?.currency &&
+                x.offersFullTime.stocks?.value &&
+                x.offersFullTime.totalCompensation?.currency &&
+                x.offersFullTime.totalCompensation?.value &&
+                x.offersFullTime.level
               ) {
                 return {
-                  OffersFullTime: {
-                    create: {
-                      baseSalary: {
-                        create: {
-                          currency: x.OffersFullTime.baseSalary?.currency,
-                          value: x.OffersFullTime.baseSalary?.value,
-                        },
-                      },
-                      bonus: {
-                        create: {
-                          currency: x.OffersFullTime.bonus?.currency,
-                          value: x.OffersFullTime.bonus?.value,
-                        },
-                      },
-                      level: x.OffersFullTime.level,
-                      specialization: x.OffersFullTime.specialization,
-                      stocks: {
-                        create: {
-                          currency: x.OffersFullTime.stocks?.currency,
-                          value: x.OffersFullTime.stocks?.value,
-                        },
-                      },
-                      title: x.OffersFullTime.title,
-                      totalCompensation: {
-                        create: {
-                          currency:
-                            x.OffersFullTime.totalCompensation?.currency,
-                          value: x.OffersFullTime.totalCompensation?.value,
-                        },
-                      },
-                    },
-                  },
                   comments: x.comments,
                   company: {
                     connect: {
@@ -470,6 +438,38 @@ export const offersProfileRouter = createRouter()
                   location: x.location,
                   monthYearReceived: x.monthYearReceived,
                   negotiationStrategy: x.negotiationStrategy,
+                  offersFullTime: {
+                    create: {
+                      baseSalary: {
+                        create: {
+                          currency: x.offersFullTime.baseSalary?.currency,
+                          value: x.offersFullTime.baseSalary?.value,
+                        },
+                      },
+                      bonus: {
+                        create: {
+                          currency: x.offersFullTime.bonus?.currency,
+                          value: x.offersFullTime.bonus?.value,
+                        },
+                      },
+                      level: x.offersFullTime.level,
+                      specialization: x.offersFullTime.specialization,
+                      stocks: {
+                        create: {
+                          currency: x.offersFullTime.stocks?.currency,
+                          value: x.offersFullTime.stocks?.value,
+                        },
+                      },
+                      title: x.offersFullTime.title,
+                      totalCompensation: {
+                        create: {
+                          currency:
+                            x.offersFullTime.totalCompensation?.currency,
+                          value: x.offersFullTime.totalCompensation?.value,
+                        },
+                      },
+                    },
+                  },
                 };
               }
 
@@ -813,117 +813,98 @@ export const offersProfileRouter = createRouter()
               });
             }
 
-            if (offerToUpdate.OffersIntern?.monthlySalary) {
+            if (offerToUpdate.offersIntern?.monthlySalary) {
               await ctx.prisma.offersIntern.update({
                 data: {
                   internshipCycle:
-                    offerToUpdate.OffersIntern.internshipCycle ?? undefined,
-                  specialization: offerToUpdate.OffersIntern.specialization,
-                  startYear: offerToUpdate.OffersIntern.startYear ?? undefined,
-                  title: offerToUpdate.OffersIntern.title,
+                    offerToUpdate.offersIntern.internshipCycle ?? undefined,
+                  specialization: offerToUpdate.offersIntern.specialization,
+                  startYear: offerToUpdate.offersIntern.startYear ?? undefined,
+                  title: offerToUpdate.offersIntern.title,
                 },
                 where: {
-                  id: offerToUpdate.OffersIntern.id,
+                  id: offerToUpdate.offersIntern.id,
                 },
               });
               await ctx.prisma.offersCurrency.update({
                 data: {
-                  currency: offerToUpdate.OffersIntern.monthlySalary.currency,
-                  value: offerToUpdate.OffersIntern.monthlySalary.value,
+                  currency: offerToUpdate.offersIntern.monthlySalary.currency,
+                  value: offerToUpdate.offersIntern.monthlySalary.value,
                 },
                 where: {
-                  id: offerToUpdate.OffersIntern.monthlySalary.id,
+                  id: offerToUpdate.offersIntern.monthlySalary.id,
                 },
               });
             }
 
-            if (offerToUpdate.OffersFullTime?.totalCompensation) {
+            if (offerToUpdate.offersFullTime?.totalCompensation) {
               await ctx.prisma.offersFullTime.update({
                 data: {
-                  level: offerToUpdate.OffersFullTime.level ?? undefined,
-                  specialization: offerToUpdate.OffersFullTime.specialization,
-                  title: offerToUpdate.OffersFullTime.title,
+                  level: offerToUpdate.offersFullTime.level ?? undefined,
+                  specialization: offerToUpdate.offersFullTime.specialization,
+                  title: offerToUpdate.offersFullTime.title,
                 },
                 where: {
-                  id: offerToUpdate.OffersFullTime.id,
+                  id: offerToUpdate.offersFullTime.id,
                 },
               });
-              if (offerToUpdate.OffersFullTime.baseSalary) {
+              if (offerToUpdate.offersFullTime.baseSalary) {
                 await ctx.prisma.offersCurrency.update({
                   data: {
-                    currency: offerToUpdate.OffersFullTime.baseSalary.currency,
-                    value: offerToUpdate.OffersFullTime.baseSalary.value,
+                    currency: offerToUpdate.offersFullTime.baseSalary.currency,
+                    value: offerToUpdate.offersFullTime.baseSalary.value,
                   },
                   where: {
-                    id: offerToUpdate.OffersFullTime.baseSalary.id,
+                    id: offerToUpdate.offersFullTime.baseSalary.id,
                   },
                 });
               }
-              if (offerToUpdate.OffersFullTime.bonus) {
+              if (offerToUpdate.offersFullTime.bonus) {
                 await ctx.prisma.offersCurrency.update({
                   data: {
-                    currency: offerToUpdate.OffersFullTime.bonus.currency,
-                    value: offerToUpdate.OffersFullTime.bonus.value,
+                    currency: offerToUpdate.offersFullTime.bonus.currency,
+                    value: offerToUpdate.offersFullTime.bonus.value,
                   },
                   where: {
-                    id: offerToUpdate.OffersFullTime.bonus.id,
+                    id: offerToUpdate.offersFullTime.bonus.id,
                   },
                 });
               }
-              if (offerToUpdate.OffersFullTime.stocks) {
+              if (offerToUpdate.offersFullTime.stocks) {
                 await ctx.prisma.offersCurrency.update({
                   data: {
-                    currency: offerToUpdate.OffersFullTime.stocks.currency,
-                    value: offerToUpdate.OffersFullTime.stocks.value,
+                    currency: offerToUpdate.offersFullTime.stocks.currency,
+                    value: offerToUpdate.offersFullTime.stocks.value,
                   },
                   where: {
-                    id: offerToUpdate.OffersFullTime.stocks.id,
+                    id: offerToUpdate.offersFullTime.stocks.id,
                   },
                 });
               }
               await ctx.prisma.offersCurrency.update({
                 data: {
                   currency:
-                    offerToUpdate.OffersFullTime.totalCompensation.currency,
-                  value: offerToUpdate.OffersFullTime.totalCompensation.value,
+                    offerToUpdate.offersFullTime.totalCompensation.currency,
+                  value: offerToUpdate.offersFullTime.totalCompensation.value,
                 },
                 where: {
-                  id: offerToUpdate.OffersFullTime.totalCompensation.id,
+                  id: offerToUpdate.offersFullTime.totalCompensation.id,
                 },
               });
             }
           } else {
             if (
               offerToUpdate.jobType === 'INTERN' &&
-              offerToUpdate.OffersIntern &&
-              offerToUpdate.OffersIntern.internshipCycle &&
-              offerToUpdate.OffersIntern.monthlySalary?.currency &&
-              offerToUpdate.OffersIntern.monthlySalary.value &&
-              offerToUpdate.OffersIntern.startYear
+              offerToUpdate.offersIntern &&
+              offerToUpdate.offersIntern.internshipCycle &&
+              offerToUpdate.offersIntern.monthlySalary?.currency &&
+              offerToUpdate.offersIntern.monthlySalary.value &&
+              offerToUpdate.offersIntern.startYear
             ) {
               await ctx.prisma.offersProfile.update({
                 data: {
                   offers: {
                     create: {
-                      OffersIntern: {
-                        create: {
-                          internshipCycle:
-                            offerToUpdate.OffersIntern.internshipCycle,
-                          monthlySalary: {
-                            create: {
-                              currency:
-                                offerToUpdate.OffersIntern.monthlySalary
-                                  ?.currency,
-                              value:
-                                offerToUpdate.OffersIntern.monthlySalary?.value,
-                            },
-                          },
-                          specialization:
-                            offerToUpdate.OffersIntern.specialization,
-                          startYear: offerToUpdate.OffersIntern.startYear,
-                          title: offerToUpdate.OffersIntern.title,
-                        },
-                      },
                       comments: offerToUpdate.comments,
                       company: {
                         connect: {
@@ -934,6 +915,25 @@ export const offersProfileRouter = createRouter()
                       location: offerToUpdate.location,
                       monthYearReceived: offerToUpdate.monthYearReceived,
                       negotiationStrategy: offerToUpdate.negotiationStrategy,
+                      offersIntern: {
+                        create: {
+                          internshipCycle:
+                            offerToUpdate.offersIntern.internshipCycle,
+                          monthlySalary: {
+                            create: {
+                              currency:
+                                offerToUpdate.offersIntern.monthlySalary
+                                  ?.currency,
+                              value:
+                                offerToUpdate.offersIntern.monthlySalary?.value,
+                            },
+                          },
+                          specialization:
+                            offerToUpdate.offersIntern.specialization,
+                          startYear: offerToUpdate.offersIntern.startYear,
+                          title: offerToUpdate.offersIntern.title,
+                        },
+                      },
                     },
                   },
                 },
@@ -944,62 +944,21 @@ export const offersProfileRouter = createRouter()
             }
             if (
               offerToUpdate.jobType === 'FULLTIME' &&
-              offerToUpdate.OffersFullTime &&
-              offerToUpdate.OffersFullTime.baseSalary?.currency &&
-              offerToUpdate.OffersFullTime.baseSalary?.value &&
-              offerToUpdate.OffersFullTime.bonus?.currency &&
-              offerToUpdate.OffersFullTime.bonus?.value &&
-              offerToUpdate.OffersFullTime.stocks?.currency &&
-              offerToUpdate.OffersFullTime.stocks?.value &&
-              offerToUpdate.OffersFullTime.totalCompensation?.currency &&
-              offerToUpdate.OffersFullTime.totalCompensation?.value &&
-              offerToUpdate.OffersFullTime.level
+              offerToUpdate.offersFullTime &&
+              offerToUpdate.offersFullTime.baseSalary?.currency &&
+              offerToUpdate.offersFullTime.baseSalary?.value &&
+              offerToUpdate.offersFullTime.bonus?.currency &&
+              offerToUpdate.offersFullTime.bonus?.value &&
+              offerToUpdate.offersFullTime.stocks?.currency &&
+              offerToUpdate.offersFullTime.stocks?.value &&
+              offerToUpdate.offersFullTime.totalCompensation?.currency &&
+              offerToUpdate.offersFullTime.totalCompensation?.value &&
+              offerToUpdate.offersFullTime.level
             ) {
               await ctx.prisma.offersProfile.update({
                 data: {
                   offers: {
                     create: {
-                      OffersFullTime: {
-                        create: {
-                          baseSalary: {
-                            create: {
-                              currency:
-                                offerToUpdate.OffersFullTime.baseSalary
-                                  ?.currency,
-                              value:
-                                offerToUpdate.OffersFullTime.baseSalary?.value,
-                            },
-                          },
-                          bonus: {
-                            create: {
-                              currency:
-                                offerToUpdate.OffersFullTime.bonus?.currency,
-                              value: offerToUpdate.OffersFullTime.bonus?.value,
-                            },
-                          },
-                          level: offerToUpdate.OffersFullTime.level,
-                          specialization:
-                            offerToUpdate.OffersFullTime.specialization,
-                          stocks: {
-                            create: {
-                              currency:
-                                offerToUpdate.OffersFullTime.stocks?.currency,
-                              value: offerToUpdate.OffersFullTime.stocks?.value,
-                            },
-                          },
-                          title: offerToUpdate.OffersFullTime.title,
-                          totalCompensation: {
-                            create: {
-                              currency:
-                                offerToUpdate.OffersFullTime.totalCompensation
-                                  ?.currency,
-                              value:
-                                offerToUpdate.OffersFullTime.totalCompensation
-                                  ?.value,
-                            },
-                          },
-                        },
-                      },
                       comments: offerToUpdate.comments,
                       company: {
                         connect: {
@@ -1010,6 +969,47 @@ export const offersProfileRouter = createRouter()
                       location: offerToUpdate.location,
                       monthYearReceived: offerToUpdate.monthYearReceived,
                       negotiationStrategy: offerToUpdate.negotiationStrategy,
+                      offersFullTime: {
+                        create: {
+                          baseSalary: {
+                            create: {
+                              currency:
+                                offerToUpdate.offersFullTime.baseSalary
+                                  ?.currency,
+                              value:
+                                offerToUpdate.offersFullTime.baseSalary?.value,
+                            },
+                          },
+                          bonus: {
+                            create: {
+                              currency:
+                                offerToUpdate.offersFullTime.bonus?.currency,
+                              value: offerToUpdate.offersFullTime.bonus?.value,
+                            },
+                          },
+                          level: offerToUpdate.offersFullTime.level,
+                          specialization:
+                            offerToUpdate.offersFullTime.specialization,
+                          stocks: {
+                            create: {
+                              currency:
+                                offerToUpdate.offersFullTime.stocks?.currency,
+                              value: offerToUpdate.offersFullTime.stocks?.value,
+                            },
+                          },
+                          title: offerToUpdate.offersFullTime.title,
+                          totalCompensation: {
+                            create: {
+                              currency:
+                                offerToUpdate.offersFullTime.totalCompensation
+                                  ?.currency,
+                              value:
+                                offerToUpdate.offersFullTime.totalCompensation
+                                  ?.value,
+                            },
+                          },
+                        },
+                      },
                     },
                   },
                 },
@@ -1045,7 +1045,8 @@ export const offersProfileRouter = createRouter()
             },
             offers: {
               include: {
-                OffersFullTime: {
+                company: true,
+                offersFullTime: {
                   include: {
                     baseSalary: true,
                     bonus: true,
@@ -1053,12 +1054,11 @@ export const offersProfileRouter = createRouter()
                     totalCompensation: true,
                   },
                 },
-                OffersIntern: {
+                offersIntern: {
                   include: {
                     monthlySalary: true,
                   },
                 },
-                company: true,
               },
             },
           },

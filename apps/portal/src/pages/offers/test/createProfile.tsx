@@ -130,28 +130,6 @@ function Test() {
       },
       offers: [
         {
-          OffersFullTime: {
-            baseSalary: {
-              currency: 'SGD',
-              value: 84000,
-            },
-            bonus: {
-              currency: 'SGD',
-              value: 20000,
-            },
-            level: 'Junior',
-            specialization: 'Front End',
-            stocks: {
-              currency: 'SGD',
-              value: 100,
-            },
-            title: 'Software Engineer',
-            totalCompensation: {
-              currency: 'SGD',
-              value: 104100,
-            },
-          },
-
           comments: 'I am a Raffles Institution almumni',
           // Comments: '',
           companyId: 'cl98yuqk80007txhgjtjp8fk4',
@@ -159,9 +137,7 @@ function Test() {
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
           negotiationStrategy: 'Leveraged having multiple offers',
-        },
-        {
-          OffersFullTime: {
+          offersFullTime: {
             baseSalary: {
               currency: 'SGD',
               value: 84000,
@@ -182,12 +158,35 @@ function Test() {
               value: 104100,
             },
           },
+        },
+        {
           comments: '',
           companyId: 'cl98yuqk80007txhgjtjp8fk4',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
           negotiationStrategy: 'Leveraged having multiple offers',
+          offersFullTime: {
+            baseSalary: {
+              currency: 'SGD',
+              value: 84000,
+            },
+            bonus: {
+              currency: 'SGD',
+              value: 20000,
+            },
+            level: 'Junior',
+            specialization: 'Front End',
+            stocks: {
+              currency: 'SGD',
+              value: 100,
+            },
+            title: 'Software Engineer',
+            totalCompensation: {
+              currency: 'SGD',
+              value: 104100,
+            },
+          },
         },
       ],
     });
@@ -330,7 +329,24 @@ function Test() {
       isEditable: true,
       offers: [
         {
-          OffersFullTime: {
+          comments: 'this IS SO IEUHDAEUIGDI',
+          company: {
+            createdAt: new Date('2022-10-12T16:19:05.196Z'),
+            description:
+              'Meta Platforms, Inc., doing business as Meta and formerly named Facebook, Inc., and TheFacebook, Inc., is an American multinational technology conglomerate based in Menlo Park, California. The company owns Facebook, Instagram, and WhatsApp, among other products and services.',
+            id: 'cl95u79f000007im531ysjg79',
+            logoUrl: 'https://logo.clearbit.com/meta.com',
+            name: 'Meta',
+            slug: 'meta',
+            updatedAt: new Date('2022-10-12T16:19:05.196Z'),
+          },
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
+          id: 'cl976t4de00047iygl0zbce11',
+          jobType: 'FULLTIME',
+          location: 'Singapore, Singapore',
+          monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
+          negotiationStrategy: 'Charmed the guy with my face',
+          offersFullTime: {
             baseSalary: {
               currency: 'SGD',
               id: 'cl976t4de00067iyg3pjir7k9',
@@ -360,8 +376,13 @@ function Test() {
             },
             totalCompensationId: 'cl976t4df000c7iyg73ryf5uw',
           },
-          OffersIntern: null,
-          comments: 'this IS SO IEUHDAEUIGDI',
+          offersFullTimeId: 'cl976t4de00057iygq3ktce3v',
+          offersIntern: null,
+          offersInternId: null,
+          profileId: 'cl96stky5002ew32gx2kale2x',
+        },
+        {
+          comments: '',
           company: {
             createdAt: new Date('2022-10-12T16:19:05.196Z'),
             description:
@@ -373,17 +394,12 @@ function Test() {
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
           companyId: 'cl9ec1mgg0000w33hg1a3612r',
-          id: 'cl976t4de00047iygl0zbce11',
+          id: 'cl96stky80031w32gau9mu1gs',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
-          negotiationStrategy: 'Charmed the guy with my face',
-          offersFullTimeId: 'cl976t4de00057iygq3ktce3v',
-          offersInternId: null,
-          profileId: 'cl96stky5002ew32gx2kale2x',
-        },
-        {
-          OffersFullTime: {
+          negotiationStrategy: 'Leveraged having million offers',
+          offersFullTime: {
             baseSalary: {
               currency: 'SGD',
               id: 'cl96stky80033w32gxw5goc4z',
@@ -413,7 +429,12 @@ function Test() {
             },
             totalCompensationId: 'cl96stky90039w32glbpktd0o',
           },
-          OffersIntern: null,
+          offersFullTimeId: 'cl96stky80032w32gep9ovgj3',
+          offersIntern: null,
+          offersInternId: null,
+          profileId: 'cl96stky5002ew32gx2kale2x',
+        },
+        {
           comments: '',
           company: {
             createdAt: new Date('2022-10-12T16:19:05.196Z'),
@@ -426,17 +447,12 @@ function Test() {
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
           companyId: 'cl9ec1mgg0000w33hg1a3612r',
-          id: 'cl96stky80031w32gau9mu1gs',
+          id: 'cl96stky9003bw32gc3l955vr',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
-          negotiationStrategy: 'Leveraged having million offers',
-          offersFullTimeId: 'cl96stky80032w32gep9ovgj3',
-          offersInternId: null,
-          profileId: 'cl96stky5002ew32gx2kale2x',
-        },
-        {
-          OffersFullTime: {
+          negotiationStrategy: 'LOst out having multiple offers',
+          offersFullTime: {
             baseSalary: {
               currency: 'SGD',
               id: 'cl96stky9003dw32gcvqbijlo',
@@ -466,8 +482,13 @@ function Test() {
             },
             totalCompensationId: 'cl96stky9003jw32gzumcoi7v',
           },
-          OffersIntern: null,
-          comments: '',
+          offersFullTimeId: 'cl96stky9003cw32g5v10izfu',
+          offersIntern: null,
+          offersInternId: null,
+          profileId: 'cl96stky5002ew32gx2kale2x',
+        },
+        {
+          comments: 'this IS SO COOL',
           company: {
             createdAt: new Date('2022-10-12T16:19:05.196Z'),
             description:
@@ -479,17 +500,12 @@ function Test() {
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
           companyId: 'cl9ec1mgg0000w33hg1a3612r',
-          id: 'cl96stky9003bw32gc3l955vr',
+          id: 'cl976wf28000t7iyga4noyz7s',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
-          negotiationStrategy: 'LOst out having multiple offers',
-          offersFullTimeId: 'cl96stky9003cw32g5v10izfu',
-          offersInternId: null,
-          profileId: 'cl96stky5002ew32gx2kale2x',
-        },
-        {
-          OffersFullTime: {
+          negotiationStrategy: 'Charmed the guy with my face',
+          offersFullTime: {
             baseSalary: {
               currency: 'SGD',
               id: 'cl976wf28000v7iygmk1b7qaq',
@@ -519,8 +535,13 @@ function Test() {
             },
             totalCompensationId: 'cl976wf2800117iygmzsc0xit',
           },
-          OffersIntern: null,
-          comments: 'this IS SO COOL',
+          offersFullTimeId: 'cl976wf28000u7iyg6euei8e9',
+          offersIntern: null,
+          offersInternId: null,
+          profileId: 'cl96stky5002ew32gx2kale2x',
+        },
+        {
+          comments: 'this rocks',
           company: {
             createdAt: new Date('2022-10-12T16:19:05.196Z'),
             description:
@@ -532,17 +553,12 @@ function Test() {
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
           companyId: 'cl9ec1mgg0000w33hg1a3612r',
-          id: 'cl976wf28000t7iyga4noyz7s',
+          id: 'cl96tbb3o0051w32gjrpaiiit',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
           negotiationStrategy: 'Charmed the guy with my face',
-          offersFullTimeId: 'cl976wf28000u7iyg6euei8e9',
-          offersInternId: null,
-          profileId: 'cl96stky5002ew32gx2kale2x',
-        },
-        {
-          OffersFullTime: {
+          offersFullTime: {
             baseSalary: {
               currency: 'SGD',
               id: 'cl96tbb3o0053w32gz11paaxu',
@@ -572,25 +588,8 @@ function Test() {
             },
             totalCompensationId: 'cl96tbb3o0059w32gm3iy1zk4',
           },
-          OffersIntern: null,
-          comments: 'this rocks',
-          company: {
-            createdAt: new Date('2022-10-12T16:19:05.196Z'),
-            description:
-              'Meta Platforms, Inc., doing business as Meta and formerly named Facebook, Inc., and TheFacebook, Inc., is an American multinational technology conglomerate based in Menlo Park, California. The company owns Facebook, Instagram, and WhatsApp, among other products and services.',
-            id: 'cl95u79f000007im531ysjg79',
-            logoUrl: 'https://logo.clearbit.com/meta.com',
-            name: 'Meta',
-            slug: 'meta',
-            updatedAt: new Date('2022-10-12T16:19:05.196Z'),
-          },
-          companyId: 'cl9ec1mgg0000w33hg1a3612r',
-          id: 'cl96tbb3o0051w32gjrpaiiit',
-          jobType: 'FULLTIME',
-          location: 'Singapore, Singapore',
-          monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
-          negotiationStrategy: 'Charmed the guy with my face',
           offersFullTimeId: 'cl96tbb3o0052w32guguajzin',
+          offersIntern: null,
           offersInternId: null,
           profileId: 'cl96stky5002ew32gx2kale2x',
         },

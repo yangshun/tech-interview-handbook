@@ -16,7 +16,8 @@ import { createRouter } from '../context';
 
 const searchOfferPercentile = (
   offer: OffersOffer & {
-    OffersFullTime:
+    company: Company;
+    offersFullTime:
       | (OffersFullTime & {
           baseSalary: OffersCurrency;
           bonus: OffersCurrency;
@@ -24,19 +25,18 @@ const searchOfferPercentile = (
           totalCompensation: OffersCurrency;
         })
       | null;
-    OffersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-    company: Company;
+    offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
     profile: OffersProfile & { background: OffersBackground | null };
   },
   similarOffers: Array<
     OffersOffer & {
-      OffersFullTime:
+      company: Company;
+      offersFullTime:
         | (OffersFullTime & {
             totalCompensation: OffersCurrency;
           })
         | null;
-      OffersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-      company: Company;
+      offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
       profile: OffersProfile & { background: OffersBackground | null };
     }
   >,
@@ -64,7 +64,8 @@ export const offersAnalysisRouter = createRouter()
 
       const offers = await ctx.prisma.offersOffer.findMany({
         include: {
-          OffersFullTime: {
+          company: true,
+          offersFullTime: {
             include: {
               baseSalary: true,
               bonus: true,
@@ -72,12 +73,11 @@ export const offersAnalysisRouter = createRouter()
               totalCompensation: true,
             },
           },
-          OffersIntern: {
+          offersIntern: {
             include: {
               monthlySalary: true,
             },
           },
-          company: true,
           profile: {
             include: {
               background: true,
@@ -86,14 +86,14 @@ export const offersAnalysisRouter = createRouter()
         },
         orderBy: [
           {
-            OffersFullTime: {
+            offersFullTime: {
               totalCompensation: {
                 value: 'desc',
               },
             },
           },
           {
-            OffersIntern: {
+            offersIntern: {
               monthlySalary: {
                 value: 'desc',
               },
@@ -129,17 +129,17 @@ export const offersAnalysisRouter = createRouter()
 
       let similarOffers = await ctx.prisma.offersOffer.findMany({
         include: {
-          OffersFullTime: {
+          company: true,
+          offersFullTime: {
             include: {
               totalCompensation: true,
             },
           },
-          OffersIntern: {
+          offersIntern: {
             include: {
               monthlySalary: true,
             },
           },
-          company: true,
           profile: {
             include: {
               background: {
@@ -156,14 +156,14 @@ export const offersAnalysisRouter = createRouter()
         },
         orderBy: [
           {
-            OffersFullTime: {
+            offersFullTime: {
               totalCompensation: {
                 value: 'desc',
               },
             },
           },
           {
-            OffersIntern: {
+            offersIntern: {
               monthlySalary: {
                 value: 'desc',
               },
@@ -178,14 +178,14 @@ export const offersAnalysisRouter = createRouter()
             {
               OR: [
                 {
-                  OffersFullTime: {
-                    level: overallHighestOffer.OffersFullTime?.level,
+                  offersFullTime: {
+                    level: overallHighestOffer.offersFullTime?.level,
                     specialization:
-                      overallHighestOffer.OffersFullTime?.specialization,
+                      overallHighestOffer.offersFullTime?.specialization,
                   },
-                  OffersIntern: {
+                  offersIntern: {
                     specialization:
-                      overallHighestOffer.OffersIntern?.specialization,
+                      overallHighestOffer.offersIntern?.specialization,
                   },
                 },
               ],
@@ -289,17 +289,17 @@ export const offersAnalysisRouter = createRouter()
         include: {
           overallHighestOffer: {
             include: {
-              OffersFullTime: {
+              company: true,
+              offersFullTime: {
                 include: {
                   totalCompensation: true,
                 },
               },
-              OffersIntern: {
+              offersIntern: {
                 include: {
                   monthlySalary: true,
                 },
               },
-              company: true,
               profile: {
                 include: {
                   background: true,
@@ -309,17 +309,17 @@ export const offersAnalysisRouter = createRouter()
           },
           topCompanyOffers: {
             include: {
-              OffersFullTime: {
+              company: true,
+              offersFullTime: {
                 include: {
                   totalCompensation: true,
                 },
               },
-              OffersIntern: {
+              offersIntern: {
                 include: {
                   monthlySalary: true,
                 },
               },
-              company: true,
               profile: {
                 include: {
                   background: {
@@ -337,17 +337,17 @@ export const offersAnalysisRouter = createRouter()
           },
           topOverallOffers: {
             include: {
-              OffersFullTime: {
+              company: true,
+              offersFullTime: {
                 include: {
                   totalCompensation: true,
                 },
               },
-              OffersIntern: {
+              offersIntern: {
                 include: {
                   monthlySalary: true,
                 },
               },
-              company: true,
               profile: {
                 include: {
                   background: {
@@ -378,17 +378,17 @@ export const offersAnalysisRouter = createRouter()
         include: {
           overallHighestOffer: {
             include: {
-              OffersFullTime: {
+              company: true,
+              offersFullTime: {
                 include: {
                   totalCompensation: true,
                 },
               },
-              OffersIntern: {
+              offersIntern: {
                 include: {
                   monthlySalary: true,
                 },
               },
-              company: true,
               profile: {
                 include: {
                   background: true,
@@ -398,17 +398,17 @@ export const offersAnalysisRouter = createRouter()
           },
           topCompanyOffers: {
             include: {
-              OffersFullTime: {
+              company: true,
+              offersFullTime: {
                 include: {
                   totalCompensation: true,
                 },
               },
-              OffersIntern: {
+              offersIntern: {
                 include: {
                   monthlySalary: true,
                 },
               },
-              company: true,
               profile: {
                 include: {
                   background: {
@@ -426,17 +426,17 @@ export const offersAnalysisRouter = createRouter()
           },
           topOverallOffers: {
             include: {
-              OffersFullTime: {
+              company: true,
+              offersFullTime: {
                 include: {
                   totalCompensation: true,
                 },
               },
-              OffersIntern: {
+              offersIntern: {
                 include: {
                   monthlySalary: true,
                 },
               },
-              company: true,
               profile: {
                 include: {
                   background: {

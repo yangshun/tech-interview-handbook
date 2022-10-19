@@ -60,7 +60,8 @@ export const offersRouter = createRouter().query('list', {
       ? await ctx.prisma.offersOffer.findMany({
           // Internship
           include: {
-            OffersFullTime: {
+            company: true,
+            offersFullTime: {
               include: {
                 baseSalary: true,
                 bonus: true,
@@ -68,12 +69,11 @@ export const offersRouter = createRouter().query('list', {
                 totalCompensation: true,
               },
             },
-            OffersIntern: {
+            offersIntern: {
               include: {
                 monthlySalary: true,
               },
             },
-            company: true,
             profile: {
               include: {
                 background: true,
@@ -86,12 +86,12 @@ export const offersRouter = createRouter().query('list', {
                 location: input.location,
               },
               {
-                OffersIntern: {
+                offersIntern: {
                   isNot: null,
                 },
               },
               {
-                OffersFullTime: {
+                offersFullTime: {
                   is: null,
                 },
               },
@@ -101,7 +101,8 @@ export const offersRouter = createRouter().query('list', {
       : await ctx.prisma.offersOffer.findMany({
           // Junior, Mid, Senior
           include: {
-            OffersFullTime: {
+            company: true,
+            offersFullTime: {
               include: {
                 baseSalary: true,
                 bonus: true,
@@ -109,12 +110,11 @@ export const offersRouter = createRouter().query('list', {
                 totalCompensation: true,
               },
             },
-            OffersIntern: {
+            offersIntern: {
               include: {
                 monthlySalary: true,
               },
             },
-            company: true,
             profile: {
               include: {
                 background: true,
@@ -127,12 +127,12 @@ export const offersRouter = createRouter().query('list', {
                 location: input.location,
               },
               {
-                OffersIntern: {
+                offersIntern: {
                   is: null,
                 },
               },
               {
-                OffersFullTime: {
+                offersFullTime: {
                   isNot: null,
                 },
               },
@@ -161,8 +161,8 @@ export const offersRouter = createRouter().query('list', {
       if (input.title) {
         validRecord =
           validRecord &&
-          (offer.OffersFullTime?.title === input.title ||
-            offer.OffersIntern?.title === input.title);
+          (offer.offersFullTime?.title === input.title ||
+            offer.offersIntern?.title === input.title);
       }
 
       if (input.dateStart && input.dateEnd) {
@@ -173,9 +173,9 @@ export const offersRouter = createRouter().query('list', {
       }
 
       if (input.salaryMin && input.salaryMax) {
-        const salary = offer.OffersFullTime?.totalCompensation.value
-          ? offer.OffersFullTime?.totalCompensation.value
-          : offer.OffersIntern?.monthlySalary.value;
+        const salary = offer.offersFullTime?.totalCompensation.value
+          ? offer.offersFullTime?.totalCompensation.value
+          : offer.offersIntern?.monthlySalary.value;
 
         if (!salary) {
           throw new TRPCError({
@@ -213,13 +213,13 @@ export const offersRouter = createRouter().query('list', {
           }
 
           if (sortingKey === 'totalCompensation') {
-            const salary1 = offer1.OffersFullTime?.totalCompensation.value
-              ? offer1.OffersFullTime?.totalCompensation.value
-              : offer1.OffersIntern?.monthlySalary.value;
+            const salary1 = offer1.offersFullTime?.totalCompensation.value
+              ? offer1.offersFullTime?.totalCompensation.value
+              : offer1.offersIntern?.monthlySalary.value;
 
-            const salary2 = offer2.OffersFullTime?.totalCompensation.value
-              ? offer2.OffersFullTime?.totalCompensation.value
-              : offer2.OffersIntern?.monthlySalary.value;
+            const salary2 = offer2.offersFullTime?.totalCompensation.value
+              ? offer2.offersFullTime?.totalCompensation.value
+              : offer2.offersIntern?.monthlySalary.value;
 
             if (!salary1 || !salary2) {
               throw new TRPCError({
@@ -259,13 +259,13 @@ export const offersRouter = createRouter().query('list', {
           }
 
           if (sortingKey === 'totalCompensation') {
-            const salary1 = offer1.OffersFullTime?.totalCompensation.value
-              ? offer1.OffersFullTime?.totalCompensation.value
-              : offer1.OffersIntern?.monthlySalary.value;
+            const salary1 = offer1.offersFullTime?.totalCompensation.value
+              ? offer1.offersFullTime?.totalCompensation.value
+              : offer1.offersIntern?.monthlySalary.value;
 
-            const salary2 = offer2.OffersFullTime?.totalCompensation.value
-              ? offer2.OffersFullTime?.totalCompensation.value
-              : offer2.OffersIntern?.monthlySalary.value;
+            const salary2 = offer2.offersFullTime?.totalCompensation.value
+              ? offer2.offersFullTime?.totalCompensation.value
+              : offer2.offersIntern?.monthlySalary.value;
 
             if (!salary1 || !salary2) {
               throw new TRPCError({
