@@ -3,14 +3,7 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { CalendarDaysIcon, UserIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
-import {
-  Button,
-  CheckboxInput,
-  Collapsible,
-  Select,
-  TextArea,
-  TextInput,
-} from '@tih/ui';
+import { Button, CheckboxInput, Select, TextArea, TextInput } from '@tih/ui';
 
 import { QUESTION_TYPES } from '~/utils/questions/constants';
 import {
@@ -110,28 +103,26 @@ export default function ContributeQuestionForm({
           />
         </div>
       </div>
-      <Collapsible defaultOpen={true} label="Additional info">
-        <div className="justify-left flex flex-wrap items-end gap-2">
-          <div className="min-w-[150px] max-w-[300px] flex-1">
-            <TextInput
-              label="Location"
-              required={true}
-              startAddOn={CalendarDaysIcon}
-              startAddOnType="icon"
-              {...register('location')}
-            />
-          </div>
-          <div className="min-w-[150px] max-w-[200px] flex-1">
-            <TextInput
-              label="Role"
-              required={true}
-              startAddOn={UserIcon}
-              startAddOnType="icon"
-              {...register('role')}
-            />
-          </div>
+      <div className="justify-left flex flex-wrap items-end gap-2">
+        <div className="min-w-[150px] max-w-[300px] flex-1">
+          <TextInput
+            label="Location"
+            required={true}
+            startAddOn={CalendarDaysIcon}
+            startAddOnType="icon"
+            {...register('location')}
+          />
         </div>
-      </Collapsible>
+        <div className="min-w-[150px] max-w-[200px] flex-1">
+          <TextInput
+            label="Role"
+            required={true}
+            startAddOn={UserIcon}
+            startAddOnType="icon"
+            {...register('role')}
+          />
+        </div>
+      </div>
       {/* <div className="w-full">
         <HorizontalDivider />
       </div>
