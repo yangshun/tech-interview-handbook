@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
 import { Vote } from '@prisma/client';
-import { Button, TextArea } from '@tih/ui';
+import { Button, Spinner, TextArea } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
@@ -212,11 +212,9 @@ export default function ResumeCommentListItem({
                 )}
               />
             </button>
-
             <div className="text-xs">
               {commentVotesQuery.data?.numVotes ?? 0}
             </div>
-
             <button
               disabled={
                 !userId ||
@@ -244,6 +242,12 @@ export default function ResumeCommentListItem({
                 onClick={() => setIsEditingComment(true)}>
                 Edit
               </button>
+            )}
+
+            {(commentVotesQuery.isLoading ||
+              commentVotesUpsertMutation.isLoading ||
+              commentVotesDeleteMutation.isLoading) && (
+              <Spinner label="loading votes..." size="xs" />
             )}
           </div>
         </div>
