@@ -63,19 +63,19 @@ export const internshipCycleOptions = [
 export const yearOptions = [
   {
     label: '2021',
-    value: '2021',
+    value: 2021,
   },
   {
     label: '2022',
-    value: '2022',
+    value: 2022,
   },
   {
     label: '2023',
-    value: '2023',
+    value: 2023,
   },
   {
     label: '2024',
-    value: '2024',
+    value: 2024,
   },
 ];
 
@@ -106,3 +106,5 @@ export enum FieldError {
   Number = 'Please fill in a number in this field.',
   Required = 'Please fill in this field.',
 }
+
+export const OVERALL_TAB = 'Overall';

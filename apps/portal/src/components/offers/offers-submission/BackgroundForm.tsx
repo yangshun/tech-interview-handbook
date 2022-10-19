@@ -9,16 +9,21 @@ import {
   locationOptions,
   titleOptions,
 } from '~/components/offers/constants';
-import FormRadioList from '~/components/offers/forms/components/FormRadioList';
-import FormSelect from '~/components/offers/forms/components/FormSelect';
-import FormTextInput from '~/components/offers/forms/components/FormTextInput';
+import type { BackgroundPostData } from '~/components/offers/types';
 import { JobType } from '~/components/offers/types';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 
 import { CURRENCY_OPTIONS } from '~/utils/offers/currency/CurrencyEnum';
 
+import FormRadioList from '../forms/FormRadioList';
+import FormSelect from '../forms/FormSelect';
+import FormTextInput from '../forms/FormTextInput';
+
 function YoeSection() {
-  const { register } = useFormContext();
+  const { register, formState } = useFormContext<{
+    background: BackgroundPostData;
+  }>();
+  const backgroundFields = formState.errors.background;
   return (
     <>
       <h6 className="mb-2 text-left text-xl font-medium text-gray-400">
@@ -28,11 +33,13 @@ function YoeSection() {
       <div className="mb-5 rounded-lg border border-gray-200 px-10 py-5">
         <div className="mb-2 grid grid-cols-3 space-x-3">
           <FormTextInput
+            errorMessage={backgroundFields?.totalYoe?.message}
             label="Total YOE"
             placeholder="0"
             required={true}
             type="number"
             {...register(`background.totalYoe`, {
+              min: { message: FieldError.NonNegativeNumber, value: 0 },
               required: FieldError.Required,
               valueAsNumber: true,
             })}
@@ -41,9 +48,11 @@ function YoeSection() {
         <Collapsible label="Add specific YOEs by domain">
           <div className="mb-5 grid grid-cols-2 space-x-3">
             <FormTextInput
+              errorMessage={backgroundFields?.specificYoes?.[0]?.yoe?.message}
               label="Specific YOE 1"
               type="number"
               {...register(`background.specificYoes.0.yoe`, {
+                min: { message: FieldError.NonNegativeNumber, value: 0 },
                 valueAsNumber: true,
               })}
             />
@@ -55,9 +64,11 @@ function YoeSection() {
           </div>
           <div className="mb-5 grid grid-cols-2 space-x-3">
             <FormTextInput
+              errorMessage={backgroundFields?.specificYoes?.[1]?.yoe?.message}
               label="Specific YOE 2"
               type="number"
               {...register(`background.specificYoes.1.yoe`, {
+                min: { message: FieldError.NonNegativeNumber, value: 0 },
                 valueAsNumber: true,
               })}
             />
@@ -74,7 +85,10 @@ function YoeSection() {
 }
 
 function FullTimeJobFields() {
-  const { register, setValue } = useFormContext();
+  const { register, setValue, formState } = useFormContext<{
+    background: BackgroundPostData;
+  }>();
+  const experiencesField = formState.errors.background?.experiences?.[0];
   return (
     <>
       <div className="mb-5 grid grid-cols-2 space-x-3">
@@ -107,12 +121,14 @@ function FullTimeJobFields() {
             />
           }
           endAddOnType="element"
+          errorMessage={experiencesField?.totalCompensation?.value?.message}
           label="Total Compensation (Annual)"
           placeholder="0.00"
           startAddOn="$"
           startAddOnType="label"
           type="number"
           {...register(`background.experiences.0.totalCompensation.value`, {
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
             valueAsNumber: true,
           })}
         />
@@ -138,9 +154,11 @@ function FullTimeJobFields() {
             {...register(`background.experiences.0.location`)}
           />
           <FormTextInput
+            errorMessage={experiencesField?.durationInMonths?.message}
             label="Duration (months)"
             type="number"
             {...register(`background.experiences.0.durationInMonths`, {
+              min: { message: FieldError.NonNegativeNumber, value: 0 },
               valueAsNumber: true,
             })}
           />
@@ -151,7 +169,11 @@ function FullTimeJobFields() {
 }
 
 function InternshipJobFields() {
-  const { register, setValue } = useFormContext();
+  const { register, setValue, formState } = useFormContext<{
+    background: BackgroundPostData;
+  }>();
+  const experiencesField = formState.errors.background?.experiences?.[0];
+
   return (
     <>
       <div className="mb-5 grid grid-cols-2 space-x-3">
@@ -182,12 +204,16 @@ function InternshipJobFields() {
             />
           }
           endAddOnType="element"
+          errorMessage={experiencesField?.monthlySalary?.value?.message}
           label="Salary (Monthly)"
           placeholder="0.00"
           startAddOn="$"
           startAddOnType="label"
           type="number"
-          {...register(`background.experiences.0.monthlySalary.value`)}
+          {...register(`background.experiences.0.monthlySalary.value`, {
+            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            valueAsNumber: true,
+          })}
         />
       </div>
       <Collapsible label="Add more details">
@@ -238,7 +264,7 @@ function CurrentJobSection() {
             <RadioList.Item
               key="Internship"
               label="Internship"
-              value={JobType.Internship}
+              value={JobType.Intern}
             />
           </FormRadioList>
         </div>

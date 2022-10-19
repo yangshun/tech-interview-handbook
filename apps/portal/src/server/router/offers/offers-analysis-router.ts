@@ -51,7 +51,106 @@ const searchOfferPercentile = (
 };
 
 export const offersAnalysisRouter = createRouter()
-  .query('generate', {
+  .query('get', {
+    input: z.object({
+      profileId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const analysis = await ctx.prisma.offersAnalysis.findFirst({
+        include: {
+          overallHighestOffer: {
+            include: {
+              company: true,
+              offersFullTime: {
+                include: {
+                  totalCompensation: true,
+                },
+              },
+              offersIntern: {
+                include: {
+                  monthlySalary: true,
+                },
+              },
+              profile: {
+                include: {
+                  background: true,
+                },
+              },
+            },
+          },
+          topCompanyOffers: {
+            include: {
+              company: true,
+              offersFullTime: {
+                include: {
+                  totalCompensation: true,
+                },
+              },
+              offersIntern: {
+                include: {
+                  monthlySalary: true,
+                },
+              },
+              profile: {
+                include: {
+                  background: {
+                    include: {
+                      experiences: {
+                        include: {
+                          company: true,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          topOverallOffers: {
+            include: {
+              company: true,
+              offersFullTime: {
+                include: {
+                  totalCompensation: true,
+                },
+              },
+              offersIntern: {
+                include: {
+                  monthlySalary: true,
+                },
+              },
+              profile: {
+                include: {
+                  background: {
+                    include: {
+                      experiences: {
+                        include: {
+                          company: true,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        where: {
+          profileId: input.profileId,
+        },
+      });
+
+      if (!analysis) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'No analysis found on this profile',
+        });
+      }
+
+      return profileAnalysisDtoMapper(analysis);
+    },
+  })
+  .mutation('generate', {
     input: z.object({
       profileId: z.string(),
     }),
@@ -365,105 +464,6 @@ export const offersAnalysisRouter = createRouter()
           },
         },
       });
-
-      return profileAnalysisDtoMapper(analysis);
-    },
-  })
-  .query('get', {
-    input: z.object({
-      profileId: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const analysis = await ctx.prisma.offersAnalysis.findFirst({
-        include: {
-          overallHighestOffer: {
-            include: {
-              company: true,
-              offersFullTime: {
-                include: {
-                  totalCompensation: true,
-                },
-              },
-              offersIntern: {
-                include: {
-                  monthlySalary: true,
-                },
-              },
-              profile: {
-                include: {
-                  background: true,
-                },
-              },
-            },
-          },
-          topCompanyOffers: {
-            include: {
-              company: true,
-              offersFullTime: {
-                include: {
-                  totalCompensation: true,
-                },
-              },
-              offersIntern: {
-                include: {
-                  monthlySalary: true,
-                },
-              },
-              profile: {
-                include: {
-                  background: {
-                    include: {
-                      experiences: {
-                        include: {
-                          company: true,
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-          topOverallOffers: {
-            include: {
-              company: true,
-              offersFullTime: {
-                include: {
-                  totalCompensation: true,
-                },
-              },
-              offersIntern: {
-                include: {
-                  monthlySalary: true,
-                },
-              },
-              profile: {
-                include: {
-                  background: {
-                    include: {
-                      experiences: {
-                        include: {
-                          company: true,
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-        where: {
-          profileId: input.profileId,
-        },
-      });
-
-      if (!analysis) {
-        throw new TRPCError({
-          code: 'NOT_FOUND',
-          message: 'No analysis found on this profile',
-        });
-      }
 
       return profileAnalysisDtoMapper(analysis);
     },

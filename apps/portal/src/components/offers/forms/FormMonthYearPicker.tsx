@@ -4,7 +4,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 
 import MonthYearPicker from '~/components/shared/MonthYearPicker';
 
-import { getCurrentMonth, getCurrentYear } from '../../../../utils/offers/time';
+import { getCurrentMonth, getCurrentYear } from '../../../utils/offers/time';
 
 type MonthYearPickerProps = ComponentProps<typeof MonthYearPicker>;
 
