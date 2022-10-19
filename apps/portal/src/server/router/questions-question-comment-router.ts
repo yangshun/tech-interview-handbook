@@ -12,6 +12,7 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
       questionId: z.string(),
     }),
     async resolve({ ctx, input }) {
+      const { questionId } = input;
       const questionCommentsData =
         await ctx.prisma.questionsQuestionComment.findMany({
           include: {
@@ -27,7 +28,7 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
             createdAt: 'desc',
           },
           where: {
-            ...input,
+            questionId,
           },
         });
       return questionCommentsData.map((data) => {
@@ -68,9 +69,12 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
+      const { content, questionId } = input;
+
       return await ctx.prisma.questionsQuestionComment.create({
         data: {
-          ...input,
+          content,
+          questionId,
           userId,
         },
       });
@@ -83,6 +87,8 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
+
+      const { content } = input;
 
       const questionCommentToUpdate =
         await ctx.prisma.questionsQuestionComment.findUnique({
@@ -100,7 +106,7 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
 
       return await ctx.prisma.questionsQuestionComment.update({
         data: {
-          ...input,
+          content,
         },
         where: {
           id: input.id,
@@ -158,11 +164,13 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
+      const { questionCommentId, vote } = input;
 
       return await ctx.prisma.questionsQuestionCommentVote.create({
         data: {
-          ...input,
+          questionCommentId,
           userId,
+          vote,
         },
       });
     },
