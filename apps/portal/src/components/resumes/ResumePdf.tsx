@@ -58,7 +58,11 @@ export default function ResumePdf({ url }: Props) {
                   : '',
               ),
             }}>
-            <Page pageNumber={pageNumber} width={pageWidth} />
+            <Page
+              pageNumber={pageNumber}
+              renderTextLayer={false}
+              width={pageWidth}
+            />
           </div>
           <div className="absolute top-2 right-5 hidden hover:block group-hover:block">
             <Button

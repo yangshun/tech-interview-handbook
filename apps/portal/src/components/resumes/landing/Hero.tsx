@@ -33,7 +33,7 @@ export function Hero() {
         </Link>
         <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
           <button
-            className="group inline-flex items-center justify-center py-2 px-4 text-sm ring-1 ring-slate-200 hover:text-slate-900 hover:ring-slate-300 focus:outline-none focus-visible:outline-indigo-600 focus-visible:ring-slate-300 active:bg-slate-100 active:text-slate-600"
+            className="group inline-flex items-center justify-center rounded-md py-2 px-4 text-sm ring-1 ring-slate-200 hover:text-slate-900 hover:ring-slate-300 focus:outline-none focus-visible:outline-indigo-600 focus-visible:ring-slate-300 active:bg-slate-100 active:text-slate-600"
             type="button">
             <svg
               aria-hidden="true"
