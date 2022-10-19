@@ -60,14 +60,14 @@ export default function ContributeQuestionDialog({
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-                <Dialog.Panel className="relative max-w-5xl transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full">
+                <Dialog.Panel className="relative max-w-5xl transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full">
                   <div className="bg-white p-6 pt-5 sm:pb-4">
                     <div className="flex flex-1 items-stretch">
                       <div className="mt-3 w-full sm:mt-0 sm:text-left">
                         <Dialog.Title
                           as="h3"
                           className="text-lg font-medium leading-6 text-gray-900">
-                          Question Draft
+                          Contribute question
                         </Dialog.Title>
                         <div className="w-full">
                           <HorizontalDivider />
