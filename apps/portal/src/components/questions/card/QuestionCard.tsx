@@ -1,9 +1,15 @@
-import { ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
+import {
+  ChatBubbleBottomCenterTextIcon,
+  EyeIcon,
+} from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
 import { Badge, Button } from '@tih/ui';
 
 import { useQuestionVote } from '~/utils/questions/useVote';
 
+import type { CreateQuestionEncounterData } from '../forms/CreateQuestionEncounterForm';
+import CreateQuestionEncounterForm from '../forms/CreateQuestionEncounterForm';
 import QuestionTypeBadge from '../QuestionTypeBadge';
 import VotingButtons from '../VotingButtons';
 
@@ -17,14 +23,14 @@ type UpvoteProps =
       upvoteCount?: never;
     };
 
-type StatisticsProps =
+type AnswerStatisticsProps =
   | {
       answerCount: number;
-      showUserStatistics: true;
+      showAnswerStatistics: true;
     }
   | {
       answerCount?: never;
-      showUserStatistics?: false;
+      showAnswerStatistics?: false;
     };
 
 type ActionButtonProps =
@@ -39,14 +45,26 @@ type ActionButtonProps =
       showActionButton?: false;
     };
 
+type ReceivedStatisticsProps =
+  | {
+      onReceivedSubmit: (data: CreateQuestionEncounterData) => void;
+      receivedCount: number;
+      showReceivedStatistics: true;
+    }
+  | {
+      onReceivedSubmit?: never;
+      receivedCount?: never;
+      showReceivedStatistics?: false;
+    };
+
 export type QuestionCardProps = ActionButtonProps &
-  StatisticsProps &
+  AnswerStatisticsProps &
+  ReceivedStatisticsProps &
   UpvoteProps & {
     company: string;
     content: string;
     location: string;
     questionId: string;
-    receivedCount: number;
     role: string;
     showHover?: boolean;
     timestamp: string;
@@ -58,10 +76,11 @@ export default function QuestionCard({
   company,
   answerCount,
   content,
-  // ReceivedCount,
+  receivedCount,
   type,
   showVoteButtons,
-  showUserStatistics,
+  showAnswerStatistics,
+  showReceivedStatistics,
   showActionButton,
   actionButtonLabel,
   onActionButtonClick,
@@ -70,12 +89,24 @@ export default function QuestionCard({
   role,
   location,
   showHover,
+  onReceivedSubmit,
 }: QuestionCardProps) {
+  const [showReceivedForm, setShowReceivedForm] = useState(false);
   const { handleDownvote, handleUpvote, vote } = useQuestionVote(questionId);
   const hoverClass = showHover ? 'hover:bg-slate-50' : '';
-  return (
-    <article
-      className={`flex gap-4 rounded-md border border-slate-300 bg-white p-4 ${hoverClass}`}>
+
+  const cardContent = showReceivedForm ? (
+    <CreateQuestionEncounterForm
+      onCancel={() => {
+        setShowReceivedForm(false);
+      }}
+      onSubmit={(data) => {
+        onReceivedSubmit?.(data);
+        setShowReceivedForm(false);
+      }}
+    />
+  ) : (
+    <>
       {showVoteButtons && (
         <VotingButtons
           upvoteCount={upvoteCount}
@@ -105,25 +136,40 @@ export default function QuestionCard({
         <div className="ml-2">
           <p className="line-clamp-2 text-ellipsis ">{content}</p>
         </div>
-        {showUserStatistics && (
+        {(showAnswerStatistics || showReceivedStatistics) && (
           <div className="flex gap-2">
-            <Button
-              addonPosition="start"
-              icon={ChatBubbleBottomCenterTextIcon}
-              label={`${answerCount} answers`}
-              size="sm"
-              variant="tertiary"
-            />
-            {/* <Button
-              addonPosition="start"
-              icon={EyeIcon}
-              label={`${receivedCount} received this`}
-              size="sm"
-              variant="tertiary"
-            /> */}
+            {showAnswerStatistics && (
+              <Button
+                addonPosition="start"
+                icon={ChatBubbleBottomCenterTextIcon}
+                label={`${answerCount} answers`}
+                size="sm"
+                variant="tertiary"
+              />
+            )}
+            {showReceivedStatistics && (
+              <Button
+                addonPosition="start"
+                icon={EyeIcon}
+                label={`${receivedCount} received this`}
+                size="sm"
+                variant="tertiary"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setShowReceivedForm(true);
+                }}
+              />
+            )}
           </div>
         )}
       </div>
+    </>
+  );
+
+  return (
+    <article
+      className={`flex gap-4 rounded-md border border-slate-300 bg-white p-4 ${hoverClass}`}>
+      {cardContent}
     </article>
   );
 }

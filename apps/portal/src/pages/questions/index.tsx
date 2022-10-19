@@ -381,14 +381,17 @@ export default function QuestionsHomePage() {
                   )}`}
                   location={question.location}
                   questionId={question.id}
-                  receivedCount={0}
+                  receivedCount={question.receivedCount}
                   role={question.role}
                   timestamp={question.seenAt.toLocaleDateString(undefined, {
                     month: 'short',
                     year: 'numeric',
-                  })} // TODO: Implement received count
+                  })}
                   type={question.type}
                   upvoteCount={question.numVotes}
+                  onReceivedSubmit={(data) => {
+                    console.log(data);
+                  }}
                 />
               ))}
               {questions?.length === 0 && (

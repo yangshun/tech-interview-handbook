@@ -6,13 +6,15 @@ import QuestionCard from './QuestionCard';
 export type QuestionOverviewCardProps = Omit<
   QuestionCardProps & {
     showActionButton: false;
-    showUserStatistics: true;
+    showAnswerStatistics: true;
+    showReceivedStatistics: true;
     showVoteButtons: true;
   },
   | 'actionButtonLabel'
   | 'onActionButtonClick'
   | 'showActionButton'
-  | 'showUserStatistics'
+  | 'showAnswerStatistics'
+  | 'showReceivedStatistics'
   | 'showVoteButtons'
 >;
 
@@ -21,8 +23,9 @@ function QuestionOverviewCardWithoutHref(props: QuestionOverviewCardProps) {
     <QuestionCard
       {...props}
       showActionButton={false}
+      showAnswerStatistics={true}
       showHover={true}
-      showUserStatistics={true}
+      showReceivedStatistics={true}
       showVoteButtons={true}
     />
   );

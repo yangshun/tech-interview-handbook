@@ -45,6 +45,11 @@ export default function QuestionPage() {
     { id: questionId as string },
   ]);
 
+  const { data: aggregatedEncounters } = trpc.useQuery([
+    'questions.questions.encounters.getAggregatedEncounters',
+    { questionId: questionId as string },
+  ]);
+
   const utils = trpc.useContext();
 
   const { data: comments } = trpc.useQuery([
@@ -73,6 +78,18 @@ export default function QuestionPage() {
       utils.invalidateQueries('questions.answers.getAnswers');
     },
   });
+
+  const { mutate: addEncounter } = trpc.useMutation(
+    'questions.questions.encounters.create',
+    {
+      onSuccess: () => {
+        utils.invalidateQueries(
+          'questions.questions.encounters.getAggregatedEncounters',
+        );
+        utils.invalidateQueries('questions.questions.getQuestionById');
+      },
+    },
+  );
 
   const handleBackNavigation = () => {
     router.back();
@@ -114,12 +131,21 @@ export default function QuestionPage() {
           <FullQuestionCard
             {...question}
             questionId={question.id}
-            receivedCount={0}
+            receivedCount={question.receivedCount}
             timestamp={question.seenAt.toLocaleDateString(undefined, {
               month: 'short',
               year: 'numeric',
             })}
             upvoteCount={question.numVotes}
+            onReceivedSubmit={(data) => {
+              addEncounter({
+                companyId: data.company,
+                location: data.location,
+                questionId: questionId as string,
+                role: data.role,
+                seenAt: data.seenAt,
+              });
+            }}
           />
           <div className="mx-2">
             <Collapsible label={`${(comments ?? []).length} comment(s)`}>
@@ -180,7 +206,7 @@ export default function QuestionPage() {
                   authorName={comment.user}
                   content={comment.content}
                   createdAt={comment.createdAt}
-                  upvoteCount={0}
+                  upvoteCount={comment.numVotes}
                 />
               ))}
             </Collapsible>

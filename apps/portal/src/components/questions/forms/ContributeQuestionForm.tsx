@@ -17,9 +17,11 @@ import {
   useSelectRegister,
 } from '~/utils/questions/useFormRegister';
 
-import CompaniesTypeahead from '../shared/CompaniesTypeahead';
-import type { Month } from '../shared/MonthYearPicker';
-import MonthYearPicker from '../shared/MonthYearPicker';
+import LocationTypeahead from '../typeahead/LocationTypeahead';
+import RoleTypeahead from '../typeahead/RoleTypeahead';
+import CompaniesTypeahead from '../../shared/CompaniesTypeahead';
+import type { Month } from '../../shared/MonthYearPicker';
+import MonthYearPicker from '../../shared/MonthYearPicker';
 
 export type ContributeQuestionData = {
   company: string;
@@ -86,9 +88,7 @@ export default function ContributeQuestionForm({
             control={control}
             name="location"
             render={({ field }) => (
-              <Typeahead
-                label="Location"
-                options={LOCATIONS}
+              <LocationTypeahead
                 required={true}
                 // eslint-disable-next-line @typescript-eslint/no-empty-function
                 onQueryChange={() => {}}
@@ -142,9 +142,7 @@ export default function ContributeQuestionForm({
             control={control}
             name="role"
             render={({ field }) => (
-              <Typeahead
-                label="Role"
-                options={ROLES}
+              <RoleTypeahead
                 required={true}
                 // eslint-disable-next-line @typescript-eslint/no-empty-function
                 onQueryChange={() => {}}
