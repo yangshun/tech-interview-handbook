@@ -16,6 +16,12 @@ export type Question = {
   user: string;
 };
 
+export type AggregatedQuestionEncounter = {
+  companyCounts: Record<string, number>;
+  locationCounts: Record<string, number>;
+  roleCounts: Record<string, number>;
+}
+
 export type AnswerComment = {
   content: string;
   createdAt: Date;
