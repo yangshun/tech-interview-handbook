@@ -315,19 +315,19 @@ export default function SubmitResumeForm({
                             {resumeFile.name}
                           </p>
                         )}
-                        <div className="flex justify-center text-sm">
+                        <div className="flex items-center text-sm">
                           <label
                             className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
                             htmlFor="file-upload">
-                            <p className="mt-2 font-medium">Drop files here</p>
-                            <div className="mt-2 mb-1 flex justify-center gap-1">
-                              <span className="font-light">or</span>
-                              <span className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
-                                {resumeFile == null
-                                  ? 'Select file'
-                                  : 'Replace file'}
-                              </span>
-                            </div>
+                            <span className="mt-2 font-medium">
+                              Drop file here
+                            </span>
+                            <span className="mr-1 ml-1 font-light">or</span>
+                            <span className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
+                              {resumeFile == null
+                                ? 'Select file'
+                                : 'Replace file'}
+                            </span>
                             <input
                               {...register('file', { required: true })}
                               {...getInputProps()}
