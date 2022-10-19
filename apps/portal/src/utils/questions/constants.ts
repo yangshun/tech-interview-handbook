@@ -4,10 +4,12 @@ import type { FilterChoices } from '~/components/questions/filter/FilterSection'
 
 export const COMPANIES: FilterChoices = [
   {
+    id: 'Google',
     label: 'Google',
     value: 'Google',
   },
   {
+    id: 'Meta',
     label: 'Meta',
     value: 'Meta',
   },
@@ -16,14 +18,17 @@ export const COMPANIES: FilterChoices = [
 // Code, design, behavioral
 export const QUESTION_TYPES: FilterChoices<QuestionsQuestionType> = [
   {
+    id: 'CODING',
     label: 'Coding',
     value: 'CODING',
   },
   {
+    id: 'SYSTEM_DESIGN',
     label: 'Design',
     value: 'SYSTEM_DESIGN',
   },
   {
+    id: 'BEHAVIORAL',
     label: 'Behavioral',
     value: 'BEHAVIORAL',
   },
@@ -33,18 +38,22 @@ export type QuestionAge = 'all' | 'last-6-months' | 'last-month' | 'last-year';
 
 export const QUESTION_AGES: FilterChoices<QuestionAge> = [
   {
+    id: 'last-month',
     label: 'Last month',
     value: 'last-month',
   },
   {
+    id: 'last-6-months',
     label: 'Last 6 months',
     value: 'last-6-months',
   },
   {
+    id: 'last-year',
     label: 'Last year',
     value: 'last-year',
   },
   {
+    id: 'all',
     label: 'All',
     value: 'all',
   },
@@ -52,22 +61,27 @@ export const QUESTION_AGES: FilterChoices<QuestionAge> = [
 
 export const LOCATIONS: FilterChoices = [
   {
+    id: 'Singapore',
     label: 'Singapore',
     value: 'Singapore',
   },
   {
+    id: 'Menlo Park',
     label: 'Menlo Park',
     value: 'Menlo Park',
   },
   {
+    id: 'california',
     label: 'California',
     value: 'california',
   },
   {
+    id: 'california',
     label: 'Hong Kong',
     value: 'Hong Kong',
   },
   {
+    id: 'Taiwan',
     label: 'Taiwan',
     value: 'Taiwan',
   },

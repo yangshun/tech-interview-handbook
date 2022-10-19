@@ -3,7 +3,7 @@ import Router, { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { NoSymbolIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
-import { SlideOut } from '@tih/ui';
+import { SlideOut, Typeahead } from '@tih/ui';
 
 import QuestionOverviewCard from '~/components/questions/card/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
@@ -188,7 +188,18 @@ export default function QuestionsHomePage() {
       <FilterSection
         label="Company"
         options={companyFilterOptions}
-        searchPlaceholder="Add company filter"
+        renderInput={({ onOptionChange, options, field }) => (
+          <Typeahead
+            {...field}
+            label=""
+            options={options}
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            onQueryChange={() => {}}
+            onSelect={({ value }) => {
+              onOptionChange(value, true);
+            }}
+          />
+        )}
         onOptionChange={(optionValue, checked) => {
           if (checked) {
             setSelectedCompanies([...selectedCompanies, optionValue]);
@@ -227,7 +238,18 @@ export default function QuestionsHomePage() {
       <FilterSection
         label="Location"
         options={locationFilterOptions}
-        searchPlaceholder="Add location filter"
+        renderInput={({ onOptionChange, options, field }) => (
+          <Typeahead
+            {...field}
+            label=""
+            options={options}
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            onQueryChange={() => {}}
+            onSelect={({ value }) => {
+              onOptionChange(value, true);
+            }}
+          />
+        )}
         onOptionChange={(optionValue, checked) => {
           if (checked) {
             setSelectedLocations([...selectedLocations, optionValue]);
