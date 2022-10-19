@@ -52,7 +52,8 @@ export default function OfferProfileSave() {
 
         <p className="mb-5 text-gray-900">
           If you do not want to keep the edit link, you can opt to save this
-          profile under your user accont. It will still only be editable by you.
+          profile under your user account. It will still only be editable by
+          you.
         </p>
         <div className="mb-20">
           <Button

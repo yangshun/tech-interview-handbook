@@ -6,12 +6,12 @@ import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
 export enum JobType {
   FullTime = 'FULLTIME',
-  Internship = 'INTERNSHIP',
+  Intern = 'INTERN',
 }
 
 export const JobTypeLabel = {
   FULLTIME: 'Full-time',
-  INTERNSHIP: 'Internship',
+  INTERN: 'Internship',
 };
 
 export enum EducationBackgroundType {
@@ -20,17 +20,72 @@ export enum EducationBackgroundType {
   Masters = 'Masters',
   PhD = 'PhD',
   Professional = 'Professional',
-  Seconday = 'Secondary',
+  Secondary = 'Secondary',
   SelfTaught = 'Self-taught',
 }
 
-export type Money = {
-  currency: string;
-  value: number;
+export type OffersProfilePostData = {
+  background: BackgroundPostData;
+  offers: Array<OfferPostData>;
 };
 
-type FullTimeJobData = {
-  base: Money;
+export type OffersProfileFormData = {
+  background: BackgroundPostData;
+  offers: Array<OfferFormData>;
+};
+
+export type BackgroundPostData = {
+  educations: Array<EducationPostData>;
+  experiences: Array<ExperiencePostData>;
+  specificYoes: Array<SpecificYoePostData>;
+  totalYoe: number;
+};
+
+type ExperiencePostData = {
+  companyId?: string | null;
+  durationInMonths?: number | null;
+  jobType?: string | null;
+  level?: string | null;
+  location?: string | null;
+  monthlySalary?: Money | null;
+  specialization?: string | null;
+  title?: string | null;
+  totalCompensation?: Money | null;
+  totalCompensationId?: string | null;
+};
+
+type EducationPostData = {
+  endDate?: Date | null;
+  field?: string | null;
+  school?: string | null;
+  startDate?: Date | null;
+  type?: string | null;
+};
+
+type SpecificYoePostData = {
+  domain: string;
+  yoe: number;
+};
+
+type SpecificYoe = SpecificYoePostData;
+
+export type OfferPostData = {
+  comments: string;
+  companyId: string;
+  jobType: string;
+  location: string;
+  monthYearReceived: Date;
+  negotiationStrategy: string;
+  offersFullTime?: OfferFullTimePostData | null;
+  offersIntern?: OfferInternPostData | null;
+};
+
+export type OfferFormData = Omit<OfferPostData, 'monthYearReceived'> & {
+  monthYearReceived: MonthYear;
+};
+
+export type OfferFullTimePostData = {
+  baseSalary: Money;
   bonus: Money;
   level: string;
   specialization: string;
@@ -39,7 +94,7 @@ type FullTimeJobData = {
   totalCompensation: Money;
 };
 
-type InternshipJobData = {
+export type OfferInternPostData = {
   internshipCycle: string;
   monthlySalary: Money;
   specialization: string;
@@ -47,83 +102,9 @@ type InternshipJobData = {
   title: string;
 };
 
-type OfferDetailsGeneralData = {
-  comments: string;
-  companyId: string;
-  jobType: string;
-  location: string;
-  monthYearReceived: MonthYear;
-  negotiationStrategy: string;
-};
-
-export type FullTimeOfferDetailsFormData = OfferDetailsGeneralData & {
-  job: FullTimeJobData;
-};
-
-export type InternshipOfferDetailsFormData = OfferDetailsGeneralData & {
-  job: InternshipJobData;
-};
-
-export type OfferDetailsFormData =
-  | FullTimeOfferDetailsFormData
-  | InternshipOfferDetailsFormData;
-
-export type OfferDetailsPostData = Omit<
-  OfferDetailsFormData,
-  'monthYearReceived'
-> & {
-  monthYearReceived: Date;
-};
-
-type SpecificYoe = {
-  domain: string;
-  yoe: number;
-};
-
-type FullTimeExperience = {
-  level?: string;
-  totalCompensation?: Money;
-};
-
-type InternshipExperience = {
-  monthlySalary?: Money;
-};
-
-type GeneralExperience = {
-  companyId?: string;
-  durationInMonths?: number;
-  jobType?: string;
-  specialization?: string;
-  title?: string;
-};
-
-export type Experience =
-  | (FullTimeExperience & GeneralExperience)
-  | (GeneralExperience & InternshipExperience);
-
-type Education = {
-  endDate?: Date;
-  field?: string;
-  school?: string;
-  startDate?: Date;
-  type?: string;
-};
-
-type BackgroundFormData = {
-  educations: Array<Education>;
-  experiences: Array<Experience>;
-  specificYoes: Array<SpecificYoe>;
-  totalYoe?: number;
-};
-
-export type OfferProfileFormData = {
-  background: BackgroundFormData;
-  offers: Array<OfferDetailsFormData>;
-};
-
-export type OfferProfilePostData = {
-  background: BackgroundFormData;
-  offers: Array<OfferDetailsPostData>;
+export type Money = {
+  currency: string;
+  value: number;
 };
 
 type EducationDisplay = {

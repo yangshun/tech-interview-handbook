@@ -5,13 +5,13 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from '@tih/ui';
 
 import { Breadcrumbs } from '~/components/offers/Breadcrumb';
-import BackgroundForm from '~/components/offers/forms/BackgroundForm';
-import OfferAnalysis from '~/components/offers/forms/OfferAnalysis';
-import OfferDetailsForm from '~/components/offers/forms/OfferDetailsForm';
-import OfferProfileSave from '~/components/offers/forms/OfferProfileSave';
+import BackgroundForm from '~/components/offers/offers-submission/BackgroundForm';
+import OfferAnalysis from '~/components/offers/offers-submission/OfferAnalysis';
+import OfferDetailsForm from '~/components/offers/offers-submission/OfferDetailsForm';
+import OfferProfileSave from '~/components/offers/offers-submission/OfferProfileSave';
 import type {
-  OfferDetailsFormData,
-  OfferProfileFormData,
+  OfferFormData,
+  OffersProfileFormData,
 } from '~/components/offers/types';
 import { JobType } from '~/components/offers/types';
 import type { Month } from '~/components/shared/MonthYearPicker';
@@ -20,10 +20,11 @@ import { cleanObject, removeInvalidMoneyData } from '~/utils/offers/form';
 import { getCurrentMonth, getCurrentYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
+import type { CreateOfferProfileResponse } from '~/types/offers';
+
 const defaultOfferValues = {
   comments: '',
   companyId: '',
-  job: {},
   jobType: JobType.FullTime,
   location: '',
   monthYearReceived: {
@@ -40,7 +41,7 @@ export const defaultFullTimeOfferValues = {
 
 export const defaultInternshipOfferValues = {
   ...defaultOfferValues,
-  jobType: JobType.Internship,
+  jobType: JobType.Intern,
 };
 
 const defaultOfferProfileValues = {
@@ -61,10 +62,13 @@ type FormStep = {
 
 export default function OffersSubmissionPage() {
   const [formStep, setFormStep] = useState(0);
+  const [createProfileResponse, setCreateProfileResponse] =
+    useState<CreateOfferProfileResponse>();
+
   const pageRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () =>
     pageRef.current?.scrollTo({ behavior: 'smooth', top: 0 });
-  const formMethods = useForm<OfferProfileFormData>({
+  const formMethods = useForm<OffersProfileFormData>({
     defaultValues: defaultOfferProfileValues,
     mode: 'all',
   });
@@ -84,7 +88,9 @@ export default function OffersSubmissionPage() {
       label: 'Background',
     },
     {
-      component: <OfferAnalysis key={2} />,
+      component: (
+        <OfferAnalysis key={2} profileId={createProfileResponse?.id} />
+      ),
       hasNext: true,
       hasPrevious: false,
       label: 'Analysis',
@@ -115,18 +121,30 @@ export default function OffersSubmissionPage() {
     scrollToTop();
   };
 
+  const generateAnalysisMutation = trpc.useMutation(
+    ['offers.analysis.generate'],
+    {
+      onError(error) {
+        console.error(error.message);
+      },
+    },
+  );
+
   const createMutation = trpc.useMutation(['offers.profile.create'], {
     onError(error) {
       console.error(error.message);
     },
-    onSuccess() {
-      alert('offer profile submit success!');
+    onSuccess(data) {
+      generateAnalysisMutation.mutate({
+        profileId: data?.id || '',
+      });
+      setCreateProfileResponse(data);
       setFormStep(formStep + 1);
       scrollToTop();
     },
   });
 
-  const onSubmit: SubmitHandler<OfferProfileFormData> = async (data) => {
+  const onSubmit: SubmitHandler<OffersProfileFormData> = async (data) => {
     const result = await trigger();
     if (!result) {
       return;
@@ -142,7 +160,7 @@ export default function OffersSubmissionPage() {
       background.experiences = [];
     }
 
-    const offers = data.offers.map((offer: OfferDetailsFormData) => ({
+    const offers = data.offers.map((offer: OfferFormData) => ({
       ...offer,
       monthYearReceived: new Date(
         offer.monthYearReceived.year,
