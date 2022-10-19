@@ -1,11 +1,13 @@
 import Link from 'next/link';
 
-import type { OfferTableRowData } from '~/components/offers/table/types';
+import type { DashboardOffer } from '../../../types/offers';
+import { convertCurrencyToString } from '../../../utils/offers/currency';
+import { formatDate } from '../../../utils/offers/time';
 
-export type OfferTableRowProps = Readonly<{ row: OfferTableRowData }>;
+export type OfferTableRowProps = Readonly<{ row: DashboardOffer }>;
 
 export default function OfferTableRow({
-  row: { company, date, id, profileId, salary, title, yoe },
+  row: { company, id, income, monthYearReceived, profileId, title, totalYoe },
 }: OfferTableRowProps) {
   return (
     <tr
@@ -14,12 +16,12 @@ export default function OfferTableRow({
       <th
         className="whitespace-nowrap py-4 px-6 font-medium text-gray-900 dark:text-white"
         scope="row">
-        {company}
+        {company.name}
       </th>
       <td className="py-4 px-6">{title}</td>
-      <td className="py-4 px-6">{yoe}</td>
-      <td className="py-4 px-6">{salary}</td>
-      <td className="py-4 px-6">{date}</td>
+      <td className="py-4 px-6">{totalYoe}</td>
+      <td className="py-4 px-6">{convertCurrencyToString(income)}</td>
+      <td className="py-4 px-6">{formatDate(monthYearReceived)}</td>
       <td className="space-x-4 py-4 px-6">
         <Link
           className="font-medium text-indigo-600 hover:underline dark:text-indigo-500"

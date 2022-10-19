@@ -2,17 +2,14 @@ import { useEffect, useState } from 'react';
 import { HorizontalDivider, Select, Spinner, Tabs } from '@tih/ui';
 
 import OffersTablePagination from '~/components/offers/table/OffersTablePagination';
-import type {
-  OfferTableRowData,
-  PaginationType,
-} from '~/components/offers/table/types';
 import { YOE_CATEGORY } from '~/components/offers/table/types';
 
 import CurrencySelector from '~/utils/offers/currency/CurrencySelector';
-import { formatDate } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
 import OffersRow from './OffersRow';
+
+import type { DashboardOffer, Paging } from '~/types/offers';
 
 const NUMBER_OF_OFFERS_IN_PAGE = 10;
 export type OffersTableProps = Readonly<{
@@ -25,18 +22,18 @@ export default function OffersTable({
 }: OffersTableProps) {
   const [currency, setCurrency] = useState('SGD'); // TODO: Detect location
   const [selectedTab, setSelectedTab] = useState(YOE_CATEGORY.ENTRY);
-  const [pagination, setPagination] = useState<PaginationType>({
-    currentPage: 1,
-    numOfItems: 1,
+  const [pagination, setPagination] = useState<Paging>({
+    currentPage: 0,
+    numOfItems: 0,
     numOfPages: 0,
     totalItems: 0,
   });
-  const [offers, setOffers] = useState<Array<OfferTableRowData>>([]);
+  const [offers, setOffers] = useState<Array<DashboardOffer>>([]);
 
   useEffect(() => {
     setPagination({
-      currentPage: 1,
-      numOfItems: 1,
+      currentPage: 0,
+      numOfItems: 0,
       numOfPages: 0,
       totalItems: 0,
     });
@@ -48,7 +45,7 @@ export default function OffersTable({
         companyId: companyFilter,
         limit: NUMBER_OF_OFFERS_IN_PAGE,
         location: 'Singapore, Singapore', // TODO: Geolocation
-        offset: pagination.currentPage - 1,
+        offset: 0,
         sortBy: '-monthYearReceived',
         title: jobTitleFilter,
         yoeCategory: selectedTab,
@@ -56,28 +53,19 @@ export default function OffersTable({
     ],
     {
       onSuccess: (response) => {
-        const filteredData = response.data.map((res) => {
-          return {
-            company: res.company.name,
-            date: formatDate(res.monthYearReceived),
-            id: res.OffersFullTime
-              ? res.OffersFullTime!.id
-              : res.OffersIntern!.id,
-            profileId: res.profileId,
-            salary: res.OffersFullTime
-              ? res.OffersFullTime?.totalCompensation.value
-              : res.OffersIntern?.monthlySalary.value,
-            title: res.OffersFullTime ? res.OffersFullTime?.level : '',
-            yoe: 100,
-          };
-        });
-        setOffers(filteredData);
-        setPagination({
-          currentPage: (response.paging.currPage as number) + 1,
-          numOfItems: response.paging.numOfItemsInPage,
-          numOfPages: response.paging.numOfPages,
-          totalItems: response.paging.totalNumberOfOffers,
-        });
+        // Const filteredData = response.data.map((res) => {
+        //   return {
+        //     company: res.company.name,
+        //     date: res.monthYearReceived,
+        //     id: res.id,
+        //     profileId: res.profileId,
+        //     income: res.income,
+        //     title: res.title,
+        //     yoe: res.totalYoe,
+        //   };
+        // });
+        setOffers(response.data);
+        setPagination(response.paging);
       },
     },
   );
@@ -90,15 +78,15 @@ export default function OffersTable({
             label="Table Navigation"
             tabs={[
               {
-                label: 'Fresh Grad (0-3 YOE)',
+                label: 'Fresh Grad (0-2 YOE)',
                 value: YOE_CATEGORY.ENTRY,
               },
               {
-                label: 'Mid (4-7 YOE)',
+                label: 'Mid (3-5 YOE)',
                 value: YOE_CATEGORY.MID,
               },
               {
-                label: 'Senior (8+ YOE)',
+                label: 'Senior (6+ YOE)',
                 value: YOE_CATEGORY.SENIOR,
               },
               {
@@ -187,14 +175,11 @@ export default function OffersTable({
         )}
         <OffersTablePagination
           endNumber={
-            (pagination.currentPage - 1) * NUMBER_OF_OFFERS_IN_PAGE +
-            offers.length
+            pagination.currentPage * NUMBER_OF_OFFERS_IN_PAGE + offers.length
           }
           handlePageChange={handlePageChange}
           pagination={pagination}
-          startNumber={
-            (pagination.currentPage - 1) * NUMBER_OF_OFFERS_IN_PAGE + 1
-          }
+          startNumber={pagination.currentPage * NUMBER_OF_OFFERS_IN_PAGE + 1}
         />
       </div>
     </div>

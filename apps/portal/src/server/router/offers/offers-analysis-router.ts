@@ -8,8 +8,9 @@ import type {
   OffersOffer,
   OffersProfile,
 } from '@prisma/client';
-import { JobType } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
+
+import { profileAnalysisDtoMapper } from '~/mappers/offers-mappers';
 
 import { createRouter } from '../context';
 
@@ -27,9 +28,19 @@ const searchOfferPercentile = (
     company: Company;
     profile: OffersProfile & { background: OffersBackground | null };
   },
-  similarOffers: Array<any> | string,
+  similarOffers: Array<
+    OffersOffer & {
+      OffersFullTime:
+        | (OffersFullTime & {
+            totalCompensation: OffersCurrency;
+          })
+        | null;
+      OffersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
+      company: Company;
+      profile: OffersProfile & { background: OffersBackground | null };
+    }
+  >,
 ) => {
-
   for (let i = 0; i < similarOffers.length; i++) {
     if (similarOffers[i].id === offer.id) {
       return i;
@@ -37,116 +48,6 @@ const searchOfferPercentile = (
   }
 
   return -1;
-};
-
-const topPercentileDtoMapper = (topPercentileOffers: Array<any>) => {
-  return topPercentileOffers.map((offer) => {
-    const { background } = offer.profile;
-    return {
-      company: { id: offer.company.id, name: offer.company.name },
-      id: offer.id,
-      jobType: offer.jobType,
-      level: offer.OffersFullTime?.level,
-      monthYearReceived: offer.monthYearReceived,
-      monthlySalary: offer.OffersIntern?.monthlySalary?.value,
-      negotiationStrategy: offer.negotiationStrategy,
-      profile: {
-        background: {
-          experiences: background?.experiences.map(
-            (exp: { company: { id: any; name: any }; id: any }) => {
-              return {
-                company: { id: exp.company.id, name: exp.company.name },
-                id: exp.id,
-              };
-            },
-          ),
-          id: background?.id,
-          totalYoe: background?.totalYoe,
-        },
-        id: offer.profileId,
-        name: offer.profile.profileName,
-      },
-      specialization:
-        offer.jobType === JobType.FULLTIME
-          ? offer.OffersFullTime?.specialization
-          : offer.OffersIntern?.specialization,
-      title:
-        offer.jobType === JobType.FULLTIME
-          ? offer.OffersFullTime?.title
-          : offer.OffersIntern?.title,
-      totalCompensation: offer.OffersFullTime?.totalCompensation?.value,
-    };
-  });
-};
-
-const specificAnalysisDtoMapper = (
-  noOfOffers: number,
-  percentile: number,
-  topPercentileOffers: Array<any>,
-) => {
-  return {
-    noOfOffers,
-    percentile,
-    topPercentileCompanyOffers: topPercentileDtoMapper(topPercentileOffers),
-  };
-};
-
-const highestOfferDtoMapper = (
-  offer: OffersOffer & {
-    OffersFullTime:
-      | (OffersFullTime & { totalCompensation: OffersCurrency })
-      | null;
-    OffersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-    company: Company;
-    profile: OffersProfile & { background: OffersBackground | null };
-  },
-) => {
-  return {
-    company: { id: offer.company.id, name: offer.company.name },
-    id: offer.id,
-    level: offer.OffersFullTime?.level,
-    location: offer.location,
-    specialization:
-      offer.jobType === JobType.FULLTIME
-        ? offer.OffersFullTime?.specialization
-        : offer.OffersIntern?.specialization,
-    totalYoe: offer.profile.background?.totalYoe,
-  };
-};
-
-const profileAnalysisDtoMapper = (
-  analysisId: string,
-  profileId: string,
-  overallHighestOffer: OffersOffer & {
-    OffersFullTime:
-      | (OffersFullTime & { totalCompensation: OffersCurrency })
-      | null;
-    OffersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-    company: Company;
-    profile: OffersProfile & { background: OffersBackground | null };
-  },
-  noOfSimilarOffers: number,
-  overallPercentile: number,
-  topPercentileOffers: Array<any>,
-  noOfSimilarCompanyOffers: number,
-  companyPercentile: number,
-  topPercentileCompanyOffers: Array<any>,
-) => {
-  return {
-    companyAnalysis: specificAnalysisDtoMapper(
-      noOfSimilarCompanyOffers,
-      companyPercentile,
-      topPercentileCompanyOffers,
-    ),
-    id: analysisId,
-    overallAnalysis: specificAnalysisDtoMapper(
-      noOfSimilarOffers,
-      overallPercentile,
-      topPercentileOffers,
-    ),
-    overallHighestOffer: highestOfferDtoMapper(overallHighestOffer),
-    profileId,
-  };
 };
 
 export const offersAnalysisRouter = createRouter()
@@ -213,7 +114,7 @@ export const offersAnalysisRouter = createRouter()
 
       const overallHighestOffer = offers[0];
 
-      // TODO: Shift yoe to background to make it mandatory
+      // TODO: Shift yoe out of background to make it mandatory
       if (
         !overallHighestOffer.profile.background ||
         !overallHighestOffer.profile.background.totalYoe
@@ -465,17 +366,7 @@ export const offersAnalysisRouter = createRouter()
         },
       });
 
-      return profileAnalysisDtoMapper(
-        analysis.id,
-        analysis.profileId,
-        overallHighestOffer,
-        noOfSimilarOffers,
-        overallPercentile,
-        topPercentileOffers,
-        noOfSimilarCompanyOffers,
-        companyPercentile,
-        topPercentileCompanyOffers,
-      );
+      return profileAnalysisDtoMapper(analysis);
     },
   })
   .query('get', {
@@ -574,16 +465,6 @@ export const offersAnalysisRouter = createRouter()
         });
       }
 
-      return profileAnalysisDtoMapper(
-        analysis.id,
-        analysis.profileId,
-        analysis.overallHighestOffer,
-        analysis.noOfSimilarOffers,
-        analysis.overallPercentile,
-        analysis.topOverallOffers,
-        analysis.noOfSimilarCompanyOffers,
-        analysis.companyPercentile,
-        analysis.topCompanyOffers,
-      );
+      return profileAnalysisDtoMapper(analysis);
     },
   });

@@ -7,7 +7,7 @@ function Test() {
   const [error, setError] = useState('');
 
   const createMutation = trpc.useMutation(['offers.profile.create'], {
-    onError(err: any) {
+    onError(err) {
       alert(err);
     },
     onSuccess(data) {
@@ -18,7 +18,7 @@ function Test() {
   const addToUserProfileMutation = trpc.useMutation(
     ['offers.profile.addToUserProfile'],
     {
-      onError(err: any) {
+      onError(err) {
         alert(err);
       },
       onSuccess(data) {
@@ -28,7 +28,7 @@ function Test() {
   );
 
   const deleteCommentMutation = trpc.useMutation(['offers.comments.delete'], {
-    onError(err: any) {
+    onError(err) {
       alert(err);
     },
     onSuccess(data) {
@@ -46,7 +46,7 @@ function Test() {
   };
 
   const updateCommentMutation = trpc.useMutation(['offers.comments.update'], {
-    onError(err: any) {
+    onError(err) {
       alert(err);
     },
     onSuccess(data) {
@@ -64,7 +64,7 @@ function Test() {
   };
 
   const createCommentMutation = trpc.useMutation(['offers.comments.create'], {
-    onError(err: any) {
+    onError(err) {
       alert(err);
     },
     onSuccess(data) {
@@ -74,17 +74,18 @@ function Test() {
 
   const handleCreate = () => {
     createCommentMutation.mutate({
-      message: 'hello',
-      profileId: 'cl96stky5002ew32gx2kale2x',
-      // UserId: 'cl97dl51k001e7iygd5v5gt58'
+      message: 'wassup bro',
+      profileId: 'cl9efyn9p004ww3u42mjgl1vn',
+      replyingToId: 'cl9el4xj10001w3w21o3p2iny',
+      userId: 'cl9ehvpng0000w3ec2mpx0bdd'
     });
   };
 
   const handleLink = () => {
     addToUserProfileMutation.mutate({
-      profileId: 'cl96stky5002ew32gx2kale2x',
+      profileId: 'cl9efyn9p004ww3u42mjgl1vn',
       token: 'afca11e436d21bde24543718fa957c6c625335439dc504f24ee35eae7b5ef1ba',
-      userId: 'cl97dl51k001e7iygd5v5gt58',
+      userId: 'cl9ehvpng0000w3ec2mpx0bdd',
     });
   };
 
@@ -102,7 +103,7 @@ function Test() {
         ],
         experiences: [
           {
-            companyId: 'cl98yuqk80007txhgjtjp8fk4',
+            companyId: 'cl9ec1mgg0000w33hg1a3612r',
             durationInMonths: 24,
             jobType: 'FULLTIME',
             level: 'Junior',
@@ -150,6 +151,8 @@ function Test() {
               value: 104100,
             },
           },
+
+          comments: 'I am a Raffles Institution almumni',
           // Comments: '',
           companyId: 'cl98yuqk80007txhgjtjp8fk4',
           jobType: 'FULLTIME',
@@ -179,25 +182,25 @@ function Test() {
               value: 104100,
             },
           },
-          comments: undefined,
+          comments: '',
           companyId: 'cl98yuqk80007txhgjtjp8fk4',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
-          // NegotiationStrategy: 'Leveraged having multiple offers',
+          negotiationStrategy: 'Leveraged having multiple offers',
         },
       ],
     });
   };
 
-  const profileId = 'cl99fhrsf00007ijpbrdk8gue'; // Remember to change this filed after testing deleting
+  const profileId = 'cl9efyn9p004ww3u42mjgl1vn'; // Remember to change this filed after testing deleting
   const data = trpc.useQuery(
     [
       `offers.profile.listOne`,
       {
         profileId,
         token:
-          'e7effd2a40adba2deb1ddea4fb9f1e6c3c98ab0a85a88ed1567fc2a107fdb445',
+          'd14666ff76e267c9e99445844b41410e83874936d0c07e664db73ff0ea76919e',
       },
     ],
     {
@@ -216,6 +219,7 @@ function Test() {
     },
   );
 
+  // Console.log(replies.data?.data)
   const deleteMutation = trpc.useMutation(['offers.profile.delete']);
 
   const handleDelete = (id: string) => {
@@ -226,7 +230,7 @@ function Test() {
   };
 
   const updateMutation = trpc.useMutation(['offers.profile.update'], {
-    onError(err: any) {
+    onError(err) {
       alert(err);
     },
     onSuccess(response) {
@@ -261,7 +265,7 @@ function Test() {
               slug: 'meta',
               updatedAt: new Date('2022-10-12T16:19:05.196Z'),
             },
-            companyId: 'cl98yuqk80007txhgjtjp8fk4',
+            companyId: 'cl9ec1mgg0000w33hg1a3612r',
             durationInMonths: 24,
             id: 'cl96stky6002iw32gpt6t87s2',
             jobType: 'FULLTIME',
@@ -368,7 +372,7 @@ function Test() {
             slug: 'meta',
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           id: 'cl976t4de00047iygl0zbce11',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
@@ -410,7 +414,7 @@ function Test() {
             totalCompensationId: 'cl96stky90039w32glbpktd0o',
           },
           OffersIntern: null,
-          comments: null,
+          comments: '',
           company: {
             createdAt: new Date('2022-10-12T16:19:05.196Z'),
             description:
@@ -421,7 +425,7 @@ function Test() {
             slug: 'meta',
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           id: 'cl96stky80031w32gau9mu1gs',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
@@ -463,7 +467,7 @@ function Test() {
             totalCompensationId: 'cl96stky9003jw32gzumcoi7v',
           },
           OffersIntern: null,
-          comments: null,
+          comments: '',
           company: {
             createdAt: new Date('2022-10-12T16:19:05.196Z'),
             description:
@@ -474,7 +478,7 @@ function Test() {
             slug: 'meta',
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           id: 'cl96stky9003bw32gc3l955vr',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
@@ -527,7 +531,7 @@ function Test() {
             slug: 'meta',
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           id: 'cl976wf28000t7iyga4noyz7s',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
@@ -580,7 +584,7 @@ function Test() {
             slug: 'meta',
             updatedAt: new Date('2022-10-12T16:19:05.196Z'),
           },
-          companyId: 'cl98yuqk80007txhgjtjp8fk4',
+          companyId: 'cl9ec1mgg0000w33hg1a3612r',
           id: 'cl96tbb3o0051w32gjrpaiiit',
           jobType: 'FULLTIME',
           location: 'Singapore, Singapore',
@@ -600,7 +604,7 @@ function Test() {
   return (
     <>
       <div>{createdData}</div>
-      <div>{JSON.stringify(replies.data)}</div>
+      <div>{JSON.stringify(replies.data?.data)}</div>
       <button type="button" onClick={handleClick}>
         Click Me!
       </button>

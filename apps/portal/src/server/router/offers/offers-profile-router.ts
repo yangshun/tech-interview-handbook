@@ -2,9 +2,13 @@ import crypto, { randomUUID } from 'crypto';
 import { z } from 'zod';
 import * as trpc from '@trpc/server';
 
-import { createRouter } from '../context';
+import {
+  addToProfileResponseMapper,
+  createOfferProfileResponseMapper,
+  profileDtoMapper,
+} from '~/mappers/offers-mappers';
 
-import type { OffersProfile } from '~/types/offers-profile';
+import { createRouter } from '../context';
 
 const valuation = z.object({
   currency: z.string(),
@@ -19,41 +23,45 @@ const company = z.object({
   logoUrl: z.string().nullish(),
   name: z.string(),
   slug: z.string(),
-  updatedAt: z.date()
-})
+  updatedAt: z.date(),
+});
 
 const offer = z.object({
-  OffersFullTime: z.object({
-    baseSalary: valuation.nullish(),
-    baseSalaryId: z.string().nullish(),
-    bonus: valuation.nullish(),
-    bonusId: z.string().nullish(),
-    id: z.string().optional(),
-    level: z.string().nullish(),
-    specialization: z.string(),
-    stocks: valuation.nullish(),
-    stocksId: z.string().nullish(),
-    title: z.string(),
-    totalCompensation: valuation.nullish(),
-    totalCompensationId: z.string().nullish(),
-  }).nullish(),
-  OffersIntern: z.object({
-    id: z.string().optional(),
-    internshipCycle: z.string().nullish(),
-    monthlySalary: valuation.nullish(),
-    specialization: z.string(),
-    startYear: z.number().nullish(),
-    title: z.string(),
-    totalCompensation: valuation.nullish(), // Full time
-  }).nullish(),
-  comments: z.string().nullish(),
+  OffersFullTime: z
+    .object({
+      baseSalary: valuation.nullish(),
+      baseSalaryId: z.string().nullish(),
+      bonus: valuation.nullish(),
+      bonusId: z.string().nullish(),
+      id: z.string().optional(),
+      level: z.string().nullish(),
+      specialization: z.string(),
+      stocks: valuation.nullish(),
+      stocksId: z.string().nullish(),
+      title: z.string(),
+      totalCompensation: valuation.nullish(),
+      totalCompensationId: z.string().nullish(),
+    })
+    .nullish(),
+  OffersIntern: z
+    .object({
+      id: z.string().optional(),
+      internshipCycle: z.string().nullish(),
+      monthlySalary: valuation.nullish(),
+      specialization: z.string(),
+      startYear: z.number().nullish(),
+      title: z.string(),
+      totalCompensation: valuation.nullish(), // Full time
+    })
+    .nullish(),
+  comments: z.string(),
   company: company.nullish(),
   companyId: z.string(),
   id: z.string().optional(),
   jobType: z.string(),
   location: z.string(),
   monthYearReceived: z.date(),
-  negotiationStrategy: z.string().nullish(),
+  negotiationStrategy: z.string(),
   offersFullTimeId: z.string().nullish(),
   offersInternId: z.string().nullish(),
   profileId: z.string().nullish(),
@@ -72,7 +80,7 @@ const experience = z.object({
   specialization: z.string().nullish(),
   title: z.string().nullish(),
   totalCompensation: valuation.nullish(),
-  totalCompensationId: z.string().nullish()
+  totalCompensationId: z.string().nullish(),
 });
 
 const education = z.object({
@@ -91,32 +99,8 @@ const reply = z.object({
   messages: z.string().nullish(),
   profileId: z.string().nullish(),
   replyingToId: z.string().nullish(),
-  userId: z.string().nullish()
-})
-
-type WithIsEditable<T> = T & {
-  isEditable: boolean;
-};
-
-function computeIsEditable(
-  profileInput: OffersProfile,
-  editToken?: string,
-): WithIsEditable<OffersProfile> {
-  return {
-    ...profileInput,
-    isEditable: profileInput.editToken === editToken,
-  };
-}
-
-function exclude<Key extends keyof WithIsEditable<OffersProfile>>(
-  profile: WithIsEditable<OffersProfile>,
-  ...keys: Array<Key>
-): Omit<WithIsEditable<OffersProfile>, Key> {
-  for (const key of keys) {
-    delete profile[key];
-  }
-  return profile;
-}
+  userId: z.string().nullish(),
+});
 
 export const offersProfileRouter = createRouter()
   .query('listOne', {
@@ -127,6 +111,86 @@ export const offersProfileRouter = createRouter()
     async resolve({ ctx, input }) {
       const result = await ctx.prisma.offersProfile.findFirst({
         include: {
+          analysis: {
+            include: {
+              overallHighestOffer: {
+                include: {
+                  OffersFullTime: {
+                    include: {
+                      totalCompensation: true,
+                    },
+                  },
+                  OffersIntern: {
+                    include: {
+                      monthlySalary: true,
+                    },
+                  },
+                  company: true,
+                  profile: {
+                    include: {
+                      background: true,
+                    },
+                  },
+                },
+              },
+              topCompanyOffers: {
+                include: {
+                  OffersFullTime: {
+                    include: {
+                      totalCompensation: true,
+                    },
+                  },
+                  OffersIntern: {
+                    include: {
+                      monthlySalary: true,
+                    },
+                  },
+                  company: true,
+                  profile: {
+                    include: {
+                      background: {
+                        include: {
+                          experiences: {
+                            include: {
+                              company: true,
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+              topOverallOffers: {
+                include: {
+                  OffersFullTime: {
+                    include: {
+                      totalCompensation: true,
+                    },
+                  },
+                  OffersIntern: {
+                    include: {
+                      monthlySalary: true,
+                    },
+                  },
+                  company: true,
+                  profile: {
+                    include: {
+                      background: {
+                        include: {
+                          experiences: {
+                            include: {
+                              company: true,
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
           background: {
             include: {
               educations: true,
@@ -144,7 +208,7 @@ export const offersProfileRouter = createRouter()
             include: {
               replies: true,
               replyingTo: true,
-              user: true
+              user: true,
             },
           },
           offers: {
@@ -172,7 +236,7 @@ export const offersProfileRouter = createRouter()
       });
 
       if (result) {
-        return exclude(computeIsEditable(result, input.token), 'editToken')
+        return profileDtoMapper(result, input.token);
       }
 
       throw new trpc.TRPCError({
@@ -389,7 +453,8 @@ export const offersProfileRouter = createRouter()
                       title: x.OffersFullTime.title,
                       totalCompensation: {
                         create: {
-                          currency: x.OffersFullTime.totalCompensation?.currency,
+                          currency:
+                            x.OffersFullTime.totalCompensation?.currency,
                           value: x.OffersFullTime.totalCompensation?.value,
                         },
                       },
@@ -417,41 +482,9 @@ export const offersProfileRouter = createRouter()
           },
           profileName: randomUUID().substring(0, 10),
         },
-        include: {
-          background: {
-            include: {
-              educations: true,
-              experiences: {
-                include: {
-                  company: true,
-                  monthlySalary: true,
-                  totalCompensation: true,
-                },
-              },
-              specificYoes: true,
-            },
-          },
-          offers: {
-            include: {
-              OffersFullTime: {
-                include: {
-                  baseSalary: true,
-                  bonus: true,
-                  stocks: true,
-                  totalCompensation: true,
-                },
-              },
-              OffersIntern: {
-                include: {
-                  monthlySalary: true,
-                },
-              },
-            },
-          },
-        },
       });
-      // TODO: add analysis to profile object then return
-      return profile;
+
+      return createOfferProfileResponseMapper(profile, token);
     },
   })
   .mutation('delete', {
@@ -468,11 +501,13 @@ export const offersProfileRouter = createRouter()
       const profileEditToken = profileToDelete?.editToken;
 
       if (profileEditToken === input.token) {
-        return await ctx.prisma.offersProfile.delete({
+        const deletedProfile = await ctx.prisma.offersProfile.delete({
           where: {
             id: input.profileId,
           },
         });
+
+        return deletedProfile.id;
       }
       // TODO: Throw 401
       throw new trpc.TRPCError({
@@ -493,7 +528,7 @@ export const offersProfileRouter = createRouter()
             backgroundId: z.string().optional(),
             domain: z.string(),
             id: z.string().optional(),
-            yoe: z.number()
+            yoe: z.number(),
           }),
         ),
         totalYoe: z.number(),
@@ -505,7 +540,7 @@ export const offersProfileRouter = createRouter()
       offers: z.array(offer),
       profileName: z.string(),
       token: z.string(),
-      userId: z.string().nullish()
+      userId: z.string().nullish(),
     }),
     async resolve({ ctx, input }) {
       const profileToUpdate = await ctx.prisma.offersProfile.findFirst({
@@ -522,17 +557,17 @@ export const offersProfileRouter = createRouter()
           },
           where: {
             id: input.id,
-          }
+          },
         });
 
         await ctx.prisma.offersBackground.update({
           data: {
-            totalYoe: input.background.totalYoe
+            totalYoe: input.background.totalYoe,
           },
           where: {
-            id: input.background.id
-          }
-        })
+            id: input.background.id,
+          },
+        });
 
         for (const edu of input.background.educations) {
           if (edu.id) {
@@ -545,27 +580,26 @@ export const offersProfileRouter = createRouter()
                 type: edu.type,
               },
               where: {
-                id: edu.id
-              }
-            })
+                id: edu.id,
+              },
+            });
           } else {
             await ctx.prisma.offersBackground.update({
               data: {
                 educations: {
-                  create:
-                  {
+                  create: {
                     endDate: edu.endDate,
                     field: edu.field,
                     school: edu.school,
                     startDate: edu.startDate,
                     type: edu.type,
-                  }
-                }
+                  },
+                },
               },
               where: {
-                id: input.background.id
-              }
-            })
+                id: input.background.id,
+              },
+            });
           }
         }
 
@@ -579,9 +613,9 @@ export const offersProfileRouter = createRouter()
                 specialization: exp.specialization,
               },
               where: {
-                id: exp.id
-              }
-            })
+                id: exp.id,
+              },
+            });
 
             if (exp.monthlySalary) {
               await ctx.prisma.offersCurrency.update({
@@ -590,9 +624,9 @@ export const offersProfileRouter = createRouter()
                   value: exp.monthlySalary.value,
                 },
                 where: {
-                  id: exp.monthlySalary.id
-                }
-              })
+                  id: exp.monthlySalary.id,
+                },
+              });
             }
 
             if (exp.totalCompensation) {
@@ -602,12 +636,16 @@ export const offersProfileRouter = createRouter()
                   value: exp.totalCompensation.value,
                 },
                 where: {
-                  id: exp.totalCompensation.id
-                }
-              })
+                  id: exp.totalCompensation.id,
+                },
+              });
             }
           } else if (!exp.id) {
-            if (exp.jobType === 'FULLTIME' && exp.totalCompensation?.currency !== undefined && exp.totalCompensation.value !== undefined) {
+            if (
+              exp.jobType === 'FULLTIME' &&
+              exp.totalCompensation?.currency !== undefined &&
+              exp.totalCompensation.value !== undefined
+            ) {
               if (exp.companyId) {
                 await ctx.prisma.offersBackground.update({
                   data: {
@@ -630,12 +668,12 @@ export const offersProfileRouter = createRouter()
                           },
                         },
                       },
-                    }
+                    },
                   },
                   where: {
-                    id: input.background.id
-                  }
-                })
+                    id: input.background.id,
+                  },
+                });
               } else {
                 await ctx.prisma.offersBackground.update({
                   data: {
@@ -652,16 +690,15 @@ export const offersProfileRouter = createRouter()
                             value: exp.totalCompensation?.value,
                           },
                         },
-                      }
-                    }
+                      },
+                    },
                   },
                   where: {
-                    id: input.background.id
-                  }
-                })
+                    id: input.background.id,
+                  },
+                });
               }
-            }
-            else if (
+            } else if (
               exp.jobType === 'INTERN' &&
               exp.monthlySalary?.currency !== undefined &&
               exp.monthlySalary.value !== undefined
@@ -686,13 +723,13 @@ export const offersProfileRouter = createRouter()
                         },
                         specialization: exp.specialization,
                         title: exp.title,
-                      }
-                    }
+                      },
+                    },
                   },
                   where: {
-                    id: input.background.id
-                  }
-                })
+                    id: input.background.id,
+                  },
+                });
               } else {
                 await ctx.prisma.offersBackground.update({
                   data: {
@@ -708,44 +745,42 @@ export const offersProfileRouter = createRouter()
                         },
                         specialization: exp.specialization,
                         title: exp.title,
-                      }
-                    }
+                      },
+                    },
                   },
                   where: {
-                    id: input.background.id
-                  }
-                })
+                    id: input.background.id,
+                  },
+                });
               }
             }
           }
-
         }
 
         for (const yoe of input.background.specificYoes) {
           if (yoe.id) {
             await ctx.prisma.offersSpecificYoe.update({
               data: {
-                ...yoe
+                ...yoe,
               },
               where: {
-                id: yoe.id
-              }
-            })
+                id: yoe.id,
+              },
+            });
           } else {
             await ctx.prisma.offersBackground.update({
               data: {
                 specificYoes: {
-                  create:
-                  {
+                  create: {
                     domain: yoe.domain,
                     yoe: yoe.yoe,
-                  }
-                }
+                  },
+                },
               },
               where: {
-                id: input.background.id
-              }
-            })
+                id: input.background.id,
+              },
+            });
           }
         }
 
@@ -760,42 +795,46 @@ export const offersProfileRouter = createRouter()
                 negotiationStrategy: offerToUpdate.negotiationStrategy,
               },
               where: {
-                id: offerToUpdate.id
-              }
-            })
+                id: offerToUpdate.id,
+              },
+            });
 
-            if (offerToUpdate.jobType === "INTERN" || offerToUpdate.jobType === "FULLTIME") {
+            if (
+              offerToUpdate.jobType === 'INTERN' ||
+              offerToUpdate.jobType === 'FULLTIME'
+            ) {
               await ctx.prisma.offersOffer.update({
                 data: {
-                  jobType: offerToUpdate.jobType
+                  jobType: offerToUpdate.jobType,
                 },
                 where: {
-                  id: offerToUpdate.id
-                }
-              })
+                  id: offerToUpdate.id,
+                },
+              });
             }
 
             if (offerToUpdate.OffersIntern?.monthlySalary) {
               await ctx.prisma.offersIntern.update({
                 data: {
-                  internshipCycle: offerToUpdate.OffersIntern.internshipCycle ?? undefined,
+                  internshipCycle:
+                    offerToUpdate.OffersIntern.internshipCycle ?? undefined,
                   specialization: offerToUpdate.OffersIntern.specialization,
                   startYear: offerToUpdate.OffersIntern.startYear ?? undefined,
                   title: offerToUpdate.OffersIntern.title,
                 },
                 where: {
                   id: offerToUpdate.OffersIntern.id,
-                }
-              })
+                },
+              });
               await ctx.prisma.offersCurrency.update({
                 data: {
                   currency: offerToUpdate.OffersIntern.monthlySalary.currency,
-                  value: offerToUpdate.OffersIntern.monthlySalary.value
+                  value: offerToUpdate.OffersIntern.monthlySalary.value,
                 },
                 where: {
-                  id: offerToUpdate.OffersIntern.monthlySalary.id
-                }
-              })
+                  id: offerToUpdate.OffersIntern.monthlySalary.id,
+                },
+              });
             }
 
             if (offerToUpdate.OffersFullTime?.totalCompensation) {
@@ -807,54 +846,55 @@ export const offersProfileRouter = createRouter()
                 },
                 where: {
                   id: offerToUpdate.OffersFullTime.id,
-                }
-              })
+                },
+              });
               if (offerToUpdate.OffersFullTime.baseSalary) {
                 await ctx.prisma.offersCurrency.update({
                   data: {
                     currency: offerToUpdate.OffersFullTime.baseSalary.currency,
-                    value: offerToUpdate.OffersFullTime.baseSalary.value
+                    value: offerToUpdate.OffersFullTime.baseSalary.value,
                   },
                   where: {
-                    id: offerToUpdate.OffersFullTime.baseSalary.id
-                  }
-                })
+                    id: offerToUpdate.OffersFullTime.baseSalary.id,
+                  },
+                });
               }
               if (offerToUpdate.OffersFullTime.bonus) {
                 await ctx.prisma.offersCurrency.update({
                   data: {
                     currency: offerToUpdate.OffersFullTime.bonus.currency,
-                    value: offerToUpdate.OffersFullTime.bonus.value
+                    value: offerToUpdate.OffersFullTime.bonus.value,
                   },
                   where: {
-                    id: offerToUpdate.OffersFullTime.bonus.id
-                  }
-                })
+                    id: offerToUpdate.OffersFullTime.bonus.id,
+                  },
+                });
               }
               if (offerToUpdate.OffersFullTime.stocks) {
                 await ctx.prisma.offersCurrency.update({
                   data: {
                     currency: offerToUpdate.OffersFullTime.stocks.currency,
-                    value: offerToUpdate.OffersFullTime.stocks.value
+                    value: offerToUpdate.OffersFullTime.stocks.value,
                   },
                   where: {
-                    id: offerToUpdate.OffersFullTime.stocks.id
-                  }
-                })
+                    id: offerToUpdate.OffersFullTime.stocks.id,
+                  },
+                });
               }
               await ctx.prisma.offersCurrency.update({
                 data: {
-                  currency: offerToUpdate.OffersFullTime.totalCompensation.currency,
-                  value: offerToUpdate.OffersFullTime.totalCompensation.value
+                  currency:
+                    offerToUpdate.OffersFullTime.totalCompensation.currency,
+                  value: offerToUpdate.OffersFullTime.totalCompensation.value,
                 },
                 where: {
-                  id: offerToUpdate.OffersFullTime.totalCompensation.id
-                }
-              })
+                  id: offerToUpdate.OffersFullTime.totalCompensation.id,
+                },
+              });
             }
           } else {
             if (
-              offerToUpdate.jobType === "INTERN" &&
+              offerToUpdate.jobType === 'INTERN' &&
               offerToUpdate.OffersIntern &&
               offerToUpdate.OffersIntern.internshipCycle &&
               offerToUpdate.OffersIntern.monthlySalary?.currency &&
@@ -867,14 +907,19 @@ export const offersProfileRouter = createRouter()
                     create: {
                       OffersIntern: {
                         create: {
-                          internshipCycle: offerToUpdate.OffersIntern.internshipCycle,
+                          internshipCycle:
+                            offerToUpdate.OffersIntern.internshipCycle,
                           monthlySalary: {
                             create: {
-                              currency: offerToUpdate.OffersIntern.monthlySalary?.currency,
-                              value: offerToUpdate.OffersIntern.monthlySalary?.value,
+                              currency:
+                                offerToUpdate.OffersIntern.monthlySalary
+                                  ?.currency,
+                              value:
+                                offerToUpdate.OffersIntern.monthlySalary?.value,
                             },
                           },
-                          specialization: offerToUpdate.OffersIntern.specialization,
+                          specialization:
+                            offerToUpdate.OffersIntern.specialization,
                           startYear: offerToUpdate.OffersIntern.startYear,
                           title: offerToUpdate.OffersIntern.title,
                         },
@@ -889,13 +934,13 @@ export const offersProfileRouter = createRouter()
                       location: offerToUpdate.location,
                       monthYearReceived: offerToUpdate.monthYearReceived,
                       negotiationStrategy: offerToUpdate.negotiationStrategy,
-                    }
-                  }
+                    },
+                  },
                 },
                 where: {
                   id: input.id,
-                }
-              })
+                },
+              });
             }
             if (
               offerToUpdate.jobType === 'FULLTIME' &&
@@ -918,29 +963,39 @@ export const offersProfileRouter = createRouter()
                         create: {
                           baseSalary: {
                             create: {
-                              currency: offerToUpdate.OffersFullTime.baseSalary?.currency,
-                              value: offerToUpdate.OffersFullTime.baseSalary?.value,
+                              currency:
+                                offerToUpdate.OffersFullTime.baseSalary
+                                  ?.currency,
+                              value:
+                                offerToUpdate.OffersFullTime.baseSalary?.value,
                             },
                           },
                           bonus: {
                             create: {
-                              currency: offerToUpdate.OffersFullTime.bonus?.currency,
+                              currency:
+                                offerToUpdate.OffersFullTime.bonus?.currency,
                               value: offerToUpdate.OffersFullTime.bonus?.value,
                             },
                           },
                           level: offerToUpdate.OffersFullTime.level,
-                          specialization: offerToUpdate.OffersFullTime.specialization,
+                          specialization:
+                            offerToUpdate.OffersFullTime.specialization,
                           stocks: {
                             create: {
-                              currency: offerToUpdate.OffersFullTime.stocks?.currency,
+                              currency:
+                                offerToUpdate.OffersFullTime.stocks?.currency,
                               value: offerToUpdate.OffersFullTime.stocks?.value,
                             },
                           },
                           title: offerToUpdate.OffersFullTime.title,
                           totalCompensation: {
                             create: {
-                              currency: offerToUpdate.OffersFullTime.totalCompensation?.currency,
-                              value: offerToUpdate.OffersFullTime.totalCompensation?.value,
+                              currency:
+                                offerToUpdate.OffersFullTime.totalCompensation
+                                  ?.currency,
+                              value:
+                                offerToUpdate.OffersFullTime.totalCompensation
+                                  ?.value,
                             },
                           },
                         },
@@ -955,17 +1010,17 @@ export const offersProfileRouter = createRouter()
                       location: offerToUpdate.location,
                       monthYearReceived: offerToUpdate.monthYearReceived,
                       negotiationStrategy: offerToUpdate.negotiationStrategy,
-                    }
-                  }
+                    },
+                  },
                 },
                 where: {
                   id: input.id,
-                }
-              })
+                },
+              });
             }
           }
         }
-        // TODO: add analysis to profile object then return
+
         const result = await ctx.prisma.offersProfile.findFirst({
           include: {
             background: {
@@ -985,7 +1040,7 @@ export const offersProfileRouter = createRouter()
               include: {
                 replies: true,
                 replyingTo: true,
-                user: true
+                user: true,
               },
             },
             offers: {
@@ -1013,7 +1068,7 @@ export const offersProfileRouter = createRouter()
         });
 
         if (result) {
-          return exclude(computeIsEditable(result, input.token), 'editToken')
+          return createOfferProfileResponseMapper(result, input.token);
         }
 
         throw new trpc.TRPCError({
@@ -1036,9 +1091,9 @@ export const offersProfileRouter = createRouter()
     }),
     async resolve({ ctx, input }) {
       const profile = await ctx.prisma.offersProfile.findFirst({
-          where: {
-            id: input.profileId,
-          },
+        where: {
+          id: input.profileId,
+        },
       });
 
       const profileEditToken = profile?.editToken;
@@ -1048,25 +1103,21 @@ export const offersProfileRouter = createRouter()
           data: {
             user: {
               connect: {
-                id: input.userId
-              }
-            }
+                id: input.userId,
+              },
+            },
           },
           where: {
-            id: input.profileId
-          }
-        })
+            id: input.profileId,
+          },
+        });
 
-        return {
-          id: updated.id,
-          profileName: updated.profileName,
-          userId: updated.userId
-        }
+        return addToProfileResponseMapper(updated);
       }
 
       throw new trpc.TRPCError({
         code: 'UNAUTHORIZED',
         message: 'Invalid token.',
       });
-     }
+    },
   });

@@ -191,13 +191,13 @@ model OffersProfile {
   user   User?   @relation(fields: [userId], references: [id])
   userId String?
 
-  OffersAnalysis OffersAnalysis?
+  analysis OffersAnalysis?
 }
 
 model OffersBackground {
   id String @id @default(cuid())
 
-  totalYoe     Int?
+  totalYoe     Int
   specificYoes OffersSpecificYoe[]
 
   experiences OffersExperience[] // For extensibility in the future
@@ -308,8 +308,8 @@ model OffersOffer {
 
   monthYearReceived   DateTime
   location            String
-  negotiationStrategy String?
-  comments            String?
+  negotiationStrategy String
+  comments            String
 
   jobType JobType
 
@@ -320,7 +320,6 @@ model OffersOffer {
   offersFullTimeId String?         @unique
 
   OffersAnalysis OffersAnalysis? @relation("HighestOverallOffer")
-
   OffersAnalysisTopOverallOffers OffersAnalysis[] @relation("TopOverallOffers")
   OffersAnalysisTopCompanyOffers OffersAnalysis[] @relation("TopCompanyOffers")
 }
