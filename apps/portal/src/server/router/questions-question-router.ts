@@ -81,7 +81,6 @@ export const questionsQuestionRouter = createProtectedRouter()
         },
       });
 
-      console.log(input);
       return questionsData.map((data) => {
         const votes: number = data.votes.reduce(
           (previousValue: number, currentValue) => {
