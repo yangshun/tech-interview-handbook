@@ -1,0 +1,37 @@
+# Copied from https://github.com/facebook/docusaurus/blob/main/.github/workflows/lint.yml
+name: Typecheck
+
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  tsc:
+    name: Typecheck
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: yarn
+      - name: Installation
+        run: yarn
+      - name: Check immutable yarn.lock
+        run: git diff --exit-code
+      # Build the shared types in dependent packages.
+      - name: Build dependencies
+        run: yarn turbo run build --filter=ui
+      - name: Typecheck
+        run: yarn tsc

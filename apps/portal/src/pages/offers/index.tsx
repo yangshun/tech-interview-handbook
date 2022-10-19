@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Select } from '@tih/ui';
 
-import OffersTable from '~/components/offers/OffersTable';
 import OffersTitle from '~/components/offers/OffersTitle';
+import OffersTable from '~/components/offers/table/OffersTable';
+import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 
 export default function OffersHomePage() {
-  const [jobTitleFilter, setjobTitleFilter] = useState('Software engineers');
-  const [companyFilter, setCompanyFilter] = useState('All companies');
+  const [jobTitleFilter, setjobTitleFilter] = useState('Software Engineer');
+  const [companyFilter, setCompanyFilter] = useState('');
 
   return (
     <main className="flex-1 overflow-y-auto">
@@ -21,20 +22,20 @@ export default function OffersHomePage() {
                 label="Select a job title"
                 options={[
                   {
-                    label: 'Software engineers',
-                    value: 'Software engineers',
+                    label: 'Software Engineer',
+                    value: 'Software Engineer',
                   },
                   {
-                    label: 'Frontend engineers',
-                    value: 'Frontend engineers',
+                    label: 'Frontend Engineer',
+                    value: 'Frontend Engineer',
                   },
                   {
-                    label: 'Backend engineers',
-                    value: 'Backend engineers',
+                    label: 'Backend Engineer',
+                    value: 'Backend Engineer',
                   },
                   {
-                    label: 'Full-stack engineers',
-                    value: 'Full-stack engineers',
+                    label: 'Full-stack Engineer',
+                    value: 'Full-stack Engineer',
                   },
                 ]}
                 value={jobTitleFilter}
@@ -43,32 +44,20 @@ export default function OffersHomePage() {
             </div>
             in
             <div className="ml-4">
-              <Select
+              <CompaniesTypeahead
                 isLabelHidden={true}
-                label="Select a company"
-                options={[
-                  {
-                    label: 'All companies',
-                    value: 'All companies',
-                  },
-                  {
-                    label: 'Shopee',
-                    value: 'Shopee',
-                  },
-                  {
-                    label: 'Meta',
-                    value: 'Meta',
-                  },
-                ]}
-                value={companyFilter}
-                onChange={setCompanyFilter}
+                placeHolder="All companies"
+                onSelect={({ value }) => setCompanyFilter(value)}
               />
             </div>
           </div>
         </div>
       </div>
       <div className="flex justify-center bg-white pb-20 pt-10">
-        <OffersTable />
+        <OffersTable
+          companyFilter={companyFilter}
+          jobTitleFilter={jobTitleFilter}
+        />
       </div>
     </main>
   );

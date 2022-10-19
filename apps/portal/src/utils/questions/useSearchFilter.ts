@@ -27,13 +27,6 @@ export const useSearchFilter = <Value extends string = string>(
         if (localStorageValue !== null) {
           const loadedFilters = JSON.parse(localStorageValue);
           setFilters(loadedFilters);
-          router.replace({
-            pathname: router.pathname,
-            query: {
-              ...router.query,
-              [name]: loadedFilters,
-            },
-          });
         }
       }
       setIsInitialized(true);
@@ -44,15 +37,8 @@ export const useSearchFilter = <Value extends string = string>(
     (newFilters: Array<Value>) => {
       setFilters(newFilters);
       localStorage.setItem(name, JSON.stringify(newFilters));
-      router.replace({
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-          [name]: newFilters,
-        },
-      });
     },
-    [name, router],
+    [name],
   );
 
   return [filters, setFiltersCallback, isInitialized] as const;
@@ -73,9 +59,7 @@ export const useSearchFilterSingle = <Value extends string = string>(
 
   return [
     filters[0],
-    (value: Value) => {
-      setFilters([value]);
-    },
+    (value: Value) => setFilters([value]),
     isInitialized,
   ] as const;
 };

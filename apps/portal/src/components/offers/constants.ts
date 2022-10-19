@@ -1,13 +1,9 @@
 import { EducationBackgroundType } from './types';
 
-const emptyOption = {
-  label: '----',
-  value: '',
-};
+export const emptyOption = '----';
 
 // TODO: use enums
 export const titleOptions = [
-  emptyOption,
   {
     label: 'Software engineer',
     value: 'Software engineer',
@@ -27,31 +23,29 @@ export const titleOptions = [
 ];
 
 export const companyOptions = [
-  emptyOption,
   {
-    label: 'Bytedance',
-    value: 'id-abc123',
+    label: 'Amazon',
+    value: 'cl93patjt0000txewdi601mub',
+  },
+  {
+    label: 'Microsoft',
+    value: 'cl93patjt0001txewkglfjsro',
+  },
+  {
+    label: 'Apple',
+    value: 'cl93patjt0002txewf3ug54m8',
   },
   {
     label: 'Google',
-    value: 'id-abc567',
+    value: 'cl93patjt0003txewyiaky7xx',
   },
   {
     label: 'Meta',
-    value: 'id-abc456',
-  },
-  {
-    label: 'Shopee',
-    value: 'id-abc345',
-  },
-  {
-    label: 'Tik Tok',
-    value: 'id-abc678',
+    value: 'cl93patjt0004txew88wkcqpu',
   },
 ];
 
 export const locationOptions = [
-  emptyOption,
   {
     label: 'Singapore, Singapore',
     value: 'Singapore, Singapore',
@@ -67,7 +61,6 @@ export const locationOptions = [
 ];
 
 export const internshipCycleOptions = [
-  emptyOption,
   {
     label: 'Summer',
     value: 'Summer',
@@ -91,7 +84,6 @@ export const internshipCycleOptions = [
 ];
 
 export const yearOptions = [
-  emptyOption,
   {
     label: '2021',
     value: '2021',
@@ -110,17 +102,14 @@ export const yearOptions = [
   },
 ];
 
-const educationBackgroundTypes = Object.entries(EducationBackgroundType).map(
-  ([key, value]) => ({
-    label: key,
-    value,
-  }),
-);
-
-export const educationLevelOptions = [emptyOption, ...educationBackgroundTypes];
+export const educationLevelOptions = Object.entries(
+  EducationBackgroundType,
+).map(([key, value]) => ({
+  label: key,
+  value,
+}));
 
 export const educationFieldOptions = [
-  emptyOption,
   {
     label: 'Computer Science',
     value: 'Computer Science',
@@ -134,3 +123,9 @@ export const educationFieldOptions = [
     value: 'Business Analytics',
   },
 ];
+
+export enum FieldError {
+  NonNegativeNumber = 'Please fill in a non-negative number in this field.',
+  Number = 'Please fill in a number in this field.',
+  Required = 'Please fill in this field.',
+}

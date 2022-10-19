@@ -1,7 +1,8 @@
 import clsx from 'clsx';
+import type { InputHTMLAttributes } from 'react';
 import { Fragment, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
-import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 export type TypeaheadOption = Readonly<{
   // String value to uniquely identify the option.
@@ -10,8 +11,18 @@ export type TypeaheadOption = Readonly<{
   value: string;
 }>;
 
+type Attributes = Pick<
+  InputHTMLAttributes<HTMLInputElement>,
+  | 'disabled'
+  | 'name'
+  | 'onBlur'
+  | 'onFocus'
+  | 'pattern'
+  | 'placeholder'
+  | 'required'
+>;
+
 type Props = Readonly<{
-  disabled?: boolean;
   isLabelHidden?: boolean;
   label: string;
   noResultsMessage?: string;
@@ -23,7 +34,8 @@ type Props = Readonly<{
   onSelect: (option: TypeaheadOption) => void;
   options: ReadonlyArray<TypeaheadOption>;
   value?: TypeaheadOption;
-}>;
+}> &
+  Readonly<Attributes>;
 
 export default function Typeahead({
   disabled = false,
@@ -33,8 +45,10 @@ export default function Typeahead({
   nullable = false,
   options,
   onQueryChange,
+  required,
   value,
   onSelect,
+  ...props
 }: Props) {
   const [query, setQuery] = useState('');
   return (
@@ -66,6 +80,12 @@ export default function Typeahead({
             : 'mb-1 block text-sm font-medium text-slate-700',
         )}>
         {label}
+        {required && (
+          <span aria-hidden="true" className="text-danger-500">
+            {' '}
+            *
+          </span>
+        )}
       </Combobox.Label>
       <div className="relative">
         <div className="focus-visible:ring-offset-primary-300 relative w-full cursor-default overflow-hidden rounded-lg border border-slate-300 bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm">
@@ -77,13 +97,15 @@ export default function Typeahead({
             displayValue={(option) =>
               (option as unknown as TypeaheadOption)?.label
             }
+            required={required}
             onChange={(event) => {
               setQuery(event.target.value);
               onQueryChange(event.target.value, event);
             }}
+            {...props}
           />
           <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
-            <ChevronUpDownIcon
+            <ChevronDownIcon
               aria-hidden="true"
               className="h-5 w-5 text-slate-400"
             />

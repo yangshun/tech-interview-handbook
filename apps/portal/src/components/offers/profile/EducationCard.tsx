@@ -3,14 +3,14 @@ import {
   LightBulbIcon,
 } from '@heroicons/react/24/outline';
 
-import type { EducationBackgroundType } from '../types';
+import type { EducationBackgroundType } from '~/components/offers/types';
 
 type EducationEntity = {
-  backgroundType?: EducationBackgroundType;
+  endDate?: string;
   field?: string;
-  fromMonth?: string;
   school?: string;
-  toMonth?: string;
+  startDate?: string;
+  type?: EducationBackgroundType;
 };
 
 type Props = Readonly<{
@@ -18,7 +18,7 @@ type Props = Readonly<{
 }>;
 
 export default function EducationCard({
-  education: { backgroundType, field, fromMonth, school, toMonth },
+  education: { type, field, startDate, endDate, school },
 }: Props) {
   return (
     <div className="mx-8 my-4 block rounded-lg bg-white py-4 shadow-md">
@@ -27,9 +27,7 @@ export default function EducationCard({
           <div className="flex flex-row">
             <LightBulbIcon className="mr-1 h-5" />
             <span className="ml-1 font-bold">
-              {field
-                ? `${backgroundType ?? 'N/A'}, ${field}`
-                : backgroundType ?? `N/A`}
+              {field ? `${type ?? 'N/A'}, ${field}` : type ?? `N/A`}
             </span>
           </div>
           {school && (
@@ -39,9 +37,11 @@ export default function EducationCard({
             </div>
           )}
         </div>
-        {(fromMonth || toMonth) && (
+        {(startDate || endDate) && (
           <div className="font-light text-gray-400">
-            <p>{`${fromMonth ?? 'N/A'} - ${toMonth ?? 'N/A'}`}</p>
+            <p>{`${startDate ? startDate : 'N/A'} - ${
+              endDate ? endDate : 'N/A'
+            }`}</p>
           </div>
         )}
       </div>

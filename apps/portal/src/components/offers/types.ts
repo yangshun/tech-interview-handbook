@@ -1,4 +1,5 @@
-/* eslint-disable no-shadow */
+import type { MonthYear } from '~/components/shared/MonthYearPicker';
+
 /*
  *  Offer Profile
  */
@@ -7,6 +8,11 @@ export enum JobType {
   FullTime = 'FULLTIME',
   Internship = 'INTERNSHIP',
 }
+
+export const JobTypeLabel = {
+  FULLTIME: 'Full-time',
+  INTERNSHIP: 'Internship',
+};
 
 export enum EducationBackgroundType {
   Bachelor = 'Bachelor',
@@ -18,7 +24,7 @@ export enum EducationBackgroundType {
   SelfTaught = 'Self-taught',
 }
 
-type Money = {
+export type Money = {
   currency: string;
   value: number;
 };
@@ -33,16 +39,6 @@ type FullTimeJobData = {
   totalCompensation: Money;
 };
 
-export type FullTimeOfferFormData = {
-  comments: string;
-  companyId: string;
-  job: FullTimeJobData;
-  jobType: string;
-  location: string;
-  monthYearReceived: string;
-  negotiationStrategy: string;
-};
-
 type InternshipJobData = {
   internshipCycle: string;
   monthlySalary: Money;
@@ -51,17 +47,33 @@ type InternshipJobData = {
   title: string;
 };
 
-export type InternshipOfferFormData = {
+type OfferDetailsGeneralData = {
   comments: string;
   companyId: string;
-  job: InternshipJobData;
   jobType: string;
   location: string;
-  monthYearReceived: string;
+  monthYearReceived: MonthYear;
   negotiationStrategy: string;
 };
 
-type OfferDetailsFormData = FullTimeOfferFormData | InternshipOfferFormData;
+export type FullTimeOfferDetailsFormData = OfferDetailsGeneralData & {
+  job: FullTimeJobData;
+};
+
+export type InternshipOfferDetailsFormData = OfferDetailsGeneralData & {
+  job: InternshipJobData;
+};
+
+export type OfferDetailsFormData =
+  | FullTimeOfferDetailsFormData
+  | InternshipOfferDetailsFormData;
+
+export type OfferDetailsPostData = Omit<
+  OfferDetailsFormData,
+  'monthYearReceived'
+> & {
+  monthYearReceived: Date;
+};
 
 type SpecificYoe = {
   domain: string;
@@ -69,42 +81,80 @@ type SpecificYoe = {
 };
 
 type FullTimeExperience = {
-  level: string;
-  totalCompensation: Money;
+  level?: string;
+  totalCompensation?: Money;
 };
 
 type InternshipExperience = {
-  monthlySalary: Money;
+  monthlySalary?: Money;
 };
 
 type GeneralExperience = {
-  companyId: string;
-  durationInMonths: number;
-  jobType: string;
-  specialization: string;
-  title: string;
+  companyId?: string;
+  durationInMonths?: number;
+  jobType?: string;
+  specialization?: string;
+  title?: string;
 };
 
-type Experience =
+export type Experience =
   | (FullTimeExperience & GeneralExperience)
   | (GeneralExperience & InternshipExperience);
 
 type Education = {
-  endDate: Date;
-  field: string;
-  school: string;
-  startDate: Date;
-  type: string;
+  endDate?: Date;
+  field?: string;
+  school?: string;
+  startDate?: Date;
+  type?: string;
 };
 
 type BackgroundFormData = {
-  education: Education;
-  experience: Experience;
+  educations: Array<Education>;
+  experiences: Array<Experience>;
   specificYoes: Array<SpecificYoe>;
-  totalYoe: number;
+  totalYoe?: number;
 };
 
-export type SubmitOfferFormData = {
+export type OfferProfileFormData = {
   background: BackgroundFormData;
   offers: Array<OfferDetailsFormData>;
+};
+
+export type OfferProfilePostData = {
+  background: BackgroundFormData;
+  offers: Array<OfferDetailsPostData>;
+};
+
+type EducationDisplay = {
+  endDate?: string;
+  field: string;
+  school: string;
+  startDate?: string;
+  type: string;
+};
+
+export type OfferEntity = {
+  base?: string;
+  bonus?: string;
+  companyName?: string;
+  duration?: string;
+  id?: string;
+  jobLevel?: string;
+  jobTitle?: string;
+  location?: string;
+  monthlySalary?: string;
+  negotiationStrategy?: string;
+  otherComment?: string;
+  receivedMonth?: string;
+  stocks?: string;
+  totalCompensation?: string;
+};
+
+export type BackgroundCard = {
+  educations: Array<EducationDisplay>;
+  experiences: Array<OfferEntity>;
+  profileName: string;
+  specificYoes: Array<SpecificYoe>;
+  totalYoe: string;
 };

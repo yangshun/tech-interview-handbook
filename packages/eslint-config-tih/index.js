@@ -43,7 +43,7 @@ module.exports = {
     'no-else-return': [ERROR, { allowElseIf: false }],
     'no-extra-boolean-cast': ERROR,
     'no-lonely-if': ERROR,
-    'no-shadow': ERROR,
+    'no-shadow': OFF,
     'no-unused-vars': OFF, // Use @typescript-eslint/no-unused-vars instead.
     'object-shorthand': ERROR,
     'one-var': [ERROR, 'never'],
@@ -100,6 +100,7 @@ module.exports = {
     '@typescript-eslint/no-for-in-array': ERROR,
     '@typescript-eslint/no-non-null-assertion': OFF,
     '@typescript-eslint/no-unused-vars': [ERROR, { argsIgnorePattern: '^_' }],
+    '@typescript-eslint/no-shadow': ERROR,
     '@typescript-eslint/prefer-optional-chain': ERROR,
     '@typescript-eslint/require-array-sort-compare': ERROR,
     '@typescript-eslint/restrict-plus-operands': ERROR,

@@ -1,13 +1,16 @@
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
 type NavigationItem = Readonly<{
   children?: ReadonlyArray<NavigationItem>;
   href: string;
   name: string;
+  target?: '_blank';
 }>;
 
 export type ProductNavigationItems = ReadonlyArray<NavigationItem>;
@@ -15,15 +18,21 @@ export type ProductNavigationItems = ReadonlyArray<NavigationItem>;
 type Props = Readonly<{
   items: ProductNavigationItems;
   title: string;
+  titleHref: string;
 }>;
 
-export default function ProductNavigation({ items, title }: Props) {
+export default function ProductNavigation({ items, title, titleHref }: Props) {
+  const router = useRouter();
+
   return (
-    <nav aria-label="Global" className="flex space-x-8">
-      <span className="text-primary-700 text-sm font-medium">{title}</span>
-      <div className="hidden space-x-8 md:flex">
-        {items.map((item) =>
-          item.children != null && item.children.length > 0 ? (
+    <nav aria-label="Global" className="flex h-full items-center space-x-8">
+      <Link className="text-primary-700 text-sm font-medium" href={titleHref}>
+        {title}
+      </Link>
+      <div className="hidden h-full items-center space-x-8 md:flex">
+        {items.map((item) => {
+          const isActive = router.pathname === item.href;
+          return item.children != null && item.children.length > 0 ? (
             <Menu key={item.name} as="div" className="relative text-left">
               <Menu.Button className="focus:ring-primary-600 flex items-center rounded-md text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2">
                 <span>{item.name}</span>
@@ -50,7 +59,13 @@ export default function ProductNavigation({ items, title }: Props) {
                               active ? 'bg-slate-100' : '',
                               'block px-4 py-2 text-sm text-slate-700',
                             )}
-                            href={child.href}>
+                            href={child.href}
+                            rel={
+                              !child.href.startsWith('/')
+                                ? 'noopener noreferrer'
+                                : undefined
+                            }
+                            target={child.target}>
                             {child.name}
                           </Link>
                         )}
@@ -63,12 +78,22 @@ export default function ProductNavigation({ items, title }: Props) {
           ) : (
             <Link
               key={item.name}
-              className="hover:text-primary-600 text-sm font-medium text-slate-900"
-              href={item.href}>
+              className={clsx(
+                'hover:text-primary-600 inline-flex h-full items-center border-y-2 border-t-transparent text-sm font-medium text-slate-900',
+                isActive ? 'border-b-primary-500' : 'border-b-transparent',
+              )}
+              href={item.href}
+              rel={
+                !item.href.startsWith('/') ? 'noopener noreferrer' : undefined
+              }
+              target={item.target}>
               {item.name}
+              {item.target ? (
+                <ArrowTopRightOnSquareIcon className="h-5 w-5 pl-1" />
+              ) : null}
             </Link>
-          ),
-        )}
+          );
+        })}
       </div>
     </nav>
   );

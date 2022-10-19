@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import { Select } from '@tih/ui';
 
 export type Month = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
@@ -8,8 +9,13 @@ export type MonthYear = Readonly<{
 }>;
 
 type Props = Readonly<{
+  errorMessage?: string;
+  monthLabel?: string;
+  monthRequired?: boolean;
   onChange: (value: MonthYear) => void;
   value: MonthYear;
+  yearLabel?: string;
+  yearRequired?: boolean;
 }>;
 
 const MONTH_OPTIONS = [
@@ -72,25 +78,45 @@ const YEAR_OPTIONS = Array.from({ length: NUM_YEARS }, (_, i) => {
   };
 });
 
-export default function MonthYearPicker({ value, onChange }: Props) {
+export default function MonthYearPicker({
+  errorMessage,
+  monthLabel = 'Month',
+  value,
+  onChange,
+  yearLabel = 'Year',
+  monthRequired = false,
+  yearRequired = false,
+}: Props) {
+  const hasError = errorMessage != null;
+  const errorId = useId();
+
   return (
-    <div className="flex space-x-4">
+    <div
+      aria-describedby={hasError ? errorId : undefined}
+      className="flex items-end space-x-4">
       <Select
-        label="Month"
+        label={monthLabel}
         options={MONTH_OPTIONS}
+        required={monthRequired}
         value={value.month}
         onChange={(newMonth) =>
           onChange({ month: Number(newMonth) as Month, year: value.year })
         }
       />
       <Select
-        label="Year"
+        label={yearLabel}
         options={YEAR_OPTIONS}
+        required={yearRequired}
         value={value.year}
         onChange={(newYear) =>
           onChange({ month: value.month, year: Number(newYear) })
         }
       />
+      {errorMessage && (
+        <p className="text-danger-600 mt-2 text-sm" id={errorId}>
+          {errorMessage}
+        </p>
+      )}
     </div>
   );
 }

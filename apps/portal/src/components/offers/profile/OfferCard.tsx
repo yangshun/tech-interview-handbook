@@ -6,21 +6,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { HorizontalDivider } from '@tih/ui';
 
-type OfferEntity = {
-  base?: string;
-  bonus?: string;
-  companyName: string;
-  duration?: string; // For background
-  jobLevel?: string;
-  jobTitle: string;
-  location: string;
-  monthlySalary?: string;
-  negotiationStrategy?: string;
-  otherComment?: string;
-  receivedMonth: string;
-  stocks?: string;
-  totalCompensation?: string;
-};
+import type { OfferEntity } from '~/components/offers/types';
 
 type Props = Readonly<{
   offer: OfferEntity;
@@ -28,16 +14,16 @@ type Props = Readonly<{
 
 export default function OfferCard({
   offer: {
-    companyName = 'Meta',
-    jobTitle = 'Senior Engineer',
-    jobLevel,
-    location = 'Singapore',
-    receivedMonth = 'Jun 2021',
-    totalCompensation = '350.1k',
-    base = '0k',
-    stocks = '0k',
-    bonus = '0k',
+    base,
+    bonus,
+    companyName,
     duration,
+    jobTitle,
+    jobLevel,
+    location,
+    receivedMonth,
+    totalCompensation,
+    stocks,
     monthlySalary,
     negotiationStrategy,
     otherComment,
@@ -57,14 +43,14 @@ export default function OfferCard({
             <p>{jobLevel ? `${jobTitle}, ${jobLevel}` : jobTitle}</p>
           </div>
         </div>
-        {receivedMonth && (
+        {!duration && receivedMonth && (
           <div className="font-light text-gray-400">
             <p>{receivedMonth}</p>
           </div>
         )}
         {duration && (
           <div className="font-light text-gray-400">
-            <p>{duration}</p>
+            <p>{`${duration} months`}</p>
           </div>
         )}
       </div>

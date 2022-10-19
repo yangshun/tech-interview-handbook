@@ -1,256 +1,205 @@
+import Error from 'next/error';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
-import {
-  AcademicCapIcon,
-  BookmarkSquareIcon,
-  BriefcaseIcon,
-  BuildingOffice2Icon,
-  CalendarDaysIcon,
-  ClipboardDocumentIcon,
-  PencilSquareIcon,
-  ShareIcon,
-  TrashIcon,
-} from '@heroicons/react/24/outline';
-import { Button, Dialog, Tabs } from '@tih/ui';
 
-import EducationCard from '~/components/offers/profile/EducationCard';
-import OfferCard from '~/components/offers/profile/OfferCard';
-import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
-import { EducationBackgroundType } from '~/components/offers/types';
+import ProfileComments from '~/components/offers/profile/ProfileComments';
+import ProfileDetails from '~/components/offers/profile/ProfileDetails';
+import ProfileHeader from '~/components/offers/profile/ProfileHeader';
+import type { BackgroundCard, OfferEntity } from '~/components/offers/types';
 
+import { convertCurrencyToString } from '~/utils/offers/currency';
+import { formatDate } from '~/utils/offers/time';
+import { trpc } from '~/utils/trpc';
 export default function OfferProfile() {
+  const ErrorPage = (
+    <Error statusCode={404} title="Requested profile does not exist." />
+  );
+  const router = useRouter();
+  const { offerProfileId, token = '' } = router.query;
+  const [isEditable, setIsEditable] = useState(false);
+  const [background, setBackground] = useState<BackgroundCard>();
+  const [offers, setOffers] = useState<Array<OfferEntity>>([]);
+
   const [selectedTab, setSelectedTab] = useState('offers');
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  function renderActionList() {
-    return (
-      <div className="space-x-2">
-        <Button
-          icon={BookmarkSquareIcon}
-          isLabelHidden={true}
-          label="Save to user account"
-          size="md"
-          variant="tertiary"
-        />
-        <Button
-          icon={PencilSquareIcon}
-          isLabelHidden={true}
-          label="Edit"
-          size="md"
-          variant="tertiary"
-        />
-        <Button
-          icon={TrashIcon}
-          isLabelHidden={true}
-          label="Delete"
-          size="md"
-          variant="tertiary"
-          onClick={() => setIsDialogOpen(true)}
-        />
-        {isDialogOpen && (
-          <Dialog
-            isShown={isDialogOpen}
-            primaryButton={
-              <Button
-                display="block"
-                label="Delete"
-                variant="primary"
-                onClick={() => setIsDialogOpen(false)}
-              />
-            }
-            secondaryButton={
-              <Button
-                display="block"
-                label="Cancel"
-                variant="tertiary"
-                onClick={() => setIsDialogOpen(false)}
-              />
-            }
-            title="Are you sure you want to delete this offer profile?"
-            onClose={() => setIsDialogOpen(false)}>
-            <div>
-              All comments will gone. You will not be able to access or recover
-              it.
-            </div>
-          </Dialog>
-        )}
-      </div>
+
+  const getProfileQuery = trpc.useQuery(
+    [
+      'offers.profile.listOne',
+      { profileId: offerProfileId as string, token: token as string },
+    ],
+    {
+      enabled: typeof offerProfileId === 'string',
+      onSuccess: (data) => {
+        if (!data) {
+          router.push('/offers');
+        }
+        // If the profile is not editable with a wrong token, redirect to the profile page
+        if (!data?.isEditable && token !== '') {
+          router.push(`/offers/profile/${offerProfileId}`);
+        }
+
+        setIsEditable(data?.isEditable ?? false);
+
+        if (data?.offers) {
+          const filteredOffers: Array<OfferEntity> = data
+            ? data?.offers.map((res) => {
+                if (res.offersFullTime) {
+                  const filteredOffer: OfferEntity = {
+                    base: convertCurrencyToString(
+                      res.offersFullTime.baseSalary,
+                    ),
+                    bonus: convertCurrencyToString(res.offersFullTime.bonus),
+                    companyName: res.company.name,
+                    id: res.offersFullTime.id,
+                    jobLevel: res.offersFullTime.level,
+                    jobTitle: res.offersFullTime.title,
+                    location: res.location,
+                    negotiationStrategy: res.negotiationStrategy || '',
+                    otherComment: res.comments || '',
+                    receivedMonth: formatDate(res.monthYearReceived),
+                    stocks: convertCurrencyToString(res.offersFullTime.stocks),
+                    totalCompensation: convertCurrencyToString(
+                      res.offersFullTime.totalCompensation,
+                    ),
+                  };
+
+                  return filteredOffer;
+                }
+                const filteredOffer: OfferEntity = {
+                  companyName: res.company.name,
+                  id: res.offersIntern!.id,
+                  jobTitle: res.offersIntern!.title,
+                  location: res.location,
+                  monthlySalary: convertCurrencyToString(
+                    res.offersIntern!.monthlySalary,
+                  ),
+                  negotiationStrategy: res.negotiationStrategy || '',
+                  otherComment: res.comments || '',
+                  receivedMonth: formatDate(res.monthYearReceived),
+                };
+                return filteredOffer;
+              })
+            : [];
+          setOffers(filteredOffers);
+        }
+
+        if (data?.background) {
+          const transformedBackground = {
+            educations: [
+              {
+                endDate: data?.background.educations[0].endDate
+                  ? formatDate(data.background.educations[0].endDate)
+                  : '-',
+                field: data.background.educations[0].field || '-',
+                school: data.background.educations[0].school || '-',
+                startDate: data.background.educations[0].startDate
+                  ? formatDate(data.background.educations[0].startDate)
+                  : '-',
+                type: data.background.educations[0].type || '-',
+              },
+            ],
+            experiences: [
+              data.background.experiences &&
+              data.background.experiences.length > 0
+                ? {
+                    companyName:
+                      data.background.experiences[0].company?.name ?? '-',
+                    duration:
+                      String(data.background.experiences[0].durationInMonths) ??
+                      '-',
+                    jobLevel: data.background.experiences[0].level ?? '',
+                    jobTitle: data.background.experiences[0].title ?? '-',
+                    monthlySalary: data.background.experiences[0].monthlySalary
+                      ? convertCurrencyToString(
+                          data.background.experiences[0].monthlySalary,
+                        )
+                      : '-',
+                    totalCompensation: data.background.experiences[0]
+                      .totalCompensation
+                      ? convertCurrencyToString(
+                          data.background.experiences[0].totalCompensation,
+                        )
+                      : '-',
+                  }
+                : {},
+            ],
+            profileName: data.profileName,
+            specificYoes: data.background.specificYoes ?? [],
+            totalYoe: String(data.background.totalYoe) || '-',
+          };
+          setBackground(transformedBackground);
+        }
+      },
+    },
+  );
+
+  const trpcContext = trpc.useContext();
+  const deleteMutation = trpc.useMutation(['offers.profile.delete'], {
+    onError: () => {
+      alert('Error deleting profile'); // TODO: replace with toast
+    },
+    onSuccess: () => {
+      trpcContext.invalidateQueries(['offers.profile.listOne']);
+      router.push('/offers');
+    },
+  });
+
+  function handleDelete() {
+    if (isEditable) {
+      deleteMutation.mutate({
+        profileId: offerProfileId as string,
+        token: token as string,
+      });
+    }
+  }
+
+  function handleCopyEditLink() {
+    // TODO: Add notification
+    navigator.clipboard.writeText(
+      `${window.location.origin}/offers/profile/${offerProfileId}?token=${token}`,
     );
   }
-  function ProfileHeader() {
-    return (
-      <div className="relative h-40 bg-white p-4">
-        <div className="justify-left flex h-1/2">
-          <div className="mx-4 mt-2">
-            <ProfilePhotoHolder />
-          </div>
-          <div className="w-full">
-            <div className="justify-left flex ">
-              <h2 className="flex w-4/5 text-2xl font-bold">anonymised-name</h2>
-              <div className="flex h-8 w-1/5 justify-end">
-                {renderActionList()}
-              </div>
-            </div>
-            <div className="flex flex-row">
-              <BuildingOffice2Icon className="mr-2.5 h-5" />
-              <span className="mr-2 font-bold">Current:</span>
-              <span>Level 4 Google</span>
-            </div>
-            <div className="flex flex-row">
-              <CalendarDaysIcon className="mr-2.5 h-5" />
-              <span className="mr-2 font-bold">YOE:</span>
-              <span>4</span>
-            </div>
-          </div>
-        </div>
 
-        <div className="absolute left-8 bottom-1 content-center">
-          <Tabs
-            label="Profile Detail Navigation"
-            tabs={[
-              {
-                label: 'Offers',
-                value: 'offers',
-              },
-              {
-                label: 'Background',
-                value: 'background',
-              },
-              {
-                label: 'Offer Engine Analysis',
-                value: 'offerEngineAnalysis',
-              },
-            ]}
-            value={selectedTab}
-            onChange={(value) => setSelectedTab(value)}
-          />
-        </div>
-      </div>
-    );
-  }
-
-  function ProfileDetails() {
-    if (selectedTab === 'offers') {
-      return (
-        <>
-          {[
-            {
-              base: undefined,
-              bonus: undefined,
-              companyName: 'Meta',
-              id: 1,
-              jobLevel: 'G5',
-              jobTitle: 'Software Engineer',
-              location: 'Singapore',
-              monthlySalary: undefined,
-              negotiationStrategy:
-                'Nostrud nulla aliqua deserunt commodo id aute.',
-              otherComment:
-                'Pariatur ut est voluptate incididunt consequat do veniam quis irure adipisicing. Deserunt laborum dolor quis voluptate enim.',
-              receivedMonth: 'Jun 2022',
-              stocks: undefined,
-              totalCompensation: undefined,
-            },
-            {
-              companyName: 'Meta',
-              id: 2,
-              jobLevel: 'G5',
-              jobTitle: 'Software Engineer',
-              location: 'Singapore',
-              receivedMonth: 'Jun 2022',
-            },
-            {
-              companyName: 'Meta',
-              id: 3,
-              jobLevel: 'G5',
-              jobTitle: 'Software Engineer',
-              location: 'Singapore',
-              receivedMonth: 'Jun 2022',
-            },
-          ].map((offer) => (
-            <OfferCard key={offer.id} offer={offer} />
-          ))}
-        </>
-      );
-    }
-    if (selectedTab === 'background') {
-      return (
-        <>
-          <div className="mx-8 my-4 flex flex-row">
-            <BriefcaseIcon className="mr-1 h-5" />
-            <span className="font-bold">Work Experience</span>
-          </div>
-          <OfferCard
-            offer={{
-              base: undefined,
-              bonus: undefined,
-              companyName: 'Prefer not to say',
-              jobLevel: 'G4',
-              jobTitle: 'N/A',
-              location: '',
-              monthlySalary: '1,400k',
-              receivedMonth: '',
-              stocks: undefined,
-              totalCompensation: undefined,
-            }}
-          />
-          <div className="mx-8 my-4 flex flex-row">
-            <AcademicCapIcon className="mr-1 h-5" />
-            <span className="font-bold">Education</span>
-          </div>
-          <EducationCard
-            education={{
-              backgroundType: EducationBackgroundType.Bachelor,
-              field: 'CS',
-              fromMonth: 'Aug 2019',
-              school: 'NUS',
-              toMonth: 'May 2021',
-            }}
-          />
-        </>
-      );
-    }
-    return <div>Detail page for {selectedTab}</div>;
-  }
-
-  function ProfileComments() {
-    return (
-      <div className="m-4">
-        <div className="flex-end flex justify-end space-x-4">
-          <Button
-            addonPosition="start"
-            icon={ClipboardDocumentIcon}
-            isLabelHidden={false}
-            label="Copy profile edit link"
-            size="sm"
-            variant="secondary"
-          />
-          <Button
-            addonPosition="start"
-            icon={ShareIcon}
-            isLabelHidden={false}
-            label="Copy public link"
-            size="sm"
-            variant="secondary"
-          />
-        </div>
-        <h2 className="mt-2 text-2xl font-bold">
-          Discussions feature coming soon
-        </h2>
-        {/* <TextArea label="Comment" placeholder="Type your comment here" /> */}
-      </div>
+  function handleCopyPublicLink() {
+    navigator.clipboard.writeText(
+      `${window.location.origin}/offers/profile/${offerProfileId}`,
     );
   }
 
   return (
-    <div className="mb-4 flex flex h-screen w-screen items-center justify-center divide-x">
-      <div className="h-full w-2/3 divide-y">
-        <ProfileHeader />
-        <div className="h-4/5 w-full overflow-y-scroll pb-32">
-          <ProfileDetails />
+    <>
+      {getProfileQuery.isError && ErrorPage}
+      {!getProfileQuery.isError && (
+        <div className="mb-4 flex flex h-screen w-screen items-center justify-center divide-x">
+          <div className="h-full w-2/3 divide-y">
+            <ProfileHeader
+              background={background}
+              handleDelete={handleDelete}
+              isEditable={isEditable}
+              isLoading={getProfileQuery.isLoading}
+              selectedTab={selectedTab}
+              setSelectedTab={setSelectedTab}
+            />
+            <div className="h-4/5 w-full overflow-y-scroll pb-32">
+              <ProfileDetails
+                background={background}
+                isLoading={getProfileQuery.isLoading}
+                offers={offers}
+                selectedTab={selectedTab}
+              />
+            </div>
+          </div>
+          <div className="h-full w-1/3 bg-white">
+            <ProfileComments
+              handleCopyEditLink={handleCopyEditLink}
+              handleCopyPublicLink={handleCopyPublicLink}
+              isDisabled={deleteMutation.isLoading}
+              isEditable={isEditable}
+              isLoading={getProfileQuery.isLoading}
+            />
+          </div>
         </div>
-      </div>
-      <div className="h-full w-1/3 bg-white">
-        <ProfileComments />
-      </div>
-    </div>
+      )}
+    </>
   );
 }

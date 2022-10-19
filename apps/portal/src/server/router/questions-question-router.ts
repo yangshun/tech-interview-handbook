@@ -51,29 +51,34 @@ export const questionsQuestionRouter = createProtectedRouter()
                 },
               }
             : {}),
+          encounters : {
+            some: {
+              ...(input.companies.length > 0
+                ? {
+                    company : {
+                      in : input.companies
+                    }
+                }
+                : {}),
+              ...(input.locations.length > 0
+                ? {
+                    location: {
+                      in: input.locations
+                    },
+                }
+                : {}),
+              ...(input.roles.length > 0
+                ? {
+                    role : {
+                      in: input.roles
+                    }
+                }
+                : {}),
+            }
+          }
         },
       });
       return questionsData
-        .filter((data) => {
-          for (let i = 0; i < data.encounters.length; i++) {
-            const encounter = data.encounters[i];
-            const matchCompany =
-              input.companyIds.length === 0 ||
-              input.companyIds.includes(encounter.company!.id);
-            const matchLocation =
-              input.locations.length === 0 ||
-              input.locations.includes(encounter.location);
-            const matchRole =
-              input.roles.length === 0 || input.roles.includes(encounter.role);
-            const matchDate =
-              (!input.startDate || encounter.seenAt >= input.startDate) &&
-              encounter.seenAt <= input.endDate;
-            if (matchCompany && matchLocation && matchRole && matchDate) {
-              return true;
-            }
-          }
-          return false;
-        })
         .map((data) => {
           const votes: number = data.votes.reduce(
             (previousValue: number, currentValue) => {
@@ -237,9 +242,13 @@ export const questionsQuestionRouter = createProtectedRouter()
         });
       }
 
+      const { content, questionType } = input;
+
       return await ctx.prisma.questionsQuestion.update({
+
         data: {
-          ...input,
+          content,
+          questionType,
         },
         where: {
           id: input.id,
@@ -297,11 +306,13 @@ export const questionsQuestionRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
+      const { questionId, vote } = input;
 
       return await ctx.prisma.questionsQuestionVote.create({
         data: {
-          ...input,
+          questionId,
           userId,
+          vote,
         },
       });
     },
@@ -321,7 +332,7 @@ export const questionsQuestionRouter = createProtectedRouter()
         },
       });
 
-      if (voteToUpdate?.id !== userId) {
+      if (voteToUpdate?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -351,7 +362,7 @@ export const questionsQuestionRouter = createProtectedRouter()
         },
       });
 
-      if (voteToDelete?.id !== userId) {
+      if (voteToDelete?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',

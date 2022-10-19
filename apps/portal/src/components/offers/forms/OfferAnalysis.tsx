@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { UserCircleIcon } from '@heroicons/react/20/solid';
-
-import { HorizontalDivider, Tabs } from '~/../../../packages/ui/dist';
+import { HorizontalDivider, Tabs } from '@tih/ui';
 
 const tabs = [
   {
@@ -86,8 +85,7 @@ export default function OfferAnalysis() {
       <h5 className="mb-2 text-center text-4xl font-bold text-gray-900">
         Result
       </h5>
-
-      <div className="mx-40">
+      <div>
         <Tabs
           label="Result Navigation"
           tabs={tabs}

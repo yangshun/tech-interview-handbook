@@ -2,17 +2,21 @@ import superjson from 'superjson';
 
 import { companiesRouter } from './companies-router';
 import { createRouter } from './context';
-import { offersRouter } from './offers';
-import { offersProfileRouter } from './offers-profile-router';
+import { offersRouter } from './offers/offers';
+import { offersAnalysisRouter } from './offers/offers-analysis-router';
+import { offersCommentsRouter } from './offers/offers-comments-router';
+import { offersProfileRouter } from './offers/offers-profile-router';
 import { protectedExampleRouter } from './protected-example-router';
 import { questionsAnswerCommentRouter } from './questions-answer-comment-router';
 import { questionsAnswerRouter } from './questions-answer-router';
 import { questionsQuestionCommentRouter } from './questions-question-comment-router';
 import { questionsQuestionRouter } from './questions-question-router';
+import { resumeCommentsRouter } from './resumes/resumes-comments-router';
+import { resumesCommentsUserRouter } from './resumes/resumes-comments-user-router';
+import { resumesCommentsVotesRouter } from './resumes/resumes-comments-votes-router';
+import { resumesCommentsVotesUserRouter } from './resumes/resumes-comments-votes-user-router';
 import { resumesRouter } from './resumes/resumes-resume-router';
 import { resumesResumeUserRouter } from './resumes/resumes-resume-user-router';
-import { resumeReviewsRouter } from './resumes/resumes-reviews-router';
-import { resumesReviewsUserRouter } from './resumes/resumes-reviews-user-router';
 import { resumesStarUserRouter } from './resumes/resumes-star-user-router';
 import { todosRouter } from './todos';
 import { todosUserRouter } from './todos-user-router';
@@ -28,15 +32,19 @@ export const appRouter = createRouter()
   .merge('companies.', companiesRouter)
   .merge('resumes.resume.', resumesRouter)
   .merge('resumes.resume.user.', resumesResumeUserRouter)
-  .merge('resumes.star.user.', resumesStarUserRouter)
-  .merge('resumes.reviews.', resumeReviewsRouter)
-  .merge('resumes.reviews.user.', resumesReviewsUserRouter)
+  .merge('resumes.resume.', resumesStarUserRouter)
+  .merge('resumes.comments.', resumeCommentsRouter)
+  .merge('resumes.comments.user.', resumesCommentsUserRouter)
+  .merge('resumes.comments.votes.', resumesCommentsVotesRouter)
+  .merge('resumes.comments.votes.user.', resumesCommentsVotesUserRouter)
   .merge('questions.answers.comments.', questionsAnswerCommentRouter)
   .merge('questions.answers.', questionsAnswerRouter)
   .merge('questions.questions.comments.', questionsQuestionCommentRouter)
   .merge('questions.questions.', questionsQuestionRouter)
   .merge('offers.', offersRouter)
-  .merge('offers.profile.', offersProfileRouter);
+  .merge('offers.profile.', offersProfileRouter)
+  .merge('offers.analysis.', offersAnalysisRouter)
+  .merge('offers.comments.', offersCommentsRouter);
 
 // Export type definition of API
 export type AppRouter = typeof appRouter;

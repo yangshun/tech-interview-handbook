@@ -3,15 +3,11 @@ import { useForm } from 'react-hook-form';
 import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button, Collapsible, Select, TextArea } from '@tih/ui';
 
-import AnswerCard from '~/components/questions/card/AnswerCard';
+import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullQuestionCard from '~/components/questions/card/FullQuestionCard';
-import CommentListItem from '~/components/questions/CommentListItem';
+import QuestionAnswerCard from '~/components/questions/card/QuestionAnswerCard';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 
-import {
-  SAMPLE_ANSWER,
-  SAMPLE_QUESTION_COMMENT,
-} from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
 import { trpc } from '~/utils/trpc';
@@ -29,6 +25,7 @@ export default function QuestionPage() {
   const {
     register: ansRegister,
     handleSubmit,
+    reset: resetAnswer,
     formState: { isDirty, isValid },
   } = useForm<AnswerQuestionData>({ mode: 'onChange' });
   const answerRegister = useFormRegister(ansRegister);
@@ -86,6 +83,7 @@ export default function QuestionPage() {
       content: data.answerContent,
       questionId: questionId as string,
     });
+    resetAnswer();
   };
 
   const handleSubmitComment = (data: QuestionCommentData) => {
@@ -115,13 +113,16 @@ export default function QuestionPage() {
         <div className="flex max-w-7xl flex-1 flex-col gap-2">
           <FullQuestionCard
             {...question}
-            receivedCount={0} // TODO: Change to actual value
-            showVoteButtons={true}
-            timestamp={question.seenAt.toLocaleDateString()}
+            questionId={question.id}
+            receivedCount={0}
+            timestamp={question.seenAt.toLocaleDateString(undefined, {
+              month: 'short',
+              year: 'numeric',
+            })}
             upvoteCount={question.numVotes}
           />
           <div className="mx-2">
-            <Collapsible label={`${question.numComments} comment(s)`}>
+            <Collapsible label={`${(comments ?? []).length} comment(s)`}>
               <form
                 className="mb-2"
                 onSubmit={handleCommentSubmit(handleSubmitComment)}>
@@ -172,9 +173,10 @@ export default function QuestionPage() {
               </form>
 
               {(comments ?? []).map((comment) => (
-                <CommentListItem
+                <AnswerCommentListItem
                   key={comment.id}
-                  authorImageUrl={SAMPLE_QUESTION_COMMENT.authorImageUrl}
+                  answerCommentId={comment.id}
+                  authorImageUrl={comment.userImage}
                   authorName={comment.user}
                   content={comment.content}
                   createdAt={comment.createdAt}
@@ -196,7 +198,7 @@ export default function QuestionPage() {
             />
             <div className="mt-3 mb-1 flex justify-between">
               <div className="flex items-baseline justify-start gap-2">
-                <p>{question.numAnswers} answers</p>
+                <p>{(answers ?? []).length} answers</p>
                 <div className="flex items-baseline gap-2">
                   <span aria-hidden={true} className="text-sm">
                     Sort by:
@@ -232,9 +234,10 @@ export default function QuestionPage() {
             </div>
           </form>
           {(answers ?? []).map((answer) => (
-            <AnswerCard
+            <QuestionAnswerCard
               key={answer.id}
-              authorImageUrl={SAMPLE_ANSWER.authorImageUrl}
+              answerId={answer.id}
+              authorImageUrl={answer.userImage}
               authorName={answer.user}
               commentCount={answer.numComments}
               content={answer.content}

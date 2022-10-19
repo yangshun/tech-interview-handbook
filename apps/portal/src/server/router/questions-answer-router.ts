@@ -12,6 +12,8 @@ export const questionsAnswerRouter = createProtectedRouter()
       questionId: z.string(),
     }),
     async resolve({ ctx, input }) {
+      const { questionId } = input;
+
       const answersData = await ctx.prisma.questionsAnswer.findMany({
         include: {
           _count: {
@@ -21,6 +23,7 @@ export const questionsAnswerRouter = createProtectedRouter()
           },
           user: {
             select: {
+              image: true,
               name: true,
             },
           },
@@ -30,7 +33,7 @@ export const questionsAnswerRouter = createProtectedRouter()
           createdAt: 'desc',
         },
         where: {
-          ...input,
+          questionId,
         },
       });
       return answersData.map((data) => {
@@ -58,6 +61,7 @@ export const questionsAnswerRouter = createProtectedRouter()
           numComments: data._count.comments,
           numVotes: votes,
           user: data.user?.name ?? '',
+          userImage: data.user?.image ?? '',
         };
         return answer;
       });
@@ -77,6 +81,7 @@ export const questionsAnswerRouter = createProtectedRouter()
           },
           user: {
             select: {
+              image: true,
               name: true,
             },
           },
@@ -116,6 +121,7 @@ export const questionsAnswerRouter = createProtectedRouter()
         numComments: answerData._count.comments,
         numVotes: votes,
         user: answerData.user?.name ?? '',
+        userImage: answerData.user?.image ?? '',
       };
       return answer;
     },
@@ -128,9 +134,12 @@ export const questionsAnswerRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
+      const { content, questionId } = input;
+
       return await ctx.prisma.questionsAnswer.create({
         data: {
-          ...input,
+          content,
+          questionId,
           userId,
         },
       });
@@ -218,10 +227,13 @@ export const questionsAnswerRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
+      const { answerId, vote } = input;
+
       return await ctx.prisma.questionsAnswerVote.create({
         data: {
-          ...input,
+          answerId,
           userId,
+          vote,
         },
       });
     },
@@ -241,7 +253,7 @@ export const questionsAnswerRouter = createProtectedRouter()
         },
       });
 
-      if (voteToUpdate?.id !== userId) {
+      if (voteToUpdate?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -271,7 +283,7 @@ export const questionsAnswerRouter = createProtectedRouter()
         },
       });
 
-      if (voteToDelete?.id !== userId) {
+      if (voteToDelete?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',

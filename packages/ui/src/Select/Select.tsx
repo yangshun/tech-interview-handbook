@@ -20,11 +20,13 @@ type Props<T> = Readonly<{
   borderStyle?: SelectBorderStyle;
   defaultValue?: T;
   display?: SelectDisplay;
+  errorMessage?: string;
   isLabelHidden?: boolean;
   label: string;
   name?: string;
   onChange?: (value: string) => void;
   options: ReadonlyArray<SelectItem<T>>;
+  placeholder?: string;
   value?: T;
 }> &
   Readonly<Attributes>;
@@ -34,15 +36,25 @@ const borderClasses: Record<SelectBorderStyle, string> = {
   borderless: 'border-transparent bg-transparent',
 };
 
+type State = 'error' | 'normal';
+
+const stateClasses: Record<State, string> = {
+  error:
+    'border-danger-300 text-danger-900 placeholder-danger-300 focus:outline-none focus:ring-danger-500 focus:border-danger-500',
+  normal: 'focus:border-primary-500 focus:ring-primary-500',
+};
+
 function Select<T>(
   {
     borderStyle = 'bordered',
     defaultValue,
     display,
     disabled,
+    errorMessage,
     label,
     isLabelHidden,
     options,
+    placeholder,
     required,
     value,
     onChange,
@@ -50,7 +62,10 @@ function Select<T>(
   }: Props<T>,
   ref: ForwardedRef<HTMLSelectElement>,
 ) {
+  const hasError = errorMessage != null;
   const id = useId();
+  const errorId = useId();
+  const state: State = hasError ? 'error' : 'normal';
 
   return (
     <div>
@@ -69,10 +84,12 @@ function Select<T>(
       )}
       <select
         ref={ref}
+        aria-describedby={hasError ? errorId : undefined}
         aria-label={isLabelHidden ? label : undefined}
         className={clsx(
           display === 'block' && 'block w-full',
-          'focus:border-primary-500 focus:ring-primary-500 rounded-md py-2 pl-3 pr-8 text-base focus:outline-none sm:text-sm',
+          'rounded-md py-2 pl-3 pr-8 text-base focus:outline-none sm:text-sm',
+          stateClasses[state],
           borderClasses[borderStyle],
           disabled && 'bg-slate-100',
         )}
@@ -85,12 +102,22 @@ function Select<T>(
           onChange?.(event.target.value);
         }}
         {...props}>
+        {placeholder && (
+          <option disabled={true} hidden={true} selected={true} value="">
+            {placeholder}
+          </option>
+        )}
         {options.map(({ label: optionLabel, value: optionValue }) => (
           <option key={String(optionValue)} value={String(optionValue)}>
             {optionLabel}
           </option>
         ))}
       </select>
+      {errorMessage && (
+        <p className="text-danger-600 mt-2 text-sm" id={errorId}>
+          {errorMessage}
+        </p>
+      )}
     </div>
   );
 }

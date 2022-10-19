@@ -8,7 +8,7 @@ export type SlideOutEnterFrom = 'end' | 'start';
 
 type Props = Readonly<{
   children: React.ReactNode;
-  className: string;
+  className?: string;
   enterFrom?: SlideOutEnterFrom;
   isShown?: boolean;
   onClose?: () => void;

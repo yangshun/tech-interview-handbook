@@ -1,7 +1,9 @@
 import { subMonths, subYears } from 'date-fns';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
+import { NoSymbolIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
+import { SlideOut } from '@tih/ui';
 
 import QuestionOverviewCard from '~/components/questions/card/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
@@ -59,17 +61,22 @@ export default function QuestionsHomePage() {
       : undefined;
   }, [selectedQuestionAge]);
 
-  const { data: questions } = trpc.useQuery([
-    'questions.questions.getQuestionsByFilter',
+  const { data: questions } = trpc.useQuery(
+    [
+      'questions.questions.getQuestionsByFilter',
+      {
+        companies: selectedCompanies,
+        endDate: today,
+        locations: selectedLocations,
+        questionTypes: selectedQuestionTypes,
+        roles: [],
+        startDate,
+      },
+    ],
     {
-      companies: selectedCompanies,
-      endDate: today,
-      locations: selectedLocations,
-      questionTypes: selectedQuestionTypes,
-      roles: [],
-      startDate,
+      keepPreviousData: true,
     },
-  ]);
+  );
 
   const utils = trpc.useContext();
   const { mutate: createQuestion } = trpc.useMutation(
@@ -83,6 +90,7 @@ export default function QuestionsHomePage() {
 
   const [hasLanded, setHasLanded] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
 
   const companyFilterOptions = useMemo(() => {
     return COMPANIES.map((company) => ({
@@ -112,8 +120,9 @@ export default function QuestionsHomePage() {
     }));
   }, [selectedLocations]);
 
-  const handleLandingQuery = (data: LandingQueryData) => {
+  const handleLandingQuery = async (data: LandingQueryData) => {
     const { company, location, questionType } = data;
+
     setSelectedCompanies([company]);
     setSelectedLocations([location]);
     setSelectedQuestionTypes([questionType as QuestionsQuestionType]);
@@ -134,98 +143,112 @@ export default function QuestionsHomePage() {
     areLocationsInitialized,
   ]);
 
+  const { pathname } = router;
   useEffect(() => {
     if (areFiltersInitialized) {
+      // Router.replace used instead of router.replace to avoid
+      // the page reloading itself since the router.replace
+      // callback changes on every page load
+      Router.replace({
+        pathname,
+        query: {
+          companies: selectedCompanies,
+          locations: selectedLocations,
+          questionAge: selectedQuestionAge,
+          questionTypes: selectedQuestionTypes,
+        },
+      });
       const hasFilter =
-        router.query.companies ||
-        router.query.questionTypes ||
-        router.query.questionAge ||
-        router.query.locations;
+        selectedCompanies.length > 0 ||
+        selectedLocations.length > 0 ||
+        selectedQuestionAge !== 'all' ||
+        selectedQuestionTypes.length > 0;
       if (hasFilter) {
         setHasLanded(true);
       }
-      // Console.log('landed', hasLanded);
+
       setLoaded(true);
     }
-  }, [areFiltersInitialized, hasLanded, router.query]);
+  }, [
+    areFiltersInitialized,
+    hasLanded,
+    loaded,
+    pathname,
+    selectedCompanies,
+    selectedLocations,
+    selectedQuestionAge,
+    selectedQuestionTypes,
+  ]);
 
   if (!loaded) {
     return null;
   }
+  const filterSidebar = (
+    <div className="mt-2 divide-y divide-slate-200 px-4">
+      <FilterSection
+        label="Company"
+        options={companyFilterOptions}
+        searchPlaceholder="Add company filter"
+        onOptionChange={(optionValue, checked) => {
+          if (checked) {
+            setSelectedCompanies([...selectedCompanies, optionValue]);
+          } else {
+            setSelectedCompanies(
+              selectedCompanies.filter((company) => company !== optionValue),
+            );
+          }
+        }}
+      />
+      <FilterSection
+        label="Question types"
+        options={questionTypeFilterOptions}
+        showAll={true}
+        onOptionChange={(optionValue, checked) => {
+          if (checked) {
+            setSelectedQuestionTypes([...selectedQuestionTypes, optionValue]);
+          } else {
+            setSelectedQuestionTypes(
+              selectedQuestionTypes.filter(
+                (questionType) => questionType !== optionValue,
+              ),
+            );
+          }
+        }}
+      />
+      <FilterSection
+        isSingleSelect={true}
+        label="Question age"
+        options={questionAgeFilterOptions}
+        showAll={true}
+        onOptionChange={(optionValue) => {
+          setSelectedQuestionAge(optionValue);
+        }}
+      />
+      <FilterSection
+        label="Location"
+        options={locationFilterOptions}
+        searchPlaceholder="Add location filter"
+        onOptionChange={(optionValue, checked) => {
+          if (checked) {
+            setSelectedLocations([...selectedLocations, optionValue]);
+          } else {
+            setSelectedLocations(
+              selectedLocations.filter((location) => location !== optionValue),
+            );
+          }
+        }}
+      />
+    </div>
+  );
 
   return !hasLanded ? (
     <LandingComponent onLanded={handleLandingQuery}></LandingComponent>
   ) : (
-    <main className="flex flex-1 flex-col items-stretch overflow-y-auto">
-      <div className="flex pt-4">
-        <aside className="w-[300px] border-r px-4">
-          <h2 className="text-xl font-semibold">Filter by</h2>
-          <div className="divide-y divide-slate-200">
-            <FilterSection
-              label="Company"
-              options={companyFilterOptions}
-              searchPlaceholder="Add company filter"
-              onOptionChange={(optionValue, checked) => {
-                if (checked) {
-                  setSelectedCompanies([...selectedCompanies, optionValue]);
-                } else {
-                  setSelectedCompanies(
-                    selectedCompanies.filter(
-                      (company) => company !== optionValue,
-                    ),
-                  );
-                }
-              }}
-            />
-            <FilterSection
-              label="Question types"
-              options={questionTypeFilterOptions}
-              showAll={true}
-              onOptionChange={(optionValue, checked) => {
-                if (checked) {
-                  setSelectedQuestionTypes([
-                    ...selectedQuestionTypes,
-                    optionValue,
-                  ]);
-                } else {
-                  setSelectedQuestionTypes(
-                    selectedQuestionTypes.filter(
-                      (questionType) => questionType !== optionValue,
-                    ),
-                  );
-                }
-              }}
-            />
-            <FilterSection
-              isSingleSelect={true}
-              label="Question age"
-              options={questionAgeFilterOptions}
-              showAll={true}
-              onOptionChange={(optionValue) => {
-                setSelectedQuestionAge(optionValue);
-              }}
-            />
-            <FilterSection
-              label="Location"
-              options={locationFilterOptions}
-              searchPlaceholder="Add location filter"
-              onOptionChange={(optionValue, checked) => {
-                if (checked) {
-                  setSelectedLocations([...selectedLocations, optionValue]);
-                } else {
-                  setSelectedLocations(
-                    selectedLocations.filter(
-                      (location) => location !== optionValue,
-                    ),
-                  );
-                }
-              }}
-            />
-          </div>
-        </aside>
-        <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto pt-4">
-          <div className="flex min-h-0 max-w-3xl flex-1">
-            <div className="flex flex-1 flex-col items-stretch justify-start gap-4 pb-4">
+    <main className="flex flex-1 flex-col items-stretch">
+      <div className="flex h-full flex-1">
+        <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
+          <div className="flex min-h-0 max-w-3xl flex-1 p-4">
+            <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
               <ContributeQuestionCard
                 onSubmit={(data) => {
                   createQuestion({
@@ -250,6 +273,9 @@ export default function QuestionsHomePage() {
                   },
                 ]}
                 sortValue="most-recent"
+                onFilterOptionsToggle={() => {
+                  setFilterDrawerOpen(!filterDrawerOpen);
+                }}
                 onSortChange={(value) => {
                   // eslint-disable-next-line no-console
                   console.log(value);
@@ -257,24 +283,49 @@ export default function QuestionsHomePage() {
               />
               {(questions ?? []).map((question) => (
                 <QuestionOverviewCard
-                  // eslint-disable-next-line react/no-array-index-key
                   key={question.id}
                   answerCount={question.numAnswers}
+                  company={question.company}
                   content={question.content}
                   href={`/questions/${question.id}/${createSlug(
                     question.content,
                   )}`}
                   location={question.location}
-                  receivedCount={0} // TODO: Implement received count
+                  questionId={question.id}
+                  receivedCount={0}
                   role={question.role}
-                  timestamp={question.seenAt.toLocaleDateString()}
-                  type={question.type}
+                  timestamp={question.seenAt.toLocaleDateString(undefined, {
+                    month: 'short',
+                    year: 'numeric',
+                  })}
+                  type={question.type} // TODO: Implement received count
                   upvoteCount={question.numVotes}
                 />
               ))}
+              {questions?.length === 0 && (
+                <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
+                  <NoSymbolIcon className="h-6 w-6" />
+                  <p>Nothing found. Try changing your search filters.</p>
+                </div>
+              )}
             </div>
           </div>
         </section>
+        <aside className="hidden w-[300px] overflow-y-auto border-l bg-white py-4 lg:block">
+          <h2 className="px-4 text-xl font-semibold">Filter by</h2>
+          {filterSidebar}
+        </aside>
+        <SlideOut
+          className="lg:hidden"
+          enterFrom="end"
+          isShown={filterDrawerOpen}
+          size="sm"
+          title="Filter by"
+          onClose={() => {
+            setFilterDrawerOpen(false);
+          }}>
+          {filterSidebar}
+        </SlideOut>
       </div>
     </main>
   );
