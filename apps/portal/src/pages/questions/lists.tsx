@@ -65,7 +65,7 @@ export default function QuestionsHomePage() {
     [
       'questions.questions.getQuestionsByFilter',
       {
-        companyNames: selectedCompanies,
+        companies: selectedCompanies,
         endDate: today,
         locations: selectedLocations,
         questionTypes: selectedQuestionTypes,
@@ -252,7 +252,7 @@ export default function QuestionsHomePage() {
               <ContributeQuestionCard
                 onSubmit={(data) => {
                   createQuestion({
-                    companyId: data.company,
+                    company: data.company,
                     content: data.questionContent,
                     location: data.location,
                     questionType: data.questionType,
@@ -297,8 +297,8 @@ export default function QuestionsHomePage() {
                   timestamp={question.seenAt.toLocaleDateString(undefined, {
                     month: 'short',
                     year: 'numeric',
-                  })} // TODO: Implement received count
-                  type={question.type}
+                  })}
+                  type={question.type} // TODO: Implement received count
                   upvoteCount={question.numVotes}
                 />
               ))}

@@ -48,6 +48,7 @@ export type QuestionCardProps = ActionButtonProps &
     questionId: string;
     receivedCount: number;
     role: string;
+    showHover?: boolean;
     timestamp: string;
     type: QuestionsQuestionType;
   };
@@ -68,11 +69,13 @@ export default function QuestionCard({
   timestamp,
   role,
   location,
+  showHover,
 }: QuestionCardProps) {
   const { handleDownvote, handleUpvote, vote } = useQuestionVote(questionId);
-
+  const hoverClass = showHover ? 'hover:bg-slate-50' : '';
   return (
-    <article className="flex gap-4 rounded-md border border-slate-300 bg-white p-4">
+    <article
+      className={`flex gap-4 rounded-md border border-slate-300 bg-white p-4 ${hoverClass}`}>
       {showVoteButtons && (
         <VotingButtons
           upvoteCount={upvoteCount}

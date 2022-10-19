@@ -21,6 +21,7 @@ function QuestionOverviewCardWithoutHref(props: QuestionOverviewCardProps) {
     <QuestionCard
       {...props}
       showActionButton={false}
+      showHover={true}
       showUserStatistics={true}
       showVoteButtons={true}
     />
