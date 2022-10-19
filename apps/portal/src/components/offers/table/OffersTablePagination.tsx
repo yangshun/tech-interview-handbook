@@ -1,11 +1,11 @@
 import { Pagination } from '@tih/ui';
 
-import type { PaginationType } from '~/components/offers/table/types';
+import type { Paging } from '~/types/offers';
 
 type OffersTablePaginationProps = Readonly<{
   endNumber: number;
   handlePageChange: (page: number) => void;
-  pagination: PaginationType;
+  pagination: Paging;
   startNumber: number;
 }>;
 
@@ -30,13 +30,13 @@ export default function OffersTablePagination({
         </span>
       </span>
       <Pagination
-        current={pagination.currentPage}
+        current={pagination.currentPage + 1}
         end={pagination.numOfPages}
         label="Pagination"
         pagePadding={1}
         start={1}
         onSelect={(currPage) => {
-          handlePageChange(currPage);
+          handlePageChange(currPage - 1);
         }}
       />
     </nav>

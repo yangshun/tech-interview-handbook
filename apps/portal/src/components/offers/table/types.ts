@@ -1,13 +1,3 @@
-export type OfferTableRowData = {
-  company: string;
-  date: string;
-  id: string;
-  profileId: string;
-  salary: number | undefined;
-  title: string;
-  yoe: number;
-};
-
 // eslint-disable-next-line no-shadow
 export enum YOE_CATEGORY {
   INTERN = 0,
