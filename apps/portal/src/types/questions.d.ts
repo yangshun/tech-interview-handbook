@@ -1,3 +1,5 @@
+import type { QuestionsQuestionType } from '@prisma/client';
+
 export type Question = {
   // TODO: company, location, role maps
   company: string;
@@ -9,7 +11,7 @@ export type Question = {
   numVotes: number;
   role: string;
   seenAt: Date;
-  type: stringl;
+  type: QuestionsQuestionType;
   updatedAt: Date;
   user: string;
 };
