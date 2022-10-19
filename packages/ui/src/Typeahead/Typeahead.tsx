@@ -22,7 +22,7 @@ type Attributes = Pick<
   | 'required'
 >;
 
-export type Props = Readonly<{
+type Props = Readonly<{
   isLabelHidden?: boolean;
   label: string;
   noResultsMessage?: string;

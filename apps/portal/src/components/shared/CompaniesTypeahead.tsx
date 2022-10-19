@@ -1,8 +1,10 @@
+import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import { Typeahead } from '@tih/ui';
-import type { Props as TypeaheadProps } from '@tih/ui/src/Typeahead/Typeahead';
 
 import { trpc } from '~/utils/trpc';
+
+type TypeaheadProps = ComponentProps<typeof Typeahead>;
 
 type Props = Omit<
   TypeaheadProps,
