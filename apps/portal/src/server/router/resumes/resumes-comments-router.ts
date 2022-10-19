@@ -22,7 +22,6 @@ export const resumeCommentsRouter = createRouter().query('list', {
             name: true,
           },
         },
-        votes: true,
       },
       orderBy: {
         createdAt: 'desc',
