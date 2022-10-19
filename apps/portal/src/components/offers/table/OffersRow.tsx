@@ -1,8 +1,9 @@
 import Link from 'next/link';
 
-import type { DashboardOffer } from '../../../types/offers';
-import { convertCurrencyToString } from '../../../utils/offers/currency';
-import { formatDate } from '../../../utils/offers/time';
+import { convertCurrencyToString } from '~/utils/offers/currency';
+import { formatDate } from '~/utils/offers/time';
+
+import type { DashboardOffer } from '~/types/offers';
 
 export type OfferTableRowProps = Readonly<{ row: DashboardOffer }>;
 
