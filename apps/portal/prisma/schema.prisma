@@ -370,12 +370,12 @@ model QuestionsQuestion {
     createdAt    DateTime              @default(now())
     updatedAt    DateTime              @updatedAt
 
-    user                  User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
-    encounters            QuestionsQuestionEncounter[]
-    votes                 QuestionsQuestionVote[]
-    comments              QuestionsQuestionComment[]
-    answers               QuestionsAnswer[]
-    QuestionsListQuestion QuestionsListQuestion[]
+    user                User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+    encounters          QuestionsQuestionEncounter[]
+    votes               QuestionsQuestionVote[]
+    comments            QuestionsQuestionComment[]
+    answers             QuestionsAnswer[]
+    listQuestionEntries QuestionsListQuestion[]
 }
 
 model QuestionsQuestionEncounter {
@@ -497,8 +497,8 @@ model QuestionsList {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    user                  User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    QuestionsListQuestion QuestionsListQuestion[]
+    user            User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    questionEntries QuestionsListQuestion[]
 
     @@unique([userId, name])
 }

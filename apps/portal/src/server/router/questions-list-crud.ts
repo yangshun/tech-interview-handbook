@@ -1,21 +1,20 @@
 import { z } from 'zod';
-import { Vote } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
 import { createProtectedRouter } from './context';
 
-import type { Answer } from '~/types/questions';
-
 export const questionListRouter = createProtectedRouter()
   .query('getListsByUser', {
-    input: z.object({
-    }),
-    async resolve({ ctx, input }) {
+    async resolve({ ctx }) {
       const userId = ctx.session?.user?.id;
 
-      const listsData = await ctx.prisma.questionsList.findMany({
+      return await ctx.prisma.questionsList.findMany({
         include: {
-          questions: true,
+          listQuestionEntries: {
+            include: {
+              question: true,
+            },
+          }
         },
         orderBy: {
           createdAt: 'asc',
@@ -24,110 +23,44 @@ export const questionListRouter = createProtectedRouter()
           id: userId,
         },
       });
-      return listsData.map((data) => {
-        const votes: number = data.votes.reduce(
-          (previousValue: number, currentValue) => {
-            let result: number = previousValue;
-
-            switch (currentValue.vote) {
-              case Vote.UPVOTE:
-                result += 1;
-                break;
-              case Vote.DOWNVOTE:
-                result -= 1;
-                break;
-            }
-            return result;
-          },
-          0,
-        );
-
-        const answer: Answer = {
-          content: data.content,
-          createdAt: data.createdAt,
-          id: data.id,
-          numComments: data._count.comments,
-          numVotes: votes,
-          user: data.user?.name ?? '',
-          userImage: data.user?.image ?? '',
-        };
-        return answer;
-      });
-    },
+    }
   })
-  .query('getAnswerById', {
+  .query('getListById', {
     input: z.object({
-      answerId: z.string(),
+      listId: z.string(),
     }),
-    async resolve({ ctx, input }) {
-      const answerData = await ctx.prisma.questionsAnswer.findUnique({
+    async resolve({ ctx }) {
+      const userId = ctx.session?.user?.id;
+
+      return await ctx.prisma.questionsList.findMany({
         include: {
-          _count: {
-            select: {
-              comments: true,
+          listQuestionEntries: {
+            include: {
+              question: true,
             },
-          },
-          user: {
-            select: {
-              image: true,
-              name: true,
-            },
-          },
-          votes: true,
+          }
+        },
+        orderBy: {
+          createdAt: 'asc',
         },
         where: {
-          id: input.answerId,
+          id: userId,
         },
       });
-      if (!answerData) {
-        throw new TRPCError({
-          code: 'NOT_FOUND',
-          message: 'Answer not found',
-        });
-      }
-      const votes: number = answerData.votes.reduce(
-        (previousValue: number, currentValue) => {
-          let result: number = previousValue;
-
-          switch (currentValue.vote) {
-            case Vote.UPVOTE:
-              result += 1;
-              break;
-            case Vote.DOWNVOTE:
-              result -= 1;
-              break;
-          }
-          return result;
-        },
-        0,
-      );
-
-      const answer: Answer = {
-        content: answerData.content,
-        createdAt: answerData.createdAt,
-        id: answerData.id,
-        numComments: answerData._count.comments,
-        numVotes: votes,
-        user: answerData.user?.name ?? '',
-        userImage: answerData.user?.image ?? '',
-      };
-      return answer;
-    },
+    }
   })
   .mutation('create', {
     input: z.object({
-      content: z.string(),
-      questionId: z.string(),
+      name: z.string(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const { content, questionId } = input;
+      const { name } = input;
 
-      return await ctx.prisma.questionsAnswer.create({
+      return await ctx.prisma.questionsList.create({
         data: {
-          content,
-          questionId,
+          name,
           userId,
         },
       });
@@ -135,29 +68,29 @@ export const questionListRouter = createProtectedRouter()
   })
   .mutation('update', {
     input: z.object({
-      content: z.string().optional(),
       id: z.string(),
+      name: z.string().optional(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
-      const { content, id } = input;
+      const { name, id } = input;
 
-      const answerToUpdate = await ctx.prisma.questionsAnswer.findUnique({
+      const listToUpdate = await ctx.prisma.questionsList.findUnique({
         where: {
           id: input.id,
         },
       });
 
-      if (answerToUpdate?.id !== userId) {
+      if (listToUpdate?.id !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
         });
       }
 
-      return await ctx.prisma.questionsAnswer.update({
+      return await ctx.prisma.questionsList.update({
         data: {
-          content,
+          name,
         },
         where: {
           id,
@@ -172,88 +105,53 @@ export const questionListRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const answerToDelete = await ctx.prisma.questionsAnswer.findUnique({
+      const listToDelete = await ctx.prisma.questionsList.findUnique({
         where: {
           id: input.id,
         },
       });
 
-      if (answerToDelete?.id !== userId) {
+      if (listToDelete?.id !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
         });
       }
 
-      return await ctx.prisma.questionsAnswer.delete({
+      return await ctx.prisma.questionsList.delete({
         where: {
           id: input.id,
-        },
-      });
-    },
-  })
-  .query('getVote', {
-    input: z.object({
-      answerId: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const userId = ctx.session?.user?.id;
-      const { answerId } = input;
-
-      return await ctx.prisma.questionsAnswerVote.findUnique({
-        where: {
-          answerId_userId: { answerId, userId },
         },
       });
     },
   })
   .mutation('createQuestionEntry', {
     input: z.object({
-      answerId: z.string(),
-      vote: z.nativeEnum(Vote),
+      listId: z.string(),
+      questionId: z.string(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const { answerId, vote } = input;
-
-      return await ctx.prisma.questionsAnswerVote.create({
-        data: {
-          answerId,
-          userId,
-          vote,
-        },
-      });
-    },
-  })
-  .mutation('updateQuestionEntry', {
-    input: z.object({
-      id: z.string(),
-      vote: z.nativeEnum(Vote),
-    }),
-    async resolve({ ctx, input }) {
-      const userId = ctx.session?.user?.id;
-      const { id, vote } = input;
-
-      const voteToUpdate = await ctx.prisma.questionsAnswerVote.findUnique({
+      const listToAugment = await ctx.prisma.questionsList.findUnique({
         where: {
-          id: input.id,
+          id: input.listId,
         },
       });
 
-      if (voteToUpdate?.userId !== userId) {
+      if (listToAugment?.id !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
         });
       }
 
-      return await ctx.prisma.questionsAnswerVote.update({
+      const { questionId, listId } = input;
+
+      return await ctx.prisma.questionsListQuestionEntry.create({
         data: {
-          vote,
-        },
-        where: {
-          id,
+          listId,
+          questionId,
         },
       });
     },
@@ -265,20 +163,20 @@ export const questionListRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const voteToDelete = await ctx.prisma.questionsAnswerVote.findUnique({
+      const listToAugment = await ctx.prisma.questionsList.findUnique({
         where: {
-          id: input.id,
+          id: input.listId,
         },
       });
 
-      if (voteToDelete?.userId !== userId) {
+      if (listToAugment?.id !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
         });
       }
 
-      return await ctx.prisma.questionsAnswerVote.delete({
+      return await ctx.prisma.questionsListQuestionEntry.delete({
         where: {
           id: input.id,
         },
