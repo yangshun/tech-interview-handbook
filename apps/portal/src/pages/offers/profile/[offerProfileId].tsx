@@ -10,6 +10,9 @@ import type { BackgroundCard, OfferEntity } from '~/components/offers/types';
 import { convertCurrencyToString } from '~/utils/offers/currency';
 import { formatDate } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
+
+import type { Profile, ProfileOffer } from '~/types/offers';
+
 export default function OfferProfile() {
   const ErrorPage = (
     <Error statusCode={404} title="Requested profile does not exist." />
@@ -29,7 +32,7 @@ export default function OfferProfile() {
     ],
     {
       enabled: typeof offerProfileId === 'string',
-      onSuccess: (data) => {
+      onSuccess: (data: Profile) => {
         if (!data) {
           router.push('/offers');
         }
@@ -42,7 +45,7 @@ export default function OfferProfile() {
 
         if (data?.offers) {
           const filteredOffers: Array<OfferEntity> = data
-            ? data?.offers.map((res) => {
+            ? data?.offers.map((res: ProfileOffer) => {
                 if (res.offersFullTime) {
                   const filteredOffer: OfferEntity = {
                     base: convertCurrencyToString(
@@ -153,19 +156,6 @@ export default function OfferProfile() {
     }
   }
 
-  function handleCopyEditLink() {
-    // TODO: Add notification
-    navigator.clipboard.writeText(
-      `${window.location.origin}/offers/profile/${offerProfileId}?token=${token}`,
-    );
-  }
-
-  function handleCopyPublicLink() {
-    navigator.clipboard.writeText(
-      `${window.location.origin}/offers/profile/${offerProfileId}`,
-    );
-  }
-
   return (
     <>
       {getProfileQuery.isError && ErrorPage}
@@ -191,11 +181,12 @@ export default function OfferProfile() {
           </div>
           <div className="h-full w-1/3 bg-white">
             <ProfileComments
-              handleCopyEditLink={handleCopyEditLink}
-              handleCopyPublicLink={handleCopyPublicLink}
               isDisabled={deleteMutation.isLoading}
               isEditable={isEditable}
               isLoading={getProfileQuery.isLoading}
+              profileId={offerProfileId as string}
+              profileName={background?.profileName}
+              token={token as string}
             />
           </div>
         </div>
