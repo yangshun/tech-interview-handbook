@@ -205,7 +205,11 @@ export default function QuestionsHomePage() {
       <FilterSection
         label="Company"
         options={companyFilterOptions}
-        renderInput={({ onOptionChange, options, field }) => (
+        renderInput={({
+          onOptionChange,
+          options,
+          field: { ref: _, ...field },
+        }) => (
           <Typeahead
             {...field}
             label=""
@@ -255,7 +259,11 @@ export default function QuestionsHomePage() {
       <FilterSection
         label="Roles"
         options={roleFilterOptions}
-        renderInput={({ onOptionChange, options, field }) => (
+        renderInput={({
+          onOptionChange,
+          options,
+          field: { ref: _, ...field },
+        }) => (
           <Typeahead
             {...field}
             label=""
@@ -280,7 +288,11 @@ export default function QuestionsHomePage() {
       <FilterSection
         label="Location"
         options={locationFilterOptions}
-        renderInput={({ onOptionChange, options, field }) => (
+        renderInput={({
+          onOptionChange,
+          options,
+          field: { ref: _, ...field },
+        }) => (
           <Typeahead
             {...field}
             label=""
