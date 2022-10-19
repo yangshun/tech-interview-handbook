@@ -87,6 +87,19 @@ export const LOCATIONS: FilterChoices = [
   },
 ] as const;
 
+export const ROLES: FilterChoices = [
+  {
+    id: 'Software Engineer',
+    label: 'Software Engineer',
+    value: 'Software Engineer',
+  },
+  {
+    id: 'Software Engineer Intern',
+    label: 'Software Engineer Intern',
+    value: 'Software Engineer Intern',
+  },
+] as const;
+
 export const SAMPLE_QUESTION = {
   answerCount: 10,
   commentCount: 10,

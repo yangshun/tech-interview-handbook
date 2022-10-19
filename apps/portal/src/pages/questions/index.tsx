@@ -13,6 +13,7 @@ import LandingComponent from '~/components/questions/LandingComponent';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
 import type { QuestionAge } from '~/utils/questions/constants';
+import { ROLES } from '~/utils/questions/constants';
 import {
   COMPANIES,
   LOCATIONS,
@@ -47,6 +48,9 @@ export default function QuestionsHomePage() {
   ] = useSearchFilterSingle<QuestionAge>('questionAge', {
     defaultValue: 'all',
   });
+
+  const [selectedRoles, setSelectedRoles, areRolesInitialized] =
+    useSearchFilter('roles');
   const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
     useSearchFilter('locations');
 
@@ -69,7 +73,7 @@ export default function QuestionsHomePage() {
         endDate: today,
         locations: selectedLocations,
         questionTypes: selectedQuestionTypes,
-        roles: [],
+        roles: selectedRoles,
         startDate,
       },
     ],
@@ -113,6 +117,13 @@ export default function QuestionsHomePage() {
     }));
   }, [selectedQuestionAge]);
 
+  const roleFilterOptions = useMemo(() => {
+    return ROLES.map((role) => ({
+      ...role,
+      checked: selectedRoles.includes(role.value),
+    }));
+  }, [selectedRoles]);
+
   const locationFilterOptions = useMemo(() => {
     return LOCATIONS.map((location) => ({
       ...location,
@@ -124,6 +135,7 @@ export default function QuestionsHomePage() {
     const { company, location, questionType } = data;
 
     setSelectedCompanies([company]);
+    setSelectedRoles([]);
     setSelectedLocations([location]);
     setSelectedQuestionTypes([questionType as QuestionsQuestionType]);
     setHasLanded(true);
@@ -134,12 +146,14 @@ export default function QuestionsHomePage() {
       areCompaniesInitialized &&
       areQuestionTypesInitialized &&
       isQuestionAgeInitialized &&
+      areRolesInitialized &&
       areLocationsInitialized
     );
   }, [
     areCompaniesInitialized,
     areQuestionTypesInitialized,
     isQuestionAgeInitialized,
+    areRolesInitialized,
     areLocationsInitialized,
   ]);
 
@@ -156,10 +170,12 @@ export default function QuestionsHomePage() {
           locations: selectedLocations,
           questionAge: selectedQuestionAge,
           questionTypes: selectedQuestionTypes,
+          roles: selectedRoles,
         },
       });
       const hasFilter =
         selectedCompanies.length > 0 ||
+        selectedRoles.length > 0 ||
         selectedLocations.length > 0 ||
         selectedQuestionAge !== 'all' ||
         selectedQuestionTypes.length > 0;
@@ -175,6 +191,7 @@ export default function QuestionsHomePage() {
     loaded,
     pathname,
     selectedCompanies,
+    selectedRoles,
     selectedLocations,
     selectedQuestionAge,
     selectedQuestionTypes,
@@ -233,6 +250,31 @@ export default function QuestionsHomePage() {
         showAll={true}
         onOptionChange={(optionValue) => {
           setSelectedQuestionAge(optionValue);
+        }}
+      />
+      <FilterSection
+        label="Roles"
+        options={roleFilterOptions}
+        renderInput={({ onOptionChange, options, field }) => (
+          <Typeahead
+            {...field}
+            label=""
+            options={options}
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            onQueryChange={() => {}}
+            onSelect={({ value }) => {
+              onOptionChange(value, true);
+            }}
+          />
+        )}
+        onOptionChange={(optionValue, checked) => {
+          if (checked) {
+            setSelectedRoles([...selectedRoles, optionValue]);
+          } else {
+            setSelectedRoles(
+              selectedRoles.filter((role) => role !== optionValue),
+            );
+          }
         }}
       />
       <FilterSection
