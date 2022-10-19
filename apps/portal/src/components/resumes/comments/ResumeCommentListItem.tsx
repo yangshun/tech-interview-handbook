@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
@@ -6,6 +7,7 @@ import {
   ArrowUpCircleIcon,
 } from '@heroicons/react/20/solid';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
+import { Vote } from '@prisma/client';
 import { Button, TextArea } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
@@ -53,6 +55,31 @@ export default function ResumeCommentListItem({
     },
   );
 
+  // COMMENT VOTES
+  const commentVotesQuery = trpc.useQuery([
+    'resumes.comments.votes.list',
+    { commentId: comment.id },
+  ]);
+  const commentVotesUpsertMutation = trpc.useMutation(
+    'resumes.comments.votes.user.upsert',
+    {
+      onSuccess: () => {
+        // Comment updated, invalidate query to trigger refetch
+        trpcContext.invalidateQueries(['resumes.comments.votes.list']);
+      },
+    },
+  );
+  const commentVotesDeleteMutation = trpc.useMutation(
+    'resumes.comments.votes.user.delete',
+    {
+      onSuccess: () => {
+        // Comment updated, invalidate query to trigger refetch
+        trpcContext.invalidateQueries(['resumes.comments.votes.list']);
+      },
+    },
+  );
+
+  // FORM ACTIONS
   const onCancel = () => {
     reset({ description: comment.description });
     setIsEditingComment(false);
@@ -60,7 +87,7 @@ export default function ResumeCommentListItem({
 
   const onSubmit: SubmitHandler<ICommentInput> = async (data) => {
     const { id } = comment;
-    return await commentUpdateMutation.mutate(
+    return commentUpdateMutation.mutate(
       {
         id,
         ...data,
@@ -75,6 +102,18 @@ export default function ResumeCommentListItem({
 
   const setFormValue = (value: string) => {
     setValue('description', value.trim(), { shouldDirty: true });
+  };
+
+  const onVote = async (value: Vote) => {
+    if (commentVotesQuery.data?.userVote?.value === value) {
+      return commentVotesDeleteMutation.mutate({
+        commentId: comment.id,
+      });
+    }
+    return commentVotesUpsertMutation.mutate({
+      commentId: comment.id,
+      value,
+    });
   };
 
   return (
@@ -154,18 +193,57 @@ export default function ResumeCommentListItem({
 
           {/* Upvote and edit */}
           <div className="flex flex-row space-x-1 pt-1 align-middle">
-            {/* TODO: Implement upvote */}
-            <ArrowUpCircleIcon className="h-4 w-4 fill-gray-400" />
-            <div className="text-xs">{comment.numVotes}</div>
-            <ArrowDownCircleIcon className="h-4 w-4 fill-gray-400" />
+            <button
+              disabled={
+                !userId ||
+                commentVotesQuery.isLoading ||
+                commentVotesUpsertMutation.isLoading ||
+                commentVotesDeleteMutation.isLoading
+              }
+              type="button"
+              onClick={() => onVote(Vote.UPVOTE)}>
+              <ArrowUpCircleIcon
+                className={clsx(
+                  'h-4 w-4',
+                  commentVotesQuery.data?.userVote?.value === Vote.UPVOTE
+                    ? 'fill-indigo-500'
+                    : 'fill-gray-400',
+                  userId && 'hover:fill-indigo-500',
+                )}
+              />
+            </button>
+
+            <div className="text-xs">
+              {commentVotesQuery.data?.numVotes ?? 0}
+            </div>
+
+            <button
+              disabled={
+                !userId ||
+                commentVotesQuery.isLoading ||
+                commentVotesUpsertMutation.isLoading ||
+                commentVotesDeleteMutation.isLoading
+              }
+              type="button"
+              onClick={() => onVote(Vote.DOWNVOTE)}>
+              <ArrowDownCircleIcon
+                className={clsx(
+                  'h-4 w-4',
+                  commentVotesQuery.data?.userVote?.value === Vote.DOWNVOTE
+                    ? 'fill-red-500'
+                    : 'fill-gray-400',
+                  userId && 'hover:fill-red-500',
+                )}
+              />
+            </button>
 
             {isCommentOwner && !isEditingComment && (
-              <a
+              <button
                 className="text-primary-800 hover:text-primary-400 px-1 text-xs"
-                href="#"
+                type="button"
                 onClick={() => setIsEditingComment(true)}>
                 Edit
-              </a>
+              </button>
             )}
           </div>
         </div>

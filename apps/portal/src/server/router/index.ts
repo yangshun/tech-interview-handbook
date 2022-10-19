@@ -13,6 +13,8 @@ import { questionsQuestionCommentRouter } from './questions-question-comment-rou
 import { questionsQuestionRouter } from './questions-question-router';
 import { resumeCommentsRouter } from './resumes/resumes-comments-router';
 import { resumesCommentsUserRouter } from './resumes/resumes-comments-user-router';
+import { resumesCommentsVotesRouter } from './resumes/resumes-comments-votes-router';
+import { resumesCommentsVotesUserRouter } from './resumes/resumes-comments-votes-user-router';
 import { resumesRouter } from './resumes/resumes-resume-router';
 import { resumesResumeUserRouter } from './resumes/resumes-resume-user-router';
 import { resumesStarUserRouter } from './resumes/resumes-star-user-router';
@@ -33,6 +35,8 @@ export const appRouter = createRouter()
   .merge('resumes.resume.', resumesStarUserRouter)
   .merge('resumes.comments.', resumeCommentsRouter)
   .merge('resumes.comments.user.', resumesCommentsUserRouter)
+  .merge('resumes.comments.votes.', resumesCommentsVotesRouter)
+  .merge('resumes.comments.votes.user.', resumesCommentsVotesUserRouter)
   .merge('questions.answers.comments.', questionsAnswerCommentRouter)
   .merge('questions.answers.', questionsAnswerRouter)
   .merge('questions.questions.comments.', questionsQuestionCommentRouter)
