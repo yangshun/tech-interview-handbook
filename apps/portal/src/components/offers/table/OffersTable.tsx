@@ -9,7 +9,7 @@ import { trpc } from '~/utils/trpc';
 
 import OffersRow from './OffersRow';
 
-import type { DashboardOffer, Paging } from '~/types/offers';
+import type { DashboardOffer, GetOffersResponse, Paging } from '~/types/offers';
 
 const NUMBER_OF_OFFERS_IN_PAGE = 10;
 export type OffersTableProps = Readonly<{
@@ -52,18 +52,7 @@ export default function OffersTable({
       },
     ],
     {
-      onSuccess: (response) => {
-        // Const filteredData = response.data.map((res) => {
-        //   return {
-        //     company: res.company.name,
-        //     date: res.monthYearReceived,
-        //     id: res.id,
-        //     profileId: res.profileId,
-        //     income: res.income,
-        //     title: res.title,
-        //     yoe: res.totalYoe,
-        //   };
-        // });
+      onSuccess: (response: GetOffersResponse) => {
         setOffers(response.data);
         setPagination(response.paging);
       },
