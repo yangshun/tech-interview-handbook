@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
@@ -8,7 +9,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
 import { Vote } from '@prisma/client';
-import { Button, Spinner, TextArea } from '@tih/ui';
+import { Button, TextArea } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
@@ -31,6 +32,9 @@ export default function ResumeCommentListItem({
 }: ResumeCommentListItemProps) {
   const isCommentOwner = userId === comment.user.userId;
   const [isEditingComment, setIsEditingComment] = useState(false);
+
+  const [upvoteAnimation, setUpvoteAnimation] = useState(false);
+  const [downvoteAnimation, setDownvoteAnimation] = useState(false);
 
   const {
     register,
@@ -104,16 +108,31 @@ export default function ResumeCommentListItem({
     setValue('description', value.trim(), { shouldDirty: true });
   };
 
-  const onVote = async (value: Vote) => {
+  const onVote = async (
+    value: Vote,
+    setAnimation: Dispatch<SetStateAction<boolean>>,
+  ) => {
+    setAnimation(true);
+
     if (commentVotesQuery.data?.userVote?.value === value) {
-      return commentVotesDeleteMutation.mutate({
-        commentId: comment.id,
-      });
+      return commentVotesDeleteMutation.mutate(
+        {
+          commentId: comment.id,
+        },
+        {
+          onSettled: async () => setAnimation(false),
+        },
+      );
     }
-    return commentVotesUpsertMutation.mutate({
-      commentId: comment.id,
-      value,
-    });
+    return commentVotesUpsertMutation.mutate(
+      {
+        commentId: comment.id,
+        value,
+      },
+      {
+        onSettled: async () => setAnimation(false),
+      },
+    );
   };
 
   return (
@@ -201,20 +220,28 @@ export default function ResumeCommentListItem({
                 commentVotesDeleteMutation.isLoading
               }
               type="button"
-              onClick={() => onVote(Vote.UPVOTE)}>
+              onClick={() => onVote(Vote.UPVOTE, setUpvoteAnimation)}>
               <ArrowUpCircleIcon
                 className={clsx(
                   'h-4 w-4',
-                  commentVotesQuery.data?.userVote?.value === Vote.UPVOTE
+                  commentVotesQuery.data?.userVote?.value === Vote.UPVOTE ||
+                    upvoteAnimation
                     ? 'fill-indigo-500'
                     : 'fill-gray-400',
-                  userId && 'hover:fill-indigo-500',
+                  userId &&
+                    !downvoteAnimation &&
+                    !upvoteAnimation &&
+                    'hover:fill-indigo-500',
+                  upvoteAnimation &&
+                    'animate-[bounce_0.5s_infinite] cursor-default',
                 )}
               />
             </button>
+
             <div className="text-xs">
               {commentVotesQuery.data?.numVotes ?? 0}
             </div>
+
             <button
               disabled={
                 !userId ||
@@ -223,14 +250,20 @@ export default function ResumeCommentListItem({
                 commentVotesDeleteMutation.isLoading
               }
               type="button"
-              onClick={() => onVote(Vote.DOWNVOTE)}>
+              onClick={() => onVote(Vote.DOWNVOTE, setDownvoteAnimation)}>
               <ArrowDownCircleIcon
                 className={clsx(
                   'h-4 w-4',
-                  commentVotesQuery.data?.userVote?.value === Vote.DOWNVOTE
+                  commentVotesQuery.data?.userVote?.value === Vote.DOWNVOTE ||
+                    downvoteAnimation
                     ? 'fill-red-500'
                     : 'fill-gray-400',
-                  userId && 'hover:fill-red-500',
+                  userId &&
+                    !downvoteAnimation &&
+                    !upvoteAnimation &&
+                    'hover:fill-red-500',
+                  downvoteAnimation &&
+                    'animate-[bounce_0.5s_infinite] cursor-default',
                 )}
               />
             </button>
@@ -242,12 +275,6 @@ export default function ResumeCommentListItem({
                 onClick={() => setIsEditingComment(true)}>
                 Edit
               </button>
-            )}
-
-            {(commentVotesQuery.isLoading ||
-              commentVotesUpsertMutation.isLoading ||
-              commentVotesDeleteMutation.isLoading) && (
-              <Spinner label="loading votes..." size="xs" />
             )}
           </div>
         </div>
