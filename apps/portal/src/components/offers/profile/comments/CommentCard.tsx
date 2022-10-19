@@ -13,9 +13,7 @@ type Props = Readonly<{
   comment: Reply;
   disableReply?: boolean;
   handleExpanded?: () => void;
-  // HandleReply?: (message: string, replyingToId: string) => void;
   isExpanded?: boolean;
-  // IsLoading?: boolean;
   profileId: string;
   replyLength?: number;
   token?: string;
@@ -25,9 +23,7 @@ export default function CommentCard({
   comment: { createdAt, id, message, user },
   disableReply,
   handleExpanded,
-  // HandleReply,
   isExpanded,
-  // IsLoading,
   profileId,
   token = '',
   replyLength = 0,
