@@ -76,7 +76,7 @@ export const LOCATIONS: FilterChoices = [
     value: 'california',
   },
   {
-    id: 'california',
+    id: 'Hong Kong',
     label: 'Hong Kong',
     value: 'Hong Kong',
   },

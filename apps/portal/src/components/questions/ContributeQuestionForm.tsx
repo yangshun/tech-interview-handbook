@@ -1,7 +1,6 @@
 import { startOfMonth } from 'date-fns';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { CalendarDaysIcon, UserIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
 import {
   Button,
@@ -9,10 +8,10 @@ import {
   HorizontalDivider,
   Select,
   TextArea,
-  TextInput,
+  Typeahead,
 } from '@tih/ui';
 
-import { QUESTION_TYPES } from '~/utils/questions/constants';
+import { LOCATIONS, QUESTION_TYPES, ROLES } from '~/utils/questions/constants';
 import {
   useFormRegister,
   useSelectRegister,
@@ -83,12 +82,25 @@ export default function ContributeQuestionForm({
       </h2>
       <div className="flex flex-col flex-wrap items-stretch gap-2 sm:flex-row sm:items-end">
         <div className="flex-1 sm:min-w-[150px] sm:max-w-[300px]">
-          <TextInput
-            label="Location"
-            required={true}
-            startAddOn={CalendarDaysIcon}
-            startAddOnType="icon"
-            {...register('location')}
+          <Controller
+            control={control}
+            name="location"
+            render={({ field }) => (
+              <Typeahead
+                label="Location"
+                options={LOCATIONS}
+                required={true}
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
+                onQueryChange={() => {}}
+                onSelect={(option) => {
+                  field.onChange(option.value);
+                }}
+                {...field}
+                value={LOCATIONS.find(
+                  (location) => location.value === field.value,
+                )}
+              />
+            )}
           />
         </div>
         <div className="flex-1 sm:min-w-[150px] sm:max-w-[300px]">
@@ -97,10 +109,12 @@ export default function ContributeQuestionForm({
             name="date"
             render={({ field }) => (
               <MonthYearPicker
+                monthRequired={true}
                 value={{
                   month: ((field.value.getMonth() as number) + 1) as Month,
                   year: field.value.getFullYear(),
                 }}
+                yearRequired={true}
                 onChange={({ month, year }) =>
                   field.onChange(startOfMonth(new Date(year, month - 1)))
                 }
@@ -124,12 +138,23 @@ export default function ContributeQuestionForm({
           />
         </div>
         <div className="flex-1 sm:min-w-[150px] sm:max-w-[200px]">
-          <TextInput
-            label="Role"
-            required={true}
-            startAddOn={UserIcon}
-            startAddOnType="icon"
-            {...register('role')}
+          <Controller
+            control={control}
+            name="role"
+            render={({ field }) => (
+              <Typeahead
+                label="Role"
+                options={ROLES}
+                required={true}
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
+                onQueryChange={() => {}}
+                onSelect={(option) => {
+                  field.onChange(option.value);
+                }}
+                {...field}
+                value={ROLES.find((role) => role.value === field.value)}
+              />
+            )}
           />
         </div>
       </div>

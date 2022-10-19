@@ -5,7 +5,7 @@ export const useSearchFilter = <Value extends string = string>(
   name: string,
   opts: {
     defaultValues?: Array<Value>;
-    queryParamToValue?: (param: string) => Value;
+    queryParamToValue?: (param: string) => Value | null;
   } = {},
 ) => {
   const { defaultValues, queryParamToValue = (param) => param } = opts;
@@ -20,7 +20,11 @@ export const useSearchFilter = <Value extends string = string>(
       const query = router.query[name];
       if (query) {
         const queryValues = Array.isArray(query) ? query : [query];
-        setFilters(queryValues.map(queryParamToValue) as Array<Value>);
+        setFilters(
+          queryValues
+            .map(queryParamToValue)
+            .filter((value) => value !== null) as Array<Value>,
+        );
       } else {
         // Try to load from local storage
         const localStorageValue = localStorage.getItem(name);
@@ -48,7 +52,7 @@ export const useSearchFilterSingle = <Value extends string = string>(
   name: string,
   opts: {
     defaultValue?: Value;
-    queryParamToValue?: (param: string) => Value;
+    queryParamToValue?: (param: string) => Value | null;
   } = {},
 ) => {
   const { defaultValue, queryParamToValue } = opts;

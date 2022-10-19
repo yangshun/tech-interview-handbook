@@ -38,7 +38,12 @@ export default function QuestionsHomePage() {
     areQuestionTypesInitialized,
   ] = useSearchFilter<QuestionsQuestionType>('questionTypes', {
     queryParamToValue: (param) => {
-      return param.toUpperCase() as QuestionsQuestionType;
+      const uppercaseParam = param.toUpperCase();
+      return (
+        QUESTION_TYPES.find(
+          (questionType) => questionType.value.toUpperCase() === uppercaseParam,
+        )?.value ?? null
+      );
     },
   });
   const [
@@ -47,6 +52,14 @@ export default function QuestionsHomePage() {
     isQuestionAgeInitialized,
   ] = useSearchFilterSingle<QuestionAge>('questionAge', {
     defaultValue: 'all',
+    queryParamToValue: (param) => {
+      const uppercaseParam = param.toUpperCase();
+      return (
+        QUESTION_AGES.find(
+          (questionAge) => questionAge.value.toUpperCase() === uppercaseParam,
+        )?.value ?? null
+      );
+    },
   });
 
   const [selectedRoles, setSelectedRoles, areRolesInitialized] =
