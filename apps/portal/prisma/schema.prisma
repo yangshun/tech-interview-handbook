@@ -91,17 +91,17 @@ enum TodoStatus {
 }
 
 model Company {
-    id          String   @id @default(cuid())
-    name        String   @db.Text
-    slug        String   @unique
-    description String?  @db.Text
-    logoUrl     String?
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+  id          String   @id @default(cuid())
+  name        String   @db.Text
+  slug        String   @unique
+  description String?  @db.Text
+  logoUrl     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-    questionsQuestionEncounter QuestionsQuestionEncounter[]
-    OffersExperience OffersExperience[]
-    OffersOffer      OffersOffer[]
+  questionsQuestionEncounter QuestionsQuestionEncounter[]
+  OffersExperience           OffersExperience[]
+  OffersOffer                OffersOffer[]
 }
 
 // Start of Resumes project models.
@@ -232,6 +232,7 @@ model OffersExperience {
   // Add more fields
   durationInMonths Int?
   specialization   String?
+  location         String?
 
   // FULLTIME fields
   level               String?
@@ -405,20 +406,20 @@ model QuestionsQuestion {
 }
 
 model QuestionsQuestionEncounter {
-    id         String   @id @default(cuid())
-    questionId String
-    userId     String?
-    // TODO: sync with models (location, role)
-    companyId  String
-    location   String   @db.Text
-    role       String   @db.Text
-    seenAt     DateTime
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+  id         String   @id @default(cuid())
+  questionId String
+  userId     String?
+  // TODO: sync with models (location, role)
+  companyId  String
+  location   String   @db.Text
+  role       String   @db.Text
+  seenAt     DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-    company  Company?          @relation(fields: [companyId], references: [id], onDelete: SetNull)
-    user     User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
-    question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  company  Company?          @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  user     User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
 }
 
 model QuestionsQuestionVote {

@@ -75,6 +75,7 @@ const experience = z.object({
   id: z.string().optional(),
   jobType: z.string().nullish(),
   level: z.string().nullish(),
+  location: z.string().nullish(),
   monthlySalary: valuation.nullish(),
   monthlySalaryId: z.string().nullish(),
   specialization: z.string().nullish(),

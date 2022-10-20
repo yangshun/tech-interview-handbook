@@ -267,6 +267,7 @@ export const experienceDtoMapper = (
     id: experience.id,
     jobType: experience.jobType,
     level: experience.level,
+    location: experience.location,
     monthlySalary: experience.monthlySalary
       ? valuationDtoMapper(experience.monthlySalary)
       : experience.monthlySalary,

@@ -24,6 +24,7 @@ export type Experience = {
   id: string;
   jobType: JobType?;
   level: string?;
+  location: string?;
   monthlySalary: Valuation?;
   specialization: string?;
   title: string?;
