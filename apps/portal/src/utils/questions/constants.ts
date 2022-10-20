@@ -1,4 +1,4 @@
-import type { QuestionsQuestionType } from '@prisma/client';
+import { QuestionsQuestionType } from '@prisma/client';
 
 import type { FilterChoices } from '~/components/questions/filter/FilterSection';
 
@@ -106,10 +106,15 @@ export const SAMPLE_QUESTION = {
   company: 'Google',
   content:
     'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and',
+  createdAt: new Date(2014, 8, 1, 11, 30, 40),
+  id: '1',
   location: 'Menlo Park, CA',
   receivedCount: 12,
   role: 'Software Engineer',
+  seenAt: new Date(2014, 8, 1, 11, 30, 40),
   timestamp: 'Last month',
+
+  type: QuestionsQuestionType.CODING,
   upvoteCount: 5,
 };
 
