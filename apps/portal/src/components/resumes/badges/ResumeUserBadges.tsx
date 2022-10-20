@@ -27,7 +27,7 @@ export default function ResumeUserBadges({ userId }: Props) {
             key={badge.id}
             description={badge.description}
             icon={badge.icon}
-            toolTip={badge.toolTip}
+            title={badge.title}
           />
         ),
       )}

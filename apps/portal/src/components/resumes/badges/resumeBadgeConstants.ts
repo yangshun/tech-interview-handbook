@@ -15,7 +15,7 @@ export type BadgeInfo = {
   icon: BadgeIcon;
   id: string;
   isValid: (payload: BadgePayload) => boolean;
-  toolTip: string;
+  title: string;
 };
 
 // TODO: Add other badges in
@@ -34,7 +34,7 @@ export const RESUME_USER_BADGES: Array<BadgeInfo> = [
     id: 'Superhero',
     isValid: (payload: BadgePayload) =>
       payload.reviewedResumesCount >= TIER_THREE,
-    toolTip: 'True saviour of the people',
+    title: 'True saviour of the people',
   },
   {
     description: `Reviewed over ${TIER_TWO} resumes`,
@@ -43,7 +43,7 @@ export const RESUME_USER_BADGES: Array<BadgeInfo> = [
     isValid: (payload: BadgePayload) =>
       payload.reviewedResumesCount >= TIER_TWO &&
       payload.reviewedResumesCount < TIER_THREE,
-    toolTip: 'Keen eye for details like a private eye',
+    title: 'Keen eye for details like a private eye',
   },
   {
     description: `Reviewed over ${TIER_THREE} resumes`,
@@ -52,6 +52,6 @@ export const RESUME_USER_BADGES: Array<BadgeInfo> = [
     isValid: (payload: BadgePayload) =>
       payload.reviewedResumesCount >= TIER_ONE &&
       payload.reviewedResumesCount < TIER_TWO,
-    toolTip: 'As sharp as an eagle',
+    title: 'As sharp as an eagle',
   },
 ];
