@@ -15,9 +15,9 @@ import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 
 import { CURRENCY_OPTIONS } from '~/utils/offers/currency/CurrencyEnum';
 
-import FormRadioList from '../forms/FormRadioList';
-import FormSelect from '../forms/FormSelect';
-import FormTextInput from '../forms/FormTextInput';
+import FormRadioList from '../../forms/FormRadioList';
+import FormSelect from '../../forms/FormSelect';
+import FormTextInput from '../../forms/FormTextInput';
 
 function YoeSection() {
   const { register, formState } = useFormContext<{

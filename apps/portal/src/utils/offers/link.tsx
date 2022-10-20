@@ -13,3 +13,7 @@ export function getProfilePath(profileId: string, token?: string) {
   }
   return `/offers/profile/${profileId}`;
 }
+
+export function getProfileEditPath(profileId: string, token: string) {
+  return `/offers/profile/edit/${profileId}?token=${token}`;
+}

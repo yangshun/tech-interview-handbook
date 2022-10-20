@@ -4,9 +4,9 @@ import { HorizontalDivider, Spinner, Tabs } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
-import OfferPercentileAnalysis from './analysis/OfferPercentileAnalysis';
-import OfferProfileCard from './analysis/OfferProfileCard';
-import { OVERALL_TAB } from '../constants';
+import OfferPercentileAnalysis from './OfferPercentileAnalysis';
+import OfferProfileCard from './OfferProfileCard';
+import { OVERALL_TAB } from '../../constants';
 
 import type {
   Analysis,
