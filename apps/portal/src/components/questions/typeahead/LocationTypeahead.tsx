@@ -1,12 +1,19 @@
-import type { ComponentProps } from 'react';
-import { Typeahead } from '@tih/ui';
-
 import { LOCATIONS } from '~/utils/questions/constants';
 
-type TypeaheadProps = ComponentProps<typeof Typeahead>;
+import type { ExpandedTypeaheadProps } from './ExpandedTypeahead';
+import ExpandedTypeahead from './ExpandedTypeahead';
 
-export type LocationTypeaheadProps = Omit<TypeaheadProps, 'label' | 'options'>;
+export type LocationTypeaheadProps = Omit<
+  ExpandedTypeaheadProps,
+  'label' | 'options'
+>;
 
 export default function LocationTypeahead(props: LocationTypeaheadProps) {
-  return <Typeahead label="Location" options={LOCATIONS} {...props} />;
+  return (
+    <ExpandedTypeahead
+      {...(props as ExpandedTypeaheadProps)}
+      label="Location"
+      options={LOCATIONS}
+    />
+  );
 }

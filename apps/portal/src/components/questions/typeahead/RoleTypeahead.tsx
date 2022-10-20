@@ -1,12 +1,19 @@
-import type { ComponentProps } from 'react';
-import { Typeahead } from '@tih/ui';
-
 import { ROLES } from '~/utils/questions/constants';
 
-type TypeaheadProps = ComponentProps<typeof Typeahead>;
+import type { ExpandedTypeaheadProps } from './ExpandedTypeahead';
+import ExpandedTypeahead from './ExpandedTypeahead';
 
-export type RoleTypeaheadProps = Omit<TypeaheadProps, 'label' | 'options'>;
+export type RoleTypeaheadProps = Omit<
+  ExpandedTypeaheadProps,
+  'label' | 'options'
+>;
 
 export default function RoleTypeahead(props: RoleTypeaheadProps) {
-  return <Typeahead label="Role" options={ROLES} {...props} />;
+  return (
+    <ExpandedTypeahead
+      {...(props as ExpandedTypeaheadProps)}
+      label="Role"
+      options={ROLES}
+    />
+  );
 }

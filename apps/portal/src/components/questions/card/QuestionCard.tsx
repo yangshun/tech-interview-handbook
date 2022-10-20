@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import {
   ChatBubbleBottomCenterTextIcon,
+  CheckIcon,
   EyeIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
@@ -80,6 +82,7 @@ export type QuestionCardProps = ActionButtonProps &
     role: string;
     showHover?: boolean;
     timestamp: string;
+    truncateContent?: boolean;
     type: QuestionsQuestionType;
   };
 
@@ -104,6 +107,7 @@ export default function QuestionCard({
   onReceivedSubmit,
   showDeleteButton,
   onDelete,
+  truncateContent = true,
 }: QuestionCardProps) {
   const [showReceivedForm, setShowReceivedForm] = useState(false);
   const { handleDownvote, handleUpvote, vote } = useQuestionVote(questionId);
@@ -147,7 +151,9 @@ export default function QuestionCard({
           )}
         </div>
         <div className="ml-2">
-          <p className="line-clamp-2 text-ellipsis ">{content}</p>
+          <p className={clsx(truncateContent && 'line-clamp-2 text-ellipsis')}>
+            {content}
+          </p>
         </div>
         {(showAnswerStatistics || showReceivedStatistics) && (
           <div className="flex gap-2">
@@ -161,17 +167,26 @@ export default function QuestionCard({
               />
             )}
             {showReceivedStatistics && (
-              <Button
-                addonPosition="start"
-                icon={EyeIcon}
-                label={`${receivedCount} received this`}
-                size="sm"
-                variant="tertiary"
-                onClick={(event) => {
-                  event.preventDefault();
-                  setShowReceivedForm(true);
-                }}
-              />
+              <>
+                <Button
+                  addonPosition="start"
+                  icon={EyeIcon}
+                  label={`${receivedCount} received this`}
+                  size="sm"
+                  variant="tertiary"
+                />
+                <Button
+                  addonPosition="start"
+                  icon={CheckIcon}
+                  label="I received this too"
+                  size="sm"
+                  variant="tertiary"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setShowReceivedForm(true);
+                  }}
+                />
+              </>
             )}
           </div>
         )}

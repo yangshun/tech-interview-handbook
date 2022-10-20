@@ -8,7 +8,6 @@ import {
   HorizontalDivider,
   Select,
   TextArea,
-  Typeahead,
 } from '@tih/ui';
 
 import { LOCATIONS, QUESTION_TYPES, ROLES } from '~/utils/questions/constants';

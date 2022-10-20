@@ -5,6 +5,7 @@ export type QuestionOverviewCardProps = Omit<
   QuestionCardProps & {
     showActionButton: false;
     showAnswerStatistics: false;
+    showDeleteButton: false;
     showReceivedStatistics: true;
     showVoteButtons: true;
   },
@@ -24,6 +25,7 @@ export default function FullQuestionCard(props: QuestionOverviewCardProps) {
       showAnswerStatistics={false}
       showReceivedStatistics={true}
       showVoteButtons={true}
+      truncateContent={false}
     />
   );
 }
