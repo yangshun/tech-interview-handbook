@@ -5,6 +5,7 @@ import type { ResumesCommentVote, ResumesSection } from '@prisma/client';
  * frontend-friendly representation of the query
  */
 export type ResumeComment = Readonly<{
+  children: Array<ResumeComment>;
   createdAt: Date;
   description: string;
   id: string;
