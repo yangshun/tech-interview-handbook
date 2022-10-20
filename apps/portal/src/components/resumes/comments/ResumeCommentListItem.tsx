@@ -13,7 +13,7 @@ import { Button, TextArea } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
-import ResumeUserBadges from './ResumeUserBadges';
+import ResumeUserBadges from '../badges/ResumeUserBadges';
 import ResumeExpandableText from '../shared/ResumeExpandableText';
 
 import type { ResumeComment } from '~/types/resume-comments';
