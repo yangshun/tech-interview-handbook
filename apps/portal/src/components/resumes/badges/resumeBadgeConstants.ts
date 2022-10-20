@@ -29,7 +29,7 @@ const BRONZE_TIER = 5;
 
 export const RESUME_USER_BADGES: Array<BadgeInfo> = [
   {
-    description: `User has reviewed over ${GOLD_TIER} resumes`,
+    description: `Reviewed over ${GOLD_TIER} resumes`,
     icon: GoldReviewerBadgeIcon,
     id: 'Superhero',
     isValid: (payload: BadgePayload) =>
@@ -37,7 +37,7 @@ export const RESUME_USER_BADGES: Array<BadgeInfo> = [
     toolTip: 'True saviour of the people',
   },
   {
-    description: `User has reviewed over ${SILVER_TIER} resumes`,
+    description: `Reviewed over ${SILVER_TIER} resumes`,
     icon: SilverReviewerBadgeIcon,
     id: 'Detective',
     isValid: (payload: BadgePayload) =>
@@ -46,7 +46,7 @@ export const RESUME_USER_BADGES: Array<BadgeInfo> = [
     toolTip: 'Keen eye for details like a private eye',
   },
   {
-    description: `User has reviewed over ${BRONZE_TIER} resumes`,
+    description: `Reviewed over ${BRONZE_TIER} resumes`,
     icon: BronzeReviewerBadgeIcon,
     id: 'Eagle',
     isValid: (payload: BadgePayload) =>
