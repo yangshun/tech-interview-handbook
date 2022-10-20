@@ -71,6 +71,7 @@ export function Basic({
       isLabelHidden={isLabelHidden}
       label={label}
       options={filteredPeople}
+      query={query}
       value={selectedEntry}
       onQueryChange={setQuery}
       onSelect={setSelectedEntry}
@@ -112,6 +113,7 @@ export function Required() {
     <Typeahead
       label="Author"
       options={filteredPeople}
+      query={query}
       required={true}
       value={selectedEntry}
       onQueryChange={setQuery}
