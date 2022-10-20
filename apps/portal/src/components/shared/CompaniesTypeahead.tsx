@@ -8,9 +8,9 @@ type TypeaheadProps = ComponentProps<typeof Typeahead>;
 
 type Props = Omit<
   TypeaheadProps,
-  'noResultsMessage' | 'onQueryChange' | 'options' | 'query'
+  'label' | 'noResultsMessage' | 'onQueryChange' | 'options' | 'query'
 > &
-  Partial<Pick<TypeaheadProps, 'noResultsMessage'>> &
+  Partial<Pick<TypeaheadProps, 'label' | 'noResultsMessage'>> &
   (
     | Required<Pick<TypeaheadProps, 'onQueryChange' | 'query'>>
     | {
@@ -39,6 +39,7 @@ export default function CompaniesTypeahead({
   return (
     <Typeahead
       {...typeaheadProps}
+      label={typeaheadProps.label ?? 'Company'}
       noResultsMessage="No companies found"
       nullable={nullable}
       options={
