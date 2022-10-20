@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
   BookmarkSquareIcon,
@@ -10,6 +11,8 @@ import { Button, Dialog, Spinner, Tabs } from '@tih/ui';
 
 import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
 import type { BackgroundCard } from '~/components/offers/types';
+
+import { getProfileEditPath } from '~/utils/offers/link';
 
 type ProfileHeaderProps = Readonly<{
   background?: BackgroundCard;
@@ -29,6 +32,12 @@ export default function ProfileHeader({
   setSelectedTab,
 }: ProfileHeaderProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const router = useRouter();
+  const { offerProfileId = '', token = '' } = router.query;
+
+  const handleEditClick = () => {
+    router.push(getProfileEditPath(offerProfileId as string, token as string));
+  };
 
   function renderActionList() {
     return (
@@ -48,6 +57,7 @@ export default function ProfileHeader({
           label="Edit"
           size="md"
           variant="tertiary"
+          onClick={handleEditClick}
         />
         <Button
           disabled={isLoading}
@@ -119,9 +129,11 @@ export default function ProfileHeader({
           <div className="flex flex-row">
             <BuildingOffice2Icon className="mr-2.5 h-5" />
             <span className="mr-2 font-bold">Current:</span>
-            <span>{`${background?.experiences[0].companyName ?? '-'} ${
-              background?.experiences[0].jobLevel
-            } ${background?.experiences[0].jobTitle}`}</span>
+            <span>
+              {`${background?.experiences[0]?.companyName ?? '-'} ${
+                background?.experiences[0]?.jobLevel || ''
+              } ${background?.experiences[0]?.jobTitle || ''}`}
+            </span>
           </div>
           <div className="flex flex-row">
             <CalendarDaysIcon className="mr-2.5 h-5" />

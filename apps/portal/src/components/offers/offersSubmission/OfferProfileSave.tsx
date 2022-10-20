@@ -1,13 +1,30 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { setTimeout } from 'timers';
 import { CheckIcon, DocumentDuplicateIcon } from '@heroicons/react/20/solid';
 import { BookmarkSquareIcon, EyeIcon } from '@heroicons/react/24/outline';
 import { Button, TextInput } from '@tih/ui';
 
-export default function OfferProfileSave() {
+import {
+  copyProfileLink,
+  getProfileLink,
+  getProfilePath,
+} from '~/utils/offers/link';
+
+type OfferProfileSaveProps = Readonly<{
+  profileId: string;
+  token?: string;
+}>;
+
+export default function OfferProfileSave({
+  profileId,
+  token,
+}: OfferProfileSaveProps) {
   const [linkCopied, setLinkCopied] = useState(false);
   const [isSaving, setSaving] = useState(false);
   const [isSaved, setSaved] = useState(false);
+  const router = useRouter();
+
   const saveProfile = () => {
     setSaving(true);
     setTimeout(() => {
@@ -27,13 +44,13 @@ export default function OfferProfileSave() {
           To keep you offer profile strictly anonymous, only people who have the
           link below can edit it.
         </p>
-        <div className="mb-20 grid grid-cols-12 gap-4">
+        <div className="mb-5 grid grid-cols-12 gap-4">
           <div className="col-span-11">
             <TextInput
               disabled={true}
               isLabelHidden={true}
               label="Edit link"
-              value="link.myprofile-auto-generate..."
+              value={getProfileLink(profileId, token)}
             />
           </div>
           <Button
@@ -41,10 +58,12 @@ export default function OfferProfileSave() {
             isLabelHidden={true}
             label="Copy"
             variant="primary"
-            onClick={() => setLinkCopied(true)}
+            onClick={() => {
+              copyProfileLink(profileId, token), setLinkCopied(true);
+            }}
           />
         </div>
-        <div className="mb-5">
+        <div className="mb-20">
           {linkCopied && (
             <p className="text-purple-700">Link copied to clipboard!</p>
           )}
@@ -60,13 +79,18 @@ export default function OfferProfileSave() {
             disabled={isSaved}
             icon={isSaved ? CheckIcon : BookmarkSquareIcon}
             isLoading={isSaving}
-            label="Save to user profile"
+            label={isSaved ? 'Saved to user profile' : 'Save to user profile'}
             variant="primary"
             onClick={saveProfile}
           />
         </div>
         <div className="mb-10">
-          <Button icon={EyeIcon} label="View your profile" variant="special" />
+          <Button
+            icon={EyeIcon}
+            label="View your profile"
+            variant="special"
+            onClick={() => router.push(getProfilePath(profileId, token))}
+          />
         </div>
       </div>
     </div>

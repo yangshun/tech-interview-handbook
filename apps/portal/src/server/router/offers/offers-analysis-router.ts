@@ -216,7 +216,7 @@ export const offersAnalysisRouter = createRouter()
       // TODO: Shift yoe out of background to make it mandatory
       if (
         !overallHighestOffer.profile.background ||
-        !overallHighestOffer.profile.background.totalYoe
+        overallHighestOffer.profile.background.totalYoe === undefined
       ) {
         throw new TRPCError({
           code: 'BAD_REQUEST',

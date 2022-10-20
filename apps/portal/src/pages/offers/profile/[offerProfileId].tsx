@@ -7,7 +7,8 @@ import ProfileDetails from '~/components/offers/profile/ProfileDetails';
 import ProfileHeader from '~/components/offers/profile/ProfileHeader';
 import type { BackgroundCard, OfferEntity } from '~/components/offers/types';
 
-import { convertCurrencyToString } from '~/utils/offers/currency';
+import { convertMoneyToString } from '~/utils/offers/currency';
+import { getProfilePath } from '~/utils/offers/link';
 import { formatDate } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
@@ -38,7 +39,7 @@ export default function OfferProfile() {
         }
         // If the profile is not editable with a wrong token, redirect to the profile page
         if (!data?.isEditable && token !== '') {
-          router.push(`/offers/profile/${offerProfileId}`);
+          router.push(getProfilePath(offerProfileId as string));
         }
 
         setIsEditable(data?.isEditable ?? false);
@@ -48,10 +49,8 @@ export default function OfferProfile() {
             ? data?.offers.map((res: ProfileOffer) => {
                 if (res.offersFullTime) {
                   const filteredOffer: OfferEntity = {
-                    base: convertCurrencyToString(
-                      res.offersFullTime.baseSalary,
-                    ),
-                    bonus: convertCurrencyToString(res.offersFullTime.bonus),
+                    base: convertMoneyToString(res.offersFullTime.baseSalary),
+                    bonus: convertMoneyToString(res.offersFullTime.bonus),
                     companyName: res.company.name,
                     id: res.offersFullTime.id,
                     jobLevel: res.offersFullTime.level,
@@ -60,12 +59,11 @@ export default function OfferProfile() {
                     negotiationStrategy: res.negotiationStrategy || '',
                     otherComment: res.comments || '',
                     receivedMonth: formatDate(res.monthYearReceived),
-                    stocks: convertCurrencyToString(res.offersFullTime.stocks),
-                    totalCompensation: convertCurrencyToString(
+                    stocks: convertMoneyToString(res.offersFullTime.stocks),
+                    totalCompensation: convertMoneyToString(
                       res.offersFullTime.totalCompensation,
                     ),
                   };
-
                   return filteredOffer;
                 }
                 const filteredOffer: OfferEntity = {
@@ -73,7 +71,7 @@ export default function OfferProfile() {
                   id: res.offersIntern!.id,
                   jobTitle: res.offersIntern!.title,
                   location: res.location,
-                  monthlySalary: convertCurrencyToString(
+                  monthlySalary: convertMoneyToString(
                     res.offersIntern!.monthlySalary,
                   ),
                   negotiationStrategy: res.negotiationStrategy || '',
@@ -88,46 +86,29 @@ export default function OfferProfile() {
 
         if (data?.background) {
           const transformedBackground = {
-            educations: [
-              {
-                endDate: data?.background.educations[0].endDate
-                  ? formatDate(data.background.educations[0].endDate)
-                  : '-',
-                field: data.background.educations[0].field || '-',
-                school: data.background.educations[0].school || '-',
-                startDate: data.background.educations[0].startDate
-                  ? formatDate(data.background.educations[0].startDate)
-                  : '-',
-                type: data.background.educations[0].type || '-',
-              },
-            ],
-            experiences: [
-              data.background.experiences &&
-              data.background.experiences.length > 0
-                ? {
-                    companyName:
-                      data.background.experiences[0].company?.name ?? '-',
-                    duration:
-                      String(data.background.experiences[0].durationInMonths) ??
-                      '-',
-                    jobLevel: data.background.experiences[0].level ?? '',
-                    jobTitle: data.background.experiences[0].title ?? '-',
-                    monthlySalary: data.background.experiences[0].monthlySalary
-                      ? convertCurrencyToString(
-                          data.background.experiences[0].monthlySalary,
-                        )
-                      : '-',
-                    totalCompensation: data.background.experiences[0]
-                      .totalCompensation
-                      ? convertCurrencyToString(
-                          data.background.experiences[0].totalCompensation,
-                        )
-                      : '-',
-                  }
-                : {},
-            ],
+            educations: data.background.educations.map((education) => ({
+              endDate: education.endDate ? formatDate(education.endDate) : '-',
+              field: education.field || '-',
+              school: education.school || '-',
+              startDate: education.startDate
+                ? formatDate(education.startDate)
+                : '-',
+              type: education.type || '-',
+            })),
+            experiences: data.background.experiences.map((experience) => ({
+              companyName: experience.company?.name ?? '-',
+              duration: String(experience.durationInMonths) ?? '-',
+              jobLevel: experience.level ?? '',
+              jobTitle: experience.title ?? '-',
+              monthlySalary: experience.monthlySalary
+                ? convertMoneyToString(experience.monthlySalary)
+                : '-',
+              totalCompensation: experience.totalCompensation
+                ? convertMoneyToString(experience.totalCompensation)
+                : '-',
+            })),
             profileName: data.profileName,
-            specificYoes: data.background.specificYoes ?? [],
+            specificYoes: data.background.specificYoes,
             totalYoe: String(data.background.totalYoe) || '-',
           };
           setBackground(transformedBackground);
