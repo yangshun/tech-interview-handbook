@@ -33,6 +33,7 @@ import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 
+import useDebounceValue from '~/utils/resumes/useDebounceValue';
 import { trpc } from '~/utils/trpc';
 
 const filters: Array<Filter> = [
@@ -80,6 +81,7 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
+        searchValue: useDebounceValue(searchValue, 800),
         skip,
         sortOrder,
       },
@@ -100,6 +102,7 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
+        searchValue: useDebounceValue(searchValue, 800),
         skip,
         sortOrder,
       },
@@ -122,6 +125,7 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
+        searchValue: useDebounceValue(searchValue, 800),
         skip,
         sortOrder,
       },

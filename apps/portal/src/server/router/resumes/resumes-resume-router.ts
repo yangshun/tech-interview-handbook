@@ -11,6 +11,7 @@ export const resumesRouter = createRouter()
       locationFilters: z.string().array(),
       numComments: z.number().optional(),
       roleFilters: z.string().array(),
+      searchValue: z.string(),
       skip: z.number(),
       sortOrder: z.string(),
     }),
@@ -22,6 +23,7 @@ export const resumesRouter = createRouter()
         sortOrder,
         numComments,
         skip,
+        searchValue,
       } = input;
       const userId = ctx.session?.user?.id;
       const totalRecords = await ctx.prisma.resumesResume.count({
@@ -81,6 +83,7 @@ export const resumesRouter = createRouter()
           experience: { in: experienceFilters },
           location: { in: locationFilters },
           role: { in: roleFilters },
+          title: { contains: searchValue, mode: 'insensitive' },
         },
       });
       const mappedResumeData = resumesData.map((r) => {
