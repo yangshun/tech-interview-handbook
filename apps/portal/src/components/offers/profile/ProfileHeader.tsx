@@ -119,9 +119,11 @@ export default function ProfileHeader({
           <div className="flex flex-row">
             <BuildingOffice2Icon className="mr-2.5 h-5" />
             <span className="mr-2 font-bold">Current:</span>
-            <span>{`${background?.experiences[0].companyName ?? '-'} ${
-              background?.experiences[0].jobLevel
-            } ${background?.experiences[0].jobTitle}`}</span>
+            <span>
+              {`${background?.experiences[0]?.companyName ?? '-'} ${
+                background?.experiences[0]?.jobLevel || ''
+              } ${background?.experiences[0]?.jobTitle || ''}`}
+            </span>
           </div>
           <div className="flex flex-row">
             <CalendarDaysIcon className="mr-2.5 h-5" />

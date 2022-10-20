@@ -1,6 +1,6 @@
 import type { Money } from '~/components/offers/types';
 
-export function convertCurrencyToString({ currency, value }: Money) {
+export function convertMoneyToString({ currency, value }: Money) {
   if (!value) {
     return '-';
   }
