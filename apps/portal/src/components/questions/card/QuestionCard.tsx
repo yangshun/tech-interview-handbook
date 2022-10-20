@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
   ChatBubbleBottomCenterTextIcon,
   EyeIcon,
+  TrashIcon,
 } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
 import { Badge, Button } from '@tih/ui';
@@ -21,6 +22,16 @@ type UpvoteProps =
   | {
       showVoteButtons?: false;
       upvoteCount?: never;
+    };
+
+type DeleteProps =
+  | {
+      onDelete: () => void;
+      showDeleteButton: true;
+    }
+  | {
+      onDelete?: never;
+      showDeleteButton?: false;
     };
 
 type AnswerStatisticsProps =
@@ -59,6 +70,7 @@ type ReceivedStatisticsProps =
 
 export type QuestionCardProps = ActionButtonProps &
   AnswerStatisticsProps &
+  DeleteProps &
   ReceivedStatisticsProps &
   UpvoteProps & {
     company: string;
@@ -90,11 +102,12 @@ export default function QuestionCard({
   location,
   showHover,
   onReceivedSubmit,
+  showDeleteButton,
+  onDelete,
 }: QuestionCardProps) {
   const [showReceivedForm, setShowReceivedForm] = useState(false);
   const { handleDownvote, handleUpvote, vote } = useQuestionVote(questionId);
   const hoverClass = showHover ? 'hover:bg-slate-50' : '';
-
   const cardContent = showReceivedForm ? (
     <CreateQuestionEncounterForm
       onCancel={() => {
@@ -168,8 +181,24 @@ export default function QuestionCard({
 
   return (
     <article
-      className={`flex gap-4 rounded-md border border-slate-300 bg-white p-4 ${hoverClass}`}>
+      className={`group flex gap-4 rounded-md border border-slate-300 bg-white p-4 ${hoverClass}`}>
       {cardContent}
+      {showDeleteButton && (
+        <div className="invisible self-center	fill-red-700 group-hover:visible">
+          <Button
+            icon={TrashIcon}
+            isLabelHidden={true}
+            label="Delete"
+            size="md"
+            variant="tertiary"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onDelete();
+            }}
+          />
+        </div>
+      )}
     </article>
   );
 }

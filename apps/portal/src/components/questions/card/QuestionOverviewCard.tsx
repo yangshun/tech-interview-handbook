@@ -7,13 +7,16 @@ export type QuestionOverviewCardProps = Omit<
   QuestionCardProps & {
     showActionButton: false;
     showAnswerStatistics: true;
+    showDeleteButton: false;
     showReceivedStatistics: true;
     showVoteButtons: true;
   },
   | 'actionButtonLabel'
   | 'onActionButtonClick'
+  | 'onDelete'
   | 'showActionButton'
   | 'showAnswerStatistics'
+  | 'showDeleteButton'
   | 'showReceivedStatistics'
   | 'showVoteButtons'
 >;
@@ -24,6 +27,7 @@ function QuestionOverviewCardWithoutHref(props: QuestionOverviewCardProps) {
       {...props}
       showActionButton={false}
       showAnswerStatistics={true}
+      showDeleteButton={false}
       showHover={true}
       showReceivedStatistics={true}
       showVoteButtons={true}
