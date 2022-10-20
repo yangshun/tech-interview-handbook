@@ -16,7 +16,9 @@ export default function ResumeUserBadges({ userId }: Props) {
 
   // TODO: Add other badges in
   const payload: BadgePayload = {
+    maxResumeUpvoteCount: 10,
     reviewedResumesCount: userReviewedResumesCountQuery.data ?? 0,
+    topUpvotedCommentCount: 10,
   };
 
   return (

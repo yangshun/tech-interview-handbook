@@ -1,8 +1,8 @@
-type Props = Readonly<{
-  className: string;
-}>;
+import type { ResumeBadgeProps } from '../resume-badge';
 
-export default function ResumeBadgeDetectiveIcon({ className }: Props) {
+export default function ResumeBadgeDetectiveIcon({
+  className,
+}: ResumeBadgeProps) {
   return (
     <svg
       aria-hidden="true"
