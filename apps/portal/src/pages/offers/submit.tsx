@@ -96,7 +96,13 @@ export default function OffersSubmissionPage() {
       label: 'Analysis',
     },
     {
-      component: <OfferProfileSave key={3} />,
+      component: (
+        <OfferProfileSave
+          key={3}
+          profileId={createProfileResponse?.id || ''}
+          token={createProfileResponse?.token}
+        />
+      ),
       hasNext: false,
       hasPrevious: false,
       label: 'Save',

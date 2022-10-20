@@ -8,6 +8,7 @@ import ProfileHeader from '~/components/offers/profile/ProfileHeader';
 import type { BackgroundCard, OfferEntity } from '~/components/offers/types';
 
 import { convertCurrencyToString } from '~/utils/offers/currency';
+import { getProfilePath } from '~/utils/offers/link';
 import { formatDate } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
@@ -38,7 +39,7 @@ export default function OfferProfile() {
         }
         // If the profile is not editable with a wrong token, redirect to the profile page
         if (!data?.isEditable && token !== '') {
-          router.push(`/offers/profile/${offerProfileId}`);
+          router.push(getProfilePath(offerProfileId as string));
         }
 
         setIsEditable(data?.isEditable ?? false);

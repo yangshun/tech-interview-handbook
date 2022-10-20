@@ -3,7 +3,7 @@ import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { HorizontalDivider } from '~/../../../packages/ui/dist';
 import { formatDate } from '~/utils/offers/time';
 
-import { JobType } from '../types';
+import { JobType } from '../../types';
 
 import type { AnalysisOffer } from '~/types/offers';
 
