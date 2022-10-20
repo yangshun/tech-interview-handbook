@@ -99,6 +99,7 @@ export default function ResumeHomePage() {
         setResumes(data.mappedResumeData);
         setRenderSignInButton(false);
       },
+      staleTime: 5 * 60 * 1000,
     },
   );
   const starredResumesQuery = trpc.useQuery(
@@ -129,6 +130,7 @@ export default function ResumeHomePage() {
         setResumes(data.mappedResumeData);
       },
       retry: false,
+      staleTime: 5 * 60 * 1000,
     },
   );
   const myResumesQuery = trpc.useQuery(
@@ -159,6 +161,7 @@ export default function ResumeHomePage() {
         setResumes(data.mappedResumeData);
       },
       retry: false,
+      staleTime: 5 * 60 * 1000,
     },
   );
 
