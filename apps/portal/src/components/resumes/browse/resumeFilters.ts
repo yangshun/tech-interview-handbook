@@ -139,3 +139,13 @@ export const SHORTCUTS: Array<Shortcut> = [
     sortOrder: 'latest',
   },
 ];
+
+export const isInitialFilterState = (filters: FilterState) =>
+  Object.keys(filters).every((filter) => {
+    if (!['experience', 'location', 'role'].includes(filter)) {
+      return true;
+    }
+    return INITIAL_FILTER_STATE[filter as FilterId].every((value) =>
+      filters[filter as FilterId].includes(value),
+    );
+  });

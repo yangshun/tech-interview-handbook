@@ -4,7 +4,10 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import {
+  MagnifyingGlassIcon,
+  NewspaperIcon,
+} from '@heroicons/react/24/outline';
 import {
   CheckboxInput,
   CheckboxList,
@@ -24,6 +27,7 @@ import {
   BROWSE_TABS_VALUES,
   EXPERIENCE,
   INITIAL_FILTER_STATE,
+  isInitialFilterState,
   LOCATION,
   ROLE,
   SHORTCUTS,
@@ -36,6 +40,9 @@ import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 import useDebounceValue from '~/utils/resumes/useDebounceValue';
 import { trpc } from '~/utils/trpc';
 
+import type { FilterState } from '../../components/resumes/browse/resumeFilters';
+
+const PAGE_LIMIT = 10;
 const filters: Array<Filter> = [
   {
     id: 'role',
@@ -54,6 +61,29 @@ const filters: Array<Filter> = [
   },
 ];
 
+const getEmptyDataText = (
+  tabsValue: string,
+  searchValue: string,
+  userFilters: FilterState,
+) => {
+  if (searchValue.length > 0) {
+    return 'Try tweaking your search text to see more resumes.';
+  }
+  if (!isInitialFilterState(userFilters)) {
+    return 'Try tweaking your filters to see more resumes.';
+  }
+  switch (tabsValue) {
+    case BROWSE_TABS_VALUES.ALL:
+      return 'Looks like SWEs are feeling lucky!';
+    case BROWSE_TABS_VALUES.STARRED:
+      return 'You have not starred any resumes.\nStar one to see it here!';
+    case BROWSE_TABS_VALUES.MY:
+      return 'Upload a resume to see it here!';
+    default:
+      return null;
+  }
+};
+
 export default function ResumeHomePage() {
   const { data: sessionData } = useSession();
   const router = useRouter();
@@ -66,7 +96,6 @@ export default function ResumeHomePage() {
   const [signInButtonText, setSignInButtonText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const PAGE_LIMIT = 10;
   const skip = (currentPage - 1) * PAGE_LIMIT;
 
   useEffect(() => {
@@ -374,26 +403,36 @@ export default function ResumeHomePage() {
                 {renderSignInButton && (
                   <ResumeSignInButton text={signInButtonText} />
                 )}
-                {getTabResumes().length === 0 && (
-                  <div className="mt-4">Nothing to see here.</div>
+                {getTabResumes().length === 0 ? (
+                  <div className="mt-24 flex flex-wrap justify-center">
+                    <NewspaperIcon
+                      className="mb-12 basis-full"
+                      height={196}
+                      width={196}
+                    />
+                    {getEmptyDataText(tabsValue, searchValue, userFilters)}
+                  </div>
+                ) : (
+                  <>
+                    <ResumeListItems
+                      isLoading={
+                        allResumesQuery.isFetching ||
+                        starredResumesQuery.isFetching ||
+                        myResumesQuery.isFetching
+                      }
+                      resumes={getTabResumes()}
+                    />
+                    <div className="my-4 flex justify-center">
+                      <Pagination
+                        current={currentPage}
+                        end={getTabTotalPages()}
+                        label="pagination"
+                        start={1}
+                        onSelect={(page) => setCurrentPage(page)}
+                      />
+                    </div>
+                  </>
                 )}
-                <ResumeListItems
-                  isLoading={
-                    allResumesQuery.isFetching ||
-                    starredResumesQuery.isFetching ||
-                    myResumesQuery.isFetching
-                  }
-                  resumes={getTabResumes()}
-                />
-                <div className="my-4 flex justify-center">
-                  <Pagination
-                    current={currentPage}
-                    end={getTabTotalPages()}
-                    label="pagination"
-                    start={1}
-                    onSelect={(page) => setCurrentPage(page)}
-                  />
-                </div>
               </div>
             </div>
           </div>
