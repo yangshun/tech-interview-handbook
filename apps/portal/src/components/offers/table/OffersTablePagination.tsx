@@ -33,7 +33,7 @@ export default function OffersTablePagination({
         current={pagination.currentPage + 1}
         end={pagination.numOfPages}
         label="Pagination"
-        pagePadding={1}
+        pagePadding={2}
         start={1}
         onSelect={(currPage) => {
           handlePageChange(currPage - 1);

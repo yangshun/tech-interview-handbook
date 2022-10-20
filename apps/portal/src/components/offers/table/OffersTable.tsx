@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import { HorizontalDivider, Select, Spinner, Tabs } from '@tih/ui';
 
 import OffersTablePagination from '~/components/offers/table/OffersTablePagination';
-import { YOE_CATEGORY } from '~/components/offers/table/types';
+import {
+  OfferTableFilterOptions,
+  OfferTableSortBy,
+  OfferTableTabOptions,
+  YOE_CATEGORY,
+} from '~/components/offers/table/types';
 
 import CurrencySelector from '~/utils/offers/currency/CurrencySelector';
 import { trpc } from '~/utils/trpc';
@@ -29,7 +34,9 @@ export default function OffersTable({
     totalItems: 0,
   });
   const [offers, setOffers] = useState<Array<DashboardOffer>>([]);
-
+  const [selectedFilter, setSelectedFilter] = useState(
+    OfferTableFilterOptions[0].value,
+  );
   useEffect(() => {
     setPagination({
       currentPage: 0,
@@ -45,13 +52,16 @@ export default function OffersTable({
         companyId: companyFilter,
         limit: NUMBER_OF_OFFERS_IN_PAGE,
         location: 'Singapore, Singapore', // TODO: Geolocation
-        offset: 0,
-        sortBy: '-monthYearReceived',
+        offset: pagination.currentPage,
+        sortBy: OfferTableSortBy[selectedFilter] ?? '-monthYearReceived',
         title: jobTitleFilter,
         yoeCategory: selectedTab,
       },
     ],
     {
+      onError: (err) => {
+        alert(err);
+      },
       onSuccess: (response: GetOffersResponse) => {
         setOffers(response.data);
         setPagination(response.paging);
@@ -65,24 +75,7 @@ export default function OffersTable({
         <div className="w-fit">
           <Tabs
             label="Table Navigation"
-            tabs={[
-              {
-                label: 'Fresh Grad (0-2 YOE)',
-                value: YOE_CATEGORY.ENTRY,
-              },
-              {
-                label: 'Mid (3-5 YOE)',
-                value: YOE_CATEGORY.MID,
-              },
-              {
-                label: 'Senior (6+ YOE)',
-                value: YOE_CATEGORY.SENIOR,
-              },
-              {
-                label: 'Internship',
-                value: YOE_CATEGORY.INTERN,
-              },
-            ]}
+            tabs={OfferTableTabOptions}
             value={selectedTab}
             onChange={(value) => setSelectedTab(value)}
           />
@@ -102,16 +95,11 @@ export default function OffersTable({
           />
         </div>
         <Select
-          disabled={true}
           isLabelHidden={true}
           label=""
-          options={[
-            {
-              label: 'Latest Submitted',
-              value: 'latest-submitted',
-            },
-          ]}
-          value="latest-submitted"
+          options={OfferTableFilterOptions}
+          value={selectedFilter}
+          onChange={(value) => setSelectedFilter(value)}
         />
       </div>
     );
@@ -139,7 +127,9 @@ export default function OffersTable({
   }
 
   const handlePageChange = (currPage: number) => {
-    setPagination({ ...pagination, currentPage: currPage });
+    if (0 < currPage && currPage < pagination.numOfPages) {
+      setPagination({ ...pagination, currentPage: currPage });
+    }
   };
 
   return (
