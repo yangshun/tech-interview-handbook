@@ -17,11 +17,11 @@ const yoeCategoryMap: Record<number, string> = {
 
 const getYoeRange = (yoeCategory: number) => {
   return yoeCategoryMap[yoeCategory] === 'Fresh Grad'
-    ? { maxYoe: 3, minYoe: 0 }
+    ? { maxYoe: 2, minYoe: 0 }
     : yoeCategoryMap[yoeCategory] === 'Mid'
-    ? { maxYoe: 7, minYoe: 4 }
+    ? { maxYoe: 5, minYoe: 3 }
     : yoeCategoryMap[yoeCategory] === 'Senior'
-    ? { maxYoe: 100, minYoe: 8 }
+    ? { maxYoe: 100, minYoe: 6 }
     : null; // Internship
 };
 
