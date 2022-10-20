@@ -20,17 +20,17 @@ export default function ResumeUserBadges({ userId }: Props) {
   };
 
   return (
-    <>
+    <div className="flex items-center justify-center gap-1">
       {RESUME_USER_BADGES.filter((badge) => badge.isValid(payload)).map(
         (badge) => (
           <ResumeUserBadge
             key={badge.id}
             description={badge.description}
             icon={badge.icon}
-            toolTip={badge.toolTip}
+            title={badge.title}
           />
         ),
       )}
-    </>
+    </div>
   );
 }

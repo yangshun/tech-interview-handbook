@@ -2,7 +2,7 @@ type Props = Readonly<{
   className: string;
 }>;
 
-export default function GoldReviewerBadgeIcon({ className }: Props) {
+export default function ResumeBadgeSuperheroIcon({ className }: Props) {
   return (
     <svg
       aria-hidden="true"
