@@ -1,12 +1,12 @@
-import BronzeReviewerBadgeIcon from '../badgeIcons/reviewer/BronzeReviewerBadgeIcon';
-import GoldReviewerBadgeIcon from '../badgeIcons/reviewer/GoldReviewerBadgeIcon';
-import SilverReviewerBadgeIcon from '../badgeIcons/reviewer/SilverReviewerBadgeIcon';
+import ResumeBadgeDetectiveIcon from '../badgeIcons/reviewer/ResumeBadgeDetectiveIcon';
+import ResumeBadgeEagleIcon from '../badgeIcons/reviewer/ResumeBadgeEagleIcon';
+import ResumeBadgeSuperheroIcon from '../badgeIcons/reviewer/ResumeBadgeSuperheroIcon';
 
 export type BadgeIcon = (
   props: React.ComponentProps<
-    | typeof BronzeReviewerBadgeIcon
-    | typeof GoldReviewerBadgeIcon
-    | typeof SilverReviewerBadgeIcon
+    | typeof ResumeBadgeDetectiveIcon
+    | typeof ResumeBadgeEagleIcon
+    | typeof ResumeBadgeSuperheroIcon
   >,
 ) => JSX.Element;
 
@@ -23,35 +23,35 @@ export type BadgePayload = {
   reviewedResumesCount: number;
 };
 
-const GOLD_TIER = 20;
-const SILVER_TIER = 10;
-const BRONZE_TIER = 5;
+const TIER_THREE = 20;
+const TIER_TWO = 10;
+const TIER_ONE = 5;
 
 export const RESUME_USER_BADGES: Array<BadgeInfo> = [
   {
-    description: `Reviewed over ${GOLD_TIER} resumes`,
-    icon: GoldReviewerBadgeIcon,
+    description: `Reviewed over ${TIER_ONE} resumes`,
+    icon: ResumeBadgeSuperheroIcon,
     id: 'Superhero',
     isValid: (payload: BadgePayload) =>
-      payload.reviewedResumesCount >= GOLD_TIER,
+      payload.reviewedResumesCount >= TIER_THREE,
     toolTip: 'True saviour of the people',
   },
   {
-    description: `Reviewed over ${SILVER_TIER} resumes`,
-    icon: SilverReviewerBadgeIcon,
+    description: `Reviewed over ${TIER_TWO} resumes`,
+    icon: ResumeBadgeDetectiveIcon,
     id: 'Detective',
     isValid: (payload: BadgePayload) =>
-      payload.reviewedResumesCount >= SILVER_TIER &&
-      payload.reviewedResumesCount < GOLD_TIER,
+      payload.reviewedResumesCount >= TIER_TWO &&
+      payload.reviewedResumesCount < TIER_THREE,
     toolTip: 'Keen eye for details like a private eye',
   },
   {
-    description: `Reviewed over ${BRONZE_TIER} resumes`,
-    icon: BronzeReviewerBadgeIcon,
+    description: `Reviewed over ${TIER_THREE} resumes`,
+    icon: ResumeBadgeEagleIcon,
     id: 'Eagle',
     isValid: (payload: BadgePayload) =>
-      payload.reviewedResumesCount >= BRONZE_TIER &&
-      payload.reviewedResumesCount < SILVER_TIER,
+      payload.reviewedResumesCount >= TIER_ONE &&
+      payload.reviewedResumesCount < TIER_TWO,
     toolTip: 'As sharp as an eagle',
   },
 ];
