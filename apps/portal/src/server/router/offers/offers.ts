@@ -43,7 +43,7 @@ export const offersRouter = createRouter().query('list', {
     limit: z.number().positive(),
     location: z.string(),
     offset: z.number().nonnegative(),
-    salaryMax: z.number().nullish(),
+    salaryMax: z.number().nonnegative().nullish(),
     salaryMin: z.number().nonnegative().nullish(),
     sortBy: z.string().regex(createSortByValidationRegex()).nullish(),
     title: z.string().nullish(),
@@ -154,38 +154,47 @@ export const offersRouter = createRouter().query('list', {
     data = data.filter((offer) => {
       let validRecord = true;
 
-      if (input.companyId) {
+      if (input.companyId && input.companyId.length !== 0) {
         validRecord = validRecord && offer.company.id === input.companyId;
       }
 
-      if (input.title) {
+      if (input.title && input.title.length !== 0) {
         validRecord =
           validRecord &&
           (offer.offersFullTime?.title === input.title ||
             offer.offersIntern?.title === input.title);
       }
 
-      if (input.dateStart && input.dateEnd) {
+      if (
+        input.dateStart &&
+        input.dateEnd &&
+        input.dateStart.getTime() <= input.dateEnd.getTime()
+      ) {
         validRecord =
           validRecord &&
           offer.monthYearReceived.getTime() >= input.dateStart.getTime() &&
           offer.monthYearReceived.getTime() <= input.dateEnd.getTime();
       }
 
-      if (input.salaryMin && input.salaryMax) {
+      if (input.salaryMin != null || input.salaryMax != null) {
         const salary = offer.offersFullTime?.totalCompensation.value
           ? offer.offersFullTime?.totalCompensation.value
           : offer.offersIntern?.monthlySalary.value;
 
-        if (!salary) {
+        if (salary == null) {
           throw new TRPCError({
             code: 'NOT_FOUND',
             message: 'Total Compensation or Salary not found',
           });
         }
 
-        validRecord =
-          validRecord && salary >= input.salaryMin && salary <= input.salaryMax;
+        if (input.salaryMin != null) {
+          validRecord = validRecord && salary >= input.salaryMin;
+        }
+
+        if (input.salaryMax != null) {
+          validRecord = validRecord && salary <= input.salaryMax;
+        }
       }
 
       return validRecord;
@@ -221,7 +230,7 @@ export const offersRouter = createRouter().query('list', {
               ? offer2.offersFullTime?.totalCompensation.value
               : offer2.offersIntern?.monthlySalary.value;
 
-            if (!salary1 || !salary2) {
+            if (salary1 == null || salary2 == null) {
               throw new TRPCError({
                 code: 'NOT_FOUND',
                 message: 'Total Compensation or Salary not found',
@@ -235,7 +244,7 @@ export const offersRouter = createRouter().query('list', {
             const yoe1 = offer1.profile.background?.totalYoe;
             const yoe2 = offer2.profile.background?.totalYoe;
 
-            if (!yoe1 || !yoe2) {
+            if (yoe1 == null || yoe2 == null) {
               throw new TRPCError({
                 code: 'NOT_FOUND',
                 message: 'Total years of experience not found',
@@ -267,7 +276,7 @@ export const offersRouter = createRouter().query('list', {
               ? offer2.offersFullTime?.totalCompensation.value
               : offer2.offersIntern?.monthlySalary.value;
 
-            if (!salary1 || !salary2) {
+            if (salary1 == null || salary2 == null) {
               throw new TRPCError({
                 code: 'NOT_FOUND',
                 message: 'Total Compensation or Salary not found',
@@ -281,7 +290,7 @@ export const offersRouter = createRouter().query('list', {
             const yoe1 = offer1.profile.background?.totalYoe;
             const yoe2 = offer2.profile.background?.totalYoe;
 
-            if (!yoe1 || !yoe2) {
+            if (yoe1 == null || yoe2 == null) {
               throw new TRPCError({
                 code: 'NOT_FOUND',
                 message: 'Total years of experience not found',

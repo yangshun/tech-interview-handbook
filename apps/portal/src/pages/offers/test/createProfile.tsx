@@ -77,7 +77,7 @@ function Test() {
       message: 'wassup bro',
       profileId: 'cl9efyn9p004ww3u42mjgl1vn',
       replyingToId: 'cl9el4xj10001w3w21o3p2iny',
-      userId: 'cl9ehvpng0000w3ec2mpx0bdd'
+      userId: 'cl9ehvpng0000w3ec2mpx0bdd',
     });
   };
 
@@ -218,7 +218,6 @@ function Test() {
     },
   );
 
-  // Console.log(replies.data?.data)
   const deleteMutation = trpc.useMutation(['offers.profile.delete']);
 
   const handleDelete = (id: string) => {
