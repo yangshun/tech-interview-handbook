@@ -370,36 +370,39 @@ export default function QuestionsHomePage() {
                   console.log(value);
                 }}
               />
-              {(questions ?? []).map((question) => (
-                <QuestionOverviewCard
-                  key={question.id}
-                  answerCount={question.numAnswers}
-                  company={question.company}
-                  content={question.content}
-                  href={`/questions/${question.id}/${createSlug(
-                    question.content,
-                  )}`}
-                  location={question.location}
-                  questionId={question.id}
-                  receivedCount={question.receivedCount}
-                  role={question.role}
-                  timestamp={question.seenAt.toLocaleDateString(undefined, {
-                    month: 'short',
-                    year: 'numeric',
-                  })}
-                  type={question.type}
-                  upvoteCount={question.numVotes}
-                  onReceivedSubmit={(data) => {
-                    console.log(data);
-                  }}
-                />
-              ))}
-              {questions?.length === 0 && (
-                <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
-                  <NoSymbolIcon className="h-6 w-6" />
-                  <p>Nothing found. Try changing your search filters.</p>
-                </div>
-              )}
+              <div className="flex flex-col gap-4 pb-4">
+                {(questions ?? []).map((question) => (
+                  <QuestionOverviewCard
+                    key={question.id}
+                    answerCount={question.numAnswers}
+                    company={question.company}
+                    content={question.content}
+                    href={`/questions/${question.id}/${createSlug(
+                      question.content,
+                    )}`}
+                    location={question.location}
+                    questionId={question.id}
+                    receivedCount={question.receivedCount}
+                    role={question.role}
+                    timestamp={question.seenAt.toLocaleDateString(undefined, {
+                      month: 'short',
+                      year: 'numeric',
+                    })}
+                    type={question.type}
+                    upvoteCount={question.numVotes}
+                    onReceivedSubmit={(data) => {
+                      // eslint-disable-next-line no-console
+                      console.log(data);
+                    }}
+                  />
+                ))}
+                {questions?.length === 0 && (
+                  <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
+                    <NoSymbolIcon className="h-6 w-6" />
+                    <p>Nothing found. Try changing your search filters.</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
