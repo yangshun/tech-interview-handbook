@@ -13,7 +13,6 @@ export const resumeCommentsRouter = createRouter().query('list', {
 
     // For this resume, we retrieve every comment's information, along with:
     // The user's name and image to render
-    // Number of votes, and whether the user (if-any) has voted
     const comments = await ctx.prisma.resumesComment.findMany({
       include: {
         user: {

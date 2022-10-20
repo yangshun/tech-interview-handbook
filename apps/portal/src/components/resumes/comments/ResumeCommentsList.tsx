@@ -33,7 +33,7 @@ export default function ResumeCommentsList({
   const commentsQuery = trpc.useQuery(['resumes.comments.list', { resumeId }]);
 
   const renderIcon = (section: ResumesSection) => {
-    const className = 'h-8 w-8';
+    const className = 'h-7 w-7';
     switch (section) {
       case ResumesSection.GENERAL:
         return <IdentificationIcon className={className} />;
@@ -83,11 +83,11 @@ export default function ResumeCommentsList({
             const commentCount = comments.length;
 
             return (
-              <div key={value} className="mb-4 space-y-3">
+              <div key={value} className="mb-4 space-y-4">
                 <div className="flex flex-row items-center space-x-2 text-indigo-800">
                   {renderIcon(value)}
 
-                  <div className="w-fit text-xl font-medium">{label}</div>
+                  <div className="w-fit text-lg font-medium">{label}</div>
                 </div>
 
                 {commentCount > 0 ? (
