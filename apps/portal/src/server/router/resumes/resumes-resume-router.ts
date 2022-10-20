@@ -157,4 +157,30 @@ export const resumesRouter = createRouter()
         },
       });
     },
+  })
+  .query('findUserMaxResumeUpvoteCount', {
+    input: z.object({
+      userId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const highestUpvotedResume = await ctx.prisma.resumesResume.findFirst({
+        include: {
+          _count: {
+            select: {
+              stars: true,
+            },
+          },
+        },
+        orderBy: {
+          stars: {
+            _count: 'desc',
+          },
+        },
+        where: {
+          userId: input.userId,
+        },
+      });
+
+      return highestUpvotedResume?._count?.stars ?? 0;
+    },
   });

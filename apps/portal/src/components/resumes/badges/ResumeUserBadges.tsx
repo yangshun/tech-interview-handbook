@@ -9,15 +9,19 @@ type Props = Readonly<{
 }>;
 
 export default function ResumeUserBadges({ userId }: Props) {
-  const userReviewedResumesCountQuery = trpc.useQuery([
+  const userReviewedResumeCountQuery = trpc.useQuery([
     'resumes.resume.findUserReviewedResumeCount',
+    { userId },
+  ]);
+  const userMaxResumeUpvoteCountQuery = trpc.useQuery([
+    'resumes.resume.findUserMaxResumeUpvoteCount',
     { userId },
   ]);
 
   // TODO: Add other badges in
   const payload: BadgePayload = {
-    maxResumeUpvoteCount: 10,
-    reviewedResumesCount: userReviewedResumesCountQuery.data ?? 0,
+    maxResumeUpvoteCount: userMaxResumeUpvoteCountQuery.data ?? 0,
+    reviewedResumesCount: userReviewedResumeCountQuery.data ?? 0,
     topUpvotedCommentCount: 10,
   };
 
