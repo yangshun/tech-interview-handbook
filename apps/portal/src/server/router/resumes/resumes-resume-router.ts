@@ -154,16 +154,4 @@ export const resumesRouter = createRouter()
         },
       });
     },
-  })
-  .query('findUserStarredResumeCount', {
-    input: z.object({
-      userId: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      return await ctx.prisma.resumesResume.findMany({
-        where: {
-          userId: input.userId,
-        },
-      });
-    },
   });
