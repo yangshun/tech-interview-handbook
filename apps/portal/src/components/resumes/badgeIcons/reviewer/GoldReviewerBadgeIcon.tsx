@@ -1,7 +1,12 @@
-export default function GoldReviewerBadgeIcon() {
+type Props = Readonly<{
+  className: string;
+}>;
+
+export default function GoldReviewerBadgeIcon({ className }: Props) {
   return (
     <svg
       aria-hidden="true"
+      className={className}
       height="36px"
       preserveAspectRatio="xMidYMid meet"
       role="img"

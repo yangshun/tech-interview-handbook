@@ -138,4 +138,20 @@ export const resumesRouter = createRouter()
         },
       });
     },
+  })
+  .query('findUserReviewedResumeCount', {
+    input: z.object({
+      userId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.resumesResume.count({
+        where: {
+          comments: {
+            some: {
+              userId: input.userId,
+            },
+          },
+        },
+      });
+    },
   });

@@ -13,6 +13,7 @@ import { Button, TextArea } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
+import ResumeUserBadges from '../badges/ResumeUserBadges';
 import ResumeExpandableText from '../shared/ResumeExpandableText';
 
 import type { ResumeComment } from '~/types/resume-comments';
@@ -152,13 +153,15 @@ export default function ResumeCommentListItem({
           {/* Name and creation time */}
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center space-x-1">
-              <div className="font-medium">
+              <p className="font-medium">
                 {comment.user.name ?? 'Reviewer ABC'}
-              </div>
+              </p>
 
-              <div className="text-primary-800 text-xs font-medium">
+              <p className="text-primary-800 text-xs font-medium">
                 {isCommentOwner ? '(Me)' : ''}
-              </div>
+              </p>
+
+              <ResumeUserBadges userId={comment.user.userId} />
             </div>
 
             <div className="px-2 text-xs text-gray-600">
