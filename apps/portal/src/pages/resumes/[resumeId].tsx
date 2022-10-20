@@ -42,11 +42,17 @@ export default function ResumeReviewPage() {
   const starMutation = trpc.useMutation('resumes.resume.star', {
     onSuccess() {
       utils.invalidateQueries(['resumes.resume.findOne']);
+      utils.invalidateQueries(['resumes.resume.findAll']);
+      utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
+      utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
     },
   });
   const unstarMutation = trpc.useMutation('resumes.resume.unstar', {
     onSuccess() {
       utils.invalidateQueries(['resumes.resume.findOne']);
+      utils.invalidateQueries(['resumes.resume.findAll']);
+      utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
+      utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
     },
   });
   const userIsOwner =
@@ -89,6 +95,9 @@ export default function ResumeReviewPage() {
         }}
         onClose={() => {
           utils.invalidateQueries(['resumes.resume.findOne']);
+          utils.invalidateQueries(['resumes.resume.findAll']);
+          utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
+          utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
           setIsEditMode(false);
         }}
       />

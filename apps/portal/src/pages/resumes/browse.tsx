@@ -35,8 +35,6 @@ import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 
 import { trpc } from '~/utils/trpc';
 
-import type { Resume } from '~/types/resume';
-
 const filters: Array<Filter> = [
   {
     id: 'role',
@@ -63,11 +61,9 @@ export default function ResumeHomePage() {
   const [searchValue, setSearchValue] = useState('');
   const [userFilters, setUserFilters] = useState(INITIAL_FILTER_STATE);
   const [shortcutSelected, setShortcutSelected] = useState('All');
-  const [resumes, setResumes] = useState<Array<Resume>>([]);
   const [renderSignInButton, setRenderSignInButton] = useState(false);
   const [signInButtonText, setSignInButtonText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
 
   const PAGE_LIMIT = 10;
   const skip = (currentPage - 1) * PAGE_LIMIT;
@@ -90,13 +86,7 @@ export default function ResumeHomePage() {
     ],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
-      onSuccess: (data) => {
-        setTotalPages(
-          data.totalRecords % PAGE_LIMIT === 0
-            ? data.totalRecords / PAGE_LIMIT
-            : Math.floor(data.totalRecords / PAGE_LIMIT) + 1,
-        );
-        setResumes(data.mappedResumeData);
+      onSuccess: () => {
         setRenderSignInButton(false);
       },
       staleTime: 5 * 60 * 1000,
@@ -117,17 +107,8 @@ export default function ResumeHomePage() {
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
       onError: () => {
-        setResumes([]);
         setRenderSignInButton(true);
         setSignInButtonText('to view starred resumes');
-      },
-      onSuccess: (data) => {
-        setTotalPages(
-          data.totalRecords % PAGE_LIMIT === 0
-            ? data.totalRecords / PAGE_LIMIT
-            : Math.floor(data.totalRecords / PAGE_LIMIT) + 1,
-        );
-        setResumes(data.mappedResumeData);
       },
       retry: false,
       staleTime: 5 * 60 * 1000,
@@ -148,17 +129,8 @@ export default function ResumeHomePage() {
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.MY,
       onError: () => {
-        setResumes([]);
         setRenderSignInButton(true);
         setSignInButtonText('to view your submitted resumes');
-      },
-      onSuccess: (data) => {
-        setTotalPages(
-          data.totalRecords % PAGE_LIMIT === 0
-            ? data.totalRecords / PAGE_LIMIT
-            : Math.floor(data.totalRecords / PAGE_LIMIT) + 1,
-        );
-        setResumes(data.mappedResumeData);
       },
       retry: false,
       staleTime: 5 * 60 * 1000,
@@ -206,6 +178,30 @@ export default function ResumeHomePage() {
   const onTabChange = (tab: string) => {
     setTabsValue(tab);
     setCurrentPage(1);
+  };
+
+  const getTabQueryData = () => {
+    switch (tabsValue) {
+      case BROWSE_TABS_VALUES.ALL:
+        return allResumesQuery.data;
+      case BROWSE_TABS_VALUES.STARRED:
+        return starredResumesQuery.data;
+      case BROWSE_TABS_VALUES.MY:
+        return myResumesQuery.data;
+      default:
+        return null;
+    }
+  };
+
+  const getTabResumes = () => {
+    return getTabQueryData()?.mappedResumeData ?? [];
+  };
+
+  const getTabTotalPages = () => {
+    const numRecords = getTabQueryData()?.totalRecords ?? 0;
+    return numRecords % PAGE_LIMIT === 0
+      ? numRecords / PAGE_LIMIT
+      : Math.floor(numRecords / PAGE_LIMIT) + 1;
   };
 
   return (
@@ -277,7 +273,7 @@ export default function ResumeHomePage() {
                     </div>
                     <div>
                       <button
-                        className="rounded-md bg-indigo-500 py-1 px-3 text-sm font-medium text-white"
+                        className="rounded-md bg-indigo-500 py-2 px-3 text-sm font-medium text-white"
                         type="button"
                         onClick={onSubmitResume}>
                         Submit Resume
@@ -374,7 +370,7 @@ export default function ResumeHomePage() {
                 {renderSignInButton && (
                   <ResumeSignInButton text={signInButtonText} />
                 )}
-                {totalPages === 0 && (
+                {getTabResumes().length === 0 && (
                   <div className="mt-4">Nothing to see here.</div>
                 )}
                 <ResumeListItems
@@ -383,12 +379,12 @@ export default function ResumeHomePage() {
                     starredResumesQuery.isFetching ||
                     myResumesQuery.isFetching
                   }
-                  resumes={resumes}
+                  resumes={getTabResumes()}
                 />
                 <div className="my-4 flex justify-center">
                   <Pagination
                     current={currentPage}
-                    end={totalPages}
+                    end={getTabTotalPages()}
                     label="pagination"
                     start={1}
                     onSelect={(page) => setCurrentPage(page)}
