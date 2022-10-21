@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import { ChevronUpIcon } from '@heroicons/react/20/solid';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
 
 import ResumeCommentEditForm from './comment/ResumeCommentEditForm';
@@ -22,6 +23,7 @@ export default function ResumeCommentListItem({
   const isCommentOwner = userId === comment.user.userId;
   const [isEditingComment, setIsEditingComment] = useState(false);
   const [isReplyingComment, setIsReplyingComment] = useState(false);
+  const [showReplies, setShowReplies] = useState(true);
 
   return (
     <div
@@ -56,7 +58,7 @@ export default function ResumeCommentListItem({
             <div className="flex flex-row items-center space-x-1">
               <p
                 className={clsx(
-                  'font-medium',
+                  'font-medium text-black',
                   !!comment.parentId && 'text-sm',
                 )}>
                 {comment.user.name ?? 'Reviewer ABC'}
@@ -126,24 +128,30 @@ export default function ResumeCommentListItem({
           {/* Replies */}
           {comment.children.length > 0 && (
             // Horizontal Divider
-            <div className="min-w-fit space-y-1 pt-1">
-              <div className="relative flex items-center">
-                <div className="flex-grow border-t border-gray-300" />
-                <span className="mx-4 flex-shrink text-xs text-gray-400">
-                  Replies
-                </span>
-                <div className="flex-grow border-t border-gray-300" />
-              </div>
+            <div className="min-w-fit space-y-1 pt-2">
+              <button
+                className="flex items-center space-x-1 rounded-md text-xs font-medium text-indigo-800 hover:text-indigo-300"
+                type="button"
+                onClick={() => setShowReplies(!showReplies)}>
+                <ChevronUpIcon
+                  className={clsx(
+                    'h-5 w-5 ',
+                    !showReplies && 'rotate-180 transform',
+                  )}
+                />
+                <span>{showReplies ? 'Hide replies' : 'Show replies'}</span>
+              </button>
 
-              {comment.children.map((child) => {
-                return (
-                  <ResumeCommentListItem
-                    key={child.id}
-                    comment={child}
-                    userId={userId}
-                  />
-                );
-              })}
+              {showReplies &&
+                comment.children.map((child) => {
+                  return (
+                    <ResumeCommentListItem
+                      key={child.id}
+                      comment={child}
+                      userId={userId}
+                    />
+                  );
+                })}
             </div>
           )}
         </div>
