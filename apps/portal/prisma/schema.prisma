@@ -394,8 +394,8 @@ model QuestionsQuestion {
   userId       String?
   content      String                @db.Text
   questionType QuestionsQuestionType
-  lastSeenAt   DateTime              @default(now())
-  upvotes      Int
+  lastSeenAt   DateTime
+  upvotes      Int                   @default(0)
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
 
@@ -414,7 +414,6 @@ model QuestionsQuestionEncounter {
   companyId  String
   location   String   @db.Text
   role       String   @db.Text
-  netVotes   Int      @default(0)
   seenAt     DateTime
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt

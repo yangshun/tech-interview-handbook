@@ -24,6 +24,21 @@ export const questionsQuestionRouter = createProtectedRouter()
       startDate: z.date().default(new Date(Date.now() - TWO_WEEK_IN_MS)),
     }),
     async resolve({ ctx, input }) {
+      let sortCondition;
+
+      switch(input.sortType) {
+        case SortType.TOP:
+          sortCondition = {
+                upvotes: input.sortOrder,
+          }
+          break;
+        case SortType.NEW:
+          sortCondition = {
+                lastSeenAt: input.sortOrder,
+          }
+          break;
+      }
+
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
         include: {
           _count: {
@@ -48,7 +63,7 @@ export const questionsQuestionRouter = createProtectedRouter()
           votes: true,
         },
         orderBy: {
-          createdAt: 'desc',
+          ...sortCondition,
         },
         where: {
           ...(input.questionTypes.length > 0
@@ -214,7 +229,6 @@ export const questionsQuestionRouter = createProtectedRouter()
       return await ctx.prisma.questionsQuestion.create({
         data: {
           content: input.content,
-          lastSeenAt: input.seenAt,
           encounters: {
             create: {
               company: {
@@ -232,6 +246,7 @@ export const questionsQuestionRouter = createProtectedRouter()
               },
             },
           },
+          lastSeenAt: input.seenAt,
           questionType: input.questionType,
           userId,
         },
@@ -326,18 +341,28 @@ export const questionsQuestionRouter = createProtectedRouter()
       const userId = ctx.session?.user?.id;
       const { questionId, vote } = input;
 
-      return await ctx.prisma.questionsQuestionVote.create({
-        question: {
-          update :{
+      const incrementValue = vote === Vote.UPVOTE ? 1 : -1;
 
-          }
-        }
-        data: {
-          questionId,
-          userId,
-          vote,
-        },
-      });
+      const [questionVote, question] = await ctx.prisma.$transaction([
+        ctx.prisma.questionsQuestionVote.create({
+          data: {
+            questionId,
+            userId,
+            vote,
+          },
+        }),
+        ctx.prisma.questionsQuestion.update({
+          data: {
+            upvotes : {
+              increment: incrementValue,
+            },
+          },
+          where: {
+            id: questionId,
+          },
+        })
+      ]);
+      return questionVote;
     },
   })
   .mutation('updateVote', {
@@ -362,14 +387,30 @@ export const questionsQuestionRouter = createProtectedRouter()
         });
       }
 
-      return await ctx.prisma.questionsQuestionVote.update({
-        data: {
-          vote,
-        },
-        where: {
-          id,
-        },
-      });
+      const incrementValue = vote === Vote.UPVOTE ? 2 : -2;
+
+      const [questionVote, question] = await ctx.prisma.$transaction([
+        ctx.prisma.questionsQuestionVote.update({
+          data: {
+            vote,
+          },
+          where: {
+            id,
+          },
+        }),
+        ctx.prisma.questionsQuestion.update({
+          data: {
+            upvotes : {
+              increment: incrementValue,
+            },
+          },
+          where: {
+            id: voteToUpdate.questionId,
+          },
+        })
+      ]);
+
+      return questionVote;
     },
   })
   .mutation('deleteVote', {
@@ -392,10 +433,25 @@ export const questionsQuestionRouter = createProtectedRouter()
         });
       }
 
-      return await ctx.prisma.questionsQuestionVote.delete({
-        where: {
-          id: input.id,
-        },
-      });
+      const incrementValue = voteToDelete.vote === Vote.UPVOTE ? -1 : 1;
+
+      const [questionVote, question] = await ctx.prisma.$transaction([
+        ctx.prisma.questionsQuestionVote.delete({
+          where: {
+            id: input.id,
+          },
+        }),
+        ctx.prisma.questionsQuestion.update({
+          data: {
+            upvotes : {
+              increment: incrementValue,
+            },
+          },
+          where: {
+            id: voteToDelete.questionId,
+          },
+        })
+      ]);
+      return questionVote;
     },
   });
