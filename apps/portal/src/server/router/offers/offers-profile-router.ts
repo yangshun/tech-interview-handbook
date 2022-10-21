@@ -572,6 +572,23 @@ export const offersProfileRouter = createRouter()
           },
         });
 
+        // Delete educations
+        const educationsId = (await ctx.prisma.offersEducation.findMany({
+          where: {
+             backgroundId: input.background.id
+          }
+        })).map((x) => x.id)
+
+        for (const id of educationsId) {
+          if (!input.background.educations.map((x) => x.id).includes(id)) {
+            await ctx.prisma.offersEducation.delete({
+              where: {
+                id
+              }
+            })
+          }
+        }
+
         for (const edu of input.background.educations) {
           if (edu.id) {
             // Update existing education
@@ -605,6 +622,23 @@ export const offersProfileRouter = createRouter()
                 id: input.background.id,
               },
             });
+          }
+        }
+
+        // Delete experiences
+        const experiencesId = (await ctx.prisma.offersExperience.findMany({
+          where: {
+             backgroundId: input.background.id
+          }
+        })).map((x) => x.id)
+
+        for (const id of experiencesId) {
+          if (!input.background.experiences.map((x) => x.id).includes(id)) {
+            await ctx.prisma.offersExperience.delete({
+              where: {
+                id
+              }
+            })
           }
         }
 
@@ -764,6 +798,23 @@ export const offersProfileRouter = createRouter()
           }
         }
 
+        // Delete specific yoes
+        const yoesId = (await ctx.prisma.offersSpecificYoe.findMany({
+          where: {
+            backgroundId: input.background.id
+          }
+        })).map((x) => x.id)
+
+        for (const id of yoesId) {
+          if (!input.background.specificYoes.map((x) => x.id).includes(id)) {
+            await ctx.prisma.offersSpecificYoe.delete({
+              where: {
+                id
+              }
+            })
+          }
+        }
+
         for (const yoe of input.background.specificYoes) {
           if (yoe.id) {
             // Update existing yoe
@@ -793,6 +844,24 @@ export const offersProfileRouter = createRouter()
           }
         }
 
+        // Delete specific offers
+        const offers = (await ctx.prisma.offersOffer.findMany({
+          where: {
+            profileId: input.id
+          }
+        })).map((x) => x.id)
+
+        for (const id of offers) {
+          if (!input.offers.map((x) => x.id).includes(id)) {
+            await ctx.prisma.offersOffer.delete({
+              where: {
+                id
+              }
+            })
+          }
+        }
+
+        // Update remaining offers
         for (const offerToUpdate of input.offers) {
           if (offerToUpdate.id) {
             // Update existing offer
