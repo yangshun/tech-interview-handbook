@@ -7,14 +7,15 @@ import {
   TrashIcon,
 } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
-import { Badge, Button } from '@tih/ui';
+import { Button } from '@tih/ui';
 
 import { useQuestionVote } from '~/utils/questions/useVote';
 
-import type { CreateQuestionEncounterData } from '../forms/CreateQuestionEncounterForm';
-import CreateQuestionEncounterForm from '../forms/CreateQuestionEncounterForm';
-import QuestionTypeBadge from '../QuestionTypeBadge';
-import VotingButtons from '../VotingButtons';
+import type { CreateQuestionEncounterData } from '../../forms/CreateQuestionEncounterForm';
+import CreateQuestionEncounterForm from '../../forms/CreateQuestionEncounterForm';
+import QuestionAggregateBadge from '../../QuestionAggregateBadge';
+import QuestionTypeBadge from '../../QuestionTypeBadge';
+import VotingButtons from '../../VotingButtons';
 
 type UpvoteProps =
   | {
@@ -60,35 +61,44 @@ type ActionButtonProps =
 
 type ReceivedStatisticsProps =
   | {
-      onReceivedSubmit: (data: CreateQuestionEncounterData) => void;
       receivedCount: number;
       showReceivedStatistics: true;
     }
   | {
-      onReceivedSubmit?: never;
       receivedCount?: never;
       showReceivedStatistics?: false;
     };
 
-export type QuestionCardProps = ActionButtonProps &
+type CreateEncounterProps =
+  | {
+      onReceivedSubmit: (data: CreateQuestionEncounterData) => void;
+      showCreateEncounterButton: true;
+    }
+  | {
+      onReceivedSubmit?: never;
+      showCreateEncounterButton?: false;
+    };
+
+export type BaseQuestionCardProps = ActionButtonProps &
   AnswerStatisticsProps &
+  CreateEncounterProps &
   DeleteProps &
   ReceivedStatisticsProps &
   UpvoteProps & {
-    company: string;
+    companies: Record<string, number>;
     content: string;
-    location: string;
+    locations: Record<string, number>;
     questionId: string;
-    role: string;
+    roles: Record<string, number>;
     showHover?: boolean;
     timestamp: string;
     truncateContent?: boolean;
     type: QuestionsQuestionType;
   };
 
-export default function QuestionCard({
+export default function BaseQuestionCard({
   questionId,
-  company,
+  companies,
   answerCount,
   content,
   receivedCount,
@@ -96,19 +106,20 @@ export default function QuestionCard({
   showVoteButtons,
   showAnswerStatistics,
   showReceivedStatistics,
+  showCreateEncounterButton,
   showActionButton,
   actionButtonLabel,
   onActionButtonClick,
   upvoteCount,
   timestamp,
-  role,
-  location,
+  roles,
+  locations,
   showHover,
   onReceivedSubmit,
   showDeleteButton,
   onDelete,
   truncateContent = true,
-}: QuestionCardProps) {
+}: BaseQuestionCardProps) {
   const [showReceivedForm, setShowReceivedForm] = useState(false);
   const { handleDownvote, handleUpvote, vote } = useQuestionVote(questionId);
   const hoverClass = showHover ? 'hover:bg-slate-50' : '';
@@ -125,11 +136,11 @@ export default function QuestionCard({
       <div className="flex flex-col items-start gap-2">
         <div className="flex items-baseline justify-between">
           <div className="flex items-baseline gap-2 text-slate-500">
-            <Badge label={company} variant="primary" />
             <QuestionTypeBadge type={type} />
-            <p className="text-xs">
-              {timestamp} · {location} · {role}
-            </p>
+            <QuestionAggregateBadge statistics={companies} variant="primary" />
+            <QuestionAggregateBadge statistics={locations} variant="success" />
+            <QuestionAggregateBadge statistics={roles} variant="danger" />
+            <p className="text-xs">{timestamp}</p>
           </div>
           {showActionButton && (
             <Button
@@ -143,19 +154,21 @@ export default function QuestionCard({
         <p className={clsx(truncateContent && 'line-clamp-2 text-ellipsis')}>
           {content}
         </p>
-        {!showReceivedForm && (showAnswerStatistics || showReceivedStatistics) && (
-          <div className="flex gap-2">
-            {showAnswerStatistics && (
-              <Button
-                addonPosition="start"
-                icon={ChatBubbleBottomCenterTextIcon}
-                label={`${answerCount} answers`}
-                size="sm"
-                variant="tertiary"
-              />
-            )}
-            {showReceivedStatistics && (
-              <>
+        {!showReceivedForm &&
+          (showAnswerStatistics ||
+            showReceivedStatistics ||
+            showCreateEncounterButton) && (
+            <div className="flex gap-2">
+              {showAnswerStatistics && (
+                <Button
+                  addonPosition="start"
+                  icon={ChatBubbleBottomCenterTextIcon}
+                  label={`${answerCount} answers`}
+                  size="sm"
+                  variant="tertiary"
+                />
+              )}
+              {showReceivedStatistics && (
                 <Button
                   addonPosition="start"
                   icon={EyeIcon}
@@ -163,6 +176,8 @@ export default function QuestionCard({
                   size="sm"
                   variant="tertiary"
                 />
+              )}
+              {showCreateEncounterButton && (
                 <Button
                   addonPosition="start"
                   icon={CheckIcon}
@@ -174,10 +189,9 @@ export default function QuestionCard({
                     setShowReceivedForm(true);
                   }}
                 />
-              </>
-            )}
-          </div>
-        )}
+              )}
+            </div>
+          )}
         {showReceivedForm && (
           <CreateQuestionEncounterForm
             onCancel={() => {

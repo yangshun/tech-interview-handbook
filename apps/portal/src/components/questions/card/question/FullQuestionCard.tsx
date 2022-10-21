@@ -1,29 +1,33 @@
-import type { QuestionCardProps } from './QuestionCard';
-import QuestionCard from './QuestionCard';
+import type { BaseQuestionCardProps } from './BaseQuestionCard';
+import BaseQuestionCard from './BaseQuestionCard';
 
 export type QuestionOverviewCardProps = Omit<
-  QuestionCardProps & {
+  BaseQuestionCardProps & {
     showActionButton: false;
     showAnswerStatistics: false;
+    showCreateEncounterButton: true;
     showDeleteButton: false;
-    showReceivedStatistics: true;
+    showReceivedStatistics: false;
     showVoteButtons: true;
   },
   | 'actionButtonLabel'
   | 'onActionButtonClick'
   | 'showActionButton'
   | 'showAnswerStatistics'
+  | 'showCreateEncounterButton'
+  | 'showDeleteButton'
   | 'showReceivedStatistics'
   | 'showVoteButtons'
 >;
 
 export default function FullQuestionCard(props: QuestionOverviewCardProps) {
   return (
-    <QuestionCard
+    <BaseQuestionCard
       {...props}
       showActionButton={false}
       showAnswerStatistics={false}
-      showReceivedStatistics={true}
+      showCreateEncounterButton={true}
+      showReceivedStatistics={false}
       showVoteButtons={true}
       truncateContent={false}
     />

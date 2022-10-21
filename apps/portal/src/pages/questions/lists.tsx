@@ -1,6 +1,6 @@
 import { NoSymbolIcon } from '@heroicons/react/24/outline';
 
-import QuestionListCard from '~/components/questions/card/QuestionListCard';
+import QuestionListCard from '~/components/questions/card/question/QuestionListCard';
 
 import { SAMPLE_QUESTION } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
@@ -14,13 +14,13 @@ export default function ListPage() {
         {(questions ?? []).map((question) => (
           <QuestionListCard
             key={question.id}
-            company={question.company}
+            companies={{ [question.company]: 1 }}
             content={question.content}
             href={`/questions/${question.id}/${createSlug(question.content)}`}
-            location={question.location}
+            locations={{ [question.location]: 1 }}
             questionId={question.id}
-            receivedCount={0}
-            role={question.role}
+            receivedCount={question.receivedCount}
+            roles={{ [question.role]: 1 }}
             timestamp={question.seenAt.toLocaleDateString(undefined, {
               month: 'short',
               year: 'numeric',

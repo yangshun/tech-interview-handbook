@@ -5,7 +5,7 @@ import { NoSymbolIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
 import { SlideOut, Typeahead } from '@tih/ui';
 
-import QuestionOverviewCard from '~/components/questions/card/QuestionOverviewCard';
+import QuestionOverviewCard from '~/components/questions/card/question/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
 import FilterSection from '~/components/questions/filter/FilterSection';
 import type { LandingQueryData } from '~/components/questions/LandingComponent';
@@ -375,25 +375,21 @@ export default function QuestionsHomePage() {
                   <QuestionOverviewCard
                     key={question.id}
                     answerCount={question.numAnswers}
-                    company={question.company}
+                    companies={{ [question.company]: 1 }}
                     content={question.content}
                     href={`/questions/${question.id}/${createSlug(
                       question.content,
                     )}`}
-                    location={question.location}
+                    locations={{ [question.location]: 1 }}
                     questionId={question.id}
                     receivedCount={question.receivedCount}
-                    role={question.role}
+                    roles={{ [question.role]: 1 }}
                     timestamp={question.seenAt.toLocaleDateString(undefined, {
                       month: 'short',
                       year: 'numeric',
                     })}
                     type={question.type}
                     upvoteCount={question.numVotes}
-                    onReceivedSubmit={(data) => {
-                      // eslint-disable-next-line no-console
-                      console.log(data);
-                    }}
                   />
                 ))}
                 {questions?.length === 0 && (

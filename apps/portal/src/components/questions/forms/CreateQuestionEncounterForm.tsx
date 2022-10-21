@@ -5,9 +5,9 @@ import { Button } from '@tih/ui';
 import type { Month } from '~/components/shared/MonthYearPicker';
 import MonthYearPicker from '~/components/shared/MonthYearPicker';
 
+import CompanyTypeahead from '../typeahead/CompanyTypeahead';
 import LocationTypeahead from '../typeahead/LocationTypeahead';
 import RoleTypeahead from '../typeahead/RoleTypeahead';
-import CompanyTypeahead from '../typeahead/CompanyTypeahead';
 
 export type CreateQuestionEncounterData = {
   company: string;
@@ -40,15 +40,15 @@ export default function CreateQuestionEncounterForm({
       {step === 0 && (
         <div>
           <CompanyTypeahead
+            isLabelHidden={true}
             placeholder="Other company"
             suggestedCount={3}
+            onSelect={({ value: company }) => {
+              setSelectedCompany(company);
+            }}
             onSuggestionClick={({ value: company }) => {
               setSelectedCompany(company);
               setStep(step + 1);
-            }}
-            isLabelHidden={true}
-            onSelect={({ value: company }) => {
-              setSelectedCompany(company);
             }}
           />
         </div>
@@ -56,17 +56,17 @@ export default function CreateQuestionEncounterForm({
       {step === 1 && (
         <div>
           <LocationTypeahead
-            suggestedCount={3}
-            onSuggestionClick={({ value: location }) => {
-              setSelectedLocation(location);
-              setStep(step + 1);
-            }}
             isLabelHidden={true}
             placeholder="Other location"
+            suggestedCount={3}
             // eslint-disable-next-line @typescript-eslint/no-empty-function
             onQueryChange={() => {}}
             onSelect={({ value: location }) => {
               setSelectedLocation(location);
+            }}
+            onSuggestionClick={({ value: location }) => {
+              setSelectedLocation(location);
+              setStep(step + 1);
             }}
           />
         </div>
@@ -75,28 +75,28 @@ export default function CreateQuestionEncounterForm({
         <div>
           <RoleTypeahead
             isLabelHidden={true}
-            suggestedCount={3}
-            onSuggestionClick={({ value: role }) => {
-              setSelectedRole(role);
-              setStep(step + 1);
-            }}
             placeholder="Other role"
+            suggestedCount={3}
             // eslint-disable-next-line @typescript-eslint/no-empty-function
             onQueryChange={() => {}}
             onSelect={({ value: role }) => {
               setSelectedRole(role);
+            }}
+            onSuggestionClick={({ value: role }) => {
+              setSelectedRole(role);
+              setStep(step + 1);
             }}
           />
         </div>
       )}
       {step === 3 && (
         <MonthYearPicker
-          yearLabel={''}
-          monthLabel={''}
+          monthLabel=""
           value={{
             month: ((selectedDate?.getMonth() ?? 0) + 1) as Month,
             year: selectedDate?.getFullYear() as number,
           }}
+          yearLabel=""
           onChange={(value) => {
             setSelectedDate(
               startOfMonth(new Date(value.year, value.month - 1)),
@@ -106,6 +106,11 @@ export default function CreateQuestionEncounterForm({
       )}
       {step < 3 && (
         <Button
+          disabled={
+            (step === 0 && selectedCompany === null) ||
+            (step === 1 && selectedLocation === null) ||
+            (step === 2 && selectedRole === null)
+          }
           label="Next"
           variant="primary"
           onClick={() => {

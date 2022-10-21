@@ -1,12 +1,13 @@
 import withHref from '~/utils/questions/withHref';
 
-import type { QuestionCardProps } from './QuestionCard';
-import QuestionCard from './QuestionCard';
+import type { BaseQuestionCardProps } from './BaseQuestionCard';
+import BaseQuestionCard from './BaseQuestionCard';
 
 export type QuestionOverviewCardProps = Omit<
-  QuestionCardProps & {
+  BaseQuestionCardProps & {
     showActionButton: false;
     showAnswerStatistics: true;
+    showCreateEncounterButton: false;
     showDeleteButton: false;
     showReceivedStatistics: true;
     showVoteButtons: true;
@@ -16,6 +17,7 @@ export type QuestionOverviewCardProps = Omit<
   | 'onDelete'
   | 'showActionButton'
   | 'showAnswerStatistics'
+  | 'showCreateEncounterButton'
   | 'showDeleteButton'
   | 'showReceivedStatistics'
   | 'showVoteButtons'
@@ -23,10 +25,11 @@ export type QuestionOverviewCardProps = Omit<
 
 function QuestionOverviewCardWithoutHref(props: QuestionOverviewCardProps) {
   return (
-    <QuestionCard
+    <BaseQuestionCard
       {...props}
       showActionButton={false}
       showAnswerStatistics={true}
+      showCreateEncounterButton={false}
       showDeleteButton={false}
       showHover={true}
       showReceivedStatistics={true}

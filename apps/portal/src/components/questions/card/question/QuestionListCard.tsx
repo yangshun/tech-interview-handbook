@@ -1,10 +1,10 @@
 import withHref from '~/utils/questions/withHref';
 
-import type { QuestionCardProps } from './QuestionCard';
-import QuestionCard from './QuestionCard';
+import type { BaseQuestionCardProps } from './BaseQuestionCard';
+import BaseQuestionCard from './BaseQuestionCard';
 
 export type QuestionListCardProps = Omit<
-  QuestionCardProps & {
+  BaseQuestionCardProps & {
     showActionButton: false;
     showAnswerStatistics: false;
     showDeleteButton: true;
@@ -20,7 +20,8 @@ export type QuestionListCardProps = Omit<
 
 function QuestionListCardWithoutHref(props: QuestionListCardProps) {
   return (
-    <QuestionCard
+    <BaseQuestionCard
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       {...(props as any)}
       showActionButton={false}
       showAnswerStatistics={false}

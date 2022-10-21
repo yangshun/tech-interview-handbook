@@ -71,9 +71,9 @@ export const LOCATIONS: FilterChoices = [
     value: 'Menlo Park',
   },
   {
-    id: 'california',
+    id: 'California',
     label: 'California',
-    value: 'california',
+    value: 'California',
   },
   {
     id: 'Hong Kong',

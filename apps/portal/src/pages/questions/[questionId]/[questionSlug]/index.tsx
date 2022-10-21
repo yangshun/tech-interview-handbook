@@ -4,7 +4,7 @@ import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button, Collapsible, Select, TextArea } from '@tih/ui';
 
 import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
-import FullQuestionCard from '~/components/questions/card/FullQuestionCard';
+import FullQuestionCard from '~/components/questions/card/question/FullQuestionCard';
 import QuestionAnswerCard from '~/components/questions/card/QuestionAnswerCard';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 
@@ -130,8 +130,11 @@ export default function QuestionPage() {
         <div className="flex max-w-7xl flex-1 flex-col gap-2">
           <FullQuestionCard
             {...question}
+            companies={aggregatedEncounters?.companyCounts ?? {}}
+            locations={aggregatedEncounters?.locationCounts ?? {}}
             questionId={question.id}
-            receivedCount={question.receivedCount}
+            receivedCount={undefined}
+            roles={aggregatedEncounters?.roleCounts ?? {}}
             timestamp={question.seenAt.toLocaleDateString(undefined, {
               month: 'short',
               year: 'numeric',
