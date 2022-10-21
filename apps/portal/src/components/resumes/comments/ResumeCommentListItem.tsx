@@ -1,18 +1,11 @@
 import clsx from 'clsx';
-import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
-import type { SubmitHandler } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
-import {
-  ArrowDownCircleIcon,
-  ArrowUpCircleIcon,
-} from '@heroicons/react/20/solid';
+import { ChevronUpIcon } from '@heroicons/react/20/solid';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
-import { Vote } from '@prisma/client';
-import { Button, TextArea } from '@tih/ui';
 
-import { trpc } from '~/utils/trpc';
-
+import ResumeCommentEditForm from './comment/ResumeCommentEditForm';
+import ResumeCommentReplyForm from './comment/ResumeCommentReplyForm';
+import ResumeCommentVoteButtons from './comment/ResumeCommentVoteButtons';
 import ResumeUserBadges from '../badges/ResumeUserBadges';
 import ResumeExpandableText from '../shared/ResumeExpandableText';
 
@@ -23,141 +16,55 @@ type ResumeCommentListItemProps = {
   userId: string | undefined;
 };
 
-type ICommentInput = {
-  description: string;
-};
-
 export default function ResumeCommentListItem({
   comment,
   userId,
 }: ResumeCommentListItemProps) {
   const isCommentOwner = userId === comment.user.userId;
   const [isEditingComment, setIsEditingComment] = useState(false);
-
-  const [upvoteAnimation, setUpvoteAnimation] = useState(false);
-  const [downvoteAnimation, setDownvoteAnimation] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors, isDirty },
-    reset,
-  } = useForm<ICommentInput>({
-    defaultValues: {
-      description: comment.description,
-    },
-  });
-
-  const trpcContext = trpc.useContext();
-  const commentUpdateMutation = trpc.useMutation(
-    'resumes.comments.user.update',
-    {
-      onSuccess: () => {
-        // Comment updated, invalidate query to trigger refetch
-        trpcContext.invalidateQueries(['resumes.comments.list']);
-      },
-    },
-  );
-
-  // COMMENT VOTES
-  const commentVotesQuery = trpc.useQuery([
-    'resumes.comments.votes.list',
-    { commentId: comment.id },
-  ]);
-  const commentVotesUpsertMutation = trpc.useMutation(
-    'resumes.comments.votes.user.upsert',
-    {
-      onSuccess: () => {
-        // Comment updated, invalidate query to trigger refetch
-        trpcContext.invalidateQueries(['resumes.comments.votes.list']);
-      },
-    },
-  );
-  const commentVotesDeleteMutation = trpc.useMutation(
-    'resumes.comments.votes.user.delete',
-    {
-      onSuccess: () => {
-        // Comment updated, invalidate query to trigger refetch
-        trpcContext.invalidateQueries(['resumes.comments.votes.list']);
-      },
-    },
-  );
-
-  // FORM ACTIONS
-  const onCancel = () => {
-    reset({ description: comment.description });
-    setIsEditingComment(false);
-  };
-
-  const onSubmit: SubmitHandler<ICommentInput> = async (data) => {
-    const { id } = comment;
-    return commentUpdateMutation.mutate(
-      {
-        id,
-        ...data,
-      },
-      {
-        onSuccess: () => {
-          setIsEditingComment(false);
-        },
-      },
-    );
-  };
-
-  const setFormValue = (value: string) => {
-    setValue('description', value.trim(), { shouldDirty: true });
-  };
-
-  const onVote = async (
-    value: Vote,
-    setAnimation: Dispatch<SetStateAction<boolean>>,
-  ) => {
-    setAnimation(true);
-
-    if (commentVotesQuery.data?.userVote?.value === value) {
-      return commentVotesDeleteMutation.mutate(
-        {
-          commentId: comment.id,
-        },
-        {
-          onSettled: async () => setAnimation(false),
-        },
-      );
-    }
-    return commentVotesUpsertMutation.mutate(
-      {
-        commentId: comment.id,
-        value,
-      },
-      {
-        onSettled: async () => setAnimation(false),
-      },
-    );
-  };
+  const [isReplyingComment, setIsReplyingComment] = useState(false);
+  const [showReplies, setShowReplies] = useState(true);
 
   return (
-    <div className="border-primary-300 w-11/12 min-w-fit rounded-md border-2 bg-white p-2 drop-shadow-md">
+    <div
+      className={clsx(
+        'min-w-fit rounded-md bg-white ',
+        !comment.parentId &&
+          'w-11/12 border-2 border-indigo-300 p-2 drop-shadow-md',
+      )}>
       <div className="flex flex-row space-x-2 p-1 align-top">
+        {/* Image Icon */}
         {comment.user.image ? (
           <img
             alt={comment.user.name ?? 'Reviewer'}
-            className="mt-1 h-8 w-8 rounded-full"
+            className={clsx(
+              'mt-1 rounded-full',
+              comment.parentId ? 'h-6 w-6' : 'h-8 w-8 ',
+            )}
             src={comment.user.image!}
           />
         ) : (
-          <FaceSmileIcon className="h-8 w-8 rounded-full" />
+          <FaceSmileIcon
+            className={clsx(
+              'mt-1 rounded-full',
+              comment.parentId ? 'h-6 w-6' : 'h-8 w-8 ',
+            )}
+          />
         )}
 
         <div className="flex w-full flex-col space-y-1">
           {/* Name and creation time */}
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center space-x-1">
-              <p className="font-medium">
+              <p
+                className={clsx(
+                  'font-medium text-black',
+                  !!comment.parentId && 'text-sm',
+                )}>
                 {comment.user.name ?? 'Reviewer ABC'}
               </p>
 
-              <p className="text-primary-800 text-xs font-medium">
+              <p className="text-xs font-medium text-indigo-800">
                 {isCommentOwner ? '(Me)' : ''}
               </p>
 
@@ -174,112 +81,78 @@ export default function ResumeCommentListItem({
 
           {/* Description */}
           {isEditingComment ? (
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="flex-column mt-1 space-y-2">
-                <TextArea
-                  {...(register('description', {
-                    required: 'Comments cannot be empty!',
-                  }),
-                  {})}
-                  defaultValue={comment.description}
-                  disabled={commentUpdateMutation.isLoading}
-                  errorMessage={errors.description?.message}
-                  label=""
-                  placeholder="Leave your comment here"
-                  onChange={setFormValue}
-                />
-
-                <div className="flex-row space-x-2">
-                  <Button
-                    disabled={commentUpdateMutation.isLoading}
-                    label="Cancel"
-                    size="sm"
-                    variant="tertiary"
-                    onClick={onCancel}
-                  />
-
-                  <Button
-                    disabled={!isDirty || commentUpdateMutation.isLoading}
-                    isLoading={commentUpdateMutation.isLoading}
-                    label="Confirm"
-                    size="sm"
-                    type="submit"
-                    variant="primary"
-                  />
-                </div>
-              </div>
-            </form>
+            <ResumeCommentEditForm
+              comment={comment}
+              setIsEditingComment={setIsEditingComment}
+            />
           ) : (
             <ResumeExpandableText text={comment.description} />
           )}
 
           {/* Upvote and edit */}
           <div className="flex flex-row space-x-1 pt-1 align-middle">
-            <button
-              disabled={
-                !userId ||
-                commentVotesQuery.isLoading ||
-                commentVotesUpsertMutation.isLoading ||
-                commentVotesDeleteMutation.isLoading
-              }
-              type="button"
-              onClick={() => onVote(Vote.UPVOTE, setUpvoteAnimation)}>
-              <ArrowUpCircleIcon
-                className={clsx(
-                  'h-4 w-4',
-                  commentVotesQuery.data?.userVote?.value === Vote.UPVOTE ||
-                    upvoteAnimation
-                    ? 'fill-indigo-500'
-                    : 'fill-gray-400',
-                  userId &&
-                    !downvoteAnimation &&
-                    !upvoteAnimation &&
-                    'hover:fill-indigo-500',
-                  upvoteAnimation &&
-                    'animate-[bounce_0.5s_infinite] cursor-default',
+            <ResumeCommentVoteButtons commentId={comment.id} userId={userId} />
+
+            {/* Action buttons; only present when not editing/replying */}
+            {isCommentOwner && !isEditingComment && !isReplyingComment && (
+              <>
+                <button
+                  className="px-1 text-xs text-indigo-800 hover:text-indigo-400"
+                  type="button"
+                  onClick={() => setIsEditingComment(true)}>
+                  Edit
+                </button>
+
+                {!comment.parentId && (
+                  <button
+                    className="px-1 text-xs text-indigo-800 hover:text-indigo-400"
+                    type="button"
+                    onClick={() => setIsReplyingComment(true)}>
+                    Reply
+                  </button>
                 )}
-              />
-            </button>
-
-            <div className="text-xs">
-              {commentVotesQuery.data?.numVotes ?? 0}
-            </div>
-
-            <button
-              disabled={
-                !userId ||
-                commentVotesQuery.isLoading ||
-                commentVotesUpsertMutation.isLoading ||
-                commentVotesDeleteMutation.isLoading
-              }
-              type="button"
-              onClick={() => onVote(Vote.DOWNVOTE, setDownvoteAnimation)}>
-              <ArrowDownCircleIcon
-                className={clsx(
-                  'h-4 w-4',
-                  commentVotesQuery.data?.userVote?.value === Vote.DOWNVOTE ||
-                    downvoteAnimation
-                    ? 'fill-red-500'
-                    : 'fill-gray-400',
-                  userId &&
-                    !downvoteAnimation &&
-                    !upvoteAnimation &&
-                    'hover:fill-red-500',
-                  downvoteAnimation &&
-                    'animate-[bounce_0.5s_infinite] cursor-default',
-                )}
-              />
-            </button>
-
-            {isCommentOwner && !isEditingComment && (
-              <button
-                className="text-primary-800 hover:text-primary-400 px-1 text-xs"
-                type="button"
-                onClick={() => setIsEditingComment(true)}>
-                Edit
-              </button>
+              </>
             )}
           </div>
+
+          {/* Reply Form */}
+          {isReplyingComment && (
+            <ResumeCommentReplyForm
+              parentId={comment.id}
+              resumeId={comment.resumeId}
+              section={comment.section}
+              setIsReplyingComment={setIsReplyingComment}
+            />
+          )}
+
+          {/* Replies */}
+          {comment.children.length > 0 && (
+            <div className="min-w-fit space-y-1 pt-2">
+              <button
+                className="flex items-center space-x-1 rounded-md text-xs font-medium text-indigo-800 hover:text-indigo-300"
+                type="button"
+                onClick={() => setShowReplies(!showReplies)}>
+                <ChevronUpIcon
+                  className={clsx(
+                    'h-5 w-5 ',
+                    !showReplies && 'rotate-180 transform',
+                  )}
+                />
+                <span>{showReplies ? 'Hide replies' : 'Show replies'}</span>
+              </button>
+
+              {showReplies &&
+                comment.children.map((child) => {
+                  return (
+                    <ResumeCommentListItem
+                      key={child.id}
+                      comment={child}
+                      userId={userId}
+                    />
+                  );
+                })}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -140,6 +140,7 @@ model ResumesComment {
   id          String               @id @default(cuid())
   userId      String
   resumeId    String
+  parentId    String?
   description String               @db.Text
   section     ResumesSection
   createdAt   DateTime             @default(now())
@@ -147,6 +148,8 @@ model ResumesComment {
   resume      ResumesResume        @relation(fields: [resumeId], references: [id], onDelete: Cascade)
   votes       ResumesCommentVote[]
   user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent      ResumesComment?      @relation("parentComment", fields: [parentId], references: [id])
+  children    ResumesComment[]     @relation("parentComment")
 }
 
 enum ResumesSection {
