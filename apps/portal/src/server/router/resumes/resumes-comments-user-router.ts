@@ -67,4 +67,26 @@ export const resumesCommentsUserRouter = createProtectedRouter()
         },
       });
     },
+  })
+  .mutation('reply', {
+    input: z.object({
+      description: z.string(),
+      parentId: z.string(),
+      resumeId: z.string(),
+      section: z.nativeEnum(ResumesSection),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session.user.id;
+      const { description, parentId, resumeId, section } = input;
+
+      return await ctx.prisma.resumesComment.create({
+        data: {
+          description,
+          parentId,
+          resumeId,
+          section,
+          userId,
+        },
+      });
+    },
   });

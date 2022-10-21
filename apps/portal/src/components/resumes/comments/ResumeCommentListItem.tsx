@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
 
 import ResumeCommentEditForm from './comment/ResumeCommentEditForm';
+import ResumeCommentReplyForm from './comment/ResumeCommentReplyForm';
 import ResumeCommentVoteButtons from './comment/ResumeCommentVoteButtons';
 import ResumeUserBadges from '../badges/ResumeUserBadges';
 import ResumeExpandableText from '../shared/ResumeExpandableText';
@@ -19,6 +20,7 @@ export default function ResumeCommentListItem({
 }: ResumeCommentListItemProps) {
   const isCommentOwner = userId === comment.user.userId;
   const [isEditingComment, setIsEditingComment] = useState(false);
+  const [isReplyingComment, setIsReplyingComment] = useState(false);
 
   return (
     <div className="border-primary-300 w-11/12 min-w-fit rounded-md border-2 bg-white p-2 drop-shadow-md">
@@ -70,15 +72,34 @@ export default function ResumeCommentListItem({
           <div className="flex flex-row space-x-1 pt-1 align-middle">
             <ResumeCommentVoteButtons commentId={comment.id} userId={userId} />
 
-            {isCommentOwner && !isEditingComment && (
-              <button
-                className="text-primary-800 hover:text-primary-400 px-1 text-xs"
-                type="button"
-                onClick={() => setIsEditingComment(true)}>
-                Edit
-              </button>
+            {isCommentOwner && !isEditingComment && !isReplyingComment && (
+              <>
+                <button
+                  className="text-primary-800 hover:text-primary-400 px-1 text-xs"
+                  type="button"
+                  onClick={() => setIsEditingComment(true)}>
+                  Edit
+                </button>
+
+                <button
+                  className="text-primary-800 hover:text-primary-400 px-1 text-xs"
+                  type="button"
+                  onClick={() => setIsReplyingComment(true)}>
+                  Reply
+                </button>
+              </>
             )}
           </div>
+
+          {/* Replies */}
+          {isReplyingComment && (
+            <ResumeCommentReplyForm
+              parentId={comment.id}
+              resumeId={comment.resumeId}
+              section={comment.section}
+              setIsReplyingComment={setIsReplyingComment}
+            />
+          )}
         </div>
       </div>
     </div>
