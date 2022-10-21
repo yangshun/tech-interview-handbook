@@ -6,7 +6,36 @@ import type { Resume } from '~/types/resume';
 
 export const resumesRouter = createRouter()
   .query('findAll', {
-    async resolve({ ctx }) {
+    input: z.object({
+      experienceFilters: z.string().array(),
+      locationFilters: z.string().array(),
+      numComments: z.number().optional(),
+      roleFilters: z.string().array(),
+      skip: z.number(),
+      sortOrder: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const {
+        roleFilters,
+        locationFilters,
+        experienceFilters,
+        sortOrder,
+        numComments,
+        skip,
+      } = input;
+      const userId = ctx.session?.user?.id;
+      const totalRecords = await ctx.prisma.resumesResume.count({
+        where: {
+          ...(numComments === 0 && {
+            comments: {
+              none: {},
+            },
+          }),
+          experience: { in: experienceFilters },
+          location: { in: locationFilters },
+          role: { in: roleFilters },
+        },
+      });
       const resumesData = await ctx.prisma.resumesResume.findMany({
         include: {
           _count: {
@@ -15,22 +44,52 @@ export const resumesRouter = createRouter()
               stars: true,
             },
           },
+          comments: true,
+          stars: {
+            where: {
+              OR: {
+                userId,
+              },
+            },
+          },
           user: {
             select: {
               name: true,
             },
           },
         },
-        orderBy: {
-          createdAt: 'desc',
+        orderBy:
+          sortOrder === 'latest'
+            ? {
+                createdAt: 'desc',
+              }
+            : sortOrder === 'popular'
+            ? {
+                stars: {
+                  _count: 'desc',
+                },
+              }
+            : { comments: { _count: 'desc' } },
+        skip,
+        take: 10,
+        where: {
+          ...(numComments === 0 && {
+            comments: {
+              none: {},
+            },
+          }),
+          experience: { in: experienceFilters },
+          location: { in: locationFilters },
+          role: { in: roleFilters },
         },
       });
-      return resumesData.map((r) => {
+      const mappedResumeData = resumesData.map((r) => {
         const resume: Resume = {
           additionalInfo: r.additionalInfo,
           createdAt: r.createdAt,
           experience: r.experience,
           id: r.id,
+          isStarredByUser: r.stars.length > 0,
           location: r.location,
           numComments: r._count.comments,
           numStars: r._count.stars,
@@ -41,6 +100,7 @@ export const resumesRouter = createRouter()
         };
         return resume;
       });
+      return { mappedResumeData, totalRecords };
     },
   })
   .query('findOne', {
