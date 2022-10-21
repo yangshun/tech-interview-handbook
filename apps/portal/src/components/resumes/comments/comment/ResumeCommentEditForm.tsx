@@ -1,0 +1,106 @@
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { Button, TextArea } from '@tih/ui';
+
+import { trpc } from '~/utils/trpc';
+
+import type { ResumeComment } from '~/types/resume-comments';
+
+type ResumeCommentEditFormProps = {
+  comment: ResumeComment;
+  setIsEditingComment: (value: boolean) => void;
+};
+
+type ICommentInput = {
+  description: string;
+};
+
+export default function ResumeCommentEditForm({
+  comment,
+  setIsEditingComment,
+}: ResumeCommentEditFormProps) {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isDirty },
+    reset,
+  } = useForm<ICommentInput>({
+    defaultValues: {
+      description: comment.description,
+    },
+  });
+
+  const trpcContext = trpc.useContext();
+  const commentUpdateMutation = trpc.useMutation(
+    'resumes.comments.user.update',
+    {
+      onSuccess: () => {
+        // Comment updated, invalidate query to trigger refetch
+        trpcContext.invalidateQueries(['resumes.comments.list']);
+      },
+    },
+  );
+
+  const onCancel = () => {
+    reset({ description: comment.description });
+    setIsEditingComment(false);
+  };
+
+  const onSubmit: SubmitHandler<ICommentInput> = async (data) => {
+    const { id } = comment;
+    return commentUpdateMutation.mutate(
+      {
+        id,
+        ...data,
+      },
+      {
+        onSuccess: () => {
+          setIsEditingComment(false);
+        },
+      },
+    );
+  };
+
+  const setFormValue = (value: string) => {
+    setValue('description', value.trim(), { shouldDirty: true });
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex-column mt-1 space-y-2">
+        <TextArea
+          {...(register('description', {
+            required: 'Comments cannot be empty!',
+          }),
+          {})}
+          defaultValue={comment.description}
+          disabled={commentUpdateMutation.isLoading}
+          errorMessage={errors.description?.message}
+          label=""
+          placeholder="Leave your comment here"
+          onChange={setFormValue}
+        />
+
+        <div className="flex-row space-x-2">
+          <Button
+            disabled={commentUpdateMutation.isLoading}
+            label="Cancel"
+            size="sm"
+            variant="tertiary"
+            onClick={onCancel}
+          />
+
+          <Button
+            disabled={!isDirty || commentUpdateMutation.isLoading}
+            isLoading={commentUpdateMutation.isLoading}
+            label="Confirm"
+            size="sm"
+            type="submit"
+            variant="primary"
+          />
+        </div>
+      </div>
+    </form>
+  );
+}
