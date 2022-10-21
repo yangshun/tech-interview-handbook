@@ -408,6 +408,9 @@ model QuestionsQuestion {
   votes      QuestionsQuestionVote[]
   comments   QuestionsQuestionComment[]
   answers    QuestionsAnswer[]
+
+  @@index([lastSeenAt, id])
+  @@index([upvotes, id])
 }
 
 model QuestionsQuestionEncounter {
