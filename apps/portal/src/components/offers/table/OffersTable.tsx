@@ -9,13 +9,13 @@ import {
   YOE_CATEGORY,
 } from '~/components/offers/table/types';
 
+import { Currency } from '~/utils/offers/currency/CurrencyEnum';
 import CurrencySelector from '~/utils/offers/currency/CurrencySelector';
 import { trpc } from '~/utils/trpc';
 
 import OffersRow from './OffersRow';
 
 import type { DashboardOffer, GetOffersResponse, Paging } from '~/types/offers';
-import { Currency } from '~/utils/offers/currency/CurrencyEnum';
 
 const NUMBER_OF_OFFERS_IN_PAGE = 10;
 export type OffersTableProps = Readonly<{

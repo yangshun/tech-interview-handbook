@@ -1,9 +1,14 @@
-import { TRPCError } from "@trpc/server";
-import { z } from "zod";
-import { dashboardOfferDtoMapper, getOffersResponseMapper } from "~/mappers/offers-mappers";
-import { convert } from "~/utils/offers/currency/currency-exchange";
-import { Currency } from "~/utils/offers/currency/CurrencyEnum";
-import { createRouter } from "../context";
+import { z } from 'zod';
+import { TRPCError } from '@trpc/server';
+
+import {
+  dashboardOfferDtoMapper,
+  getOffersResponseMapper,
+} from '~/mappers/offers-mappers';
+import { convert } from '~/utils/offers/currency/currency-exchange';
+import { Currency } from '~/utils/offers/currency/CurrencyEnum';
+
+import { createRouter } from '../context';
 
 const yoeCategoryMap: Record<number, string> = {
   0: 'Internship',
@@ -84,7 +89,8 @@ export const offersRouter = createRouter().query('list', {
           where: {
             AND: [
               {
-                location: input.location,
+                location:
+                  input.location.length === 0 ? undefined : input.location,
               },
               {
                 offersIntern: {
@@ -92,8 +98,38 @@ export const offersRouter = createRouter().query('list', {
                 },
               },
               {
+                offersIntern: {
+                  title:
+                    input.title && input.title.length !== 0
+                      ? input.title
+                      : undefined,
+                },
+              },
+              {
+                offersIntern: {
+                  monthlySalary: {
+                    value: {
+                      gte: input.salaryMin ?? undefined,
+                      lte: input.salaryMax ?? undefined,
+                    },
+                  },
+                },
+              },
+              {
                 offersFullTime: {
                   is: null,
+                },
+              },
+              {
+                companyId:
+                  input.companyId && input.companyId.length !== 0
+                    ? input.companyId
+                    : undefined,
+              },
+              {
+                monthYearReceived: {
+                  gte: input.dateStart ?? undefined,
+                  lte: input.dateEnd ?? undefined,
                 },
               },
             ],
@@ -128,7 +164,8 @@ export const offersRouter = createRouter().query('list', {
           where: {
             AND: [
               {
-                location: input.location,
+                location:
+                  input.location.length === 0 ? undefined : input.location,
               },
               {
                 offersIntern: {
@@ -141,6 +178,30 @@ export const offersRouter = createRouter().query('list', {
                 },
               },
               {
+                offersFullTime: {
+                  title:
+                    input.title && input.title.length !== 0
+                      ? input.title
+                      : undefined,
+                },
+              },
+              {
+                offersFullTime: {
+                  totalCompensation: {
+                    value: {
+                      gte: input.salaryMin ?? undefined,
+                      lte: input.salaryMax ?? undefined,
+                    },
+                  },
+                },
+              },
+              {
+                companyId:
+                  input.companyId && input.companyId.length !== 0
+                    ? input.companyId
+                    : undefined,
+              },
+              {
                 profile: {
                   background: {
                     totalYoe: {
@@ -150,27 +211,52 @@ export const offersRouter = createRouter().query('list', {
                   },
                 },
               },
+              {
+                monthYearReceived: {
+                  gte: input.dateStart ?? undefined,
+                  lte: input.dateEnd ?? undefined,
+                },
+              },
             ],
           },
         });
 
     // CONVERTING
-    const currency = input.currency?.toUpperCase()
+    const currency = input.currency?.toUpperCase();
     if (currency != null && currency in Currency) {
       data = await Promise.all(
         data.map(async (offer) => {
-
           if (offer.offersFullTime?.totalCompensation) {
-            offer.offersFullTime.totalCompensation.value = await convert(offer.offersFullTime.totalCompensation.value, offer.offersFullTime.totalCompensation.currency, currency);
+            offer.offersFullTime.totalCompensation.value = await convert(
+              offer.offersFullTime.totalCompensation.value,
+              offer.offersFullTime.totalCompensation.currency,
+              currency,
+            );
             offer.offersFullTime.totalCompensation.currency = currency;
-            offer.offersFullTime.baseSalary.value = await convert(offer.offersFullTime.totalCompensation.value, offer.offersFullTime.totalCompensation.currency, currency);
+            offer.offersFullTime.baseSalary.value = await convert(
+              offer.offersFullTime.totalCompensation.value,
+              offer.offersFullTime.totalCompensation.currency,
+              currency,
+            );
             offer.offersFullTime.baseSalary.currency = currency;
-            offer.offersFullTime.stocks.value = await convert(offer.offersFullTime.totalCompensation.value, offer.offersFullTime.totalCompensation.currency, currency);
+            offer.offersFullTime.stocks.value = await convert(
+              offer.offersFullTime.totalCompensation.value,
+              offer.offersFullTime.totalCompensation.currency,
+              currency,
+            );
             offer.offersFullTime.stocks.currency = currency;
-            offer.offersFullTime.bonus.value = await convert(offer.offersFullTime.totalCompensation.value, offer.offersFullTime.totalCompensation.currency, currency);
+            offer.offersFullTime.bonus.value = await convert(
+              offer.offersFullTime.totalCompensation.value,
+              offer.offersFullTime.totalCompensation.currency,
+              currency,
+            );
             offer.offersFullTime.bonus.currency = currency;
           } else if (offer.offersIntern?.monthlySalary) {
-            offer.offersIntern.monthlySalary.value = await convert(offer.offersIntern.monthlySalary.value, offer.offersIntern.monthlySalary.currency, currency);
+            offer.offersIntern.monthlySalary.value = await convert(
+              offer.offersIntern.monthlySalary.value,
+              offer.offersIntern.monthlySalary.currency,
+              currency,
+            );
             offer.offersIntern.monthlySalary.currency = currency;
           } else {
             throw new TRPCError({
@@ -183,56 +269,6 @@ export const offersRouter = createRouter().query('list', {
         }),
       );
     }
-
-    // FILTERING
-    data = data.filter((offer) => {
-      let validRecord = true;
-
-      if (input.companyId && input.companyId.length !== 0) {
-        validRecord = validRecord && offer.company.id === input.companyId;
-      }
-
-      if (input.title && input.title.length !== 0) {
-        validRecord =
-          validRecord &&
-          (offer.offersFullTime?.title === input.title ||
-            offer.offersIntern?.title === input.title);
-      }
-
-      if (
-        input.dateStart &&
-        input.dateEnd &&
-        input.dateStart.getTime() <= input.dateEnd.getTime()
-      ) {
-        validRecord =
-          validRecord &&
-          offer.monthYearReceived.getTime() >= input.dateStart.getTime() &&
-          offer.monthYearReceived.getTime() <= input.dateEnd.getTime();
-      }
-
-      if (input.salaryMin != null || input.salaryMax != null) {
-        const salary = offer.offersFullTime?.totalCompensation.value
-          ? offer.offersFullTime?.totalCompensation.value
-          : offer.offersIntern?.monthlySalary.value;
-
-        if (salary == null) {
-          throw new TRPCError({
-            code: 'NOT_FOUND',
-            message: 'Total Compensation or Salary not found',
-          });
-        }
-
-        if (input.salaryMin != null) {
-          validRecord = validRecord && salary >= input.salaryMin;
-        }
-
-        if (input.salaryMax != null) {
-          validRecord = validRecord && salary <= input.salaryMax;
-        }
-      }
-
-      return validRecord;
-    });
 
     // SORTING
     data = data.sort((offer1, offer2) => {
