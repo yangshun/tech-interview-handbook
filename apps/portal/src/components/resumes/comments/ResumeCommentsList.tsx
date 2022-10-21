@@ -56,6 +56,7 @@ export default function ResumeCommentsList({
     }
     return (
       <Button
+        className="-mb-2"
         display="block"
         label="Add your review"
         variant="tertiary"
@@ -73,7 +74,7 @@ export default function ResumeCommentsList({
           <Spinner display="block" size="lg" />
         </div>
       ) : (
-        <div className="m-2 flow-root h-[calc(100vh-20rem)] w-full flex-col space-y-4 overflow-y-auto overflow-x-hidden">
+        <div className="scrollbar-hide m-2 flow-root h-[calc(100vh-20rem)] w-full flex-col space-y-4 overflow-y-auto overflow-x-hidden pt-14 pb-6">
           {RESUME_COMMENTS_SECTIONS.map(({ label, value }) => {
             const comments = commentsQuery.data
               ? commentsQuery.data.filter((comment: ResumeComment) => {

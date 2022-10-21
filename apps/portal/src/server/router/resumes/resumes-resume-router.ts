@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { Vote } from '@prisma/client';
 
 import { createRouter } from '../context';
 
@@ -149,10 +150,15 @@ export const resumesRouter = createRouter()
     async resolve({ ctx, input }) {
       return await ctx.prisma.resumesResume.count({
         where: {
+          // User has commented on this resume
           comments: {
             some: {
               userId: input.userId,
             },
+          },
+          // Not user's own resume
+          userId: {
+            not: input.userId,
           },
         },
       });
@@ -164,16 +170,16 @@ export const resumesRouter = createRouter()
     }),
     async resolve({ ctx, input }) {
       const highestUpvotedResume = await ctx.prisma.resumesResume.findFirst({
-        include: {
+        orderBy: {
+          stars: {
+            _count: 'desc',
+          },
+        },
+        select: {
           _count: {
             select: {
               stars: true,
             },
-          },
-        },
-        orderBy: {
-          stars: {
-            _count: 'desc',
           },
         },
         where: {
@@ -183,14 +189,61 @@ export const resumesRouter = createRouter()
 
       return highestUpvotedResume?._count?.stars ?? 0;
     },
+  })
+  .query('findUserTopUpvotedCommentCount', {
+    input: z.object({
+      userId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const resumes = await ctx.prisma.resumesResume.findMany({
+        select: {
+          comments: {
+            select: {
+              userId: true,
+              votes: {
+                select: {
+                  value: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      let topUpvotedCommentCount = 0;
+
+      for (const resume of resumes) {
+        let highestVoteCount = 1;
+
+        // Get Map of {userId, voteCount} for each comment
+        const commentUpvotePairs = [];
+        for (const comment of resume.comments) {
+          const { userId, votes } = comment;
+          let voteCount = 0;
+          for (const vote of votes) {
+            if (vote.value === Vote.UPVOTE) {
+              voteCount++;
+            } else {
+              voteCount--;
+            }
+          }
+          if (voteCount >= highestVoteCount) {
+            highestVoteCount = voteCount;
+            commentUpvotePairs.push({ userId, voteCount });
+          }
+        }
+
+        // Filter to get the userIds with the highest vote counts
+        const userIds = commentUpvotePairs
+          .filter((pair) => pair.voteCount === highestVoteCount)
+          .map((pair) => pair.userId);
+
+        // Increment if input userId is the highest voted comment
+        if (userIds.includes(input.userId)) {
+          topUpvotedCommentCount++;
+        }
+      }
+
+      return topUpvotedCommentCount;
+    },
   });
-// .query('findUserTopUpvotedCommentCount', {
-//   input: z.object({
-//     userId: z.string(),
-//   }),
-//   async resolve({ ctx, input }) {
-//     const highestUpvotedResume = await ctx.prisma.resumesComment.groupBy({
-//       by: ['resumeId'],
-//     })
-//   },
-// });

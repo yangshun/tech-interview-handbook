@@ -17,12 +17,15 @@ export default function ResumeUserBadges({ userId }: Props) {
     'resumes.resume.findUserMaxResumeUpvoteCount',
     { userId },
   ]);
+  const userTopUpvotedCommentCountQuery = trpc.useQuery([
+    'resumes.resume.findUserTopUpvotedCommentCount',
+    { userId },
+  ]);
 
-  // TODO: Add other badges in
   const payload: BadgePayload = {
     maxResumeUpvoteCount: userMaxResumeUpvoteCountQuery.data ?? 0,
     reviewedResumesCount: userReviewedResumeCountQuery.data ?? 0,
-    topUpvotedCommentCount: 20,
+    topUpvotedCommentCount: userTopUpvotedCommentCountQuery.data ?? 0,
   };
 
   return (
