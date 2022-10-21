@@ -97,7 +97,9 @@ export default function ResumeCommentVoteButtons({
         />
       </button>
 
-      <div className="text-xs">{commentVotesQuery.data?.numVotes ?? 0}</div>
+      <div className="flex min-w-[1rem] justify-center text-xs">
+        {commentVotesQuery.data?.numVotes ?? 0}
+      </div>
 
       <button
         disabled={
