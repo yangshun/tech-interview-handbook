@@ -184,3 +184,13 @@ export const resumesRouter = createRouter()
       return highestUpvotedResume?._count?.stars ?? 0;
     },
   });
+// .query('findUserTopUpvotedCommentCount', {
+//   input: z.object({
+//     userId: z.string(),
+//   }),
+//   async resolve({ ctx, input }) {
+//     const highestUpvotedResume = await ctx.prisma.resumesComment.groupBy({
+//       by: ['resumeId'],
+//     })
+//   },
+// });

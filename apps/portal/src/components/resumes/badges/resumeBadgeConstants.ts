@@ -90,7 +90,7 @@ export const RESUME_USER_BADGES: Array<BadgeInfo> = [
     id: 'Sage',
     isValid: (payload: BadgePayload) =>
       payload.topUpvotedCommentCount >= TIER_THREE,
-    title: 'I am wisdom.',
+    title: 'I am wisdom',
   },
   {
     description: `${TIER_TWO} top upvoted comment`,

@@ -22,7 +22,7 @@ export default function ResumeUserBadges({ userId }: Props) {
   const payload: BadgePayload = {
     maxResumeUpvoteCount: userMaxResumeUpvoteCountQuery.data ?? 0,
     reviewedResumesCount: userReviewedResumeCountQuery.data ?? 0,
-    topUpvotedCommentCount: 10,
+    topUpvotedCommentCount: 20,
   };
 
   return (
