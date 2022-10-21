@@ -96,15 +96,17 @@ export default function ResumeCommentListItem({
           <div className="flex flex-row space-x-1 pt-1 align-middle">
             <ResumeCommentVoteButtons commentId={comment.id} userId={userId} />
 
-            {/* Action buttons; only present when not editing/replying */}
-            {isCommentOwner && !isEditingComment && !isReplyingComment && (
+            {/* Action buttons; only present for authenticated user when not editing/replying */}
+            {userId && !isEditingComment && !isReplyingComment && (
               <>
-                <button
-                  className="px-1 text-xs text-indigo-800 hover:text-indigo-400"
-                  type="button"
-                  onClick={() => setIsEditingComment(true)}>
-                  Edit
-                </button>
+                {isCommentOwner && (
+                  <button
+                    className="px-1 text-xs text-indigo-800 hover:text-indigo-400"
+                    type="button"
+                    onClick={() => setIsEditingComment(true)}>
+                    Edit
+                  </button>
+                )}
 
                 {!comment.parentId && (
                   <button
