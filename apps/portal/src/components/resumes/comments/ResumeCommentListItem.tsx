@@ -127,7 +127,6 @@ export default function ResumeCommentListItem({
 
           {/* Replies */}
           {comment.children.length > 0 && (
-            // Horizontal Divider
             <div className="min-w-fit space-y-1 pt-2">
               <button
                 className="flex items-center space-x-1 rounded-md text-xs font-medium text-indigo-800 hover:text-indigo-300"
