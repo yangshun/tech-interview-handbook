@@ -112,17 +112,7 @@ export default function QuestionCard({
   const [showReceivedForm, setShowReceivedForm] = useState(false);
   const { handleDownvote, handleUpvote, vote } = useQuestionVote(questionId);
   const hoverClass = showHover ? 'hover:bg-slate-50' : '';
-  const cardContent = showReceivedForm ? (
-    <CreateQuestionEncounterForm
-      onCancel={() => {
-        setShowReceivedForm(false);
-      }}
-      onSubmit={(data) => {
-        onReceivedSubmit?.(data);
-        setShowReceivedForm(false);
-      }}
-    />
-  ) : (
+  const cardContent = (
     <>
       {showVoteButtons && (
         <VotingButtons
@@ -132,7 +122,7 @@ export default function QuestionCard({
           onUpvote={handleUpvote}
         />
       )}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col items-start gap-2">
         <div className="flex items-baseline justify-between">
           <div className="flex items-baseline gap-2 text-slate-500">
             <Badge label={company} variant="primary" />
@@ -150,12 +140,10 @@ export default function QuestionCard({
             />
           )}
         </div>
-        <div className="ml-2">
-          <p className={clsx(truncateContent && 'line-clamp-2 text-ellipsis')}>
-            {content}
-          </p>
-        </div>
-        {(showAnswerStatistics || showReceivedStatistics) && (
+        <p className={clsx(truncateContent && 'line-clamp-2 text-ellipsis')}>
+          {content}
+        </p>
+        {!showReceivedForm && (showAnswerStatistics || showReceivedStatistics) && (
           <div className="flex gap-2">
             {showAnswerStatistics && (
               <Button
@@ -189,6 +177,17 @@ export default function QuestionCard({
               </>
             )}
           </div>
+        )}
+        {showReceivedForm && (
+          <CreateQuestionEncounterForm
+            onCancel={() => {
+              setShowReceivedForm(false);
+            }}
+            onSubmit={(data) => {
+              onReceivedSubmit?.(data);
+              setShowReceivedForm(false);
+            }}
+          />
         )}
       </div>
     </>

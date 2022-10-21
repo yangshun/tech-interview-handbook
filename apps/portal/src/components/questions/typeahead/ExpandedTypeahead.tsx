@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 import { Button, Typeahead } from '@tih/ui';
 
-type RequireAllOrNone<T> = T | { [K in keyof T]?: never };
+import type { RequireAllOrNone } from '~/utils/questions/RequireAllOrNone';
 
 type TypeaheadProps = ComponentProps<typeof Typeahead>;
 type TypeaheadOption = TypeaheadProps['options'][number];

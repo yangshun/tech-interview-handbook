@@ -21,7 +21,7 @@ export type QuestionListCardProps = Omit<
 function QuestionListCardWithoutHref(props: QuestionListCardProps) {
   return (
     <QuestionCard
-      {...props}
+      {...(props as any)}
       showActionButton={false}
       showAnswerStatistics={false}
       showDeleteButton={true}
