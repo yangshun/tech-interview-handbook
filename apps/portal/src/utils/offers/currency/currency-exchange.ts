@@ -6,7 +6,11 @@ export const convert = async (
 ) => {
   fromCurrency = fromCurrency.trim().toLowerCase();
   toCurrency = toCurrency.trim().toLowerCase();
-  const url = ['https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies', fromCurrency, toCurrency].join('/');
+  const url = [
+    'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies',
+    fromCurrency,
+    toCurrency,
+  ].join('/');
 
   return await fetch(url + '.json')
     .then((res) => res.json())

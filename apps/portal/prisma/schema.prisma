@@ -205,9 +205,9 @@ model OffersBackground {
   totalYoe     Int
   specificYoes OffersSpecificYoe[]
 
-  experiences OffersExperience[] // For extensibility in the future
+  experiences OffersExperience[]
 
-  educations OffersEducation[] // For extensibility in the future
+  educations OffersEducation[]
 
   profile         OffersProfile @relation(fields: [offersProfileId], references: [id], onDelete: Cascade)
   offersProfileId String        @unique
@@ -251,9 +251,15 @@ model OffersExperience {
 }
 
 model OffersCurrency {
-  id       String @id @default(cuid())
-  value    Int
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  value    Float
   currency String
+
+  baseValue    Float
+  baseCurrency String @default("USD")
 
   // Experience
   OffersExperienceTotalCompensation OffersExperience? @relation("ExperienceTotalCompensation")
