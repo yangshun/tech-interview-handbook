@@ -86,7 +86,10 @@ export default function ResumeCommentListItem({
               setIsEditingComment={setIsEditingComment}
             />
           ) : (
-            <ResumeExpandableText text={comment.description} />
+            <ResumeExpandableText
+              key={comment.description}
+              text={comment.description}
+            />
           )}
 
           {/* Upvote and edit */}
