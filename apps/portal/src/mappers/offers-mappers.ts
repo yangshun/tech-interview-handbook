@@ -14,6 +14,7 @@ import type {
   User,
 } from '@prisma/client';
 import { JobType } from '@prisma/client';
+import { TRPCError } from '@trpc/server';
 
 import type {
   AddToProfileResponse,
@@ -49,7 +50,7 @@ const analysisOfferDtoMapper = (
   const analysisOfferDto: AnalysisOffer = {
     company: offersCompanyDtoMapper(offer.company),
     id: offer.id,
-    income: -1,
+    income: { currency: '', value: -1 },
     jobType: offer.jobType,
     level: offer.offersFullTime?.level ?? '',
     location: offer.location,
@@ -69,9 +70,19 @@ const analysisOfferDtoMapper = (
   };
 
   if (offer.offersFullTime?.totalCompensation) {
-    analysisOfferDto.income = offer.offersFullTime.totalCompensation.value;
+    analysisOfferDto.income.value =
+      offer.offersFullTime.totalCompensation.value;
+    analysisOfferDto.income.currency =
+      offer.offersFullTime.totalCompensation.currency;
   } else if (offer.offersIntern?.monthlySalary) {
-    analysisOfferDto.income = offer.offersIntern.monthlySalary.value;
+    analysisOfferDto.income.value = offer.offersIntern.monthlySalary.value;
+    analysisOfferDto.income.currency =
+      offer.offersIntern.monthlySalary.currency;
+  } else {
+    throw new TRPCError({
+      code: 'NOT_FOUND',
+      message: 'Total Compensation or Salary not found',
+    });
   }
 
   return analysisOfferDto;

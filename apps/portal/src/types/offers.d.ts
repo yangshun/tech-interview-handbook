@@ -167,7 +167,7 @@ export type AnalysisHighestOffer = {
 export type AnalysisOffer = {
   company: OffersCompany;
   id: string;
-  income: number;
+  income: Valuation;
   jobType: JobType;
   level: string;
   location: string;
