@@ -128,6 +128,11 @@ type VoteProps<VoteQueryKey extends QueryKey = QueryKey> = {
   update: MutationKey;
 };
 
+type UseVoteMutationContext = {
+  currentData: any;
+  previousData: any;
+};
+
 export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
   id: string,
   opts: VoteProps<VoteQueryKey>,
@@ -152,16 +157,87 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
 
   const backendVote = data as BackendVote;
 
-  const { mutate: createVote } = trpc.useMutation(create, {
-    onSuccess: onVoteUpdate,
-  });
-  const { mutate: updateVote } = trpc.useMutation(update, {
-    onSuccess: onVoteUpdate,
-  });
+  const { mutate: createVote } = trpc.useMutation<any, UseVoteMutationContext>(
+    create,
+    {
+      onError: (err, variables, context) => {
+        if (context !== undefined) {
+          utils.setQueryData([query], context.previousData);
+        }
+      },
+      onMutate: async (vote) => {
+        await utils.queryClient.cancelQueries([query, { [idKey]: id } as any]);
+        const previousData = utils.queryClient.getQueryData<BackendVote | null>(
+          [query, { [idKey]: id } as any],
+        );
 
-  const { mutate: deleteVote } = trpc.useMutation(deleteKey, {
-    onSuccess: onVoteUpdate,
-  });
+        utils.setQueryData(
+          [
+            query,
+            {
+              [idKey]: id,
+            } as any,
+          ],
+          vote as any,
+        );
+        return { currentData: vote, previousData };
+      },
+      onSettled: onVoteUpdate,
+    },
+  );
+  const { mutate: updateVote } = trpc.useMutation<any, UseVoteMutationContext>(
+    update,
+    {
+      onError: (error, variables, context) => {
+        if (context !== undefined) {
+          utils.setQueryData([query], context.previousData);
+        }
+      },
+      onMutate: async (vote) => {
+        await utils.queryClient.cancelQueries([query, { [idKey]: id } as any]);
+        const previousData = utils.queryClient.getQueryData<BackendVote | null>(
+          [query, { [idKey]: id } as any],
+        );
+
+        utils.setQueryData(
+          [
+            query,
+            {
+              [idKey]: id,
+            } as any,
+          ],
+          vote,
+        );
+        return { currentData: vote, previousData };
+      },
+      onSettled: onVoteUpdate,
+    },
+  );
+
+  const { mutate: deleteVote } = trpc.useMutation<any, UseVoteMutationContext>(
+    deleteKey,
+    {
+      onError: (err, variables, context) => {
+        if (context !== undefined) {
+          utils.setQueryData([query], context.previousData);
+        }
+      },
+      onMutate: async (vote) => {
+        await utils.queryClient.cancelQueries([query, { [idKey]: id } as any]);
+        utils.setQueryData(
+          [
+            query,
+            {
+              [idKey]: id,
+            } as any,
+          ],
+          null as any,
+        );
+        return { currentData: null, previousData: vote };
+      },
+      onSettled: onVoteUpdate,
+    },
+  );
 
   const { handleDownvote, handleUpvote } = createVoteCallbacks(
     backendVote ?? null,
