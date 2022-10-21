@@ -9,6 +9,7 @@ export type ResumeComment = Readonly<{
   createdAt: Date;
   description: string;
   id: string;
+  parentId: string?;
   resumeId: string;
   section: ResumesSection;
   updatedAt: Date;

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
 
@@ -23,27 +24,45 @@ export default function ResumeCommentListItem({
   const [isReplyingComment, setIsReplyingComment] = useState(false);
 
   return (
-    <div className="border-primary-300 w-11/12 min-w-fit rounded-md border-2 bg-white p-2 drop-shadow-md">
+    <div
+      className={clsx(
+        'min-w-fit rounded-md bg-white ',
+        !comment.parentId &&
+          'w-11/12 border-2 border-indigo-300 p-2 drop-shadow-md',
+      )}>
       <div className="flex flex-row space-x-2 p-1 align-top">
+        {/* Image Icon */}
         {comment.user.image ? (
           <img
             alt={comment.user.name ?? 'Reviewer'}
-            className="mt-1 h-8 w-8 rounded-full"
+            className={clsx(
+              'mt-1 rounded-full',
+              comment.parentId ? 'h-6 w-6' : 'h-8 w-8 ',
+            )}
             src={comment.user.image!}
           />
         ) : (
-          <FaceSmileIcon className="h-8 w-8 rounded-full" />
+          <FaceSmileIcon
+            className={clsx(
+              'mt-1 rounded-full',
+              comment.parentId ? 'h-6 w-6' : 'h-8 w-8 ',
+            )}
+          />
         )}
 
         <div className="flex w-full flex-col space-y-1">
           {/* Name and creation time */}
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center space-x-1">
-              <p className="font-medium">
+              <p
+                className={clsx(
+                  'font-medium',
+                  !!comment.parentId && 'text-sm',
+                )}>
                 {comment.user.name ?? 'Reviewer ABC'}
               </p>
 
-              <p className="text-primary-800 text-xs font-medium">
+              <p className="text-xs font-medium text-indigo-800">
                 {isCommentOwner ? '(Me)' : ''}
               </p>
 
@@ -72,26 +91,29 @@ export default function ResumeCommentListItem({
           <div className="flex flex-row space-x-1 pt-1 align-middle">
             <ResumeCommentVoteButtons commentId={comment.id} userId={userId} />
 
+            {/* Action buttons; only present when not editing/replying */}
             {isCommentOwner && !isEditingComment && !isReplyingComment && (
               <>
                 <button
-                  className="text-primary-800 hover:text-primary-400 px-1 text-xs"
+                  className="px-1 text-xs text-indigo-800 hover:text-indigo-400"
                   type="button"
                   onClick={() => setIsEditingComment(true)}>
                   Edit
                 </button>
 
-                <button
-                  className="text-primary-800 hover:text-primary-400 px-1 text-xs"
-                  type="button"
-                  onClick={() => setIsReplyingComment(true)}>
-                  Reply
-                </button>
+                {!comment.parentId && (
+                  <button
+                    className="px-1 text-xs text-indigo-800 hover:text-indigo-400"
+                    type="button"
+                    onClick={() => setIsReplyingComment(true)}>
+                    Reply
+                  </button>
+                )}
               </>
             )}
           </div>
 
-          {/* Replies */}
+          {/* Reply Form */}
           {isReplyingComment && (
             <ResumeCommentReplyForm
               parentId={comment.id}
@@ -99,6 +121,30 @@ export default function ResumeCommentListItem({
               section={comment.section}
               setIsReplyingComment={setIsReplyingComment}
             />
+          )}
+
+          {/* Replies */}
+          {comment.children.length > 0 && (
+            // Horizontal Divider
+            <div className="min-w-fit space-y-1 pt-1">
+              <div className="relative flex items-center">
+                <div className="flex-grow border-t border-gray-300" />
+                <span className="mx-4 flex-shrink text-xs text-gray-400">
+                  Replies
+                </span>
+                <div className="flex-grow border-t border-gray-300" />
+              </div>
+
+              {comment.children.map((child) => {
+                return (
+                  <ResumeCommentListItem
+                    key={child.id}
+                    comment={child}
+                    userId={userId}
+                  />
+                );
+              })}
+            </div>
           )}
         </div>
       </div>

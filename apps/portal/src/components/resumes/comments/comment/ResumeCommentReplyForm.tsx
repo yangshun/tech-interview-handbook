@@ -69,7 +69,7 @@ export default function ResumeCommentReplyForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex-column mt-1 space-y-2">
+      <div className="flex-column space-y-2 pt-2">
         <TextArea
           {...(register('description', {
             required: 'Reply cannot be empty!',
