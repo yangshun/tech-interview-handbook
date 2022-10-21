@@ -15,6 +15,7 @@ import { trpc } from '~/utils/trpc';
 import OffersRow from './OffersRow';
 
 import type { DashboardOffer, GetOffersResponse, Paging } from '~/types/offers';
+import { Currency } from '~/utils/offers/currency/CurrencyEnum';
 
 const NUMBER_OF_OFFERS_IN_PAGE = 10;
 export type OffersTableProps = Readonly<{
@@ -25,7 +26,7 @@ export default function OffersTable({
   companyFilter,
   jobTitleFilter,
 }: OffersTableProps) {
-  const [currency, setCurrency] = useState('SGD'); // TODO: Detect location
+  const [currency, setCurrency] = useState(Currency.SGD.toString()); // TODO: Detect location
   const [selectedTab, setSelectedTab] = useState(YOE_CATEGORY.ENTRY);
   const [pagination, setPagination] = useState<Paging>({
     currentPage: 0,
@@ -44,12 +45,13 @@ export default function OffersTable({
       numOfPages: 0,
       totalItems: 0,
     });
-  }, [selectedTab]);
+  }, [selectedTab, currency]);
   const offersQuery = trpc.useQuery(
     [
       'offers.list',
       {
         companyId: companyFilter,
+        currency,
         limit: NUMBER_OF_OFFERS_IN_PAGE,
         location: 'Singapore, Singapore', // TODO: Geolocation
         offset: pagination.currentPage,

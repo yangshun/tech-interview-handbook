@@ -6,11 +6,12 @@ function Test() {
   const data = trpc.useQuery([
     'offers.list',
     {
+      currency: "aed",
       limit: 100,
       location: 'Singapore, Singapore',
       offset: 0,
       sortBy: '+totalCompensation',
-      yoeCategory: 1,
+      yoeCategory: 2,
     },
   ]);
 

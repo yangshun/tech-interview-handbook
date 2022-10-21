@@ -1,12 +1,9 @@
-import { z } from 'zod';
-import { TRPCError } from '@trpc/server';
-
-import {
-  dashboardOfferDtoMapper,
-  getOffersResponseMapper,
-} from '~/mappers/offers-mappers';
-
-import { createRouter } from '../context';
+import { TRPCError } from "@trpc/server";
+import { z } from "zod";
+import { dashboardOfferDtoMapper, getOffersResponseMapper } from "~/mappers/offers-mappers";
+import { convert } from "~/utils/offers/currency/currency-exchange";
+import { Currency } from "~/utils/offers/currency/CurrencyEnum";
+import { createRouter } from "../context";
 
 const yoeCategoryMap: Record<number, string> = {
   0: 'Internship',
@@ -38,6 +35,7 @@ const createSortByValidationRegex = () => {
 export const offersRouter = createRouter().query('list', {
   input: z.object({
     companyId: z.string().nullish(),
+    currency: z.string().nullish(),
     dateEnd: z.date().nullish(),
     dateStart: z.date().nullish(),
     limit: z.number().positive(),
@@ -80,6 +78,9 @@ export const offersRouter = createRouter().query('list', {
               },
             },
           },
+          orderBy: {
+            monthYearReceived: 'desc',
+          },
           where: {
             AND: [
               {
@@ -121,6 +122,9 @@ export const offersRouter = createRouter().query('list', {
               },
             },
           },
+          orderBy: {
+            monthYearReceived: 'desc',
+          },
           where: {
             AND: [
               {
@@ -149,6 +153,36 @@ export const offersRouter = createRouter().query('list', {
             ],
           },
         });
+
+    // CONVERTING
+    const currency = input.currency?.toUpperCase()
+    if (currency != null && currency in Currency) {
+      data = await Promise.all(
+        data.map(async (offer) => {
+
+          if (offer.offersFullTime?.totalCompensation) {
+            offer.offersFullTime.totalCompensation.value = await convert(offer.offersFullTime.totalCompensation.value, offer.offersFullTime.totalCompensation.currency, currency);
+            offer.offersFullTime.totalCompensation.currency = currency;
+            offer.offersFullTime.baseSalary.value = await convert(offer.offersFullTime.totalCompensation.value, offer.offersFullTime.totalCompensation.currency, currency);
+            offer.offersFullTime.baseSalary.currency = currency;
+            offer.offersFullTime.stocks.value = await convert(offer.offersFullTime.totalCompensation.value, offer.offersFullTime.totalCompensation.currency, currency);
+            offer.offersFullTime.stocks.currency = currency;
+            offer.offersFullTime.bonus.value = await convert(offer.offersFullTime.totalCompensation.value, offer.offersFullTime.totalCompensation.currency, currency);
+            offer.offersFullTime.bonus.currency = currency;
+          } else if (offer.offersIntern?.monthlySalary) {
+            offer.offersIntern.monthlySalary.value = await convert(offer.offersIntern.monthlySalary.value, offer.offersIntern.monthlySalary.currency, currency);
+            offer.offersIntern.monthlySalary.currency = currency;
+          } else {
+            throw new TRPCError({
+              code: 'NOT_FOUND',
+              message: 'Total Compensation or Salary not found',
+            });
+          }
+
+          return offer;
+        }),
+      );
+    }
 
     // FILTERING
     data = data.filter((offer) => {
