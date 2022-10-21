@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-import { Disclosure } from '@headlessui/react';
-import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
+import { Fragment, useEffect, useState } from 'react';
+import { Dialog, Disclosure, Transition } from '@headlessui/react';
+import { FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import {
   MagnifyingGlassIcon,
   NewspaperIcon,
@@ -104,6 +105,7 @@ export default function ResumeHomePage() {
   const [userFilters, setUserFilters] = useState(INITIAL_FILTER_STATE);
   const [shortcutSelected, setShortcutSelected] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const skip = (currentPage - 1) * PAGE_LIMIT;
 
@@ -240,88 +242,51 @@ export default function ResumeHomePage() {
       <Head>
         <title>Resume Review Portal</title>
       </Head>
-      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
-        <div className="ml-4 py-4">
-          <ResumeReviewsTitle />
-        </div>
-        <div className="mt-4 flex items-start">
-          <div className="w-screen sm:px-4 md:px-8">
-            <div className="grid grid-cols-12">
-              <div className="col-span-2 self-end">
-                <h3 className="text-md mb-4 font-medium tracking-tight text-gray-900">
-                  Shortcuts:
-                </h3>
-              </div>
-              <div className="col-span-10">
-                <div className="border-grey-200 grid grid-cols-12 items-center gap-4 border-b pb-2">
-                  <div className="col-span-5">
-                    <Tabs
-                      label="Resume Browse Tabs"
-                      tabs={[
-                        {
-                          label: 'All Resumes',
-                          value: BROWSE_TABS_VALUES.ALL,
-                        },
-                        {
-                          label: 'Starred Resumes',
-                          value: BROWSE_TABS_VALUES.STARRED,
-                        },
-                        {
-                          label: 'My Resumes',
-                          value: BROWSE_TABS_VALUES.MY,
-                        },
-                      ]}
-                      value={tabsValue}
-                      onChange={onTabChange}
-                    />
-                  </div>
-                  <div className="col-span-7 flex items-center justify-evenly">
-                    <div className="w-64">
-                      <form>
-                        <TextInput
-                          label=""
-                          placeholder="Search Resumes"
-                          startAddOn={MagnifyingGlassIcon}
-                          startAddOnType="icon"
-                          type="text"
-                          value={searchValue}
-                          onChange={setSearchValue}
-                        />
-                      </form>
-                    </div>
-                    <div>
-                      <DropdownMenu align="end" label={SORT_OPTIONS[sortOrder]}>
-                        {Object.entries(SORT_OPTIONS).map(([key, value]) => (
-                          <DropdownMenu.Item
-                            key={key}
-                            isSelected={sortOrder === key}
-                            label={value}
-                            onClick={() =>
-                              setSortOrder(key)
-                            }></DropdownMenu.Item>
-                        ))}
-                      </DropdownMenu>
-                    </div>
-                    <div>
-                      <button
-                        className="rounded-md bg-indigo-500 py-2 px-3 text-sm font-medium text-white"
-                        type="button"
-                        onClick={onSubmitResume}>
-                        Submit Resume
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div className="grid grid-cols-12">
-              <div className="col-span-2">
-                <div className="w-100 pt-4 sm:pr-0 md:pr-4">
-                  <form>
-                    <h3 className="sr-only">Shortcuts</h3>
+      {/* Mobile Filters */}
+      <div>
+        <Transition.Root as={Fragment} show={mobileFiltersOpen}>
+          <Dialog
+            as="div"
+            className="relative z-40 lg:hidden"
+            onClose={setMobileFiltersOpen}>
+            <Transition.Child
+              as={Fragment}
+              enter="transition-opacity ease-linear duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="transition-opacity ease-linear duration-300"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0">
+              <div className="fixed inset-0 bg-black bg-opacity-25" />
+            </Transition.Child>
+
+            <div className="fixed inset-0 z-40 flex">
+              <Transition.Child
+                as={Fragment}
+                enter="transition ease-in-out duration-300 transform"
+                enterFrom="translate-x-full"
+                enterTo="translate-x-0"
+                leave="transition ease-in-out duration-300 transform"
+                leaveFrom="translate-x-0"
+                leaveTo="translate-x-full">
+                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+                  <div className="flex items-center justify-between px-4">
+                    <h2 className="text-lg font-medium text-gray-900">
+                      Shortcuts
+                    </h2>
+                    <button
+                      className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
+                      type="button"
+                      onClick={() => setMobileFiltersOpen(false)}>
+                      <span className="sr-only">Close menu</span>
+                      <XMarkIcon aria-hidden="true" className="h-6 w-6" />
+                    </button>
+                  </div>
+
+                  <form className="mt-4 border-t border-gray-200">
                     <ul
-                      className="flex flex-wrap justify-start gap-4 pb-6 text-sm font-medium text-gray-900"
+                      className="flex flex-wrap justify-start gap-4 px-4 py-3 font-medium text-gray-900"
                       role="list">
                       {SHORTCUTS.map((shortcut) => (
                         <li key={shortcut.name}>
@@ -333,18 +298,16 @@ export default function ResumeHomePage() {
                         </li>
                       ))}
                     </ul>
-                    <h3 className="text-md my-4 font-medium tracking-tight text-gray-900">
-                      Explore these filters:
-                    </h3>
+
                     {filters.map((filter) => (
                       <Disclosure
                         key={filter.id}
                         as="div"
-                        className="border-b border-gray-200 py-6">
+                        className="border-t border-gray-200 px-4 py-6">
                         {({ open }) => (
                           <>
-                            <h3 className="-my-3 flow-root">
-                              <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500">
+                            <h3 className="-mx-2 -my-3 flow-root">
+                              <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
                                 <span className="font-medium text-gray-900">
                                   {filter.label}
                                 </span>
@@ -363,12 +326,8 @@ export default function ResumeHomePage() {
                                 </span>
                               </Disclosure.Button>
                             </h3>
-                            <Disclosure.Panel className="pt-4">
-                              <CheckboxList
-                                description=""
-                                isLabelHidden={true}
-                                label=""
-                                orientation="vertical">
+                            <Disclosure.Panel className="pt-6">
+                              <div className="space-y-6">
                                 {filter.options.map((option) => (
                                   <div
                                     key={option.value}
@@ -388,53 +347,222 @@ export default function ResumeHomePage() {
                                     />
                                   </div>
                                 ))}
-                              </CheckboxList>
+                              </div>
                             </Disclosure.Panel>
                           </>
                         )}
                       </Disclosure>
                     ))}
                   </form>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </Dialog>
+        </Transition.Root>
+      </div>
+
+      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
+        <div className="ml-4 py-4">
+          <ResumeReviewsTitle />
+        </div>
+
+        <div className="mx-8 mt-4 flex justify-start">
+          <div className="hidden w-1/6 pt-2 lg:block">
+            <h3 className="text-md mb-4 font-medium tracking-tight text-gray-900">
+              Shortcuts:
+            </h3>
+            <div className="w-100 pt-4 sm:pr-0 md:pr-4">
+              <form>
+                <ul
+                  className="flex flex-wrap justify-start gap-4 pb-6 text-sm font-medium text-gray-900"
+                  role="list">
+                  {SHORTCUTS.map((shortcut) => (
+                    <li key={shortcut.name}>
+                      <ResumeFilterPill
+                        isSelected={shortcutSelected === shortcut.name}
+                        title={shortcut.name}
+                        onClick={() => onShortcutChange(shortcut)}
+                      />
+                    </li>
+                  ))}
+                </ul>
+                <h3 className="text-md my-4 font-medium tracking-tight text-gray-900">
+                  Explore these filters:
+                </h3>
+                {filters.map((filter) => (
+                  <Disclosure
+                    key={filter.id}
+                    as="div"
+                    className="border-b border-gray-200 py-6">
+                    {({ open }) => (
+                      <>
+                        <h3 className="-my-3 flow-root">
+                          <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500">
+                            <span className="font-medium text-gray-900">
+                              {filter.label}
+                            </span>
+                            <span className="ml-6 flex items-center">
+                              {open ? (
+                                <MinusIcon
+                                  aria-hidden="true"
+                                  className="h-5 w-5"
+                                />
+                              ) : (
+                                <PlusIcon
+                                  aria-hidden="true"
+                                  className="h-5 w-5"
+                                />
+                              )}
+                            </span>
+                          </Disclosure.Button>
+                        </h3>
+                        <Disclosure.Panel className="pt-4">
+                          <CheckboxList
+                            description=""
+                            isLabelHidden={true}
+                            label=""
+                            orientation="vertical">
+                            {filter.options.map((option) => (
+                              <div
+                                key={option.value}
+                                className="[&>div>div:nth-child(2)>label]:font-normal [&>div>div:nth-child(1)>input]:text-indigo-600 [&>div>div:nth-child(1)>input]:ring-indigo-500">
+                                <CheckboxInput
+                                  label={option.label}
+                                  value={userFilters[filter.id].includes(
+                                    option.value,
+                                  )}
+                                  onChange={(isChecked) =>
+                                    onFilterCheckboxChange(
+                                      isChecked,
+                                      filter.id,
+                                      option.value,
+                                    )
+                                  }
+                                />
+                              </div>
+                            ))}
+                          </CheckboxList>
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                ))}
+              </form>
+            </div>
+          </div>
+          <div className="w-full">
+            <div className="lg:border-grey-200 flex flex-wrap items-center justify-between pb-2 lg:border-b">
+              <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none lg:pb-0">
+                <div>
+                  <Tabs
+                    label="Resume Browse Tabs"
+                    tabs={[
+                      {
+                        label: 'All Resumes',
+                        value: BROWSE_TABS_VALUES.ALL,
+                      },
+                      {
+                        label: 'Starred Resumes',
+                        value: BROWSE_TABS_VALUES.STARRED,
+                      },
+                      {
+                        label: 'My Resumes',
+                        value: BROWSE_TABS_VALUES.MY,
+                      },
+                    ]}
+                    value={tabsValue}
+                    onChange={onTabChange}
+                  />
+                </div>
+
+                <div>
+                  <button
+                    className="ml-4 rounded-md bg-indigo-500 py-2 px-3 text-sm font-medium text-white lg:hidden"
+                    type="button"
+                    onClick={onSubmitResume}>
+                    Submit Resume
+                  </button>
                 </div>
               </div>
-              <div className="col-span-10 mb-6">
-                {sessionData === null &&
-                tabsValue !== BROWSE_TABS_VALUES.ALL ? (
-                  <ResumeSignInButton
-                    className="mt-8"
-                    text={getLoggedOutText(tabsValue)}
-                  />
-                ) : getTabResumes().length === 0 ? (
-                  <div className="mt-24 flex flex-wrap justify-center">
-                    <NewspaperIcon
-                      className="mb-12 basis-full"
-                      height={196}
-                      width={196}
+              <div className="flex flex-wrap items-center justify-start gap-8">
+                <div className="w-64">
+                  <form>
+                    <TextInput
+                      label=""
+                      placeholder="Search Resumes"
+                      startAddOn={MagnifyingGlassIcon}
+                      startAddOnType="icon"
+                      type="text"
+                      value={searchValue}
+                      onChange={setSearchValue}
                     />
-                    {getEmptyDataText(tabsValue, searchValue, userFilters)}
-                  </div>
-                ) : (
-                  <>
-                    <ResumeListItems
-                      isLoading={
-                        allResumesQuery.isFetching ||
-                        starredResumesQuery.isFetching ||
-                        myResumesQuery.isFetching
-                      }
-                      resumes={getTabResumes()}
-                    />
-                    <div className="my-4 flex justify-center">
-                      <Pagination
-                        current={currentPage}
-                        end={getTabTotalPages()}
-                        label="pagination"
-                        start={1}
-                        onSelect={(page) => setCurrentPage(page)}
-                      />
-                    </div>
-                  </>
-                )}
+                  </form>
+                </div>
+                <div>
+                  <DropdownMenu align="end" label={SORT_OPTIONS[sortOrder]}>
+                    {Object.entries(SORT_OPTIONS).map(([key, value]) => (
+                      <DropdownMenu.Item
+                        key={key}
+                        isSelected={sortOrder === key}
+                        label={value}
+                        onClick={() => setSortOrder(key)}></DropdownMenu.Item>
+                    ))}
+                  </DropdownMenu>
+                </div>
+                <button
+                  className="-m-2 text-gray-400 hover:text-gray-500 lg:hidden"
+                  type="button"
+                  onClick={() => setMobileFiltersOpen(true)}>
+                  <span className="sr-only">Filters</span>
+                  <FunnelIcon aria-hidden="true" className="h-6 w-6" />
+                </button>
+
+                <div>
+                  <button
+                    className="hidden w-36 rounded-md bg-indigo-500 py-2 px-3 text-sm font-medium text-white lg:block"
+                    type="button"
+                    onClick={onSubmitResume}>
+                    Submit Resume
+                  </button>
+                </div>
               </div>
+            </div>
+            <div className="mb-6">
+              {sessionData === null && tabsValue !== BROWSE_TABS_VALUES.ALL ? (
+                <ResumeSignInButton
+                  className="mt-8"
+                  text={getLoggedOutText(tabsValue)}
+                />
+              ) : getTabResumes().length === 0 ? (
+                <div className="mt-24 flex flex-wrap justify-center">
+                  <NewspaperIcon
+                    className="mb-12 basis-full"
+                    height={196}
+                    width={196}
+                  />
+                  {getEmptyDataText(tabsValue, searchValue, userFilters)}
+                </div>
+              ) : (
+                <>
+                  <ResumeListItems
+                    isLoading={
+                      allResumesQuery.isFetching ||
+                      starredResumesQuery.isFetching ||
+                      myResumesQuery.isFetching
+                    }
+                    resumes={getTabResumes()}
+                  />
+                  <div className="my-4 flex justify-center">
+                    <Pagination
+                      current={currentPage}
+                      end={getTabTotalPages()}
+                      label="pagination"
+                      start={1}
+                      onSelect={(page) => setCurrentPage(page)}
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
