@@ -61,6 +61,17 @@ const filters: Array<Filter> = [
   },
 ];
 
+const getLoggedOutText = (tabsValue: string) => {
+  switch (tabsValue) {
+    case BROWSE_TABS_VALUES.STARRED:
+      return 'to view starred resumes!';
+    case BROWSE_TABS_VALUES.MY:
+      return 'to view your submitted resumes!';
+    default:
+      return '';
+  }
+};
+
 const getEmptyDataText = (
   tabsValue: string,
   searchValue: string,
@@ -76,11 +87,11 @@ const getEmptyDataText = (
     case BROWSE_TABS_VALUES.ALL:
       return 'Looks like SWEs are feeling lucky!';
     case BROWSE_TABS_VALUES.STARRED:
-      return 'You have not starred any resumes.\nStar one to see it here!';
+      return 'You have not starred any resumes. Star one to see it here!';
     case BROWSE_TABS_VALUES.MY:
       return 'Upload a resume to see it here!';
     default:
-      return null;
+      return '';
   }
 };
 
@@ -92,8 +103,6 @@ export default function ResumeHomePage() {
   const [searchValue, setSearchValue] = useState('');
   const [userFilters, setUserFilters] = useState(INITIAL_FILTER_STATE);
   const [shortcutSelected, setShortcutSelected] = useState('All');
-  const [renderSignInButton, setRenderSignInButton] = useState(false);
-  const [signInButtonText, setSignInButtonText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
   const skip = (currentPage - 1) * PAGE_LIMIT;
@@ -117,9 +126,6 @@ export default function ResumeHomePage() {
     ],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
-      onSuccess: () => {
-        setRenderSignInButton(false);
-      },
       staleTime: 5 * 60 * 1000,
     },
   );
@@ -138,10 +144,6 @@ export default function ResumeHomePage() {
     ],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
-      onError: () => {
-        setRenderSignInButton(true);
-        setSignInButtonText('to view starred resumes');
-      },
       retry: false,
       staleTime: 5 * 60 * 1000,
     },
@@ -161,20 +163,16 @@ export default function ResumeHomePage() {
     ],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.MY,
-      onError: () => {
-        setRenderSignInButton(true);
-        setSignInButtonText('to view your submitted resumes');
-      },
       retry: false,
       staleTime: 5 * 60 * 1000,
     },
   );
 
   const onSubmitResume = () => {
-    if (sessionData?.user?.id) {
-      router.push('/resumes/submit');
-    } else {
+    if (sessionData === null) {
       router.push('/api/auth/signin');
+    } else {
+      router.push('/resumes/submit');
     }
   };
 
@@ -400,10 +398,13 @@ export default function ResumeHomePage() {
                 </div>
               </div>
               <div className="col-span-10 mb-6">
-                {renderSignInButton && (
-                  <ResumeSignInButton text={signInButtonText} />
-                )}
-                {getTabResumes().length === 0 ? (
+                {sessionData === null &&
+                tabsValue !== BROWSE_TABS_VALUES.ALL ? (
+                  <ResumeSignInButton
+                    className="mt-8"
+                    text={getLoggedOutText(tabsValue)}
+                  />
+                ) : getTabResumes().length === 0 ? (
                   <div className="mt-24 flex flex-wrap justify-center">
                     <NewspaperIcon
                       className="mb-12 basis-full"
