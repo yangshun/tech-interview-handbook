@@ -69,23 +69,23 @@ function AlgoMonster({ position }) {
   );
 }
 
-function Moonchaser({ position }) {
+function Rora({ position }) {
   return (
     <a
-      className={clsx(styles.container, styles.backgroundMoonchaser)}
-      href={`https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}`}
+      className={clsx(styles.container, styles.backgroundRora)}
+      href={`https://www.teamrora.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}`}
       key={Math.random()}
       target="_blank"
       rel="noopener"
       onClick={() => {
-        window.gtag('event', `moonchaser.${position}.click`);
+        window.gtag('event', `rora.${position}.click`);
       }}>
       <p className={styles.tagline}>
         <strong className={styles.title}>
           Risk-free salary negotiation help
         </strong>{' '}
-        Receive risk-free salary negotiation advice from <u>Moonchaser</u>. You
-        pay nothing unless your offer is increased.{' '}
+        Receive risk-free salary negotiation advice from <u>Rora</u>. You pay
+        nothing unless your offer is increased.{' '}
         <u>Book your free consultation today!</u>
       </p>
     </a>
@@ -210,7 +210,7 @@ export default React.memo(function SidebarAd({ position }) {
         }
 
         if (path.includes('negotiation') || path.includes('compensation')) {
-          return <Moonchaser key={Math.random()} position={position} />;
+          return <Rora key={Math.random()} position={position} />;
         }
 
         if (path.includes('system-design')) {

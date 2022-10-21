@@ -1,3 +1,5 @@
+import type { QuestionsQuestionType } from '@prisma/client';
+
 export type Question = {
   // TODO: company, location, role maps
   company: string;
@@ -9,10 +11,16 @@ export type Question = {
   numVotes: number;
   role: string;
   seenAt: Date;
-  type: stringl;
+  type: QuestionsQuestionType;
   updatedAt: Date;
   user: string;
 };
+
+export type AggregatedQuestionEncounter = {
+  companyCounts: Record<string, number>;
+  locationCounts: Record<string, number>;
+  roleCounts: Record<string, number>;
+}
 
 export type AnswerComment = {
   content: string;

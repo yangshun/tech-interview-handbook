@@ -27,10 +27,10 @@ export default function ProfileDetails({
     );
   }
   if (selectedTab === 'offers') {
-    if (offers && offers.length !== 0) {
+    if (offers.length !== 0) {
       return (
         <>
-          {[...offers].map((offer) => (
+          {offers.map((offer) => (
             <OfferCard key={offer.id} offer={offer} />
           ))}
         </>

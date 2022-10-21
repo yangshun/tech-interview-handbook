@@ -1,154 +1,178 @@
-import compareAsc from 'date-fns/compareAsc';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import {
+  MagnifyingGlassIcon,
+  NewspaperIcon,
+} from '@heroicons/react/24/outline';
 import {
   CheckboxInput,
   CheckboxList,
   DropdownMenu,
+  Pagination,
   Tabs,
   TextInput,
 } from '@tih/ui';
 
+import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
 import type {
-  FilterOption,
-  SortOrder,
-} from '~/components/resumes/browse/resumeConstants';
+  Filter,
+  FilterId,
+  Shortcut,
+} from '~/components/resumes/browse/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCE,
+  INITIAL_FILTER_STATE,
+  isInitialFilterState,
   LOCATION,
   ROLE,
+  SHORTCUTS,
   SORT_OPTIONS,
-  TOP_HITS,
-} from '~/components/resumes/browse/resumeConstants';
-import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
+} from '~/components/resumes/browse/resumeFilters';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 
+import useDebounceValue from '~/utils/resumes/useDebounceValue';
 import { trpc } from '~/utils/trpc';
 
-import type { Resume } from '~/types/resume';
+import type { FilterState } from '../../components/resumes/browse/resumeFilters';
 
-type FilterId = 'experience' | 'location' | 'role';
-type Filter = {
-  id: FilterId;
-  name: string;
-  options: Array<FilterOption>;
-};
-type FilterState = Record<FilterId, Array<string>>;
-
+const PAGE_LIMIT = 10;
 const filters: Array<Filter> = [
   {
     id: 'role',
-    name: 'Role',
+    label: 'Role',
     options: ROLE,
   },
   {
     id: 'experience',
-    name: 'Experience',
+    label: 'Experience',
     options: EXPERIENCE,
   },
   {
     id: 'location',
-    name: 'Location',
+    label: 'Location',
     options: LOCATION,
   },
 ];
 
-const INITIAL_FILTER_STATE: FilterState = {
-  experience: Object.values(EXPERIENCE).map(({ value }) => value),
-  location: Object.values(LOCATION).map(({ value }) => value),
-  role: Object.values(ROLE).map(({ value }) => value),
+const getLoggedOutText = (tabsValue: string) => {
+  switch (tabsValue) {
+    case BROWSE_TABS_VALUES.STARRED:
+      return 'to view starred resumes!';
+    case BROWSE_TABS_VALUES.MY:
+      return 'to view your submitted resumes!';
+    default:
+      return '';
+  }
 };
 
-const filterResumes = (
-  resumes: Array<Resume>,
+const getEmptyDataText = (
+  tabsValue: string,
   searchValue: string,
   userFilters: FilterState,
-) =>
-  resumes
-    .filter((resume) =>
-      resume.title.toLowerCase().includes(searchValue.toLocaleLowerCase()),
-    )
-    .filter(
-      ({ experience, location, role }) =>
-        userFilters.role.includes(role) &&
-        userFilters.experience.includes(experience) &&
-        userFilters.location.includes(location),
-    );
-
-const sortComparators: Record<
-  SortOrder,
-  (resume1: Resume, resume2: Resume) => number
-> = {
-  latest: (resume1, resume2) =>
-    compareAsc(resume2.createdAt, resume1.createdAt),
-  popular: (resume1, resume2) => resume2.numStars - resume1.numStars,
-  topComments: (resume1, resume2) => resume2.numComments - resume1.numComments,
+) => {
+  if (searchValue.length > 0) {
+    return 'Try tweaking your search text to see more resumes.';
+  }
+  if (!isInitialFilterState(userFilters)) {
+    return 'Try tweaking your filters to see more resumes.';
+  }
+  switch (tabsValue) {
+    case BROWSE_TABS_VALUES.ALL:
+      return 'Looks like SWEs are feeling lucky!';
+    case BROWSE_TABS_VALUES.STARRED:
+      return 'You have not starred any resumes. Star one to see it here!';
+    case BROWSE_TABS_VALUES.MY:
+      return 'Upload a resume to see it here!';
+    default:
+      return '';
+  }
 };
-const sortResumes = (resumes: Array<Resume>, sortOrder: SortOrder) =>
-  resumes.sort(sortComparators[sortOrder]);
 
 export default function ResumeHomePage() {
   const { data: sessionData } = useSession();
   const router = useRouter();
   const [tabsValue, setTabsValue] = useState(BROWSE_TABS_VALUES.ALL);
-  const [sortOrder, setSortOrder] = useState(SORT_OPTIONS[0].value);
+  const [sortOrder, setSortOrder] = useState('latest');
   const [searchValue, setSearchValue] = useState('');
   const [userFilters, setUserFilters] = useState(INITIAL_FILTER_STATE);
-  const [resumes, setResumes] = useState<Array<Resume>>([]);
-  const [renderSignInButton, setRenderSignInButton] = useState(false);
-  const [signInButtonText, setSignInButtonText] = useState('');
+  const [shortcutSelected, setShortcutSelected] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const allResumesQuery = trpc.useQuery(['resumes.resume.findAll'], {
-    enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
-    onSuccess: (data) => {
-      setResumes(data);
-      setRenderSignInButton(false);
+  const skip = (currentPage - 1) * PAGE_LIMIT;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [userFilters, sortOrder]);
+
+  const allResumesQuery = trpc.useQuery(
+    [
+      'resumes.resume.findAll',
+      {
+        experienceFilters: userFilters.experience,
+        locationFilters: userFilters.location,
+        numComments: userFilters.numComments,
+        roleFilters: userFilters.role,
+        searchValue: useDebounceValue(searchValue, 800),
+        skip,
+        sortOrder,
+      },
+    ],
+    {
+      enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
+      staleTime: 5 * 60 * 1000,
     },
-  });
+  );
   const starredResumesQuery = trpc.useQuery(
-    ['resumes.resume.user.findUserStarred'],
+    [
+      'resumes.resume.user.findUserStarred',
+      {
+        experienceFilters: userFilters.experience,
+        locationFilters: userFilters.location,
+        numComments: userFilters.numComments,
+        roleFilters: userFilters.role,
+        searchValue: useDebounceValue(searchValue, 800),
+        skip,
+        sortOrder,
+      },
+    ],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
-      onError: () => {
-        setResumes([]);
-        setRenderSignInButton(true);
-        setSignInButtonText('to view starred resumes');
-      },
-      onSuccess: (data) => {
-        setResumes(data);
-      },
       retry: false,
+      staleTime: 5 * 60 * 1000,
     },
   );
   const myResumesQuery = trpc.useQuery(
-    ['resumes.resume.user.findUserCreated'],
+    [
+      'resumes.resume.user.findUserCreated',
+      {
+        experienceFilters: userFilters.experience,
+        locationFilters: userFilters.location,
+        numComments: userFilters.numComments,
+        roleFilters: userFilters.role,
+        searchValue: useDebounceValue(searchValue, 800),
+        skip,
+        sortOrder,
+      },
+    ],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.MY,
-      onError: () => {
-        setResumes([]);
-        setRenderSignInButton(true);
-        setSignInButtonText('to view your submitted resumes');
-      },
-      onSuccess: (data) => {
-        setResumes(data);
-      },
       retry: false,
+      staleTime: 5 * 60 * 1000,
     },
   );
 
   const onSubmitResume = () => {
-    if (sessionData?.user?.id) {
-      router.push('/resumes/submit');
-    } else {
+    if (sessionData === null) {
       router.push('/api/auth/signin');
+    } else {
+      router.push('/resumes/submit');
     }
   };
 
@@ -172,6 +196,45 @@ export default function ResumeHomePage() {
     }
   };
 
+  const onShortcutChange = ({
+    sortOrder: shortcutSortOrder,
+    filters: shortcutFilters,
+    name: shortcutName,
+  }: Shortcut) => {
+    setShortcutSelected(shortcutName);
+    setSortOrder(shortcutSortOrder);
+    setUserFilters(shortcutFilters);
+  };
+
+  const onTabChange = (tab: string) => {
+    setTabsValue(tab);
+    setCurrentPage(1);
+  };
+
+  const getTabQueryData = () => {
+    switch (tabsValue) {
+      case BROWSE_TABS_VALUES.ALL:
+        return allResumesQuery.data;
+      case BROWSE_TABS_VALUES.STARRED:
+        return starredResumesQuery.data;
+      case BROWSE_TABS_VALUES.MY:
+        return myResumesQuery.data;
+      default:
+        return null;
+    }
+  };
+
+  const getTabResumes = () => {
+    return getTabQueryData()?.mappedResumeData ?? [];
+  };
+
+  const getTabTotalPages = () => {
+    const numRecords = getTabQueryData()?.totalRecords ?? 0;
+    return numRecords % PAGE_LIMIT === 0
+      ? numRecords / PAGE_LIMIT
+      : Math.floor(numRecords / PAGE_LIMIT) + 1;
+  };
+
   return (
     <>
       <Head>
@@ -191,7 +254,7 @@ export default function ResumeHomePage() {
               </div>
               <div className="col-span-10">
                 <div className="border-grey-200 grid grid-cols-12 items-center gap-4 border-b pb-2">
-                  <div className="col-span-7">
+                  <div className="col-span-5">
                     <Tabs
                       label="Resume Browse Tabs"
                       tabs={[
@@ -209,42 +272,44 @@ export default function ResumeHomePage() {
                         },
                       ]}
                       value={tabsValue}
-                      onChange={setTabsValue}
+                      onChange={onTabChange}
                     />
                   </div>
-                  <div className="col-span-3 self-end">
-                    <form>
-                      <TextInput
-                        label=""
-                        placeholder="Search Resumes"
-                        startAddOn={MagnifyingGlassIcon}
-                        startAddOnType="icon"
-                        type="text"
-                        value={searchValue}
-                        onChange={setSearchValue}
-                      />
-                    </form>
-                  </div>
-                  <div className="col-span-1 justify-self-center">
-                    <DropdownMenu align="end" label="Sort">
-                      {SORT_OPTIONS.map((option) => (
-                        <DropdownMenu.Item
-                          key={option.name}
-                          isSelected={sortOrder === option.value}
-                          label={option.name}
-                          onClick={() =>
-                            setSortOrder(option.value)
-                          }></DropdownMenu.Item>
-                      ))}
-                    </DropdownMenu>
-                  </div>
-                  <div className="col-span-1">
-                    <button
-                      className="rounded-md bg-indigo-500 py-1 px-3 text-sm text-white"
-                      type="button"
-                      onClick={onSubmitResume}>
-                      Submit
-                    </button>
+                  <div className="col-span-7 flex items-center justify-evenly">
+                    <div className="w-64">
+                      <form>
+                        <TextInput
+                          label=""
+                          placeholder="Search Resumes"
+                          startAddOn={MagnifyingGlassIcon}
+                          startAddOnType="icon"
+                          type="text"
+                          value={searchValue}
+                          onChange={setSearchValue}
+                        />
+                      </form>
+                    </div>
+                    <div>
+                      <DropdownMenu align="end" label={SORT_OPTIONS[sortOrder]}>
+                        {Object.entries(SORT_OPTIONS).map(([key, value]) => (
+                          <DropdownMenu.Item
+                            key={key}
+                            isSelected={sortOrder === key}
+                            label={value}
+                            onClick={() =>
+                              setSortOrder(key)
+                            }></DropdownMenu.Item>
+                        ))}
+                      </DropdownMenu>
+                    </div>
+                    <div>
+                      <button
+                        className="rounded-md bg-indigo-500 py-2 px-3 text-sm font-medium text-white"
+                        type="button"
+                        onClick={onSubmitResume}>
+                        Submit Resume
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -258,12 +323,12 @@ export default function ResumeHomePage() {
                     <ul
                       className="flex flex-wrap justify-start gap-4 pb-6 text-sm font-medium text-gray-900"
                       role="list">
-                      {TOP_HITS.map((category) => (
-                        <li key={category.name}>
-                          {/* TODO: Replace onClick with filtering function */}
+                      {SHORTCUTS.map((shortcut) => (
+                        <li key={shortcut.name}>
                           <ResumeFilterPill
-                            title={category.name}
-                            onClick={() => true}
+                            isSelected={shortcutSelected === shortcut.name}
+                            title={shortcut.name}
+                            onClick={() => onShortcutChange(shortcut)}
                           />
                         </li>
                       ))}
@@ -271,9 +336,9 @@ export default function ResumeHomePage() {
                     <h3 className="text-md my-4 font-medium tracking-tight text-gray-900">
                       Explore these filters:
                     </h3>
-                    {filters.map((section) => (
+                    {filters.map((filter) => (
                       <Disclosure
-                        key={section.id}
+                        key={filter.id}
                         as="div"
                         className="border-b border-gray-200 py-6">
                         {({ open }) => (
@@ -281,7 +346,7 @@ export default function ResumeHomePage() {
                             <h3 className="-my-3 flow-root">
                               <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500">
                                 <span className="font-medium text-gray-900">
-                                  {section.name}
+                                  {filter.label}
                                 </span>
                                 <span className="ml-6 flex items-center">
                                   {open ? (
@@ -304,19 +369,19 @@ export default function ResumeHomePage() {
                                 isLabelHidden={true}
                                 label=""
                                 orientation="vertical">
-                                {section.options.map((option) => (
+                                {filter.options.map((option) => (
                                   <div
                                     key={option.value}
                                     className="[&>div>div:nth-child(2)>label]:font-normal [&>div>div:nth-child(1)>input]:text-indigo-600 [&>div>div:nth-child(1)>input]:ring-indigo-500">
                                     <CheckboxInput
                                       label={option.label}
-                                      value={userFilters[section.id].includes(
+                                      value={userFilters[filter.id].includes(
                                         option.value,
                                       )}
                                       onChange={(isChecked) =>
                                         onFilterCheckboxChange(
                                           isChecked,
-                                          section.id,
+                                          filter.id,
                                           option.value,
                                         )
                                       }
@@ -333,20 +398,42 @@ export default function ResumeHomePage() {
                 </div>
               </div>
               <div className="col-span-10 mb-6">
-                {renderSignInButton && (
-                  <ResumeSignInButton text={signInButtonText} />
+                {sessionData === null &&
+                tabsValue !== BROWSE_TABS_VALUES.ALL ? (
+                  <ResumeSignInButton
+                    className="mt-8"
+                    text={getLoggedOutText(tabsValue)}
+                  />
+                ) : getTabResumes().length === 0 ? (
+                  <div className="mt-24 flex flex-wrap justify-center">
+                    <NewspaperIcon
+                      className="mb-12 basis-full"
+                      height={196}
+                      width={196}
+                    />
+                    {getEmptyDataText(tabsValue, searchValue, userFilters)}
+                  </div>
+                ) : (
+                  <>
+                    <ResumeListItems
+                      isLoading={
+                        allResumesQuery.isFetching ||
+                        starredResumesQuery.isFetching ||
+                        myResumesQuery.isFetching
+                      }
+                      resumes={getTabResumes()}
+                    />
+                    <div className="my-4 flex justify-center">
+                      <Pagination
+                        current={currentPage}
+                        end={getTabTotalPages()}
+                        label="pagination"
+                        start={1}
+                        onSelect={(page) => setCurrentPage(page)}
+                      />
+                    </div>
+                  </>
                 )}
-                <ResumeListItems
-                  isLoading={
-                    allResumesQuery.isFetching ||
-                    starredResumesQuery.isFetching ||
-                    myResumesQuery.isFetching
-                  }
-                  resumes={sortResumes(
-                    filterResumes(resumes, searchValue, userFilters),
-                    sortOrder,
-                  )}
-                />
               </div>
             </div>
           </div>

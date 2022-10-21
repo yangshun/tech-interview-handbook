@@ -1,6 +1,11 @@
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
 
+import {
+  dashboardOfferDtoMapper,
+  getOffersResponseMapper,
+} from '~/mappers/offers-mappers';
+
 import { createRouter } from '../context';
 
 const yoeCategoryMap: Record<number, string> = {
@@ -12,12 +17,12 @@ const yoeCategoryMap: Record<number, string> = {
 
 const getYoeRange = (yoeCategory: number) => {
   return yoeCategoryMap[yoeCategory] === 'Fresh Grad'
-    ? { maxYoe: 3, minYoe: 0 }
+    ? { maxYoe: 2, minYoe: 0 }
     : yoeCategoryMap[yoeCategory] === 'Mid'
-    ? { maxYoe: 7, minYoe: 4 }
+    ? { maxYoe: 5, minYoe: 3 }
     : yoeCategoryMap[yoeCategory] === 'Senior'
-    ? { maxYoe: null, minYoe: 8 }
-    : null;
+    ? { maxYoe: 100, minYoe: 6 }
+    : null; // Internship
 };
 
 const ascOrder = '+';
@@ -35,23 +40,28 @@ export const offersRouter = createRouter().query('list', {
     companyId: z.string().nullish(),
     dateEnd: z.date().nullish(),
     dateStart: z.date().nullish(),
-    limit: z.number().nonnegative(),
+    limit: z.number().positive(),
     location: z.string(),
     offset: z.number().nonnegative(),
-    salaryMax: z.number().nullish(),
+    salaryMax: z.number().nonnegative().nullish(),
     salaryMin: z.number().nonnegative().nullish(),
     sortBy: z.string().regex(createSortByValidationRegex()).nullish(),
     title: z.string().nullish(),
     yoeCategory: z.number().min(0).max(3),
+    yoeMax: z.number().max(100).nullish(),
+    yoeMin: z.number().min(0).nullish(),
   }),
   async resolve({ ctx, input }) {
     const yoeRange = getYoeRange(input.yoeCategory);
+    const yoeMin = input.yoeMin ? input.yoeMin : yoeRange?.minYoe;
+    const yoeMax = input.yoeMax ? input.yoeMax : yoeRange?.maxYoe;
 
     let data = !yoeRange
       ? await ctx.prisma.offersOffer.findMany({
           // Internship
           include: {
-            OffersFullTime: {
+            company: true,
+            offersFullTime: {
               include: {
                 baseSalary: true,
                 bonus: true,
@@ -59,12 +69,11 @@ export const offersRouter = createRouter().query('list', {
                 totalCompensation: true,
               },
             },
-            OffersIntern: {
+            offersIntern: {
               include: {
                 monthlySalary: true,
               },
             },
-            company: true,
             profile: {
               include: {
                 background: true,
@@ -77,82 +86,23 @@ export const offersRouter = createRouter().query('list', {
                 location: input.location,
               },
               {
-                OffersIntern: {
+                offersIntern: {
                   isNot: null,
                 },
               },
               {
-                OffersFullTime: {
+                offersFullTime: {
                   is: null,
-                },
-              },
-            ],
-          },
-        })
-      : yoeRange.maxYoe
-      ? await ctx.prisma.offersOffer.findMany({
-          // Junior, Mid
-          include: {
-            OffersFullTime: {
-              include: {
-                baseSalary: true,
-                bonus: true,
-                stocks: true,
-                totalCompensation: true,
-              },
-            },
-            OffersIntern: {
-              include: {
-                monthlySalary: true,
-              },
-            },
-            company: true,
-            profile: {
-              include: {
-                background: true,
-              },
-            },
-          },
-          where: {
-            AND: [
-              {
-                location: input.location,
-              },
-              {
-                OffersIntern: {
-                  is: null,
-                },
-              },
-              {
-                OffersFullTime: {
-                  isNot: null,
-                },
-              },
-              {
-                profile: {
-                  background: {
-                    totalYoe: {
-                      gte: yoeRange.minYoe,
-                    },
-                  },
-                },
-              },
-              {
-                profile: {
-                  background: {
-                    totalYoe: {
-                      gte: yoeRange.maxYoe,
-                    },
-                  },
                 },
               },
             ],
           },
         })
       : await ctx.prisma.offersOffer.findMany({
-          // Senior
+          // Junior, Mid, Senior
           include: {
-            OffersFullTime: {
+            company: true,
+            offersFullTime: {
               include: {
                 baseSalary: true,
                 bonus: true,
@@ -160,12 +110,11 @@ export const offersRouter = createRouter().query('list', {
                 totalCompensation: true,
               },
             },
-            OffersIntern: {
+            offersIntern: {
               include: {
                 monthlySalary: true,
               },
             },
-            company: true,
             profile: {
               include: {
                 background: true,
@@ -178,12 +127,12 @@ export const offersRouter = createRouter().query('list', {
                 location: input.location,
               },
               {
-                OffersIntern: {
+                offersIntern: {
                   is: null,
                 },
               },
               {
-                OffersFullTime: {
+                offersFullTime: {
                   isNot: null,
                 },
               },
@@ -191,7 +140,8 @@ export const offersRouter = createRouter().query('list', {
                 profile: {
                   background: {
                     totalYoe: {
-                      gte: yoeRange.minYoe,
+                      gte: yoeMin,
+                      lte: yoeMax,
                     },
                   },
                 },
@@ -204,38 +154,47 @@ export const offersRouter = createRouter().query('list', {
     data = data.filter((offer) => {
       let validRecord = true;
 
-      if (input.companyId) {
+      if (input.companyId && input.companyId.length !== 0) {
         validRecord = validRecord && offer.company.id === input.companyId;
       }
 
-      if (input.title) {
+      if (input.title && input.title.length !== 0) {
         validRecord =
           validRecord &&
-          (offer.OffersFullTime?.title === input.title ||
-            offer.OffersIntern?.title === input.title);
+          (offer.offersFullTime?.title === input.title ||
+            offer.offersIntern?.title === input.title);
       }
 
-      if (input.dateStart && input.dateEnd) {
+      if (
+        input.dateStart &&
+        input.dateEnd &&
+        input.dateStart.getTime() <= input.dateEnd.getTime()
+      ) {
         validRecord =
           validRecord &&
           offer.monthYearReceived.getTime() >= input.dateStart.getTime() &&
           offer.monthYearReceived.getTime() <= input.dateEnd.getTime();
       }
 
-      if (input.salaryMin && input.salaryMax) {
-        const salary = offer.OffersFullTime?.totalCompensation.value
-          ? offer.OffersFullTime?.totalCompensation.value
-          : offer.OffersIntern?.monthlySalary.value;
+      if (input.salaryMin != null || input.salaryMax != null) {
+        const salary = offer.offersFullTime?.totalCompensation.value
+          ? offer.offersFullTime?.totalCompensation.value
+          : offer.offersIntern?.monthlySalary.value;
 
-        if (!salary) {
+        if (salary == null) {
           throw new TRPCError({
             code: 'NOT_FOUND',
             message: 'Total Compensation or Salary not found',
           });
         }
 
-        validRecord =
-          validRecord && salary >= input.salaryMin && salary <= input.salaryMax;
+        if (input.salaryMin != null) {
+          validRecord = validRecord && salary >= input.salaryMin;
+        }
+
+        if (input.salaryMax != null) {
+          validRecord = validRecord && salary <= input.salaryMax;
+        }
       }
 
       return validRecord;
@@ -263,15 +222,15 @@ export const offersRouter = createRouter().query('list', {
           }
 
           if (sortingKey === 'totalCompensation') {
-            const salary1 = offer1.OffersFullTime?.totalCompensation.value
-              ? offer1.OffersFullTime?.totalCompensation.value
-              : offer1.OffersIntern?.monthlySalary.value;
+            const salary1 = offer1.offersFullTime?.totalCompensation.value
+              ? offer1.offersFullTime?.totalCompensation.value
+              : offer1.offersIntern?.monthlySalary.value;
 
-            const salary2 = offer2.OffersFullTime?.totalCompensation.value
-              ? offer2.OffersFullTime?.totalCompensation.value
-              : offer2.OffersIntern?.monthlySalary.value;
+            const salary2 = offer2.offersFullTime?.totalCompensation.value
+              ? offer2.offersFullTime?.totalCompensation.value
+              : offer2.offersIntern?.monthlySalary.value;
 
-            if (!salary1 || !salary2) {
+            if (salary1 == null || salary2 == null) {
               throw new TRPCError({
                 code: 'NOT_FOUND',
                 message: 'Total Compensation or Salary not found',
@@ -285,7 +244,7 @@ export const offersRouter = createRouter().query('list', {
             const yoe1 = offer1.profile.background?.totalYoe;
             const yoe2 = offer2.profile.background?.totalYoe;
 
-            if (!yoe1 || !yoe2) {
+            if (yoe1 == null || yoe2 == null) {
               throw new TRPCError({
                 code: 'NOT_FOUND',
                 message: 'Total years of experience not found',
@@ -309,15 +268,15 @@ export const offersRouter = createRouter().query('list', {
           }
 
           if (sortingKey === 'totalCompensation') {
-            const salary1 = offer1.OffersFullTime?.totalCompensation.value
-              ? offer1.OffersFullTime?.totalCompensation.value
-              : offer1.OffersIntern?.monthlySalary.value;
+            const salary1 = offer1.offersFullTime?.totalCompensation.value
+              ? offer1.offersFullTime?.totalCompensation.value
+              : offer1.offersIntern?.monthlySalary.value;
 
-            const salary2 = offer2.OffersFullTime?.totalCompensation.value
-              ? offer2.OffersFullTime?.totalCompensation.value
-              : offer2.OffersIntern?.monthlySalary.value;
+            const salary2 = offer2.offersFullTime?.totalCompensation.value
+              ? offer2.offersFullTime?.totalCompensation.value
+              : offer2.offersIntern?.monthlySalary.value;
 
-            if (!salary1 || !salary2) {
+            if (salary1 == null || salary2 == null) {
               throw new TRPCError({
                 code: 'NOT_FOUND',
                 message: 'Total Compensation or Salary not found',
@@ -331,7 +290,7 @@ export const offersRouter = createRouter().query('list', {
             const yoe1 = offer1.profile.background?.totalYoe;
             const yoe2 = offer2.profile.background?.totalYoe;
 
-            if (!yoe1 || !yoe2) {
+            if (yoe1 == null || yoe2 == null) {
               throw new TRPCError({
                 code: 'NOT_FOUND',
                 message: 'Total years of experience not found',
@@ -354,14 +313,14 @@ export const offersRouter = createRouter().query('list', {
         : data.length;
     const paginatedData = data.slice(startRecordIndex, endRecordIndex);
 
-    return {
-      data: paginatedData,
-      paging: {
-        currPage: input.offset,
-        numOfItemsInPage: paginatedData.length,
+    return getOffersResponseMapper(
+      paginatedData.map((offer) => dashboardOfferDtoMapper(offer)),
+      {
+        currentPage: input.offset,
+        numOfItems: paginatedData.length,
         numOfPages: Math.ceil(data.length / input.limit),
-        totalNumberOfOffers: data.length,
+        totalItems: data.length,
       },
-    };
+    );
   },
 });
