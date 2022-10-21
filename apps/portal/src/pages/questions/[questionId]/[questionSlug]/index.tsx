@@ -91,10 +91,6 @@ export default function QuestionPage() {
     },
   );
 
-  const handleBackNavigation = () => {
-    router.back();
-  };
-
   const handleSubmitAnswer = (data: AnswerQuestionData) => {
     addAnswer({
       content: data.answerContent,
@@ -121,10 +117,11 @@ export default function QuestionPage() {
         <Button
           addonPosition="start"
           display="inline"
+          href="/questions"
           icon={ArrowSmallLeftIcon}
           label="Back"
           variant="secondary"
-          onClick={handleBackNavigation}></Button>
+        />
       </div>
       <div className="flex w-full  justify-center overflow-y-auto py-4 px-5">
         <div className="flex max-w-7xl flex-1 flex-col gap-2">

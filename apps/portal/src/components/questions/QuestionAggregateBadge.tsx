@@ -1,5 +1,6 @@
 import type { ComponentProps } from 'react';
 import { useMemo } from 'react';
+import { Popover } from '@headlessui/react';
 import { Badge } from '@tih/ui';
 
 type BadgeProps = ComponentProps<typeof Badge>;
@@ -22,7 +23,7 @@ export default function QuestionAggregateBadge({
           return mostCommon;
         },
         { key: '', value: 0 },
-    ),
+      ),
     [statistics],
   );
 
@@ -35,5 +36,16 @@ export default function QuestionAggregateBadge({
     return `${mostCommonStatistic.key} (+${additionalStatisticCount})`;
   }, [mostCommonStatistic, additionalStatisticCount]);
 
-  return <Badge label={label} {...badgeProps} />;
+  return (
+    <Popover>
+      <Popover.Button>
+        <Badge label={label} {...badgeProps} />
+      </Popover.Button>
+      <Popover.Panel>
+        <div className="flex flex-col gap-2">
+          <h1>Hello</h1>
+        </div>
+      </Popover.Panel>
+    </Popover>
+  );
 }
