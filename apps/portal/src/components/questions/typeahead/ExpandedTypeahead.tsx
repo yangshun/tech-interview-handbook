@@ -31,7 +31,9 @@ export default function ExpandedTypeahead({
           }}
         />
       ))}
-      <Typeahead {...typeaheadProps} />
+      <div className="flex-1">
+        <Typeahead {...typeaheadProps} />
+      </div>
     </div>
   );
 }
