@@ -144,16 +144,25 @@ export default function ResumeCommentListItem({
                 <span>{showReplies ? 'Hide replies' : 'Show replies'}</span>
               </button>
 
-              {showReplies &&
-                comment.children.map((child) => {
-                  return (
-                    <ResumeCommentListItem
-                      key={child.id}
-                      comment={child}
-                      userId={userId}
-                    />
-                  );
-                })}
+              {showReplies && (
+                <div className="flex flex-row">
+                  <div className="relative flex flex-col px-2 py-2">
+                    <div className="flex-grow border-r border-gray-300" />
+                  </div>
+
+                  <div className="flex flex-col space-y-1">
+                    {comment.children.map((child) => {
+                      return (
+                        <ResumeCommentListItem
+                          key={child.id}
+                          comment={child}
+                          userId={userId}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
