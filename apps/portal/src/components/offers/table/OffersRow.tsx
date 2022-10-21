@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { convertCurrencyToString } from '~/utils/offers/currency';
+import { convertMoneyToString } from '~/utils/offers/currency';
 import { formatDate } from '~/utils/offers/time';
 
 import type { DashboardOffer } from '~/types/offers';
@@ -21,7 +21,7 @@ export default function OfferTableRow({
       </th>
       <td className="py-4 px-6">{title}</td>
       <td className="py-4 px-6">{totalYoe}</td>
-      <td className="py-4 px-6">{convertCurrencyToString(income)}</td>
+      <td className="py-4 px-6">{convertMoneyToString(income)}</td>
       <td className="py-4 px-6">{formatDate(monthYearReceived)}</td>
       <td className="space-x-4 py-4 px-6">
         <Link

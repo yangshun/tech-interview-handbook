@@ -24,6 +24,7 @@ export type Experience = {
   id: string;
   jobType: JobType?;
   level: string?;
+  location: string?;
   monthlySalary: Valuation?;
   specialization: string?;
   title: string?;
@@ -166,7 +167,7 @@ export type AnalysisHighestOffer = {
 export type AnalysisOffer = {
   company: OffersCompany;
   id: string;
-  income: number;
+  income: Valuation;
   jobType: JobType;
   level: string;
   location: string;

@@ -4,7 +4,10 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import {
+  MagnifyingGlassIcon,
+  NewspaperIcon,
+} from '@heroicons/react/24/outline';
 import {
   CheckboxInput,
   CheckboxList,
@@ -24,6 +27,7 @@ import {
   BROWSE_TABS_VALUES,
   EXPERIENCE,
   INITIAL_FILTER_STATE,
+  isInitialFilterState,
   LOCATION,
   ROLE,
   SHORTCUTS,
@@ -33,10 +37,12 @@ import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 
+import useDebounceValue from '~/utils/resumes/useDebounceValue';
 import { trpc } from '~/utils/trpc';
 
-import type { Resume } from '~/types/resume';
+import type { FilterState } from '../../components/resumes/browse/resumeFilters';
 
+const PAGE_LIMIT = 10;
 const filters: Array<Filter> = [
   {
     id: 'role',
@@ -55,6 +61,40 @@ const filters: Array<Filter> = [
   },
 ];
 
+const getLoggedOutText = (tabsValue: string) => {
+  switch (tabsValue) {
+    case BROWSE_TABS_VALUES.STARRED:
+      return 'to view starred resumes!';
+    case BROWSE_TABS_VALUES.MY:
+      return 'to view your submitted resumes!';
+    default:
+      return '';
+  }
+};
+
+const getEmptyDataText = (
+  tabsValue: string,
+  searchValue: string,
+  userFilters: FilterState,
+) => {
+  if (searchValue.length > 0) {
+    return 'Try tweaking your search text to see more resumes.';
+  }
+  if (!isInitialFilterState(userFilters)) {
+    return 'Try tweaking your filters to see more resumes.';
+  }
+  switch (tabsValue) {
+    case BROWSE_TABS_VALUES.ALL:
+      return 'Looks like SWEs are feeling lucky!';
+    case BROWSE_TABS_VALUES.STARRED:
+      return 'You have not starred any resumes. Star one to see it here!';
+    case BROWSE_TABS_VALUES.MY:
+      return 'Upload a resume to see it here!';
+    default:
+      return '';
+  }
+};
+
 export default function ResumeHomePage() {
   const { data: sessionData } = useSession();
   const router = useRouter();
@@ -63,13 +103,8 @@ export default function ResumeHomePage() {
   const [searchValue, setSearchValue] = useState('');
   const [userFilters, setUserFilters] = useState(INITIAL_FILTER_STATE);
   const [shortcutSelected, setShortcutSelected] = useState('All');
-  const [resumes, setResumes] = useState<Array<Resume>>([]);
-  const [renderSignInButton, setRenderSignInButton] = useState(false);
-  const [signInButtonText, setSignInButtonText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
 
-  const PAGE_LIMIT = 10;
   const skip = (currentPage - 1) * PAGE_LIMIT;
 
   useEffect(() => {
@@ -84,21 +119,14 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
+        searchValue: useDebounceValue(searchValue, 800),
         skip,
         sortOrder,
       },
     ],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
-      onSuccess: (data) => {
-        setTotalPages(
-          data.totalRecords % PAGE_LIMIT === 0
-            ? data.totalRecords / PAGE_LIMIT
-            : Math.floor(data.totalRecords / PAGE_LIMIT) + 1,
-        );
-        setResumes(data.mappedResumeData);
-        setRenderSignInButton(false);
-      },
+      staleTime: 5 * 60 * 1000,
     },
   );
   const starredResumesQuery = trpc.useQuery(
@@ -109,26 +137,15 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
+        searchValue: useDebounceValue(searchValue, 800),
         skip,
         sortOrder,
       },
     ],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
-      onError: () => {
-        setResumes([]);
-        setRenderSignInButton(true);
-        setSignInButtonText('to view starred resumes');
-      },
-      onSuccess: (data) => {
-        setTotalPages(
-          data.totalRecords % PAGE_LIMIT === 0
-            ? data.totalRecords / PAGE_LIMIT
-            : Math.floor(data.totalRecords / PAGE_LIMIT) + 1,
-        );
-        setResumes(data.mappedResumeData);
-      },
       retry: false,
+      staleTime: 5 * 60 * 1000,
     },
   );
   const myResumesQuery = trpc.useQuery(
@@ -139,34 +156,23 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
+        searchValue: useDebounceValue(searchValue, 800),
         skip,
         sortOrder,
       },
     ],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.MY,
-      onError: () => {
-        setResumes([]);
-        setRenderSignInButton(true);
-        setSignInButtonText('to view your submitted resumes');
-      },
-      onSuccess: (data) => {
-        setTotalPages(
-          data.totalRecords % PAGE_LIMIT === 0
-            ? data.totalRecords / PAGE_LIMIT
-            : Math.floor(data.totalRecords / PAGE_LIMIT) + 1,
-        );
-        setResumes(data.mappedResumeData);
-      },
       retry: false,
+      staleTime: 5 * 60 * 1000,
     },
   );
 
   const onSubmitResume = () => {
-    if (sessionData?.user?.id) {
-      router.push('/resumes/submit');
-    } else {
+    if (sessionData === null) {
       router.push('/api/auth/signin');
+    } else {
+      router.push('/resumes/submit');
     }
   };
 
@@ -203,6 +209,30 @@ export default function ResumeHomePage() {
   const onTabChange = (tab: string) => {
     setTabsValue(tab);
     setCurrentPage(1);
+  };
+
+  const getTabQueryData = () => {
+    switch (tabsValue) {
+      case BROWSE_TABS_VALUES.ALL:
+        return allResumesQuery.data;
+      case BROWSE_TABS_VALUES.STARRED:
+        return starredResumesQuery.data;
+      case BROWSE_TABS_VALUES.MY:
+        return myResumesQuery.data;
+      default:
+        return null;
+    }
+  };
+
+  const getTabResumes = () => {
+    return getTabQueryData()?.mappedResumeData ?? [];
+  };
+
+  const getTabTotalPages = () => {
+    const numRecords = getTabQueryData()?.totalRecords ?? 0;
+    return numRecords % PAGE_LIMIT === 0
+      ? numRecords / PAGE_LIMIT
+      : Math.floor(numRecords / PAGE_LIMIT) + 1;
   };
 
   return (
@@ -274,7 +304,7 @@ export default function ResumeHomePage() {
                     </div>
                     <div>
                       <button
-                        className="rounded-md bg-indigo-500 py-1 px-3 text-sm font-medium text-white"
+                        className="rounded-md bg-indigo-500 py-2 px-3 text-sm font-medium text-white"
                         type="button"
                         onClick={onSubmitResume}>
                         Submit Resume
@@ -368,29 +398,42 @@ export default function ResumeHomePage() {
                 </div>
               </div>
               <div className="col-span-10 mb-6">
-                {renderSignInButton && (
-                  <ResumeSignInButton text={signInButtonText} />
-                )}
-                {totalPages === 0 && (
-                  <div className="mt-4">Nothing to see here.</div>
-                )}
-                <ResumeListItems
-                  isLoading={
-                    allResumesQuery.isFetching ||
-                    starredResumesQuery.isFetching ||
-                    myResumesQuery.isFetching
-                  }
-                  resumes={resumes}
-                />
-                <div className="my-4 flex justify-center">
-                  <Pagination
-                    current={currentPage}
-                    end={totalPages}
-                    label="pagination"
-                    start={1}
-                    onSelect={(page) => setCurrentPage(page)}
+                {sessionData === null &&
+                tabsValue !== BROWSE_TABS_VALUES.ALL ? (
+                  <ResumeSignInButton
+                    className="mt-8"
+                    text={getLoggedOutText(tabsValue)}
                   />
-                </div>
+                ) : getTabResumes().length === 0 ? (
+                  <div className="mt-24 flex flex-wrap justify-center">
+                    <NewspaperIcon
+                      className="mb-12 basis-full"
+                      height={196}
+                      width={196}
+                    />
+                    {getEmptyDataText(tabsValue, searchValue, userFilters)}
+                  </div>
+                ) : (
+                  <>
+                    <ResumeListItems
+                      isLoading={
+                        allResumesQuery.isFetching ||
+                        starredResumesQuery.isFetching ||
+                        myResumesQuery.isFetching
+                      }
+                      resumes={getTabResumes()}
+                    />
+                    <div className="my-4 flex justify-center">
+                      <Pagination
+                        current={currentPage}
+                        end={getTabTotalPages()}
+                        label="pagination"
+                        start={1}
+                        onSelect={(page) => setCurrentPage(page)}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

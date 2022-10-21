@@ -5,6 +5,7 @@ import { Button, HorizontalDivider, Spinner, TextArea } from '@tih/ui';
 
 import ExpandableCommentCard from '~/components/offers/profile/comments/ExpandableCommentCard';
 
+import { copyProfileLink } from '~/utils/offers/link';
 import { trpc } from '~/utils/trpc';
 
 import type { OffersDiscussion, Reply } from '~/types/offers';
@@ -84,19 +85,6 @@ export default function ProfileComments({
     }
   }
 
-  function handleCopyEditLink() {
-    // TODO: Add notification
-    navigator.clipboard.writeText(
-      `${window.location.origin}/offers/profile/${profileId}?token=${token}`,
-    );
-  }
-
-  function handleCopyPublicLink() {
-    navigator.clipboard.writeText(
-      `${window.location.origin}/offers/profile/${profileId}`,
-    );
-  }
-
   if (isLoading) {
     return (
       <div className="col-span-10 pt-4">
@@ -116,7 +104,7 @@ export default function ProfileComments({
             label="Copy profile edit link"
             size="sm"
             variant="secondary"
-            onClick={handleCopyEditLink}
+            onClick={() => copyProfileLink(profileId, token)}
           />
         )}
         <Button
@@ -127,7 +115,7 @@ export default function ProfileComments({
           label="Copy public link"
           size="sm"
           variant="secondary"
-          onClick={handleCopyPublicLink}
+          onClick={() => copyProfileLink(profileId)}
         />
       </div>
       <h2 className="mt-2 mb-6 text-2xl font-bold">Discussions</h2>

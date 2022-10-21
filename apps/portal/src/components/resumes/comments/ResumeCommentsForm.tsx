@@ -47,6 +47,9 @@ export default function ResumeCommentsForm({
       onSuccess: () => {
         // New Comment added, invalidate query to trigger refetch
         trpcContext.invalidateQueries(['resumes.comments.list']);
+        trpcContext.invalidateQueries(['resumes.resume.findAll']);
+        trpcContext.invalidateQueries(['resumes.resume.user.findUserStarred']);
+        trpcContext.invalidateQueries(['resumes.resume.user.findUserCreated']);
       },
     },
   );

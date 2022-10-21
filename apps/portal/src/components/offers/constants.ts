@@ -5,20 +5,20 @@ export const emptyOption = '----';
 // TODO: use enums
 export const titleOptions = [
   {
-    label: 'Software engineer',
-    value: 'Software engineer',
+    label: 'Software Engineer',
+    value: 'Software Engineer',
   },
   {
-    label: 'Frontend engineer',
-    value: 'Frontend engineer',
+    label: 'Frontend Engineer',
+    value: 'Frontend Engineer',
   },
   {
-    label: 'Backend engineer',
-    value: 'Backend engineer',
+    label: 'Backend Engineer',
+    value: 'Backend Engineer',
   },
   {
-    label: 'Full-stack engineer',
-    value: 'Full-stack engineer',
+    label: 'Full-stack Engineer',
+    value: 'Full-stack Engineer',
   },
 ];
 
@@ -96,8 +96,16 @@ export const educationFieldOptions = [
     value: 'Information Security',
   },
   {
+    label: 'Information Systems',
+    value: 'Information Systems',
+  },
+  {
     label: 'Business Analytics',
     value: 'Business Analytics',
+  },
+  {
+    label: 'Data Science and Analytics',
+    value: 'Data Science and Analytics',
   },
 ];
 

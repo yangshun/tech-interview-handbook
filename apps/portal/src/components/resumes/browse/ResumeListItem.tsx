@@ -41,7 +41,9 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
           <div className="mt-4 flex justify-start text-xs text-slate-500">
             <div className="flex gap-2 pr-4">
               <ChatBubbleLeftIcon className="w-4" />
-              {resumeInfo.numComments} comments
+              {`${resumeInfo.numComments} comment${
+                resumeInfo.numComments > 0 ? 's' : ''
+              }`}
             </div>
             <div className="flex gap-2">
               {resumeInfo.isStarredByUser ? (

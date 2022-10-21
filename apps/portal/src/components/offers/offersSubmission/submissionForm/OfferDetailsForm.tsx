@@ -16,8 +16,7 @@ import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import {
   defaultFullTimeOfferValues,
   defaultInternshipOfferValues,
-} from '~/pages/offers/submit';
-
+} from '../OffersSubmissionForm';
 import {
   emptyOption,
   FieldError,
@@ -25,15 +24,15 @@ import {
   locationOptions,
   titleOptions,
   yearOptions,
-} from '../constants';
-import FormMonthYearPicker from '../forms/FormMonthYearPicker';
-import FormSelect from '../forms/FormSelect';
-import FormTextArea from '../forms/FormTextArea';
-import FormTextInput from '../forms/FormTextInput';
-import type { OfferFormData } from '../types';
-import { JobTypeLabel } from '../types';
-import { JobType } from '../types';
-import { CURRENCY_OPTIONS } from '../../../utils/offers/currency/CurrencyEnum';
+} from '../../constants';
+import FormMonthYearPicker from '../../forms/FormMonthYearPicker';
+import FormSelect from '../../forms/FormSelect';
+import FormTextArea from '../../forms/FormTextArea';
+import FormTextInput from '../../forms/FormTextInput';
+import type { OfferFormData } from '../../types';
+import { JobTypeLabel } from '../../types';
+import { JobType } from '../../types';
+import { CURRENCY_OPTIONS } from '../../../../utils/offers/currency/CurrencyEnum';
 
 type FullTimeOfferDetailsFormProps = Readonly<{
   index: number;

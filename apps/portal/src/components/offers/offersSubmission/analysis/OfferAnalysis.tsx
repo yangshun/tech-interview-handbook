@@ -1,13 +1,12 @@
-import Error from 'next/error';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { HorizontalDivider, Spinner, Tabs } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
-import OfferPercentileAnalysis from '../analysis/OfferPercentileAnalysis';
-import OfferProfileCard from '../analysis/OfferProfileCard';
-import { OVERALL_TAB } from '../constants';
+import OfferPercentileAnalysis from './OfferPercentileAnalysis';
+import OfferProfileCard from './OfferProfileCard';
+import { OVERALL_TAB } from '../../constants';
 
 import type {
   Analysis,
@@ -105,34 +104,32 @@ export default function OfferAnalysis({ profileId }: OfferAnalysisProps) {
   ];
 
   return (
-    <>
-      {getAnalysisResult.isError && (
-        <Error
-          statusCode={404}
-          title="An error occurred while generating profile analysis."
-        />
-      )}
-      {!getAnalysisResult.isError && analysis && (
-        <div>
-          <h5 className="mb-2 text-center text-4xl font-bold text-gray-900">
-            Result
-          </h5>
-          {getAnalysisResult.isLoading ? (
-            <Spinner className="m-10" display="block" size="lg" />
-          ) : (
-            <div>
-              <Tabs
-                label="Result Navigation"
-                tabs={tabOptions}
-                value={tab}
-                onChange={setTab}
-              />
-              <HorizontalDivider className="mb-5" />
-              <OfferAnalysisContent analysis={analysis} tab={tab} />
-            </div>
-          )}
-        </div>
-      )}
-    </>
+    analysis && (
+      <div>
+        <h5 className="mb-2 text-center text-4xl font-bold text-gray-900">
+          Result
+        </h5>
+        {getAnalysisResult.isError && (
+          <p className="m-10 text-center">
+            An error occurred while generating profile analysis.
+          </p>
+        )}
+        {getAnalysisResult.isLoading && (
+          <Spinner className="m-10" display="block" size="lg" />
+        )}
+        {!getAnalysisResult.isError && !getAnalysisResult.isLoading && (
+          <div>
+            <Tabs
+              label="Result Navigation"
+              tabs={tabOptions}
+              value={tab}
+              onChange={setTab}
+            />
+            <HorizontalDivider className="mb-5" />
+            <OfferAnalysisContent analysis={analysis} tab={tab} />
+          </div>
+        )}
+      </div>
+    )
   );
 }

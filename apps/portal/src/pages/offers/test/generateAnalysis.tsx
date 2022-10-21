@@ -8,7 +8,7 @@ function GenerateAnalysis() {
   return (
     <div>
       {JSON.stringify(
-        analysisMutation.mutate({ profileId: 'cl98ywtbv0000tx1s4p18eol1' }),
+        analysisMutation.mutate({ profileId: 'cl9h23fb1002ftxysli5iziu2' }),
       )}
     </div>
   );

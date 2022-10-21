@@ -9,8 +9,8 @@ function Test() {
       limit: 100,
       location: 'Singapore, Singapore',
       offset: 0,
-      sortBy: '-totalYoe',
-      yoeCategory: 2,
+      sortBy: '+totalCompensation',
+      yoeCategory: 1,
     },
   ]);
 

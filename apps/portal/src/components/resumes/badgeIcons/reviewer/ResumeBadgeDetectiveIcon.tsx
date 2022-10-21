@@ -1,7 +1,12 @@
-export default function SilverReviewerBadgeIcon() {
+import type { ResumeBadgeProps } from '../resume-badge';
+
+export default function ResumeBadgeDetectiveIcon({
+  className,
+}: ResumeBadgeProps) {
   return (
     <svg
       aria-hidden="true"
+      className={className}
       height="36px"
       preserveAspectRatio="xMidYMid meet"
       role="img"

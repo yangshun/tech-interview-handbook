@@ -75,6 +75,7 @@ const experience = z.object({
   id: z.string().optional(),
   jobType: z.string().nullish(),
   level: z.string().nullish(),
+  location: z.string().nullish(),
   monthlySalary: valuation.nullish(),
   monthlySalaryId: z.string().nullish(),
   specialization: z.string().nullish(),
@@ -93,14 +94,14 @@ const education = z.object({
   type: z.string().nullish(),
 });
 
-const reply = z.object({
-  createdAt: z.date().nullish(),
-  id: z.string().optional(),
-  messages: z.string().nullish(),
-  profileId: z.string().nullish(),
-  replyingToId: z.string().nullish(),
-  userId: z.string().nullish(),
-});
+// Const reply = z.object({
+//   createdAt: z.date().nullish(),
+//   id: z.string().optional(),
+//   messages: z.string().nullish(),
+//   profileId: z.string().nullish(),
+//   replyingToId: z.string().nullish(),
+//   userId: z.string().nullish(),
+// });
 
 export const offersProfileRouter = createRouter()
   .query('listOne', {
@@ -534,11 +535,11 @@ export const offersProfileRouter = createRouter()
         totalYoe: z.number(),
       }),
       createdAt: z.string().optional(),
-      discussion: z.array(reply),
+      // Discussion: z.array(reply),
       id: z.string(),
       isEditable: z.boolean().nullish(),
       offers: z.array(offer),
-      profileName: z.string(),
+      profileName: z.string().optional(),
       token: z.string(),
       userId: z.string().nullish(),
     }),
@@ -551,14 +552,16 @@ export const offersProfileRouter = createRouter()
       const profileEditToken = profileToUpdate?.editToken;
 
       if (profileEditToken === input.token) {
-        await ctx.prisma.offersProfile.update({
-          data: {
-            profileName: input.profileName,
-          },
-          where: {
-            id: input.id,
-          },
-        });
+        if (input.profileName) {
+          await ctx.prisma.offersProfile.update({
+            data: {
+              profileName: input.profileName,
+            },
+            where: {
+              id: input.id,
+            },
+          });
+        }
 
         await ctx.prisma.offersBackground.update({
           data: {
@@ -569,8 +572,26 @@ export const offersProfileRouter = createRouter()
           },
         });
 
+        // Delete educations
+        const educationsId = (await ctx.prisma.offersEducation.findMany({
+          where: {
+             backgroundId: input.background.id
+          }
+        })).map((x) => x.id)
+
+        for (const id of educationsId) {
+          if (!input.background.educations.map((x) => x.id).includes(id)) {
+            await ctx.prisma.offersEducation.delete({
+              where: {
+                id
+              }
+            })
+          }
+        }
+
         for (const edu of input.background.educations) {
           if (edu.id) {
+            // Update existing education
             await ctx.prisma.offersEducation.update({
               data: {
                 endDate: edu.endDate,
@@ -584,6 +605,7 @@ export const offersProfileRouter = createRouter()
               },
             });
           } else {
+            // Create new education
             await ctx.prisma.offersBackground.update({
               data: {
                 educations: {
@@ -603,8 +625,26 @@ export const offersProfileRouter = createRouter()
           }
         }
 
+        // Delete experiences
+        const experiencesId = (await ctx.prisma.offersExperience.findMany({
+          where: {
+             backgroundId: input.background.id
+          }
+        })).map((x) => x.id)
+
+        for (const id of experiencesId) {
+          if (!input.background.experiences.map((x) => x.id).includes(id)) {
+            await ctx.prisma.offersExperience.delete({
+              where: {
+                id
+              }
+            })
+          }
+        }
+
         for (const exp of input.background.experiences) {
           if (exp.id) {
+            // Update existing experience
             await ctx.prisma.offersExperience.update({
               data: {
                 companyId: exp.companyId,
@@ -641,6 +681,7 @@ export const offersProfileRouter = createRouter()
               });
             }
           } else if (!exp.id) {
+            // Create new experience
             if (
               exp.jobType === 'FULLTIME' &&
               exp.totalCompensation?.currency !== undefined &&
@@ -757,8 +798,26 @@ export const offersProfileRouter = createRouter()
           }
         }
 
+        // Delete specific yoes
+        const yoesId = (await ctx.prisma.offersSpecificYoe.findMany({
+          where: {
+            backgroundId: input.background.id
+          }
+        })).map((x) => x.id)
+
+        for (const id of yoesId) {
+          if (!input.background.specificYoes.map((x) => x.id).includes(id)) {
+            await ctx.prisma.offersSpecificYoe.delete({
+              where: {
+                id
+              }
+            })
+          }
+        }
+
         for (const yoe of input.background.specificYoes) {
           if (yoe.id) {
+            // Update existing yoe
             await ctx.prisma.offersSpecificYoe.update({
               data: {
                 ...yoe,
@@ -768,6 +827,7 @@ export const offersProfileRouter = createRouter()
               },
             });
           } else {
+            // Create new yoe
             await ctx.prisma.offersBackground.update({
               data: {
                 specificYoes: {
@@ -784,8 +844,27 @@ export const offersProfileRouter = createRouter()
           }
         }
 
+        // Delete specific offers
+        const offers = (await ctx.prisma.offersOffer.findMany({
+          where: {
+            profileId: input.id
+          }
+        })).map((x) => x.id)
+
+        for (const id of offers) {
+          if (!input.offers.map((x) => x.id).includes(id)) {
+            await ctx.prisma.offersOffer.delete({
+              where: {
+                id
+              }
+            })
+          }
+        }
+
+        // Update remaining offers
         for (const offerToUpdate of input.offers) {
           if (offerToUpdate.id) {
+            // Update existing offer
             await ctx.prisma.offersOffer.update({
               data: {
                 comments: offerToUpdate.comments,
@@ -893,6 +972,7 @@ export const offersProfileRouter = createRouter()
               });
             }
           } else {
+            // Create new offer
             if (
               offerToUpdate.jobType === 'INTERN' &&
               offerToUpdate.offersIntern &&

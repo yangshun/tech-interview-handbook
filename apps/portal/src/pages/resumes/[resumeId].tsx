@@ -42,11 +42,17 @@ export default function ResumeReviewPage() {
   const starMutation = trpc.useMutation('resumes.resume.star', {
     onSuccess() {
       utils.invalidateQueries(['resumes.resume.findOne']);
+      utils.invalidateQueries(['resumes.resume.findAll']);
+      utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
+      utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
     },
   });
   const unstarMutation = trpc.useMutation('resumes.resume.unstar', {
     onSuccess() {
       utils.invalidateQueries(['resumes.resume.findOne']);
+      utils.invalidateQueries(['resumes.resume.findAll']);
+      utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
+      utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
     },
   });
   const userIsOwner =
@@ -89,6 +95,9 @@ export default function ResumeReviewPage() {
         }}
         onClose={() => {
           utils.invalidateQueries(['resumes.resume.findOne']);
+          utils.invalidateQueries(['resumes.resume.findAll']);
+          utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
+          utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
           setIsEditMode(false);
         }}
       />
@@ -189,7 +198,10 @@ export default function ResumeReviewPage() {
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                 />
-                <ResumeExpandableText text={detailsQuery.data.additionalInfo} />
+                <ResumeExpandableText
+                  key={detailsQuery.data.additionalInfo}
+                  text={detailsQuery.data.additionalInfo}
+                />
               </div>
             )}
             <div className="flex w-full flex-col py-4 lg:flex-row">
