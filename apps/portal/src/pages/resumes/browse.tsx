@@ -361,7 +361,7 @@ export default function ResumeHomePage() {
         </Transition.Root>
       </div>
 
-      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
+      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto">
         <div className="ml-4 py-4">
           <ResumeReviewsTitle />
         </div>
