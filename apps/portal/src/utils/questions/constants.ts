@@ -103,14 +103,14 @@ export const ROLES: FilterChoices = [
 export const SAMPLE_QUESTION = {
   answerCount: 10,
   commentCount: 10,
-  company: 'Google',
+  companies: { Google: 1 },
   content:
     'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums andiven an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and',
   createdAt: new Date(2014, 8, 1, 11, 30, 40),
   id: '1',
-  location: 'Menlo Park, CA',
+  locations: { 'Menlo Park, CA': 1 },
   receivedCount: 12,
-  role: 'Software Engineer',
+  roles: { 'Software Engineer': 1 },
   seenAt: new Date(2014, 8, 1, 11, 30, 40),
   timestamp: 'Last month',
 
