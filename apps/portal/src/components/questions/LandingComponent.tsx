@@ -42,7 +42,7 @@ export default function LandingComponent({
   };
 
   const handleChangeLocation = (newLocation: FilterChoice) => {
-    setCompany(newLocation);
+    setLocation(newLocation);
   };
 
   const handleChangeType = (newQuestionType: QuestionsQuestionType) => {
@@ -56,7 +56,7 @@ export default function LandingComponent({
   }, [defaultCompany, company]);
 
   useEffect(() => {
-    if (location !== undefined) {
+    if (location === undefined) {
       setLocation(defaultLocation);
     }
   }, [defaultLocation, location]);
