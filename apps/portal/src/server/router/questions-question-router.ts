@@ -14,6 +14,8 @@ export const questionsQuestionRouter = createProtectedRouter()
     input: z.object({
       companyNames: z.string().array(),
       endDate: z.date().default(new Date()),
+      idCursor: z.string().optional(),
+      lastSeenCursor: z.date().optional(),
       locations: z.string().array(),
       pageSize: z.number().default(50),
       questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
@@ -21,18 +23,43 @@ export const questionsQuestionRouter = createProtectedRouter()
       sortOrder: z.nativeEnum(SortOrder),
       sortType: z.nativeEnum(SortType),
       startDate: z.date().default(new Date(Date.now() - TWO_WEEK_IN_MS)),
+      upvoteCursor: z.string().optional(),
     }),
     async resolve({ ctx, input }) {
       const sortCondition =
         input.sortType === SortType.TOP
+          ? [
+              {
+                upvotes: input.sortOrder
+              },
+              {
+                id: input.sortOrder
+              }
+          ]
+          : [
+              {
+                lastSeenAt: input.sortOrder,
+              },
+              {
+                id: input.sortOrder
+              }
+            ];
+
+      const cursorCondition =
+        input.sortType === SortType.TOP
           ? {
-              upvotes: input.sortOrder,
+              id: input.idCursor,
+              upvotes: input.upvoteCursor,
             }
           : {
-              lastSeenAt: input.sortOrder,
+              id: input.idCursor,
+              lastSeenAt: input.lastSeenCursor,
             };
 
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
+        cursor: {
+          ...cursorCondition,
+        },
         include: {
           _count: {
             select: {
@@ -55,9 +82,8 @@ export const questionsQuestionRouter = createProtectedRouter()
           },
           votes: true,
         },
-        orderBy: {
-          ...sortCondition,
-        },
+        orderBy: sortCondition,
+        take: input.pageSize,
         where: {
           ...(input.questionTypes.length > 0
             ? {
@@ -117,16 +143,47 @@ export const questionsQuestionRouter = createProtectedRouter()
           0,
         );
 
+        const companyCounts: Record<string, number> = {};
+        const locationCounts: Record<string, number> = {};
+        const roleCounts:Record<string, number> = {};
+
+        let latestSeenAt = data.encounters[0].seenAt;
+
+        for (let i = 0; i < data.encounters.length; i++) {
+          const encounter = data.encounters[i];
+
+          latestSeenAt = latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
+
+          if (!(encounter.company!.name in companyCounts)) {
+              companyCounts[encounter.company!.name] = 1;
+          }
+          companyCounts[encounter.company!.name] += 1;
+
+          if (!(encounter.location in locationCounts)) {
+              locationCounts[encounter.location] = 1;
+          }
+          locationCounts[encounter.location] += 1;
+
+          if (!(encounter.role in roleCounts)) {
+              roleCounts[encounter.role] = 1;
+          }
+          roleCounts[encounter.role] += 1;
+        }
+
+
         const question: Question = {
-          company: data.encounters[0].company!.name ?? 'Unknown company',
+          aggregatedQuestionEncounters: {
+            companyCounts,
+            latestSeenAt,
+            locationCounts,
+            roleCounts,
+          },
           content: data.content,
           id: data.id,
-          location: data.encounters[0].location ?? 'Unknown location',
           numAnswers: data._count.answers,
           numComments: data._count.comments,
           numVotes: votes,
-          role: data.encounters[0].role ?? 'Unknown role',
-          seenAt: data.encounters[0].seenAt,
+          seenAt: latestSeenAt,
           type: data.questionType,
           updatedAt: data.updatedAt,
           user: data.user?.name ?? '',
