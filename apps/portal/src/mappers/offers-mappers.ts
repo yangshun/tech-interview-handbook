@@ -56,7 +56,7 @@ const analysisOfferDtoMapper = (
     location: offer.location,
     monthYearReceived: offer.monthYearReceived,
     negotiationStrategy: offer.negotiationStrategy,
-    previousCompanies: [],
+    previousCompanies: [], // TODO: Fill this up
     profileName,
     specialization:
       offer.jobType === JobType.FULLTIME
@@ -74,10 +74,18 @@ const analysisOfferDtoMapper = (
       offer.offersFullTime.totalCompensation.value;
     analysisOfferDto.income.currency =
       offer.offersFullTime.totalCompensation.currency;
+    analysisOfferDto.income.baseValue =
+      offer.offersFullTime.totalCompensation.baseValue;
+    analysisOfferDto.income.baseCurrency =
+      offer.offersFullTime.totalCompensation.baseCurrency;
   } else if (offer.offersIntern?.monthlySalary) {
     analysisOfferDto.income.value = offer.offersIntern.monthlySalary.value;
     analysisOfferDto.income.currency =
       offer.offersIntern.monthlySalary.currency;
+    analysisOfferDto.income.baseValue =
+      offer.offersIntern.monthlySalary.baseValue;
+    analysisOfferDto.income.baseCurrency =
+      offer.offersIntern.monthlySalary.baseCurrency;
   } else {
     throw new TRPCError({
       code: 'NOT_FOUND',

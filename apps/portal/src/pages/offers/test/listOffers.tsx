@@ -6,6 +6,7 @@ function Test() {
   const data = trpc.useQuery([
     'offers.list',
     {
+      currency: 'SGD',
       limit: 100,
       location: 'Singapore, Singapore',
       offset: 0,

@@ -5,7 +5,7 @@ import {
   dashboardOfferDtoMapper,
   getOffersResponseMapper,
 } from '~/mappers/offers-mappers';
-import { convert } from '~/utils/offers/currency/currency-exchange';
+import { convertWithDate } from '~/utils/offers/currency/currency-exchange';
 import { Currency } from '~/utils/offers/currency/CurrencyEnum';
 import { createValidationRegex } from '~/utils/offers/zodRegex';
 
@@ -106,7 +106,7 @@ export const offersRouter = createRouter().query('list', {
               ? {
                   offersIntern: {
                     monthlySalary: {
-                      value: order,
+                      baseValue: order,
                     },
                   },
                 }
@@ -141,7 +141,7 @@ export const offersRouter = createRouter().query('list', {
               {
                 offersIntern: {
                   monthlySalary: {
-                    value: {
+                    baseValue: {
                       gte: input.salaryMin ?? undefined,
                       lte: input.salaryMax ?? undefined,
                     },
@@ -210,7 +210,7 @@ export const offersRouter = createRouter().query('list', {
               ? {
                   offersFullTime: {
                     totalCompensation: {
-                      value: order,
+                      baseValue: order,
                     },
                   },
                 }
@@ -250,7 +250,7 @@ export const offersRouter = createRouter().query('list', {
               {
                 offersFullTime: {
                   totalCompensation: {
-                    value: {
+                    baseValue: {
                       gte: input.salaryMin ?? undefined,
                       lte: input.salaryMax ?? undefined,
                     },
@@ -288,36 +288,42 @@ export const offersRouter = createRouter().query('list', {
     if (currency != null && currency in Currency) {
       data = await Promise.all(
         data.map(async (offer) => {
-          if (offer.offersFullTime?.totalCompensation) {
-            offer.offersFullTime.totalCompensation.value = await convert(
-              offer.offersFullTime.totalCompensation.value,
-              offer.offersFullTime.totalCompensation.currency,
-              currency,
-            );
+          if (offer.offersFullTime?.totalCompensation != null) {
+            offer.offersFullTime.totalCompensation.value =
+              await convertWithDate(
+                offer.offersFullTime.totalCompensation.value,
+                offer.offersFullTime.totalCompensation.currency,
+                currency,
+                offer.offersFullTime.totalCompensation.updatedAt,
+              );
             offer.offersFullTime.totalCompensation.currency = currency;
-            offer.offersFullTime.baseSalary.value = await convert(
-              offer.offersFullTime.totalCompensation.value,
-              offer.offersFullTime.totalCompensation.currency,
+            offer.offersFullTime.baseSalary.value = await convertWithDate(
+              offer.offersFullTime.baseSalary.value,
+              offer.offersFullTime.baseSalary.currency,
               currency,
+              offer.offersFullTime.baseSalary.updatedAt,
             );
             offer.offersFullTime.baseSalary.currency = currency;
-            offer.offersFullTime.stocks.value = await convert(
-              offer.offersFullTime.totalCompensation.value,
-              offer.offersFullTime.totalCompensation.currency,
+            offer.offersFullTime.stocks.value = await convertWithDate(
+              offer.offersFullTime.stocks.value,
+              offer.offersFullTime.stocks.currency,
               currency,
+              offer.offersFullTime.stocks.updatedAt,
             );
             offer.offersFullTime.stocks.currency = currency;
-            offer.offersFullTime.bonus.value = await convert(
-              offer.offersFullTime.totalCompensation.value,
-              offer.offersFullTime.totalCompensation.currency,
+            offer.offersFullTime.bonus.value = await convertWithDate(
+              offer.offersFullTime.bonus.value,
+              offer.offersFullTime.bonus.currency,
               currency,
+              offer.offersFullTime.bonus.updatedAt,
             );
             offer.offersFullTime.bonus.currency = currency;
-          } else if (offer.offersIntern?.monthlySalary) {
-            offer.offersIntern.monthlySalary.value = await convert(
+          } else if (offer.offersIntern?.monthlySalary != null) {
+            offer.offersIntern.monthlySalary.value = await convertWithDate(
               offer.offersIntern.monthlySalary.value,
               offer.offersIntern.monthlySalary.currency,
               currency,
+              offer.offersIntern.monthlySalary.updatedAt,
             );
             offer.offersIntern.monthlySalary.currency = currency;
           } else {
