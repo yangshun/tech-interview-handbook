@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { undefined, z } from 'zod';
 import { QuestionsQuestionType, Vote } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
@@ -128,7 +128,12 @@ export const questionsQuestionRouter = createProtectedRouter()
           },
         },
       });
-      return questionsData.map((data) => {
+      const lastQuestion = questionsData[input.pageSize - 1];
+      const nextIdCursor = lastQuestion.id;
+      const nextLastSeenCursor = input.sortType === SortType.NEW ? lastQuestion.lastSeenAt : undefined;
+      const nextupvoteCursor = input.sortType === SortType.TOP ? lastQuestion.upvote : undefined;
+
+      const processedQuestionsData = questionsData.map((data) => {
         const votes: number = data.votes.reduce(
           (previousValue: number, currentValue) => {
             let result: number = previousValue;
@@ -193,6 +198,13 @@ export const questionsQuestionRouter = createProtectedRouter()
         };
         return question;
       });
+
+      return {
+        nextIdCursor,
+        nextLastSeenCursor,
+        nextupvoteCursor,
+        processedQuestionsData,
+      }
     },
   })
   .query('getQuestionById', {
