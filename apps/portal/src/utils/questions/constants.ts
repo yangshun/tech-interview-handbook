@@ -2,6 +2,8 @@ import { QuestionsQuestionType } from '@prisma/client';
 
 import type { FilterChoices } from '~/components/questions/filter/FilterSection';
 
+import { SortOrder, SortType } from '~/types/questions.d';
+
 export const APP_TITLE = 'Questions Bank';
 
 export const COMPANIES: FilterChoices = [
@@ -101,6 +103,28 @@ export const ROLES: FilterChoices = [
     value: 'Software Engineer Intern',
   },
 ] as const;
+
+export const SORT_ORDERS = [
+  {
+    label: 'Ascending',
+    value: SortOrder.ASC,
+  },
+  {
+    label: 'Descending',
+    value: SortOrder.DESC,
+  },
+];
+
+export const SORT_TYPES = [
+  {
+    label: 'New',
+    value: SortType.NEW,
+  },
+  {
+    label: 'Top',
+    value: SortType.TOP,
+  },
+];
 
 export const SAMPLE_QUESTION = {
   answerCount: 10,

@@ -13,6 +13,8 @@ import FilterSection from '~/components/questions/filter/FilterSection';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
 import type { QuestionAge } from '~/utils/questions/constants';
+import { SORT_TYPES } from '~/utils/questions/constants';
+import { SORT_ORDERS } from '~/utils/questions/constants';
 import { APP_TITLE } from '~/utils/questions/constants';
 import { ROLES } from '~/utils/questions/constants';
 import {
@@ -23,24 +25,25 @@ import {
 } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
 import {
-  useSearchFilter,
-  useSearchFilterSingle,
-} from '~/utils/questions/useSearchFilter';
+  useSearchParam,
+  useSearchParamSingle,
+} from '~/utils/questions/useSearchParam';
 import { trpc } from '~/utils/trpc';
 
-import { SortOrder, SortType } from '~/types/questions.d';
+import { SortType } from '~/types/questions.d';
+import { SortOrder } from '~/types/questions.d';
 
 export default function QuestionsBrowsePage() {
   const router = useRouter();
 
   const [selectedCompanies, setSelectedCompanies, areCompaniesInitialized] =
-    useSearchFilter('companies');
+    useSearchParam('companies');
   const [
     selectedQuestionTypes,
     setSelectedQuestionTypes,
     areQuestionTypesInitialized,
-  ] = useSearchFilter<QuestionsQuestionType>('questionTypes', {
-    queryParamToValue: (param) => {
+  ] = useSearchParam<QuestionsQuestionType>('questionTypes', {
+    stringToParam: (param) => {
       const uppercaseParam = param.toUpperCase();
       return (
         QUESTION_TYPES.find(
@@ -53,9 +56,9 @@ export default function QuestionsBrowsePage() {
     selectedQuestionAge,
     setSelectedQuestionAge,
     isQuestionAgeInitialized,
-  ] = useSearchFilterSingle<QuestionAge>('questionAge', {
+  ] = useSearchParamSingle<QuestionAge>('questionAge', {
     defaultValue: 'all',
-    queryParamToValue: (param) => {
+    stringToParam: (param) => {
       const uppercaseParam = param.toUpperCase();
       return (
         QUESTION_AGES.find(
@@ -66,9 +69,57 @@ export default function QuestionsBrowsePage() {
   });
 
   const [selectedRoles, setSelectedRoles, areRolesInitialized] =
-    useSearchFilter('roles');
+    useSearchParam('roles');
   const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
-    useSearchFilter('locations');
+    useSearchParam('locations');
+
+  const [sortOrder, setSortOrder, isSortOrderInitialized] =
+    useSearchParamSingle<SortOrder>('sortOrder', {
+      defaultValue: SortOrder.DESC,
+      paramToString: (value) => {
+        if (value === SortOrder.ASC) {
+          return 'ASC';
+        }
+        if (value === SortOrder.DESC) {
+          return 'DESC';
+        }
+        return null;
+      },
+      stringToParam: (param) => {
+        const uppercaseParam = param.toUpperCase();
+        if (uppercaseParam === 'ASC') {
+          return SortOrder.ASC;
+        }
+        if (uppercaseParam === 'DESC') {
+          return SortOrder.DESC;
+        }
+        return null;
+      },
+    });
+
+  const [sortType, setSortType, isSortTypeInitialized] =
+    useSearchParamSingle<SortType>('sortType', {
+      defaultValue: SortType.TOP,
+      paramToString: (value) => {
+        if (value === SortType.NEW) {
+          return 'NEW';
+        }
+        if (value === SortType.TOP) {
+          return 'TOP';
+        }
+        return null;
+      },
+      stringToParam: (param) => {
+        const uppercaseParam = param.toUpperCase();
+        if (uppercaseParam === 'NEW') {
+          return SortType.NEW;
+        }
+        if (uppercaseParam === 'TOP') {
+          return SortType.TOP;
+        }
+        return null;
+      },
+    });
 
   const hasFilters = useMemo(
     () =>
@@ -106,8 +157,8 @@ export default function QuestionsBrowsePage() {
         locations: selectedLocations,
         questionTypes: selectedQuestionTypes,
         roles: selectedRoles,
-        sortOrder: SortOrder.DESC,
-        sortType: SortType.NEW,
+        sortOrder,
+        sortType,
         startDate,
       },
     ],
@@ -164,13 +215,15 @@ export default function QuestionsBrowsePage() {
     }));
   }, [selectedLocations]);
 
-  const areFiltersInitialized = useMemo(() => {
+  const areSearchOptionsInitialized = useMemo(() => {
     return (
       areCompaniesInitialized &&
       areQuestionTypesInitialized &&
       isQuestionAgeInitialized &&
       areRolesInitialized &&
-      areLocationsInitialized
+      areLocationsInitialized &&
+      isSortTypeInitialized &&
+      isSortOrderInitialized
     );
   }, [
     areCompaniesInitialized,
@@ -178,11 +231,13 @@ export default function QuestionsBrowsePage() {
     isQuestionAgeInitialized,
     areRolesInitialized,
     areLocationsInitialized,
+    isSortTypeInitialized,
+    isSortOrderInitialized,
   ]);
 
   const { pathname } = router;
   useEffect(() => {
-    if (areFiltersInitialized) {
+    if (areSearchOptionsInitialized) {
       // Router.replace used instead of router.replace to avoid
       // the page reloading itself since the router.replace
       // callback changes on every page load
@@ -194,13 +249,14 @@ export default function QuestionsBrowsePage() {
           questionAge: selectedQuestionAge,
           questionTypes: selectedQuestionTypes,
           roles: selectedRoles,
+          sortOrder,
         },
       });
 
       setLoaded(true);
     }
   }, [
-    areFiltersInitialized,
+    areSearchOptionsInitialized,
     loaded,
     pathname,
     selectedCompanies,
@@ -208,6 +264,7 @@ export default function QuestionsBrowsePage() {
     selectedLocations,
     selectedQuestionAge,
     selectedQuestionTypes,
+    sortOrder,
   ]);
 
   if (!loaded) {
@@ -360,7 +417,7 @@ export default function QuestionsBrowsePage() {
         <div className="flex h-full flex-1">
           <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
             <div className="flex min-h-0 max-w-3xl flex-1 p-4">
-              <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
+              <div className="flex flex-1 flex-col items-stretch justify-start gap-8">
                 <ContributeQuestionCard
                   onSubmit={(data) => {
                     createQuestion({
@@ -374,24 +431,15 @@ export default function QuestionsBrowsePage() {
                   }}
                 />
                 <QuestionSearchBar
-                  sortOptions={[
-                    {
-                      label: 'Most recent',
-                      value: 'most-recent',
-                    },
-                    {
-                      label: 'Most upvotes',
-                      value: 'most-upvotes',
-                    },
-                  ]}
-                  sortValue="most-recent"
+                  sortOrderOptions={SORT_ORDERS}
+                  sortOrderValue={sortOrder}
+                  sortTypeOptions={SORT_TYPES}
+                  sortTypeValue={sortType}
                   onFilterOptionsToggle={() => {
                     setFilterDrawerOpen(!filterDrawerOpen);
                   }}
-                  onSortChange={(value) => {
-                    // eslint-disable-next-line no-console
-                    console.log(value);
-                  }}
+                  onSortOrderChange={setSortOrder}
+                  onSortTypeChange={setSortType}
                 />
                 <div className="flex flex-col gap-4 pb-4">
                   {(questions ?? []).map((question) => (

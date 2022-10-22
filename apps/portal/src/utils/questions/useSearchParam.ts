@@ -1,14 +1,27 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
-export const useSearchFilter = <Value extends string = string>(
+type SearchParamOptions<Value> = [Value] extends [string]
+  ? {
+      defaultValues?: Array<Value>;
+      paramToString?: (value: Value) => string | null;
+      stringToParam?: (param: string) => Value | null;
+    }
+  : {
+      defaultValues?: Array<Value>;
+      paramToString: (value: Value) => string | null;
+      stringToParam: (param: string) => Value | null;
+    };
+
+export const useSearchParam = <Value = string>(
   name: string,
-  opts: {
-    defaultValues?: Array<Value>;
-    queryParamToValue?: (param: string) => Value | null;
-  } = {},
+  opts?: SearchParamOptions<Value>,
 ) => {
-  const { defaultValues, queryParamToValue = (param) => param } = opts;
+  const {
+    defaultValues,
+    stringToParam = (param: string) => param,
+    paramToString: valueToQueryParam = (value: Value) => String(value),
+  } = opts ?? {};
   const [isInitialized, setIsInitialized] = useState(false);
   const router = useRouter();
 
@@ -22,7 +35,7 @@ export const useSearchFilter = <Value extends string = string>(
         const queryValues = Array.isArray(query) ? query : [query];
         setFilters(
           queryValues
-            .map(queryParamToValue)
+            .map(stringToParam)
             .filter((value) => value !== null) as Array<Value>,
         );
       } else {
@@ -35,31 +48,35 @@ export const useSearchFilter = <Value extends string = string>(
       }
       setIsInitialized(true);
     }
-  }, [isInitialized, name, queryParamToValue, router]);
+  }, [isInitialized, name, stringToParam, router]);
 
   const setFiltersCallback = useCallback(
     (newFilters: Array<Value>) => {
       setFilters(newFilters);
-      localStorage.setItem(name, JSON.stringify(newFilters));
+      localStorage.setItem(
+        name,
+        JSON.stringify(
+          newFilters.map(valueToQueryParam).filter((param) => param !== null),
+        ),
+      );
     },
-    [name],
+    [name, valueToQueryParam],
   );
 
   return [filters, setFiltersCallback, isInitialized] as const;
 };
 
-export const useSearchFilterSingle = <Value extends string = string>(
+export const useSearchParamSingle = <Value = string>(
   name: string,
-  opts: {
+  opts?: Omit<SearchParamOptions<Value>, 'defaultValues'> & {
     defaultValue?: Value;
-    queryParamToValue?: (param: string) => Value | null;
-  } = {},
+  },
 ) => {
-  const { defaultValue, queryParamToValue } = opts;
-  const [filters, setFilters, isInitialized] = useSearchFilter(name, {
+  const { defaultValue, ...restOpts } = opts ?? {};
+  const [filters, setFilters, isInitialized] = useSearchParam<Value>(name, {
     defaultValues: defaultValue !== undefined ? [defaultValue] : undefined,
-    queryParamToValue,
-  });
+    ...restOpts,
+  } as SearchParamOptions<Value>);
 
   return [
     filters[0],

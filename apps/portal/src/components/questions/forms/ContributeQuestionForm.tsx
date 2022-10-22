@@ -19,7 +19,6 @@ import {
 import CompanyTypeahead from '../typeahead/CompanyTypeahead';
 import LocationTypeahead from '../typeahead/LocationTypeahead';
 import RoleTypeahead from '../typeahead/RoleTypeahead';
-import CompaniesTypeahead from '../../shared/CompaniesTypeahead';
 import type { Month } from '../../shared/MonthYearPicker';
 import MonthYearPicker from '../../shared/MonthYearPicker';
 
