@@ -7,8 +7,6 @@ import { createProtectedRouter } from './context';
 import type { Question } from '~/types/questions';
 import { SortOrder, SortType } from '~/types/questions.d';
 
-const TWO_WEEK_IN_MS = 12096e5;
-
 export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
@@ -20,7 +18,7 @@ export const questionsQuestionRouter = createProtectedRouter()
       roles: z.string().array(),
       sortOrder: z.nativeEnum(SortOrder),
       sortType: z.nativeEnum(SortType),
-      startDate: z.date().default(new Date(Date.now() - TWO_WEEK_IN_MS)),
+      startDate: z.date().optional(),
     }),
     async resolve({ ctx, input }) {
       const sortCondition =
