@@ -15,7 +15,7 @@ First and foremost, compensation. Most technical roles at tech companies would r
 
 Not all stock grants are equal as well. Some companies have linear vesting cycles (you vest the same amount every year), some companies like Amazon and Snap have backloaded schemes (you vest less in the earlier years, more later), and there are pay attention to cliffs as well. [Stripe and Lyft](https://www.theinformation.com/articles/stripe-and-lyft-speed-up-equity-payouts-to-first-year) recently changed their stock structure and announced that they will speed up equity payouts to the first year. This sounds good initially, [but in reality there are some nuances](https://tanay.substack.com/p/employee-compensation-and-one-year).
 
-Regardless of company, **always negotiate** your offer, especially if you have multiple offers to choose from! Having multiple offers in hand is the best bargaining chip you can have for negotiation and you should leverage it. We go into this more in the [Negotiation](./negotiation.md) section. Use [Moonchaser](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_choosing_between_companies) for risk-free negotiation services.
+Regardless of company, **always negotiate** your offer, especially if you have multiple offers to choose from! Having multiple offers in hand is the best bargaining chip you can have for negotiation and you should leverage it. We go into this more in the [Negotiation](./negotiation.md) section. Use [Rora](https://www.teamrora.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_choosing_between_companies) for risk-free negotiation services.
 
 ## Products
 

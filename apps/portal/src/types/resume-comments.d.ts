@@ -1,15 +1,15 @@
-import type { ResumesSection } from '@prisma/client';
+import type { ResumesCommentVote, ResumesSection } from '@prisma/client';
 
 /**
  * Returned by `resumeCommentsRouter` (query for 'resumes.comments.list') and received as prop by `Comment` in `CommentsList`
  * frontend-friendly representation of the query
  */
 export type ResumeComment = Readonly<{
+  children: Array<ResumeComment>;
   createdAt: Date;
   description: string;
-  hasVoted: boolean;
   id: string;
-  numVotes: number;
+  parentId: string?;
   resumeId: string;
   section: ResumesSection;
   updatedAt: Date;
@@ -18,4 +18,9 @@ export type ResumeComment = Readonly<{
     name: string?;
     userId: string;
   };
+}>;
+
+export type ResumeCommentVote = Readonly<{
+  numVotes: number;
+  userVote: ResumesCommentVote?;
 }>;

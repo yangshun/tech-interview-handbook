@@ -5,12 +5,15 @@ import { useState } from 'react';
 import ProfileComments from '~/components/offers/profile/ProfileComments';
 import ProfileDetails from '~/components/offers/profile/ProfileDetails';
 import ProfileHeader from '~/components/offers/profile/ProfileHeader';
-import type { OfferEntity } from '~/components/offers/types';
-import type { BackgroundCard } from '~/components/offers/types';
+import type { BackgroundCard, OfferEntity } from '~/components/offers/types';
 
-import { convertCurrencyToString } from '~/utils/offers/currency';
+import { convertMoneyToString } from '~/utils/offers/currency';
+import { getProfilePath } from '~/utils/offers/link';
 import { formatDate } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
+
+import type { Profile, ProfileOffer } from '~/types/offers';
+
 export default function OfferProfile() {
   const ErrorPage = (
     <Error statusCode={404} title="Requested profile does not exist." />
@@ -30,51 +33,46 @@ export default function OfferProfile() {
     ],
     {
       enabled: typeof offerProfileId === 'string',
-      onSuccess: (data) => {
+      onSuccess: (data: Profile) => {
         if (!data) {
           router.push('/offers');
         }
         // If the profile is not editable with a wrong token, redirect to the profile page
         if (!data?.isEditable && token !== '') {
-          router.push(`/offers/profile/${offerProfileId}`);
+          router.push(getProfilePath(offerProfileId as string));
         }
 
         setIsEditable(data?.isEditable ?? false);
 
         if (data?.offers) {
           const filteredOffers: Array<OfferEntity> = data
-            ? data?.offers.map((res) => {
-                if (res.OffersFullTime) {
+            ? data?.offers.map((res: ProfileOffer) => {
+                if (res.offersFullTime) {
                   const filteredOffer: OfferEntity = {
-                    base: convertCurrencyToString(
-                      res.OffersFullTime.baseSalary.value,
-                    ),
-                    bonus: convertCurrencyToString(
-                      res.OffersFullTime.bonus.value,
-                    ),
+                    base: convertMoneyToString(res.offersFullTime.baseSalary),
+                    bonus: convertMoneyToString(res.offersFullTime.bonus),
                     companyName: res.company.name,
-                    id: res.OffersFullTime.id,
-                    jobLevel: res.OffersFullTime.level,
-                    jobTitle: res.OffersFullTime.title,
+                    id: res.offersFullTime.id,
+                    jobLevel: res.offersFullTime.level,
+                    jobTitle: res.offersFullTime.title,
                     location: res.location,
                     negotiationStrategy: res.negotiationStrategy || '',
                     otherComment: res.comments || '',
                     receivedMonth: formatDate(res.monthYearReceived),
-                    stocks: convertCurrencyToString(res.OffersFullTime.stocks),
-                    totalCompensation: convertCurrencyToString(
-                      res.OffersFullTime.totalCompensation,
+                    stocks: convertMoneyToString(res.offersFullTime.stocks),
+                    totalCompensation: convertMoneyToString(
+                      res.offersFullTime.totalCompensation,
                     ),
                   };
-
                   return filteredOffer;
                 }
                 const filteredOffer: OfferEntity = {
                   companyName: res.company.name,
-                  id: res.OffersIntern!.id,
-                  jobTitle: res.OffersIntern!.title,
+                  id: res.offersIntern!.id,
+                  jobTitle: res.offersIntern!.title,
                   location: res.location,
-                  monthlySalary: convertCurrencyToString(
-                    res.OffersIntern!.monthlySalary,
+                  monthlySalary: convertMoneyToString(
+                    res.offersIntern!.monthlySalary,
                   ),
                   negotiationStrategy: res.negotiationStrategy || '',
                   otherComment: res.comments || '',
@@ -88,46 +86,29 @@ export default function OfferProfile() {
 
         if (data?.background) {
           const transformedBackground = {
-            educations: [
-              {
-                endDate: data?.background.educations[0].endDate
-                  ? formatDate(data.background.educations[0].endDate)
-                  : '-',
-                field: data.background.educations[0].field || '-',
-                school: data.background.educations[0].school || '-',
-                startDate: data.background.educations[0].startDate
-                  ? formatDate(data.background.educations[0].startDate)
-                  : '-',
-                type: data.background.educations[0].type || '-',
-              },
-            ],
-            experiences: [
-              data.background.experiences &&
-              data.background.experiences.length > 0
-                ? {
-                    companyName:
-                      data.background.experiences[0].company?.name ?? '-',
-                    duration:
-                      String(data.background.experiences[0].durationInMonths) ??
-                      '-',
-                    jobLevel: data.background.experiences[0].level ?? '',
-                    jobTitle: data.background.experiences[0].title ?? '-',
-                    monthlySalary: data.background.experiences[0].monthlySalary
-                      ? convertCurrencyToString(
-                          data.background.experiences[0].monthlySalary,
-                        )
-                      : '-',
-                    totalCompensation: data.background.experiences[0]
-                      .totalCompensation
-                      ? convertCurrencyToString(
-                          data.background.experiences[0].totalCompensation,
-                        )
-                      : '-',
-                  }
-                : {},
-            ],
+            educations: data.background.educations.map((education) => ({
+              endDate: education.endDate ? formatDate(education.endDate) : '-',
+              field: education.field || '-',
+              school: education.school || '-',
+              startDate: education.startDate
+                ? formatDate(education.startDate)
+                : '-',
+              type: education.type || '-',
+            })),
+            experiences: data.background.experiences.map((experience) => ({
+              companyName: experience.company?.name ?? '-',
+              duration: String(experience.durationInMonths) ?? '-',
+              jobLevel: experience.level ?? '',
+              jobTitle: experience.title ?? '-',
+              monthlySalary: experience.monthlySalary
+                ? convertMoneyToString(experience.monthlySalary)
+                : '-',
+              totalCompensation: experience.totalCompensation
+                ? convertMoneyToString(experience.totalCompensation)
+                : '-',
+            })),
             profileName: data.profileName,
-            specificYoes: data.background.specificYoes ?? [],
+            specificYoes: data.background.specificYoes,
             totalYoe: String(data.background.totalYoe) || '-',
           };
           setBackground(transformedBackground);
@@ -156,19 +137,6 @@ export default function OfferProfile() {
     }
   }
 
-  function handleCopyEditLink() {
-    // TODO: Add notification
-    navigator.clipboard.writeText(
-      `${window.location.origin}/offers/profile/${offerProfileId}?token=${token}`,
-    );
-  }
-
-  function handleCopyPublicLink() {
-    navigator.clipboard.writeText(
-      `${window.location.origin}/offers/profile/${offerProfileId}`,
-    );
-  }
-
   return (
     <>
       {getProfileQuery.isError && ErrorPage}
@@ -194,11 +162,12 @@ export default function OfferProfile() {
           </div>
           <div className="h-full w-1/3 bg-white">
             <ProfileComments
-              handleCopyEditLink={handleCopyEditLink}
-              handleCopyPublicLink={handleCopyPublicLink}
               isDisabled={deleteMutation.isLoading}
               isEditable={isEditable}
               isLoading={getProfileQuery.isLoading}
+              profileId={offerProfileId as string}
+              profileName={background?.profileName}
+              token={token as string}
             />
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Select } from '@tih/ui';
 
+import { titleOptions } from '~/components/offers/constants';
 import OffersTitle from '~/components/offers/OffersTitle';
 import OffersTable from '~/components/offers/table/OffersTable';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
@@ -20,24 +21,7 @@ export default function OffersHomePage() {
               <Select
                 isLabelHidden={true}
                 label="Select a job title"
-                options={[
-                  {
-                    label: 'Software Engineer',
-                    value: 'Software Engineer',
-                  },
-                  {
-                    label: 'Frontend Engineer',
-                    value: 'Frontend Engineer',
-                  },
-                  {
-                    label: 'Backend Engineer',
-                    value: 'Backend Engineer',
-                  },
-                  {
-                    label: 'Full-stack Engineer',
-                    value: 'Full-stack Engineer',
-                  },
-                ]}
+                options={titleOptions}
                 value={jobTitleFilter}
                 onChange={setjobTitleFilter}
               />

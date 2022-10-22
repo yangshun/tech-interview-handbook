@@ -1,6 +1,10 @@
 import type { Money } from '~/components/offers/types';
 
-export function convertCurrencyToString({ currency, value }: Money) {
+import { Currency } from './CurrencyEnum';
+
+export const baseCurrencyString = Currency.USD.toString();
+
+export function convertMoneyToString({ currency, value }: Money) {
   if (!value) {
     return '-';
   }
@@ -10,5 +14,5 @@ export function convertCurrencyToString({ currency, value }: Money) {
     minimumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
     style: 'currency',
   });
-  return `${formatter.format(10000)}`; /* $2,500.00 */
+  return `${formatter.format(value)}`;
 }

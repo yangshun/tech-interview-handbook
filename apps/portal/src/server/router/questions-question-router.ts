@@ -5,18 +5,33 @@ import { TRPCError } from '@trpc/server';
 import { createProtectedRouter } from './context';
 
 import type { Question } from '~/types/questions';
+import { SortOrder, SortType } from '~/types/questions.d';
+
+const TWO_WEEK_IN_MS = 12096e5;
 
 export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
-      companies: z.string().array(),
-      endDate: z.date(),
+      companyNames: z.string().array(),
+      endDate: z.date().default(new Date()),
       locations: z.string().array(),
+      pageSize: z.number().default(50),
       questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
       roles: z.string().array(),
-      startDate: z.date().optional(),
+      sortOrder: z.nativeEnum(SortOrder),
+      sortType: z.nativeEnum(SortType),
+      startDate: z.date().default(new Date(Date.now() - TWO_WEEK_IN_MS)),
     }),
     async resolve({ ctx, input }) {
+      const sortCondition =
+        input.sortType === SortType.TOP
+          ? {
+              upvotes: input.sortOrder,
+            }
+          : {
+              lastSeenAt: input.sortOrder,
+            };
+
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
         include: {
           _count: {
@@ -41,7 +56,7 @@ export const questionsQuestionRouter = createProtectedRouter()
           votes: true,
         },
         orderBy: {
-          createdAt: 'desc',
+          ...sortCondition,
         },
         where: {
           ...(input.questionTypes.length > 0
@@ -51,63 +66,73 @@ export const questionsQuestionRouter = createProtectedRouter()
                 },
               }
             : {}),
+          encounters: {
+            some: {
+              seenAt: {
+                gte: input.startDate,
+                lte: input.endDate,
+              },
+              ...(input.companyNames.length > 0
+                ? {
+                    company: {
+                      name: {
+                        in: input.companyNames,
+                      },
+                    },
+                  }
+                : {}),
+              ...(input.locations.length > 0
+                ? {
+                    location: {
+                      in: input.locations,
+                    },
+                  }
+                : {}),
+              ...(input.roles.length > 0
+                ? {
+                    role: {
+                      in: input.roles,
+                    },
+                  }
+                : {}),
+            },
+          },
         },
       });
-      return questionsData
-        .filter((data) => {
-          for (let i = 0; i < data.encounters.length; i++) {
-            const encounter = data.encounters[i];
-            const matchCompany =
-              input.companies.length === 0 ||
-              input.companies.includes(encounter.company);
-            const matchLocation =
-              input.locations.length === 0 ||
-              input.locations.includes(encounter.location);
-            const matchRole =
-              input.roles.length === 0 || input.roles.includes(encounter.role);
-            const matchDate =
-              (!input.startDate || encounter.seenAt >= input.startDate) &&
-              encounter.seenAt <= input.endDate;
-            if (matchCompany && matchLocation && matchRole && matchDate) {
-              return true;
+      return questionsData.map((data) => {
+        const votes: number = data.votes.reduce(
+          (previousValue: number, currentValue) => {
+            let result: number = previousValue;
+
+            switch (currentValue.vote) {
+              case Vote.UPVOTE:
+                result += 1;
+                break;
+              case Vote.DOWNVOTE:
+                result -= 1;
+                break;
             }
-          }
-          return false;
-        })
-        .map((data) => {
-          const votes: number = data.votes.reduce(
-            (previousValue: number, currentValue) => {
-              let result: number = previousValue;
+            return result;
+          },
+          0,
+        );
 
-              switch (currentValue.vote) {
-                case Vote.UPVOTE:
-                  result += 1;
-                  break;
-                case Vote.DOWNVOTE:
-                  result -= 1;
-                  break;
-              }
-              return result;
-            },
-            0,
-          );
-
-          const question: Question = {
-            company: data.encounters[0].company,
-            content: data.content,
-            id: data.id,
-            location: data.encounters[0].location ?? 'Unknown location',
-            numAnswers: data._count.answers,
-            numComments: data._count.comments,
-            numVotes: votes,
-            role: data.encounters[0].role ?? 'Unknown role',
-            seenAt: data.encounters[0].seenAt,
-            type: data.questionType,
-            updatedAt: data.updatedAt,
-            user: data.user?.name ?? '',
-          };
-          return question;
-        });
+        const question: Question = {
+          company: data.encounters[0].company!.name ?? 'Unknown company',
+          content: data.content,
+          id: data.id,
+          location: data.encounters[0].location ?? 'Unknown location',
+          numAnswers: data._count.answers,
+          numComments: data._count.comments,
+          numVotes: votes,
+          role: data.encounters[0].role ?? 'Unknown role',
+          seenAt: data.encounters[0].seenAt,
+          type: data.questionType,
+          updatedAt: data.updatedAt,
+          user: data.user?.name ?? '',
+        };
+        return question;
+      });
     },
   })
   .query('getQuestionById', {
@@ -166,7 +191,7 @@ export const questionsQuestionRouter = createProtectedRouter()
       );
 
       const question: Question = {
-        company: questionData.encounters[0].company,
+        company: questionData.encounters[0].company!.name ?? 'Unknown company',
         content: questionData.content,
         id: questionData.id,
         location: questionData.encounters[0].location ?? 'Unknown location',
@@ -209,7 +234,7 @@ export const questionsQuestionRouter = createProtectedRouter()
   })
   .mutation('create', {
     input: z.object({
-      company: z.string(),
+      companyId: z.string(),
       content: z.string(),
       location: z.string(),
       questionType: z.nativeEnum(QuestionsQuestionType),
@@ -219,38 +244,31 @@ export const questionsQuestionRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const question = await ctx.prisma.questionsQuestion.create({
+      return await ctx.prisma.questionsQuestion.create({
         data: {
           content: input.content,
           encounters: {
-            create: [
-              {
-                company: input.company,
-                location: input.location,
-                role: input.role,
-                seenAt: input.seenAt,
-                userId,
+            create: {
+              company: {
+                connect: {
+                  id: input.companyId,
+                },
               },
-            ],
+              location: input.location,
+              role: input.role,
+              seenAt: input.seenAt,
+              user: {
+                connect: {
+                  id: userId,
+                },
+              },
+            },
           },
+          lastSeenAt: input.seenAt,
           questionType: input.questionType,
           userId,
         },
       });
-
-      // Create question encounter
-      await ctx.prisma.questionsQuestionEncounter.create({
-        data: {
-          company: input.company,
-          location: input.location,
-          questionId: question.id,
-          role: input.role,
-          seenAt: input.seenAt,
-          userId,
-        },
-      });
-
-      return question;
     },
   })
   .mutation('update', {
@@ -276,9 +294,12 @@ export const questionsQuestionRouter = createProtectedRouter()
         });
       }
 
+      const { content, questionType } = input;
+
       return await ctx.prisma.questionsQuestion.update({
         data: {
-          ...input,
+          content,
+          questionType,
         },
         where: {
           id: input.id,
@@ -336,13 +357,30 @@ export const questionsQuestionRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
+      const { questionId, vote } = input;
 
-      return await ctx.prisma.questionsQuestionVote.create({
-        data: {
-          ...input,
-          userId,
-        },
-      });
+      const incrementValue = vote === Vote.UPVOTE ? 1 : -1;
+
+      const [questionVote] = await ctx.prisma.$transaction([
+        ctx.prisma.questionsQuestionVote.create({
+          data: {
+            questionId,
+            userId,
+            vote,
+          },
+        }),
+        ctx.prisma.questionsQuestion.update({
+          data: {
+            upvotes: {
+              increment: incrementValue,
+            },
+          },
+          where: {
+            id: questionId,
+          },
+        }),
+      ]);
+      return questionVote;
     },
   })
   .mutation('updateVote', {
@@ -367,14 +405,30 @@ export const questionsQuestionRouter = createProtectedRouter()
         });
       }
 
-      return await ctx.prisma.questionsQuestionVote.update({
-        data: {
-          vote,
-        },
-        where: {
-          id,
-        },
-      });
+      const incrementValue = vote === Vote.UPVOTE ? 2 : -2;
+
+      const [questionVote] = await ctx.prisma.$transaction([
+        ctx.prisma.questionsQuestionVote.update({
+          data: {
+            vote,
+          },
+          where: {
+            id,
+          },
+        }),
+        ctx.prisma.questionsQuestion.update({
+          data: {
+            upvotes: {
+              increment: incrementValue,
+            },
+          },
+          where: {
+            id: voteToUpdate.questionId,
+          },
+        }),
+      ]);
+
+      return questionVote;
     },
   })
   .mutation('deleteVote', {
@@ -397,10 +451,25 @@ export const questionsQuestionRouter = createProtectedRouter()
         });
       }
 
-      return await ctx.prisma.questionsQuestionVote.delete({
-        where: {
-          id: input.id,
-        },
-      });
+      const incrementValue = voteToDelete.vote === Vote.UPVOTE ? -1 : 1;
+
+      const [questionVote] = await ctx.prisma.$transaction([
+        ctx.prisma.questionsQuestionVote.delete({
+          where: {
+            id: input.id,
+          },
+        }),
+        ctx.prisma.questionsQuestion.update({
+          data: {
+            upvotes: {
+              increment: incrementValue,
+            },
+          },
+          where: {
+            id: voteToDelete.questionId,
+          },
+        }),
+      ]);
+      return questionVote;
     },
   });

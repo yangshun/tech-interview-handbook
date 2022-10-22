@@ -222,7 +222,7 @@ function WhatIsThisSection() {
   );
 }
 
-function MoonchaserSection() {
+function RoraSection() {
   // Because the SSR and client output can differ and hydration doesn't patch attribute differences,
   // we'll render this on the browser only.
   return (
@@ -237,18 +237,18 @@ function MoonchaserSection() {
                     <h2 className={styles.sectionSponsorTitle}>
                       <strong>
                         Get paid more. Receive risk-free salary negotiation
-                        advice from Moonchaser. You pay nothing unless your
-                        offer is increased.
+                        advice from Rora. You pay nothing unless your offer is
+                        increased.
                       </strong>
                     </h2>
                     <div className="margin-vert--lg">
                       <a
                         className="button button--secondary button--lg"
-                        href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
+                        href="https://www.teamrora.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
                         rel="noopener"
                         target="_blank"
                         onClick={() => {
-                          window.gtag('event', 'moonchaser.homepage.click');
+                          window.gtag('event', 'rora.homepage.click');
                         }}>
                         Get risk-free negotiation advice&nbsp;&nbsp;→
                       </a>
@@ -504,7 +504,7 @@ function GreatFrontEndSection() {
   return (
     <div
       className={clsx('padding-vert--lg')}
-      style={{backgroundColor: 'rgb(79, 70, 229)'}}>
+      style={{ backgroundColor: 'rgb(79, 70, 229)' }}>
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -517,13 +517,13 @@ function GreatFrontEndSection() {
                 </h2>
                 <h3
                   className={styles.sectionSponsorTitle}
-                  style={{fontSize: 'var(--ifm-h2-font-size)'}}>
+                  style={{ fontSize: 'var(--ifm-h2-font-size)' }}>
                   <strong>
                     Spend less time but prepare better for your Front End
                     Interviews with{' '}
                     <a
                       href="https://www.greatfrontend.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=homepage&fpr=techinterviewhandbook"
-                      style={{color: '#fff', textDecoration: 'underline'}}>
+                      style={{ color: '#fff', textDecoration: 'underline' }}>
                       Great Front End's
                     </a>{' '}
                     large pool of high quality practice questions and solutions.

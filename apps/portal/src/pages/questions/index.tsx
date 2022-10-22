@@ -26,6 +26,8 @@ import {
 } from '~/utils/questions/useSearchFilter';
 import { trpc } from '~/utils/trpc';
 
+import { SortOrder, SortType } from '~/types/questions.d';
+
 export default function QuestionsHomePage() {
   const router = useRouter();
 
@@ -65,11 +67,14 @@ export default function QuestionsHomePage() {
     [
       'questions.questions.getQuestionsByFilter',
       {
-        companies: selectedCompanies,
+        companyNames: selectedCompanies,
         endDate: today,
         locations: selectedLocations,
         questionTypes: selectedQuestionTypes,
         roles: [],
+        // TODO: Implement sort order and sort type choices
+        sortOrder: SortOrder.DESC,
+        sortType: SortType.NEW,
         startDate,
       },
     ],
@@ -252,7 +257,7 @@ export default function QuestionsHomePage() {
               <ContributeQuestionCard
                 onSubmit={(data) => {
                   createQuestion({
-                    company: data.company,
+                    companyId: data.company,
                     content: data.questionContent,
                     location: data.location,
                     questionType: data.questionType,

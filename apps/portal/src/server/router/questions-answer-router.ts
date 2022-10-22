@@ -12,6 +12,8 @@ export const questionsAnswerRouter = createProtectedRouter()
       questionId: z.string(),
     }),
     async resolve({ ctx, input }) {
+      const { questionId } = input;
+
       const answersData = await ctx.prisma.questionsAnswer.findMany({
         include: {
           _count: {
@@ -31,7 +33,7 @@ export const questionsAnswerRouter = createProtectedRouter()
           createdAt: 'desc',
         },
         where: {
-          ...input,
+          questionId,
         },
       });
       return answersData.map((data) => {
@@ -132,9 +134,12 @@ export const questionsAnswerRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
+      const { content, questionId } = input;
+
       return await ctx.prisma.questionsAnswer.create({
         data: {
-          ...input,
+          content,
+          questionId,
           userId,
         },
       });
@@ -222,10 +227,13 @@ export const questionsAnswerRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
+      const { answerId, vote } = input;
+
       return await ctx.prisma.questionsAnswerVote.create({
         data: {
-          ...input,
+          answerId,
           userId,
+          vote,
         },
       });
     },

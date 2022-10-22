@@ -49,6 +49,12 @@ export { default as TextArea } from './TextArea/TextArea';
 // TextInput
 export * from './TextInput/TextInput';
 export { default as TextInput } from './TextInput/TextInput';
+// Toast
+export * from './Toast/Toast';
+export { default as Toast } from './Toast/Toast';
+// ToastsProvider
+export * from './Toast/ToastsProvider';
+export { default as ToastsProvider } from './Toast/ToastsProvider';
 // Typeahead
 export * from './Typeahead/Typeahead';
 export { default as Typeahead } from './Typeahead/Typeahead';
