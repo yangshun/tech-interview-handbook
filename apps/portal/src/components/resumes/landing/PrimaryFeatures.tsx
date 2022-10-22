@@ -4,27 +4,27 @@ import { useEffect, useState } from 'react';
 import { Tab } from '@headlessui/react';
 
 import { Container } from './Container';
-import screenshotExpenses from './images/screenshots/expenses.png';
-import screenshotPayroll from './images/screenshots/payroll.png';
-import screenshotVatReturns from './images/screenshots/vat-returns.png';
+import resumeBrowse from './images/screenshots/resumes-browse.png';
+import resumeReview from './images/screenshots/resumes-review.png';
+import resumeSubmit from './images/screenshots/resumes-submit.png';
 
 const features = [
   {
     description:
       'Browse the most popular reviewed resumes out there and see what you can learn',
-    image: screenshotPayroll,
+    image: resumeBrowse,
     title: 'Browse',
   },
   {
     description:
       'Upload your own resume easily to get feedback from people in industry.',
-    image: screenshotExpenses,
+    image: resumeSubmit,
     title: 'Submit',
   },
   {
     description:
       'Pass the baton forward by reviewing resumes and bounce off ideas with other engineers out there.',
-    image: screenshotVatReturns,
+    image: resumeReview,
     title: 'Review',
   },
 ];
@@ -49,7 +49,6 @@ export function PrimaryFeatures() {
 
   return (
     <section
-      aria-label="Features for running your books"
       className="relative overflow-hidden bg-gradient-to-r from-indigo-400 to-indigo-700 pt-20 pb-28 sm:py-32"
       id="features">
       <Container className="relative">
@@ -64,7 +63,7 @@ export function PrimaryFeatures() {
           vertical={tabOrientation === 'vertical'}>
           {({ selectedIndex }) => (
             <>
-              <div className="-mx-4 flex overflow-x-auto pb-4 sm:mx-0 sm:overflow-visible sm:pb-0 lg:col-span-5">
+              <div className="-mx-4 flex overflow-x-auto pb-4 sm:mx-0 sm:overflow-visible sm:pb-0 lg:col-span-4">
                 <Tab.List className="relative z-10 flex gap-x-4 whitespace-nowrap px-4 sm:mx-auto sm:px-0 lg:mx-0 lg:block lg:gap-x-0 lg:gap-y-1 lg:whitespace-normal">
                   {features.map((feature, featureIndex) => (
                     <div
@@ -100,7 +99,7 @@ export function PrimaryFeatures() {
                   ))}
                 </Tab.List>
               </div>
-              <Tab.Panels className="lg:col-span-7">
+              <Tab.Panels className="lg:col-span-8">
                 {features.map((feature) => (
                   <Tab.Panel key={feature.title} unmount={false}>
                     <div className="relative sm:px-6 lg:hidden">
