@@ -26,7 +26,7 @@ import {
 } from '~/utils/questions/useSearchFilter';
 import { trpc } from '~/utils/trpc';
 
-import { SortOrder, SortType } from '~/types/questions';
+import { SortOrder, SortType } from '~/types/questions.d';
 
 export default function QuestionsHomePage() {
   const router = useRouter();
@@ -74,7 +74,7 @@ export default function QuestionsHomePage() {
         roles: [],
         // TODO: Implement sort order and sort type choices
         sortOrder: SortOrder.DESC,
-        sortType: SortType.BEST,
+        sortType: SortType.NEW,
         startDate,
       },
     ],
