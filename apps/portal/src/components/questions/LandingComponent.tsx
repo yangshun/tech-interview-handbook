@@ -81,7 +81,7 @@ export default function LandingComponent({
         </header>
         <div className="flex flex-col items-start gap-3 text-xl font-semibold text-slate-900">
           <p className="text-3xl">Find questions</p>
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-[auto_auto] items-baseline gap-x-4 gap-y-2">
             <p className="text-slate-600">about</p>
             <Select
               isLabelHidden={true}
