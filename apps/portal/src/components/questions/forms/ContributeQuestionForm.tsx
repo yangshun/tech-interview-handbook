@@ -16,6 +16,7 @@ import {
   useSelectRegister,
 } from '~/utils/questions/useFormRegister';
 
+import CompanyTypeahead from '../typeahead/CompanyTypeahead';
 import LocationTypeahead from '../typeahead/LocationTypeahead';
 import RoleTypeahead from '../typeahead/RoleTypeahead';
 import CompaniesTypeahead from '../../shared/CompaniesTypeahead';
@@ -126,7 +127,8 @@ export default function ContributeQuestionForm({
             control={control}
             name="company"
             render={({ field }) => (
-              <CompaniesTypeahead
+              <CompanyTypeahead
+                required={true}
                 onSelect={({ id }) => {
                   field.onChange(id);
                 }}

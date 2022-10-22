@@ -125,7 +125,7 @@ export default function QuestionPage() {
           <Button
             addonPosition="start"
             display="inline"
-            href="/questions"
+            href="/questions/browse"
             icon={ArrowSmallLeftIcon}
             label="Back"
             variant="secondary"
