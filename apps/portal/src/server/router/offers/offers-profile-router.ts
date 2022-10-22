@@ -9,7 +9,7 @@ import {
   profileDtoMapper,
 } from '~/mappers/offers-mappers';
 import { baseCurrencyString } from '~/utils/offers/currency';
-import { convert } from '~/utils/offers/currency/currency-exchange';
+import { convert } from '~/utils/offers/currency/currencyExchange';
 import { createValidationRegex } from '~/utils/offers/zodRegex';
 
 import { createRouter } from '../context';
