@@ -5,7 +5,7 @@ import { TRPCError } from '@trpc/server';
 import { createProtectedRouter } from './context';
 
 import type { Question } from '~/types/questions';
-import { SortOrder, SortType } from '~/types/questions';
+import { SortOrder, SortType } from '~/types/questions.d';
 
 const TWO_WEEK_IN_MS = 12096e5;
 

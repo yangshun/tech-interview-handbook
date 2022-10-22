@@ -20,7 +20,7 @@ export type AggregatedQuestionEncounter = {
   companyCounts: Record<string, number>;
   locationCounts: Record<string, number>;
   roleCounts: Record<string, number>;
-}
+};
 
 export type AnswerComment = {
   content: string;
@@ -54,9 +54,9 @@ export type QuestionComment = {
 export enum SortOrder {
   ASC = 'asc',
   DESC = 'desc',
-};
+}
 
 export enum SortType {
   TOP,
   NEW,
-};
+}
