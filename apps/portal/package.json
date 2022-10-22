@@ -35,6 +35,7 @@
     "react-pdf": "^5.7.2",
     "react-query": "^3.39.2",
     "superjson": "^1.10.0",
+    "xlsx": "^0.18.5",
     "zod": "^3.18.0"
   },
   "devDependencies": {
