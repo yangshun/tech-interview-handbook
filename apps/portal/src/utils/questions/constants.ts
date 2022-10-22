@@ -2,6 +2,8 @@ import { QuestionsQuestionType } from '@prisma/client';
 
 import type { FilterChoices } from '~/components/questions/filter/FilterSection';
 
+export const APP_TITLE = 'Questions Bank';
+
 export const COMPANIES: FilterChoices = [
   {
     id: 'Google',

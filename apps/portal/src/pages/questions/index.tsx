@@ -1,4 +1,5 @@
 import { subMonths, subYears } from 'date-fns';
+import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { NoSymbolIcon } from '@heroicons/react/24/outline';
@@ -13,6 +14,7 @@ import LandingComponent from '~/components/questions/LandingComponent';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 
 import type { QuestionAge } from '~/utils/questions/constants';
+import { APP_TITLE } from '~/utils/questions/constants';
 import { ROLES } from '~/utils/questions/constants';
 import {
   COMPANIES,
@@ -330,94 +332,104 @@ export default function QuestionsHomePage() {
     </div>
   );
 
-  return !hasLanded ? (
-    <LandingComponent onLanded={handleLandingQuery}></LandingComponent>
-  ) : (
-    <main className="flex flex-1 flex-col items-stretch">
-      <div className="flex h-full flex-1">
-        <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
-          <div className="flex min-h-0 max-w-3xl flex-1 p-4">
-            <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
-              <ContributeQuestionCard
-                onSubmit={(data) => {
-                  createQuestion({
-                    companyId: data.company,
-                    content: data.questionContent,
-                    location: data.location,
-                    questionType: data.questionType,
-                    role: data.role,
-                    seenAt: data.date,
-                  });
-                }}
-              />
-              <QuestionSearchBar
-                sortOptions={[
-                  {
-                    label: 'Most recent',
-                    value: 'most-recent',
-                  },
-                  {
-                    label: 'Most upvotes',
-                    value: 'most-upvotes',
-                  },
-                ]}
-                sortValue="most-recent"
-                onFilterOptionsToggle={() => {
-                  setFilterDrawerOpen(!filterDrawerOpen);
-                }}
-                onSortChange={(value) => {
-                  // eslint-disable-next-line no-console
-                  console.log(value);
-                }}
-              />
-              <div className="flex flex-col gap-4 pb-4">
-                {(questions ?? []).map((question) => (
-                  <QuestionOverviewCard
-                    key={question.id}
-                    answerCount={question.numAnswers}
-                    companies={{ [question.company]: 1 }}
-                    content={question.content}
-                    href={`/questions/${question.id}/${createSlug(
-                      question.content,
-                    )}`}
-                    locations={{ [question.location]: 1 }}
-                    questionId={question.id}
-                    receivedCount={question.receivedCount}
-                    roles={{ [question.role]: 1 }}
-                    timestamp={question.seenAt.toLocaleDateString(undefined, {
-                      month: 'short',
-                      year: 'numeric',
-                    })}
-                    type={question.type}
-                    upvoteCount={question.numVotes}
+  return (
+    <>
+      <Head>
+        <title>Home - {APP_TITLE}</title>
+      </Head>
+      {!hasLanded ? (
+        <LandingComponent onLanded={handleLandingQuery}></LandingComponent>
+      ) : (
+        <main className="flex flex-1 flex-col items-stretch">
+          <div className="flex h-full flex-1">
+            <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
+              <div className="flex min-h-0 max-w-3xl flex-1 p-4">
+                <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
+                  <ContributeQuestionCard
+                    onSubmit={(data) => {
+                      createQuestion({
+                        companyId: data.company,
+                        content: data.questionContent,
+                        location: data.location,
+                        questionType: data.questionType,
+                        role: data.role,
+                        seenAt: data.date,
+                      });
+                    }}
                   />
-                ))}
-                {questions?.length === 0 && (
-                  <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
-                    <NoSymbolIcon className="h-6 w-6" />
-                    <p>Nothing found. Try changing your search filters.</p>
+                  <QuestionSearchBar
+                    sortOptions={[
+                      {
+                        label: 'Most recent',
+                        value: 'most-recent',
+                      },
+                      {
+                        label: 'Most upvotes',
+                        value: 'most-upvotes',
+                      },
+                    ]}
+                    sortValue="most-recent"
+                    onFilterOptionsToggle={() => {
+                      setFilterDrawerOpen(!filterDrawerOpen);
+                    }}
+                    onSortChange={(value) => {
+                      // eslint-disable-next-line no-console
+                      console.log(value);
+                    }}
+                  />
+                  <div className="flex flex-col gap-4 pb-4">
+                    {(questions ?? []).map((question) => (
+                      <QuestionOverviewCard
+                        key={question.id}
+                        answerCount={question.numAnswers}
+                        companies={{ [question.company]: 1 }}
+                        content={question.content}
+                        href={`/questions/${question.id}/${createSlug(
+                          question.content,
+                        )}`}
+                        locations={{ [question.location]: 1 }}
+                        questionId={question.id}
+                        receivedCount={question.receivedCount}
+                        roles={{ [question.role]: 1 }}
+                        timestamp={question.seenAt.toLocaleDateString(
+                          undefined,
+                          {
+                            month: 'short',
+                            year: 'numeric',
+                          },
+                        )}
+                        type={question.type}
+                        upvoteCount={question.numVotes}
+                      />
+                    ))}
+                    {questions?.length === 0 && (
+                      <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
+                        <NoSymbolIcon className="h-6 w-6" />
+                        <p>Nothing found. Try changing your search filters.</p>
+                      </div>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
-            </div>
+            </section>
+            <aside className="hidden w-[300px] overflow-y-auto border-l bg-white py-4 lg:block">
+              <h2 className="px-4 text-xl font-semibold">Filter by</h2>
+              {filterSidebar}
+            </aside>
+            <SlideOut
+              className="lg:hidden"
+              enterFrom="end"
+              isShown={filterDrawerOpen}
+              size="sm"
+              title="Filter by"
+              onClose={() => {
+                setFilterDrawerOpen(false);
+              }}>
+              {filterSidebar}
+            </SlideOut>
           </div>
-        </section>
-        <aside className="hidden w-[300px] overflow-y-auto border-l bg-white py-4 lg:block">
-          <h2 className="px-4 text-xl font-semibold">Filter by</h2>
-          {filterSidebar}
-        </aside>
-        <SlideOut
-          className="lg:hidden"
-          enterFrom="end"
-          isShown={filterDrawerOpen}
-          size="sm"
-          title="Filter by"
-          onClose={() => {
-            setFilterDrawerOpen(false);
-          }}>
-          {filterSidebar}
-        </SlideOut>
-      </div>
-    </main>
+        </main>
+      )}
+    </>
   );
 }

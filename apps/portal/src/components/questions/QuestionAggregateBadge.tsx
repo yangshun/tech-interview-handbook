@@ -67,7 +67,7 @@ export default function QuestionAggregateBadge({
                 <li
                   key={key}
                   className="flex justify-between gap-x-4 rtl:flex-row-reverse">
-                  <span className="flex text-start font-bold">{key}</span>
+                  <span className="flex text-start font-semibold">{key}</span>
                   <span className="float-end">{value}</span>
                 </li>
               ))}

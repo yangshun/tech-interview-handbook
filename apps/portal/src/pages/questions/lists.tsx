@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useState } from 'react';
 import { Menu } from '@headlessui/react';
 import {
@@ -9,6 +10,7 @@ import {
 import QuestionListCard from '~/components/questions/card/question/QuestionListCard';
 
 import { Button } from '~/../../../packages/ui/dist';
+import { APP_TITLE } from '~/utils/questions/constants';
 import { SAMPLE_QUESTION } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
 
@@ -103,67 +105,75 @@ export default function ListPage() {
     </>
   );
   return (
-    <main className="flex flex-1 flex-col items-stretch">
-      <div className="flex h-full flex-1">
-        <aside className="w-[300px] overflow-y-auto border-l bg-white py-4 lg:block">
-          <div className="mb-2 flex items-center justify-between">
-            <h2 className="px-4 text-xl font-semibold">My Lists</h2>
-            <div className="px-4">
-              <Button
-                icon={PlusIcon}
-                isLabelHidden={true}
-                label="Create"
-                size="md"
-                variant="tertiary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }}
-              />
+    <>
+      <Head>
+        <title>My Lists - {APP_TITLE}</title>
+      </Head>
+      <main className="flex flex-1 flex-col items-stretch">
+        <div className="flex h-full flex-1">
+          <aside className="w-[300px] overflow-y-auto border-l bg-white py-4 lg:block">
+            <div className="mb-2 flex items-center justify-between">
+              <h2 className="px-4 text-xl font-semibold">My Lists</h2>
+              <div className="px-4">
+                <Button
+                  icon={PlusIcon}
+                  isLabelHidden={true}
+                  label="Create"
+                  size="md"
+                  variant="tertiary"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          {listOptions}
-        </aside>
-        <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
-          <div className="flex min-h-0 max-w-3xl flex-1 p-4">
-            <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
-              {selectedList && (
-                <div className="flex flex-col gap-4 pb-4">
-                  {(questions ?? []).map((question) => (
-                    <QuestionListCard
-                      key={question.id}
-                      companies={question.companies}
-                      content={question.content}
-                      href={`/questions/${question.id}/${createSlug(
-                        question.content,
-                      )}`}
-                      locations={question.locations}
-                      questionId={question.id}
-                      receivedCount={0}
-                      roles={question.roles}
-                      timestamp={question.seenAt.toLocaleDateString(undefined, {
-                        month: 'short',
-                        year: 'numeric',
-                      })}
-                      type={question.type}
-                      onDelete={() => {
-                        // eslint-disable-next-line no-console
-                        console.log('delete');
-                      }}
-                    />
-                  ))}
-                  {questions?.length === 0 && (
-                    <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
-                      <NoSymbolIcon className="h-6 w-6" />
-                      <p>You have no added any questions to your list yet.</p>
-                    </div>
-                  )}
-                </div>
-              )}
+            {listOptions}
+          </aside>
+          <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
+            <div className="flex min-h-0 max-w-3xl flex-1 p-4">
+              <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
+                {selectedList && (
+                  <div className="flex flex-col gap-4 pb-4">
+                    {(questions ?? []).map((question) => (
+                      <QuestionListCard
+                        key={question.id}
+                        companies={question.companies}
+                        content={question.content}
+                        href={`/questions/${question.id}/${createSlug(
+                          question.content,
+                        )}`}
+                        locations={question.locations}
+                        questionId={question.id}
+                        receivedCount={0}
+                        roles={question.roles}
+                        timestamp={question.seenAt.toLocaleDateString(
+                          undefined,
+                          {
+                            month: 'short',
+                            year: 'numeric',
+                          },
+                        )}
+                        type={question.type}
+                        onDelete={() => {
+                          // eslint-disable-next-line no-console
+                          console.log('delete');
+                        }}
+                      />
+                    ))}
+                    {questions?.length === 0 && (
+                      <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
+                        <NoSymbolIcon className="h-6 w-6" />
+                        <p>You have no added any questions to your list yet.</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </section>
-      </div>
-    </main>
+          </section>
+        </div>
+      </main>
+    </>
   );
 }
