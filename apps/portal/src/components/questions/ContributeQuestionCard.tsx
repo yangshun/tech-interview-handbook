@@ -7,7 +7,7 @@ import {
 import { TextInput } from '@tih/ui';
 
 import ContributeQuestionDialog from './ContributeQuestionDialog';
-import type { ContributeQuestionFormProps } from './ContributeQuestionForm';
+import type { ContributeQuestionFormProps } from './forms/ContributeQuestionForm';
 
 export type ContributeQuestionCardProps = Pick<
   ContributeQuestionFormProps,

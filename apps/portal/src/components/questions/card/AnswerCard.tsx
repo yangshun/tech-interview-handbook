@@ -13,6 +13,7 @@ export type AnswerCardProps = {
   commentCount?: number;
   content: string;
   createdAt: Date;
+  showHover?: boolean;
   upvoteCount: number;
   votingButtonsSize: VotingButtonsProps['size'];
 };
@@ -26,10 +27,14 @@ export default function AnswerCard({
   commentCount,
   votingButtonsSize,
   upvoteCount,
+  showHover,
 }: AnswerCardProps) {
   const { handleUpvote, handleDownvote, vote } = useAnswerVote(answerId);
+  const hoverClass = showHover ? 'hover:bg-slate-50' : '';
+
   return (
-    <article className="flex gap-4 rounded-md border bg-white p-2">
+    <article
+      className={`flex gap-4 rounded-md border bg-white p-2 ${hoverClass}`}>
       <VotingButtons
         size={votingButtonsSize}
         upvoteCount={upvoteCount}

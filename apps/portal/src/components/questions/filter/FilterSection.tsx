@@ -1,14 +1,20 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { CheckboxInput, Collapsible, RadioList, TextInput } from '@tih/ui';
+import { useMemo } from 'react';
+import type { UseFormRegisterReturn } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { CheckboxInput, Collapsible, RadioList } from '@tih/ui';
 
-export type FilterOption<V extends string = string> = {
-  checked: boolean;
+export type FilterChoice<V extends string = string> = {
+  id: string;
   label: string;
   value: V;
 };
 
+export type FilterOption<V extends string = string> = FilterChoice<V> & {
+  checked: boolean;
+};
+
 export type FilterChoices<V extends string = string> = ReadonlyArray<
-  Omit<FilterOption<V>, 'checked'>
+  FilterChoice<V>
 >;
 
 type FilterSectionType<FilterOptions extends Array<FilterOption>> =
@@ -30,42 +36,87 @@ export type FilterSectionProps<FilterOptions extends Array<FilterOption>> =
     options: FilterOptions;
   } & (
       | {
-          searchPlaceholder: string;
+          renderInput: (props: {
+            field: UseFormRegisterReturn<'search'>;
+            onOptionChange: FilterSectionType<FilterOptions>['onOptionChange'];
+            options: FilterOptions;
+          }) => React.ReactNode;
           showAll?: never;
         }
       | {
-          searchPlaceholder?: never;
+          renderInput?: never;
           showAll: true;
         }
     );
+
+export type FilterSectionFormData = {
+  search: string;
+};
 
 export default function FilterSection<
   FilterOptions extends Array<FilterOption>,
 >({
   label,
   options,
-  searchPlaceholder,
   showAll,
   onOptionChange,
   isSingleSelect,
+  renderInput,
 }: FilterSectionProps<FilterOptions>) {
+  const { register, reset } = useForm<FilterSectionFormData>();
+
+  const registerSearch = register('search');
+
+  const field: UseFormRegisterReturn<'search'> = {
+    ...registerSearch,
+    onChange: async (event) => {
+      await registerSearch.onChange(event);
+      reset();
+    },
+  };
+
+  const autocompleteOptions = useMemo(() => {
+    return options.filter((option) => !option.checked) as FilterOptions;
+  }, [options]);
+
+  const selectedCount = useMemo(() => {
+    return options.filter((option) => option.checked).length;
+  }, [options]);
+
+  const collapsibleLabel = useMemo(() => {
+    if (isSingleSelect) {
+      return label;
+    }
+    if (selectedCount === 0) {
+      return `${label} (all)`;
+    }
+
+    return `${label} (${selectedCount})`;
+  }, [label, selectedCount, isSingleSelect]);
+
   return (
-    <div className="mx-2">
-      <Collapsible defaultOpen={true} label={label}>
+    <div className="mx-2 py-2">
+      <Collapsible defaultOpen={true} label={collapsibleLabel}>
         <div className="-mx-2 flex flex-col items-stretch gap-2">
           {!showAll && (
-            <TextInput
-              isLabelHidden={true}
-              label={label}
-              placeholder={searchPlaceholder}
-              startAddOn={MagnifyingGlassIcon}
-              startAddOnType="icon"
-            />
+            <div className="z-10">
+              {renderInput({
+                field,
+                onOptionChange: async (
+                  optionValue: FilterOptions[number]['value'],
+                ) => {
+                  reset();
+                  return onOptionChange(optionValue, true);
+                },
+                options: autocompleteOptions,
+              })}
+            </div>
           )}
           {isSingleSelect ? (
             <div className="px-1.5">
               <RadioList
-                label=""
+                isLabelHidden={true}
+                label={label}
                 value={options.find((option) => option.checked)?.value}
                 onChange={(value) => {
                   onOptionChange(value);
@@ -81,16 +132,18 @@ export default function FilterSection<
             </div>
           ) : (
             <div className="px-1.5">
-              {options.map((option) => (
-                <CheckboxInput
-                  key={option.value}
-                  label={option.label}
-                  value={option.checked}
-                  onChange={(checked) => {
-                    onOptionChange(option.value, checked);
-                  }}
-                />
-              ))}
+              {options
+                .filter((option) => showAll || option.checked)
+                .map((option) => (
+                  <CheckboxInput
+                    key={option.value}
+                    label={option.label}
+                    value={option.checked}
+                    onChange={(checked) => {
+                      onOptionChange(option.value, checked);
+                    }}
+                  />
+                ))}
             </div>
           )}
         </div>
