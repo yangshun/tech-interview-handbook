@@ -404,6 +404,8 @@ model QuestionsQuestion {
   userId       String?
   content      String                @db.Text
   questionType QuestionsQuestionType
+  lastSeenAt   DateTime
+  upvotes      Int                   @default(0)
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
 
@@ -412,6 +414,9 @@ model QuestionsQuestion {
   votes      QuestionsQuestionVote[]
   comments   QuestionsQuestionComment[]
   answers    QuestionsAnswer[]
+
+  @@index([lastSeenAt, id])
+  @@index([upvotes, id])
 }
 
 model QuestionsQuestionEncounter {
