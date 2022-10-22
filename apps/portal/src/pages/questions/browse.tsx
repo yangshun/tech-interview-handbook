@@ -2,9 +2,10 @@ import { subMonths, subYears } from 'date-fns';
 import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
+import { Bars3BottomLeftIcon } from '@heroicons/react/20/solid';
 import { NoSymbolIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
-import { SlideOut, Typeahead } from '@tih/ui';
+import { Button, SlideOut, Typeahead } from '@tih/ui';
 
 import QuestionOverviewCard from '~/components/questions/card/question/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
@@ -68,6 +69,22 @@ export default function QuestionsBrowsePage() {
     useSearchFilter('roles');
   const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
     useSearchFilter('locations');
+
+  const hasFilters = useMemo(
+    () =>
+      selectedCompanies.length > 0 ||
+      selectedQuestionTypes.length > 0 ||
+      selectedQuestionAge !== 'all' ||
+      selectedRoles.length > 0 ||
+      selectedLocations.length > 0,
+    [
+      selectedCompanies,
+      selectedQuestionTypes,
+      selectedQuestionAge,
+      selectedRoles,
+      selectedLocations,
+    ],
+  );
 
   const today = useMemo(() => new Date(), []);
   const startDate = useMemo(() => {
@@ -197,7 +214,22 @@ export default function QuestionsBrowsePage() {
     return null;
   }
   const filterSidebar = (
-    <div className="mt-2 divide-y divide-slate-200 px-4">
+    <div className="divide-y divide-slate-200 px-4">
+      <Button
+        addonPosition="start"
+        className="my-4"
+        disabled={!hasFilters}
+        icon={Bars3BottomLeftIcon}
+        label="Clear filters"
+        variant="tertiary"
+        onClick={() => {
+          setSelectedCompanies([]);
+          setSelectedQuestionTypes([]);
+          setSelectedQuestionAge('all');
+          setSelectedRoles([]);
+          setSelectedLocations([]);
+        }}
+      />
       <FilterSection
         label="Company"
         options={companyFilterOptions}
@@ -208,8 +240,10 @@ export default function QuestionsBrowsePage() {
         }) => (
           <Typeahead
             {...field}
-            label=""
+            isLabelHidden={true}
+            label="Companies"
             options={options}
+            placeholder="Search companies"
             // eslint-disable-next-line @typescript-eslint/no-empty-function
             onQueryChange={() => {}}
             onSelect={({ value }) => {
@@ -262,8 +296,10 @@ export default function QuestionsBrowsePage() {
         }) => (
           <Typeahead
             {...field}
-            label=""
+            isLabelHidden={true}
+            label="Roles"
             options={options}
+            placeholder="Search roles"
             // eslint-disable-next-line @typescript-eslint/no-empty-function
             onQueryChange={() => {}}
             onSelect={({ value }) => {
@@ -291,8 +327,10 @@ export default function QuestionsBrowsePage() {
         }) => (
           <Typeahead
             {...field}
-            label=""
+            isLabelHidden={true}
+            label="Locations"
             options={options}
+            placeholder="Search locations"
             // eslint-disable-next-line @typescript-eslint/no-empty-function
             onQueryChange={() => {}}
             onSelect={({ value }) => {

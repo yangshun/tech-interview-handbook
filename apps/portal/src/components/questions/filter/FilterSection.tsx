@@ -79,9 +79,24 @@ export default function FilterSection<
     return options.filter((option) => !option.checked) as FilterOptions;
   }, [options]);
 
+  const selectedCount = useMemo(() => {
+    return options.filter((option) => option.checked).length;
+  }, [options]);
+
+  const collapsibleLabel = useMemo(() => {
+    if (isSingleSelect) {
+      return label;
+    }
+    if (selectedCount === 0) {
+      return `${label} (all)`;
+    }
+
+    return `${label} (${selectedCount})`;
+  }, [label, selectedCount, isSingleSelect]);
+
   return (
-    <div className="mx-2">
-      <Collapsible defaultOpen={true} label={label}>
+    <div className="mx-2 py-2">
+      <Collapsible defaultOpen={true} label={collapsibleLabel}>
         <div className="-mx-2 flex flex-col items-stretch gap-2">
           {!showAll && (
             <div className="z-10">
