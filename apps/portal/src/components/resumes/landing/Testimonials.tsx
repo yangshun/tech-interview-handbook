@@ -94,7 +94,6 @@ function QuoteIcon(props: QuoteProps) {
 export function Testimonials() {
   return (
     <section
-      aria-label="What our customers are saying"
       className="bg-gradient-to-r from-indigo-700 to-indigo-400 py-20 sm:py-32"
       id="testimonials">
       <Container>
