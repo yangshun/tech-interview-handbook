@@ -24,7 +24,7 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
       const locationCounts: Record<string, number> = {};
       const roleCounts:Record<string, number> = {};
 
-      const latestSeenAt = questionEncountersData[0].seenAt;
+      let latestSeenAt = questionEncountersData[0].seenAt;
 
       for (let i = 0; i < questionEncountersData.length; i++) {
         const encounter = questionEncountersData[i];

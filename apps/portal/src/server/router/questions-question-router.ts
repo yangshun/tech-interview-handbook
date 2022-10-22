@@ -56,6 +56,8 @@ export const questionsQuestionRouter = createProtectedRouter()
               lastSeenAt: input.lastSeenCursor,
             };
 
+      const toSkip = input.idCursor ? 1 : 0;
+
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
         cursor: {
           ...cursorCondition,
@@ -83,6 +85,7 @@ export const questionsQuestionRouter = createProtectedRouter()
           votes: true,
         },
         orderBy: sortCondition,
+        skip: toSkip,
         take: input.pageSize,
         where: {
           ...(input.questionTypes.length > 0
@@ -247,15 +250,45 @@ export const questionsQuestionRouter = createProtectedRouter()
         0,
       );
 
+      const companyCounts: Record<string, number> = {};
+      const locationCounts: Record<string, number> = {};
+      const roleCounts:Record<string, number> = {};
+
+      let latestSeenAt = questionData.encounters[0].seenAt;
+
+      for (let i = 0; i < questionData.encounters.length; i++) {
+        const encounter = questionData.encounters[i];
+
+        latestSeenAt = latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
+
+        if (!(encounter.company!.name in companyCounts)) {
+            companyCounts[encounter.company!.name] = 1;
+        }
+        companyCounts[encounter.company!.name] += 1;
+
+        if (!(encounter.location in locationCounts)) {
+            locationCounts[encounter.location] = 1;
+        }
+        locationCounts[encounter.location] += 1;
+
+        if (!(encounter.role in roleCounts)) {
+            roleCounts[encounter.role] = 1;
+        }
+        roleCounts[encounter.role] += 1;
+      }
+
       const question: Question = {
-        company: questionData.encounters[0].company!.name ?? 'Unknown company',
+        aggregatedQuestionEncounters: {
+            companyCounts,
+            latestSeenAt,
+            locationCounts,
+            roleCounts,
+        },
         content: questionData.content,
         id: questionData.id,
-        location: questionData.encounters[0].location ?? 'Unknown location',
         numAnswers: questionData._count.answers,
         numComments: questionData._count.comments,
         numVotes: votes,
-        role: questionData.encounters[0].role ?? 'Unknown role',
         seenAt: questionData.encounters[0].seenAt,
         type: questionData.questionType,
         updatedAt: questionData.updatedAt,
