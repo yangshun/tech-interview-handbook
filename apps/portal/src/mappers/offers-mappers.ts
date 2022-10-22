@@ -43,7 +43,13 @@ const analysisOfferDtoMapper = (
       | (OffersFullTime & { totalCompensation: OffersCurrency })
       | null;
     offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-    profile: OffersProfile & { background: OffersBackground | null };
+    profile: OffersProfile & {
+      background:
+        | (OffersBackground & {
+            experiences: Array<OffersExperience & { company: Company | null }>;
+          })
+        | null;
+    };
   },
 ) => {
   const { background, profileName } = offer.profile;
@@ -56,7 +62,10 @@ const analysisOfferDtoMapper = (
     location: offer.location,
     monthYearReceived: offer.monthYearReceived,
     negotiationStrategy: offer.negotiationStrategy,
-    previousCompanies: [], // TODO: Fill this up
+    previousCompanies:
+      background?.experiences
+        ?.filter((exp) => exp.company != null)
+        .map((exp) => exp.company?.name ?? '') ?? [],
     profileName,
     specialization:
       offer.jobType === JobType.FULLTIME
@@ -103,10 +112,26 @@ const analysisDtoMapper = (
     OffersOffer & {
       company: Company;
       offersFullTime:
-        | (OffersFullTime & { totalCompensation: OffersCurrency })
+        | (OffersFullTime & {
+            totalCompensation: OffersCurrency;
+          })
         | null;
-      offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-      profile: OffersProfile & { background: OffersBackground | null };
+      offersIntern:
+        | (OffersIntern & {
+            monthlySalary: OffersCurrency;
+          })
+        | null;
+      profile: OffersProfile & {
+        background:
+          | (OffersBackground & {
+              experiences: Array<
+                OffersExperience & {
+                  company: Company | null;
+                }
+              >;
+            })
+          | null;
+      };
     }
   >,
 ) => {
