@@ -14,6 +14,7 @@ import {
   CheckboxList,
   DropdownMenu,
   Pagination,
+  Spinner,
   Tabs,
   TextInput,
 } from '@tih/ui';
@@ -528,7 +529,15 @@ export default function ResumeHomePage() {
               </div>
             </div>
             <div className="mb-6">
-              {sessionData === null && tabsValue !== BROWSE_TABS_VALUES.ALL ? (
+              {allResumesQuery.isLoading ||
+              starredResumesQuery.isLoading ||
+              myResumesQuery.isLoading ? (
+                <div className="w-full pt-4">
+                  {' '}
+                  <Spinner display="block" size="lg" />{' '}
+                </div>
+              ) : sessionData === null &&
+                tabsValue !== BROWSE_TABS_VALUES.ALL ? (
                 <ResumeSignInButton
                   className="mt-8"
                   text={getLoggedOutText(tabsValue)}
