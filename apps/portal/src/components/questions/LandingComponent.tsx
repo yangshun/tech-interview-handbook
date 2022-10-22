@@ -64,7 +64,7 @@ export default function LandingComponent({
   return (
     <main className="flex flex-1 flex-col items-center overflow-y-auto bg-white">
       <div className="flex flex-1 flex-col items-start justify-center gap-12 px-4">
-        <header className="flex flex-col items-start">
+        <header className="flex flex-col items-start gap-4">
           <div className="flex items-center justify-center">
             <h1 className="text-3xl font-semibold text-slate-900">
               Tech Interview Question Bank
