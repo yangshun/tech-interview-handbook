@@ -1,6 +1,14 @@
-export default function ProfilePhotoHolder() {
+type ProfilePhotoHolderProps = {
+  size?: 'lg' | 'sm';
+};
+
+export default function ProfilePhotoHolder({
+  size = 'lg',
+}: ProfilePhotoHolderProps) {
+  const sizeMap = { lg: '16', sm: '12' };
   return (
-    <span className="inline-block h-16 w-16 overflow-hidden rounded-full bg-gray-100">
+    <span
+      className={`inline-block h-${sizeMap[size]} w-${sizeMap[size]} overflow-hidden rounded-full bg-gray-100`}>
       <svg
         className="h-full w-full text-gray-300"
         fill="currentColor"

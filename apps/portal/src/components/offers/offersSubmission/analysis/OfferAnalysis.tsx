@@ -4,7 +4,7 @@ import { HorizontalDivider, Spinner, Tabs } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
-import OfferPercentileAnalysis from './OfferPercentileAnalysis';
+import OfferPercentileAnalysisText from './OfferPercentileAnalysisText';
 import OfferProfileCard from './OfferProfileCard';
 import { OVERALL_TAB } from '../../constants';
 
@@ -38,11 +38,12 @@ function OfferAnalysisContent({
   }
   return (
     <>
-      <OfferPercentileAnalysis
+      <OfferPercentileAnalysisText
         companyName={offer.company.name}
         offerAnalysis={offerAnalysis}
         tab={tab}
       />
+      <p className="mt-5">Here are some of the top offers relevant to you:</p>
       {offerAnalysis.topPercentileOffers.map((topPercentileOffer) => (
         <OfferProfileCard
           key={topPercentileOffer.id}

@@ -5,14 +5,17 @@ import { useState } from 'react';
 import ProfileComments from '~/components/offers/profile/ProfileComments';
 import ProfileDetails from '~/components/offers/profile/ProfileDetails';
 import ProfileHeader from '~/components/offers/profile/ProfileHeader';
-import type { BackgroundCard, OfferEntity } from '~/components/offers/types';
+import type {
+  BackgroundDisplayData,
+  OfferDisplayData,
+} from '~/components/offers/types';
 
 import { convertMoneyToString } from '~/utils/offers/currency';
 import { getProfilePath } from '~/utils/offers/link';
 import { formatDate } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
-import type { Profile, ProfileOffer } from '~/types/offers';
+import type { Profile, ProfileAnalysis, ProfileOffer } from '~/types/offers';
 
 export default function OfferProfile() {
   const ErrorPage = (
@@ -21,10 +24,11 @@ export default function OfferProfile() {
   const router = useRouter();
   const { offerProfileId, token = '' } = router.query;
   const [isEditable, setIsEditable] = useState(false);
-  const [background, setBackground] = useState<BackgroundCard>();
-  const [offers, setOffers] = useState<Array<OfferEntity>>([]);
+  const [background, setBackground] = useState<BackgroundDisplayData>();
+  const [offers, setOffers] = useState<Array<OfferDisplayData>>([]);
 
   const [selectedTab, setSelectedTab] = useState('offers');
+  const [analysis, setAnalysis] = useState<ProfileAnalysis>();
 
   const getProfileQuery = trpc.useQuery(
     [
@@ -44,74 +48,78 @@ export default function OfferProfile() {
 
         setIsEditable(data?.isEditable ?? false);
 
-        if (data?.offers) {
-          const filteredOffers: Array<OfferEntity> = data
-            ? data?.offers.map((res: ProfileOffer) => {
-                if (res.offersFullTime) {
-                  const filteredOffer: OfferEntity = {
-                    base: convertMoneyToString(res.offersFullTime.baseSalary),
-                    bonus: convertMoneyToString(res.offersFullTime.bonus),
-                    companyName: res.company.name,
-                    id: res.offersFullTime.id,
-                    jobLevel: res.offersFullTime.level,
-                    jobTitle: res.offersFullTime.title,
-                    location: res.location,
-                    negotiationStrategy: res.negotiationStrategy || '',
-                    otherComment: res.comments || '',
-                    receivedMonth: formatDate(res.monthYearReceived),
-                    stocks: convertMoneyToString(res.offersFullTime.stocks),
-                    totalCompensation: convertMoneyToString(
-                      res.offersFullTime.totalCompensation,
-                    ),
-                  };
-                  return filteredOffer;
-                }
-                const filteredOffer: OfferEntity = {
+        const filteredOffers: Array<OfferDisplayData> = data
+          ? data?.offers.map((res: ProfileOffer) => {
+              if (res.offersFullTime) {
+                const filteredOffer: OfferDisplayData = {
+                  base: convertMoneyToString(res.offersFullTime.baseSalary),
+                  bonus: convertMoneyToString(res.offersFullTime.bonus),
                   companyName: res.company.name,
-                  id: res.offersIntern!.id,
-                  jobTitle: res.offersIntern!.title,
+                  id: res.offersFullTime.id,
+                  jobLevel: res.offersFullTime.level,
+                  jobTitle: res.offersFullTime.title,
                   location: res.location,
-                  monthlySalary: convertMoneyToString(
-                    res.offersIntern!.monthlySalary,
-                  ),
-                  negotiationStrategy: res.negotiationStrategy || '',
-                  otherComment: res.comments || '',
+                  negotiationStrategy: res.negotiationStrategy,
+                  otherComment: res.comments,
                   receivedMonth: formatDate(res.monthYearReceived),
+                  stocks: convertMoneyToString(res.offersFullTime.stocks),
+                  totalCompensation: convertMoneyToString(
+                    res.offersFullTime.totalCompensation,
+                  ),
                 };
                 return filteredOffer;
-              })
-            : [];
-          setOffers(filteredOffers);
-        }
+              }
+              const filteredOffer: OfferDisplayData = {
+                companyName: res.company.name,
+                id: res.offersIntern!.id,
+                jobTitle: res.offersIntern!.title,
+                location: res.location,
+                monthlySalary: convertMoneyToString(
+                  res.offersIntern!.monthlySalary,
+                ),
+                negotiationStrategy: res.negotiationStrategy,
+                otherComment: res.comments,
+                receivedMonth: formatDate(res.monthYearReceived),
+              };
+              return filteredOffer;
+            })
+          : [];
+        setOffers(filteredOffers);
 
         if (data?.background) {
           const transformedBackground = {
             educations: data.background.educations.map((education) => ({
-              endDate: education.endDate ? formatDate(education.endDate) : '-',
-              field: education.field || '-',
-              school: education.school || '-',
+              endDate: education.endDate ? formatDate(education.endDate) : null,
+              field: education.field,
+              school: education.school,
               startDate: education.startDate
                 ? formatDate(education.startDate)
-                : '-',
-              type: education.type || '-',
+                : null,
+              type: education.type,
             })),
-            experiences: data.background.experiences.map((experience) => ({
-              companyName: experience.company?.name ?? '-',
-              duration: String(experience.durationInMonths) ?? '-',
-              jobLevel: experience.level ?? '',
-              jobTitle: experience.title ?? '-',
-              monthlySalary: experience.monthlySalary
-                ? convertMoneyToString(experience.monthlySalary)
-                : '-',
-              totalCompensation: experience.totalCompensation
-                ? convertMoneyToString(experience.totalCompensation)
-                : '-',
-            })),
+            experiences: data.background.experiences.map(
+              (experience): OfferDisplayData => ({
+                companyName: experience.company?.name,
+                duration: experience.durationInMonths,
+                jobLevel: experience.level,
+                jobTitle: experience.title,
+                monthlySalary: experience.monthlySalary
+                  ? convertMoneyToString(experience.monthlySalary)
+                  : null,
+                totalCompensation: experience.totalCompensation
+                  ? convertMoneyToString(experience.totalCompensation)
+                  : null,
+              }),
+            ),
             profileName: data.profileName,
             specificYoes: data.background.specificYoes,
-            totalYoe: String(data.background.totalYoe) || '-',
+            totalYoe: data.background.totalYoe,
           };
           setBackground(transformedBackground);
+        }
+
+        if (data.analysis) {
+          setAnalysis(data.analysis);
         }
       },
     },
@@ -153,6 +161,7 @@ export default function OfferProfile() {
             />
             <div className="h-4/5 w-full overflow-y-scroll pb-32">
               <ProfileDetails
+                analysis={analysis}
                 background={background}
                 isLoading={getProfileQuery.isLoading}
                 offers={offers}
