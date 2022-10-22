@@ -249,7 +249,8 @@ export default function QuestionsBrowsePage() {
           questionAge: selectedQuestionAge,
           questionTypes: selectedQuestionTypes,
           roles: selectedRoles,
-          sortOrder,
+          sortOrder: sortOrder === SortOrder.ASC ? 'ASC' : 'DESC',
+          sortType: sortType === SortType.TOP ? 'TOP' : 'NEW',
         },
       });
 
@@ -265,6 +266,7 @@ export default function QuestionsBrowsePage() {
     selectedQuestionAge,
     selectedQuestionTypes,
     sortOrder,
+    sortType,
   ]);
 
   if (!loaded) {
