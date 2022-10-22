@@ -9,6 +9,7 @@ import {
   YOE_CATEGORY,
 } from '~/components/offers/table/types';
 
+import { Currency } from '~/utils/offers/currency/CurrencyEnum';
 import CurrencySelector from '~/utils/offers/currency/CurrencySelector';
 import { trpc } from '~/utils/trpc';
 
@@ -25,7 +26,7 @@ export default function OffersTable({
   companyFilter,
   jobTitleFilter,
 }: OffersTableProps) {
-  const [currency, setCurrency] = useState('SGD'); // TODO: Detect location
+  const [currency, setCurrency] = useState(Currency.SGD.toString()); // TODO: Detect location
   const [selectedTab, setSelectedTab] = useState(YOE_CATEGORY.ENTRY);
   const [pagination, setPagination] = useState<Paging>({
     currentPage: 0,
@@ -44,12 +45,13 @@ export default function OffersTable({
       numOfPages: 0,
       totalItems: 0,
     });
-  }, [selectedTab]);
+  }, [selectedTab, currency]);
   const offersQuery = trpc.useQuery(
     [
       'offers.list',
       {
         companyId: companyFilter,
+        currency,
         limit: NUMBER_OF_OFFERS_IN_PAGE,
         location: 'Singapore, Singapore', // TODO: Geolocation
         offset: pagination.currentPage,

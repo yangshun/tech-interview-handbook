@@ -27,6 +27,8 @@ import {
 } from '~/utils/questions/useSearchFilter';
 import { trpc } from '~/utils/trpc';
 
+import { SortOrder, SortType } from '~/types/questions.d';
+
 export default function QuestionsBrowsePage() {
   const router = useRouter();
 
@@ -87,6 +89,8 @@ export default function QuestionsBrowsePage() {
         locations: selectedLocations,
         questionTypes: selectedQuestionTypes,
         roles: selectedRoles,
+        sortOrder: SortOrder.DESC,
+        sortType: SortType.NEW,
         startDate,
       },
     ],

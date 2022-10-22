@@ -80,6 +80,7 @@ export default function SubmitResumeForm({
 
   const { data: session, status } = useSession();
   const router = useRouter();
+  const trpcContext = trpc.useContext();
   const resumeUpsertMutation = trpc.useMutation('resumes.resume.user.upsert');
   const isNewForm = initFormDetails == null;
 
@@ -170,6 +171,7 @@ export default function SubmitResumeForm({
         },
         onSuccess() {
           if (isNewForm) {
+            trpcContext.invalidateQueries('resumes.resume.findAll');
             router.push('/resumes/browse');
           } else {
             onClose();
@@ -228,7 +230,7 @@ export default function SubmitResumeForm({
       <Head>
         <title>Upload a Resume</title>
       </Head>
-      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
+      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto">
         <section
           aria-labelledby="primary-heading"
           className="flex h-full min-w-0 flex-1 flex-col lg:order-last">

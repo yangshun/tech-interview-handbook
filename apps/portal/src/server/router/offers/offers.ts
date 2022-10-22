@@ -5,8 +5,24 @@ import {
   dashboardOfferDtoMapper,
   getOffersResponseMapper,
 } from '~/mappers/offers-mappers';
+import { convertWithDate } from '~/utils/offers/currency/currencyExchange';
+import { Currency } from '~/utils/offers/currency/CurrencyEnum';
+import { createValidationRegex } from '~/utils/offers/zodRegex';
 
 import { createRouter } from '../context';
+
+const getOrder = (prefix: string) => {
+  if (prefix === '+') {
+    return 'asc';
+  }
+  return 'desc';
+};
+
+const sortingKeysMap = {
+  monthYearReceived: 'monthYearReceived',
+  totalCompensation: 'totalCompensation',
+  totalYoe: 'totalYoe',
+};
 
 const yoeCategoryMap: Record<number, string> = {
   0: 'Internship',
@@ -25,19 +41,10 @@ const getYoeRange = (yoeCategory: number) => {
     : null; // Internship
 };
 
-const ascOrder = '+';
-const descOrder = '-';
-const sortingKeys = ['monthYearReceived', 'totalCompensation', 'totalYoe'];
-
-const createSortByValidationRegex = () => {
-  const startsWithPlusOrMinusOnly = '^[+-]{1}';
-  const sortingKeysRegex = sortingKeys.join('|');
-  return new RegExp(startsWithPlusOrMinusOnly + '(' + sortingKeysRegex + ')');
-};
-
 export const offersRouter = createRouter().query('list', {
   input: z.object({
     companyId: z.string().nullish(),
+    currency: z.string().nullish(),
     dateEnd: z.date().nullish(),
     dateStart: z.date().nullish(),
     limit: z.number().positive(),
@@ -45,7 +52,10 @@ export const offersRouter = createRouter().query('list', {
     offset: z.number().nonnegative(),
     salaryMax: z.number().nonnegative().nullish(),
     salaryMin: z.number().nonnegative().nullish(),
-    sortBy: z.string().regex(createSortByValidationRegex()).nullish(),
+    sortBy: z
+      .string()
+      .regex(createValidationRegex(Object.keys(sortingKeysMap), '[+-]{1}'))
+      .nullish(),
     title: z.string().nullish(),
     yoeCategory: z.number().min(0).max(3),
     yoeMax: z.number().max(100).nullish(),
@@ -55,6 +65,13 @@ export const offersRouter = createRouter().query('list', {
     const yoeRange = getYoeRange(input.yoeCategory);
     const yoeMin = input.yoeMin ? input.yoeMin : yoeRange?.minYoe;
     const yoeMax = input.yoeMax ? input.yoeMax : yoeRange?.maxYoe;
+
+    if (!input.sortBy) {
+      input.sortBy = '-' + sortingKeysMap.monthYearReceived;
+    }
+
+    const order = getOrder(input.sortBy.charAt(0));
+    const sortingKey = input.sortBy.substring(1);
 
     let data = !yoeRange
       ? await ctx.prisma.offersOffer.findMany({
@@ -80,10 +97,33 @@ export const offersRouter = createRouter().query('list', {
               },
             },
           },
+          orderBy:
+            sortingKey === sortingKeysMap.monthYearReceived
+              ? {
+                  monthYearReceived: order,
+                }
+              : sortingKey === sortingKeysMap.totalCompensation
+              ? {
+                  offersIntern: {
+                    monthlySalary: {
+                      baseValue: order,
+                    },
+                  },
+                }
+              : sortingKey === sortingKeysMap.totalYoe
+              ? {
+                  profile: {
+                    background: {
+                      totalYoe: order,
+                    },
+                  },
+                }
+              : undefined,
           where: {
             AND: [
               {
-                location: input.location,
+                location:
+                  input.location.length === 0 ? undefined : input.location,
               },
               {
                 offersIntern: {
@@ -91,8 +131,48 @@ export const offersRouter = createRouter().query('list', {
                 },
               },
               {
+                offersIntern: {
+                  title:
+                    input.title && input.title.length !== 0
+                      ? input.title
+                      : undefined,
+                },
+              },
+              {
+                offersIntern: {
+                  monthlySalary: {
+                    baseValue: {
+                      gte: input.salaryMin ?? undefined,
+                      lte: input.salaryMax ?? undefined,
+                    },
+                  },
+                },
+              },
+              {
                 offersFullTime: {
                   is: null,
+                },
+              },
+              {
+                companyId:
+                  input.companyId && input.companyId.length !== 0
+                    ? input.companyId
+                    : undefined,
+              },
+              {
+                profile: {
+                  background: {
+                    totalYoe: {
+                      gte: yoeMin,
+                      lte: yoeMax,
+                    },
+                  },
+                },
+              },
+              {
+                monthYearReceived: {
+                  gte: input.dateStart ?? undefined,
+                  lte: input.dateEnd ?? undefined,
                 },
               },
             ],
@@ -121,10 +201,33 @@ export const offersRouter = createRouter().query('list', {
               },
             },
           },
+          orderBy:
+            sortingKey === sortingKeysMap.monthYearReceived
+              ? {
+                  monthYearReceived: order,
+                }
+              : sortingKey === sortingKeysMap.totalCompensation
+              ? {
+                  offersFullTime: {
+                    totalCompensation: {
+                      baseValue: order,
+                    },
+                  },
+                }
+              : sortingKey === sortingKeysMap.totalYoe
+              ? {
+                  profile: {
+                    background: {
+                      totalYoe: order,
+                    },
+                  },
+                }
+              : undefined,
           where: {
             AND: [
               {
-                location: input.location,
+                location:
+                  input.location.length === 0 ? undefined : input.location,
               },
               {
                 offersIntern: {
@@ -137,6 +240,30 @@ export const offersRouter = createRouter().query('list', {
                 },
               },
               {
+                offersFullTime: {
+                  title:
+                    input.title && input.title.length !== 0
+                      ? input.title
+                      : undefined,
+                },
+              },
+              {
+                offersFullTime: {
+                  totalCompensation: {
+                    baseValue: {
+                      gte: input.salaryMin ?? undefined,
+                      lte: input.salaryMax ?? undefined,
+                    },
+                  },
+                },
+              },
+              {
+                companyId:
+                  input.companyId && input.companyId.length !== 0
+                    ? input.companyId
+                    : undefined,
+              },
+              {
                 profile: {
                   background: {
                     totalYoe: {
@@ -146,165 +273,70 @@ export const offersRouter = createRouter().query('list', {
                   },
                 },
               },
+              {
+                monthYearReceived: {
+                  gte: input.dateStart ?? undefined,
+                  lte: input.dateEnd ?? undefined,
+                },
+              },
             ],
           },
         });
 
-    // FILTERING
-    data = data.filter((offer) => {
-      let validRecord = true;
-
-      if (input.companyId && input.companyId.length !== 0) {
-        validRecord = validRecord && offer.company.id === input.companyId;
-      }
-
-      if (input.title && input.title.length !== 0) {
-        validRecord =
-          validRecord &&
-          (offer.offersFullTime?.title === input.title ||
-            offer.offersIntern?.title === input.title);
-      }
-
-      if (
-        input.dateStart &&
-        input.dateEnd &&
-        input.dateStart.getTime() <= input.dateEnd.getTime()
-      ) {
-        validRecord =
-          validRecord &&
-          offer.monthYearReceived.getTime() >= input.dateStart.getTime() &&
-          offer.monthYearReceived.getTime() <= input.dateEnd.getTime();
-      }
-
-      if (input.salaryMin != null || input.salaryMax != null) {
-        const salary = offer.offersFullTime?.totalCompensation.value
-          ? offer.offersFullTime?.totalCompensation.value
-          : offer.offersIntern?.monthlySalary.value;
-
-        if (salary == null) {
-          throw new TRPCError({
-            code: 'NOT_FOUND',
-            message: 'Total Compensation or Salary not found',
-          });
-        }
-
-        if (input.salaryMin != null) {
-          validRecord = validRecord && salary >= input.salaryMin;
-        }
-
-        if (input.salaryMax != null) {
-          validRecord = validRecord && salary <= input.salaryMax;
-        }
-      }
-
-      return validRecord;
-    });
-
-    // SORTING
-    data = data.sort((offer1, offer2) => {
-      const defaultReturn =
-        offer2.monthYearReceived.getTime() - offer1.monthYearReceived.getTime();
-
-      if (!input.sortBy) {
-        return defaultReturn;
-      }
-
-      const order = input.sortBy.charAt(0);
-      const sortingKey = input.sortBy.substring(1);
-
-      if (order === ascOrder) {
-        return (() => {
-          if (sortingKey === 'monthYearReceived') {
-            return (
-              offer1.monthYearReceived.getTime() -
-              offer2.monthYearReceived.getTime()
+    // CONVERTING
+    const currency = input.currency?.toUpperCase();
+    if (currency != null && currency in Currency) {
+      data = await Promise.all(
+        data.map(async (offer) => {
+          if (offer.offersFullTime?.totalCompensation != null) {
+            offer.offersFullTime.totalCompensation.value =
+              await convertWithDate(
+                offer.offersFullTime.totalCompensation.value,
+                offer.offersFullTime.totalCompensation.currency,
+                currency,
+                offer.offersFullTime.totalCompensation.updatedAt,
+              );
+            offer.offersFullTime.totalCompensation.currency = currency;
+            offer.offersFullTime.baseSalary.value = await convertWithDate(
+              offer.offersFullTime.baseSalary.value,
+              offer.offersFullTime.baseSalary.currency,
+              currency,
+              offer.offersFullTime.baseSalary.updatedAt,
             );
-          }
-
-          if (sortingKey === 'totalCompensation') {
-            const salary1 = offer1.offersFullTime?.totalCompensation.value
-              ? offer1.offersFullTime?.totalCompensation.value
-              : offer1.offersIntern?.monthlySalary.value;
-
-            const salary2 = offer2.offersFullTime?.totalCompensation.value
-              ? offer2.offersFullTime?.totalCompensation.value
-              : offer2.offersIntern?.monthlySalary.value;
-
-            if (salary1 == null || salary2 == null) {
-              throw new TRPCError({
-                code: 'NOT_FOUND',
-                message: 'Total Compensation or Salary not found',
-              });
-            }
-
-            return salary1 - salary2;
-          }
-
-          if (sortingKey === 'totalYoe') {
-            const yoe1 = offer1.profile.background?.totalYoe;
-            const yoe2 = offer2.profile.background?.totalYoe;
-
-            if (yoe1 == null || yoe2 == null) {
-              throw new TRPCError({
-                code: 'NOT_FOUND',
-                message: 'Total years of experience not found',
-              });
-            }
-
-            return yoe1 - yoe2;
-          }
-
-          return defaultReturn;
-        })();
-      }
-
-      if (order === descOrder) {
-        return (() => {
-          if (sortingKey === 'monthYearReceived') {
-            return (
-              offer2.monthYearReceived.getTime() -
-              offer1.monthYearReceived.getTime()
+            offer.offersFullTime.baseSalary.currency = currency;
+            offer.offersFullTime.stocks.value = await convertWithDate(
+              offer.offersFullTime.stocks.value,
+              offer.offersFullTime.stocks.currency,
+              currency,
+              offer.offersFullTime.stocks.updatedAt,
             );
+            offer.offersFullTime.stocks.currency = currency;
+            offer.offersFullTime.bonus.value = await convertWithDate(
+              offer.offersFullTime.bonus.value,
+              offer.offersFullTime.bonus.currency,
+              currency,
+              offer.offersFullTime.bonus.updatedAt,
+            );
+            offer.offersFullTime.bonus.currency = currency;
+          } else if (offer.offersIntern?.monthlySalary != null) {
+            offer.offersIntern.monthlySalary.value = await convertWithDate(
+              offer.offersIntern.monthlySalary.value,
+              offer.offersIntern.monthlySalary.currency,
+              currency,
+              offer.offersIntern.monthlySalary.updatedAt,
+            );
+            offer.offersIntern.monthlySalary.currency = currency;
+          } else {
+            throw new TRPCError({
+              code: 'NOT_FOUND',
+              message: 'Total Compensation or Salary not found',
+            });
           }
 
-          if (sortingKey === 'totalCompensation') {
-            const salary1 = offer1.offersFullTime?.totalCompensation.value
-              ? offer1.offersFullTime?.totalCompensation.value
-              : offer1.offersIntern?.monthlySalary.value;
-
-            const salary2 = offer2.offersFullTime?.totalCompensation.value
-              ? offer2.offersFullTime?.totalCompensation.value
-              : offer2.offersIntern?.monthlySalary.value;
-
-            if (salary1 == null || salary2 == null) {
-              throw new TRPCError({
-                code: 'NOT_FOUND',
-                message: 'Total Compensation or Salary not found',
-              });
-            }
-
-            return salary2 - salary1;
-          }
-
-          if (sortingKey === 'totalYoe') {
-            const yoe1 = offer1.profile.background?.totalYoe;
-            const yoe2 = offer2.profile.background?.totalYoe;
-
-            if (yoe1 == null || yoe2 == null) {
-              throw new TRPCError({
-                code: 'NOT_FOUND',
-                message: 'Total years of experience not found',
-              });
-            }
-
-            return yoe2 - yoe1;
-          }
-
-          return defaultReturn;
-        })();
-      }
-      return defaultReturn;
-    });
+          return offer;
+        }),
+      );
+    }
 
     const startRecordIndex: number = input.limit * input.offset;
     const endRecordIndex: number =

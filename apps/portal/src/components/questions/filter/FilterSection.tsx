@@ -100,7 +100,8 @@ export default function FilterSection<
           {isSingleSelect ? (
             <div className="px-1.5">
               <RadioList
-                label=""
+                isLabelHidden={true}
+                label={label}
                 value={options.find((option) => option.checked)?.value}
                 onChange={(value) => {
                   onOptionChange(value);

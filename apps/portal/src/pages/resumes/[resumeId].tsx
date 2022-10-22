@@ -131,7 +131,9 @@ export default function ResumeReviewPage() {
                   onClick={onStarButtonClick}>
                   <span className="relative inline-flex">
                     <div className="-ml-1 mr-2 h-5 w-5">
-                      {starMutation.isLoading || unstarMutation.isLoading ? (
+                      {starMutation.isLoading ||
+                      unstarMutation.isLoading ||
+                      detailsQuery.isLoading ? (
                         <Spinner className="mt-0.5" size="xs" />
                       ) : (
                         <StarIcon
@@ -198,7 +200,10 @@ export default function ResumeReviewPage() {
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                 />
-                <ResumeExpandableText text={detailsQuery.data.additionalInfo} />
+                <ResumeExpandableText
+                  key={detailsQuery.data.additionalInfo}
+                  text={detailsQuery.data.additionalInfo}
+                />
               </div>
             )}
             <div className="flex w-full flex-col py-4 lg:flex-row">

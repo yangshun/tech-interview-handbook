@@ -26,26 +26,27 @@ export const offersCommentsRouter = createRouter()
                   user: true,
                 },
                 orderBy: {
-                  createdAt: 'desc'
-                }
+                  createdAt: 'desc',
+                },
               },
               replyingTo: true,
               user: true,
             },
             orderBy: {
-              createdAt: 'desc'
-            }
+              createdAt: 'desc',
+            },
           },
         },
         where: {
           id: input.profileId,
-        }
+        },
       });
 
       const discussions: OffersDiscussion = {
-        data: result?.discussion
+        data:
+          result?.discussion
             .filter((x) => {
-            return x.replyingToId === null
+              return x.replyingToId === null;
             })
             .map((x) => {
               if (x.user == null) {
@@ -81,18 +82,18 @@ export const offersCommentsRouter = createRouter()
                     message: reply.message,
                     replies: [],
                     replyingToId: reply.replyingToId,
-                    user: reply.user
-                  }
+                    user: reply.user,
+                  };
                 }),
                 replyingToId: x.replyingToId,
-                user: x.user
-              }
+                user: x.user,
+              };
 
-              return replyType
-            }) ?? []
-      }
+              return replyType;
+            }) ?? [],
+      };
 
-      return discussions
+      return discussions;
     },
   })
   .mutation('create', {
@@ -101,7 +102,7 @@ export const offersCommentsRouter = createRouter()
       profileId: z.string(),
       replyingToId: z.string().optional(),
       token: z.string().optional(),
-      userId: z.string().optional()
+      userId: z.string().optional(),
     }),
     async resolve({ ctx, input }) {
       const profile = await ctx.prisma.offersProfile.findFirst({
@@ -156,7 +157,7 @@ export const offersCommentsRouter = createRouter()
 
         const created = await ctx.prisma.offersReply.findFirst({
           include: {
-            user: true
+            user: true,
           },
           where: {
             id: createdReply.id,
@@ -175,10 +176,10 @@ export const offersCommentsRouter = createRouter()
             id: '',
             image: '',
             name: profile?.profileName ?? '<missing name>',
-          }
-        }
+          },
+        };
 
-        return result
+        return result;
       }
 
       throw new trpc.TRPCError({
@@ -223,10 +224,10 @@ export const offersCommentsRouter = createRouter()
           include: {
             replies: {
               include: {
-                user: true
-              }
+                user: true,
+              },
             },
-            user: true
+            user: true,
           },
           where: {
             id: input.id,
@@ -250,8 +251,8 @@ export const offersCommentsRouter = createRouter()
                 id: '',
                 image: '',
                 name: profile?.profileName ?? '<missing name>',
-              }
-            }
+              },
+            };
           }),
           replyingToId: updated!.replyingToId,
           user: updated!.user ?? {
@@ -260,10 +261,10 @@ export const offersCommentsRouter = createRouter()
             id: '',
             image: '',
             name: profile?.profileName ?? '<missing name>',
-          }
-        }
+          },
+        };
 
-        return result
+        return result;
       }
 
       throw new trpc.TRPCError({

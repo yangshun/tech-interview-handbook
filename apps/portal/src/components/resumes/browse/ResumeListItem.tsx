@@ -42,7 +42,7 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
             <div className="flex gap-2 pr-4">
               <ChatBubbleLeftIcon className="w-4" />
               {`${resumeInfo.numComments} comment${
-                resumeInfo.numComments > 0 ? 's' : ''
+                resumeInfo.numComments === 1 ? '' : 's'
               }`}
             </div>
             <div className="flex gap-2">
@@ -51,7 +51,9 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
               ) : (
                 <StarIcon className="w-4" />
               )}
-              {resumeInfo.numStars} stars
+              {`${resumeInfo.numStars} star${
+                resumeInfo.numStars === 1 ? '' : 's'
+              }`}
             </div>
           </div>
         </div>

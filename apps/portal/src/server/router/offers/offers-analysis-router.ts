@@ -187,14 +187,14 @@ export const offersAnalysisRouter = createRouter()
           {
             offersFullTime: {
               totalCompensation: {
-                value: 'desc',
+                baseValue: 'desc',
               },
             },
           },
           {
             offersIntern: {
               monthlySalary: {
-                value: 'desc',
+                baseValue: 'desc',
               },
             },
           },
@@ -216,15 +216,17 @@ export const offersAnalysisRouter = createRouter()
       // TODO: Shift yoe out of background to make it mandatory
       if (
         !overallHighestOffer.profile.background ||
-        overallHighestOffer.profile.background.totalYoe === undefined
+        overallHighestOffer.profile.background.totalYoe == null
       ) {
         throw new TRPCError({
-          code: 'BAD_REQUEST',
-          message: 'Cannot analyse without YOE',
+          code: 'NOT_FOUND',
+          message: 'YOE not found',
         });
       }
 
       const yoe = overallHighestOffer.profile.background.totalYoe as number;
+      const monthYearReceived = new Date(overallHighestOffer.monthYearReceived);
+      monthYearReceived.setFullYear(monthYearReceived.getFullYear() - 1);
 
       let similarOffers = await ctx.prisma.offersOffer.findMany({
         include: {
@@ -257,14 +259,14 @@ export const offersAnalysisRouter = createRouter()
           {
             offersFullTime: {
               totalCompensation: {
-                value: 'desc',
+                baseValue: 'desc',
               },
             },
           },
           {
             offersIntern: {
               monthlySalary: {
-                value: 'desc',
+                baseValue: 'desc',
               },
             },
           },
@@ -275,16 +277,19 @@ export const offersAnalysisRouter = createRouter()
               location: overallHighestOffer.location,
             },
             {
+              monthYearReceived: {
+                gte: monthYearReceived,
+              },
+            },
+            {
               OR: [
                 {
                   offersFullTime: {
                     level: overallHighestOffer.offersFullTime?.level,
-                    specialization:
-                      overallHighestOffer.offersFullTime?.specialization,
+                    title: overallHighestOffer.offersFullTime?.title,
                   },
                   offersIntern: {
-                    specialization:
-                      overallHighestOffer.offersIntern?.specialization,
+                    title: overallHighestOffer.offersIntern?.title,
                   },
                 },
               ],
@@ -317,7 +322,9 @@ export const offersAnalysisRouter = createRouter()
         similarOffers,
       );
       const overallPercentile =
-        similarOffers.length === 0 ? 0 : overallIndex / similarOffers.length;
+        similarOffers.length === 0
+          ? 100
+          : (100 * overallIndex) / similarOffers.length;
 
       const companyIndex = searchOfferPercentile(
         overallHighestOffer,
@@ -325,10 +332,11 @@ export const offersAnalysisRouter = createRouter()
       );
       const companyPercentile =
         similarCompanyOffers.length === 0
-          ? 0
-          : companyIndex / similarCompanyOffers.length;
+          ? 100
+          : (100 * companyIndex) / similarCompanyOffers.length;
 
-      // FIND TOP >=90 PERCENTILE OFFERS
+      // FIND TOP >=90 PERCENTILE OFFERS, DOESN'T GIVE 100th PERCENTILE
+      // e.g. If there only 4 offers, it gives the 2nd and 3rd offer
       similarOffers = similarOffers.filter(
         (offer) => offer.id !== overallHighestOffer.id,
       );
@@ -337,10 +345,9 @@ export const offersAnalysisRouter = createRouter()
       );
 
       const noOfSimilarOffers = similarOffers.length;
-      const similarOffers90PercentileIndex =
-        Math.floor(noOfSimilarOffers * 0.9) - 1;
+      const similarOffers90PercentileIndex = Math.ceil(noOfSimilarOffers * 0.1);
       const topPercentileOffers =
-        noOfSimilarOffers > 1
+        noOfSimilarOffers > 2
           ? similarOffers.slice(
               similarOffers90PercentileIndex,
               similarOffers90PercentileIndex + 2,
@@ -348,10 +355,11 @@ export const offersAnalysisRouter = createRouter()
           : similarOffers;
 
       const noOfSimilarCompanyOffers = similarCompanyOffers.length;
-      const similarCompanyOffers90PercentileIndex =
-        Math.floor(noOfSimilarCompanyOffers * 0.9) - 1;
+      const similarCompanyOffers90PercentileIndex = Math.ceil(
+        noOfSimilarCompanyOffers * 0.1,
+      );
       const topPercentileCompanyOffers =
-        noOfSimilarCompanyOffers > 1
+        noOfSimilarCompanyOffers > 2
           ? similarCompanyOffers.slice(
               similarCompanyOffers90PercentileIndex,
               similarCompanyOffers90PercentileIndex + 2,
