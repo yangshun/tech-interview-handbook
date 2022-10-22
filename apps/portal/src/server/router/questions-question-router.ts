@@ -9,7 +9,6 @@ import { SortOrder, SortType } from '~/types/questions';
 
 const TWO_WEEK_IN_MS = 12096e5;
 
-
 export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
@@ -24,20 +23,14 @@ export const questionsQuestionRouter = createProtectedRouter()
       startDate: z.date().default(new Date(Date.now() - TWO_WEEK_IN_MS)),
     }),
     async resolve({ ctx, input }) {
-      let sortCondition;
-
-      switch(input.sortType) {
-        case SortType.TOP:
-          sortCondition = {
-                upvotes: input.sortOrder,
-          }
-          break;
-        case SortType.NEW:
-          sortCondition = {
-                lastSeenAt: input.sortOrder,
-          }
-          break;
-      }
+      const sortCondition =
+        input.sortType === SortType.TOP
+          ? {
+              upvotes: input.sortOrder,
+            }
+          : {
+              lastSeenAt: input.sortOrder,
+            };
 
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
         include: {
@@ -76,8 +69,8 @@ export const questionsQuestionRouter = createProtectedRouter()
           encounters: {
             some: {
               seenAt: {
-                  gte: input.startDate,
-                  lte: input.endDate,
+                gte: input.startDate,
+                lte: input.endDate,
               },
               ...(input.companyNames.length > 0
                 ? {
@@ -343,7 +336,7 @@ export const questionsQuestionRouter = createProtectedRouter()
 
       const incrementValue = vote === Vote.UPVOTE ? 1 : -1;
 
-      const [questionVote, question] = await ctx.prisma.$transaction([
+      const [questionVote] = await ctx.prisma.$transaction([
         ctx.prisma.questionsQuestionVote.create({
           data: {
             questionId,
@@ -353,14 +346,14 @@ export const questionsQuestionRouter = createProtectedRouter()
         }),
         ctx.prisma.questionsQuestion.update({
           data: {
-            upvotes : {
+            upvotes: {
               increment: incrementValue,
             },
           },
           where: {
             id: questionId,
           },
-        })
+        }),
       ]);
       return questionVote;
     },
@@ -389,7 +382,7 @@ export const questionsQuestionRouter = createProtectedRouter()
 
       const incrementValue = vote === Vote.UPVOTE ? 2 : -2;
 
-      const [questionVote, question] = await ctx.prisma.$transaction([
+      const [questionVote] = await ctx.prisma.$transaction([
         ctx.prisma.questionsQuestionVote.update({
           data: {
             vote,
@@ -400,14 +393,14 @@ export const questionsQuestionRouter = createProtectedRouter()
         }),
         ctx.prisma.questionsQuestion.update({
           data: {
-            upvotes : {
+            upvotes: {
               increment: incrementValue,
             },
           },
           where: {
             id: voteToUpdate.questionId,
           },
-        })
+        }),
       ]);
 
       return questionVote;
@@ -435,7 +428,7 @@ export const questionsQuestionRouter = createProtectedRouter()
 
       const incrementValue = voteToDelete.vote === Vote.UPVOTE ? -1 : 1;
 
-      const [questionVote, question] = await ctx.prisma.$transaction([
+      const [questionVote] = await ctx.prisma.$transaction([
         ctx.prisma.questionsQuestionVote.delete({
           where: {
             id: input.id,
@@ -443,14 +436,14 @@ export const questionsQuestionRouter = createProtectedRouter()
         }),
         ctx.prisma.questionsQuestion.update({
           data: {
-            upvotes : {
+            upvotes: {
               increment: incrementValue,
             },
           },
           where: {
             id: voteToDelete.questionId,
           },
-        })
+        }),
       ]);
       return questionVote;
     },

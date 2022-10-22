@@ -74,7 +74,7 @@ export default function QuestionsHomePage() {
         roles: [],
         // TODO: Implement sort order and sort type choices
         sortOrder: SortOrder.DESC,
-        sortType: SortType.BEST,
+        sortType: SortType.NEW,
         startDate,
       },
     ],
