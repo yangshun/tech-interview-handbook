@@ -1,8 +1,13 @@
-// Requiring the module
-const reader = require('xlsx')
+// const xlsxFile = require('read-excel-file/node');
+
+// xlsxFile('/Users/stuartlong/Desktop/tech-interview-handbook/apps/portal/prisma/salaries.xlsx').then((rows) => {
+//     console.log(rows)
+// })
+
+const reader = require("xlsx")
 
 // Reading our test file
-const file = reader.readFile('./test.xlsx')
+const file = reader.readFile('/Users/stuartlong/Desktop/tech-interview-handbook/apps/portal/prisma/salaries.xlsx')
 
 let data = []
 
@@ -18,4 +23,5 @@ for(let i = 0; i < sheets.length; i++)
 }
 
 // Printing data
-console.log(data)
+console.log(data.splice(0,100))
+console.table(data.splice(0,100))
