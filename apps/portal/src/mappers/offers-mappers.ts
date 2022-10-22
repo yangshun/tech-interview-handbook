@@ -43,20 +43,29 @@ const analysisOfferDtoMapper = (
       | (OffersFullTime & { totalCompensation: OffersCurrency })
       | null;
     offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-    profile: OffersProfile & { background: OffersBackground | null };
+    profile: OffersProfile & {
+      background:
+        | (OffersBackground & {
+            experiences: Array<OffersExperience & { company: Company | null }>;
+          })
+        | null;
+    };
   },
 ) => {
   const { background, profileName } = offer.profile;
   const analysisOfferDto: AnalysisOffer = {
     company: offersCompanyDtoMapper(offer.company),
     id: offer.id,
-    income: { currency: '', value: -1 },
+    income: { baseCurrency: '', baseValue: -1, currency: '', value: -1 },
     jobType: offer.jobType,
     level: offer.offersFullTime?.level ?? '',
     location: offer.location,
     monthYearReceived: offer.monthYearReceived,
     negotiationStrategy: offer.negotiationStrategy,
-    previousCompanies: [],
+    previousCompanies:
+      background?.experiences
+        ?.filter((exp) => exp.company != null)
+        .map((exp) => exp.company?.name ?? '') ?? [],
     profileName,
     specialization:
       offer.jobType === JobType.FULLTIME
@@ -74,10 +83,18 @@ const analysisOfferDtoMapper = (
       offer.offersFullTime.totalCompensation.value;
     analysisOfferDto.income.currency =
       offer.offersFullTime.totalCompensation.currency;
+    analysisOfferDto.income.baseValue =
+      offer.offersFullTime.totalCompensation.baseValue;
+    analysisOfferDto.income.baseCurrency =
+      offer.offersFullTime.totalCompensation.baseCurrency;
   } else if (offer.offersIntern?.monthlySalary) {
     analysisOfferDto.income.value = offer.offersIntern.monthlySalary.value;
     analysisOfferDto.income.currency =
       offer.offersIntern.monthlySalary.currency;
+    analysisOfferDto.income.baseValue =
+      offer.offersIntern.monthlySalary.baseValue;
+    analysisOfferDto.income.baseCurrency =
+      offer.offersIntern.monthlySalary.baseCurrency;
   } else {
     throw new TRPCError({
       code: 'NOT_FOUND',
@@ -95,10 +112,26 @@ const analysisDtoMapper = (
     OffersOffer & {
       company: Company;
       offersFullTime:
-        | (OffersFullTime & { totalCompensation: OffersCurrency })
+        | (OffersFullTime & {
+            totalCompensation: OffersCurrency;
+          })
         | null;
-      offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-      profile: OffersProfile & { background: OffersBackground | null };
+      offersIntern:
+        | (OffersIntern & {
+            monthlySalary: OffersCurrency;
+          })
+        | null;
+      profile: OffersProfile & {
+        background:
+          | (OffersBackground & {
+              experiences: Array<
+                OffersExperience & {
+                  company: Company | null;
+                }
+              >;
+            })
+          | null;
+      };
     }
   >,
 ) => {
@@ -219,11 +252,15 @@ export const profileAnalysisDtoMapper = (
 };
 
 export const valuationDtoMapper = (currency: {
+  baseCurrency: string;
+  baseValue: number;
   currency: string;
   id?: string;
   value: number;
 }) => {
   const valuationDto: Valuation = {
+    baseCurrency: currency.baseCurrency,
+    baseValue: currency.baseValue,
     currency: currency.currency,
     value: currency.value,
   };
@@ -554,7 +591,12 @@ export const dashboardOfferDtoMapper = (
   const dashboardOfferDto: DashboardOffer = {
     company: offersCompanyDtoMapper(offer.company),
     id: offer.id,
-    income: valuationDtoMapper({ currency: '', value: -1 }),
+    income: valuationDtoMapper({
+      baseCurrency: '',
+      baseValue: -1,
+      currency: '',
+      value: -1,
+    }),
     monthYearReceived: offer.monthYearReceived,
     profileId: offer.profileId,
     title: offer.offersFullTime?.title ?? '',

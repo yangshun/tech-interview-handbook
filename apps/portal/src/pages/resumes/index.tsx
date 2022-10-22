@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { CallToAction } from '~/components/resumes/landing/CallToAction';
 import { Hero } from '~/components/resumes/landing/Hero';
 import { PrimaryFeatures } from '~/components/resumes/landing/PrimaryFeatures';
-import { Testimonials } from '~/components/resumes/landing/Testimonials';
 
 export default function Home() {
   return (
@@ -16,7 +15,6 @@ export default function Home() {
         <Hero />
         <PrimaryFeatures />
         <CallToAction />
-        <Testimonials />
       </main>
     </>
   );
