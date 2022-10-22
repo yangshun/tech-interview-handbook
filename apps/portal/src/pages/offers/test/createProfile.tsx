@@ -139,22 +139,22 @@ function Test() {
           offersFullTime: {
             baseSalary: {
               currency: 'SGD',
-              value: 84000,
+              value: 2222,
             },
             bonus: {
               currency: 'SGD',
-              value: 20000,
+              value: 2222,
             },
             level: 'Junior',
             specialization: 'Front End',
             stocks: {
               currency: 'SGD',
-              value: 100,
+              value: 0,
             },
             title: 'Software Engineer',
             totalCompensation: {
               currency: 'SGD',
-              value: 104100,
+              value: 4444,
             },
           },
         },

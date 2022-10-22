@@ -50,7 +50,7 @@ const analysisOfferDtoMapper = (
   const analysisOfferDto: AnalysisOffer = {
     company: offersCompanyDtoMapper(offer.company),
     id: offer.id,
-    income: { currency: '', value: -1 },
+    income: { baseCurrency: '', baseValue: -1, currency: '', value: -1 },
     jobType: offer.jobType,
     level: offer.offersFullTime?.level ?? '',
     location: offer.location,
@@ -219,11 +219,15 @@ export const profileAnalysisDtoMapper = (
 };
 
 export const valuationDtoMapper = (currency: {
+  baseCurrency: string;
+  baseValue: number;
   currency: string;
   id?: string;
   value: number;
 }) => {
   const valuationDto: Valuation = {
+    baseCurrency: currency.baseCurrency,
+    baseValue: currency.baseValue,
     currency: currency.currency,
     value: currency.value,
   };
@@ -554,7 +558,12 @@ export const dashboardOfferDtoMapper = (
   const dashboardOfferDto: DashboardOffer = {
     company: offersCompanyDtoMapper(offer.company),
     id: offer.id,
-    income: valuationDtoMapper({ currency: '', value: -1 }),
+    income: valuationDtoMapper({
+      baseCurrency: '',
+      baseValue: -1,
+      currency: '',
+      value: -1,
+    }),
     monthYearReceived: offer.monthYearReceived,
     profileId: offer.profileId,
     title: offer.offersFullTime?.title ?? '',

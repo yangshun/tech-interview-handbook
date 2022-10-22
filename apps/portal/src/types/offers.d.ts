@@ -42,6 +42,8 @@ export type OffersCompany = {
 };
 
 export type Valuation = {
+  baseCurrency: string;
+  baseValue: number;
   currency: string;
   value: number;
 };
