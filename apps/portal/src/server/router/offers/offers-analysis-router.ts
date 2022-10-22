@@ -225,6 +225,8 @@ export const offersAnalysisRouter = createRouter()
       }
 
       const yoe = overallHighestOffer.profile.background.totalYoe as number;
+      const monthYearReceived = new Date(overallHighestOffer.monthYearReceived);
+      monthYearReceived.setFullYear(monthYearReceived.getFullYear() - 1);
 
       let similarOffers = await ctx.prisma.offersOffer.findMany({
         include: {
@@ -275,6 +277,11 @@ export const offersAnalysisRouter = createRouter()
               location: overallHighestOffer.location,
             },
             {
+              monthYearReceived: {
+                gte: monthYearReceived,
+              },
+            },
+            {
               OR: [
                 {
                   offersFullTime: {
@@ -315,7 +322,9 @@ export const offersAnalysisRouter = createRouter()
         similarOffers,
       );
       const overallPercentile =
-        similarOffers.length === 0 ? 1.0 : overallIndex / similarOffers.length;
+        similarOffers.length === 0
+          ? 100
+          : (100 * overallIndex) / similarOffers.length;
 
       const companyIndex = searchOfferPercentile(
         overallHighestOffer,
@@ -323,8 +332,8 @@ export const offersAnalysisRouter = createRouter()
       );
       const companyPercentile =
         similarCompanyOffers.length === 0
-          ? 1.0
-          : companyIndex / similarCompanyOffers.length;
+          ? 100
+          : (100 * companyIndex) / similarCompanyOffers.length;
 
       // FIND TOP >=90 PERCENTILE OFFERS, DOESN'T GIVE 100th PERCENTILE
       // e.g. If there only 4 offers, it gives the 2nd and 3rd offer
