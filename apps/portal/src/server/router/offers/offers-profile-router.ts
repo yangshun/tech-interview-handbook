@@ -385,7 +385,7 @@ export const offersProfileRouter = createRouter()
 
                   throw new trpc.TRPCError({
                     code: 'BAD_REQUEST',
-                    message: 'Missing fields.',
+                    message: 'Missing fields in background experiences.',
                   });
                 }),
               },
@@ -533,7 +533,7 @@ export const offersProfileRouter = createRouter()
                 // Throw error
                 throw new trpc.TRPCError({
                   code: 'BAD_REQUEST',
-                  message: 'Missing fields.',
+                  message: 'Missing fields in offers.',
                 });
               }),
             ),

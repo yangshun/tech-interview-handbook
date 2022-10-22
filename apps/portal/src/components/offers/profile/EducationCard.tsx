@@ -3,18 +3,10 @@ import {
   LightBulbIcon,
 } from '@heroicons/react/24/outline';
 
-import type { EducationBackgroundType } from '~/components/offers/types';
-
-type EducationEntity = {
-  endDate?: string;
-  field?: string;
-  school?: string;
-  startDate?: string;
-  type?: EducationBackgroundType;
-};
+import type { EducationDisplayData } from '~/components/offers/types';
 
 type Props = Readonly<{
-  education: EducationEntity;
+  education: EducationDisplayData;
 }>;
 
 export default function EducationCard({
@@ -39,9 +31,7 @@ export default function EducationCard({
         </div>
         {(startDate || endDate) && (
           <div className="font-light text-gray-400">
-            <p>{`${startDate ? startDate : 'N/A'} - ${
-              endDate ? endDate : 'N/A'
-            }`}</p>
+            <p>{`${startDate || 'N/A'} - ${endDate || 'N/A'}`}</p>
           </div>
         )}
       </div>

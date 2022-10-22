@@ -56,7 +56,13 @@ const analysisOfferDtoMapper = (
   const analysisOfferDto: AnalysisOffer = {
     company: offersCompanyDtoMapper(offer.company),
     id: offer.id,
-    income: { baseCurrency: '', baseValue: -1, currency: '', value: -1 },
+    income: {
+      baseCurrency: '',
+      baseValue: -1,
+      currency: '',
+      id: '',
+      value: -1,
+    },
     jobType: offer.jobType,
     level: offer.offersFullTime?.level ?? '',
     location: offer.location,
@@ -83,6 +89,7 @@ const analysisOfferDtoMapper = (
       offer.offersFullTime.totalCompensation.value;
     analysisOfferDto.income.currency =
       offer.offersFullTime.totalCompensation.currency;
+    analysisOfferDto.income.id = offer.offersFullTime.totalCompensation.id;
     analysisOfferDto.income.baseValue =
       offer.offersFullTime.totalCompensation.baseValue;
     analysisOfferDto.income.baseCurrency =
@@ -91,6 +98,7 @@ const analysisOfferDtoMapper = (
     analysisOfferDto.income.value = offer.offersIntern.monthlySalary.value;
     analysisOfferDto.income.currency =
       offer.offersIntern.monthlySalary.currency;
+    analysisOfferDto.income.id = offer.offersIntern.monthlySalary.id;
     analysisOfferDto.income.baseValue =
       offer.offersIntern.monthlySalary.baseValue;
     analysisOfferDto.income.baseCurrency =
@@ -255,13 +263,14 @@ export const valuationDtoMapper = (currency: {
   baseCurrency: string;
   baseValue: number;
   currency: string;
-  id?: string;
+  id: string;
   value: number;
 }) => {
   const valuationDto: Valuation = {
     baseCurrency: currency.baseCurrency,
     baseValue: currency.baseValue,
     currency: currency.currency,
+    id: currency.id,
     value: currency.value,
   };
   return valuationDto;
@@ -595,11 +604,12 @@ export const dashboardOfferDtoMapper = (
       baseCurrency: '',
       baseValue: -1,
       currency: '',
+      id: '',
       value: -1,
     }),
     monthYearReceived: offer.monthYearReceived,
     profileId: offer.profileId,
-    title: offer.offersFullTime?.title ?? '',
+    title: offer.offersFullTime?.title || offer.offersIntern?.title || '',
     totalYoe: offer.profile.background?.totalYoe ?? -1,
   };
 

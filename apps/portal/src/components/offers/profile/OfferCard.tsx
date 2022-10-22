@@ -6,10 +6,10 @@ import {
 } from '@heroicons/react/24/outline';
 import { HorizontalDivider } from '@tih/ui';
 
-import type { OfferEntity } from '~/components/offers/types';
+import type { OfferDisplayData } from '~/components/offers/types';
 
 type Props = Readonly<{
-  offer: OfferEntity;
+  offer: OfferDisplayData;
 }>;
 
 export default function OfferCard({

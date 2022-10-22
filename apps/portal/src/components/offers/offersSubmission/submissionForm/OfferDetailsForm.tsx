@@ -9,6 +9,7 @@ import { useFormContext } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 import { PlusIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
+import { JobType } from '@prisma/client';
 import { Button, Dialog } from '@tih/ui';
 
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
@@ -31,7 +32,6 @@ import FormTextArea from '../../forms/FormTextArea';
 import FormTextInput from '../../forms/FormTextInput';
 import type { OfferFormData } from '../../types';
 import { JobTypeLabel } from '../../types';
-import { JobType } from '../../types';
 import { CURRENCY_OPTIONS } from '../../../../utils/offers/currency/CurrencyEnum';
 
 type FullTimeOfferDetailsFormProps = Readonly<{
@@ -448,7 +448,7 @@ function OfferDetailsFormArray({
       {fields.map((item, index) => {
         return (
           <div key={item.id}>
-            {jobType === JobType.FullTime ? (
+            {jobType === JobType.FULLTIME ? (
               <FullTimeOfferDetailsForm index={index} remove={remove} />
             ) : (
               <InternshipOfferDetailsForm index={index} remove={remove} />
@@ -464,7 +464,7 @@ function OfferDetailsFormArray({
         variant="tertiary"
         onClick={() =>
           append(
-            jobType === JobType.FullTime
+            jobType === JobType.FULLTIME
               ? defaultFullTimeOfferValues
               : defaultInternshipOfferValues,
           )
@@ -474,8 +474,14 @@ function OfferDetailsFormArray({
   );
 }
 
-export default function OfferDetailsForm() {
-  const [jobType, setJobType] = useState(JobType.FullTime);
+type OfferDetailsFormProps = Readonly<{
+  defaultJobType?: JobType;
+}>;
+
+export default function OfferDetailsForm({
+  defaultJobType = JobType.FULLTIME,
+}: OfferDetailsFormProps) {
+  const [jobType, setJobType] = useState(defaultJobType);
   const [isDialogOpen, setDialogOpen] = useState(false);
   const { control } = useFormContext();
   const fieldArrayValues = useFieldArray({ control, name: 'offers' });
@@ -483,17 +489,17 @@ export default function OfferDetailsForm() {
 
   const toggleJobType = () => {
     remove();
-    if (jobType === JobType.FullTime) {
-      setJobType(JobType.Intern);
+    if (jobType === JobType.FULLTIME) {
+      setJobType(JobType.INTERN);
       append(defaultInternshipOfferValues);
     } else {
-      setJobType(JobType.FullTime);
+      setJobType(JobType.FULLTIME);
       append(defaultFullTimeOfferValues);
     }
   };
 
   const switchJobTypeLabel = () =>
-    jobType === JobType.FullTime ? JobTypeLabel.INTERN : JobTypeLabel.FULLTIME;
+    jobType === JobType.FULLTIME ? JobTypeLabel.INTERN : JobTypeLabel.FULLTIME;
 
   return (
     <div className="mb-5">
@@ -506,9 +512,9 @@ export default function OfferDetailsForm() {
             display="block"
             label={JobTypeLabel.FULLTIME}
             size="md"
-            variant={jobType === JobType.FullTime ? 'secondary' : 'tertiary'}
+            variant={jobType === JobType.FULLTIME ? 'secondary' : 'tertiary'}
             onClick={() => {
-              if (jobType === JobType.FullTime) {
+              if (jobType === JobType.FULLTIME) {
                 return;
               }
               setDialogOpen(true);
@@ -520,9 +526,9 @@ export default function OfferDetailsForm() {
             display="block"
             label={JobTypeLabel.INTERN}
             size="md"
-            variant={jobType === JobType.Intern ? 'secondary' : 'tertiary'}
+            variant={jobType === JobType.INTERN ? 'secondary' : 'tertiary'}
             onClick={() => {
-              if (jobType === JobType.Intern) {
+              if (jobType === JobType.INTERN) {
                 return;
               }
               setDialogOpen(true);
