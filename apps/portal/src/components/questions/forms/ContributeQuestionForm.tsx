@@ -89,8 +89,6 @@ export default function ContributeQuestionForm({
             render={({ field }) => (
               <LocationTypeahead
                 required={true}
-                // eslint-disable-next-line @typescript-eslint/no-empty-function
-                onQueryChange={() => {}}
                 onSelect={(option) => {
                   field.onChange(option.value);
                 }}
@@ -143,8 +141,6 @@ export default function ContributeQuestionForm({
             render={({ field }) => (
               <RoleTypeahead
                 required={true}
-                // eslint-disable-next-line @typescript-eslint/no-empty-function
-                onQueryChange={() => {}}
                 onSelect={(option) => {
                   field.onChange(option.value);
                 }}

@@ -5,7 +5,7 @@ import ExpandedTypeahead from './ExpandedTypeahead';
 
 export type RoleTypeaheadProps = Omit<
   ExpandedTypeaheadProps,
-  'label' | 'options'
+  'label' | 'onQueryChange' | 'options'
 >;
 
 export default function RoleTypeahead(props: RoleTypeaheadProps) {
@@ -14,6 +14,8 @@ export default function RoleTypeahead(props: RoleTypeaheadProps) {
       {...(props as ExpandedTypeaheadProps)}
       label="Role"
       options={ROLES}
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      onQueryChange={() => {}}
     />
   );
 }

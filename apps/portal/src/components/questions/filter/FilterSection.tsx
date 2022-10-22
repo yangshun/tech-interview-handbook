@@ -3,15 +3,18 @@ import type { UseFormRegisterReturn } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { CheckboxInput, Collapsible, RadioList } from '@tih/ui';
 
-export type FilterOption<V extends string = string> = {
-  checked: boolean;
+export type FilterChoice<V extends string = string> = {
   id: string;
   label: string;
   value: V;
 };
 
+export type FilterOption<V extends string = string> = FilterChoice<V> & {
+  checked: boolean;
+};
+
 export type FilterChoices<V extends string = string> = ReadonlyArray<
-  Omit<FilterOption<V>, 'checked'>
+  FilterChoice<V>
 >;
 
 type FilterSectionType<FilterOptions extends Array<FilterOption>> =

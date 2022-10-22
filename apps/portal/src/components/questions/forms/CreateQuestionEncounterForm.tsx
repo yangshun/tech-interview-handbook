@@ -59,8 +59,6 @@ export default function CreateQuestionEncounterForm({
             isLabelHidden={true}
             placeholder="Other location"
             suggestedCount={3}
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onQueryChange={() => {}}
             onSelect={({ value: location }) => {
               setSelectedLocation(location);
             }}
@@ -77,8 +75,6 @@ export default function CreateQuestionEncounterForm({
             isLabelHidden={true}
             placeholder="Other role"
             suggestedCount={3}
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onQueryChange={() => {}}
             onSelect={({ value: role }) => {
               setSelectedRole(role);
             }}

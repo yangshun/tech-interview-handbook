@@ -5,7 +5,7 @@ import ExpandedTypeahead from './ExpandedTypeahead';
 
 export type LocationTypeaheadProps = Omit<
   ExpandedTypeaheadProps,
-  'label' | 'options'
+  'label' | 'onQueryChange' | 'options'
 >;
 
 export default function LocationTypeahead(props: LocationTypeaheadProps) {
@@ -14,6 +14,8 @@ export default function LocationTypeahead(props: LocationTypeaheadProps) {
       {...(props as ExpandedTypeaheadProps)}
       label="Location"
       options={LOCATIONS}
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      onQueryChange={() => {}}
     />
   );
 }
