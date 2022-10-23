@@ -131,7 +131,7 @@ export const questionsQuestionRouter = createProtectedRouter()
       const lastQuestion = questionsData[input.pageSize - 1];
       const nextIdCursor = lastQuestion.id;
       const nextLastSeenCursor = input.sortType === SortType.NEW ? lastQuestion.lastSeenAt : undefined;
-      const nextupvoteCursor = input.sortType === SortType.TOP ? lastQuestion.upvote : undefined;
+      const nextupvoteCursor = input.sortType === SortType.TOP ? lastQuestion.upvotes : undefined;
 
       const processedQuestionsData = questionsData.map((data) => {
         const votes: number = data.votes.reduce(
