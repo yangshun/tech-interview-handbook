@@ -4,7 +4,7 @@ import { TRPCError } from '@trpc/server';
 import { createProtectedRouter } from './context';
 
 import type { AggregatedQuestionEncounter } from '~/types/questions';
-import { SortOrder } from '~/types/questions';
+import { SortOrder } from '~/types/questions.d';
 
 
 export const questionsQuestionEncounterRouter = createProtectedRouter()
@@ -79,7 +79,7 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
           },
         });
 
-        if (questionToUpdate < input.seenAt) {
+        if (questionToUpdate!.lastSeenAt < input.seenAt) {
           await tx.questionsQuestion.update({
             data: {
               lastSeenAt : input.seenAt,
@@ -135,24 +135,22 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
           },
         });
 
-        if (questionToUpdate.lastSeenAt === questionEncounterToUpdate.seenAt) {
+        if (questionToUpdate!.lastSeenAt === questionEncounterToUpdate.seenAt) {
           const latestEncounter = await ctx.prisma.questionsQuestionEncounter.findFirst({
             orderBy: {
               seenAt: SortOrder.DESC,
             },
             where: {
-              questionId: questionToUpdate.questionId,
+              questionId: questionToUpdate!.id,
             },
           });
 
-          const lastSeenVal = latestEncounter ? latestEncounter!.seenAt : null;
-
           await tx.questionsQuestion.update({
             data: {
-              lastSeenAt : lastSeenVal,
+              lastSeenAt : latestEncounter!.seenAt,
             },
             where: {
-              id: questionToUpdate.questionId,
+              id: questionToUpdate!.id,
             },
           });
         }
@@ -197,13 +195,13 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
           },
         });
 
-        if (questionToUpdate.lastSeenAt === questionEncounterToDelete.seenAt) {
+        if (questionToUpdate!.lastSeenAt === questionEncounterToDelete.seenAt) {
           const latestEncounter = await ctx.prisma.questionsQuestionEncounter.findFirst({
             orderBy: {
               seenAt: SortOrder.DESC,
             },
             where: {
-              questionId: questionToUpdate.questionId,
+              questionId: questionToUpdate!.id,
             },
           });
 
@@ -214,7 +212,7 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
               lastSeenAt : lastSeenVal,
             },
             where: {
-              id: questionToUpdate.questionId,
+              id: questionToUpdate!.id,
             },
           });
         }

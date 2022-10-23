@@ -405,7 +405,7 @@ model QuestionsQuestion {
   userId       String?
   content      String                @db.Text
   questionType QuestionsQuestionType
-  lastSeenAt   DateTime
+  lastSeenAt   DateTime?
   upvotes      Int                   @default(0)
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
