@@ -10,7 +10,7 @@ export const questionListRouter = createProtectedRouter()
 
       return await ctx.prisma.questionsList.findMany({
         include: {
-          listQuestionEntries: {
+          questionEntries: {
             include: {
               question: true,
             },
@@ -34,7 +34,7 @@ export const questionListRouter = createProtectedRouter()
 
       return await ctx.prisma.questionsList.findMany({
         include: {
-          listQuestionEntries: {
+          questionEntries: {
             include: {
               question: true,
             },
@@ -163,9 +163,23 @@ export const questionListRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
+      const entryToDelete = await ctx.prisma.questionsListQuestionEntry.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+
+      if (entryToDelete?.id !== userId) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'User have no authorization to record.',
+        });
+      }
+
+
       const listToAugment = await ctx.prisma.questionsList.findUnique({
         where: {
-          id: input.listId,
+          id: entryToDelete.listId,
         },
       });
 
