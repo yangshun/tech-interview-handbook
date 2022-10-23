@@ -4,29 +4,41 @@ import {
 } from '@heroicons/react/24/outline';
 import { Button, Select, TextInput } from '@tih/ui';
 
-export type SortOption = {
+export type SortOption<Value> = {
   label: string;
-  value: string;
+  value: Value;
 };
 
-export type QuestionSearchBarProps<SortOptions extends Array<SortOption>> = {
-  onFilterOptionsToggle: () => void;
-  onSortChange?: (sortValue: SortOptions[number]['value']) => void;
-  sortOptions: SortOptions;
-  sortValue: SortOptions[number]['value'];
+type SortOrderProps<SortOrder> = {
+  onSortOrderChange?: (sortValue: SortOrder) => void;
+  sortOrderOptions: ReadonlyArray<SortOption<SortOrder>>;
+  sortOrderValue: SortOrder;
 };
 
-export default function QuestionSearchBar<
-  SortOptions extends Array<SortOption>,
->({
-  onSortChange,
-  sortOptions,
-  sortValue,
+type SortTypeProps<SortType> = {
+  onSortTypeChange?: (sortType: SortType) => void;
+  sortTypeOptions: ReadonlyArray<SortOption<SortType>>;
+  sortTypeValue: SortType;
+};
+
+export type QuestionSearchBarProps<SortType, SortOrder> =
+  SortOrderProps<SortOrder> &
+    SortTypeProps<SortType> & {
+      onFilterOptionsToggle: () => void;
+    };
+
+export default function QuestionSearchBar<SortType, SortOrder>({
+  onSortOrderChange,
+  sortOrderOptions,
+  sortOrderValue,
+  onSortTypeChange,
+  sortTypeOptions,
+  sortTypeValue,
   onFilterOptionsToggle,
-}: QuestionSearchBarProps<SortOptions>) {
+}: QuestionSearchBarProps<SortType, SortOrder>) {
   return (
-    <div className="flex items-center gap-4">
-      <div className="flex-1">
+    <div className="flex flex-col items-stretch gap-x-4 gap-y-2 lg:flex-row lg:items-end">
+      <div className="flex-1 ">
         <TextInput
           isLabelHidden={true}
           label="Search by content"
@@ -35,27 +47,48 @@ export default function QuestionSearchBar<
           startAddOnType="icon"
         />
       </div>
-      <div className="flex items-center gap-2">
-        <span aria-hidden={true} className="align-middle text-sm font-medium">
-          Sort by:
-        </span>
-        <Select
-          display="inline"
-          isLabelHidden={true}
-          label="Sort by"
-          options={sortOptions}
-          value={sortValue}
-          onChange={onSortChange}
-        />
-      </div>
-      <div className="lg:hidden">
-        <Button
-          addonPosition="start"
-          icon={AdjustmentsHorizontalIcon}
-          label="Filter options"
-          variant="tertiary"
-          onClick={onFilterOptionsToggle}
-        />
+      <div className="flex items-end justify-end gap-4">
+        <div className="flex items-center gap-2">
+          <Select
+            display="inline"
+            label="Sort by"
+            options={sortTypeOptions}
+            value={sortTypeValue}
+            onChange={(value) => {
+              const chosenOption = sortTypeOptions.find(
+                (option) => String(option.value) === value,
+              );
+              if (chosenOption) {
+                onSortTypeChange?.(chosenOption.value);
+              }
+            }}
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <Select
+            display="inline"
+            label="Order by"
+            options={sortOrderOptions}
+            value={sortOrderValue}
+            onChange={(value) => {
+              const chosenOption = sortOrderOptions.find(
+                (option) => String(option.value) === value,
+              );
+              if (chosenOption) {
+                onSortOrderChange?.(chosenOption.value);
+              }
+            }}
+          />
+        </div>
+        <div className="lg:hidden">
+          <Button
+            addonPosition="start"
+            icon={AdjustmentsHorizontalIcon}
+            label="Filter options"
+            variant="tertiary"
+            onClick={onFilterOptionsToggle}
+          />
+        </div>
       </div>
     </div>
   );
