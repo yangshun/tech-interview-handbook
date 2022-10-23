@@ -126,9 +126,9 @@ export const questionsQuestionRouter = createProtectedRouter()
           },
         },
       });
-      
+
       const lastQuestion = questionsData[input.pageSize - 1];
-      const nextIdCursor = lastQuestion.id;
+      const nextIdCursor: string = lastQuestion.id;
       const nextLastSeenCursor = input.sortType === SortType.NEW ? lastQuestion.lastSeenAt : undefined;
       const nextupvoteCursor = input.sortType === SortType.TOP ? lastQuestion.upvotes : undefined;
 
@@ -190,8 +190,8 @@ export const questionsQuestionRouter = createProtectedRouter()
           numAnswers: data._count.answers,
           numComments: data._count.comments,
           numVotes: votes,
-          seenAt: latestSeenAt,
           receivedCount: data.encounters.length,
+          seenAt: latestSeenAt,
           type: data.questionType,
           updatedAt: data.updatedAt,
           user: data.user?.name ?? '',
