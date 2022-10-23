@@ -126,6 +126,7 @@ export default function ResumeHomePage() {
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
+        take: PAGE_LIMIT,
       },
     ],
     {
@@ -144,6 +145,7 @@ export default function ResumeHomePage() {
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
+        take: PAGE_LIMIT,
       },
     ],
     {
@@ -163,6 +165,7 @@ export default function ResumeHomePage() {
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
+        take: PAGE_LIMIT,
       },
     ],
     {
@@ -489,17 +492,16 @@ export default function ResumeHomePage() {
               </div>
               <div className="flex flex-wrap items-center justify-start gap-8">
                 <div className="w-64">
-                  <form>
-                    <TextInput
-                      label=""
-                      placeholder="Search Resumes"
-                      startAddOn={MagnifyingGlassIcon}
-                      startAddOnType="icon"
-                      type="text"
-                      value={searchValue}
-                      onChange={setSearchValue}
-                    />
-                  </form>
+                  <TextInput
+                    isLabelHidden={true}
+                    label="search"
+                    placeholder="Search Resumes"
+                    startAddOn={MagnifyingGlassIcon}
+                    startAddOnType="icon"
+                    type="text"
+                    value={searchValue}
+                    onChange={setSearchValue}
+                  />
                 </div>
                 <div>
                   <DropdownMenu align="end" label={SORT_OPTIONS[sortOrder]}>
@@ -559,7 +561,7 @@ export default function ResumeHomePage() {
                       end={getTabTotalPages()}
                       label="pagination"
                       start={1}
-                      onSelect={(page) => setCurrentPage(page)}
+                      onSelect={setCurrentPage}
                     />
                   </div>
                 )}
