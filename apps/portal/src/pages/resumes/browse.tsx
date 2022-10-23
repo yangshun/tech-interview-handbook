@@ -369,12 +369,8 @@ export default function ResumeHomePage() {
         </Transition.Root>
       </div>
 
-      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
-        <div className="ml-8 py-4">
-          <ResumeReviewsTitle />
-        </div>
-
-        <div className="mx-8 mt-4 flex justify-start">
+      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll px-8 pt-8">
+        <div className="flex justify-start">
           <div className="hidden w-1/6 pt-2 lg:block">
             <h3 className="text-md font-medium tracking-tight text-gray-900">
               Shortcuts
@@ -535,7 +531,7 @@ export default function ResumeHomePage() {
                 </div>
               </div>
             </div>
-            <div className="mb-6">
+            <div className="mb-4">
               {isFetchingResumes ? (
                 <div className="w-full pt-4">
                   {' '}
@@ -560,7 +556,7 @@ export default function ResumeHomePage() {
                 <>
                   <ResumeListItems resumes={getTabResumes()} />
                   {getTabTotalPages() > 1 && (
-                    <div className="my-4 flex justify-center">
+                    <div className="mt-4 flex justify-center">
                       <Pagination
                         current={currentPage}
                         end={getTabTotalPages()}
