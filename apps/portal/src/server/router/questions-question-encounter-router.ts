@@ -11,46 +11,46 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
       questionId: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const questionEncountersData = await ctx.prisma.questionsQuestionEncounter.findMany({
-        include: {
-          company : true,
-        },
-        where: {
-          ...input,
-        },
-      });
+      const questionEncountersData =
+        await ctx.prisma.questionsQuestionEncounter.findMany({
+          include: {
+            company: true,
+          },
+          where: {
+            ...input,
+          },
+        });
 
       const companyCounts: Record<string, number> = {};
       const locationCounts: Record<string, number> = {};
-      const roleCounts:Record<string, number> = {};
+      const roleCounts: Record<string, number> = {};
 
       for (let i = 0; i < questionEncountersData.length; i++) {
         const encounter = questionEncountersData[i];
 
         if (!(encounter.company!.name in companyCounts)) {
-            companyCounts[encounter.company!.name] = 1;
+          companyCounts[encounter.company!.name] = 1;
         }
         companyCounts[encounter.company!.name] += 1;
 
         if (!(encounter.location in locationCounts)) {
-            locationCounts[encounter.location] = 1;
+          locationCounts[encounter.location] = 1;
         }
         locationCounts[encounter.location] += 1;
 
         if (!(encounter.role in roleCounts)) {
-            roleCounts[encounter.role] = 1;
+          roleCounts[encounter.role] = 1;
         }
         roleCounts[encounter.role] += 1;
-
       }
 
-      const questionEncounter:AggregatedQuestionEncounter = {
+      const questionEncounter: AggregatedQuestionEncounter = {
         companyCounts,
         locationCounts,
         roleCounts,
-      }
+      };
       return questionEncounter;
-    }
+    },
   })
   .mutation('create', {
     input: z.object({
@@ -58,7 +58,7 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
       location: z.string(),
       questionId: z.string(),
       role: z.string(),
-      seenAt: z.date()
+      seenAt: z.date(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
@@ -83,11 +83,12 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const questionEncounterToUpdate = await ctx.prisma.questionsQuestionEncounter.findUnique({
-        where: {
-          id: input.id,
-        },
-      });
+      const questionEncounterToUpdate =
+        await ctx.prisma.questionsQuestionEncounter.findUnique({
+          where: {
+            id: input.id,
+          },
+        });
 
       if (questionEncounterToUpdate?.id !== userId) {
         throw new TRPCError({
@@ -113,11 +114,12 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const questionEncounterToDelete = await ctx.prisma.questionsQuestionEncounter.findUnique({
-        where: {
-          id: input.id,
-        },
-      });
+      const questionEncounterToDelete =
+        await ctx.prisma.questionsQuestionEncounter.findUnique({
+          where: {
+            id: input.id,
+          },
+        });
 
       if (questionEncounterToDelete?.id !== userId) {
         throw new TRPCError({

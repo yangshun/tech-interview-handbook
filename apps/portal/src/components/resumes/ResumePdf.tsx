@@ -3,12 +3,10 @@ import { useEffect, useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import type { PDFDocumentProxy } from 'react-pdf/node_modules/pdfjs-dist';
 import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
   MagnifyingGlassMinusIcon,
   MagnifyingGlassPlusIcon,
 } from '@heroicons/react/20/solid';
-import { Button, Spinner } from '@tih/ui';
+import { Button, Pagination, Spinner } from '@tih/ui';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
@@ -86,28 +84,17 @@ export default function ResumePdf({ url }: Props) {
           </div>
         </Document>
       </div>
-
-      <div className="flex flex-row items-center justify-between p-4">
-        <Button
-          disabled={pageNumber === 1}
-          icon={ArrowLeftIcon}
-          isLabelHidden={true}
-          label="Previous"
-          variant="tertiary"
-          onClick={() => setPageNumber(pageNumber - 1)}
-        />
-        <p className="text-md text-gray-600">
-          Page {pageNumber} of {numPages}
-        </p>
-        <Button
-          disabled={pageNumber >= numPages}
-          icon={ArrowRightIcon}
-          isLabelHidden={true}
-          label="Next"
-          variant="tertiary"
-          onClick={() => setPageNumber(pageNumber + 1)}
-        />
-      </div>
+      {numPages > 1 && (
+        <div className="flex justify-center p-4">
+          <Pagination
+            current={pageNumber}
+            end={numPages}
+            label="pagination"
+            start={1}
+            onSelect={(page) => setPageNumber(page)}
+          />
+        </div>
+      )}
     </div>
   );
 }

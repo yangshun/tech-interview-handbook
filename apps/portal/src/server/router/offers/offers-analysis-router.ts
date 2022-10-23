@@ -285,7 +285,6 @@ export const offersAnalysisRouter = createRouter()
               OR: [
                 {
                   offersFullTime: {
-                    level: overallHighestOffer.offersFullTime?.level,
                     title: overallHighestOffer.offersFullTime?.title,
                   },
                   offersIntern: {

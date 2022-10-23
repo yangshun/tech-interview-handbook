@@ -44,6 +44,8 @@ import { trpc } from '~/utils/trpc';
 
 import type { FilterState } from '../../components/resumes/browse/resumeFilters';
 
+const STALE_TIME = 5 * 60 * 1000;
+const DEBOUNCE_DELAY = 800;
 const PAGE_LIMIT = 10;
 const filters: Array<Filter> = [
   {
@@ -122,14 +124,14 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
-        searchValue: useDebounceValue(searchValue, 800),
+        searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
       },
     ],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
-      staleTime: 5 * 60 * 1000,
+      staleTime: STALE_TIME,
     },
   );
   const starredResumesQuery = trpc.useQuery(
@@ -140,7 +142,7 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
-        searchValue: useDebounceValue(searchValue, 800),
+        searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
       },
@@ -148,7 +150,7 @@ export default function ResumeHomePage() {
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
       retry: false,
-      staleTime: 5 * 60 * 1000,
+      staleTime: STALE_TIME,
     },
   );
   const myResumesQuery = trpc.useQuery(
@@ -159,7 +161,7 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
-        searchValue: useDebounceValue(searchValue, 800),
+        searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
       },
@@ -167,7 +169,7 @@ export default function ResumeHomePage() {
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.MY,
       retry: false,
-      staleTime: 5 * 60 * 1000,
+      staleTime: STALE_TIME,
     },
   );
 
@@ -238,6 +240,11 @@ export default function ResumeHomePage() {
       : Math.floor(numRecords / PAGE_LIMIT) + 1;
   };
 
+  const isFetchingResumes =
+    allResumesQuery.isFetching ||
+    starredResumesQuery.isFetching ||
+    myResumesQuery.isFetching;
+
   return (
     <>
       <Head>
@@ -271,7 +278,7 @@ export default function ResumeHomePage() {
                 leave="transition ease-in-out duration-300 transform"
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full">
-                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-scroll bg-white py-4 pb-12 shadow-xl">
                   <div className="flex items-center justify-between px-4">
                     <h2 className="text-lg font-medium text-gray-900">
                       Shortcuts
@@ -362,20 +369,20 @@ export default function ResumeHomePage() {
         </Transition.Root>
       </div>
 
-      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto">
-        <div className="ml-4 py-4">
+      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
+        <div className="ml-8 py-4">
           <ResumeReviewsTitle />
         </div>
 
         <div className="mx-8 mt-4 flex justify-start">
           <div className="hidden w-1/6 pt-2 lg:block">
-            <h3 className="text-md mb-4 font-medium tracking-tight text-gray-900">
-              Shortcuts:
+            <h3 className="text-md font-medium tracking-tight text-gray-900">
+              Shortcuts
             </h3>
             <div className="w-100 pt-4 sm:pr-0 md:pr-4">
               <form>
                 <ul
-                  className="flex flex-wrap justify-start gap-4 pb-6 text-sm font-medium text-gray-900"
+                  className="flex w-11/12 flex-wrap justify-start gap-2 pb-6 text-sm font-medium text-gray-900"
                   role="list">
                   {SHORTCUTS.map((shortcut) => (
                     <li key={shortcut.name}>
@@ -387,8 +394,8 @@ export default function ResumeHomePage() {
                     </li>
                   ))}
                 </ul>
-                <h3 className="text-md my-4 font-medium tracking-tight text-gray-900">
-                  Explore these filters:
+                <h3 className="text-md font-medium tracking-tight text-gray-900">
+                  Explore these filters
                 </h3>
                 {filters.map((filter) => (
                   <Disclosure
@@ -529,9 +536,7 @@ export default function ResumeHomePage() {
               </div>
             </div>
             <div className="mb-6">
-              {allResumesQuery.isLoading ||
-              starredResumesQuery.isLoading ||
-              myResumesQuery.isLoading ? (
+              {isFetchingResumes ? (
                 <div className="w-full pt-4">
                   {' '}
                   <Spinner display="block" size="lg" />{' '}
@@ -553,23 +558,18 @@ export default function ResumeHomePage() {
                 </div>
               ) : (
                 <>
-                  <ResumeListItems
-                    isLoading={
-                      allResumesQuery.isFetching ||
-                      starredResumesQuery.isFetching ||
-                      myResumesQuery.isFetching
-                    }
-                    resumes={getTabResumes()}
-                  />
-                  <div className="my-4 flex justify-center">
-                    <Pagination
-                      current={currentPage}
-                      end={getTabTotalPages()}
-                      label="pagination"
-                      start={1}
-                      onSelect={(page) => setCurrentPage(page)}
-                    />
-                  </div>
+                  <ResumeListItems resumes={getTabResumes()} />
+                  {getTabTotalPages() > 1 && (
+                    <div className="my-4 flex justify-center">
+                      <Pagination
+                        current={currentPage}
+                        end={getTabTotalPages()}
+                        label="pagination"
+                        start={1}
+                        onSelect={(page) => setCurrentPage(page)}
+                      />
+                    </div>
+                  )}
                 </>
               )}
             </div>

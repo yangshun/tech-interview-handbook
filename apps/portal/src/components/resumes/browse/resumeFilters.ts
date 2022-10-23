@@ -57,7 +57,7 @@ export const BROWSE_TABS_VALUES = {
 export const SORT_OPTIONS: Record<string, string> = {
   latest: 'Latest',
   popular: 'Popular',
-  topComments: 'Top Comments',
+  topComments: 'Most Comments',
 };
 
 export const ROLE: Array<FilterOption<RoleFilter>> = [

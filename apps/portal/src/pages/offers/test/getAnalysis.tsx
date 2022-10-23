@@ -5,7 +5,7 @@ import { trpc } from '~/utils/trpc';
 function GetAnalysis() {
   const analysis = trpc.useQuery([
     'offers.analysis.get',
-    { profileId: 'cl9j50xzk008vutfqg6mta2ey' },
+    { profileId: 'cl9jj2ks1001li9fn9np47wjr' },
   ]);
 
   return <div>{JSON.stringify(analysis.data)}</div>;

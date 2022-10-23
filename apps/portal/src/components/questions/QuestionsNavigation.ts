@@ -1,9 +1,10 @@
 import type { ProductNavigationItems } from '~/components/global/ProductNavigation';
 
 const navigation: ProductNavigationItems = [
-  { href: '/questions', name: 'My Lists' },
-  { href: '/questions', name: 'My Questions' },
-  { href: '/questions', name: 'History' },
+  { href: '/questions/browse', name: 'Browse' },
+  { href: '/questions/lists', name: 'My Lists' },
+  { href: '/questions/my-questions', name: 'My Questions' },
+  { href: '/questions/history', name: 'History' },
 ];
 
 const config = {

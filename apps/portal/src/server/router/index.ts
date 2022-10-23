@@ -10,6 +10,7 @@ import { protectedExampleRouter } from './protected-example-router';
 import { questionsAnswerCommentRouter } from './questions-answer-comment-router';
 import { questionsAnswerRouter } from './questions-answer-router';
 import { questionsQuestionCommentRouter } from './questions-question-comment-router';
+import { questionsQuestionEncounterRouter } from './questions-question-encounter-router';
 import { questionsQuestionRouter } from './questions-question-router';
 import { resumeCommentsRouter } from './resumes/resumes-comments-router';
 import { resumesCommentsUserRouter } from './resumes/resumes-comments-user-router';
@@ -40,6 +41,7 @@ export const appRouter = createRouter()
   .merge('questions.answers.comments.', questionsAnswerCommentRouter)
   .merge('questions.answers.', questionsAnswerRouter)
   .merge('questions.questions.comments.', questionsQuestionCommentRouter)
+  .merge('questions.questions.encounters.', questionsQuestionEncounterRouter)
   .merge('questions.questions.', questionsQuestionRouter)
   .merge('offers.', offersRouter)
   .merge('offers.profile.', offersProfileRouter)

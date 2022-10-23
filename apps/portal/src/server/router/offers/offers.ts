@@ -5,7 +5,7 @@ import {
   dashboardOfferDtoMapper,
   getOffersResponseMapper,
 } from '~/mappers/offers-mappers';
-import { convertWithDate } from '~/utils/offers/currency/currency-exchange';
+import { convertWithDate } from '~/utils/offers/currency/currencyExchange';
 import { Currency } from '~/utils/offers/currency/CurrencyEnum';
 import { createValidationRegex } from '~/utils/offers/zodRegex';
 

@@ -3,13 +3,18 @@ import { Spinner } from '@tih/ui';
 
 import EducationCard from '~/components/offers/profile/EducationCard';
 import OfferCard from '~/components/offers/profile/OfferCard';
-import type { BackgroundCard, OfferEntity } from '~/components/offers/types';
-import { EducationBackgroundType } from '~/components/offers/types';
+import type {
+  BackgroundDisplayData,
+  OfferDisplayData,
+} from '~/components/offers/types';
+
+import type { ProfileAnalysis } from '~/types/offers';
 
 type ProfileHeaderProps = Readonly<{
-  background?: BackgroundCard;
+  analysis?: ProfileAnalysis;
+  background?: BackgroundDisplayData;
   isLoading: boolean;
-  offers: Array<OfferEntity>;
+  offers: Array<OfferDisplayData>;
   selectedTab: string;
 }>;
 
@@ -52,7 +57,7 @@ export default function ProfileDetails({
               <BriefcaseIcon className="mr-1 h-5" />
               <span className="font-bold">Work Experience</span>
             </div>
-            <OfferCard offer={background?.experiences[0]} />
+            <OfferCard offer={background.experiences[0]} />
           </>
         )}
         {background?.educations && background?.educations.length > 0 && (
@@ -61,15 +66,7 @@ export default function ProfileDetails({
               <AcademicCapIcon className="mr-1 h-5" />
               <span className="font-bold">Education</span>
             </div>
-            <EducationCard
-              education={{
-                endDate: background.educations[0].endDate,
-                field: background.educations[0].field,
-                school: background.educations[0].school,
-                startDate: background.educations[0].startDate,
-                type: EducationBackgroundType.Bachelor,
-              }}
-            />
+            <EducationCard education={background.educations[0]} />
           </>
         )}
       </>

@@ -84,7 +84,7 @@ export default function OfferProfileSave({
             onClick={saveProfile}
           />
         </div>
-        <div className="mb-10">
+        <div>
           <Button
             icon={EyeIcon}
             label="View your profile"

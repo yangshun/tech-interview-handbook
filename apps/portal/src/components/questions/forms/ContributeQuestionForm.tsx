@@ -1,26 +1,26 @@
 import { startOfMonth } from 'date-fns';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { CalendarDaysIcon, UserIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
 import {
   Button,
   CheckboxInput,
-  Collapsible,
+  HorizontalDivider,
   Select,
   TextArea,
-  TextInput,
 } from '@tih/ui';
 
-import { QUESTION_TYPES } from '~/utils/questions/constants';
+import { LOCATIONS, QUESTION_TYPES, ROLES } from '~/utils/questions/constants';
 import {
   useFormRegister,
   useSelectRegister,
 } from '~/utils/questions/useFormRegister';
 
-import CompaniesTypeahead from '../shared/CompaniesTypeahead';
-import type { Month } from '../shared/MonthYearPicker';
-import MonthYearPicker from '../shared/MonthYearPicker';
+import CompanyTypeahead from '../typeahead/CompanyTypeahead';
+import LocationTypeahead from '../typeahead/LocationTypeahead';
+import RoleTypeahead from '../typeahead/RoleTypeahead';
+import type { Month } from '../../shared/MonthYearPicker';
+import MonthYearPicker from '../../shared/MonthYearPicker';
 
 export type ContributeQuestionData = {
   company: string;
@@ -59,8 +59,17 @@ export default function ContributeQuestionForm({
   };
   return (
     <form
-      className=" flex flex-1 flex-col items-stretch justify-center pb-[50px]"
+      className="flex flex-1 flex-col items-stretch justify-center gap-y-4"
       onSubmit={handleSubmit(onSubmit)}>
+      <div className="min-w-[113px] max-w-[113px] flex-1">
+        <Select
+          defaultValue="coding"
+          label="Type"
+          options={QUESTION_TYPES}
+          required={true}
+          {...selectRegister('questionType')}
+        />
+      </div>
       <TextArea
         label="Question Prompt"
         placeholder="Contribute a question"
@@ -68,40 +77,41 @@ export default function ContributeQuestionForm({
         rows={5}
         {...register('questionContent')}
       />
-      <div className="mt-3 mb-1 flex flex-wrap items-end gap-2">
-        <div className="mr-2 min-w-[113px] max-w-[113px] flex-1">
-          <Select
-            defaultValue="coding"
-            label="Type"
-            options={QUESTION_TYPES}
-            required={true}
-            {...selectRegister('questionType')}
-          />
-        </div>
-        <div className="min-w-[150px] max-w-[300px] flex-1">
+      <HorizontalDivider />
+      <h2 className="text-md text-primary-800 font-semibold">
+        Additional information
+      </h2>
+      <div className="flex flex-col flex-wrap items-stretch gap-2 sm:flex-row sm:items-end">
+        <div className="flex-1 sm:min-w-[150px] sm:max-w-[300px]">
           <Controller
             control={control}
-            name="company"
+            name="location"
             render={({ field }) => (
-              <CompaniesTypeahead
-                onSelect={({ id }) => {
-                  field.onChange(id);
+              <LocationTypeahead
+                required={true}
+                onSelect={(option) => {
+                  field.onChange(option.value);
                 }}
+                {...field}
+                value={LOCATIONS.find(
+                  (location) => location.value === field.value,
+                )}
               />
             )}
           />
         </div>
-
-        <div className="min-w-[150px] max-w-[300px] flex-1">
+        <div className="flex-1 sm:min-w-[150px] sm:max-w-[300px]">
           <Controller
             control={control}
             name="date"
             render={({ field }) => (
               <MonthYearPicker
+                monthRequired={true}
                 value={{
-                  month: (field.value.getMonth() + 1) as Month,
+                  month: ((field.value.getMonth() as number) + 1) as Month,
                   year: field.value.getFullYear(),
                 }}
+                yearRequired={true}
                 onChange={({ month, year }) =>
                   field.onChange(startOfMonth(new Date(year, month - 1)))
                 }
@@ -110,28 +120,38 @@ export default function ContributeQuestionForm({
           />
         </div>
       </div>
-      <Collapsible defaultOpen={true} label="Additional info">
-        <div className="justify-left flex flex-wrap items-end gap-2">
-          <div className="min-w-[150px] max-w-[300px] flex-1">
-            <TextInput
-              label="Location"
-              required={true}
-              startAddOn={CalendarDaysIcon}
-              startAddOnType="icon"
-              {...register('location')}
-            />
-          </div>
-          <div className="min-w-[150px] max-w-[200px] flex-1">
-            <TextInput
-              label="Role"
-              required={true}
-              startAddOn={UserIcon}
-              startAddOnType="icon"
-              {...register('role')}
-            />
-          </div>
+      <div className="flex flex-col flex-wrap items-stretch gap-2 sm:flex-row sm:items-end">
+        <div className="flex-1 sm:min-w-[150px] sm:max-w-[300px]">
+          <Controller
+            control={control}
+            name="company"
+            render={({ field }) => (
+              <CompanyTypeahead
+                required={true}
+                onSelect={({ id }) => {
+                  field.onChange(id);
+                }}
+              />
+            )}
+          />
         </div>
-      </Collapsible>
+        <div className="flex-1 sm:min-w-[150px] sm:max-w-[200px]">
+          <Controller
+            control={control}
+            name="role"
+            render={({ field }) => (
+              <RoleTypeahead
+                required={true}
+                onSelect={(option) => {
+                  field.onChange(option.value);
+                }}
+                {...field}
+                value={ROLES.find((role) => role.value === field.value)}
+              />
+            )}
+          />
+        </div>
+      </div>
       {/* <div className="w-full">
         <HorizontalDivider />
       </div>
@@ -151,15 +171,20 @@ export default function ContributeQuestionForm({
           }}
         />
       </div> */}
-      <div className="bg-primary-50 fixed bottom-0 left-0 w-full px-4 py-3 sm:flex sm:flex-row sm:justify-between sm:px-6">
-        <div className="mb-1 flex">
+      <div
+        className="bg-primary-50 flex w-full flex-col gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)] sm:flex-row sm:justify-between"
+        style={{
+          // Hack to make the background bleed outside the container
+          clipPath: 'inset(0 -100vmax)',
+        }}>
+        <div className="my-2 flex sm:my-0">
           <CheckboxInput
             label="I have checked that my question is new"
             value={canSubmit}
             onChange={handleCheckSimilarQuestions}
           />
         </div>
-        <div className=" flex gap-x-2">
+        <div className="flex gap-x-2">
           <button
             className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
             type="button"
