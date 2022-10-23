@@ -65,7 +65,7 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
           </div>
           <div className="mt-2 text-slate-400">{resumeInfo.location}</div>
         </div>
-        <ChevronRightIcon className="col-span-1 w-8 self-center justify-self-center" />
+        <ChevronRightIcon className="col-span-1 w-8 self-center justify-self-center text-slate-400" />
       </div>
     </Link>
   );

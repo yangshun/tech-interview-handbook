@@ -15,6 +15,7 @@
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.11",
     "@next-auth/prisma-adapter": "^1.0.4",
+    "@popperjs/core": "^2.11.6",
     "@prisma/client": "^4.4.0",
     "@supabase/supabase-js": "^1.35.7",
     "@tih/ui": "*",
@@ -33,6 +34,8 @@
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.36.1",
     "react-pdf": "^5.7.2",
+    "react-popper": "^2.3.0",
+    "react-popper-tooltip": "^4.4.2",
     "react-query": "^3.39.2",
     "superjson": "^1.10.0",
     "zod": "^3.18.0"

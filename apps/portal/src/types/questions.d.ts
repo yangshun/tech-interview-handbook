@@ -8,6 +8,7 @@ export type Question = {
   numAnswers: number;
   numComments: number;
   numVotes: number;
+  receivedCount: number;
   seenAt: Date;
   type: QuestionsQuestionType;
   updatedAt: Date;

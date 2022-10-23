@@ -1,13 +1,10 @@
+import type { JobType } from '@prisma/client';
+
 import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
 /*
  *  Offer Profile
  */
-
-export enum JobType {
-  FullTime = 'FULLTIME',
-  Intern = 'INTERN',
-}
 
 export const JobTypeLabel = {
   FULLTIME: 'Full-time',
@@ -26,17 +23,20 @@ export enum EducationBackgroundType {
 
 export type OffersProfilePostData = {
   background: BackgroundPostData;
+  id?: string;
   offers: Array<OfferPostData>;
 };
 
 export type OffersProfileFormData = {
   background: BackgroundPostData;
+  id?: string;
   offers: Array<OfferFormData>;
 };
 
 export type BackgroundPostData = {
   educations: Array<EducationPostData>;
   experiences: Array<ExperiencePostData>;
+  id?: string;
   specificYoes: Array<SpecificYoePostData>;
   totalYoe: number;
 };
@@ -44,6 +44,7 @@ export type BackgroundPostData = {
 type ExperiencePostData = {
   companyId?: string | null;
   durationInMonths?: number | null;
+  id?: string;
   jobType?: string | null;
   level?: string | null;
   location?: string | null;
@@ -57,6 +58,7 @@ type ExperiencePostData = {
 type EducationPostData = {
   endDate?: Date | null;
   field?: string | null;
+  id?: string;
   school?: string | null;
   startDate?: Date | null;
   type?: string | null;
@@ -64,6 +66,7 @@ type EducationPostData = {
 
 type SpecificYoePostData = {
   domain: string;
+  id?: string;
   yoe: number;
 };
 
@@ -72,7 +75,8 @@ type SpecificYoe = SpecificYoePostData;
 export type OfferPostData = {
   comments: string;
   companyId: string;
-  jobType: string;
+  id?: string;
+  jobType: JobType;
   location: string;
   monthYearReceived: Date;
   negotiationStrategy: string;
@@ -87,6 +91,7 @@ export type OfferFormData = Omit<OfferPostData, 'monthYearReceived'> & {
 export type OfferFullTimePostData = {
   baseSalary: Money;
   bonus: Money;
+  id?: string;
   level: string;
   specialization: string;
   stocks: Money;
@@ -95,6 +100,7 @@ export type OfferFullTimePostData = {
 };
 
 export type OfferInternPostData = {
+  id?: string;
   internshipCycle: string;
   monthlySalary: Money;
   specialization: string;
@@ -104,40 +110,41 @@ export type OfferInternPostData = {
 
 export type Money = {
   currency: string;
+  id?: string;
   value: number;
 };
 
-type EducationDisplay = {
-  endDate?: string;
-  field: string;
-  school: string;
-  startDate?: string;
-  type: string;
+export type EducationDisplayData = {
+  endDate?: string | null;
+  field?: string | null;
+  school?: string | null;
+  startDate?: string | null;
+  type?: string | null;
 };
 
-export type OfferEntity = {
-  base?: string;
-  bonus?: string;
-  companyName?: string;
-  duration?: string;
+export type OfferDisplayData = {
+  base?: string | null;
+  bonus?: string | null;
+  companyName?: string | null;
+  duration?: number | null;
   id?: string;
-  jobLevel?: string;
-  jobTitle?: string;
-  location?: string;
-  monthlySalary?: string;
-  negotiationStrategy?: string;
-  otherComment?: string;
-  receivedMonth?: string;
-  stocks?: string;
-  totalCompensation?: string;
+  jobLevel?: string | null;
+  jobTitle?: string | null;
+  location?: string | null;
+  monthlySalary?: string | null;
+  negotiationStrategy?: string | null;
+  otherComment?: string | null;
+  receivedMonth?: string | null;
+  stocks?: string | null;
+  totalCompensation?: string | null;
 };
 
-export type BackgroundCard = {
-  educations: Array<EducationDisplay>;
-  experiences: Array<OfferEntity>;
+export type BackgroundDisplayData = {
+  educations: Array<EducationDisplayData>;
+  experiences: Array<OfferDisplayData>;
   profileName: string;
   specificYoes: Array<SpecificYoe>;
-  totalYoe: string;
+  totalYoe: number;
 };
 
 export type CommentEntity = {

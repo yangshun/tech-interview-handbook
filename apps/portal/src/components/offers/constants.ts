@@ -110,9 +110,30 @@ export const educationFieldOptions = [
 ];
 
 export enum FieldError {
-  NonNegativeNumber = 'Please fill in a non-negative number in this field.',
-  Number = 'Please fill in a number in this field.',
-  Required = 'Please fill in this field.',
+  NON_NEGATIVE_NUMBER = 'Please fill in a non-negative number in this field.',
+  NUMBER = 'Please fill in a number in this field.',
+  REQUIRED = 'Please fill in this field.',
 }
 
 export const OVERALL_TAB = 'Overall';
+
+export enum ProfileDetailTab {
+  ANALYSIS = 'Offer Engine Analysis',
+  BACKGROUND = 'Background',
+  OFFERS = 'Offers',
+}
+
+export const profileDetailTabs = [
+  {
+    label: ProfileDetailTab.OFFERS,
+    value: ProfileDetailTab.OFFERS,
+  },
+  {
+    label: ProfileDetailTab.BACKGROUND,
+    value: ProfileDetailTab.BACKGROUND,
+  },
+  {
+    label: ProfileDetailTab.ANALYSIS,
+    value: ProfileDetailTab.ANALYSIS,
+  },
+];

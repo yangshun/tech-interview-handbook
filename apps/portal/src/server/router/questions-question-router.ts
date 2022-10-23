@@ -7,8 +7,6 @@ import { createProtectedRouter } from './context';
 import type { Question } from '~/types/questions';
 import { SortOrder, SortType } from '~/types/questions.d';
 
-const TWO_WEEK_IN_MS = 12096e5;
-
 export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
@@ -22,7 +20,7 @@ export const questionsQuestionRouter = createProtectedRouter()
       roles: z.string().array(),
       sortOrder: z.nativeEnum(SortOrder),
       sortType: z.nativeEnum(SortType),
-      startDate: z.date().default(new Date(Date.now() - TWO_WEEK_IN_MS)),
+      startDate: z.date().optional(),
       upvoteCursor: z.string().optional(),
     }),
     async resolve({ ctx, input }) {
@@ -128,6 +126,7 @@ export const questionsQuestionRouter = createProtectedRouter()
           },
         },
       });
+      
       const lastQuestion = questionsData[input.pageSize - 1];
       const nextIdCursor = lastQuestion.id;
       const nextLastSeenCursor = input.sortType === SortType.NEW ? lastQuestion.lastSeenAt : undefined;
@@ -192,6 +191,7 @@ export const questionsQuestionRouter = createProtectedRouter()
           numComments: data._count.comments,
           numVotes: votes,
           seenAt: latestSeenAt,
+          receivedCount: data.encounters.length,
           type: data.questionType,
           updatedAt: data.updatedAt,
           user: data.user?.name ?? '',
@@ -301,6 +301,7 @@ export const questionsQuestionRouter = createProtectedRouter()
         numAnswers: questionData._count.answers,
         numComments: questionData._count.comments,
         numVotes: votes,
+        receivedCount: questionData.encounters.length,
         seenAt: questionData.encounters[0].seenAt,
         type: questionData.questionType,
         updatedAt: questionData.updatedAt,
