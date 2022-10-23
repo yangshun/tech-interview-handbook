@@ -8,6 +8,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.7",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss": "^3.1.8"
   }
 }

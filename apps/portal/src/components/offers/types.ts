@@ -1,17 +1,14 @@
+import type { JobType } from '@prisma/client';
+
 import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
 /*
  *  Offer Profile
  */
 
-export enum JobType {
-  FullTime = 'FULLTIME',
-  Internship = 'INTERNSHIP',
-}
-
 export const JobTypeLabel = {
   FULLTIME: 'Full-time',
-  INTERNSHIP: 'Internship',
+  INTERN: 'Internship',
 };
 
 export enum EducationBackgroundType {
@@ -20,18 +17,81 @@ export enum EducationBackgroundType {
   Masters = 'Masters',
   PhD = 'PhD',
   Professional = 'Professional',
-  Seconday = 'Secondary',
+  Secondary = 'Secondary',
   SelfTaught = 'Self-taught',
 }
 
-export type Money = {
-  currency: string;
-  value: number;
+export type OffersProfilePostData = {
+  background: BackgroundPostData;
+  id?: string;
+  offers: Array<OfferPostData>;
 };
 
-type FullTimeJobData = {
-  base: Money;
+export type OffersProfileFormData = {
+  background: BackgroundPostData;
+  id?: string;
+  offers: Array<OfferFormData>;
+};
+
+export type BackgroundPostData = {
+  educations: Array<EducationPostData>;
+  experiences: Array<ExperiencePostData>;
+  id?: string;
+  specificYoes: Array<SpecificYoePostData>;
+  totalYoe: number;
+};
+
+type ExperiencePostData = {
+  companyId?: string | null;
+  durationInMonths?: number | null;
+  id?: string;
+  jobType?: string | null;
+  level?: string | null;
+  location?: string | null;
+  monthlySalary?: Money | null;
+  specialization?: string | null;
+  title?: string | null;
+  totalCompensation?: Money | null;
+  totalCompensationId?: string | null;
+};
+
+type EducationPostData = {
+  endDate?: Date | null;
+  field?: string | null;
+  id?: string;
+  school?: string | null;
+  startDate?: Date | null;
+  type?: string | null;
+};
+
+type SpecificYoePostData = {
+  domain: string;
+  id?: string;
+  yoe: number;
+};
+
+type SpecificYoe = SpecificYoePostData;
+
+export type OfferPostData = {
+  comments: string;
+  companyId: string;
+  id?: string;
+  jobType: JobType;
+  location: string;
+  monthYearReceived: Date;
+  negotiationStrategy: string;
+  offersFullTime?: OfferFullTimePostData | null;
+  offersIntern?: OfferInternPostData | null;
+};
+
+export type OfferFormData = Omit<OfferPostData, 'monthYearReceived'> & {
+  monthYearReceived: MonthYear;
+};
+
+export type OfferFullTimePostData = {
+  baseSalary: Money;
   bonus: Money;
+  id?: string;
   level: string;
   specialization: string;
   stocks: Money;
@@ -39,7 +99,8 @@ type FullTimeJobData = {
   totalCompensation: Money;
 };
 
-type InternshipJobData = {
+export type OfferInternPostData = {
+  id?: string;
   internshipCycle: string;
   monthlySalary: Money;
   specialization: string;
@@ -47,114 +108,52 @@ type InternshipJobData = {
   title: string;
 };
 
-type OfferDetailsGeneralData = {
-  comments: string;
-  companyId: string;
-  jobType: string;
-  location: string;
-  monthYearReceived: MonthYear;
-  negotiationStrategy: string;
-};
-
-export type FullTimeOfferDetailsFormData = OfferDetailsGeneralData & {
-  job: FullTimeJobData;
-};
-
-export type InternshipOfferDetailsFormData = OfferDetailsGeneralData & {
-  job: InternshipJobData;
-};
-
-export type OfferDetailsFormData =
-  | FullTimeOfferDetailsFormData
-  | InternshipOfferDetailsFormData;
-
-export type OfferDetailsPostData = Omit<
-  OfferDetailsFormData,
-  'monthYearReceived'
-> & {
-  monthYearReceived: Date;
-};
-
-type SpecificYoe = {
-  domain: string;
-  yoe: number;
-};
-
-type FullTimeExperience = {
-  level?: string;
-  totalCompensation?: Money;
-};
-
-type InternshipExperience = {
-  monthlySalary?: Money;
-};
-
-type GeneralExperience = {
-  companyId?: string;
-  durationInMonths?: number;
-  jobType?: string;
-  specialization?: string;
-  title?: string;
-};
-
-export type Experience =
-  | (FullTimeExperience & GeneralExperience)
-  | (GeneralExperience & InternshipExperience);
-
-type Education = {
-  endDate?: Date;
-  field?: string;
-  school?: string;
-  startDate?: Date;
-  type?: string;
-};
-
-type BackgroundFormData = {
-  educations: Array<Education>;
-  experiences: Array<Experience>;
-  specificYoes: Array<SpecificYoe>;
-  totalYoe?: number;
-};
-
-export type OfferProfileFormData = {
-  background: BackgroundFormData;
-  offers: Array<OfferDetailsFormData>;
-};
-
-export type OfferProfilePostData = {
-  background: BackgroundFormData;
-  offers: Array<OfferDetailsPostData>;
-};
-
-type EducationDisplay = {
-  endDate?: string;
-  field: string;
-  school: string;
-  startDate?: string;
-  type: string;
-};
-
-export type OfferEntity = {
-  base?: string;
-  bonus?: string;
-  companyName?: string;
-  duration?: string;
+export type Money = {
+  currency: string;
   id?: string;
-  jobLevel?: string;
-  jobTitle?: string;
-  location?: string;
-  monthlySalary?: string;
-  negotiationStrategy?: string;
-  otherComment?: string;
-  receivedMonth?: string;
-  stocks?: string;
-  totalCompensation?: string;
+  value: number;
 };
 
-export type BackgroundCard = {
-  educations: Array<EducationDisplay>;
-  experiences: Array<OfferEntity>;
+export type EducationDisplayData = {
+  endDate?: string | null;
+  field?: string | null;
+  school?: string | null;
+  startDate?: string | null;
+  type?: string | null;
+};
+
+export type OfferDisplayData = {
+  base?: string | null;
+  bonus?: string | null;
+  companyName?: string | null;
+  duration?: number | null;
+  id?: string;
+  jobLevel?: string | null;
+  jobTitle?: string | null;
+  location?: string | null;
+  monthlySalary?: string | null;
+  negotiationStrategy?: string | null;
+  otherComment?: string | null;
+  receivedMonth?: string | null;
+  stocks?: string | null;
+  totalCompensation?: string | null;
+};
+
+export type BackgroundDisplayData = {
+  educations: Array<EducationDisplayData>;
+  experiences: Array<OfferDisplayData>;
   profileName: string;
   specificYoes: Array<SpecificYoe>;
-  totalYoe: string;
+  totalYoe: number;
+};
+
+export type CommentEntity = {
+  createdAt: Date;
+  id: string;
+  message: string;
+  profileId: string;
+  replies?: Array<CommentEntity>;
+  replyingToId: string;
+  userId: string;
+  username: string;
 };

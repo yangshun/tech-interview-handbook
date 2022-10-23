@@ -5,29 +5,81 @@ import { createProtectedRouter } from '../context';
 import type { Resume } from '~/types/resume';
 
 export const resumesResumeUserRouter = createProtectedRouter()
-  .mutation('create', {
+  .mutation('upsert', {
     // TODO: Use enums for experience, location, role
     input: z.object({
       additionalInfo: z.string().optional(),
       experience: z.string(),
+      id: z.string().optional(),
       location: z.string(),
       role: z.string(),
       title: z.string(),
       url: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const userId = ctx.session?.user.id;
-      return await ctx.prisma.resumesResume.create({
-        data: {
-          ...input,
+      const userId = ctx.session.user.id;
+
+      return await ctx.prisma.resumesResume.upsert({
+        create: {
+          additionalInfo: input.additionalInfo,
+          experience: input.experience,
+          location: input.location,
+          role: input.role,
+          title: input.title,
+          url: input.url,
           userId,
+        },
+        update: {
+          additionalInfo: input.additionalInfo,
+          experience: input.experience,
+          location: input.location,
+          role: input.role,
+          title: input.title,
+          url: input.url,
+          userId,
+        },
+        where: {
+          id: input.id ?? '',
         },
       });
     },
   })
   .query('findUserStarred', {
-    async resolve({ ctx }) {
-      const userId = ctx.session?.user?.id;
+    input: z.object({
+      experienceFilters: z.string().array(),
+      locationFilters: z.string().array(),
+      numComments: z.number().optional(),
+      roleFilters: z.string().array(),
+      searchValue: z.string(),
+      skip: z.number(),
+      sortOrder: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session.user.id;
+      const {
+        roleFilters,
+        locationFilters,
+        experienceFilters,
+        searchValue,
+        sortOrder,
+        numComments,
+        skip,
+      } = input;
+      const totalRecords = await ctx.prisma.resumesStar.count({
+        where: {
+          resume: {
+            ...(numComments === 0 && {
+              comments: {
+                none: {},
+              },
+            }),
+            experience: { in: experienceFilters },
+            location: { in: locationFilters },
+            role: { in: roleFilters },
+          },
+          userId,
+        },
+      });
       const resumeStarsData = await ctx.prisma.resumesStar.findMany({
         include: {
           resume: {
@@ -46,19 +98,53 @@ export const resumesResumeUserRouter = createProtectedRouter()
             },
           },
         },
-        orderBy: {
-          createdAt: 'desc',
-        },
+        orderBy:
+          sortOrder === 'latest'
+            ? {
+                resume: {
+                  createdAt: 'desc',
+                },
+              }
+            : sortOrder === 'popular'
+            ? {
+                resume: {
+                  stars: {
+                    _count: 'desc',
+                  },
+                },
+              }
+            : {
+                resume: {
+                  comments: {
+                    _count: 'desc',
+                  },
+                },
+              },
+        skip,
+        take: 10,
         where: {
+          resume: {
+            ...(numComments === 0 && {
+              comments: {
+                none: {},
+              },
+            }),
+            experience: { in: experienceFilters },
+            location: { in: locationFilters },
+            role: { in: roleFilters },
+            title: { contains: searchValue, mode: 'insensitive' },
+          },
           userId,
         },
       });
-      return resumeStarsData.map((rs) => {
+
+      const mappedResumeData = resumeStarsData.map((rs) => {
         const resume: Resume = {
           additionalInfo: rs.resume.additionalInfo,
           createdAt: rs.resume.createdAt,
           experience: rs.resume.experience,
           id: rs.resume.id,
+          isStarredByUser: true,
           location: rs.resume.location,
           numComments: rs.resume._count.comments,
           numStars: rs.resume._count.stars,
@@ -69,11 +155,43 @@ export const resumesResumeUserRouter = createProtectedRouter()
         };
         return resume;
       });
+      return { mappedResumeData, totalRecords };
     },
   })
   .query('findUserCreated', {
-    async resolve({ ctx }) {
-      const userId = ctx.session?.user?.id;
+    input: z.object({
+      experienceFilters: z.string().array(),
+      locationFilters: z.string().array(),
+      numComments: z.number().optional(),
+      roleFilters: z.string().array(),
+      searchValue: z.string(),
+      skip: z.number(),
+      sortOrder: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session.user.id;
+      const {
+        roleFilters,
+        locationFilters,
+        experienceFilters,
+        sortOrder,
+        searchValue,
+        numComments,
+        skip,
+      } = input;
+      const totalRecords = await ctx.prisma.resumesResume.count({
+        where: {
+          ...(numComments === 0 && {
+            comments: {
+              none: {},
+            },
+          }),
+          experience: { in: experienceFilters },
+          location: { in: locationFilters },
+          role: { in: roleFilters },
+          userId,
+        },
+      });
       const resumesData = await ctx.prisma.resumesResume.findMany({
         include: {
           _count: {
@@ -82,25 +200,51 @@ export const resumesResumeUserRouter = createProtectedRouter()
               stars: true,
             },
           },
+          stars: {
+            where: {
+              userId,
+            },
+          },
           user: {
             select: {
               name: true,
             },
           },
         },
-        orderBy: {
-          createdAt: 'desc',
-        },
+        orderBy:
+          sortOrder === 'latest'
+            ? {
+                createdAt: 'desc',
+              }
+            : sortOrder === 'popular'
+            ? {
+                stars: {
+                  _count: 'desc',
+                },
+              }
+            : { comments: { _count: 'desc' } },
+        skip,
+        take: 10,
         where: {
+          ...(numComments === 0 && {
+            comments: {
+              none: {},
+            },
+          }),
+          experience: { in: experienceFilters },
+          location: { in: locationFilters },
+          role: { in: roleFilters },
+          title: { contains: searchValue, mode: 'insensitive' },
           userId,
         },
       });
-      return resumesData.map((r) => {
+      const mappedResumeData = resumesData.map((r) => {
         const resume: Resume = {
           additionalInfo: r.additionalInfo,
           createdAt: r.createdAt,
           experience: r.experience,
           id: r.id,
+          isStarredByUser: r.stars.length > 0,
           location: r.location,
           numComments: r._count.comments,
           numStars: r._count.stars,
@@ -111,19 +255,6 @@ export const resumesResumeUserRouter = createProtectedRouter()
         };
         return resume;
       });
-    },
-  })
-  .query('isResumeStarred', {
-    input: z.object({
-      resumeId: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const userId = ctx.session?.user?.id;
-      const { resumeId } = input;
-      return await ctx.prisma.resumesStar.findUnique({
-        where: {
-          userId_resumeId: { resumeId, userId },
-        },
-      });
+      return { mappedResumeData, totalRecords };
     },
   });

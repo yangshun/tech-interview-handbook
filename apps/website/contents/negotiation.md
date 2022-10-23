@@ -32,11 +32,11 @@ If you've received an offer (or even better, offers), congratulations! You may h
 
 If you haven't been negotiating your past offers, or are new to the negotiation game, worry not! There are multiple negotiation services that can help you out. Typically, they'd be well-worth the cost. Had I know about negotiation services in the past, I'd have leveraged them!
 
-### Moonchaser
+### Rora
 
-How Moonchaser works is that you will be guided by their experienced team of professionals throughout the entire salary negotiation process. It's also risk-free because you don't have to pay anything unless you have an increased offer. It's a **no-brainer decision** to get the help of Moonchaser during the offer process - some increase is better than no increase. Don't leave money on the table! Check out [Moonchaser](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation).
+How Rora works is that you will be guided by their experienced team of professionals throughout the entire salary negotiation process. It's also risk-free because you don't have to pay anything unless you have an increased offer. It's a **no-brainer decision** to get the help of Rora during the offer process - some increase is better than no increase. Don't leave money on the table! Check out [Rora](https://www.teamrora.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation).
 
-Things Moonchaser can do for you:
+Things Rora can do for you:
 
 - Help you to negotiate increases even without competing offers
 - Provide tailored advice through their knowledge of compensation ranges at many companies
@@ -45,18 +45,18 @@ Things Moonchaser can do for you:
 - Provide you with live guidance during the recruiter call through chat
 - Introduce you to recruiters at other companies
 
-<a className="button button--primary" href="https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation">Book a free consultation with Moonchaser &nbsp;→</a>
+<a className="button button--primary" href="https://www.teamrora.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation">Book a free consultation with Rora &nbsp;→</a>
 
 <br/>
 <br/>
 
 ### Levels.fyi
 
-[Levels.fyi](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) is most famously known for being a salary database but they also offer complementary services such as salary negotiation where you will be put in-touch with experienced recruiters to help you in the process. How Levels.fyi differs from Moonchaser is that Levels.fyi charges a flat fee whereas Moonchaser takes a percentage of the negotiated difference.
+[Levels.fyi](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) is most famously known for being a salary database but they also offer complementary services such as salary negotiation where you will be put in-touch with experienced recruiters to help you in the process. How Levels.fyi differs from Rora is that Levels.fyi charges a flat fee whereas Rora takes a percentage of the negotiated difference.
 
 :::tip Expert tip
 
-Get paid more. Receive salary negotiation advice from [**Moonchaser**](https://www.moonchaser.io/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) (risk-free) or [**Levels.fyi**](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) and their team of experienced recruiters. Don't leave money on the table 💰!
+Get paid more. Receive salary negotiation advice from [**Rora**](https://www.teamrora.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) (risk-free) or [**Levels.fyi**](https://www.levels.fyi/services/?ref=TechInterviewHandbook&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_negotiation) and their team of experienced recruiters. Don't leave money on the table 💰!
 
 :::
 

@@ -74,6 +74,10 @@ export const useQuestionVote = (id: string) => {
     create: 'questions.questions.createVote',
     deleteKey: 'questions.questions.deleteVote',
     idKey: 'questionId',
+    invalidateKeys: [
+      'questions.questions.getQuestionsByFilter',
+      'questions.questions.getQuestionById',
+    ],
     query: 'questions.questions.getVote',
     update: 'questions.questions.updateVote',
   });
@@ -84,6 +88,10 @@ export const useAnswerVote = (id: string) => {
     create: 'questions.answers.createVote',
     deleteKey: 'questions.answers.deleteVote',
     idKey: 'answerId',
+    invalidateKeys: [
+      'questions.answers.getAnswers',
+      'questions.answers.getAnswerById',
+    ],
     query: 'questions.answers.getVote',
     update: 'questions.answers.updateVote',
   });
@@ -94,6 +102,7 @@ export const useQuestionCommentVote = (id: string) => {
     create: 'questions.questions.comments.createVote',
     deleteKey: 'questions.questions.comments.deleteVote',
     idKey: 'questionCommentId',
+    invalidateKeys: ['questions.questions.comments.getQuestionComments'],
     query: 'questions.questions.comments.getVote',
     update: 'questions.questions.comments.updateVote',
   });
@@ -104,6 +113,7 @@ export const useAnswerCommentVote = (id: string) => {
     create: 'questions.answers.comments.createVote',
     deleteKey: 'questions.answers.comments.deleteVote',
     idKey: 'answerCommentId',
+    invalidateKeys: ['questions.answers.comments.getAnswerComments'],
     query: 'questions.answers.comments.getVote',
     update: 'questions.answers.comments.updateVote',
   });
@@ -113,29 +123,30 @@ type VoteProps<VoteQueryKey extends QueryKey = QueryKey> = {
   create: MutationKey;
   deleteKey: MutationKey;
   idKey: string;
+  invalidateKeys: Array<VoteQueryKey>;
   query: VoteQueryKey;
   update: MutationKey;
+};
+
+type UseVoteMutationContext = {
+  currentData: any;
+  previousData: any;
 };
 
 export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
   id: string,
   opts: VoteProps<VoteQueryKey>,
 ) => {
-  const { create, deleteKey, query, update, idKey } = opts;
+  const { create, deleteKey, query, update, idKey, invalidateKeys } = opts;
   const utils = trpc.useContext();
 
   const onVoteUpdate = useCallback(() => {
     // TODO: Optimise query invalidation
     utils.invalidateQueries([query, { [idKey]: id } as any]);
-    utils.invalidateQueries(['questions.questions.getQuestionsByFilter']);
-    utils.invalidateQueries(['questions.questions.getQuestionById']);
-    utils.invalidateQueries(['questions.answers.getAnswers']);
-    utils.invalidateQueries(['questions.answers.getAnswerById']);
-    utils.invalidateQueries([
-      'questions.questions.comments.getQuestionComments',
-    ]);
-    utils.invalidateQueries(['questions.answers.comments.getAnswerComments']);
-  }, [id, idKey, utils, query]);
+    for (const invalidateKey of invalidateKeys) {
+      utils.invalidateQueries([invalidateKey]);
+    }
+  }, [id, idKey, utils, query, invalidateKeys]);
 
   const { data } = trpc.useQuery([
     query,
@@ -146,16 +157,87 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
 
   const backendVote = data as BackendVote;
 
-  const { mutate: createVote } = trpc.useMutation(create, {
-    onSuccess: onVoteUpdate,
-  });
-  const { mutate: updateVote } = trpc.useMutation(update, {
-    onSuccess: onVoteUpdate,
-  });
+  const { mutate: createVote } = trpc.useMutation<any, UseVoteMutationContext>(
+    create,
+    {
+      onError: (err, variables, context) => {
+        if (context !== undefined) {
+          utils.setQueryData([query], context.previousData);
+        }
+      },
+      onMutate: async (vote) => {
+        await utils.queryClient.cancelQueries([query, { [idKey]: id } as any]);
+        const previousData = utils.queryClient.getQueryData<BackendVote | null>(
+          [query, { [idKey]: id } as any],
+        );
 
-  const { mutate: deleteVote } = trpc.useMutation(deleteKey, {
-    onSuccess: onVoteUpdate,
-  });
+        utils.setQueryData(
+          [
+            query,
+            {
+              [idKey]: id,
+            } as any,
+          ],
+          vote as any,
+        );
+        return { currentData: vote, previousData };
+      },
+      onSettled: onVoteUpdate,
+    },
+  );
+  const { mutate: updateVote } = trpc.useMutation<any, UseVoteMutationContext>(
+    update,
+    {
+      onError: (error, variables, context) => {
+        if (context !== undefined) {
+          utils.setQueryData([query], context.previousData);
+        }
+      },
+      onMutate: async (vote) => {
+        await utils.queryClient.cancelQueries([query, { [idKey]: id } as any]);
+        const previousData = utils.queryClient.getQueryData<BackendVote | null>(
+          [query, { [idKey]: id } as any],
+        );
+
+        utils.setQueryData(
+          [
+            query,
+            {
+              [idKey]: id,
+            } as any,
+          ],
+          vote,
+        );
+        return { currentData: vote, previousData };
+      },
+      onSettled: onVoteUpdate,
+    },
+  );
+
+  const { mutate: deleteVote } = trpc.useMutation<any, UseVoteMutationContext>(
+    deleteKey,
+    {
+      onError: (err, variables, context) => {
+        if (context !== undefined) {
+          utils.setQueryData([query], context.previousData);
+        }
+      },
+      onMutate: async (vote) => {
+        await utils.queryClient.cancelQueries([query, { [idKey]: id } as any]);
+        utils.setQueryData(
+          [
+            query,
+            {
+              [idKey]: id,
+            } as any,
+          ],
+          null as any,
+        );
+        return { currentData: null, previousData: vote };
+      },
+      onSettled: onVoteUpdate,
+    },
+  );
 
   const { handleDownvote, handleUpvote } = createVoteCallbacks(
     backendVote ?? null,

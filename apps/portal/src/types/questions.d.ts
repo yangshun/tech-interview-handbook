@@ -1,3 +1,5 @@
+import type { QuestionsQuestionType } from '@prisma/client';
+
 export type Question = {
   // TODO: company, location, role maps
   company: string;
@@ -7,11 +9,18 @@ export type Question = {
   numAnswers: number;
   numComments: number;
   numVotes: number;
+  receivedCount: number;
   role: string;
   seenAt: Date;
-  type: stringl;
+  type: QuestionsQuestionType;
   updatedAt: Date;
   user: string;
+};
+
+export type AggregatedQuestionEncounter = {
+  companyCounts: Record<string, number>;
+  locationCounts: Record<string, number>;
+  roleCounts: Record<string, number>;
 };
 
 export type AnswerComment = {
@@ -42,3 +51,13 @@ export type QuestionComment = {
   user: string;
   userImage: string;
 };
+
+export enum SortOrder {
+  ASC = 'asc',
+  DESC = 'desc',
+}
+
+export enum SortType {
+  TOP,
+  NEW,
+}

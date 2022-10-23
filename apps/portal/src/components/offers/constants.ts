@@ -5,43 +5,20 @@ export const emptyOption = '----';
 // TODO: use enums
 export const titleOptions = [
   {
-    label: 'Software engineer',
-    value: 'Software engineer',
+    label: 'Software Engineer',
+    value: 'Software Engineer',
   },
   {
-    label: 'Frontend engineer',
-    value: 'Frontend engineer',
+    label: 'Frontend Engineer',
+    value: 'Frontend Engineer',
   },
   {
-    label: 'Backend engineer',
-    value: 'Backend engineer',
+    label: 'Backend Engineer',
+    value: 'Backend Engineer',
   },
   {
-    label: 'Full-stack engineer',
-    value: 'Full-stack engineer',
-  },
-];
-
-export const companyOptions = [
-  {
-    label: 'Amazon',
-    value: 'cl93patjt0000txewdi601mub',
-  },
-  {
-    label: 'Microsoft',
-    value: 'cl93patjt0001txewkglfjsro',
-  },
-  {
-    label: 'Apple',
-    value: 'cl93patjt0002txewf3ug54m8',
-  },
-  {
-    label: 'Google',
-    value: 'cl93patjt0003txewyiaky7xx',
-  },
-  {
-    label: 'Meta',
-    value: 'cl93patjt0004txew88wkcqpu',
+    label: 'Full-stack Engineer',
+    value: 'Full-stack Engineer',
   },
 ];
 
@@ -86,26 +63,26 @@ export const internshipCycleOptions = [
 export const yearOptions = [
   {
     label: '2021',
-    value: '2021',
+    value: 2021,
   },
   {
     label: '2022',
-    value: '2022',
+    value: 2022,
   },
   {
     label: '2023',
-    value: '2023',
+    value: 2023,
   },
   {
     label: '2024',
-    value: '2024',
+    value: 2024,
   },
 ];
 
 export const educationLevelOptions = Object.entries(
   EducationBackgroundType,
-).map(([key, value]) => ({
-  label: key,
+).map(([, value]) => ({
+  label: value,
   value,
 }));
 
@@ -119,13 +96,44 @@ export const educationFieldOptions = [
     value: 'Information Security',
   },
   {
+    label: 'Information Systems',
+    value: 'Information Systems',
+  },
+  {
     label: 'Business Analytics',
     value: 'Business Analytics',
+  },
+  {
+    label: 'Data Science and Analytics',
+    value: 'Data Science and Analytics',
   },
 ];
 
 export enum FieldError {
-  NonNegativeNumber = 'Please fill in a non-negative number in this field.',
-  Number = 'Please fill in a number in this field.',
-  Required = 'Please fill in this field.',
+  NON_NEGATIVE_NUMBER = 'Please fill in a non-negative number in this field.',
+  NUMBER = 'Please fill in a number in this field.',
+  REQUIRED = 'Please fill in this field.',
 }
+
+export const OVERALL_TAB = 'Overall';
+
+export enum ProfileDetailTab {
+  ANALYSIS = 'Offer Engine Analysis',
+  BACKGROUND = 'Background',
+  OFFERS = 'Offers',
+}
+
+export const profileDetailTabs = [
+  {
+    label: ProfileDetailTab.OFFERS,
+    value: ProfileDetailTab.OFFERS,
+  },
+  {
+    label: ProfileDetailTab.BACKGROUND,
+    value: ProfileDetailTab.BACKGROUND,
+  },
+  {
+    label: ProfileDetailTab.ANALYSIS,
+    value: ProfileDetailTab.ANALYSIS,
+  },
+];

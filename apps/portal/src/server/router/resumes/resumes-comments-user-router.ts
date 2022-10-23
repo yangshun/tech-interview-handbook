@@ -10,9 +10,8 @@ type ResumeCommentInput = Readonly<{
   userId: string;
 }>;
 
-export const resumesCommentsUserRouter = createProtectedRouter().mutation(
-  'create',
-  {
+export const resumesCommentsUserRouter = createProtectedRouter()
+  .mutation('create', {
     input: z.object({
       education: z.string(),
       experience: z.string(),
@@ -22,7 +21,7 @@ export const resumesCommentsUserRouter = createProtectedRouter().mutation(
       skills: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const userId = ctx.session?.user?.id;
+      const userId = ctx.session.user.id;
       const { resumeId, education, experience, general, projects, skills } =
         input;
 
@@ -50,5 +49,44 @@ export const resumesCommentsUserRouter = createProtectedRouter().mutation(
         data: comments,
       });
     },
-  },
-);
+  })
+  .mutation('update', {
+    input: z.object({
+      description: z.string(),
+      id: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const { id, description } = input;
+
+      return await ctx.prisma.resumesComment.update({
+        data: {
+          description,
+        },
+        where: {
+          id,
+        },
+      });
+    },
+  })
+  .mutation('reply', {
+    input: z.object({
+      description: z.string(),
+      parentId: z.string(),
+      resumeId: z.string(),
+      section: z.nativeEnum(ResumesSection),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session.user.id;
+      const { description, parentId, resumeId, section } = input;
+
+      return await ctx.prisma.resumesComment.create({
+        data: {
+          description,
+          parentId,
+          resumeId,
+          section,
+          userId,
+        },
+      });
+    },
+  });
