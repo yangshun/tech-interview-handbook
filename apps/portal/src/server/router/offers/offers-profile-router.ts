@@ -707,7 +707,7 @@ export const offersProfileRouter = createRouter()
             // Update existing experience
             await ctx.prisma.offersExperience.update({
               data: {
-                companyId: exp.companyId,
+                companyId: exp.companyId, // TODO: check if can change with connect or whether there is a difference
                 durationInMonths: exp.durationInMonths,
                 level: exp.level,
                 specialization: exp.specialization,
@@ -718,39 +718,83 @@ export const offersProfileRouter = createRouter()
             });
 
             if (exp.monthlySalary) {
-              await ctx.prisma.offersCurrency.update({
-                data: {
-                  baseCurrency: baseCurrencyString,
-                  baseValue: await convert(
-                    exp.monthlySalary.value,
-                    exp.monthlySalary.currency,
-                    baseCurrencyString,
-                  ),
-                  currency: exp.monthlySalary.currency,
-                  value: exp.monthlySalary.value,
-                },
-                where: {
-                  id: exp.monthlySalary.id,
-                },
-              });
+              if (exp.monthlySalary.id) {
+                await ctx.prisma.offersCurrency.update({
+                  data: {
+                    baseCurrency: baseCurrencyString,
+                    baseValue: await convert(
+                      exp.monthlySalary.value,
+                      exp.monthlySalary.currency,
+                      baseCurrencyString,
+                    ),
+                    currency: exp.monthlySalary.currency,
+                    value: exp.monthlySalary.value,
+                  },
+                  where: {
+                    id: exp.monthlySalary.id,
+                  },
+                });
+              } else {
+                await ctx.prisma.offersExperience.update({
+                  data: {
+                    monthlySalary: {
+                      create: {
+                        baseCurrency: baseCurrencyString,
+                        baseValue: await convert(
+                          exp.monthlySalary.value,
+                          exp.monthlySalary.currency,
+                          baseCurrencyString,
+                        ),
+                        currency: exp.monthlySalary.currency,
+                        value: exp.monthlySalary.value,
+                      }
+                    }
+                  },
+                  where: {
+                    id: exp.id,
+                  },
+                });
+              }
             }
 
             if (exp.totalCompensation) {
-              await ctx.prisma.offersCurrency.update({
-                data: {
-                  baseCurrency: baseCurrencyString,
-                  baseValue: await convert(
-                    exp.totalCompensation.value,
-                    exp.totalCompensation.currency,
-                    baseCurrencyString,
-                  ),
-                  currency: exp.totalCompensation.currency,
-                  value: exp.totalCompensation.value,
-                },
-                where: {
-                  id: exp.totalCompensation.id,
-                },
-              });
+              if (exp.totalCompensation.id) {
+                await ctx.prisma.offersCurrency.update({
+                  data: {
+                    baseCurrency: baseCurrencyString,
+                    baseValue: await convert(
+                      exp.totalCompensation.value,
+                      exp.totalCompensation.currency,
+                      baseCurrencyString,
+                    ),
+                    currency: exp.totalCompensation.currency,
+                    value: exp.totalCompensation.value,
+                  },
+                  where: {
+                    id: exp.totalCompensation.id,
+                  },
+                });
+             } else {
+                await ctx.prisma.offersExperience.update({
+                  data: {
+                    totalCompensation: {
+                      create: {
+                        baseCurrency: baseCurrencyString,
+                        baseValue: await convert(
+                          exp.totalCompensation.value,
+                          exp.totalCompensation.currency,
+                          baseCurrencyString,
+                        ),
+                        currency: exp.totalCompensation.currency,
+                        value: exp.totalCompensation.value,
+                      }
+                    }
+                  },
+                  where: {
+                    id: exp.id,
+                  },
+                });
+             }
             }
           } else if (!exp.id) {
             // Create new experience
