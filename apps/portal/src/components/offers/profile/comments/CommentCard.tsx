@@ -43,6 +43,10 @@ export default function CommentCard({
   });
 
   function handleReply() {
+    if (!currentReply.length) {
+      return;
+    }
+
     if (token && token.length > 0) {
       // If it is with edit permission, send comment to API with username = null
       createCommentMutation.mutate(
@@ -132,6 +136,7 @@ export default function CommentCard({
               <div className="mt-2 flex w-full justify-end">
                 <div className="w-fit">
                   <Button
+                    disabled={!currentReply.length}
                     display="block"
                     isLabelHidden={false}
                     isLoading={createCommentMutation.isLoading}
