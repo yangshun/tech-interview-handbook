@@ -79,6 +79,13 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
           },
         });
 
+        if (questionToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Question does not exist',
+          });
+        }
+
         if (questionToUpdate!.lastSeenAt < input.seenAt) {
           await tx.questionsQuestion.update({
             data: {
