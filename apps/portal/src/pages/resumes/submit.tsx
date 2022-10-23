@@ -18,11 +18,10 @@ import {
   TextInput,
 } from '@tih/ui';
 
-import type { Filter } from '~/components/resumes/browse/resumeFilters';
 import {
-  EXPERIENCE,
-  LOCATION,
-  ROLE,
+  EXPERIENCES,
+  LOCATIONS,
+  ROLES,
 } from '~/components/resumes/browse/resumeFilters';
 import SubmissionGuidelines from '~/components/resumes/submit-form/SubmissionGuidelines';
 
@@ -46,12 +45,6 @@ type IFormInput = {
   role: string;
   title: string;
 };
-
-const selectors: Array<Filter> = [
-  { id: 'role', label: 'Role', options: ROLE },
-  { id: 'experience', label: 'Experience Level', options: EXPERIENCE },
-  { id: 'location', label: 'Location', options: LOCATION },
-];
 
 type InitFormDetails = {
   additionalInfo?: string;
@@ -261,138 +254,153 @@ export default function SubmitResumeForm({
             onClose={() => setIsDialogShown(false)}>
             Note that your current input will not be saved!
           </Dialog>
-          <div className="mx-20 space-y-4 py-8">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <h1 className="mb-4 text-2xl font-bold">Upload a resume</h1>
-              {/*  Title Section */}
-              <div className="mb-4">
-                <TextInput
-                  {...register('title', { required: true })}
-                  disabled={isLoading}
-                  label="Title"
-                  placeholder={TITLE_PLACEHOLDER}
-                  required={true}
-                  onChange={(val) => setValue('title', val)}
-                />
-              </div>
-              {/*  Selectors */}
-              {selectors.map((item) => (
-                <div key={item.id} className="mb-4">
-                  <Select
-                    {...register(item.id, { required: true })}
-                    disabled={isLoading}
-                    label={item.label}
-                    options={item.options}
-                    required={true}
-                    onChange={(val) => setValue(item.id, val)}
-                  />
-                </div>
-              ))}
-              {/* Upload resume form */}
-              {isNewForm && (
-                <>
-                  <p className="text-sm font-medium text-slate-700">
-                    Upload resume (PDF format)
-                    <span aria-hidden="true" className="text-danger-500">
-                      {' '}
-                      *
-                    </span>
-                  </p>
-                  <div className="mb-4">
-                    <div
-                      {...getRootProps()}
-                      className={clsx(
-                        fileUploadError
-                          ? 'border-danger-600'
-                          : 'border-gray-300',
-                        'mt-2 flex cursor-pointer justify-center rounded-md border-2 border-dashed bg-gray-100 px-6 pt-5 pb-6',
-                      )}>
-                      <div className="space-y-1 text-center">
-                        {resumeFile == null ? (
-                          <ArrowUpCircleIcon className="m-auto h-10 w-10 text-indigo-500" />
-                        ) : (
-                          <p
-                            className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
-                            onClick={onClickDownload}>
-                            {resumeFile.name}
-                          </p>
-                        )}
-                        <div className="flex items-center text-sm">
-                          <label
-                            className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
-                            htmlFor="file-upload">
-                            <span className="mt-2 font-medium">
-                              Drop file here
-                            </span>
-                            <span className="mr-1 ml-1 font-light">or</span>
-                            <span className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
-                              {resumeFile == null
-                                ? 'Select file'
-                                : 'Replace file'}
-                            </span>
-                            <input
-                              {...register('file', { required: true })}
-                              {...getInputProps()}
-                              accept="application/pdf"
-                              className="sr-only"
-                              disabled={isLoading}
-                              id="file-upload"
-                              name="file-upload"
-                              type="file"
-                            />
-                          </label>
-                        </div>
-                        <p className="text-xs text-gray-500">
-                          PDF up to {FILE_SIZE_LIMIT_MB}MB
-                        </p>
-                      </div>
-                    </div>
-                    {fileUploadError && (
-                      <p className="text-danger-600 text-sm">
-                        {fileUploadError}
-                      </p>
-                    )}
-                  </div>
-                </>
-              )}
-              {/*  Additional Info Section */}
-              <div className="mb-8">
-                <TextArea
-                  {...register('additionalInfo')}
-                  disabled={isLoading}
-                  label="Additional Information"
-                  placeholder={ADDITIONAL_INFO_PLACEHOLDER}
-                  onChange={(val) => setValue('additionalInfo', val)}
-                />
-              </div>
-              {/*  Submission Guidelines */}
-              <SubmissionGuidelines />
-              <CheckboxInput
-                {...register('isChecked', { required: true })}
+          <form
+            className="mt-8 w-full max-w-screen-lg space-y-6 self-center rounded-lg bg-white p-10 shadow-lg"
+            onSubmit={handleSubmit(onSubmit)}>
+            <h1 className="mb-4 text-center text-2xl font-semibold">
+              {isNewForm ? 'Upload a resume' : 'Update details'}
+            </h1>
+            {/*  Title Section */}
+            <TextInput
+              {...register('title', { required: true })}
+              disabled={isLoading}
+              label="Title"
+              placeholder={TITLE_PLACEHOLDER}
+              required={true}
+              onChange={(val) => setValue('title', val)}
+            />
+            <div className="flex gap-12">
+              <Select
+                {...register('role', { required: true })}
+                defaultValue={undefined}
                 disabled={isLoading}
-                label="I have read and will follow the guidelines stated."
-                onChange={(val) => setValue('isChecked', val)}
+                label="Role"
+                options={ROLES}
+                placeholder=" "
+                required={true}
+                onChange={(val) => setValue('role', val)}
               />
-              {/*  Clear and Submit Buttons */}
-              <div className="mt-4 flex justify-end gap-4">
-                <Button
-                  addonPosition="start"
+              <Select
+                {...register('experience', { required: true })}
+                disabled={isLoading}
+                label="Experience Level"
+                options={EXPERIENCES}
+                placeholder=" "
+                required={true}
+                onChange={(val) => setValue('experience', val)}
+              />
+            </div>
+            <Select
+              {...register('location', { required: true })}
+              disabled={isLoading}
+              label="Location"
+              options={LOCATIONS}
+              placeholder=" "
+              required={true}
+              onChange={(val) => setValue('location', val)}
+            />
+            {/* Upload resume form */}
+            {isNewForm && (
+              <>
+                <p className="text-sm font-medium text-slate-700">
+                  Upload resume (PDF format)
+                  <span aria-hidden="true" className="text-danger-500">
+                    {' '}
+                    *
+                  </span>
+                </p>
+                <div className="mb-4">
+                  <div
+                    {...getRootProps()}
+                    className={clsx(
+                      fileUploadError ? 'border-danger-600' : 'border-gray-300',
+                      'mt-2 flex cursor-pointer justify-center rounded-md border-2 border-dashed bg-gray-100 px-6 pt-5 pb-6',
+                    )}>
+                    <div className="space-y-1 text-center">
+                      {resumeFile == null ? (
+                        <ArrowUpCircleIcon className="m-auto h-10 w-10 text-indigo-500" />
+                      ) : (
+                        <p
+                          className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
+                          onClick={onClickDownload}>
+                          {resumeFile.name}
+                        </p>
+                      )}
+                      <div className="flex items-center text-sm">
+                        <label
+                          className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
+                          htmlFor="file-upload">
+                          <span className="mt-2 font-medium">
+                            Drop file here
+                          </span>
+                          <span className="mr-1 ml-1 font-light">or</span>
+                          <span className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
+                            {resumeFile == null
+                              ? 'Select file'
+                              : 'Replace file'}
+                          </span>
+                          <input
+                            {...register('file', { required: true })}
+                            {...getInputProps()}
+                            accept="application/pdf"
+                            className="sr-only"
+                            disabled={isLoading}
+                            id="file-upload"
+                            name="file-upload"
+                            type="file"
+                          />
+                        </label>
+                      </div>
+                      <p className="text-xs text-gray-500">
+                        PDF up to {FILE_SIZE_LIMIT_MB}MB
+                      </p>
+                    </div>
+                  </div>
+                  {fileUploadError && (
+                    <p className="text-danger-600 text-sm">{fileUploadError}</p>
+                  )}
+                </div>
+              </>
+            )}
+            {/*  Additional Info Section */}
+            <TextArea
+              {...register('additionalInfo')}
+              disabled={isLoading}
+              label="Additional Information"
+              placeholder={ADDITIONAL_INFO_PLACEHOLDER}
+              onChange={(val) => setValue('additionalInfo', val)}
+            />
+            {/*  Submission Guidelines */}
+            {isNewForm && (
+              <>
+                <SubmissionGuidelines />
+                <CheckboxInput
+                  {...register('isChecked', { required: true })}
                   disabled={isLoading}
-                  label={isNewForm ? 'Clear' : 'Cancel'}
-                  variant="tertiary"
-                  onClick={onClickClear}
+                  label="I have read and will follow the guidelines stated."
+                  onChange={(val) => setValue('isChecked', val)}
                 />
-                <Button
-                  addonPosition="start"
-                  disabled={isLoading}
-                  isLoading={isLoading}
-                  label="Submit"
-                  type="submit"
-                  variant="primary"
-                />
-              </div>
-            </form>
-          </div>
+              </>
+            )}
+            {/*  Clear and Submit Buttons */}
+            <div className="flex justify-end gap-4">
+              <Button
+                addonPosition="start"
+                disabled={isLoading}
+                label={isNewForm ? 'Clear' : 'Cancel'}
+                variant="tertiary"
+                onClick={onClickClear}
+              />
+              <Button
+                addonPosition="start"
+                disabled={isLoading}
+                isLoading={isLoading}
+                label="Submit"
+                type="submit"
+                variant="primary"
+              />
+            </div>
+          </form>
         </section>
       </main>
     </>
