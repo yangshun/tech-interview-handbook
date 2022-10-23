@@ -2,11 +2,9 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { HorizontalDivider, Spinner, Tabs } from '@tih/ui';
 
-import { trpc } from '~/utils/trpc';
-
 import OfferPercentileAnalysisText from './OfferPercentileAnalysisText';
 import OfferProfileCard from './OfferProfileCard';
-import { OVERALL_TAB } from '../../constants';
+import { OVERALL_TAB } from '../constants';
 
 import type {
   Analysis,
@@ -29,10 +27,18 @@ function OfferAnalysisContent({
   tab,
 }: OfferAnalysisContentProps) {
   if (!offerAnalysis || !offer || offerAnalysis.noOfOffers === 0) {
+    if (tab === OVERALL_TAB) {
+      return (
+        <p className="m-10">
+          You are the first to submit an offer for your job title and YOE! Check
+          back later when there are more submissions.
+        </p>
+      );
+    }
     return (
       <p className="m-10">
-        You are the first to submit an offer for these companies! Check back
-        later when there are more submissions.
+        You are the first to submit an offer for this company, job title and
+        YOE! Check back later when there are more submissions.
       </p>
     );
   }
@@ -55,12 +61,17 @@ function OfferAnalysisContent({
 }
 
 type OfferAnalysisProps = Readonly<{
-  profileId?: string;
+  allAnalysis?: ProfileAnalysis | null;
+  isError: boolean;
+  isLoading: boolean;
 }>;
 
-export default function OfferAnalysis({ profileId }: OfferAnalysisProps) {
+export default function OfferAnalysis({
+  allAnalysis,
+  isError,
+  isLoading,
+}: OfferAnalysisProps) {
   const [tab, setTab] = useState(OVERALL_TAB);
-  const [allAnalysis, setAllAnalysis] = useState<ProfileAnalysis | null>(null);
   const [analysis, setAnalysis] = useState<OfferAnalysisData | null>(null);
 
   useEffect(() => {
@@ -77,22 +88,6 @@ export default function OfferAnalysis({ profileId }: OfferAnalysisProps) {
     }
   }, [tab, allAnalysis]);
 
-  if (!profileId) {
-    return null;
-  }
-
-  const getAnalysisResult = trpc.useQuery(
-    ['offers.analysis.get', { profileId }],
-    {
-      onError(error) {
-        console.error(error.message);
-      },
-      onSuccess(data) {
-        setAllAnalysis(data);
-      },
-    },
-  );
-
   const tabOptions = [
     {
       label: OVERALL_TAB,
@@ -107,18 +102,13 @@ export default function OfferAnalysis({ profileId }: OfferAnalysisProps) {
   return (
     analysis && (
       <div>
-        <h5 className="mb-2 text-center text-4xl font-bold text-gray-900">
-          Result
-        </h5>
-        {getAnalysisResult.isError && (
+        {isError && (
           <p className="m-10 text-center">
             An error occurred while generating profile analysis.
           </p>
         )}
-        {getAnalysisResult.isLoading && (
-          <Spinner className="m-10" display="block" size="lg" />
-        )}
-        {!getAnalysisResult.isError && !getAnalysisResult.isLoading && (
+        {isLoading && <Spinner className="m-10" display="block" size="lg" />}
+        {!isError && !isLoading && (
           <div>
             <Tabs
               label="Result Navigation"

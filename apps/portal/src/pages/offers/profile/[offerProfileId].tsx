@@ -2,6 +2,7 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
+import { ProfileDetailTab } from '~/components/offers/constants';
 import ProfileComments from '~/components/offers/profile/ProfileComments';
 import ProfileDetails from '~/components/offers/profile/ProfileDetails';
 import ProfileHeader from '~/components/offers/profile/ProfileHeader';
@@ -27,7 +28,9 @@ export default function OfferProfile() {
   const [background, setBackground] = useState<BackgroundDisplayData>();
   const [offers, setOffers] = useState<Array<OfferDisplayData>>([]);
 
-  const [selectedTab, setSelectedTab] = useState('offers');
+  const [selectedTab, setSelectedTab] = useState<ProfileDetailTab>(
+    ProfileDetailTab.OFFERS,
+  );
   const [analysis, setAnalysis] = useState<ProfileAnalysis>();
 
   const getProfileQuery = trpc.useQuery(
@@ -163,8 +166,10 @@ export default function OfferProfile() {
               <ProfileDetails
                 analysis={analysis}
                 background={background}
+                isEditable={isEditable}
                 isLoading={getProfileQuery.isLoading}
                 offers={offers}
+                profileId={offerProfileId as string}
                 selectedTab={selectedTab}
               />
             </div>

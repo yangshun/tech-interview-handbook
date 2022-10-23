@@ -72,7 +72,7 @@ function FullTimeOfferDetailsForm({
           placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.offersFullTime.title`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
         <FormTextInput
@@ -81,7 +81,7 @@ function FullTimeOfferDetailsForm({
           placeholder="e.g. Front End"
           required={true}
           {...register(`offers.${index}.offersFullTime.specialization`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -99,7 +99,7 @@ function FullTimeOfferDetailsForm({
           placeholder="e.g. L4, Junior"
           required={true}
           {...register(`offers.${index}.offersFullTime.level`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -112,7 +112,7 @@ function FullTimeOfferDetailsForm({
           placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.location`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
         <FormMonthYearPicker
@@ -120,7 +120,7 @@ function FullTimeOfferDetailsForm({
           monthRequired={true}
           yearLabel=""
           {...register(`offers.${index}.monthYearReceived`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -135,7 +135,7 @@ function FullTimeOfferDetailsForm({
               {...register(
                 `offers.${index}.offersFullTime.totalCompensation.currency`,
                 {
-                  required: FieldError.Required,
+                  required: FieldError.REQUIRED,
                 },
               )}
             />
@@ -153,8 +153,8 @@ function FullTimeOfferDetailsForm({
           {...register(
             `offers.${index}.offersFullTime.totalCompensation.value`,
             {
-              min: { message: FieldError.NonNegativeNumber, value: 0 },
-              required: FieldError.Required,
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+              required: FieldError.REQUIRED,
               valueAsNumber: true,
             },
           )}
@@ -171,7 +171,7 @@ function FullTimeOfferDetailsForm({
               {...register(
                 `offers.${index}.offersFullTime.baseSalary.currency`,
                 {
-                  required: FieldError.Required,
+                  required: FieldError.REQUIRED,
                 },
               )}
             />
@@ -185,8 +185,8 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.offersFullTime.baseSalary.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
-            required: FieldError.Required,
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+            required: FieldError.REQUIRED,
             valueAsNumber: true,
           })}
         />
@@ -198,7 +198,7 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.offersFullTime.bonus.currency`, {
-                required: FieldError.Required,
+                required: FieldError.REQUIRED,
               })}
             />
           }
@@ -211,8 +211,8 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.offersFullTime.bonus.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
-            required: FieldError.Required,
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+            required: FieldError.REQUIRED,
             valueAsNumber: true,
           })}
         />
@@ -226,7 +226,7 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.offersFullTime.stocks.currency`, {
-                required: FieldError.Required,
+                required: FieldError.REQUIRED,
               })}
             />
           }
@@ -239,8 +239,8 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.offersFullTime.stocks.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
-            required: FieldError.Required,
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+            required: FieldError.REQUIRED,
             valueAsNumber: true,
           })}
         />
@@ -300,7 +300,7 @@ function InternshipOfferDetailsForm({
           required={true}
           {...register(`offers.${index}.offersIntern.title`, {
             minLength: 1,
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
         <FormTextInput
@@ -310,7 +310,7 @@ function InternshipOfferDetailsForm({
           required={true}
           {...register(`offers.${index}.offersIntern.specialization`, {
             minLength: 1,
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -330,7 +330,7 @@ function InternshipOfferDetailsForm({
           placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.location`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -343,7 +343,7 @@ function InternshipOfferDetailsForm({
           placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.offersIntern.internshipCycle`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
         <FormSelect
@@ -354,7 +354,7 @@ function InternshipOfferDetailsForm({
           placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.offersIntern.startYear`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
             valueAsNumber: true,
           })}
         />
@@ -365,7 +365,7 @@ function InternshipOfferDetailsForm({
           monthRequired={true}
           yearLabel=""
           {...register(`offers.${index}.monthYearReceived`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -380,7 +380,7 @@ function InternshipOfferDetailsForm({
               {...register(
                 `offers.${index}.offersIntern.monthlySalary.currency`,
                 {
-                  required: FieldError.Required,
+                  required: FieldError.REQUIRED,
                 },
               )}
             />
@@ -396,8 +396,8 @@ function InternshipOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.offersIntern.monthlySalary.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
-            required: FieldError.Required,
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+            required: FieldError.REQUIRED,
             valueAsNumber: true,
           })}
         />

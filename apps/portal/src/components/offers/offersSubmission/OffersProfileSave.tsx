@@ -16,7 +16,7 @@ type OfferProfileSaveProps = Readonly<{
   token?: string;
 }>;
 
-export default function OfferProfileSave({
+export default function OffersProfileSave({
   profileId,
   token,
 }: OfferProfileSaveProps) {

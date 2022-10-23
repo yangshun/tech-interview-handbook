@@ -39,8 +39,8 @@ function YoeSection() {
             required={true}
             type="number"
             {...register(`background.totalYoe`, {
-              min: { message: FieldError.NonNegativeNumber, value: 0 },
-              required: FieldError.Required,
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+              required: FieldError.REQUIRED,
               valueAsNumber: true,
             })}
           />
@@ -52,7 +52,7 @@ function YoeSection() {
               label="Specific YOE 1"
               type="number"
               {...register(`background.specificYoes.0.yoe`, {
-                min: { message: FieldError.NonNegativeNumber, value: 0 },
+                min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
                 valueAsNumber: true,
               })}
             />
@@ -68,7 +68,7 @@ function YoeSection() {
               label="Specific YOE 2"
               type="number"
               {...register(`background.specificYoes.1.yoe`, {
-                min: { message: FieldError.NonNegativeNumber, value: 0 },
+                min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
                 valueAsNumber: true,
               })}
             />
@@ -128,7 +128,7 @@ function FullTimeJobFields() {
           startAddOnType="label"
           type="number"
           {...register(`background.experiences.0.totalCompensation.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
             valueAsNumber: true,
           })}
         />
@@ -158,7 +158,7 @@ function FullTimeJobFields() {
             label="Duration (months)"
             type="number"
             {...register(`background.experiences.0.durationInMonths`, {
-              min: { message: FieldError.NonNegativeNumber, value: 0 },
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
               valueAsNumber: true,
             })}
           />
@@ -211,7 +211,7 @@ function InternshipJobFields() {
           startAddOnType="label"
           type="number"
           {...register(`background.experiences.0.monthlySalary.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
             valueAsNumber: true,
           })}
         />
