@@ -118,9 +118,9 @@ export default function ResumeReviewPage() {
           <Head>
             <title>{detailsQuery.data.title}</title>
           </Head>
-          <main className="h-[calc(100vh-2rem)] flex-1 overflow-y-auto p-4">
-            <div className="flex space-x-8">
-              <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+          <main className="h-[calc(100vh-2rem)] flex-1 space-y-2 overflow-y-auto py-4 px-8 xl:px-12 2xl:pr-16">
+            <div className="flex justify-between">
+              <h1 className="text-2xl font-semibold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                 {detailsQuery.data.title}
               </h1>
               <div className="flex gap-4">
@@ -157,12 +157,12 @@ export default function ResumeReviewPage() {
                     className="p h-10 rounded-md border border-gray-300 bg-white py-1 px-2 text-center"
                     type="button"
                     onClick={onEditButtonClick}>
-                    <PencilSquareIcon className="h-6 w-6 text-indigo-500 hover:text-indigo-300" />
+                    <PencilSquareIcon className="h-6 w-6 text-indigo-600 hover:text-indigo-300" />
                   </button>
                 )}
               </div>
             </div>
-            <div className="flex flex-col pt-1 lg:mt-0 lg:flex-row lg:flex-wrap lg:space-x-8">
+            <div className="flex flex-col lg:mt-0 lg:flex-row lg:flex-wrap lg:space-x-8">
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <BriefcaseIcon
                   aria-hidden="true"
@@ -206,11 +206,11 @@ export default function ResumeReviewPage() {
                 />
               </div>
             )}
-            <div className="flex w-full flex-col py-4 lg:flex-row">
+            <div className="flex w-full flex-col gap-6 py-4 lg:flex-row">
               <div className="w-full lg:w-[780px]">
                 <ResumePdf url={detailsQuery.data.url} />
               </div>
-              <div className="mx-8 grow">
+              <div className="grow">
                 <ResumeCommentsSection resumeId={resumeId as string} />
               </div>
             </div>

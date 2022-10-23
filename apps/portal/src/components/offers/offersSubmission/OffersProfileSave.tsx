@@ -16,7 +16,7 @@ type OfferProfileSaveProps = Readonly<{
   token?: string;
 }>;
 
-export default function OfferProfileSave({
+export default function OffersProfileSave({
   profileId,
   token,
 }: OfferProfileSaveProps) {
@@ -84,7 +84,7 @@ export default function OfferProfileSave({
             onClick={saveProfile}
           />
         </div>
-        <div className="mb-10">
+        <div>
           <Button
             icon={EyeIcon}
             label="View your profile"

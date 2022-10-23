@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
-  BookmarkSquareIcon,
   BuildingOffice2Icon,
   CalendarDaysIcon,
   PencilSquareIcon,
@@ -10,17 +9,20 @@ import {
 import { Button, Dialog, Spinner, Tabs } from '@tih/ui';
 
 import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
-import type { BackgroundCard } from '~/components/offers/types';
+import type { BackgroundDisplayData } from '~/components/offers/types';
 
 import { getProfileEditPath } from '~/utils/offers/link';
 
+import type { ProfileDetailTab } from '../constants';
+import { profileDetailTabs } from '../constants';
+
 type ProfileHeaderProps = Readonly<{
-  background?: BackgroundCard;
+  background?: BackgroundDisplayData;
   handleDelete: () => void;
   isEditable: boolean;
   isLoading: boolean;
-  selectedTab: string;
-  setSelectedTab: (tab: string) => void;
+  selectedTab: ProfileDetailTab;
+  setSelectedTab: (tab: ProfileDetailTab) => void;
 }>;
 
 export default function ProfileHeader({
@@ -42,14 +44,14 @@ export default function ProfileHeader({
   function renderActionList() {
     return (
       <div className="space-x-2">
-        <Button
+        {/* <Button
           disabled={isLoading}
           icon={BookmarkSquareIcon}
           isLabelHidden={true}
           label="Save to user account"
           size="md"
           variant="tertiary"
-        />
+        /> */}
         <Button
           disabled={isLoading}
           icon={PencilSquareIcon}
@@ -109,6 +111,13 @@ export default function ProfileHeader({
       </div>
     );
   }
+
+  if (!background) {
+    return null;
+  }
+
+  const { experiences, totalYoe, specificYoes, profileName } = background;
+
   return (
     <div className="h-40 bg-white p-4">
       <div className="justify-left flex h-1/2">
@@ -118,7 +127,7 @@ export default function ProfileHeader({
         <div className="w-full">
           <div className="justify-left flex flex-1">
             <h2 className="flex w-4/5 text-2xl font-bold">
-              {background?.profileName ?? 'anonymous'}
+              {profileName ?? 'anonymous'}
             </h2>
             {isEditable && (
               <div className="flex h-8 w-1/5 justify-end">
@@ -126,22 +135,26 @@ export default function ProfileHeader({
               </div>
             )}
           </div>
-          <div className="flex flex-row">
-            <BuildingOffice2Icon className="mr-2.5 h-5" />
-            <span className="mr-2 font-bold">Current:</span>
-            <span>
-              {`${background?.experiences[0]?.companyName ?? '-'} ${
-                background?.experiences[0]?.jobLevel || ''
-              } ${background?.experiences[0]?.jobTitle || ''}`}
-            </span>
-          </div>
+          {(experiences[0]?.companyName ||
+            experiences[0]?.jobLevel ||
+            experiences[0]?.jobTitle) && (
+            <div className="flex flex-row">
+              <BuildingOffice2Icon className="mr-2.5 h-5" />
+              <span className="mr-2 font-bold">Current:</span>
+              <span>
+                {`${experiences[0].companyName || ''} ${
+                  experiences[0].jobLevel || ''
+                } ${experiences[0].jobTitle || ''}`}
+              </span>
+            </div>
+          )}
           <div className="flex flex-row">
             <CalendarDaysIcon className="mr-2.5 h-5" />
             <span className="mr-2 font-bold">YOE:</span>
-            <span className="mr-4">{background?.totalYoe}</span>
-            {background?.specificYoes &&
-              background?.specificYoes.length > 0 &&
-              background?.specificYoes.map(({ domain, yoe }) => {
+            <span className="mr-4">{totalYoe}</span>
+            {specificYoes &&
+              specificYoes.length > 0 &&
+              specificYoes.map(({ domain, yoe }) => {
                 return (
                   <span
                     key={domain}
@@ -155,20 +168,7 @@ export default function ProfileHeader({
       <div className="mt-8">
         <Tabs
           label="Profile Detail Navigation"
-          tabs={[
-            {
-              label: 'Offers',
-              value: 'offers',
-            },
-            {
-              label: 'Background',
-              value: 'background',
-            },
-            {
-              label: 'Offer Engine Analysis',
-              value: 'offerEngineAnalysis',
-            },
-          ]}
+          tabs={profileDetailTabs}
           value={selectedTab}
           onChange={(value) => setSelectedTab(value)}
         />
