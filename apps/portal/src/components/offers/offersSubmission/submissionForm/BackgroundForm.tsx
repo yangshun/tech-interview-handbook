@@ -1,4 +1,5 @@
 import { useFormContext, useWatch } from 'react-hook-form';
+import { JobType } from '@prisma/client';
 import { Collapsible, RadioList } from '@tih/ui';
 
 import {
@@ -10,7 +11,6 @@ import {
   titleOptions,
 } from '~/components/offers/constants';
 import type { BackgroundPostData } from '~/components/offers/types';
-import { JobType } from '~/components/offers/types';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 
 import { CURRENCY_OPTIONS } from '~/utils/offers/currency/CurrencyEnum';
@@ -39,8 +39,8 @@ function YoeSection() {
             required={true}
             type="number"
             {...register(`background.totalYoe`, {
-              min: { message: FieldError.NonNegativeNumber, value: 0 },
-              required: FieldError.Required,
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+              required: FieldError.REQUIRED,
               valueAsNumber: true,
             })}
           />
@@ -52,7 +52,7 @@ function YoeSection() {
               label="Specific YOE 1"
               type="number"
               {...register(`background.specificYoes.0.yoe`, {
-                min: { message: FieldError.NonNegativeNumber, value: 0 },
+                min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
                 valueAsNumber: true,
               })}
             />
@@ -68,7 +68,7 @@ function YoeSection() {
               label="Specific YOE 2"
               type="number"
               {...register(`background.specificYoes.1.yoe`, {
-                min: { message: FieldError.NonNegativeNumber, value: 0 },
+                min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
                 valueAsNumber: true,
               })}
             />
@@ -128,7 +128,7 @@ function FullTimeJobFields() {
           startAddOnType="label"
           type="number"
           {...register(`background.experiences.0.totalCompensation.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
             valueAsNumber: true,
           })}
         />
@@ -158,7 +158,7 @@ function FullTimeJobFields() {
             label="Duration (months)"
             type="number"
             {...register(`background.experiences.0.durationInMonths`, {
-              min: { message: FieldError.NonNegativeNumber, value: 0 },
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
               valueAsNumber: true,
             })}
           />
@@ -211,7 +211,7 @@ function InternshipJobFields() {
           startAddOnType="label"
           type="number"
           {...register(`background.experiences.0.monthlySalary.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
             valueAsNumber: true,
           })}
         />
@@ -239,7 +239,7 @@ function InternshipJobFields() {
 function CurrentJobSection() {
   const { register } = useFormContext();
   const watchJobType = useWatch({
-    defaultValue: JobType.FullTime,
+    defaultValue: JobType.FULLTIME,
     name: 'background.experiences.0.jobType',
   });
 
@@ -251,7 +251,7 @@ function CurrentJobSection() {
       <div className="mb-5 rounded-lg border border-gray-200 px-10 py-5">
         <div className="mb-5">
           <FormRadioList
-            defaultValue={JobType.FullTime}
+            defaultValue={JobType.FULLTIME}
             isLabelHidden={true}
             label="Job Type"
             orientation="horizontal"
@@ -259,16 +259,16 @@ function CurrentJobSection() {
             <RadioList.Item
               key="Full-time"
               label="Full-time"
-              value={JobType.FullTime}
+              value={JobType.FULLTIME}
             />
             <RadioList.Item
               key="Internship"
               label="Internship"
-              value={JobType.Intern}
+              value={JobType.INTERN}
             />
           </FormRadioList>
         </div>
-        {watchJobType === JobType.FullTime ? (
+        {watchJobType === JobType.FULLTIME ? (
           <FullTimeJobFields />
         ) : (
           <InternshipJobFields />

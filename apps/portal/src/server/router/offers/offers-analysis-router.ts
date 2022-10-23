@@ -285,7 +285,6 @@ export const offersAnalysisRouter = createRouter()
               OR: [
                 {
                   offersFullTime: {
-                    level: overallHighestOffer.offersFullTime?.level,
                     title: overallHighestOffer.offersFullTime?.title,
                   },
                   offersIntern: {
@@ -322,18 +321,18 @@ export const offersAnalysisRouter = createRouter()
         similarOffers,
       );
       const overallPercentile =
-        similarOffers.length === 0
+        similarOffers.length <= 1
           ? 100
-          : (100 * overallIndex) / similarOffers.length;
+          : 100 - (100 * overallIndex) / (similarOffers.length - 1);
 
       const companyIndex = searchOfferPercentile(
         overallHighestOffer,
         similarCompanyOffers,
       );
       const companyPercentile =
-        similarCompanyOffers.length === 0
+        similarCompanyOffers.length <= 1
           ? 100
-          : (100 * companyIndex) / similarCompanyOffers.length;
+          : 100 - (100 * companyIndex) / (similarCompanyOffers.length - 1);
 
       // FIND TOP >=90 PERCENTILE OFFERS, DOESN'T GIVE 100th PERCENTILE
       // e.g. If there only 4 offers, it gives the 2nd and 3rd offer

@@ -4,10 +4,10 @@ import { useSession } from 'next-auth/react';
 import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Disclosure, Transition } from '@headlessui/react';
 import { FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 import {
   MagnifyingGlassIcon,
   NewspaperIcon,
+  XMarkIcon,
 } from '@heroicons/react/24/outline';
 import {
   CheckboxInput,
@@ -27,16 +27,15 @@ import type {
 } from '~/components/resumes/browse/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
-  EXPERIENCE,
+  EXPERIENCES,
   INITIAL_FILTER_STATE,
   isInitialFilterState,
-  LOCATION,
-  ROLE,
+  LOCATIONS,
+  ROLES,
   SHORTCUTS,
   SORT_OPTIONS,
 } from '~/components/resumes/browse/resumeFilters';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
-import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 
 import useDebounceValue from '~/utils/resumes/useDebounceValue';
@@ -44,22 +43,24 @@ import { trpc } from '~/utils/trpc';
 
 import type { FilterState } from '../../components/resumes/browse/resumeFilters';
 
+const STALE_TIME = 5 * 60 * 1000;
+const DEBOUNCE_DELAY = 800;
 const PAGE_LIMIT = 10;
 const filters: Array<Filter> = [
   {
     id: 'role',
     label: 'Role',
-    options: ROLE,
+    options: ROLES,
   },
   {
     id: 'experience',
     label: 'Experience',
-    options: EXPERIENCE,
+    options: EXPERIENCES,
   },
   {
     id: 'location',
     label: 'Location',
-    options: LOCATION,
+    options: LOCATIONS,
   },
 ];
 
@@ -122,14 +123,14 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
-        searchValue: useDebounceValue(searchValue, 800),
+        searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
       },
     ],
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.ALL,
-      staleTime: 5 * 60 * 1000,
+      staleTime: STALE_TIME,
     },
   );
   const starredResumesQuery = trpc.useQuery(
@@ -140,7 +141,7 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
-        searchValue: useDebounceValue(searchValue, 800),
+        searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
       },
@@ -148,7 +149,7 @@ export default function ResumeHomePage() {
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.STARRED,
       retry: false,
-      staleTime: 5 * 60 * 1000,
+      staleTime: STALE_TIME,
     },
   );
   const myResumesQuery = trpc.useQuery(
@@ -159,7 +160,7 @@ export default function ResumeHomePage() {
         locationFilters: userFilters.location,
         numComments: userFilters.numComments,
         roleFilters: userFilters.role,
-        searchValue: useDebounceValue(searchValue, 800),
+        searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
       },
@@ -167,7 +168,7 @@ export default function ResumeHomePage() {
     {
       enabled: tabsValue === BROWSE_TABS_VALUES.MY,
       retry: false,
-      staleTime: 5 * 60 * 1000,
+      staleTime: STALE_TIME,
     },
   );
 
@@ -238,6 +239,11 @@ export default function ResumeHomePage() {
       : Math.floor(numRecords / PAGE_LIMIT) + 1;
   };
 
+  const isFetchingResumes =
+    allResumesQuery.isFetching ||
+    starredResumesQuery.isFetching ||
+    myResumesQuery.isFetching;
+
   return (
     <>
       <Head>
@@ -271,7 +277,7 @@ export default function ResumeHomePage() {
                 leave="transition ease-in-out duration-300 transform"
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full">
-                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-scroll bg-white py-4 pb-12 shadow-xl">
                   <div className="flex items-center justify-between px-4">
                     <h2 className="text-lg font-medium text-gray-900">
                       Shortcuts
@@ -362,20 +368,16 @@ export default function ResumeHomePage() {
         </Transition.Root>
       </div>
 
-      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto">
-        <div className="ml-4 py-4">
-          <ResumeReviewsTitle />
-        </div>
-
-        <div className="mx-8 mt-4 flex justify-start">
+      <main className="h-[calc(100vh-4rem)] flex-auto overflow-y-scroll px-8 pt-6 pb-4">
+        <div className="flex justify-start">
           <div className="hidden w-1/6 pt-2 lg:block">
-            <h3 className="text-md mb-4 font-medium tracking-tight text-gray-900">
-              Shortcuts:
+            <h3 className="text-md font-medium tracking-tight text-gray-900">
+              Shortcuts
             </h3>
             <div className="w-100 pt-4 sm:pr-0 md:pr-4">
               <form>
                 <ul
-                  className="flex flex-wrap justify-start gap-4 pb-6 text-sm font-medium text-gray-900"
+                  className="flex w-11/12 flex-wrap justify-start gap-2 pb-6 text-sm font-medium text-gray-900"
                   role="list">
                   {SHORTCUTS.map((shortcut) => (
                     <li key={shortcut.name}>
@@ -387,8 +389,8 @@ export default function ResumeHomePage() {
                     </li>
                   ))}
                 </ul>
-                <h3 className="text-md my-4 font-medium tracking-tight text-gray-900">
-                  Explore these filters:
+                <h3 className="text-md font-medium tracking-tight text-gray-900">
+                  Explore these filters
                 </h3>
                 {filters.map((filter) => (
                   <Disclosure
@@ -528,40 +530,30 @@ export default function ResumeHomePage() {
                 </div>
               </div>
             </div>
-            <div className="mb-6">
-              {allResumesQuery.isLoading ||
-              starredResumesQuery.isLoading ||
-              myResumesQuery.isLoading ? (
-                <div className="w-full pt-4">
-                  {' '}
-                  <Spinner display="block" size="lg" />{' '}
-                </div>
-              ) : sessionData === null &&
-                tabsValue !== BROWSE_TABS_VALUES.ALL ? (
-                <ResumeSignInButton
-                  className="mt-8"
-                  text={getLoggedOutText(tabsValue)}
+            {isFetchingResumes ? (
+              <div className="w-full pt-4">
+                {' '}
+                <Spinner display="block" size="lg" />{' '}
+              </div>
+            ) : sessionData === null && tabsValue !== BROWSE_TABS_VALUES.ALL ? (
+              <ResumeSignInButton
+                className="mt-8"
+                text={getLoggedOutText(tabsValue)}
+              />
+            ) : getTabResumes().length === 0 ? (
+              <div className="mt-24 flex flex-wrap justify-center">
+                <NewspaperIcon
+                  className="mb-12 basis-full"
+                  height={196}
+                  width={196}
                 />
-              ) : getTabResumes().length === 0 ? (
-                <div className="mt-24 flex flex-wrap justify-center">
-                  <NewspaperIcon
-                    className="mb-12 basis-full"
-                    height={196}
-                    width={196}
-                  />
-                  {getEmptyDataText(tabsValue, searchValue, userFilters)}
-                </div>
-              ) : (
-                <>
-                  <ResumeListItems
-                    isLoading={
-                      allResumesQuery.isFetching ||
-                      starredResumesQuery.isFetching ||
-                      myResumesQuery.isFetching
-                    }
-                    resumes={getTabResumes()}
-                  />
-                  <div className="my-4 flex justify-center">
+                {getEmptyDataText(tabsValue, searchValue, userFilters)}
+              </div>
+            ) : (
+              <>
+                <ResumeListItems resumes={getTabResumes()} />
+                {getTabTotalPages() > 1 && (
+                  <div className="mt-4 flex justify-center">
                     <Pagination
                       current={currentPage}
                       end={getTabTotalPages()}
@@ -570,9 +562,9 @@ export default function ResumeHomePage() {
                       onSelect={(page) => setCurrentPage(page)}
                     />
                   </div>
-                </>
-              )}
-            </div>
+                )}
+              </>
+            )}
           </div>
         </div>
       </main>

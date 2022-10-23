@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { JobType } from '@prisma/client';
 
 import OffersSubmissionForm from '~/components/offers/offersSubmission/OffersSubmissionForm';
 import type { OffersProfileFormData } from '~/components/offers/types';
-import { JobType } from '~/components/offers/types';
 
 import { Spinner } from '~/../../../packages/ui/dist';
 import { getProfilePath } from '~/utils/offers/link';
@@ -25,7 +25,7 @@ export default function OffersEditPage() {
         console.error(error.message);
       },
       onSuccess(data) {
-        const { educations, experiences, specificYoes, totalYoe } =
+        const { educations, experiences, specificYoes, totalYoe, id } =
           data.background!;
 
         setInitialData({
@@ -33,11 +33,13 @@ export default function OffersEditPage() {
             educations,
             experiences:
               experiences.length === 0
-                ? [{ jobType: JobType.FullTime }]
+                ? [{ jobType: JobType.FULLTIME }]
                 : experiences,
+            id,
             specificYoes,
             totalYoe,
           },
+          id: data.id,
           offers: data.offers.map((offer) => ({
             comments: offer.comments,
             companyId: offer.company.id,
@@ -67,7 +69,7 @@ export default function OffersEditPage() {
           <Spinner className="m-10" display="block" size="lg" />
         </div>
       )}
-      {!getProfileResult.isLoading && (
+      {!getProfileResult.isLoading && initialData && (
         <OffersSubmissionForm
           initialOfferProfileValues={initialData}
           profileId={profile?.id}

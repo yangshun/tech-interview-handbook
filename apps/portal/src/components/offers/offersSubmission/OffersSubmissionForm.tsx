@@ -2,30 +2,34 @@ import { useRef, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
+import { JobType } from '@prisma/client';
 import { Button } from '@tih/ui';
 
 import { Breadcrumbs } from '~/components/offers/Breadcrumb';
-import OfferAnalysis from '~/components/offers/offersSubmission/analysis/OfferAnalysis';
-import OfferProfileSave from '~/components/offers/offersSubmission/OfferProfileSave';
+import OffersProfileSave from '~/components/offers/offersSubmission/OffersProfileSave';
 import BackgroundForm from '~/components/offers/offersSubmission/submissionForm/BackgroundForm';
 import OfferDetailsForm from '~/components/offers/offersSubmission/submissionForm/OfferDetailsForm';
 import type {
   OfferFormData,
   OffersProfileFormData,
 } from '~/components/offers/types';
-import { JobType } from '~/components/offers/types';
 import type { Month } from '~/components/shared/MonthYearPicker';
 
 import { cleanObject, removeInvalidMoneyData } from '~/utils/offers/form';
 import { getCurrentMonth, getCurrentYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
-import type { CreateOfferProfileResponse } from '~/types/offers';
+import OfferAnalysis from '../offerAnalysis/OfferAnalysis';
+
+import type {
+  CreateOfferProfileResponse,
+  ProfileAnalysis,
+} from '~/types/offers';
 
 const defaultOfferValues = {
   comments: '',
   companyId: '',
-  jobType: JobType.FullTime,
+  jobType: JobType.FULLTIME,
   location: '',
   monthYearReceived: {
     month: getCurrentMonth() as Month,
@@ -36,18 +40,18 @@ const defaultOfferValues = {
 
 export const defaultFullTimeOfferValues = {
   ...defaultOfferValues,
-  jobType: JobType.FullTime,
+  jobType: JobType.FULLTIME,
 };
 
 export const defaultInternshipOfferValues = {
   ...defaultOfferValues,
-  jobType: JobType.Intern,
+  jobType: JobType.INTERN,
 };
 
 const defaultOfferProfileValues = {
   background: {
     educations: [],
-    experiences: [{ jobType: JobType.FullTime }],
+    experiences: [{ jobType: JobType.FULLTIME }],
     specificYoes: [],
     totalYoe: 0,
   },
@@ -78,6 +82,7 @@ export default function OffersSubmissionForm({
       id: profileId || '',
       token: token || '',
     });
+  const [analysis, setAnalysis] = useState<ProfileAnalysis | null>(null);
 
   const pageRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () =>
@@ -88,9 +93,26 @@ export default function OffersSubmissionForm({
   });
   const { handleSubmit, trigger } = formMethods;
 
+  const generateAnalysisMutation = trpc.useMutation(
+    ['offers.analysis.generate'],
+    {
+      onError(error) {
+        console.error(error.message);
+      },
+      onSuccess(data) {
+        setAnalysis(data);
+      },
+    },
+  );
+
   const formSteps: Array<FormStep> = [
     {
-      component: <OfferDetailsForm key={0} />,
+      component: (
+        <OfferDetailsForm
+          key={0}
+          defaultJobType={initialOfferProfileValues.offers[0].jobType}
+        />
+      ),
       hasNext: true,
       hasPrevious: false,
       label: 'Offer details',
@@ -102,14 +124,21 @@ export default function OffersSubmissionForm({
       label: 'Background',
     },
     {
-      component: <OfferAnalysis key={2} profileId={createProfileResponse.id} />,
+      component: (
+        <OfferAnalysis
+          key={2}
+          allAnalysis={analysis}
+          isError={generateAnalysisMutation.isError}
+          isLoading={generateAnalysisMutation.isLoading}
+        />
+      ),
       hasNext: true,
       hasPrevious: false,
       label: 'Analysis',
     },
     {
       component: (
-        <OfferProfileSave
+        <OffersProfileSave
           key={3}
           profileId={createProfileResponse.id || ''}
           token={createProfileResponse.token}
@@ -138,15 +167,6 @@ export default function OffersSubmissionForm({
     setFormStep(formStep - 1);
     scrollToTop();
   };
-
-  const generateAnalysisMutation = trpc.useMutation(
-    ['offers.analysis.generate'],
-    {
-      onError(error) {
-        console.error(error.message);
-      },
-    },
-  );
 
   const mutationpath =
     profileId && token ? 'offers.profile.update' : 'offers.profile.create';

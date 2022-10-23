@@ -9,6 +9,7 @@ import { useFormContext } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 import { PlusIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
+import { JobType } from '@prisma/client';
 import { Button, Dialog } from '@tih/ui';
 
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
@@ -31,7 +32,6 @@ import FormTextArea from '../../forms/FormTextArea';
 import FormTextInput from '../../forms/FormTextInput';
 import type { OfferFormData } from '../../types';
 import { JobTypeLabel } from '../../types';
-import { JobType } from '../../types';
 import { CURRENCY_OPTIONS } from '../../../../utils/offers/currency/CurrencyEnum';
 
 type FullTimeOfferDetailsFormProps = Readonly<{
@@ -72,7 +72,7 @@ function FullTimeOfferDetailsForm({
           placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.offersFullTime.title`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
         <FormTextInput
@@ -81,7 +81,7 @@ function FullTimeOfferDetailsForm({
           placeholder="e.g. Front End"
           required={true}
           {...register(`offers.${index}.offersFullTime.specialization`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -99,7 +99,7 @@ function FullTimeOfferDetailsForm({
           placeholder="e.g. L4, Junior"
           required={true}
           {...register(`offers.${index}.offersFullTime.level`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -112,7 +112,7 @@ function FullTimeOfferDetailsForm({
           placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.location`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
         <FormMonthYearPicker
@@ -120,7 +120,7 @@ function FullTimeOfferDetailsForm({
           monthRequired={true}
           yearLabel=""
           {...register(`offers.${index}.monthYearReceived`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -135,7 +135,7 @@ function FullTimeOfferDetailsForm({
               {...register(
                 `offers.${index}.offersFullTime.totalCompensation.currency`,
                 {
-                  required: FieldError.Required,
+                  required: FieldError.REQUIRED,
                 },
               )}
             />
@@ -153,8 +153,8 @@ function FullTimeOfferDetailsForm({
           {...register(
             `offers.${index}.offersFullTime.totalCompensation.value`,
             {
-              min: { message: FieldError.NonNegativeNumber, value: 0 },
-              required: FieldError.Required,
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+              required: FieldError.REQUIRED,
               valueAsNumber: true,
             },
           )}
@@ -171,7 +171,7 @@ function FullTimeOfferDetailsForm({
               {...register(
                 `offers.${index}.offersFullTime.baseSalary.currency`,
                 {
-                  required: FieldError.Required,
+                  required: FieldError.REQUIRED,
                 },
               )}
             />
@@ -185,8 +185,8 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.offersFullTime.baseSalary.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
-            required: FieldError.Required,
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+            required: FieldError.REQUIRED,
             valueAsNumber: true,
           })}
         />
@@ -198,7 +198,7 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.offersFullTime.bonus.currency`, {
-                required: FieldError.Required,
+                required: FieldError.REQUIRED,
               })}
             />
           }
@@ -211,8 +211,8 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.offersFullTime.bonus.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
-            required: FieldError.Required,
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+            required: FieldError.REQUIRED,
             valueAsNumber: true,
           })}
         />
@@ -226,7 +226,7 @@ function FullTimeOfferDetailsForm({
               label="Currency"
               options={CURRENCY_OPTIONS}
               {...register(`offers.${index}.offersFullTime.stocks.currency`, {
-                required: FieldError.Required,
+                required: FieldError.REQUIRED,
               })}
             />
           }
@@ -239,8 +239,8 @@ function FullTimeOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.offersFullTime.stocks.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
-            required: FieldError.Required,
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+            required: FieldError.REQUIRED,
             valueAsNumber: true,
           })}
         />
@@ -300,7 +300,7 @@ function InternshipOfferDetailsForm({
           required={true}
           {...register(`offers.${index}.offersIntern.title`, {
             minLength: 1,
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
         <FormTextInput
@@ -310,7 +310,7 @@ function InternshipOfferDetailsForm({
           required={true}
           {...register(`offers.${index}.offersIntern.specialization`, {
             minLength: 1,
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -330,7 +330,7 @@ function InternshipOfferDetailsForm({
           placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.location`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -343,7 +343,7 @@ function InternshipOfferDetailsForm({
           placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.offersIntern.internshipCycle`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
         <FormSelect
@@ -354,7 +354,7 @@ function InternshipOfferDetailsForm({
           placeholder={emptyOption}
           required={true}
           {...register(`offers.${index}.offersIntern.startYear`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
             valueAsNumber: true,
           })}
         />
@@ -365,7 +365,7 @@ function InternshipOfferDetailsForm({
           monthRequired={true}
           yearLabel=""
           {...register(`offers.${index}.monthYearReceived`, {
-            required: FieldError.Required,
+            required: FieldError.REQUIRED,
           })}
         />
       </div>
@@ -380,7 +380,7 @@ function InternshipOfferDetailsForm({
               {...register(
                 `offers.${index}.offersIntern.monthlySalary.currency`,
                 {
-                  required: FieldError.Required,
+                  required: FieldError.REQUIRED,
                 },
               )}
             />
@@ -396,8 +396,8 @@ function InternshipOfferDetailsForm({
           startAddOnType="label"
           type="number"
           {...register(`offers.${index}.offersIntern.monthlySalary.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
-            required: FieldError.Required,
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+            required: FieldError.REQUIRED,
             valueAsNumber: true,
           })}
         />
@@ -448,7 +448,7 @@ function OfferDetailsFormArray({
       {fields.map((item, index) => {
         return (
           <div key={item.id}>
-            {jobType === JobType.FullTime ? (
+            {jobType === JobType.FULLTIME ? (
               <FullTimeOfferDetailsForm index={index} remove={remove} />
             ) : (
               <InternshipOfferDetailsForm index={index} remove={remove} />
@@ -464,7 +464,7 @@ function OfferDetailsFormArray({
         variant="tertiary"
         onClick={() =>
           append(
-            jobType === JobType.FullTime
+            jobType === JobType.FULLTIME
               ? defaultFullTimeOfferValues
               : defaultInternshipOfferValues,
           )
@@ -474,8 +474,14 @@ function OfferDetailsFormArray({
   );
 }
 
-export default function OfferDetailsForm() {
-  const [jobType, setJobType] = useState(JobType.FullTime);
+type OfferDetailsFormProps = Readonly<{
+  defaultJobType?: JobType;
+}>;
+
+export default function OfferDetailsForm({
+  defaultJobType = JobType.FULLTIME,
+}: OfferDetailsFormProps) {
+  const [jobType, setJobType] = useState(defaultJobType);
   const [isDialogOpen, setDialogOpen] = useState(false);
   const { control } = useFormContext();
   const fieldArrayValues = useFieldArray({ control, name: 'offers' });
@@ -483,17 +489,17 @@ export default function OfferDetailsForm() {
 
   const toggleJobType = () => {
     remove();
-    if (jobType === JobType.FullTime) {
-      setJobType(JobType.Intern);
+    if (jobType === JobType.FULLTIME) {
+      setJobType(JobType.INTERN);
       append(defaultInternshipOfferValues);
     } else {
-      setJobType(JobType.FullTime);
+      setJobType(JobType.FULLTIME);
       append(defaultFullTimeOfferValues);
     }
   };
 
   const switchJobTypeLabel = () =>
-    jobType === JobType.FullTime ? JobTypeLabel.INTERN : JobTypeLabel.FULLTIME;
+    jobType === JobType.FULLTIME ? JobTypeLabel.INTERN : JobTypeLabel.FULLTIME;
 
   return (
     <div className="mb-5">
@@ -506,9 +512,9 @@ export default function OfferDetailsForm() {
             display="block"
             label={JobTypeLabel.FULLTIME}
             size="md"
-            variant={jobType === JobType.FullTime ? 'secondary' : 'tertiary'}
+            variant={jobType === JobType.FULLTIME ? 'secondary' : 'tertiary'}
             onClick={() => {
-              if (jobType === JobType.FullTime) {
+              if (jobType === JobType.FULLTIME) {
                 return;
               }
               setDialogOpen(true);
@@ -520,9 +526,9 @@ export default function OfferDetailsForm() {
             display="block"
             label={JobTypeLabel.INTERN}
             size="md"
-            variant={jobType === JobType.Intern ? 'secondary' : 'tertiary'}
+            variant={jobType === JobType.INTERN ? 'secondary' : 'tertiary'}
             onClick={() => {
-              if (jobType === JobType.Intern) {
+              if (jobType === JobType.INTERN) {
                 return;
               }
               setDialogOpen(true);

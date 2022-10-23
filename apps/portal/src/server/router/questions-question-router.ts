@@ -7,8 +7,6 @@ import { createProtectedRouter } from './context';
 import type { Question } from '~/types/questions';
 import { SortOrder, SortType } from '~/types/questions.d';
 
-const TWO_WEEK_IN_MS = 12096e5;
-
 export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
@@ -20,7 +18,7 @@ export const questionsQuestionRouter = createProtectedRouter()
       roles: z.string().array(),
       sortOrder: z.nativeEnum(SortOrder),
       sortType: z.nativeEnum(SortType),
-      startDate: z.date().default(new Date(Date.now() - TWO_WEEK_IN_MS)),
+      startDate: z.date().optional(),
     }),
     async resolve({ ctx, input }) {
       const sortCondition =
@@ -99,6 +97,7 @@ export const questionsQuestionRouter = createProtectedRouter()
           },
         },
       });
+
       return questionsData.map((data) => {
         const votes: number = data.votes.reduce(
           (previousValue: number, currentValue) => {
@@ -125,6 +124,7 @@ export const questionsQuestionRouter = createProtectedRouter()
           numAnswers: data._count.answers,
           numComments: data._count.comments,
           numVotes: votes,
+          receivedCount: data.encounters.length,
           role: data.encounters[0].role ?? 'Unknown role',
           seenAt: data.encounters[0].seenAt,
           type: data.questionType,
@@ -198,6 +198,7 @@ export const questionsQuestionRouter = createProtectedRouter()
         numAnswers: questionData._count.answers,
         numComments: questionData._count.comments,
         numVotes: votes,
+        receivedCount: questionData.encounters.length,
         role: questionData.encounters[0].role ?? 'Unknown role',
         seenAt: questionData.encounters[0].seenAt,
         type: questionData.questionType,
