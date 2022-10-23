@@ -69,6 +69,7 @@ export default function Pagination({
       pageNumberSet.add(page);
       elements.push(
         <PaginationPage
+          key={page}
           isCurrent={current === page}
           label={page}
           onClick={(event) => {
@@ -83,7 +84,7 @@ export default function Pagination({
     addPage(i);
   }
 
-  if (lastAddedPage < current - pagePadding) {
+  if (lastAddedPage < current - pagePadding - 1) {
     elements.push(<PaginationEllipsis />);
   }
 
@@ -91,7 +92,7 @@ export default function Pagination({
     addPage(i);
   }
 
-  if (lastAddedPage < end - pagePadding) {
+  if (lastAddedPage < end - pagePadding - 1) {
     elements.push(<PaginationEllipsis />);
   }
 

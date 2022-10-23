@@ -53,6 +53,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
       searchValue: z.string(),
       skip: z.number(),
       sortOrder: z.string(),
+      take: z.number(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session.user.id;
@@ -64,6 +65,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         sortOrder,
         numComments,
         skip,
+        take,
       } = input;
       const totalRecords = await ctx.prisma.resumesStar.count({
         where: {
@@ -76,6 +78,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
             experience: { in: experienceFilters },
             location: { in: locationFilters },
             role: { in: roleFilters },
+            title: { contains: searchValue, mode: 'insensitive' },
           },
           userId,
         },
@@ -121,7 +124,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
                 },
               },
         skip,
-        take: 10,
+        take,
         where: {
           resume: {
             ...(numComments === 0 && {
@@ -167,6 +170,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
       searchValue: z.string(),
       skip: z.number(),
       sortOrder: z.string(),
+      take: z.number(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session.user.id;
@@ -177,6 +181,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         sortOrder,
         searchValue,
         numComments,
+        take,
         skip,
       } = input;
       const totalRecords = await ctx.prisma.resumesResume.count({
@@ -189,6 +194,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
           experience: { in: experienceFilters },
           location: { in: locationFilters },
           role: { in: roleFilters },
+          title: { contains: searchValue, mode: 'insensitive' },
           userId,
         },
       });
@@ -224,7 +230,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
               }
             : { comments: { _count: 'desc' } },
         skip,
-        take: 10,
+        take,
         where: {
           ...(numComments === 0 && {
             comments: {
