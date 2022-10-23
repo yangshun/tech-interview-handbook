@@ -60,6 +60,7 @@ model User {
   questionsAnswerCommentVotes   QuestionsAnswerCommentVote[]
   OffersProfile                 OffersProfile[]
   offersDiscussion              OffersReply[]
+  questionsLists                QuestionsList[]
 }
 
 enum Vote {
@@ -409,11 +410,12 @@ model QuestionsQuestion {
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
 
-  user       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
-  encounters QuestionsQuestionEncounter[]
-  votes      QuestionsQuestionVote[]
-  comments   QuestionsQuestionComment[]
-  answers    QuestionsAnswer[]
+  user                       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  encounters                 QuestionsQuestionEncounter[]
+  votes                      QuestionsQuestionVote[]
+  comments                   QuestionsQuestionComment[]
+  answers                    QuestionsAnswer[]
+  QuestionsListQuestionEntry QuestionsListQuestionEntry[]
 
   @@index([lastSeenAt, id])
   @@index([upvotes, id])
@@ -539,8 +541,8 @@ model QuestionsList {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user            User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  questionEntries QuestionsListQuestion[]
+  user            User                         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questionEntries QuestionsListQuestionEntry[]
 
   @@unique([userId, name])
 }
