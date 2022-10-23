@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react';
 import {
   BookOpenIcon,
   BriefcaseIcon,
+  ChatBubbleLeftRightIcon,
   CodeBracketSquareIcon,
   FaceSmileIcon,
   IdentificationIcon,
@@ -91,19 +92,33 @@ export default function ResumeCommentsList({
                   <div className="w-fit text-lg font-medium">{label}</div>
                 </div>
 
-                {commentCount > 0 ? (
-                  comments.map((comment) => {
-                    return (
-                      <ResumeCommentListItem
-                        key={comment.id}
-                        comment={comment}
-                        userId={sessionData?.user?.id}
-                      />
-                    );
-                  })
-                ) : (
-                  <div>There are no comments for this section yet!</div>
-                )}
+                <div className="w-11/12 space-y-4">
+                  <div className=" space-y-2 rounded-md border-2 border-indigo-300 bg-white px-4 py-3 drop-shadow-md">
+                    {commentCount > 0 ? (
+                      comments.map((comment) => {
+                        return (
+                          <ResumeCommentListItem
+                            key={comment.id}
+                            comment={comment}
+                            userId={sessionData?.user?.id}
+                          />
+                        );
+                      })
+                    ) : (
+                      <div className="flex flex-row items-center text-sm">
+                        <ChatBubbleLeftRightIcon className="mr-2 h-6 w-6 text-indigo-400" />
+
+                        <div className="text-gray-500">
+                          There are no comments for this section yet!
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="relative flex flex-row pr-6 pt-2">
+                  <div className="flex-grow border-t border-gray-300" />
+                </div>
               </div>
             );
           })}
