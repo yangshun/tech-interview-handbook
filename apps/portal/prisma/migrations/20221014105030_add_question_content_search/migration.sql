@@ -1,5 +1,5 @@
 -- AlterTable
-ALTER TABLE "QuestionsQuestion" ADD COLUMN     "contentSearch" TSVECTOR
+ALTER TABLE "QuestionsQuestion" ADD COLUMN "contentSearch" TSVECTOR
     GENERATED ALWAYS AS
         to_tsvector('english', coalesce(content, ''))
     STORED;
