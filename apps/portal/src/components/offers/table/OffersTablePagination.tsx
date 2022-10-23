@@ -19,13 +19,13 @@ export default function OffersTablePagination({
     <nav
       aria-label="Table navigation"
       className="flex items-center justify-between p-4">
-      <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+      <span className="text-sm font-normal text-gray-500">
         Showing
-        <span className="font-semibold text-gray-900 dark:text-white">
+        <span className="font-semibold text-gray-900">
           {` ${startNumber} - ${endNumber} `}
         </span>
         {`of `}
-        <span className="font-semibold text-gray-900 dark:text-white">
+        <span className="font-semibold text-gray-900">
           {pagination.totalItems}
         </span>
       </span>
