@@ -11,7 +11,7 @@ function Test() {
       location: 'Singapore, Singapore',
       offset: 0,
       sortBy: '-totalCompensation',
-      yoeCategory: 2,
+      yoeCategory: 1,
     },
   ]);
 

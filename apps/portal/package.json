@@ -9,7 +9,8 @@
     "lint": "next lint",
     "tsc": "tsc",
     "postinstall": "prisma generate",
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seed.ts",
+    "seedSalaries": "ts-node prisma/readSheet.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.3",
