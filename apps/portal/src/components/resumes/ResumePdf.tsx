@@ -43,7 +43,7 @@ export default function ResumePdf({ url }: Props) {
     <div id="pdfView">
       <div className="group relative">
         <Document
-          className="flex h-[calc(100vh-17rem)] flex-row justify-center overflow-auto"
+          className="flex h-[calc(100vh-16rem)] flex-row justify-center overflow-auto"
           file={url}
           loading={<Spinner display="block" size="lg" />}
           noData=""
