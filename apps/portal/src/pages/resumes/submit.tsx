@@ -46,6 +46,8 @@ type IFormInput = {
   title: string;
 };
 
+type InputKeys = keyof IFormInput;
+
 type InitFormDetails = {
   additionalInfo?: string;
   experience: string;
@@ -218,6 +220,10 @@ export default function SubmitResumeForm({
     }
   }, [errors?.file, invalidFileUploadError]);
 
+  const onValueChange = (section: InputKeys, value: string) => {
+    setValue(section, value.trim(), { shouldTouch: false });
+  };
+
   return (
     <>
       <Head>
@@ -269,7 +275,7 @@ export default function SubmitResumeForm({
               required={true}
               onChange={(val) => setValue('title', val)}
             />
-            <div className="flex gap-12">
+            <div className="flex gap-8">
               <Select
                 {...register('role', { required: true })}
                 defaultValue={undefined}
@@ -301,7 +307,7 @@ export default function SubmitResumeForm({
             />
             {/* Upload resume form */}
             {isNewForm && (
-              <>
+              <div className="space-y-2">
                 <p className="text-sm font-medium text-slate-700">
                   Upload resume (PDF format)
                   <span aria-hidden="true" className="text-danger-500">
@@ -309,66 +315,60 @@ export default function SubmitResumeForm({
                     *
                   </span>
                 </p>
-                <div className="mb-4">
-                  <div
-                    {...getRootProps()}
-                    className={clsx(
-                      fileUploadError ? 'border-danger-600' : 'border-gray-300',
-                      'mt-2 flex cursor-pointer justify-center rounded-md border-2 border-dashed bg-gray-100 px-6 pt-5 pb-6',
-                    )}>
-                    <div className="space-y-1 text-center">
-                      {resumeFile == null ? (
-                        <ArrowUpCircleIcon className="m-auto h-10 w-10 text-indigo-500" />
-                      ) : (
-                        <p
-                          className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
-                          onClick={onClickDownload}>
-                          {resumeFile.name}
-                        </p>
-                      )}
-                      <div className="flex items-center text-sm">
-                        <label
-                          className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
-                          htmlFor="file-upload">
-                          <span className="mt-2 font-medium">
-                            Drop file here
-                          </span>
-                          <span className="mr-1 ml-1 font-light">or</span>
-                          <span className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
-                            {resumeFile == null
-                              ? 'Select file'
-                              : 'Replace file'}
-                          </span>
-                          <input
-                            {...register('file', { required: true })}
-                            {...getInputProps()}
-                            accept="application/pdf"
-                            className="sr-only"
-                            disabled={isLoading}
-                            id="file-upload"
-                            name="file-upload"
-                            type="file"
-                          />
-                        </label>
-                      </div>
-                      <p className="text-xs text-gray-500">
-                        PDF up to {FILE_SIZE_LIMIT_MB}MB
+                <div
+                  {...getRootProps()}
+                  className={clsx(
+                    fileUploadError ? 'border-danger-600' : 'border-gray-300',
+                    'flex cursor-pointer justify-center rounded-md border-2 border-dashed bg-gray-100 py-4',
+                  )}>
+                  <div className="space-y-1 text-center">
+                    {resumeFile == null ? (
+                      <ArrowUpCircleIcon className="m-auto h-10 w-10 text-indigo-500" />
+                    ) : (
+                      <p
+                        className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
+                        onClick={onClickDownload}>
+                        {resumeFile.name}
                       </p>
+                    )}
+                    <div className="flex items-center text-sm">
+                      <label
+                        className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
+                        htmlFor="file-upload">
+                        <span className="font-medium">Drop file here</span>
+                        <span className="mr-1 ml-1 font-light">or</span>
+                        <span className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
+                          {resumeFile == null ? 'Select file' : 'Replace file'}
+                        </span>
+                        <input
+                          {...register('file', { required: true })}
+                          {...getInputProps()}
+                          accept="application/pdf"
+                          className="sr-only"
+                          disabled={isLoading}
+                          id="file-upload"
+                          name="file-upload"
+                          type="file"
+                        />
+                      </label>
                     </div>
+                    <p className="text-xs text-gray-500">
+                      PDF up to {FILE_SIZE_LIMIT_MB}MB
+                    </p>
                   </div>
-                  {fileUploadError && (
-                    <p className="text-danger-600 text-sm">{fileUploadError}</p>
-                  )}
                 </div>
-              </>
+                {fileUploadError && (
+                  <p className="text-danger-600 text-sm">{fileUploadError}</p>
+                )}
+              </div>
             )}
             {/*  Additional Info Section */}
             <TextArea
-              {...register('additionalInfo')}
+              {...(register('additionalInfo'), {})}
               disabled={isLoading}
               label="Additional Information"
               placeholder={ADDITIONAL_INFO_PLACEHOLDER}
-              onChange={(val) => setValue('additionalInfo', val)}
+              onChange={(val) => onValueChange('additionalInfo', val)}
             />
             {/*  Submission Guidelines */}
             {isNewForm && (

@@ -4,10 +4,10 @@ import { useSession } from 'next-auth/react';
 import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Disclosure, Transition } from '@headlessui/react';
 import { FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 import {
   MagnifyingGlassIcon,
   NewspaperIcon,
+  XMarkIcon,
 } from '@heroicons/react/24/outline';
 import {
   CheckboxInput,
@@ -36,7 +36,6 @@ import {
   SORT_OPTIONS,
 } from '~/components/resumes/browse/resumeFilters';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
-import ResumeReviewsTitle from '~/components/resumes/ResumeReviewsTitle';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 
 import useDebounceValue from '~/utils/resumes/useDebounceValue';
@@ -369,12 +368,8 @@ export default function ResumeHomePage() {
         </Transition.Root>
       </div>
 
-      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-scroll">
-        <div className="ml-8 py-4">
-          <ResumeReviewsTitle />
-        </div>
-
-        <div className="mx-8 mt-4 flex justify-start">
+      <main className="h-[calc(100vh-4rem)] flex-auto overflow-y-scroll px-8 pt-6 pb-4">
+        <div className="flex justify-start">
           <div className="hidden w-1/6 pt-2 lg:block">
             <h3 className="text-md font-medium tracking-tight text-gray-900">
               Shortcuts
@@ -535,44 +530,41 @@ export default function ResumeHomePage() {
                 </div>
               </div>
             </div>
-            <div className="mb-6">
-              {isFetchingResumes ? (
-                <div className="w-full pt-4">
-                  {' '}
-                  <Spinner display="block" size="lg" />{' '}
-                </div>
-              ) : sessionData === null &&
-                tabsValue !== BROWSE_TABS_VALUES.ALL ? (
-                <ResumeSignInButton
-                  className="mt-8"
-                  text={getLoggedOutText(tabsValue)}
+            {isFetchingResumes ? (
+              <div className="w-full pt-4">
+                {' '}
+                <Spinner display="block" size="lg" />{' '}
+              </div>
+            ) : sessionData === null && tabsValue !== BROWSE_TABS_VALUES.ALL ? (
+              <ResumeSignInButton
+                className="mt-8"
+                text={getLoggedOutText(tabsValue)}
+              />
+            ) : getTabResumes().length === 0 ? (
+              <div className="mt-24 flex flex-wrap justify-center">
+                <NewspaperIcon
+                  className="mb-12 basis-full"
+                  height={196}
+                  width={196}
                 />
-              ) : getTabResumes().length === 0 ? (
-                <div className="mt-24 flex flex-wrap justify-center">
-                  <NewspaperIcon
-                    className="mb-12 basis-full"
-                    height={196}
-                    width={196}
-                  />
-                  {getEmptyDataText(tabsValue, searchValue, userFilters)}
-                </div>
-              ) : (
-                <>
-                  <ResumeListItems resumes={getTabResumes()} />
-                  {getTabTotalPages() > 1 && (
-                    <div className="my-4 flex justify-center">
-                      <Pagination
-                        current={currentPage}
-                        end={getTabTotalPages()}
-                        label="pagination"
-                        start={1}
-                        onSelect={(page) => setCurrentPage(page)}
-                      />
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
+                {getEmptyDataText(tabsValue, searchValue, userFilters)}
+              </div>
+            ) : (
+              <>
+                <ResumeListItems resumes={getTabResumes()} />
+                {getTabTotalPages() > 1 && (
+                  <div className="mt-4 flex justify-center">
+                    <Pagination
+                      current={currentPage}
+                      end={getTabTotalPages()}
+                      label="pagination"
+                      start={1}
+                      onSelect={(page) => setCurrentPage(page)}
+                    />
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </div>
       </main>
