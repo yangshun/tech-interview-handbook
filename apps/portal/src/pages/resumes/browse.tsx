@@ -27,11 +27,11 @@ import type {
 } from '~/components/resumes/browse/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
-  EXPERIENCE,
+  EXPERIENCES,
   INITIAL_FILTER_STATE,
   isInitialFilterState,
-  LOCATION,
-  ROLE,
+  LOCATIONS,
+  ROLES,
   SHORTCUTS,
   SORT_OPTIONS,
 } from '~/components/resumes/browse/resumeFilters';
@@ -51,17 +51,17 @@ const filters: Array<Filter> = [
   {
     id: 'role',
     label: 'Role',
-    options: ROLE,
+    options: ROLES,
   },
   {
     id: 'experience',
     label: 'Experience',
-    options: EXPERIENCE,
+    options: EXPERIENCES,
   },
   {
     id: 'location',
     label: 'Location',
-    options: LOCATION,
+    options: LOCATIONS,
   },
 ];
 
