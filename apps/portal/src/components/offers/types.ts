@@ -2,6 +2,8 @@ import type { JobType } from '@prisma/client';
 
 import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
+export const HOME_URL = '/offers/browse';
+
 /*
  *  Offer Profile
  */
