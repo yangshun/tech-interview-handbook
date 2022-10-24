@@ -26,7 +26,6 @@ export type Experience = {
   level: string?;
   location: string?;
   monthlySalary: Valuation?;
-  specialization: string?;
   title: string?;
   totalCompensation: Valuation?;
 };
@@ -87,12 +86,11 @@ export type ProfileOffer = {
 };
 
 export type FullTime = {
-  baseSalary: Valuation;
-  bonus: Valuation;
+  baseSalary: Valuation?;
+  bonus: Valuation?;
   id: string;
   level: string;
-  specialization: string;
-  stocks: Valuation;
+  stocks: Valuation?;
   title: string;
   totalCompensation: Valuation;
 };
@@ -101,7 +99,6 @@ export type Intern = {
   id: string;
   internshipCycle: string;
   monthlySalary: Valuation;
-  specialization: string;
   startYear: number;
   title: string;
 };
@@ -163,7 +160,6 @@ export type AnalysisHighestOffer = {
   id: string;
   level: string;
   location: string;
-  specialization: string;
   totalYoe: number;
 };
 
@@ -178,7 +174,6 @@ export type AnalysisOffer = {
   negotiationStrategy: string;
   previousCompanies: Array<string>;
   profileName: string;
-  specialization: string;
   title: string;
   totalYoe: number;
 };

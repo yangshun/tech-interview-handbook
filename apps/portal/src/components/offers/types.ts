@@ -88,11 +88,11 @@ export type OfferFormData = Omit<OfferPostData, 'monthYearReceived'> & {
 };
 
 export type OfferFullTimePostData = {
-  baseSalary: Money;
-  bonus: Money;
+  baseSalary: Money | null;
+  bonus: Money | null;
   id?: string;
   level: string;
-  stocks: Money;
+  stocks: Money | null;
   title: string;
   totalCompensation: Money;
 };
