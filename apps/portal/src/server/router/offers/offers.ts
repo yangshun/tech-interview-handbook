@@ -317,27 +317,36 @@ export const offersRouter = createRouter().query('list', {
                 offer.offersFullTime.totalCompensation.updatedAt,
               );
             offer.offersFullTime.totalCompensation.currency = currency;
-            offer.offersFullTime.baseSalary.value = await convertWithDate(
-              offer.offersFullTime.baseSalary.value,
-              offer.offersFullTime.baseSalary.currency,
-              currency,
-              offer.offersFullTime.baseSalary.updatedAt,
-            );
-            offer.offersFullTime.baseSalary.currency = currency;
-            offer.offersFullTime.stocks.value = await convertWithDate(
-              offer.offersFullTime.stocks.value,
-              offer.offersFullTime.stocks.currency,
-              currency,
-              offer.offersFullTime.stocks.updatedAt,
-            );
-            offer.offersFullTime.stocks.currency = currency;
-            offer.offersFullTime.bonus.value = await convertWithDate(
-              offer.offersFullTime.bonus.value,
-              offer.offersFullTime.bonus.currency,
-              currency,
-              offer.offersFullTime.bonus.updatedAt,
-            );
-            offer.offersFullTime.bonus.currency = currency;
+
+            if (offer.offersFullTime?.baseSalary != null) {
+              offer.offersFullTime.baseSalary.value = await convertWithDate(
+                offer.offersFullTime.baseSalary.value,
+                offer.offersFullTime.baseSalary.currency,
+                currency,
+                offer.offersFullTime.baseSalary.updatedAt,
+              );
+              offer.offersFullTime.baseSalary.currency = currency;
+            }
+
+            if (offer.offersFullTime?.stocks != null) {
+              offer.offersFullTime.stocks.value = await convertWithDate(
+                offer.offersFullTime.stocks.value,
+                offer.offersFullTime.stocks.currency,
+                currency,
+                offer.offersFullTime.stocks.updatedAt,
+              );
+              offer.offersFullTime.stocks.currency = currency;
+            }
+
+            if (offer.offersFullTime?.bonus != null) {
+              offer.offersFullTime.bonus.value = await convertWithDate(
+                offer.offersFullTime.bonus.value,
+                offer.offersFullTime.bonus.currency,
+                currency,
+                offer.offersFullTime.bonus.updatedAt,
+              );
+              offer.offersFullTime.bonus.currency = currency;
+            }
           } else if (offer.offersIntern?.monthlySalary != null) {
             offer.offersIntern.monthlySalary.value = await convertWithDate(
               offer.offersIntern.monthlySalary.value,

@@ -4,6 +4,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { JobType } from '@prisma/client';
 
+import type { JobTitleType } from '~/components/shared/JobTitles';
+import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
+
 import { HorizontalDivider } from '~/../../../packages/ui/dist';
 import { convertMoneyToString } from '~/utils/offers/currency';
 import { formatDate } from '~/utils/offers/time';
@@ -54,7 +57,9 @@ export default function OfferProfileCard({
       <HorizontalDivider />
       <div className="flex items-end justify-between">
         <div className="col-span-1 row-span-3">
-          <p className="font-bold">{title}</p>
+          <p className="font-bold">
+            {getLabelForJobTitleType(title as JobTitleType)}
+          </p>
           <p>
             Company: {company.name}, {location}
           </p>

@@ -128,7 +128,7 @@ export default function CommentCard({
               <TextArea
                 isLabelHidden={true}
                 label="Comment"
-                placeholder="Type your comment here"
+                placeholder="Type your reply here"
                 resize="none"
                 value={currentReply}
                 onChange={(value) => setCurrentReply(value)}
@@ -136,7 +136,9 @@ export default function CommentCard({
               <div className="mt-2 flex w-full justify-end">
                 <div className="w-fit">
                   <Button
-                    disabled={!currentReply.length}
+                    disabled={
+                      !currentReply.length || createCommentMutation.isLoading
+                    }
                     display="block"
                     isLabelHidden={false}
                     isLoading={createCommentMutation.isLoading}

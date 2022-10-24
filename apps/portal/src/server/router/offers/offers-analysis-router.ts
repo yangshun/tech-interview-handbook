@@ -19,9 +19,9 @@ const searchOfferPercentile = (
     company: Company;
     offersFullTime:
       | (OffersFullTime & {
-          baseSalary: OffersCurrency;
-          bonus: OffersCurrency;
-          stocks: OffersCurrency;
+          baseSalary: OffersCurrency | null;
+          bonus: OffersCurrency | null;
+          stocks: OffersCurrency | null;
           totalCompensation: OffersCurrency;
         })
       | null;

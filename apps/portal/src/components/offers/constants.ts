@@ -2,26 +2,6 @@ import { EducationBackgroundType } from './types';
 
 export const emptyOption = '----';
 
-// TODO: use enums
-export const titleOptions = [
-  {
-    label: 'Software Engineer',
-    value: 'Software Engineer',
-  },
-  {
-    label: 'Frontend Engineer',
-    value: 'Frontend Engineer',
-  },
-  {
-    label: 'Backend Engineer',
-    value: 'Backend Engineer',
-  },
-  {
-    label: 'Full-stack Engineer',
-    value: 'Full-stack Engineer',
-  },
-];
-
 export const locationOptions = [
   {
     label: 'Singapore, Singapore',
