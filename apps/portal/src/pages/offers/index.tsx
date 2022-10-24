@@ -15,7 +15,7 @@ import { HOME_URL } from '~/components/offers/types';
 const features = [
   {
     description:
-      'Name of the profile creator is stricly anonymous by using randomly generated names.',
+      'Profile names are randomly generated to keep your offers strictly anonymous.',
     icon: UsersIcon,
     name: 'Anonymized Profile Name',
   },
@@ -79,7 +79,7 @@ const footerNavigation = {
 
 export default function LandingPage() {
   return (
-    <div className="w-full overflow-y-auto bg-white">
+    <div className="mx-auto w-full overflow-y-auto bg-white">
       <main>
         {/* Hero section */}
         <div className="relative h-full">
