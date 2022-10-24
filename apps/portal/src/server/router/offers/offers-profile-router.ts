@@ -268,22 +268,7 @@ export const offersProfileRouter = createRouter()
         .digest('hex');
 
       // Generate random name until unique
-      let uniqueName: string = generateRandomName();
-
-      let sameNameProfiles = await ctx.prisma.offersProfile.findMany({
-        where: {
-          profileName: uniqueName
-        }
-      })
-
-      while (sameNameProfiles.length !== 0) {
-        uniqueName = generateRandomName();
-        sameNameProfiles = await ctx.prisma.offersProfile.findMany({
-          where: {
-            profileName: uniqueName
-          }
-        })
-      }
+      const uniqueName: string = await generateRandomName();
 
       const profile = await ctx.prisma.offersProfile.create({
         data: {

@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import { baseCurrencyString } from '../src/utils/offers/currency';
 import { convert } from '../src/utils/offers/currency/currencyExchange';
 import { generateAnalysis } from '../src/utils/offers/analysisGeneration';
+import generateRandomName from '../src/utils/offers/randomNameGenerator';
 
 const prisma = new PrismaClient();
 
@@ -68,11 +69,15 @@ const seedSalaries = async () => {
               .createHash('sha256')
               .update(xlSerialToJsDate(data.Timestamp).toString())
               .digest('hex');
+
+            // Generate random name until unique
+            let uniqueName: string = await generateRandomName();
+
             if (data.Type.toUpperCase() === 'INTERNSHIP') {
               // create profile
               const dataAdded = await prisma.offersProfile.create({
                 data: {
-                  profileName: crypto.randomUUID().substring(0, 10),
+                  profileName: uniqueName,
                   createdAt: xlSerialToJsDate(data.Timestamp),
                   editToken: token,
                   background: {
