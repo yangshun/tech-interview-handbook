@@ -14,11 +14,13 @@ import {
   PencilSquareIcon,
   StarIcon,
 } from '@heroicons/react/20/solid';
-import { Spinner } from '@tih/ui';
+import { Button, Spinner } from '@tih/ui';
 
-import ResumeCommentsSection from '~/components/resumes/comments/ResumeCommentsSection';
+import ResumeCommentsForm from '~/components/resumes/comments/ResumeCommentsForm';
+import ResumeCommentsList from '~/components/resumes/comments/ResumeCommentsList';
 import ResumePdf from '~/components/resumes/ResumePdf';
 import ResumeExpandableText from '~/components/resumes/shared/ResumeExpandableText';
+import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 
 import { trpc } from '~/utils/trpc';
 
@@ -59,6 +61,7 @@ export default function ResumeReviewPage() {
     session?.user?.id != null && session.user.id === detailsQuery.data?.userId;
 
   const [isEditMode, setIsEditMode] = useState(false);
+  const [showCommentsForm, setShowCommentsForm] = useState(false);
 
   const onStarButtonClick = () => {
     if (session?.user?.id == null) {
@@ -79,6 +82,21 @@ export default function ResumeReviewPage() {
 
   const onEditButtonClick = () => {
     setIsEditMode(true);
+  };
+
+  const renderReviewButton = () => {
+    if (session === null) {
+      return <ResumeSignInButton text="to join discussion" />;
+    }
+    return (
+      <Button
+        className="h-10 py-2"
+        display="block"
+        label="Add your review"
+        variant="tertiary"
+        onClick={() => setShowCommentsForm(true)}
+      />
+    );
   };
 
   if (isEditMode && detailsQuery.data != null) {
@@ -120,10 +138,19 @@ export default function ResumeReviewPage() {
           </Head>
           <main className="h-[calc(100vh-2rem)] flex-1 space-y-2 overflow-y-auto py-4 px-8 xl:px-12 2xl:pr-16">
             <div className="flex justify-between">
-              <h1 className="text-2xl font-semibold leading-7 text-slate-900 sm:truncate sm:text-3xl sm:tracking-tight">
+              <h1 className="pr-2 text-2xl font-semibold leading-7 text-slate-900 sm:truncate sm:text-3xl sm:tracking-tight">
                 {detailsQuery.data.title}
               </h1>
-              <div className="flex gap-4">
+              <div className="flex gap-4 xl:pr-4">
+                {userIsOwner && (
+                  <button
+                    className="p h-10 rounded-md border border-slate-300 bg-white py-1 px-2 text-center"
+                    type="button"
+                    onClick={onEditButtonClick}>
+                    <PencilSquareIcon className="text-primary-600 hover:text-primary-300 h-6 w-6" />
+                  </button>
+                )}
+
                 <button
                   className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50  disabled:hover:bg-white"
                   disabled={starMutation.isLoading || unstarMutation.isLoading}
@@ -152,39 +179,33 @@ export default function ResumeReviewPage() {
                     {detailsQuery.data?._count.stars}
                   </span>
                 </button>
-                {userIsOwner && (
-                  <button
-                    className="p h-10 rounded-md border border-slate-300 bg-white py-1 px-2 text-center"
-                    type="button"
-                    onClick={onEditButtonClick}>
-                    <PencilSquareIcon className="text-primary-600 hover:text-primary-300 h-6 w-6" />
-                  </button>
-                )}
+
+                <div className="hidden xl:block">{renderReviewButton()}</div>
               </div>
             </div>
             <div className="flex flex-col lg:mt-0 lg:flex-row lg:flex-wrap lg:space-x-8">
-              <div className="mt-2 flex items-center text-sm text-slate-600">
+              <div className="mt-2 flex items-center text-sm text-slate-600 xl:mt-1">
                 <BriefcaseIcon
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                 />
                 {detailsQuery.data.role}
               </div>
-              <div className="flex items-center pt-2 text-sm text-slate-600">
+              <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
                 <MapPinIcon
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                 />
                 {detailsQuery.data.location}
               </div>
-              <div className="flex items-center pt-2 text-sm text-slate-600">
+              <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
                 <AcademicCapIcon
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                 />
                 {detailsQuery.data.experience}
               </div>
-              <div className="flex items-center pt-2 text-sm text-slate-600">
+              <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
                 <CalendarIcon
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
@@ -195,7 +216,7 @@ export default function ResumeReviewPage() {
               </div>
             </div>
             {detailsQuery.data.additionalInfo && (
-              <div className="flex items-start whitespace-pre-wrap pt-2 text-sm text-slate-600">
+              <div className="flex items-start whitespace-pre-wrap pt-2 text-sm text-slate-600 xl:pt-1">
                 <InformationCircleIcon
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
@@ -206,12 +227,35 @@ export default function ResumeReviewPage() {
                 />
               </div>
             )}
-            <div className="flex w-full flex-col gap-6 py-4 xl:flex-row">
-              <div className="w-full xl:w-[780px]">
+
+            <div className="flex w-full flex-col gap-6 py-4 xl:flex-row xl:py-0">
+              <div className="w-full xl:w-1/2">
                 <ResumePdf url={detailsQuery.data.url} />
               </div>
               <div className="grow">
-                <ResumeCommentsSection resumeId={resumeId as string} />
+                <div className="relative p-2 xl:hidden">
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-slate-300" />
+                  </div>
+                  <div className="relative flex justify-center">
+                    <span className="bg-slate-50 px-3 text-lg font-medium text-slate-900">
+                      Reviews
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mb-4 xl:hidden">{renderReviewButton()}</div>
+
+                {showCommentsForm ? (
+                  <ResumeCommentsForm
+                    resumeId={resumeId as string}
+                    setShowCommentsForm={setShowCommentsForm}
+                  />
+                ) : (
+                  <ResumeCommentsList resumeId={resumeId as string} />
+                )}
               </div>
             </div>
           </main>

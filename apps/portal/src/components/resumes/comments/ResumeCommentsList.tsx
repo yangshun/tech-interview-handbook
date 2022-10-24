@@ -11,24 +11,20 @@ import {
 } from '@heroicons/react/24/outline';
 import { ResumesSection } from '@prisma/client';
 import { Spinner } from '@tih/ui';
-import { Button } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
 import { RESUME_COMMENTS_SECTIONS } from './resumeCommentConstants';
 import ResumeCommentListItem from './ResumeCommentListItem';
-import ResumeSignInButton from '../shared/ResumeSignInButton';
 
 import type { ResumeComment } from '~/types/resume-comments';
 
 type ResumeCommentsListProps = Readonly<{
   resumeId: string;
-  setShowCommentsForm: (show: boolean) => void;
 }>;
 
 export default function ResumeCommentsList({
   resumeId,
-  setShowCommentsForm,
 }: ResumeCommentsListProps) {
   const { data: sessionData } = useSession();
 
@@ -52,31 +48,14 @@ export default function ResumeCommentsList({
     }
   };
 
-  const renderButton = () => {
-    if (sessionData === null) {
-      return <ResumeSignInButton text="to join discussion" />;
-    }
-    return (
-      <Button
-        className="-mb-2"
-        display="block"
-        label="Add your review"
-        variant="tertiary"
-        onClick={() => setShowCommentsForm(true)}
-      />
-    );
-  };
-
   return (
     <div className="space-y-3">
-      {renderButton()}
-
       {commentsQuery.isLoading ? (
         <div className="col-span-10 pt-4">
           <Spinner display="block" size="lg" />
         </div>
       ) : (
-        <div className="m-2 flow-root h-[calc(100vh-17rem)] w-full flex-col space-y-4 overflow-y-auto overflow-x-hidden pt-14 pb-6">
+        <div className="mb-8 flow-root h-[calc(100vh-13rem)] w-full flex-col space-y-4 overflow-y-auto overflow-x-hidden">
           {RESUME_COMMENTS_SECTIONS.map(({ label, value }) => {
             const comments = commentsQuery.data
               ? commentsQuery.data.filter((comment: ResumeComment) => {
@@ -93,7 +72,7 @@ export default function ResumeCommentsList({
                   <div className="w-fit text-lg font-medium">{label}</div>
                 </div>
 
-                <div className="w-11/12 space-y-4">
+                <div className="w-full space-y-4 pr-4">
                   <div
                     className={clsx(
                       'space-y-2 rounded-md border-2 bg-white px-4 py-3 drop-shadow-md',
