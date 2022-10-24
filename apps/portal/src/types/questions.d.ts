@@ -2,7 +2,6 @@ import type { QuestionsQuestionType } from '@prisma/client';
 
 export type Question = {
   aggregatedQuestionEncounters: AggregatedQuestionEncounter;
-  // TODO: company, location, role maps
   content: string;
   id: string;
   numAnswers: number;
