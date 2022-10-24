@@ -1,4 +1,4 @@
-import { undefined, z } from 'zod';
+import { z } from 'zod';
 import { QuestionsQuestionType, Vote } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
@@ -11,9 +11,12 @@ export const questionsQuestionRouter = createProtectedRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
       companyNames: z.string().array(),
+      cursor: z.object({
+        idCursor: z.string().optional(),
+        lastSeenCursor: z.date().optional(),
+        upvoteCursor: z.string().optional(),
+      }).nullish(),
       endDate: z.date().default(new Date()),
-      idCursor: z.string().optional(),
-      lastSeenCursor: z.date().optional(),
       locations: z.string().array(),
       pageSize: z.number().default(50),
       questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
@@ -21,9 +24,10 @@ export const questionsQuestionRouter = createProtectedRouter()
       sortOrder: z.nativeEnum(SortOrder),
       sortType: z.nativeEnum(SortType),
       startDate: z.date().optional(),
-      upvoteCursor: z.string().optional(),
     }),
     async resolve({ ctx, input }) {
+      const { cursor } = input
+
       const sortCondition =
         input.sortType === SortType.TOP
           ? [
@@ -46,15 +50,15 @@ export const questionsQuestionRouter = createProtectedRouter()
       const cursorCondition =
         input.sortType === SortType.TOP
           ? {
-              id: input.idCursor,
-              upvotes: input.upvoteCursor,
+              id: cursor ? cursor!.idCursor : undefined,
+              upvotes: cursor ? cursor!.upvoteCursor : undefined,
             }
           : {
-              id: input.idCursor,
-              lastSeenAt: input.lastSeenCursor,
+              id: cursor ? cursor!.idCursor : undefined,
+              lastSeenAt: cursor ?  cursor!.lastSeenCursor : undefined,
             };
 
-      const toSkip = input.idCursor ? 1 : 0;
+      const toSkip = cursor ? 1 : 0;
 
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
         cursor: {
@@ -128,7 +132,7 @@ export const questionsQuestionRouter = createProtectedRouter()
       });
 
       const lastQuestion = questionsData[input.pageSize - 1];
-      const nextIdCursor: string = lastQuestion.id;
+      const nextIdCursor: string | undefined = lastQuestion.id;
       const nextLastSeenCursor = input.sortType === SortType.NEW ? lastQuestion.lastSeenAt : undefined;
       const nextupvoteCursor = input.sortType === SortType.TOP ? lastQuestion.upvotes : undefined;
 
@@ -199,11 +203,17 @@ export const questionsQuestionRouter = createProtectedRouter()
         return question;
       });
 
+      let nextCursor: typeof cursor | undefined = undefined;
+
+      nextCursor = {
+        idCursor: nextIdCursor,
+        lastSeenCursor: nextLastSeenCursor,
+        upvoteCursor: nextupvoteCursor,
+      }
+
       return {
-        nextIdCursor,
-        nextLastSeenCursor,
-        nextupvoteCursor,
-        processedQuestionsData,
+        nextCursor,
+        processedQuestionsData
       }
     },
   })
