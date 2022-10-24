@@ -10,26 +10,26 @@ import {
 
 import LeftTextCard from '~/components/offers/landing/LeftTextCard';
 import RightTextCard from '~/components/offers/landing/RightTextCard';
-const baseUrl = '/offers/home';
+import { HOME_URL } from '~/components/offers/types';
 
 const features = [
   {
     description:
-      'Name of the profile creator is stricly anonymous by using randomly generated names.',
+      'Profile names are randomly generated to keep your offers strictly anonymous.',
     icon: UsersIcon,
-    name: 'Anonymisd Profile Name',
+    name: 'Anonymized Profile Name',
   },
   {
     description:
-      ' Only people with the edit link can edit that profile. Share profiles to others using public link without giving edit permission.',
+      'Only users with the edit link can edit that profile. Share profiles to others using a public link without giving edit permission.',
     icon: ShareIcon,
     name: 'Edit Link v.s. Public Link',
   },
   {
     description:
-      "Offer profiles will not be automatically saved under creator's account in database unless explicit permission is given.",
+      "Offer profiles will not be automatically saved under creators' account in our database unless explicit permission is given.",
     icon: BookmarkSquareIcon,
-    name: 'No Auto-Save to User Account',
+    name: 'Save with Permission',
   },
 ];
 
@@ -79,29 +79,29 @@ const footerNavigation = {
 
 export default function LandingPage() {
   return (
-    <div className="overflow-y-auto bg-white">
+    <div className="mx-auto w-full overflow-y-auto bg-white">
       <main>
         {/* Hero section */}
         <div className="relative h-full">
           <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
             <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              <span className="block">Choosing offers made easier</span>
-              <span className="from-primary-600 -mb-1 block bg-gradient-to-r to-purple-500 bg-clip-text pb-1 text-transparent">
-                using profiles behind offers.
+              <span>Choosing offers </span>
+              <span className="from-primary-600 -mb-1 mr-2 bg-gradient-to-r to-purple-500 bg-clip-text pb-1 pr-4 italic text-transparent">
+                made easier
               </span>
             </h1>
-            <p className="text-primary-600 mx-auto mt-6 max-w-lg text-center text-xl sm:max-w-3xl">
-              Analyse your offers using profiles from fellow software engineers.
+            <p className="mx-auto mt-6 max-w-lg text-center text-xl sm:max-w-3xl">
+              Analyze your offers using profiles from fellow software engineers.
             </p>
             <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
               <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
                 <a
                   className="border-grey-600 flex items-center justify-center rounded-md border bg-white bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8"
-                  href={baseUrl}>
+                  href={HOME_URL}>
                   Get started
                 </a>
                 <a
-                  className="bg-primary-600 flex items-center justify-center rounded-md border border-transparent px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"
+                  className="bg-primary-500 flex items-center justify-center rounded-md border border-transparent px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"
                   href="#">
                   Live demo
                 </a>
@@ -118,7 +118,7 @@ export default function LandingPage() {
           />
           <div className="relative">
             <LeftTextCard
-              description="An offer profile includes not only offers that a person get in their application cycle, but also background information such as education and work experience. Use offer profiles to help you better contaxtualize offers."
+              description="An offer profile includes not only offers that a person received in their application cycle, but also background information such as education and work experience. Use offer profiles to help you better contextualize offers."
               icon={
                 <InformationCircleIcon
                   aria-hidden="true"
@@ -161,13 +161,13 @@ export default function LandingPage() {
         </div>
 
         {/* Gradient Feature Section */}
-        <div className="bg-gradient-to-r from-purple-800 to-indigo-700">
+        <div className="to-primary-600 bg-gradient-to-r from-purple-800">
           <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:px-8 lg:pt-24">
             <h2 className="flex justify-center text-4xl font-bold tracking-tight text-white">
               Your privacy is our priority.
             </h2>
-            <p className="mt-4 flex flex-row justify-center text-lg text-purple-200">
-              All offer profiles are anonymised and we do not store information
+            <p className="text-primary-100 mt-4 flex flex-row justify-center text-lg">
+              All offer profiles are anonymized and we do not store information
               about your personal identity.
             </p>
             <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
@@ -185,7 +185,7 @@ export default function LandingPage() {
                     <h3 className="text-lg font-medium text-white">
                       {feature.name}
                     </h3>
-                    <p className="mt-2 text-base text-purple-200">
+                    <p className="text-primary-100 mt-2 text-base">
                       {feature.description}
                     </p>
                   </div>
@@ -200,14 +200,14 @@ export default function LandingPage() {
           <div className="mx-auto max-w-4xl py-16 px-4 sm:px-6 sm:py-24 lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:px-8">
             <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               <span className="block">Ready to get started?</span>
-              <span className="-mb-1 block bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text pb-1 text-transparent">
+              <span className="to-primary-600 -mb-1 block bg-gradient-to-r from-purple-600 bg-clip-text pb-1 text-transparent">
                 Create your own offer profile today.
               </span>
             </h2>
             <div className="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
               <a
-                className="flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
-                href={baseUrl}>
+                className="to-primary-500 flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                href={HOME_URL}>
                 Get Started
               </a>
             </div>
