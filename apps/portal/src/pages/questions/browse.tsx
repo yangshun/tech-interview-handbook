@@ -194,18 +194,6 @@ export default function QuestionsBrowsePage() {
   const [loaded, setLoaded] = useState(false);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
 
-  // Const [selectedCompanyOptions, setSelectedCompanyOptions] = useState<
-  //   Array<FilterOption>
-  // >([]);
-
-  // const [selectedRoleOptions, setSelectedRoleOptions] = useState<
-  //   Array<FilterOption>
-  // >([]);
-
-  // const [selectedLocationOptions, setSelectedLocationOptions] = useState<
-  //   Array<FilterOption>
-  // >([]);
-
   const questionTypeFilterOptions = useMemo(() => {
     return QUESTION_TYPES.map((questionType) => ({
       ...questionType,
@@ -320,9 +308,6 @@ export default function QuestionsBrowsePage() {
           setSelectedQuestionAge('all');
           setSelectedRoles([]);
           setSelectedLocations([]);
-          // SetSelectedCompanyOptions([]);
-          // setSelectedRoleOptions([]);
-          // setSelectedLocationOptions([]);
         }}
       />
       <FilterSection
