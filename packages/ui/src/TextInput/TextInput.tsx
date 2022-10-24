@@ -178,7 +178,7 @@ function TextInput(
           aria-describedby={hasError ? errorId : undefined}
           aria-invalid={hasError ? true : undefined}
           className={clsx(
-            'flex-1 border-none text-sm focus:outline-none focus:ring-0',
+            'w-0 flex-1 border-none text-sm focus:outline-none focus:ring-0',
             inputClass,
             disabled && 'bg-transparent',
           )}
