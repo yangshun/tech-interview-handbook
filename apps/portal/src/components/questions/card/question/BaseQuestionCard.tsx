@@ -11,6 +11,7 @@ import { Button } from '@tih/ui';
 
 import { useQuestionVote } from '~/utils/questions/useVote';
 
+import AddToListDropdown from '../../AddToListDropdown';
 import type { CreateQuestionEncounterData } from '../../forms/CreateQuestionEncounterForm';
 import CreateQuestionEncounterForm from '../../forms/CreateQuestionEncounterForm';
 import QuestionAggregateBadge from '../../QuestionAggregateBadge';
@@ -79,7 +80,16 @@ type CreateEncounterProps =
       showCreateEncounterButton?: false;
     };
 
+type AddToListProps =
+  | {
+      showAddToList: true;
+    }
+  | {
+      showAddToList?: false;
+    };
+
 export type BaseQuestionCardProps = ActionButtonProps &
+  AddToListProps &
   AnswerStatisticsProps &
   CreateEncounterProps &
   DeleteProps &
@@ -117,6 +127,7 @@ export default function BaseQuestionCard({
   showHover,
   onReceivedSubmit,
   showDeleteButton,
+  showAddToList,
   onDelete,
   truncateContent = true,
 }: BaseQuestionCardProps) {
@@ -135,12 +146,17 @@ export default function BaseQuestionCard({
       )}
       <div className="flex flex-col items-start gap-2">
         <div className="flex items-baseline justify-between">
-          <div className="flex items-baseline gap-2 text-slate-500">
+          <div className="flex items-center gap-2 text-slate-500">
             <QuestionTypeBadge type={type} />
             <QuestionAggregateBadge statistics={companies} variant="primary" />
             <QuestionAggregateBadge statistics={locations} variant="success" />
             <QuestionAggregateBadge statistics={roles} variant="danger" />
             <p className="text-xs">{timestamp}</p>
+            {showAddToList && (
+              <div className="pl-4">
+                <AddToListDropdown></AddToListDropdown>
+              </div>
+            )}
           </div>
           {showActionButton && (
             <Button

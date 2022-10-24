@@ -16,33 +16,33 @@ import { APP_TITLE } from '~/utils/questions/constants';
 import { SAMPLE_QUESTION } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
 
+export const questions = [
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+  SAMPLE_QUESTION,
+];
+
+export const lists = [
+  { id: 1, name: 'list 1', questions },
+  { id: 2, name: 'list 2', questions },
+  { id: 3, name: 'list 3', questions },
+  { id: 4, name: 'list 4', questions },
+  { id: 5, name: 'list 5', questions },
+];
+
 export default function ListPage() {
-  const questions = [
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-  ];
-
-  const lists = [
-    { id: 1, name: 'list 1', questions },
-    { id: 2, name: 'list 2', questions },
-    { id: 3, name: 'list 3', questions },
-    { id: 4, name: 'list 4', questions },
-    { id: 5, name: 'list 5', questions },
-  ];
-
   const [selectedList, setSelectedList] = useState(
     (lists ?? []).length > 0 ? lists[0].id : '',
   );

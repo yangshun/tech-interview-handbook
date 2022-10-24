@@ -4,6 +4,7 @@ import BaseQuestionCard from './BaseQuestionCard';
 export type QuestionOverviewCardProps = Omit<
   BaseQuestionCardProps & {
     showActionButton: false;
+    showAddToList: true;
     showAnswerStatistics: false;
     showCreateEncounterButton: true;
     showDeleteButton: false;
@@ -13,6 +14,7 @@ export type QuestionOverviewCardProps = Omit<
   | 'actionButtonLabel'
   | 'onActionButtonClick'
   | 'showActionButton'
+  | 'showAddToList'
   | 'showAnswerStatistics'
   | 'showCreateEncounterButton'
   | 'showDeleteButton'
@@ -25,6 +27,7 @@ export default function FullQuestionCard(props: QuestionOverviewCardProps) {
     <BaseQuestionCard
       {...props}
       showActionButton={false}
+      showAddToList={true}
       showAnswerStatistics={false}
       showCreateEncounterButton={true}
       showReceivedStatistics={false}
