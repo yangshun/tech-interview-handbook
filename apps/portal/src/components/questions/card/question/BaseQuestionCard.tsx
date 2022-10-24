@@ -154,7 +154,7 @@ export default function BaseQuestionCard({
             <p className="text-xs">{timestamp}</p>
             {showAddToList && (
               <div className="pl-4">
-                <AddToListDropdown></AddToListDropdown>
+                <AddToListDropdown questionId={questionId} />
               </div>
             )}
           </div>

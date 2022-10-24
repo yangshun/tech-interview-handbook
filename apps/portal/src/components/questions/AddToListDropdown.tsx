@@ -1,16 +1,53 @@
-import { forwardRef, Fragment, useEffect, useRef, useState } from 'react';
+import clsx from 'clsx';
+import type { PropsWithChildren } from 'react';
+import { useMemo } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { CheckIcon, HeartIcon } from '@heroicons/react/20/solid';
 
-import { lists } from '~/pages/questions/lists';
+import { trpc } from '~/utils/trpc';
 
-function classNames(...classes: Array<string>) {
-  return classes.filter(Boolean).join(' ');
-}
+export type AddToListDropdownProps = {
+  questionId: string;
+};
 
-export default function AddToListDropdown() {
+export default function AddToListDropdown({
+  questionId,
+}: AddToListDropdownProps) {
   const [menuOpened, setMenuOpened] = useState(false);
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
+
+  const utils = trpc.useContext();
+  const { data: lists } = trpc.useQuery(['questions.lists.getListsByUser']);
+
+  const listsWithQuestionData = useMemo(() => {
+    return lists?.map((list) => ({
+      ...list,
+      hasQuestion: list.questionEntries.some(
+        (entry) => entry.question.id === questionId,
+      ),
+    }));
+  }, [lists, questionId]);
+
+  const { mutateAsync: addQuestionToList } = trpc.useMutation(
+    'questions.lists.createQuestionEntry',
+    {
+      // TODO: Add optimistic update
+      onSuccess: () => {
+        utils.invalidateQueries(['questions.lists.getListsByUser']);
+      },
+    },
+  );
+
+  const { mutateAsync: removeQuestionFromList } = trpc.useMutation(
+    'questions.lists.deleteQuestionEntry',
+    {
+      // TODO: Add optimistic update
+      onSuccess: () => {
+        utils.invalidateQueries(['questions.lists.getListsByUser']);
+      },
+    },
+  );
 
   const addClickOutsideListener = () => {
     document.addEventListener('click', handleClickOutside, true);
@@ -23,7 +60,32 @@ export default function AddToListDropdown() {
     }
   };
 
-  const CustomMenuButton = ({ children }: any) => (
+  const handleAddToList = async (listId: string) => {
+    await addQuestionToList({
+      listId,
+      questionId,
+    });
+  };
+
+  const handleDeleteFromList = async (listId: string) => {
+    const list = listsWithQuestionData?.find(
+      (listWithQuestion) => listWithQuestion.id === listId,
+    );
+    if (!list) {
+      return;
+    }
+    const entry = list.questionEntries.find(
+      (questionEntry) => questionEntry.question.id === questionId,
+    );
+    if (!entry) {
+      return;
+    }
+    await removeQuestionFromList({
+      id: entry.id,
+    });
+  };
+
+  const CustomMenuButton = ({ children }: PropsWithChildren<unknown>) => (
     <button
       className="focus:ring-primary-500 inline-flex w-full justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-100"
       type="button"
@@ -58,23 +120,32 @@ export default function AddToListDropdown() {
           static={true}>
           {menuOpened && (
             <>
-              {lists.map((list) => (
+              {(listsWithQuestionData ?? []).map((list) => (
                 <div key={list.id} className="py-1">
                   <Menu.Item>
                     {({ active }) => (
                       <button
-                        className={classNames(
+                        className={clsx(
                           active
                             ? 'bg-slate-100 text-slate-900'
                             : 'text-slate-700',
                           'group flex w-full items-center px-4 py-2 text-sm',
                         )}
-                        type="button">
-                        <CheckIcon
-                          aria-hidden="true"
-                          className="mr-3 h-5 w-5 text-slate-400 group-hover:text-slate-500"
-                        />
-                        list.name
+                        type="button"
+                        onClick={() => {
+                          if (list.hasQuestion) {
+                            handleDeleteFromList(list.id);
+                          } else {
+                            handleAddToList(list.id);
+                          }
+                        }}>
+                        {list.hasQuestion && (
+                          <CheckIcon
+                            aria-hidden="true"
+                            className="mr-3 h-5 w-5 text-slate-400 group-hover:text-slate-500"
+                          />
+                        )}
+                        {list.name}
                       </button>
                     )}
                   </Menu.Item>
