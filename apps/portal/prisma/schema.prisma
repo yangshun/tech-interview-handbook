@@ -414,6 +414,9 @@ model QuestionsQuestion {
   answers                    QuestionsAnswer[]
   QuestionsListQuestionEntry QuestionsListQuestionEntry[]
 
+  contentSearch Unsupported("TSVECTOR")?
+
+  @@index([contentSearch])
   @@index([lastSeenAt, id])
   @@index([upvotes, id])
 }
