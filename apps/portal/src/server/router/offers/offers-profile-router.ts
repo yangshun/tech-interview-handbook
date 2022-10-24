@@ -285,11 +285,7 @@ export const offersProfileRouter = createRouter()
               },
               experiences: {
                 create: input.background.experiences.map(async (x) => {
-                  if (
-                    x.jobType === JobType.FULLTIME &&
-                    x.totalCompensation?.currency != null &&
-                    x.totalCompensation?.value != null
-                  ) {
+                  if (x.jobType === JobType.FULLTIME) {
                     if (x.companyId) {
                       return {
                         company: {
@@ -301,18 +297,21 @@ export const offersProfileRouter = createRouter()
                         jobType: x.jobType,
                         level: x.level,
                         title: x.title,
-                        totalCompensation: {
-                          create: {
-                            baseCurrency: baseCurrencyString,
-                            baseValue: await convert(
-                              x.totalCompensation.value,
-                              x.totalCompensation.currency,
-                              baseCurrencyString,
-                            ),
-                            currency: x.totalCompensation.currency,
-                            value: x.totalCompensation.value,
-                          },
-                        },
+                        totalCompensation:
+                          x.totalCompensation != null
+                            ? {
+                                create: {
+                                  baseCurrency: baseCurrencyString,
+                                  baseValue: await convert(
+                                    x.totalCompensation.value,
+                                    x.totalCompensation.currency,
+                                    baseCurrencyString,
+                                  ),
+                                  currency: x.totalCompensation.currency,
+                                  value: x.totalCompensation.value,
+                                },
+                              }
+                            : undefined,
                       };
                     }
                     return {
@@ -321,25 +320,24 @@ export const offersProfileRouter = createRouter()
                       level: x.level,
                       location: x.location,
                       title: x.title,
-                      totalCompensation: {
-                        create: {
-                          baseCurrency: baseCurrencyString,
-                          baseValue: await convert(
-                            x.totalCompensation.value,
-                            x.totalCompensation.currency,
-                            baseCurrencyString,
-                          ),
-                          currency: x.totalCompensation.currency,
-                          value: x.totalCompensation.value,
-                        },
-                      },
+                      totalCompensation:
+                        x.totalCompensation != null
+                          ? {
+                              create: {
+                                baseCurrency: baseCurrencyString,
+                                baseValue: await convert(
+                                  x.totalCompensation.value,
+                                  x.totalCompensation.currency,
+                                  baseCurrencyString,
+                                ),
+                                currency: x.totalCompensation.currency,
+                                value: x.totalCompensation.value,
+                              },
+                            }
+                          : undefined,
                     };
                   }
-                  if (
-                    x.jobType === JobType.INTERN &&
-                    x.monthlySalary?.currency != null &&
-                    x.monthlySalary?.value != null
-                  ) {
+                  if (x.jobType === JobType.INTERN) {
                     if (x.companyId) {
                       return {
                         company: {
@@ -349,36 +347,42 @@ export const offersProfileRouter = createRouter()
                         },
                         durationInMonths: x.durationInMonths,
                         jobType: x.jobType,
-                        monthlySalary: {
-                          create: {
-                            baseCurrency: baseCurrencyString,
-                            baseValue: await convert(
-                              x.monthlySalary.value,
-                              x.monthlySalary.currency,
-                              baseCurrencyString,
-                            ),
-                            currency: x.monthlySalary.currency,
-                            value: x.monthlySalary.value,
-                          },
-                        },
+                        monthlySalary:
+                          x.monthlySalary != null
+                            ? {
+                                create: {
+                                  baseCurrency: baseCurrencyString,
+                                  baseValue: await convert(
+                                    x.monthlySalary.value,
+                                    x.monthlySalary.currency,
+                                    baseCurrencyString,
+                                  ),
+                                  currency: x.monthlySalary.currency,
+                                  value: x.monthlySalary.value,
+                                },
+                              }
+                            : undefined,
                         title: x.title,
                       };
                     }
                     return {
                       durationInMonths: x.durationInMonths,
                       jobType: x.jobType,
-                      monthlySalary: {
-                        create: {
-                          baseCurrency: baseCurrencyString,
-                          baseValue: await convert(
-                            x.monthlySalary.value,
-                            x.monthlySalary.currency,
-                            baseCurrencyString,
-                          ),
-                          currency: x.monthlySalary.currency,
-                          value: x.monthlySalary.value,
-                        },
-                      },
+                      monthlySalary:
+                        x.monthlySalary != null
+                          ? {
+                              create: {
+                                baseCurrency: baseCurrencyString,
+                                baseValue: await convert(
+                                  x.monthlySalary.value,
+                                  x.monthlySalary.currency,
+                                  baseCurrencyString,
+                                ),
+                                currency: x.monthlySalary.currency,
+                                value: x.monthlySalary.value,
+                              },
+                            }
+                          : undefined,
                       title: x.title,
                     };
                   }
@@ -710,6 +714,7 @@ export const offersProfileRouter = createRouter()
               data: {
                 companyId: exp.companyId, // TODO: check if can change with connect or whether there is a difference
                 durationInMonths: exp.durationInMonths,
+                jobType: exp.jobType as JobType,
                 level: exp.level,
               },
               where: {
@@ -818,18 +823,20 @@ export const offersProfileRouter = createRouter()
                           level: exp.level,
                           location: exp.location,
                           title: exp.title,
-                          totalCompensation: {
-                            create: {
-                              baseCurrency: baseCurrencyString,
-                              baseValue: await convert(
-                                exp.totalCompensation.value,
-                                exp.totalCompensation.currency,
-                                baseCurrencyString,
-                              ),
-                              currency: exp.totalCompensation.currency,
-                              value: exp.totalCompensation.value,
-                            },
-                          },
+                          totalCompensation: exp.totalCompensation
+                            ? {
+                                create: {
+                                  baseCurrency: baseCurrencyString,
+                                  baseValue: await convert(
+                                    exp.totalCompensation.value,
+                                    exp.totalCompensation.currency,
+                                    baseCurrencyString,
+                                  ),
+                                  currency: exp.totalCompensation.currency,
+                                  value: exp.totalCompensation.value,
+                                },
+                              }
+                            : undefined,
                         },
                       },
                     },
