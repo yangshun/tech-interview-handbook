@@ -84,13 +84,13 @@ export default function ResumeCommentsForm({
 
   return (
     <div className="h-[calc(100vh-13rem)] overflow-y-auto">
-      <h2 className="text-xl font-semibold text-gray-800">Add your review</h2>
-      <p className="text-gray-800">
+      <h2 className="text-xl font-semibold text-slate-800">Add your review</h2>
+      <p className="text-slate-800">
         Please fill in at least one section to submit your review
       </p>
 
       <form
-        className="w-full space-y-8 divide-y divide-gray-200"
+        className="w-full space-y-8 divide-y divide-slate-200"
         onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-4 space-y-4">
           <TextArea

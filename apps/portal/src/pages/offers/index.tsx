@@ -12,7 +12,7 @@ export default function OffersHomePage() {
 
   return (
     <main className="flex-1 overflow-y-auto">
-      <div className="grid-rows grid h-1/2 bg-gray-100">
+      <div className="grid-rows grid h-1/2 bg-slate-100">
         <OffersTitle />
         <div className="flex items-start justify-center">
           <div className="mt-4 flex items-center">

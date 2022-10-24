@@ -85,7 +85,7 @@ export default function ResumeCommentsList({
 
             return (
               <div key={value} className="mb-4 space-y-4">
-                <div className="flex flex-row items-center space-x-2 text-indigo-800">
+                <div className="text-primary-800 flex flex-row items-center space-x-2">
                   {renderIcon(value)}
 
                   <div className="w-fit text-lg font-medium">{label}</div>

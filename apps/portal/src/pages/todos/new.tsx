@@ -27,7 +27,7 @@ export default function TodosCreate() {
             </h1>
             <form
               ref={formRef}
-              className="w-full space-y-8 divide-y divide-gray-200"
+              className="w-full space-y-8 divide-y divide-slate-200"
               onSubmit={async (event) => {
                 event.preventDefault();
                 if (!formRef.current) {
@@ -52,14 +52,14 @@ export default function TodosCreate() {
               }}>
               <div className="mt-6">
                 <label
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-slate-700"
                   htmlFor="text">
                   Text
                 </label>
                 <div className="mt-1 flex rounded-md shadow-sm">
                   <input
                     autoFocus={true}
-                    className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="focus:border-primary-500 focus:ring-primary-500 block w-full min-w-0 flex-1 rounded-md border-slate-300 sm:text-sm"
                     id="text"
                     name="text"
                     type="text"
@@ -71,12 +71,12 @@ export default function TodosCreate() {
               <div className="pt-5">
                 <div className="flex justify-end">
                   <Link
-                    className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="focus:ring-primary-500 rounded-md border border-slate-300 bg-white py-2 px-4 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2"
                     href="/todos">
                     Cancel
                   </Link>
                   <button
-                    className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 ml-3 inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
                     type="submit">
                     Save
                   </button>

@@ -318,26 +318,26 @@ export default function SubmitResumeForm({
                 <div
                   {...getRootProps()}
                   className={clsx(
-                    fileUploadError ? 'border-danger-600' : 'border-gray-300',
-                    'flex cursor-pointer justify-center rounded-md border-2 border-dashed bg-gray-100 py-4',
+                    fileUploadError ? 'border-danger-600' : 'border-slate-300',
+                    'flex cursor-pointer justify-center rounded-md border-2 border-dashed bg-slate-100 py-4',
                   )}>
                   <div className="space-y-1 text-center">
                     {resumeFile == null ? (
-                      <ArrowUpCircleIcon className="m-auto h-10 w-10 text-indigo-500" />
+                      <ArrowUpCircleIcon className="text-primary-500 m-auto h-10 w-10" />
                     ) : (
                       <p
-                        className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
+                        className="hover:text-primary-600 cursor-pointer underline underline-offset-1"
                         onClick={onClickDownload}>
                         {resumeFile.name}
                       </p>
                     )}
                     <div className="flex items-center text-sm">
                       <label
-                        className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
+                        className="focus-within:ring-primary-500 rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2"
                         htmlFor="file-upload">
                         <span className="font-medium">Drop file here</span>
                         <span className="mr-1 ml-1 font-light">or</span>
-                        <span className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
+                        <span className="text-primary-600 hover:text-primary-400 cursor-pointer font-medium">
                           {resumeFile == null ? 'Select file' : 'Replace file'}
                         </span>
                         <input
@@ -352,7 +352,7 @@ export default function SubmitResumeForm({
                         />
                       </label>
                     </div>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-slate-500">
                       PDF up to {FILE_SIZE_LIMIT_MB}MB
                     </p>
                   </div>

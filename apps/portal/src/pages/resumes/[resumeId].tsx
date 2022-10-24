@@ -120,12 +120,12 @@ export default function ResumeReviewPage() {
           </Head>
           <main className="h-[calc(100vh-2rem)] flex-1 space-y-2 overflow-y-auto py-4 px-8 xl:px-12 2xl:pr-16">
             <div className="flex justify-between">
-              <h1 className="text-2xl font-semibold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+              <h1 className="text-2xl font-semibold leading-7 text-slate-900 sm:truncate sm:text-3xl sm:tracking-tight">
                 {detailsQuery.data.title}
               </h1>
               <div className="flex gap-4">
                 <button
-                  className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50  disabled:hover:bg-white"
+                  className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50  disabled:hover:bg-white"
                   disabled={starMutation.isLoading || unstarMutation.isLoading}
                   type="button"
                   onClick={onStarButtonClick}>
@@ -141,7 +141,7 @@ export default function ResumeReviewPage() {
                           className={clsx(
                             detailsQuery.data?.stars.length
                               ? 'text-orange-400'
-                              : 'text-gray-400',
+                              : 'text-slate-400',
                           )}
                         />
                       )}
@@ -154,40 +154,40 @@ export default function ResumeReviewPage() {
                 </button>
                 {userIsOwner && (
                   <button
-                    className="p h-10 rounded-md border border-gray-300 bg-white py-1 px-2 text-center"
+                    className="p h-10 rounded-md border border-slate-300 bg-white py-1 px-2 text-center"
                     type="button"
                     onClick={onEditButtonClick}>
-                    <PencilSquareIcon className="h-6 w-6 text-indigo-600 hover:text-indigo-300" />
+                    <PencilSquareIcon className="text-primary-600 hover:text-primary-300 h-6 w-6" />
                   </button>
                 )}
               </div>
             </div>
             <div className="flex flex-col lg:mt-0 lg:flex-row lg:flex-wrap lg:space-x-8">
-              <div className="mt-2 flex items-center text-sm text-gray-500">
+              <div className="mt-2 flex items-center text-sm text-slate-500">
                 <BriefcaseIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
                 />
                 {detailsQuery.data.role}
               </div>
-              <div className="flex items-center pt-2 text-sm text-gray-500">
+              <div className="flex items-center pt-2 text-sm text-slate-500">
                 <MapPinIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
                 />
                 {detailsQuery.data.location}
               </div>
-              <div className="flex items-center pt-2 text-sm text-gray-500">
+              <div className="flex items-center pt-2 text-sm text-slate-500">
                 <AcademicCapIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
                 />
                 {detailsQuery.data.experience}
               </div>
-              <div className="flex items-center pt-2 text-sm text-gray-500">
+              <div className="flex items-center pt-2 text-sm text-slate-500">
                 <CalendarIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
                 />
                 {`Uploaded ${formatDistanceToNow(detailsQuery.data.createdAt, {
                   addSuffix: true,
@@ -195,10 +195,10 @@ export default function ResumeReviewPage() {
               </div>
             </div>
             {detailsQuery.data.additionalInfo && (
-              <div className="flex items-start whitespace-pre-wrap pt-2 text-sm text-gray-500">
+              <div className="flex items-start whitespace-pre-wrap pt-2 text-sm text-slate-500">
                 <InformationCircleIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
                 />
                 <ResumeExpandableText
                   key={detailsQuery.data.additionalInfo}

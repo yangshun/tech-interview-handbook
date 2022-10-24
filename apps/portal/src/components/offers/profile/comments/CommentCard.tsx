@@ -100,12 +100,12 @@ export default function CommentCard({
           </div>
           <div className="mt-2 mb-2 flex flex-row ">{message}</div>
           <div className="flex flex-row items-center justify-start space-x-4 ">
-            <div className="flex flex-col text-sm font-light text-gray-400">{`${timeSinceNow(
+            <div className="flex flex-col text-sm font-light text-slate-400">{`${timeSinceNow(
               createdAt,
             )} ago`}</div>
             {replyLength > 0 && (
               <div
-                className="flex cursor-pointer flex-col text-sm text-purple-600 hover:underline"
+                className="text-primary-600 flex cursor-pointer flex-col text-sm hover:underline"
                 onClick={handleExpanded}>
                 {isExpanded ? `Hide replies` : `View replies (${replyLength})`}
               </div>

@@ -86,12 +86,12 @@ export default function ResumeCommentVoteButtons({
             'h-4 w-4',
             commentVotesQuery.data?.userVote?.value === Vote.UPVOTE ||
               upvoteAnimation
-              ? 'fill-indigo-500'
-              : 'fill-gray-400',
+              ? 'fill-primary-500'
+              : 'fill-slate-400',
             userId &&
               !downvoteAnimation &&
               !upvoteAnimation &&
-              'hover:fill-indigo-500',
+              'hover:fill-primary-500',
             upvoteAnimation && 'animate-[bounce_0.5s_infinite] cursor-default',
           )}
         />
@@ -115,12 +115,12 @@ export default function ResumeCommentVoteButtons({
             'h-4 w-4',
             commentVotesQuery.data?.userVote?.value === Vote.DOWNVOTE ||
               downvoteAnimation
-              ? 'fill-red-500'
-              : 'fill-gray-400',
+              ? 'fill-danger-500'
+              : 'fill-slate-400',
             userId &&
               !downvoteAnimation &&
               !upvoteAnimation &&
-              'hover:fill-red-500',
+              'hover:fill-danger-500',
             downvoteAnimation &&
               'animate-[bounce_0.5s_infinite] cursor-default',
           )}

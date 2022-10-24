@@ -109,7 +109,7 @@ export default function OffersTable({
 
   function renderHeader() {
     return (
-      <thead className="bg-gray-50 text-xs uppercase text-gray-700">
+      <thead className="bg-slate-50 text-xs uppercase text-slate-700">
         <tr>
           {[
             'Company',
@@ -145,7 +145,7 @@ export default function OffersTable({
             <Spinner display="block" size="lg" />
           </div>
         ) : (
-          <table className="w-full text-left text-sm text-gray-500">
+          <table className="w-full text-left text-sm text-slate-500">
             {renderHeader()}
             <tbody>
               {offers.map((offer) => (
