@@ -1,5 +1,8 @@
 import Link from 'next/link';
 
+import type { JobTitleType } from '~/components/shared/JobTitles';
+import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
+
 import { convertMoneyToString } from '~/utils/offers/currency';
 import { formatDate } from '~/utils/offers/time';
 
@@ -19,7 +22,9 @@ export default function OfferTableRow({
         scope="row">
         {company.name}
       </th>
-      <td className="py-4 px-6">{title}</td>
+      <td className="py-4 px-6">
+        {getLabelForJobTitleType(title as JobTitleType)}
+      </td>
       <td className="py-4 px-6">{totalYoe}</td>
       <td className="py-4 px-6">{convertMoneyToString(income)}</td>
       <td className="py-4 px-6">{formatDate(monthYearReceived)}</td>

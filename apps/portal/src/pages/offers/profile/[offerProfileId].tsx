@@ -10,6 +10,8 @@ import type {
   BackgroundDisplayData,
   OfferDisplayData,
 } from '~/components/offers/types';
+import type { JobTitleType } from '~/components/shared/JobTitles';
+import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
 import { useToast } from '~/../../../packages/ui/dist';
 import { convertMoneyToString } from '~/utils/offers/currency';
@@ -62,7 +64,9 @@ export default function OfferProfile() {
                   companyName: res.company.name,
                   id: res.offersFullTime.id,
                   jobLevel: res.offersFullTime.level,
-                  jobTitle: res.offersFullTime.title,
+                  jobTitle: getLabelForJobTitleType(
+                    res.offersFullTime.title as JobTitleType,
+                  ),
                   location: res.location,
                   negotiationStrategy: res.negotiationStrategy,
                   otherComment: res.comments,
@@ -77,7 +81,9 @@ export default function OfferProfile() {
               const filteredOffer: OfferDisplayData = {
                 companyName: res.company.name,
                 id: res.offersIntern!.id,
-                jobTitle: res.offersIntern!.title,
+                jobTitle: getLabelForJobTitleType(
+                  res.offersIntern!.title as JobTitleType,
+                ),
                 location: res.location,
                 monthlySalary: convertMoneyToString(
                   res.offersIntern!.monthlySalary,
@@ -107,7 +113,9 @@ export default function OfferProfile() {
                 companyName: experience.company?.name,
                 duration: experience.durationInMonths,
                 jobLevel: experience.level,
-                jobTitle: experience.title,
+                jobTitle: experience.title
+                  ? getLabelForJobTitleType(experience.title as JobTitleType)
+                  : null,
                 monthlySalary: experience.monthlySalary
                   ? convertMoneyToString(experience.monthlySalary)
                   : null,
