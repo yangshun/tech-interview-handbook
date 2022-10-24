@@ -747,8 +747,8 @@ export const offersProfileRouter = createRouter()
                         ),
                         currency: exp.monthlySalary.currency,
                         value: exp.monthlySalary.value,
-                      }
-                    }
+                      },
+                    },
                   },
                   where: {
                     id: exp.id,
@@ -774,7 +774,7 @@ export const offersProfileRouter = createRouter()
                     id: exp.totalCompensation.id,
                   },
                 });
-             } else {
+              } else {
                 await ctx.prisma.offersExperience.update({
                   data: {
                     totalCompensation: {
@@ -787,20 +787,22 @@ export const offersProfileRouter = createRouter()
                         ),
                         currency: exp.totalCompensation.currency,
                         value: exp.totalCompensation.value,
-                      }
-                    }
+                      },
+                    },
                   },
                   where: {
                     id: exp.id,
                   },
                 });
-             }
+              }
             }
           } else if (!exp.id) {
             // Create new experience
             if (exp.jobType === JobType.FULLTIME) {
-              if (exp.totalCompensation?.currency != null &&
-                  exp.totalCompensation?.value != null) {
+              if (
+                exp.totalCompensation?.currency != null &&
+                exp.totalCompensation?.value != null
+              ) {
                 if (exp.companyId) {
                   await ctx.prisma.offersBackground.update({
                     data: {
@@ -910,8 +912,10 @@ export const offersProfileRouter = createRouter()
                 });
               }
             } else if (exp.jobType === JobType.INTERN) {
-              if (exp.monthlySalary?.currency != null &&
-                  exp.monthlySalary?.value != null) {
+              if (
+                exp.monthlySalary?.currency != null &&
+                exp.monthlySalary?.value != null
+              ) {
                 if (exp.companyId) {
                   await ctx.prisma.offersBackground.update({
                     data: {
