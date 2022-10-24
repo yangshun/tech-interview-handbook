@@ -11,7 +11,7 @@ export default function ResumeSignInButton({ text, className }: Props) {
     <div className={clsx('flex justify-center pt-4', className)}>
       <p>
         <a
-          className="text-primary-800 hover:text-primary-500"
+          className="text-indigo-500 hover:text-indigo-600"
           href="/api/auth/signin"
           onClick={(event) => {
             event.preventDefault();
