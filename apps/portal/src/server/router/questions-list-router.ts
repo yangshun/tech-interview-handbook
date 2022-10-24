@@ -10,6 +10,7 @@ export const questionListRouter = createProtectedRouter()
     async resolve({ ctx }) {
       const userId = ctx.session?.user?.id;
 
+      // TODO: Optimize by not returning question entries
       const questionsLists = await ctx.prisma.questionsList.findMany({
         include: {
           questionEntries: {

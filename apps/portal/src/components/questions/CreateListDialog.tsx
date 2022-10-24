@@ -22,18 +22,27 @@ export default function CreateListDialog({
     register: formRegister,
     handleSubmit,
     formState: { isSubmitting },
+    reset,
   } = useForm<CreateListFormData>();
   const register = useFormRegister(formRegister);
+
+  const handleDialogCancel = () => {
+    onCancel();
+    reset();
+  };
 
   return (
     <Dialog
       isShown={show}
       primaryButton={undefined}
       title="Create question list"
-      onClose={onCancel}>
+      onClose={handleDialogCancel}>
       <form
         className="mt-5 gap-2 sm:flex sm:items-center"
-        onSubmit={handleSubmit(onSubmit)}>
+        onSubmit={handleSubmit(async (data) => {
+          await onSubmit(data);
+          reset();
+        })}>
         <div className="w-full sm:max-w-xs">
           <TextInput
             id="listName"
@@ -49,9 +58,8 @@ export default function CreateListDialog({
           display="inline"
           label="Cancel"
           size="md"
-          type="submit"
           variant="tertiary"
-          onClick={onCancel}
+          onClick={handleDialogCancel}
         />
         <Button
           display="inline"
