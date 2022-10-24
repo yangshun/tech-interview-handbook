@@ -14,6 +14,7 @@ import {
   CheckboxInput,
   Dialog,
   Select,
+  Spinner,
   TextArea,
   TextInput,
 } from '@tih/ui';
@@ -74,6 +75,7 @@ export default function SubmitResumeForm({
   const [isDialogShown, setIsDialogShown] = useState(false);
 
   const { data: session, status } = useSession();
+  const isSessionLoading = status === 'loading';
   const router = useRouter();
   const trpcContext = trpc.useContext();
   const resumeUpsertMutation = trpc.useMutation('resumes.resume.user.upsert');
@@ -122,12 +124,12 @@ export default function SubmitResumeForm({
 
   // Route user to sign in if not logged in
   useEffect(() => {
-    if (status !== 'loading') {
+    if (isSessionLoading) {
       if (session?.user?.id == null) {
         router.push('/api/auth/signin');
       }
     }
-  }, [router, session, status]);
+  }, [isSessionLoading, router, session]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     setIsLoading(true);
@@ -221,11 +223,17 @@ export default function SubmitResumeForm({
   }, [errors?.file, invalidFileUploadError]);
 
   const onValueChange = (section: InputKeys, value: string) => {
-    setValue(section, value.trim(), { shouldTouch: false });
+    setValue(section, value.trim(), { shouldDirty: true });
   };
 
   return (
     <>
+      {isSessionLoading && (
+        <div className="w-full pt-4">
+          {' '}
+          <Spinner display="block" size="lg" />{' '}
+        </div>
+      )}
       <Head>
         <title>Upload a Resume</title>
       </Head>
@@ -268,12 +276,18 @@ export default function SubmitResumeForm({
             </h1>
             {/*  Title Section */}
             <TextInput
-              {...register('title', { required: true })}
+              {...(register('title', { required: true }), {})}
+              defaultValue={initFormDetails?.title}
               disabled={isLoading}
+              errorMessage={
+                errors.title?.message != null
+                  ? 'Title cannot be empty'
+                  : undefined
+              }
               label="Title"
               placeholder={TITLE_PLACEHOLDER}
               required={true}
-              onChange={(val) => setValue('title', val)}
+              onChange={(val) => onValueChange('title', val)}
             />
             <div className="flex gap-8">
               <Select
@@ -364,7 +378,8 @@ export default function SubmitResumeForm({
             )}
             {/*  Additional Info Section */}
             <TextArea
-              {...(register('additionalInfo'), {})}
+              {...(register('additionalInfo'),
+              { defaultValue: initFormDetails?.additionalInfo })}
               disabled={isLoading}
               label="Additional Information"
               placeholder={ADDITIONAL_INFO_PLACEHOLDER}
