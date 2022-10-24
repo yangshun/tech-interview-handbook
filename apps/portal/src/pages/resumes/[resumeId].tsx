@@ -3,7 +3,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Error from 'next/error';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import {
   AcademicCapIcon,
@@ -20,7 +20,6 @@ import ResumeCommentsForm from '~/components/resumes/comments/ResumeCommentsForm
 import ResumeCommentsList from '~/components/resumes/comments/ResumeCommentsList';
 import ResumePdf from '~/components/resumes/ResumePdf';
 import ResumeExpandableText from '~/components/resumes/shared/ResumeExpandableText';
-import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 
 import { trpc } from '~/utils/trpc';
 
@@ -86,7 +85,18 @@ export default function ResumeReviewPage() {
 
   const renderReviewButton = () => {
     if (session === null) {
-      return <ResumeSignInButton text="to join discussion" />;
+      return (
+        <div className=" flex h-10 justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-[400] hover:cursor-pointer hover:bg-slate-50">
+          <a
+            href="/api/auth/signin"
+            onClick={(event) => {
+              event.preventDefault();
+              signIn();
+            }}>
+            Sign in to join discussion
+          </a>
+        </div>
+      );
     }
     return (
       <Button
