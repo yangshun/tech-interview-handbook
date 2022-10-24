@@ -15,16 +15,17 @@ import type {
 } from '~/components/offers/types';
 import type { Month } from '~/components/shared/MonthYearPicker';
 
-import { cleanObject, removeInvalidMoneyData } from '~/utils/offers/form';
+import {
+  cleanObject,
+  removeEmptyObjects,
+  removeInvalidMoneyData,
+} from '~/utils/offers/form';
 import { getCurrentMonth, getCurrentYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
-import OfferAnalysis from '../offerAnalysis/OfferAnalysis';
+import OffersSubmissionAnalysis from './OffersSubmissionAnalysis';
 
-import type {
-  CreateOfferProfileResponse,
-  ProfileAnalysis,
-} from '~/types/offers';
+import type { ProfileAnalysis } from '~/types/offers';
 
 const defaultOfferValues = {
   comments: '',
@@ -73,15 +74,12 @@ type Props = Readonly<{
 
 export default function OffersSubmissionForm({
   initialOfferProfileValues = defaultOfferProfileValues,
-  profileId,
-  token,
+  profileId: editProfileId = '',
+  token: editToken = '',
 }: Props) {
   const [formStep, setFormStep] = useState(0);
-  const [createProfileResponse, setCreateProfileResponse] =
-    useState<CreateOfferProfileResponse>({
-      id: profileId || '',
-      token: token || '',
-    });
+  const [profileId, setProfileId] = useState(editProfileId);
+  const [token, setToken] = useState(editToken);
   const [analysis, setAnalysis] = useState<ProfileAnalysis | null>(null);
 
   const pageRef = useRef<HTMLDivElement>(null);
@@ -125,11 +123,7 @@ export default function OffersSubmissionForm({
     },
     {
       component: (
-        <OffersProfileSave
-          key={2}
-          profileId={createProfileResponse.id || ''}
-          token={createProfileResponse.token}
-        />
+        <OffersProfileSave key={2} profileId={profileId} token={token} />
       ),
       hasNext: true,
       hasPrevious: false,
@@ -137,17 +131,13 @@ export default function OffersSubmissionForm({
     },
     {
       component: (
-        <div>
-          <h5 className="mb-8 text-center text-4xl font-bold text-slate-900">
-            Result
-          </h5>
-          <OfferAnalysis
-            key={3}
-            allAnalysis={analysis}
-            isError={generateAnalysisMutation.isError}
-            isLoading={generateAnalysisMutation.isLoading}
-          />
-        </div>
+        <OffersSubmissionAnalysis
+          analysis={analysis}
+          isError={generateAnalysisMutation.isError}
+          isLoading={generateAnalysisMutation.isLoading}
+          profileId={profileId}
+          token={token}
+        />
       ),
       hasNext: false,
       hasPrevious: true,
@@ -184,7 +174,8 @@ export default function OffersSubmissionForm({
       generateAnalysisMutation.mutate({
         profileId: data?.id || '',
       });
-      setCreateProfileResponse(data);
+      setProfileId(data.id);
+      setToken(data.token);
       setFormStep(formStep + 1);
       scrollToTop();
     },
@@ -197,6 +188,7 @@ export default function OffersSubmissionForm({
     }
 
     data = removeInvalidMoneyData(data);
+    data.offers = removeEmptyObjects(data.offers);
 
     const background = cleanObject(data.background);
     background.specificYoes = data.background.specificYoes.filter(

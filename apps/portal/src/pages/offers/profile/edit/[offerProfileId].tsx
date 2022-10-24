@@ -34,7 +34,17 @@ export default function OffersEditPage() {
             experiences:
               experiences.length === 0
                 ? [{ jobType: JobType.FULLTIME }]
-                : experiences,
+                : experiences.map((exp) => ({
+                    companyId: exp.company?.id,
+                    durationInMonths: exp.durationInMonths,
+                    id: exp.id,
+                    jobType: exp.jobType,
+                    level: exp.level,
+                    location: exp.location,
+                    monthlySalary: exp.monthlySalary,
+                    title: exp.title,
+                    totalCompensation: exp.totalCompensation,
+                  })),
             id,
             specificYoes,
             totalYoe,
