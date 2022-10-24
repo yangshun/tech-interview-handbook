@@ -44,7 +44,7 @@ export default function OfferProfile() {
       enabled: typeof offerProfileId === 'string',
       onSuccess: (data: Profile) => {
         if (!data) {
-          router.push('/offers');
+          router.push('/offers/home');
         }
         // If the profile is not editable with a wrong token, redirect to the profile page
         if (!data?.isEditable && token !== '') {
@@ -140,7 +140,7 @@ export default function OfferProfile() {
     },
     onSuccess: () => {
       trpcContext.invalidateQueries(['offers.profile.listOne']);
-      router.push('/offers');
+      router.push('/offers/home');
       showToast({
         title: `Offers profile successfully deleted!`,
         variant: 'success',

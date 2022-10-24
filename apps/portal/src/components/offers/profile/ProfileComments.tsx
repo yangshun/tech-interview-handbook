@@ -142,6 +142,39 @@ export default function ProfileComments({
         />
       </div>
       <h2 className="mt-2 mb-6 text-2xl font-bold">Discussions</h2>
+      {isEditable || session?.user?.name ? (
+        <div>
+          <TextArea
+            label={`Comment as ${
+              isEditable ? profileName : session?.user?.name ?? 'anonymous'
+            }`}
+            placeholder="Type your comment here"
+            value={currentReply}
+            onChange={(value) => setCurrentReply(value)}
+          />
+          <div className="mt-2 flex w-full justify-end">
+            <div className="w-fit">
+              <Button
+                disabled={
+                  commentsQuery.isLoading ||
+                  !currentReply.length ||
+                  createCommentMutation.isLoading
+                }
+                display="block"
+                isLabelHidden={false}
+                isLoading={createCommentMutation.isLoading}
+                label="Comment"
+                size="sm"
+                variant="primary"
+                onClick={() => handleComment(currentReply)}
+              />
+            </div>
+          </div>
+          <HorizontalDivider />
+        </div>
+      ) : (
+        <div>Please log in before commenting on this profile.</div>
+      )}
       <div>
         <TextArea
           label={`Comment as ${
@@ -154,7 +187,11 @@ export default function ProfileComments({
         <div className="mt-2 flex w-full justify-end">
           <div className="w-fit">
             <Button
-              disabled={commentsQuery.isLoading || !currentReply.length}
+              disabled={
+                commentsQuery.isLoading ||
+                !currentReply.length ||
+                createCommentMutation.isLoading
+              }
               display="block"
               isLabelHidden={false}
               isLoading={createCommentMutation.isLoading}
