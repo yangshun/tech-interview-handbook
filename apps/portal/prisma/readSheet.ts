@@ -42,12 +42,6 @@ function xlSerialToJsDate(xlSerial) {
   return new Date(Date.UTC(0, 0, xlSerial - 1));
 }
 
-function generateSpecialization() {
-  const specializations = ['Frontend', 'Backend', 'Fullstack'];
-
-  return specializations[Math.floor(Math.random() * 300) % 3];
-}
-
 const getJobTitle = (role: string) => {
   const processedRole = role.toUpperCase().trim();
 
@@ -146,7 +140,6 @@ const seedSalaries = async () => {
                             value: data.Income,
                           },
                         },
-                        specialization: generateSpecialization(), // TODO: check about this
                         startYear: xlSerialToJsDate(
                           data.Timestamp,
                         ).getFullYear(),
@@ -219,7 +212,6 @@ const seedSalaries = async () => {
                           },
                         },
                         level: data.Type,
-                        specialization: generateSpecialization(), // TODO: check about this
                         stocks: {
                           create: {
                             baseCurrency: baseCurrencyString,
