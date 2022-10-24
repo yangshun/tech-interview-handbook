@@ -100,7 +100,7 @@ export default function ResumeReviewPage() {
     }
     return (
       <Button
-        className="h-10 py-2"
+        className="h-10 py-2 shadow-md"
         display="block"
         label="Add your review"
         variant="tertiary"
@@ -151,18 +151,18 @@ export default function ResumeReviewPage() {
               <h1 className="pr-2 text-2xl font-semibold leading-7 text-slate-900 sm:truncate sm:text-3xl sm:tracking-tight">
                 {detailsQuery.data.title}
               </h1>
-              <div className="flex gap-4 xl:pr-4">
+              <div className="flex gap-3 xl:pr-4">
                 {userIsOwner && (
                   <button
-                    className="p h-10 rounded-md border border-slate-300 bg-white py-1 px-2 text-center"
+                    className="h-10 rounded-md border border-slate-300 bg-white py-1 px-2 text-center shadow-md hover:bg-slate-50"
                     type="button"
                     onClick={onEditButtonClick}>
-                    <PencilSquareIcon className="text-primary-600 hover:text-primary-300 h-6 w-6" />
+                    <PencilSquareIcon className="text-primary-600 h-6 w-6" />
                   </button>
                 )}
 
                 <button
-                  className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50  disabled:hover:bg-white"
+                  className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-md hover:bg-slate-50  disabled:hover:bg-white"
                   disabled={starMutation.isLoading || unstarMutation.isLoading}
                   type="button"
                   onClick={onStarButtonClick}>
