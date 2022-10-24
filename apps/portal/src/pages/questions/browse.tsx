@@ -157,7 +157,7 @@ export default function QuestionsBrowsePage() {
       {
         companyNames: selectedCompanies,
         endDate: today,
-        limit: 5,
+        limit: 10,
         locations: selectedLocations,
         questionTypes: selectedQuestionTypes,
         roles: selectedRoles,
