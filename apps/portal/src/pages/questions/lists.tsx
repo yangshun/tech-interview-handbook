@@ -8,6 +8,8 @@ import {
 } from '@heroicons/react/24/outline';
 
 import QuestionListCard from '~/components/questions/card/question/QuestionListCard';
+import CreateListDialog from '~/components/questions/CreatListDialog';
+import DeleteListDialog from '~/components/questions/DeleteListDialog';
 
 import { Button } from '~/../../../packages/ui/dist';
 import { APP_TITLE } from '~/utils/questions/constants';
@@ -44,6 +46,25 @@ export default function ListPage() {
   const [selectedList, setSelectedList] = useState(
     (lists ?? []).length > 0 ? lists[0].id : '',
   );
+  const [showDeleteListDialog, setShowDeleteListDialog] = useState(false);
+  const [showCreateListDialog, setShowCreateListDialog] = useState(false);
+
+  const handleDeleteList = () => {
+    setShowDeleteListDialog(false);
+  };
+
+  const handleDeleteListCancel = () => {
+    setShowDeleteListDialog(false);
+  };
+
+  const handleCreateList = () => {
+    setShowCreateListDialog(false);
+  };
+
+  const handleCreateListCancel = () => {
+    setShowCreateListDialog(false);
+  };
+
   const listOptions = (
     <>
       <ul className="flex flex-1 flex-col divide-y divide-solid divide-slate-200">
@@ -61,7 +82,7 @@ export default function ListPage() {
                 // eslint-disable-next-line no-console
                 console.log(selectedList);
               }}>
-              <p className="text-primary-700 text-md p-3 font-medium">
+              <p className="text-primary-700 text-md p-3 pl-6 font-medium">
                 {list.name}
               </p>
             </button>
@@ -85,7 +106,8 @@ export default function ListPage() {
                               ? 'bg-violet-500 text-white'
                               : 'text-slate-900'
                           } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                          type="button">
+                          type="button"
+                          onClick={() => setShowDeleteListDialog(true)}>
                           Delete
                         </button>
                       )}
@@ -104,6 +126,7 @@ export default function ListPage() {
       )}
     </>
   );
+
   return (
     <>
       <Head>
@@ -124,6 +147,7 @@ export default function ListPage() {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
+                    setShowCreateListDialog(true);
                   }}
                 />
               </div>
@@ -171,6 +195,14 @@ export default function ListPage() {
                 )}
               </div>
             </div>
+            <DeleteListDialog
+              show={showDeleteListDialog}
+              onCancel={handleDeleteListCancel}
+              onDelete={handleDeleteList}></DeleteListDialog>
+            <CreateListDialog
+              show={showCreateListDialog}
+              onCancel={handleCreateListCancel}
+              onCreate={handleCreateList}></CreateListDialog>
           </section>
         </div>
       </main>
