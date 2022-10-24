@@ -5,11 +5,14 @@ import { useToast } from '@tih/ui';
 import { HorizontalDivider } from '@tih/ui';
 
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
+import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 import type { Month, MonthYear } from '~/components/shared/MonthYearPicker';
 import MonthYearPicker from '~/components/shared/MonthYearPicker';
 
 export default function HomePage() {
   const [selectedCompany, setSelectedCompany] =
+    useState<TypeaheadOption | null>(null);
+  const [selectedJobTitle, setSelectedJobTitle] =
     useState<TypeaheadOption | null>(null);
   const [monthYear, setMonthYear] = useState<MonthYear>({
     month: (new Date().getMonth() + 1) as Month,
@@ -29,6 +32,11 @@ export default function HomePage() {
             onSelect={(option) => setSelectedCompany(option)}
           />
           <pre>{JSON.stringify(selectedCompany, null, 2)}</pre>
+          <HorizontalDivider />
+          <JobTitlesTypeahead
+            onSelect={(option) => setSelectedJobTitle(option)}
+          />
+          <pre>{JSON.stringify(selectedJobTitle, null, 2)}</pre>
           <HorizontalDivider />
           <MonthYearPicker value={monthYear} onChange={setMonthYear} />
           <HorizontalDivider />

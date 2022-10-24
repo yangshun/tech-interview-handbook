@@ -30,7 +30,7 @@ export default function EducationCard({
           )}
         </div>
         {(startDate || endDate) && (
-          <div className="font-light text-gray-400">
+          <div className="font-light text-slate-400">
             <p>{`${startDate || 'N/A'} - ${endDate || 'N/A'}`}</p>
           </div>
         )}

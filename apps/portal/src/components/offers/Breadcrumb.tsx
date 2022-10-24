@@ -9,12 +9,12 @@ export function Breadcrumbs({ stepLabels, currentStep }: BreadcrumbsProps) {
       {stepLabels.map((label, index) => (
         <div key={label} className="flex space-x-1">
           {index === currentStep ? (
-            <p className="text-sm text-purple-700">{label}</p>
+            <p className="text-primary-700 text-sm">{label}</p>
           ) : (
-            <p className="text-sm text-gray-400">{label}</p>
+            <p className="text-sm text-slate-400">{label}</p>
           )}
           {index !== stepLabels.length - 1 && (
-            <p className="text-sm text-gray-400">{'>'}</p>
+            <p className="text-sm text-slate-400">{'>'}</p>
           )}
         </div>
       ))}

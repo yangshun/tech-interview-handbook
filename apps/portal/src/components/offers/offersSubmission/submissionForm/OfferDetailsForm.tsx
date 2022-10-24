@@ -62,7 +62,7 @@ function FullTimeOfferDetailsForm({
   }, [watchCurrency, index, setValue]);
 
   return (
-    <div className="my-5 rounded-lg border border-gray-200 px-10 py-5">
+    <div className="my-5 rounded-lg border border-slate-200 px-10 py-5">
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
@@ -289,7 +289,7 @@ function InternshipOfferDetailsForm({
   const offerFields = formState.errors.offers?.[index];
 
   return (
-    <div className="my-5 rounded-lg border border-gray-200 px-10 py-5">
+    <div className="my-5 rounded-lg border border-slate-200 px-10 py-5">
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <FormSelect
           display="block"
@@ -503,7 +503,7 @@ export default function OfferDetailsForm({
 
   return (
     <div className="mb-5">
-      <h5 className="mb-8 text-center text-4xl font-bold text-gray-900">
+      <h5 className="mb-8 text-center text-4xl font-bold text-slate-900">
         Fill in your offer details
       </h5>
       <div className="flex w-full justify-center">

@@ -113,7 +113,7 @@ export default function ResumeHomePage() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [userFilters, sortOrder]);
+  }, [userFilters, sortOrder, searchValue]);
 
   const allResumesQuery = trpc.useQuery(
     [
@@ -126,6 +126,7 @@ export default function ResumeHomePage() {
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
+        take: PAGE_LIMIT,
       },
     ],
     {
@@ -144,6 +145,7 @@ export default function ResumeHomePage() {
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
+        take: PAGE_LIMIT,
       },
     ],
     {
@@ -163,6 +165,7 @@ export default function ResumeHomePage() {
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
+        take: PAGE_LIMIT,
       },
     ],
     {
@@ -279,11 +282,11 @@ export default function ResumeHomePage() {
                 leaveTo="translate-x-full">
                 <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-scroll bg-white py-4 pb-12 shadow-xl">
                   <div className="flex items-center justify-between px-4">
-                    <h2 className="text-lg font-medium text-gray-900">
+                    <h2 className="text-lg font-medium text-slate-900">
                       Shortcuts
                     </h2>
                     <button
-                      className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
+                      className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-slate-400"
                       type="button"
                       onClick={() => setMobileFiltersOpen(false)}>
                       <span className="sr-only">Close menu</span>
@@ -291,9 +294,9 @@ export default function ResumeHomePage() {
                     </button>
                   </div>
 
-                  <form className="mt-4 border-t border-gray-200">
+                  <form className="mt-4 border-t border-slate-200">
                     <ul
-                      className="flex flex-wrap justify-start gap-4 px-4 py-3 font-medium text-gray-900"
+                      className="flex flex-wrap justify-start gap-4 px-4 py-3 font-medium text-slate-900"
                       role="list">
                       {SHORTCUTS.map((shortcut) => (
                         <li key={shortcut.name}>
@@ -310,12 +313,12 @@ export default function ResumeHomePage() {
                       <Disclosure
                         key={filter.id}
                         as="div"
-                        className="border-t border-gray-200 px-4 py-6">
+                        className="border-t border-slate-200 px-4 py-6">
                         {({ open }) => (
                           <>
                             <h3 className="-mx-2 -my-3 flow-root">
-                              <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                                <span className="font-medium text-gray-900">
+                              <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-slate-400 hover:text-slate-500">
+                                <span className="font-medium text-slate-900">
                                   {filter.label}
                                 </span>
                                 <span className="ml-6 flex items-center">
@@ -338,7 +341,7 @@ export default function ResumeHomePage() {
                                 {filter.options.map((option) => (
                                   <div
                                     key={option.value}
-                                    className="[&>div>div:nth-child(2)>label]:font-normal [&>div>div:nth-child(1)>input]:text-indigo-600 [&>div>div:nth-child(1)>input]:ring-indigo-500">
+                                    className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 [&>div>div:nth-child(2)>label]:font-normal">
                                     <CheckboxInput
                                       label={option.label}
                                       value={userFilters[filter.id].includes(
@@ -368,16 +371,16 @@ export default function ResumeHomePage() {
         </Transition.Root>
       </div>
 
-      <main className="h-[calc(100vh-4rem)] flex-auto overflow-y-scroll px-8 pt-6 pb-4">
+      <main className="h-[calc(100vh-4rem)] flex-auto px-8 pb-4">
         <div className="flex justify-start">
-          <div className="hidden w-1/6 pt-2 lg:block">
+          <div className="fixed top-0 bottom-0 mt-24 hidden w-64 overflow-auto lg:block">
             <h3 className="text-md font-medium tracking-tight text-gray-900">
               Shortcuts
             </h3>
             <div className="w-100 pt-4 sm:pr-0 md:pr-4">
               <form>
                 <ul
-                  className="flex w-11/12 flex-wrap justify-start gap-2 pb-6 text-sm font-medium text-gray-900"
+                  className="flex w-11/12 flex-wrap justify-start gap-2 pb-6 text-sm font-medium text-slate-900"
                   role="list">
                   {SHORTCUTS.map((shortcut) => (
                     <li key={shortcut.name}>
@@ -389,19 +392,19 @@ export default function ResumeHomePage() {
                     </li>
                   ))}
                 </ul>
-                <h3 className="text-md font-medium tracking-tight text-gray-900">
+                <h3 className="text-md font-medium tracking-tight text-slate-900">
                   Explore these filters
                 </h3>
                 {filters.map((filter) => (
                   <Disclosure
                     key={filter.id}
                     as="div"
-                    className="border-b border-gray-200 py-6">
+                    className="border-b border-slate-200 py-6">
                     {({ open }) => (
                       <>
                         <h3 className="-my-3 flow-root">
-                          <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500">
-                            <span className="font-medium text-gray-900">
+                          <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-slate-400 hover:text-slate-500">
+                            <span className="font-medium text-slate-900">
                               {filter.label}
                             </span>
                             <span className="ml-6 flex items-center">
@@ -428,7 +431,7 @@ export default function ResumeHomePage() {
                             {filter.options.map((option) => (
                               <div
                                 key={option.value}
-                                className="[&>div>div:nth-child(2)>label]:font-normal [&>div>div:nth-child(1)>input]:text-indigo-600 [&>div>div:nth-child(1)>input]:ring-indigo-500">
+                                className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 [&>div>div:nth-child(2)>label]:font-normal">
                                 <CheckboxInput
                                   label={option.label}
                                   value={userFilters[filter.id].includes(
@@ -453,8 +456,8 @@ export default function ResumeHomePage() {
               </form>
             </div>
           </div>
-          <div className="w-full">
-            <div className="lg:border-grey-200 flex flex-wrap items-center justify-between pb-2 lg:border-b">
+          <div className="relative lg:left-64 lg:w-[calc(100%-16rem)]">
+            <div className="lg:border-grey-200 sticky top-0 z-10 flex flex-wrap items-center justify-between bg-gray-50 pt-6 pb-2 lg:border-b">
               <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none lg:pb-0">
                 <div>
                   <Tabs
@@ -477,10 +480,9 @@ export default function ResumeHomePage() {
                     onChange={onTabChange}
                   />
                 </div>
-
                 <div>
                   <button
-                    className="ml-4 rounded-md bg-indigo-500 py-2 px-3 text-sm font-medium text-white lg:hidden"
+                    className="bg-primary-500 ml-4 rounded-md py-2 px-3 text-sm font-medium text-white lg:hidden"
                     type="button"
                     onClick={onSubmitResume}>
                     Submit Resume
@@ -489,17 +491,16 @@ export default function ResumeHomePage() {
               </div>
               <div className="flex flex-wrap items-center justify-start gap-8">
                 <div className="w-64">
-                  <form>
-                    <TextInput
-                      label=""
-                      placeholder="Search Resumes"
-                      startAddOn={MagnifyingGlassIcon}
-                      startAddOnType="icon"
-                      type="text"
-                      value={searchValue}
-                      onChange={setSearchValue}
-                    />
-                  </form>
+                  <TextInput
+                    isLabelHidden={true}
+                    label="search"
+                    placeholder="Search Resumes"
+                    startAddOn={MagnifyingGlassIcon}
+                    startAddOnType="icon"
+                    type="text"
+                    value={searchValue}
+                    onChange={setSearchValue}
+                  />
                 </div>
                 <div>
                   <DropdownMenu align="end" label={SORT_OPTIONS[sortOrder]}>
@@ -513,16 +514,15 @@ export default function ResumeHomePage() {
                   </DropdownMenu>
                 </div>
                 <button
-                  className="-m-2 text-gray-400 hover:text-gray-500 lg:hidden"
+                  className="-m-2 text-slate-400 hover:text-slate-500 lg:hidden"
                   type="button"
                   onClick={() => setMobileFiltersOpen(true)}>
                   <span className="sr-only">Filters</span>
                   <FunnelIcon aria-hidden="true" className="h-6 w-6" />
                 </button>
-
                 <div>
                   <button
-                    className="hidden w-36 rounded-md bg-indigo-500 py-2 px-3 text-sm font-medium text-white lg:block"
+                    className="bg-primary-500 hidden w-36 rounded-md py-2 px-3 text-sm font-medium text-white lg:block"
                     type="button"
                     onClick={onSubmitResume}>
                     Submit Resume
@@ -550,20 +550,26 @@ export default function ResumeHomePage() {
                 {getEmptyDataText(tabsValue, searchValue, userFilters)}
               </div>
             ) : (
-              <>
-                <ResumeListItems resumes={getTabResumes()} />
-                {getTabTotalPages() > 1 && (
-                  <div className="mt-4 flex justify-center">
-                    <Pagination
-                      current={currentPage}
-                      end={getTabTotalPages()}
-                      label="pagination"
-                      start={1}
-                      onSelect={(page) => setCurrentPage(page)}
-                    />
+              <div className="h-[calc(100vh-9rem)] pb-10 lg:h-[calc(100vh-6rem)]">
+                <div className="h-[85%] overflow-y-auto">
+                  <div>
+                    <ResumeListItems resumes={getTabResumes()} />
                   </div>
-                )}
-              </>
+                </div>
+                <div className="flex h-[15%] items-center justify-center">
+                  {getTabTotalPages() > 1 && (
+                    <div>
+                      <Pagination
+                        current={currentPage}
+                        end={getTabTotalPages()}
+                        label="pagination"
+                        start={1}
+                        onSelect={(page) => setCurrentPage(page)}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
             )}
           </div>
         </div>

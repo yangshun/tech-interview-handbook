@@ -11,6 +11,7 @@ import type {
   OfferDisplayData,
 } from '~/components/offers/types';
 
+import { useToast } from '~/../../../packages/ui/dist';
 import { convertMoneyToString } from '~/utils/offers/currency';
 import { getProfilePath } from '~/utils/offers/link';
 import { formatDate } from '~/utils/offers/time';
@@ -19,6 +20,7 @@ import { trpc } from '~/utils/trpc';
 import type { Profile, ProfileAnalysis, ProfileOffer } from '~/types/offers';
 
 export default function OfferProfile() {
+  const { showToast } = useToast();
   const ErrorPage = (
     <Error statusCode={404} title="Requested profile does not exist." />
   );
@@ -131,11 +133,18 @@ export default function OfferProfile() {
   const trpcContext = trpc.useContext();
   const deleteMutation = trpc.useMutation(['offers.profile.delete'], {
     onError: () => {
-      alert('Error deleting profile'); // TODO: replace with toast
+      showToast({
+        title: `Error deleting offers profile.`,
+        variant: 'failure',
+      });
     },
     onSuccess: () => {
       trpcContext.invalidateQueries(['offers.profile.listOne']);
       router.push('/offers');
+      showToast({
+        title: `Offers profile successfully deleted!`,
+        variant: 'success',
+      });
     },
   });
 
