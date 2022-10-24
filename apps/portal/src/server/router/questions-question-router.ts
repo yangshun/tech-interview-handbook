@@ -316,6 +316,31 @@ export const questionsQuestionRouter = createProtectedRouter()
       return question;
     },
   })
+  .query('getRelatedQuestionsByContent', {
+    input: z.object({
+      content: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const escapeChars = /[()|&:*!]/g;
+
+      const query =
+        input.content
+          .replace(escapeChars, " ")
+          .trim()
+          .split(/\s+/)
+          .join(" | ");
+
+      const relatedQuestions = await ctx.prisma.$queryRaw`
+        SELECT * FROM "QuestionsQuestion"
+        WHERE
+          "contentSearch" @@ to_tsquery('english', ${query})
+        ORDER BY ts_rank("textSearch", to_tsquery('english', ${query})) DESC
+      `;
+
+      return relatedQuestions;
+    }
+
+  })
   .mutation('create', {
     input: z.object({
       companyId: z.string(),
@@ -537,7 +562,7 @@ export const questionsQuestionRouter = createProtectedRouter()
 
       const incrementValue = voteToDelete.vote === Vote.UPVOTE ? -1 : 1;
 
-      const [questionVote] = await ctx.prisma.$transaction([
+      const [ questionVote ] = await ctx.prisma.$transaction([
         ctx.prisma.questionsQuestionVote.delete({
           where: {
             id: input.id,
