@@ -34,14 +34,14 @@ export default function TodoList() {
       <div className="mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Todos</h1>
-            <p className="mt-2 text-sm text-gray-700">
+            <h1 className="text-xl font-semibold text-slate-900">Todos</h1>
+            <p className="mt-2 text-sm text-slate-700">
               A list of all Todos added by everyone.
             </p>
           </div>
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <Link
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+              className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:w-auto"
               href="/todos/new">
               Add Todo
             </Link>
@@ -54,40 +54,40 @@ export default function TodoList() {
             <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                 <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                  <table className="min-w-full divide-y divide-gray-300">
-                    <thead className="bg-gray-50">
-                      <tr className="divide-x divide-gray-200">
+                  <table className="min-w-full divide-y divide-slate-300">
+                    <thead className="bg-slate-50">
+                      <tr className="divide-x divide-slate-200">
                         <th
-                          className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-slate-900 sm:pl-6"
                           scope="col">
                           Description
                         </th>
                         <th
-                          className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          className="px-4 py-3.5 text-left text-sm font-semibold text-slate-900"
                           scope="col">
                           Creator
                         </th>
                         <th
-                          className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          className="px-4 py-3.5 text-left text-sm font-semibold text-slate-900"
                           scope="col">
                           Last Updated
                         </th>
                         <th
-                          className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6"
+                          className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-slate-900 sm:pr-6"
                           scope="col">
                           Status
                         </th>
                         <th
-                          className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6"
+                          className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-slate-900 sm:pr-6"
                           scope="col">
                           Actions
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-200 bg-white">
+                    <tbody className="divide-y divide-slate-200 bg-white">
                       {todosQuery.data?.map((todo) => (
-                        <tr key={todo.id} className="divide-x divide-gray-200">
-                          <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pl-6">
+                        <tr key={todo.id} className="divide-x divide-slate-200">
+                          <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-slate-500 sm:pl-6">
                             {todo.id === currentlyEditingTodo ? (
                               <form
                                 ref={formRef}
@@ -120,7 +120,7 @@ export default function TodoList() {
                                 }}>
                                 <input
                                   autoFocus={true}
-                                  className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  className="focus:border-primary-500 focus:ring-primary-500 block w-full min-w-0 flex-1 rounded-md border-slate-300 sm:text-sm"
                                   defaultValue={todo.text}
                                   name="text"
                                   type="text"
@@ -130,19 +130,19 @@ export default function TodoList() {
                               todo.text
                             )}
                           </td>
-                          <td className="whitespace-nowrap p-4 text-sm text-gray-500">
+                          <td className="whitespace-nowrap p-4 text-sm text-slate-500">
                             {todo.user.name}
                           </td>
-                          <td className="whitespace-nowrap p-4 text-sm text-gray-500">
+                          <td className="whitespace-nowrap p-4 text-sm text-slate-500">
                             {todo.updatedAt.toLocaleString('en-US', {
                               dateStyle: 'long',
                               timeStyle: 'medium',
                             })}
                           </td>
-                          <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6">
+                          <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-slate-500 sm:pr-6">
                             <input
                               checked={todo.status === 'COMPLETE'}
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                              className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded border-slate-300"
                               type="checkbox"
                               onChange={() => {
                                 todoUpdateMutation.mutate({
@@ -155,12 +155,12 @@ export default function TodoList() {
                               }}
                             />
                           </td>
-                          <td className="space-x-4 whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6">
+                          <td className="space-x-4 whitespace-nowrap py-4 pl-4 pr-4 text-sm text-slate-500 sm:pr-6">
                             {data?.user?.id === todo.userId && (
                               <>
                                 {currentlyEditingTodo === todo.id ? (
                                   <a
-                                    className="text-indigo-600 hover:text-indigo-900"
+                                    className="text-primary-600 hover:text-primary-900"
                                     href="#"
                                     onClick={() => {
                                       setCurrentlyEditingTodo(null);
@@ -169,7 +169,7 @@ export default function TodoList() {
                                   </a>
                                 ) : (
                                   <a
-                                    className="text-indigo-600 hover:text-indigo-900"
+                                    className="text-primary-600 hover:text-primary-900"
                                     href="#"
                                     onClick={async () => {
                                       setCurrentlyEditingTodo(todo.id);
@@ -178,7 +178,7 @@ export default function TodoList() {
                                   </a>
                                 )}
                                 <a
-                                  className="text-indigo-600 hover:text-indigo-900"
+                                  className="text-primary-600 hover:text-primary-900"
                                   href="#"
                                   onClick={async () => {
                                     const confirmDelete = window.confirm(

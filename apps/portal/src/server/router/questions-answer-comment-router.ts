@@ -27,7 +27,7 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
             createdAt: 'desc',
           },
           where: {
-            answerId : input.answerId,
+            answerId: input.answerId,
           },
         });
       return questionAnswerCommentsData.map((data) => {

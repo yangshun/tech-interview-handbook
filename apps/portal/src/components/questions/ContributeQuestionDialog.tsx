@@ -48,7 +48,7 @@ export default function ContributeQuestionDialog({
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
             leaveTo="opacity-0">
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+            <div className="fixed inset-0 bg-slate-500 bg-opacity-75 transition-opacity" />
           </Transition.Child>
           <div className="fixed inset-0 z-10 overflow-y-auto">
             <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
@@ -66,7 +66,7 @@ export default function ContributeQuestionDialog({
                       <div className="mt-3 w-full sm:mt-0 sm:text-left">
                         <Dialog.Title
                           as="h3"
-                          className="text-lg font-medium leading-6 text-gray-900">
+                          className="text-lg font-medium leading-6 text-slate-900">
                           Contribute question
                         </Dialog.Title>
                         <div className="w-full">

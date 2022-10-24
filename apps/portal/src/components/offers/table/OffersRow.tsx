@@ -13,9 +13,9 @@ export default function OfferTableRow({
   return (
     <tr
       key={id}
-      className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
+      className="border-b bg-white hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-600">
       <th
-        className="whitespace-nowrap py-4 px-6 font-medium text-gray-900 dark:text-white"
+        className="whitespace-nowrap py-4 px-6 font-medium text-slate-900 dark:text-white"
         scope="row">
         {company.name}
       </th>
@@ -25,7 +25,7 @@ export default function OfferTableRow({
       <td className="py-4 px-6">{formatDate(monthYearReceived)}</td>
       <td className="space-x-4 py-4 px-6">
         <Link
-          className="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
+          className="text-primary-600 dark:text-primary-500 font-medium hover:underline"
           href={`/offers/profile/${profileId}`}>
           View Profile
         </Link>

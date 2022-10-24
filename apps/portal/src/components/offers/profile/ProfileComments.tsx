@@ -1,7 +1,13 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { ClipboardDocumentIcon, ShareIcon } from '@heroicons/react/24/outline';
-import { Button, HorizontalDivider, Spinner, TextArea } from '@tih/ui';
+import {
+  Button,
+  HorizontalDivider,
+  Spinner,
+  TextArea,
+  useToast,
+} from '@tih/ui';
 
 import ExpandableCommentCard from '~/components/offers/profile/comments/ExpandableCommentCard';
 
@@ -30,6 +36,7 @@ export default function ProfileComments({
   const { data: session, status } = useSession();
   const [currentReply, setCurrentReply] = useState<string>('');
   const [replies, setReplies] = useState<Array<Reply>>();
+  const { showToast } = useToast();
 
   const commentsQuery = trpc.useQuery(
     ['offers.comments.getComments', { profileId }],
@@ -51,6 +58,10 @@ export default function ProfileComments({
   });
 
   function handleComment(message: string) {
+    if (!currentReply.length) {
+      return;
+    }
+
     if (isEditable) {
       // If it is with edit permission, send comment to API with username = null
       createCommentMutation.mutate(
@@ -104,7 +115,13 @@ export default function ProfileComments({
             label="Copy profile edit link"
             size="sm"
             variant="secondary"
-            onClick={() => copyProfileLink(profileId, token)}
+            onClick={() => {
+              copyProfileLink(profileId, token);
+              showToast({
+                title: `Profile edit link copied to clipboard!`,
+                variant: 'success',
+              });
+            }}
           />
         )}
         <Button
@@ -115,7 +132,13 @@ export default function ProfileComments({
           label="Copy public link"
           size="sm"
           variant="secondary"
-          onClick={() => copyProfileLink(profileId)}
+          onClick={() => {
+            copyProfileLink(profileId);
+            showToast({
+              title: `Public profile link copied to clipboard!`,
+              variant: 'success',
+            });
+          }}
         />
       </div>
       <h2 className="mt-2 mb-6 text-2xl font-bold">Discussions</h2>
@@ -131,7 +154,7 @@ export default function ProfileComments({
         <div className="mt-2 flex w-full justify-end">
           <div className="w-fit">
             <Button
-              disabled={commentsQuery.isLoading}
+              disabled={commentsQuery.isLoading || !currentReply.length}
               display="block"
               isLabelHidden={false}
               isLoading={createCommentMutation.isLoading}
