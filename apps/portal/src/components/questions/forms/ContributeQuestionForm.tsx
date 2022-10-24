@@ -58,101 +58,102 @@ export default function ContributeQuestionForm({
     setCanSubmit(checked);
   };
   return (
-    <form
-      className="flex flex-1 flex-col items-stretch justify-center gap-y-4"
-      onSubmit={handleSubmit(onSubmit)}>
-      <div className="min-w-[113px] max-w-[113px] flex-1">
-        <Select
-          defaultValue="coding"
-          label="Type"
-          options={QUESTION_TYPES}
+    <div className="flex flex-col justify-between gap-4">
+      <form
+        className="flex flex-1 flex-col items-stretch justify-center gap-y-4"
+        onSubmit={handleSubmit(onSubmit)}>
+        <div className="min-w-[113px] max-w-[113px] flex-1">
+          <Select
+            defaultValue="coding"
+            label="Type"
+            options={QUESTION_TYPES}
+            required={true}
+            {...selectRegister('questionType')}
+          />
+        </div>
+        <TextArea
+          label="Question Prompt"
+          placeholder="Contribute a question"
           required={true}
-          {...selectRegister('questionType')}
+          rows={5}
+          {...register('questionContent')}
         />
-      </div>
-      <TextArea
-        label="Question Prompt"
-        placeholder="Contribute a question"
-        required={true}
-        rows={5}
-        {...register('questionContent')}
-      />
-      <HorizontalDivider />
-      <h2 className="text-md text-primary-800 font-semibold">
-        Additional information
-      </h2>
-      <div className="flex flex-col flex-wrap items-stretch gap-2 sm:flex-row sm:items-end">
-        <div className="flex-1 sm:min-w-[150px] sm:max-w-[300px]">
-          <Controller
-            control={control}
-            name="location"
-            render={({ field }) => (
-              <LocationTypeahead
-                required={true}
-                onSelect={(option) => {
-                  field.onChange(option.value);
-                }}
-                {...field}
-                value={LOCATIONS.find(
-                  (location) => location.value === field.value,
-                )}
-              />
-            )}
-          />
+        <HorizontalDivider />
+        <h2 className="text-md text-primary-800 font-semibold">
+          Additional information
+        </h2>
+        <div className="flex flex-col flex-wrap items-stretch gap-2 sm:flex-row sm:items-end">
+          <div className="flex-1 sm:min-w-[150px] sm:max-w-[300px]">
+            <Controller
+              control={control}
+              name="location"
+              render={({ field }) => (
+                <LocationTypeahead
+                  required={true}
+                  onSelect={(option) => {
+                    field.onChange(option.value);
+                  }}
+                  {...field}
+                  value={LOCATIONS.find(
+                    (location) => location.value === field.value,
+                  )}
+                />
+              )}
+            />
+          </div>
+          <div className="flex-1 sm:min-w-[150px] sm:max-w-[300px]">
+            <Controller
+              control={control}
+              name="date"
+              render={({ field }) => (
+                <MonthYearPicker
+                  monthRequired={true}
+                  value={{
+                    month: ((field.value.getMonth() as number) + 1) as Month,
+                    year: field.value.getFullYear(),
+                  }}
+                  yearRequired={true}
+                  onChange={({ month, year }) =>
+                    field.onChange(startOfMonth(new Date(year, month - 1)))
+                  }
+                />
+              )}
+            />
+          </div>
         </div>
-        <div className="flex-1 sm:min-w-[150px] sm:max-w-[300px]">
-          <Controller
-            control={control}
-            name="date"
-            render={({ field }) => (
-              <MonthYearPicker
-                monthRequired={true}
-                value={{
-                  month: ((field.value.getMonth() as number) + 1) as Month,
-                  year: field.value.getFullYear(),
-                }}
-                yearRequired={true}
-                onChange={({ month, year }) =>
-                  field.onChange(startOfMonth(new Date(year, month - 1)))
-                }
-              />
-            )}
-          />
+        <div className="flex flex-col flex-wrap items-stretch gap-2 sm:flex-row sm:items-end">
+          <div className="flex-1 sm:min-w-[150px] sm:max-w-[300px]">
+            <Controller
+              control={control}
+              name="company"
+              render={({ field }) => (
+                <CompanyTypeahead
+                  required={true}
+                  onSelect={({ id }) => {
+                    field.onChange(id);
+                  }}
+                />
+              )}
+            />
+          </div>
+          <div className="flex-1 sm:min-w-[150px] sm:max-w-[200px]">
+            <Controller
+              control={control}
+              name="role"
+              render={({ field }) => (
+                <RoleTypeahead
+                  required={true}
+                  onSelect={(option) => {
+                    field.onChange(option.value);
+                  }}
+                  {...field}
+                  value={ROLES.find((role) => role.value === field.value)}
+                />
+              )}
+            />
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col flex-wrap items-stretch gap-2 sm:flex-row sm:items-end">
-        <div className="flex-1 sm:min-w-[150px] sm:max-w-[300px]">
-          <Controller
-            control={control}
-            name="company"
-            render={({ field }) => (
-              <CompanyTypeahead
-                required={true}
-                onSelect={({ id }) => {
-                  field.onChange(id);
-                }}
-              />
-            )}
-          />
-        </div>
-        <div className="flex-1 sm:min-w-[150px] sm:max-w-[200px]">
-          <Controller
-            control={control}
-            name="role"
-            render={({ field }) => (
-              <RoleTypeahead
-                required={true}
-                onSelect={(option) => {
-                  field.onChange(option.value);
-                }}
-                {...field}
-                value={ROLES.find((role) => role.value === field.value)}
-              />
-            )}
-          />
-        </div>
-      </div>
-      {/* <div className="w-full">
+        {/* <div className="w-full">
         <HorizontalDivider />
       </div>
       <h1 className="mb-3">
@@ -171,6 +172,7 @@ export default function ContributeQuestionForm({
           }}
         />
       </div> */}
+      </form>
       <div
         className="bg-primary-50 flex w-full flex-col gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)] sm:flex-row sm:justify-between"
         style={{
@@ -199,6 +201,6 @@ export default function ContributeQuestionForm({
             variant="primary"></Button>
         </div>
       </div>
-    </form>
+    </div>
   );
 }
