@@ -49,24 +49,13 @@ export const questionsQuestionRouter = createProtectedRouter()
               },
             ];
 
-      const cursorCondition =
-        input.sortType === SortType.TOP
-          ? {
-              id: cursor ? cursor!.idCursor : undefined,
-              // Upvotes: cursor ? cursor!.upvoteCursor : undefined,
-            }
-          : {
-              id: cursor ? cursor!.idCursor : undefined,
-              // LastSeenAt: cursor ? cursor!.lastSeenCursor : undefined,
-            };
-
       const toSkip = cursor ? 1 : 0;
 
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
         cursor:
           cursor !== undefined
             ? {
-                ...cursorCondition,
+                id: cursor ? cursor!.idCursor : undefined,
               }
             : undefined,
         include: {
