@@ -14,8 +14,8 @@ export default function ResumeFilterPill({
   return (
     <button
       className={clsx(
-        'rounded-xl border border-indigo-500 border-transparent px-2 py-1 text-xs font-medium focus:bg-indigo-500 focus:text-white',
-        isSelected ? 'bg-indigo-500 text-white' : 'bg-white text-indigo-500',
+        'border-primary-500 focus:bg-primary-500 rounded-xl border border-transparent px-2 py-1 text-xs font-medium focus:text-white',
+        isSelected ? 'bg-primary-500 text-white' : 'text-primary-500 bg-white',
       )}
       type="button"
       onClick={onClick}>

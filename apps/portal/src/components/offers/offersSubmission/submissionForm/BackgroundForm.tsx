@@ -8,13 +8,17 @@ import {
   emptyOption,
   FieldError,
   locationOptions,
-  titleOptions,
 } from '~/components/offers/constants';
 import type { BackgroundPostData } from '~/components/offers/types';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
+import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
-import { CURRENCY_OPTIONS } from '~/utils/offers/currency/CurrencyEnum';
+import {
+  Currency,
+  CURRENCY_OPTIONS,
+} from '~/utils/offers/currency/CurrencyEnum';
 
+import FormMonthYearPicker from '../../forms/FormMonthYearPicker';
 import FormRadioList from '../../forms/FormRadioList';
 import FormSelect from '../../forms/FormSelect';
 import FormTextInput from '../../forms/FormTextInput';
@@ -26,11 +30,11 @@ function YoeSection() {
   const backgroundFields = formState.errors.background;
   return (
     <>
-      <h6 className="mb-2 text-left text-xl font-medium text-gray-400">
+      <h6 className="mb-2 text-left text-xl font-medium text-slate-400">
         Years of Experience (YOE)
       </h6>
 
-      <div className="mb-5 rounded-lg border border-gray-200 px-10 py-5">
+      <div className="mb-5 rounded-lg border border-slate-200 px-10 py-5">
         <div className="mb-2 grid grid-cols-3 space-x-3">
           <FormTextInput
             errorMessage={backgroundFields?.totalYoe?.message}
@@ -92,13 +96,13 @@ function FullTimeJobFields() {
   return (
     <>
       <div className="mb-5 grid grid-cols-2 space-x-3">
-        <FormSelect
-          display="block"
-          label="Title"
-          options={titleOptions}
-          placeholder={emptyOption}
-          {...register(`background.experiences.0.title`)}
-        />
+        <div>
+          <JobTitlesTypeahead
+            onSelect={({ value }) =>
+              setValue(`background.experiences.0.title`, value)
+            }
+          />
+        </div>
         <div>
           <CompaniesTypeahead
             onSelect={({ value }) =>
@@ -112,6 +116,7 @@ function FullTimeJobFields() {
           endAddOn={
             <FormSelect
               borderStyle="borderless"
+              defaultValue={Currency.SGD}
               isLabelHidden={true}
               label="Currency"
               options={CURRENCY_OPTIONS}
@@ -177,13 +182,13 @@ function InternshipJobFields() {
   return (
     <>
       <div className="mb-5 grid grid-cols-2 space-x-3">
-        <FormSelect
-          display="block"
-          label="Title"
-          options={titleOptions}
-          placeholder={emptyOption}
-          {...register(`background.experiences.0.title`)}
-        />
+        <div>
+          <JobTitlesTypeahead
+            onSelect={({ value }) =>
+              setValue(`background.experiences.0.title`, value)
+            }
+          />
+        </div>
         <div>
           <CompaniesTypeahead
             onSelect={({ value }) =>
@@ -197,6 +202,7 @@ function InternshipJobFields() {
           endAddOn={
             <FormSelect
               borderStyle="borderless"
+              defaultValue={Currency.SGD}
               isLabelHidden={true}
               label="Currency"
               options={CURRENCY_OPTIONS}
@@ -245,10 +251,10 @@ function CurrentJobSection() {
 
   return (
     <>
-      <h6 className="mb-2 text-left text-xl font-medium text-gray-400">
+      <h6 className="mb-2 text-left text-xl font-medium text-slate-400">
         Current / Previous Job
       </h6>
-      <div className="mb-5 rounded-lg border border-gray-200 px-10 py-5">
+      <div className="mb-5 rounded-lg border border-slate-200 px-10 py-5">
         <div className="mb-5">
           <FormRadioList
             defaultValue={JobType.FULLTIME}
@@ -282,10 +288,10 @@ function EducationSection() {
   const { register } = useFormContext();
   return (
     <>
-      <h6 className="mb-2 text-left text-xl font-medium text-gray-400">
+      <h6 className="mb-2 text-left text-xl font-medium text-slate-400">
         Education
       </h6>
-      <div className="mb-5 rounded-lg border border-gray-200 px-10 py-5">
+      <div className="mb-5 rounded-lg border border-slate-200 px-10 py-5">
         <div className="mb-5 grid grid-cols-2 space-x-3">
           <FormSelect
             display="block"
@@ -310,6 +316,22 @@ function EducationSection() {
               {...register(`background.educations.0.school`)}
             />
           </div>
+          <div className="grid grid-cols-2 space-x-3">
+            <FormMonthYearPicker
+              monthLabel="Candidature Start"
+              yearLabel=""
+              {...register(`background.educations.0.startDate`, {
+                required: FieldError.REQUIRED,
+              })}
+            />
+            <FormMonthYearPicker
+              monthLabel="Candidature End"
+              yearLabel=""
+              {...register(`background.educations.0.endDate`, {
+                required: FieldError.REQUIRED,
+              })}
+            />
+          </div>
         </Collapsible>
       </div>
     </>
@@ -319,13 +341,9 @@ function EducationSection() {
 export default function BackgroundForm() {
   return (
     <div>
-      <h5 className="mb-2 text-center text-4xl font-bold text-gray-900">
+      <h5 className="mb-8 text-center text-4xl font-bold text-slate-900">
         Help us better gauge your offers
       </h5>
-      <h6 className="text-md mx-10 mb-8 text-center font-light text-gray-600">
-        This section is mostly optional, but your background information helps
-        us benchmark your offers.
-      </h6>
       <div>
         <YoeSection />
         <CurrentJobSection />

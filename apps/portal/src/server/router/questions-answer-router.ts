@@ -229,13 +229,28 @@ export const questionsAnswerRouter = createProtectedRouter()
 
       const { answerId, vote } = input;
 
-      return await ctx.prisma.questionsAnswerVote.create({
-        data: {
-          answerId,
-          userId,
-          vote,
-        },
-      });
+      const incrementValue = vote === Vote.UPVOTE ? 1 : -1;
+
+      const [answerVote] = await ctx.prisma.$transaction([
+        ctx.prisma.questionsAnswerVote.create({
+          data: {
+            answerId,
+            userId,
+            vote,
+          },
+        }),
+        ctx.prisma.questionsAnswer.update({
+          data: {
+            upvotes: {
+              increment: incrementValue,
+            },
+          },
+          where: {
+            id: answerId,
+          },
+        }),
+      ]);
+      return answerVote;
     },
   })
   .mutation('updateVote', {
@@ -260,14 +275,30 @@ export const questionsAnswerRouter = createProtectedRouter()
         });
       }
 
-      return await ctx.prisma.questionsAnswerVote.update({
-        data: {
-          vote,
-        },
-        where: {
-          id,
-        },
-      });
+      const incrementValue = vote === Vote.UPVOTE ? 2 : -2;
+
+      const [questionsAnswerVote] = await ctx.prisma.$transaction([
+        ctx.prisma.questionsAnswerVote.update({
+          data: {
+            vote,
+          },
+          where: {
+            id,
+          },
+        }),
+        ctx.prisma.questionsAnswer.update({
+          data: {
+            upvotes: {
+              increment: incrementValue,
+            },
+          },
+          where: {
+            id: voteToUpdate.answerId,
+          },
+        }),
+      ]);
+
+      return questionsAnswerVote;
     },
   })
   .mutation('deleteVote', {
@@ -290,10 +321,26 @@ export const questionsAnswerRouter = createProtectedRouter()
         });
       }
 
-      return await ctx.prisma.questionsAnswerVote.delete({
-        where: {
-          id: input.id,
-        },
-      });
+      const incrementValue = voteToDelete.vote === Vote.UPVOTE ? -1 : 1;
+
+      const [questionsAnswerVote] = await ctx.prisma.$transaction([
+        ctx.prisma.questionsAnswerVote.delete({
+          where: {
+            id: input.id,
+          },
+        }),
+        ctx.prisma.questionsAnswer.update({
+          data: {
+            upvotes: {
+              increment: incrementValue,
+            },
+          },
+          where: {
+            id: voteToDelete.answerId,
+          },
+        }),
+      ]);
+      return questionsAnswerVote;
+
     },
   });

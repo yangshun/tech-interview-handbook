@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { TypeaheadOption } from '@tih/ui';
 import { Typeahead } from '@tih/ui';
 
-import { trpc } from '~/utils/trpc';
+import { JobTitleLabels } from './JobTitles';
 
 type Props = Readonly<{
   disabled?: boolean;
@@ -12,7 +12,7 @@ type Props = Readonly<{
   required?: boolean;
 }>;
 
-export default function CompaniesTypeahead({
+export default function JobTitlesTypeahead({
   disabled,
   onSelect,
   isLabelHidden,
@@ -20,29 +20,25 @@ export default function CompaniesTypeahead({
   required,
 }: Props) {
   const [query, setQuery] = useState('');
-  const companies = trpc.useQuery([
-    'companies.list',
-    {
-      name: query,
-    },
-  ]);
-
-  const { data } = companies;
+  const options = Object.entries(JobTitleLabels)
+    .map(([slug, label]) => ({
+      id: slug,
+      label,
+      value: slug,
+    }))
+    .filter(
+      ({ label }) =>
+        label.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) > -1,
+    );
 
   return (
     <Typeahead
       disabled={disabled}
       isLabelHidden={isLabelHidden}
-      label="Company"
-      noResultsMessage="No companies found"
+      label="Job Title"
+      noResultsMessage="No available job titles."
       nullable={true}
-      options={
-        data?.map(({ id, name }) => ({
-          id,
-          label: name,
-          value: id,
-        })) ?? []
-      }
+      options={options}
       placeholder={placeHolder}
       required={required}
       onQueryChange={setQuery}

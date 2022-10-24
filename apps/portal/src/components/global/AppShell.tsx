@@ -85,8 +85,8 @@ function ProfileJewel() {
               {({ active }) => (
                 <Link
                   className={clsx(
-                    active ? 'bg-gray-100' : '',
-                    'block px-4 py-2 text-sm text-gray-700',
+                    active ? 'bg-slate-100' : '',
+                    'block px-4 py-2 text-sm text-slate-700',
                   )}
                   href={item.href}
                   onClick={item.onClick}>
@@ -178,9 +178,9 @@ export default function AppShell({ children }: Props) {
       {/* Content area */}
       <div className="flex h-screen flex-1 flex-col overflow-hidden">
         <header className="w-full">
-          <div className="relative z-10 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white shadow-sm">
+          <div className="relative z-10 flex h-16 flex-shrink-0 border-b border-slate-200 bg-white shadow-sm">
             <button
-              className="focus:ring-primary-500 border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset md:hidden"
+              className="focus:ring-primary-500 border-r border-slate-200 px-4 text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset md:hidden"
               type="button"
               onClick={() => setMobileMenuOpen(true)}>
               <span className="sr-only">Open sidebar</span>

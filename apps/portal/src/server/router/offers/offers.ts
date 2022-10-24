@@ -5,8 +5,8 @@ import {
   dashboardOfferDtoMapper,
   getOffersResponseMapper,
 } from '~/mappers/offers-mappers';
-import { convertWithDate } from '~/utils/offers/currency/currencyExchange';
 import { Currency } from '~/utils/offers/currency/CurrencyEnum';
+import { convertWithDate } from '~/utils/offers/currency/currencyExchange';
 import { createValidationRegex } from '~/utils/offers/zodRegex';
 
 import { createRouter } from '../context';
@@ -103,22 +103,32 @@ export const offersRouter = createRouter().query('list', {
                   monthYearReceived: order,
                 }
               : sortingKey === sortingKeysMap.totalCompensation
-              ? {
-                  offersIntern: {
-                    monthlySalary: {
-                      baseValue: order,
+              ? [
+                  {
+                    offersIntern: {
+                      monthlySalary: {
+                        baseValue: order,
+                      },
                     },
                   },
-                }
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
               : sortingKey === sortingKeysMap.totalYoe
-              ? {
-                  profile: {
-                    background: {
-                      totalYoe: order,
+              ? [
+                  {
+                    profile: {
+                      background: {
+                        totalYoe: order,
+                      },
                     },
                   },
-                }
-              : undefined,
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
+              : { monthYearReceived: 'desc' },
           where: {
             AND: [
               {
@@ -207,22 +217,32 @@ export const offersRouter = createRouter().query('list', {
                   monthYearReceived: order,
                 }
               : sortingKey === sortingKeysMap.totalCompensation
-              ? {
-                  offersFullTime: {
-                    totalCompensation: {
-                      baseValue: order,
+              ? [
+                  {
+                    offersIntern: {
+                      monthlySalary: {
+                        baseValue: order,
+                      },
                     },
                   },
-                }
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
               : sortingKey === sortingKeysMap.totalYoe
-              ? {
-                  profile: {
-                    background: {
-                      totalYoe: order,
+              ? [
+                  {
+                    profile: {
+                      background: {
+                        totalYoe: order,
+                      },
                     },
                   },
-                }
-              : undefined,
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
+              : { monthYearReceived: 'desc' },
           where: {
             AND: [
               {

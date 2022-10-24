@@ -44,12 +44,12 @@ export default function OfferCard({
           </div>
         </div>
         {!duration && receivedMonth && (
-          <div className="font-light text-gray-400">
+          <div className="font-light text-slate-400">
             <p>{receivedMonth}</p>
           </div>
         )}
         {duration && (
-          <div className="font-light text-gray-400">
+          <div className="font-light text-slate-400">
             <p>{`${duration} months`}</p>
           </div>
         )}
@@ -83,7 +83,7 @@ export default function OfferCard({
                 </div>
               ))}
             {totalCompensation && (
-              <div className="ml-6 flex flex-row font-light text-gray-400">
+              <div className="ml-6 flex flex-row font-light text-slate-400">
                 <p>
                   Base / year: {base} ⋅ Stocks / year: {stocks} ⋅ Bonus / year:{' '}
                   {bonus}

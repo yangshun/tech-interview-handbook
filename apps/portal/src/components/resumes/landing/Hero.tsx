@@ -7,7 +7,7 @@ export function Hero() {
     <Container className="pb-36 pt-20 text-center lg:pt-32">
       <h1 className="font-display mx-auto max-w-4xl text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
         Resume review{' '}
-        <span className="relative whitespace-nowrap text-indigo-500">
+        <span className="text-primary-500 relative whitespace-nowrap">
           <svg
             aria-hidden="true"
             className="absolute top-2/3 left-0 h-[0.58em] w-full fill-blue-300/70"
@@ -26,18 +26,18 @@ export function Hero() {
       <div className="mt-10 flex justify-center gap-x-4">
         <Link href="/resumes/browse">
           <button
-            className="rounded-md bg-indigo-500 py-2 px-3 text-sm font-medium text-white"
+            className="bg-primary-500 rounded-md py-2 px-3 text-sm font-medium text-white"
             type="button">
             Start browsing now
           </button>
         </Link>
         <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
           <button
-            className="group inline-flex items-center justify-center rounded-md py-2 px-4 text-sm ring-1 ring-slate-200 hover:text-slate-900 hover:ring-slate-300 focus:outline-none focus-visible:outline-indigo-600 focus-visible:ring-slate-300 active:bg-slate-100 active:text-slate-600"
+            className="focus-visible:outline-primary-600 group inline-flex items-center justify-center rounded-md py-2 px-4 text-sm ring-1 ring-slate-200 hover:text-slate-900 hover:ring-slate-300 focus:outline-none focus-visible:ring-slate-300 active:bg-slate-100 active:text-slate-600"
             type="button">
             <svg
               aria-hidden="true"
-              className="h-3 w-3 flex-none fill-indigo-600 group-active:fill-current">
+              className="fill-primary-600 h-3 w-3 flex-none group-active:fill-current">
               <path d="m9.997 6.91-7.583 3.447A1 1 0 0 1 1 9.447V2.553a1 1 0 0 1 1.414-.91L9.997 5.09c.782.355.782 1.465 0 1.82Z" />
             </svg>
             <span className="ml-3">Watch video</span>

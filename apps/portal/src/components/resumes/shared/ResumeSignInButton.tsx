@@ -8,10 +8,10 @@ type Props = Readonly<{
 
 export default function ResumeSignInButton({ text, className }: Props) {
   return (
-    <div className={clsx('flex justify-center pt-4', className)}>
+    <div className={clsx('flex justify-center', className)}>
       <p>
         <a
-          className="text-primary-800 hover:text-primary-500"
+          className="text-indigo-500 hover:text-indigo-600"
           href="/api/auth/signin"
           onClick={(event) => {
             event.preventDefault();

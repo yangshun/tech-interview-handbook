@@ -457,6 +457,7 @@ model QuestionsQuestionComment {
   id         String   @id @default(cuid())
   questionId String
   userId     String?
+  upvotes    Int      @default(0)
   content    String   @db.Text
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -485,6 +486,7 @@ model QuestionsAnswer {
   questionId String
   userId     String?
   content    String   @db.Text
+  upvotes    Int      @default(0)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
@@ -513,6 +515,7 @@ model QuestionsAnswerComment {
   answerId  String
   userId    String?
   content   String   @db.Text
+  upvotes   Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
