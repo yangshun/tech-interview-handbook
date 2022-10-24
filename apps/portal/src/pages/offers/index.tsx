@@ -27,9 +27,9 @@ const features = [
   },
   {
     description:
-      "Offer profiles will not be automatically saved under the creator's account in our database unless explicit permission is given.",
+      "Offer profiles will not be automatically saved under creators' account in our database unless explicit permission is given.",
     icon: BookmarkSquareIcon,
-    name: 'Save with permission',
+    name: 'Save with Permission',
   },
 ];
 
@@ -91,7 +91,7 @@ export default function LandingPage() {
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-lg text-center text-xl sm:max-w-3xl">
-              Analyse your offers using profiles from fellow software engineers.
+              Analyze your offers using profiles from fellow software engineers.
             </p>
             <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
               <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
