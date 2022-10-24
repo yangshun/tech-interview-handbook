@@ -97,7 +97,7 @@ export default function ResumeCommentVoteButtons({
         />
       </button>
 
-      <div className="flex min-w-[1rem] justify-center text-xs">
+      <div className="flex min-w-[1rem] justify-center text-xs font-semibold text-gray-700">
         {commentVotesQuery.data?.numVotes ?? 0}
       </div>
 
