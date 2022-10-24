@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { Select } from '@tih/ui';
 
-import { titleOptions } from '~/components/offers/constants';
 import OffersTitle from '~/components/offers/OffersTitle';
 import OffersTable from '~/components/offers/table/OffersTable';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
+import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
 export default function OffersHomePage() {
-  const [jobTitleFilter, setjobTitleFilter] = useState('Software Engineer');
+  const [jobTitleFilter, setjobTitleFilter] = useState('software-engineer');
   const [companyFilter, setCompanyFilter] = useState('');
 
   return (
@@ -18,19 +17,17 @@ export default function OffersHomePage() {
           <div className="mt-4 flex items-center">
             Viewing offers for
             <div className="mx-4">
-              <Select
+              <JobTitlesTypeahead
                 isLabelHidden={true}
-                label="Select a job title"
-                options={titleOptions}
-                value={jobTitleFilter}
-                onChange={setjobTitleFilter}
+                placeHolder="Software Engineer"
+                onSelect={({ value }) => setjobTitleFilter(value)}
               />
             </div>
             in
             <div className="ml-4">
               <CompaniesTypeahead
                 isLabelHidden={true}
-                placeHolder="All companies"
+                placeHolder="All Companies"
                 onSelect={({ value }) => setCompanyFilter(value)}
               />
             </div>
