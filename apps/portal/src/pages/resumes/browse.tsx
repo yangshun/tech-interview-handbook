@@ -113,7 +113,7 @@ export default function ResumeHomePage() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [userFilters, sortOrder]);
+  }, [userFilters, sortOrder, searchValue]);
 
   const allResumesQuery = trpc.useQuery(
     [
@@ -371,10 +371,10 @@ export default function ResumeHomePage() {
         </Transition.Root>
       </div>
 
-      <main className="h-[calc(100vh-4rem)] flex-auto overflow-y-scroll px-8 pt-6 pb-4">
+      <main className="h-[calc(100vh-4rem)] flex-auto px-8 pb-4">
         <div className="flex justify-start">
-          <div className="hidden w-1/6 pt-2 lg:block">
-            <h3 className="text-md font-medium tracking-tight text-slate-900">
+          <div className="fixed top-0 bottom-0 mt-24 hidden w-64 overflow-auto lg:block">
+            <h3 className="text-md font-medium tracking-tight text-gray-900">
               Shortcuts
             </h3>
             <div className="w-100 pt-4 sm:pr-0 md:pr-4">
@@ -456,8 +456,8 @@ export default function ResumeHomePage() {
               </form>
             </div>
           </div>
-          <div className="w-full">
-            <div className="lg:border-grey-200 flex flex-wrap items-center justify-between pb-2 lg:border-b">
+          <div className="relative lg:left-64 lg:w-[calc(100%-16rem)]">
+            <div className="lg:border-grey-200 sticky top-0 z-10 flex flex-wrap items-center justify-between bg-gray-50 pt-6 pb-2 lg:border-b">
               <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none lg:pb-0">
                 <div>
                   <Tabs
@@ -480,7 +480,6 @@ export default function ResumeHomePage() {
                     onChange={onTabChange}
                   />
                 </div>
-
                 <div>
                   <button
                     className="bg-primary-500 ml-4 rounded-md py-2 px-3 text-sm font-medium text-white lg:hidden"
@@ -521,7 +520,6 @@ export default function ResumeHomePage() {
                   <span className="sr-only">Filters</span>
                   <FunnelIcon aria-hidden="true" className="h-6 w-6" />
                 </button>
-
                 <div>
                   <button
                     className="bg-primary-500 hidden w-36 rounded-md py-2 px-3 text-sm font-medium text-white lg:block"
@@ -552,20 +550,26 @@ export default function ResumeHomePage() {
                 {getEmptyDataText(tabsValue, searchValue, userFilters)}
               </div>
             ) : (
-              <>
-                <ResumeListItems resumes={getTabResumes()} />
-                {getTabTotalPages() > 1 && (
-                  <div className="mt-4 flex justify-center">
-                    <Pagination
-                      current={currentPage}
-                      end={getTabTotalPages()}
-                      label="pagination"
-                      start={1}
-                      onSelect={setCurrentPage}
-                    />
+              <div className="h-[calc(100vh-9rem)] pb-10 lg:h-[calc(100vh-6rem)]">
+                <div className="h-[85%] overflow-y-auto">
+                  <div>
+                    <ResumeListItems resumes={getTabResumes()} />
                   </div>
-                )}
-              </>
+                </div>
+                <div className="flex h-[15%] items-center justify-center">
+                  {getTabTotalPages() > 1 && (
+                    <div>
+                      <Pagination
+                        current={currentPage}
+                        end={getTabTotalPages()}
+                        label="pagination"
+                        start={1}
+                        onSelect={(page) => setCurrentPage(page)}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
             )}
           </div>
         </div>
