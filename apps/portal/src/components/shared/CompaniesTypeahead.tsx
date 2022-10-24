@@ -9,6 +9,7 @@ type Props = Readonly<{
   isLabelHidden?: boolean;
   onSelect: (option: TypeaheadOption) => void;
   placeHolder?: string;
+  required?: boolean;
 }>;
 
 export default function CompaniesTypeahead({
@@ -16,6 +17,7 @@ export default function CompaniesTypeahead({
   onSelect,
   isLabelHidden,
   placeHolder,
+  required,
 }: Props) {
   const [query, setQuery] = useState('');
   const companies = trpc.useQuery([
@@ -42,6 +44,7 @@ export default function CompaniesTypeahead({
         })) ?? []
       }
       placeholder={placeHolder}
+      required={required}
       onQueryChange={setQuery}
       onSelect={onSelect}
     />
