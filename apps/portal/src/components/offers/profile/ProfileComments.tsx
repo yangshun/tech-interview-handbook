@@ -142,32 +142,40 @@ export default function ProfileComments({
         />
       </div>
       <h2 className="mt-2 mb-6 text-2xl font-bold">Discussions</h2>
-      <div>
-        <TextArea
-          label={`Comment as ${
-            isEditable ? profileName : session?.user?.name ?? 'anonymous'
-          }`}
-          placeholder="Type your comment here"
-          value={currentReply}
-          onChange={(value) => setCurrentReply(value)}
-        />
-        <div className="mt-2 flex w-full justify-end">
-          <div className="w-fit">
-            <Button
-              disabled={commentsQuery.isLoading || !currentReply.length}
-              display="block"
-              isLabelHidden={false}
-              isLoading={createCommentMutation.isLoading}
-              label="Comment"
-              size="sm"
-              variant="primary"
-              onClick={() => handleComment(currentReply)}
-            />
+      {isEditable || session?.user?.name ? (
+        <div>
+          <TextArea
+            label={`Comment as ${
+              isEditable ? profileName : session?.user?.name ?? 'anonymous'
+            }`}
+            placeholder="Type your comment here"
+            value={currentReply}
+            onChange={(value) => setCurrentReply(value)}
+          />
+          <div className="mt-2 flex w-full justify-end">
+            <div className="w-fit">
+              <Button
+                disabled={
+                  commentsQuery.isLoading ||
+                  !currentReply.length ||
+                  createCommentMutation.isLoading
+                }
+                display="block"
+                isLabelHidden={false}
+                isLoading={createCommentMutation.isLoading}
+                label="Comment"
+                size="sm"
+                variant="primary"
+                onClick={() => handleComment(currentReply)}
+              />
+            </div>
           </div>
+          <HorizontalDivider />
         </div>
-        <HorizontalDivider />
-      </div>
-      <div className="h-full overflow-y-scroll">
+      ) : (
+        <div>Please log in before commenting on this profile.</div>
+      )}
+      <div className="h-full overflow-y-auto">
         <div className="h-content mb-96 w-full">
           {replies?.map((reply: Reply) => (
             <ExpandableCommentCard
