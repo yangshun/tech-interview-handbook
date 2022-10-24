@@ -163,31 +163,31 @@ export default function ResumeReviewPage() {
               </div>
             </div>
             <div className="flex flex-col lg:mt-0 lg:flex-row lg:flex-wrap lg:space-x-8">
-              <div className="mt-2 flex items-center text-sm text-slate-500">
+              <div className="mt-2 flex items-center text-sm text-slate-600">
                 <BriefcaseIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                 />
                 {detailsQuery.data.role}
               </div>
-              <div className="flex items-center pt-2 text-sm text-slate-500">
+              <div className="flex items-center pt-2 text-sm text-slate-600">
                 <MapPinIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                 />
                 {detailsQuery.data.location}
               </div>
-              <div className="flex items-center pt-2 text-sm text-slate-500">
+              <div className="flex items-center pt-2 text-sm text-slate-600">
                 <AcademicCapIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                 />
                 {detailsQuery.data.experience}
               </div>
-              <div className="flex items-center pt-2 text-sm text-slate-500">
+              <div className="flex items-center pt-2 text-sm text-slate-600">
                 <CalendarIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                 />
                 {`Uploaded ${formatDistanceToNow(detailsQuery.data.createdAt, {
                   addSuffix: true,
@@ -195,10 +195,10 @@ export default function ResumeReviewPage() {
               </div>
             </div>
             {detailsQuery.data.additionalInfo && (
-              <div className="flex items-start whitespace-pre-wrap pt-2 text-sm text-slate-500">
+              <div className="flex items-start whitespace-pre-wrap pt-2 text-sm text-slate-600">
                 <InformationCircleIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                 />
                 <ResumeExpandableText
                   key={detailsQuery.data.additionalInfo}
@@ -206,8 +206,8 @@ export default function ResumeReviewPage() {
                 />
               </div>
             )}
-            <div className="flex w-full flex-col gap-6 py-4 lg:flex-row">
-              <div className="w-full lg:w-[780px]">
+            <div className="flex w-full flex-col gap-6 py-4 xl:flex-row">
+              <div className="w-full xl:w-[780px]">
                 <ResumePdf url={detailsQuery.data.url} />
               </div>
               <div className="grow">
