@@ -3,8 +3,8 @@ import type { ProductNavigationItems } from '~/components/global/ProductNavigati
 const navigation: ProductNavigationItems = [
   { href: '/questions/browse', name: 'Browse' },
   { href: '/questions/lists', name: 'My Lists' },
-  { href: '/questions/my-questions', name: 'My Questions' },
-  { href: '/questions/history', name: 'History' },
+  // { href: '/questions/my-questions', name: 'My Questions' },
+  // { href: '/questions/history', name: 'History' },
 ];
 
 const config = {
