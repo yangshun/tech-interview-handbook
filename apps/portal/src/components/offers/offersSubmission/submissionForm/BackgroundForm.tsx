@@ -141,23 +141,18 @@ function FullTimeJobFields() {
       <Collapsible label="Add more details">
         <div className="mb-5 grid grid-cols-2 space-x-3">
           <FormTextInput
-            label="Focus / Specialization"
-            placeholder="e.g. Front End"
-            {...register(`background.experiences.0.specialization`)}
-          />
-          <FormTextInput
             label="Level"
             placeholder="e.g. L4, Junior"
             {...register(`background.experiences.0.level`)}
           />
-        </div>
-        <div className="mb-5 grid grid-cols-2 space-x-3">
           <FormSelect
             display="block"
             label="Location"
             options={locationOptions}
             {...register(`background.experiences.0.location`)}
           />
+        </div>
+        <div className="mb-5 grid grid-cols-2 space-x-3">
           <FormTextInput
             errorMessage={experiencesField?.durationInMonths?.message}
             label="Duration (months)"
@@ -224,11 +219,6 @@ function InternshipJobFields() {
       </div>
       <Collapsible label="Add more details">
         <div className="mb-5 grid grid-cols-2 space-x-3">
-          <FormTextInput
-            label="Focus / Specialization"
-            placeholder="e.g. Front End"
-            {...register(`background.experiences.0.specialization`)}
-          />
           <FormSelect
             display="block"
             label="Location"

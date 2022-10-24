@@ -236,7 +236,7 @@ export default function OffersSubmissionForm({
           <FormProvider {...formMethods}>
             <form onSubmit={handleSubmit(onSubmit)}>
               {formSteps[formStep].component}
-              <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre>
+              {/* <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre> */}
               {formSteps[formStep].hasNext && (
                 <div className="flex justify-end">
                   <Button

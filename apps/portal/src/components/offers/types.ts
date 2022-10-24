@@ -49,7 +49,6 @@ type ExperiencePostData = {
   level?: string | null;
   location?: string | null;
   monthlySalary?: Money | null;
-  specialization?: string | null;
   title?: string | null;
   totalCompensation?: Money | null;
   totalCompensationId?: string | null;
@@ -93,7 +92,6 @@ export type OfferFullTimePostData = {
   bonus: Money;
   id?: string;
   level: string;
-  specialization: string;
   stocks: Money;
   title: string;
   totalCompensation: Money;
@@ -103,7 +101,6 @@ export type OfferInternPostData = {
   id?: string;
   internshipCycle: string;
   monthlySalary: Money;
-  specialization: string;
   startYear: number;
   title: string;
 };
