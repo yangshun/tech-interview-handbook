@@ -278,9 +278,7 @@ export const questionsQuestionRouter = createProtectedRouter()
 
       let latestSeenAt = questionData.encounters[0].seenAt;
 
-      for (let i = 0; i < questionData.encounters.length; i++) {
-        const encounter = questionData.encounters[i];
-
+      for (const encounter of questionData.encounters) {
         latestSeenAt =
           latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
 
