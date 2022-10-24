@@ -14,11 +14,12 @@ export default function ResumeUserBadge({
   return (
     <div className="group relative flex items-center justify-center">
       <div
-        className="absolute -top-3 hidden w-48 -translate-y-full flex-col
-        justify-center gap-1 rounded-lg bg-white px-2 py-2 text-center drop-shadow-xl
-        after:absolute after:left-1/2 after:top-[100%] after:-translate-x-1/2
-        after:border-8 after:border-x-transparent after:border-b-transparent
-       after:border-t-white after:drop-shadow-lg after:content-['']
+        className="absolute left-6 z-10 hidden w-48 flex-col
+        justify-center gap-1 rounded-xl bg-white px-2 py-2 text-center drop-shadow-lg
+
+        before:absolute before:top-12 before:-translate-x-6
+        before:border-8 before:border-y-transparent before:border-l-transparent
+        before:border-r-white before:drop-shadow-lg before:content-['']
         group-hover:flex">
         <Icon className="h-12 w-12 self-center" />
         <p className="font-medium">{title}</p>

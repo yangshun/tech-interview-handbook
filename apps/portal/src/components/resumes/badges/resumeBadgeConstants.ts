@@ -33,7 +33,7 @@ const TIER_ONE = 5;
 
 export const RESUME_USER_BADGES: Array<BadgeInfo> = [
   {
-    description: `Reviewed over ${TIER_THREE} resumes`,
+    description: `Reviewed ${TIER_THREE} resumes`,
     icon: ResumeBadgeSuperheroIcon,
     id: 'Superhero',
     isValid: (payload: BadgePayload) =>
@@ -41,7 +41,7 @@ export const RESUME_USER_BADGES: Array<BadgeInfo> = [
     title: 'True saviour of the people',
   },
   {
-    description: `Reviewed over ${TIER_TWO} resumes`,
+    description: `Reviewed ${TIER_TWO} resumes`,
     icon: ResumeBadgeDetectiveIcon,
     id: 'Detective',
     isValid: (payload: BadgePayload) =>
@@ -50,7 +50,7 @@ export const RESUME_USER_BADGES: Array<BadgeInfo> = [
     title: 'Keen eye for details like a private eye',
   },
   {
-    description: `Reviewed over ${TIER_ONE} resumes`,
+    description: `Reviewed ${TIER_ONE} resumes`,
     icon: ResumeBadgeEagleIcon,
     id: 'Eagle',
     isValid: (payload: BadgePayload) =>
