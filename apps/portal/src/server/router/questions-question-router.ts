@@ -153,17 +153,17 @@ export const questionsQuestionRouter = createProtectedRouter()
             latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
 
           if (!(encounter.company!.name in companyCounts)) {
-            companyCounts[encounter.company!.name] = 1;
+            companyCounts[encounter.company!.name] = 0;
           }
           companyCounts[encounter.company!.name] += 1;
 
           if (!(encounter.location in locationCounts)) {
-            locationCounts[encounter.location] = 1;
+            locationCounts[encounter.location] = 0;
           }
           locationCounts[encounter.location] += 1;
 
           if (!(encounter.role in roleCounts)) {
-            roleCounts[encounter.role] = 1;
+            roleCounts[encounter.role] = 0;
           }
           roleCounts[encounter.role] += 1;
         }
@@ -181,7 +181,7 @@ export const questionsQuestionRouter = createProtectedRouter()
           numComments: data._count.comments,
           numVotes: votes,
           receivedCount: data.encounters.length,
-          seenAt: latestSeenAt,
+          seenAt: data.encounters[0].seenAt,
           type: data.questionType,
           updatedAt: data.updatedAt,
           user: data.user?.name ?? '',

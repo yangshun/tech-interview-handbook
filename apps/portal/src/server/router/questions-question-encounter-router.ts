@@ -33,17 +33,17 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
         latestSeenAt = latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
 
         if (!(encounter.company!.name in companyCounts)) {
-          companyCounts[encounter.company!.name] = 1;
+          companyCounts[encounter.company!.name] = 0;
         }
         companyCounts[encounter.company!.name] += 1;
 
         if (!(encounter.location in locationCounts)) {
-          locationCounts[encounter.location] = 1;
+          locationCounts[encounter.location] = 0;
         }
         locationCounts[encounter.location] += 1;
 
         if (!(encounter.role in roleCounts)) {
-          roleCounts[encounter.role] = 1;
+          roleCounts[encounter.role] = 0;
         }
         roleCounts[encounter.role] += 1;
       }
