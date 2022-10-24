@@ -72,18 +72,17 @@ export default function OfferCard({
         <HorizontalDivider />
         <div className="px-8">
           <div className="flex flex-col py-2">
-            {totalCompensation ||
-              (monthlySalary && (
-                <div className="flex flex-row">
-                  <CurrencyDollarIcon className="mr-1 h-5" />
-                  <p>
-                    {totalCompensation && `TC: ${totalCompensation}`}
-                    {monthlySalary && `Monthly Salary: ${monthlySalary}`}
-                  </p>
-                </div>
-              ))}
+            {(totalCompensation || monthlySalary) && (
+              <div className="flex flex-row">
+                <CurrencyDollarIcon className="mr-1 h-5" />
+                <p>
+                  {totalCompensation && `TC: ${totalCompensation}`}
+                  {monthlySalary && `Monthly Salary: ${monthlySalary}`}
+                </p>
+              </div>
+            )}
             {totalCompensation && (
-              <div className="ml-6 flex flex-row font-light text-slate-400">
+              <div className="ml-6 flex flex-row font-light">
                 <p>
                   Base / year: {base} ⋅ Stocks / year: {stocks} ⋅ Bonus / year:{' '}
                   {bonus}
