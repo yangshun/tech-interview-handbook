@@ -17,29 +17,26 @@ export type FilterChoices<V extends string = string> = ReadonlyArray<
   FilterChoice<V>
 >;
 
-type FilterSectionType<FilterOptions extends Array<FilterOption>> =
+type FilterSectionType<V extends string> =
   | {
       isSingleSelect: true;
-      onOptionChange: (optionValue: FilterOptions[number]['value']) => void;
+      onOptionChange: (option: FilterOption<V>) => void;
     }
   | {
       isSingleSelect?: false;
-      onOptionChange: (
-        optionValue: FilterOptions[number]['value'],
-        checked: boolean,
-      ) => void;
+      onOptionChange: (option: FilterOption<V>) => void;
     };
 
-export type FilterSectionProps<FilterOptions extends Array<FilterOption>> =
-  FilterSectionType<FilterOptions> & {
+export type FilterSectionProps<V extends string = string> =
+  FilterSectionType<V> & {
     label: string;
-    options: FilterOptions;
+    options: Array<FilterOption<V>>;
   } & (
       | {
           renderInput: (props: {
             field: UseFormRegisterReturn<'search'>;
-            onOptionChange: FilterSectionType<FilterOptions>['onOptionChange'];
-            options: FilterOptions;
+            onOptionChange: FilterSectionType<V>['onOptionChange'];
+            options: Array<FilterOption<V>>;
           }) => React.ReactNode;
           showAll?: never;
         }
@@ -53,16 +50,14 @@ export type FilterSectionFormData = {
   search: string;
 };
 
-export default function FilterSection<
-  FilterOptions extends Array<FilterOption>,
->({
+export default function FilterSection<V extends string>({
   label,
   options,
   showAll,
   onOptionChange,
   isSingleSelect,
   renderInput,
-}: FilterSectionProps<FilterOptions>) {
+}: FilterSectionProps<V>) {
   const { register, reset } = useForm<FilterSectionFormData>();
 
   const registerSearch = register('search');
@@ -76,7 +71,9 @@ export default function FilterSection<
   };
 
   const autocompleteOptions = useMemo(() => {
-    return options.filter((option) => !option.checked) as FilterOptions;
+    return options.filter((option) => !option.checked) as Array<
+      FilterOption<V>
+    >;
   }, [options]);
 
   const selectedCount = useMemo(() => {
@@ -102,11 +99,12 @@ export default function FilterSection<
             <div className="z-10">
               {renderInput({
                 field,
-                onOptionChange: async (
-                  optionValue: FilterOptions[number]['value'],
-                ) => {
+                onOptionChange: async (option: FilterOption<V>) => {
                   reset();
-                  return onOptionChange(optionValue, true);
+                  return onOptionChange({
+                    ...option,
+                    checked: true,
+                  });
                 },
                 options: autocompleteOptions,
               })}
@@ -119,7 +117,13 @@ export default function FilterSection<
                 label={label}
                 value={options.find((option) => option.checked)?.value}
                 onChange={(value) => {
-                  onOptionChange(value);
+                  const changedOption = options.find(
+                    (option) => option.value === value,
+                  )!;
+                  onOptionChange({
+                    ...changedOption,
+                    checked: !changedOption.checked,
+                  });
                 }}>
                 {options.map((option) => (
                   <RadioList.Item
@@ -140,7 +144,10 @@ export default function FilterSection<
                     label={option.label}
                     value={option.checked}
                     onChange={(checked) => {
-                      onOptionChange(option.value, checked);
+                      onOptionChange({
+                        ...option,
+                        checked,
+                      });
                     }}
                   />
                 ))}

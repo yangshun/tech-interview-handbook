@@ -25,9 +25,11 @@ export function timeSinceNow(date: Date | number | string) {
   }
   interval = seconds / 60;
   if (interval > 1) {
-    return `${Math.floor(interval)} minutes`;
+    const time: number = Math.floor(interval);
+    return time === 1 ? `${time} minute` : `${time} minutes`;
   }
-  return `${Math.floor(interval)} seconds`;
+  const time: number = Math.floor(interval);
+  return time === 1 ? `${time} second` : `${time} seconds`;
 }
 
 export function formatDate(value: Date | number | string) {

@@ -115,7 +115,7 @@ export default function OffersSubmissionForm({
       ),
       hasNext: true,
       hasPrevious: false,
-      label: 'Offer details',
+      label: 'Offers',
     },
     {
       component: <BackgroundForm key={1} />,
@@ -125,28 +125,33 @@ export default function OffersSubmissionForm({
     },
     {
       component: (
-        <OfferAnalysis
-          key={2}
-          allAnalysis={analysis}
-          isError={generateAnalysisMutation.isError}
-          isLoading={generateAnalysisMutation.isLoading}
-        />
-      ),
-      hasNext: true,
-      hasPrevious: false,
-      label: 'Analysis',
-    },
-    {
-      component: (
         <OffersProfileSave
-          key={3}
+          key={2}
           profileId={createProfileResponse.id || ''}
           token={createProfileResponse.token}
         />
       ),
-      hasNext: false,
+      hasNext: true,
       hasPrevious: false,
-      label: 'Save',
+      label: 'Save profile',
+    },
+    {
+      component: (
+        <div>
+          <h5 className="mb-8 text-center text-4xl font-bold text-slate-900">
+            Result
+          </h5>
+          <OfferAnalysis
+            key={3}
+            allAnalysis={analysis}
+            isError={generateAnalysisMutation.isError}
+            isLoading={generateAnalysisMutation.isLoading}
+          />
+        </div>
+      ),
+      hasNext: false,
+      hasPrevious: true,
+      label: 'Analysis',
     },
   ];
 
@@ -231,7 +236,7 @@ export default function OffersSubmissionForm({
           <FormProvider {...formMethods}>
             <form onSubmit={handleSubmit(onSubmit)}>
               {formSteps[formStep].component}
-              {/* <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre> */}
+              <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre>
               {formSteps[formStep].hasNext && (
                 <div className="flex justify-end">
                   <Button

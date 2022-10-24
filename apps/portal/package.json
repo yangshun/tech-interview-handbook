@@ -38,6 +38,7 @@
     "react-popper-tooltip": "^4.4.2",
     "react-query": "^3.39.2",
     "superjson": "^1.10.0",
+    "unique-names-generator": "^4.7.1",
     "zod": "^3.18.0"
   },
   "devDependencies": {

@@ -27,8 +27,12 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
       const locationCounts: Record<string, number> = {};
       const roleCounts: Record<string, number> = {};
 
+      let latestSeenAt = questionEncountersData[0].seenAt;
+
       for (let i = 0; i < questionEncountersData.length; i++) {
         const encounter = questionEncountersData[i];
+
+        latestSeenAt = latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
 
         if (!(encounter.company!.name in companyCounts)) {
           companyCounts[encounter.company!.name] = 1;
@@ -48,6 +52,7 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
 
       const questionEncounter: AggregatedQuestionEncounter = {
         companyCounts,
+        latestSeenAt,
         locationCounts,
         roleCounts,
       };
