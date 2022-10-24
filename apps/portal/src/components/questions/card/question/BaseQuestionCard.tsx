@@ -48,6 +48,20 @@ type AnswerStatisticsProps =
       showAnswerStatistics?: false;
     };
 
+type AggregateStatisticsProps =
+  | {
+      companies: Record<string, number>;
+      locations: Record<string, number>;
+      roles: Record<string, number>;
+      showAggregateStatistics: true;
+    }
+  | {
+      companies?: never;
+      locations?: never;
+      roles?: never;
+      showAggregateStatistics?: false;
+    };
+
 type ActionButtonProps =
   | {
       actionButtonLabel: string;
@@ -90,16 +104,14 @@ type AddToListProps =
 
 export type BaseQuestionCardProps = ActionButtonProps &
   AddToListProps &
+  AggregateStatisticsProps &
   AnswerStatisticsProps &
   CreateEncounterProps &
   DeleteProps &
   ReceivedStatisticsProps &
   UpvoteProps & {
-    companies: Record<string, number>;
     content: string;
-    locations: Record<string, number>;
     questionId: string;
-    roles: Record<string, number>;
     showHover?: boolean;
     timestamp: string;
     truncateContent?: boolean;
@@ -114,6 +126,7 @@ export default function BaseQuestionCard({
   receivedCount,
   type,
   showVoteButtons,
+  showAggregateStatistics,
   showAnswerStatistics,
   showReceivedStatistics,
   showCreateEncounterButton,
@@ -145,12 +158,22 @@ export default function BaseQuestionCard({
         />
       )}
       <div className="flex flex-col items-start gap-2">
-        <div className="flex items-baseline justify-between">
+        <div className="flex items-baseline justify-between self-stretch">
           <div className="flex items-center gap-2 text-slate-500">
-            <QuestionTypeBadge type={type} />
-            <QuestionAggregateBadge statistics={companies} variant="primary" />
-            <QuestionAggregateBadge statistics={locations} variant="success" />
-            <QuestionAggregateBadge statistics={roles} variant="danger" />
+            {showAggregateStatistics && (
+              <>
+                <QuestionTypeBadge type={type} />
+                <QuestionAggregateBadge
+                  statistics={companies}
+                  variant="primary"
+                />
+                <QuestionAggregateBadge
+                  statistics={locations}
+                  variant="success"
+                />
+                <QuestionAggregateBadge statistics={roles} variant="danger" />
+              </>
+            )}
             <p className="text-xs">{timestamp}</p>
             {showAddToList && (
               <div className="pl-4">
@@ -162,7 +185,7 @@ export default function BaseQuestionCard({
             <Button
               label={actionButtonLabel}
               size="sm"
-              variant="tertiary"
+              variant="secondary"
               onClick={onActionButtonClick}
             />
           )}

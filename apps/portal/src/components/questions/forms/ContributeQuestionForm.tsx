@@ -1,6 +1,7 @@
 import { startOfMonth } from 'date-fns';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { ArrowPathIcon } from '@heroicons/react/20/solid';
 import type { QuestionsQuestionType } from '@prisma/client';
 import {
   Button,
@@ -15,7 +16,9 @@ import {
   useFormRegister,
   useSelectRegister,
 } from '~/utils/questions/useFormRegister';
+import { trpc } from '~/utils/trpc';
 
+import SimilarQuestionCard from '../card/question/SimilarQuestionCard';
 import CompanyTypeahead from '../typeahead/CompanyTypeahead';
 import LocationTypeahead from '../typeahead/LocationTypeahead';
 import RoleTypeahead from '../typeahead/RoleTypeahead';
@@ -45,18 +48,39 @@ export default function ContributeQuestionForm({
     control,
     register: formRegister,
     handleSubmit,
+    watch,
   } = useForm<ContributeQuestionData>({
     defaultValues: {
       date: startOfMonth(new Date()),
     },
   });
+
+  const [contentToCheck, setContentToCheck] = useState('');
+
+  const { data: similarQuestions } = trpc.useQuery(
+    [
+      'questions.questions.getRelatedQuestionsByContent',
+      { content: contentToCheck },
+    ],
+    {
+      keepPreviousData: true,
+    },
+  );
+  const questionContent = watch('questionContent');
   const register = useFormRegister(formRegister);
   const selectRegister = useSelectRegister(formRegister);
 
-  const [canSubmit, setCanSubmit] = useState<boolean>(false);
+  const [checkedSimilar, setCheckedSimilar] = useState<boolean>(false);
   const handleCheckSimilarQuestions = (checked: boolean) => {
-    setCanSubmit(checked);
+    setCheckedSimilar(checked);
   };
+
+  useEffect(() => {
+    if (questionContent !== contentToCheck) {
+      setCheckedSimilar(false);
+    }
+  }, [questionContent, contentToCheck]);
+
   return (
     <div className="flex flex-col justify-between gap-4">
       <form
@@ -153,35 +177,55 @@ export default function ContributeQuestionForm({
             />
           </div>
         </div>
-        {/* <div className="w-full">
-        <HorizontalDivider />
-      </div>
-      <h1 className="mb-3">
-        Are these questions the same as yours? TODO:Change to list
-      </h1>
-      <div>
-        <SimilarQuestionCard
-          content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices"
-          location="Menlo Park, CA"
-          receivedCount={0}
-          role="Senior Engineering Manager"
-          timestamp="Today"
-          onSimilarQuestionClick={() => {
-            // eslint-disable-next-line no-console
-            console.log('hi!');
+        <div className="w-full">
+          <HorizontalDivider />
+        </div>
+        <h2
+          className="text-primary-900 mb-3
+        text-lg font-semibold
+        ">
+          Are these questions the same as yours?
+        </h2>
+        <Button
+          addonPosition="start"
+          disabled={questionContent === contentToCheck}
+          icon={ArrowPathIcon}
+          label="Refresh similar questions"
+          variant="primary"
+          onClick={() => {
+            setContentToCheck(questionContent);
           }}
         />
-      </div> */}
+        <div className="flex flex-col gap-y-2">
+          {similarQuestions?.map((question) => (
+            <SimilarQuestionCard
+              key={question.id}
+              content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices"
+              questionId={question.id}
+              timestamp="Today"
+              type="CODING"
+              onSimilarQuestionClick={() => {
+                // eslint-disable-next-line no-console
+                console.log('hi!');
+              }}
+            />
+          ))}
+        </div>
         <div
           className="bg-primary-50 flex w-full flex-col gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)] sm:flex-row sm:justify-between"
           style={{
             // Hack to make the background bleed outside the container
             clipPath: 'inset(0 -100vmax)',
           }}>
-          <div className="my-2 flex sm:my-0">
+          <div className="my-2 flex items-center sm:my-0">
             <CheckboxInput
-              label="I have checked that my question is new"
-              value={canSubmit}
+              disabled={questionContent !== contentToCheck}
+              label={
+                questionContent !== contentToCheck
+                  ? 'I have checked that my question is new (Refresh similar questions to proceed)'
+                  : 'I have checked that my question is new'
+              }
+              value={checkedSimilar}
               onChange={handleCheckSimilarQuestions}
             />
           </div>
@@ -194,7 +238,7 @@ export default function ContributeQuestionForm({
             </button>
             <Button
               className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-slate-400 sm:ml-3 sm:w-auto sm:text-sm"
-              disabled={!canSubmit}
+              disabled={!checkedSimilar}
               label="Contribute"
               type="submit"
               variant="primary"></Button>
