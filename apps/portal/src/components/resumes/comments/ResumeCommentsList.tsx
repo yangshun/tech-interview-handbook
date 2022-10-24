@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useSession } from 'next-auth/react';
 import {
   BookOpenIcon,
@@ -93,7 +94,11 @@ export default function ResumeCommentsList({
                 </div>
 
                 <div className="w-11/12 space-y-4">
-                  <div className=" space-y-2 rounded-md border-2 border-indigo-300 bg-white px-4 py-3 drop-shadow-md">
+                  <div
+                    className={clsx(
+                      'space-y-2 rounded-md border-2 bg-white px-4 py-3 drop-shadow-md',
+                      commentCount ? 'border-slate-300' : 'border-slate-300',
+                    )}>
                     {commentCount > 0 ? (
                       comments.map((comment) => {
                         return (
@@ -106,9 +111,9 @@ export default function ResumeCommentsList({
                       })
                     ) : (
                       <div className="flex flex-row items-center text-sm">
-                        <ChatBubbleLeftRightIcon className="mr-2 h-6 w-6 text-indigo-400" />
+                        <ChatBubbleLeftRightIcon className="mr-2 h-6 w-6 text-slate-500" />
 
-                        <div className="text-gray-500">
+                        <div className="text-slate-500">
                           There are no comments for this section yet!
                         </div>
                       </div>
