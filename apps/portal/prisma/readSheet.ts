@@ -4,7 +4,7 @@ import crypto from 'crypto';
 import { baseCurrencyString } from '../src/utils/offers/currency';
 import { convert } from '../src/utils/offers/currency/currencyExchange';
 import { generateAnalysis } from '../src/utils/offers/analysisGeneration';
-import generateRandomName from '../src/utils/offers/randomNameGenerator';
+import { generateRandomName, generateRandomStringForToken } from '../src/utils/offers/randomGenerator';
 
 const prisma = new PrismaClient();
 
@@ -67,7 +67,7 @@ const seedSalaries = async () => {
           if (companyIdMappings[data.Company]) {
             const token = crypto
               .createHash('sha256')
-              .update(xlSerialToJsDate(data.Timestamp).toString())
+              .update(xlSerialToJsDate(data.Timestamp).toString() + generateRandomStringForToken())
               .digest('hex');
 
             // Generate random name until unique
