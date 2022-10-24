@@ -1,4 +1,4 @@
-import crypto, { randomUUID } from 'crypto';
+import crypto from 'crypto';
 import { z } from 'zod';
 import { JobType } from '@prisma/client';
 import * as trpc from '@trpc/server';
@@ -10,6 +10,7 @@ import {
 } from '~/mappers/offers-mappers';
 import { baseCurrencyString } from '~/utils/offers/currency';
 import { convert } from '~/utils/offers/currency/currencyExchange';
+import generateRandomName from '~/utils/offers/randomNameGenerator';
 import { createValidationRegex } from '~/utils/offers/zodRegex';
 
 import { createRouter } from '../context';
@@ -265,6 +266,24 @@ export const offersProfileRouter = createRouter()
         .createHash('sha256')
         .update(Date.now().toString())
         .digest('hex');
+
+      // Generate random name until unique
+      let uniqueName: string = generateRandomName();
+
+      let sameNameProfiles = await ctx.prisma.offersProfile.findMany({
+        where: {
+          profileName: uniqueName
+        }
+      })
+
+      while (sameNameProfiles.length !== 0) {
+        uniqueName = generateRandomName();
+        sameNameProfiles = await ctx.prisma.offersProfile.findMany({
+          where: {
+            profileName: uniqueName
+          }
+        })
+      }
 
       const profile = await ctx.prisma.offersProfile.create({
         data: {
@@ -538,7 +557,7 @@ export const offersProfileRouter = createRouter()
               }),
             ),
           },
-          profileName: randomUUID().substring(0, 10),
+          profileName: uniqueName,
         },
       });
 
