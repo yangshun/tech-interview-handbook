@@ -8,13 +8,15 @@ import {
 } from '@heroicons/react/24/outline';
 
 import QuestionListCard from '~/components/questions/card/question/QuestionListCard';
-import CreateListDialog from '~/components/questions/CreatListDialog';
+import type { CreateListFormData } from '~/components/questions/CreateListDialog';
+import CreateListDialog from '~/components/questions/CreateListDialog';
 import DeleteListDialog from '~/components/questions/DeleteListDialog';
 
 import { Button } from '~/../../../packages/ui/dist';
 import { APP_TITLE } from '~/utils/questions/constants';
 import { SAMPLE_QUESTION } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
+import { trpc } from '~/utils/trpc';
 
 export const questions = [
   SAMPLE_QUESTION,
@@ -34,22 +36,40 @@ export const questions = [
   SAMPLE_QUESTION,
 ];
 
-export const lists = [
-  { id: 1, name: 'list 1', questions },
-  { id: 2, name: 'list 2', questions },
-  { id: 3, name: 'list 3', questions },
-  { id: 4, name: 'list 4', questions },
-  { id: 5, name: 'list 5', questions },
-];
-
 export default function ListPage() {
+  const utils = trpc.useContext();
+  const { data: lists } = trpc.useQuery(['questions.lists.getListsByUser']);
+  const { mutateAsync: createList } = trpc.useMutation(
+    'questions.lists.create',
+    {
+      onSuccess: () => {
+        // TODO: Add optimistic update
+        utils.invalidateQueries(['questions.lists.getListsByUser']);
+      },
+    },
+  );
+  const { mutateAsync: deleteList } = trpc.useMutation(
+    'questions.lists.delete',
+    {
+      onSuccess: () => {
+        // TODO: Add optimistic update
+        utils.invalidateQueries(['questions.lists.getListsByUser']);
+      },
+    },
+  );
+
   const [selectedList, setSelectedList] = useState(
-    (lists ?? []).length > 0 ? lists[0].id : '',
+    lists?.length ? lists[0].id : '',
   );
   const [showDeleteListDialog, setShowDeleteListDialog] = useState(false);
   const [showCreateListDialog, setShowCreateListDialog] = useState(false);
 
-  const handleDeleteList = () => {
+  const [listIdToDelete, setListIdToDelete] = useState('');
+
+  const handleDeleteList = async (listId: string) => {
+    await deleteList({
+      id: listId,
+    });
     setShowDeleteListDialog(false);
   };
 
@@ -57,7 +77,10 @@ export default function ListPage() {
     setShowDeleteListDialog(false);
   };
 
-  const handleCreateList = () => {
+  const handleCreateList = async (data: CreateListFormData) => {
+    await createList({
+      name: data.name,
+    });
     setShowCreateListDialog(false);
   };
 
@@ -68,7 +91,7 @@ export default function ListPage() {
   const listOptions = (
     <>
       <ul className="flex flex-1 flex-col divide-y divide-solid divide-slate-200">
-        {lists.map((list) => (
+        {(lists ?? []).map((list) => (
           <li
             key={list.id}
             className={`flex items-center hover:bg-slate-50 ${
@@ -107,7 +130,10 @@ export default function ListPage() {
                               : 'text-slate-900'
                           } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                           type="button"
-                          onClick={() => setShowDeleteListDialog(true)}>
+                          onClick={() => {
+                            setShowDeleteListDialog(true);
+                            setListIdToDelete(list.id);
+                          }}>
                           Delete
                         </button>
                       )}
@@ -134,7 +160,7 @@ export default function ListPage() {
       </Head>
       <main className="flex flex-1 flex-col items-stretch">
         <div className="flex h-full flex-1">
-          <aside className="w-[300px] overflow-y-auto border-l bg-white py-4 lg:block">
+          <aside className="w-[300px] overflow-y-auto border-r bg-white py-4 lg:block">
             <div className="mb-2 flex items-center justify-between">
               <h2 className="px-4 text-xl font-semibold">My Lists</h2>
               <div className="px-4">
@@ -198,11 +224,13 @@ export default function ListPage() {
             <DeleteListDialog
               show={showDeleteListDialog}
               onCancel={handleDeleteListCancel}
-              onDelete={handleDeleteList}></DeleteListDialog>
+              onDelete={() => {
+                handleDeleteList(listIdToDelete);
+              }}></DeleteListDialog>
             <CreateListDialog
               show={showCreateListDialog}
               onCancel={handleCreateListCancel}
-              onCreate={handleCreateList}></CreateListDialog>
+              onSubmit={handleCreateList}></CreateListDialog>
           </section>
         </div>
       </main>
