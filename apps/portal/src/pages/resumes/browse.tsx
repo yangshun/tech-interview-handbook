@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import { Dialog, Disclosure, Transition } from '@headlessui/react';
 import { FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
 import {
@@ -39,6 +39,7 @@ import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 
 import useDebounceValue from '~/utils/resumes/useDebounceValue';
+import useSearchParams from '~/utils/resumes/useSearchParams';
 import { trpc } from '~/utils/trpc';
 
 import type { FilterState } from '../../components/resumes/browse/resumeFilters';
@@ -101,19 +102,82 @@ const getEmptyDataText = (
 export default function ResumeHomePage() {
   const { data: sessionData } = useSession();
   const router = useRouter();
-  const [tabsValue, setTabsValue] = useState(BROWSE_TABS_VALUES.ALL);
-  const [sortOrder, setSortOrder] = useState('latest');
-  const [searchValue, setSearchValue] = useState('');
-  const [userFilters, setUserFilters] = useState(INITIAL_FILTER_STATE);
-  const [shortcutSelected, setShortcutSelected] = useState('All');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [tabsValue, setTabsValue, isTabsValueInit] = useSearchParams(
+    'tabsValue',
+    BROWSE_TABS_VALUES.ALL,
+  );
+  const [sortOrder, setSortOrder, isSortOrderInit] = useSearchParams(
+    'sortOrder',
+    'latest',
+  );
+  const [searchValue, setSearchValue, isSearchValueInit] = useSearchParams(
+    'searchValue',
+    '',
+  );
+  const [shortcutSelected, setShortcutSelected, isShortcutInit] =
+    useSearchParams('shortcutSelected', 'All');
+  const [currentPage, setCurrentPage, isCurrentPageInit] = useSearchParams(
+    'currentPage',
+    1,
+  );
+  const [userFilters, setUserFilters, isUserFiltersInit] = useSearchParams(
+    'userFilters',
+    INITIAL_FILTER_STATE,
+  );
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const skip = (currentPage - 1) * PAGE_LIMIT;
+  const isSearchOptionsInit = useMemo(() => {
+    return (
+      isTabsValueInit &&
+      isSortOrderInit &&
+      isSearchValueInit &&
+      isShortcutInit &&
+      isCurrentPageInit &&
+      isUserFiltersInit
+    );
+  }, [
+    isTabsValueInit,
+    isSortOrderInit,
+    isSearchValueInit,
+    isShortcutInit,
+    isCurrentPageInit,
+    isUserFiltersInit,
+  ]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [userFilters, sortOrder, searchValue]);
+  }, [userFilters, sortOrder, setCurrentPage, searchValue]);
+
+  useEffect(() => {
+    // Router.replace used instead of router.replace to avoid
+    // the page reloading itself since the router.replace
+    // callback changes on every page load
+    if (!isSearchOptionsInit) {
+      return;
+    }
+
+    Router.replace({
+      pathname: router.pathname,
+      query: {
+        currentPage: JSON.stringify(currentPage),
+        searchValue: JSON.stringify(searchValue),
+        shortcutSelected: JSON.stringify(shortcutSelected),
+        sortOrder: JSON.stringify(sortOrder),
+        tabsValue: JSON.stringify(tabsValue),
+        userFilters: JSON.stringify(userFilters),
+      },
+    });
+  }, [
+    tabsValue,
+    sortOrder,
+    searchValue,
+    userFilters,
+    shortcutSelected,
+    currentPage,
+    router.pathname,
+    isSearchOptionsInit,
+  ]);
 
   const allResumesQuery = trpc.useQuery(
     [
