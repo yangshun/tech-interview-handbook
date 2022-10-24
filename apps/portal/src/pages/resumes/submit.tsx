@@ -86,10 +86,16 @@ export default function SubmitResumeForm({
     setValue,
     reset,
     watch,
+    clearErrors,
     formState: { errors, isDirty, dirtyFields },
   } = useForm<IFormInput>({
     defaultValues: {
+      additionalInfo: '',
+      experience: '',
       isChecked: false,
+      location: '',
+      role: '',
+      title: '',
       ...initFormDetails,
     },
   });
@@ -296,7 +302,7 @@ export default function SubmitResumeForm({
                   options={ROLES}
                   placeholder=" "
                   required={true}
-                  onChange={(val) => setValue('role', val)}
+                  onChange={(val) => onValueChange('role', val)}
                 />
                 <Select
                   {...register('experience', { required: true })}
@@ -305,7 +311,7 @@ export default function SubmitResumeForm({
                   options={EXPERIENCES}
                   placeholder=" "
                   required={true}
-                  onChange={(val) => setValue('experience', val)}
+                  onChange={(val) => onValueChange('experience', val)}
                 />
               </div>
               <Select
@@ -315,7 +321,7 @@ export default function SubmitResumeForm({
                 options={LOCATIONS}
                 placeholder=" "
                 required={true}
-                onChange={(val) => setValue('location', val)}
+                onChange={(val) => onValueChange('location', val)}
               />
               {/* Upload resume form */}
               {isNewForm && (
@@ -335,6 +341,16 @@ export default function SubmitResumeForm({
                         : 'border-slate-300',
                       'flex cursor-pointer justify-center rounded-md border-2 border-dashed bg-slate-100 py-4',
                     )}>
+                    <input
+                      {...register('file', { required: true })}
+                      {...getInputProps()}
+                      accept="application/pdf"
+                      className="sr-only"
+                      disabled={isLoading}
+                      id="file-upload"
+                      name="file-upload"
+                      type="file"
+                    />
                     <div className="space-y-1 text-center">
                       {resumeFile == null ? (
                         <ArrowUpCircleIcon className="text-primary-500 m-auto h-10 w-10" />
@@ -345,29 +361,15 @@ export default function SubmitResumeForm({
                           {resumeFile.name}
                         </p>
                       )}
-                      <div className="flex items-center text-sm">
-                        <label
-                          className="focus-within:ring-primary-500 rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2"
-                          htmlFor="file-upload">
-                          <span className="font-medium">Drop file here</span>
-                          <span className="mr-1 ml-1 font-light">or</span>
-                          <span className="text-primary-600 hover:text-primary-400 cursor-pointer font-medium">
-                            {resumeFile == null
-                              ? 'Select file'
-                              : 'Replace file'}
-                          </span>
-                          <input
-                            {...register('file', { required: true })}
-                            {...getInputProps()}
-                            accept="application/pdf"
-                            className="sr-only"
-                            disabled={isLoading}
-                            id="file-upload"
-                            name="file-upload"
-                            type="file"
-                          />
-                        </label>
-                      </div>
+                      <label
+                        className="focus-within:ring-primary-500 flex items-center rounded-md text-sm focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2"
+                        htmlFor="file-upload">
+                        <span className="font-medium">Drop file here</span>
+                        <span className="mr-1 ml-1 font-light">or</span>
+                        <span className="text-primary-600 hover:text-primary-400 cursor-pointer font-medium">
+                          {resumeFile == null ? 'Select file' : 'Replace file'}
+                        </span>
+                      </label>
                       <p className="text-xs text-slate-500">
                         PDF up to {FILE_SIZE_LIMIT_MB}MB
                       </p>
@@ -394,8 +396,18 @@ export default function SubmitResumeForm({
                   <CheckboxInput
                     {...register('isChecked', { required: true })}
                     disabled={isLoading}
+                    errorMessage={
+                      !errors.file && errors.isChecked
+                        ? 'Please tick the checkbox after reading through the guidelines.'
+                        : undefined
+                    }
                     label="I have read and will follow the guidelines stated."
-                    onChange={(val) => setValue('isChecked', val)}
+                    onChange={(val) => {
+                      if (val) {
+                        clearErrors('isChecked');
+                      }
+                      setValue('isChecked', val);
+                    }}
                   />
                 </>
               )}
