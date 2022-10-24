@@ -273,7 +273,6 @@ export const questionsQuestionRouter = createProtectedRouter()
       const { content, questionType } = input;
 
       return await ctx.prisma.questionsQuestion.update({
-
         data: {
           content,
           questionType,
