@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import { HOME_URL } from '~/components/offers/types';
+
 type LeftTextCardProps = Readonly<{
   description: string;
   icon: ReactNode;
@@ -8,7 +10,6 @@ type LeftTextCardProps = Readonly<{
   title: string;
 }>;
 
-const baseUrl = '/offers/home';
 export default function LeftTextCard({
   description,
   icon,
@@ -21,7 +22,7 @@ export default function LeftTextCard({
       <div className="mx-auto max-w-xl px-4 sm:px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
         <div>
           <div>
-            <span className="flex h-12 w-12 items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600">
+            <span className="to-primary-500 flex h-12 w-12 items-center justify-center rounded-md bg-gradient-to-r from-purple-600">
               {icon}
             </span>
           </div>
@@ -32,8 +33,8 @@ export default function LeftTextCard({
             <p className="mt-4 text-lg text-gray-500">{description}</p>
             <div className="mt-6">
               <a
-                className="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
-                href={baseUrl}>
+                className="to-primary-500 inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                href={HOME_URL}>
                 Get started
               </a>
             </div>

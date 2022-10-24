@@ -14,7 +14,7 @@ export const questionsQuestionRouter = createProtectedRouter()
       cursor: z
         .object({
           idCursor: z.string().optional(),
-          lastSeenCursor: z.date().optional(),
+          lastSeenCursor: z.date().nullish().optional(),
           upvoteCursor: z.number().optional(),
         })
         .nullish(),
@@ -49,8 +49,6 @@ export const questionsQuestionRouter = createProtectedRouter()
               },
             ];
 
-      const toSkip = cursor ? 1 : 0;
-
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
         cursor:
           cursor !== undefined
@@ -81,7 +79,6 @@ export const questionsQuestionRouter = createProtectedRouter()
           votes: true,
         },
         orderBy: sortCondition,
-        skip: toSkip,
         take: input.limit + 1,
         where: {
           ...(input.questionTypes.length > 0

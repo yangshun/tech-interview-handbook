@@ -1,7 +1,7 @@
 import type { ProductNavigationItems } from '~/components/global/ProductNavigation';
 
 const navigation: ProductNavigationItems = [
-  { href: '/offers/home', name: 'Home' },
+  { href: '/offers/browse', name: 'Browse' },
   { href: '/offers/submit', name: 'Analyse your offers' },
 ];
 

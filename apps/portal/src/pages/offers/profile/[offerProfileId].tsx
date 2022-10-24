@@ -10,6 +10,7 @@ import type {
   BackgroundDisplayData,
   OfferDisplayData,
 } from '~/components/offers/types';
+import { HOME_URL } from '~/components/offers/types';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
@@ -46,7 +47,7 @@ export default function OfferProfile() {
       enabled: typeof offerProfileId === 'string',
       onSuccess: (data: Profile) => {
         if (!data) {
-          router.push('/offers/home');
+          router.push(HOME_URL);
         }
         // If the profile is not editable with a wrong token, redirect to the profile page
         if (!data?.isEditable && token !== '') {
@@ -148,7 +149,7 @@ export default function OfferProfile() {
     },
     onSuccess: () => {
       trpcContext.invalidateQueries(['offers.profile.listOne']);
-      router.push('/offers/home');
+      router.push(HOME_URL);
       showToast({
         title: `Offers profile successfully deleted!`,
         variant: 'success',
