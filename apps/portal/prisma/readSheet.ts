@@ -56,7 +56,7 @@ const seedSalaries = async () => {
 
   //seed here
   return await Promise.all(
-    data.map(async (data: excelData) => {
+    data.map(async (data: ExcelData) => {
       // only add swe roles
       if (data.Role.toUpperCase() === 'SOFTWARE ENGINEER') {
         if (data.Income && typeof data.Income === 'number') {
