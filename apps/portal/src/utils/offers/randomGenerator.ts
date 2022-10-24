@@ -1,4 +1,5 @@
-import type { Config } from 'unique-names-generator';
+import type { Config} from 'unique-names-generator';
+import { countries, names } from 'unique-names-generator';
 import { adjectives, animals,colors, uniqueNamesGenerator } from 'unique-names-generator';
 import { PrismaClient } from '@prisma/client';
 
@@ -10,8 +11,7 @@ const customConfig: Config = {
   separator: '-',
 };
 
-
-export default async function generateRandomName(): Promise<string> {
+export async function generateRandomName(): Promise<string> {
     let uniqueName: string = uniqueNamesGenerator(customConfig);
 
     let sameNameProfiles = await prisma.offersProfile.findMany({
@@ -30,4 +30,15 @@ export default async function generateRandomName(): Promise<string> {
     }
 
     return uniqueName
+}
+
+const tokenConfig: Config = {
+  dictionaries: [adjectives, colors, animals, countries, names]
+    .sort((_a, _b) => 0.5 - Math.random()),
+  length: 5,
+  separator: '-',
+};
+
+export function generateRandomStringForToken(): string {
+    return uniqueNamesGenerator(tokenConfig)
 }
