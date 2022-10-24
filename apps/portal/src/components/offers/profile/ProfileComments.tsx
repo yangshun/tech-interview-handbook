@@ -154,7 +154,11 @@ export default function ProfileComments({
         <div className="mt-2 flex w-full justify-end">
           <div className="w-fit">
             <Button
-              disabled={commentsQuery.isLoading || !currentReply.length}
+              disabled={
+                commentsQuery.isLoading ||
+                !currentReply.length ||
+                createCommentMutation.isLoading
+              }
               display="block"
               isLabelHidden={false}
               isLoading={createCommentMutation.isLoading}

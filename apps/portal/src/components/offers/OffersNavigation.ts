@@ -7,7 +7,7 @@ const navigation: ProductNavigationItems = [
 const config = {
   navigation,
   showGlobalNav: false,
-  title: 'Tech Offers Repo',
+  title: 'Offer Profile Repository',
   titleHref: '/offers',
 };
 
