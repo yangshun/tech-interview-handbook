@@ -13,13 +13,16 @@ import type { BackgroundDisplayData } from '~/components/offers/types';
 
 import { getProfileEditPath } from '~/utils/offers/link';
 
+import type { ProfileDetailTab } from '../constants';
+import { profileDetailTabs } from '../constants';
+
 type ProfileHeaderProps = Readonly<{
   background?: BackgroundDisplayData;
   handleDelete: () => void;
   isEditable: boolean;
   isLoading: boolean;
-  selectedTab: string;
-  setSelectedTab: (tab: string) => void;
+  selectedTab: ProfileDetailTab;
+  setSelectedTab: (tab: ProfileDetailTab) => void;
 }>;
 
 export default function ProfileHeader({
@@ -139,9 +142,9 @@ export default function ProfileHeader({
               <BuildingOffice2Icon className="mr-2.5 h-5" />
               <span className="mr-2 font-bold">Current:</span>
               <span>
-                {`${experiences[0]?.companyName || ''} ${
-                  experiences[0]?.jobLevel || ''
-                } ${experiences[0]?.jobTitle || ''}`}
+                {`${experiences[0].companyName || ''} ${
+                  experiences[0].jobLevel || ''
+                } ${experiences[0].jobTitle || ''}`}
               </span>
             </div>
           )}
@@ -165,20 +168,7 @@ export default function ProfileHeader({
       <div className="mt-8">
         <Tabs
           label="Profile Detail Navigation"
-          tabs={[
-            {
-              label: 'Offers',
-              value: 'offers',
-            },
-            {
-              label: 'Background',
-              value: 'background',
-            },
-            {
-              label: 'Offer Engine Analysis',
-              value: 'offerEngineAnalysis',
-            },
-          ]}
+          tabs={profileDetailTabs}
           value={selectedTab}
           onChange={(value) => setSelectedTab(value)}
         />

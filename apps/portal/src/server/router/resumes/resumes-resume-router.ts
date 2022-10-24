@@ -15,6 +15,7 @@ export const resumesRouter = createRouter()
       searchValue: z.string(),
       skip: z.number(),
       sortOrder: z.string(),
+      take: z.number(),
     }),
     async resolve({ ctx, input }) {
       const {
@@ -25,6 +26,7 @@ export const resumesRouter = createRouter()
         numComments,
         skip,
         searchValue,
+        take,
       } = input;
       const userId = ctx.session?.user?.id;
       const totalRecords = await ctx.prisma.resumesResume.count({
@@ -37,6 +39,7 @@ export const resumesRouter = createRouter()
           experience: { in: experienceFilters },
           location: { in: locationFilters },
           role: { in: roleFilters },
+          title: { contains: searchValue, mode: 'insensitive' },
         },
       });
       const resumesData = await ctx.prisma.resumesResume.findMany({
@@ -74,7 +77,7 @@ export const resumesRouter = createRouter()
               }
             : { comments: { _count: 'desc' } },
         skip,
-        take: 10,
+        take,
         where: {
           ...(numComments === 0 && {
             comments: {

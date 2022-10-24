@@ -50,7 +50,7 @@ export default function ListPage() {
         {lists.map((list) => (
           <li
             key={list.id}
-            className={`flex items-center hover:bg-gray-50 ${
+            className={`flex items-center hover:bg-slate-50 ${
               selectedList === list.id ? 'bg-primary-100' : ''
             }`}>
             <button
@@ -83,7 +83,7 @@ export default function ListPage() {
                           className={`${
                             active
                               ? 'bg-violet-500 text-white'
-                              : 'text-gray-900'
+                              : 'text-slate-900'
                           } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                           type="button">
                           Delete

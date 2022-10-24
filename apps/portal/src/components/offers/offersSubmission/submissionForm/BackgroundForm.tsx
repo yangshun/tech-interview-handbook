@@ -26,11 +26,11 @@ function YoeSection() {
   const backgroundFields = formState.errors.background;
   return (
     <>
-      <h6 className="mb-2 text-left text-xl font-medium text-gray-400">
+      <h6 className="mb-2 text-left text-xl font-medium text-slate-400">
         Years of Experience (YOE)
       </h6>
 
-      <div className="mb-5 rounded-lg border border-gray-200 px-10 py-5">
+      <div className="mb-5 rounded-lg border border-slate-200 px-10 py-5">
         <div className="mb-2 grid grid-cols-3 space-x-3">
           <FormTextInput
             errorMessage={backgroundFields?.totalYoe?.message}
@@ -39,8 +39,8 @@ function YoeSection() {
             required={true}
             type="number"
             {...register(`background.totalYoe`, {
-              min: { message: FieldError.NonNegativeNumber, value: 0 },
-              required: FieldError.Required,
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+              required: FieldError.REQUIRED,
               valueAsNumber: true,
             })}
           />
@@ -52,7 +52,7 @@ function YoeSection() {
               label="Specific YOE 1"
               type="number"
               {...register(`background.specificYoes.0.yoe`, {
-                min: { message: FieldError.NonNegativeNumber, value: 0 },
+                min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
                 valueAsNumber: true,
               })}
             />
@@ -68,7 +68,7 @@ function YoeSection() {
               label="Specific YOE 2"
               type="number"
               {...register(`background.specificYoes.1.yoe`, {
-                min: { message: FieldError.NonNegativeNumber, value: 0 },
+                min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
                 valueAsNumber: true,
               })}
             />
@@ -128,7 +128,7 @@ function FullTimeJobFields() {
           startAddOnType="label"
           type="number"
           {...register(`background.experiences.0.totalCompensation.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
             valueAsNumber: true,
           })}
         />
@@ -158,7 +158,7 @@ function FullTimeJobFields() {
             label="Duration (months)"
             type="number"
             {...register(`background.experiences.0.durationInMonths`, {
-              min: { message: FieldError.NonNegativeNumber, value: 0 },
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
               valueAsNumber: true,
             })}
           />
@@ -211,7 +211,7 @@ function InternshipJobFields() {
           startAddOnType="label"
           type="number"
           {...register(`background.experiences.0.monthlySalary.value`, {
-            min: { message: FieldError.NonNegativeNumber, value: 0 },
+            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
             valueAsNumber: true,
           })}
         />
@@ -245,10 +245,10 @@ function CurrentJobSection() {
 
   return (
     <>
-      <h6 className="mb-2 text-left text-xl font-medium text-gray-400">
+      <h6 className="mb-2 text-left text-xl font-medium text-slate-400">
         Current / Previous Job
       </h6>
-      <div className="mb-5 rounded-lg border border-gray-200 px-10 py-5">
+      <div className="mb-5 rounded-lg border border-slate-200 px-10 py-5">
         <div className="mb-5">
           <FormRadioList
             defaultValue={JobType.FULLTIME}
@@ -282,10 +282,10 @@ function EducationSection() {
   const { register } = useFormContext();
   return (
     <>
-      <h6 className="mb-2 text-left text-xl font-medium text-gray-400">
+      <h6 className="mb-2 text-left text-xl font-medium text-slate-400">
         Education
       </h6>
-      <div className="mb-5 rounded-lg border border-gray-200 px-10 py-5">
+      <div className="mb-5 rounded-lg border border-slate-200 px-10 py-5">
         <div className="mb-5 grid grid-cols-2 space-x-3">
           <FormSelect
             display="block"
@@ -319,10 +319,10 @@ function EducationSection() {
 export default function BackgroundForm() {
   return (
     <div>
-      <h5 className="mb-2 text-center text-4xl font-bold text-gray-900">
+      <h5 className="mb-2 text-center text-4xl font-bold text-slate-900">
         Help us better gauge your offers
       </h5>
-      <h6 className="text-md mx-10 mb-8 text-center font-light text-gray-600">
+      <h6 className="text-md mx-10 mb-8 text-center font-light text-slate-600">
         This section is mostly optional, but your background information helps
         us benchmark your offers.
       </h6>

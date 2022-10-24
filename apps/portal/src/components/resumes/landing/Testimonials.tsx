@@ -94,7 +94,7 @@ function QuoteIcon(props: QuoteProps) {
 export function Testimonials() {
   return (
     <section
-      className="bg-gradient-to-r from-indigo-700 to-indigo-400 py-20 sm:py-32"
+      className="from-primary-700 to-primary-400 bg-gradient-to-r py-20 sm:py-32"
       id="testimonials">
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">

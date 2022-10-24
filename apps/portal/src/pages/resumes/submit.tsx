@@ -14,15 +14,15 @@ import {
   CheckboxInput,
   Dialog,
   Select,
+  Spinner,
   TextArea,
   TextInput,
 } from '@tih/ui';
 
-import type { Filter } from '~/components/resumes/browse/resumeFilters';
 import {
-  EXPERIENCE,
-  LOCATION,
-  ROLE,
+  EXPERIENCES,
+  LOCATIONS,
+  ROLES,
 } from '~/components/resumes/browse/resumeFilters';
 import SubmissionGuidelines from '~/components/resumes/submit-form/SubmissionGuidelines';
 
@@ -47,11 +47,7 @@ type IFormInput = {
   title: string;
 };
 
-const selectors: Array<Filter> = [
-  { id: 'role', label: 'Role', options: ROLE },
-  { id: 'experience', label: 'Experience Level', options: EXPERIENCE },
-  { id: 'location', label: 'Location', options: LOCATION },
-];
+type InputKeys = keyof IFormInput;
 
 type InitFormDetails = {
   additionalInfo?: string;
@@ -78,7 +74,7 @@ export default function SubmitResumeForm({
   >(null);
   const [isDialogShown, setIsDialogShown] = useState(false);
 
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
   const trpcContext = trpc.useContext();
   const resumeUpsertMutation = trpc.useMutation('resumes.resume.user.upsert');
@@ -127,12 +123,10 @@ export default function SubmitResumeForm({
 
   // Route user to sign in if not logged in
   useEffect(() => {
-    if (status !== 'loading') {
-      if (session?.user?.id == null) {
-        router.push('/api/auth/signin');
-      }
+    if (status === 'unauthenticated') {
+      router.push('/api/auth/signin');
     }
-  }, [router, session, status]);
+  }, [router, status]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     setIsLoading(true);
@@ -225,72 +219,107 @@ export default function SubmitResumeForm({
     }
   }, [errors?.file, invalidFileUploadError]);
 
+  const onValueChange = (section: InputKeys, value: string) => {
+    setValue(section, value.trim(), { shouldDirty: true });
+  };
+
   return (
     <>
       <Head>
         <title>Upload a Resume</title>
       </Head>
-      <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto">
-        <section
-          aria-labelledby="primary-heading"
-          className="flex h-full min-w-0 flex-1 flex-col lg:order-last">
-          {/* Reset Dialog component */}
-          <Dialog
-            isShown={isDialogShown}
-            primaryButton={
-              <Button
-                display="block"
-                label="OK"
-                variant="primary"
-                onClick={onClickResetDialog}
-              />
-            }
-            secondaryButton={
-              <Button
-                display="block"
-                label="Cancel"
-                variant="tertiary"
-                onClick={() => setIsDialogShown(false)}
-              />
-            }
-            title={
-              isNewForm
-                ? 'Are you sure you want to clear?'
-                : 'Are you sure you want to leave?'
-            }
-            onClose={() => setIsDialogShown(false)}>
-            Note that your current input will not be saved!
-          </Dialog>
-          <div className="mx-20 space-y-4 py-8">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <h1 className="mb-4 text-2xl font-bold">Upload a resume</h1>
+      {status === 'loading' && (
+        <div className="w-full pt-4">
+          {' '}
+          <Spinner display="block" size="lg" />{' '}
+        </div>
+      )}
+      {status === 'authenticated' && (
+        <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto">
+          <section
+            aria-labelledby="primary-heading"
+            className="flex h-full min-w-0 flex-1 flex-col lg:order-last">
+            {/* Reset Dialog component */}
+            <Dialog
+              isShown={isDialogShown}
+              primaryButton={
+                <Button
+                  display="block"
+                  label="OK"
+                  variant="primary"
+                  onClick={onClickResetDialog}
+                />
+              }
+              secondaryButton={
+                <Button
+                  display="block"
+                  label="Cancel"
+                  variant="tertiary"
+                  onClick={() => setIsDialogShown(false)}
+                />
+              }
+              title={
+                isNewForm
+                  ? 'Are you sure you want to clear?'
+                  : 'Are you sure you want to leave?'
+              }
+              onClose={() => setIsDialogShown(false)}>
+              Note that your current input will not be saved!
+            </Dialog>
+            <form
+              className="mt-8 w-full max-w-screen-lg space-y-6 self-center rounded-lg bg-white p-10 shadow-lg"
+              onSubmit={handleSubmit(onSubmit)}>
+              <h1 className="mb-4 text-center text-2xl font-semibold">
+                {isNewForm ? 'Upload a resume' : 'Update details'}
+              </h1>
               {/*  Title Section */}
-              <div className="mb-4">
-                <TextInput
-                  {...register('title', { required: true })}
+              <TextInput
+                {...(register('title', { required: true }), {})}
+                defaultValue={initFormDetails?.title}
+                disabled={isLoading}
+                errorMessage={
+                  errors.title?.message != null
+                    ? 'Title cannot be empty'
+                    : undefined
+                }
+                label="Title"
+                placeholder={TITLE_PLACEHOLDER}
+                required={true}
+                onChange={(val) => onValueChange('title', val)}
+              />
+              <div className="flex gap-8">
+                <Select
+                  {...register('role', { required: true })}
+                  defaultValue={undefined}
                   disabled={isLoading}
-                  label="Title"
-                  placeholder={TITLE_PLACEHOLDER}
+                  label="Role"
+                  options={ROLES}
+                  placeholder=" "
                   required={true}
-                  onChange={(val) => setValue('title', val)}
+                  onChange={(val) => setValue('role', val)}
+                />
+                <Select
+                  {...register('experience', { required: true })}
+                  disabled={isLoading}
+                  label="Experience Level"
+                  options={EXPERIENCES}
+                  placeholder=" "
+                  required={true}
+                  onChange={(val) => setValue('experience', val)}
                 />
               </div>
-              {/*  Selectors */}
-              {selectors.map((item) => (
-                <div key={item.id} className="mb-4">
-                  <Select
-                    {...register(item.id, { required: true })}
-                    disabled={isLoading}
-                    label={item.label}
-                    options={item.options}
-                    required={true}
-                    onChange={(val) => setValue(item.id, val)}
-                  />
-                </div>
-              ))}
+              <Select
+                {...register('location', { required: true })}
+                disabled={isLoading}
+                label="Location"
+                options={LOCATIONS}
+                placeholder=" "
+                required={true}
+                onChange={(val) => setValue('location', val)}
+              />
               {/* Upload resume form */}
               {isNewForm && (
-                <>
+                <div className="space-y-2">
                   <p className="text-sm font-medium text-slate-700">
                     Upload resume (PDF format)
                     <span aria-hidden="true" className="text-danger-500">
@@ -298,83 +327,80 @@ export default function SubmitResumeForm({
                       *
                     </span>
                   </p>
-                  <div className="mb-4">
-                    <div
-                      {...getRootProps()}
-                      className={clsx(
-                        fileUploadError
-                          ? 'border-danger-600'
-                          : 'border-gray-300',
-                        'mt-2 flex cursor-pointer justify-center rounded-md border-2 border-dashed bg-gray-100 px-6 pt-5 pb-6',
-                      )}>
-                      <div className="space-y-1 text-center">
-                        {resumeFile == null ? (
-                          <ArrowUpCircleIcon className="m-auto h-10 w-10 text-indigo-500" />
-                        ) : (
-                          <p
-                            className="cursor-pointer underline underline-offset-1 hover:text-indigo-600"
-                            onClick={onClickDownload}>
-                            {resumeFile.name}
-                          </p>
-                        )}
-                        <div className="flex items-center text-sm">
-                          <label
-                            className="rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2"
-                            htmlFor="file-upload">
-                            <span className="mt-2 font-medium">
-                              Drop file here
-                            </span>
-                            <span className="mr-1 ml-1 font-light">or</span>
-                            <span className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-400">
-                              {resumeFile == null
-                                ? 'Select file'
-                                : 'Replace file'}
-                            </span>
-                            <input
-                              {...register('file', { required: true })}
-                              {...getInputProps()}
-                              accept="application/pdf"
-                              className="sr-only"
-                              disabled={isLoading}
-                              id="file-upload"
-                              name="file-upload"
-                              type="file"
-                            />
-                          </label>
-                        </div>
-                        <p className="text-xs text-gray-500">
-                          PDF up to {FILE_SIZE_LIMIT_MB}MB
+                  <div
+                    {...getRootProps()}
+                    className={clsx(
+                      fileUploadError
+                        ? 'border-danger-600'
+                        : 'border-slate-300',
+                      'flex cursor-pointer justify-center rounded-md border-2 border-dashed bg-slate-100 py-4',
+                    )}>
+                    <div className="space-y-1 text-center">
+                      {resumeFile == null ? (
+                        <ArrowUpCircleIcon className="text-primary-500 m-auto h-10 w-10" />
+                      ) : (
+                        <p
+                          className="hover:text-primary-600 cursor-pointer underline underline-offset-1"
+                          onClick={onClickDownload}>
+                          {resumeFile.name}
                         </p>
+                      )}
+                      <div className="flex items-center text-sm">
+                        <label
+                          className="focus-within:ring-primary-500 rounded-md focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2"
+                          htmlFor="file-upload">
+                          <span className="font-medium">Drop file here</span>
+                          <span className="mr-1 ml-1 font-light">or</span>
+                          <span className="text-primary-600 hover:text-primary-400 cursor-pointer font-medium">
+                            {resumeFile == null
+                              ? 'Select file'
+                              : 'Replace file'}
+                          </span>
+                          <input
+                            {...register('file', { required: true })}
+                            {...getInputProps()}
+                            accept="application/pdf"
+                            className="sr-only"
+                            disabled={isLoading}
+                            id="file-upload"
+                            name="file-upload"
+                            type="file"
+                          />
+                        </label>
                       </div>
-                    </div>
-                    {fileUploadError && (
-                      <p className="text-danger-600 text-sm">
-                        {fileUploadError}
+                      <p className="text-xs text-slate-500">
+                        PDF up to {FILE_SIZE_LIMIT_MB}MB
                       </p>
-                    )}
+                    </div>
                   </div>
-                </>
+                  {fileUploadError && (
+                    <p className="text-danger-600 text-sm">{fileUploadError}</p>
+                  )}
+                </div>
               )}
               {/*  Additional Info Section */}
-              <div className="mb-8">
-                <TextArea
-                  {...register('additionalInfo')}
-                  disabled={isLoading}
-                  label="Additional Information"
-                  placeholder={ADDITIONAL_INFO_PLACEHOLDER}
-                  onChange={(val) => setValue('additionalInfo', val)}
-                />
-              </div>
-              {/*  Submission Guidelines */}
-              <SubmissionGuidelines />
-              <CheckboxInput
-                {...register('isChecked', { required: true })}
+              <TextArea
+                {...(register('additionalInfo'),
+                { defaultValue: initFormDetails?.additionalInfo })}
                 disabled={isLoading}
-                label="I have read and will follow the guidelines stated."
-                onChange={(val) => setValue('isChecked', val)}
+                label="Additional Information"
+                placeholder={ADDITIONAL_INFO_PLACEHOLDER}
+                onChange={(val) => onValueChange('additionalInfo', val)}
               />
+              {/*  Submission Guidelines */}
+              {isNewForm && (
+                <>
+                  <SubmissionGuidelines />
+                  <CheckboxInput
+                    {...register('isChecked', { required: true })}
+                    disabled={isLoading}
+                    label="I have read and will follow the guidelines stated."
+                    onChange={(val) => setValue('isChecked', val)}
+                  />
+                </>
+              )}
               {/*  Clear and Submit Buttons */}
-              <div className="mt-4 flex justify-end gap-4">
+              <div className="flex justify-end gap-4">
                 <Button
                   addonPosition="start"
                   disabled={isLoading}
@@ -392,9 +418,9 @@ export default function SubmitResumeForm({
                 />
               </div>
             </form>
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
+      )}
     </>
   );
 }

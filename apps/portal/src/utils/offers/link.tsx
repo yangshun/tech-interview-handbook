@@ -3,7 +3,6 @@ export function getProfileLink(profileId: string, token?: string) {
 }
 
 export function copyProfileLink(profileId: string, token?: string) {
-  // TODO: Add notification
   navigator.clipboard.writeText(getProfileLink(profileId, token));
 }
 

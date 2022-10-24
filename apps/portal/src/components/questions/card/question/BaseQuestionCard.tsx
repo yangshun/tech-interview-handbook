@@ -212,7 +212,7 @@ export default function BaseQuestionCard({
       className={`group flex gap-4 rounded-md border border-slate-300 bg-white p-4 ${hoverClass}`}>
       {cardContent}
       {showDeleteButton && (
-        <div className="invisible self-center	fill-red-700 group-hover:visible">
+        <div className="fill-danger-700 invisible	self-center group-hover:visible">
           <Button
             icon={TrashIcon}
             isLabelHidden={true}

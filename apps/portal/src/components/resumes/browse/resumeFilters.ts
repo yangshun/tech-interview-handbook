@@ -60,7 +60,7 @@ export const SORT_OPTIONS: Record<string, string> = {
   topComments: 'Most Comments',
 };
 
-export const ROLE: Array<FilterOption<RoleFilter>> = [
+export const ROLES: Array<FilterOption<RoleFilter>> = [
   {
     label: 'Full-Stack Engineer',
     value: 'Full-Stack Engineer',
@@ -72,7 +72,7 @@ export const ROLE: Array<FilterOption<RoleFilter>> = [
   { label: 'Android Engineer', value: 'Android Engineer' },
 ];
 
-export const EXPERIENCE: Array<FilterOption<ExperienceFilter>> = [
+export const EXPERIENCES: Array<FilterOption<ExperienceFilter>> = [
   { label: 'Freshman', value: 'Freshman' },
   { label: 'Sophomore', value: 'Sophomore' },
   { label: 'Junior', value: 'Junior' },
@@ -91,16 +91,16 @@ export const EXPERIENCE: Array<FilterOption<ExperienceFilter>> = [
   },
 ];
 
-export const LOCATION: Array<FilterOption<LocationFilter>> = [
+export const LOCATIONS: Array<FilterOption<LocationFilter>> = [
   { label: 'Singapore', value: 'Singapore' },
   { label: 'United States', value: 'United States' },
   { label: 'India', value: 'India' },
 ];
 
 export const INITIAL_FILTER_STATE: FilterState = {
-  experience: Object.values(EXPERIENCE).map(({ value }) => value),
-  location: Object.values(LOCATION).map(({ value }) => value),
-  role: Object.values(ROLE).map(({ value }) => value),
+  experience: Object.values(EXPERIENCES).map(({ value }) => value),
+  location: Object.values(LOCATIONS).map(({ value }) => value),
+  role: Object.values(ROLES).map(({ value }) => value),
 };
 
 export const SHORTCUTS: Array<Shortcut> = [

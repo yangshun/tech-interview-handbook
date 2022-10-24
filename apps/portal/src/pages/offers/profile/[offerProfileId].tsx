@@ -2,6 +2,7 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
+import { ProfileDetailTab } from '~/components/offers/constants';
 import ProfileComments from '~/components/offers/profile/ProfileComments';
 import ProfileDetails from '~/components/offers/profile/ProfileDetails';
 import ProfileHeader from '~/components/offers/profile/ProfileHeader';
@@ -10,6 +11,7 @@ import type {
   OfferDisplayData,
 } from '~/components/offers/types';
 
+import { useToast } from '~/../../../packages/ui/dist';
 import { convertMoneyToString } from '~/utils/offers/currency';
 import { getProfilePath } from '~/utils/offers/link';
 import { formatDate } from '~/utils/offers/time';
@@ -18,6 +20,7 @@ import { trpc } from '~/utils/trpc';
 import type { Profile, ProfileAnalysis, ProfileOffer } from '~/types/offers';
 
 export default function OfferProfile() {
+  const { showToast } = useToast();
   const ErrorPage = (
     <Error statusCode={404} title="Requested profile does not exist." />
   );
@@ -27,7 +30,9 @@ export default function OfferProfile() {
   const [background, setBackground] = useState<BackgroundDisplayData>();
   const [offers, setOffers] = useState<Array<OfferDisplayData>>([]);
 
-  const [selectedTab, setSelectedTab] = useState('offers');
+  const [selectedTab, setSelectedTab] = useState<ProfileDetailTab>(
+    ProfileDetailTab.OFFERS,
+  );
   const [analysis, setAnalysis] = useState<ProfileAnalysis>();
 
   const getProfileQuery = trpc.useQuery(
@@ -128,11 +133,18 @@ export default function OfferProfile() {
   const trpcContext = trpc.useContext();
   const deleteMutation = trpc.useMutation(['offers.profile.delete'], {
     onError: () => {
-      alert('Error deleting profile'); // TODO: replace with toast
+      showToast({
+        title: `Error deleting offers profile.`,
+        variant: 'failure',
+      });
     },
     onSuccess: () => {
       trpcContext.invalidateQueries(['offers.profile.listOne']);
       router.push('/offers');
+      showToast({
+        title: `Offers profile successfully deleted!`,
+        variant: 'success',
+      });
     },
   });
 
@@ -163,8 +175,10 @@ export default function OfferProfile() {
               <ProfileDetails
                 analysis={analysis}
                 background={background}
+                isEditable={isEditable}
                 isLoading={getProfileQuery.isLoading}
                 offers={offers}
+                profileId={offerProfileId as string}
                 selectedTab={selectedTab}
               />
             </div>

@@ -6,8 +6,7 @@ import { JobType } from '@prisma/client';
 import { Button } from '@tih/ui';
 
 import { Breadcrumbs } from '~/components/offers/Breadcrumb';
-import OfferAnalysis from '~/components/offers/offersSubmission/analysis/OfferAnalysis';
-import OfferProfileSave from '~/components/offers/offersSubmission/OfferProfileSave';
+import OffersProfileSave from '~/components/offers/offersSubmission/OffersProfileSave';
 import BackgroundForm from '~/components/offers/offersSubmission/submissionForm/BackgroundForm';
 import OfferDetailsForm from '~/components/offers/offersSubmission/submissionForm/OfferDetailsForm';
 import type {
@@ -20,7 +19,12 @@ import { cleanObject, removeInvalidMoneyData } from '~/utils/offers/form';
 import { getCurrentMonth, getCurrentYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
-import type { CreateOfferProfileResponse } from '~/types/offers';
+import OfferAnalysis from '../offerAnalysis/OfferAnalysis';
+
+import type {
+  CreateOfferProfileResponse,
+  ProfileAnalysis,
+} from '~/types/offers';
 
 const defaultOfferValues = {
   comments: '',
@@ -78,6 +82,7 @@ export default function OffersSubmissionForm({
       id: profileId || '',
       token: token || '',
     });
+  const [analysis, setAnalysis] = useState<ProfileAnalysis | null>(null);
 
   const pageRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () =>
@@ -87,6 +92,18 @@ export default function OffersSubmissionForm({
     mode: 'all',
   });
   const { handleSubmit, trigger } = formMethods;
+
+  const generateAnalysisMutation = trpc.useMutation(
+    ['offers.analysis.generate'],
+    {
+      onError(error) {
+        console.error(error.message);
+      },
+      onSuccess(data) {
+        setAnalysis(data);
+      },
+    },
+  );
 
   const formSteps: Array<FormStep> = [
     {
@@ -107,14 +124,21 @@ export default function OffersSubmissionForm({
       label: 'Background',
     },
     {
-      component: <OfferAnalysis key={2} profileId={createProfileResponse.id} />,
+      component: (
+        <OfferAnalysis
+          key={2}
+          allAnalysis={analysis}
+          isError={generateAnalysisMutation.isError}
+          isLoading={generateAnalysisMutation.isLoading}
+        />
+      ),
       hasNext: true,
       hasPrevious: false,
       label: 'Analysis',
     },
     {
       component: (
-        <OfferProfileSave
+        <OffersProfileSave
           key={3}
           profileId={createProfileResponse.id || ''}
           token={createProfileResponse.token}
@@ -143,15 +167,6 @@ export default function OffersSubmissionForm({
     setFormStep(formStep - 1);
     scrollToTop();
   };
-
-  const generateAnalysisMutation = trpc.useMutation(
-    ['offers.analysis.generate'],
-    {
-      onError(error) {
-        console.error(error.message);
-      },
-    },
-  );
 
   const mutationpath =
     profileId && token ? 'offers.profile.update' : 'offers.profile.create';
