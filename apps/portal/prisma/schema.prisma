@@ -60,6 +60,7 @@ model User {
   questionsAnswerCommentVotes   QuestionsAnswerCommentVote[]
   OffersProfile                 OffersProfile[]
   offersDiscussion              OffersReply[]
+  questionsLists                QuestionsList[]
 }
 
 enum Vote {
@@ -406,11 +407,12 @@ model QuestionsQuestion {
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
 
-  user       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
-  encounters QuestionsQuestionEncounter[]
-  votes      QuestionsQuestionVote[]
-  comments   QuestionsQuestionComment[]
-  answers    QuestionsAnswer[]
+  user                       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  encounters                 QuestionsQuestionEncounter[]
+  votes                      QuestionsQuestionVote[]
+  comments                   QuestionsQuestionComment[]
+  answers                    QuestionsAnswer[]
+  QuestionsListQuestionEntry QuestionsListQuestionEntry[]
 
   @@index([lastSeenAt, id])
   @@index([upvotes, id])
@@ -530,6 +532,32 @@ model QuestionsAnswerCommentVote {
   comment QuestionsAnswerComment @relation(fields: [answerCommentId], references: [id], onDelete: Cascade)
 
   @@unique([answerCommentId, userId])
+}
+
+model QuestionsList {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String   @db.VarChar(256)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user            User                         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questionEntries QuestionsListQuestionEntry[]
+
+  @@unique([userId, name])
+}
+
+model QuestionsListQuestionEntry {
+  id         String   @id @default(cuid())
+  listId     String
+  questionId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  list     QuestionsList     @relation(fields: [listId], references: [id], onDelete: Cascade)
+  question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([listId, questionId])
 }
 
 // End of Questions project models.
