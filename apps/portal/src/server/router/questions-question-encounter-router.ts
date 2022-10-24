@@ -77,7 +77,6 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
     },
   })
   .mutation('update', {
-    //
     input: z.object({
       companyId: z.string().optional(),
       id: z.string(),
