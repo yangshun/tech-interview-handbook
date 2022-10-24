@@ -319,8 +319,6 @@ export const questionsQuestionRouter = createProtectedRouter()
   .query('getRelatedQuestionsByContent', {
     input: z.object({
       content: z.string(),
-      pageNum: z.number(),
-      pageSize: z.number(),
     }),
     async resolve({ ctx, input }) {
       const escapeChars = /[()|&:*!]/g;
@@ -333,11 +331,10 @@ export const questionsQuestionRouter = createProtectedRouter()
           .join(" | ");
 
       const relatedQuestions = await ctx.prisma.$queryRaw`
-        SELECT content FROM "QuestionsQuestion"
+        SELECT * FROM "QuestionsQuestion"
         WHERE
           "contentSearch" @@ to_tsquery('english', ${query})
         ORDER BY ts_rank("textSearch", to_tsquery('english', ${query})) DESC
-        LIMIT 10;
       `;
 
       return relatedQuestions;
