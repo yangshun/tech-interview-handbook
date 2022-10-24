@@ -175,36 +175,7 @@ export default function ProfileComments({
       ) : (
         <div>Please log in before commenting on this profile.</div>
       )}
-      <div>
-        <TextArea
-          label={`Comment as ${
-            isEditable ? profileName : session?.user?.name ?? 'anonymous'
-          }`}
-          placeholder="Type your comment here"
-          value={currentReply}
-          onChange={(value) => setCurrentReply(value)}
-        />
-        <div className="mt-2 flex w-full justify-end">
-          <div className="w-fit">
-            <Button
-              disabled={
-                commentsQuery.isLoading ||
-                !currentReply.length ||
-                createCommentMutation.isLoading
-              }
-              display="block"
-              isLabelHidden={false}
-              isLoading={createCommentMutation.isLoading}
-              label="Comment"
-              size="sm"
-              variant="primary"
-              onClick={() => handleComment(currentReply)}
-            />
-          </div>
-        </div>
-        <HorizontalDivider />
-      </div>
-      <div className="h-full overflow-y-scroll">
+      <div className="h-full overflow-y-auto">
         <div className="h-content mb-96 w-full">
           {replies?.map((reply: Reply) => (
             <ExpandableCommentCard

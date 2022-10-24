@@ -17,7 +17,7 @@ const features = [
     description:
       'Name of the profile creator is stricly anonymous by using randomly generated names.',
     icon: UsersIcon,
-    name: 'Anonymisd Profile Name',
+    name: 'Anonymized Profile Name',
   },
   {
     description:
@@ -79,7 +79,7 @@ const footerNavigation = {
 
 export default function LandingPage() {
   return (
-    <div className="overflow-y-auto bg-white">
+    <div className="w-full overflow-y-auto bg-white">
       <main>
         {/* Hero section */}
         <div className="relative h-full">
@@ -167,7 +167,7 @@ export default function LandingPage() {
               Your privacy is our priority.
             </h2>
             <p className="mt-4 flex flex-row justify-center text-lg text-purple-200">
-              All offer profiles are anonymised and we do not store information
+              All offer profiles are anonymized and we do not store information
               about your personal identity.
             </p>
             <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
