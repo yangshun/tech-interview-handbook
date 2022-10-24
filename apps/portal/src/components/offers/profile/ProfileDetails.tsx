@@ -121,7 +121,7 @@ function ProfileAnalysis({
           <Button
             addonPosition="start"
             icon={ArrowPathIcon}
-            label="Refresh Analysis"
+            label="Regenerate Analysis"
             variant="secondary"
             onClick={() => generateAnalysisMutation.mutate({ profileId })}
           />

@@ -73,10 +73,6 @@ const analysisOfferDtoMapper = (
         ?.filter((exp) => exp.company != null)
         .map((exp) => exp.company?.name ?? '') ?? [],
     profileName,
-    specialization:
-      offer.jobType === JobType.FULLTIME
-        ? offer.offersFullTime?.specialization ?? ''
-        : offer.offersIntern?.specialization ?? '',
     title:
       offer.jobType === JobType.FULLTIME
         ? offer.offersFullTime?.title ?? ''
@@ -120,22 +116,14 @@ const analysisDtoMapper = (
     OffersOffer & {
       company: Company;
       offersFullTime:
-        | (OffersFullTime & {
-            totalCompensation: OffersCurrency;
-          })
+        | (OffersFullTime & { totalCompensation: OffersCurrency })
         | null;
-      offersIntern:
-        | (OffersIntern & {
-            monthlySalary: OffersCurrency;
-          })
-        | null;
+      offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
       profile: OffersProfile & {
         background:
           | (OffersBackground & {
               experiences: Array<
-                OffersExperience & {
-                  company: Company | null;
-                }
+                OffersExperience & { company: Company | null }
               >;
             })
           | null;
@@ -168,10 +156,6 @@ const analysisHighestOfferDtoMapper = (
     id: offer.id,
     level: offer.offersFullTime?.level ?? '',
     location: offer.location,
-    specialization:
-      offer.jobType === JobType.FULLTIME
-        ? offer.offersFullTime?.specialization ?? ''
-        : offer.offersIntern?.specialization ?? '',
     totalYoe: offer.profile.background?.totalYoe ?? -1,
   };
   return analysisHighestOfferDto;
@@ -327,12 +311,11 @@ export const experienceDtoMapper = (
     location: experience.location,
     monthlySalary: experience.monthlySalary
       ? valuationDtoMapper(experience.monthlySalary)
-      : experience.monthlySalary,
-    specialization: experience.specialization,
+      : null,
     title: experience.title,
     totalCompensation: experience.totalCompensation
       ? valuationDtoMapper(experience.totalCompensation)
-      : experience.totalCompensation,
+      : null,
   };
   return experienceDto;
 };
@@ -398,9 +381,9 @@ export const profileOfferDtoMapper = (
     company: Company;
     offersFullTime:
       | (OffersFullTime & {
-          baseSalary: OffersCurrency;
-          bonus: OffersCurrency;
-          stocks: OffersCurrency;
+          baseSalary: OffersCurrency | null;
+          bonus: OffersCurrency | null;
+          stocks: OffersCurrency | null;
           totalCompensation: OffersCurrency;
         })
       | null;
@@ -421,12 +404,20 @@ export const profileOfferDtoMapper = (
 
   if (offer.offersFullTime) {
     profileOfferDto.offersFullTime = {
-      baseSalary: valuationDtoMapper(offer.offersFullTime.baseSalary),
-      bonus: valuationDtoMapper(offer.offersFullTime.bonus),
+      baseSalary:
+        offer.offersFullTime?.baseSalary != null
+          ? valuationDtoMapper(offer.offersFullTime.baseSalary)
+          : null,
+      bonus:
+        offer.offersFullTime?.bonus != null
+          ? valuationDtoMapper(offer.offersFullTime.bonus)
+          : null,
       id: offer.offersFullTime.id,
       level: offer.offersFullTime.level,
-      specialization: offer.offersFullTime.specialization,
-      stocks: valuationDtoMapper(offer.offersFullTime.stocks),
+      stocks:
+        offer.offersFullTime?.stocks != null
+          ? valuationDtoMapper(offer.offersFullTime.stocks)
+          : null,
       title: offer.offersFullTime.title,
       totalCompensation: valuationDtoMapper(
         offer.offersFullTime.totalCompensation,
@@ -437,7 +428,6 @@ export const profileOfferDtoMapper = (
       id: offer.offersIntern.id,
       internshipCycle: offer.offersIntern.internshipCycle,
       monthlySalary: valuationDtoMapper(offer.offersIntern.monthlySalary),
-      specialization: offer.offersIntern.specialization,
       startYear: offer.offersIntern.startYear,
       title: offer.offersIntern.title,
     };
@@ -527,9 +517,9 @@ export const profileDtoMapper = (
         company: Company;
         offersFullTime:
           | (OffersFullTime & {
-              baseSalary: OffersCurrency;
-              bonus: OffersCurrency;
-              stocks: OffersCurrency;
+              baseSalary: OffersCurrency | null;
+              bonus: OffersCurrency | null;
+              stocks: OffersCurrency | null;
               totalCompensation: OffersCurrency;
             })
           | null;
@@ -550,7 +540,7 @@ export const profileDtoMapper = (
   };
 
   if (inputToken === profile.editToken) {
-    profileDto.editToken = profile.editToken;
+    profileDto.editToken = profile.editToken ?? null;
     profileDto.isEditable = true;
   }
 
@@ -587,9 +577,9 @@ export const dashboardOfferDtoMapper = (
     company: Company;
     offersFullTime:
       | (OffersFullTime & {
-          baseSalary: OffersCurrency;
-          bonus: OffersCurrency;
-          stocks: OffersCurrency;
+          baseSalary: OffersCurrency | null;
+          bonus: OffersCurrency | null;
+          stocks: OffersCurrency | null;
           totalCompensation: OffersCurrency;
         })
       | null;

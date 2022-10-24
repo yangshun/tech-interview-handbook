@@ -234,7 +234,6 @@ model OffersExperience {
 
   // Add more fields
   durationInMonths Int?
-  specialization   String?
   location         String?
 
   // FULLTIME fields
@@ -340,7 +339,6 @@ model OffersIntern {
   id String @id @default(cuid())
 
   title           String
-  specialization  String
   internshipCycle String
   startYear       Int
   monthlySalary   OffersCurrency @relation(fields: [monthlySalaryId], references: [id], onDelete: Cascade)
@@ -350,18 +348,17 @@ model OffersIntern {
 }
 
 model OffersFullTime {
-  id                  String         @id @default(cuid())
+  id                  String          @id @default(cuid())
   title               String
-  specialization      String
   level               String
-  totalCompensation   OffersCurrency @relation("OfferTotalCompensation", fields: [totalCompensationId], references: [id], onDelete: Cascade)
-  totalCompensationId String         @unique
-  baseSalary          OffersCurrency @relation("OfferBaseSalary", fields: [baseSalaryId], references: [id], onDelete: Cascade)
-  baseSalaryId        String         @unique
-  bonus               OffersCurrency @relation("OfferBonus", fields: [bonusId], references: [id], onDelete: Cascade)
-  bonusId             String         @unique
-  stocks              OffersCurrency @relation("OfferStocks", fields: [stocksId], references: [id], onDelete: Cascade)
-  stocksId            String         @unique
+  totalCompensation   OffersCurrency  @relation("OfferTotalCompensation", fields: [totalCompensationId], references: [id], onDelete: Cascade)
+  totalCompensationId String          @unique
+  baseSalary          OffersCurrency? @relation("OfferBaseSalary", fields: [baseSalaryId], references: [id], onDelete: Cascade)
+  baseSalaryId        String?         @unique
+  bonus               OffersCurrency? @relation("OfferBonus", fields: [bonusId], references: [id], onDelete: Cascade)
+  bonusId             String?         @unique
+  stocks              OffersCurrency? @relation("OfferStocks", fields: [stocksId], references: [id], onDelete: Cascade)
+  stocksId            String?         @unique
 
   OffersOffer OffersOffer?
 }

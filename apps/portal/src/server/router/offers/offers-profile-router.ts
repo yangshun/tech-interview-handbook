@@ -10,7 +10,10 @@ import {
 } from '~/mappers/offers-mappers';
 import { baseCurrencyString } from '~/utils/offers/currency';
 import { convert } from '~/utils/offers/currency/currencyExchange';
-import { generateRandomName, generateRandomStringForToken } from '~/utils/offers/randomGenerator';
+import {
+  generateRandomName,
+  generateRandomStringForToken,
+} from '~/utils/offers/randomGenerator';
 import { createValidationRegex } from '~/utils/offers/zodRegex';
 
 import { createRouter } from '../context';
@@ -48,7 +51,6 @@ const offer = z.object({
       bonusId: z.string().nullish(),
       id: z.string().optional(),
       level: z.string().nullish(),
-      specialization: z.string(),
       stocks: valuation.nullish(),
       stocksId: z.string().nullish(),
       title: z.string(),
@@ -62,7 +64,6 @@ const offer = z.object({
       id: z.string().optional(),
       internshipCycle: z.string().nullish(),
       monthlySalary: valuation.nullish(),
-      specialization: z.string(),
       startYear: z.number().nullish(),
       title: z.string(),
       totalCompensation: valuation.nullish(), // Full time
@@ -86,7 +87,6 @@ const experience = z.object({
   location: z.string().nullish(),
   monthlySalary: valuation.nullish(),
   monthlySalaryId: z.string().nullish(),
-  specialization: z.string().nullish(),
   title: z.string().nullish(),
   totalCompensation: valuation.nullish(),
   totalCompensationId: z.string().nullish(),
@@ -300,7 +300,6 @@ export const offersProfileRouter = createRouter()
                         durationInMonths: x.durationInMonths,
                         jobType: x.jobType,
                         level: x.level,
-                        specialization: x.specialization,
                         title: x.title,
                         totalCompensation: {
                           create: {
@@ -321,7 +320,6 @@ export const offersProfileRouter = createRouter()
                       jobType: x.jobType,
                       level: x.level,
                       location: x.location,
-                      specialization: x.specialization,
                       title: x.title,
                       totalCompensation: {
                         create: {
@@ -363,7 +361,6 @@ export const offersProfileRouter = createRouter()
                             value: x.monthlySalary.value,
                           },
                         },
-                        specialization: x.specialization,
                         title: x.title,
                       };
                     }
@@ -382,7 +379,6 @@ export const offersProfileRouter = createRouter()
                           value: x.monthlySalary.value,
                         },
                       },
-                      specialization: x.specialization,
                       title: x.title,
                     };
                   }
@@ -442,7 +438,6 @@ export const offersProfileRouter = createRouter()
                             value: x.offersIntern.monthlySalary.value,
                           },
                         },
-                        specialization: x.offersIntern.specialization,
                         startYear: x.offersIntern.startYear,
                         title: x.offersIntern.title,
                       },
@@ -452,17 +447,10 @@ export const offersProfileRouter = createRouter()
                 if (
                   x.jobType === JobType.FULLTIME &&
                   x.offersFullTime &&
-                  x.offersFullTime.baseSalary?.currency != null &&
-                  x.offersFullTime.baseSalary?.value != null &&
-                  x.offersFullTime.bonus?.currency != null &&
-                  x.offersFullTime.bonus?.value != null &&
-                  x.offersFullTime.stocks?.currency != null &&
-                  x.offersFullTime.stocks?.value != null &&
                   x.offersFullTime.totalCompensation?.currency != null &&
                   x.offersFullTime.totalCompensation?.value != null &&
                   x.offersFullTime.level != null &&
-                  x.offersFullTime.title != null &&
-                  x.offersFullTime.specialization != null
+                  x.offersFullTime.title != null
                 ) {
                   return {
                     comments: x.comments,
@@ -477,44 +465,53 @@ export const offersProfileRouter = createRouter()
                     negotiationStrategy: x.negotiationStrategy,
                     offersFullTime: {
                       create: {
-                        baseSalary: {
-                          create: {
-                            baseCurrency: baseCurrencyString,
-                            baseValue: await convert(
-                              x.offersFullTime.baseSalary.value,
-                              x.offersFullTime.baseSalary.currency,
-                              baseCurrencyString,
-                            ),
-                            currency: x.offersFullTime.baseSalary.currency,
-                            value: x.offersFullTime.baseSalary.value,
-                          },
-                        },
-                        bonus: {
-                          create: {
-                            baseCurrency: baseCurrencyString,
-                            baseValue: await convert(
-                              x.offersFullTime.bonus.value,
-                              x.offersFullTime.bonus.currency,
-                              baseCurrencyString,
-                            ),
-                            currency: x.offersFullTime.bonus.currency,
-                            value: x.offersFullTime.bonus.value,
-                          },
-                        },
+                        baseSalary:
+                          x.offersFullTime?.baseSalary != null
+                            ? {
+                                create: {
+                                  baseCurrency: baseCurrencyString,
+                                  baseValue: await convert(
+                                    x.offersFullTime.baseSalary.value,
+                                    x.offersFullTime.baseSalary.currency,
+                                    baseCurrencyString,
+                                  ),
+                                  currency:
+                                    x.offersFullTime.baseSalary.currency,
+                                  value: x.offersFullTime.baseSalary.value,
+                                },
+                              }
+                            : undefined,
+                        bonus:
+                          x.offersFullTime?.bonus != null
+                            ? {
+                                create: {
+                                  baseCurrency: baseCurrencyString,
+                                  baseValue: await convert(
+                                    x.offersFullTime.bonus.value,
+                                    x.offersFullTime.bonus.currency,
+                                    baseCurrencyString,
+                                  ),
+                                  currency: x.offersFullTime.bonus.currency,
+                                  value: x.offersFullTime.bonus.value,
+                                },
+                              }
+                            : undefined,
                         level: x.offersFullTime.level,
-                        specialization: x.offersFullTime.specialization,
-                        stocks: {
-                          create: {
-                            baseCurrency: baseCurrencyString,
-                            baseValue: await convert(
-                              x.offersFullTime.stocks.value,
-                              x.offersFullTime.stocks.currency,
-                              baseCurrencyString,
-                            ),
-                            currency: x.offersFullTime.stocks.currency,
-                            value: x.offersFullTime.stocks.value,
-                          },
-                        },
+                        stocks:
+                          x.offersFullTime?.stocks != null
+                            ? {
+                                create: {
+                                  baseCurrency: baseCurrencyString,
+                                  baseValue: await convert(
+                                    x.offersFullTime.stocks.value,
+                                    x.offersFullTime.stocks.currency,
+                                    baseCurrencyString,
+                                  ),
+                                  currency: x.offersFullTime.stocks.currency,
+                                  value: x.offersFullTime.stocks.value,
+                                },
+                              }
+                            : undefined,
                         title: x.offersFullTime.title,
                         totalCompensation: {
                           create: {
@@ -714,7 +711,6 @@ export const offersProfileRouter = createRouter()
                 companyId: exp.companyId, // TODO: check if can change with connect or whether there is a difference
                 durationInMonths: exp.durationInMonths,
                 level: exp.level,
-                specialization: exp.specialization,
               },
               where: {
                 id: exp.id,
@@ -821,7 +817,6 @@ export const offersProfileRouter = createRouter()
                           jobType: exp.jobType,
                           level: exp.level,
                           location: exp.location,
-                          specialization: exp.specialization,
                           title: exp.title,
                           totalCompensation: {
                             create: {
@@ -851,7 +846,6 @@ export const offersProfileRouter = createRouter()
                           jobType: exp.jobType,
                           level: exp.level,
                           location: exp.location,
-                          specialization: exp.specialization,
                           title: exp.title,
                           totalCompensation: {
                             create: {
@@ -887,7 +881,6 @@ export const offersProfileRouter = createRouter()
                         jobType: exp.jobType,
                         level: exp.level,
                         location: exp.location,
-                        specialization: exp.specialization,
                         title: exp.title,
                       },
                     },
@@ -905,7 +898,6 @@ export const offersProfileRouter = createRouter()
                         jobType: exp.jobType,
                         level: exp.level,
                         location: exp.location,
-                        specialization: exp.specialization,
                         title: exp.title,
                       },
                     },
@@ -945,7 +937,6 @@ export const offersProfileRouter = createRouter()
                               value: exp.monthlySalary.value,
                             },
                           },
-                          specialization: exp.specialization,
                           title: exp.title,
                         },
                       },
@@ -974,7 +965,6 @@ export const offersProfileRouter = createRouter()
                               value: exp.monthlySalary.value,
                             },
                           },
-                          specialization: exp.specialization,
                           title: exp.title,
                         },
                       },
@@ -997,7 +987,6 @@ export const offersProfileRouter = createRouter()
                         durationInMonths: exp.durationInMonths,
                         jobType: exp.jobType,
                         location: exp.location,
-                        specialization: exp.specialization,
                         title: exp.title,
                       },
                     },
@@ -1014,7 +1003,6 @@ export const offersProfileRouter = createRouter()
                         durationInMonths: exp.durationInMonths,
                         jobType: exp.jobType,
                         location: exp.location,
-                        specialization: exp.specialization,
                         title: exp.title,
                       },
                     },
@@ -1121,7 +1109,6 @@ export const offersProfileRouter = createRouter()
                 data: {
                   internshipCycle:
                     offerToUpdate.offersIntern.internshipCycle ?? undefined,
-                  specialization: offerToUpdate.offersIntern.specialization,
                   startYear: offerToUpdate.offersIntern.startYear ?? undefined,
                   title: offerToUpdate.offersIntern.title,
                 },
@@ -1150,7 +1137,6 @@ export const offersProfileRouter = createRouter()
               await ctx.prisma.offersFullTime.update({
                 data: {
                   level: offerToUpdate.offersFullTime.level ?? undefined,
-                  specialization: offerToUpdate.offersFullTime.specialization,
                   title: offerToUpdate.offersFullTime.title,
                 },
                 where: {
@@ -1174,7 +1160,7 @@ export const offersProfileRouter = createRouter()
                   },
                 });
               }
-              if (offerToUpdate.offersFullTime.bonus) {
+              if (offerToUpdate.offersFullTime.bonus != null) {
                 await ctx.prisma.offersCurrency.update({
                   data: {
                     baseCurrency: baseCurrencyString,
@@ -1191,7 +1177,7 @@ export const offersProfileRouter = createRouter()
                   },
                 });
               }
-              if (offerToUpdate.offersFullTime.stocks) {
+              if (offerToUpdate.offersFullTime.stocks != null) {
                 await ctx.prisma.offersCurrency.update({
                   data: {
                     baseCurrency: baseCurrencyString,
@@ -1269,8 +1255,6 @@ export const offersProfileRouter = createRouter()
                                 offerToUpdate.offersIntern.monthlySalary.value,
                             },
                           },
-                          specialization:
-                            offerToUpdate.offersIntern.specialization,
                           startYear: offerToUpdate.offersIntern.startYear,
                           title: offerToUpdate.offersIntern.title,
                         },
@@ -1286,12 +1270,6 @@ export const offersProfileRouter = createRouter()
             if (
               offerToUpdate.jobType === JobType.FULLTIME &&
               offerToUpdate.offersFullTime &&
-              offerToUpdate.offersFullTime.baseSalary?.currency != null &&
-              offerToUpdate.offersFullTime.baseSalary?.value != null &&
-              offerToUpdate.offersFullTime.bonus?.currency != null &&
-              offerToUpdate.offersFullTime.bonus?.value != null &&
-              offerToUpdate.offersFullTime.stocks?.currency != null &&
-              offerToUpdate.offersFullTime.stocks?.value != null &&
               offerToUpdate.offersFullTime.totalCompensation?.currency !=
                 null &&
               offerToUpdate.offersFullTime.totalCompensation?.value != null &&
@@ -1313,51 +1291,66 @@ export const offersProfileRouter = createRouter()
                       negotiationStrategy: offerToUpdate.negotiationStrategy,
                       offersFullTime: {
                         create: {
-                          baseSalary: {
-                            create: {
-                              baseCurrency: baseCurrencyString,
-                              baseValue: await convert(
-                                offerToUpdate.offersFullTime.baseSalary.value,
-                                offerToUpdate.offersFullTime.baseSalary
-                                  .currency,
-                                baseCurrencyString,
-                              ),
-                              currency:
-                                offerToUpdate.offersFullTime.baseSalary
-                                  .currency,
-                              value:
-                                offerToUpdate.offersFullTime.baseSalary.value,
-                            },
-                          },
-                          bonus: {
-                            create: {
-                              baseCurrency: baseCurrencyString,
-                              baseValue: await convert(
-                                offerToUpdate.offersFullTime.bonus.value,
-                                offerToUpdate.offersFullTime.bonus.currency,
-                                baseCurrencyString,
-                              ),
-                              currency:
-                                offerToUpdate.offersFullTime.bonus.currency,
-                              value: offerToUpdate.offersFullTime.bonus.value,
-                            },
-                          },
+                          baseSalary:
+                            offerToUpdate.offersFullTime?.baseSalary != null
+                              ? {
+                                  create: {
+                                    baseCurrency: baseCurrencyString,
+                                    baseValue: await convert(
+                                      offerToUpdate.offersFullTime.baseSalary
+                                        .value,
+                                      offerToUpdate.offersFullTime.baseSalary
+                                        .currency,
+                                      baseCurrencyString,
+                                    ),
+                                    currency:
+                                      offerToUpdate.offersFullTime.baseSalary
+                                        .currency,
+                                    value:
+                                      offerToUpdate.offersFullTime.baseSalary
+                                        .value,
+                                  },
+                                }
+                              : undefined,
+                          bonus:
+                            offerToUpdate.offersFullTime?.bonus != null
+                              ? {
+                                  create: {
+                                    baseCurrency: baseCurrencyString,
+                                    baseValue: await convert(
+                                      offerToUpdate.offersFullTime.bonus.value,
+                                      offerToUpdate.offersFullTime.bonus
+                                        .currency,
+                                      baseCurrencyString,
+                                    ),
+                                    currency:
+                                      offerToUpdate.offersFullTime.bonus
+                                        .currency,
+                                    value:
+                                      offerToUpdate.offersFullTime.bonus.value,
+                                  },
+                                }
+                              : undefined,
                           level: offerToUpdate.offersFullTime.level,
-                          specialization:
-                            offerToUpdate.offersFullTime.specialization,
-                          stocks: {
-                            create: {
-                              baseCurrency: baseCurrencyString,
-                              baseValue: await convert(
-                                offerToUpdate.offersFullTime.stocks.value,
-                                offerToUpdate.offersFullTime.stocks.currency,
-                                baseCurrencyString,
-                              ),
-                              currency:
-                                offerToUpdate.offersFullTime.stocks.currency,
-                              value: offerToUpdate.offersFullTime.stocks.value,
-                            },
-                          },
+                          stocks:
+                            offerToUpdate.offersFullTime?.stocks != null
+                              ? {
+                                  create: {
+                                    baseCurrency: baseCurrencyString,
+                                    baseValue: await convert(
+                                      offerToUpdate.offersFullTime.stocks.value,
+                                      offerToUpdate.offersFullTime.stocks
+                                        .currency,
+                                      baseCurrencyString,
+                                    ),
+                                    currency:
+                                      offerToUpdate.offersFullTime.stocks
+                                        .currency,
+                                    value:
+                                      offerToUpdate.offersFullTime.stocks.value,
+                                  },
+                                }
+                              : undefined,
                           title: offerToUpdate.offersFullTime.title,
                           totalCompensation: {
                             create: {
