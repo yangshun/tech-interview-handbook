@@ -113,7 +113,7 @@ export default function ResumeHomePage() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [userFilters, sortOrder]);
+  }, [userFilters, sortOrder, searchValue]);
 
   const allResumesQuery = trpc.useQuery(
     [
