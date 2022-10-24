@@ -88,7 +88,7 @@ export default function Typeahead({
         )}
       </Combobox.Label>
       <div className="relative">
-        <div className="focus-visible:ring-offset-primary-300 relative w-full cursor-default overflow-hidden rounded-lg border border-slate-300 bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm">
+        <div className="focus-visible:ring-offset-primary-300 relative w-full cursor-default overflow-hidden rounded-lg border border-slate-300 bg-white text-left text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2">
           <Combobox.Input
             className={clsx(
               'w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-slate-900 focus:ring-0',
@@ -117,7 +117,7 @@ export default function Typeahead({
           leave="transition ease-in duration-100"
           leaveFrom="opacity-100"
           leaveTo="opacity-0">
-          <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             {options.length === 0 && query !== '' ? (
               <div className="relative cursor-default select-none py-2 px-4 text-slate-700">
                 {noResultsMessage}

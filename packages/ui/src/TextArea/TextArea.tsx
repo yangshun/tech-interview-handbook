@@ -108,7 +108,7 @@ function TextArea(
           aria-describedby={hasError ? errorId : undefined}
           aria-invalid={hasError ? true : undefined}
           className={clsx(
-            'block w-full rounded-md sm:text-sm',
+            'block w-full rounded-md text-sm',
             stateClasses[state].textArea,
             disabled && 'bg-slate-100',
             resizeClasses[resize],
