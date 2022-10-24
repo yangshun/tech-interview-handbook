@@ -43,6 +43,7 @@
     "read-excel-file": "^5.5.3",
     "superjson": "^1.10.0",
     "xlsx": "^0.18.5",
+    "unique-names-generator": "^4.7.1",
     "zod": "^3.18.0"
   },
   "devDependencies": {

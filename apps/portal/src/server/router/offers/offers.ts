@@ -103,22 +103,32 @@ export const offersRouter = createRouter().query('list', {
                   monthYearReceived: order,
                 }
               : sortingKey === sortingKeysMap.totalCompensation
-              ? {
-                  offersIntern: {
-                    monthlySalary: {
-                      baseValue: order,
+              ? [
+                  {
+                    offersIntern: {
+                      monthlySalary: {
+                        baseValue: order,
+                      },
                     },
                   },
-                }
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
               : sortingKey === sortingKeysMap.totalYoe
-              ? {
-                  profile: {
-                    background: {
-                      totalYoe: order,
+              ? [
+                  {
+                    profile: {
+                      background: {
+                        totalYoe: order,
+                      },
                     },
                   },
-                }
-              : undefined,
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
+              : { monthYearReceived: 'desc' },
           where: {
             AND: [
               {
@@ -207,22 +217,32 @@ export const offersRouter = createRouter().query('list', {
                   monthYearReceived: order,
                 }
               : sortingKey === sortingKeysMap.totalCompensation
-              ? {
-                  offersFullTime: {
-                    totalCompensation: {
-                      baseValue: order,
+              ? [
+                  {
+                    offersIntern: {
+                      monthlySalary: {
+                        baseValue: order,
+                      },
                     },
                   },
-                }
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
               : sortingKey === sortingKeysMap.totalYoe
-              ? {
-                  profile: {
-                    background: {
-                      totalYoe: order,
+              ? [
+                  {
+                    profile: {
+                      background: {
+                        totalYoe: order,
+                      },
                     },
                   },
-                }
-              : undefined,
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
+              : { monthYearReceived: 'desc' },
           where: {
             AND: [
               {
