@@ -21,9 +21,25 @@ import ResumeCommentsList from '~/components/resumes/comments/ResumeCommentsList
 import ResumePdf from '~/components/resumes/ResumePdf';
 import ResumeExpandableText from '~/components/resumes/shared/ResumeExpandableText';
 
+import type {
+  FilterOption,
+  LocationFilter,
+} from '~/utils/resumes/resumeFilters';
+import {
+  BROWSE_TABS_VALUES,
+  EXPERIENCES,
+  INITIAL_FILTER_STATE,
+  LOCATIONS,
+  ROLES,
+  SORT_OPTIONS,
+} from '~/utils/resumes/resumeFilters';
 import { trpc } from '~/utils/trpc';
 
 import SubmitResumeForm from './submit';
+import type {
+  ExperienceFilter,
+  RoleFilter,
+} from '../../utils/resumes/resumeFilters';
 
 export default function ResumeReviewPage() {
   const ErrorPage = (
@@ -57,7 +73,8 @@ export default function ResumeReviewPage() {
     },
   });
   const userIsOwner =
-    session?.user?.id != null && session.user.id === detailsQuery.data?.userId;
+    session?.user?.id !== undefined &&
+    session.user.id === detailsQuery.data?.userId;
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [showCommentsForm, setShowCommentsForm] = useState(false);
@@ -77,6 +94,46 @@ export default function ResumeReviewPage() {
         resumeId: resumeId as string,
       });
     }
+  };
+
+  const onInfoTagClick = ({
+    locationLabel,
+    experienceLabel,
+    roleLabel,
+  }: {
+    experienceLabel?: string;
+    locationLabel?: string;
+    roleLabel?: string;
+  }) => {
+    const getFilterValue = (
+      label: string,
+      filterOptions: Array<
+        FilterOption<ExperienceFilter | LocationFilter | RoleFilter>
+      >,
+    ) => filterOptions.find((option) => option.label === label)?.value;
+
+    router.push({
+      pathname: '/resumes/browse',
+      query: {
+        currentPage: JSON.stringify(1),
+        searchValue: JSON.stringify(''),
+        shortcutSelected: JSON.stringify('all'),
+        sortOrder: JSON.stringify(SORT_OPTIONS.LATEST),
+        tabsValue: JSON.stringify(BROWSE_TABS_VALUES.ALL),
+        userFilters: JSON.stringify({
+          ...INITIAL_FILTER_STATE,
+          ...(locationLabel && {
+            location: [getFilterValue(locationLabel, LOCATIONS)],
+          }),
+          ...(roleLabel && {
+            role: [getFilterValue(roleLabel, ROLES)],
+          }),
+          ...(experienceLabel && {
+            experience: [getFilterValue(experienceLabel, EXPERIENCES)],
+          }),
+        }),
+      },
+    });
   };
 
   const onEditButtonClick = () => {
@@ -199,21 +256,48 @@ export default function ResumeReviewPage() {
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                 />
-                {detailsQuery.data.role}
+                <button
+                  className="hover:text-primary-800 underline"
+                  type="button"
+                  onClick={() =>
+                    onInfoTagClick({
+                      roleLabel: detailsQuery.data?.role,
+                    })
+                  }>
+                  {detailsQuery.data.role}
+                </button>
               </div>
               <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
                 <MapPinIcon
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                 />
-                {detailsQuery.data.location}
+                <button
+                  className="hover:text-primary-800 underline"
+                  type="button"
+                  onClick={() =>
+                    onInfoTagClick({
+                      locationLabel: detailsQuery.data?.location,
+                    })
+                  }>
+                  {detailsQuery.data.location}
+                </button>
               </div>
               <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
                 <AcademicCapIcon
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                 />
-                {detailsQuery.data.experience}
+                <button
+                  className="hover:text-primary-800 underline"
+                  type="button"
+                  onClick={() =>
+                    onInfoTagClick({
+                      experienceLabel: detailsQuery.data?.experience,
+                    })
+                  }>
+                  {detailsQuery.data.experience}
+                </button>
               </div>
               <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
                 <CalendarIcon
