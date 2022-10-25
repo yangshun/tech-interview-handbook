@@ -139,7 +139,7 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
               id: questionEncounterToUpdate.questionId,
             },
           }),
-          tx.prisma.questionsQuestionEncounter.update({
+          tx.questionsQuestionEncounter.update({
             data: {
               ...input,
             },
@@ -204,7 +204,7 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
               id: questionEncounterToDelete.questionId,
             },
           }),
-          tx.prisma.questionsQuestionEncounter.delete({
+          tx.questionsQuestionEncounter.delete({
             where: {
               id: input.id,
             },
