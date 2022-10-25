@@ -71,6 +71,23 @@ const getJobTitle = (role: string) => {
   }
 };
 
+const getYoe = (type: string) => {
+  const processedType = type.toUpperCase().trim();
+
+  if (
+    processedType.includes('FRESH GRAD') ||
+    processedType.includes('JUNIOR')
+  ) {
+    return Math.floor(Math.random() * 3);
+  } else if (processedType.includes('MID')) {
+    return Math.floor(Math.random() * 3) + 3;
+  } else if (processedType.includes('SENIOR')) {
+    return Math.floor(Math.random() * 5) + 6;
+  } else {
+    return 0; // INTERNSHIP OR ERROR -> 0 YOE
+  }
+};
+
 const createdProfileIds: Array<string> = [];
 
 const seedSalaries = async () => {
@@ -89,6 +106,7 @@ const seedSalaries = async () => {
         let uniqueName: string = await generateRandomName();
 
         const jobTitle = getJobTitle(data.Role);
+        const yoe = getYoe(data.Type);
 
         // check if we have company id
         if (companyIdMappings[data.Company]) {
@@ -109,7 +127,7 @@ const seedSalaries = async () => {
                 editToken: token,
                 background: {
                   create: {
-                    totalYoe: 0,
+                    totalYoe: yoe,
                   },
                 },
                 offers: {
@@ -161,7 +179,7 @@ const seedSalaries = async () => {
                 editToken: token,
                 background: {
                   create: {
-                    totalYoe: 0,
+                    totalYoe: yoe,
                   },
                 },
                 offers: {
