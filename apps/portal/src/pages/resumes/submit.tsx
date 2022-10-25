@@ -293,7 +293,7 @@ export default function SubmitResumeForm({
                 required={true}
                 onChange={(val) => onValueChange('title', val)}
               />
-              <div className="flex gap-8">
+              <div className="flex flex-wrap gap-6">
                 <Select
                   {...register('role', { required: true })}
                   defaultValue={undefined}
