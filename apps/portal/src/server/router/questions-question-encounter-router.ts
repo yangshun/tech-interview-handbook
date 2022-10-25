@@ -93,7 +93,7 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
           });
         }
 
-        if (questionToUpdate!.lastSeenAt < input.seenAt) {
+        if (questionToUpdate.lastSeenAt < input.seenAt) {
           await tx.questionsQuestion.update({
             data: {
               lastSeenAt : input.seenAt,
