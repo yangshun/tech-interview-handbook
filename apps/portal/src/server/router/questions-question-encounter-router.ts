@@ -71,18 +71,20 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
       const userId = ctx.session?.user?.id;
 
       return await ctx.prisma.$transaction(async (tx) => {
-        const questionToUpdate = await tx.questionsQuestion.findUnique({
-          where: {
-            id: input.questionId,
-          },
-        });
+        const [questionToUpdate, questionEncounterCreated] = await Promise.all([
+          tx.questionsQuestion.findUnique({
+            where: {
+              id: input.questionId,
+            },
+          }),
+          tx.questionsQuestionEncounter.create({
+            data: {
+              ...input,
+              userId,
+            },
+          })
+        ]);
 
-        const questionEncounterCreated = await tx.questionsQuestionEncounter.create({
-          data: {
-            ...input,
-            userId,
-          },
-        });
 
         if (questionToUpdate === null) {
           throw new TRPCError({
@@ -131,20 +133,22 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
       }
 
       return await ctx.prisma.$transaction(async (tx) => {
-        const questionToUpdate = await tx.questionsQuestion.findUnique({
-          where: {
-            id: questionEncounterToUpdate.questionId,
-          },
-        });
+        const [questionToUpdate, questionEncounterUpdated] = await Promise.all([
+          tx.questionsQuestion.findUnique({
+            where: {
+              id: questionEncounterToUpdate.questionId,
+            },
+          }),
+          tx.prisma.questionsQuestionEncounter.update({
+            data: {
+              ...input,
+            },
+            where: {
+              id: input.id,
+            },
+          })
+        ]);
 
-        const questionEncounterUpdated = await ctx.prisma.questionsQuestionEncounter.update({
-          data: {
-            ...input,
-          },
-          where: {
-            id: input.id,
-          },
-        });
 
         if (questionToUpdate!.lastSeenAt === questionEncounterToUpdate.seenAt) {
           const latestEncounter = await ctx.prisma.questionsQuestionEncounter.findFirst({
@@ -194,17 +198,18 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
       }
 
       return await ctx.prisma.$transaction(async (tx) => {
-        const questionToUpdate = await tx.questionsQuestion.findUnique({
-          where: {
-            id: questionEncounterToDelete.questionId,
-          },
-        });
-
-        const questionEncounterDeleted = await ctx.prisma.questionsQuestionEncounter.delete({
-          where: {
-            id: input.id,
-          },
-        });
+        const [questionToUpdate, questionEncounterDeleted] = await Promise.all([
+          tx.questionsQuestion.findUnique({
+            where: {
+              id: questionEncounterToDelete.questionId,
+            },
+          }),
+          tx.prisma.questionsQuestionEncounter.delete({
+            where: {
+              id: input.id,
+            },
+          })
+        ]);
 
         if (questionToUpdate!.lastSeenAt === questionEncounterToDelete.seenAt) {
           const latestEncounter = await ctx.prisma.questionsQuestionEncounter.findFirst({
