@@ -73,7 +73,7 @@ export const offersRouter = createRouter().query('list', {
     const order = getOrder(input.sortBy.charAt(0));
     const sortingKey = input.sortBy.substring(1);
 
-    let data = !yoeRange
+    const data = !yoeRange
       ? await ctx.prisma.offersOffer.findMany({
           // Internship
           include: {
@@ -303,11 +303,18 @@ export const offersRouter = createRouter().query('list', {
           },
         });
 
+    const startRecordIndex: number = input.limit * input.offset;
+    const endRecordIndex: number =
+      startRecordIndex + input.limit <= data.length
+        ? startRecordIndex + input.limit
+        : data.length;
+    let paginatedData = data.slice(startRecordIndex, endRecordIndex);
+
     // CONVERTING
     const currency = input.currency?.toUpperCase();
     if (currency != null && currency in Currency) {
-      data = await Promise.all(
-        data.map(async (offer) => {
+      paginatedData = await Promise.all(
+        paginatedData.map(async (offer) => {
           if (offer.offersFullTime?.totalCompensation != null) {
             offer.offersFullTime.totalCompensation.value =
               await convertWithDate(
@@ -317,27 +324,36 @@ export const offersRouter = createRouter().query('list', {
                 offer.offersFullTime.totalCompensation.updatedAt,
               );
             offer.offersFullTime.totalCompensation.currency = currency;
-            offer.offersFullTime.baseSalary.value = await convertWithDate(
-              offer.offersFullTime.baseSalary.value,
-              offer.offersFullTime.baseSalary.currency,
-              currency,
-              offer.offersFullTime.baseSalary.updatedAt,
-            );
-            offer.offersFullTime.baseSalary.currency = currency;
-            offer.offersFullTime.stocks.value = await convertWithDate(
-              offer.offersFullTime.stocks.value,
-              offer.offersFullTime.stocks.currency,
-              currency,
-              offer.offersFullTime.stocks.updatedAt,
-            );
-            offer.offersFullTime.stocks.currency = currency;
-            offer.offersFullTime.bonus.value = await convertWithDate(
-              offer.offersFullTime.bonus.value,
-              offer.offersFullTime.bonus.currency,
-              currency,
-              offer.offersFullTime.bonus.updatedAt,
-            );
-            offer.offersFullTime.bonus.currency = currency;
+
+            if (offer.offersFullTime?.baseSalary != null) {
+              offer.offersFullTime.baseSalary.value = await convertWithDate(
+                offer.offersFullTime.baseSalary.value,
+                offer.offersFullTime.baseSalary.currency,
+                currency,
+                offer.offersFullTime.baseSalary.updatedAt,
+              );
+              offer.offersFullTime.baseSalary.currency = currency;
+            }
+
+            if (offer.offersFullTime?.stocks != null) {
+              offer.offersFullTime.stocks.value = await convertWithDate(
+                offer.offersFullTime.stocks.value,
+                offer.offersFullTime.stocks.currency,
+                currency,
+                offer.offersFullTime.stocks.updatedAt,
+              );
+              offer.offersFullTime.stocks.currency = currency;
+            }
+
+            if (offer.offersFullTime?.bonus != null) {
+              offer.offersFullTime.bonus.value = await convertWithDate(
+                offer.offersFullTime.bonus.value,
+                offer.offersFullTime.bonus.currency,
+                currency,
+                offer.offersFullTime.bonus.updatedAt,
+              );
+              offer.offersFullTime.bonus.currency = currency;
+            }
           } else if (offer.offersIntern?.monthlySalary != null) {
             offer.offersIntern.monthlySalary.value = await convertWithDate(
               offer.offersIntern.monthlySalary.value,
@@ -357,13 +373,6 @@ export const offersRouter = createRouter().query('list', {
         }),
       );
     }
-
-    const startRecordIndex: number = input.limit * input.offset;
-    const endRecordIndex: number =
-      startRecordIndex + input.limit <= data.length
-        ? startRecordIndex + input.limit
-        : data.length;
-    const paginatedData = data.slice(startRecordIndex, endRecordIndex);
 
     return getOffersResponseMapper(
       paginatedData.map((offer) => dashboardOfferDtoMapper(offer)),

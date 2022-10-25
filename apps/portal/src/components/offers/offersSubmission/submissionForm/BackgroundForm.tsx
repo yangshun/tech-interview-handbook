@@ -18,7 +18,6 @@ import {
   CURRENCY_OPTIONS,
 } from '~/utils/offers/currency/CurrencyEnum';
 
-import FormMonthYearPicker from '../../forms/FormMonthYearPicker';
 import FormRadioList from '../../forms/FormRadioList';
 import FormSelect from '../../forms/FormSelect';
 import FormTextInput from '../../forms/FormTextInput';
@@ -141,23 +140,18 @@ function FullTimeJobFields() {
       <Collapsible label="Add more details">
         <div className="mb-5 grid grid-cols-2 space-x-3">
           <FormTextInput
-            label="Focus / Specialization"
-            placeholder="e.g. Front End"
-            {...register(`background.experiences.0.specialization`)}
-          />
-          <FormTextInput
             label="Level"
             placeholder="e.g. L4, Junior"
             {...register(`background.experiences.0.level`)}
           />
-        </div>
-        <div className="mb-5 grid grid-cols-2 space-x-3">
           <FormSelect
             display="block"
             label="Location"
             options={locationOptions}
             {...register(`background.experiences.0.location`)}
           />
+        </div>
+        <div className="mb-5 grid grid-cols-2 space-x-3">
           <FormTextInput
             errorMessage={experiencesField?.durationInMonths?.message}
             label="Duration (months)"
@@ -224,11 +218,6 @@ function InternshipJobFields() {
       </div>
       <Collapsible label="Add more details">
         <div className="mb-5 grid grid-cols-2 space-x-3">
-          <FormTextInput
-            label="Focus / Specialization"
-            placeholder="e.g. Front End"
-            {...register(`background.experiences.0.specialization`)}
-          />
           <FormSelect
             display="block"
             label="Location"
@@ -245,7 +234,6 @@ function InternshipJobFields() {
 function CurrentJobSection() {
   const { register } = useFormContext();
   const watchJobType = useWatch({
-    defaultValue: JobType.FULLTIME,
     name: 'background.experiences.0.jobType',
   });
 
@@ -257,7 +245,7 @@ function CurrentJobSection() {
       <div className="mb-5 rounded-lg border border-slate-200 px-10 py-5">
         <div className="mb-5">
           <FormRadioList
-            defaultValue={JobType.FULLTIME}
+            defaultValue={watchJobType}
             isLabelHidden={true}
             label="Job Type"
             orientation="horizontal"
@@ -314,22 +302,6 @@ function EducationSection() {
               label="School"
               placeholder="e.g. National University of Singapore"
               {...register(`background.educations.0.school`)}
-            />
-          </div>
-          <div className="grid grid-cols-2 space-x-3">
-            <FormMonthYearPicker
-              monthLabel="Candidature Start"
-              yearLabel=""
-              {...register(`background.educations.0.startDate`, {
-                required: FieldError.REQUIRED,
-              })}
-            />
-            <FormMonthYearPicker
-              monthLabel="Candidature End"
-              yearLabel=""
-              {...register(`background.educations.0.endDate`, {
-                required: FieldError.REQUIRED,
-              })}
             />
           </div>
         </Collapsible>

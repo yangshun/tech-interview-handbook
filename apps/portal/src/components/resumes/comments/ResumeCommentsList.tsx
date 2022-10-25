@@ -55,7 +55,7 @@ export default function ResumeCommentsList({
           <Spinner display="block" size="lg" />
         </div>
       ) : (
-        <div className="mb-8 flow-root h-[calc(100vh-13rem)] w-full flex-col space-y-4 overflow-y-auto overflow-x-hidden">
+        <div className="mb-8 flow-root h-[calc(100vh-13rem)] w-full flex-col space-y-4 overflow-y-auto overflow-x-hidden pb-16">
           {RESUME_COMMENTS_SECTIONS.map(({ label, value }) => {
             const comments = commentsQuery.data
               ? commentsQuery.data.filter((comment: ResumeComment) => {
@@ -65,44 +65,40 @@ export default function ResumeCommentsList({
             const commentCount = comments.length;
 
             return (
-              <div key={value} className="mb-4 space-y-4">
-                <div className="text-primary-800 flex flex-row items-center space-x-2">
+              <div key={value} className="space-y-6 pr-4">
+                <div className="text-primary-800 -mb-2 flex flex-row items-center space-x-2">
                   {renderIcon(value)}
 
                   <div className="w-fit text-lg font-medium">{label}</div>
                 </div>
 
-                <div className="w-full space-y-4 pr-4">
-                  <div
-                    className={clsx(
-                      'space-y-2 rounded-md border-2 bg-white px-4 py-3 drop-shadow-md',
-                      commentCount ? 'border-slate-300' : 'border-slate-300',
-                    )}>
-                    {commentCount > 0 ? (
-                      comments.map((comment) => {
-                        return (
-                          <ResumeCommentListItem
-                            key={comment.id}
-                            comment={comment}
-                            userId={sessionData?.user?.id}
-                          />
-                        );
-                      })
-                    ) : (
-                      <div className="flex flex-row items-center text-sm">
-                        <ChatBubbleLeftRightIcon className="mr-2 h-6 w-6 text-slate-500" />
+                <div
+                  className={clsx(
+                    'space-y-2 rounded-md border-2 bg-white px-4 py-3 drop-shadow-md',
+                    commentCount ? 'border-slate-300' : 'border-slate-300',
+                  )}>
+                  {commentCount > 0 ? (
+                    comments.map((comment) => {
+                      return (
+                        <ResumeCommentListItem
+                          key={comment.id}
+                          comment={comment}
+                          userId={sessionData?.user?.id}
+                        />
+                      );
+                    })
+                  ) : (
+                    <div className="flex flex-row items-center text-sm">
+                      <ChatBubbleLeftRightIcon className="mr-2 h-6 w-6 text-slate-500" />
 
-                        <div className="text-slate-500">
-                          There are no comments for this section yet!
-                        </div>
+                      <div className="text-slate-500">
+                        There are no comments for this section yet!
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
 
-                <div className="relative flex flex-row pr-6 pt-2">
-                  <div className="flex-grow border-t border-gray-300" />
-                </div>
+                <hr className="border-gray-300" />
               </div>
             );
           })}

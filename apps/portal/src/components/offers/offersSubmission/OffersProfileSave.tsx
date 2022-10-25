@@ -1,15 +1,9 @@
-import { useRouter } from 'next/router';
 // Import { useState } from 'react';
 // import { setTimeout } from 'timers';
 import { DocumentDuplicateIcon } from '@heroicons/react/20/solid';
-import { EyeIcon } from '@heroicons/react/24/outline';
 import { Button, TextInput, useToast } from '@tih/ui';
 
-import {
-  copyProfileLink,
-  getProfileLink,
-  getProfilePath,
-} from '~/utils/offers/link';
+import { copyProfileLink, getProfileLink } from '~/utils/offers/link';
 
 type OfferProfileSaveProps = Readonly<{
   profileId: string;
@@ -23,7 +17,6 @@ export default function OffersProfileSave({
   const { showToast } = useToast();
   // Const [isSaving, setSaving] = useState(false);
   // const [isSaved, setSaved] = useState(false);
-  const router = useRouter();
 
   // Const saveProfile = () => {
   //   setSaving(true);
@@ -82,14 +75,6 @@ export default function OffersProfileSave({
             onClick={saveProfile}
           />
         </div> */}
-        <div>
-          <Button
-            icon={EyeIcon}
-            label="View your profile"
-            variant="special"
-            onClick={() => router.push(getProfilePath(profileId, token))}
-          />
-        </div>
       </div>
     </div>
   );

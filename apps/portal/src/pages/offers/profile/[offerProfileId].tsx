@@ -60,8 +60,14 @@ export default function OfferProfile() {
           ? data?.offers.map((res: ProfileOffer) => {
               if (res.offersFullTime) {
                 const filteredOffer: OfferDisplayData = {
-                  base: convertMoneyToString(res.offersFullTime.baseSalary),
-                  bonus: convertMoneyToString(res.offersFullTime.bonus),
+                  base:
+                    res.offersFullTime.baseSalary != null
+                      ? convertMoneyToString(res.offersFullTime.baseSalary)
+                      : undefined,
+                  bonus:
+                    res.offersFullTime.bonus != null
+                      ? convertMoneyToString(res.offersFullTime.bonus)
+                      : undefined,
                   companyName: res.company.name,
                   id: res.offersFullTime.id,
                   jobLevel: res.offersFullTime.level,
@@ -72,7 +78,10 @@ export default function OfferProfile() {
                   negotiationStrategy: res.negotiationStrategy,
                   otherComment: res.comments,
                   receivedMonth: formatDate(res.monthYearReceived),
-                  stocks: convertMoneyToString(res.offersFullTime.stocks),
+                  stocks:
+                    res.offersFullTime.stocks != null
+                      ? convertMoneyToString(res.offersFullTime.stocks)
+                      : undefined,
                   totalCompensation: convertMoneyToString(
                     res.offersFullTime.totalCompensation,
                   ),
