@@ -20,11 +20,10 @@ import {
 } from '@tih/ui';
 
 import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
-import type {
-  Filter,
-  FilterId,
-  Shortcut,
-} from '~/components/resumes/browse/resumeFilters';
+import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
+import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
+
+import type { Filter, FilterId, Shortcut } from '~/utils/resumes/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCES,
@@ -34,15 +33,12 @@ import {
   ROLES,
   SHORTCUTS,
   SORT_OPTIONS,
-} from '~/components/resumes/browse/resumeFilters';
-import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
-import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
-
+} from '~/utils/resumes/resumeFilters';
 import useDebounceValue from '~/utils/resumes/useDebounceValue';
 import useSearchParams from '~/utils/resumes/useSearchParams';
 import { trpc } from '~/utils/trpc';
 
-import type { FilterState } from '../../components/resumes/browse/resumeFilters';
+import type { FilterState } from '../../utils/resumes/resumeFilters';
 
 const STALE_TIME = 5 * 60 * 1000;
 const DEBOUNCE_DELAY = 800;
@@ -108,7 +104,7 @@ export default function ResumeHomePage() {
   );
   const [sortOrder, setSortOrder, isSortOrderInit] = useSearchParams(
     'sortOrder',
-    'latest',
+    SORT_OPTIONS.LATEST,
   );
   const [searchValue, setSearchValue, isSearchValueInit] = useSearchParams(
     'searchValue',
@@ -573,7 +569,7 @@ export default function ResumeHomePage() {
                         key={key}
                         isSelected={sortOrder === key}
                         label={value}
-                        onClick={() => setSortOrder(key)}></DropdownMenu.Item>
+                        onClick={() => setSortOrder(value)}></DropdownMenu.Item>
                     ))}
                   </DropdownMenu>
                 </div>

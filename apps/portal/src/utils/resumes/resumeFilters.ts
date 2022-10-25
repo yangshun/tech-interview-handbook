@@ -4,7 +4,7 @@ export type CustomFilter = {
   numComments: number;
 };
 
-type RoleFilter =
+export type RoleFilter =
   | 'Android Engineer'
   | 'Backend Engineer'
   | 'DevOps Engineer'
@@ -12,7 +12,7 @@ type RoleFilter =
   | 'Full-Stack Engineer'
   | 'iOS Engineer';
 
-type ExperienceFilter =
+export type ExperienceFilter =
   | 'Entry Level (0 - 2 years)'
   | 'Freshman'
   | 'Junior'
@@ -21,7 +21,7 @@ type ExperienceFilter =
   | 'Senior'
   | 'Sophomore';
 
-type LocationFilter = 'India' | 'Singapore' | 'United States';
+export type LocationFilter = 'India' | 'Singapore' | 'United States';
 
 export type FilterValue = ExperienceFilter | LocationFilter | RoleFilter;
 
@@ -54,10 +54,10 @@ export const BROWSE_TABS_VALUES = {
   STARRED: 'starred',
 };
 
-export const SORT_OPTIONS: Record<string, string> = {
-  latest: 'Latest',
-  popular: 'Popular',
-  topComments: 'Most Comments',
+export const SORT_OPTIONS: Record<string, SortOrder> = {
+  LATEST: 'latest',
+  POPULAR: 'popular',
+  TOPCOMMENTS: 'topComments',
 };
 
 export const ROLES: Array<FilterOption<RoleFilter>> = [
