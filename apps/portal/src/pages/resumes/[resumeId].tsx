@@ -31,7 +31,6 @@ import {
   INITIAL_FILTER_STATE,
   LOCATIONS,
   ROLES,
-  SORT_OPTIONS,
 } from '~/utils/resumes/resumeFilters';
 import { trpc } from '~/utils/trpc';
 
@@ -118,7 +117,7 @@ export default function ResumeReviewPage() {
         currentPage: JSON.stringify(1),
         searchValue: JSON.stringify(''),
         shortcutSelected: JSON.stringify('all'),
-        sortOrder: JSON.stringify(SORT_OPTIONS.LATEST),
+        sortOrder: JSON.stringify('latest'),
         tabsValue: JSON.stringify(BROWSE_TABS_VALUES.ALL),
         userFilters: JSON.stringify({
           ...INITIAL_FILTER_STATE,

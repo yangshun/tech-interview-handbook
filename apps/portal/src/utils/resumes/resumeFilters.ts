@@ -54,11 +54,17 @@ export const BROWSE_TABS_VALUES = {
   STARRED: 'starred',
 };
 
-export const SORT_OPTIONS: Record<string, SortOrder> = {
-  LATEST: 'latest',
-  POPULAR: 'popular',
-  TOPCOMMENTS: 'topComments',
-};
+// Export const SORT_OPTIONS: Record<string, SortOrder> = {
+//   LATEST: 'latest',
+//   POPULAR: 'popular',
+//   TOPCOMMENTS: 'topComments',
+// };
+
+export const SORT_OPTIONS: Array<FilterOption<SortOrder>> = [
+  { label: 'Latest', value: 'latest' },
+  { label: 'Popular', value: 'popular' },
+  { label: 'Top Comments', value: 'topComments' },
+];
 
 export const ROLES: Array<FilterOption<RoleFilter>> = [
   {

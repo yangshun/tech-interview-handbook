@@ -38,7 +38,7 @@ import useDebounceValue from '~/utils/resumes/useDebounceValue';
 import useSearchParams from '~/utils/resumes/useSearchParams';
 import { trpc } from '~/utils/trpc';
 
-import type { FilterState } from '../../utils/resumes/resumeFilters';
+import type { FilterState, SortOrder } from '../../utils/resumes/resumeFilters';
 
 const STALE_TIME = 5 * 60 * 1000;
 const DEBOUNCE_DELAY = 800;
@@ -102,9 +102,9 @@ export default function ResumeHomePage() {
     'tabsValue',
     BROWSE_TABS_VALUES.ALL,
   );
-  const [sortOrder, setSortOrder, isSortOrderInit] = useSearchParams(
+  const [sortOrder, setSortOrder, isSortOrderInit] = useSearchParams<SortOrder>(
     'sortOrder',
-    SORT_OPTIONS.LATEST,
+    'latest',
   );
   const [searchValue, setSearchValue, isSearchValueInit] = useSearchParams(
     'searchValue',
@@ -491,7 +491,7 @@ export default function ResumeHomePage() {
                             {filter.options.map((option) => (
                               <div
                                 key={option.value}
-                                className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 [&>div>div:nth-child(2)>label]:font-normal">
+                                className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 px-1 [&>div>div:nth-child(2)>label]:font-normal">
                                 <CheckboxInput
                                   label={option.label}
                                   value={userFilters[filter.id].includes(
@@ -563,12 +563,17 @@ export default function ResumeHomePage() {
                   />
                 </div>
                 <div>
-                  <DropdownMenu align="end" label={SORT_OPTIONS[sortOrder]}>
-                    {Object.entries(SORT_OPTIONS).map(([key, value]) => (
+                  <DropdownMenu
+                    align="end"
+                    label={
+                      SORT_OPTIONS.find(({ value }) => value === sortOrder)
+                        ?.label
+                    }>
+                    {SORT_OPTIONS.map(({ label, value }) => (
                       <DropdownMenu.Item
-                        key={key}
-                        isSelected={sortOrder === key}
-                        label={value}
+                        key={value}
+                        isSelected={sortOrder === value}
+                        label={label}
                         onClick={() => setSortOrder(value)}></DropdownMenu.Item>
                     ))}
                   </DropdownMenu>
