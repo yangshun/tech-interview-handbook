@@ -73,7 +73,7 @@ export const offersRouter = createRouter().query('list', {
     const order = getOrder(input.sortBy.charAt(0));
     const sortingKey = input.sortBy.substring(1);
 
-    let data = !yoeRange
+    const data = !yoeRange
       ? await ctx.prisma.offersOffer.findMany({
           // Internship
           include: {
@@ -303,11 +303,18 @@ export const offersRouter = createRouter().query('list', {
           },
         });
 
+    const startRecordIndex: number = input.limit * input.offset;
+    const endRecordIndex: number =
+      startRecordIndex + input.limit <= data.length
+        ? startRecordIndex + input.limit
+        : data.length;
+    let paginatedData = data.slice(startRecordIndex, endRecordIndex);
+
     // CONVERTING
     const currency = input.currency?.toUpperCase();
     if (currency != null && currency in Currency) {
-      data = await Promise.all(
-        data.map(async (offer) => {
+      paginatedData = await Promise.all(
+        paginatedData.map(async (offer) => {
           if (offer.offersFullTime?.totalCompensation != null) {
             offer.offersFullTime.totalCompensation.value =
               await convertWithDate(
@@ -366,13 +373,6 @@ export const offersRouter = createRouter().query('list', {
         }),
       );
     }
-
-    const startRecordIndex: number = input.limit * input.offset;
-    const endRecordIndex: number =
-      startRecordIndex + input.limit <= data.length
-        ? startRecordIndex + input.limit
-        : data.length;
-    const paginatedData = data.slice(startRecordIndex, endRecordIndex);
 
     return getOffersResponseMapper(
       paginatedData.map((offer) => dashboardOfferDtoMapper(offer)),
