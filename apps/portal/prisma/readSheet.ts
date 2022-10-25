@@ -88,6 +88,23 @@ const getYoe = (type: string) => {
   }
 };
 
+const getLevel = (type: string) => {
+  const processedType = type.toUpperCase().trim();
+
+  if (
+    processedType.includes('FRESH GRAD') ||
+    processedType.includes('JUNIOR')
+  ) {
+    return 'L1';
+  } else if (processedType.includes('MID')) {
+    return 'L2';
+  } else if (processedType.includes('SENIOR')) {
+    return 'L4';
+  } else {
+    return 'L0';
+  }
+};
+
 const createdProfileIds: Array<string> = [];
 
 const seedSalaries = async () => {
@@ -108,6 +125,7 @@ const seedSalaries = async () => {
 
         const jobTitle = getJobTitle(data.Role);
         const yoe = getYoe(data.Type);
+        const level = getLevel(data.Type);
 
         // check if we have company id
         if (companyIdMappings[data.Company]) {
@@ -229,7 +247,7 @@ const seedSalaries = async () => {
                               : 0,
                           },
                         },
-                        level: data.Type,
+                        level: level,
                         stocks: {
                           create: {
                             baseCurrency: baseCurrencyString,
