@@ -209,17 +209,13 @@ export const questionsQuestionRouter = createProtectedRouter()
         .join(' | ');
 
       const relatedQuestions = (await ctx.prisma.$queryRaw`
-        SELECT * FROM "QuestionsQuestion"
-        WHERE "contentSearch" @@ to_tsquery(${query})
-        ORDER BY ts_rank("contentSearch", to_tsquery(${query})) DESC
+        SELECT "id", "userId", "content", "createdAt", "updatedAt", "questionType", "lastSeenAt", "upvotes" FROM "QuestionsQuestion"
+        WHERE
+          "contentSearch" @@ to_tsquery('english', ${query})
+        ORDER BY ts_rank("contentSearch", to_tsquery('english', ${query})) DESC
       `) as Array<QuestionsQuestion>;
 
-      // Dummy data to make this return something
-      return await ctx.prisma.questionsQuestion.findMany({
-        take: 5,
-      });
-
-      // Return relatedQuestions;
+      return relatedQuestions;
     },
   })
   .mutation('create', {

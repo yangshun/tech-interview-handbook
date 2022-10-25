@@ -200,10 +200,13 @@ export default function ContributeQuestionForm({
           {similarQuestions?.map((question) => (
             <SimilarQuestionCard
               key={question.id}
-              content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up. Given an array of integers nums and an integer target, return indices"
+              content={question.content}
               questionId={question.id}
-              timestamp="Today"
-              type="CODING"
+              timestamp={question.lastSeenAt.toLocaleDateString(undefined, {
+                month: 'short',
+                year: 'numeric',
+              })}
+              type={question.questionType}
               onSimilarQuestionClick={() => {
                 // eslint-disable-next-line no-console
                 console.log('hi!');
