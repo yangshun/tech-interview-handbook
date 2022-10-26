@@ -39,7 +39,7 @@ export type Filter = {
 export type FilterState = Partial<CustomFilter> &
   Record<FilterId, Array<FilterValue>>;
 
-export type SortOrder = 'latest' | 'popular' | 'topComments';
+export type SortOrder = 'latest' | 'mostComments' | 'popular';
 
 export type Shortcut = {
   customFilters?: CustomFilter;
@@ -63,7 +63,7 @@ export const BROWSE_TABS_VALUES = {
 export const SORT_OPTIONS: Array<FilterOption<SortOrder>> = [
   { label: 'Latest', value: 'latest' },
   { label: 'Popular', value: 'popular' },
-  { label: 'Top Comments', value: 'topComments' },
+  { label: 'Most Comments', value: 'mostComments' },
 ];
 
 export const ROLES: Array<FilterOption<RoleFilter>> = [
