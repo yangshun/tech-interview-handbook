@@ -184,7 +184,7 @@ export default function QuestionsBrowsePage() {
 
   const utils = trpc.useContext();
   const { mutate: createQuestion } = trpc.useMutation(
-    'questions.questions.create',
+    'questions.questions.user.create',
     {
       onSuccess: () => {
         utils.invalidateQueries('questions.questions.getQuestionsByFilter');

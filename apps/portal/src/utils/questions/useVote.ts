@@ -71,51 +71,51 @@ type QueryKey = Parameters<typeof trpc.useQuery>[0][0];
 
 export const useQuestionVote = (id: string) => {
   return useVote(id, {
-    create: 'questions.questions.createVote',
-    deleteKey: 'questions.questions.deleteVote',
+    create: 'questions.questions.user.createVote',
+    deleteKey: 'questions.questions.user.deleteVote',
     idKey: 'questionId',
     invalidateKeys: [
       'questions.questions.getQuestionsByFilter',
       'questions.questions.getQuestionById',
     ],
-    query: 'questions.questions.getVote',
-    update: 'questions.questions.updateVote',
+    query: 'questions.questions.user.getVote',
+    update: 'questions.questions.user.updateVote',
   });
 };
 
 export const useAnswerVote = (id: string) => {
   return useVote(id, {
-    create: 'questions.answers.createVote',
-    deleteKey: 'questions.answers.deleteVote',
+    create: 'questions.answers.user.createVote',
+    deleteKey: 'questions.answers.user.deleteVote',
     idKey: 'answerId',
     invalidateKeys: [
       'questions.answers.getAnswers',
       'questions.answers.getAnswerById',
     ],
-    query: 'questions.answers.getVote',
-    update: 'questions.answers.updateVote',
+    query: 'questions.answers.user.getVote',
+    update: 'questions.answers.user.updateVote',
   });
 };
 
 export const useQuestionCommentVote = (id: string) => {
   return useVote(id, {
-    create: 'questions.questions.comments.createVote',
-    deleteKey: 'questions.questions.comments.deleteVote',
+    create: 'questions.questions.comments.user.createVote',
+    deleteKey: 'questions.questions.comments.user.deleteVote',
     idKey: 'questionCommentId',
     invalidateKeys: ['questions.questions.comments.getQuestionComments'],
-    query: 'questions.questions.comments.getVote',
-    update: 'questions.questions.comments.updateVote',
+    query: 'questions.questions.comments.user.getVote',
+    update: 'questions.questions.comments.user.updateVote',
   });
 };
 
 export const useAnswerCommentVote = (id: string) => {
   return useVote(id, {
-    create: 'questions.answers.comments.createVote',
-    deleteKey: 'questions.answers.comments.deleteVote',
+    create: 'questions.answers.comments.user.createVote',
+    deleteKey: 'questions.answers.comments.user.deleteVote',
     idKey: 'answerCommentId',
     invalidateKeys: ['questions.answers.comments.getAnswerComments'],
-    query: 'questions.answers.comments.getVote',
-    update: 'questions.answers.comments.updateVote',
+    query: 'questions.answers.comments.user.getVote',
+    update: 'questions.answers.comments.user.updateVote',
   });
 };
 
