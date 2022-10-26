@@ -38,11 +38,6 @@ export default function AboutUsPage() {
         community of Software Engineers, Hiring Managers and so many more...
       </div>
 
-      {/* For fun, can remove later */}
-      <div className="mt-3 flex w-4/5 text-sm italic xl:w-1/2">
-        Psst...Yangshun might review your resumes...
-      </div>
-
       {/* Feedback */}
       <div className="mt-10 flex w-4/5 text-left text-3xl font-bold xl:w-1/2">
         Feedback? New Features? BUGS?! 😱
