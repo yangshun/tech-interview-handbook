@@ -3,7 +3,7 @@ import { TRPCError } from '@trpc/server';
 
 import { createQuestionWithAggregateData } from '~/utils/questions/server/aggregate-encounters';
 
-import { createProtectedRouter } from './context';
+import { createProtectedRouter } from '../context';
 
 export const questionsListRouter = createProtectedRouter()
   .query('getListsByUser', {

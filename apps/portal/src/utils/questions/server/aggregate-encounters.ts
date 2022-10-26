@@ -5,26 +5,28 @@ import type {
 } from '@prisma/client';
 import { Vote } from '@prisma/client';
 
-import type { Question } from '~/types/questions';
+import type { AggregatedQuestionEncounter, Question } from '~/types/questions';
+
+type AggregatableEncounters = Array<{
+  company: Company | null;
+  location: string;
+  role: string;
+  seenAt: Date;
+}>;
 
 type QuestionWithAggregatableData = QuestionsQuestion & {
   _count: {
     answers: number;
     comments: number;
   };
-  encounters: Array<{
-    company: Company | null;
-    location: string;
-    role: string;
-    seenAt: Date;
-  }>;
+  encounters: AggregatableEncounters;
   user: {
     name: string | null;
   } | null;
   votes: Array<QuestionsQuestionVote>;
 };
 
-export default function createQuestionWithAggregateData(
+export function createQuestionWithAggregateData(
   data: QuestionWithAggregatableData,
 ): Question {
   const votes: number = data.votes.reduce(
@@ -44,13 +46,34 @@ export default function createQuestionWithAggregateData(
     0,
   );
 
+  const question: Question = {
+    aggregatedQuestionEncounters: createAggregatedQuestionEncounter(
+      data.encounters,
+    ),
+    content: data.content,
+    id: data.id,
+    numAnswers: data._count.answers,
+    numComments: data._count.comments,
+    numVotes: votes,
+    receivedCount: data.encounters.length,
+    seenAt: data.encounters[0].seenAt,
+    type: data.questionType,
+    updatedAt: data.updatedAt,
+    user: data.user?.name ?? '',
+  };
+  return question;
+}
+
+export function createAggregatedQuestionEncounter(
+  encounters: AggregatableEncounters,
+): AggregatedQuestionEncounter {
   const companyCounts: Record<string, number> = {};
   const locationCounts: Record<string, number> = {};
   const roleCounts: Record<string, number> = {};
 
-  let latestSeenAt = data.encounters[0].seenAt;
+  let latestSeenAt = encounters[0].seenAt;
 
-  for (const encounter of data.encounters) {
+  for (const encounter of encounters) {
     latestSeenAt =
       latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
 
@@ -70,23 +93,10 @@ export default function createQuestionWithAggregateData(
     roleCounts[encounter.role] += 1;
   }
 
-  const question: Question = {
-    aggregatedQuestionEncounters: {
-      companyCounts,
-      latestSeenAt,
-      locationCounts,
-      roleCounts,
-    },
-    content: data.content,
-    id: data.id,
-    numAnswers: data._count.answers,
-    numComments: data._count.comments,
-    numVotes: votes,
-    receivedCount: data.encounters.length,
-    seenAt: data.encounters[0].seenAt,
-    type: data.questionType,
-    updatedAt: data.updatedAt,
-    user: data.user?.name ?? '',
+  return {
+    companyCounts,
+    latestSeenAt,
+    locationCounts,
+    roleCounts,
   };
-  return question;
 }

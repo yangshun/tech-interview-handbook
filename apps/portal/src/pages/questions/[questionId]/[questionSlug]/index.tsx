@@ -60,7 +60,7 @@ export default function QuestionPage() {
   ]);
 
   const { mutate: addComment } = trpc.useMutation(
-    'questions.questions.comments.create',
+    'questions.questions.comments.user.create',
     {
       onSuccess: () => {
         utils.invalidateQueries(
@@ -75,14 +75,17 @@ export default function QuestionPage() {
     { questionId: questionId as string },
   ]);
 
-  const { mutate: addAnswer } = trpc.useMutation('questions.answers.create', {
-    onSuccess: () => {
-      utils.invalidateQueries('questions.answers.getAnswers');
+  const { mutate: addAnswer } = trpc.useMutation(
+    'questions.answers.user.create',
+    {
+      onSuccess: () => {
+        utils.invalidateQueries('questions.answers.getAnswers');
+      },
     },
-  });
+  );
 
   const { mutate: addEncounter } = trpc.useMutation(
-    'questions.questions.encounters.create',
+    'questions.questions.encounters.user.create',
     {
       onSuccess: () => {
         utils.invalidateQueries(
