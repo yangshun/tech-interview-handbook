@@ -66,10 +66,15 @@ export default function ResumeCommentsList({
 
             return (
               <div key={value} className="space-y-6 pr-4">
-                <div className="text-primary-800 -mb-2 flex flex-row items-center space-x-2">
-                  {renderIcon(value)}
+                <div className="relative flex flex-row items-center px-2 py-2">
+                  <div className="flex-grow border-t border-slate-300" />
 
-                  <div className="w-fit text-lg font-medium">{label}</div>
+                  <div className="text-primary-800 flex flex-row items-center space-x-2 px-4 text-left">
+                    {renderIcon(value)}
+                    <div className="w-fit text-lg font-medium">{label}</div>
+                  </div>
+
+                  <div className="flex-grow border-t border-slate-300" />
                 </div>
 
                 <div
@@ -97,8 +102,6 @@ export default function ResumeCommentsList({
                     </div>
                   )}
                 </div>
-
-                <hr className="border-gray-300" />
               </div>
             );
           })}
