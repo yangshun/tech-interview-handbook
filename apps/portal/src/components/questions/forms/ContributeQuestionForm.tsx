@@ -202,10 +202,12 @@ export default function ContributeQuestionForm({
               key={question.id}
               content={question.content}
               questionId={question.id}
-              timestamp={question.lastSeenAt?.toLocaleDateString(undefined, {
-                month: 'short',
-                year: 'numeric',
-              }) ?? null}
+              timestamp={
+                question.lastSeenAt?.toLocaleDateString(undefined, {
+                  month: 'short',
+                  year: 'numeric',
+                }) ?? null
+              }
               type={question.questionType}
               onSimilarQuestionClick={() => {
                 // eslint-disable-next-line no-console
@@ -213,6 +215,9 @@ export default function ContributeQuestionForm({
               }}
             />
           ))}
+          {similarQuestions?.length === 0 && (
+            <p className="text-slate-900 font-semibold">No similar questions found.</p>
+          )}
         </div>
         <div
           className="bg-primary-50 flex w-full flex-col gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)] sm:flex-row sm:justify-between"
