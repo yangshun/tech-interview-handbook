@@ -24,20 +24,15 @@ export default function ResumePdf({ url }: Props) {
     setNumPages(pdf.numPages);
   };
 
+  const onPageResize = () => {
+    setComponentWidth(
+      document.querySelector('#pdfView')?.getBoundingClientRect().width ?? 780,
+    );
+  };
+
   useEffect(() => {
-    const onPageResize = () => {
-      setComponentWidth(
-        document.querySelector('#pdfView')?.getBoundingClientRect().width ??
-          780,
-      );
-    };
-
-    window.addEventListener('resize', onPageResize);
-
-    return () => {
-      window.removeEventListener('resize', onPageResize);
-    };
-  }, []);
+    onPageResize();
+  }, [pageWidth]);
 
   return (
     <div id="pdfView">
