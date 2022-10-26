@@ -213,7 +213,7 @@ export default function ResumeReviewPage() {
           <Head>
             <title>{detailsQuery.data.title}</title>
           </Head>
-          <main className="h-[calc(100vh-2rem)] flex-1 space-y-2 overflow-y-auto py-4 px-8 xl:px-12 2xl:pr-16">
+          <main className="h-full flex-1 space-y-2 overflow-y-auto py-4 px-8 xl:px-12 2xl:pr-16">
             <div className="flex justify-between">
               <h1 className="pr-2 text-2xl font-semibold leading-7 text-slate-900 sm:truncate sm:text-3xl sm:tracking-tight">
                 {detailsQuery.data.title}
