@@ -14,7 +14,7 @@ export const questionListRouter = createProtectedRouter()
             include: {
               question: true,
             },
-          }
+          },
         },
         orderBy: {
           createdAt: 'asc',
@@ -23,7 +23,7 @@ export const questionListRouter = createProtectedRouter()
           id: userId,
         },
       });
-    }
+    },
   })
   .query('getListById', {
     input: z.object({
@@ -38,7 +38,7 @@ export const questionListRouter = createProtectedRouter()
             include: {
               question: true,
             },
-          }
+          },
         },
         orderBy: {
           createdAt: 'asc',
@@ -47,7 +47,7 @@ export const questionListRouter = createProtectedRouter()
           id: userId,
         },
       });
-    }
+    },
   })
   .mutation('create', {
     input: z.object({
@@ -163,11 +163,12 @@ export const questionListRouter = createProtectedRouter()
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
 
-      const entryToDelete = await ctx.prisma.questionsListQuestionEntry.findUnique({
-        where: {
-          id: input.id,
-        },
-      });
+      const entryToDelete =
+        await ctx.prisma.questionsListQuestionEntry.findUnique({
+          where: {
+            id: input.id,
+          },
+        });
 
       if (entryToDelete?.id !== userId) {
         throw new TRPCError({
@@ -175,7 +176,6 @@ export const questionListRouter = createProtectedRouter()
           message: 'User have no authorization to record.',
         });
       }
-
 
       const listToAugment = await ctx.prisma.questionsList.findUnique({
         where: {

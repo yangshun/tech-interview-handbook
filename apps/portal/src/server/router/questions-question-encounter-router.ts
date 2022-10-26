@@ -6,7 +6,6 @@ import { createProtectedRouter } from './context';
 import type { AggregatedQuestionEncounter } from '~/types/questions';
 import { SortOrder } from '~/types/questions.d';
 
-
 export const questionsQuestionEncounterRouter = createProtectedRouter()
   .query('getAggregatedEncounters', {
     input: z.object({
@@ -32,7 +31,8 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
       for (let i = 0; i < questionEncountersData.length; i++) {
         const encounter = questionEncountersData[i];
 
-        latestSeenAt = latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
+        latestSeenAt =
+          latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
 
         if (!(encounter.company!.name in companyCounts)) {
           companyCounts[encounter.company!.name] = 1;
@@ -82,9 +82,8 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
               ...input,
               userId,
             },
-          })
+          }),
         ]);
-
 
         if (questionToUpdate === null) {
           throw new TRPCError({
@@ -93,10 +92,13 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
           });
         }
 
-        if (!questionToUpdate.lastSeenAt || questionToUpdate.lastSeenAt < input.seenAt) {
+        if (
+          !questionToUpdate.lastSeenAt ||
+          questionToUpdate.lastSeenAt < input.seenAt
+        ) {
           await tx.questionsQuestion.update({
             data: {
-              lastSeenAt : input.seenAt,
+              lastSeenAt: input.seenAt,
             },
             where: {
               id: input.questionId,
@@ -146,23 +148,23 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
             where: {
               id: input.id,
             },
-          })
+          }),
         ]);
 
-
         if (questionToUpdate!.lastSeenAt === questionEncounterToUpdate.seenAt) {
-          const latestEncounter = await ctx.prisma.questionsQuestionEncounter.findFirst({
-            orderBy: {
-              seenAt: SortOrder.DESC,
-            },
-            where: {
-              questionId: questionToUpdate!.id,
-            },
-          });
+          const latestEncounter =
+            await ctx.prisma.questionsQuestionEncounter.findFirst({
+              orderBy: {
+                seenAt: SortOrder.DESC,
+              },
+              where: {
+                questionId: questionToUpdate!.id,
+              },
+            });
 
           await tx.questionsQuestion.update({
             data: {
-              lastSeenAt : latestEncounter!.seenAt,
+              lastSeenAt: latestEncounter!.seenAt,
             },
             where: {
               id: questionToUpdate!.id,
@@ -170,10 +172,8 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
           });
         }
 
-
         return questionEncounterUpdated;
       });
-
     },
   })
   .mutation('delete', {
@@ -208,24 +208,25 @@ export const questionsQuestionEncounterRouter = createProtectedRouter()
             where: {
               id: input.id,
             },
-          })
+          }),
         ]);
 
         if (questionToUpdate!.lastSeenAt === questionEncounterToDelete.seenAt) {
-          const latestEncounter = await ctx.prisma.questionsQuestionEncounter.findFirst({
-            orderBy: {
-              seenAt: SortOrder.DESC,
-            },
-            where: {
-              questionId: questionToUpdate!.id,
-            },
-          });
+          const latestEncounter =
+            await ctx.prisma.questionsQuestionEncounter.findFirst({
+              orderBy: {
+                seenAt: SortOrder.DESC,
+              },
+              where: {
+                questionId: questionToUpdate!.id,
+              },
+            });
 
           const lastSeenVal = latestEncounter ? latestEncounter!.seenAt : null;
 
           await tx.questionsQuestion.update({
             data: {
-              lastSeenAt : lastSeenVal,
+              lastSeenAt: lastSeenVal,
             },
             where: {
               id: questionToUpdate!.id,
