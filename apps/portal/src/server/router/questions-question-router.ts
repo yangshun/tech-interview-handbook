@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import type { QuestionsQuestion } from '@prisma/client';
 import { QuestionsQuestionType, Vote } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
@@ -193,29 +192,6 @@ export const questionsQuestionRouter = createProtectedRouter()
       }
 
       return createQuestionWithAggregateData(questionData);
-    },
-  })
-  .query('getRelatedQuestionsByContent', {
-    input: z.object({
-      content: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const escapeChars = /[()|&:*!]/g;
-
-      const query = input.content
-        .replace(escapeChars, ' ')
-        .trim()
-        .split(/\s+/)
-        .join(' | ');
-
-      const relatedQuestions = (await ctx.prisma.$queryRaw`
-        SELECT "id", "userId", "content", "createdAt", "updatedAt", "questionType", "lastSeenAt", "upvotes" FROM "QuestionsQuestion"
-        WHERE
-          "contentSearch" @@ to_tsquery('english', ${query})
-        ORDER BY ts_rank("contentSearch", to_tsquery('english', ${query})) DESC
-      `) as Array<QuestionsQuestion>;
-
-      return relatedQuestions;
     },
   })
   .mutation('create', {
