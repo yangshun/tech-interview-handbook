@@ -284,18 +284,42 @@ export const offersProfileRouter = createRouter()
                 })),
               },
               experiences: {
-                create: input.background.experiences.map(async (x) => {
-                  if (x.jobType === JobType.FULLTIME) {
-                    if (x.companyId) {
-                      return {
-                        company: {
-                          connect: {
-                            id: x.companyId,
+                create: await Promise.all(
+                  input.background.experiences.map(async (x) => {
+                    if (x.jobType === JobType.FULLTIME) {
+                      if (x.companyId) {
+                        return {
+                          company: {
+                            connect: {
+                              id: x.companyId,
+                            },
                           },
-                        },
+                          durationInMonths: x.durationInMonths,
+                          jobType: x.jobType,
+                          level: x.level,
+                          title: x.title,
+                          totalCompensation:
+                            x.totalCompensation != null
+                              ? {
+                                  create: {
+                                    baseCurrency: baseCurrencyString,
+                                    baseValue: await convert(
+                                      x.totalCompensation.value,
+                                      x.totalCompensation.currency,
+                                      baseCurrencyString,
+                                    ),
+                                    currency: x.totalCompensation.currency,
+                                    value: x.totalCompensation.value,
+                                  },
+                                }
+                              : undefined,
+                        };
+                      }
+                      return {
                         durationInMonths: x.durationInMonths,
                         jobType: x.jobType,
                         level: x.level,
+                        location: x.location,
                         title: x.title,
                         totalCompensation:
                           x.totalCompensation != null
@@ -314,37 +338,35 @@ export const offersProfileRouter = createRouter()
                             : undefined,
                       };
                     }
-                    return {
-                      durationInMonths: x.durationInMonths,
-                      jobType: x.jobType,
-                      level: x.level,
-                      location: x.location,
-                      title: x.title,
-                      totalCompensation:
-                        x.totalCompensation != null
-                          ? {
-                              create: {
-                                baseCurrency: baseCurrencyString,
-                                baseValue: await convert(
-                                  x.totalCompensation.value,
-                                  x.totalCompensation.currency,
-                                  baseCurrencyString,
-                                ),
-                                currency: x.totalCompensation.currency,
-                                value: x.totalCompensation.value,
-                              },
-                            }
-                          : undefined,
-                    };
-                  }
-                  if (x.jobType === JobType.INTERN) {
-                    if (x.companyId) {
-                      return {
-                        company: {
-                          connect: {
-                            id: x.companyId,
+                    if (x.jobType === JobType.INTERN) {
+                      if (x.companyId) {
+                        return {
+                          company: {
+                            connect: {
+                              id: x.companyId,
+                            },
                           },
-                        },
+                          durationInMonths: x.durationInMonths,
+                          jobType: x.jobType,
+                          monthlySalary:
+                            x.monthlySalary != null
+                              ? {
+                                  create: {
+                                    baseCurrency: baseCurrencyString,
+                                    baseValue: await convert(
+                                      x.monthlySalary.value,
+                                      x.monthlySalary.currency,
+                                      baseCurrencyString,
+                                    ),
+                                    currency: x.monthlySalary.currency,
+                                    value: x.monthlySalary.value,
+                                  },
+                                }
+                              : undefined,
+                          title: x.title,
+                        };
+                      }
+                      return {
                         durationInMonths: x.durationInMonths,
                         jobType: x.jobType,
                         monthlySalary:
@@ -365,33 +387,13 @@ export const offersProfileRouter = createRouter()
                         title: x.title,
                       };
                     }
-                    return {
-                      durationInMonths: x.durationInMonths,
-                      jobType: x.jobType,
-                      monthlySalary:
-                        x.monthlySalary != null
-                          ? {
-                              create: {
-                                baseCurrency: baseCurrencyString,
-                                baseValue: await convert(
-                                  x.monthlySalary.value,
-                                  x.monthlySalary.currency,
-                                  baseCurrencyString,
-                                ),
-                                currency: x.monthlySalary.currency,
-                                value: x.monthlySalary.value,
-                              },
-                            }
-                          : undefined,
-                      title: x.title,
-                    };
-                  }
 
-                  throw new trpc.TRPCError({
-                    code: 'BAD_REQUEST',
-                    message: 'Missing fields in background experiences.',
-                  });
-                }),
+                    throw new trpc.TRPCError({
+                      code: 'BAD_REQUEST',
+                      message: 'Missing fields in background experiences.',
+                    });
+                  }),
+                )
               },
               specificYoes: {
                 create: input.background.specificYoes.map((x) => {
@@ -546,7 +548,6 @@ export const offersProfileRouter = createRouter()
           profileName: uniqueName,
         },
       });
-
       return createOfferProfileResponseMapper(profile, token);
     },
   })
