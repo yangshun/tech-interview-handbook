@@ -1,21 +1,43 @@
+export type BreadcrumbStep = {
+  label: string;
+  step?: number;
+};
+
 type BreadcrumbsProps = Readonly<{
   currentStep: number;
-  stepLabels: Array<string>;
+  setStep: (nextStep: number) => void;
+  steps: Array<BreadcrumbStep>;
 }>;
 
-export function Breadcrumbs({ stepLabels, currentStep }: BreadcrumbsProps) {
+function getPrimaryText(text: string) {
+  return <p className="text-primary-700 text-sm">{text}</p>;
+}
+
+function getSlateText(text: string) {
+  return <p className="text-sm text-slate-400">{text}</p>;
+}
+
+function getTextWithLink(text: string, onClickHandler: () => void) {
+  return (
+    <p
+      className="hover:text-primary-700 cursor-pointer text-sm text-slate-400 hover:underline hover:underline-offset-2"
+      onClick={onClickHandler}>
+      {text}
+    </p>
+  );
+}
+
+export function Breadcrumbs({ steps, currentStep, setStep }: BreadcrumbsProps) {
   return (
     <div className="flex space-x-1">
-      {stepLabels.map((label, index) => (
+      {steps.map(({ label, step }, index) => (
         <div key={label} className="flex space-x-1">
-          {index === currentStep ? (
-            <p className="text-primary-700 text-sm">{label}</p>
-          ) : (
-            <p className="text-sm text-slate-400">{label}</p>
-          )}
-          {index !== stepLabels.length - 1 && (
-            <p className="text-sm text-slate-400">{'>'}</p>
-          )}
+          {step === currentStep
+            ? getPrimaryText(label)
+            : step !== undefined
+            ? getTextWithLink(label, () => setStep(step))
+            : getSlateText(label)}
+          {index !== steps.length - 1 && getSlateText('>')}
         </div>
       ))}
     </div>
