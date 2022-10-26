@@ -11,6 +11,7 @@ import { Button } from '@tih/ui';
 
 import { useQuestionVote } from '~/utils/questions/useVote';
 
+import AddToListDropdown from '../../AddToListDropdown';
 import type { CreateQuestionEncounterData } from '../../forms/CreateQuestionEncounterForm';
 import CreateQuestionEncounterForm from '../../forms/CreateQuestionEncounterForm';
 import QuestionAggregateBadge from '../../QuestionAggregateBadge';
@@ -47,6 +48,20 @@ type AnswerStatisticsProps =
       showAnswerStatistics?: false;
     };
 
+type AggregateStatisticsProps =
+  | {
+      companies: Record<string, number>;
+      locations: Record<string, number>;
+      roles: Record<string, number>;
+      showAggregateStatistics: true;
+    }
+  | {
+      companies?: never;
+      locations?: never;
+      roles?: never;
+      showAggregateStatistics?: false;
+    };
+
 type ActionButtonProps =
   | {
       actionButtonLabel: string;
@@ -79,19 +94,26 @@ type CreateEncounterProps =
       showCreateEncounterButton?: false;
     };
 
+type AddToListProps =
+  | {
+      showAddToList: true;
+    }
+  | {
+      showAddToList?: false;
+    };
+
 export type BaseQuestionCardProps = ActionButtonProps &
+  AddToListProps &
+  AggregateStatisticsProps &
   AnswerStatisticsProps &
   CreateEncounterProps &
   DeleteProps &
   ReceivedStatisticsProps &
   UpvoteProps & {
-    companies: Record<string, number>;
     content: string;
-    locations: Record<string, number>;
     questionId: string;
-    roles: Record<string, number>;
     showHover?: boolean;
-    timestamp: string;
+    timestamp: string | null;
     truncateContent?: boolean;
     type: QuestionsQuestionType;
   };
@@ -104,6 +126,7 @@ export default function BaseQuestionCard({
   receivedCount,
   type,
   showVoteButtons,
+  showAggregateStatistics,
   showAnswerStatistics,
   showReceivedStatistics,
   showCreateEncounterButton,
@@ -117,6 +140,7 @@ export default function BaseQuestionCard({
   showHover,
   onReceivedSubmit,
   showDeleteButton,
+  showAddToList,
   onDelete,
   truncateContent = true,
 }: BaseQuestionCardProps) {
@@ -133,20 +157,35 @@ export default function BaseQuestionCard({
           onUpvote={handleUpvote}
         />
       )}
-      <div className="flex flex-col items-start gap-2">
-        <div className="flex items-baseline justify-between">
-          <div className="flex items-baseline gap-2 text-slate-500">
-            <QuestionTypeBadge type={type} />
-            <QuestionAggregateBadge statistics={companies} variant="primary" />
-            <QuestionAggregateBadge statistics={locations} variant="success" />
-            <QuestionAggregateBadge statistics={roles} variant="danger" />
-            <p className="text-xs">{timestamp}</p>
+      <div className="flex flex-1 flex-col items-start gap-2">
+        <div className="flex items-baseline justify-between self-stretch">
+          <div className="flex items-center gap-2 text-slate-500">
+            {showAggregateStatistics && (
+              <>
+                <QuestionTypeBadge type={type} />
+                <QuestionAggregateBadge
+                  statistics={companies}
+                  variant="primary"
+                />
+                <QuestionAggregateBadge
+                  statistics={locations}
+                  variant="success"
+                />
+                <QuestionAggregateBadge statistics={roles} variant="danger" />
+              </>
+            )}
+            {timestamp !== null && <p className="text-xs">{timestamp}</p>}
+            {showAddToList && (
+              <div className="pl-4">
+                <AddToListDropdown questionId={questionId} />
+              </div>
+            )}
           </div>
           {showActionButton && (
             <Button
               label={actionButtonLabel}
               size="sm"
-              variant="tertiary"
+              variant="secondary"
               onClick={onActionButtonClick}
             />
           )}

@@ -6,6 +6,7 @@ import BaseQuestionCard from './BaseQuestionCard';
 export type QuestionOverviewCardProps = Omit<
   BaseQuestionCardProps & {
     showActionButton: false;
+    showAggregateStatistics: true;
     showAnswerStatistics: true;
     showCreateEncounterButton: false;
     showDeleteButton: false;
@@ -16,6 +17,7 @@ export type QuestionOverviewCardProps = Omit<
   | 'onActionButtonClick'
   | 'onDelete'
   | 'showActionButton'
+  | 'showAggregateStatistics'
   | 'showAnswerStatistics'
   | 'showCreateEncounterButton'
   | 'showDeleteButton'
@@ -28,6 +30,7 @@ function QuestionOverviewCardWithoutHref(props: QuestionOverviewCardProps) {
     <BaseQuestionCard
       {...props}
       showActionButton={false}
+      showAggregateStatistics={true}
       showAnswerStatistics={true}
       showCreateEncounterButton={false}
       showDeleteButton={false}

@@ -8,60 +8,90 @@ import {
 } from '@heroicons/react/24/outline';
 
 import QuestionListCard from '~/components/questions/card/question/QuestionListCard';
+import type { CreateListFormData } from '~/components/questions/CreateListDialog';
+import CreateListDialog from '~/components/questions/CreateListDialog';
+import DeleteListDialog from '~/components/questions/DeleteListDialog';
 
 import { Button } from '~/../../../packages/ui/dist';
 import { APP_TITLE } from '~/utils/questions/constants';
-import { SAMPLE_QUESTION } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
+import { trpc } from '~/utils/trpc';
 
 export default function ListPage() {
-  const questions = [
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-    SAMPLE_QUESTION,
-  ];
-
-  const lists = [
-    { id: 1, name: 'list 1', questions },
-    { id: 2, name: 'list 2', questions },
-    { id: 3, name: 'list 3', questions },
-    { id: 4, name: 'list 4', questions },
-    { id: 5, name: 'list 5', questions },
-  ];
-
-  const [selectedList, setSelectedList] = useState(
-    (lists ?? []).length > 0 ? lists[0].id : '',
+  const utils = trpc.useContext();
+  const { data: lists } = trpc.useQuery(['questions.lists.getListsByUser']);
+  const { mutateAsync: createList } = trpc.useMutation(
+    'questions.lists.create',
+    {
+      onSuccess: () => {
+        // TODO: Add optimistic update
+        utils.invalidateQueries(['questions.lists.getListsByUser']);
+      },
+    },
   );
+  const { mutateAsync: deleteList } = trpc.useMutation(
+    'questions.lists.delete',
+    {
+      onSuccess: () => {
+        // TODO: Add optimistic update
+        utils.invalidateQueries(['questions.lists.getListsByUser']);
+      },
+    },
+  );
+  const { mutateAsync: deleteQuestionEntry } = trpc.useMutation(
+    'questions.lists.deleteQuestionEntry',
+    {
+      onSuccess: () => {
+        // TODO: Add optimistic update
+        utils.invalidateQueries(['questions.lists.getListsByUser']);
+      },
+    },
+  );
+
+  const [selectedListIndex, setSelectedListIndex] = useState(0);
+  const [showDeleteListDialog, setShowDeleteListDialog] = useState(false);
+  const [showCreateListDialog, setShowCreateListDialog] = useState(false);
+
+  const [listIdToDelete, setListIdToDelete] = useState('');
+
+  const handleDeleteList = async (listId: string) => {
+    await deleteList({
+      id: listId,
+    });
+    setShowDeleteListDialog(false);
+  };
+
+  const handleDeleteListCancel = () => {
+    setShowDeleteListDialog(false);
+  };
+
+  const handleCreateList = async (data: CreateListFormData) => {
+    await createList({
+      name: data.name,
+    });
+    setShowCreateListDialog(false);
+  };
+
+  const handleCreateListCancel = () => {
+    setShowCreateListDialog(false);
+  };
+
   const listOptions = (
     <>
       <ul className="flex flex-1 flex-col divide-y divide-solid divide-slate-200">
-        {lists.map((list) => (
+        {(lists ?? []).map((list, index) => (
           <li
             key={list.id}
             className={`flex items-center hover:bg-slate-50 ${
-              selectedList === list.id ? 'bg-primary-100' : ''
+              selectedListIndex === index ? 'bg-primary-100' : ''
             }`}>
             <button
               className="flex w-full flex-1 justify-between  "
               type="button"
               onClick={() => {
-                setSelectedList(list.id);
-                // eslint-disable-next-line no-console
-                console.log(selectedList);
+                setSelectedListIndex(index);
               }}>
-              <p className="text-primary-700 text-md p-3 font-medium">
+              <p className="text-primary-700 text-md p-3 pl-6 font-medium">
                 {list.name}
               </p>
             </button>
@@ -85,7 +115,11 @@ export default function ListPage() {
                               ? 'bg-violet-500 text-white'
                               : 'text-slate-900'
                           } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                          type="button">
+                          type="button"
+                          onClick={() => {
+                            setShowDeleteListDialog(true);
+                            setListIdToDelete(list.id);
+                          }}>
                           Delete
                         </button>
                       )}
@@ -104,6 +138,7 @@ export default function ListPage() {
       )}
     </>
   );
+
   return (
     <>
       <Head>
@@ -111,7 +146,7 @@ export default function ListPage() {
       </Head>
       <main className="flex flex-1 flex-col items-stretch">
         <div className="flex h-full flex-1">
-          <aside className="w-[300px] overflow-y-auto border-l bg-white py-4 lg:block">
+          <aside className="w-[300px] overflow-y-auto border-r bg-white py-4 lg:block">
             <div className="mb-2 flex items-center justify-between">
               <h2 className="px-4 text-xl font-semibold">My Lists</h2>
               <div className="px-4">
@@ -124,6 +159,7 @@ export default function ListPage() {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
+                    setShowCreateListDialog(true);
                   }}
                 />
               </div>
@@ -133,44 +169,63 @@ export default function ListPage() {
           <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
             <div className="flex min-h-0 max-w-3xl flex-1 p-4">
               <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
-                {selectedList && (
+                {lists?.[selectedListIndex] && (
                   <div className="flex flex-col gap-4 pb-4">
-                    {(questions ?? []).map((question) => (
-                      <QuestionListCard
-                        key={question.id}
-                        companies={question.companies}
-                        content={question.content}
-                        href={`/questions/${question.id}/${createSlug(
-                          question.content,
-                        )}`}
-                        locations={question.locations}
-                        questionId={question.id}
-                        receivedCount={0}
-                        roles={question.roles}
-                        timestamp={question.seenAt.toLocaleDateString(
-                          undefined,
-                          {
-                            month: 'short',
-                            year: 'numeric',
-                          },
-                        )}
-                        type={question.type}
-                        onDelete={() => {
-                          // eslint-disable-next-line no-console
-                          console.log('delete');
-                        }}
-                      />
-                    ))}
-                    {questions?.length === 0 && (
+                    {lists[selectedListIndex].questionEntries.map(
+                      ({ question, id: entryId }) => (
+                        <QuestionListCard
+                          key={question.id}
+                          companies={
+                            question.aggregatedQuestionEncounters.companyCounts
+                          }
+                          content={question.content}
+                          href={`/questions/${question.id}/${createSlug(
+                            question.content,
+                          )}`}
+                          locations={
+                            question.aggregatedQuestionEncounters.locationCounts
+                          }
+                          questionId={question.id}
+                          receivedCount={question.receivedCount}
+                          roles={
+                            question.aggregatedQuestionEncounters.roleCounts
+                          }
+                          timestamp={question.seenAt.toLocaleDateString(
+                            undefined,
+                            {
+                              month: 'short',
+                              year: 'numeric',
+                            },
+                          )}
+                          type={question.type}
+                          onDelete={() => {
+                            deleteQuestionEntry({ id: entryId });
+                          }}
+                        />
+                      ),
+                    )}
+                    {lists[selectedListIndex].questionEntries?.length === 0 && (
                       <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
                         <NoSymbolIcon className="h-6 w-6" />
-                        <p>You have no added any questions to your list yet.</p>
+                        <p>
+                          You have not added any questions to your list yet.
+                        </p>
                       </div>
                     )}
                   </div>
                 )}
               </div>
             </div>
+            <DeleteListDialog
+              show={showDeleteListDialog}
+              onCancel={handleDeleteListCancel}
+              onDelete={() => {
+                handleDeleteList(listIdToDelete);
+              }}></DeleteListDialog>
+            <CreateListDialog
+              show={showCreateListDialog}
+              onCancel={handleCreateListCancel}
+              onSubmit={handleCreateList}></CreateListDialog>
           </section>
         </div>
       </main>

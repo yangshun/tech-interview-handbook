@@ -9,7 +9,6 @@ import { Button, SlideOut } from '@tih/ui';
 
 import QuestionOverviewCard from '~/components/questions/card/question/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
-import type { FilterOption } from '~/components/questions/filter/FilterSection';
 import FilterSection from '~/components/questions/filter/FilterSection';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 import CompanyTypeahead from '~/components/questions/typeahead/CompanyTypeahead';
@@ -195,18 +194,6 @@ export default function QuestionsBrowsePage() {
   const [loaded, setLoaded] = useState(false);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
 
-  const [selectedCompanyOptions, setSelectedCompanyOptions] = useState<
-    Array<FilterOption>
-  >([]);
-
-  const [selectedRoleOptions, setSelectedRoleOptions] = useState<
-    Array<FilterOption>
-  >([]);
-
-  const [selectedLocationOptions, setSelectedLocationOptions] = useState<
-    Array<FilterOption>
-  >([]);
-
   const questionTypeFilterOptions = useMemo(() => {
     return QUESTION_TYPES.map((questionType) => ({
       ...questionType,
@@ -275,9 +262,37 @@ export default function QuestionsBrowsePage() {
     sortType,
   ]);
 
+  const selectedCompanyOptions = useMemo(() => {
+    return selectedCompanies.map((company) => ({
+      checked: true,
+      id: company,
+      label: company,
+      value: company,
+    }));
+  }, [selectedCompanies]);
+
+  const selectedRoleOptions = useMemo(() => {
+    return selectedRoles.map((role) => ({
+      checked: true,
+      id: role,
+      label: role,
+      value: role,
+    }));
+  }, [selectedRoles]);
+
+  const selectedLocationOptions = useMemo(() => {
+    return selectedLocations.map((location) => ({
+      checked: true,
+      id: location,
+      label: location,
+      value: location,
+    }));
+  }, [selectedLocations]);
+
   if (!loaded) {
     return null;
   }
+
   const filterSidebar = (
     <div className="divide-y divide-slate-200 px-4">
       <Button
@@ -293,9 +308,6 @@ export default function QuestionsBrowsePage() {
           setSelectedQuestionAge('all');
           setSelectedRoles([]);
           setSelectedLocations([]);
-          setSelectedCompanyOptions([]);
-          setSelectedRoleOptions([]);
-          setSelectedLocationOptions([]);
         }}
       />
       <FilterSection
@@ -306,8 +318,8 @@ export default function QuestionsBrowsePage() {
             {...field}
             clearOnSelect={true}
             filterOption={(option) => {
-              return !selectedCompanyOptions.some((selectedOption) => {
-                return selectedOption.value === option.value;
+              return !selectedCompanies.some((company) => {
+                return company === option.value;
               });
             }}
             isLabelHidden={true}
@@ -323,18 +335,9 @@ export default function QuestionsBrowsePage() {
         onOptionChange={(option) => {
           if (option.checked) {
             setSelectedCompanies([...selectedCompanies, option.label]);
-            setSelectedCompanyOptions((prevOptions) => [
-              ...prevOptions,
-              { ...option, checked: true },
-            ]);
           } else {
             setSelectedCompanies(
               selectedCompanies.filter((company) => company !== option.label),
-            );
-            setSelectedCompanyOptions((prevOptions) =>
-              prevOptions.filter(
-                (prevOption) => prevOption.label !== option.label,
-              ),
             );
           }
         }}
@@ -347,8 +350,8 @@ export default function QuestionsBrowsePage() {
             {...field}
             clearOnSelect={true}
             filterOption={(option) => {
-              return !selectedRoleOptions.some((selectedOption) => {
-                return selectedOption.value === option.value;
+              return !selectedRoles.some((role) => {
+                return role === option.value;
               });
             }}
             isLabelHidden={true}
@@ -364,18 +367,9 @@ export default function QuestionsBrowsePage() {
         onOptionChange={(option) => {
           if (option.checked) {
             setSelectedRoles([...selectedRoles, option.value]);
-            setSelectedRoleOptions((prevOptions) => [
-              ...prevOptions,
-              { ...option, checked: true },
-            ]);
           } else {
             setSelectedRoles(
               selectedCompanies.filter((role) => role !== option.value),
-            );
-            setSelectedRoleOptions((prevOptions) =>
-              prevOptions.filter(
-                (prevOption) => prevOption.value !== option.value,
-              ),
             );
           }
         }}
@@ -413,8 +407,8 @@ export default function QuestionsBrowsePage() {
             {...field}
             clearOnSelect={true}
             filterOption={(option) => {
-              return !selectedLocationOptions.some((selectedOption) => {
-                return selectedOption.value === option.value;
+              return !selectedLocations.some((location) => {
+                return location === option.value;
               });
             }}
             isLabelHidden={true}
@@ -430,18 +424,9 @@ export default function QuestionsBrowsePage() {
         onOptionChange={(option) => {
           if (option.checked) {
             setSelectedLocations([...selectedLocations, option.value]);
-            setSelectedLocationOptions((prevOptions) => [
-              ...prevOptions,
-              { ...option, checked: true },
-            ]);
           } else {
             setSelectedLocations(
               selectedLocations.filter((role) => role !== option.value),
-            );
-            setSelectedLocationOptions((prevOptions) =>
-              prevOptions.filter(
-                (prevOption) => prevOption.value !== option.value,
-              ),
             );
           }
         }}

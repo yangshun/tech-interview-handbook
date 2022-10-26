@@ -47,8 +47,8 @@ export const appRouter = createRouter()
   .merge('questions.answers.comments.', questionsAnswerCommentRouter)
   .merge('questions.answers.comments.user.', questionsAnswerCommentUserRouter)
   .merge('questions.answers.', questionsAnswerRouter)
-  .merge('questions.lists.', questionsListRouter)
   .merge('questions.answers.user.', questionsAnswerUserRouter)
+  .merge('questions.lists.', questionsListRouter)
   .merge('questions.questions.comments.', questionsQuestionCommentRouter)
   .merge(
     'questions.questions.comments.user.',

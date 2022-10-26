@@ -118,7 +118,7 @@ export default function LandingComponent({
             onClick={() => {
               if (company !== undefined && location !== undefined) {
                 return handleLandingQuery({
-                  company: company.value,
+                  company: company.label,
                   location: location.value,
                   questionType,
                 });

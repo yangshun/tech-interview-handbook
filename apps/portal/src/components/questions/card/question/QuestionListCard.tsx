@@ -6,6 +6,7 @@ import BaseQuestionCard from './BaseQuestionCard';
 export type QuestionListCardProps = Omit<
   BaseQuestionCardProps & {
     showActionButton: false;
+    showAggregateStatistics: true;
     showAnswerStatistics: false;
     showDeleteButton: true;
     showVoteButtons: false;
@@ -13,6 +14,7 @@ export type QuestionListCardProps = Omit<
   | 'actionButtonLabel'
   | 'onActionButtonClick'
   | 'showActionButton'
+  | 'showAggregateStatistics'
   | 'showAnswerStatistics'
   | 'showDeleteButton'
   | 'showVoteButtons'
@@ -24,6 +26,7 @@ function QuestionListCardWithoutHref(props: QuestionListCardProps) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       {...(props as any)}
       showActionButton={false}
+      showAggregateStatistics={true}
       showAnswerStatistics={false}
       showDeleteButton={true}
       showHover={true}
