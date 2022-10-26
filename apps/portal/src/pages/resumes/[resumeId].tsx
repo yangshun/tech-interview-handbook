@@ -3,7 +3,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Error from 'next/error';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { signIn, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import {
   AcademicCapIcon,
@@ -142,24 +142,21 @@ export default function ResumeReviewPage() {
   const renderReviewButton = () => {
     if (session === null) {
       return (
-        <div className=" flex h-10 justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-[400] hover:cursor-pointer hover:bg-slate-50">
-          <a
-            href="/api/auth/signin"
-            onClick={(event) => {
-              event.preventDefault();
-              signIn();
-            }}>
-            Sign in to join discussion
-          </a>
-        </div>
+        <Button
+          className="h-10 shadow-md"
+          display="block"
+          href="/api/auth/signin"
+          label="Sign in to join discussion"
+          variant="primary"
+        />
       );
     }
     return (
       <Button
-        className="h-10 py-2 shadow-md"
+        className="h-10 shadow-md"
         display="block"
         label="Add your review"
-        variant="tertiary"
+        variant="primary"
         onClick={() => setShowCommentsForm(true)}
       />
     );
@@ -209,14 +206,15 @@ export default function ResumeReviewPage() {
               </h1>
               <div className="flex gap-3 xl:pr-4">
                 {userIsOwner && (
-                  <button
-                    className="h-10 rounded-md border border-slate-300 bg-white py-1 px-2 text-center shadow-md hover:bg-slate-50"
-                    type="button"
-                    onClick={onEditButtonClick}>
-                    <PencilSquareIcon className="text-primary-600 h-6 w-6" />
-                  </button>
+                  <Button
+                    addonPosition="start"
+                    className="h-10 shadow-md"
+                    icon={PencilSquareIcon}
+                    label="Edit"
+                    variant="tertiary"
+                    onClick={onEditButtonClick}
+                  />
                 )}
-
                 <button
                   className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-md hover:bg-slate-50  disabled:hover:bg-white"
                   disabled={starMutation.isLoading || unstarMutation.isLoading}
@@ -239,13 +237,12 @@ export default function ResumeReviewPage() {
                         />
                       )}
                     </div>
-                    Star
+                    {detailsQuery.data?.stars.length ? 'Starred' : 'Star'}
                   </span>
                   <span className="relative -ml-px inline-flex">
                     {detailsQuery.data?._count.stars}
                   </span>
                 </button>
-
                 <div className="hidden xl:block">{renderReviewButton()}</div>
               </div>
             </div>
@@ -326,20 +323,16 @@ export default function ResumeReviewPage() {
                 <ResumePdf url={detailsQuery.data.url} />
               </div>
               <div className="grow">
-                <div className="relative p-2 xl:hidden">
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-slate-300" />
-                  </div>
-                  <div className="relative flex justify-center">
+                <div className="mb-6 space-y-4 xl:hidden">
+                  {renderReviewButton()}
+                  <div className="flex items-center space-x-2">
+                    <hr className="flex-grow border-slate-300" />
                     <span className="bg-slate-50 px-3 text-lg font-medium text-slate-900">
                       Reviews
                     </span>
+                    <hr className="flex-grow border-slate-300" />
                   </div>
                 </div>
-
-                <div className="mb-4 xl:hidden">{renderReviewButton()}</div>
 
                 {showCommentsForm ? (
                   <ResumeCommentsForm

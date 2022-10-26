@@ -10,6 +10,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import {
+  Button,
   CheckboxInput,
   CheckboxList,
   DropdownMenu,
@@ -540,16 +541,14 @@ export default function ResumeHomePage() {
                     onChange={onTabChange}
                   />
                 </div>
-                <div>
-                  <button
-                    className="bg-primary-500 ml-4 rounded-md py-2 px-3 text-sm font-medium text-white lg:hidden"
-                    type="button"
-                    onClick={onSubmitResume}>
-                    Submit Resume
-                  </button>
-                </div>
+                <Button
+                  className="lg:hidden"
+                  label="Submit Resume"
+                  variant="primary"
+                  onClick={onSubmitResume}
+                />
               </div>
-              <div className="flex flex-wrap items-center justify-start gap-8">
+              <div className="flex flex-wrap items-center justify-start gap-6">
                 <div className="w-64">
                   <TextInput
                     isLabelHidden={true}
@@ -562,37 +561,33 @@ export default function ResumeHomePage() {
                     onChange={setSearchValue}
                   />
                 </div>
-                <div>
-                  <DropdownMenu
-                    align="end"
-                    label={
-                      SORT_OPTIONS.find(({ value }) => value === sortOrder)
-                        ?.label
-                    }>
-                    {SORT_OPTIONS.map(({ label, value }) => (
-                      <DropdownMenu.Item
-                        key={value}
-                        isSelected={sortOrder === value}
-                        label={label}
-                        onClick={() => setSortOrder(value)}></DropdownMenu.Item>
-                    ))}
-                  </DropdownMenu>
-                </div>
-                <button
-                  className="-m-2 text-slate-400 hover:text-slate-500 lg:hidden"
-                  type="button"
-                  onClick={() => setMobileFiltersOpen(true)}>
-                  <span className="sr-only">Filters</span>
-                  <FunnelIcon aria-hidden="true" className="h-6 w-6" />
-                </button>
-                <div>
-                  <button
-                    className="bg-primary-500 hidden w-36 rounded-md py-2 px-3 text-sm font-medium text-white lg:block"
-                    type="button"
-                    onClick={onSubmitResume}>
-                    Submit Resume
-                  </button>
-                </div>
+                <Button
+                  className="lg:hidden"
+                  icon={FunnelIcon}
+                  isLabelHidden={true}
+                  label="Filters"
+                  variant="tertiary"
+                  onClick={() => setMobileFiltersOpen(true)}
+                />
+                <DropdownMenu
+                  align="end"
+                  label={
+                    SORT_OPTIONS.find(({ value }) => value === sortOrder)?.label
+                  }>
+                  {SORT_OPTIONS.map(({ label, value }) => (
+                    <DropdownMenu.Item
+                      key={value}
+                      isSelected={sortOrder === value}
+                      label={label}
+                      onClick={() => setSortOrder(value)}></DropdownMenu.Item>
+                  ))}
+                </DropdownMenu>
+                <Button
+                  className="hidden lg:block"
+                  label="Submit Resume"
+                  variant="primary"
+                  onClick={onSubmitResume}
+                />
               </div>
             </div>
             {isFetchingResumes ? (
