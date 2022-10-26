@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import type { ResumesCommentVote } from '@prisma/client';
 import { Vote } from '@prisma/client';
 
 import { createRouter } from '../context';
