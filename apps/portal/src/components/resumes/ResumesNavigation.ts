@@ -3,15 +3,15 @@ import type { ProductNavigationItems } from '~/components/global/ProductNavigati
 const navigation: ProductNavigationItems = [
   {
     children: [],
-    href: '/resumes/about',
-    name: 'About Us',
-  },
-  {
-    children: [],
     href: '/resumes/browse',
     name: 'Browse',
   },
   { children: [], href: '/resumes/submit', name: 'Submit for review' },
+  {
+    children: [],
+    href: '/resumes/about',
+    name: 'About Us',
+  },
   {
     children: [],
     href: 'https://www.techinterviewhandbook.org/resume/',
