@@ -26,7 +26,9 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
 
   return (
     <nav aria-label="Global" className="flex h-full items-center space-x-8">
-      <Link className="text-primary-700 text-sm font-medium" href={titleHref}>
+      <Link
+        className="hover:text-primary-700 text-sm font-bold text-slate-900"
+        href={titleHref}>
         {title}
       </Link>
       <div className="hidden h-full items-center space-x-8 md:flex">
