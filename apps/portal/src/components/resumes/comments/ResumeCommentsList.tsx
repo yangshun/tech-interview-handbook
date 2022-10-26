@@ -68,11 +68,11 @@ export default function ResumeCommentsList({
               <div key={value} className="space-y-4 pr-4">
                 {/* CommentHeader Section */}
                 <div className="text-primary-800 flex items-center space-x-2">
-                  <hr className="flex-grow border-gray-300" />
+                  <hr className="flex-grow border-slate-800" />
                   {renderIcon(value)}
 
                   <span className="w-fit text-lg font-medium">{label}</span>
-                  <hr className="flex-grow border-gray-300" />
+                  <hr className="flex-grow border-slate-800" />
                 </div>
 
                 {/* Comment Section */}
