@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 import { EyeIcon } from '@heroicons/react/24/outline';
-import { Button } from '@tih/ui';
+import { Button, Spinner } from '@tih/ui';
 
 import type { BreadcrumbStep } from '~/components/offers/Breadcrumb';
 import { Breadcrumbs } from '~/components/offers/Breadcrumb';
@@ -68,46 +68,56 @@ export default function OffersSubmissionResult() {
   }, [step]);
 
   return (
-    <div ref={pageRef} className="fixed h-full w-full overflow-y-scroll">
-      <div className="mb-20 flex justify-center">
-        <div className="my-5 block w-full max-w-screen-md rounded-lg bg-white py-10 px-10 shadow-lg">
-          <div className="mb-4 flex justify-end">
-            <Breadcrumbs
-              currentStep={step}
-              setStep={setStep}
-              steps={breadcrumbSteps}
-            />
+    <>
+      {getAnalysis.isLoading && (
+        <Spinner className="m-10" display="block" size="lg" />
+      )}
+      {!getAnalysis.isLoading && (
+        <div ref={pageRef} className="fixed h-full w-full overflow-y-scroll">
+          <div className="mb-20 flex justify-center">
+            <div className="my-5 block w-full max-w-screen-md rounded-lg bg-white py-10 px-10 shadow-lg">
+              <div className="mb-4 flex justify-end">
+                <Breadcrumbs
+                  currentStep={step}
+                  setStep={setStep}
+                  steps={breadcrumbSteps}
+                />
+              </div>
+              {steps[step]}
+              {step === 0 && (
+                <div className="flex justify-end">
+                  <Button
+                    disabled={false}
+                    icon={ArrowRightIcon}
+                    label="Next"
+                    variant="secondary"
+                    onClick={() => setStep(step + 1)}
+                  />
+                </div>
+              )}
+              {step === 1 && (
+                <div className="flex items-center justify-between">
+                  <Button
+                    icon={ArrowLeftIcon}
+                    label="Previous"
+                    variant="secondary"
+                    onClick={() => setStep(step - 1)}
+                  />
+                  <Button
+                    href={getProfilePath(
+                      offerProfileId as string,
+                      token as string,
+                    )}
+                    icon={EyeIcon}
+                    label="View your profile"
+                    variant="primary"
+                  />
+                </div>
+              )}
+            </div>
           </div>
-          {steps[step]}
-          {step === 0 && (
-            <div className="flex justify-end">
-              <Button
-                disabled={false}
-                icon={ArrowRightIcon}
-                label="Next"
-                variant="secondary"
-                onClick={() => setStep(step + 1)}
-              />
-            </div>
-          )}
-          {step === 1 && (
-            <div className="flex items-center justify-between">
-              <Button
-                icon={ArrowLeftIcon}
-                label="Previous"
-                variant="secondary"
-                onClick={() => setStep(step - 1)}
-              />
-              <Button
-                href={getProfilePath(offerProfileId as string, token as string)}
-                icon={EyeIcon}
-                label="View your profile"
-                variant="primary"
-              />
-            </div>
-          )}
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
