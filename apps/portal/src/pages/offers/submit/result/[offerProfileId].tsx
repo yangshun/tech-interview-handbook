@@ -99,14 +99,10 @@ export default function OffersSubmissionResult() {
                 onClick={() => setStep(step - 1)}
               />
               <Button
+                href={getProfilePath(offerProfileId as string, token as string)}
                 icon={EyeIcon}
                 label="View your profile"
                 variant="primary"
-                onClick={() =>
-                  router.push(
-                    getProfilePath(offerProfileId as string, token as string),
-                  )
-                }
               />
             </div>
           )}
