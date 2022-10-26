@@ -2,9 +2,10 @@ import { z } from 'zod';
 import { QuestionsQuestionType, Vote } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
+import createQuestionWithAggregateData from '~/utils/questions/server/createQuestionWithAggregateData';
+
 import { createProtectedRouter } from './context';
 
-import type { Question } from '~/types/questions';
 import { SortOrder, SortType } from '~/types/questions.d';
 
 export const questionsQuestionRouter = createProtectedRouter()
@@ -122,72 +123,9 @@ export const questionsQuestionRouter = createProtectedRouter()
         },
       });
 
-      const processedQuestionsData = questionsData.map((data) => {
-        const votes: number = data.votes.reduce(
-          (previousValue: number, currentValue) => {
-            let result: number = previousValue;
-
-            switch (currentValue.vote) {
-              case Vote.UPVOTE:
-                result += 1;
-                break;
-              case Vote.DOWNVOTE:
-                result -= 1;
-                break;
-            }
-            return result;
-          },
-          0,
-        );
-
-        const companyCounts: Record<string, number> = {};
-        const locationCounts: Record<string, number> = {};
-        const roleCounts: Record<string, number> = {};
-
-        let latestSeenAt = data.encounters[0].seenAt;
-
-        for (let i = 0; i < data.encounters.length; i++) {
-          const encounter = data.encounters[i];
-
-          latestSeenAt =
-            latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
-
-          if (!(encounter.company!.name in companyCounts)) {
-            companyCounts[encounter.company!.name] = 1;
-          }
-          companyCounts[encounter.company!.name] += 1;
-
-          if (!(encounter.location in locationCounts)) {
-            locationCounts[encounter.location] = 1;
-          }
-          locationCounts[encounter.location] += 1;
-
-          if (!(encounter.role in roleCounts)) {
-            roleCounts[encounter.role] = 1;
-          }
-          roleCounts[encounter.role] += 1;
-        }
-
-        const question: Question = {
-          aggregatedQuestionEncounters: {
-            companyCounts,
-            latestSeenAt,
-            locationCounts,
-            roleCounts,
-          },
-          content: data.content,
-          id: data.id,
-          numAnswers: data._count.answers,
-          numComments: data._count.comments,
-          numVotes: votes,
-          receivedCount: data.encounters.length,
-          seenAt: latestSeenAt,
-          type: data.questionType,
-          updatedAt: data.updatedAt,
-          user: data.user?.name ?? '',
-        };
-        return question;
-      });
+      const processedQuestionsData = questionsData.map(
+        createQuestionWithAggregateData,
+      );
 
       let nextCursor: typeof cursor | undefined = undefined;
 
@@ -252,68 +190,8 @@ export const questionsQuestionRouter = createProtectedRouter()
           message: 'Question not found',
         });
       }
-      const votes: number = questionData.votes.reduce(
-        (previousValue: number, currentValue) => {
-          let result: number = previousValue;
 
-          switch (currentValue.vote) {
-            case Vote.UPVOTE:
-              result += 1;
-              break;
-            case Vote.DOWNVOTE:
-              result -= 1;
-              break;
-          }
-          return result;
-        },
-        0,
-      );
-
-      const companyCounts: Record<string, number> = {};
-      const locationCounts: Record<string, number> = {};
-      const roleCounts: Record<string, number> = {};
-
-      let latestSeenAt = questionData.encounters[0].seenAt;
-
-      for (const encounter of questionData.encounters) {
-        latestSeenAt =
-          latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
-
-        if (!(encounter.company!.name in companyCounts)) {
-          companyCounts[encounter.company!.name] = 1;
-        }
-        companyCounts[encounter.company!.name] += 1;
-
-        if (!(encounter.location in locationCounts)) {
-          locationCounts[encounter.location] = 1;
-        }
-        locationCounts[encounter.location] += 1;
-
-        if (!(encounter.role in roleCounts)) {
-          roleCounts[encounter.role] = 1;
-        }
-        roleCounts[encounter.role] += 1;
-      }
-
-      const question: Question = {
-        aggregatedQuestionEncounters: {
-          companyCounts,
-          latestSeenAt,
-          locationCounts,
-          roleCounts,
-        },
-        content: questionData.content,
-        id: questionData.id,
-        numAnswers: questionData._count.answers,
-        numComments: questionData._count.comments,
-        numVotes: votes,
-        receivedCount: questionData.encounters.length,
-        seenAt: questionData.encounters[0].seenAt,
-        type: questionData.questionType,
-        updatedAt: questionData.updatedAt,
-        user: questionData.user?.name ?? '',
-      };
-      return question;
+      return createQuestionWithAggregateData(questionData);
     },
   })
   .mutation('create', {

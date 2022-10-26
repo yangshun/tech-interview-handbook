@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
 
+import createQuestionWithAggregateData from '~/utils/questions/server/createQuestionWithAggregateData';
+
 import { createProtectedRouter } from './context';
 
 export const questionListRouter = createProtectedRouter()
@@ -8,11 +10,35 @@ export const questionListRouter = createProtectedRouter()
     async resolve({ ctx }) {
       const userId = ctx.session?.user?.id;
 
-      return await ctx.prisma.questionsList.findMany({
+      // TODO: Optimize by not returning question entries
+      const questionsLists = await ctx.prisma.questionsList.findMany({
         include: {
           questionEntries: {
             include: {
-              question: true,
+              question: {
+                include: {
+                  _count: {
+                    select: {
+                      answers: true,
+                      comments: true,
+                    },
+                  },
+                  encounters: {
+                    select: {
+                      company: true,
+                      location: true,
+                      role: true,
+                      seenAt: true,
+                    },
+                  },
+                  user: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                  votes: true,
+                },
+              },
             },
           },
         },
@@ -20,23 +46,57 @@ export const questionListRouter = createProtectedRouter()
           createdAt: 'asc',
         },
         where: {
-          id: userId,
+          userId,
         },
       });
+
+      const lists = questionsLists.map((list) => ({
+        ...list,
+        questionEntries: list.questionEntries.map((entry) => ({
+          ...entry,
+          question: createQuestionWithAggregateData(entry.question),
+        })),
+      }));
+
+      return lists;
     },
   })
   .query('getListById', {
     input: z.object({
       listId: z.string(),
     }),
-    async resolve({ ctx }) {
+    async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
+      const { listId } = input;
 
-      return await ctx.prisma.questionsList.findMany({
+      const questionList = await ctx.prisma.questionsList.findFirst({
         include: {
           questionEntries: {
             include: {
-              question: true,
+              question: {
+                include: {
+                  _count: {
+                    select: {
+                      answers: true,
+                      comments: true,
+                    },
+                  },
+                  encounters: {
+                    select: {
+                      company: true,
+                      location: true,
+                      role: true,
+                      seenAt: true,
+                    },
+                  },
+                  user: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                  votes: true,
+                },
+              },
             },
           },
         },
@@ -44,9 +104,25 @@ export const questionListRouter = createProtectedRouter()
           createdAt: 'asc',
         },
         where: {
-          id: userId,
+          id: listId,
+          userId,
         },
       });
+
+      if (!questionList) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Question list not found',
+        });
+      }
+
+      return {
+        ...questionList,
+        questionEntries: questionList.questionEntries.map((questionEntry) => ({
+          ...questionEntry,
+          question: createQuestionWithAggregateData(questionEntry.question),
+        })),
+      };
     },
   })
   .mutation('create', {
@@ -111,7 +187,7 @@ export const questionListRouter = createProtectedRouter()
         },
       });
 
-      if (listToDelete?.id !== userId) {
+      if (listToDelete?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -139,7 +215,7 @@ export const questionListRouter = createProtectedRouter()
         },
       });
 
-      if (listToAugment?.id !== userId) {
+      if (listToAugment?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -170,10 +246,10 @@ export const questionListRouter = createProtectedRouter()
           },
         });
 
-      if (entryToDelete?.id !== userId) {
+      if (entryToDelete === null) {
         throw new TRPCError({
-          code: 'UNAUTHORIZED',
-          message: 'User have no authorization to record.',
+          code: 'NOT_FOUND',
+          message: 'Entry not found.',
         });
       }
 
@@ -183,7 +259,7 @@ export const questionListRouter = createProtectedRouter()
         },
       });
 
-      if (listToAugment?.id !== userId) {
+      if (listToAugment?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',

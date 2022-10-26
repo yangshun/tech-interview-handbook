@@ -4,7 +4,8 @@ import BaseQuestionCard from './BaseQuestionCard';
 export type SimilarQuestionCardProps = Omit<
   BaseQuestionCardProps & {
     showActionButton: true;
-    showAnswerStatistics: true;
+    showAggregateStatistics: false;
+    showAnswerStatistics: false;
     showCreateEncounterButton: false;
     showDeleteButton: false;
     showHover: true;
@@ -14,6 +15,7 @@ export type SimilarQuestionCardProps = Omit<
   | 'actionButtonLabel'
   | 'onActionButtonClick'
   | 'showActionButton'
+  | 'showAggregateStatistics'
   | 'showAnswerStatistics'
   | 'showCreateEncounterButton'
   | 'showDeleteButton'
@@ -30,12 +32,13 @@ export default function SimilarQuestionCard(props: SimilarQuestionCardProps) {
     <BaseQuestionCard
       actionButtonLabel="Yes, this is my question"
       showActionButton={true}
-      showAnswerStatistics={true}
+      showAggregateStatistics={false}
+      showAnswerStatistics={false}
       showCreateEncounterButton={false}
       showDeleteButton={false}
       showHover={true}
-      showReceivedStatistics={true}
-      showVoteButtons={true}
+      showReceivedStatistics={false}
+      showVoteButtons={false}
       onActionButtonClick={onSimilarQuestionClick}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       {...(rest as any)}
