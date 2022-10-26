@@ -15,7 +15,7 @@ export default function AddToListDropdown({
   questionId,
 }: AddToListDropdownProps) {
   const [menuOpened, setMenuOpened] = useState(false);
-  const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const ref = useRef<HTMLDivElement>(null);
 
   const utils = trpc.useContext();
   const { data: lists } = trpc.useQuery(['questions.lists.getListsByUser']);
@@ -54,7 +54,7 @@ export default function AddToListDropdown({
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (!ref.current.contains(event.target as Node)) {
+    if (ref.current && !ref.current.contains(event.target as Node)) {
       setMenuOpened(false);
       document.removeEventListener('click', handleClickOutside, true);
     }
