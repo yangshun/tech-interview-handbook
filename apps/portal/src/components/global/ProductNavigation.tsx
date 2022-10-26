@@ -27,7 +27,7 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
   return (
     <nav aria-label="Global" className="flex h-full items-center space-x-8">
       <Link
-        className="hover:text-primary-700 text-sm font-bold text-slate-900"
+        className="hover:text-primary-700 text-sm font-medium"
         href={titleHref}>
         {title}
       </Link>
@@ -81,7 +81,7 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
             <Link
               key={item.name}
               className={clsx(
-                'hover:text-primary-600 inline-flex h-full items-center border-y-2 border-t-transparent text-sm font-medium text-slate-900',
+                'hover:text-primary-600 inline-flex h-full items-center border-y-2 border-t-transparent text-sm text-slate-900',
                 isActive ? 'border-b-primary-500' : 'border-b-transparent',
               )}
               href={item.href}
