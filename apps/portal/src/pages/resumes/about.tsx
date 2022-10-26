@@ -52,6 +52,7 @@ export default function AboutUsPage() {
           target="_blank">
           here
         </a>
+        .
       </div>
     </div>
   );

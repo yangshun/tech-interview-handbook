@@ -55,7 +55,7 @@ export default function ResumeCommentsList({
           <Spinner display="block" size="lg" />
         </div>
       ) : (
-        <div className="mb-8 flow-root h-[calc(100vh-13rem)] w-full flex-col space-y-4 overflow-y-auto overflow-x-hidden pb-16">
+        <div className="mb-8 flow-root h-[calc(100vh-13rem)] w-full flex-col space-y-10 overflow-y-auto overflow-x-hidden pb-16">
           {RESUME_COMMENTS_SECTIONS.map(({ label, value }) => {
             const comments = commentsQuery.data
               ? commentsQuery.data.filter((comment: ResumeComment) => {
@@ -65,13 +65,17 @@ export default function ResumeCommentsList({
             const commentCount = comments.length;
 
             return (
-              <div key={value} className="space-y-6 pr-4">
-                <div className="text-primary-800 -mb-2 flex flex-row items-center space-x-2">
+              <div key={value} className="space-y-4 pr-4">
+                {/* CommentHeader Section */}
+                <div className="text-primary-800 flex items-center space-x-2">
+                  <hr className="flex-grow border-gray-300" />
                   {renderIcon(value)}
 
-                  <div className="w-fit text-lg font-medium">{label}</div>
+                  <span className="w-fit text-lg font-medium">{label}</span>
+                  <hr className="flex-grow border-gray-300" />
                 </div>
 
+                {/* Comment Section */}
                 <div
                   className={clsx(
                     'space-y-2 rounded-md border-2 bg-white px-4 py-3 drop-shadow-md',
@@ -97,8 +101,6 @@ export default function ResumeCommentsList({
                     </div>
                   )}
                 </div>
-
-                <hr className="border-gray-300" />
               </div>
             );
           })}
