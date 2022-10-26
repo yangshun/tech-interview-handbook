@@ -415,9 +415,9 @@ model QuestionsQuestion {
   comments   QuestionsQuestionComment[]
   answers    QuestionsAnswer[]
 
-  contentSearch Unsupported("TSVECTOR")?
+  contentSearch Unsupported("tsvector")? @default(dbgenerated())
 
-  @@index([contentSearch])
+  @@index([contentSearch], type: Gin)
   @@index([lastSeenAt, id])
   @@index([upvotes, id])
 }
