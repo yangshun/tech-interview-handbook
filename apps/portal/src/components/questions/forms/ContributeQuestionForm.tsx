@@ -202,10 +202,10 @@ export default function ContributeQuestionForm({
               key={question.id}
               content={question.content}
               questionId={question.id}
-              timestamp={question.lastSeenAt.toLocaleDateString(undefined, {
+              timestamp={question.lastSeenAt?.toLocaleDateString(undefined, {
                 month: 'short',
                 year: 'numeric',
-              })}
+              }) ?? null}
               type={question.questionType}
               onSimilarQuestionClick={() => {
                 // eslint-disable-next-line no-console

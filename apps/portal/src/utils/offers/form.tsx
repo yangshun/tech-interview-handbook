@@ -33,6 +33,33 @@ export function cleanObject(object: any) {
 }
 
 /**
+ * Removes empty objects from an object.
+ * @param object
+ * @returns object without empty values or objects.
+ */
+export function removeEmptyObjects(object: any) {
+  Object.entries(object).forEach(([k, v]) => {
+    if ((v && typeof v === 'object') || Array.isArray(v)) {
+      removeEmptyObjects(v);
+    }
+    if (
+      v &&
+      typeof v === 'object' &&
+      !Object.keys(v).length &&
+      !Array.isArray(v)
+    ) {
+      if (Array.isArray(object)) {
+        const index = object.indexOf(v);
+        object.splice(index, 1);
+      } else if (!(v instanceof Date)) {
+        delete object[k];
+      }
+    }
+  });
+  return object;
+}
+
+/**
  * Removes invalid money data from an object.
  * If currency is present but value is not present, money object is removed.
  * @param object

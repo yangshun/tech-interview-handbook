@@ -4,7 +4,7 @@ export type CustomFilter = {
   numComments: number;
 };
 
-type RoleFilter =
+export type RoleFilter =
   | 'Android Engineer'
   | 'Backend Engineer'
   | 'DevOps Engineer'
@@ -12,7 +12,7 @@ type RoleFilter =
   | 'Full-Stack Engineer'
   | 'iOS Engineer';
 
-type ExperienceFilter =
+export type ExperienceFilter =
   | 'Entry Level (0 - 2 years)'
   | 'Freshman'
   | 'Junior'
@@ -21,7 +21,7 @@ type ExperienceFilter =
   | 'Senior'
   | 'Sophomore';
 
-type LocationFilter = 'India' | 'Singapore' | 'United States';
+export type LocationFilter = 'India' | 'Singapore' | 'United States';
 
 export type FilterValue = ExperienceFilter | LocationFilter | RoleFilter;
 
@@ -39,7 +39,7 @@ export type Filter = {
 export type FilterState = Partial<CustomFilter> &
   Record<FilterId, Array<FilterValue>>;
 
-export type SortOrder = 'latest' | 'popular' | 'topComments';
+export type SortOrder = 'latest' | 'mostComments' | 'popular';
 
 export type Shortcut = {
   customFilters?: CustomFilter;
@@ -54,11 +54,17 @@ export const BROWSE_TABS_VALUES = {
   STARRED: 'starred',
 };
 
-export const SORT_OPTIONS: Record<string, string> = {
-  latest: 'Latest',
-  popular: 'Popular',
-  topComments: 'Most Comments',
-};
+// Export const SORT_OPTIONS: Record<string, SortOrder> = {
+//   LATEST: 'latest',
+//   POPULAR: 'popular',
+//   TOPCOMMENTS: 'topComments',
+// };
+
+export const SORT_OPTIONS: Array<FilterOption<SortOrder>> = [
+  { label: 'Latest', value: 'latest' },
+  { label: 'Popular', value: 'popular' },
+  { label: 'Most Comments', value: 'mostComments' },
+];
 
 export const ROLES: Array<FilterOption<RoleFilter>> = [
   {

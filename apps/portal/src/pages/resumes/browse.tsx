@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import { Dialog, Disclosure, Transition } from '@headlessui/react';
 import { FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
 import {
@@ -20,11 +20,10 @@ import {
 } from '@tih/ui';
 
 import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
-import type {
-  Filter,
-  FilterId,
-  Shortcut,
-} from '~/components/resumes/browse/resumeFilters';
+import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
+import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
+
+import type { Filter, FilterId, Shortcut } from '~/utils/resumes/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCES,
@@ -34,14 +33,12 @@ import {
   ROLES,
   SHORTCUTS,
   SORT_OPTIONS,
-} from '~/components/resumes/browse/resumeFilters';
-import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
-import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
-
+} from '~/utils/resumes/resumeFilters';
 import useDebounceValue from '~/utils/resumes/useDebounceValue';
+import useSearchParams from '~/utils/resumes/useSearchParams';
 import { trpc } from '~/utils/trpc';
 
-import type { FilterState } from '../../components/resumes/browse/resumeFilters';
+import type { FilterState, SortOrder } from '../../utils/resumes/resumeFilters';
 
 const STALE_TIME = 5 * 60 * 1000;
 const DEBOUNCE_DELAY = 800;
@@ -101,19 +98,82 @@ const getEmptyDataText = (
 export default function ResumeHomePage() {
   const { data: sessionData } = useSession();
   const router = useRouter();
-  const [tabsValue, setTabsValue] = useState(BROWSE_TABS_VALUES.ALL);
-  const [sortOrder, setSortOrder] = useState('latest');
-  const [searchValue, setSearchValue] = useState('');
-  const [userFilters, setUserFilters] = useState(INITIAL_FILTER_STATE);
-  const [shortcutSelected, setShortcutSelected] = useState('All');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [tabsValue, setTabsValue, isTabsValueInit] = useSearchParams(
+    'tabsValue',
+    BROWSE_TABS_VALUES.ALL,
+  );
+  const [sortOrder, setSortOrder, isSortOrderInit] = useSearchParams<SortOrder>(
+    'sortOrder',
+    'latest',
+  );
+  const [searchValue, setSearchValue, isSearchValueInit] = useSearchParams(
+    'searchValue',
+    '',
+  );
+  const [shortcutSelected, setShortcutSelected, isShortcutInit] =
+    useSearchParams('shortcutSelected', 'All');
+  const [currentPage, setCurrentPage, isCurrentPageInit] = useSearchParams(
+    'currentPage',
+    1,
+  );
+  const [userFilters, setUserFilters, isUserFiltersInit] = useSearchParams(
+    'userFilters',
+    INITIAL_FILTER_STATE,
+  );
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const skip = (currentPage - 1) * PAGE_LIMIT;
+  const isSearchOptionsInit = useMemo(() => {
+    return (
+      isTabsValueInit &&
+      isSortOrderInit &&
+      isSearchValueInit &&
+      isShortcutInit &&
+      isCurrentPageInit &&
+      isUserFiltersInit
+    );
+  }, [
+    isTabsValueInit,
+    isSortOrderInit,
+    isSearchValueInit,
+    isShortcutInit,
+    isCurrentPageInit,
+    isUserFiltersInit,
+  ]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [userFilters, sortOrder, searchValue]);
+  }, [userFilters, sortOrder, setCurrentPage, searchValue]);
+
+  useEffect(() => {
+    // Router.replace used instead of router.replace to avoid
+    // the page reloading itself since the router.replace
+    // callback changes on every page load
+    if (!isSearchOptionsInit) {
+      return;
+    }
+
+    Router.replace({
+      pathname: router.pathname,
+      query: {
+        currentPage: JSON.stringify(currentPage),
+        searchValue: JSON.stringify(searchValue),
+        shortcutSelected: JSON.stringify(shortcutSelected),
+        sortOrder: JSON.stringify(sortOrder),
+        tabsValue: JSON.stringify(tabsValue),
+        userFilters: JSON.stringify(userFilters),
+      },
+    });
+  }, [
+    tabsValue,
+    sortOrder,
+    searchValue,
+    userFilters,
+    shortcutSelected,
+    currentPage,
+    router.pathname,
+    isSearchOptionsInit,
+  ]);
 
   const allResumesQuery = trpc.useQuery(
     [
@@ -431,7 +491,7 @@ export default function ResumeHomePage() {
                             {filter.options.map((option) => (
                               <div
                                 key={option.value}
-                                className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 [&>div>div:nth-child(2)>label]:font-normal">
+                                className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 px-1 [&>div>div:nth-child(2)>label]:font-normal">
                                 <CheckboxInput
                                   label={option.label}
                                   value={userFilters[filter.id].includes(
@@ -457,7 +517,7 @@ export default function ResumeHomePage() {
             </div>
           </div>
           <div className="relative lg:left-64 lg:w-[calc(100%-16rem)]">
-            <div className="lg:border-grey-200 sticky top-0 z-10 flex flex-wrap items-center justify-between bg-gray-50 pt-6 pb-2 lg:border-b">
+            <div className="lg:border-grey-200 sticky top-0 z-0 flex flex-wrap items-center justify-between pt-6 pb-2 lg:border-b">
               <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none lg:pb-0">
                 <div>
                   <Tabs
@@ -503,13 +563,18 @@ export default function ResumeHomePage() {
                   />
                 </div>
                 <div>
-                  <DropdownMenu align="end" label={SORT_OPTIONS[sortOrder]}>
-                    {Object.entries(SORT_OPTIONS).map(([key, value]) => (
+                  <DropdownMenu
+                    align="end"
+                    label={
+                      SORT_OPTIONS.find(({ value }) => value === sortOrder)
+                        ?.label
+                    }>
+                    {SORT_OPTIONS.map(({ label, value }) => (
                       <DropdownMenu.Item
-                        key={key}
-                        isSelected={sortOrder === key}
-                        label={value}
-                        onClick={() => setSortOrder(key)}></DropdownMenu.Item>
+                        key={value}
+                        isSelected={sortOrder === value}
+                        label={label}
+                        onClick={() => setSortOrder(value)}></DropdownMenu.Item>
                     ))}
                   </DropdownMenu>
                 </div>

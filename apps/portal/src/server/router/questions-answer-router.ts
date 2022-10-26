@@ -341,6 +341,5 @@ export const questionsAnswerRouter = createProtectedRouter()
         }),
       ]);
       return questionsAnswerVote;
-
     },
   });

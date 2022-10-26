@@ -113,7 +113,7 @@ export type BaseQuestionCardProps = ActionButtonProps &
     content: string;
     questionId: string;
     showHover?: boolean;
-    timestamp: string;
+    timestamp: string | null;
     truncateContent?: boolean;
     type: QuestionsQuestionType;
   };
@@ -174,7 +174,7 @@ export default function BaseQuestionCard({
                 <QuestionAggregateBadge statistics={roles} variant="danger" />
               </>
             )}
-            <p className="text-xs">{timestamp}</p>
+            {timestamp !== null && <p className="text-xs">{timestamp}</p>}
             {showAddToList && (
               <div className="pl-4">
                 <AddToListDropdown questionId={questionId} />

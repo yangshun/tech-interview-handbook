@@ -281,6 +281,5 @@ export const questionsAnswerCommentRouter = createProtectedRouter()
         }),
       ]);
       return answerCommentVote;
-
     },
   });

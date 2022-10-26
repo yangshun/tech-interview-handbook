@@ -168,7 +168,7 @@ export const questionsQuestionCommentRouter = createProtectedRouter()
 
       const incrementValue: number = vote === Vote.UPVOTE ? 1 : -1;
 
-      const [ questionCommentVote ] = await ctx.prisma.$transaction([
+      const [questionCommentVote] = await ctx.prisma.$transaction([
         ctx.prisma.questionsQuestionCommentVote.create({
           data: {
             questionCommentId,
