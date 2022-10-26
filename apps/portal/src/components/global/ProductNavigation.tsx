@@ -27,8 +27,11 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
   return (
     <nav aria-label="Global" className="flex h-full items-center space-x-8">
       <Link
-        className="hover:text-primary-700 text-sm font-medium"
+        className="hover:text-primary-700 flex items-center gap-2 text-sm font-semibold"
         href={titleHref}>
+        {titleHref !== '/' && (
+          <img alt="TIH" className="h-8 w-auto" src="/logo.svg" />
+        )}
         {title}
       </Link>
       <div className="hidden h-full items-center space-x-8 md:flex">
