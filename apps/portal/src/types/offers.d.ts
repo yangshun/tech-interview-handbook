@@ -183,3 +183,22 @@ export type AddToProfileResponse = {
   profileName: string;
   userId: string;
 };
+
+export type UserProfile = {
+  createdAt: Date;
+  id: string;
+  offers: Array<UserProfileOffers>;
+  profileName: string;
+  token: string;
+}
+
+export type UserProfileOffer = {
+  company: OffersCompany;
+  id: string;
+  income: Valuation;
+  jobType: JobType;
+  level: string;
+  location: string;
+  monthYearReceived: Date;
+  title: string;
+}
