@@ -1,5 +1,6 @@
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
-import { HorizontalDivider, Select, Spinner, Tabs } from '@tih/ui';
+import { DropdownMenu, Spinner } from '@tih/ui';
 
 import OffersTablePagination from '~/components/offers/table/OffersTablePagination';
 import {
@@ -71,55 +72,84 @@ export default function OffersTable({
     },
   );
 
-  function renderTabs() {
-    return (
-      <div className="flex justify-center">
-        <div className="w-fit">
-          <Tabs
-            label="Table Navigation"
-            tabs={OfferTableTabOptions}
-            value={selectedTab}
-            onChange={(value) => setSelectedTab(value)}
-          />
-        </div>
-      </div>
-    );
-  }
-
   function renderFilters() {
     return (
       <div className="m-4 flex items-center justify-between">
-        <div className="justify-left flex items-center space-x-2">
-          <span>All offers in</span>
-          <CurrencySelector
-            handleCurrencyChange={(value: string) => setCurrency(value)}
-            selectedCurrency={currency}
-          />
+        <DropdownMenu
+          align="start"
+          label={
+            OfferTableTabOptions.filter(
+              ({ value: itemValue }) => itemValue === selectedTab,
+            )[0].label
+          }
+          size="inherit">
+          {OfferTableTabOptions.map(({ label: itemLabel, value }) => (
+            <DropdownMenu.Item
+              key={value}
+              isSelected={value === selectedTab}
+              label={itemLabel}
+              onClick={() => {
+                setSelectedTab(value);
+              }}
+            />
+          ))}
+        </DropdownMenu>
+        <div className="divide-x-slate-200 flex items-center space-x-4 divide-x">
+          <div className="justify-left flex items-center space-x-2">
+            <span>All offers in</span>
+            <CurrencySelector
+              handleCurrencyChange={(value: string) => setCurrency(value)}
+              selectedCurrency={currency}
+            />
+          </div>
+          <div className="pl-4">
+            <DropdownMenu
+              align="end"
+              label={
+                OfferTableFilterOptions.filter(
+                  ({ value: itemValue }) => itemValue === selectedFilter,
+                )[0].label
+              }
+              size="inherit">
+              {OfferTableFilterOptions.map(({ label: itemLabel, value }) => (
+                <DropdownMenu.Item
+                  key={value}
+                  isSelected={value === selectedFilter}
+                  label={itemLabel}
+                  onClick={() => {
+                    setSelectedFilter(value);
+                  }}
+                />
+              ))}
+            </DropdownMenu>
+          </div>
         </div>
-        <Select
-          isLabelHidden={true}
-          label=""
-          options={OfferTableFilterOptions}
-          value={selectedFilter}
-          onChange={(value) => setSelectedFilter(value)}
-        />
       </div>
     );
   }
 
   function renderHeader() {
+    const columns = [
+      'Company',
+      'Title',
+      'YOE',
+      selectedTab === YOE_CATEGORY.INTERN ? 'Monthly Salary' : 'Annual TC',
+      'Date Offered',
+      'Actions',
+    ];
     return (
-      <thead className="bg-slate-50 text-xs uppercase text-slate-700">
-        <tr>
-          {[
-            'Company',
-            'Title',
-            'YOE',
-            selectedTab === YOE_CATEGORY.INTERN ? 'Monthly Salary' : 'TC/year',
-            'Date offered',
-            'Actions',
-          ].map((header) => (
-            <th key={header} className="py-3 px-6" scope="col">
+      <thead className="text-slate-700">
+        <tr className="divide-x divide-slate-200">
+          {columns.map((header, index) => (
+            <th
+              key={header}
+              className={clsx(
+                'bg-slate-100 py-3 px-6',
+                // Make last column sticky.
+                index === columns.length - 1 &&
+                  'sticky right-0 drop-shadow md:drop-shadow-none',
+              )}
+              scope="col">
               {header}
             </th>
           ))}
@@ -136,23 +166,23 @@ export default function OffersTable({
 
   return (
     <div className="w-5/6">
-      {renderTabs()}
-      <HorizontalDivider />
-      <div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="relative w-full border border-slate-200">
         {renderFilters()}
         {offersQuery.isLoading ? (
           <div className="col-span-10 pt-4">
             <Spinner display="block" size="lg" />
           </div>
         ) : (
-          <table className="w-full text-left text-sm text-slate-500">
-            {renderHeader()}
-            <tbody>
-              {offers.map((offer) => (
-                <OffersRow key={offer.id} row={offer} />
-              ))}
-            </tbody>
-          </table>
+          <div className="overflow-x-auto">
+            <table className="w-full divide-y divide-slate-200 border-y border-slate-200 text-left text-slate-600">
+              {renderHeader()}
+              <tbody>
+                {offers.map((offer) => (
+                  <OffersRow key={offer.id} row={offer} />
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
         <OffersTablePagination
           endNumber={

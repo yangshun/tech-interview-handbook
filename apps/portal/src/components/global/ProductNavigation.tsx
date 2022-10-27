@@ -30,7 +30,11 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
         className="hover:text-primary-700 flex items-center gap-2 text-base font-medium"
         href={titleHref}>
         {titleHref !== '/' && (
-          <img alt="TIH" className="h-8 w-auto" src="/logo.svg" />
+          <img
+            alt="Tech Interview Handbook"
+            className="h-8 w-auto"
+            src="/logo.svg"
+          />
         )}
         {title}
       </Link>
