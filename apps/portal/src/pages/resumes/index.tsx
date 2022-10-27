@@ -11,7 +11,7 @@ export default function Home() {
         <title>Resume Review</title>
       </Head>
 
-      <main className="h-[calc(100vh-2rem)] w-full overflow-y-auto">
+      <main className="h-full w-full overflow-y-auto">
         <Hero />
         <PrimaryFeatures />
         <CallToAction />

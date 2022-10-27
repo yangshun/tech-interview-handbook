@@ -10,7 +10,6 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import {
-  Button,
   CheckboxInput,
   CheckboxList,
   DropdownMenu,
@@ -28,6 +27,7 @@ import type { Filter, FilterId, Shortcut } from '~/utils/resumes/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCES,
+  getFilterLabel,
   INITIAL_FILTER_STATE,
   isInitialFilterState,
   LOCATIONS,
@@ -432,7 +432,7 @@ export default function ResumeHomePage() {
         </Transition.Root>
       </div>
 
-      <main className="h-[calc(100vh-4rem)] flex-auto px-8 pb-4">
+      <main className="h-full flex-auto px-8 pb-4">
         <div className="flex justify-start">
           <div className="fixed top-0 bottom-0 mt-24 hidden w-64 overflow-auto lg:block">
             <h3 className="text-md font-medium tracking-tight text-gray-900">
@@ -518,7 +518,7 @@ export default function ResumeHomePage() {
             </div>
           </div>
           <div className="relative lg:left-64 lg:w-[calc(100%-16rem)]">
-            <div className="lg:border-grey-200 sticky top-0 z-0 flex flex-wrap items-center justify-between pt-6 pb-2 lg:border-b">
+            <div className="lg:border-grey-200 sticky top-0 z-10 flex flex-wrap items-center justify-between pt-6 pb-2 lg:border-b">
               <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none lg:pb-0">
                 <div>
                   <Tabs
@@ -541,12 +541,6 @@ export default function ResumeHomePage() {
                     onChange={onTabChange}
                   />
                 </div>
-                <Button
-                  className="whitespace-pre-wrap px-2 lg:hidden"
-                  label="Submit Resume"
-                  variant="primary"
-                  onClick={onSubmitResume}
-                />
               </div>
               <div className="flex flex-wrap items-center justify-start gap-6">
                 <div className="w-64">
@@ -561,33 +555,34 @@ export default function ResumeHomePage() {
                     onChange={setSearchValue}
                   />
                 </div>
-                <Button
-                  className="lg:hidden"
-                  icon={FunnelIcon}
-                  isLabelHidden={true}
-                  label="Filters"
-                  variant="tertiary"
-                  onClick={() => setMobileFiltersOpen(true)}
-                />
-                <DropdownMenu
-                  align="end"
-                  label={
-                    SORT_OPTIONS.find(({ value }) => value === sortOrder)?.label
-                  }>
-                  {SORT_OPTIONS.map(({ label, value }) => (
-                    <DropdownMenu.Item
-                      key={value}
-                      isSelected={sortOrder === value}
-                      label={label}
-                      onClick={() => setSortOrder(value)}></DropdownMenu.Item>
-                  ))}
-                </DropdownMenu>
-                <Button
-                  className="hidden lg:block"
-                  label="Submit Resume"
-                  variant="primary"
-                  onClick={onSubmitResume}
-                />
+                <div>
+                  <DropdownMenu
+                    align="end"
+                    label={getFilterLabel(SORT_OPTIONS, sortOrder)}>
+                    {SORT_OPTIONS.map(({ label, value }) => (
+                      <DropdownMenu.Item
+                        key={value}
+                        isSelected={sortOrder === value}
+                        label={label}
+                        onClick={() => setSortOrder(value)}></DropdownMenu.Item>
+                    ))}
+                  </DropdownMenu>
+                </div>
+                <button
+                  className="-m-2 text-slate-400 hover:text-slate-500 lg:hidden"
+                  type="button"
+                  onClick={() => setMobileFiltersOpen(true)}>
+                  <span className="sr-only">Filters</span>
+                  <FunnelIcon aria-hidden="true" className="h-6 w-6" />
+                </button>
+                <div>
+                  <button
+                    className="bg-primary-500 block w-36 rounded-md py-2 px-3 text-sm font-medium text-white"
+                    type="button"
+                    onClick={onSubmitResume}>
+                    Submit Resume
+                  </button>
+                </div>
               </div>
             </div>
             {isFetchingResumes ? (

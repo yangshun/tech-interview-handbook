@@ -24,23 +24,18 @@ export default function ResumePdf({ url }: Props) {
     setNumPages(pdf.numPages);
   };
 
+  const onPageResize = () => {
+    setComponentWidth(
+      document.querySelector('#pdfView')?.getBoundingClientRect().width ?? 780,
+    );
+  };
+
   useEffect(() => {
-    const onPageResize = () => {
-      setComponentWidth(
-        document.querySelector('#pdfView')?.getBoundingClientRect().width ??
-          780,
-      );
-    };
-
-    window.addEventListener('resize', onPageResize);
-
-    return () => {
-      window.removeEventListener('resize', onPageResize);
-    };
-  }, []);
+    onPageResize();
+  }, [pageWidth]);
 
   return (
-    <div id="pdfView">
+    <div className="w-full" id="pdfView">
       <div className="group relative">
         <Document
           className="flex h-[calc(100vh-16rem)] flex-row justify-center overflow-auto"
@@ -84,17 +79,15 @@ export default function ResumePdf({ url }: Props) {
           </div>
         </Document>
       </div>
-      {numPages > 1 && (
-        <div className="flex justify-center p-4">
-          <Pagination
-            current={pageNumber}
-            end={numPages}
-            label="pagination"
-            start={1}
-            onSelect={(page) => setPageNumber(page)}
-          />
-        </div>
-      )}
+      <div className="flex justify-center p-4">
+        <Pagination
+          current={pageNumber}
+          end={numPages}
+          label="pagination"
+          start={1}
+          onSelect={(page) => setPageNumber(page)}
+        />
+      </div>
     </div>
   );
 }

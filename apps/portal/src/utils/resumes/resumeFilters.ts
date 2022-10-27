@@ -51,12 +51,6 @@ export const BROWSE_TABS_VALUES = {
   STARRED: 'starred',
 };
 
-// Export const SORT_OPTIONS: Record<string, SortOrder> = {
-//   LATEST: 'latest',
-//   POPULAR: 'popular',
-//   TOPCOMMENTS: 'topComments',
-// };
-
 export const SORT_OPTIONS: Array<FilterOption<SortOrder>> = [
   { label: 'Latest', value: 'latest' },
   { label: 'Popular', value: 'popular' },
@@ -149,3 +143,10 @@ export const isInitialFilterState = (filters: FilterState) =>
       filters[filter as FilterId].includes(value),
     );
   });
+
+export const getFilterLabel = (
+  filters: Array<
+    FilterOption<ExperienceFilter | LocationFilter | RoleFilter | SortOrder>
+  >,
+  filterValue: ExperienceFilter | LocationFilter | RoleFilter | SortOrder,
+) => filters.find(({ value }) => value === filterValue)?.label ?? filterValue;
