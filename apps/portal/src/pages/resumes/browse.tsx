@@ -425,7 +425,10 @@ export default function ResumeHomePage() {
                                     key={option.value}
                                     className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 [&>div>div:nth-child(2)>label]:font-normal">
                                     <CheckboxInput
-                                      label={option.label}
+                                      label={`${option.label} (${getFilterCount(
+                                        filter.label,
+                                        option.label,
+                                      )})`}
                                       value={userFilters[filter.id].includes(
                                         option.value,
                                       )}
