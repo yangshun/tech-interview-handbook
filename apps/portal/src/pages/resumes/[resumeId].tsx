@@ -58,28 +58,26 @@ export default function ResumeReviewPage() {
   );
   const starMutation = trpc.useMutation('resumes.resume.star', {
     onSuccess() {
-      utils.invalidateQueries(['resumes.resume.findOne']);
-      utils.invalidateQueries(['resumes.resume.findAll']);
-      utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
-      utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+      invalidateResumeQueries();
     },
   });
   const unstarMutation = trpc.useMutation('resumes.resume.unstar', {
     onSuccess() {
-      utils.invalidateQueries(['resumes.resume.findOne']);
-      utils.invalidateQueries(['resumes.resume.findAll']);
-      utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
-      utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+      invalidateResumeQueries();
     },
   });
   const resolveMutation = trpc.useMutation('resumes.resume.user.resolve', {
     onSuccess() {
-      utils.invalidateQueries(['resumes.resume.findOne']);
-      utils.invalidateQueries(['resumes.resume.findAll']);
-      utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
-      utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+      invalidateResumeQueries();
     },
   });
+
+  const invalidateResumeQueries = () => {
+    utils.invalidateQueries(['resumes.resume.findOne']);
+    utils.invalidateQueries(['resumes.resume.findAll']);
+    utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
+    utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+  };
 
   const userIsOwner =
     session?.user?.id !== undefined &&
@@ -194,10 +192,7 @@ export default function ResumeReviewPage() {
           url: detailsQuery.data.url,
         }}
         onClose={() => {
-          utils.invalidateQueries(['resumes.resume.findOne']);
-          utils.invalidateQueries(['resumes.resume.findAll']);
-          utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
-          utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+          invalidateResumeQueries();
           setIsEditMode(false);
         }}
       />
