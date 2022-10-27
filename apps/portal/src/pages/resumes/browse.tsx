@@ -10,6 +10,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import {
+  Button,
   CheckboxInput,
   CheckboxList,
   DropdownMenu,
@@ -344,7 +345,7 @@ export default function ResumeHomePage() {
                 <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-scroll bg-white py-4 pb-12 shadow-xl">
                   <div className="flex items-center justify-between px-4">
                     <h2 className="text-lg font-medium text-slate-900">
-                      Shortcuts
+                      Quick access
                     </h2>
                     <button
                       className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-slate-400"
@@ -436,7 +437,7 @@ export default function ResumeHomePage() {
         <div className="flex justify-start">
           <div className="fixed top-0 bottom-0 mt-24 hidden w-64 overflow-auto lg:block">
             <h3 className="text-md font-medium tracking-tight text-gray-900">
-              Shortcuts
+              Quick access
             </h3>
             <div className="w-100 pt-4 sm:pr-0 md:pr-4">
               <form>
@@ -519,7 +520,7 @@ export default function ResumeHomePage() {
           </div>
           <div className="relative lg:left-64 lg:w-[calc(100%-16rem)]">
             <div className="lg:border-grey-200 sticky top-0 z-10 flex flex-wrap items-center justify-between pt-6 pb-2 lg:border-b">
-              <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none lg:pb-0">
+              <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none xl:pb-0">
                 <div>
                   <Tabs
                     label="Resume Browse Tabs"
@@ -542,7 +543,7 @@ export default function ResumeHomePage() {
                   />
                 </div>
               </div>
-              <div className="flex flex-wrap items-center justify-start gap-6">
+              <div className="flex flex-wrap items-center justify-start gap-4 lg:gap-6">
                 <div className="w-64">
                   <TextInput
                     isLabelHidden={true}
@@ -555,34 +556,31 @@ export default function ResumeHomePage() {
                     onChange={setSearchValue}
                   />
                 </div>
-                <div>
-                  <DropdownMenu
-                    align="end"
-                    label={getFilterLabel(SORT_OPTIONS, sortOrder)}>
-                    {SORT_OPTIONS.map(({ label, value }) => (
-                      <DropdownMenu.Item
-                        key={value}
-                        isSelected={sortOrder === value}
-                        label={label}
-                        onClick={() => setSortOrder(value)}></DropdownMenu.Item>
-                    ))}
-                  </DropdownMenu>
-                </div>
-                <button
-                  className="-m-2 text-slate-400 hover:text-slate-500 lg:hidden"
-                  type="button"
-                  onClick={() => setMobileFiltersOpen(true)}>
-                  <span className="sr-only">Filters</span>
-                  <FunnelIcon aria-hidden="true" className="h-6 w-6" />
-                </button>
-                <div>
-                  <button
-                    className="bg-primary-500 block w-36 rounded-md py-2 px-3 text-sm font-medium text-white"
-                    type="button"
-                    onClick={onSubmitResume}>
-                    Submit Resume
-                  </button>
-                </div>
+                <DropdownMenu
+                  align="end"
+                  label={getFilterLabel(SORT_OPTIONS, sortOrder)}>
+                  {SORT_OPTIONS.map(({ label, value }) => (
+                    <DropdownMenu.Item
+                      key={value}
+                      isSelected={sortOrder === value}
+                      label={label}
+                      onClick={() => setSortOrder(value)}></DropdownMenu.Item>
+                  ))}
+                </DropdownMenu>
+                <Button
+                  className="lg:hidden"
+                  icon={FunnelIcon}
+                  isLabelHidden={true}
+                  label="Filters"
+                  variant="tertiary"
+                  onClick={() => setMobileFiltersOpen(true)}
+                />
+                <Button
+                  className="whitespace-pre-wrap px-2 lg:block"
+                  label="Submit Resume"
+                  variant="primary"
+                  onClick={onSubmitResume}
+                />
               </div>
             </div>
             {isFetchingResumes ? (
