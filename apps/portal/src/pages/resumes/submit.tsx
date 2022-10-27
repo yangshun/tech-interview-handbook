@@ -168,6 +168,9 @@ export default function SubmitResumeForm({
         onSuccess() {
           if (isNewForm) {
             trpcContext.invalidateQueries('resumes.resume.findAll');
+            trpcContext.invalidateQueries(
+              'resumes.resume.getTotalFilterCounts',
+            );
             router.push('/resumes/browse');
           } else {
             onClose();

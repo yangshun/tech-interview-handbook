@@ -1,4 +1,5 @@
 export type FilterId = 'experience' | 'location' | 'role';
+export type FilterLabel = 'Experience' | 'Location' | 'Role';
 
 export type CustomFilter = {
   numComments: number;
@@ -29,7 +30,7 @@ export type FilterOption<T> = {
 
 export type Filter = {
   id: FilterId;
-  label: string;
+  label: FilterLabel;
   options: Array<FilterOption<FilterValue>>;
 };
 
