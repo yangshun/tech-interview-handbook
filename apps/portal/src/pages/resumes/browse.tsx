@@ -23,7 +23,12 @@ import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 
-import type { Filter, FilterId, Shortcut } from '~/utils/resumes/resumeFilters';
+import type {
+  Filter,
+  FilterId,
+  FilterLabel,
+  Shortcut,
+} from '~/utils/resumes/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCES,
@@ -176,6 +181,13 @@ export default function ResumeHomePage() {
     isSearchOptionsInit,
   ]);
 
+  const filterCountsQuery = trpc.useQuery(
+    ['resumes.resume.getTotalFilterCounts'],
+    {
+      staleTime: STALE_TIME,
+    },
+  );
+
   const allResumesQuery = trpc.useQuery(
     [
       'resumes.resume.findAll',
@@ -235,6 +247,14 @@ export default function ResumeHomePage() {
       staleTime: STALE_TIME,
     },
   );
+
+  const getFilterCount = (filter: FilterLabel, value: string) => {
+    if (filterCountsQuery.isLoading) {
+      return 0;
+    }
+    const filterCountsData = filterCountsQuery.data!;
+    return filterCountsData[filter][value];
+  };
 
   const onSubmitResume = () => {
     if (sessionData === null) {
@@ -494,7 +514,10 @@ export default function ResumeHomePage() {
                                 key={option.value}
                                 className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 px-1 [&>div>div:nth-child(2)>label]:font-normal">
                                 <CheckboxInput
-                                  label={option.label}
+                                  label={`${option.label} (${getFilterCount(
+                                    filter.label,
+                                    option.label,
+                                  )})`}
                                   value={userFilters[filter.id].includes(
                                     option.value,
                                   )}
