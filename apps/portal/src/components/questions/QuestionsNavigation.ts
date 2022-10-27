@@ -8,6 +8,8 @@ const navigation: ProductNavigationItems = [
 ];
 
 const config = {
+  // TODO: Change this to your own GA4 measurement ID.
+  googleAnalyticsMeasurementID: 'G-DBLZDQ2ZZN',
   navigation,
   showGlobalNav: false,
   title: 'Questions Bank',
