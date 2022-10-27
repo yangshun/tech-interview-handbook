@@ -96,7 +96,6 @@ export const resumesRouter = createRouter()
           createdAt: r.createdAt,
           experience: r.experience,
           id: r.id,
-          isResolved: r.isResolved,
           isStarredByUser: r.stars.length > 0,
           location: r.location,
           numComments: r._count.comments,

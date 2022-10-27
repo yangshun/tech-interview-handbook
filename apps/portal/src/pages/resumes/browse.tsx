@@ -542,7 +542,7 @@ export default function ResumeHomePage() {
                   />
                 </div>
                 <Button
-                  className="whitespace-pre-wrap px-2 lg:hidden"
+                  className="lg:hidden"
                   label="Submit Resume"
                   variant="primary"
                   onClick={onSubmitResume}

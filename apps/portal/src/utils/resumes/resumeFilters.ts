@@ -14,9 +14,12 @@ export type RoleFilter =
 
 export type ExperienceFilter =
   | 'Entry Level (0 - 2 years)'
-  | 'Internship'
+  | 'Freshman'
+  | 'Junior'
   | 'Mid Level (3 - 5 years)'
-  | 'Senior Level (5+ years)';
+  | 'Senior Level (5+ years)'
+  | 'Senior'
+  | 'Sophomore';
 
 export type LocationFilter = 'India' | 'Singapore' | 'United States';
 
@@ -76,7 +79,10 @@ export const ROLES: Array<FilterOption<RoleFilter>> = [
 ];
 
 export const EXPERIENCES: Array<FilterOption<ExperienceFilter>> = [
-  { label: 'Internship', value: 'Internship' },
+  { label: 'Freshman', value: 'Freshman' },
+  { label: 'Sophomore', value: 'Sophomore' },
+  { label: 'Junior', value: 'Junior' },
+  { label: 'Senior', value: 'Senior' },
   {
     label: 'Entry Level (0 - 2 years)',
     value: 'Entry Level (0 - 2 years)',
@@ -127,7 +133,7 @@ export const SHORTCUTS: Array<Shortcut> = [
   },
   {
     filters: INITIAL_FILTER_STATE,
-    name: 'Top 10',
+    name: 'GOATs',
     sortOrder: 'popular',
   },
   {

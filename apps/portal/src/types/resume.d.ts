@@ -3,7 +3,6 @@ export type Resume = {
   createdAt: Date;
   experience: string;
   id: string;
-  isResolved: boolean;
   isStarredByUser: boolean;
   location: string;
   numComments: number;
