@@ -628,7 +628,7 @@ export const getOffersResponseMapper = (
   return getOffersResponse;
 };
 
-export const getUserProfileResponeMapper = (res: User & {
+export const getUserProfileResponseMapper = (res: User & {
     OffersProfile: Array<OffersProfile & {
         offers: Array<OffersOffer & {
             company: Company;

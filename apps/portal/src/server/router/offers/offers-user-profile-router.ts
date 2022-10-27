@@ -1,11 +1,13 @@
 import { z } from 'zod';
 import * as trpc from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 
 import {
-  addToProfileResponseMapper, getUserProfileResponeMapper,
+  addToProfileResponseMapper, getUserProfileResponseMapper,
 } from '~/mappers/offers-mappers';
 
 import { createProtectedRouter } from '../context';
+
 export const offersUserProfileRouter = createProtectedRouter()
     .mutation('addToUserProfile', {
         input: z.object({
@@ -75,6 +77,55 @@ export const offersUserProfileRouter = createProtectedRouter()
                 }
             })
 
-            return getUserProfileResponeMapper(result)
+            return getUserProfileResponseMapper(result)
         }
-    });
+    })
+   .mutation('removeFromUserProfile', {
+        input: z.object({
+            profileId: z.string(),
+        }),
+        async resolve({ ctx, input }) {
+            const userId = ctx.session.user.id
+
+            const profiles = await ctx.prisma.user.findFirst({
+                include: {
+                    OffersProfile: true
+                },
+                where: {
+                    id: userId
+                }
+            })
+
+            // Validation
+            let doesProfileExist = false;
+
+            if (profiles?.OffersProfile) {
+                for (let i = 0; i < profiles.OffersProfile.length; i++) {
+                    if (profiles.OffersProfile[i].id === input.profileId) {
+                        doesProfileExist = true
+                    }
+                }
+            }
+
+            if (!doesProfileExist) {
+                throw new TRPCError({
+                    code: 'NOT_FOUND',
+                    message: 'No such profile id saved.'
+                })
+            }
+
+            await ctx.prisma.user.update({
+                data: {
+                    OffersProfile: {
+                        disconnect: [{
+                            id: input.profileId
+                        }]
+                    }
+                },
+                where: {
+                    id: userId
+                }
+            })
+
+        }
+    })
