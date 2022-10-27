@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
   ArrowDownCircleIcon,
@@ -21,6 +22,7 @@ export default function ResumeCommentVoteButtons({
   const [downvoteAnimation, setDownvoteAnimation] = useState(false);
 
   const trpcContext = trpc.useContext();
+  const router = useRouter();
 
   // COMMENT VOTES
   const commentVotesQuery = trpc.useQuery([
@@ -47,6 +49,11 @@ export default function ResumeCommentVoteButtons({
   );
 
   const onVote = async (value: Vote, setAnimation: (_: boolean) => void) => {
+    if (!userId) {
+      router.push('/api/auth/signin');
+      return;
+    }
+
     setAnimation(true);
 
     if (commentVotesQuery.data?.userVote?.value === value) {
@@ -74,7 +81,6 @@ export default function ResumeCommentVoteButtons({
     <>
       <button
         disabled={
-          !userId ||
           commentVotesQuery.isLoading ||
           commentVotesUpsertMutation.isLoading ||
           commentVotesDeleteMutation.isLoading
@@ -103,7 +109,6 @@ export default function ResumeCommentVoteButtons({
 
       <button
         disabled={
-          !userId ||
           commentVotesQuery.isLoading ||
           commentVotesUpsertMutation.isLoading ||
           commentVotesDeleteMutation.isLoading
