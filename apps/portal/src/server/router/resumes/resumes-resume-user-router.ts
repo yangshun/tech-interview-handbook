@@ -44,6 +44,23 @@ export const resumesResumeUserRouter = createProtectedRouter()
       });
     },
   })
+  .mutation('resolve', {
+    input: z.object({
+      id: z.string(),
+      val: z.boolean(),
+    }),
+    async resolve({ ctx, input }) {
+      const resume = await ctx.prisma.resumesResume.update({
+        data: {
+          isResolved: input.val,
+        },
+        where: {
+          id: input.id,
+        },
+      });
+      return resume.isResolved;
+    },
+  })
   .query('findUserStarred', {
     input: z.object({
       experienceFilters: z.string().array(),

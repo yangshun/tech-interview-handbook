@@ -133,7 +133,7 @@ export const SHORTCUTS: Array<Shortcut> = [
   },
   {
     filters: INITIAL_FILTER_STATE,
-    name: 'GOATs',
+    name: 'Top 10',
     sortOrder: 'popular',
   },
   {
