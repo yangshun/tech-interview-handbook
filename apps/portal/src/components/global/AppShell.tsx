@@ -169,7 +169,6 @@ export default function AppShell({ children }: Props) {
             </div>
           </div>
         )}
-
         {/* Mobile menu */}
         <MobileNavigation
           globalNavigationItems={GlobalNavigation}
@@ -178,7 +177,6 @@ export default function AppShell({ children }: Props) {
           productTitle={currentProductNavigation.title}
           setIsShown={setMobileMenuOpen}
         />
-
         {/* Content area */}
         <div className="flex h-screen flex-1 flex-col overflow-hidden">
           <header className="w-full">
