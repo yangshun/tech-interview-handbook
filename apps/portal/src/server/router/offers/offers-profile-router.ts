@@ -4,7 +4,6 @@ import { JobType } from '@prisma/client';
 import * as trpc from '@trpc/server';
 
 import {
-  addToProfileResponseMapper,
   createOfferProfileResponseMapper,
   profileDtoMapper,
 } from '~/mappers/offers-mappers';
@@ -1405,44 +1404,6 @@ export const offersProfileRouter = createRouter()
           code: 'NOT_FOUND',
           message: 'Profile does not exist',
         });
-      }
-
-      throw new trpc.TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'Invalid token.',
-      });
-    },
-  })
-  .mutation('addToUserProfile', {
-    input: z.object({
-      profileId: z.string(),
-      token: z.string(),
-      userId: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const profile = await ctx.prisma.offersProfile.findFirst({
-        where: {
-          id: input.profileId,
-        },
-      });
-
-      const profileEditToken = profile?.editToken;
-
-      if (profileEditToken === input.token) {
-        const updated = await ctx.prisma.offersProfile.update({
-          data: {
-            user: {
-              connect: {
-                id: input.userId,
-              },
-            },
-          },
-          where: {
-            id: input.profileId,
-          },
-        });
-
-        return addToProfileResponseMapper(updated);
       }
 
       throw new trpc.TRPCError({

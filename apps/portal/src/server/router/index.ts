@@ -6,6 +6,7 @@ import { offersRouter } from './offers/offers';
 import { offersAnalysisRouter } from './offers/offers-analysis-router';
 import { offersCommentsRouter } from './offers/offers-comments-router';
 import { offersProfileRouter } from './offers/offers-profile-router';
+import { offersUserProfileRouter } from './offers/offers-user-profile-router';
 import { protectedExampleRouter } from './protected-example-router';
 import { questionsAnswerCommentRouter } from './questions/questions-answer-comment-router';
 import { questionsAnswerCommentUserRouter } from './questions/questions-answer-comment-user-router';
@@ -64,7 +65,8 @@ export const appRouter = createRouter()
   .merge('offers.', offersRouter)
   .merge('offers.profile.', offersProfileRouter)
   .merge('offers.analysis.', offersAnalysisRouter)
-  .merge('offers.comments.', offersCommentsRouter);
+  .merge('offers.comments.', offersCommentsRouter)
+  .merge('offers.user.profile.', offersUserProfileRouter);
 
 // Export type definition of API
 export type AppRouter = typeof appRouter;
