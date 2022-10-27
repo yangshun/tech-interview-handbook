@@ -44,6 +44,23 @@ export const resumesResumeUserRouter = createProtectedRouter()
       });
     },
   })
+  .mutation('resolve', {
+    input: z.object({
+      id: z.string(),
+      val: z.boolean(),
+    }),
+    async resolve({ ctx, input }) {
+      const resume = await ctx.prisma.resumesResume.update({
+        data: {
+          isResolved: input.val,
+        },
+        where: {
+          id: input.id,
+        },
+      });
+      return resume.isResolved;
+    },
+  })
   .query('findUserStarred', {
     input: z.object({
       experienceFilters: z.string().array(),
@@ -147,6 +164,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
           createdAt: rs.resume.createdAt,
           experience: rs.resume.experience,
           id: rs.resume.id,
+          isResolved: rs.resume.isResolved,
           isStarredByUser: true,
           location: rs.resume.location,
           numComments: rs.resume._count.comments,
@@ -250,6 +268,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
           createdAt: r.createdAt,
           experience: r.experience,
           id: r.id,
+          isResolved: r.isResolved,
           isStarredByUser: r.stars.length > 0,
           location: r.location,
           numComments: r._count.comments,

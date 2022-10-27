@@ -9,6 +9,7 @@ import {
   AcademicCapIcon,
   BriefcaseIcon,
   CalendarIcon,
+  CheckCircleIcon,
   InformationCircleIcon,
   MapPinIcon,
   PencilSquareIcon,
@@ -57,23 +58,32 @@ export default function ResumeReviewPage() {
   );
   const starMutation = trpc.useMutation('resumes.resume.star', {
     onSuccess() {
-      utils.invalidateQueries(['resumes.resume.findOne']);
-      utils.invalidateQueries(['resumes.resume.findAll']);
-      utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
-      utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+      invalidateResumeQueries();
     },
   });
   const unstarMutation = trpc.useMutation('resumes.resume.unstar', {
     onSuccess() {
-      utils.invalidateQueries(['resumes.resume.findOne']);
-      utils.invalidateQueries(['resumes.resume.findAll']);
-      utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
-      utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+      invalidateResumeQueries();
     },
   });
+  const resolveMutation = trpc.useMutation('resumes.resume.user.resolve', {
+    onSuccess() {
+      invalidateResumeQueries();
+    },
+  });
+
+  const invalidateResumeQueries = () => {
+    utils.invalidateQueries(['resumes.resume.findOne']);
+    utils.invalidateQueries(['resumes.resume.findAll']);
+    utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
+    utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+  };
+
   const userIsOwner =
     session?.user?.id !== undefined &&
     session.user.id === detailsQuery.data?.userId;
+
+  const isResumeResolved = detailsQuery.data?.isResolved;
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [showCommentsForm, setShowCommentsForm] = useState(false);
@@ -139,6 +149,13 @@ export default function ResumeReviewPage() {
     setIsEditMode(true);
   };
 
+  const onResolveButtonClick = () => {
+    resolveMutation.mutate({
+      id: resumeId as string,
+      val: !isResumeResolved,
+    });
+  };
+
   const renderReviewButton = () => {
     if (session === null) {
       return (
@@ -175,10 +192,7 @@ export default function ResumeReviewPage() {
           url: detailsQuery.data.url,
         }}
         onClose={() => {
-          utils.invalidateQueries(['resumes.resume.findOne']);
-          utils.invalidateQueries(['resumes.resume.findAll']);
-          utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
-          utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+          invalidateResumeQueries();
           setIsEditMode(false);
         }}
       />
@@ -206,17 +220,36 @@ export default function ResumeReviewPage() {
               </h1>
               <div className="flex gap-3 xl:pr-4">
                 {userIsOwner && (
-                  <Button
-                    addonPosition="start"
-                    className="h-10 shadow-md"
-                    icon={PencilSquareIcon}
-                    label="Edit"
-                    variant="tertiary"
-                    onClick={onEditButtonClick}
-                  />
+                  <>
+                    <Button
+                      addonPosition="start"
+                      className="h-10 shadow-md"
+                      icon={PencilSquareIcon}
+                      label="Edit"
+                      variant="tertiary"
+                      onClick={onEditButtonClick}
+                    />
+                    <button
+                      className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-md hover:bg-slate-50 focus:ring-slate-600 disabled:hover:bg-white"
+                      disabled={resolveMutation.isLoading}
+                      type="button"
+                      onClick={onResolveButtonClick}>
+                      <div className="-ml-1 mr-2 h-5 w-5">
+                        {resolveMutation.isLoading ? (
+                          <Spinner className="mt-0.5" size="xs" />
+                        ) : (
+                          <CheckCircleIcon
+                            aria-hidden="true"
+                            className={isResumeResolved ? '' : 'text-slate-400'}
+                          />
+                        )}
+                      </div>
+                      {isResumeResolved ? 'Resolved' : 'Resolve'}
+                    </button>
+                  </>
                 )}
                 <button
-                  className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-md hover:bg-slate-50  disabled:hover:bg-white"
+                  className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-md hover:bg-slate-50 focus:ring-slate-600 disabled:hover:bg-white"
                   disabled={starMutation.isLoading || unstarMutation.isLoading}
                   type="button"
                   onClick={onStarButtonClick}>
