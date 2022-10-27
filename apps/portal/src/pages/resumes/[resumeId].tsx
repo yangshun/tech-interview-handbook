@@ -239,11 +239,17 @@ export default function ResumeReviewPage() {
                         ) : (
                           <CheckCircleIcon
                             aria-hidden="true"
-                            className={isResumeResolved ? '' : 'text-slate-400'}
+                            className={
+                              isResumeResolved
+                                ? 'text-slate-500'
+                                : 'text-success-600'
+                            }
                           />
                         )}
                       </div>
-                      {isResumeResolved ? 'Resolved' : 'Resolve'}
+                      {isResumeResolved
+                        ? 'Reopen for review'
+                        : 'Mark as reviewed'}
                     </button>
                   </>
                 )}
