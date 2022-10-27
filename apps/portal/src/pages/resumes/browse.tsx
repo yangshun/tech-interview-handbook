@@ -27,6 +27,7 @@ import type { Filter, FilterId, Shortcut } from '~/utils/resumes/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCES,
+  getFilterLabel,
   INITIAL_FILTER_STATE,
   isInitialFilterState,
   LOCATIONS,
@@ -557,10 +558,7 @@ export default function ResumeHomePage() {
                 <div>
                   <DropdownMenu
                     align="end"
-                    label={
-                      SORT_OPTIONS.find(({ value }) => value === sortOrder)
-                        ?.label
-                    }>
+                    label={getFilterLabel(SORT_OPTIONS, sortOrder)}>
                     {SORT_OPTIONS.map(({ label, value }) => (
                       <DropdownMenu.Item
                         key={value}

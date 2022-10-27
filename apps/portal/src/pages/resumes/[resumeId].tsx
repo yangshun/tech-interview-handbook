@@ -23,12 +23,15 @@ import ResumePdf from '~/components/resumes/ResumePdf';
 import ResumeExpandableText from '~/components/resumes/shared/ResumeExpandableText';
 
 import type {
+  ExperienceFilter,
   FilterOption,
   LocationFilter,
+  RoleFilter,
 } from '~/utils/resumes/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCES,
+  getFilterLabel,
   INITIAL_FILTER_STATE,
   LOCATIONS,
   ROLES,
@@ -36,10 +39,6 @@ import {
 import { trpc } from '~/utils/trpc';
 
 import SubmitResumeForm from './submit';
-import type {
-  ExperienceFilter,
-  RoleFilter,
-} from '../../utils/resumes/resumeFilters';
 
 export default function ResumeReviewPage() {
   const ErrorPage = (
@@ -293,7 +292,7 @@ export default function ResumeReviewPage() {
                       roleLabel: detailsQuery.data?.role,
                     })
                   }>
-                  {detailsQuery.data.role}
+                  {getFilterLabel(ROLES, detailsQuery.data.role as RoleFilter)}
                 </button>
               </div>
               <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
@@ -309,7 +308,10 @@ export default function ResumeReviewPage() {
                       locationLabel: detailsQuery.data?.location,
                     })
                   }>
-                  {detailsQuery.data.location}
+                  {getFilterLabel(
+                    LOCATIONS,
+                    detailsQuery.data.location as LocationFilter,
+                  )}
                 </button>
               </div>
               <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
@@ -325,7 +327,10 @@ export default function ResumeReviewPage() {
                       experienceLabel: detailsQuery.data?.experience,
                     })
                   }>
-                  {detailsQuery.data.experience}
+                  {getFilterLabel(
+                    EXPERIENCES,
+                    detailsQuery.data.experience as ExperienceFilter,
+                  )}
                 </button>
               </div>
               <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">

@@ -9,6 +9,18 @@ import {
 } from '@heroicons/react/20/solid';
 import { ChatBubbleLeftIcon, StarIcon } from '@heroicons/react/24/outline';
 
+import type {
+  ExperienceFilter,
+  LocationFilter,
+  RoleFilter,
+} from '~/utils/resumes/resumeFilters';
+import {
+  EXPERIENCES,
+  getFilterLabel,
+  LOCATIONS,
+  ROLES,
+} from '~/utils/resumes/resumeFilters';
+
 import type { Resume } from '~/types/resume';
 
 type Props = Readonly<{
@@ -29,14 +41,17 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
                   aria-hidden="true"
                   className="mr-1.5 h-4 w-4 flex-shrink-0"
                 />
-                {resumeInfo.role}
+                {getFilterLabel(ROLES, resumeInfo.role as RoleFilter)}
               </div>
               <div className="ml-4 flex">
                 <AcademicCapIcon
                   aria-hidden="true"
                   className="mr-1.5 h-4 w-4 flex-shrink-0"
                 />
-                {resumeInfo.experience}
+                {getFilterLabel(
+                  EXPERIENCES,
+                  resumeInfo.experience as ExperienceFilter,
+                )}
               </div>
             </div>
             <div className="mt-4 flex justify-start text-xs text-slate-500">
@@ -64,7 +79,9 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
                 addSuffix: true,
               })} by ${resumeInfo.user}`}
             </div>
-            <div className="mt-2 text-slate-400">{resumeInfo.location}</div>
+            <div className="mt-2 text-slate-400">
+              {getFilterLabel(LOCATIONS, resumeInfo.location as LocationFilter)}
+            </div>
           </div>
         </div>
         <ChevronRightIcon className="col-span-1 w-8 self-center justify-self-center text-slate-400" />
