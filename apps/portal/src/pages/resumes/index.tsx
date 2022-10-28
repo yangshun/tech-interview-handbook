@@ -92,7 +92,7 @@ const getEmptyDataText = (
   }
   switch (tabsValue) {
     case BROWSE_TABS_VALUES.ALL:
-      return 'Looks like SWEs are feeling lucky!';
+      return "There's nothing to see here...";
     case BROWSE_TABS_VALUES.STARRED:
       return 'You have not starred any resumes. Star one to see it here!';
     case BROWSE_TABS_VALUES.MY:

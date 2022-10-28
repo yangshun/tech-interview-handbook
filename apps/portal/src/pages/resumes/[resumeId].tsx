@@ -214,7 +214,7 @@ export default function ResumeReviewPage() {
           </Head>
           <main className="h-full flex-1 space-y-2 overflow-y-auto py-4 px-8 xl:px-12 2xl:pr-16">
             <div className="flex justify-between">
-              <h1 className="pr-2 text-2xl font-semibold leading-7 text-slate-900 sm:truncate sm:text-3xl sm:tracking-tight">
+              <h1 className="w-[60%] pr-2 text-2xl font-semibold leading-7 text-slate-900">
                 {detailsQuery.data.title}
               </h1>
               <div className="flex gap-3 xl:pr-4">
@@ -258,25 +258,23 @@ export default function ResumeReviewPage() {
                   disabled={starMutation.isLoading || unstarMutation.isLoading}
                   type="button"
                   onClick={onStarButtonClick}>
-                  <span className="relative inline-flex">
-                    <div className="-ml-1 mr-2 h-5 w-5">
-                      {starMutation.isLoading ||
-                      unstarMutation.isLoading ||
-                      detailsQuery.isLoading ? (
-                        <Spinner className="mt-0.5" size="xs" />
-                      ) : (
-                        <StarIcon
-                          aria-hidden="true"
-                          className={clsx(
-                            detailsQuery.data?.stars.length
-                              ? 'text-orange-400'
-                              : 'text-slate-400',
-                          )}
-                        />
-                      )}
-                    </div>
-                    {detailsQuery.data?.stars.length ? 'Starred' : 'Star'}
-                  </span>
+                  <div className="-ml-1 mr-2 h-5 w-5">
+                    {starMutation.isLoading ||
+                    unstarMutation.isLoading ||
+                    detailsQuery.isLoading ? (
+                      <Spinner className="mt-0.5" size="xs" />
+                    ) : (
+                      <StarIcon
+                        aria-hidden="true"
+                        className={clsx(
+                          detailsQuery.data?.stars.length
+                            ? 'text-orange-400'
+                            : 'text-slate-400',
+                        )}
+                      />
+                    )}
+                  </div>
+                  {detailsQuery.data?.stars.length ? 'Starred' : 'Star'}
                   <span className="relative -ml-px inline-flex">
                     {detailsQuery.data?._count.stars}
                   </span>
