@@ -118,7 +118,7 @@ const seedSalaries = async () => {
   //seed here
   return await Promise.all(
     data.map(async (data: ExcelData) => {
-      if (data.Income && typeof data.Income === 'number') {
+      if (data.TC && typeof data.TC === 'number') {
         // Generate random name until unique
         let uniqueName: string = await generateRandomName();
 
@@ -167,12 +167,20 @@ const seedSalaries = async () => {
                           create: {
                             baseCurrency: baseCurrencyString,
                             baseValue: await convert(
-                              data.Income,
+                              data.Income
+                                ? typeof data.Income === 'number'
+                                  ? data.Income
+                                  : 0
+                                : 0,
                               'SGD', // assume sgd
                               baseCurrencyString,
                             ),
                             currency: 'SGD', // assume sgd
-                            value: data.Income,
+                            value: data.Income
+                                ? typeof data.Income === 'number'
+                                  ? data.Income
+                                  : 0
+                                : 0,
                           },
                         },
                         startYear: xlSerialToJsDate(
@@ -218,12 +226,20 @@ const seedSalaries = async () => {
                           create: {
                             baseCurrency: baseCurrencyString,
                             baseValue: await convert(
-                              data.Income,
+                              data.Income
+                                ? typeof data.Income === 'number'
+                                  ? data.Income
+                                  : 0
+                                : 0,
                               'SGD', // assume sgd
                               baseCurrencyString,
                             ),
                             currency: 'SGD', // assume sgd
-                            value: data.Income,
+                            value: data.Income
+                                ? typeof data.Income === 'number'
+                                  ? data.Income
+                                  : 0
+                                : 0,
                           },
                         },
                         bonus: {
@@ -301,7 +317,7 @@ const seedSalaries = async () => {
           console.log('Invalid Company: ' + data.Company);
         }
       } else {
-        console.log('Invalid Income not a number: ' + data.Income);
+        console.log('Invalid TC not a number: ' + data.TC);
       }
     }),
   );
