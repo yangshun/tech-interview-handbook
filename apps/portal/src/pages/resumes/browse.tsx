@@ -385,7 +385,7 @@ export default function ResumeHomePage() {
 
                   <form className="mt-4 border-t border-slate-200">
                     <ul
-                      className="flex flex-wrap justify-start gap-4 px-4 py-3 font-medium text-slate-900"
+                      className="flex w-11/12 flex-wrap justify-start gap-2 px-4 py-4 font-medium text-slate-900"
                       role="list">
                       {SHORTCUTS.map((shortcut) => (
                         <li key={shortcut.name}>
@@ -402,7 +402,7 @@ export default function ResumeHomePage() {
                       <Disclosure
                         key={filter.id}
                         as="div"
-                        className="border-t border-slate-200 px-4 py-6">
+                        className="border-t border-slate-200 px-4 pt-6 pb-4">
                         {({ open }) => (
                           <>
                             <h3 className="-mx-2 -my-3 flow-root">
@@ -425,8 +425,8 @@ export default function ResumeHomePage() {
                                 </span>
                               </Disclosure.Button>
                             </h3>
-                            <Disclosure.Panel className="pt-6">
-                              <div className="space-y-6">
+                            <Disclosure.Panel className="space-y-4 pt-6">
+                              <div className="space-y-3">
                                 {filter.options.map((option) => (
                                   <div
                                     key={option.value}
@@ -450,6 +450,11 @@ export default function ResumeHomePage() {
                                   </div>
                                 ))}
                               </div>
+                              <p
+                                className="cursor-pointer text-sm text-slate-500 underline"
+                                onClick={() => onClearFilterClick(filter.id)}>
+                                Clear
+                              </p>
                             </Disclosure.Panel>
                           </>
                         )}
