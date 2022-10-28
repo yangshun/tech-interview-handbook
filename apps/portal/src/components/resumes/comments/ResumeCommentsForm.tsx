@@ -79,7 +79,10 @@ export default function ResumeCommentsForm({
           setShowCommentsForm(false);
           const { prevCount, newCount } = data;
           // Auto mark resume as resolved once the total comments passes the 5 threshold
-          if (newCount >= 5 && prevCount < 5) {
+          if (
+            (newCount >= 5 && prevCount < 5) ||
+            (newCount >= 15 && prevCount < 15)
+          ) {
             resolveMutation.mutate({
               id: resumeId,
               val: true,
