@@ -1,8 +1,8 @@
 import type { ProductNavigationItems } from '~/components/global/ProductNavigation';
 
 const navigation: ProductNavigationItems = [
-  { href: '/offers/browse', name: 'Browse' },
-  { href: '/offers/submit', name: 'Analyse your offers' },
+  { href: '/offers/browse', name: 'Browse all offers' },
+  { href: '/offers/submit', name: 'Analyze your offers' },
 ];
 
 const config = {
@@ -10,7 +10,7 @@ const config = {
   googleAnalyticsMeasurementID: 'G-DBLZDQ2ZZN',
   navigation,
   showGlobalNav: false,
-  title: 'Offer Profile Repository',
+  title: 'Tech Offers Repo',
   titleHref: '/offers',
 };
 

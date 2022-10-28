@@ -45,6 +45,7 @@ export default function CompaniesTypeahead({
       }
       placeholder={placeHolder}
       required={required}
+      textSize="inherit"
       onQueryChange={setQuery}
       onSelect={onSelect}
     />

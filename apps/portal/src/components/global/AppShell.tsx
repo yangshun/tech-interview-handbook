@@ -33,7 +33,7 @@ function ProfileJewel() {
   if (session == null) {
     return (
       <Link
-        className="text-sm font-medium"
+        className="text-base"
         href="/api/auth/signin"
         onClick={(event) => {
           event.preventDefault();
@@ -169,7 +169,6 @@ export default function AppShell({ children }: Props) {
             </div>
           </div>
         )}
-
         {/* Mobile menu */}
         <MobileNavigation
           globalNavigationItems={GlobalNavigation}
@@ -178,7 +177,6 @@ export default function AppShell({ children }: Props) {
           productTitle={currentProductNavigation.title}
           setIsShown={setMobileMenuOpen}
         />
-
         {/* Content area */}
         <div className="flex h-screen flex-1 flex-col overflow-hidden">
           <header className="w-full">
