@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Button } from '@tih/ui';
 
 import { Container } from './Container';
 
@@ -24,13 +25,12 @@ export function Hero() {
         your fellow engineers
       </p>
       <div className="mt-10 flex justify-center gap-x-4">
-        <Link href="/resumes/browse">
-          <button
-            className="bg-primary-500 rounded-md py-2 px-3 text-sm font-medium text-white"
-            type="button">
-            Start browsing now
-          </button>
-        </Link>
+        <Button
+          href="/resumes/browse"
+          label="Start browsing now"
+          variant="primary"
+        />
+        {/* TODO: Update video */}
         <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
           <button
             className="focus-visible:outline-primary-600 group inline-flex items-center justify-center rounded-md py-2 px-4 text-sm ring-1 ring-slate-200 hover:text-slate-900 hover:ring-slate-300 focus:outline-none focus-visible:ring-slate-300 active:bg-slate-100 active:text-slate-600"

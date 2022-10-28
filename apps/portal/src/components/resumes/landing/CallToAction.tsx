@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Button } from '@tih/ui';
 
 import { Container } from './Container';
 
@@ -14,13 +14,12 @@ export function CallToAction() {
             It's free! Take charge of your resume game by learning from the top
             engineers in the field.
           </p>
-          <Link href="/resumes/browse">
-            <button
-              className="bg-primary-500 mt-4 rounded-md py-2 px-3 text-sm font-medium text-white"
-              type="button">
-              Start browsing now
-            </button>
-          </Link>
+          <Button
+            className="mt-4"
+            href="/resumes/browse"
+            label="Start browsing now"
+            variant="primary"
+          />
         </div>
       </Container>
     </section>
