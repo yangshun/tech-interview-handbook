@@ -171,7 +171,7 @@ export default function SubmitResumeForm({
             trpcContext.invalidateQueries(
               'resumes.resume.getTotalFilterCounts',
             );
-            router.push('/resumes/browse');
+            router.push('/resumes');
           } else {
             onClose();
           }

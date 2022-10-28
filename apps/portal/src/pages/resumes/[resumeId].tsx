@@ -121,7 +121,7 @@ export default function ResumeReviewPage() {
     ) => filterOptions.find((option) => option.label === label)?.value;
 
     router.push({
-      pathname: '/resumes/browse',
+      pathname: '/resumes',
       query: {
         currentPage: JSON.stringify(1),
         searchValue: JSON.stringify(''),

@@ -25,11 +25,7 @@ export function Hero() {
         your fellow engineers
       </p>
       <div className="mt-10 flex justify-center gap-x-4">
-        <Button
-          href="/resumes/browse"
-          label="Start browsing now"
-          variant="primary"
-        />
+        <Button href="/resumes" label="Start browsing now" variant="primary" />
         {/* TODO: Update video */}
         <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
           <button
