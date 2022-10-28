@@ -33,7 +33,7 @@ function ProfileJewel() {
   if (session == null) {
     return (
       <Link
-        className="text-sm font-medium"
+        className="text-base"
         href="/api/auth/signin"
         onClick={(event) => {
           event.preventDefault();
