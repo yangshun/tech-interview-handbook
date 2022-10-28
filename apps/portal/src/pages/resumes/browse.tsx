@@ -471,6 +471,7 @@ export default function ResumeHomePage() {
       <main className="h-full flex-auto px-8 pb-4">
         <div className="flex justify-start">
           <div className="fixed top-0 bottom-0 mt-24 hidden w-64 overflow-auto lg:block">
+            {/* Quick Access Section */}
             <h3 className="text-md font-medium tracking-tight text-gray-900">
               Quick access
             </h3>
@@ -489,6 +490,7 @@ export default function ResumeHomePage() {
                     </li>
                   ))}
                 </ul>
+                {/* Filter Section */}
                 <h3 className="text-md font-medium tracking-tight text-slate-900">
                   Explore these filters
                 </h3>

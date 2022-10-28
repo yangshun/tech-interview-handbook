@@ -45,9 +45,19 @@ export const resumesCommentsUserRouter = createProtectedRouter()
           };
         });
 
-      return await ctx.prisma.resumesComment.createMany({
+      const prevCommentCount = await ctx.prisma.resumesComment.count({
+        where: {
+          resumeId,
+        },
+      });
+      const result = await ctx.prisma.resumesComment.createMany({
         data: comments,
       });
+
+      return {
+        newCount: Number(prevCommentCount) + result.count,
+        prevCount: prevCommentCount,
+      };
     },
   })
   .mutation('update', {
