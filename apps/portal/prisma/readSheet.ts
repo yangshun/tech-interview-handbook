@@ -168,12 +168,20 @@ const seedSalaries = async () => {
                           create: {
                             baseCurrency: baseCurrencyString,
                             baseValue: await convert(
-                              data.Income,
+                              data.Income
+                                ? typeof data.Income === 'number'
+                                  ? data.Income
+                                  : 0
+                                : 0,
                               'SGD', // assume sgd
                               baseCurrencyString,
                             ),
                             currency: 'SGD', // assume sgd
-                            value: data.Income,
+                            value: data.Income
+                                ? typeof data.Income === 'number'
+                                  ? data.Income
+                                  : 0
+                                : 0,
                           },
                         },
                         startYear: xlSerialToJsDate(
@@ -219,12 +227,20 @@ const seedSalaries = async () => {
                           create: {
                             baseCurrency: baseCurrencyString,
                             baseValue: await convert(
-                              data.Income,
+                              data.Income
+                                ? typeof data.Income === 'number'
+                                  ? data.Income
+                                  : 0
+                                : 0,
                               'SGD', // assume sgd
                               baseCurrencyString,
                             ),
                             currency: 'SGD', // assume sgd
-                            value: data.Income,
+                            value: data.Income
+                                ? typeof data.Income === 'number'
+                                  ? data.Income
+                                  : 0
+                                : 0,
                           },
                         },
                         bonus: {
@@ -302,7 +318,7 @@ const seedSalaries = async () => {
           console.log('Invalid Company: ' + data.Company);
         }
       } else {
-        console.log('Invalid Income not a number: ' + data.Income);
+        console.log('Invalid TC not a number: ' + data.TC);
       }
     }),
   );
