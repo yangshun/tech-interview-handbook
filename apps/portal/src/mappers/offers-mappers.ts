@@ -527,8 +527,10 @@ export const profileDtoMapper = (
         offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
       }
     >;
+    user: User | null;
   },
   inputToken: string | undefined,
+  inputUserId: string | null | undefined
 ) => {
   const profileDto: Profile = {
     analysis: profileAnalysisDtoMapper(profile.analysis),
@@ -536,6 +538,7 @@ export const profileDtoMapper = (
     editToken: null,
     id: profile.id,
     isEditable: false,
+    isSaved: false,
     offers: profile.offers.map((offer) => profileOfferDtoMapper(offer)),
     profileName: profile.profileName,
   };
@@ -543,6 +546,20 @@ export const profileDtoMapper = (
   if (inputToken === profile.editToken) {
     profileDto.editToken = profile.editToken ?? null;
     profileDto.isEditable = true;
+
+    const users = profile.user
+
+    // TODO: BRYANN UNCOMMENT THIS ONCE U CHANGE THE SCHEMA
+    // for (let i = 0; i < users.length; i++) {
+    //   if (users[i].id === inputUserId) {
+    //     profileDto.isSaved = true
+    //   }
+    // }
+
+    // TODO: REMOVE THIS ONCE U CHANGE THE SCHEMA
+    if (users?.id === inputUserId) {
+      profileDto.isSaved = true
+    }
   }
 
   return profileDto;

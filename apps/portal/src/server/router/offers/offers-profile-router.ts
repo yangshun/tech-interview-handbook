@@ -106,6 +106,7 @@ export const offersProfileRouter = createRouter()
     input: z.object({
       profileId: z.string(),
       token: z.string().optional(),
+      userId: z.string().nullish(),
     }),
     async resolve({ ctx, input }) {
       const result = await ctx.prisma.offersProfile.findFirst({
@@ -228,6 +229,7 @@ export const offersProfileRouter = createRouter()
               },
             },
           },
+          user: true,
         },
         where: {
           id: input.profileId,
@@ -235,7 +237,7 @@ export const offersProfileRouter = createRouter()
       });
 
       if (result) {
-        return profileDtoMapper(result, input.token);
+        return profileDtoMapper(result, input.token, input.userId);
       }
 
       throw new trpc.TRPCError({

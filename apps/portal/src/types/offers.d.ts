@@ -6,6 +6,7 @@ export type Profile = {
   editToken: string?;
   id: string;
   isEditable: boolean;
+  isSaved: boolean;
   offers: Array<ProfileOffer>;
   profileName: string;
 };
