@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import type { ResumesCommentVote } from '@prisma/client';
 import { Vote } from '@prisma/client';
 
 import { createRouter } from '../context';
@@ -20,13 +19,13 @@ export const resumesCommentsVotesRouter = createRouter().query('list', {
       },
     });
 
-    let userVote: ResumesCommentVote | null = null;
-    let numVotes = 0;
-
-    votes.forEach((vote) => {
-      numVotes += vote.value === Vote.UPVOTE ? 1 : -1;
-      userVote = vote.userId === userId ? vote : null;
-    });
+    const userVotes = votes.filter((vote) => vote.userId === userId);
+    const userVote = userVotes.length > 0 ? userVotes[0] : null;
+    const numVotes = votes
+      .map((vote) => (vote.value === Vote.UPVOTE ? 1 : -1))
+      .reduce((result, current) => {
+        return result + current;
+      }, 0);
 
     const resumeCommentVote: ResumeCommentVote = {
       numVotes,

@@ -4,7 +4,6 @@ import { JobType } from '@prisma/client';
 import * as trpc from '@trpc/server';
 
 import {
-  addToProfileResponseMapper,
   createOfferProfileResponseMapper,
   profileDtoMapper,
 } from '~/mappers/offers-mappers';
@@ -107,6 +106,7 @@ export const offersProfileRouter = createRouter()
     input: z.object({
       profileId: z.string(),
       token: z.string().optional(),
+      userId: z.string().nullish(),
     }),
     async resolve({ ctx, input }) {
       const result = await ctx.prisma.offersProfile.findFirst({
@@ -229,6 +229,7 @@ export const offersProfileRouter = createRouter()
               },
             },
           },
+          user: true,
         },
         where: {
           id: input.profileId,
@@ -236,7 +237,7 @@ export const offersProfileRouter = createRouter()
       });
 
       if (result) {
-        return profileDtoMapper(result, input.token);
+        return profileDtoMapper(result, input.token, input.userId);
       }
 
       throw new trpc.TRPCError({
@@ -284,18 +285,42 @@ export const offersProfileRouter = createRouter()
                 })),
               },
               experiences: {
-                create: input.background.experiences.map(async (x) => {
-                  if (x.jobType === JobType.FULLTIME) {
-                    if (x.companyId) {
-                      return {
-                        company: {
-                          connect: {
-                            id: x.companyId,
+                create: await Promise.all(
+                  input.background.experiences.map(async (x) => {
+                    if (x.jobType === JobType.FULLTIME) {
+                      if (x.companyId) {
+                        return {
+                          company: {
+                            connect: {
+                              id: x.companyId,
+                            },
                           },
-                        },
+                          durationInMonths: x.durationInMonths,
+                          jobType: x.jobType,
+                          level: x.level,
+                          title: x.title,
+                          totalCompensation:
+                            x.totalCompensation != null
+                              ? {
+                                  create: {
+                                    baseCurrency: baseCurrencyString,
+                                    baseValue: await convert(
+                                      x.totalCompensation.value,
+                                      x.totalCompensation.currency,
+                                      baseCurrencyString,
+                                    ),
+                                    currency: x.totalCompensation.currency,
+                                    value: x.totalCompensation.value,
+                                  },
+                                }
+                              : undefined,
+                        };
+                      }
+                      return {
                         durationInMonths: x.durationInMonths,
                         jobType: x.jobType,
                         level: x.level,
+                        location: x.location,
                         title: x.title,
                         totalCompensation:
                           x.totalCompensation != null
@@ -314,37 +339,35 @@ export const offersProfileRouter = createRouter()
                             : undefined,
                       };
                     }
-                    return {
-                      durationInMonths: x.durationInMonths,
-                      jobType: x.jobType,
-                      level: x.level,
-                      location: x.location,
-                      title: x.title,
-                      totalCompensation:
-                        x.totalCompensation != null
-                          ? {
-                              create: {
-                                baseCurrency: baseCurrencyString,
-                                baseValue: await convert(
-                                  x.totalCompensation.value,
-                                  x.totalCompensation.currency,
-                                  baseCurrencyString,
-                                ),
-                                currency: x.totalCompensation.currency,
-                                value: x.totalCompensation.value,
-                              },
-                            }
-                          : undefined,
-                    };
-                  }
-                  if (x.jobType === JobType.INTERN) {
-                    if (x.companyId) {
-                      return {
-                        company: {
-                          connect: {
-                            id: x.companyId,
+                    if (x.jobType === JobType.INTERN) {
+                      if (x.companyId) {
+                        return {
+                          company: {
+                            connect: {
+                              id: x.companyId,
+                            },
                           },
-                        },
+                          durationInMonths: x.durationInMonths,
+                          jobType: x.jobType,
+                          monthlySalary:
+                            x.monthlySalary != null
+                              ? {
+                                  create: {
+                                    baseCurrency: baseCurrencyString,
+                                    baseValue: await convert(
+                                      x.monthlySalary.value,
+                                      x.monthlySalary.currency,
+                                      baseCurrencyString,
+                                    ),
+                                    currency: x.monthlySalary.currency,
+                                    value: x.monthlySalary.value,
+                                  },
+                                }
+                              : undefined,
+                          title: x.title,
+                        };
+                      }
+                      return {
                         durationInMonths: x.durationInMonths,
                         jobType: x.jobType,
                         monthlySalary:
@@ -365,33 +388,13 @@ export const offersProfileRouter = createRouter()
                         title: x.title,
                       };
                     }
-                    return {
-                      durationInMonths: x.durationInMonths,
-                      jobType: x.jobType,
-                      monthlySalary:
-                        x.monthlySalary != null
-                          ? {
-                              create: {
-                                baseCurrency: baseCurrencyString,
-                                baseValue: await convert(
-                                  x.monthlySalary.value,
-                                  x.monthlySalary.currency,
-                                  baseCurrencyString,
-                                ),
-                                currency: x.monthlySalary.currency,
-                                value: x.monthlySalary.value,
-                              },
-                            }
-                          : undefined,
-                      title: x.title,
-                    };
-                  }
 
-                  throw new trpc.TRPCError({
-                    code: 'BAD_REQUEST',
-                    message: 'Missing fields in background experiences.',
-                  });
-                }),
+                    throw new trpc.TRPCError({
+                      code: 'BAD_REQUEST',
+                      message: 'Missing fields in background experiences.',
+                    });
+                  }),
+                )
               },
               specificYoes: {
                 create: input.background.specificYoes.map((x) => {
@@ -546,7 +549,6 @@ export const offersProfileRouter = createRouter()
           profileName: uniqueName,
         },
       });
-
       return createOfferProfileResponseMapper(profile, token);
     },
   })
@@ -1404,44 +1406,6 @@ export const offersProfileRouter = createRouter()
           code: 'NOT_FOUND',
           message: 'Profile does not exist',
         });
-      }
-
-      throw new trpc.TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'Invalid token.',
-      });
-    },
-  })
-  .mutation('addToUserProfile', {
-    input: z.object({
-      profileId: z.string(),
-      token: z.string(),
-      userId: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const profile = await ctx.prisma.offersProfile.findFirst({
-        where: {
-          id: input.profileId,
-        },
-      });
-
-      const profileEditToken = profile?.editToken;
-
-      if (profileEditToken === input.token) {
-        const updated = await ctx.prisma.offersProfile.update({
-          data: {
-            user: {
-              connect: {
-                id: input.userId,
-              },
-            },
-          },
-          where: {
-            id: input.profileId,
-          },
-        });
-
-        return addToProfileResponseMapper(updated);
       }
 
       throw new trpc.TRPCError({

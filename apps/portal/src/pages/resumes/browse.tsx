@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import { Dialog, Disclosure, Transition } from '@headlessui/react';
 import { FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
 import {
@@ -10,6 +10,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import {
+  Button,
   CheckboxInput,
   CheckboxList,
   DropdownMenu,
@@ -20,28 +21,31 @@ import {
 } from '@tih/ui';
 
 import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
+import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
+import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
+
 import type {
   Filter,
   FilterId,
+  FilterLabel,
   Shortcut,
-} from '~/components/resumes/browse/resumeFilters';
+} from '~/utils/resumes/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCES,
+  getFilterLabel,
   INITIAL_FILTER_STATE,
   isInitialFilterState,
   LOCATIONS,
   ROLES,
   SHORTCUTS,
   SORT_OPTIONS,
-} from '~/components/resumes/browse/resumeFilters';
-import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
-import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
-
+} from '~/utils/resumes/resumeFilters';
 import useDebounceValue from '~/utils/resumes/useDebounceValue';
+import useSearchParams from '~/utils/resumes/useSearchParams';
 import { trpc } from '~/utils/trpc';
 
-import type { FilterState } from '../../components/resumes/browse/resumeFilters';
+import type { FilterState, SortOrder } from '../../utils/resumes/resumeFilters';
 
 const STALE_TIME = 5 * 60 * 1000;
 const DEBOUNCE_DELAY = 800;
@@ -101,19 +105,89 @@ const getEmptyDataText = (
 export default function ResumeHomePage() {
   const { data: sessionData } = useSession();
   const router = useRouter();
-  const [tabsValue, setTabsValue] = useState(BROWSE_TABS_VALUES.ALL);
-  const [sortOrder, setSortOrder] = useState('latest');
-  const [searchValue, setSearchValue] = useState('');
-  const [userFilters, setUserFilters] = useState(INITIAL_FILTER_STATE);
-  const [shortcutSelected, setShortcutSelected] = useState('All');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [tabsValue, setTabsValue, isTabsValueInit] = useSearchParams(
+    'tabsValue',
+    BROWSE_TABS_VALUES.ALL,
+  );
+  const [sortOrder, setSortOrder, isSortOrderInit] = useSearchParams<SortOrder>(
+    'sortOrder',
+    'latest',
+  );
+  const [searchValue, setSearchValue, isSearchValueInit] = useSearchParams(
+    'searchValue',
+    '',
+  );
+  const [shortcutSelected, setShortcutSelected, isShortcutInit] =
+    useSearchParams('shortcutSelected', 'All');
+  const [currentPage, setCurrentPage, isCurrentPageInit] = useSearchParams(
+    'currentPage',
+    1,
+  );
+  const [userFilters, setUserFilters, isUserFiltersInit] = useSearchParams(
+    'userFilters',
+    INITIAL_FILTER_STATE,
+  );
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const skip = (currentPage - 1) * PAGE_LIMIT;
+  const isSearchOptionsInit = useMemo(() => {
+    return (
+      isTabsValueInit &&
+      isSortOrderInit &&
+      isSearchValueInit &&
+      isShortcutInit &&
+      isCurrentPageInit &&
+      isUserFiltersInit
+    );
+  }, [
+    isTabsValueInit,
+    isSortOrderInit,
+    isSearchValueInit,
+    isShortcutInit,
+    isCurrentPageInit,
+    isUserFiltersInit,
+  ]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [userFilters, sortOrder, searchValue]);
+  }, [userFilters, sortOrder, setCurrentPage, searchValue]);
+
+  useEffect(() => {
+    // Router.replace used instead of router.replace to avoid
+    // the page reloading itself since the router.replace
+    // callback changes on every page load
+    if (!isSearchOptionsInit) {
+      return;
+    }
+
+    Router.replace({
+      pathname: router.pathname,
+      query: {
+        currentPage: JSON.stringify(currentPage),
+        searchValue: JSON.stringify(searchValue),
+        shortcutSelected: JSON.stringify(shortcutSelected),
+        sortOrder: JSON.stringify(sortOrder),
+        tabsValue: JSON.stringify(tabsValue),
+        userFilters: JSON.stringify(userFilters),
+      },
+    });
+  }, [
+    tabsValue,
+    sortOrder,
+    searchValue,
+    userFilters,
+    shortcutSelected,
+    currentPage,
+    router.pathname,
+    isSearchOptionsInit,
+  ]);
+
+  const filterCountsQuery = trpc.useQuery(
+    ['resumes.resume.getTotalFilterCounts'],
+    {
+      staleTime: STALE_TIME,
+    },
+  );
 
   const allResumesQuery = trpc.useQuery(
     [
@@ -175,6 +249,14 @@ export default function ResumeHomePage() {
     },
   );
 
+  const getFilterCount = (filter: FilterLabel, value: string) => {
+    if (filterCountsQuery.isLoading) {
+      return 0;
+    }
+    const filterCountsData = filterCountsQuery.data!;
+    return filterCountsData[filter][value];
+  };
+
   const onSubmitResume = () => {
     if (sessionData === null) {
       router.push('/api/auth/signin');
@@ -201,6 +283,13 @@ export default function ResumeHomePage() {
         ),
       });
     }
+  };
+
+  const onClearFilterClick = (filterSection: FilterId) => {
+    setUserFilters({
+      ...userFilters,
+      [filterSection]: [],
+    });
   };
 
   const onShortcutChange = ({
@@ -283,7 +372,7 @@ export default function ResumeHomePage() {
                 <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-scroll bg-white py-4 pb-12 shadow-xl">
                   <div className="flex items-center justify-between px-4">
                     <h2 className="text-lg font-medium text-slate-900">
-                      Shortcuts
+                      Quick access
                     </h2>
                     <button
                       className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-slate-400"
@@ -296,7 +385,7 @@ export default function ResumeHomePage() {
 
                   <form className="mt-4 border-t border-slate-200">
                     <ul
-                      className="flex flex-wrap justify-start gap-4 px-4 py-3 font-medium text-slate-900"
+                      className="flex w-11/12 flex-wrap justify-start gap-2 px-4 py-4 font-medium text-slate-900"
                       role="list">
                       {SHORTCUTS.map((shortcut) => (
                         <li key={shortcut.name}>
@@ -313,7 +402,7 @@ export default function ResumeHomePage() {
                       <Disclosure
                         key={filter.id}
                         as="div"
-                        className="border-t border-slate-200 px-4 py-6">
+                        className="border-t border-slate-200 px-4 pt-6 pb-4">
                         {({ open }) => (
                           <>
                             <h3 className="-mx-2 -my-3 flow-root">
@@ -336,14 +425,17 @@ export default function ResumeHomePage() {
                                 </span>
                               </Disclosure.Button>
                             </h3>
-                            <Disclosure.Panel className="pt-6">
-                              <div className="space-y-6">
+                            <Disclosure.Panel className="space-y-4 pt-6">
+                              <div className="space-y-3">
                                 {filter.options.map((option) => (
                                   <div
                                     key={option.value}
                                     className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 [&>div>div:nth-child(2)>label]:font-normal">
                                     <CheckboxInput
-                                      label={option.label}
+                                      label={`${option.label} (${getFilterCount(
+                                        filter.label,
+                                        option.label,
+                                      )})`}
                                       value={userFilters[filter.id].includes(
                                         option.value,
                                       )}
@@ -358,6 +450,11 @@ export default function ResumeHomePage() {
                                   </div>
                                 ))}
                               </div>
+                              <p
+                                className="cursor-pointer text-sm text-slate-500 underline"
+                                onClick={() => onClearFilterClick(filter.id)}>
+                                Clear
+                              </p>
                             </Disclosure.Panel>
                           </>
                         )}
@@ -371,11 +468,12 @@ export default function ResumeHomePage() {
         </Transition.Root>
       </div>
 
-      <main className="h-[calc(100vh-4rem)] flex-auto px-8 pb-4">
+      <main className="h-full flex-auto px-8 pb-4">
         <div className="flex justify-start">
           <div className="fixed top-0 bottom-0 mt-24 hidden w-64 overflow-auto lg:block">
+            {/* Quick Access Section */}
             <h3 className="text-md font-medium tracking-tight text-gray-900">
-              Shortcuts
+              Quick access
             </h3>
             <div className="w-100 pt-4 sm:pr-0 md:pr-4">
               <form>
@@ -392,6 +490,7 @@ export default function ResumeHomePage() {
                     </li>
                   ))}
                 </ul>
+                {/* Filter Section */}
                 <h3 className="text-md font-medium tracking-tight text-slate-900">
                   Explore these filters
                 </h3>
@@ -399,7 +498,7 @@ export default function ResumeHomePage() {
                   <Disclosure
                     key={filter.id}
                     as="div"
-                    className="border-b border-slate-200 py-6">
+                    className="border-b border-slate-200 pt-6 pb-4">
                     {({ open }) => (
                       <>
                         <h3 className="-my-3 flow-root">
@@ -422,7 +521,7 @@ export default function ResumeHomePage() {
                             </span>
                           </Disclosure.Button>
                         </h3>
-                        <Disclosure.Panel className="pt-4">
+                        <Disclosure.Panel className="space-y-4 pt-4">
                           <CheckboxList
                             description=""
                             isLabelHidden={true}
@@ -431,9 +530,12 @@ export default function ResumeHomePage() {
                             {filter.options.map((option) => (
                               <div
                                 key={option.value}
-                                className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 [&>div>div:nth-child(2)>label]:font-normal">
+                                className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 px-1 [&>div>div:nth-child(2)>label]:font-normal">
                                 <CheckboxInput
-                                  label={option.label}
+                                  label={`${option.label} (${getFilterCount(
+                                    filter.label,
+                                    option.label,
+                                  )})`}
                                   value={userFilters[filter.id].includes(
                                     option.value,
                                   )}
@@ -448,6 +550,11 @@ export default function ResumeHomePage() {
                               </div>
                             ))}
                           </CheckboxList>
+                          <p
+                            className="cursor-pointer text-sm text-slate-500 underline"
+                            onClick={() => onClearFilterClick(filter.id)}>
+                            Clear
+                          </p>
                         </Disclosure.Panel>
                       </>
                     )}
@@ -457,8 +564,8 @@ export default function ResumeHomePage() {
             </div>
           </div>
           <div className="relative lg:left-64 lg:w-[calc(100%-16rem)]">
-            <div className="lg:border-grey-200 sticky top-0 z-10 flex flex-wrap items-center justify-between bg-gray-50 pt-6 pb-2 lg:border-b">
-              <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none lg:pb-0">
+            <div className="lg:border-grey-200 sticky top-0 z-10 flex flex-wrap items-center justify-between pt-6 pb-2 lg:border-b">
+              <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none xl:pb-0">
                 <div>
                   <Tabs
                     label="Resume Browse Tabs"
@@ -480,16 +587,8 @@ export default function ResumeHomePage() {
                     onChange={onTabChange}
                   />
                 </div>
-                <div>
-                  <button
-                    className="bg-primary-500 ml-4 rounded-md py-2 px-3 text-sm font-medium text-white lg:hidden"
-                    type="button"
-                    onClick={onSubmitResume}>
-                    Submit Resume
-                  </button>
-                </div>
               </div>
-              <div className="flex flex-wrap items-center justify-start gap-8">
+              <div className="flex flex-wrap items-center justify-start gap-4 lg:gap-6">
                 <div className="w-64">
                   <TextInput
                     isLabelHidden={true}
@@ -502,32 +601,31 @@ export default function ResumeHomePage() {
                     onChange={setSearchValue}
                   />
                 </div>
-                <div>
-                  <DropdownMenu align="end" label={SORT_OPTIONS[sortOrder]}>
-                    {Object.entries(SORT_OPTIONS).map(([key, value]) => (
-                      <DropdownMenu.Item
-                        key={key}
-                        isSelected={sortOrder === key}
-                        label={value}
-                        onClick={() => setSortOrder(key)}></DropdownMenu.Item>
-                    ))}
-                  </DropdownMenu>
-                </div>
-                <button
-                  className="-m-2 text-slate-400 hover:text-slate-500 lg:hidden"
-                  type="button"
-                  onClick={() => setMobileFiltersOpen(true)}>
-                  <span className="sr-only">Filters</span>
-                  <FunnelIcon aria-hidden="true" className="h-6 w-6" />
-                </button>
-                <div>
-                  <button
-                    className="bg-primary-500 hidden w-36 rounded-md py-2 px-3 text-sm font-medium text-white lg:block"
-                    type="button"
-                    onClick={onSubmitResume}>
-                    Submit Resume
-                  </button>
-                </div>
+                <DropdownMenu
+                  align="end"
+                  label={getFilterLabel(SORT_OPTIONS, sortOrder)}>
+                  {SORT_OPTIONS.map(({ label, value }) => (
+                    <DropdownMenu.Item
+                      key={value}
+                      isSelected={sortOrder === value}
+                      label={label}
+                      onClick={() => setSortOrder(value)}></DropdownMenu.Item>
+                  ))}
+                </DropdownMenu>
+                <Button
+                  className="lg:hidden"
+                  icon={FunnelIcon}
+                  isLabelHidden={true}
+                  label="Filters"
+                  variant="tertiary"
+                  onClick={() => setMobileFiltersOpen(true)}
+                />
+                <Button
+                  className="whitespace-pre-wrap px-2 lg:block"
+                  label="Submit Resume"
+                  variant="primary"
+                  onClick={onSubmitResume}
+                />
               </div>
             </div>
             {isFetchingResumes ? (

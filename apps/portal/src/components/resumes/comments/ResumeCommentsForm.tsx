@@ -53,18 +53,41 @@ export default function ResumeCommentsForm({
       },
     },
   );
+  const invalidateResumeQueries = () => {
+    trpcContext.invalidateQueries(['resumes.resume.findOne']);
+    trpcContext.invalidateQueries(['resumes.resume.findAll']);
+    trpcContext.invalidateQueries(['resumes.resume.user.findUserStarred']);
+    trpcContext.invalidateQueries(['resumes.resume.user.findUserCreated']);
+  };
+
+  const resolveMutation = trpc.useMutation('resumes.resume.user.resolve', {
+    onSuccess() {
+      invalidateResumeQueries();
+    },
+  });
 
   // TODO: Give a feedback to the user if the action succeeds/fails
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
     return await commentCreateMutation.mutate(
       {
         resumeId,
-        ...data,
+        ...formData,
       },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
           // Redirect back to comments section
           setShowCommentsForm(false);
+          const { prevCount, newCount } = data;
+          // Auto mark resume as resolved once the total comments passes the 5 threshold
+          if (
+            (newCount >= 5 && prevCount < 5) ||
+            (newCount >= 15 && prevCount < 15)
+          ) {
+            resolveMutation.mutate({
+              id: resumeId,
+              val: true,
+            });
+          }
         },
       },
     );

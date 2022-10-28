@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import type { ComponentMeta } from '@storybook/react';
-import type { TypeaheadOption } from '@tih/ui';
+import type { TypeaheadOption, TypeaheadTextSize } from '@tih/ui';
 import { Typeahead } from '@tih/ui';
+
+const typeaheadTextSizes: ReadonlyArray<TypeaheadTextSize> = [
+  'default',
+  'inherit',
+];
 
 export default {
   argTypes: {
@@ -22,6 +27,10 @@ export default {
     },
     required: {
       control: 'boolean',
+    },
+    textSize: {
+      control: { type: 'select' },
+      options: typeaheadTextSizes,
     },
   },
   component: Typeahead,

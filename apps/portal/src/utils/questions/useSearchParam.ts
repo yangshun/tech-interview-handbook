@@ -25,7 +25,7 @@ export const useSearchParam = <Value = string>(
   const [isInitialized, setIsInitialized] = useState(false);
   const router = useRouter();
 
-  const [filters, setFilters] = useState<Array<Value>>(defaultValues || []);
+  const [params, setParams] = useState<Array<Value>>(defaultValues || []);
 
   useEffect(() => {
     if (router.isReady && !isInitialized) {
@@ -33,7 +33,7 @@ export const useSearchParam = <Value = string>(
       const query = router.query[name];
       if (query) {
         const queryValues = Array.isArray(query) ? query : [query];
-        setFilters(
+        setParams(
           queryValues
             .map(stringToParam)
             .filter((value) => value !== null) as Array<Value>,
@@ -42,28 +42,32 @@ export const useSearchParam = <Value = string>(
         // Try to load from local storage
         const localStorageValue = localStorage.getItem(name);
         if (localStorageValue !== null) {
-          const loadedFilters = JSON.parse(localStorageValue);
-          setFilters(loadedFilters);
+          const loadedFilters = JSON.parse(localStorageValue) as Array<string>;
+          setParams(
+            loadedFilters
+              .map(stringToParam)
+              .filter((value) => value !== null) as Array<Value>,
+          );
         }
       }
       setIsInitialized(true);
     }
   }, [isInitialized, name, stringToParam, router]);
 
-  const setFiltersCallback = useCallback(
-    (newFilters: Array<Value>) => {
-      setFilters(newFilters);
+  const setParamsCallback = useCallback(
+    (newParams: Array<Value>) => {
+      setParams(newParams);
       localStorage.setItem(
         name,
         JSON.stringify(
-          newFilters.map(valueToQueryParam).filter((param) => param !== null),
+          newParams.map(valueToQueryParam).filter((param) => param !== null),
         ),
       );
     },
     [name, valueToQueryParam],
   );
 
-  return [filters, setFiltersCallback, isInitialized] as const;
+  return [params, setParamsCallback, isInitialized] as const;
 };
 
 export const useSearchParamSingle = <Value = string>(
@@ -73,14 +77,14 @@ export const useSearchParamSingle = <Value = string>(
   },
 ) => {
   const { defaultValue, ...restOpts } = opts ?? {};
-  const [filters, setFilters, isInitialized] = useSearchParam<Value>(name, {
+  const [params, setParams, isInitialized] = useSearchParam<Value>(name, {
     defaultValues: defaultValue !== undefined ? [defaultValue] : undefined,
     ...restOpts,
   } as SearchParamOptions<Value>);
 
   return [
-    filters[0],
-    (value: Value) => setFilters([value]),
+    params[0],
+    (value: Value) => setParams([value]),
     isInitialized,
   ] as const;
 };

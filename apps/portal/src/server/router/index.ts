@@ -6,12 +6,19 @@ import { offersRouter } from './offers/offers';
 import { offersAnalysisRouter } from './offers/offers-analysis-router';
 import { offersCommentsRouter } from './offers/offers-comments-router';
 import { offersProfileRouter } from './offers/offers-profile-router';
+import { offersUserProfileRouter } from './offers/offers-user-profile-router';
 import { protectedExampleRouter } from './protected-example-router';
-import { questionsAnswerCommentRouter } from './questions-answer-comment-router';
-import { questionsAnswerRouter } from './questions-answer-router';
-import { questionsQuestionCommentRouter } from './questions-question-comment-router';
-import { questionsQuestionEncounterRouter } from './questions-question-encounter-router';
-import { questionsQuestionRouter } from './questions-question-router';
+import { questionsAnswerCommentRouter } from './questions/questions-answer-comment-router';
+import { questionsAnswerCommentUserRouter } from './questions/questions-answer-comment-user-router';
+import { questionsAnswerRouter } from './questions/questions-answer-router';
+import { questionsAnswerUserRouter } from './questions/questions-answer-user-router';
+import { questionsListRouter } from './questions/questions-list-router';
+import { questionsQuestionCommentRouter } from './questions/questions-question-comment-router';
+import { questionsQuestionCommentUserRouter } from './questions/questions-question-comment-user-router';
+import { questionsQuestionEncounterRouter } from './questions/questions-question-encounter-router';
+import { questionsQuestionEncounterUserRouter } from './questions/questions-question-encounter-user-router';
+import { questionsQuestionRouter } from './questions/questions-question-router';
+import { questionsQuestionUserRouter } from './questions/questions-question-user-router';
 import { resumeCommentsRouter } from './resumes/resumes-comments-router';
 import { resumesCommentsUserRouter } from './resumes/resumes-comments-user-router';
 import { resumesCommentsVotesRouter } from './resumes/resumes-comments-votes-router';
@@ -39,14 +46,27 @@ export const appRouter = createRouter()
   .merge('resumes.comments.votes.', resumesCommentsVotesRouter)
   .merge('resumes.comments.votes.user.', resumesCommentsVotesUserRouter)
   .merge('questions.answers.comments.', questionsAnswerCommentRouter)
+  .merge('questions.answers.comments.user.', questionsAnswerCommentUserRouter)
   .merge('questions.answers.', questionsAnswerRouter)
+  .merge('questions.answers.user.', questionsAnswerUserRouter)
+  .merge('questions.lists.', questionsListRouter)
   .merge('questions.questions.comments.', questionsQuestionCommentRouter)
+  .merge(
+    'questions.questions.comments.user.',
+    questionsQuestionCommentUserRouter,
+  )
   .merge('questions.questions.encounters.', questionsQuestionEncounterRouter)
+  .merge(
+    'questions.questions.encounters.user.',
+    questionsQuestionEncounterUserRouter,
+  )
   .merge('questions.questions.', questionsQuestionRouter)
+  .merge('questions.questions.user.', questionsQuestionUserRouter)
   .merge('offers.', offersRouter)
   .merge('offers.profile.', offersProfileRouter)
   .merge('offers.analysis.', offersAnalysisRouter)
-  .merge('offers.comments.', offersCommentsRouter);
+  .merge('offers.comments.', offersCommentsRouter)
+  .merge('offers.user.profile.', offersUserProfileRouter);
 
 // Export type definition of API
 export type AppRouter = typeof appRouter;

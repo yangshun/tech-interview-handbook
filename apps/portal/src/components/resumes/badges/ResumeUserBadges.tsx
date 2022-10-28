@@ -8,19 +8,30 @@ type Props = Readonly<{
   userId: string;
 }>;
 
+const STALE_TIME = 60;
+
 export default function ResumeUserBadges({ userId }: Props) {
-  const userReviewedResumeCountQuery = trpc.useQuery([
-    'resumes.resume.findUserReviewedResumeCount',
-    { userId },
-  ]);
-  const userMaxResumeUpvoteCountQuery = trpc.useQuery([
-    'resumes.resume.findUserMaxResumeUpvoteCount',
-    { userId },
-  ]);
-  const userTopUpvotedCommentCountQuery = trpc.useQuery([
-    'resumes.resume.findUserTopUpvotedCommentCount',
-    { userId },
-  ]);
+  const userReviewedResumeCountQuery = trpc.useQuery(
+    ['resumes.resume.findUserReviewedResumeCount', { userId }],
+    {
+      retry: false,
+      staleTime: STALE_TIME,
+    },
+  );
+  const userMaxResumeUpvoteCountQuery = trpc.useQuery(
+    ['resumes.resume.findUserMaxResumeUpvoteCount', { userId }],
+    {
+      retry: false,
+      staleTime: STALE_TIME,
+    },
+  );
+  const userTopUpvotedCommentCountQuery = trpc.useQuery(
+    ['resumes.resume.findUserTopUpvotedCommentCount', { userId }],
+    {
+      retry: false,
+      staleTime: STALE_TIME,
+    },
+  );
 
   const payload: BadgePayload = {
     maxResumeUpvoteCount: userMaxResumeUpvoteCountQuery.data ?? 0,

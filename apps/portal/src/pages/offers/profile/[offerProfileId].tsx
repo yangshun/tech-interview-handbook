@@ -50,11 +50,11 @@ export default function OfferProfile() {
           router.push(HOME_URL);
         }
         // If the profile is not editable with a wrong token, redirect to the profile page
-        if (!data?.isEditable && token !== '') {
+        if (!data.isEditable && token !== '') {
           router.push(getProfilePath(offerProfileId as string));
         }
 
-        setIsEditable(data?.isEditable ?? false);
+        setIsEditable(data.isEditable);
 
         const filteredOffers: Array<OfferDisplayData> = data
           ? data?.offers.map((res: ProfileOffer) => {

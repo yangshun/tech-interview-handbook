@@ -42,7 +42,7 @@ export default function QuestionPage() {
   ]);
 
   const { mutate: addComment } = trpc.useMutation(
-    'questions.answers.comments.create',
+    'questions.answers.comments.user.create',
     {
       onSuccess: () => {
         utils.invalidateQueries([

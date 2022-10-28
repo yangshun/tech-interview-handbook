@@ -85,7 +85,7 @@ export default function Pagination({
   }
 
   if (lastAddedPage < current - pagePadding - 1) {
-    elements.push(<PaginationEllipsis />);
+    elements.push(<PaginationEllipsis key="ellipse-1" />);
   }
 
   for (let i = current - pagePadding; i <= current + pagePadding; i++) {
@@ -93,7 +93,7 @@ export default function Pagination({
   }
 
   if (lastAddedPage < end - pagePadding - 1) {
-    elements.push(<PaginationEllipsis />);
+    elements.push(<PaginationEllipsis key="ellipse-2" />);
   }
 
   for (let i = end - pagePadding; i <= end; i++) {

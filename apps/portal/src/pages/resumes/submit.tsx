@@ -19,14 +19,10 @@ import {
   TextInput,
 } from '@tih/ui';
 
-import {
-  EXPERIENCES,
-  LOCATIONS,
-  ROLES,
-} from '~/components/resumes/browse/resumeFilters';
 import SubmissionGuidelines from '~/components/resumes/submit-form/SubmissionGuidelines';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
+import { EXPERIENCES, LOCATIONS, ROLES } from '~/utils/resumes/resumeFilters';
 import { trpc } from '~/utils/trpc';
 
 const FILE_SIZE_LIMIT_MB = 3;
@@ -172,6 +168,9 @@ export default function SubmitResumeForm({
         onSuccess() {
           if (isNewForm) {
             trpcContext.invalidateQueries('resumes.resume.findAll');
+            trpcContext.invalidateQueries(
+              'resumes.resume.getTotalFilterCounts',
+            );
             router.push('/resumes/browse');
           } else {
             onClose();

@@ -26,7 +26,12 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
 
   return (
     <nav aria-label="Global" className="flex h-full items-center space-x-8">
-      <Link className="text-primary-700 text-sm font-medium" href={titleHref}>
+      <Link
+        className="hover:text-primary-700 flex items-center gap-2 text-sm font-medium"
+        href={titleHref}>
+        {titleHref !== '/' && (
+          <img alt="TIH" className="h-8 w-auto" src="/logo.svg" />
+        )}
         {title}
       </Link>
       <div className="hidden h-full items-center space-x-8 md:flex">
@@ -79,7 +84,7 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
             <Link
               key={item.name}
               className={clsx(
-                'hover:text-primary-600 inline-flex h-full items-center border-y-2 border-t-transparent text-sm font-medium text-slate-900',
+                'hover:text-primary-600 inline-flex h-full items-center border-y-2 border-t-transparent text-sm text-slate-900',
                 isActive ? 'border-b-primary-500' : 'border-b-transparent',
               )}
               href={item.href}

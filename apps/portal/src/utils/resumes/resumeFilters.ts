@@ -1,10 +1,11 @@
 export type FilterId = 'experience' | 'location' | 'role';
+export type FilterLabel = 'Experience' | 'Location' | 'Role';
 
 export type CustomFilter = {
   numComments: number;
 };
 
-type RoleFilter =
+export type RoleFilter =
   | 'Android Engineer'
   | 'Backend Engineer'
   | 'DevOps Engineer'
@@ -12,16 +13,13 @@ type RoleFilter =
   | 'Full-Stack Engineer'
   | 'iOS Engineer';
 
-type ExperienceFilter =
+export type ExperienceFilter =
   | 'Entry Level (0 - 2 years)'
-  | 'Freshman'
-  | 'Junior'
+  | 'Internship'
   | 'Mid Level (3 - 5 years)'
-  | 'Senior Level (5+ years)'
-  | 'Senior'
-  | 'Sophomore';
+  | 'Senior Level (5+ years)';
 
-type LocationFilter = 'India' | 'Singapore' | 'United States';
+export type LocationFilter = 'India' | 'Singapore' | 'United States';
 
 export type FilterValue = ExperienceFilter | LocationFilter | RoleFilter;
 
@@ -32,14 +30,14 @@ export type FilterOption<T> = {
 
 export type Filter = {
   id: FilterId;
-  label: string;
+  label: FilterLabel;
   options: Array<FilterOption<FilterValue>>;
 };
 
 export type FilterState = Partial<CustomFilter> &
   Record<FilterId, Array<FilterValue>>;
 
-export type SortOrder = 'latest' | 'popular' | 'topComments';
+export type SortOrder = 'latest' | 'mostComments' | 'popular';
 
 export type Shortcut = {
   customFilters?: CustomFilter;
@@ -54,11 +52,11 @@ export const BROWSE_TABS_VALUES = {
   STARRED: 'starred',
 };
 
-export const SORT_OPTIONS: Record<string, string> = {
-  latest: 'Latest',
-  popular: 'Popular',
-  topComments: 'Most Comments',
-};
+export const SORT_OPTIONS: Array<FilterOption<SortOrder>> = [
+  { label: 'Latest', value: 'latest' },
+  { label: 'Popular', value: 'popular' },
+  { label: 'Most Comments', value: 'mostComments' },
+];
 
 export const ROLES: Array<FilterOption<RoleFilter>> = [
   {
@@ -73,10 +71,7 @@ export const ROLES: Array<FilterOption<RoleFilter>> = [
 ];
 
 export const EXPERIENCES: Array<FilterOption<ExperienceFilter>> = [
-  { label: 'Freshman', value: 'Freshman' },
-  { label: 'Sophomore', value: 'Sophomore' },
-  { label: 'Junior', value: 'Junior' },
-  { label: 'Senior', value: 'Senior' },
+  { label: 'Internship', value: 'Internship' },
   {
     label: 'Entry Level (0 - 2 years)',
     value: 'Entry Level (0 - 2 years)',
@@ -127,7 +122,7 @@ export const SHORTCUTS: Array<Shortcut> = [
   },
   {
     filters: INITIAL_FILTER_STATE,
-    name: 'GOATs',
+    name: 'Top 10',
     sortOrder: 'popular',
   },
   {
@@ -149,3 +144,10 @@ export const isInitialFilterState = (filters: FilterState) =>
       filters[filter as FilterId].includes(value),
     );
   });
+
+export const getFilterLabel = (
+  filters: Array<
+    FilterOption<ExperienceFilter | LocationFilter | RoleFilter | SortOrder>
+  >,
+  filterValue: ExperienceFilter | LocationFilter | RoleFilter | SortOrder,
+) => filters.find(({ value }) => value === filterValue)?.label ?? filterValue;
