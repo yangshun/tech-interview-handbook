@@ -178,7 +178,7 @@ export default function QuestionsBrowsePage() {
       return undefined;
     }
     return questionsQueryData.pages.reduce(
-      (acc, page) => acc + page.data.length,
+      (acc, page) => acc + (page.data.length as number),
       0,
     );
   }, [questionsQueryData]);
@@ -444,20 +444,20 @@ export default function QuestionsBrowsePage() {
       <main className="flex flex-1 flex-col items-stretch">
         <div className="flex h-full flex-1">
           <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
-            <div className="flex min-h-0 max-w-3xl flex-1 p-4">
-              <div className="flex flex-1 flex-col items-stretch justify-start gap-8">
-                <ContributeQuestionCard
-                  onSubmit={(data) => {
-                    createQuestion({
-                      companyId: data.company,
-                      content: data.questionContent,
-                      location: data.location,
-                      questionType: data.questionType,
-                      role: data.role,
-                      seenAt: data.date,
-                    });
-                  }}
-                />
+            <div className="m-4 flex max-w-3xl flex-1 flex-col items-stretch justify-start gap-8">
+              <ContributeQuestionCard
+                onSubmit={(data) => {
+                  createQuestion({
+                    companyId: data.company,
+                    content: data.questionContent,
+                    location: data.location,
+                    questionType: data.questionType,
+                    role: data.role,
+                    seenAt: data.date,
+                  });
+                }}
+              />
+              <div className="sticky top-0 border-b border-slate-300 bg-slate-50 py-4">
                 <QuestionSearchBar
                   sortOrderOptions={SORT_ORDERS}
                   sortOrderValue={sortOrder}
@@ -469,58 +469,58 @@ export default function QuestionsBrowsePage() {
                   onSortOrderChange={setSortOrder}
                   onSortTypeChange={setSortType}
                 />
-                <div className="flex flex-col gap-2 pb-4">
-                  {(questionsQueryData?.pages ?? []).flatMap(
-                    ({ data: questions }) =>
-                      questions.map((question) => {
-                        const { companyCounts, locationCounts, roleCounts } =
-                          relabelQuestionAggregates(
-                            question.aggregatedQuestionEncounters,
-                          );
-
-                        return (
-                          <QuestionOverviewCard
-                            key={question.id}
-                            answerCount={question.numAnswers}
-                            companies={companyCounts}
-                            content={question.content}
-                            href={`/questions/${question.id}/${createSlug(
-                              question.content,
-                            )}`}
-                            locations={locationCounts}
-                            questionId={question.id}
-                            receivedCount={question.receivedCount}
-                            roles={roleCounts}
-                            timestamp={question.seenAt.toLocaleDateString(
-                              undefined,
-                              {
-                                month: 'short',
-                                year: 'numeric',
-                              },
-                            )}
-                            type={question.type}
-                            upvoteCount={question.numVotes}
-                          />
+              </div>
+              <div className="flex flex-col gap-2 pb-4">
+                {(questionsQueryData?.pages ?? []).flatMap(
+                  ({ data: questions }) =>
+                    questions.map((question) => {
+                      const { companyCounts, locationCounts, roleCounts } =
+                        relabelQuestionAggregates(
+                          question.aggregatedQuestionEncounters,
                         );
-                      }),
-                  )}
-                  <Button
-                    disabled={!hasNextPage || isFetchingNextPage}
-                    isLoading={isFetchingNextPage}
-                    label={hasNextPage ? 'Load more' : 'Nothing more to load'}
-                    variant="tertiary"
-                    onClick={() => {
-                      fetchNextPage();
-                    }}
-                  />
-                  {questionCount === 0 && (
-                    <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
-                      <NoSymbolIcon className="h-6 w-6" />
-                      <p>Nothing found.</p>
-                      {hasFilters && <p>Try changing your search criteria.</p>}
-                    </div>
-                  )}
-                </div>
+
+                      return (
+                        <QuestionOverviewCard
+                          key={question.id}
+                          answerCount={question.numAnswers}
+                          companies={companyCounts}
+                          content={question.content}
+                          href={`/questions/${question.id}/${createSlug(
+                            question.content,
+                          )}`}
+                          locations={locationCounts}
+                          questionId={question.id}
+                          receivedCount={question.receivedCount}
+                          roles={roleCounts}
+                          timestamp={question.seenAt.toLocaleDateString(
+                            undefined,
+                            {
+                              month: 'short',
+                              year: 'numeric',
+                            },
+                          )}
+                          type={question.type}
+                          upvoteCount={question.numVotes}
+                        />
+                      );
+                    }),
+                )}
+                <Button
+                  disabled={!hasNextPage || isFetchingNextPage}
+                  isLoading={isFetchingNextPage}
+                  label={hasNextPage ? 'Load more' : 'Nothing more to load'}
+                  variant="tertiary"
+                  onClick={() => {
+                    fetchNextPage();
+                  }}
+                />
+                {questionCount === 0 && (
+                  <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
+                    <NoSymbolIcon className="h-6 w-6" />
+                    <p>Nothing found.</p>
+                    {hasFilters && <p>Try changing your search criteria.</p>}
+                  </div>
+                )}
               </div>
             </div>
           </section>
