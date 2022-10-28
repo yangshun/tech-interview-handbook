@@ -143,7 +143,7 @@ function TextInput(
       <div
         className={clsx(
           'flex w-full overflow-hidden rounded-md border text-sm focus-within:ring-1',
-          disabled && 'pointer-events-none select-none bg-slate-100',
+          disabled && 'pointer-events-none select-none bg-slate-50',
           containerClass,
         )}>
         {(() => {
@@ -178,9 +178,8 @@ function TextInput(
           aria-describedby={hasError ? errorId : undefined}
           aria-invalid={hasError ? true : undefined}
           className={clsx(
-            'w-0 flex-1 border-none text-sm focus:outline-none focus:ring-0',
+            'w-0 flex-1 border-none text-sm focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:bg-transparent disabled:text-slate-500',
             inputClass,
-            disabled && 'bg-transparent',
           )}
           defaultValue={defaultValue}
           disabled={disabled}

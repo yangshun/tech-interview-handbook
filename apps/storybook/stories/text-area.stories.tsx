@@ -74,11 +74,18 @@ export function HiddenLabel() {
 
 export function Disabled() {
   return (
-    <TextArea
-      disabled={true}
-      label="Comment"
-      placeholder="You can't type here, it's disabled."
-    />
+    <div className="space-y-4">
+      <TextArea
+        disabled={true}
+        label="Comment"
+        placeholder="You can't type here, it's disabled. (Placeholder)"
+      />
+      <TextArea
+        disabled={true}
+        label="Comment"
+        value="You can't type here, it's disabled. (Value)"
+      />
+    </div>
   );
 }
 

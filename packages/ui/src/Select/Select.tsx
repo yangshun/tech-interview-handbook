@@ -88,10 +88,9 @@ function Select<T>(
         aria-label={isLabelHidden ? label : undefined}
         className={clsx(
           display === 'block' && 'block w-full',
-          'rounded-md py-2 pl-3 pr-8 text-sm focus:outline-none',
+          'rounded-md py-2 pl-3 pr-8 text-sm focus:outline-none disabled:bg-slate-50 disabled:text-slate-500',
           stateClasses[state],
           borderClasses[borderStyle],
-          disabled && 'bg-slate-100',
         )}
         defaultValue={defaultValue != null ? String(defaultValue) : undefined}
         disabled={disabled}

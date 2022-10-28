@@ -6,6 +6,7 @@ import { trpc } from '~/utils/trpc';
 
 type Props = Readonly<{
   disabled?: boolean;
+  errorMessage?: string;
   isLabelHidden?: boolean;
   onSelect: (option: TypeaheadOption) => void;
   placeHolder?: string;
