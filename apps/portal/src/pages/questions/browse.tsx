@@ -14,6 +14,7 @@ import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 import CompanyTypeahead from '~/components/questions/typeahead/CompanyTypeahead';
 import LocationTypeahead from '~/components/questions/typeahead/LocationTypeahead';
 import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
+import { JobTitleLabels } from '~/components/shared/JobTitles';
 
 import type { QuestionAge } from '~/utils/questions/constants';
 import { SORT_TYPES } from '~/utils/questions/constants';
@@ -21,6 +22,7 @@ import { SORT_ORDERS } from '~/utils/questions/constants';
 import { APP_TITLE } from '~/utils/questions/constants';
 import { QUESTION_AGES, QUESTION_TYPES } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
+import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
 import {
   useSearchParam,
   useSearchParamSingle,
@@ -275,7 +277,7 @@ export default function QuestionsBrowsePage() {
     return selectedRoles.map((role) => ({
       checked: true,
       id: role,
-      label: role,
+      label: JobTitleLabels[role as keyof typeof JobTitleLabels],
       value: role,
     }));
   }, [selectedRoles]);
@@ -369,7 +371,7 @@ export default function QuestionsBrowsePage() {
             setSelectedRoles([...selectedRoles, option.value]);
           } else {
             setSelectedRoles(
-              selectedCompanies.filter((role) => role !== option.value),
+              selectedRoles.filter((role) => role !== option.value),
             );
           }
         }}
@@ -470,36 +472,37 @@ export default function QuestionsBrowsePage() {
                 <div className="flex flex-col gap-2 pb-4">
                   {(questionsQueryData?.pages ?? []).flatMap(
                     ({ data: questions }) =>
-                      questions.map((question) => (
-                        <QuestionOverviewCard
-                          key={question.id}
-                          answerCount={question.numAnswers}
-                          companies={
-                            question.aggregatedQuestionEncounters.companyCounts
-                          }
-                          content={question.content}
-                          href={`/questions/${question.id}/${createSlug(
-                            question.content,
-                          )}`}
-                          locations={
-                            question.aggregatedQuestionEncounters.locationCounts
-                          }
-                          questionId={question.id}
-                          receivedCount={question.receivedCount}
-                          roles={
-                            question.aggregatedQuestionEncounters.roleCounts
-                          }
-                          timestamp={question.seenAt.toLocaleDateString(
-                            undefined,
-                            {
-                              month: 'short',
-                              year: 'numeric',
-                            },
-                          )}
-                          type={question.type}
-                          upvoteCount={question.numVotes}
-                        />
-                      )),
+                      questions.map((question) => {
+                        const { companyCounts, locationCounts, roleCounts } =
+                          relabelQuestionAggregates(
+                            question.aggregatedQuestionEncounters,
+                          );
+
+                        return (
+                          <QuestionOverviewCard
+                            key={question.id}
+                            answerCount={question.numAnswers}
+                            companies={companyCounts}
+                            content={question.content}
+                            href={`/questions/${question.id}/${createSlug(
+                              question.content,
+                            )}`}
+                            locations={locationCounts}
+                            questionId={question.id}
+                            receivedCount={question.receivedCount}
+                            roles={roleCounts}
+                            timestamp={question.seenAt.toLocaleDateString(
+                              undefined,
+                              {
+                                month: 'short',
+                                year: 'numeric',
+                              },
+                            )}
+                            type={question.type}
+                            upvoteCount={question.numVotes}
+                          />
+                        );
+                      }),
                   )}
                   <Button
                     disabled={!hasNextPage || isFetchingNextPage}
