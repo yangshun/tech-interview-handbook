@@ -17,6 +17,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { Button, Spinner } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ResumeCommentsForm from '~/components/resumes/comments/ResumeCommentsForm';
 import ResumeCommentsList from '~/components/resumes/comments/ResumeCommentsList';
 import ResumePdf from '~/components/resumes/ResumePdf';
@@ -48,6 +49,8 @@ export default function ResumeReviewPage() {
   const router = useRouter();
   const { resumeId } = router.query;
   const utils = trpc.useContext();
+  const { event: gaEvent } = useGoogleAnalytics();
+
   // Safe to assert resumeId type as string because query is only sent if so
   const detailsQuery = trpc.useQuery(
     ['resumes.resume.findOne', { resumeId: resumeId as string }],
@@ -58,16 +61,31 @@ export default function ResumeReviewPage() {
   const starMutation = trpc.useMutation('resumes.resume.star', {
     onSuccess() {
       invalidateResumeQueries();
+      gaEvent({
+        action: 'resumes.star_button_click',
+        category: 'engagement',
+        label: 'Star Resume',
+      });
     },
   });
   const unstarMutation = trpc.useMutation('resumes.resume.unstar', {
     onSuccess() {
       invalidateResumeQueries();
+      gaEvent({
+        action: 'resumes.star_button_click',
+        category: 'engagement',
+        label: 'Unstar Resume',
+      });
     },
   });
   const resolveMutation = trpc.useMutation('resumes.resume.user.resolve', {
     onSuccess() {
       invalidateResumeQueries();
+      gaEvent({
+        action: 'resumes.resolve_button_click',
+        category: 'engagement',
+        label: 'Resolve Resume',
+      });
     },
   });
 

@@ -19,6 +19,7 @@ import {
   TextInput,
 } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import SubmissionGuidelines from '~/components/resumes/submit-form/SubmissionGuidelines';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
@@ -74,6 +75,8 @@ export default function SubmitResumeForm({
   const router = useRouter();
   const trpcContext = trpc.useContext();
   const resumeUpsertMutation = trpc.useMutation('resumes.resume.user.upsert');
+  const { event: gaEvent } = useGoogleAnalytics();
+
   const isNewForm = initFormDetails == null;
 
   const {
@@ -172,6 +175,11 @@ export default function SubmitResumeForm({
               'resumes.resume.getTotalFilterCounts',
             );
             router.push('/resumes');
+            gaEvent({
+              action: 'resumes.submit_button_click',
+              category: 'engagement',
+              label: 'Submit Resume',
+            });
           } else {
             onClose();
           }
