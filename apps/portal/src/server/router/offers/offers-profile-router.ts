@@ -113,6 +113,70 @@ export const offersProfileRouter = createRouter()
         include: {
           analysis: {
             include: {
+              companyAnalysis: {
+                include: {
+                  topSimilarOffers: {
+                    include: {
+                      company: true,
+                      offersFullTime: {
+                        include: {
+                          totalCompensation: true,
+                        },
+                      },
+                      offersIntern: {
+                        include: {
+                          monthlySalary: true,
+                        },
+                      },
+                      profile: {
+                        include: {
+                          background: {
+                            include: {
+                              experiences: {
+                                include: {
+                                  company: true,
+                                },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+              overallAnalysis: {
+                include: {
+                  topSimilarOffers: {
+                    include: {
+                      company: true,
+                      offersFullTime: {
+                        include: {
+                          totalCompensation: true,
+                        },
+                      },
+                      offersIntern: {
+                        include: {
+                          monthlySalary: true,
+                        },
+                      },
+                      profile: {
+                        include: {
+                          background: {
+                            include: {
+                              experiences: {
+                                include: {
+                                  company: true,
+                                },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
               overallHighestOffer: {
                 include: {
                   company: true,
@@ -129,62 +193,6 @@ export const offersProfileRouter = createRouter()
                   profile: {
                     include: {
                       background: true,
-                    },
-                  },
-                },
-              },
-              topCompanyOffers: {
-                include: {
-                  company: true,
-                  offersFullTime: {
-                    include: {
-                      totalCompensation: true,
-                    },
-                  },
-                  offersIntern: {
-                    include: {
-                      monthlySalary: true,
-                    },
-                  },
-                  profile: {
-                    include: {
-                      background: {
-                        include: {
-                          experiences: {
-                            include: {
-                              company: true,
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-              topOverallOffers: {
-                include: {
-                  company: true,
-                  offersFullTime: {
-                    include: {
-                      totalCompensation: true,
-                    },
-                  },
-                  offersIntern: {
-                    include: {
-                      monthlySalary: true,
-                    },
-                  },
-                  profile: {
-                    include: {
-                      background: {
-                        include: {
-                          experiences: {
-                            include: {
-                              company: true,
-                            },
-                          },
-                        },
-                      },
                     },
                   },
                 },
@@ -394,7 +402,7 @@ export const offersProfileRouter = createRouter()
                       message: 'Missing fields in background experiences.',
                     });
                   }),
-                )
+                ),
               },
               specificYoes: {
                 create: input.background.specificYoes.map((x) => {

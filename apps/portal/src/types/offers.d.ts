@@ -143,14 +143,14 @@ export type OffersDiscussion = {
 };
 
 export type ProfileAnalysis = {
-  companyAnalysis: Array<Analysis>;
+  companyAnalysis: Array<AnalysisUnit>;
   id: string;
-  overallAnalysis: Analysis;
+  overallAnalysis: AnalysisUnit;
   overallHighestOffer: AnalysisHighestOffer;
   profileId: string;
 };
 
-export type Analysis = {
+export type AnalysisUnit = {
   noOfOffers: number;
   percentile: number;
   topPercentileOffers: Array<AnalysisOffer>;
@@ -191,7 +191,7 @@ export type UserProfile = {
   offers: Array<UserProfileOffers>;
   profileName: string;
   token: string;
-}
+};
 
 export type UserProfileOffer = {
   company: OffersCompany;
@@ -202,4 +202,4 @@ export type UserProfileOffer = {
   location: string;
   monthYearReceived: Date;
   title: string;
-}
+};
