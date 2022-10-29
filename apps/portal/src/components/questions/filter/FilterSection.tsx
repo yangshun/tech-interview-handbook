@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { CheckboxInput, Collapsible, RadioList } from '@tih/ui';
+import { CheckboxInput, CheckboxList, Collapsible, RadioList } from '@tih/ui';
 
 export type FilterChoice<V extends string = string> = {
   id: string;
@@ -96,7 +96,7 @@ export default function FilterSection<V extends string>({
       <Collapsible defaultOpen={true} label={collapsibleLabel}>
         <div className="-mx-2 flex flex-col items-stretch gap-2">
           {!showAll && (
-            <div className="z-10">
+            <div>
               {renderInput({
                 field,
                 onOptionChange: async (option: FilterOption<V>) => {
@@ -110,8 +110,8 @@ export default function FilterSection<V extends string>({
               })}
             </div>
           )}
-          {isSingleSelect ? (
-            <div className="px-1.5">
+          <div className="px-1.5">
+            {isSingleSelect ? (
               <RadioList
                 isLabelHidden={true}
                 label={label}
@@ -133,26 +133,26 @@ export default function FilterSection<V extends string>({
                   />
                 ))}
               </RadioList>
-            </div>
-          ) : (
-            <div className="px-1.5">
-              {options
-                .filter((option) => showAll || option.checked)
-                .map((option) => (
-                  <CheckboxInput
-                    key={option.value}
-                    label={option.label}
-                    value={option.checked}
-                    onChange={(checked) => {
-                      onOptionChange({
-                        ...option,
-                        checked,
-                      });
-                    }}
-                  />
-                ))}
-            </div>
-          )}
+            ) : (
+              <CheckboxList isLabelHidden={true} label={label}>
+                {options
+                  .filter((option) => showAll || option.checked)
+                  .map((option) => (
+                    <CheckboxInput
+                      key={option.value}
+                      label={option.label}
+                      value={option.checked}
+                      onChange={(checked) => {
+                        onOptionChange({
+                          ...option,
+                          checked,
+                        });
+                      }}
+                    />
+                  ))}
+              </CheckboxList>
+            )}
+          </div>
         </div>
       </Collapsible>
     </div>
