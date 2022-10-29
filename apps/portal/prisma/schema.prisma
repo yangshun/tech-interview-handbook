@@ -366,7 +366,9 @@ model OffersFullTime {
 }
 
 model OffersAnalysis {
-  id String @id @default(cuid())
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   profile   OffersProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId String        @unique

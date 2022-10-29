@@ -144,10 +144,12 @@ export type OffersDiscussion = {
 
 export type ProfileAnalysis = {
   companyAnalysis: Array<AnalysisUnit>;
+  createdAt: Date;
   id: string;
   overallAnalysis: AnalysisUnit;
   overallHighestOffer: AnalysisHighestOffer;
   profileId: string;
+  updatedAt: Date;
 };
 
 export type AnalysisUnit = {
