@@ -1,4 +1,11 @@
 import React from 'react';
+import {
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  ExclamationTriangleIcon,
+  InformationCircleIcon,
+  StarIcon,
+} from '@heroicons/react/20/solid';
 import type { ComponentMeta } from '@storybook/react';
 import type { BadgeVariant } from '@tih/ui';
 import { Badge } from '@tih/ui';
@@ -37,6 +44,26 @@ export function Variants() {
       <Badge label="Information" variant="info" />
       <Badge label="Warning" variant="warning" />
       <Badge label="Danger" variant="danger" />
+    </div>
+  );
+}
+
+export function Icon() {
+  return (
+    <div className="space-x-4">
+      <Badge endAddOn={StarIcon} label="Primary" variant="primary" />
+      <Badge endAddOn={CheckCircleIcon} label="Success" variant="success" />
+      <Badge
+        endAddOn={InformationCircleIcon}
+        label="Information"
+        variant="info"
+      />
+      <Badge
+        endAddOn={ExclamationTriangleIcon}
+        label="Warning"
+        variant="warning"
+      />
+      <Badge endAddOn={ExclamationCircleIcon} label="Danger" variant="danger" />
     </div>
   );
 }
