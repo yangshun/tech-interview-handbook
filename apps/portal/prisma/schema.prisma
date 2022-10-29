@@ -463,6 +463,9 @@ model QuestionsQuestionComment {
   user     User?                          @relation(fields: [userId], references: [id], onDelete: SetNull)
   question QuestionsQuestion              @relation(fields: [questionId], references: [id], onDelete: Cascade)
   votes    QuestionsQuestionCommentVote[]
+
+  @@index([updatedAt, id])
+  @@index([upvotes, id])
 }
 
 model QuestionsQuestionCommentVote {
@@ -492,6 +495,9 @@ model QuestionsAnswer {
   question QuestionsQuestion        @relation(fields: [questionId], references: [id], onDelete: Cascade)
   votes    QuestionsAnswerVote[]
   comments QuestionsAnswerComment[]
+
+  @@index([updatedAt, id])
+  @@index([upvotes, id])
 }
 
 model QuestionsAnswerVote {
@@ -520,6 +526,9 @@ model QuestionsAnswerComment {
   user   User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
   answer QuestionsAnswer              @relation(fields: [answerId], references: [id], onDelete: Cascade)
   votes  QuestionsAnswerCommentVote[]
+
+  @@index([updatedAt, id])
+  @@index([upvotes, id])
 }
 
 model QuestionsAnswerCommentVote {

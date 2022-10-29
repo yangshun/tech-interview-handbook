@@ -12,13 +12,7 @@ export const questionsQuestionRouter = createRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
       companyNames: z.string().array(),
-      cursor: z
-        .object({
-          idCursor: z.string().optional(),
-          lastSeenCursor: z.date().nullish().optional(),
-          upvoteCursor: z.number().optional(),
-        })
-        .nullish(),
+      cursor: z.string().nullish(),
       endDate: z.date().default(new Date()),
       limit: z.number().min(1).default(50),
       locations: z.string().array(),
@@ -51,12 +45,7 @@ export const questionsQuestionRouter = createRouter()
             ];
 
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
-        cursor:
-          cursor !== undefined
-            ? {
-                id: cursor ? cursor!.idCursor : undefined,
-              }
-            : undefined,
+        cursor: cursor ? { id: cursor } : undefined,
         include: {
           _count: {
             select: {
@@ -134,16 +123,8 @@ export const questionsQuestionRouter = createRouter()
         processedQuestionsData.pop();
 
         const nextIdCursor: string | undefined = nextItem.id;
-        const nextLastSeenCursor =
-          input.sortType === SortType.NEW ? nextItem.lastSeenAt : undefined;
-        const nextUpvoteCursor =
-          input.sortType === SortType.TOP ? nextItem.upvotes : undefined;
 
-        nextCursor = {
-          idCursor: nextIdCursor,
-          lastSeenCursor: nextLastSeenCursor,
-          upvoteCursor: nextUpvoteCursor,
-        };
+        nextCursor = nextIdCursor;
       }
 
       return {
