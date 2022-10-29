@@ -6,7 +6,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 type Props = Readonly<{
   children: ReactNode;
   defaultOpen?: boolean;
-  label: string;
+  label: ReactNode;
 }>;
 
 export default function Collapsible({ children, defaultOpen, label }: Props) {
@@ -14,10 +14,10 @@ export default function Collapsible({ children, defaultOpen, label }: Props) {
     <Disclosure defaultOpen={defaultOpen}>
       {({ open }) => (
         <>
-          <Disclosure.Button className="text-primary-900 hover:bg-primary-100 focus-visible:ring-primary-500 -mx-2.5 box-content flex w-full justify-between rounded-lg px-2.5 py-2 text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-opacity-75">
+          <Disclosure.Button className="-mx-2.5 box-content flex w-full justify-between rounded-lg px-2.5 py-2 text-left text-sm font-medium text-slate-900 hover:bg-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-slate-500 focus-visible:ring-opacity-75">
             <ChevronDownIcon
               className={clsx(
-                'text-primary-500 mr-1 -ml-1 h-5 w-5',
+                'mr-1 -ml-1 h-5 w-5 text-slate-500',
                 open && 'rotate-180 transform',
               )}
             />
