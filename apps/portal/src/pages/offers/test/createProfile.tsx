@@ -205,6 +205,22 @@ function Test() {
     },
   );
 
+  trpc.useQuery(
+    [
+      `offers.profile.isValidToken`,
+      {
+        profileId: 'cl9scdzuh0000tt727ipone1k',
+        token:
+          'aa628d0db3ad7a5f84895537d4cca38edd0a9b8b96d869cddeb967fccf068c08',
+      },
+    ],
+    {
+      onError(err) {
+        setError(err.shape?.message || '');
+      },
+    },
+  );
+
   const replies = trpc.useQuery(
     ['offers.comments.getComments', { profileId }],
     {
