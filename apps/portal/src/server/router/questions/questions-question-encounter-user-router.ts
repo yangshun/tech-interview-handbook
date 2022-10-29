@@ -59,19 +59,21 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
           });
         }
 
-        if (
-          questionToUpdate.lastSeenAt === null ||
-          questionToUpdate.lastSeenAt < input.seenAt
-        ) {
-          await tx.questionsQuestion.update({
-            data: {
-              lastSeenAt: input.seenAt,
+
+        await tx.questionsQuestion.update({
+          data: {
+            lastSeenAt: (questionToUpdate.lastSeenAt === null ||
+                          questionToUpdate.lastSeenAt < input.seenAt)
+                            ? input.seenAt : undefined,
+            numEncounters: {
+              increment: 1,
             },
-            where: {
-              id: input.questionId,
-            },
-          });
-        }
+          },
+          where: {
+            id: input.questionId,
+          },
+        });
+
         return questionEncounterCreated;
       });
     },
@@ -178,6 +180,8 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
           }),
         ]);
 
+        let lastSeenVal = undefined;
+
         if (questionToUpdate!.lastSeenAt === questionEncounterToDelete.seenAt) {
           const latestEncounter =
             await ctx.prisma.questionsQuestionEncounter.findFirst({
@@ -189,17 +193,20 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
               },
             });
 
-          const lastSeenVal = latestEncounter ? latestEncounter!.seenAt : null;
+          lastSeenVal = latestEncounter ? latestEncounter!.seenAt : null;
+        }
 
-          await tx.questionsQuestion.update({
+        await tx.questionsQuestion.update({
             data: {
               lastSeenAt: lastSeenVal,
+              numEncounters: {
+                increment: -1,
+              },
             },
             where: {
               id: questionToUpdate!.id,
             },
           });
-        }
 
         return questionEncounterDeleted;
       });
