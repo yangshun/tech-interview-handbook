@@ -143,7 +143,7 @@ function TextInput(
       <div
         className={clsx(
           'flex w-full overflow-hidden rounded-md border text-sm focus-within:ring-1',
-          disabled && 'pointer-events-none select-none bg-slate-50',
+          disabled ? 'pointer-events-none select-none bg-slate-50' : 'bg-white',
           containerClass,
         )}>
         {(() => {
