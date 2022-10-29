@@ -234,12 +234,14 @@ export const profileAnalysisDtoMapper = (
     companyAnalysis: analysis.companyAnalysis.map((analysisUnit) =>
       analysisUnitDtoMapper(analysisUnit),
     ),
+    createdAt: analysis.createdAt,
     id: analysis.id,
     overallAnalysis: analysisUnitDtoMapper(analysis.overallAnalysis),
     overallHighestOffer: analysisHighestOfferDtoMapper(
       analysis.overallHighestOffer,
     ),
     profileId: analysis.profileId,
+    updatedAt: analysis.updatedAt,
   };
   return profileAnalysisDto;
 };
