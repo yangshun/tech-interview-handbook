@@ -6,7 +6,10 @@ import { HorizontalDivider } from '@tih/ui';
 
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
-import type { Month, MonthYear } from '~/components/shared/MonthYearPicker';
+import type {
+  Month,
+  MonthYearOptional,
+} from '~/components/shared/MonthYearPicker';
 import MonthYearPicker from '~/components/shared/MonthYearPicker';
 
 export default function HomePage() {
@@ -14,7 +17,8 @@ export default function HomePage() {
     useState<TypeaheadOption | null>(null);
   const [selectedJobTitle, setSelectedJobTitle] =
     useState<TypeaheadOption | null>(null);
-  const [monthYear, setMonthYear] = useState<MonthYear>({
+
+  const [monthYear, setMonthYear] = useState<MonthYearOptional>({
     month: (new Date().getMonth() + 1) as Month,
     year: new Date().getFullYear(),
   });
@@ -38,7 +42,24 @@ export default function HomePage() {
           />
           <pre>{JSON.stringify(selectedJobTitle, null, 2)}</pre>
           <HorizontalDivider />
-          <MonthYearPicker value={monthYear} onChange={setMonthYear} />
+          <MonthYearPicker
+            errorMessage={
+              monthYear.month == null || monthYear.year == null
+                ? 'Incomplete date'
+                : undefined
+            }
+            value={monthYear}
+            onChange={setMonthYear}
+          />
+          <Button
+            label="Clear dates"
+            size="sm"
+            variant="tertiary"
+            onClick={() => {
+              setMonthYear({ month: null, year: null });
+            }}
+          />
+          <pre>{JSON.stringify(monthYear, null, 2)}</pre>
           <HorizontalDivider />
           <Button
             label="Add toast"

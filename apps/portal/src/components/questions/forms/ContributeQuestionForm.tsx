@@ -103,9 +103,9 @@ export default function ContributeQuestionForm({
                     year: field.value.getFullYear(),
                   }}
                   yearRequired={true}
-                  onChange={({ month, year }) =>
-                    field.onChange(startOfMonth(new Date(year, month - 1)))
-                  }
+                  onChange={({ month, year }) => {
+                    field.onChange(startOfMonth(new Date(year!, month! - 1)));
+                  }}
                 />
               )}
             />

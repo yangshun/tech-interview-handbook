@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { Select } from '@tih/ui';
 
 export type Month = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
@@ -8,12 +8,17 @@ export type MonthYear = Readonly<{
   year: number;
 }>;
 
+export type MonthYearOptional = Readonly<{
+  month: Month | null;
+  year: number | null;
+}>;
+
 type Props = Readonly<{
   errorMessage?: string;
   monthLabel?: string;
   monthRequired?: boolean;
-  onChange: (value: MonthYear) => void;
-  value: MonthYear;
+  onChange: (value: MonthYearOptional) => void;
+  value: MonthYearOptional;
   yearLabel?: string;
   yearRequired?: boolean;
 }>;
@@ -89,29 +94,45 @@ export default function MonthYearPicker({
 }: Props) {
   const hasError = errorMessage != null;
   const errorId = useId();
+  const [monthCounter, setMonthCounter] = useState<number>(0);
+  const [yearCounter, setYearCounter] = useState<number>(0);
+
+  useEffect(() => {
+    if (value.month == null) {
+      setMonthCounter((val) => val + 1);
+    }
+
+    if (value.year == null) {
+      setYearCounter((val) => val + 1);
+    }
+  }, [value.month, value.year]);
 
   return (
-    <div
-      aria-describedby={hasError ? errorId : undefined}
-      className="flex items-end space-x-4">
-      <Select
-        label={monthLabel}
-        options={MONTH_OPTIONS}
-        required={monthRequired}
-        value={value.month}
-        onChange={(newMonth) =>
-          onChange({ month: Number(newMonth) as Month, year: value.year })
-        }
-      />
-      <Select
-        label={yearLabel}
-        options={YEAR_OPTIONS}
-        required={yearRequired}
-        value={value.year}
-        onChange={(newYear) =>
-          onChange({ month: value.month, year: Number(newYear) })
-        }
-      />
+    <div aria-describedby={hasError ? errorId : undefined}>
+      <div className="flex items-end space-x-2">
+        <Select
+          key={`month:${monthCounter}`}
+          label={monthLabel}
+          options={MONTH_OPTIONS}
+          placeholder="Select month"
+          required={monthRequired}
+          value={value.month}
+          onChange={(newMonth) =>
+            onChange({ month: Number(newMonth) as Month, year: value.year })
+          }
+        />
+        <Select
+          key={`year:${yearCounter}`}
+          label={yearLabel}
+          options={YEAR_OPTIONS}
+          placeholder="Select year"
+          required={yearRequired}
+          value={value.year}
+          onChange={(newYear) =>
+            onChange({ month: value.month, year: Number(newYear) })
+          }
+        />
+      </div>
       {errorMessage && (
         <p className="text-danger-600 mt-2 text-sm" id={errorId}>
           {errorMessage}

@@ -87,15 +87,17 @@ export default function CreateQuestionEncounterForm({
       )}
       {step === 3 && (
         <MonthYearPicker
+          // TODO: Add label and hide label on Select instead.
           monthLabel=""
           value={{
             month: ((selectedDate?.getMonth() ?? 0) + 1) as Month,
             year: selectedDate?.getFullYear() as number,
           }}
+          // TODO: Add label and hide label on Select instead.
           yearLabel=""
           onChange={(value) => {
             setSelectedDate(
-              startOfMonth(new Date(value.year, value.month - 1)),
+              startOfMonth(new Date(value.year!, value.month! - 1)),
             );
           }}
         />
