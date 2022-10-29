@@ -12,6 +12,9 @@ export default {
     autoComplete: {
       control: 'text',
     },
+    description: {
+      control: 'text',
+    },
     disabled: {
       control: 'boolean',
     },
@@ -170,6 +173,25 @@ export function Error() {
 
   return (
     <TextInput
+      errorMessage={
+        value.length < 6 ? 'Password must be at least 6 characters' : undefined
+      }
+      label="Password"
+      startAddOn={KeyIcon}
+      startAddOnType="icon"
+      type="password"
+      value={value}
+      onChange={setValue}
+    />
+  );
+}
+
+export function Description() {
+  const [value, setValue] = useState('1234567');
+
+  return (
+    <TextInput
+      description="Select a password that is at least 6 characters"
       errorMessage={
         value.length < 6 ? 'Password must be at least 6 characters' : undefined
       }
