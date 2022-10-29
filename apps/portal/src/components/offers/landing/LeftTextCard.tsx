@@ -1,3 +1,5 @@
+import type { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import type { ReactNode } from 'react';
 
 import { HOME_URL } from '~/components/offers/types';
@@ -6,7 +8,7 @@ type LeftTextCardProps = Readonly<{
   description: string;
   icon: ReactNode;
   imageAlt: string;
-  imageSrc: string;
+  imageSrc: StaticImageData;
   title: string;
 }>;
 
@@ -18,7 +20,7 @@ export default function LeftTextCard({
   title,
 }: LeftTextCardProps) {
   return (
-    <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
+    <div className="items-center lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
       <div className="mx-auto max-w-xl px-4 sm:px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
         <div>
           <div>
@@ -42,10 +44,10 @@ export default function LeftTextCard({
         </div>
       </div>
       <div className="mt-12 sm:mt-16 lg:mt-0">
-        <div className="-mr-48 pl-4 sm:pl-6 md:-mr-16 lg:relative lg:m-0 lg:h-full lg:px-0">
-          <img
+        <div className="-mr-48 w-full rounded-xl pl-4 shadow-xl ring-1 ring-black ring-opacity-5 sm:pl-6 md:-mr-16 lg:relative lg:m-0 lg:h-full lg:px-0">
+          <Image
             alt={imageAlt}
-            className="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
+            className="lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
             src={imageSrc}
           />
         </div>
