@@ -213,7 +213,6 @@ export const offersAnalysisRouter = createRouter()
 
       const overallHighestOffer = offers[0];
 
-      // TODO: Shift yoe out of background to make it mandatory
       if (
         !overallHighestOffer.profile.background ||
         overallHighestOffer.profile.background.totalYoe == null
