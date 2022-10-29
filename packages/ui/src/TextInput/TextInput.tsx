@@ -154,14 +154,14 @@ function TextInput(
           switch (startAddOnType) {
             case 'label':
               return (
-                <div className="pointer-events-none flex items-center px-2 text-slate-500">
+                <div className="pointer-events-none flex items-center pl-3 text-slate-500">
                   {startAddOn}
                 </div>
               );
             case 'icon': {
               const StartAddOn = startAddOn;
               return (
-                <div className="pointer-events-none flex items-center px-2">
+                <div className="pointer-events-none flex items-center pl-3">
                   <StartAddOn
                     aria-hidden="true"
                     className="h-5 w-5 text-slate-400"
