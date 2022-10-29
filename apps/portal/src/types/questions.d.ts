@@ -58,4 +58,5 @@ export enum SortOrder {
 export enum SortType {
   TOP,
   NEW,
+  ENCOUNTERS,
 }
