@@ -1,8 +1,8 @@
 import type { ProductNavigationItems } from '~/components/global/ProductNavigation';
 
 const navigation: ProductNavigationItems = [
-  { href: '/offers/browse', name: 'Browse all offers' },
   { href: '/offers/submit', name: 'Analyze your offers' },
+  { href: '/offers/features', name: 'Features' },
 ];
 
 const config = {
