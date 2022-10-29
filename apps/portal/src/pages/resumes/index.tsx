@@ -118,7 +118,7 @@ export default function ResumeHomePage() {
     '',
   );
   const [shortcutSelected, setShortcutSelected, isShortcutInit] =
-    useSearchParams('shortcutSelected', 'All');
+    useSearchParams('shortcutSelected', 'Unreviewed');
   const [currentPage, setCurrentPage, isCurrentPageInit] = useSearchParams(
     'currentPage',
     1,
@@ -182,20 +182,13 @@ export default function ResumeHomePage() {
     isSearchOptionsInit,
   ]);
 
-  const filterCountsQuery = trpc.useQuery(
-    ['resumes.resume.getTotalFilterCounts'],
-    {
-      staleTime: STALE_TIME,
-    },
-  );
-
   const allResumesQuery = trpc.useQuery(
     [
       'resumes.resume.findAll',
       {
         experienceFilters: userFilters.experience,
+        isUnreviewed: userFilters.isUnreviewed,
         locationFilters: userFilters.location,
-        numComments: userFilters.numComments,
         roleFilters: userFilters.role,
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
@@ -213,8 +206,8 @@ export default function ResumeHomePage() {
       'resumes.resume.user.findUserStarred',
       {
         experienceFilters: userFilters.experience,
+        isUnreviewed: userFilters.isUnreviewed,
         locationFilters: userFilters.location,
-        numComments: userFilters.numComments,
         roleFilters: userFilters.role,
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
@@ -233,8 +226,8 @@ export default function ResumeHomePage() {
       'resumes.resume.user.findUserCreated',
       {
         experienceFilters: userFilters.experience,
+        isUnreviewed: userFilters.isUnreviewed,
         locationFilters: userFilters.location,
-        numComments: userFilters.numComments,
         roleFilters: userFilters.role,
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
@@ -248,14 +241,6 @@ export default function ResumeHomePage() {
       staleTime: STALE_TIME,
     },
   );
-
-  const getFilterCount = (filter: FilterLabel, value: string) => {
-    if (filterCountsQuery.isLoading) {
-      return 0;
-    }
-    const filterCountsData = filterCountsQuery.data!;
-    return filterCountsData[filter][value];
-  };
 
   const onSubmitResume = () => {
     if (sessionData === null) {
@@ -335,6 +320,18 @@ export default function ResumeHomePage() {
     allResumesQuery.isFetching ||
     starredResumesQuery.isFetching ||
     myResumesQuery.isFetching;
+
+  const getTabFilterCounts = () => {
+    return getTabQueryData()?.filterCounts;
+  };
+
+  const getFilterCount = (filter: FilterLabel, value: string) => {
+    const filterCountsData = getTabFilterCounts();
+    if (!filterCountsData) {
+      return 0;
+    }
+    return filterCountsData[filter][value];
+  };
 
   return (
     <>

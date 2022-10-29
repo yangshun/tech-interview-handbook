@@ -2,7 +2,7 @@ export type FilterId = 'experience' | 'location' | 'role';
 export type FilterLabel = 'Experience' | 'Location' | 'Role';
 
 export type CustomFilter = {
-  numComments: number;
+  isUnreviewed: boolean;
 };
 
 export type RoleFilter =
@@ -34,8 +34,7 @@ export type Filter = {
   options: Array<FilterOption<FilterValue>>;
 };
 
-export type FilterState = Partial<CustomFilter> &
-  Record<FilterId, Array<FilterValue>>;
+export type FilterState = CustomFilter & Record<FilterId, Array<FilterValue>>;
 
 export type SortOrder = 'latest' | 'mostComments' | 'popular';
 
@@ -94,20 +93,24 @@ export const LOCATIONS: Array<FilterOption<LocationFilter>> = [
 
 export const INITIAL_FILTER_STATE: FilterState = {
   experience: Object.values(EXPERIENCES).map(({ value }) => value),
+  isUnreviewed: true,
   location: Object.values(LOCATIONS).map(({ value }) => value),
   role: Object.values(ROLES).map(({ value }) => value),
 };
 
 export const SHORTCUTS: Array<Shortcut> = [
   {
-    filters: INITIAL_FILTER_STATE,
+    filters: {
+      ...INITIAL_FILTER_STATE,
+      isUnreviewed: false,
+    },
     name: 'All',
     sortOrder: 'latest',
   },
   {
     filters: {
       ...INITIAL_FILTER_STATE,
-      numComments: 0,
+      isUnreviewed: true,
     },
     name: 'Unreviewed',
     sortOrder: 'latest',
@@ -116,18 +119,23 @@ export const SHORTCUTS: Array<Shortcut> = [
     filters: {
       ...INITIAL_FILTER_STATE,
       experience: ['Entry Level (0 - 2 years)'],
+      isUnreviewed: false,
     },
     name: 'Fresh Grad',
     sortOrder: 'latest',
   },
   {
-    filters: INITIAL_FILTER_STATE,
+    filters: {
+      ...INITIAL_FILTER_STATE,
+      isUnreviewed: false,
+    },
     name: 'Top 10',
     sortOrder: 'popular',
   },
   {
     filters: {
       ...INITIAL_FILTER_STATE,
+      isUnreviewed: false,
       location: ['United States'],
     },
     name: 'US Only',
