@@ -27,6 +27,7 @@ export type TextAreaResize = 'both' | 'horizontal' | 'none' | 'vertical';
 
 type Props = Readonly<{
   defaultValue?: string;
+  description?: React.ReactNode;
   errorMessage?: React.ReactNode;
   id?: string;
   isLabelHidden?: boolean;
@@ -66,6 +67,7 @@ const resizeClasses: Record<TextAreaResize, string> = {
 function TextArea(
   {
     defaultValue,
+    description,
     disabled,
     errorMessage,
     id: idParam,
@@ -82,7 +84,7 @@ function TextArea(
   const hasError = errorMessage != null;
   const generatedId = useId();
   const id = idParam ?? generatedId;
-  const errorId = useId();
+  const messageId = useId();
   const state: State = hasError ? 'error' : 'normal';
 
   return (
@@ -105,7 +107,9 @@ function TextArea(
       <div>
         <textarea
           ref={ref}
-          aria-describedby={hasError ? errorId : undefined}
+          aria-describedby={
+            hasError || description != null ? messageId : undefined
+          }
           aria-invalid={hasError ? true : undefined}
           className={clsx(
             'block w-full rounded-md text-sm disabled:bg-slate-50 disabled:text-slate-500',
@@ -128,9 +132,14 @@ function TextArea(
           {...props}
         />
       </div>
-      {errorMessage && (
-        <p className="text-danger-600 mt-2 text-sm" id={errorId}>
-          {errorMessage}
+      {(errorMessage ?? description) && (
+        <p
+          className={clsx(
+            'mt-2 text-sm',
+            errorMessage ? 'text-danger-600' : 'text-slate-500',
+          )}
+          id={messageId}>
+          {errorMessage ?? description}
         </p>
       )}
     </div>
