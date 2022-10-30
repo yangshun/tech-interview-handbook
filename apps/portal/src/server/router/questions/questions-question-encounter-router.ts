@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { createRouter } from '../context';
-
 import { createAggregatedQuestionEncounter } from '~/utils/questions/server/aggregate-encounters';
+
+import { createRouter } from '../context';
 
 export const questionsQuestionEncounterRouter = createRouter().query(
   'getAggregatedEncounters',
@@ -14,9 +14,9 @@ export const questionsQuestionEncounterRouter = createRouter().query(
       const questionEncountersData =
         await ctx.prisma.questionsQuestionEncounter.findMany({
           include: {
+            city: true,
             company: true,
             country: true,
-            city: true,
             state: true,
           },
           where: {

@@ -1,22 +1,26 @@
 import type {
   City,
-  State,
-  Country,
   Company,
+  Country,
   QuestionsQuestion,
   QuestionsQuestionVote,
+  State,
 } from '@prisma/client';
 import { Vote } from '@prisma/client';
 
-import type { AggregatedQuestionEncounter, Question, CountryInfo} from '~/types/questions';
+import type {
+  AggregatedQuestionEncounter,
+  CountryInfo,
+  Question,
+} from '~/types/questions';
 
 type AggregatableEncounters = Array<{
-  company: Company | null;
   city: City | null;
+  company: Company | null;
   country: Country | null;
-  state: State | null;
   role: string;
   seenAt: Date;
+  state: State | null;
 }>;
 
 type QuestionWithAggregatableData = QuestionsQuestion & {
@@ -89,12 +93,11 @@ export function createAggregatedQuestionEncounter(
       companyCounts[encounter.company!.name] += 1;
     }
 
-
     if (encounter.country !== null) {
       if (!(encounter.country.name in countryCounts)) {
         countryCounts[encounter.country.name] = {
-          total: 0,
           stateInfos: {},
+          total: 0,
         };
       }
       const countryInfo = countryCounts[encounter.country.name];
@@ -106,26 +109,24 @@ export function createAggregatedQuestionEncounter(
       if (encounter.state !== null) {
         if (!(encounter.state.name in countryStateInfo)) {
           countryStateInfo[encounter.state.name] = {
-            total: 0,
             cityCounts: {},
+            total: 0,
           };
         }
         const stateInfo = countryStateInfo[encounter.state.name];
 
         stateInfo.total += 1;
 
-        const cityCounts = stateInfo.cityCounts;
+        const { cityCounts } = stateInfo;
 
         if (encounter.city !== null) {
           if (!(encounter.city.name in cityCounts)) {
             cityCounts[encounter.city.name] = 0;
           }
           cityCounts[encounter.city.name] += 1;
-
         }
       }
     }
-
 
     if (!(encounter.role in roleCounts)) {
       roleCounts[encounter.role] = 0;
@@ -135,8 +136,8 @@ export function createAggregatedQuestionEncounter(
 
   return {
     companyCounts,
-    latestSeenAt,
     countryCounts,
+    latestSeenAt,
     roleCounts,
   };
 }
