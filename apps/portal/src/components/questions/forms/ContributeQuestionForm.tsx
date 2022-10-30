@@ -81,6 +81,7 @@ export default function ContributeQuestionForm({
                 <LocationTypeahead
                   required={true}
                   onSelect={(option) => {
+                    // @ts-ignore TODO(questions): handle potentially null value.
                     field.onChange(option.value);
                   }}
                   {...field}
@@ -119,6 +120,7 @@ export default function ContributeQuestionForm({
               render={({ field }) => (
                 <CompanyTypeahead
                   required={true}
+                  // @ts-ignore TODO(questions): handle potentially null value.
                   onSelect={({ id }) => {
                     field.onChange(id);
                   }}
@@ -134,6 +136,7 @@ export default function ContributeQuestionForm({
                 <RoleTypeahead
                   required={true}
                   onSelect={(option) => {
+                    // @ts-ignore TODO(questions): handle potentially null value.
                     field.onChange(option.value);
                   }}
                   {...field}

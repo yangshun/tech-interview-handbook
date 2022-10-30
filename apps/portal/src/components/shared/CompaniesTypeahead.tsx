@@ -8,7 +8,7 @@ type Props = Readonly<{
   disabled?: boolean;
   errorMessage?: string;
   isLabelHidden?: boolean;
-  onSelect: (option: TypeaheadOption) => void;
+  onSelect: (option: TypeaheadOption | null) => void;
   placeHolder?: string;
   required?: boolean;
 }>;

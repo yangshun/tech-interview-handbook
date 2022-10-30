@@ -34,7 +34,7 @@ type Props = Readonly<{
     value: string,
     event: React.ChangeEvent<HTMLInputElement>,
   ) => void;
-  onSelect: (option: TypeaheadOption) => void;
+  onSelect: (option: TypeaheadOption | null) => void;
   options: ReadonlyArray<TypeaheadOption>;
   textSize?: TypeaheadTextSize;
   value?: TypeaheadOption;
@@ -102,10 +102,6 @@ export default function Typeahead({
         // @ts-ignore
         value={value}
         onChange={(newValue) => {
-          if (newValue == null) {
-            return;
-          }
-
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           onSelect(newValue as TypeaheadOption);

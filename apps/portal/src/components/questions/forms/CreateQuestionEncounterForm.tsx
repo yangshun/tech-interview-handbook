@@ -43,6 +43,7 @@ export default function CreateQuestionEncounterForm({
             isLabelHidden={true}
             placeholder="Other company"
             suggestedCount={3}
+            // @ts-ignore TODO(questions): handle potentially null value.
             onSelect={({ value: company }) => {
               setSelectedCompany(company);
             }}
@@ -59,6 +60,7 @@ export default function CreateQuestionEncounterForm({
             isLabelHidden={true}
             placeholder="Other location"
             suggestedCount={3}
+            // @ts-ignore TODO(questions): handle potentially null value.
             onSelect={({ value: location }) => {
               setSelectedLocation(location);
             }}
@@ -75,6 +77,7 @@ export default function CreateQuestionEncounterForm({
             isLabelHidden={true}
             placeholder="Other role"
             suggestedCount={3}
+            // @ts-ignore TODO(questions): handle potentially null value.
             onSelect={({ value: role }) => {
               setSelectedRole(role);
             }}

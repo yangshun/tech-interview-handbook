@@ -7,7 +7,7 @@ import { JobTitleLabels } from './JobTitles';
 type Props = Readonly<{
   disabled?: boolean;
   isLabelHidden?: boolean;
-  onSelect: (option: TypeaheadOption) => void;
+  onSelect: (option: TypeaheadOption | null) => void;
   placeHolder?: string;
   required?: boolean;
 }>;
