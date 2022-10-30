@@ -12,7 +12,6 @@ const navigationAuthenticated: ProductNavigationItems = [
 ];
 
 const config = {
-  // TODO: Change this to your own GA4 measurement ID.
   googleAnalyticsMeasurementID: 'G-34XRGLEVCF',
   logo: (
     <img alt="Tech Offers Repo" className="h-8 w-auto" src="/offers-logo.svg" />

@@ -27,7 +27,7 @@ export default function OfferTableRow({
       <td className="py-4 px-6">{formatDate(monthYearReceived)}</td>
       <td
         className={clsx(
-          'sticky right-0 bg-white py-4 px-6 drop-shadow md:drop-shadow-none',
+          'sticky right-0 py-4 px-6 drop-shadow md:drop-shadow-none',
         )}>
         <Link
           className="text-primary-600 dark:text-primary-500 font-medium hover:underline"

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Banner } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTable from '~/components/offers/table/OffersTable';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
@@ -9,6 +10,7 @@ import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 export default function OffersHomePage() {
   const [jobTitleFilter, setjobTitleFilter] = useState('software-engineer');
   const [companyFilter, setCompanyFilter] = useState('');
+  const { event: gaEvent } = useGoogleAnalytics();
 
   return (
     <main className="flex-1 overflow-y-auto">
@@ -40,6 +42,11 @@ export default function OffersHomePage() {
               onSelect={(option) => {
                 if (option) {
                   setjobTitleFilter(option.value);
+                  gaEvent({
+                    action: `offers.table_filter_job_title_${option.value}`,
+                    category: 'engagement',
+                    label: 'Filter by job title',
+                  });
                 }
               }}
             />
@@ -50,6 +57,11 @@ export default function OffersHomePage() {
               onSelect={(option) => {
                 if (option) {
                   setCompanyFilter(option.value);
+                  gaEvent({
+                    action: 'offers.table_filter_company',
+                    category: 'engagement',
+                    label: 'Filter by company',
+                  });
                 }
               }}
             />

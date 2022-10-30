@@ -6,6 +6,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 import { JobType } from '@prisma/client';
 import { Button } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import type { BreadcrumbStep } from '~/components/offers/Breadcrumb';
 import { Breadcrumbs } from '~/components/offers/Breadcrumb';
 import BackgroundForm from '~/components/offers/offersSubmission/submissionForm/BackgroundForm';
@@ -101,6 +102,7 @@ export default function OffersSubmissionForm({
     token: editToken,
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { event: gaEvent } = useGoogleAnalytics();
 
   const router = useRouter();
   const pageRef = useRef<HTMLDivElement>(null);
@@ -215,6 +217,11 @@ export default function OffersSubmissionForm({
     } else {
       createOrUpdateMutation.mutate({ background, offers });
     }
+    gaEvent({
+      action: 'offers.submit_profile',
+      category: 'submission',
+      label: 'Submit profile',
+    });
   };
 
   useEffect(() => {
@@ -278,7 +285,14 @@ export default function OffersSubmissionForm({
                     icon={ArrowRightIcon}
                     label="Next"
                     variant="secondary"
-                    onClick={() => goToNextStep(step)}
+                    onClick={() => {
+                      goToNextStep(step);
+                      gaEvent({
+                        action: 'offers.profile_submission_navigate_next',
+                        category: 'submission',
+                        label: 'Navigate next',
+                      });
+                    }}
                   />
                 </div>
               )}
@@ -288,7 +302,14 @@ export default function OffersSubmissionForm({
                     icon={ArrowLeftIcon}
                     label="Previous"
                     variant="secondary"
-                    onClick={() => setStep(step - 1)}
+                    onClick={() => {
+                      setStep(step - 1);
+                      gaEvent({
+                        action: 'offers.profile_submission_navigation_back',
+                        category: 'submission',
+                        label: 'Navigate back',
+                      });
+                    }}
                   />
                   <Button
                     disabled={isSubmitting || isSubmitSuccessful}

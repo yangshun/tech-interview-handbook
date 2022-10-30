@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Button, useToast } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import DashboardOfferCard from '~/components/offers/dashboard/DashboardOfferCard';
 
 import { formatDate } from '~/utils/offers/time';
@@ -10,7 +11,6 @@ import { trpc } from '~/utils/trpc';
 import ProfilePhotoHolder from '../profile/ProfilePhotoHolder';
 
 import type { UserProfile, UserProfileOffer } from '~/types/offers';
-
 type Props = Readonly<{
   profile: UserProfile;
 }>;
@@ -22,6 +22,7 @@ export default function DashboardProfileCard({
   const router = useRouter();
   const trpcContext = trpc.useContext();
   const PROFILE_URL = `/offers/profile/${id}?token=${token}`;
+  const { event: gaEvent } = useGoogleAnalytics();
   const removeSavedProfileMutation = trpc.useMutation(
     'offers.user.profile.removeFromUserProfile',
     {
@@ -97,7 +98,14 @@ export default function DashboardProfileCard({
           label="Read full profile"
           size="md"
           variant="secondary"
-          onClick={() => router.push(PROFILE_URL)}
+          onClick={() => {
+            gaEvent({
+              action: 'offers.view_profile_from_dashboard',
+              category: 'engagement',
+              label: 'View profile from dashboard',
+            });
+            router.push(PROFILE_URL);
+          }}
         />
       </div>
     </div>

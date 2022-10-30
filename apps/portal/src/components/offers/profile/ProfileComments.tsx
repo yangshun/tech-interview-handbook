@@ -9,6 +9,7 @@ import {
   useToast,
 } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ExpandableCommentCard from '~/components/offers/profile/comments/ExpandableCommentCard';
 import Tooltip from '~/components/offers/util/Tooltip';
 
@@ -40,6 +41,7 @@ export default function ProfileComments({
   const [currentReply, setCurrentReply] = useState<string>('');
   const [replies, setReplies] = useState<Array<Reply>>();
   const { showToast } = useToast();
+  const { event: gaEvent } = useGoogleAnalytics();
 
   const commentsQuery = trpc.useQuery(
     ['offers.comments.getComments', { profileId }],
@@ -121,6 +123,11 @@ export default function ProfileComments({
               variant="secondary"
               onClick={() => {
                 copyProfileLink(profileId, token);
+                gaEvent({
+                  action: 'offers.copy_profile_edit_link',
+                  category: 'engagement',
+                  label: 'Copy Profile Edit Link',
+                });
                 showToast({
                   title: `Profile edit link copied to clipboard!`,
                   variant: 'success',
@@ -140,6 +147,11 @@ export default function ProfileComments({
             variant="secondary"
             onClick={() => {
               copyProfileLink(profileId);
+              gaEvent({
+                action: 'offers.copy_profile_public_link',
+                category: 'engagement',
+                label: 'Copy Profile Public Link',
+              });
               showToast({
                 title: `Public profile link copied to clipboard!`,
                 variant: 'success',
