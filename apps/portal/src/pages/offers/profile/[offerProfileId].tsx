@@ -1,6 +1,7 @@
 import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { Spinner, useToast } from '@tih/ui';
 
 import { ProfileDetailTab } from '~/components/offers/constants';
 import ProfileComments from '~/components/offers/profile/ProfileComments';
@@ -14,7 +15,6 @@ import { HOME_URL } from '~/components/offers/types';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
-import { useToast } from '~/../../../packages/ui/dist';
 import { convertMoneyToString } from '~/utils/offers/currency';
 import { getProfilePath } from '~/utils/offers/link';
 import { formatDate } from '~/utils/offers/time';
@@ -180,7 +180,15 @@ export default function OfferProfile() {
           <Error statusCode={404} title="Requested profile does not exist" />
         </div>
       )}
-      {!getProfileQuery.isError && (
+      {getProfileQuery.isLoading && (
+        <div className="flex h-screen w-screen">
+          <div className="m-auto mx-auto w-screen justify-center">
+            <Spinner display="block" size="lg" />
+            <div className="text-center">Loading...</div>
+          </div>
+        </div>
+      )}
+      {!getProfileQuery.isLoading && !getProfileQuery.isError && (
         <div className="mb-4 flex flex h-screen w-screen items-center justify-center divide-x">
           <div className="h-full w-2/3 divide-y">
             <ProfileHeader
