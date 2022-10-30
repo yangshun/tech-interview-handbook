@@ -193,4 +193,64 @@ export const questionsQuestionRouter = createRouter()
 
       return createQuestionWithAggregateData(questionData);
     },
+  })
+  .query('getRelatedQuestions', {
+    input: z.object({
+      content: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const escapeChars = /[()|&:*!]/g;
+
+      const query =
+        input.content
+          .replace(escapeChars, " ")
+          .trim()
+          .split(/\s+/)
+          .join(" | ");
+
+      const relatedQuestionsId : Array<{id:string}> = await ctx.prisma.$queryRaw`
+        SELECT id FROM "QuestionsQuestion"
+        WHERE
+          to_tsvector("content") @@ to_tsquery('english', ${query})
+        ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 4) DESC;
+      `;
+
+      const relatedQuestionsIdArray = relatedQuestionsId.map(current => current.id);
+
+      const relatedQuestionsData = await ctx.prisma.questionsQuestion.findMany({
+        include: {
+          _count: {
+            select: {
+              answers: true,
+              comments: true,
+            },
+          },
+          encounters: {
+            select: {
+              company: true,
+              location: true,
+              role: true,
+              seenAt: true,
+            },
+          },
+          user: {
+            select: {
+              name: true,
+            },
+          },
+          votes: true,
+        },
+        where: {
+          id : {
+            in : relatedQuestionsIdArray,
+          }
+        },
+      });
+
+      const processedQuestionsData = relatedQuestionsData.map(
+        createQuestionWithAggregateData,
+      );
+
+      return processedQuestionsData;
+    }
   });
