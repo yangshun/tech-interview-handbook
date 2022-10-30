@@ -191,7 +191,7 @@ export type UserProfile = {
   offers: Array<UserProfileOffer>;
   profileName: string;
   token: string;
-}
+};
 
 export type UserProfileOffer = {
   company: OffersCompany;
@@ -202,4 +202,4 @@ export type UserProfileOffer = {
   location: string;
   monthYearReceived: Date;
   title: string;
-}
+};

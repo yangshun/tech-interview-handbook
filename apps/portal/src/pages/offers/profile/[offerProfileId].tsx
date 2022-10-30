@@ -188,6 +188,7 @@ export default function OfferProfile() {
               handleDelete={handleDelete}
               isEditable={isEditable}
               isLoading={getProfileQuery.isLoading}
+              isSaved={getProfileQuery.data?.isSaved}
               selectedTab={selectedTab}
               setSelectedTab={setSelectedTab}
             />
