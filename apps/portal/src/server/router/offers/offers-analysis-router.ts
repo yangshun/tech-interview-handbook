@@ -339,7 +339,7 @@ export const offersAnalysisRouter = createRouter()
         (companyOffer) => {
           // TODO: Refactor calculating analysis into a function
           let similarCompanyOffers = similarOffers.filter(
-            (offer) => offer.companyId === overallHighestOffer.companyId,
+            (offer) => offer.companyId === companyOffer.companyId,
           );
 
           const companyIndex = searchOfferPercentile(
