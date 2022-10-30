@@ -118,31 +118,33 @@ export default function OfferAnalysis({
   ];
 
   return (
-    analysis && (
-      <div>
-        {isError && (
-          <p className="m-10 text-center">
-            An error occurred while generating profile analysis.
-          </p>
-        )}
-        {isLoading && <Spinner className="m-10" display="block" size="lg" />}
-        {!isError && !isLoading && (
-          <div>
-            <Tabs
-              label="Result Navigation"
-              tabs={tabOptions}
-              value={tab}
-              onChange={setTab}
-            />
-            <HorizontalDivider className="mb-5" />
-            <OfferAnalysisContent
-              analysis={analysis}
-              isSubmission={isSubmission}
-              tab={tab}
-            />
-          </div>
-        )}
-      </div>
-    )
+    <>
+      {isLoading && <Spinner className="m-10" display="block" size="lg" />}
+      {analysis && (
+        <div>
+          {isError && (
+            <p className="m-10 text-center">
+              An error occurred while generating profile analysis.
+            </p>
+          )}
+          {!isError && !isLoading && (
+            <div>
+              <Tabs
+                label="Result Navigation"
+                tabs={tabOptions}
+                value={tab}
+                onChange={setTab}
+              />
+              <HorizontalDivider className="mb-5" />
+              <OfferAnalysisContent
+                analysis={analysis}
+                isSubmission={isSubmission}
+                tab={tab}
+              />
+            </div>
+          )}
+        </div>
+      )}
+    </>
   );
 }

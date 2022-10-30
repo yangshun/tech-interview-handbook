@@ -110,7 +110,11 @@ export default function OffersSubmissionForm({
     defaultValues: initialOfferProfileValues,
     mode: 'all',
   });
-  const { handleSubmit, trigger } = formMethods;
+  const {
+    handleSubmit,
+    trigger,
+    formState: { isSubmitting, isSubmitSuccessful },
+  } = formMethods;
 
   const generateAnalysisMutation = trpc.useMutation(
     ['offers.analysis.generate'],
@@ -178,7 +182,7 @@ export default function OffersSubmissionForm({
 
   const onSubmit: SubmitHandler<OffersProfileFormData> = async (data) => {
     const result = await trigger();
-    if (!result) {
+    if (!result || isSubmitting || isSubmitSuccessful) {
       return;
     }
 
@@ -286,7 +290,13 @@ export default function OffersSubmissionForm({
                     variant="secondary"
                     onClick={() => setStep(step - 1)}
                   />
-                  <Button label="Submit" type="submit" variant="primary" />{' '}
+                  <Button
+                    disabled={isSubmitting || isSubmitSuccessful}
+                    isLoading={isSubmitting || isSubmitSuccessful}
+                    label="Submit"
+                    type="submit"
+                    variant="primary"
+                  />
                 </div>
               )}
             </form>
