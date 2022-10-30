@@ -70,7 +70,9 @@ export default function OffersSubmissionResult() {
   return (
     <>
       {getAnalysis.isLoading && (
-        <Spinner className="m-10" display="block" size="lg" />
+        <div className="m-10 flex w-full justify-center">
+          <Spinner display="block" size="lg" />
+        </div>
       )}
       {!getAnalysis.isLoading && (
         <div ref={pageRef} className="fixed h-full w-full overflow-y-scroll">

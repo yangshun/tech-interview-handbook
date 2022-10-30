@@ -1,17 +1,15 @@
 import { OVERALL_TAB } from '../constants';
 
-import type { Analysis } from '~/types/offers';
+import type { AnalysisUnit } from '~/types/offers';
 
 type OfferPercentileAnalysisTextProps = Readonly<{
-  companyName: string;
-  offerAnalysis: Analysis;
+  offerAnalysis: AnalysisUnit;
   tab: string;
 }>;
 
 export default function OfferPercentileAnalysisText({
   tab,
-  companyName,
-  offerAnalysis: { noOfOffers, percentile },
+  offerAnalysis: { noOfOffers, percentile, companyName },
 }: OfferPercentileAnalysisTextProps) {
   return tab === OVERALL_TAB ? (
     <p>
