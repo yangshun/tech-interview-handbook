@@ -2,21 +2,19 @@ import { z } from 'zod';
 import { QuestionsQuestionType, Vote } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
-import { JobTitleLabels } from '~/components/shared/JobTitles';
-
 import { createProtectedRouter } from '../context';
 
 export const questionsQuestionUserRouter = createProtectedRouter()
   .mutation('create', {
     input: z.object({
+      cityId: z.string().nullish(),
       companyId: z.string(),
       content: z.string(),
-      cityId: z.string().nullish(),
       countryId: z.string(),
-      stateId: z.string().nullish(),
       questionType: z.nativeEnum(QuestionsQuestionType),
-      role: z.nativeEnum(JobTitleLabels),
+      role: z.string(),
       seenAt: z.date(),
+      stateId: z.string().nullish(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
@@ -26,28 +24,34 @@ export const questionsQuestionUserRouter = createProtectedRouter()
           content: input.content,
           encounters: {
             create: {
+              city:
+                input.cityId !== null
+                  ? {
+                      connect: {
+                        id: input.cityId,
+                      },
+                    }
+                  : undefined,
               company: {
                 connect: {
                   id: input.companyId,
                 },
               },
-              city: input.cityId !== null ? {
-                connect: {
-                  id: input.cityId,
-                },
-              } : undefined,
               country: {
                 connect: {
                   id: input.countryId,
                 },
               },
-              state: input.stateId !== null ? {
-                connect: {
-                  id: input.stateId,
-                },
-              } : undefined,
               role: input.role,
               seenAt: input.seenAt,
+              state:
+                input.stateId !== null
+                  ? {
+                      connect: {
+                        id: input.stateId,
+                      },
+                    }
+                  : undefined,
               user: {
                 connect: {
                   id: userId,

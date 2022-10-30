@@ -24,6 +24,26 @@ export type CountryInfo = {
   total: number;
 };
 
+export type CityLocation = {
+  cityId: string;
+  countryId: string;
+  stateId: string;
+};
+
+export type StateLocation = {
+  cityId?: never;
+  countryId: string;
+  stateId: string;
+};
+
+export type CountryLocation = {
+  cityId?: never;
+  countryId: string;
+  stateId?: never;
+};
+
+export type Location = CityLocation | CountryLocation | StateLocation;
+
 export type AggregatedQuestionEncounter = {
   companyCounts: Record<string, number>;
   countryCounts: Record<string, CountryInfo>;

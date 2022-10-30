@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Bars3BottomLeftIcon } from '@heroicons/react/20/solid';
 import { NoSymbolIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
+import type { TypeaheadOption } from '@tih/ui';
 import { Button, SlideOut } from '@tih/ui';
 
 import QuestionOverviewCard from '~/components/questions/card/question/QuestionOverviewCard';
@@ -28,8 +29,20 @@ import {
 } from '~/utils/questions/useSearchParam';
 import { trpc } from '~/utils/trpc';
 
+import type { Location } from '~/types/questions.d';
 import { SortType } from '~/types/questions.d';
 import { SortOrder } from '~/types/questions.d';
+
+function locationToSlug(value: Location & TypeaheadOption): string {
+  return [
+    value.countryId,
+    value.stateId,
+    value.cityId,
+    value.id,
+    value.label,
+    value.value,
+  ].join('-');
+}
 
 export default function QuestionsBrowsePage() {
   const router = useRouter();
@@ -72,7 +85,13 @@ export default function QuestionsBrowsePage() {
   const [selectedRoles, setSelectedRoles, areRolesInitialized] =
     useSearchParam('roles');
   const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
-    useSearchParam('locations');
+    useSearchParam<Location & TypeaheadOption>('locations', {
+      paramToString: locationToSlug,
+      stringToParam: (param) => {
+        const [countryId, stateId, cityId, id, label, value] = param.split('-');
+        return { cityId, countryId, id, label, stateId, value };
+      },
+    });
 
   const [sortOrder, setSortOrder, isSortOrderInitialized] =
     useSearchParamSingle<SortOrder>('sortOrder', {
@@ -153,8 +172,10 @@ export default function QuestionsBrowsePage() {
     [
       'questions.questions.getQuestionsByFilter',
       {
-        // TODO: Enable filtering by cities, companies and states
-        cityIds: [],
+        // TODO: Enable filtering by countryIds and stateIds
+        cityIds: selectedLocations
+          .map(({ cityId }) => cityId)
+          .filter((id) => id !== undefined) as Array<string>,
         companyIds: selectedCompanySlugs.map((slug) => slug.split('_')[0]),
         countryIds: [],
         endDate: today,
@@ -242,7 +263,7 @@ export default function QuestionsBrowsePage() {
         pathname,
         query: {
           companies: selectedCompanySlugs,
-          locations: selectedLocations,
+          locations: selectedLocations.map(locationToSlug),
           questionAge: selectedQuestionAge,
           questionTypes: selectedQuestionTypes,
           roles: selectedRoles,
@@ -267,12 +288,15 @@ export default function QuestionsBrowsePage() {
   ]);
 
   const selectedCompanyOptions = useMemo(() => {
-    return selectedCompanySlugs.map((company) => ({
-      checked: true,
-      id: company,
-      label: company,
-      value: company,
-    }));
+    return selectedCompanySlugs.map((company) => {
+      const [id, label] = company.split('_');
+      return {
+        checked: true,
+        id,
+        label,
+        value: id,
+      };
+    });
   }, [selectedCompanySlugs]);
 
   const selectedRoleOptions = useMemo(() => {
@@ -287,9 +311,7 @@ export default function QuestionsBrowsePage() {
   const selectedLocationOptions = useMemo(() => {
     return selectedLocations.map((location) => ({
       checked: true,
-      id: location,
-      label: location,
-      value: location,
+      ...location,
     }));
   }, [selectedLocations]);
 
@@ -355,7 +377,10 @@ export default function QuestionsBrowsePage() {
       <FilterSection
         label="Roles"
         options={selectedRoleOptions}
-        renderInput={({ onOptionChange, field: { ref: _, ...field } }) => (
+        renderInput={({
+          onOptionChange,
+          field: { ref: _, onChange: __, ...field },
+        }) => (
           <RoleTypeahead
             {...field}
             clearOnSelect={true}
@@ -413,13 +438,16 @@ export default function QuestionsBrowsePage() {
       <FilterSection
         label="Locations"
         options={selectedLocationOptions}
-        renderInput={({ onOptionChange, field: { ref: _, ...field } }) => (
+        renderInput={({
+          onOptionChange,
+          field: { ref: _, onChange: __, ...field },
+        }) => (
           <LocationTypeahead
             {...field}
             clearOnSelect={true}
             filterOption={(option) => {
               return !selectedLocations.some((location) => {
-                return location === option.value;
+                return location.id === option.id;
               });
             }}
             isLabelHidden={true}
@@ -435,10 +463,14 @@ export default function QuestionsBrowsePage() {
         )}
         onOptionChange={(option) => {
           if (option.checked) {
-            setSelectedLocations([...selectedLocations, option.value]);
+            // TODO: Fix type inference, then remove the `as` cast.
+            setSelectedLocations([
+              ...selectedLocations,
+              option as unknown as Location & TypeaheadOption,
+            ]);
           } else {
             setSelectedLocations(
-              selectedLocations.filter((role) => role !== option.value),
+              selectedLocations.filter((location) => location.id !== option.id),
             );
           }
         }}
@@ -457,13 +489,16 @@ export default function QuestionsBrowsePage() {
             <div className="m-4 flex max-w-3xl flex-1 flex-col items-stretch justify-start gap-8">
               <ContributeQuestionCard
                 onSubmit={(data) => {
+                  const { cityId, countryId, stateId } = data.location;
                   createQuestion({
+                    cityId,
                     companyId: data.company,
                     content: data.questionContent,
-                    location: data.location,
+                    countryId,
                     questionType: data.questionType,
-                    role: data.role,
+                    role: data.role.value,
                     seenAt: data.date,
+                    stateId,
                   });
                 }}
               />

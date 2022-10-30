@@ -8,13 +8,16 @@ import type { RequireAllOrNone } from '~/utils/questions/RequireAllOrNone';
 type TypeaheadProps = ComponentProps<typeof Typeahead>;
 type TypeaheadOption = TypeaheadProps['options'][number];
 
-export type ExpandedTypeaheadProps = RequireAllOrNone<{
-  clearOnSelect?: boolean;
-  filterOption: (option: TypeaheadOption) => boolean;
-  onSuggestionClick: (option: TypeaheadOption) => void;
-  suggestedCount: number;
-}> &
-  TypeaheadProps;
+export type ExpandedTypeaheadProps = Omit<TypeaheadProps, 'onSelect'> &
+  RequireAllOrNone<{
+    clearOnSelect?: boolean;
+    filterOption: (option: TypeaheadOption) => boolean;
+    onSuggestionClick: (option: TypeaheadOption) => void;
+    suggestedCount: number;
+  }> & {
+    onChange?: unknown; // Workaround: This prop is here just to absorb the onChange returned react-hook-form
+    onSelect: (option: TypeaheadOption) => void;
+  };
 
 export default function ExpandedTypeahead({
   suggestedCount = 0,
@@ -23,6 +26,7 @@ export default function ExpandedTypeahead({
   clearOnSelect = false,
   options,
   onSelect,
+  onChange: _,
   ...typeaheadProps
 }: ExpandedTypeaheadProps) {
   const [key, setKey] = useState(0);
@@ -55,7 +59,8 @@ export default function ExpandedTypeahead({
             if (clearOnSelect) {
               setKey((key + 1) % 2);
             }
-            onSelect(option);
+            // TODO: Remove onSelect null coercion once onSelect prop is refactored
+            onSelect(option!);
           }}
         />
       </div>

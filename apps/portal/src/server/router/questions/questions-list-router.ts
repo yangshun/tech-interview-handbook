@@ -25,10 +25,12 @@ export const questionsListRouter = createProtectedRouter()
                   },
                   encounters: {
                     select: {
+                      city: true,
                       company: true,
-                      location: true,
+                      country: true,
                       role: true,
                       seenAt: true,
+                      state: true,
                     },
                   },
                   user: {
@@ -83,10 +85,12 @@ export const questionsListRouter = createProtectedRouter()
                   },
                   encounters: {
                     select: {
+                      city: true,
                       company: true,
-                      location: true,
+                      country: true,
                       role: true,
                       seenAt: true,
+                      state: true,
                     },
                   },
                   user: {

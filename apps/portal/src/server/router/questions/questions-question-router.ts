@@ -2,8 +2,6 @@ import { z } from 'zod';
 import { QuestionsQuestionType } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
-import { JobTitleLabels } from '~/components/shared/JobTitles';
-
 import { createQuestionWithAggregateData } from '~/utils/questions/server/aggregate-encounters';
 
 import { createRouter } from '../context';
@@ -20,7 +18,7 @@ export const questionsQuestionRouter = createRouter()
       endDate: z.date().default(new Date()),
       limit: z.number().min(1).default(50),
       questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
-      roles: z.nativeEnum(JobTitleLabels).array(),
+      roles: z.string().array(),
       sortOrder: z.nativeEnum(SortOrder),
       sortType: z.nativeEnum(SortType),
       startDate: z.date().optional(),

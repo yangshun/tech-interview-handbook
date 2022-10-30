@@ -10,13 +10,13 @@ import { SortOrder } from '~/types/questions.d';
 export const questionsQuestionEncounterUserRouter = createProtectedRouter()
   .mutation('create', {
     input: z.object({
-      companyId: z.string(),
       cityId: z.string().nullish(),
+      companyId: z.string(),
       countryId: z.string(),
-      stateId: z.string().nullish(),
       questionId: z.string(),
       role: z.nativeEnum(JobTitleLabels),
       seenAt: z.date(),
+      stateId: z.string().nullish(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;

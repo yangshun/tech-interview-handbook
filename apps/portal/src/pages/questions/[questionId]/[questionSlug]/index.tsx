@@ -203,11 +203,13 @@ export default function QuestionPage() {
               upvoteCount={question.numVotes}
               onReceivedSubmit={(data) => {
                 addEncounter({
+                  cityId: data.cityId,
                   companyId: data.company,
-                  location: data.location,
+                  countryId: data.countryId,
                   questionId: questionId as string,
                   role: data.role,
                   seenAt: data.seenAt,
+                  stateId: data.stateId,
                 });
               }}
             />

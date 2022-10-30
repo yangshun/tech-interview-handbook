@@ -19,9 +19,11 @@ export const locationsRouter = createRouter()
             select: {
               country: {
                 select: {
+                  id: true,
                   name: true,
                 },
               },
+              id: true,
               name: true,
             },
           },
