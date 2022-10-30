@@ -11,6 +11,8 @@ import {
 } from '~/components/offers/constants';
 import type { BackgroundPostData } from '~/components/offers/types';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
+import type { JobTitleType } from '~/components/shared/JobTitles';
+import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
 import {
@@ -92,23 +94,47 @@ function FullTimeJobFields() {
     background: BackgroundPostData;
   }>();
   const experiencesField = formState.errors.background?.experiences?.[0];
+
+  const watchJobTitle = useWatch({
+    name: 'background.experiences.0.title',
+  });
+  const watchCompanyId = useWatch({
+    name: 'background.experiences.0.companyId',
+  });
+  const watchCompanyName = useWatch({
+    name: 'background.experiences.0.companyName',
+  });
+
   return (
     <>
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <div>
           <JobTitlesTypeahead
-            // @ts-ignore TODO(offers): handle potentially null value.
-            onSelect={({ value }) =>
-              setValue(`background.experiences.0.title`, value)
-            }
+            value={{
+              id: watchJobTitle,
+              label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
+              value: watchJobTitle,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue('background.experiences.0.title', option.value);
+              }
+            }}
           />
         </div>
         <div>
           <CompaniesTypeahead
-            // @ts-ignore TODO(offers): handle potentially null value.
-            onSelect={({ value }) =>
-              setValue(`background.experiences.0.companyId`, value)
-            }
+            value={{
+              id: watchCompanyId,
+              label: watchCompanyName,
+              value: watchCompanyId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue('background.experiences.0.companyId', option.value);
+                setValue('background.experiences.0.companyName', option.label);
+              }
+            }}
           />
         </div>
       </div>
@@ -175,23 +201,46 @@ function InternshipJobFields() {
   }>();
   const experiencesField = formState.errors.background?.experiences?.[0];
 
+  const watchJobTitle = useWatch({
+    name: 'background.experiences.0.title',
+  });
+  const watchCompanyId = useWatch({
+    name: 'background.experiences.0.companyId',
+  });
+  const watchCompanyName = useWatch({
+    name: 'background.experiences.0.companyName',
+  });
+
   return (
     <>
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <div>
           <JobTitlesTypeahead
-            // @ts-ignore TODO(offers): handle potentially null value.
-            onSelect={({ value }) =>
-              setValue(`background.experiences.0.title`, value)
-            }
+            value={{
+              id: watchJobTitle,
+              label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
+              value: watchJobTitle,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue('background.experiences.0.title', option.value);
+              }
+            }}
           />
         </div>
         <div>
           <CompaniesTypeahead
-            // @ts-ignore TODO(offers): handle potentially null value.
-            onSelect={({ value }) =>
-              setValue(`background.experiences.0.companyId`, value)
-            }
+            value={{
+              id: watchCompanyId,
+              label: watchCompanyName,
+              value: watchCompanyId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue('background.experiences.0.companyId', option.value);
+                setValue('background.experiences.0.companyName', option.label);
+              }
+            }}
           />
         </div>
       </div>

@@ -45,6 +45,7 @@ export type BackgroundPostData = {
 
 type ExperiencePostData = {
   companyId?: string | null;
+  companyName?: string | null;
   durationInMonths?: number | null;
   id?: string;
   jobType?: string | null;
@@ -76,6 +77,7 @@ type SpecificYoe = SpecificYoePostData;
 export type OfferPostData = {
   comments: string;
   companyId: string;
+  companyName?: string;
   id?: string;
   jobType: JobType;
   location: string;
@@ -129,6 +131,7 @@ export type OfferDisplayData = {
   id?: string;
   jobLevel?: string | null;
   jobTitle?: string | null;
+  jobType?: JobType;
   location?: string | null;
   monthlySalary?: string | null;
   negotiationStrategy?: string | null;

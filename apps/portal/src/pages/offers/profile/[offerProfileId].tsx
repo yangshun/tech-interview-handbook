@@ -24,9 +24,6 @@ import type { Profile, ProfileAnalysis, ProfileOffer } from '~/types/offers';
 
 export default function OfferProfile() {
   const { showToast } = useToast();
-  const ErrorPage = (
-    <Error statusCode={404} title="Requested profile does not exist." />
-  );
   const router = useRouter();
   const { offerProfileId, token = '' } = router.query;
   const [isEditable, setIsEditable] = useState(false);
@@ -126,6 +123,7 @@ export default function OfferProfile() {
                 jobTitle: experience.title
                   ? getLabelForJobTitleType(experience.title as JobTitleType)
                   : null,
+                jobType: experience.jobType || undefined,
                 monthlySalary: experience.monthlySalary
                   ? convertMoneyToString(experience.monthlySalary)
                   : null,
@@ -177,7 +175,11 @@ export default function OfferProfile() {
 
   return (
     <>
-      {getProfileQuery.isError && ErrorPage}
+      {getProfileQuery.isError && (
+        <div className="flex w-full justify-center">
+          <Error statusCode={404} title="Requested profile does not exist" />
+        </div>
+      )}
       {!getProfileQuery.isError && (
         <div className="mb-4 flex flex h-screen w-screen items-center justify-center divide-x">
           <div className="h-full w-2/3 divide-y">

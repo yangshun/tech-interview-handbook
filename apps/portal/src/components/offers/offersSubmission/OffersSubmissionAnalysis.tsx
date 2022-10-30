@@ -22,6 +22,7 @@ export default function OffersSubmissionAnalysis({
         allAnalysis={analysis}
         isError={isError}
         isLoading={isLoading}
+        isSubmission={true}
       />
     </div>
   );

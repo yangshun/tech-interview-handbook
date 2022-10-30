@@ -13,6 +13,8 @@ import { JobType } from '@prisma/client';
 import { Button, Dialog } from '@tih/ui';
 
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
+import type { JobTitleType } from '~/components/shared/JobTitles';
+import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
 import {
@@ -51,6 +53,15 @@ function FullTimeOfferDetailsForm({
   }>();
   const offerFields = formState.errors.offers?.[index];
 
+  const watchJobTitle = useWatch({
+    name: `offers.${index}.offersFullTime.title`,
+  });
+  const watchCompanyId = useWatch({
+    name: `offers.${index}.companyId`,
+  });
+  const watchCompanyName = useWatch({
+    name: `offers.${index}.companyName`,
+  });
   const watchCurrency = useWatch({
     name: `offers.${index}.offersFullTime.totalCompensation.currency`,
   });
@@ -70,10 +81,16 @@ function FullTimeOfferDetailsForm({
         <div>
           <JobTitlesTypeahead
             required={true}
-            // @ts-ignore TODO(offers): handle potentially null value.
-            onSelect={({ value }) =>
-              setValue(`offers.${index}.offersFullTime.title`, value)
-            }
+            value={{
+              id: watchJobTitle,
+              label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
+              value: watchJobTitle,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue(`offers.${index}.offersFullTime.title`, option.value);
+              }
+            }}
           />
         </div>
         <FormTextInput
@@ -90,10 +107,17 @@ function FullTimeOfferDetailsForm({
         <div>
           <CompaniesTypeahead
             required={true}
-            // @ts-ignore TODO(offers): handle potentially null value.
-            onSelect={({ value }) =>
-              setValue(`offers.${index}.companyId`, value)
-            }
+            value={{
+              id: watchCompanyId,
+              label: watchCompanyName,
+              value: watchCompanyId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue(`offers.${index}.companyId`, option.value);
+                setValue(`offers.${index}.companyName`, option.label);
+              }
+            }}
           />
         </div>
         <FormSelect
@@ -270,8 +294,17 @@ function InternshipOfferDetailsForm({
   const { register, formState, setValue } = useFormContext<{
     offers: Array<OfferFormData>;
   }>();
-
   const offerFields = formState.errors.offers?.[index];
+
+  const watchJobTitle = useWatch({
+    name: `offers.${index}.offersIntern.title`,
+  });
+  const watchCompanyId = useWatch({
+    name: `offers.${index}.companyId`,
+  });
+  const watchCompanyName = useWatch({
+    name: `offers.${index}.companyName`,
+  });
 
   return (
     <div className="my-5 rounded-lg border border-slate-200 px-10 py-5">
@@ -279,10 +312,16 @@ function InternshipOfferDetailsForm({
         <div>
           <JobTitlesTypeahead
             required={true}
-            // @ts-ignore TODO(offers): handle potentially null value.
-            onSelect={({ value }) =>
-              setValue(`offers.${index}.offersIntern.title`, value)
-            }
+            value={{
+              id: watchJobTitle,
+              label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
+              value: watchJobTitle,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue(`offers.${index}.offersIntern.title`, option.value);
+              }
+            }}
           />
         </div>
       </div>
@@ -290,10 +329,17 @@ function InternshipOfferDetailsForm({
         <div>
           <CompaniesTypeahead
             required={true}
-            // @ts-ignore TODO(offers): handle potentially null value.
-            onSelect={({ value }) =>
-              setValue(`offers.${index}.companyId`, value)
-            }
+            value={{
+              id: watchCompanyId,
+              label: watchCompanyName,
+              value: watchCompanyId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue(`offers.${index}.companyId`, option.value);
+                setValue(`offers.${index}.companyName`, option.label);
+              }
+            }}
           />
         </div>
         <FormSelect

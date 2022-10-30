@@ -27,6 +27,7 @@ import { trpc } from '~/utils/trpc';
 const defaultOfferValues = {
   comments: '',
   companyId: '',
+  jobTitle: '',
   jobType: JobType.FULLTIME,
   location: '',
   monthYearReceived: {
@@ -39,11 +40,38 @@ const defaultOfferValues = {
 export const defaultFullTimeOfferValues = {
   ...defaultOfferValues,
   jobType: JobType.FULLTIME,
+  offersFullTime: {
+    baseSalary: {
+      currency: 'SGD',
+      value: null,
+    },
+    bonus: {
+      currency: 'SGD',
+      value: null,
+    },
+    level: '',
+    stocks: {
+      currency: 'SGD',
+      value: null,
+    },
+    totalCompensation: {
+      currency: 'SGD',
+      value: null,
+    },
+  },
 };
 
 export const defaultInternshipOfferValues = {
   ...defaultOfferValues,
   jobType: JobType.INTERN,
+  offersIntern: {
+    internshipCycle: null,
+    monthlySalary: {
+      currency: 'SGD',
+      value: null,
+    },
+    startYear: null,
+  },
 };
 
 const defaultOfferProfileValues = {
@@ -198,6 +226,32 @@ export default function OffersSubmissionForm({
     scrollToTop();
   }, [step]);
 
+  useEffect(() => {
+    const warningText =
+      'Leave this page? Changes that you made will not be saved.';
+    const handleWindowClose = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      return (e.returnValue = warningText);
+    };
+    const handleRouteChange = (url: string) => {
+      if (url.includes('/offers/submit/result')) {
+        return;
+      }
+      if (window.confirm(warningText)) {
+        return;
+      }
+      router.events.emit('routeChangeError');
+      throw 'routeChange aborted.';
+    };
+    window.addEventListener('beforeunload', handleWindowClose);
+    router.events.on('routeChangeStart', handleRouteChange);
+    return () => {
+      window.removeEventListener('beforeunload', handleWindowClose);
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div ref={pageRef} className="fixed h-full w-full overflow-y-scroll">
       <div className="mb-20 flex justify-center">
@@ -210,7 +264,7 @@ export default function OffersSubmissionForm({
             />
           </div>
           <FormProvider {...formMethods}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className="text-sm" onSubmit={handleSubmit(onSubmit)}>
               {steps[step]}
               {/* <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre> */}
               {step === 0 && (
