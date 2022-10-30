@@ -8,11 +8,11 @@ import {
   UsersIcon,
 } from '@heroicons/react/24/outline';
 
-import offersAnalysis from '~/components/offers/landing/images/offers-analysis.png';
-import offersBrowse from '~/components/offers/landing/images/offers-browse.png';
-import offersProfile from '~/components/offers/landing/images/offers-profile.png';
-import LeftTextCard from '~/components/offers/landing/LeftTextCard';
-import RightTextCard from '~/components/offers/landing/RightTextCard';
+import offersAnalysis from '~/components/offers/features/images/offers-analysis.png';
+import offersBrowse from '~/components/offers/features/images/offers-browse.png';
+import offersProfile from '~/components/offers/features/images/offers-profile.png';
+import LeftTextCard from '~/components/offers/features/LeftTextCard';
+import RightTextCard from '~/components/offers/features/RightTextCard';
 import { HOME_URL } from '~/components/offers/types';
 
 const features = [
@@ -87,6 +87,11 @@ export default function LandingPage() {
         {/* Hero section */}
         <div className="relative h-full">
           <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+            <img
+              alt="Tech Offers Repo"
+              className="mx-auto mb-8 w-auto"
+              src="/offers-logo.svg"
+            />
             <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
               <span>Choosing offers </span>
               <span className="from-primary-600 -mb-1 mr-2 bg-gradient-to-r to-purple-500 bg-clip-text pb-1 pr-4 italic text-transparent">
@@ -121,16 +126,16 @@ export default function LandingPage() {
           />
           <div className="relative">
             <LeftTextCard
-              description="An offer profile includes not only offers that a person received in their application cycle, but also background information such as education and work experience. Use offer profiles to help you better contextualize offers."
+              description="Filter relevant offers by job title, company, submission date, salary and more."
               icon={
-                <InformationCircleIcon
+                <TableCellsIcon
                   aria-hidden="true"
                   className="h-6 w-6 text-white"
                 />
               }
               imageAlt="Offer table page"
-              imageSrc={offersProfile}
-              title="Choosing an offer needs context"
+              imageSrc={offersBrowse}
+              title="Stay informed of recent offers"
             />
           </div>
           <div className="mt-36">
@@ -149,16 +154,16 @@ export default function LandingPage() {
           </div>
           <div className="mt-36">
             <LeftTextCard
-              description="Filter relevant offers by job title, company, submission date, salary and more."
+              description="An offer profile includes not only offers that a person received in their application cycle, but also background information such as education and work experience. Use offer profiles to help you better contextualize offers."
               icon={
-                <TableCellsIcon
+                <InformationCircleIcon
                   aria-hidden="true"
                   className="h-6 w-6 text-white"
                 />
               }
               imageAlt="Offer table page"
-              imageSrc={offersBrowse}
-              title="Stay informed of recent offers"
+              imageSrc={offersProfile}
+              title="Choosing an offer needs context"
             />
           </div>
         </div>
