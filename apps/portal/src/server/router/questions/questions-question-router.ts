@@ -217,7 +217,9 @@ export const questionsQuestionRouter = createRouter()
           encounters: {
             select: {
               company: true,
-              location: true,
+              country: true,
+              city: true,
+              state: true,
               role: true,
               seenAt: true,
             },
