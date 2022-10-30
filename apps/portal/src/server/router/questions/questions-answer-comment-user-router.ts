@@ -100,27 +100,201 @@ export const questionsAnswerCommentUserRouter = createProtectedRouter()
       });
     },
   })
-  .mutation('createVote', {
+  .mutation('setUpVote', {
     input: z.object({
       answerCommentId: z.string(),
-      vote: z.nativeEnum(Vote),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
+      const { answerCommentId } = input;
 
-      const { answerCommentId, vote } = input;
-
-      const incrementValue = vote === Vote.UPVOTE ? 1 : -1;
-
-      const [answerCommentVote] = await ctx.prisma.$transaction([
-        ctx.prisma.questionsAnswerCommentVote.create({
-          data: {
-            answerCommentId,
-            userId,
-            vote,
+      return await ctx.prisma.$transaction(async (tx) => {
+        const vote = await tx.questionsAnswerCommentVote.findUnique({
+          where: {
+            answerCommentId_userId: { answerCommentId, userId },
           },
-        }),
-        ctx.prisma.questionsAnswerComment.update({
+        })
+
+        if (vote === null) {
+          const createdVote = await tx.questionsAnswerCommentVote.create({
+            data: {
+              answerCommentId,
+              userId,
+              vote: Vote.UPVOTE,
+            },
+          });
+
+          await tx.questionsAnswerComment.update({
+            data: {
+              upvotes: {
+                increment: 1,
+              },
+            },
+            where: {
+              id: answerCommentId,
+            },
+          });
+
+          return createdVote
+        }
+
+        if (vote!.userId !== userId) {
+          throw new TRPCError({
+            code: 'UNAUTHORIZED',
+            message: 'User have no authorization to record.',
+          });
+        }
+
+        if (vote!.vote === Vote.UPVOTE) {
+          return vote;
+        }
+
+        if (vote.vote === Vote.DOWNVOTE) {
+          tx.questionsAnswerCommentVote.delete({
+            where: {
+              id: vote.id,
+            },
+          });
+
+          const createdVote = await tx.questionsAnswerCommentVote.create({
+            data: {
+              answerCommentId,
+              userId,
+              vote: Vote.UPVOTE,
+            },
+          });
+
+          await tx.questionsAnswerComment.update({
+            data: {
+              upvotes: {
+                increment: 2,
+              },
+            },
+            where: {
+              id: answerCommentId,
+            },
+          });
+
+          return createdVote
+        }
+      });
+    },
+  })
+  .mutation('setDownVote', {
+    input: z.object({
+      answerCommentId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+      const { answerCommentId } = input;
+
+      return await ctx.prisma.$transaction(async (tx) => {
+        const vote = await tx.questionsAnswerCommentVote.findUnique({
+          where: {
+            answerCommentId_userId: { answerCommentId, userId },
+          },
+        })
+
+        if (vote === null) {
+          const createdVote = await tx.questionsAnswerCommentVote.create({
+            data: {
+              answerCommentId,
+              userId,
+              vote: Vote.DOWNVOTE,
+            },
+          });
+
+          await tx.questionsAnswerComment.update({
+            data: {
+              upvotes: {
+                increment: -1,
+              },
+            },
+            where: {
+              id: answerCommentId,
+            },
+          });
+
+          return createdVote
+        }
+
+        if (vote!.userId !== userId) {
+          throw new TRPCError({
+            code: 'UNAUTHORIZED',
+            message: 'User have no authorization to record.',
+          });
+        }
+
+        if (vote!.vote === Vote.DOWNVOTE) {
+          return vote;
+        }
+
+        if (vote.vote === Vote.UPVOTE) {
+          tx.questionsAnswerCommentVote.delete({
+            where: {
+              id: vote.id,
+            },
+          });
+
+          const createdVote = await tx.questionsAnswerCommentVote.create({
+            data: {
+              answerCommentId,
+              userId,
+              vote: Vote.DOWNVOTE,
+            },
+          });
+
+          await tx.questionsAnswerComment.update({
+            data: {
+              upvotes: {
+                increment: -2,
+              },
+            },
+            where: {
+              id: answerCommentId,
+            },
+          });
+
+          return createdVote
+        }
+      });
+    },
+  })
+  .mutation('setNoVote', {
+    input: z.object({
+      answerCommentId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+      const { answerCommentId } = input;
+
+      return await ctx.prisma.$transaction(async (tx) => {
+        const voteToDelete = await tx.questionsAnswerCommentVote.findUnique({
+          where: {
+            answerCommentId_userId: { answerCommentId, userId },
+          },
+        })
+
+        if (voteToDelete === null) {
+          return null;
+        }
+
+        if (voteToDelete!.userId !== userId) {
+          throw new TRPCError({
+            code: 'UNAUTHORIZED',
+            message: 'User have no authorization to record.',
+          });
+        }
+
+        const incrementValue = voteToDelete!.vote === Vote.UPVOTE ? -1 : 1;
+
+        tx.questionsAnswerCommentVote.delete({
+          where: {
+            id: voteToDelete.id,
+          },
+        });
+
+        await tx.questionsAnswerComment.update({
           data: {
             upvotes: {
               increment: incrementValue,
@@ -129,101 +303,9 @@ export const questionsAnswerCommentUserRouter = createProtectedRouter()
           where: {
             id: answerCommentId,
           },
-        }),
-      ]);
-
-      return answerCommentVote;
-    },
-  })
-  .mutation('updateVote', {
-    input: z.object({
-      id: z.string(),
-      vote: z.nativeEnum(Vote),
-    }),
-    async resolve({ ctx, input }) {
-      const userId = ctx.session?.user?.id;
-      const { id, vote } = input;
-
-      const voteToUpdate =
-        await ctx.prisma.questionsAnswerCommentVote.findUnique({
-          where: {
-            id: input.id,
-          },
         });
 
-      if (voteToUpdate?.userId !== userId) {
-        throw new TRPCError({
-          code: 'UNAUTHORIZED',
-          message: 'User have no authorization to record.',
-        });
-      }
-
-      const incrementValue = vote === Vote.UPVOTE ? 2 : -2;
-
-      const [answerCommentVote] = await ctx.prisma.$transaction([
-        ctx.prisma.questionsAnswerCommentVote.update({
-          data: {
-            vote,
-          },
-          where: {
-            id,
-          },
-        }),
-        ctx.prisma.questionsAnswerComment.update({
-          data: {
-            upvotes: {
-              increment: incrementValue,
-            },
-          },
-          where: {
-            id: voteToUpdate.answerCommentId,
-          },
-        }),
-      ]);
-
-      return answerCommentVote;
-    },
-  })
-  .mutation('deleteVote', {
-    input: z.object({
-      id: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const userId = ctx.session?.user?.id;
-
-      const voteToDelete =
-        await ctx.prisma.questionsAnswerCommentVote.findUnique({
-          where: {
-            id: input.id,
-          },
-        });
-
-      if (voteToDelete?.userId !== userId) {
-        throw new TRPCError({
-          code: 'UNAUTHORIZED',
-          message: 'User have no authorization to record.',
-        });
-      }
-
-      const incrementValue = voteToDelete.vote === Vote.UPVOTE ? -1 : 1;
-
-      const [answerCommentVote] = await ctx.prisma.$transaction([
-        ctx.prisma.questionsAnswerCommentVote.delete({
-          where: {
-            id: input.id,
-          },
-        }),
-        ctx.prisma.questionsAnswerComment.update({
-          data: {
-            upvotes: {
-              increment: incrementValue,
-            },
-          },
-          where: {
-            id: voteToDelete.answerCommentId,
-          },
-        }),
-      ]);
-      return answerCommentVote;
+        return voteToDelete;
+      });
     },
   });
