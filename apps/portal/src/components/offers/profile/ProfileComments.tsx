@@ -180,7 +180,13 @@ export default function ProfileComments({
           <HorizontalDivider />
         </div>
       ) : (
-        <div>Please log in before commenting on this profile.</div>
+        <Button
+          className="mb-5"
+          display="block"
+          href="/api/auth/signin"
+          label="Sign in to join discussion"
+          variant="tertiary"
+        />
       )}
       <div className="h-full overflow-y-auto">
         <div className="h-content mb-96 w-full">
