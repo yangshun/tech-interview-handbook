@@ -15,6 +15,7 @@ import DeleteListDialog from '~/components/questions/DeleteListDialog';
 import { Button } from '~/../../../packages/ui/dist';
 import { APP_TITLE } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
+import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
 import { trpc } from '~/utils/trpc';
 
 export default function ListPage() {
@@ -172,37 +173,38 @@ export default function ListPage() {
                 {lists?.[selectedListIndex] && (
                   <div className="flex flex-col gap-4 pb-4">
                     {lists[selectedListIndex].questionEntries.map(
-                      ({ question, id: entryId }) => (
-                        <QuestionListCard
-                          key={question.id}
-                          companies={
-                            question.aggregatedQuestionEncounters.companyCounts
-                          }
-                          content={question.content}
-                          href={`/questions/${question.id}/${createSlug(
-                            question.content,
-                          )}`}
-                          locations={
-                            question.aggregatedQuestionEncounters.locationCounts
-                          }
-                          questionId={question.id}
-                          receivedCount={question.receivedCount}
-                          roles={
-                            question.aggregatedQuestionEncounters.roleCounts
-                          }
-                          timestamp={question.seenAt.toLocaleDateString(
-                            undefined,
-                            {
-                              month: 'short',
-                              year: 'numeric',
-                            },
-                          )}
-                          type={question.type}
-                          onDelete={() => {
-                            deleteQuestionEntry({ id: entryId });
-                          }}
-                        />
-                      ),
+                      ({ question, id: entryId }) => {
+                        const { companyCounts, locationCounts, roleCounts } =
+                          relabelQuestionAggregates(
+                            question.aggregatedQuestionEncounters,
+                          );
+
+                        return (
+                          <QuestionListCard
+                            key={question.id}
+                            companies={companyCounts}
+                            content={question.content}
+                            href={`/questions/${question.id}/${createSlug(
+                              question.content,
+                            )}`}
+                            locations={locationCounts}
+                            questionId={question.id}
+                            receivedCount={question.receivedCount}
+                            roles={roleCounts}
+                            timestamp={question.seenAt.toLocaleDateString(
+                              undefined,
+                              {
+                                month: 'short',
+                                year: 'numeric',
+                              },
+                            )}
+                            type={question.type}
+                            onDelete={() => {
+                              deleteQuestionEntry({ id: entryId });
+                            }}
+                          />
+                        );
+                      },
                     )}
                     {lists[selectedListIndex].questionEntries?.length === 0 && (
                       <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
