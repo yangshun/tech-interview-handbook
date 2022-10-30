@@ -132,12 +132,11 @@ export const questionsQuestionUserRouter = createProtectedRouter()
       const { questionId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
-        const questionToUpdate =
-          await tx.questionsQuestion.findUnique({
-            where: {
-              id: questionId,
-            },
-          });
+        const questionToUpdate = await tx.questionsQuestion.findUnique({
+          where: {
+            id: questionId,
+          },
+        });
 
         if (questionToUpdate === null) {
           throw new TRPCError({
@@ -150,7 +149,7 @@ export const questionsQuestionUserRouter = createProtectedRouter()
           where: {
             questionId_userId: { questionId, userId },
           },
-        })
+        });
 
         if (vote === null) {
           const createdVote = await tx.questionsQuestionVote.create({
@@ -172,7 +171,7 @@ export const questionsQuestionUserRouter = createProtectedRouter()
             },
           });
 
-          return createdVote
+          return createdVote;
         }
 
         if (vote!.userId !== userId) {
@@ -187,17 +186,14 @@ export const questionsQuestionUserRouter = createProtectedRouter()
         }
 
         if (vote.vote === Vote.DOWNVOTE) {
-          tx.questionsQuestionVote.delete({
-            where: {
-              id: vote.id,
-            },
-          });
-
-          const createdVote = await tx.questionsQuestionVote.create({
+          const updatedVote = await tx.questionsQuestionVote.update({
             data: {
               questionId,
               userId,
               vote: Vote.UPVOTE,
+            },
+            where: {
+              id: vote.id,
             },
           });
 
@@ -212,7 +208,7 @@ export const questionsQuestionUserRouter = createProtectedRouter()
             },
           });
 
-          return createdVote
+          return updatedVote;
         }
       });
     },
@@ -226,12 +222,11 @@ export const questionsQuestionUserRouter = createProtectedRouter()
       const { questionId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
-        const questionToUpdate =
-          await tx.questionsQuestion.findUnique({
-            where: {
-              id: questionId,
-            },
-          });
+        const questionToUpdate = await tx.questionsQuestion.findUnique({
+          where: {
+            id: questionId,
+          },
+        });
 
         if (questionToUpdate === null) {
           throw new TRPCError({
@@ -244,7 +239,7 @@ export const questionsQuestionUserRouter = createProtectedRouter()
           where: {
             questionId_userId: { questionId, userId },
           },
-        })
+        });
 
         if (vote === null) {
           const createdVote = await tx.questionsQuestionVote.create({
@@ -266,7 +261,7 @@ export const questionsQuestionUserRouter = createProtectedRouter()
             },
           });
 
-          return createdVote
+          return createdVote;
         }
 
         if (vote!.userId !== userId) {
@@ -276,22 +271,19 @@ export const questionsQuestionUserRouter = createProtectedRouter()
           });
         }
 
-        if (vote!.vote === Vote.DOWNVOTE) {
+        if (vote.vote === Vote.DOWNVOTE) {
           return vote;
         }
 
         if (vote.vote === Vote.UPVOTE) {
-          tx.questionsQuestionVote.delete({
-            where: {
-              id: vote.id,
-            },
-          });
-
-          const createdVote = await tx.questionsQuestionVote.create({
+          const updatedVote = await tx.questionsQuestionVote.update({
             data: {
               questionId,
               userId,
               vote: Vote.DOWNVOTE,
+            },
+            where: {
+              id: vote.id,
             },
           });
 
@@ -306,7 +298,7 @@ export const questionsQuestionUserRouter = createProtectedRouter()
             },
           });
 
-          return createdVote
+          return updatedVote;
         }
       });
     },
@@ -320,12 +312,11 @@ export const questionsQuestionUserRouter = createProtectedRouter()
       const { questionId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
-        const questionToUpdate =
-          await tx.questionsQuestion.findUnique({
-            where: {
-              id: questionId,
-            },
-          });
+        const questionToUpdate = await tx.questionsQuestion.findUnique({
+          where: {
+            id: questionId,
+          },
+        });
 
         if (questionToUpdate === null) {
           throw new TRPCError({
@@ -338,7 +329,7 @@ export const questionsQuestionUserRouter = createProtectedRouter()
           where: {
             questionId_userId: { questionId, userId },
           },
-        })
+        });
 
         if (voteToDelete === null) {
           return null;
@@ -353,7 +344,7 @@ export const questionsQuestionUserRouter = createProtectedRouter()
 
         const incrementValue = voteToDelete!.vote === Vote.UPVOTE ? -1 : 1;
 
-        tx.questionsQuestionVote.delete({
+        await tx.questionsQuestionVote.delete({
           where: {
             id: voteToDelete.id,
           },
