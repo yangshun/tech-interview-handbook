@@ -10,6 +10,7 @@ import { Button, Dialog, Spinner, Tabs } from '@tih/ui';
 
 import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
 import type { BackgroundDisplayData } from '~/components/offers/types';
+import { JobTypeLabel } from '~/components/offers/types';
 
 import { getProfileEditPath } from '~/utils/offers/link';
 
@@ -95,8 +96,8 @@ export default function ProfileHeader({
             title="Are you sure you want to delete this offer profile?"
             onClose={() => setIsDialogOpen(false)}>
             <div>
-              All comments will be gone. You will not be able to access or
-              recover it.
+              All information and comments in this offer profile will be
+              deleted. You will not be able to access or recover them.
             </div>
           </Dialog>
         )}
@@ -144,7 +145,11 @@ export default function ProfileHeader({
               <span>
                 {`${experiences[0].companyName || ''} ${
                   experiences[0].jobLevel || ''
-                } ${experiences[0].jobTitle || ''}`}
+                } ${experiences[0].jobTitle || ''} ${
+                  experiences[0].jobType
+                    ? `(${JobTypeLabel[experiences[0].jobType]})`
+                    : ''
+                }`}
               </span>
             </div>
           )}

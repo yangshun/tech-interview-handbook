@@ -12,6 +12,7 @@ import { convertMoneyToString } from '~/utils/offers/currency';
 import { formatDate } from '~/utils/offers/time';
 
 import ProfilePhotoHolder from '../profile/ProfilePhotoHolder';
+import { JobTypeLabel } from '../types';
 
 import type { AnalysisOffer } from '~/types/offers';
 
@@ -34,7 +35,12 @@ export default function OfferProfileCard({
   },
 }: OfferProfileCardProps) {
   return (
-    <div className="my-5 block rounded-lg bg-white p-4 px-8  shadow-md">
+    // <a
+    //   className="my-5 block rounded-lg bg-white p-4 px-8  shadow-md"
+    //   href={`/offers/profile/${id}`}
+    //   rel="noreferrer"
+    //   target="_blank">
+    <div className="my-5 block rounded-lg bg-white p-4 px-8  shadow-lg">
       <div className="flex items-center gap-x-5">
         <div>
           <ProfilePhotoHolder size="sm" />
@@ -58,7 +64,8 @@ export default function OfferProfileCard({
       <div className="flex items-end justify-between">
         <div className="col-span-1 row-span-3">
           <p className="font-bold">
-            {getLabelForJobTitleType(title as JobTitleType)}
+            {getLabelForJobTitleType(title as JobTitleType)}{' '}
+            {`(${JobTypeLabel[jobType]})`}
           </p>
           <p>
             Company: {company.name}, {location}
