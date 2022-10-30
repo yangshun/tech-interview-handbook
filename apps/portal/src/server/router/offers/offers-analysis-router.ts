@@ -24,19 +24,7 @@ type Offer = OffersOffer & {
 };
 
 const searchOfferPercentile = (
-  offer: OffersOffer & {
-    company: Company;
-    offersFullTime:
-      | (OffersFullTime & {
-          baseSalary: OffersCurrency | null;
-          bonus: OffersCurrency | null;
-          stocks: OffersCurrency | null;
-          totalCompensation: OffersCurrency;
-        })
-      | null;
-    offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-    profile: OffersProfile & { background: OffersBackground | null };
-  },
+  offer: Offer,
   similarOffers: Array<
     OffersOffer & {
       company: Company;
@@ -343,7 +331,7 @@ export const offersAnalysisRouter = createRouter()
           );
 
           const companyIndex = searchOfferPercentile(
-            overallHighestOffer,
+            companyOffer,
             similarCompanyOffers,
           );
           const companyPercentile =
