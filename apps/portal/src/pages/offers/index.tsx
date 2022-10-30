@@ -37,15 +37,21 @@ export default function OffersHomePage() {
             <JobTitlesTypeahead
               isLabelHidden={true}
               placeholder="Software Engineer"
-              // @ts-ignore TODO(offers): handle potentially null value.
-              onSelect={({ value }) => setjobTitleFilter(value)}
+              onSelect={(option) => {
+                if (option) {
+                  setjobTitleFilter(option.value);
+                }
+              }}
             />
             <span>in</span>
             <CompaniesTypeahead
               isLabelHidden={true}
               placeholder="All Companies"
-              // @ts-ignore TODO(offers): handle potentially null value.
-              onSelect={({ value }) => setCompanyFilter(value)}
+              onSelect={(option) => {
+                if (option) {
+                  setCompanyFilter(option.value);
+                }
+              }}
             />
           </div>
         </div>
