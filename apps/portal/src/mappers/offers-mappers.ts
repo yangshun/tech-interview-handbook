@@ -536,7 +536,7 @@ export const profileDtoMapper = (
         offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
       }
     >;
-    user: User | null;
+    users: Array<User>;
   },
   inputToken: string | undefined,
   inputUserId: string | null | undefined,
@@ -556,18 +556,12 @@ export const profileDtoMapper = (
     profileDto.editToken = profile.editToken ?? null;
     profileDto.isEditable = true;
 
-    const users = profile.user;
+    const { users } = profile;
 
-    // TODO: BRYANN UNCOMMENT THIS ONCE U CHANGE THE SCHEMA
-    // for (let i = 0; i < users.length; i++) {
-    //   if (users[i].id === inputUserId) {
-    //     profileDto.isSaved = true
-    //   }
-    // }
-
-    // TODO: REMOVE THIS ONCE U CHANGE THE SCHEMA
-    if (users?.id === inputUserId) {
-      profileDto.isSaved = true;
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].id === inputUserId) {
+        profileDto.isSaved = true;
+      }
     }
   }
 

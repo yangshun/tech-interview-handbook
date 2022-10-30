@@ -237,7 +237,7 @@ export const offersProfileRouter = createRouter()
               },
             },
           },
-          user: true,
+          users: true,
         },
         where: {
           id: input.profileId,

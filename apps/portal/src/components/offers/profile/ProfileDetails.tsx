@@ -115,8 +115,9 @@ function ProfileAnalysis({
 
   return (
     <div className="mx-8 my-4">
-      {!analysis && <p>No analysis available.</p>}
-      {analysis && (
+      {!analysis ? (
+        <p>No analysis available.</p>
+      ) : (
         <OfferAnalysis
           allAnalysis={analysis}
           isError={false}

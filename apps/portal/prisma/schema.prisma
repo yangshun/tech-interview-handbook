@@ -196,8 +196,7 @@ model OffersProfile {
 
   offers OffersOffer[]
 
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  users User[]
 
   analysis OffersAnalysis?
 }
