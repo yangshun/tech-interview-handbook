@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
 
-import { createAggregatedQuestionEncounter } from '~/utils/questions/server/aggregate-encounters';
 
 import { createProtectedRouter } from '../context';
 

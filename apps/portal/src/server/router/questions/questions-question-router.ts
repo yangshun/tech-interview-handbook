@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { QuestionsQuestionType } from '@prisma/client';
+import { JobTitleLabels } from '~/components/shared/JobTitles';
 import { TRPCError } from '@trpc/server';
 
 import { createQuestionWithAggregateData } from '~/utils/questions/server/aggregate-encounters';
@@ -11,13 +12,16 @@ import { SortOrder, SortType } from '~/types/questions.d';
 export const questionsQuestionRouter = createRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
-      companyNames: z.string().array(),
+      companyIds: z.string().array(),
       cursor: z.string().nullish(),
       endDate: z.date().default(new Date()),
       limit: z.number().min(1).default(50),
+      countryIds: z.string().array(),
+      cityIds: z.string().array(),
+      stateIds: z.string().array(),
       locations: z.string().array(),
       questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
-      roles: z.string().array(),
+      roles: z.nativeEnum(JobTitleLabels).array(),
       sortOrder: z.nativeEnum(SortOrder),
       sortType: z.nativeEnum(SortType),
       startDate: z.date().optional(),
@@ -56,7 +60,9 @@ export const questionsQuestionRouter = createRouter()
           encounters: {
             select: {
               company: true,
-              location: true,
+              country: true,
+              city: true,
+              state: true,
               role: true,
               seenAt: true,
             },
@@ -84,11 +90,11 @@ export const questionsQuestionRouter = createRouter()
                 gte: input.startDate,
                 lte: input.endDate,
               },
-              ...(input.companyNames.length > 0
+              ...(input.companyIds.length > 0
                 ? {
                     company: {
-                      name: {
-                        in: input.companyNames,
+                      id: {
+                        in: input.companyIds,
                       },
                     },
                   }
@@ -149,7 +155,9 @@ export const questionsQuestionRouter = createRouter()
           encounters: {
             select: {
               company: true,
-              location: true,
+              country: true,
+              city: true,
+              state: true,
               role: true,
               seenAt: true,
             },
