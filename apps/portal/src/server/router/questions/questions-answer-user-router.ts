@@ -39,7 +39,7 @@ export const questionsAnswerUserRouter = createProtectedRouter()
         },
       });
 
-      if (answerToUpdate?.id !== userId) {
+      if (answerToUpdate?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -69,7 +69,7 @@ export const questionsAnswerUserRouter = createProtectedRouter()
         },
       });
 
-      if (answerToDelete?.id !== userId) {
+      if (answerToDelete?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -107,6 +107,20 @@ export const questionsAnswerUserRouter = createProtectedRouter()
       const { answerId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const answerToUpdate =
+          await tx.questionsAnswer.findUnique({
+            where: {
+              id: answerId,
+            },
+          });
+
+        if (answerToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Answer do not exist.',
+          });
+        }
+
         const vote = await tx.questionsAnswerVote.findUnique({
           where: {
             answerId_userId: { answerId, userId },
@@ -187,6 +201,20 @@ export const questionsAnswerUserRouter = createProtectedRouter()
       const { answerId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const answerToUpdate =
+          await tx.questionsAnswer.findUnique({
+            where: {
+              id: answerId,
+            },
+          });
+
+        if (answerToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Answer do not exist.',
+          });
+        }
+
         const vote = await tx.questionsAnswerVote.findUnique({
           where: {
             answerId_userId: { answerId, userId },
@@ -267,6 +295,20 @@ export const questionsAnswerUserRouter = createProtectedRouter()
       const { answerId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const answerToUpdate =
+          await tx.questionsAnswer.findUnique({
+            where: {
+              id: answerId,
+            },
+          });
+
+        if (answerToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Answer do not exist.',
+          });
+        }
+
         const voteToDelete = await tx.questionsAnswerVote.findUnique({
           where: {
             answerId_userId: { answerId, userId },

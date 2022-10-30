@@ -110,6 +110,20 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
       const { questionCommentId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const questionCommentToUpdate =
+          await tx.questionsQuestionComment.findUnique({
+            where: {
+              id: questionCommentId,
+            },
+          });
+
+        if (questionCommentToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Question Comment do not exist.',
+          });
+        }
+
         const vote = await tx.questionsQuestionCommentVote.findUnique({
           where: {
             questionCommentId_userId: { questionCommentId, userId },
@@ -190,6 +204,20 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
       const { questionCommentId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const questionCommentToUpdate =
+          await tx.questionsQuestionComment.findUnique({
+            where: {
+              id: questionCommentId,
+            },
+          });
+
+        if (questionCommentToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Question Comment do not exist.',
+          });
+        }
+
         const vote = await tx.questionsQuestionCommentVote.findUnique({
           where: {
             questionCommentId_userId: { questionCommentId, userId },
@@ -270,6 +298,20 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
       const { questionCommentId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const questionCommentToUpdate =
+          await tx.questionsQuestionComment.findUnique({
+            where: {
+              id: questionCommentId,
+            },
+          });
+
+        if (questionCommentToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Question Comment do not exist.',
+          });
+        }
+
         const voteToDelete = await tx.questionsQuestionCommentVote.findUnique({
           where: {
             questionCommentId_userId: { questionCommentId, userId },

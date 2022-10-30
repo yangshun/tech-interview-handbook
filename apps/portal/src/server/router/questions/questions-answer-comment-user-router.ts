@@ -109,6 +109,20 @@ export const questionsAnswerCommentUserRouter = createProtectedRouter()
       const { answerCommentId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const answerCommentToUpdate =
+          await tx.questionsAnswerComment.findUnique({
+            where: {
+              id: answerCommentId,
+            },
+          });
+
+        if (answerCommentToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Answer Comment do not exist.',
+          });
+        }
+
         const vote = await tx.questionsAnswerCommentVote.findUnique({
           where: {
             answerCommentId_userId: { answerCommentId, userId },
@@ -189,6 +203,20 @@ export const questionsAnswerCommentUserRouter = createProtectedRouter()
       const { answerCommentId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const answerCommentToUpdate =
+          await tx.questionsAnswerComment.findUnique({
+            where: {
+              id: answerCommentId,
+            },
+          });
+
+        if (answerCommentToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Answer Comment do not exist.',
+          });
+        }
+
         const vote = await tx.questionsAnswerCommentVote.findUnique({
           where: {
             answerCommentId_userId: { answerCommentId, userId },
@@ -269,6 +297,20 @@ export const questionsAnswerCommentUserRouter = createProtectedRouter()
       const { answerCommentId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const answerCommentToUpdate =
+          await tx.questionsAnswerComment.findUnique({
+            where: {
+              id: answerCommentId,
+            },
+          });
+
+        if (answerCommentToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Answer Comment do not exist.',
+          });
+        }
+
         const voteToDelete = await tx.questionsAnswerCommentVote.findUnique({
           where: {
             answerCommentId_userId: { answerCommentId, userId },

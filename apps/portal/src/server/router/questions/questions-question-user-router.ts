@@ -132,6 +132,20 @@ export const questionsQuestionUserRouter = createProtectedRouter()
       const { questionId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const questionToUpdate =
+          await tx.questionsQuestion.findUnique({
+            where: {
+              id: questionId,
+            },
+          });
+
+        if (questionToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Question do not exist.',
+          });
+        }
+
         const vote = await tx.questionsQuestionVote.findUnique({
           where: {
             questionId_userId: { questionId, userId },
@@ -212,6 +226,20 @@ export const questionsQuestionUserRouter = createProtectedRouter()
       const { questionId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const questionToUpdate =
+          await tx.questionsQuestion.findUnique({
+            where: {
+              id: questionId,
+            },
+          });
+
+        if (questionToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Question do not exist.',
+          });
+        }
+
         const vote = await tx.questionsQuestionVote.findUnique({
           where: {
             questionId_userId: { questionId, userId },
@@ -292,6 +320,20 @@ export const questionsQuestionUserRouter = createProtectedRouter()
       const { questionId } = input;
 
       return await ctx.prisma.$transaction(async (tx) => {
+        const questionToUpdate =
+          await tx.questionsQuestion.findUnique({
+            where: {
+              id: questionId,
+            },
+          });
+
+        if (questionToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Question do not exist.',
+          });
+        }
+
         const voteToDelete = await tx.questionsQuestionVote.findUnique({
           where: {
             questionId_userId: { questionId, userId },
