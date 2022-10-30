@@ -188,7 +188,7 @@ export type AddToProfileResponse = {
 export type UserProfile = {
   createdAt: Date;
   id: string;
-  offers: Array<UserProfileOffers>;
+  offers: Array<UserProfileOffer>;
   profileName: string;
   token: string;
 }

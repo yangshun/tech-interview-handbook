@@ -7,6 +7,8 @@ import {
 } from '@heroicons/react/20/solid';
 import { Vote } from '@prisma/client';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
+
 import { trpc } from '~/utils/trpc';
 
 type ResumeCommentVoteButtonsProps = {
@@ -20,6 +22,7 @@ export default function ResumeCommentVoteButtons({
 }: ResumeCommentVoteButtonsProps) {
   const [upvoteAnimation, setUpvoteAnimation] = useState(false);
   const [downvoteAnimation, setDownvoteAnimation] = useState(false);
+  const { event: gaEvent } = useGoogleAnalytics();
 
   const trpcContext = trpc.useContext();
   const router = useRouter();
@@ -35,6 +38,11 @@ export default function ResumeCommentVoteButtons({
       onSuccess: () => {
         // Comment updated, invalidate query to trigger refetch
         trpcContext.invalidateQueries(['resumes.comments.votes.list']);
+        gaEvent({
+          action: 'resumes.comment_vote',
+          category: 'engagement',
+          label: 'Upvote/Downvote comment',
+        });
       },
     },
   );
@@ -44,6 +52,11 @@ export default function ResumeCommentVoteButtons({
       onSuccess: () => {
         // Comment updated, invalidate query to trigger refetch
         trpcContext.invalidateQueries(['resumes.comments.votes.list']);
+        gaEvent({
+          action: 'resumes.comment_unvote',
+          category: 'engagement',
+          label: 'Unvote comment',
+        });
       },
     },
   );

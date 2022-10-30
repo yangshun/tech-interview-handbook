@@ -180,7 +180,6 @@ export const resumesResumeUserRouter = createProtectedRouter()
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
           location: { in: locationFilters },
-          role: { in: roleFilters },
           stars: {
             some: {
               userId,
@@ -209,7 +208,6 @@ export const resumesResumeUserRouter = createProtectedRouter()
         },
         by: ['experience'],
         where: {
-          experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
           location: { in: locationFilters },
           role: { in: roleFilters },
@@ -242,7 +240,6 @@ export const resumesResumeUserRouter = createProtectedRouter()
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
           role: { in: roleFilters },
           stars: {
             some: {
@@ -378,7 +375,6 @@ export const resumesResumeUserRouter = createProtectedRouter()
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
           location: { in: locationFilters },
-          role: { in: roleFilters },
           title: { contains: searchValue, mode: 'insensitive' },
           userId,
         },
@@ -403,7 +399,6 @@ export const resumesResumeUserRouter = createProtectedRouter()
         },
         by: ['experience'],
         where: {
-          experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
           location: { in: locationFilters },
           role: { in: roleFilters },
@@ -432,7 +427,6 @@ export const resumesResumeUserRouter = createProtectedRouter()
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
           role: { in: roleFilters },
           title: { contains: searchValue, mode: 'insensitive' },
           userId,

@@ -323,6 +323,7 @@ export default function QuestionsBrowsePage() {
             isLabelHidden={true}
             placeholder="Search companies"
             onSelect={(option) => {
+              // @ts-ignore TODO(questions): handle potentially null value.
               onOptionChange({
                 ...option,
                 checked: true,
@@ -355,6 +356,7 @@ export default function QuestionsBrowsePage() {
             isLabelHidden={true}
             placeholder="Search roles"
             onSelect={(option) => {
+              // @ts-ignore TODO(questions): handle potentially null value.
               onOptionChange({
                 ...option,
                 checked: true,
@@ -412,6 +414,7 @@ export default function QuestionsBrowsePage() {
             isLabelHidden={true}
             placeholder="Search locations"
             onSelect={(option) => {
+              // @ts-ignore TODO(offers): fix potentially empty value.
               onOptionChange({
                 ...option,
                 checked: true,

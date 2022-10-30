@@ -70,6 +70,7 @@ function FullTimeOfferDetailsForm({
         <div>
           <JobTitlesTypeahead
             required={true}
+            // @ts-ignore TODO(offers): handle potentially null value.
             onSelect={({ value }) =>
               setValue(`offers.${index}.offersFullTime.title`, value)
             }
@@ -89,6 +90,7 @@ function FullTimeOfferDetailsForm({
         <div>
           <CompaniesTypeahead
             required={true}
+            // @ts-ignore TODO(offers): handle potentially null value.
             onSelect={({ value }) =>
               setValue(`offers.${index}.companyId`, value)
             }
@@ -277,6 +279,7 @@ function InternshipOfferDetailsForm({
         <div>
           <JobTitlesTypeahead
             required={true}
+            // @ts-ignore TODO(offers): handle potentially null value.
             onSelect={({ value }) =>
               setValue(`offers.${index}.offersIntern.title`, value)
             }
@@ -287,6 +290,7 @@ function InternshipOfferDetailsForm({
         <div>
           <CompaniesTypeahead
             required={true}
+            // @ts-ignore TODO(offers): handle potentially null value.
             onSelect={({ value }) =>
               setValue(`offers.${index}.companyId`, value)
             }

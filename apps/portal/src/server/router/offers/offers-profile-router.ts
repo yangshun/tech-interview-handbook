@@ -102,6 +102,21 @@ const education = z.object({
 });
 
 export const offersProfileRouter = createRouter()
+  .query('isValidToken', {
+    input: z.object({
+      profileId: z.string(),
+      token: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const profile = await ctx.prisma.offersProfile.findFirst({
+        where: {
+          id: input.profileId
+        }
+      })
+
+      return profile?.editToken === input.token
+    }
+  })
   .query('listOne', {
     input: z.object({
       profileId: z.string(),

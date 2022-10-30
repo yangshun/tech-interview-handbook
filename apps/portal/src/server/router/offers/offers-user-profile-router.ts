@@ -47,7 +47,7 @@ export const offersUserProfileRouter = createProtectedRouter()
             });
         },
     })
-    .mutation('getUserProfiles', {
+    .query('getUserProfiles', {
         async resolve({ ctx }) {
             const userId = ctx.session.user.id
             const result = await ctx.prisma.user.findFirst({
