@@ -153,6 +153,7 @@ export type ProfileAnalysis = {
 };
 
 export type AnalysisUnit = {
+  companyName: string;
   noOfOffers: number;
   percentile: number;
   topPercentileOffers: Array<AnalysisOffer>;
