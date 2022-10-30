@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { DropdownMenu, Spinner } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTablePagination from '~/components/offers/table/OffersTablePagination';
 import {
   OfferTableFilterOptions,
@@ -39,6 +40,7 @@ export default function OffersTable({
   const [selectedFilter, setSelectedFilter] = useState(
     OfferTableFilterOptions[0].value,
   );
+  const { event: gaEvent } = useGoogleAnalytics();
   useEffect(() => {
     setPagination({
       currentPage: 0,
@@ -90,13 +92,18 @@ export default function OffersTable({
               label={itemLabel}
               onClick={() => {
                 setSelectedTab(value);
+                gaEvent({
+                  action: `offers.table_filter_yoe_category_${value}`,
+                  category: 'engagement',
+                  label: 'Filter by YOE category',
+                });
               }}
             />
           ))}
         </DropdownMenu>
         <div className="divide-x-slate-200 flex items-center space-x-4 divide-x">
           <div className="justify-left flex items-center space-x-2">
-            <span>All offers in</span>
+            <span>View all offers in</span>
             <CurrencySelector
               handleCurrencyChange={(value: string) => setCurrency(value)}
               selectedCurrency={currency}
