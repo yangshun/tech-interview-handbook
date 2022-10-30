@@ -108,6 +108,7 @@ export default function AppShell({ children }: Props) {
 
   const currentProductNavigation: Readonly<{
     googleAnalyticsMeasurementID: string;
+    logo?: React.ReactNode;
     navigation: ProductNavigationItems;
     showGlobalNav: boolean;
     title: string;
@@ -173,6 +174,7 @@ export default function AppShell({ children }: Props) {
         <MobileNavigation
           globalNavigationItems={GlobalNavigation}
           isShown={mobileMenuOpen}
+          logo={currentProductNavigation.logo}
           productNavigationItems={currentProductNavigation.navigation}
           productTitle={currentProductNavigation.title}
           setIsShown={setMobileMenuOpen}
@@ -192,6 +194,7 @@ export default function AppShell({ children }: Props) {
                 <div className="flex flex-1 items-center">
                   <ProductNavigation
                     items={currentProductNavigation.navigation}
+                    logo={currentProductNavigation.logo}
                     title={currentProductNavigation.title}
                     titleHref={currentProductNavigation.titleHref}
                   />

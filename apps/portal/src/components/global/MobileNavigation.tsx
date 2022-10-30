@@ -11,6 +11,7 @@ import type { ProductNavigationItems } from './ProductNavigation';
 type Props = Readonly<{
   globalNavigationItems: GlobalNavigationItems;
   isShown?: boolean;
+  logo?: React.ReactNode;
   productNavigationItems: ProductNavigationItems;
   productTitle: string;
   setIsShown: (isShown: boolean) => void;
@@ -19,6 +20,7 @@ type Props = Readonly<{
 export default function MobileNavigation({
   globalNavigationItems,
   isShown,
+  logo,
   productNavigationItems,
   productTitle,
   setIsShown,
@@ -69,11 +71,13 @@ export default function MobileNavigation({
               </Transition.Child>
               <div className="flex flex-shrink-0 items-center px-4">
                 <Link href="/">
-                  <img
-                    alt="Tech Interview Handbook"
-                    className="h-8 w-auto"
-                    src="/logo.svg"
-                  />
+                  {logo ?? (
+                    <img
+                      alt="Tech Interview Handbook"
+                      className="h-8 w-auto"
+                      src="/logo.svg"
+                    />
+                  )}
                 </Link>
               </div>
               <div className="mt-5 h-0 flex-1 overflow-y-auto px-2">

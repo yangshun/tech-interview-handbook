@@ -1,5 +1,5 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Script from 'next/script';
 import { createContext, useContext, useEffect } from 'react';
 
 type Context = Readonly<{
@@ -78,25 +78,26 @@ export default function GoogleAnalytics({ children, measurementID }: Props) {
   return (
     <GoogleAnalyticsContext.Provider value={{ event }}>
       {children}
-      {/* Global Site Tag (gtag.js) - Google Analytics */}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${measurementID}`}
-        strategy="afterInteractive"
-      />
-      <Script
-        dangerouslySetInnerHTML={{
-          __html: `
+      <Head>
+        {/* TODO(yangshun): Change back to next/script in future. */}
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <script
+          async={true}
+          src={`https://www.googletagmanager.com/gtag/js?id=${measurementID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            window.gtag = function(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${measurementID}', {
               page_path: window.location.pathname,
             });
           `,
-        }}
-        id="gtag-init"
-        strategy="afterInteractive"
-      />
+          }}
+        />
+      </Head>
     </GoogleAnalyticsContext.Provider>
   );
 }

@@ -128,7 +128,7 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
           where: {
             questionCommentId_userId: { questionCommentId, userId },
           },
-        })
+        });
 
         if (vote === null) {
           const createdVote = await tx.questionsQuestionCommentVote.create({
@@ -150,7 +150,7 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
             },
           });
 
-          return createdVote
+          return createdVote;
         }
 
         if (vote!.userId !== userId) {
@@ -165,17 +165,14 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
         }
 
         if (vote.vote === Vote.DOWNVOTE) {
-          tx.questionsQuestionCommentVote.delete({
-            where: {
-              id: vote.id,
-            },
-          });
-
-          const createdVote = await tx.questionsQuestionCommentVote.create({
+          const updatedVote = await tx.questionsQuestionCommentVote.update({
             data: {
               questionCommentId,
               userId,
               vote: Vote.UPVOTE,
+            },
+            where: {
+              id: vote.id,
             },
           });
 
@@ -190,7 +187,7 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
             },
           });
 
-          return createdVote
+          return updatedVote;
         }
       });
     },
@@ -222,7 +219,7 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
           where: {
             questionCommentId_userId: { questionCommentId, userId },
           },
-        })
+        });
 
         if (vote === null) {
           const createdVote = await tx.questionsQuestionCommentVote.create({
@@ -244,7 +241,7 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
             },
           });
 
-          return createdVote
+          return createdVote;
         }
 
         if (vote!.userId !== userId) {
@@ -284,7 +281,7 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
             },
           });
 
-          return createdVote
+          return createdVote;
         }
       });
     },
@@ -316,7 +313,7 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
           where: {
             questionCommentId_userId: { questionCommentId, userId },
           },
-        })
+        });
 
         if (voteToDelete === null) {
           return null;
@@ -331,7 +328,7 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
 
         const incrementValue = voteToDelete!.vote === Vote.UPVOTE ? -1 : 1;
 
-        tx.questionsQuestionCommentVote.delete({
+        await tx.questionsQuestionCommentVote.delete({
           where: {
             id: voteToDelete.id,
           },

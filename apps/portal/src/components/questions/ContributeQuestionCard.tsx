@@ -30,7 +30,7 @@ export default function ContributeQuestionCard({
   return (
     <div className="w-full">
       <button
-        className="w-full flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4 text-left hover:bg-slate-100"
+        className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4 text-left hover:bg-slate-100"
         type="button"
         onClick={handleOpenContribute}>
         <TextInput
@@ -72,12 +72,12 @@ export default function ContributeQuestionCard({
             Contribute
           </h1>
         </div>
+        <ContributeQuestionDialog
+          show={showDraftDialog}
+          onCancel={handleDraftDialogCancel}
+          onSubmit={onSubmit}
+        />
       </button>
-      <ContributeQuestionDialog
-        show={showDraftDialog}
-        onCancel={handleDraftDialogCancel}
-        onSubmit={onSubmit}
-      />
     </div>
   );
 }

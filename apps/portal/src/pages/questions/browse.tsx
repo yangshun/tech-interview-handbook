@@ -14,11 +14,13 @@ import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 import CompanyTypeahead from '~/components/questions/typeahead/CompanyTypeahead';
 import LocationTypeahead from '~/components/questions/typeahead/LocationTypeahead';
 import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
+import { JobTitleLabels } from '~/components/shared/JobTitles';
 
 import type { QuestionAge } from '~/utils/questions/constants';
 import { APP_TITLE } from '~/utils/questions/constants';
 import { QUESTION_AGES, QUESTION_TYPES } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
+import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
 import {
   useSearchParam,
   useSearchParamSingle,
@@ -174,7 +176,7 @@ export default function QuestionsBrowsePage() {
       return undefined;
     }
     return questionsQueryData.pages.reduce(
-      (acc, page) => acc + page.data.length,
+      (acc, page) => acc + (page.data.length as number),
       0,
     );
   }, [questionsQueryData]);
@@ -273,7 +275,7 @@ export default function QuestionsBrowsePage() {
     return selectedRoles.map((role) => ({
       checked: true,
       id: role,
-      label: role,
+      label: JobTitleLabels[role as keyof typeof JobTitleLabels],
       value: role,
     }));
   }, [selectedRoles]);
@@ -323,6 +325,7 @@ export default function QuestionsBrowsePage() {
             isLabelHidden={true}
             placeholder="Search companies"
             onSelect={(option) => {
+              // @ts-ignore TODO(questions): handle potentially null value.
               onOptionChange({
                 ...option,
                 checked: true,
@@ -355,6 +358,7 @@ export default function QuestionsBrowsePage() {
             isLabelHidden={true}
             placeholder="Search roles"
             onSelect={(option) => {
+              // @ts-ignore TODO(questions): handle potentially null value.
               onOptionChange({
                 ...option,
                 checked: true,
@@ -367,7 +371,7 @@ export default function QuestionsBrowsePage() {
             setSelectedRoles([...selectedRoles, option.value]);
           } else {
             setSelectedRoles(
-              selectedCompanies.filter((role) => role !== option.value),
+              selectedRoles.filter((role) => role !== option.value),
             );
           }
         }}
@@ -412,6 +416,7 @@ export default function QuestionsBrowsePage() {
             isLabelHidden={true}
             placeholder="Search locations"
             onSelect={(option) => {
+              // @ts-ignore TODO(offers): fix potentially empty value.
               onOptionChange({
                 ...option,
                 checked: true,
@@ -440,20 +445,20 @@ export default function QuestionsBrowsePage() {
       <main className="flex flex-1 flex-col items-stretch">
         <div className="flex h-full flex-1">
           <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
-            <div className="flex min-h-0 max-w-3xl flex-1 p-4">
-              <div className="flex flex-1 flex-col items-stretch justify-start gap-8">
-                <ContributeQuestionCard
-                  onSubmit={(data) => {
-                    createQuestion({
-                      companyId: data.company,
-                      content: data.questionContent,
-                      location: data.location,
-                      questionType: data.questionType,
-                      role: data.role,
-                      seenAt: data.date,
-                    });
-                  }}
-                />
+            <div className="m-4 flex max-w-3xl flex-1 flex-col items-stretch justify-start gap-8">
+              <ContributeQuestionCard
+                onSubmit={(data) => {
+                  createQuestion({
+                    companyId: data.company,
+                    content: data.questionContent,
+                    location: data.location,
+                    questionType: data.questionType,
+                    role: data.role,
+                    seenAt: data.date,
+                  });
+                }}
+              />
+              <div className="sticky top-0 border-b border-slate-300 bg-slate-50 py-4">
                 <QuestionSearchBar
                   sortOrderValue={sortOrder}
                   sortTypeValue={sortType}
@@ -463,28 +468,29 @@ export default function QuestionsBrowsePage() {
                   onSortOrderChange={setSortOrder}
                   onSortTypeChange={setSortType}
                 />
-                <div className="flex flex-col gap-2 pb-4">
-                  {(questionsQueryData?.pages ?? []).flatMap(
-                    ({ data: questions }) =>
-                      questions.map((question) => (
+              </div>
+              <div className="flex flex-col gap-2 pb-4">
+                {(questionsQueryData?.pages ?? []).flatMap(
+                  ({ data: questions }) =>
+                    questions.map((question) => {
+                      const { companyCounts, locationCounts, roleCounts } =
+                        relabelQuestionAggregates(
+                          question.aggregatedQuestionEncounters,
+                        );
+
+                      return (
                         <QuestionOverviewCard
                           key={question.id}
                           answerCount={question.numAnswers}
-                          companies={
-                            question.aggregatedQuestionEncounters.companyCounts
-                          }
+                          companies={companyCounts}
                           content={question.content}
                           href={`/questions/${question.id}/${createSlug(
                             question.content,
                           )}`}
-                          locations={
-                            question.aggregatedQuestionEncounters.locationCounts
-                          }
+                          locations={locationCounts}
                           questionId={question.id}
                           receivedCount={question.receivedCount}
-                          roles={
-                            question.aggregatedQuestionEncounters.roleCounts
-                          }
+                          roles={roleCounts}
                           timestamp={question.seenAt.toLocaleDateString(
                             undefined,
                             {
@@ -495,25 +501,25 @@ export default function QuestionsBrowsePage() {
                           type={question.type}
                           upvoteCount={question.numVotes}
                         />
-                      )),
-                  )}
-                  <Button
-                    disabled={!hasNextPage || isFetchingNextPage}
-                    isLoading={isFetchingNextPage}
-                    label={hasNextPage ? 'Load more' : 'Nothing more to load'}
-                    variant="tertiary"
-                    onClick={() => {
-                      fetchNextPage();
-                    }}
-                  />
-                  {questionCount === 0 && (
-                    <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
-                      <NoSymbolIcon className="h-6 w-6" />
-                      <p>Nothing found.</p>
-                      {hasFilters && <p>Try changing your search criteria.</p>}
-                    </div>
-                  )}
-                </div>
+                      );
+                    }),
+                )}
+                <Button
+                  disabled={!hasNextPage || isFetchingNextPage}
+                  isLoading={isFetchingNextPage}
+                  label={hasNextPage ? 'Load more' : 'Nothing more to load'}
+                  variant="tertiary"
+                  onClick={() => {
+                    fetchNextPage();
+                  }}
+                />
+                {questionCount === 0 && (
+                  <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
+                    <NoSymbolIcon className="h-6 w-6" />
+                    <p>Nothing found.</p>
+                    {hasFilters && <p>Try changing your search criteria.</p>}
+                  </div>
+                )}
               </div>
             </div>
           </section>

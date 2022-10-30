@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button, Collapsible, HorizontalDivider, TextArea } from '@tih/ui';
@@ -13,6 +13,7 @@ import SortOptionsSelect from '~/components/questions/SortOptionsSelect';
 
 import { APP_TITLE } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
+import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
 import { trpc } from '~/utils/trpc';
 
@@ -68,6 +69,14 @@ export default function QuestionPage() {
     'questions.questions.encounters.getAggregatedEncounters',
     { questionId: questionId as string },
   ]);
+
+  const relabeledAggregatedEncounters = useMemo(() => {
+    if (!aggregatedEncounters) {
+      return aggregatedEncounters;
+    }
+
+    return relabelQuestionAggregates(aggregatedEncounters);
+  }, [aggregatedEncounters]);
 
   const utils = trpc.useContext();
 
@@ -175,11 +184,11 @@ export default function QuestionPage() {
           <div className="flex max-w-7xl flex-1 flex-col gap-2">
             <FullQuestionCard
               {...question}
-              companies={aggregatedEncounters?.companyCounts ?? {}}
-              locations={aggregatedEncounters?.locationCounts ?? {}}
+              companies={relabeledAggregatedEncounters?.companyCounts ?? {}}
+              locations={relabeledAggregatedEncounters?.locationCounts ?? {}}
               questionId={question.id}
               receivedCount={undefined}
-              roles={aggregatedEncounters?.roleCounts ?? {}}
+              roles={relabeledAggregatedEncounters?.roleCounts ?? {}}
               timestamp={question.seenAt.toLocaleDateString(undefined, {
                 month: 'short',
                 year: 'numeric',

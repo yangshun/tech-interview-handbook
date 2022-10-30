@@ -8,14 +8,16 @@ type Props = Readonly<{
   disabled?: boolean;
   errorMessage?: string;
   isLabelHidden?: boolean;
+  label?: string;
   onSelect: (option: TypeaheadOption | null) => void;
   placeholder?: string;
   required?: boolean;
   value?: TypeaheadOption | null;
 }>;
 
-export default function CompaniesTypeahead({
+export default function CitiesTypeahead({
   disabled,
+  label = 'City',
   onSelect,
   isLabelHidden,
   placeholder,
@@ -23,26 +25,26 @@ export default function CompaniesTypeahead({
   value,
 }: Props) {
   const [query, setQuery] = useState('');
-  const companies = trpc.useQuery([
-    'companies.list',
+  const cities = trpc.useQuery([
+    'locations.cities.list',
     {
       name: query,
     },
   ]);
 
-  const { data } = companies;
+  const { data } = cities;
 
   return (
     <Typeahead
       disabled={disabled}
       isLabelHidden={isLabelHidden}
-      label="Company"
-      noResultsMessage="No companies found"
+      label={label}
+      noResultsMessage="No cities found"
       nullable={true}
       options={
-        data?.map(({ id, name }) => ({
+        data?.map(({ id, name, state }) => ({
           id,
-          label: name,
+          label: `${name}, ${state?.name}, ${state?.country?.name}`,
           value: id,
         })) ?? []
       }

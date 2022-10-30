@@ -97,6 +97,7 @@ function FullTimeJobFields() {
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <div>
           <JobTitlesTypeahead
+            // @ts-ignore TODO(offers): handle potentially null value.
             onSelect={({ value }) =>
               setValue(`background.experiences.0.title`, value)
             }
@@ -104,6 +105,7 @@ function FullTimeJobFields() {
         </div>
         <div>
           <CompaniesTypeahead
+            // @ts-ignore TODO(offers): handle potentially null value.
             onSelect={({ value }) =>
               setValue(`background.experiences.0.companyId`, value)
             }
@@ -178,6 +180,7 @@ function InternshipJobFields() {
       <div className="mb-5 grid grid-cols-2 space-x-3">
         <div>
           <JobTitlesTypeahead
+            // @ts-ignore TODO(offers): handle potentially null value.
             onSelect={({ value }) =>
               setValue(`background.experiences.0.title`, value)
             }
@@ -185,6 +188,7 @@ function InternshipJobFields() {
         </div>
         <div>
           <CompaniesTypeahead
+            // @ts-ignore TODO(offers): handle potentially null value.
             onSelect={({ value }) =>
               setValue(`background.experiences.0.companyId`, value)
             }
