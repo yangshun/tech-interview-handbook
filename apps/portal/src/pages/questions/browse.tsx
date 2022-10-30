@@ -16,8 +16,6 @@ import LocationTypeahead from '~/components/questions/typeahead/LocationTypeahea
 import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
 
 import type { QuestionAge } from '~/utils/questions/constants';
-import { SORT_TYPES } from '~/utils/questions/constants';
-import { SORT_ORDERS } from '~/utils/questions/constants';
 import { APP_TITLE } from '~/utils/questions/constants';
 import { QUESTION_AGES, QUESTION_TYPES } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
@@ -457,9 +455,7 @@ export default function QuestionsBrowsePage() {
                   }}
                 />
                 <QuestionSearchBar
-                  sortOrderOptions={SORT_ORDERS}
                   sortOrderValue={sortOrder}
-                  sortTypeOptions={SORT_TYPES}
                   sortTypeValue={sortType}
                   onFilterOptionsToggle={() => {
                     setFilterDrawerOpen(!filterDrawerOpen);

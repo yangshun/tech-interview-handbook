@@ -28,9 +28,9 @@ export default function ContributeQuestionCard({
   };
 
   return (
-    <div>
+    <div className="w-full">
       <button
-        className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4 text-left hover:bg-slate-100"
+        className="w-full flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4 text-left hover:bg-slate-100"
         type="button"
         onClick={handleOpenContribute}>
         <TextInput
