@@ -9,10 +9,13 @@ import { Bars3BottomLeftIcon } from '@heroicons/react/24/outline';
 
 import GlobalNavigation from '~/components/global/GlobalNavigation';
 import HomeNavigation from '~/components/global/HomeNavigation';
-import OffersNavigation from '~/components/offers/OffersNavigation';
+import OffersNavigation, {
+  OffersNavigationAuthenticated,
+} from '~/components/offers/OffersNavigation';
 import QuestionsNavigation from '~/components/questions/QuestionsNavigation';
 import ResumesNavigation from '~/components/resumes/ResumesNavigation';
 
+import GoogleAnalytics from './GoogleAnalytics';
 import MobileNavigation from './MobileNavigation';
 import type { ProductNavigationItems } from './ProductNavigation';
 import ProductNavigation from './ProductNavigation';
@@ -32,7 +35,7 @@ function ProfileJewel() {
   if (session == null) {
     return (
       <Link
-        className="text-sm font-medium"
+        className="text-base"
         href="/api/auth/signin"
         onClick={(event) => {
           event.preventDefault();
@@ -104,8 +107,11 @@ function ProfileJewel() {
 export default function AppShell({ children }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
+  const { data: session } = useSession();
 
   const currentProductNavigation: Readonly<{
+    googleAnalyticsMeasurementID: string;
+    logo?: React.ReactNode;
     navigation: ProductNavigationItems;
     showGlobalNav: boolean;
     title: string;
@@ -117,7 +123,10 @@ export default function AppShell({ children }: Props) {
     }
 
     if (path.startsWith('/offers')) {
-      return OffersNavigation;
+      if (session == null) {
+        return OffersNavigation;
+      }
+      return OffersNavigationAuthenticated;
     }
 
     if (path.startsWith('/questions')) {
@@ -128,84 +137,87 @@ export default function AppShell({ children }: Props) {
   })();
 
   return (
-    <div className="flex h-full min-h-screen">
-      {/* Narrow sidebar */}
-      {currentProductNavigation.showGlobalNav && (
-        <div className="hidden w-28 overflow-y-auto border-r border-slate-200 bg-white md:block">
-          <div className="flex w-full flex-col items-center py-6">
-            <div className="flex flex-shrink-0 items-center">
-              <Link href="/">
-                <img
-                  alt="Tech Interview Handbook"
-                  className="h-8 w-auto"
-                  src="/logo.svg"
-                />
-              </Link>
-            </div>
-            <div className="mt-6 w-full flex-1 space-y-1 px-2">
-              {GlobalNavigation.map((item) => (
-                <Link
-                  key={item.name}
-                  className={clsx(
-                    'text-slate-700 hover:bg-slate-100',
-                    'group flex w-full flex-col items-center rounded-md p-3 text-xs font-medium',
-                  )}
-                  href={item.href}>
-                  <item.icon
-                    aria-hidden="true"
-                    className={clsx(
-                      'text-slate-500 group-hover:text-slate-700',
-                      'h-6 w-6',
-                    )}
+    <GoogleAnalytics
+      measurementID={currentProductNavigation.googleAnalyticsMeasurementID}>
+      <div className="flex h-full min-h-screen">
+        {/* Narrow sidebar */}
+        {currentProductNavigation.showGlobalNav && (
+          <div className="hidden w-28 overflow-y-auto border-r border-slate-200 bg-white md:block">
+            <div className="flex w-full flex-col items-center py-6">
+              <div className="flex flex-shrink-0 items-center">
+                <Link href="/">
+                  <img
+                    alt="Tech Interview Handbook"
+                    className="h-8 w-auto"
+                    src="/logo.svg"
                   />
-                  <span className="mt-2">{item.name}</span>
                 </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Mobile menu */}
-      <MobileNavigation
-        globalNavigationItems={GlobalNavigation}
-        isShown={mobileMenuOpen}
-        productNavigationItems={currentProductNavigation.navigation}
-        productTitle={currentProductNavigation.title}
-        setIsShown={setMobileMenuOpen}
-      />
-
-      {/* Content area */}
-      <div className="flex h-screen flex-1 flex-col overflow-hidden">
-        <header className="w-full">
-          <div className="relative z-10 flex h-16 flex-shrink-0 border-b border-slate-200 bg-white shadow-sm">
-            <button
-              className="focus:ring-primary-500 border-r border-slate-200 px-4 text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset md:hidden"
-              type="button"
-              onClick={() => setMobileMenuOpen(true)}>
-              <span className="sr-only">Open sidebar</span>
-              <Bars3BottomLeftIcon aria-hidden="true" className="h-6 w-6" />
-            </button>
-            <div className="flex flex-1 justify-between px-4 sm:px-6">
-              <div className="flex flex-1 items-center">
-                <ProductNavigation
-                  items={currentProductNavigation.navigation}
-                  title={currentProductNavigation.title}
-                  titleHref={currentProductNavigation.titleHref}
-                />
               </div>
-              <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
-                <ProfileJewel />
+              <div className="mt-6 w-full flex-1 space-y-1 px-2">
+                {GlobalNavigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    className={clsx(
+                      'text-slate-700 hover:bg-slate-100',
+                      'group flex w-full flex-col items-center rounded-md p-3 text-xs font-medium',
+                    )}
+                    href={item.href}>
+                    <item.icon
+                      aria-hidden="true"
+                      className={clsx(
+                        'text-slate-500 group-hover:text-slate-700',
+                        'h-6 w-6',
+                      )}
+                    />
+                    <span className="mt-2">{item.name}</span>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
-        </header>
+        )}
+        {/* Mobile menu */}
+        <MobileNavigation
+          globalNavigationItems={GlobalNavigation}
+          isShown={mobileMenuOpen}
+          logo={currentProductNavigation.logo}
+          productNavigationItems={currentProductNavigation.navigation}
+          productTitle={currentProductNavigation.title}
+          setIsShown={setMobileMenuOpen}
+        />
+        {/* Content area */}
+        <div className="flex h-screen flex-1 flex-col overflow-hidden">
+          <header className="w-full">
+            <div className="relative z-10 flex h-16 flex-shrink-0 border-b border-slate-200 bg-white shadow-sm">
+              <button
+                className="focus:ring-primary-500 border-r border-slate-200 px-4 text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset md:hidden"
+                type="button"
+                onClick={() => setMobileMenuOpen(true)}>
+                <span className="sr-only">Open sidebar</span>
+                <Bars3BottomLeftIcon aria-hidden="true" className="h-6 w-6" />
+              </button>
+              <div className="flex flex-1 justify-between px-4 sm:px-6">
+                <div className="flex flex-1 items-center">
+                  <ProductNavigation
+                    items={currentProductNavigation.navigation}
+                    logo={currentProductNavigation.logo}
+                    title={currentProductNavigation.title}
+                    titleHref={currentProductNavigation.titleHref}
+                  />
+                </div>
+                <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
+                  <ProfileJewel />
+                </div>
+              </div>
+            </div>
+          </header>
 
-        {/* Main content */}
-        <div className="flex flex-1 items-stretch overflow-hidden">
-          {children}
+          {/* Main content */}
+          <div className="flex flex-1 items-stretch overflow-hidden">
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </GoogleAnalytics>
   );
 }

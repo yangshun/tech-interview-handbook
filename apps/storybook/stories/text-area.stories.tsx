@@ -15,6 +15,9 @@ export default {
     autoComplete: {
       control: 'text',
     },
+    description: {
+      control: 'text',
+    },
     disabled: {
       control: 'boolean',
     },
@@ -74,11 +77,18 @@ export function HiddenLabel() {
 
 export function Disabled() {
   return (
-    <TextArea
-      disabled={true}
-      label="Comment"
-      placeholder="You can't type here, it's disabled."
-    />
+    <div className="space-y-4">
+      <TextArea
+        disabled={true}
+        label="Comment"
+        placeholder="You can't type here, it's disabled. (Placeholder)"
+      />
+      <TextArea
+        disabled={true}
+        label="Comment"
+        value="You can't type here, it's disabled. (Value)"
+      />
+    </div>
   );
 }
 
@@ -93,6 +103,20 @@ export function Error() {
 
   return (
     <TextArea
+      errorMessage={value.length < 6 ? 'Your comment is too short' : undefined}
+      label="Leave a reply"
+      value={value}
+      onChange={setValue}
+    />
+  );
+}
+
+export function Description() {
+  const [value, setValue] = useState('Some comment');
+
+  return (
+    <TextArea
+      description="Your message must be at least 6 characters"
       errorMessage={value.length < 6 ? 'Your comment is too short' : undefined}
       label="Leave a reply"
       value={value}

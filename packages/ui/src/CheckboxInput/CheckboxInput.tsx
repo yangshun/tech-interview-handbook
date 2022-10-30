@@ -50,7 +50,7 @@ function CheckboxInput(
             className={clsx(
               'h-4 w-4 rounded border-slate-300',
               disabled
-                ? 'bg-slate-100 text-slate-400'
+                ? 'bg-slate-50 text-slate-400'
                 : 'text-primary-600 focus:ring-primary-500',
             )}
             defaultChecked={defaultValue}

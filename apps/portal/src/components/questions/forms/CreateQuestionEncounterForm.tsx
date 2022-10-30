@@ -9,11 +9,15 @@ import CompanyTypeahead from '../typeahead/CompanyTypeahead';
 import LocationTypeahead from '../typeahead/LocationTypeahead';
 import RoleTypeahead from '../typeahead/RoleTypeahead';
 
+import type { Location } from '~/types/questions';
+
 export type CreateQuestionEncounterData = {
+  cityId?: string;
   company: string;
-  location: string;
+  countryId: string;
   role: string;
   seenAt: Date;
+  stateId?: string;
 };
 
 export type CreateQuestionEncounterFormProps = {
@@ -28,7 +32,9 @@ export default function CreateQuestionEncounterForm({
   const [step, setStep] = useState(0);
 
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(
+    null,
+  );
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date>(
     startOfMonth(new Date()),
@@ -43,6 +49,7 @@ export default function CreateQuestionEncounterForm({
             isLabelHidden={true}
             placeholder="Other company"
             suggestedCount={3}
+            // @ts-ignore TODO(questions): handle potentially null value.
             onSelect={({ value: company }) => {
               setSelectedCompany(company);
             }}
@@ -59,10 +66,11 @@ export default function CreateQuestionEncounterForm({
             isLabelHidden={true}
             placeholder="Other location"
             suggestedCount={3}
-            onSelect={({ value: location }) => {
+            // @ts-ignore TODO(questions): handle potentially null value.
+            onSelect={(location) => {
               setSelectedLocation(location);
             }}
-            onSuggestionClick={({ value: location }) => {
+            onSuggestionClick={(location) => {
               setSelectedLocation(location);
               setStep(step + 1);
             }}
@@ -75,6 +83,7 @@ export default function CreateQuestionEncounterForm({
             isLabelHidden={true}
             placeholder="Other role"
             suggestedCount={3}
+            // @ts-ignore TODO(questions): handle potentially null value.
             onSelect={({ value: role }) => {
               setSelectedRole(role);
             }}
@@ -87,15 +96,17 @@ export default function CreateQuestionEncounterForm({
       )}
       {step === 3 && (
         <MonthYearPicker
+          // TODO: Add label and hide label on Select instead.
           monthLabel=""
           value={{
             month: ((selectedDate?.getMonth() ?? 0) + 1) as Month,
             year: selectedDate?.getFullYear() as number,
           }}
+          // TODO: Add label and hide label on Select instead.
           yearLabel=""
           onChange={(value) => {
             setSelectedDate(
-              startOfMonth(new Date(value.year, value.month - 1)),
+              startOfMonth(new Date(value.year!, value.month! - 1)),
             );
           }}
         />
@@ -125,11 +136,14 @@ export default function CreateQuestionEncounterForm({
               selectedRole &&
               selectedDate
             ) {
+              const { cityId, stateId, countryId } = selectedLocation;
               onSubmit({
+                cityId,
                 company: selectedCompany,
-                location: selectedLocation,
+                countryId,
                 role: selectedRole,
                 seenAt: selectedDate,
+                stateId,
               });
             }
           }}

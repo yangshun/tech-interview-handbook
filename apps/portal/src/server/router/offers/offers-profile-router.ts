@@ -4,7 +4,6 @@ import { JobType } from '@prisma/client';
 import * as trpc from '@trpc/server';
 
 import {
-  addToProfileResponseMapper,
   createOfferProfileResponseMapper,
   profileDtoMapper,
 } from '~/mappers/offers-mappers';
@@ -103,10 +102,26 @@ const education = z.object({
 });
 
 export const offersProfileRouter = createRouter()
+  .query('isValidToken', {
+    input: z.object({
+      profileId: z.string(),
+      token: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const profile = await ctx.prisma.offersProfile.findFirst({
+        where: {
+          id: input.profileId
+        }
+      })
+
+      return profile?.editToken === input.token
+    }
+  })
   .query('listOne', {
     input: z.object({
       profileId: z.string(),
       token: z.string().optional(),
+      userId: z.string().nullish(),
     }),
     async resolve({ ctx, input }) {
       const result = await ctx.prisma.offersProfile.findFirst({
@@ -229,6 +244,7 @@ export const offersProfileRouter = createRouter()
               },
             },
           },
+          user: true,
         },
         where: {
           id: input.profileId,
@@ -236,7 +252,7 @@ export const offersProfileRouter = createRouter()
       });
 
       if (result) {
-        return profileDtoMapper(result, input.token);
+        return profileDtoMapper(result, input.token, input.userId);
       }
 
       throw new trpc.TRPCError({
@@ -1405,44 +1421,6 @@ export const offersProfileRouter = createRouter()
           code: 'NOT_FOUND',
           message: 'Profile does not exist',
         });
-      }
-
-      throw new trpc.TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'Invalid token.',
-      });
-    },
-  })
-  .mutation('addToUserProfile', {
-    input: z.object({
-      profileId: z.string(),
-      token: z.string(),
-      userId: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const profile = await ctx.prisma.offersProfile.findFirst({
-        where: {
-          id: input.profileId,
-        },
-      });
-
-      const profileEditToken = profile?.editToken;
-
-      if (profileEditToken === input.token) {
-        const updated = await ctx.prisma.offersProfile.update({
-          data: {
-            user: {
-              connect: {
-                id: input.userId,
-              },
-            },
-          },
-          where: {
-            id: input.profileId,
-          },
-        });
-
-        return addToProfileResponseMapper(updated);
       }
 
       throw new trpc.TRPCError({

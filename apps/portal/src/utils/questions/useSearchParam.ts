@@ -42,8 +42,12 @@ export const useSearchParam = <Value = string>(
         // Try to load from local storage
         const localStorageValue = localStorage.getItem(name);
         if (localStorageValue !== null) {
-          const loadedFilters = JSON.parse(localStorageValue);
-          setParams(loadedFilters);
+          const loadedFilters = JSON.parse(localStorageValue) as Array<string>;
+          setParams(
+            loadedFilters
+              .map(stringToParam)
+              .filter((value) => value !== null) as Array<Value>,
+          );
         }
       }
       setIsInitialized(true);

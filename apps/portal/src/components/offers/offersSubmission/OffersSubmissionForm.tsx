@@ -1,12 +1,14 @@
-import { useRef, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 import { JobType } from '@prisma/client';
 import { Button } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
+import type { BreadcrumbStep } from '~/components/offers/Breadcrumb';
 import { Breadcrumbs } from '~/components/offers/Breadcrumb';
-import OffersProfileSave from '~/components/offers/offersSubmission/OffersProfileSave';
 import BackgroundForm from '~/components/offers/offersSubmission/submissionForm/BackgroundForm';
 import OfferDetailsForm from '~/components/offers/offersSubmission/submissionForm/OfferDetailsForm';
 import type {
@@ -23,13 +25,10 @@ import {
 import { getCurrentMonth, getCurrentYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
-import OffersSubmissionAnalysis from './OffersSubmissionAnalysis';
-
-import type { ProfileAnalysis } from '~/types/offers';
-
 const defaultOfferValues = {
   comments: '',
   companyId: '',
+  jobTitle: '',
   jobType: JobType.FULLTIME,
   location: '',
   monthYearReceived: {
@@ -42,11 +41,38 @@ const defaultOfferValues = {
 export const defaultFullTimeOfferValues = {
   ...defaultOfferValues,
   jobType: JobType.FULLTIME,
+  offersFullTime: {
+    baseSalary: {
+      currency: 'SGD',
+      value: null,
+    },
+    bonus: {
+      currency: 'SGD',
+      value: null,
+    },
+    level: '',
+    stocks: {
+      currency: 'SGD',
+      value: null,
+    },
+    totalCompensation: {
+      currency: 'SGD',
+      value: null,
+    },
+  },
 };
 
 export const defaultInternshipOfferValues = {
   ...defaultOfferValues,
   jobType: JobType.INTERN,
+  offersIntern: {
+    internshipCycle: null,
+    monthlySalary: {
+      currency: 'SGD',
+      value: null,
+    },
+    startYear: null,
+  },
 };
 
 const defaultOfferProfileValues = {
@@ -57,13 +83,6 @@ const defaultOfferProfileValues = {
     totalYoe: 0,
   },
   offers: [defaultOfferValues],
-};
-
-type FormStep = {
-  component: JSX.Element;
-  hasNext: boolean;
-  hasPrevious: boolean;
-  label: string;
 };
 
 type Props = Readonly<{
@@ -77,11 +96,15 @@ export default function OffersSubmissionForm({
   profileId: editProfileId = '',
   token: editToken = '',
 }: Props) {
-  const [formStep, setFormStep] = useState(0);
-  const [profileId, setProfileId] = useState(editProfileId);
-  const [token, setToken] = useState(editToken);
-  const [analysis, setAnalysis] = useState<ProfileAnalysis | null>(null);
+  const [step, setStep] = useState(0);
+  const [params, setParams] = useState({
+    profileId: editProfileId,
+    token: editToken,
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { event: gaEvent } = useGoogleAnalytics();
 
+  const router = useRouter();
   const pageRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () =>
     pageRef.current?.scrollTo({ behavior: 'smooth', top: 0 });
@@ -89,7 +112,11 @@ export default function OffersSubmissionForm({
     defaultValues: initialOfferProfileValues,
     mode: 'all',
   });
-  const { handleSubmit, trigger } = formMethods;
+  const {
+    handleSubmit,
+    trigger,
+    formState: { isSubmitting, isSubmitSuccessful },
+  } = formMethods;
 
   const generateAnalysisMutation = trpc.useMutation(
     ['offers.analysis.generate'],
@@ -97,93 +124,67 @@ export default function OffersSubmissionForm({
       onError(error) {
         console.error(error.message);
       },
-      onSuccess(data) {
-        setAnalysis(data);
+      onSuccess() {
+        router.push(
+          `/offers/submit/result/${params.profileId}?token=${params.token}`,
+        );
       },
     },
   );
 
-  const formSteps: Array<FormStep> = [
+  const steps = [
+    <OfferDetailsForm
+      key={0}
+      defaultJobType={initialOfferProfileValues.offers[0].jobType}
+    />,
+    <BackgroundForm key={1} />,
+  ];
+
+  const breadcrumbSteps: Array<BreadcrumbStep> = [
     {
-      component: (
-        <OfferDetailsForm
-          key={0}
-          defaultJobType={initialOfferProfileValues.offers[0].jobType}
-        />
-      ),
-      hasNext: true,
-      hasPrevious: false,
       label: 'Offers',
+      step: 0,
     },
     {
-      component: <BackgroundForm key={1} />,
-      hasNext: false,
-      hasPrevious: true,
       label: 'Background',
+      step: 1,
     },
     {
-      component: (
-        <OffersProfileSave key={2} profileId={profileId} token={token} />
-      ),
-      hasNext: true,
-      hasPrevious: false,
       label: 'Save profile',
     },
     {
-      component: (
-        <OffersSubmissionAnalysis
-          analysis={analysis}
-          isError={generateAnalysisMutation.isError}
-          isLoading={generateAnalysisMutation.isLoading}
-          profileId={profileId}
-          token={token}
-        />
-      ),
-      hasNext: false,
-      hasPrevious: true,
       label: 'Analysis',
     },
   ];
 
-  const formStepsLabels = formSteps.map((step) => step.label);
-
-  const nextStep = async (currStep: number) => {
+  const goToNextStep = async (currStep: number) => {
     if (currStep === 0) {
       const result = await trigger('offers');
       if (!result) {
         return;
       }
     }
-    setFormStep(formStep + 1);
-    scrollToTop();
-  };
-
-  const previousStep = () => {
-    setFormStep(formStep - 1);
-    scrollToTop();
+    setStep(step + 1);
   };
 
   const mutationpath =
-    profileId && token ? 'offers.profile.update' : 'offers.profile.create';
+    editProfileId && editToken
+      ? 'offers.profile.update'
+      : 'offers.profile.create';
 
   const createOrUpdateMutation = trpc.useMutation([mutationpath], {
     onError(error) {
       console.error(error.message);
     },
     onSuccess(data) {
-      generateAnalysisMutation.mutate({
-        profileId: data?.id || '',
-      });
-      setProfileId(data.id);
-      setToken(data.token);
-      setFormStep(formStep + 1);
-      scrollToTop();
+      setParams({ profileId: data.id, token: data.token });
+      setIsSubmitted(true);
     },
   });
 
   const onSubmit: SubmitHandler<OffersProfileFormData> = async (data) => {
     const result = await trigger();
-    if (!result) {
+    if (!result || isSubmitting || isSubmitSuccessful) {
       return;
     }
 
@@ -206,49 +207,117 @@ export default function OffersSubmissionForm({
       ),
     }));
 
-    if (profileId && token) {
+    if (params.profileId && params.token) {
       createOrUpdateMutation.mutate({
         background,
-        id: profileId,
+        id: params.profileId,
         offers,
-        token,
+        token: params.token,
       });
     } else {
       createOrUpdateMutation.mutate({ background, offers });
     }
+    gaEvent({
+      action: 'offers.submit_profile',
+      category: 'submission',
+      label: 'Submit profile',
+    });
   };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      generateAnalysisMutation.mutate({
+        profileId: params.profileId,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSubmitted, params]);
+
+  useEffect(() => {
+    scrollToTop();
+  }, [step]);
+
+  useEffect(() => {
+    const warningText =
+      'Leave this page? Changes that you made will not be saved.';
+    const handleWindowClose = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      return (e.returnValue = warningText);
+    };
+    const handleRouteChange = (url: string) => {
+      if (url.includes('/offers/submit/result')) {
+        return;
+      }
+      if (window.confirm(warningText)) {
+        return;
+      }
+      router.events.emit('routeChangeError');
+      throw 'routeChange aborted.';
+    };
+    window.addEventListener('beforeunload', handleWindowClose);
+    router.events.on('routeChangeStart', handleRouteChange);
+    return () => {
+      window.removeEventListener('beforeunload', handleWindowClose);
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div ref={pageRef} className="fixed h-full w-full overflow-y-scroll">
       <div className="mb-20 flex justify-center">
         <div className="my-5 block w-full max-w-screen-md rounded-lg bg-white py-10 px-10 shadow-lg">
           <div className="mb-4 flex justify-end">
-            <Breadcrumbs currentStep={formStep} stepLabels={formStepsLabels} />
+            <Breadcrumbs
+              currentStep={step}
+              setStep={setStep}
+              steps={breadcrumbSteps}
+            />
           </div>
           <FormProvider {...formMethods}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              {formSteps[formStep].component}
+            <form className="text-sm" onSubmit={handleSubmit(onSubmit)}>
+              {steps[step]}
               {/* <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre> */}
-              {formSteps[formStep].hasNext && (
+              {step === 0 && (
                 <div className="flex justify-end">
                   <Button
                     disabled={false}
                     icon={ArrowRightIcon}
                     label="Next"
                     variant="secondary"
-                    onClick={() => nextStep(formStep)}
+                    onClick={() => {
+                      goToNextStep(step);
+                      gaEvent({
+                        action: 'offers.profile_submission_navigate_next',
+                        category: 'submission',
+                        label: 'Navigate next',
+                      });
+                    }}
                   />
                 </div>
               )}
-              {formStep === 1 && (
+              {step === 1 && (
                 <div className="flex items-center justify-between">
                   <Button
                     icon={ArrowLeftIcon}
                     label="Previous"
                     variant="secondary"
-                    onClick={previousStep}
+                    onClick={() => {
+                      setStep(step - 1);
+                      gaEvent({
+                        action: 'offers.profile_submission_navigation_back',
+                        category: 'submission',
+                        label: 'Navigate back',
+                      });
+                    }}
                   />
-                  <Button label="Submit" type="submit" variant="primary" />{' '}
+                  <Button
+                    disabled={isSubmitting || isSubmitSuccessful}
+                    isLoading={isSubmitting || isSubmitSuccessful}
+                    label="Submit"
+                    type="submit"
+                    variant="primary"
+                  />
                 </div>
               )}
             </form>

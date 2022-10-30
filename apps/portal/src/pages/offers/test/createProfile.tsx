@@ -16,7 +16,7 @@ function Test() {
   });
 
   const addToUserProfileMutation = trpc.useMutation(
-    ['offers.profile.addToUserProfile'],
+    ['offers.user.profile.addToUserProfile'],
     {
       onError(err) {
         alert(err);
@@ -85,7 +85,7 @@ function Test() {
     addToUserProfileMutation.mutate({
       profileId: 'cl9efyn9p004ww3u42mjgl1vn',
       token: '24bafa6fef803f447d7f2e229b14cb8ee43f0c22dffbe41ee1c1e5e6e870f117',
-      userId: 'cl9ehvpng0000w3ec2mpx0bdd',
+      // UserId: 'cl9ehvpng0000w3ec2mpx0bdd',
     });
   };
 
@@ -196,6 +196,22 @@ function Test() {
         profileId,
         token:
           '24bafa6fef803f447d7f2e229b14cb8ee43f0c22dffbe41ee1c1e5e6e870f117',
+      },
+    ],
+    {
+      onError(err) {
+        setError(err.shape?.message || '');
+      },
+    },
+  );
+
+  trpc.useQuery(
+    [
+      `offers.profile.isValidToken`,
+      {
+        profileId: 'cl9scdzuh0000tt727ipone1k',
+        token:
+          'aa628d0db3ad7a5f84895537d4cca38edd0a9b8b96d869cddeb967fccf068c08',
       },
     ],
     {

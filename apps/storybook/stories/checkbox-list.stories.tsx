@@ -14,6 +14,9 @@ export default {
     description: {
       control: 'text',
     },
+    isLabelHidden: {
+      control: 'boolean',
+    },
     label: {
       control: 'text',
     },

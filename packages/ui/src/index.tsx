@@ -4,6 +4,9 @@ export { default as Alert } from './Alert/Alert';
 // Badge
 export * from './Badge/Badge';
 export { default as Badge } from './Badge/Badge';
+// Banner
+export * from './Banner/Banner';
+export { default as Banner } from './Banner/Banner';
 // Button
 export * from './Button/Button';
 export { default as Button } from './Button/Button';

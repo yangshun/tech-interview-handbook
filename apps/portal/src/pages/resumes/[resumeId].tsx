@@ -3,12 +3,13 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Error from 'next/error';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { signIn, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import {
   AcademicCapIcon,
   BriefcaseIcon,
   CalendarIcon,
+  CheckCircleIcon,
   InformationCircleIcon,
   MapPinIcon,
   PencilSquareIcon,
@@ -16,18 +17,22 @@ import {
 } from '@heroicons/react/20/solid';
 import { Button, Spinner } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ResumeCommentsForm from '~/components/resumes/comments/ResumeCommentsForm';
 import ResumeCommentsList from '~/components/resumes/comments/ResumeCommentsList';
 import ResumePdf from '~/components/resumes/ResumePdf';
 import ResumeExpandableText from '~/components/resumes/shared/ResumeExpandableText';
 
 import type {
+  ExperienceFilter,
   FilterOption,
   LocationFilter,
+  RoleFilter,
 } from '~/utils/resumes/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCES,
+  getFilterLabel,
   INITIAL_FILTER_STATE,
   LOCATIONS,
   ROLES,
@@ -35,10 +40,6 @@ import {
 import { trpc } from '~/utils/trpc';
 
 import SubmitResumeForm from './submit';
-import type {
-  ExperienceFilter,
-  RoleFilter,
-} from '../../utils/resumes/resumeFilters';
 
 export default function ResumeReviewPage() {
   const ErrorPage = (
@@ -48,6 +49,8 @@ export default function ResumeReviewPage() {
   const router = useRouter();
   const { resumeId } = router.query;
   const utils = trpc.useContext();
+  const { event: gaEvent } = useGoogleAnalytics();
+
   // Safe to assert resumeId type as string because query is only sent if so
   const detailsQuery = trpc.useQuery(
     ['resumes.resume.findOne', { resumeId: resumeId as string }],
@@ -57,23 +60,47 @@ export default function ResumeReviewPage() {
   );
   const starMutation = trpc.useMutation('resumes.resume.star', {
     onSuccess() {
-      utils.invalidateQueries(['resumes.resume.findOne']);
-      utils.invalidateQueries(['resumes.resume.findAll']);
-      utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
-      utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+      invalidateResumeQueries();
+      gaEvent({
+        action: 'resumes.star_button_click',
+        category: 'engagement',
+        label: 'Star Resume',
+      });
     },
   });
   const unstarMutation = trpc.useMutation('resumes.resume.unstar', {
     onSuccess() {
-      utils.invalidateQueries(['resumes.resume.findOne']);
-      utils.invalidateQueries(['resumes.resume.findAll']);
-      utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
-      utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+      invalidateResumeQueries();
+      gaEvent({
+        action: 'resumes.star_button_click',
+        category: 'engagement',
+        label: 'Unstar Resume',
+      });
     },
   });
+  const resolveMutation = trpc.useMutation('resumes.resume.user.resolve', {
+    onSuccess() {
+      invalidateResumeQueries();
+      gaEvent({
+        action: 'resumes.resolve_button_click',
+        category: 'engagement',
+        label: 'Resolve Resume',
+      });
+    },
+  });
+
+  const invalidateResumeQueries = () => {
+    utils.invalidateQueries(['resumes.resume.findOne']);
+    utils.invalidateQueries(['resumes.resume.findAll']);
+    utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
+    utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+  };
+
   const userIsOwner =
     session?.user?.id !== undefined &&
     session.user.id === detailsQuery.data?.userId;
+
+  const isResumeResolved = detailsQuery.data?.isResolved;
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [showCommentsForm, setShowCommentsForm] = useState(false);
@@ -112,9 +139,14 @@ export default function ResumeReviewPage() {
     ) => filterOptions.find((option) => option.label === label)?.value;
 
     router.push({
-      pathname: '/resumes/browse',
+      pathname: '/resumes',
       query: {
         currentPage: JSON.stringify(1),
+        isFiltersOpen: JSON.stringify({
+          experience: experienceLabel !== undefined,
+          location: locationLabel !== undefined,
+          role: roleLabel !== undefined,
+        }),
         searchValue: JSON.stringify(''),
         shortcutSelected: JSON.stringify('all'),
         sortOrder: JSON.stringify('latest'),
@@ -139,27 +171,31 @@ export default function ResumeReviewPage() {
     setIsEditMode(true);
   };
 
+  const onResolveButtonClick = () => {
+    resolveMutation.mutate({
+      id: resumeId as string,
+      val: !isResumeResolved,
+    });
+  };
+
   const renderReviewButton = () => {
     if (session === null) {
       return (
-        <div className=" flex h-10 justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-[400] hover:cursor-pointer hover:bg-slate-50">
-          <a
-            href="/api/auth/signin"
-            onClick={(event) => {
-              event.preventDefault();
-              signIn();
-            }}>
-            Sign in to join discussion
-          </a>
-        </div>
+        <Button
+          className="h-10 shadow-md"
+          display="block"
+          href="/api/auth/signin"
+          label="Sign in to join discussion"
+          variant="primary"
+        />
       );
     }
     return (
       <Button
-        className="h-10 py-2 shadow-md"
+        className="h-10 shadow-md"
         display="block"
         label="Add your review"
-        variant="tertiary"
+        variant="primary"
         onClick={() => setShowCommentsForm(true)}
       />
     );
@@ -178,10 +214,7 @@ export default function ResumeReviewPage() {
           url: detailsQuery.data.url,
         }}
         onClose={() => {
-          utils.invalidateQueries(['resumes.resume.findOne']);
-          utils.invalidateQueries(['resumes.resume.findAll']);
-          utils.invalidateQueries(['resumes.resume.user.findUserStarred']);
-          utils.invalidateQueries(['resumes.resume.user.findUserCreated']);
+          invalidateResumeQueries();
           setIsEditMode(false);
         }}
       />
@@ -202,50 +235,73 @@ export default function ResumeReviewPage() {
           <Head>
             <title>{detailsQuery.data.title}</title>
           </Head>
-          <main className="h-[calc(100vh-2rem)] flex-1 space-y-2 overflow-y-auto py-4 px-8 xl:px-12 2xl:pr-16">
+          <main className="h-full flex-1 space-y-2 overflow-y-auto py-4 px-8 xl:px-12 2xl:pr-16">
             <div className="flex justify-between">
-              <h1 className="pr-2 text-2xl font-semibold leading-7 text-slate-900 sm:truncate sm:text-3xl sm:tracking-tight">
+              <h1 className="w-[60%] pr-2 text-2xl font-semibold leading-7 text-slate-900">
                 {detailsQuery.data.title}
               </h1>
               <div className="flex gap-3 xl:pr-4">
                 {userIsOwner && (
-                  <button
-                    className="h-10 rounded-md border border-slate-300 bg-white py-1 px-2 text-center shadow-md hover:bg-slate-50"
-                    type="button"
-                    onClick={onEditButtonClick}>
-                    <PencilSquareIcon className="text-primary-600 h-6 w-6" />
-                  </button>
+                  <>
+                    <Button
+                      addonPosition="start"
+                      className="h-10 shadow-md"
+                      icon={PencilSquareIcon}
+                      label="Edit"
+                      variant="tertiary"
+                      onClick={onEditButtonClick}
+                    />
+                    <button
+                      className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-md hover:bg-slate-50 focus:ring-slate-600 disabled:hover:bg-white"
+                      disabled={resolveMutation.isLoading}
+                      type="button"
+                      onClick={onResolveButtonClick}>
+                      <div className="-ml-1 mr-2 h-5 w-5">
+                        {resolveMutation.isLoading ? (
+                          <Spinner className="mt-0.5" size="xs" />
+                        ) : (
+                          <CheckCircleIcon
+                            aria-hidden="true"
+                            className={
+                              isResumeResolved
+                                ? 'text-slate-500'
+                                : 'text-success-600'
+                            }
+                          />
+                        )}
+                      </div>
+                      {isResumeResolved
+                        ? 'Reopen for review'
+                        : 'Mark as reviewed'}
+                    </button>
+                  </>
                 )}
-
                 <button
-                  className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-md hover:bg-slate-50  disabled:hover:bg-white"
+                  className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-md hover:bg-slate-50 focus:ring-slate-600 disabled:hover:bg-white"
                   disabled={starMutation.isLoading || unstarMutation.isLoading}
                   type="button"
                   onClick={onStarButtonClick}>
-                  <span className="relative inline-flex">
-                    <div className="-ml-1 mr-2 h-5 w-5">
-                      {starMutation.isLoading ||
-                      unstarMutation.isLoading ||
-                      detailsQuery.isLoading ? (
-                        <Spinner className="mt-0.5" size="xs" />
-                      ) : (
-                        <StarIcon
-                          aria-hidden="true"
-                          className={clsx(
-                            detailsQuery.data?.stars.length
-                              ? 'text-orange-400'
-                              : 'text-slate-400',
-                          )}
-                        />
-                      )}
-                    </div>
-                    Star
-                  </span>
+                  <div className="-ml-1 mr-2 h-5 w-5">
+                    {starMutation.isLoading ||
+                    unstarMutation.isLoading ||
+                    detailsQuery.isLoading ? (
+                      <Spinner className="mt-0.5" size="xs" />
+                    ) : (
+                      <StarIcon
+                        aria-hidden="true"
+                        className={clsx(
+                          detailsQuery.data?.stars.length
+                            ? 'text-orange-400'
+                            : 'text-slate-400',
+                        )}
+                      />
+                    )}
+                  </div>
+                  {detailsQuery.data?.stars.length ? 'Starred' : 'Star'}
                   <span className="relative -ml-px inline-flex">
                     {detailsQuery.data?._count.stars}
                   </span>
                 </button>
-
                 <div className="hidden xl:block">{renderReviewButton()}</div>
               </div>
             </div>
@@ -263,7 +319,7 @@ export default function ResumeReviewPage() {
                       roleLabel: detailsQuery.data?.role,
                     })
                   }>
-                  {detailsQuery.data.role}
+                  {getFilterLabel(ROLES, detailsQuery.data.role as RoleFilter)}
                 </button>
               </div>
               <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
@@ -279,7 +335,10 @@ export default function ResumeReviewPage() {
                       locationLabel: detailsQuery.data?.location,
                     })
                   }>
-                  {detailsQuery.data.location}
+                  {getFilterLabel(
+                    LOCATIONS,
+                    detailsQuery.data.location as LocationFilter,
+                  )}
                 </button>
               </div>
               <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
@@ -295,7 +354,10 @@ export default function ResumeReviewPage() {
                       experienceLabel: detailsQuery.data?.experience,
                     })
                   }>
-                  {detailsQuery.data.experience}
+                  {getFilterLabel(
+                    EXPERIENCES,
+                    detailsQuery.data.experience as ExperienceFilter,
+                  )}
                 </button>
               </div>
               <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
@@ -326,20 +388,16 @@ export default function ResumeReviewPage() {
                 <ResumePdf url={detailsQuery.data.url} />
               </div>
               <div className="grow">
-                <div className="relative p-2 xl:hidden">
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-slate-300" />
-                  </div>
-                  <div className="relative flex justify-center">
+                <div className="mb-6 space-y-4 xl:hidden">
+                  {renderReviewButton()}
+                  <div className="flex items-center space-x-2">
+                    <hr className="flex-grow border-slate-300" />
                     <span className="bg-slate-50 px-3 text-lg font-medium text-slate-900">
                       Reviews
                     </span>
+                    <hr className="flex-grow border-slate-300" />
                   </div>
                 </div>
-
-                <div className="mb-4 xl:hidden">{renderReviewButton()}</div>
 
                 {showCommentsForm ? (
                   <ResumeCommentsForm

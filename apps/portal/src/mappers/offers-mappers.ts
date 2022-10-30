@@ -33,6 +33,8 @@ import type {
   ProfileAnalysis,
   ProfileOffer,
   SpecificYoe,
+  UserProfile,
+  UserProfileOffer,
   Valuation,
 } from '~/types/offers';
 
@@ -526,8 +528,10 @@ export const profileDtoMapper = (
         offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
       }
     >;
+    user: User | null;
   },
   inputToken: string | undefined,
+  inputUserId: string | null | undefined,
 ) => {
   const profileDto: Profile = {
     analysis: profileAnalysisDtoMapper(profile.analysis),
@@ -535,6 +539,7 @@ export const profileDtoMapper = (
     editToken: null,
     id: profile.id,
     isEditable: false,
+    isSaved: false,
     offers: profile.offers.map((offer) => profileOfferDtoMapper(offer)),
     profileName: profile.profileName,
   };
@@ -542,6 +547,20 @@ export const profileDtoMapper = (
   if (inputToken === profile.editToken) {
     profileDto.editToken = profile.editToken ?? null;
     profileDto.isEditable = true;
+
+    const users = profile.user;
+
+    // TODO: BRYANN UNCOMMENT THIS ONCE U CHANGE THE SCHEMA
+    // for (let i = 0; i < users.length; i++) {
+    //   if (users[i].id === inputUserId) {
+    //     profileDto.isSaved = true
+    //   }
+    // }
+
+    // TODO: REMOVE THIS ONCE U CHANGE THE SCHEMA
+    if (users?.id === inputUserId) {
+      profileDto.isSaved = true;
+    }
   }
 
   return profileDto;
@@ -625,4 +644,99 @@ export const getOffersResponseMapper = (
     paging,
   };
   return getOffersResponse;
+};
+
+export const getUserProfileResponseMapper = (
+  res:
+    | (User & {
+        OffersProfile: Array<
+          OffersProfile & {
+            offers: Array<
+              OffersOffer & {
+                company: Company;
+                offersFullTime:
+                  | (OffersFullTime & { totalCompensation: OffersCurrency })
+                  | null;
+                offersIntern:
+                  | (OffersIntern & { monthlySalary: OffersCurrency })
+                  | null;
+              }
+            >;
+          }
+        >;
+      })
+    | null,
+): Array<UserProfile> => {
+  if (res) {
+    return res.OffersProfile.map((profile) => {
+      return {
+        createdAt: profile.createdAt,
+        id: profile.id,
+        offers: profile.offers.map((offer) => {
+          return userProfileOfferDtoMapper(offer);
+        }),
+        profileName: profile.profileName,
+        token: profile.editToken,
+      };
+    }).sort((a, b) => {
+      return b.createdAt > a.createdAt ? 1 : -1;
+    });
+  }
+
+  return [];
+};
+
+const userProfileOfferDtoMapper = (
+  offer: OffersOffer & {
+    company: Company;
+    offersFullTime:
+      | (OffersFullTime & { totalCompensation: OffersCurrency })
+      | null;
+    offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
+  },
+): UserProfileOffer => {
+  const mappedOffer: UserProfileOffer = {
+    company: offersCompanyDtoMapper(offer.company),
+    id: offer.id,
+    income: {
+      baseCurrency: '',
+      baseValue: -1,
+      currency: '',
+      id: '',
+      value: -1,
+    },
+    jobType: offer.jobType,
+    level: offer.offersFullTime?.level ?? '',
+    location: offer.location,
+    monthYearReceived: offer.monthYearReceived,
+    title:
+      offer.jobType === JobType.FULLTIME
+        ? offer.offersFullTime?.title ?? ''
+        : offer.offersIntern?.title ?? '',
+  };
+
+  if (offer.offersFullTime?.totalCompensation) {
+    mappedOffer.income.value = offer.offersFullTime.totalCompensation.value;
+    mappedOffer.income.currency =
+      offer.offersFullTime.totalCompensation.currency;
+    mappedOffer.income.id = offer.offersFullTime.totalCompensation.id;
+    mappedOffer.income.baseValue =
+      offer.offersFullTime.totalCompensation.baseValue;
+    mappedOffer.income.baseCurrency =
+      offer.offersFullTime.totalCompensation.baseCurrency;
+  } else if (offer.offersIntern?.monthlySalary) {
+    mappedOffer.income.value = offer.offersIntern.monthlySalary.value;
+    mappedOffer.income.currency = offer.offersIntern.monthlySalary.currency;
+    mappedOffer.income.id = offer.offersIntern.monthlySalary.id;
+    mappedOffer.income.baseValue = offer.offersIntern.monthlySalary.baseValue;
+    mappedOffer.income.baseCurrency =
+      offer.offersIntern.monthlySalary.baseCurrency;
+  } else {
+    throw new TRPCError({
+      code: 'NOT_FOUND',
+      message: 'Total Compensation or Salary not found',
+    });
+  }
+
+  return mappedOffer;
 };

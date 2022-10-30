@@ -63,47 +63,6 @@ export const QUESTION_AGES: FilterChoices<QuestionAge> = [
   },
 ] as const;
 
-export const LOCATIONS: FilterChoices = [
-  {
-    id: 'Singapore',
-    label: 'Singapore',
-    value: 'Singapore',
-  },
-  {
-    id: 'Menlo Park',
-    label: 'Menlo Park',
-    value: 'Menlo Park',
-  },
-  {
-    id: 'California',
-    label: 'California',
-    value: 'California',
-  },
-  {
-    id: 'Hong Kong',
-    label: 'Hong Kong',
-    value: 'Hong Kong',
-  },
-  {
-    id: 'Taiwan',
-    label: 'Taiwan',
-    value: 'Taiwan',
-  },
-] as const;
-
-export const ROLES: FilterChoices = [
-  {
-    id: 'Software Engineer',
-    label: 'Software Engineer',
-    value: 'Software Engineer',
-  },
-  {
-    id: 'Software Engineer Intern',
-    label: 'Software Engineer Intern',
-    value: 'Software Engineer Intern',
-  },
-] as const;
-
 export const SORT_ORDERS = [
   {
     label: 'Ascending',

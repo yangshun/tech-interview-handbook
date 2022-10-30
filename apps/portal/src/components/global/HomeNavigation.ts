@@ -14,6 +14,7 @@ const navigation: ProductNavigationItems = [
 ];
 
 const config = {
+  googleAnalyticsMeasurementID: 'G-DBLZDQ2ZZN',
   navigation,
   showGlobalNav: true,
   title: 'Tech Interview Handbook',

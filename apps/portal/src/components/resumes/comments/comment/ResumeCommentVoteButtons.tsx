@@ -1,10 +1,13 @@
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
   ArrowDownCircleIcon,
   ArrowUpCircleIcon,
 } from '@heroicons/react/20/solid';
 import { Vote } from '@prisma/client';
+
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 
 import { trpc } from '~/utils/trpc';
 
@@ -19,8 +22,10 @@ export default function ResumeCommentVoteButtons({
 }: ResumeCommentVoteButtonsProps) {
   const [upvoteAnimation, setUpvoteAnimation] = useState(false);
   const [downvoteAnimation, setDownvoteAnimation] = useState(false);
+  const { event: gaEvent } = useGoogleAnalytics();
 
   const trpcContext = trpc.useContext();
+  const router = useRouter();
 
   // COMMENT VOTES
   const commentVotesQuery = trpc.useQuery([
@@ -33,6 +38,11 @@ export default function ResumeCommentVoteButtons({
       onSuccess: () => {
         // Comment updated, invalidate query to trigger refetch
         trpcContext.invalidateQueries(['resumes.comments.votes.list']);
+        gaEvent({
+          action: 'resumes.comment_vote',
+          category: 'engagement',
+          label: 'Upvote/Downvote comment',
+        });
       },
     },
   );
@@ -42,11 +52,21 @@ export default function ResumeCommentVoteButtons({
       onSuccess: () => {
         // Comment updated, invalidate query to trigger refetch
         trpcContext.invalidateQueries(['resumes.comments.votes.list']);
+        gaEvent({
+          action: 'resumes.comment_unvote',
+          category: 'engagement',
+          label: 'Unvote comment',
+        });
       },
     },
   );
 
   const onVote = async (value: Vote, setAnimation: (_: boolean) => void) => {
+    if (!userId) {
+      router.push('/api/auth/signin');
+      return;
+    }
+
     setAnimation(true);
 
     if (commentVotesQuery.data?.userVote?.value === value) {
@@ -74,7 +94,6 @@ export default function ResumeCommentVoteButtons({
     <>
       <button
         disabled={
-          !userId ||
           commentVotesQuery.isLoading ||
           commentVotesUpsertMutation.isLoading ||
           commentVotesDeleteMutation.isLoading
@@ -103,7 +122,6 @@ export default function ResumeCommentVoteButtons({
 
       <button
         disabled={
-          !userId ||
           commentVotesQuery.isLoading ||
           commentVotesUpsertMutation.isLoading ||
           commentVotesDeleteMutation.isLoading

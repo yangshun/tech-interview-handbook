@@ -3,15 +3,11 @@ import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ArrowPathIcon } from '@heroicons/react/20/solid';
 import type { QuestionsQuestionType } from '@prisma/client';
-import {
-  Button,
-  CheckboxInput,
-  HorizontalDivider,
-  Select,
-  TextArea,
-} from '@tih/ui';
+import type { TypeaheadOption } from '@tih/ui';
+import { CheckboxInput } from '@tih/ui';
+import { Button, HorizontalDivider, Select, TextArea } from '@tih/ui';
 
-import { LOCATIONS, QUESTION_TYPES, ROLES } from '~/utils/questions/constants';
+import { QUESTION_TYPES } from '~/utils/questions/constants';
 import {
   useFormRegister,
   useSelectRegister,
@@ -25,14 +21,16 @@ import RoleTypeahead from '../typeahead/RoleTypeahead';
 import type { Month } from '../../shared/MonthYearPicker';
 import MonthYearPicker from '../../shared/MonthYearPicker';
 
+import type { Location } from '~/types/questions';
+
 export type ContributeQuestionData = {
   company: string;
   date: Date;
-  location: string;
+  location: Location & TypeaheadOption;
   position: string;
   questionContent: string;
   questionType: QuestionsQuestionType;
-  role: string;
+  role: TypeaheadOption;
 };
 
 export type ContributeQuestionFormProps = {
@@ -58,10 +56,7 @@ export default function ContributeQuestionForm({
   const [contentToCheck, setContentToCheck] = useState('');
 
   const { data: similarQuestions } = trpc.useQuery(
-    [
-      'questions.questions.getRelatedQuestionsByContent',
-      { content: contentToCheck },
-    ],
+    ['questions.questions.getRelatedQuestions', { content: contentToCheck }],
     {
       keepPreviousData: true,
     },
@@ -113,14 +108,12 @@ export default function ContributeQuestionForm({
               name="location"
               render={({ field }) => (
                 <LocationTypeahead
+                  {...field}
                   required={true}
                   onSelect={(option) => {
-                    field.onChange(option.value);
+                    // @ts-ignore TODO(questions): handle potentially null value.
+                    field.onChange(option);
                   }}
-                  {...field}
-                  value={LOCATIONS.find(
-                    (location) => location.value === field.value,
-                  )}
                 />
               )}
             />
@@ -137,9 +130,9 @@ export default function ContributeQuestionForm({
                     year: field.value.getFullYear(),
                   }}
                   yearRequired={true}
-                  onChange={({ month, year }) =>
-                    field.onChange(startOfMonth(new Date(year, month - 1)))
-                  }
+                  onChange={({ month, year }) => {
+                    field.onChange(startOfMonth(new Date(year!, month! - 1)));
+                  }}
                 />
               )}
             />
@@ -150,9 +143,11 @@ export default function ContributeQuestionForm({
             <Controller
               control={control}
               name="company"
-              render={({ field }) => (
+              render={({ field: { value: _, ...field } }) => (
                 <CompanyTypeahead
+                  {...field}
                   required={true}
+                  // @ts-ignore TODO(questions): handle potentially null value.
                   onSelect={({ id }) => {
                     field.onChange(id);
                   }}
@@ -166,12 +161,12 @@ export default function ContributeQuestionForm({
               name="role"
               render={({ field }) => (
                 <RoleTypeahead
+                  {...field}
                   required={true}
                   onSelect={(option) => {
-                    field.onChange(option.value);
+                    // @ts-ignore TODO(questions): handle potentially null value.
+                    field.onChange(option);
                   }}
-                  {...field}
-                  value={ROLES.find((role) => role.value === field.value)}
                 />
               )}
             />
@@ -203,12 +198,12 @@ export default function ContributeQuestionForm({
               content={question.content}
               questionId={question.id}
               timestamp={
-                question.lastSeenAt?.toLocaleDateString(undefined, {
+                question.seenAt.toLocaleDateString(undefined, {
                   month: 'short',
                   year: 'numeric',
                 }) ?? null
               }
-              type={question.questionType}
+              type={question.type}
               onSimilarQuestionClick={() => {
                 // eslint-disable-next-line no-console
                 console.log('hi!');
@@ -216,11 +211,13 @@ export default function ContributeQuestionForm({
             />
           ))}
           {similarQuestions?.length === 0 && (
-            <p className="text-slate-900 font-semibold">No similar questions found.</p>
+            <p className="font-semibold text-slate-900">
+              No similar questions found.
+            </p>
           )}
         </div>
         <div
-          className="bg-primary-50 flex w-full flex-col gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)] sm:flex-row sm:justify-between"
+          className="bg-primary-50 flex w-full justify-end gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)]"
           style={{
             // Hack to make the background bleed outside the container
             clipPath: 'inset(0 -100vmax)',
@@ -246,7 +243,6 @@ export default function ContributeQuestionForm({
             </button>
             <Button
               className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-slate-400 sm:ml-3 sm:w-auto sm:text-sm"
-              disabled={!checkedSimilar}
               label="Contribute"
               type="submit"
               variant="primary"></Button>

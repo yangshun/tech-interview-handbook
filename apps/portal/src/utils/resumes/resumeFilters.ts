@@ -1,7 +1,8 @@
 export type FilterId = 'experience' | 'location' | 'role';
+export type FilterLabel = 'Experience' | 'Location' | 'Role';
 
 export type CustomFilter = {
-  numComments: number;
+  isUnreviewed: boolean;
 };
 
 export type RoleFilter =
@@ -14,12 +15,9 @@ export type RoleFilter =
 
 export type ExperienceFilter =
   | 'Entry Level (0 - 2 years)'
-  | 'Freshman'
-  | 'Junior'
+  | 'Internship'
   | 'Mid Level (3 - 5 years)'
-  | 'Senior Level (5+ years)'
-  | 'Senior'
-  | 'Sophomore';
+  | 'Senior Level (5+ years)';
 
 export type LocationFilter = 'India' | 'Singapore' | 'United States';
 
@@ -32,12 +30,11 @@ export type FilterOption<T> = {
 
 export type Filter = {
   id: FilterId;
-  label: string;
+  label: FilterLabel;
   options: Array<FilterOption<FilterValue>>;
 };
 
-export type FilterState = Partial<CustomFilter> &
-  Record<FilterId, Array<FilterValue>>;
+export type FilterState = CustomFilter & Record<FilterId, Array<FilterValue>>;
 
 export type SortOrder = 'latest' | 'mostComments' | 'popular';
 
@@ -53,12 +50,6 @@ export const BROWSE_TABS_VALUES = {
   MY: 'my',
   STARRED: 'starred',
 };
-
-// Export const SORT_OPTIONS: Record<string, SortOrder> = {
-//   LATEST: 'latest',
-//   POPULAR: 'popular',
-//   TOPCOMMENTS: 'topComments',
-// };
 
 export const SORT_OPTIONS: Array<FilterOption<SortOrder>> = [
   { label: 'Latest', value: 'latest' },
@@ -79,10 +70,7 @@ export const ROLES: Array<FilterOption<RoleFilter>> = [
 ];
 
 export const EXPERIENCES: Array<FilterOption<ExperienceFilter>> = [
-  { label: 'Freshman', value: 'Freshman' },
-  { label: 'Sophomore', value: 'Sophomore' },
-  { label: 'Junior', value: 'Junior' },
-  { label: 'Senior', value: 'Senior' },
+  { label: 'Internship', value: 'Internship' },
   {
     label: 'Entry Level (0 - 2 years)',
     value: 'Entry Level (0 - 2 years)',
@@ -105,20 +93,24 @@ export const LOCATIONS: Array<FilterOption<LocationFilter>> = [
 
 export const INITIAL_FILTER_STATE: FilterState = {
   experience: Object.values(EXPERIENCES).map(({ value }) => value),
+  isUnreviewed: true,
   location: Object.values(LOCATIONS).map(({ value }) => value),
   role: Object.values(ROLES).map(({ value }) => value),
 };
 
 export const SHORTCUTS: Array<Shortcut> = [
   {
-    filters: INITIAL_FILTER_STATE,
+    filters: {
+      ...INITIAL_FILTER_STATE,
+      isUnreviewed: false,
+    },
     name: 'All',
     sortOrder: 'latest',
   },
   {
     filters: {
       ...INITIAL_FILTER_STATE,
-      numComments: 0,
+      isUnreviewed: true,
     },
     name: 'Unreviewed',
     sortOrder: 'latest',
@@ -127,18 +119,23 @@ export const SHORTCUTS: Array<Shortcut> = [
     filters: {
       ...INITIAL_FILTER_STATE,
       experience: ['Entry Level (0 - 2 years)'],
+      isUnreviewed: false,
     },
     name: 'Fresh Grad',
     sortOrder: 'latest',
   },
   {
-    filters: INITIAL_FILTER_STATE,
-    name: 'GOATs',
+    filters: {
+      ...INITIAL_FILTER_STATE,
+      isUnreviewed: false,
+    },
+    name: 'Top 10',
     sortOrder: 'popular',
   },
   {
     filters: {
       ...INITIAL_FILTER_STATE,
+      isUnreviewed: false,
       location: ['United States'],
     },
     name: 'US Only',
@@ -155,3 +152,10 @@ export const isInitialFilterState = (filters: FilterState) =>
       filters[filter as FilterId].includes(value),
     );
   });
+
+export const getFilterLabel = (
+  filters: Array<
+    FilterOption<ExperienceFilter | LocationFilter | RoleFilter | SortOrder>
+  >,
+  filterValue: ExperienceFilter | LocationFilter | RoleFilter | SortOrder,
+) => filters.find(({ value }) => value === filterValue)?.label ?? filterValue;

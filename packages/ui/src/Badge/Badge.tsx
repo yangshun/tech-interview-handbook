@@ -8,6 +8,7 @@ export type BadgeVariant =
   | 'warning';
 
 type Props = Readonly<{
+  endAddOn?: React.ComponentType<React.ComponentProps<'svg'>>;
   label: string;
   variant: BadgeVariant;
 }>;
@@ -41,7 +42,7 @@ const classes: Record<
   },
 };
 
-export default function Badge({ label, variant }: Props) {
+export default function Badge({ endAddOn: EndAddOn, label, variant }: Props) {
   const { backgroundClass, textClass } = classes[variant];
 
   return (
@@ -51,7 +52,8 @@ export default function Badge({ label, variant }: Props) {
         backgroundClass,
         textClass,
       )}>
-      {label}
+      <span>{label}</span>
+      {EndAddOn && <EndAddOn aria-hidden="true" className="ml-1 h-4 w-4" />}
     </span>
   );
 }

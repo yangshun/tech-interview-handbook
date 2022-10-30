@@ -3,6 +3,8 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { Button, Dialog, TextArea } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
+
 import { trpc } from '~/utils/trpc';
 
 type ResumeCommentsFormProps = Readonly<{
@@ -25,6 +27,8 @@ export default function ResumeCommentsForm({
   setShowCommentsForm,
 }: ResumeCommentsFormProps) {
   const [showDialog, setShowDialog] = useState(false);
+  const { event: gaEvent } = useGoogleAnalytics();
+
   const {
     register,
     handleSubmit,
@@ -50,21 +54,49 @@ export default function ResumeCommentsForm({
         trpcContext.invalidateQueries(['resumes.resume.findAll']);
         trpcContext.invalidateQueries(['resumes.resume.user.findUserStarred']);
         trpcContext.invalidateQueries(['resumes.resume.user.findUserCreated']);
+        gaEvent({
+          action: 'resumes.comment_submit',
+          category: 'engagement',
+          label: 'Submit comment',
+        });
       },
     },
   );
+  const invalidateResumeQueries = () => {
+    trpcContext.invalidateQueries(['resumes.resume.findOne']);
+    trpcContext.invalidateQueries(['resumes.resume.findAll']);
+    trpcContext.invalidateQueries(['resumes.resume.user.findUserStarred']);
+    trpcContext.invalidateQueries(['resumes.resume.user.findUserCreated']);
+  };
+
+  const resolveMutation = trpc.useMutation('resumes.resume.user.resolve', {
+    onSuccess() {
+      invalidateResumeQueries();
+    },
+  });
 
   // TODO: Give a feedback to the user if the action succeeds/fails
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
     return await commentCreateMutation.mutate(
       {
         resumeId,
-        ...data,
+        ...formData,
       },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
           // Redirect back to comments section
           setShowCommentsForm(false);
+          const { prevCount, newCount } = data;
+          // Auto mark resume as resolved once the total comments passes the 5 threshold
+          if (
+            (newCount >= 5 && prevCount < 5) ||
+            (newCount >= 15 && prevCount < 15)
+          ) {
+            resolveMutation.mutate({
+              id: resumeId,
+              val: true,
+            });
+          }
         },
       },
     );

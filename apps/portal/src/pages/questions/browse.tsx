@@ -5,36 +5,53 @@ import { useEffect, useMemo, useState } from 'react';
 import { Bars3BottomLeftIcon } from '@heroicons/react/20/solid';
 import { NoSymbolIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
+import type { TypeaheadOption } from '@tih/ui';
 import { Button, SlideOut } from '@tih/ui';
 
 import QuestionOverviewCard from '~/components/questions/card/question/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
 import FilterSection from '~/components/questions/filter/FilterSection';
+import PaginationLoadMoreButton from '~/components/questions/PaginationLoadMoreButton';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 import CompanyTypeahead from '~/components/questions/typeahead/CompanyTypeahead';
 import LocationTypeahead from '~/components/questions/typeahead/LocationTypeahead';
 import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
+import { JobTitleLabels } from '~/components/shared/JobTitles';
 
 import type { QuestionAge } from '~/utils/questions/constants';
-import { SORT_TYPES } from '~/utils/questions/constants';
-import { SORT_ORDERS } from '~/utils/questions/constants';
 import { APP_TITLE } from '~/utils/questions/constants';
 import { QUESTION_AGES, QUESTION_TYPES } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
+import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
 import {
   useSearchParam,
   useSearchParamSingle,
 } from '~/utils/questions/useSearchParam';
 import { trpc } from '~/utils/trpc';
 
+import type { Location } from '~/types/questions.d';
 import { SortType } from '~/types/questions.d';
 import { SortOrder } from '~/types/questions.d';
+
+function locationToSlug(value: Location & TypeaheadOption): string {
+  return [
+    value.countryId,
+    value.stateId,
+    value.cityId,
+    value.id,
+    value.label,
+    value.value,
+  ].join('-');
+}
 
 export default function QuestionsBrowsePage() {
   const router = useRouter();
 
-  const [selectedCompanies, setSelectedCompanies, areCompaniesInitialized] =
-    useSearchParam('companies');
+  const [
+    selectedCompanySlugs,
+    setSelectedCompanySlugs,
+    areCompaniesInitialized,
+  ] = useSearchParam('companies');
   const [
     selectedQuestionTypes,
     setSelectedQuestionTypes,
@@ -68,7 +85,13 @@ export default function QuestionsBrowsePage() {
   const [selectedRoles, setSelectedRoles, areRolesInitialized] =
     useSearchParam('roles');
   const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
-    useSearchParam('locations');
+    useSearchParam<Location & TypeaheadOption>('locations', {
+      paramToString: locationToSlug,
+      stringToParam: (param) => {
+        const [countryId, stateId, cityId, id, label, value] = param.split('-');
+        return { cityId, countryId, id, label, stateId, value };
+      },
+    });
 
   const [sortOrder, setSortOrder, isSortOrderInitialized] =
     useSearchParamSingle<SortOrder>('sortOrder', {
@@ -120,13 +143,13 @@ export default function QuestionsBrowsePage() {
 
   const hasFilters = useMemo(
     () =>
-      selectedCompanies.length > 0 ||
+      selectedCompanySlugs.length > 0 ||
       selectedQuestionTypes.length > 0 ||
       selectedQuestionAge !== 'all' ||
       selectedRoles.length > 0 ||
       selectedLocations.length > 0,
     [
-      selectedCompanies,
+      selectedCompanySlugs,
       selectedQuestionTypes,
       selectedQuestionAge,
       selectedRoles,
@@ -145,24 +168,24 @@ export default function QuestionsBrowsePage() {
       : undefined;
   }, [selectedQuestionAge]);
 
-  const {
-    data: questionsQueryData,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = trpc.useInfiniteQuery(
+  const questionsInfiniteQuery = trpc.useInfiniteQuery(
     [
       'questions.questions.getQuestionsByFilter',
       {
-        companyNames: selectedCompanies,
+        // TODO: Enable filtering by countryIds and stateIds
+        cityIds: selectedLocations
+          .map(({ cityId }) => cityId)
+          .filter((id) => id !== undefined) as Array<string>,
+        companyIds: selectedCompanySlugs.map((slug) => slug.split('_')[0]),
+        countryIds: [],
         endDate: today,
         limit: 10,
-        locations: selectedLocations,
         questionTypes: selectedQuestionTypes,
         roles: selectedRoles,
         sortOrder,
         sortType,
         startDate,
+        stateIds: [],
       },
     ],
     {
@@ -171,19 +194,21 @@ export default function QuestionsBrowsePage() {
     },
   );
 
+  const { data: questionsQueryData } = questionsInfiniteQuery;
+
   const questionCount = useMemo(() => {
     if (!questionsQueryData) {
       return undefined;
     }
     return questionsQueryData.pages.reduce(
-      (acc, page) => acc + page.data.length,
+      (acc, page) => acc + (page.data.length as number),
       0,
     );
   }, [questionsQueryData]);
 
   const utils = trpc.useContext();
   const { mutate: createQuestion } = trpc.useMutation(
-    'questions.questions.create',
+    'questions.questions.user.create',
     {
       onSuccess: () => {
         utils.invalidateQueries('questions.questions.getQuestionsByFilter');
@@ -237,8 +262,8 @@ export default function QuestionsBrowsePage() {
       Router.replace({
         pathname,
         query: {
-          companies: selectedCompanies,
-          locations: selectedLocations,
+          companies: selectedCompanySlugs,
+          locations: selectedLocations.map(locationToSlug),
           questionAge: selectedQuestionAge,
           questionTypes: selectedQuestionTypes,
           roles: selectedRoles,
@@ -253,7 +278,7 @@ export default function QuestionsBrowsePage() {
     areSearchOptionsInitialized,
     loaded,
     pathname,
-    selectedCompanies,
+    selectedCompanySlugs,
     selectedRoles,
     selectedLocations,
     selectedQuestionAge,
@@ -263,19 +288,22 @@ export default function QuestionsBrowsePage() {
   ]);
 
   const selectedCompanyOptions = useMemo(() => {
-    return selectedCompanies.map((company) => ({
-      checked: true,
-      id: company,
-      label: company,
-      value: company,
-    }));
-  }, [selectedCompanies]);
+    return selectedCompanySlugs.map((company) => {
+      const [id, label] = company.split('_');
+      return {
+        checked: true,
+        id,
+        label,
+        value: id,
+      };
+    });
+  }, [selectedCompanySlugs]);
 
   const selectedRoleOptions = useMemo(() => {
     return selectedRoles.map((role) => ({
       checked: true,
       id: role,
-      label: role,
+      label: JobTitleLabels[role as keyof typeof JobTitleLabels],
       value: role,
     }));
   }, [selectedRoles]);
@@ -283,9 +311,7 @@ export default function QuestionsBrowsePage() {
   const selectedLocationOptions = useMemo(() => {
     return selectedLocations.map((location) => ({
       checked: true,
-      id: location,
-      label: location,
-      value: location,
+      ...location,
     }));
   }, [selectedLocations]);
 
@@ -303,7 +329,7 @@ export default function QuestionsBrowsePage() {
         label="Clear filters"
         variant="tertiary"
         onClick={() => {
-          setSelectedCompanies([]);
+          setSelectedCompanySlugs([]);
           setSelectedQuestionTypes([]);
           setSelectedQuestionAge('all');
           setSelectedRoles([]);
@@ -318,13 +344,14 @@ export default function QuestionsBrowsePage() {
             {...field}
             clearOnSelect={true}
             filterOption={(option) => {
-              return !selectedCompanies.some((company) => {
-                return company === option.value;
+              return !selectedCompanySlugs.some((companySlug) => {
+                return companySlug === `${option.id}_${option.label}`;
               });
             }}
             isLabelHidden={true}
             placeholder="Search companies"
             onSelect={(option) => {
+              // @ts-ignore TODO(questions): handle potentially null value.
               onOptionChange({
                 ...option,
                 checked: true,
@@ -334,10 +361,15 @@ export default function QuestionsBrowsePage() {
         )}
         onOptionChange={(option) => {
           if (option.checked) {
-            setSelectedCompanies([...selectedCompanies, option.label]);
+            setSelectedCompanySlugs([
+              ...selectedCompanySlugs,
+              `${option.id}_${option.label}`,
+            ]);
           } else {
-            setSelectedCompanies(
-              selectedCompanies.filter((company) => company !== option.label),
+            setSelectedCompanySlugs(
+              selectedCompanySlugs.filter(
+                (companySlug) => companySlug !== `${option.id}_${option.label}`,
+              ),
             );
           }
         }}
@@ -345,7 +377,10 @@ export default function QuestionsBrowsePage() {
       <FilterSection
         label="Roles"
         options={selectedRoleOptions}
-        renderInput={({ onOptionChange, field: { ref: _, ...field } }) => (
+        renderInput={({
+          onOptionChange,
+          field: { ref: _, onChange: __, ...field },
+        }) => (
           <RoleTypeahead
             {...field}
             clearOnSelect={true}
@@ -357,6 +392,7 @@ export default function QuestionsBrowsePage() {
             isLabelHidden={true}
             placeholder="Search roles"
             onSelect={(option) => {
+              // @ts-ignore TODO(questions): handle potentially null value.
               onOptionChange({
                 ...option,
                 checked: true,
@@ -369,7 +405,7 @@ export default function QuestionsBrowsePage() {
             setSelectedRoles([...selectedRoles, option.value]);
           } else {
             setSelectedRoles(
-              selectedCompanies.filter((role) => role !== option.value),
+              selectedRoles.filter((role) => role !== option.value),
             );
           }
         }}
@@ -402,18 +438,22 @@ export default function QuestionsBrowsePage() {
       <FilterSection
         label="Locations"
         options={selectedLocationOptions}
-        renderInput={({ onOptionChange, field: { ref: _, ...field } }) => (
+        renderInput={({
+          onOptionChange,
+          field: { ref: _, onChange: __, ...field },
+        }) => (
           <LocationTypeahead
             {...field}
             clearOnSelect={true}
             filterOption={(option) => {
               return !selectedLocations.some((location) => {
-                return location === option.value;
+                return location.id === option.id;
               });
             }}
             isLabelHidden={true}
             placeholder="Search locations"
             onSelect={(option) => {
+              // @ts-ignore TODO(offers): fix potentially empty value.
               onOptionChange({
                 ...option,
                 checked: true,
@@ -423,10 +463,14 @@ export default function QuestionsBrowsePage() {
         )}
         onOptionChange={(option) => {
           if (option.checked) {
-            setSelectedLocations([...selectedLocations, option.value]);
+            // TODO: Fix type inference, then remove the `as` cast.
+            setSelectedLocations([
+              ...selectedLocations,
+              option as unknown as Location & TypeaheadOption,
+            ]);
           } else {
             setSelectedLocations(
-              selectedLocations.filter((role) => role !== option.value),
+              selectedLocations.filter((location) => location.id !== option.id),
             );
           }
         }}
@@ -442,24 +486,25 @@ export default function QuestionsBrowsePage() {
       <main className="flex flex-1 flex-col items-stretch">
         <div className="flex h-full flex-1">
           <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
-            <div className="flex min-h-0 max-w-3xl flex-1 p-4">
-              <div className="flex flex-1 flex-col items-stretch justify-start gap-8">
-                <ContributeQuestionCard
-                  onSubmit={(data) => {
-                    createQuestion({
-                      companyId: data.company,
-                      content: data.questionContent,
-                      location: data.location,
-                      questionType: data.questionType,
-                      role: data.role,
-                      seenAt: data.date,
-                    });
-                  }}
-                />
+            <div className="m-4 flex max-w-3xl flex-1 flex-col items-stretch justify-start gap-8">
+              <ContributeQuestionCard
+                onSubmit={(data) => {
+                  const { cityId, countryId, stateId } = data.location;
+                  createQuestion({
+                    cityId,
+                    companyId: data.company,
+                    content: data.questionContent,
+                    countryId,
+                    questionType: data.questionType,
+                    role: data.role.value,
+                    seenAt: data.date,
+                    stateId,
+                  });
+                }}
+              />
+              <div className="sticky top-0 border-b border-slate-300 bg-slate-50 py-4">
                 <QuestionSearchBar
-                  sortOrderOptions={SORT_ORDERS}
                   sortOrderValue={sortOrder}
-                  sortTypeOptions={SORT_TYPES}
                   sortTypeValue={sortType}
                   onFilterOptionsToggle={() => {
                     setFilterDrawerOpen(!filterDrawerOpen);
@@ -467,28 +512,29 @@ export default function QuestionsBrowsePage() {
                   onSortOrderChange={setSortOrder}
                   onSortTypeChange={setSortType}
                 />
-                <div className="flex flex-col gap-2 pb-4">
-                  {(questionsQueryData?.pages ?? []).flatMap(
-                    ({ data: questions }) =>
-                      questions.map((question) => (
+              </div>
+              <div className="flex flex-col gap-2 pb-4">
+                {(questionsQueryData?.pages ?? []).flatMap(
+                  ({ data: questions }) =>
+                    questions.map((question) => {
+                      const { companyCounts, countryCounts, roleCounts } =
+                        relabelQuestionAggregates(
+                          question.aggregatedQuestionEncounters,
+                        );
+
+                      return (
                         <QuestionOverviewCard
                           key={question.id}
                           answerCount={question.numAnswers}
-                          companies={
-                            question.aggregatedQuestionEncounters.companyCounts
-                          }
+                          companies={companyCounts}
                           content={question.content}
+                          countries={countryCounts}
                           href={`/questions/${question.id}/${createSlug(
                             question.content,
                           )}`}
-                          locations={
-                            question.aggregatedQuestionEncounters.locationCounts
-                          }
                           questionId={question.id}
                           receivedCount={question.receivedCount}
-                          roles={
-                            question.aggregatedQuestionEncounters.roleCounts
-                          }
+                          roles={roleCounts}
                           timestamp={question.seenAt.toLocaleDateString(
                             undefined,
                             {
@@ -499,25 +545,17 @@ export default function QuestionsBrowsePage() {
                           type={question.type}
                           upvoteCount={question.numVotes}
                         />
-                      )),
-                  )}
-                  <Button
-                    disabled={!hasNextPage || isFetchingNextPage}
-                    isLoading={isFetchingNextPage}
-                    label={hasNextPage ? 'Load more' : 'Nothing more to load'}
-                    variant="tertiary"
-                    onClick={() => {
-                      fetchNextPage();
-                    }}
-                  />
-                  {questionCount === 0 && (
-                    <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
-                      <NoSymbolIcon className="h-6 w-6" />
-                      <p>Nothing found.</p>
-                      {hasFilters && <p>Try changing your search criteria.</p>}
-                    </div>
-                  )}
-                </div>
+                      );
+                    }),
+                )}
+                <PaginationLoadMoreButton query={questionsInfiniteQuery} />
+                {questionCount === 0 && (
+                  <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
+                    <NoSymbolIcon className="h-6 w-6" />
+                    <p>Nothing found.</p>
+                    {hasFilters && <p>Try changing your search criteria.</p>}
+                  </div>
+                )}
               </div>
             </div>
           </section>
