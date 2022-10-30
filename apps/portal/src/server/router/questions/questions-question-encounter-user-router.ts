@@ -1,38 +1,22 @@
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
 
-import { createAggregatedQuestionEncounter } from '~/utils/questions/server/aggregate-encounters';
+import { JobTitleLabels } from '~/components/shared/JobTitles';
 
 import { createProtectedRouter } from '../context';
 
 import { SortOrder } from '~/types/questions.d';
 
 export const questionsQuestionEncounterUserRouter = createProtectedRouter()
-  .query('getAggregatedEncounters', {
-    input: z.object({
-      questionId: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const questionEncountersData =
-        await ctx.prisma.questionsQuestionEncounter.findMany({
-          include: {
-            company: true,
-          },
-          where: {
-            ...input,
-          },
-        });
-
-      return createAggregatedQuestionEncounter(questionEncountersData);
-    },
-  })
   .mutation('create', {
     input: z.object({
+      cityId: z.string().nullish(),
       companyId: z.string(),
-      location: z.string(),
+      countryId: z.string(),
       questionId: z.string(),
-      role: z.string(),
+      role: z.nativeEnum(JobTitleLabels),
       seenAt: z.date(),
+      stateId: z.string().nullish(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
@@ -94,7 +78,7 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
           },
         });
 
-      if (questionEncounterToUpdate?.id !== userId) {
+      if (questionEncounterToUpdate?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -157,7 +141,7 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
           },
         });
 
-      if (questionEncounterToDelete?.id !== userId) {
+      if (questionEncounterToDelete?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',

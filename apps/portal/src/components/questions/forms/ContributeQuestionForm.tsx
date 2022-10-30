@@ -1,9 +1,10 @@
 import { startOfMonth } from 'date-fns';
 import { Controller, useForm } from 'react-hook-form';
 import type { QuestionsQuestionType } from '@prisma/client';
+import type { TypeaheadOption } from '@tih/ui';
 import { Button, HorizontalDivider, Select, TextArea } from '@tih/ui';
 
-import { LOCATIONS, QUESTION_TYPES, ROLES } from '~/utils/questions/constants';
+import { QUESTION_TYPES } from '~/utils/questions/constants';
 import {
   useFormRegister,
   useSelectRegister,
@@ -15,14 +16,16 @@ import RoleTypeahead from '../typeahead/RoleTypeahead';
 import type { Month } from '../../shared/MonthYearPicker';
 import MonthYearPicker from '../../shared/MonthYearPicker';
 
+import type { Location } from '~/types/questions';
+
 export type ContributeQuestionData = {
   company: string;
   date: Date;
-  location: string;
+  location: Location & TypeaheadOption;
   position: string;
   questionContent: string;
   questionType: QuestionsQuestionType;
-  role: string;
+  role: TypeaheadOption;
 };
 
 export type ContributeQuestionFormProps = {
@@ -79,15 +82,12 @@ export default function ContributeQuestionForm({
               name="location"
               render={({ field }) => (
                 <LocationTypeahead
+                  {...field}
                   required={true}
                   onSelect={(option) => {
                     // @ts-ignore TODO(questions): handle potentially null value.
-                    field.onChange(option.value);
+                    field.onChange(option);
                   }}
-                  {...field}
-                  value={LOCATIONS.find(
-                    (location) => location.value === field.value,
-                  )}
                 />
               )}
             />
@@ -117,8 +117,9 @@ export default function ContributeQuestionForm({
             <Controller
               control={control}
               name="company"
-              render={({ field }) => (
+              render={({ field: { value: _, ...field } }) => (
                 <CompanyTypeahead
+                  {...field}
                   required={true}
                   // @ts-ignore TODO(questions): handle potentially null value.
                   onSelect={({ id }) => {
@@ -134,13 +135,12 @@ export default function ContributeQuestionForm({
               name="role"
               render={({ field }) => (
                 <RoleTypeahead
+                  {...field}
                   required={true}
                   onSelect={(option) => {
                     // @ts-ignore TODO(questions): handle potentially null value.
-                    field.onChange(option.value);
+                    field.onChange(option);
                   }}
-                  {...field}
-                  value={ROLES.find((role) => role.value === field.value)}
                 />
               )}
             />

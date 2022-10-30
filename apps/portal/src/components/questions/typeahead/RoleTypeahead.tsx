@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { JobTitleLabels } from '~/components/shared/JobTitles';
 
 import type { ExpandedTypeaheadProps } from './ExpandedTypeahead';
@@ -17,13 +19,16 @@ const ROLES: FilterChoices = Object.entries(JobTitleLabels).map(
   }),
 );
 export default function RoleTypeahead(props: RoleTypeaheadProps) {
+  const [query, setQuery] = useState('');
+
   return (
     <ExpandedTypeahead
       {...(props as ExpandedTypeaheadProps)}
       label="Role"
-      options={ROLES}
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      onQueryChange={() => {}}
+      options={ROLES.filter((option) =>
+        option.label.toLowerCase().includes(query.toLowerCase()),
+      )}
+      onQueryChange={setQuery}
     />
   );
 }

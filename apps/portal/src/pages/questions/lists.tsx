@@ -174,7 +174,7 @@ export default function ListPage() {
                   <div className="flex flex-col gap-4 pb-4">
                     {lists[selectedListIndex].questionEntries.map(
                       ({ question, id: entryId }) => {
-                        const { companyCounts, locationCounts, roleCounts } =
+                        const { companyCounts, countryCounts, roleCounts } =
                           relabelQuestionAggregates(
                             question.aggregatedQuestionEncounters,
                           );
@@ -184,10 +184,10 @@ export default function ListPage() {
                             key={question.id}
                             companies={companyCounts}
                             content={question.content}
+                            countries={countryCounts}
                             href={`/questions/${question.id}/${createSlug(
                               question.content,
                             )}`}
-                            locations={locationCounts}
                             questionId={question.id}
                             receivedCount={question.receivedCount}
                             roles={roleCounts}

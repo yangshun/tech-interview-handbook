@@ -5,16 +5,42 @@ import { TRPCError } from '@trpc/server';
 import { createRouter } from '../context';
 
 import type { Answer } from '~/types/questions';
+import { SortOrder, SortType } from '~/types/questions.d';
 
 export const questionsAnswerRouter = createRouter()
   .query('getAnswers', {
     input: z.object({
+      cursor: z.string().nullish(),
+      limit: z.number().min(1).default(50),
       questionId: z.string(),
+      sortOrder: z.nativeEnum(SortOrder),
+      sortType: z.nativeEnum(SortType),
     }),
     async resolve({ ctx, input }) {
-      const { questionId } = input;
+      const { questionId, cursor } = input;
+
+      const sortCondition =
+        input.sortType === SortType.TOP
+          ? [
+              {
+                upvotes: input.sortOrder,
+              },
+              {
+                id: input.sortOrder,
+              },
+            ]
+          : [
+              {
+                updatedAt: input.sortOrder,
+              },
+              {
+                id: input.sortOrder,
+              },
+            ];
+
 
       const answersData = await ctx.prisma.questionsAnswer.findMany({
+        cursor: cursor ? { id: cursor } : undefined,
         include: {
           _count: {
             select: {
@@ -29,14 +55,14 @@ export const questionsAnswerRouter = createRouter()
           },
           votes: true,
         },
-        orderBy: {
-          createdAt: 'desc',
-        },
+        orderBy: sortCondition,
+        take: input.limit + 1,
         where: {
           questionId,
         },
       });
-      return answersData.map((data) => {
+
+      const processedAnswersData = answersData.map((data) => {
         const votes: number = data.votes.reduce(
           (previousValue: number, currentValue) => {
             let result: number = previousValue;
@@ -65,6 +91,22 @@ export const questionsAnswerRouter = createRouter()
         };
         return answer;
       });
+
+      let nextCursor: typeof cursor | undefined = undefined;
+
+      if (answersData.length > input.limit) {
+        const nextItem = answersData.pop()!;
+        processedAnswersData.pop();
+
+        const nextIdCursor: string | undefined = nextItem.id;
+
+        nextCursor = nextIdCursor;
+      }
+
+      return {
+        nextCursor,
+        processedAnswersData,
+      }
     },
   })
   .query('getAnswerById', {

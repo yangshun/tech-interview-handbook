@@ -9,11 +9,15 @@ import CompanyTypeahead from '../typeahead/CompanyTypeahead';
 import LocationTypeahead from '../typeahead/LocationTypeahead';
 import RoleTypeahead from '../typeahead/RoleTypeahead';
 
+import type { Location } from '~/types/questions';
+
 export type CreateQuestionEncounterData = {
+  cityId?: string;
   company: string;
-  location: string;
+  countryId: string;
   role: string;
   seenAt: Date;
+  stateId?: string;
 };
 
 export type CreateQuestionEncounterFormProps = {
@@ -28,7 +32,9 @@ export default function CreateQuestionEncounterForm({
   const [step, setStep] = useState(0);
 
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(
+    null,
+  );
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date>(
     startOfMonth(new Date()),
@@ -61,10 +67,10 @@ export default function CreateQuestionEncounterForm({
             placeholder="Other location"
             suggestedCount={3}
             // @ts-ignore TODO(questions): handle potentially null value.
-            onSelect={({ value: location }) => {
+            onSelect={(location) => {
               setSelectedLocation(location);
             }}
-            onSuggestionClick={({ value: location }) => {
+            onSuggestionClick={(location) => {
               setSelectedLocation(location);
               setStep(step + 1);
             }}
@@ -130,11 +136,14 @@ export default function CreateQuestionEncounterForm({
               selectedRole &&
               selectedDate
             ) {
+              const { cityId, stateId, countryId } = selectedLocation;
               onSubmit({
+                cityId,
                 company: selectedCompany,
-                location: selectedLocation,
+                countryId,
                 role: selectedRole,
                 seenAt: selectedDate,
+                stateId,
               });
             }
           }}

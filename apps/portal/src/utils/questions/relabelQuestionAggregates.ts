@@ -3,10 +3,8 @@ import { JobTitleLabels } from '~/components/shared/JobTitles';
 import type { AggregatedQuestionEncounter } from '~/types/questions';
 
 export default function relabelQuestionAggregates({
-  locationCounts,
-  companyCounts,
   roleCounts,
-  latestSeenAt,
+  ...rest
 }: AggregatedQuestionEncounter) {
   const newRoleCounts = Object.fromEntries(
     Object.entries(roleCounts).map(([roleId, count]) => [
@@ -16,10 +14,8 @@ export default function relabelQuestionAggregates({
   );
 
   const relabeledAggregate: AggregatedQuestionEncounter = {
-    companyCounts,
-    latestSeenAt,
-    locationCounts,
     roleCounts: newRoleCounts,
+    ...rest,
   };
 
   return relabeledAggregate;

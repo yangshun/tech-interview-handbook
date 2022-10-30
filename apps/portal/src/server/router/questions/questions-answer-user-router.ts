@@ -39,7 +39,7 @@ export const questionsAnswerUserRouter = createProtectedRouter()
         },
       });
 
-      if (answerToUpdate?.id !== userId) {
+      if (answerToUpdate?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -69,7 +69,7 @@ export const questionsAnswerUserRouter = createProtectedRouter()
         },
       });
 
-      if (answerToDelete?.id !== userId) {
+      if (answerToDelete?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -98,27 +98,234 @@ export const questionsAnswerUserRouter = createProtectedRouter()
       });
     },
   })
-  .mutation('createVote', {
+  .mutation('setUpVote', {
     input: z.object({
       answerId: z.string(),
-      vote: z.nativeEnum(Vote),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
+      const { answerId } = input;
 
-      const { answerId, vote } = input;
-
-      const incrementValue = vote === Vote.UPVOTE ? 1 : -1;
-
-      const [answerVote] = await ctx.prisma.$transaction([
-        ctx.prisma.questionsAnswerVote.create({
-          data: {
-            answerId,
-            userId,
-            vote,
+      return await ctx.prisma.$transaction(async (tx) => {
+        const answerToUpdate = await tx.questionsAnswer.findUnique({
+          where: {
+            id: answerId,
           },
-        }),
-        ctx.prisma.questionsAnswer.update({
+        });
+
+        if (answerToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Answer do not exist.',
+          });
+        }
+
+        const vote = await tx.questionsAnswerVote.findUnique({
+          where: {
+            answerId_userId: { answerId, userId },
+          },
+        });
+
+        if (vote === null) {
+          const createdVote = await tx.questionsAnswerVote.create({
+            data: {
+              answerId,
+              userId,
+              vote: Vote.UPVOTE,
+            },
+          });
+
+          await tx.questionsAnswer.update({
+            data: {
+              upvotes: {
+                increment: 1,
+              },
+            },
+            where: {
+              id: answerId,
+            },
+          });
+
+          return createdVote;
+        }
+
+        if (vote!.userId !== userId) {
+          throw new TRPCError({
+            code: 'UNAUTHORIZED',
+            message: 'User have no authorization to record.',
+          });
+        }
+
+        if (vote!.vote === Vote.UPVOTE) {
+          return vote;
+        }
+
+        if (vote.vote === Vote.DOWNVOTE) {
+          const updatedVote = await tx.questionsAnswerVote.update({
+            data: {
+              answerId,
+              userId,
+              vote: Vote.UPVOTE,
+            },
+            where: {
+              id: vote.id,
+            },
+          });
+
+          await tx.questionsAnswer.update({
+            data: {
+              upvotes: {
+                increment: 2,
+              },
+            },
+            where: {
+              id: answerId,
+            },
+          });
+
+          return updatedVote;
+        }
+      });
+    },
+  })
+  .mutation('setDownVote', {
+    input: z.object({
+      answerId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+      const { answerId } = input;
+
+      return await ctx.prisma.$transaction(async (tx) => {
+        const answerToUpdate = await tx.questionsAnswer.findUnique({
+          where: {
+            id: answerId,
+          },
+        });
+
+        if (answerToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Answer do not exist.',
+          });
+        }
+
+        const vote = await tx.questionsAnswerVote.findUnique({
+          where: {
+            answerId_userId: { answerId, userId },
+          },
+        });
+
+        if (vote === null) {
+          const createdVote = await tx.questionsAnswerVote.create({
+            data: {
+              answerId,
+              userId,
+              vote: Vote.DOWNVOTE,
+            },
+          });
+
+          await tx.questionsAnswer.update({
+            data: {
+              upvotes: {
+                increment: -1,
+              },
+            },
+            where: {
+              id: answerId,
+            },
+          });
+
+          return createdVote;
+        }
+
+        if (vote!.userId !== userId) {
+          throw new TRPCError({
+            code: 'UNAUTHORIZED',
+            message: 'User have no authorization to record.',
+          });
+        }
+
+        if (vote!.vote === Vote.DOWNVOTE) {
+          return vote;
+        }
+
+        if (vote.vote === Vote.UPVOTE) {
+          const updatedVote = await tx.questionsAnswerVote.update({
+            data: {
+              answerId,
+              userId,
+              vote: Vote.DOWNVOTE,
+            },
+            where: {
+              id: vote.id,
+            },
+          });
+
+          await tx.questionsAnswer.update({
+            data: {
+              upvotes: {
+                increment: -2,
+              },
+            },
+            where: {
+              id: answerId,
+            },
+          });
+
+          return updatedVote;
+        }
+      });
+    },
+  })
+  .mutation('setNoVote', {
+    input: z.object({
+      answerId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+      const { answerId } = input;
+
+      return await ctx.prisma.$transaction(async (tx) => {
+        const answerToUpdate = await tx.questionsAnswer.findUnique({
+          where: {
+            id: answerId,
+          },
+        });
+
+        if (answerToUpdate === null) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Answer do not exist.',
+          });
+        }
+
+        const voteToDelete = await tx.questionsAnswerVote.findUnique({
+          where: {
+            answerId_userId: { answerId, userId },
+          },
+        });
+
+        if (voteToDelete === null) {
+          return null;
+        }
+
+        if (voteToDelete!.userId !== userId) {
+          throw new TRPCError({
+            code: 'UNAUTHORIZED',
+            message: 'User have no authorization to record.',
+          });
+        }
+
+        const incrementValue = voteToDelete!.vote === Vote.UPVOTE ? -1 : 1;
+
+        await tx.questionsAnswerVote.delete({
+          where: {
+            id: voteToDelete.id,
+          },
+        });
+
+        await tx.questionsAnswer.update({
           data: {
             upvotes: {
               increment: incrementValue,
@@ -127,98 +334,9 @@ export const questionsAnswerUserRouter = createProtectedRouter()
           where: {
             id: answerId,
           },
-        }),
-      ]);
-      return answerVote;
-    },
-  })
-  .mutation('updateVote', {
-    input: z.object({
-      id: z.string(),
-      vote: z.nativeEnum(Vote),
-    }),
-    async resolve({ ctx, input }) {
-      const userId = ctx.session?.user?.id;
-      const { id, vote } = input;
-
-      const voteToUpdate = await ctx.prisma.questionsAnswerVote.findUnique({
-        where: {
-          id: input.id,
-        },
-      });
-
-      if (voteToUpdate?.userId !== userId) {
-        throw new TRPCError({
-          code: 'UNAUTHORIZED',
-          message: 'User have no authorization to record.',
         });
-      }
 
-      const incrementValue = vote === Vote.UPVOTE ? 2 : -2;
-
-      const [questionsAnswerVote] = await ctx.prisma.$transaction([
-        ctx.prisma.questionsAnswerVote.update({
-          data: {
-            vote,
-          },
-          where: {
-            id,
-          },
-        }),
-        ctx.prisma.questionsAnswer.update({
-          data: {
-            upvotes: {
-              increment: incrementValue,
-            },
-          },
-          where: {
-            id: voteToUpdate.answerId,
-          },
-        }),
-      ]);
-
-      return questionsAnswerVote;
-    },
-  })
-  .mutation('deleteVote', {
-    input: z.object({
-      id: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const userId = ctx.session?.user?.id;
-
-      const voteToDelete = await ctx.prisma.questionsAnswerVote.findUnique({
-        where: {
-          id: input.id,
-        },
+        return voteToDelete;
       });
-
-      if (voteToDelete?.userId !== userId) {
-        throw new TRPCError({
-          code: 'UNAUTHORIZED',
-          message: 'User have no authorization to record.',
-        });
-      }
-
-      const incrementValue = voteToDelete.vote === Vote.UPVOTE ? -1 : 1;
-
-      const [questionsAnswerVote] = await ctx.prisma.$transaction([
-        ctx.prisma.questionsAnswerVote.delete({
-          where: {
-            id: input.id,
-          },
-        }),
-        ctx.prisma.questionsAnswer.update({
-          data: {
-            upvotes: {
-              increment: incrementValue,
-            },
-          },
-          where: {
-            id: voteToDelete.answerId,
-          },
-        }),
-      ]);
-      return questionsAnswerVote;
     },
   });
