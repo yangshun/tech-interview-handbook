@@ -10,6 +10,7 @@ type Props = Readonly<{
   onSelect: (option: TypeaheadOption | null) => void;
   placeholder?: string;
   required?: boolean;
+  value?: TypeaheadOption | null;
 }>;
 
 export default function JobTitlesTypeahead({
@@ -18,6 +19,7 @@ export default function JobTitlesTypeahead({
   isLabelHidden,
   placeholder,
   required,
+  value,
 }: Props) {
   const [query, setQuery] = useState('');
   const options = Object.entries(JobTitleLabels)
@@ -42,6 +44,7 @@ export default function JobTitlesTypeahead({
       placeholder={placeholder}
       required={required}
       textSize="inherit"
+      value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}
     />

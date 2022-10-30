@@ -37,7 +37,7 @@ type Props = Readonly<{
   onSelect: (option: TypeaheadOption | null) => void;
   options: ReadonlyArray<TypeaheadOption>;
   textSize?: TypeaheadTextSize;
-  value?: TypeaheadOption;
+  value?: TypeaheadOption | null;
 }> &
   Readonly<Attributes>;
 
@@ -90,6 +90,8 @@ export default function Typeahead({
   return (
     <div>
       <Combobox
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         by="id"
         disabled={disabled}
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -104,7 +106,7 @@ export default function Typeahead({
         onChange={(newValue) => {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          onSelect(newValue as TypeaheadOption);
+          onSelect(newValue as TypeaheadOption | null);
         }}>
         <Combobox.Label
           className={clsx(
