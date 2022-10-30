@@ -55,7 +55,7 @@ export default function HomePage() {
           <pre>{JSON.stringify(selectedCountry, null, 2)}</pre>
           <HorizontalDivider />
           <CitiesTypeahead onSelect={(option) => setSelectedCity(option)} />
-          <pre>{JSON.stringify(selectedCountry, null, 2)}</pre>
+          <pre>{JSON.stringify(selectedCity, null, 2)}</pre>
         </div>
         <div className="space-y-4">
           <MonthYearPicker
