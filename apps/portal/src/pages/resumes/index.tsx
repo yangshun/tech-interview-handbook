@@ -427,12 +427,9 @@ export default function ResumeHomePage() {
                                 {filter.options.map((option) => (
                                   <div
                                     key={option.value}
-                                    className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 [&>div>div:nth-child(2)>label]:font-normal">
+                                    className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 flex items-center px-1 text-sm [&>div>div:nth-child(2)>label]:font-normal">
                                     <CheckboxInput
-                                      label={`${option.label} (${getFilterCount(
-                                        filter.label,
-                                        option.label,
-                                      )})`}
+                                      label={option.label}
                                       value={userFilters[filter.id].includes(
                                         option.value,
                                       )}
@@ -444,6 +441,14 @@ export default function ResumeHomePage() {
                                         )
                                       }
                                     />
+                                    <span className="ml-1 text-slate-500">
+                                      (
+                                      {getFilterCount(
+                                        filter.label,
+                                        option.label,
+                                      )}
+                                      )
+                                    </span>
                                   </div>
                                 ))}
                               </div>
@@ -527,12 +532,9 @@ export default function ResumeHomePage() {
                             {filter.options.map((option) => (
                               <div
                                 key={option.value}
-                                className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 px-1 [&>div>div:nth-child(2)>label]:font-normal">
+                                className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 flex items-center px-1 text-sm [&>div>div:nth-child(2)>label]:font-normal">
                                 <CheckboxInput
-                                  label={`${option.label} (${getFilterCount(
-                                    filter.label,
-                                    option.label,
-                                  )})`}
+                                  label={option.label}
                                   value={userFilters[filter.id].includes(
                                     option.value,
                                   )}
@@ -544,6 +546,9 @@ export default function ResumeHomePage() {
                                     )
                                   }
                                 />
+                                <span className="ml-1 text-slate-500">
+                                  ({getFilterCount(filter.label, option.label)})
+                                </span>
                               </div>
                             ))}
                           </CheckboxList>
