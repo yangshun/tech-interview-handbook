@@ -8,6 +8,7 @@ import { CheckboxInput } from '@tih/ui';
 import { Button, HorizontalDivider, Select, TextArea } from '@tih/ui';
 
 import { QUESTION_TYPES } from '~/utils/questions/constants';
+import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
 import {
   useFormRegister,
   useSelectRegister,
@@ -35,12 +36,14 @@ export type ContributeQuestionData = {
 
 export type ContributeQuestionFormProps = {
   onDiscard: () => void;
+  onSimilarQuestionFound: () => void;
   onSubmit: (data: ContributeQuestionData) => void;
 };
 
 export default function ContributeQuestionForm({
-  onSubmit,
   onDiscard,
+  onSimilarQuestionFound,
+  onSubmit,
 }: ContributeQuestionFormProps) {
   const {
     control,
@@ -61,6 +64,21 @@ export default function ContributeQuestionForm({
       keepPreviousData: true,
     },
   );
+
+  const utils = trpc.useContext();
+
+  const { mutateAsync: addEncounterAsync } = trpc.useMutation(
+    'questions.questions.encounters.user.create',
+    {
+      onSuccess: () => {
+        utils.invalidateQueries(
+          'questions.questions.encounters.getAggregatedEncounters',
+        );
+        utils.invalidateQueries('questions.questions.getQuestionById');
+      },
+    },
+  );
+
   const questionContent = watch('questionContent');
   const register = useFormRegister(formRegister);
   const selectRegister = useSelectRegister(formRegister);
@@ -192,24 +210,42 @@ export default function ContributeQuestionForm({
           }}
         />
         <div className="flex flex-col gap-y-2">
-          {similarQuestions?.map((question) => (
-            <SimilarQuestionCard
-              key={question.id}
-              content={question.content}
-              questionId={question.id}
-              timestamp={
-                question.seenAt.toLocaleDateString(undefined, {
-                  month: 'short',
-                  year: 'numeric',
-                }) ?? null
-              }
-              type={question.type}
-              onSimilarQuestionClick={() => {
-                // eslint-disable-next-line no-console
-                console.log('hi!');
-              }}
-            />
-          ))}
+          {similarQuestions?.map((question) => {
+            const { companyCounts, countryCounts, roleCounts } =
+              relabelQuestionAggregates(question.aggregatedQuestionEncounters);
+
+            return (
+              <SimilarQuestionCard
+                key={question.id}
+                companies={companyCounts}
+                content={question.content}
+                countries={countryCounts}
+                createEncounterButtonText="Yes, this is my question"
+                questionId={question.id}
+                roles={roleCounts}
+                timestamp={
+                  question.seenAt.toLocaleDateString(undefined, {
+                    month: 'short',
+                    year: 'numeric',
+                  }) ?? null
+                }
+                type={question.type}
+                onReceivedSubmit={async (data) => {
+                  await addEncounterAsync({
+                    cityId: data.cityId,
+                    companyId: data.company,
+                    countryId: data.countryId,
+                    questionId: question.id,
+                    role: data.role,
+                    seenAt: data.seenAt,
+                    stateId: data.stateId,
+                  });
+
+                  onSimilarQuestionFound();
+                }}
+              />
+            );
+          })}
           {similarQuestions?.length === 0 && (
             <p className="font-semibold text-slate-900">
               No similar questions found.
@@ -217,7 +253,7 @@ export default function ContributeQuestionForm({
           )}
         </div>
         <div
-          className="bg-primary-50 flex w-full justify-end gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)]"
+          className="bg-primary-50 flex w-full justify-between gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)]"
           style={{
             // Hack to make the background bleed outside the container
             clipPath: 'inset(0 -100vmax)',

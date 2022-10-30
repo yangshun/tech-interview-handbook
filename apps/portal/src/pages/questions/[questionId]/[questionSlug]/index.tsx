@@ -193,6 +193,7 @@ export default function QuestionPage() {
               {...question}
               companies={relabeledAggregatedEncounters?.companyCounts ?? {}}
               countries={relabeledAggregatedEncounters?.countryCounts ?? {}}
+              createEncounterButtonText="I received this too"
               questionId={question.id}
               receivedCount={undefined}
               roles={relabeledAggregatedEncounters?.roleCounts ?? {}}
