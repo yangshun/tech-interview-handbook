@@ -159,7 +159,7 @@ export default function OffersTable({
   }
 
   const handlePageChange = (currPage: number) => {
-    if (0 < currPage && currPage < pagination.numOfPages) {
+    if (0 <= currPage && currPage < pagination.numOfPages) {
       setPagination({ ...pagination, currentPage: currPage });
     }
   };
