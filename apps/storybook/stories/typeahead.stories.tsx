@@ -59,7 +59,7 @@ export function Basic({
     { id: '5', label: 'Tanya Fox', value: '5' },
     { id: '6', label: 'Hellen Schmidt', value: '6' },
   ];
-  const [selectedEntry, setSelectedEntry] = useState<TypeaheadOption>(
+  const [selectedEntry, setSelectedEntry] = useState<TypeaheadOption | null>(
     people[0],
   );
   const [query, setQuery] = useState('');
@@ -102,7 +102,7 @@ export function Required() {
     { id: '5', label: 'Tanya Fox', value: '5' },
     { id: '6', label: 'Hellen Schmidt', value: '6' },
   ];
-  const [selectedEntry, setSelectedEntry] = useState<TypeaheadOption>(
+  const [selectedEntry, setSelectedEntry] = useState<TypeaheadOption | null>(
     people[0],
   );
   const [query, setQuery] = useState('');
@@ -153,7 +153,7 @@ export function Error() {
     { id: '5', label: 'Tanya Fox', value: '5' },
     { id: '6', label: 'Hellen Schmidt', value: '6' },
   ];
-  const [selectedEntry, setSelectedEntry] = useState<TypeaheadOption>(
+  const [selectedEntry, setSelectedEntry] = useState<TypeaheadOption | null>(
     people[0],
   );
   const [query, setQuery] = useState('');
@@ -171,7 +171,7 @@ export function Error() {
   return (
     <Typeahead
       errorMessage={
-        selectedEntry.id === '1' ? 'Cannot select Wade Cooper' : undefined
+        selectedEntry?.id === '1' ? 'Cannot select Wade Cooper' : undefined
       }
       label="Author"
       options={filteredPeople}
