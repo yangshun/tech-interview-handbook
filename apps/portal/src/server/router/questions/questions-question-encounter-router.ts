@@ -15,6 +15,9 @@ export const questionsQuestionEncounterRouter = createRouter().query(
         await ctx.prisma.questionsQuestionEncounter.findMany({
           include: {
             company: true,
+            country: true,
+            city: true,
+            state: true,
           },
           where: {
             ...input,
