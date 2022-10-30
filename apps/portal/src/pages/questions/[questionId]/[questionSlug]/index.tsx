@@ -192,7 +192,7 @@ export default function QuestionPage() {
             <FullQuestionCard
               {...question}
               companies={relabeledAggregatedEncounters?.companyCounts ?? {}}
-              locations={relabeledAggregatedEncounters?.locationCounts ?? {}}
+              countries={relabeledAggregatedEncounters?.countryCounts ?? {}}
               questionId={question.id}
               receivedCount={undefined}
               roles={relabeledAggregatedEncounters?.roleCounts ?? {}}

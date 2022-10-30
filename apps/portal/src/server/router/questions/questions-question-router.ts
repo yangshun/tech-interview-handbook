@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { QuestionsQuestionType } from '@prisma/client';
-import { JobTitleLabels } from '~/components/shared/JobTitles';
 import { TRPCError } from '@trpc/server';
+
+import { JobTitleLabels } from '~/components/shared/JobTitles';
 
 import { createQuestionWithAggregateData } from '~/utils/questions/server/aggregate-encounters';
 
@@ -12,19 +13,18 @@ import { SortOrder, SortType } from '~/types/questions.d';
 export const questionsQuestionRouter = createRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
+      cityIds: z.string().array(),
       companyIds: z.string().array(),
+      countryIds: z.string().array(),
       cursor: z.string().nullish(),
       endDate: z.date().default(new Date()),
       limit: z.number().min(1).default(50),
-      countryIds: z.string().array(),
-      cityIds: z.string().array(),
-      stateIds: z.string().array(),
-      locations: z.string().array(),
       questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
       roles: z.nativeEnum(JobTitleLabels).array(),
       sortOrder: z.nativeEnum(SortOrder),
       sortType: z.nativeEnum(SortType),
       startDate: z.date().optional(),
+      stateIds: z.string().array(),
     }),
     async resolve({ ctx, input }) {
       const { cursor } = input;
@@ -59,12 +59,12 @@ export const questionsQuestionRouter = createRouter()
           },
           encounters: {
             select: {
+              city: true,
               company: true,
               country: true,
-              city: true,
-              state: true,
               role: true,
               seenAt: true,
+              state: true,
             },
           },
           user: {
@@ -99,13 +99,7 @@ export const questionsQuestionRouter = createRouter()
                     },
                   }
                 : {}),
-              ...(input.locations.length > 0
-                ? {
-                    location: {
-                      in: input.locations,
-                    },
-                  }
-                : {}),
+              // TODO: Add filter for cityIds, countryIds, stateIds
               ...(input.roles.length > 0
                 ? {
                     role: {
@@ -154,12 +148,12 @@ export const questionsQuestionRouter = createRouter()
           },
           encounters: {
             select: {
+              city: true,
               company: true,
               country: true,
-              city: true,
-              state: true,
               role: true,
               seenAt: true,
+              state: true,
             },
           },
           user: {
@@ -190,21 +184,23 @@ export const questionsQuestionRouter = createRouter()
     async resolve({ ctx, input }) {
       const escapeChars = /[()|&:*!]/g;
 
-      const query =
-        input.content
-          .replace(escapeChars, " ")
-          .trim()
-          .split(/\s+/)
-          .join(" | ");
+      const query = input.content
+        .replace(escapeChars, ' ')
+        .trim()
+        .split(/\s+/)
+        .join(' | ');
 
-      const relatedQuestionsId : Array<{id:string}> = await ctx.prisma.$queryRaw`
+      const relatedQuestionsId: Array<{ id: string }> = await ctx.prisma
+        .$queryRaw`
         SELECT id FROM "QuestionsQuestion"
         WHERE
           to_tsvector("content") @@ to_tsquery('english', ${query})
         ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 4) DESC;
       `;
 
-      const relatedQuestionsIdArray = relatedQuestionsId.map(current => current.id);
+      const relatedQuestionsIdArray = relatedQuestionsId.map(
+        (current) => current.id,
+      );
 
       const relatedQuestionsData = await ctx.prisma.questionsQuestion.findMany({
         include: {
@@ -216,12 +212,12 @@ export const questionsQuestionRouter = createRouter()
           },
           encounters: {
             select: {
+              city: true,
               company: true,
               country: true,
-              city: true,
-              state: true,
               role: true,
               seenAt: true,
+              state: true,
             },
           },
           user: {
@@ -232,9 +228,9 @@ export const questionsQuestionRouter = createRouter()
           votes: true,
         },
         where: {
-          id : {
-            in : relatedQuestionsIdArray,
-          }
+          id: {
+            in: relatedQuestionsIdArray,
+          },
         },
       });
 
@@ -243,5 +239,5 @@ export const questionsQuestionRouter = createRouter()
       );
 
       return processedQuestionsData;
-    }
+    },
   });

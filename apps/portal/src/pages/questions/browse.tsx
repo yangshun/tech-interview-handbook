@@ -34,8 +34,11 @@ import { SortOrder } from '~/types/questions.d';
 export default function QuestionsBrowsePage() {
   const router = useRouter();
 
-  const [selectedCompanies, setSelectedCompanies, areCompaniesInitialized] =
-    useSearchParam('companies');
+  const [
+    selectedCompanySlugs,
+    setSelectedCompanySlugs,
+    areCompaniesInitialized,
+  ] = useSearchParam('companies');
   const [
     selectedQuestionTypes,
     setSelectedQuestionTypes,
@@ -121,13 +124,13 @@ export default function QuestionsBrowsePage() {
 
   const hasFilters = useMemo(
     () =>
-      selectedCompanies.length > 0 ||
+      selectedCompanySlugs.length > 0 ||
       selectedQuestionTypes.length > 0 ||
       selectedQuestionAge !== 'all' ||
       selectedRoles.length > 0 ||
       selectedLocations.length > 0,
     [
-      selectedCompanies,
+      selectedCompanySlugs,
       selectedQuestionTypes,
       selectedQuestionAge,
       selectedRoles,
@@ -150,15 +153,18 @@ export default function QuestionsBrowsePage() {
     [
       'questions.questions.getQuestionsByFilter',
       {
-        companyNames: selectedCompanies,
+        // TODO: Enable filtering by cities, companies and states
+        cityIds: [],
+        companyIds: selectedCompanySlugs.map((slug) => slug.split('_')[0]),
+        countryIds: [],
         endDate: today,
         limit: 10,
-        locations: selectedLocations,
         questionTypes: selectedQuestionTypes,
         roles: selectedRoles,
         sortOrder,
         sortType,
         startDate,
+        stateIds: [],
       },
     ],
     {
@@ -235,7 +241,7 @@ export default function QuestionsBrowsePage() {
       Router.replace({
         pathname,
         query: {
-          companies: selectedCompanies,
+          companies: selectedCompanySlugs,
           locations: selectedLocations,
           questionAge: selectedQuestionAge,
           questionTypes: selectedQuestionTypes,
@@ -251,7 +257,7 @@ export default function QuestionsBrowsePage() {
     areSearchOptionsInitialized,
     loaded,
     pathname,
-    selectedCompanies,
+    selectedCompanySlugs,
     selectedRoles,
     selectedLocations,
     selectedQuestionAge,
@@ -261,13 +267,13 @@ export default function QuestionsBrowsePage() {
   ]);
 
   const selectedCompanyOptions = useMemo(() => {
-    return selectedCompanies.map((company) => ({
+    return selectedCompanySlugs.map((company) => ({
       checked: true,
       id: company,
       label: company,
       value: company,
     }));
-  }, [selectedCompanies]);
+  }, [selectedCompanySlugs]);
 
   const selectedRoleOptions = useMemo(() => {
     return selectedRoles.map((role) => ({
@@ -301,7 +307,7 @@ export default function QuestionsBrowsePage() {
         label="Clear filters"
         variant="tertiary"
         onClick={() => {
-          setSelectedCompanies([]);
+          setSelectedCompanySlugs([]);
           setSelectedQuestionTypes([]);
           setSelectedQuestionAge('all');
           setSelectedRoles([]);
@@ -316,8 +322,8 @@ export default function QuestionsBrowsePage() {
             {...field}
             clearOnSelect={true}
             filterOption={(option) => {
-              return !selectedCompanies.some((company) => {
-                return company === option.value;
+              return !selectedCompanySlugs.some((companySlug) => {
+                return companySlug === `${option.id}_${option.label}`;
               });
             }}
             isLabelHidden={true}
@@ -333,10 +339,15 @@ export default function QuestionsBrowsePage() {
         )}
         onOptionChange={(option) => {
           if (option.checked) {
-            setSelectedCompanies([...selectedCompanies, option.label]);
+            setSelectedCompanySlugs([
+              ...selectedCompanySlugs,
+              `${option.id}_${option.label}`,
+            ]);
           } else {
-            setSelectedCompanies(
-              selectedCompanies.filter((company) => company !== option.label),
+            setSelectedCompanySlugs(
+              selectedCompanySlugs.filter(
+                (companySlug) => companySlug !== `${option.id}_${option.label}`,
+              ),
             );
           }
         }}
@@ -471,7 +482,7 @@ export default function QuestionsBrowsePage() {
                 {(questionsQueryData?.pages ?? []).flatMap(
                   ({ data: questions }) =>
                     questions.map((question) => {
-                      const { companyCounts, locationCounts, roleCounts } =
+                      const { companyCounts, countryCounts, roleCounts } =
                         relabelQuestionAggregates(
                           question.aggregatedQuestionEncounters,
                         );
@@ -482,10 +493,10 @@ export default function QuestionsBrowsePage() {
                           answerCount={question.numAnswers}
                           companies={companyCounts}
                           content={question.content}
+                          countries={countryCounts}
                           href={`/questions/${question.id}/${createSlug(
                             question.content,
                           )}`}
-                          locations={locationCounts}
                           questionId={question.id}
                           receivedCount={question.receivedCount}
                           roles={roleCounts}

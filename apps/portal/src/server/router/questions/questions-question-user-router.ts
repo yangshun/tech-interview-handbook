@@ -27,6 +27,7 @@ export const questionsQuestionUserRouter = createProtectedRouter()
                   id: input.companyId,
                 },
               },
+              // To do: Fix this
               location: input.location,
               role: input.role,
               seenAt: input.seenAt,

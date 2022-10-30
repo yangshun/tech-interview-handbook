@@ -187,7 +187,7 @@ export default function ListPage() {
                             href={`/questions/${question.id}/${createSlug(
                               question.content,
                             )}`}
-                            locations={locationCounts}
+                            countries={locationCounts}
                             questionId={question.id}
                             receivedCount={question.receivedCount}
                             roles={roleCounts}
