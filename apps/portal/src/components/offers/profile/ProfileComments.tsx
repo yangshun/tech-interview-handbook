@@ -10,11 +10,14 @@ import {
 } from '@tih/ui';
 
 import ExpandableCommentCard from '~/components/offers/profile/comments/ExpandableCommentCard';
+import Tooltip from '~/components/offers/util/Tooltip';
 
 import { copyProfileLink } from '~/utils/offers/link';
 import { trpc } from '~/utils/trpc';
 
 import type { OffersDiscussion, Reply } from '~/types/offers';
+
+import 'react-popper-tooltip/dist/styles.css';
 
 type ProfileHeaderProps = Readonly<{
   isDisabled: boolean;
@@ -107,39 +110,43 @@ export default function ProfileComments({
     <div className="m-4 h-full">
       <div className="flex-end flex justify-end space-x-4">
         {isEditable && (
+          <Tooltip tooltipContent="Copy this link to edit your profile later">
+            <Button
+              addonPosition="start"
+              disabled={isDisabled}
+              icon={ClipboardDocumentIcon}
+              isLabelHidden={false}
+              label="Copy profile edit link"
+              size="sm"
+              variant="secondary"
+              onClick={() => {
+                copyProfileLink(profileId, token);
+                showToast({
+                  title: `Profile edit link copied to clipboard!`,
+                  variant: 'success',
+                });
+              }}
+            />
+          </Tooltip>
+        )}
+        <Tooltip tooltipContent="Share this profile with your friends">
           <Button
             addonPosition="start"
             disabled={isDisabled}
-            icon={ClipboardDocumentIcon}
+            icon={ShareIcon}
             isLabelHidden={false}
-            label="Copy profile edit link"
+            label="Copy public link"
             size="sm"
             variant="secondary"
             onClick={() => {
-              copyProfileLink(profileId, token);
+              copyProfileLink(profileId);
               showToast({
-                title: `Profile edit link copied to clipboard!`,
+                title: `Public profile link copied to clipboard!`,
                 variant: 'success',
               });
             }}
           />
-        )}
-        <Button
-          addonPosition="start"
-          disabled={isDisabled}
-          icon={ShareIcon}
-          isLabelHidden={false}
-          label="Copy public link"
-          size="sm"
-          variant="secondary"
-          onClick={() => {
-            copyProfileLink(profileId);
-            showToast({
-              title: `Public profile link copied to clipboard!`,
-              variant: 'success',
-            });
-          }}
-        />
+        </Tooltip>
       </div>
       <h2 className="mt-2 mb-6 text-2xl font-bold">Discussions</h2>
       {isEditable || session?.user?.name ? (

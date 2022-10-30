@@ -5,6 +5,12 @@ const navigation: ProductNavigationItems = [
   { href: '/offers/features', name: 'Features' },
 ];
 
+const navigationAuthenticated: ProductNavigationItems = [
+  { href: '/offers/submit', name: 'Analyze your offers' },
+  { href: '/offers/dashboard', name: 'Your repository' },
+  { href: '/offers/features', name: 'Features' },
+];
+
 const config = {
   // TODO: Change this to your own GA4 measurement ID.
   googleAnalyticsMeasurementID: 'G-34XRGLEVCF',
@@ -15,6 +21,11 @@ const config = {
   showGlobalNav: false,
   title: 'Tech Offers Repo',
   titleHref: '/offers',
+};
+
+export const OffersNavigationAuthenticated = {
+  ...config,
+  navigation: navigationAuthenticated,
 };
 
 export default config;

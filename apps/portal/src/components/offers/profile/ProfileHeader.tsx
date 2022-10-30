@@ -1,27 +1,32 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
+  BookmarkIcon as BookmarkIconOutline,
   BuildingOffice2Icon,
   CalendarDaysIcon,
   PencilSquareIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
-import { Button, Dialog, Spinner, Tabs } from '@tih/ui';
+import { BookmarkIcon as BookmarkIconSolid } from '@heroicons/react/24/solid';
+import { Button, Dialog, Spinner, Tabs, useToast } from '@tih/ui';
 
 import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
 import type { BackgroundDisplayData } from '~/components/offers/types';
 import { JobTypeLabel } from '~/components/offers/types';
 
 import { getProfileEditPath } from '~/utils/offers/link';
+import { trpc } from '~/utils/trpc';
 
 import type { ProfileDetailTab } from '../constants';
 import { profileDetailTabs } from '../constants';
+import Tooltip from '../util/Tooltip';
 
 type ProfileHeaderProps = Readonly<{
   background?: BackgroundDisplayData;
   handleDelete: () => void;
   isEditable: boolean;
   isLoading: boolean;
+  isSaved?: boolean;
   selectedTab: ProfileDetailTab;
   setSelectedTab: (tab: ProfileDetailTab) => void;
 }>;
@@ -31,46 +36,112 @@ export default function ProfileHeader({
   handleDelete,
   isEditable,
   isLoading,
+  isSaved = false,
   selectedTab,
   setSelectedTab,
 }: ProfileHeaderProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  // Const [saved, setSaved] = useState(isSaved);
   const router = useRouter();
+  const trpcContext = trpc.useContext();
   const { offerProfileId = '', token = '' } = router.query;
-
+  const { showToast } = useToast();
   const handleEditClick = () => {
     router.push(getProfileEditPath(offerProfileId as string, token as string));
   };
 
+  const saveMutation = trpc.useMutation(
+    ['offers.user.profile.addToUserProfile'],
+    {
+      onError: () => {
+        showToast({
+          title: `Failed to saved to dashboard!`,
+          variant: 'failure',
+        });
+      },
+      onSuccess: () => {
+        // SetSaved(true);
+        showToast({
+          title: `Saved to dashboard!`,
+          variant: 'success',
+        });
+      },
+    },
+  );
+
+  const unsaveMutation = trpc.useMutation(
+    ['offers.user.profile.removeFromUserProfile'],
+    {
+      onError: () => {
+        showToast({
+          title: `Failed to saved to dashboard!`,
+          variant: 'failure',
+        });
+      },
+      onSuccess: () => {
+        // SetSaved(false);
+        showToast({
+          title: `Removed from dashboard!`,
+          variant: 'success',
+        });
+        trpcContext.invalidateQueries(['offers.profile.listOne']);
+      },
+    },
+  );
+
+  const toggleSaved = () => {
+    if (isSaved) {
+      unsaveMutation.mutate({ profileId: offerProfileId as string });
+    } else {
+      saveMutation.mutate({
+        profileId: offerProfileId as string,
+        token: token as string,
+      });
+    }
+  };
+
   function renderActionList() {
     return (
-      <div className="space-x-2">
-        {/* <Button
-          disabled={isLoading}
-          icon={BookmarkSquareIcon}
-          isLabelHidden={true}
-          label="Save to user account"
-          size="md"
-          variant="tertiary"
-        /> */}
-        <Button
-          disabled={isLoading}
-          icon={PencilSquareIcon}
-          isLabelHidden={true}
-          label="Edit"
-          size="md"
-          variant="tertiary"
-          onClick={handleEditClick}
-        />
-        <Button
-          disabled={isLoading}
-          icon={TrashIcon}
-          isLabelHidden={true}
-          label="Delete"
-          size="md"
-          variant="tertiary"
-          onClick={() => setIsDialogOpen(true)}
-        />
+      <div className="flex justify-center space-x-2">
+        <Tooltip
+          tooltipContent={
+            isSaved ? 'Remove from account' : 'Save to your account'
+          }>
+          <Button
+            disabled={
+              isLoading || saveMutation.isLoading || unsaveMutation.isLoading
+            }
+            icon={isSaved ? BookmarkIconSolid : BookmarkIconOutline}
+            isLabelHidden={true}
+            isLoading={saveMutation.isLoading || unsaveMutation.isLoading}
+            label={isSaved ? 'Remove from account' : 'Save to your account'}
+            size="md"
+            variant="tertiary"
+            onClick={toggleSaved}
+          />
+        </Tooltip>
+        <Tooltip tooltipContent="Edit profile">
+          <Button
+            disabled={isLoading}
+            icon={PencilSquareIcon}
+            isLabelHidden={true}
+            label="Edit"
+            size="md"
+            variant="tertiary"
+            onClick={handleEditClick}
+          />
+        </Tooltip>
+        <Tooltip tooltipContent="Delete profile">
+          <Button
+            disabled={isLoading}
+            icon={TrashIcon}
+            isLabelHidden={true}
+            label="Delete"
+            size="md"
+            variant="tertiary"
+            onClick={() => setIsDialogOpen(true)}
+          />
+        </Tooltip>
         {isDialogOpen && (
           <Dialog
             isShown={isDialogOpen}
