@@ -369,6 +369,7 @@ export const offersAnalysisRouter = createRouter()
               : similarCompanyOffers;
 
           return {
+            companyName: companyOffer.company.name,
             noOfSimilarOffers: noOfSimilarCompanyOffers,
             percentile: companyPercentile,
             topSimilarOffers: topPercentileCompanyOffers,
@@ -405,6 +406,7 @@ export const offersAnalysisRouter = createRouter()
           companyAnalysis: {
             create: companyAnalysis.map((analysisUnit) => {
               return {
+                companyName: analysisUnit.companyName,
                 noOfSimilarOffers: analysisUnit.noOfSimilarOffers,
                 percentile: analysisUnit.percentile,
                 topSimilarOffers: {
@@ -417,6 +419,7 @@ export const offersAnalysisRouter = createRouter()
           },
           overallAnalysis: {
             create: {
+              companyName: overallHighestOffer.company.name,
               noOfSimilarOffers,
               percentile: overallPercentile,
               topSimilarOffers: {

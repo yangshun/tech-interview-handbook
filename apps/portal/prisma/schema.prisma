@@ -386,6 +386,7 @@ model OffersAnalysis {
 model OffersAnalysisUnit {
   id String @id @default(cuid())
 
+  companyName       String
   percentile        Float
   noOfSimilarOffers Int
   topSimilarOffers  OffersOffer[]

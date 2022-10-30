@@ -135,6 +135,7 @@ const analysisUnitDtoMapper = (
   },
 ) => {
   const analysisDto: AnalysisUnit = {
+    companyName: analysisUnit.companyName,
     noOfOffers: analysisUnit.noOfSimilarOffers,
     percentile: analysisUnit.percentile,
     topPercentileOffers: analysisUnit.topSimilarOffers.map((offer) =>
