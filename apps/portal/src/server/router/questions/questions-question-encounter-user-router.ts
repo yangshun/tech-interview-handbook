@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
 
+import { JobTitleLabels } from '~/components/shared/JobTitles';
 
 import { createProtectedRouter } from '../context';
 
@@ -10,9 +11,11 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
   .mutation('create', {
     input: z.object({
       companyId: z.string(),
-      location: z.string(),
+      cityId: z.string().nullish(),
+      countryId: z.string(),
+      stateId: z.string().nullish(),
       questionId: z.string(),
-      role: z.string(),
+      role: z.nativeEnum(JobTitleLabels),
       seenAt: z.date(),
     }),
     async resolve({ ctx, input }) {

@@ -99,7 +99,33 @@ export const questionsQuestionRouter = createRouter()
                     },
                   }
                 : {}),
-              // TODO: Add filter for cityIds, countryIds, stateIds
+              ...(input.cityIds.length > 0
+                ? {
+                    city: {
+                      id: {
+                        in: input.cityIds,
+                      },
+                    },
+                  }
+                : {}),
+              ...(input.countryIds.length > 0
+                ? {
+                    country: {
+                      id: {
+                        in: input.countryIds,
+                      },
+                    },
+                  }
+                : {}),
+              ...(input.stateIds.length > 0
+                ? {
+                    state: {
+                      id: {
+                        in: input.stateIds,
+                      },
+                    },
+                  }
+                : {}),
               ...(input.roles.length > 0
                 ? {
                     role: {

@@ -2,6 +2,8 @@ import { z } from 'zod';
 import { QuestionsQuestionType, Vote } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
+import { JobTitleLabels } from '~/components/shared/JobTitles';
+
 import { createProtectedRouter } from '../context';
 
 export const questionsQuestionUserRouter = createProtectedRouter()
@@ -9,9 +11,11 @@ export const questionsQuestionUserRouter = createProtectedRouter()
     input: z.object({
       companyId: z.string(),
       content: z.string(),
-      location: z.string(),
+      cityId: z.string().nullish(),
+      countryId: z.string(),
+      stateId: z.string().nullish(),
       questionType: z.nativeEnum(QuestionsQuestionType),
-      role: z.string(),
+      role: z.nativeEnum(JobTitleLabels),
       seenAt: z.date(),
     }),
     async resolve({ ctx, input }) {
@@ -27,8 +31,21 @@ export const questionsQuestionUserRouter = createProtectedRouter()
                   id: input.companyId,
                 },
               },
-              // To do: Fix this
-              location: input.location,
+              city: input.cityId !== null ? {
+                connect: {
+                  id: input.cityId,
+                },
+              } : undefined,
+              country: {
+                connect: {
+                  id: input.countryId,
+                },
+              },
+              state: input.stateId !== null ? {
+                connect: {
+                  id: input.stateId,
+                },
+              } : undefined,
               role: input.role,
               seenAt: input.seenAt,
               user: {
