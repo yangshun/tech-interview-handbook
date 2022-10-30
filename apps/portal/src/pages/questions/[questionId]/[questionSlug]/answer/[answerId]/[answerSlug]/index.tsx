@@ -8,6 +8,7 @@ import { Button, TextArea } from '@tih/ui';
 import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullAnswerCard from '~/components/questions/card/FullAnswerCard';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
+import PaginationLoadMoreButton from '~/components/questions/PaginationLoadMoreButton';
 import SortOptionsSelect from '~/components/questions/SortOptionsSelect';
 
 import { APP_TITLE } from '~/utils/questions/constants';
@@ -47,11 +48,12 @@ export default function QuestionPage() {
     { answerId: answerId as string },
   ]);
 
-  const { data: answerCommentsData } = trpc.useInfiniteQuery(
+  const answerCommentInfiniteQuery = trpc.useInfiniteQuery(
     [
       'questions.answers.comments.getAnswerComments',
       {
         answerId: answerId as string,
+        limit: 5,
         sortOrder: commentSortOrder,
         sortType: commentSortType,
       },
@@ -61,6 +63,8 @@ export default function QuestionPage() {
       keepPreviousData: true,
     },
   );
+
+  const { data: answerCommentsData } = answerCommentInfiniteQuery;
 
   const { mutate: addComment } = trpc.useMutation(
     'questions.answers.comments.user.create',
@@ -168,6 +172,7 @@ export default function QuestionPage() {
                       />
                     )),
                 )}
+                <PaginationLoadMoreButton query={answerCommentInfiniteQuery} />
               </div>
             </div>
           </div>

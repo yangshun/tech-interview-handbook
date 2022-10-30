@@ -9,6 +9,7 @@ import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem'
 import FullQuestionCard from '~/components/questions/card/question/FullQuestionCard';
 import QuestionAnswerCard from '~/components/questions/card/QuestionAnswerCard';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
+import PaginationLoadMoreButton from '~/components/questions/PaginationLoadMoreButton';
 import SortOptionsSelect from '~/components/questions/SortOptionsSelect';
 
 import { APP_TITLE } from '~/utils/questions/constants';
@@ -80,10 +81,11 @@ export default function QuestionPage() {
 
   const utils = trpc.useContext();
 
-  const { data: commentData } = trpc.useInfiniteQuery(
+  const commentInfiniteQuery = trpc.useInfiniteQuery(
     [
       'questions.questions.comments.getQuestionComments',
       {
+        limit: 5,
         questionId: questionId as string,
         sortOrder: commentSortOrder,
         sortType: commentSortType,
@@ -94,6 +96,8 @@ export default function QuestionPage() {
       keepPreviousData: true,
     },
   );
+
+  const { data: commentData } = commentInfiniteQuery;
 
   const { mutate: addComment } = trpc.useMutation(
     'questions.questions.comments.user.create',
@@ -106,10 +110,11 @@ export default function QuestionPage() {
     },
   );
 
-  const { data: answerData } = trpc.useInfiniteQuery(
+  const answerInfiniteQuery = trpc.useInfiniteQuery(
     [
       'questions.answers.getAnswers',
       {
+        limit: 5,
         questionId: questionId as string,
         sortOrder: answerSortOrder,
         sortType: answerSortType,
@@ -120,6 +125,8 @@ export default function QuestionPage() {
       keepPreviousData: true,
     },
   );
+
+  const { data: answerData } = answerInfiniteQuery;
 
   const { mutate: addAnswer } = trpc.useMutation(
     'questions.answers.user.create',
@@ -256,6 +263,7 @@ export default function QuestionPage() {
                           />
                         )),
                     )}
+                    <PaginationLoadMoreButton query={commentInfiniteQuery} />
                   </div>
                 </div>
               </Collapsible>
@@ -311,6 +319,7 @@ export default function QuestionPage() {
                   />
                 )),
             )}
+            <PaginationLoadMoreButton query={answerInfiniteQuery} />
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ import { Button, SlideOut } from '@tih/ui';
 import QuestionOverviewCard from '~/components/questions/card/question/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
 import FilterSection from '~/components/questions/filter/FilterSection';
+import PaginationLoadMoreButton from '~/components/questions/PaginationLoadMoreButton';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 import CompanyTypeahead from '~/components/questions/typeahead/CompanyTypeahead';
 import LocationTypeahead from '~/components/questions/typeahead/LocationTypeahead';
@@ -145,12 +146,7 @@ export default function QuestionsBrowsePage() {
       : undefined;
   }, [selectedQuestionAge]);
 
-  const {
-    data: questionsQueryData,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = trpc.useInfiniteQuery(
+  const questionsInfiniteQuery = trpc.useInfiniteQuery(
     [
       'questions.questions.getQuestionsByFilter',
       {
@@ -170,6 +166,8 @@ export default function QuestionsBrowsePage() {
       keepPreviousData: true,
     },
   );
+
+  const { data: questionsQueryData } = questionsInfiniteQuery;
 
   const questionCount = useMemo(() => {
     if (!questionsQueryData) {
@@ -504,15 +502,7 @@ export default function QuestionsBrowsePage() {
                       );
                     }),
                 )}
-                <Button
-                  disabled={!hasNextPage || isFetchingNextPage}
-                  isLoading={isFetchingNextPage}
-                  label={hasNextPage ? 'Load more' : 'Nothing more to load'}
-                  variant="tertiary"
-                  onClick={() => {
-                    fetchNextPage();
-                  }}
-                />
+                <PaginationLoadMoreButton query={questionsInfiniteQuery} />
                 {questionCount === 0 && (
                   <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
                     <NoSymbolIcon className="h-6 w-6" />
