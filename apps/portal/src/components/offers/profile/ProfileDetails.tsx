@@ -115,7 +115,14 @@ function ProfileAnalysis({
 
   return (
     <div className="mx-8 my-4">
-      <OfferAnalysis allAnalysis={analysis} isError={false} isLoading={false} />
+      {!analysis && <p>No analysis available.</p>}
+      {analysis && (
+        <OfferAnalysis
+          allAnalysis={analysis}
+          isError={false}
+          isLoading={false}
+        />
+      )}
       {isEditable && (
         <div className="flex justify-end">
           <Button
