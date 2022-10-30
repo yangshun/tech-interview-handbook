@@ -106,6 +106,32 @@ model Company {
   OffersOffer                OffersOffer[]
 }
 
+model Country {
+  id     String  @id
+  name   String  @unique
+  code   String  @unique
+  states State[]
+}
+
+model State {
+  id        String  @id
+  name      String
+  countryId String
+  cities    City[]
+  country   Country @relation(fields: [countryId], references: [id])
+
+  @@unique([name, countryId])
+}
+
+model City {
+  id      String @id
+  name    String
+  stateId String
+  state   State  @relation(fields: [stateId], references: [id])
+
+  @@unique([name, stateId])
+}
+
 // Start of Resumes project models.
 // Add Resumes project models here, prefix all models with "Resumes",
 // use camelCase for field names, and try to name them consistently
