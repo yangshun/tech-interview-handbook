@@ -453,7 +453,7 @@ export default function ResumeHomePage() {
                                 ))}
                               </div>
                               <p
-                                className="cursor-pointer text-sm text-slate-500 underline"
+                                className="inline-block cursor-pointer text-sm text-slate-500 underline hover:text-slate-700"
                                 onClick={() => onClearFilterClick(filter.id)}>
                                 Clear
                               </p>
@@ -553,7 +553,7 @@ export default function ResumeHomePage() {
                             ))}
                           </CheckboxList>
                           <p
-                            className="cursor-pointer text-sm text-slate-500 underline"
+                            className="inline-block cursor-pointer text-sm text-slate-500 underline hover:text-slate-700"
                             onClick={() => onClearFilterClick(filter.id)}>
                             Clear
                           </p>
