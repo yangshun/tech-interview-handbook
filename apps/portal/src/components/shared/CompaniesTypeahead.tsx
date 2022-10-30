@@ -9,7 +9,7 @@ type Props = Readonly<{
   errorMessage?: string;
   isLabelHidden?: boolean;
   onSelect: (option: TypeaheadOption | null) => void;
-  placeHolder?: string;
+  placeholder?: string;
   required?: boolean;
 }>;
 
@@ -17,7 +17,7 @@ export default function CompaniesTypeahead({
   disabled,
   onSelect,
   isLabelHidden,
-  placeHolder,
+  placeholder,
   required,
 }: Props) {
   const [query, setQuery] = useState('');
@@ -44,7 +44,7 @@ export default function CompaniesTypeahead({
           value: id,
         })) ?? []
       }
-      placeholder={placeHolder}
+      placeholder={placeholder}
       required={required}
       textSize="inherit"
       onQueryChange={setQuery}

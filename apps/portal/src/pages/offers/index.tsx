@@ -36,14 +36,14 @@ export default function OffersHomePage() {
           <div className="flex items-center space-x-4">
             <JobTitlesTypeahead
               isLabelHidden={true}
-              placeHolder="Software Engineer"
+              placeholder="Software Engineer"
               // @ts-ignore TODO(offers): handle potentially null value.
               onSelect={({ value }) => setjobTitleFilter(value)}
             />
             <span>in</span>
             <CompaniesTypeahead
               isLabelHidden={true}
-              placeHolder="All Companies"
+              placeholder="All Companies"
               // @ts-ignore TODO(offers): handle potentially null value.
               onSelect={({ value }) => setCompanyFilter(value)}
             />
