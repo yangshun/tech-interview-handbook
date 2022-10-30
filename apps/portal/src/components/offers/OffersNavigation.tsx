@@ -1,5 +1,3 @@
-import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
-
 import type { ProductNavigationItems } from '~/components/global/ProductNavigation';
 
 const navigation: ProductNavigationItems = [
@@ -11,10 +9,7 @@ const config = {
   // TODO: Change this to your own GA4 measurement ID.
   googleAnalyticsMeasurementID: 'G-34XRGLEVCF',
   logo: (
-    <CurrencyDollarIcon
-      aria-label="Tech Interview Handbook Offers"
-      className="h-8 w-8"
-    />
+    <img alt="Tech Offers Repo" className="h-8 w-auto" src="/offers-logo.svg" />
   ),
   navigation,
   showGlobalNav: false,
