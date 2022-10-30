@@ -32,18 +32,18 @@ type Props = Readonly<{
 export default function ResumeListItem({ href, resumeInfo }: Props) {
   return (
     <Link href={href}>
-      <div
-        className={clsx(
-          resumeInfo.isResolved ? 'opacity-50' : '',
-          'grid grid-cols-8',
-        )}>
+      <div className="grid grid-cols-8">
         <div className="col-span-7 grid gap-4 border-b border-slate-200 p-4 hover:bg-slate-100 sm:grid-cols-7">
           <div className="sm:col-span-4">
             <div className="flex items-center gap-3">
-              <p>{resumeInfo.title}</p>
-              {/* <p className="rounded-xl border border-slate-400 p-1 text-xs text-slate-500">
+              {resumeInfo.title}
+              <p
+                className={clsx(
+                  'w-auto items-center space-x-4 rounded-xl border border-slate-300 px-2 py-1 text-xs font-medium text-white opacity-70',
+                  resumeInfo.isResolved ? 'bg-slate-400' : 'bg-success-500',
+                )}>
                 {resumeInfo.isResolved ? 'Reviewed' : 'Unreviewed'}
-              </p> */}
+              </p>
             </div>
             <div className="text-primary-500 mt-2 flex items-center justify-start text-xs">
               <div className="flex">

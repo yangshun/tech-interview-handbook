@@ -219,8 +219,8 @@ export const offersRouter = createRouter().query('list', {
               : sortingKey === sortingKeysMap.totalCompensation
               ? [
                   {
-                    offersIntern: {
-                      monthlySalary: {
+                    offersFullTime: {
+                      totalCompensation: {
                         baseValue: order,
                       },
                     },

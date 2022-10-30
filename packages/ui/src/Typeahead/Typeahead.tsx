@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import type { InputHTMLAttributes } from 'react';
+import { useId } from 'react';
 import { Fragment, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
@@ -24,6 +25,7 @@ type Attributes = Pick<
 >;
 
 type Props = Readonly<{
+  errorMessage?: React.ReactNode;
   isLabelHidden?: boolean;
   label: string;
   noResultsMessage?: string;
@@ -39,6 +41,27 @@ type Props = Readonly<{
 }> &
   Readonly<Attributes>;
 
+type State = 'error' | 'normal';
+
+const stateClasses: Record<
+  State,
+  Readonly<{
+    container: string;
+    input: string;
+  }>
+> = {
+  error: {
+    container:
+      'border-danger-300 focus-within:outline-none focus-within:ring-danger-500 focus-within:border-danger-500',
+    input: 'text-danger-900 placeholder-danger-300',
+  },
+  normal: {
+    container:
+      'focus-within:ring-primary-500 focus-within:border-primary-500 border-slate-300',
+    input: 'placeholder:text-slate-400',
+  },
+};
+
 const textSizes: Record<TypeaheadTextSize, string> = {
   default: 'text-sm',
   inherit: '',
@@ -46,6 +69,7 @@ const textSizes: Record<TypeaheadTextSize, string> = {
 
 export default function Typeahead({
   disabled = false,
+  errorMessage,
   isLabelHidden,
   label,
   noResultsMessage = 'No results',
@@ -58,7 +82,11 @@ export default function Typeahead({
   onSelect,
   ...props
 }: Props) {
+  const hasError = errorMessage != null;
+  const errorId = useId();
+  const state: State = hasError ? 'error' : 'normal';
   const [query, setQuery] = useState('');
+
   return (
     <div>
       <Combobox
@@ -102,14 +130,18 @@ export default function Typeahead({
         <div className="relative">
           <div
             className={clsx(
-              'focus-visible:ring-offset-primary-300 relative w-full cursor-default overflow-hidden rounded-lg border border-slate-300 bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2',
+              'relative w-full cursor-default overflow-hidden rounded-md border text-left focus-within:ring-1',
+              disabled && 'pointer-events-none select-none bg-slate-50',
+              stateClasses[state].container,
               textSizes[textSize],
             )}>
             <Combobox.Input
+              aria-describedby={hasError ? errorId : undefined}
               className={clsx(
-                'w-full border-none py-2 pl-3 pr-10 leading-5 text-slate-900 focus:ring-0',
+                'w-full border-none py-2 pl-3 pr-10 leading-5 focus:ring-0',
+                stateClasses[state].input,
                 textSizes[textSize],
-                disabled && 'pointer-events-none select-none bg-slate-100',
+                'disabled:cursor-not-allowed disabled:bg-transparent disabled:text-slate-500',
               )}
               displayValue={(option) =>
                 (option as unknown as TypeaheadOption)?.label
@@ -170,6 +202,11 @@ export default function Typeahead({
           </Transition>
         </div>
       </Combobox>
+      {errorMessage && (
+        <p className="text-danger-600 mt-2 text-sm" id={errorId}>
+          {errorMessage}
+        </p>
+      )}
     </div>
   );
 }

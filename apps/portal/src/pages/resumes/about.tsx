@@ -1,6 +1,6 @@
 export default function AboutUsPage() {
   return (
-    <div className="my-10 flex w-full flex-col items-center overflow-y-auto">
+    <div className="flex w-full flex-col items-center overflow-y-auto py-10">
       <div className="flex justify-center text-4xl font-bold">
         Resume Review Portal
       </div>

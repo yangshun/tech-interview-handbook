@@ -16,7 +16,7 @@ export function CallToAction() {
           </p>
           <Button
             className="mt-4"
-            href="/resumes/browse"
+            href="/resumes"
             label="Start browsing now"
             variant="primary"
           />

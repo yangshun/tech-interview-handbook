@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 
 import type { JobTitleType } from '~/components/shared/JobTitles';
@@ -14,12 +15,8 @@ export default function OfferTableRow({
   row: { company, id, income, monthYearReceived, profileId, title, totalYoe },
 }: OfferTableRowProps) {
   return (
-    <tr
-      key={id}
-      className="border-b bg-white hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-600">
-      <th
-        className="whitespace-nowrap py-4 px-6 font-medium text-slate-900 dark:text-white"
-        scope="row">
+    <tr key={id} className="divide-x divide-slate-200 border-b bg-white">
+      <th className="whitespace-nowrap py-4 px-6 font-medium" scope="row">
         {company.name}
       </th>
       <td className="py-4 px-6">
@@ -28,7 +25,10 @@ export default function OfferTableRow({
       <td className="py-4 px-6">{totalYoe}</td>
       <td className="py-4 px-6">{convertMoneyToString(income)}</td>
       <td className="py-4 px-6">{formatDate(monthYearReceived)}</td>
-      <td className="space-x-4 py-4 px-6">
+      <td
+        className={clsx(
+          'sticky right-0 bg-white py-4 px-6 drop-shadow md:drop-shadow-none',
+        )}>
         <Link
           className="text-primary-600 dark:text-primary-500 font-medium hover:underline"
           href={`/offers/profile/${profileId}`}>

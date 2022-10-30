@@ -14,6 +14,70 @@ export const offersAnalysisRouter = createRouter()
     async resolve({ ctx, input }) {
       const analysis = await ctx.prisma.offersAnalysis.findFirst({
         include: {
+          companyAnalysis: {
+            include: {
+              topSimilarOffers: {
+                include: {
+                  company: true,
+                  offersFullTime: {
+                    include: {
+                      totalCompensation: true,
+                    },
+                  },
+                  offersIntern: {
+                    include: {
+                      monthlySalary: true,
+                    },
+                  },
+                  profile: {
+                    include: {
+                      background: {
+                        include: {
+                          experiences: {
+                            include: {
+                              company: true,
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          overallAnalysis: {
+            include: {
+              topSimilarOffers: {
+                include: {
+                  company: true,
+                  offersFullTime: {
+                    include: {
+                      totalCompensation: true,
+                    },
+                  },
+                  offersIntern: {
+                    include: {
+                      monthlySalary: true,
+                    },
+                  },
+                  profile: {
+                    include: {
+                      background: {
+                        include: {
+                          experiences: {
+                            include: {
+                              company: true,
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
           overallHighestOffer: {
             include: {
               company: true,
@@ -30,62 +94,6 @@ export const offersAnalysisRouter = createRouter()
               profile: {
                 include: {
                   background: true,
-                },
-              },
-            },
-          },
-          topCompanyOffers: {
-            include: {
-              company: true,
-              offersFullTime: {
-                include: {
-                  totalCompensation: true,
-                },
-              },
-              offersIntern: {
-                include: {
-                  monthlySalary: true,
-                },
-              },
-              profile: {
-                include: {
-                  background: {
-                    include: {
-                      experiences: {
-                        include: {
-                          company: true,
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-          topOverallOffers: {
-            include: {
-              company: true,
-              offersFullTime: {
-                include: {
-                  totalCompensation: true,
-                },
-              },
-              offersIntern: {
-                include: {
-                  monthlySalary: true,
-                },
-              },
-              profile: {
-                include: {
-                  background: {
-                    include: {
-                      experiences: {
-                        include: {
-                          company: true,
-                        },
-                      },
-                    },
-                  },
                 },
               },
             },

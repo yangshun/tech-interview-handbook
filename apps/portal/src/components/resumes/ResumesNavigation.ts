@@ -1,12 +1,12 @@
 import type { ProductNavigationItems } from '~/components/global/ProductNavigation';
 
 const navigation: ProductNavigationItems = [
+  { children: [], href: '/resumes/submit', name: 'Submit for review' },
   {
     children: [],
-    href: '/resumes/browse',
-    name: 'Browse',
+    href: '/resumes/features',
+    name: 'Features',
   },
-  { children: [], href: '/resumes/submit', name: 'Submit for review' },
   {
     children: [],
     href: '/resumes/about',

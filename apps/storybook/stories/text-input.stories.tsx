@@ -111,8 +111,14 @@ export function Disabled() {
       <TextInput
         disabled={true}
         label="Disabled input"
-        placeholder="John Doe"
+        placeholder="John Doe (Placeholder)"
         type="text"
+      />
+      <TextInput
+        disabled={true}
+        label="Disabled input"
+        type="text"
+        value="John Doe (Value)"
       />
       <TextInput
         disabled={true}

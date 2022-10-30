@@ -128,3 +128,57 @@ export function Required() {
     />
   );
 }
+
+export function Disabled() {
+  return (
+    <Typeahead
+      disabled={true}
+      label="Author"
+      options={[]}
+      placeholder="John Doe"
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      onQueryChange={() => {}}
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      onSelect={() => {}}
+    />
+  );
+}
+
+export function Error() {
+  const people = [
+    { id: '1', label: 'Wade Cooper', value: '1' },
+    { id: '2', label: 'Arlene Mccoy', value: '2' },
+    { id: '3', label: 'Devon Webb', value: '3' },
+    { id: '4', label: 'Tom Cook', value: '4' },
+    { id: '5', label: 'Tanya Fox', value: '5' },
+    { id: '6', label: 'Hellen Schmidt', value: '6' },
+  ];
+  const [selectedEntry, setSelectedEntry] = useState<TypeaheadOption>(
+    people[0],
+  );
+  const [query, setQuery] = useState('');
+
+  const filteredPeople =
+    query === ''
+      ? people
+      : people.filter((person) =>
+          person.label
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, '')),
+        );
+
+  return (
+    <Typeahead
+      errorMessage={
+        selectedEntry.id === '1' ? 'Cannot select Wade Cooper' : undefined
+      }
+      label="Author"
+      options={filteredPeople}
+      required={true}
+      value={selectedEntry}
+      onQueryChange={setQuery}
+      onSelect={setSelectedEntry}
+    />
+  );
+}

@@ -8,8 +8,8 @@ const DropdownMenuAlignments: ReadonlyArray<DropdownMenuAlignment> = [
   'end',
 ];
 const DropdownMenuSizes: ReadonlyArray<DropdownMenuSize> = [
+  'default',
   'inherit',
-  'regular',
 ];
 
 export default {
@@ -80,7 +80,7 @@ export function Basic({
 Basic.args = {
   align: 'start',
   label: 'More actions',
-  size: 'regular',
+  size: 'default',
 };
 
 export function Align() {
@@ -103,7 +103,7 @@ export function Align() {
 
   return (
     <div className="flex justify-between">
-      <DropdownMenu align="start" label="Select an action" size="regular">
+      <DropdownMenu align="start" label="Select an action" size="default">
         {menuItems.map(({ label, value }) => (
           <DropdownMenu.Item
             key={value}
@@ -115,7 +115,7 @@ export function Align() {
           />
         ))}
       </DropdownMenu>
-      <DropdownMenu align="end" label="Select an action" size="regular">
+      <DropdownMenu align="end" label="Select an action" size="default">
         {menuItems.map(({ label, value }) => (
           <DropdownMenu.Item
             key={value}

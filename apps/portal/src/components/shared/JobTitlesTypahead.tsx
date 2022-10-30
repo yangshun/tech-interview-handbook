@@ -41,6 +41,7 @@ export default function JobTitlesTypeahead({
       options={options}
       placeholder={placeHolder}
       required={required}
+      textSize="inherit"
       onQueryChange={setQuery}
       onSelect={onSelect}
     />

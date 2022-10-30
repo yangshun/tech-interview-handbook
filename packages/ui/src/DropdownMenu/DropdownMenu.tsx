@@ -6,7 +6,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import DropdownMenuItem from './DropdownMenuItem';
 
 export type DropdownMenuAlignment = 'end' | 'start';
-export type DropdownMenuSize = 'inherit' | 'regular';
+export type DropdownMenuSize = 'default' | 'inherit';
 
 type Props = Readonly<{
   align?: DropdownMenuAlignment;
@@ -26,15 +26,15 @@ export default function DropdownMenu({
   align = 'start',
   children,
   label,
-  size = 'regular',
+  size = 'default',
 }: Props) {
   return (
     <Menu as="div" className="relative inline-block">
       <div className="flex">
         <Menu.Button
           className={clsx(
-            'group inline-flex justify-center font-medium text-slate-700 hover:text-slate-900',
-            size === 'regular' && 'text-sm',
+            'group inline-flex items-center justify-center font-medium text-slate-700 hover:text-slate-900',
+            size === 'default' && 'text-sm',
           )}>
           <div>{label}</div>
           <ChevronDownIcon

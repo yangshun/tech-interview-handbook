@@ -27,10 +27,14 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
   return (
     <nav aria-label="Global" className="flex h-full items-center space-x-8">
       <Link
-        className="hover:text-primary-700 flex items-center gap-2 text-sm font-medium"
+        className="hover:text-primary-700 flex items-center gap-2 text-base font-medium"
         href={titleHref}>
         {titleHref !== '/' && (
-          <img alt="TIH" className="h-8 w-auto" src="/logo.svg" />
+          <img
+            alt="Tech Interview Handbook"
+            className="h-8 w-auto"
+            src="/logo.svg"
+          />
         )}
         {title}
       </Link>
@@ -39,7 +43,7 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
           const isActive = router.pathname === item.href;
           return item.children != null && item.children.length > 0 ? (
             <Menu key={item.name} as="div" className="relative text-left">
-              <Menu.Button className="focus:ring-primary-600 flex items-center rounded-md text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2">
+              <Menu.Button className="focus:ring-primary-600 flex items-center rounded-md text-base font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2">
                 <span>{item.name}</span>
                 <ChevronDownIcon
                   aria-hidden="true"
@@ -62,7 +66,7 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
                           <Link
                             className={clsx(
                               active ? 'bg-slate-100' : '',
-                              'block px-4 py-2 text-sm text-slate-700',
+                              'block px-4 py-2 text-base text-slate-700',
                             )}
                             href={child.href}
                             rel={
@@ -84,7 +88,7 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
             <Link
               key={item.name}
               className={clsx(
-                'hover:text-primary-600 inline-flex h-full items-center border-y-2 border-t-transparent text-sm text-slate-900',
+                'hover:text-primary-600 inline-flex h-full items-center border-y-2 border-t-transparent text-base text-slate-900',
                 isActive ? 'border-b-primary-500' : 'border-b-transparent',
               )}
               href={item.href}
