@@ -3,6 +3,8 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { Button, Dialog, TextArea } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
+
 import { trpc } from '~/utils/trpc';
 
 type ResumeCommentsFormProps = Readonly<{
@@ -25,6 +27,8 @@ export default function ResumeCommentsForm({
   setShowCommentsForm,
 }: ResumeCommentsFormProps) {
   const [showDialog, setShowDialog] = useState(false);
+  const { event: gaEvent } = useGoogleAnalytics();
+
   const {
     register,
     handleSubmit,
@@ -50,6 +54,11 @@ export default function ResumeCommentsForm({
         trpcContext.invalidateQueries(['resumes.resume.findAll']);
         trpcContext.invalidateQueries(['resumes.resume.user.findUserStarred']);
         trpcContext.invalidateQueries(['resumes.resume.user.findUserCreated']);
+        gaEvent({
+          action: 'resumes.comment_submit',
+          category: 'engagement',
+          label: 'Submit comment',
+        });
       },
     },
   );
