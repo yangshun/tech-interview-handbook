@@ -94,7 +94,7 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
           },
         });
 
-      if (questionEncounterToUpdate?.id !== userId) {
+      if (questionEncounterToUpdate?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -157,7 +157,7 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
           },
         });
 
-      if (questionEncounterToDelete?.id !== userId) {
+      if (questionEncounterToDelete?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
