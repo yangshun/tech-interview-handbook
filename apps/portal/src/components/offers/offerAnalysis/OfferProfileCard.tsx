@@ -47,11 +47,13 @@ export default function OfferProfileCard({
         </div>
         <div className="col-span-10">
           <p className="font-bold">{profileName}</p>
-          <div className="flex flex-row">
-            <BuildingOffice2Icon className="mr-2 h-5" />
-            <span className="mr-2 font-bold">Current:</span>
-            <span>{previousCompanies[0]}</span>
-          </div>
+          {previousCompanies.length > 0 && (
+            <div className="flex flex-row">
+              <BuildingOffice2Icon className="mr-2 h-5" />
+              <span className="mr-2 font-bold">Current:</span>
+              <span>{previousCompanies[0]}</span>
+            </div>
+          )}
           <div className="flex flex-row">
             <CalendarDaysIcon className="mr-2 h-5" />
             <span className="mr-2 font-bold">YOE:</span>
