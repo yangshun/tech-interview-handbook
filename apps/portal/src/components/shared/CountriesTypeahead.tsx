@@ -1,26 +1,30 @@
+import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import type { TypeaheadOption } from '@tih/ui';
 import { Typeahead } from '@tih/ui';
 
 import { trpc } from '~/utils/trpc';
 
-type Props = Readonly<{
-  disabled?: boolean;
-  errorMessage?: string;
-  isLabelHidden?: boolean;
-  onSelect: (option: TypeaheadOption | null) => void;
-  placeholder?: string;
-  required?: boolean;
-  value?: TypeaheadOption | null;
-}>;
+type BaseProps = Pick<
+  ComponentProps<typeof Typeahead>,
+  | 'disabled'
+  | 'errorMessage'
+  | 'isLabelHidden'
+  | 'placeholder'
+  | 'required'
+  | 'textSize'
+>;
+
+type Props = BaseProps &
+  Readonly<{
+    onSelect: (option: TypeaheadOption | null) => void;
+    value?: TypeaheadOption | null;
+  }>;
 
 export default function CountriesTypeahead({
-  disabled,
   onSelect,
-  isLabelHidden,
-  placeholder,
-  required,
   value,
+  ...props
 }: Props) {
   const [query, setQuery] = useState('');
   const countries = trpc.useQuery([
@@ -34,8 +38,6 @@ export default function CountriesTypeahead({
 
   return (
     <Typeahead
-      disabled={disabled}
-      isLabelHidden={isLabelHidden}
       label="Country"
       noResultsMessage="No countries found"
       nullable={true}
@@ -46,12 +48,10 @@ export default function CountriesTypeahead({
           value: id,
         })) ?? []
       }
-      placeholder={placeholder}
-      required={required}
-      textSize="inherit"
       value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}
+      {...props}
     />
   );
 }

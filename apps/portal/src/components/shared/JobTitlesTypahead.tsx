@@ -1,25 +1,30 @@
+import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import type { TypeaheadOption } from '@tih/ui';
 import { Typeahead } from '@tih/ui';
 
 import { JobTitleLabels } from './JobTitles';
 
-type Props = Readonly<{
-  disabled?: boolean;
-  isLabelHidden?: boolean;
-  onSelect: (option: TypeaheadOption | null) => void;
-  placeholder?: string;
-  required?: boolean;
-  value?: TypeaheadOption | null;
-}>;
+type BaseProps = Pick<
+  ComponentProps<typeof Typeahead>,
+  | 'disabled'
+  | 'errorMessage'
+  | 'isLabelHidden'
+  | 'placeholder'
+  | 'required'
+  | 'textSize'
+>;
+
+type Props = BaseProps &
+  Readonly<{
+    onSelect: (option: TypeaheadOption | null) => void;
+    value?: TypeaheadOption | null;
+  }>;
 
 export default function JobTitlesTypeahead({
-  disabled,
   onSelect,
-  isLabelHidden,
-  placeholder,
-  required,
   value,
+  ...props
 }: Props) {
   const [query, setQuery] = useState('');
   const options = Object.entries(JobTitleLabels)
@@ -35,18 +40,14 @@ export default function JobTitlesTypeahead({
 
   return (
     <Typeahead
-      disabled={disabled}
-      isLabelHidden={isLabelHidden}
       label="Job Title"
       noResultsMessage="No available job titles."
       nullable={true}
       options={options}
-      placeholder={placeholder}
-      required={required}
-      textSize="inherit"
       value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}
+      {...props}
     />
   );
 }
