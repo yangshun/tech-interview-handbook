@@ -9,19 +9,23 @@ export function timeSinceNow(date: Date | number | string) {
   let interval = seconds / 31536000;
 
   if (interval > 1) {
-    return `${Math.floor(interval)} years`;
+    const time: number = Math.floor(interval);
+    return time === 1 ? `${time} year` : `${time} years`;
   }
   interval = seconds / 2592000;
   if (interval > 1) {
-    return `${Math.floor(interval)} months`;
+    const time: number = Math.floor(interval);
+    return time === 1 ? `${time} month` : `${time} months`;
   }
   interval = seconds / 86400;
   if (interval > 1) {
-    return `${Math.floor(interval)} days`;
+    const time: number = Math.floor(interval);
+    return time === 1 ? `${time} day` : `${time} days`;
   }
   interval = seconds / 3600;
   if (interval > 1) {
-    return `${Math.floor(interval)} hours`;
+    const time: number = Math.floor(interval);
+    return time === 1 ? `${time} hour` : `${time} hours`;
   }
   interval = seconds / 60;
   if (interval > 1) {
