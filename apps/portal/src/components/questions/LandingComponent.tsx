@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
 import { ArrowSmallRightIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
+import type { TypeaheadOption } from '@tih/ui';
 import { Button, Select } from '@tih/ui';
 
 import { companyOptionToSlug } from '~/utils/questions/companySlug';
 import { QUESTION_TYPES } from '~/utils/questions/constants';
+import { locationOptionToSlug } from '~/utils/questions/locationSlug';
 import useDefaultCompany from '~/utils/questions/useDefaultCompany';
 import useDefaultLocation from '~/utils/questions/useDefaultLocation';
 
 import type { FilterChoice } from './filter/FilterSection';
 import CompanyTypeahead from './typeahead/CompanyTypeahead';
 import LocationTypeahead from './typeahead/LocationTypeahead';
+
+import type { Location } from '~/types/questions';
 
 export type LandingQueryData = {
   companySlug: string;
@@ -31,9 +35,9 @@ export default function LandingComponent({
   const [company, setCompany] = useState<FilterChoice | undefined>(
     defaultCompany,
   );
-  const [location, setLocation] = useState<FilterChoice | undefined>(
-    defaultLocation,
-  );
+  const [location, setLocation] = useState<
+    (Location & TypeaheadOption) | undefined
+  >(defaultLocation);
 
   const [questionType, setQuestionType] =
     useState<QuestionsQuestionType>('CODING');
@@ -42,7 +46,7 @@ export default function LandingComponent({
     setCompany(newCompany);
   };
 
-  const handleChangeLocation = (newLocation: FilterChoice) => {
+  const handleChangeLocation = (newLocation: Location & TypeaheadOption) => {
     setLocation(newLocation);
   };
 
@@ -126,7 +130,7 @@ export default function LandingComponent({
               if (company !== undefined && location !== undefined) {
                 return handleLandingQuery({
                   companySlug: companyOptionToSlug(company),
-                  location: location.value,
+                  location: locationOptionToSlug(location),
                   questionType,
                 });
               }

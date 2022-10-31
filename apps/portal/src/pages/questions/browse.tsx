@@ -18,14 +18,11 @@ import LocationTypeahead from '~/components/questions/typeahead/LocationTypeahea
 import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
 import { JobTitleLabels } from '~/components/shared/JobTitles';
 
-import {
-  companyOptionToSlug,
-  slugToCompanyOption,
-} from '~/utils/questions/companySlug';
 import type { QuestionAge } from '~/utils/questions/constants';
 import { APP_TITLE } from '~/utils/questions/constants';
 import { QUESTION_AGES, QUESTION_TYPES } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
+import { locationOptionToSlug } from '~/utils/questions/locationSlug';
 import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
 import {
   useSearchParam,
@@ -36,17 +33,6 @@ import { trpc } from '~/utils/trpc';
 import type { Location } from '~/types/questions.d';
 import { SortType } from '~/types/questions.d';
 import { SortOrder } from '~/types/questions.d';
-
-function locationToSlug(value: Location & TypeaheadOption): string {
-  return [
-    value.countryId,
-    value.stateId,
-    value.cityId,
-    value.id,
-    value.label,
-    value.value,
-  ].join('-');
-}
 
 export default function QuestionsBrowsePage() {
   const router = useRouter();
@@ -90,7 +76,7 @@ export default function QuestionsBrowsePage() {
     useSearchParam('roles');
   const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
     useSearchParam<Location & TypeaheadOption>('locations', {
-      paramToString: locationToSlug,
+      paramToString: locationOptionToSlug,
       stringToParam: (param) => {
         const [countryId, stateId, cityId, id, label, value] = param.split('-');
         return { cityId, countryId, id, label, stateId, value };
@@ -267,7 +253,7 @@ export default function QuestionsBrowsePage() {
         pathname,
         query: {
           companies: selectedCompanySlugs,
-          locations: selectedLocations.map(locationToSlug),
+          locations: selectedLocations.map(locationOptionToSlug),
           questionAge: selectedQuestionAge,
           questionTypes: selectedQuestionTypes,
           roles: selectedRoles,
@@ -292,7 +278,15 @@ export default function QuestionsBrowsePage() {
   ]);
 
   const selectedCompanyOptions = useMemo(() => {
-    return selectedCompanySlugs.map(slugToCompanyOption);
+    return selectedCompanySlugs.map((company) => {
+      const [id, label] = company.split('_');
+      return {
+        checked: true,
+        id,
+        label,
+        value: id,
+      };
+    });
   }, [selectedCompanySlugs]);
 
   const selectedRoleOptions = useMemo(() => {
@@ -359,12 +353,12 @@ export default function QuestionsBrowsePage() {
           if (option.checked) {
             setSelectedCompanySlugs([
               ...selectedCompanySlugs,
-              companyOptionToSlug(option),
+              `${option.id}_${option.label}`,
             ]);
           } else {
             setSelectedCompanySlugs(
               selectedCompanySlugs.filter(
-                (companySlug) => companySlug !== companyOptionToSlug(option),
+                (companySlug) => companySlug !== `${option.id}_${option.label}`,
               ),
             );
           }
