@@ -27,7 +27,7 @@ export const questionsQuestionRouter = createRouter()
     async resolve({ ctx, input }) {
       const { cursor } = input;
 
-      let sortCondition;
+      let sortCondition = undefined;
 
       switch (input.sortType) {
         case SortType.TOP:
