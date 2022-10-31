@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import {
   BookmarkIcon as BookmarkIconOutline,
@@ -10,23 +11,22 @@ import {
 import { BookmarkIcon as BookmarkIconSolid } from '@heroicons/react/24/solid';
 import { Button, Dialog, Spinner, Tabs, useToast } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
+import type { ProfileDetailTab } from '~/components/offers/constants';
+import { profileDetailTabs } from '~/components/offers/constants';
 import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
 import type { BackgroundDisplayData } from '~/components/offers/types';
 import { JobTypeLabel } from '~/components/offers/types';
+import Tooltip from '~/components/offers/util/Tooltip';
 
 import { getProfileEditPath } from '~/utils/offers/link';
 import { trpc } from '~/utils/trpc';
-
-import type { ProfileDetailTab } from '../constants';
-import { profileDetailTabs } from '../constants';
-import Tooltip from '../util/Tooltip';
 
 type ProfileHeaderProps = Readonly<{
   background?: BackgroundDisplayData;
   handleDelete: () => void;
   isEditable: boolean;
   isLoading: boolean;
-  isSaved?: boolean;
   selectedTab: ProfileDetailTab;
   setSelectedTab: (tab: ProfileDetailTab) => void;
 }>;
@@ -36,19 +36,40 @@ export default function ProfileHeader({
   handleDelete,
   isEditable,
   isLoading,
-  isSaved = false,
   selectedTab,
   setSelectedTab,
 }: ProfileHeaderProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [saved, setSaved] = useState(isSaved);
+  const [saved, setSaved] = useState(false);
+
   const router = useRouter();
   const trpcContext = trpc.useContext();
+
   const { offerProfileId = '', token = '' } = router.query;
   const { showToast } = useToast();
+  const { data: session, status } = useSession();
+  const { event: gaEvent } = useGoogleAnalytics();
+
   const handleEditClick = () => {
+    gaEvent({
+      action: 'offers.edit_profile',
+      category: 'engagement',
+      label: 'Edit profile',
+    });
     router.push(getProfileEditPath(offerProfileId as string, token as string));
   };
+
+  const isSavedQuery = trpc.useQuery(
+    [
+      `offers.profile.isSaved`,
+      { profileId: offerProfileId as string, userId: session?.user?.id },
+    ],
+    {
+      onSuccess: (res) => {
+        setSaved(res);
+      },
+    },
+  );
 
   const saveMutation = trpc.useMutation(
     ['offers.user.profile.addToUserProfile'],
@@ -61,7 +82,13 @@ export default function ProfileHeader({
         });
       },
       onSuccess: () => {
-        setSaved(true);
+        trpcContext.invalidateQueries([
+          'offers.profile.isSaved',
+          {
+            profileId: offerProfileId as string,
+            userId: session?.user?.id,
+          },
+        ]);
         showToast({
           title: `Saved to dashboard!`,
           variant: 'success',
@@ -80,18 +107,25 @@ export default function ProfileHeader({
         });
       },
       onSuccess: () => {
-        setSaved(false);
+        trpcContext.invalidateQueries([
+          'offers.profile.isSaved',
+          {
+            profileId: offerProfileId as string,
+            userId: session?.user?.id,
+          },
+        ]);
         showToast({
           title: `Removed from dashboard!`,
           variant: 'success',
         });
-        trpcContext.invalidateQueries(['offers.profile.listOne']);
       },
     },
   );
 
   const toggleSaved = () => {
-    if (saved) {
+    if (status === 'unauthenticated') {
+      signIn();
+    } else if (saved) {
       unsaveMutation.mutate({ profileId: offerProfileId as string });
     } else {
       saveMutation.mutate({
@@ -106,15 +140,22 @@ export default function ProfileHeader({
       <div className="flex justify-center space-x-2">
         <Tooltip
           tooltipContent={
-            isSaved ? 'Remove from account' : 'Save to your account'
+            saved ? 'Remove from account' : 'Save to your account'
           }>
           <Button
             disabled={
-              isLoading || saveMutation.isLoading || unsaveMutation.isLoading
+              isLoading ||
+              saveMutation.isLoading ||
+              unsaveMutation.isLoading ||
+              isSavedQuery.isLoading
             }
             icon={saved ? BookmarkIconSolid : BookmarkIconOutline}
             isLabelHidden={true}
-            isLoading={saveMutation.isLoading || unsaveMutation.isLoading}
+            isLoading={
+              isSavedQuery.isLoading ||
+              saveMutation.isLoading ||
+              unsaveMutation.isLoading
+            }
             label={saved ? 'Remove from account' : 'Save to your account'}
             size="md"
             variant="tertiary"

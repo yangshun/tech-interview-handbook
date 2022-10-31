@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import { z } from 'zod';
+import type { OffersProfile } from '@prisma/client';
 import { JobType } from '@prisma/client';
 import * as trpc from '@trpc/server';
 
@@ -108,11 +109,12 @@ export const offersProfileRouter = createRouter()
       token: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const profile = await ctx.prisma.offersProfile.findFirst({
-        where: {
-          id: input.profileId,
-        },
-      });
+      const profile: OffersProfile | null =
+        await ctx.prisma.offersProfile.findFirst({
+          where: {
+            id: input.profileId,
+          },
+        });
 
       return profile?.editToken === input.token;
     },
