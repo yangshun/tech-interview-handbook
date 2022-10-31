@@ -291,14 +291,20 @@ export const questionsQuestionRouter = createRouter()
         .split(/\s+/)
         .join(' | ');
 
-      const relatedQuestionsId: Array<{ id: string }> = await ctx.prisma
-        .$queryRaw`
-        SELECT id FROM "QuestionsQuestion"
-        WHERE
-          to_tsvector("content") @@ to_tsquery('english', ${query})
-          AND ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) > 0.8
-        ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) DESC;
-      `;
+      let relatedQuestionsId: Array<{ id: string }> = [];
+
+      if (input.content !== "") {
+        relatedQuestionsId = await ctx.prisma
+          .$queryRaw`
+          SELECT id FROM "QuestionsQuestion"
+          WHERE
+            to_tsvector("content") @@ to_tsquery('english', ${query})
+            AND ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) > 0.8
+          ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) DESC;
+        `;
+      }
+
+
 
       const relatedQuestionsIdArray = relatedQuestionsId.map(
         (current) => current.id,
@@ -354,9 +360,9 @@ export const questionsQuestionRouter = createRouter()
         orderBy: sortCondition,
         take: input.limit + 1,
         where: {
-          id: {
+          id: input.content !== "" ? {
             in: relatedQuestionsIdArray,
-          },
+          } : undefined,
           ...(input.questionTypes.length > 0
             ? {
                 questionType: {
