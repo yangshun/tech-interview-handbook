@@ -232,7 +232,7 @@ export const offersAnalysisRouter = createRouter()
       const monthYearReceived = new Date(overallHighestOffer.monthYearReceived);
       monthYearReceived.setFullYear(monthYearReceived.getFullYear() - 1);
 
-      let similarOffers = await ctx.prisma.offersOffer.findMany({
+      const similarOffers = await ctx.prisma.offersOffer.findMany({
         include: {
           company: true,
           offersFullTime: {
@@ -326,7 +326,7 @@ export const offersAnalysisRouter = createRouter()
       const companyAnalysis = Array.from(companyMap.values()).map(
         (companyOffer) => {
           // TODO: Refactor calculating analysis into a function
-          let similarCompanyOffers = similarOffers.filter(
+          const similarCompanyOffers = similarOffers.filter(
             (offer) => offer.companyId === companyOffer.companyId,
           );
 
@@ -340,21 +340,23 @@ export const offersAnalysisRouter = createRouter()
               : 100 - (100 * companyIndex) / (similarCompanyOffers.length - 1);
 
           // Get top offers (excluding user's offer)
-          similarCompanyOffers = similarCompanyOffers.filter(
-            (offer) => offer.id !== companyOffer.id,
-          );
+          const similarCompanyOffersWithoutUsersOffers =
+            similarCompanyOffers.filter(
+              (offer) => offer.profileId !== input.profileId,
+            );
 
-          const noOfSimilarCompanyOffers = similarCompanyOffers.length;
+          const noOfSimilarCompanyOffers =
+            similarCompanyOffersWithoutUsersOffers.length;
           const similarCompanyOffers90PercentileIndex = Math.ceil(
             noOfSimilarCompanyOffers * 0.1,
           );
           const topPercentileCompanyOffers =
             noOfSimilarCompanyOffers > 2
-              ? similarCompanyOffers.slice(
+              ? similarCompanyOffersWithoutUsersOffers.slice(
                   similarCompanyOffers90PercentileIndex,
                   similarCompanyOffers90PercentileIndex + 2,
                 )
-              : similarCompanyOffers;
+              : similarCompanyOffersWithoutUsersOffers;
 
           return {
             companyName: companyOffer.company.name,
@@ -375,19 +377,19 @@ export const offersAnalysisRouter = createRouter()
           ? 100
           : 100 - (100 * overallIndex) / (similarOffers.length - 1);
 
-      similarOffers = similarOffers.filter(
-        (offer) => offer.id !== overallHighestOffer.id,
+      const similarOffersWithoutUsersOffers = similarOffers.filter(
+        (similarOffer) => similarOffer.profileId !== input.profileId,
       );
 
-      const noOfSimilarOffers = similarOffers.length;
+      const noOfSimilarOffers = similarOffersWithoutUsersOffers.length;
       const similarOffers90PercentileIndex = Math.ceil(noOfSimilarOffers * 0.1);
       const topPercentileOffers =
         noOfSimilarOffers > 2
-          ? similarOffers.slice(
+          ? similarOffersWithoutUsersOffers.slice(
               similarOffers90PercentileIndex,
               similarOffers90PercentileIndex + 2,
             )
-          : similarOffers;
+          : similarOffersWithoutUsersOffers;
 
       const analysis = await ctx.prisma.offersAnalysis.create({
         data: {
