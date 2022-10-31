@@ -15,6 +15,9 @@ export default {
     autoComplete: {
       control: 'text',
     },
+    description: {
+      control: 'text',
+    },
     disabled: {
       control: 'boolean',
     },
@@ -100,6 +103,20 @@ export function Error() {
 
   return (
     <TextArea
+      errorMessage={value.length < 6 ? 'Your comment is too short' : undefined}
+      label="Leave a reply"
+      value={value}
+      onChange={setValue}
+    />
+  );
+}
+
+export function Description() {
+  const [value, setValue] = useState('Some comment');
+
+  return (
+    <TextArea
+      description="Your message must be at least 6 characters"
       errorMessage={value.length < 6 ? 'Your comment is too short' : undefined}
       label="Leave a reply"
       value={value}

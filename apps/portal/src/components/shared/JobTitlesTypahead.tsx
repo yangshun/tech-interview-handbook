@@ -7,17 +7,19 @@ import { JobTitleLabels } from './JobTitles';
 type Props = Readonly<{
   disabled?: boolean;
   isLabelHidden?: boolean;
-  onSelect: (option: TypeaheadOption) => void;
-  placeHolder?: string;
+  onSelect: (option: TypeaheadOption | null) => void;
+  placeholder?: string;
   required?: boolean;
+  value?: TypeaheadOption | null;
 }>;
 
 export default function JobTitlesTypeahead({
   disabled,
   onSelect,
   isLabelHidden,
-  placeHolder,
+  placeholder,
   required,
+  value,
 }: Props) {
   const [query, setQuery] = useState('');
   const options = Object.entries(JobTitleLabels)
@@ -39,9 +41,10 @@ export default function JobTitlesTypeahead({
       noResultsMessage="No available job titles."
       nullable={true}
       options={options}
-      placeholder={placeHolder}
+      placeholder={placeholder}
       required={required}
       textSize="inherit"
+      value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}
     />

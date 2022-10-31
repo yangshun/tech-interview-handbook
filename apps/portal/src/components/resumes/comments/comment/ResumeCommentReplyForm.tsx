@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import type { ResumesSection } from '@prisma/client';
 import { Button, TextArea } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
+
 import { trpc } from '~/utils/trpc';
 
 type ResumeCommentEditFormProps = {
@@ -33,6 +35,7 @@ export default function ResumeCommentReplyForm({
       description: '',
     },
   });
+  const { event: gaEvent } = useGoogleAnalytics();
 
   const trpcContext = trpc.useContext();
   const commentReplyMutation = trpc.useMutation('resumes.comments.user.reply', {
@@ -58,6 +61,12 @@ export default function ResumeCommentReplyForm({
       {
         onSuccess: () => {
           setIsReplyingComment(false);
+
+          gaEvent({
+            action: 'resumes.comment_reply',
+            category: 'engagement',
+            label: 'Reply comment',
+          });
         },
       },
     );

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   ChatBubbleBottomCenterTextIcon,
   CheckIcon,
@@ -9,6 +9,7 @@ import {
 import type { QuestionsQuestionType } from '@prisma/client';
 import { Button } from '@tih/ui';
 
+import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { useQuestionVote } from '~/utils/questions/useVote';
 
 import AddToListDropdown from '../../AddToListDropdown';
@@ -17,6 +18,8 @@ import CreateQuestionEncounterForm from '../../forms/CreateQuestionEncounterForm
 import QuestionAggregateBadge from '../../QuestionAggregateBadge';
 import QuestionTypeBadge from '../../QuestionTypeBadge';
 import VotingButtons from '../../VotingButtons';
+
+import type { CountryInfo } from '~/types/questions';
 
 type UpvoteProps =
   | {
@@ -51,13 +54,13 @@ type AnswerStatisticsProps =
 type AggregateStatisticsProps =
   | {
       companies: Record<string, number>;
-      locations: Record<string, number>;
+      countries: Record<string, CountryInfo>;
       roles: Record<string, number>;
       showAggregateStatistics: true;
     }
   | {
       companies?: never;
-      locations?: never;
+      countries?: never;
       roles?: never;
       showAggregateStatistics?: false;
     };
@@ -86,10 +89,12 @@ type ReceivedStatisticsProps =
 
 type CreateEncounterProps =
   | {
+      createEncounterButtonText: string;
       onReceivedSubmit: (data: CreateQuestionEncounterData) => void;
       showCreateEncounterButton: true;
     }
   | {
+      createEncounterButtonText?: never;
       onReceivedSubmit?: never;
       showCreateEncounterButton?: false;
     };
@@ -130,13 +135,14 @@ export default function BaseQuestionCard({
   showAnswerStatistics,
   showReceivedStatistics,
   showCreateEncounterButton,
+  createEncounterButtonText,
   showActionButton,
   actionButtonLabel,
   onActionButtonClick,
   upvoteCount,
   timestamp,
   roles,
-  locations,
+  countries,
   showHover,
   onReceivedSubmit,
   showDeleteButton,
@@ -147,6 +153,26 @@ export default function BaseQuestionCard({
   const [showReceivedForm, setShowReceivedForm] = useState(false);
   const { handleDownvote, handleUpvote, vote } = useQuestionVote(questionId);
   const hoverClass = showHover ? 'hover:bg-slate-50' : '';
+
+  const locations = useMemo(() => {
+    if (countries === undefined) {
+      return undefined;
+    }
+
+    const countryCount: Record<string, number> = {};
+    // Decompose countries
+    for (const country of Object.keys(countries)) {
+      const { total } = countries[country];
+      countryCount[country] = total;
+    }
+
+    return countryCount;
+  }, [countries]);
+
+  const handleCreateEncounterClick = useProtectedCallback(() => {
+    setShowReceivedForm(true);
+  });
+
   const cardContent = (
     <>
       {showVoteButtons && (
@@ -168,7 +194,7 @@ export default function BaseQuestionCard({
                   variant="primary"
                 />
                 <QuestionAggregateBadge
-                  statistics={locations}
+                  statistics={locations!}
                   variant="success"
                 />
                 <QuestionAggregateBadge statistics={roles} variant="danger" />
@@ -220,13 +246,10 @@ export default function BaseQuestionCard({
                 <Button
                   addonPosition="start"
                   icon={CheckIcon}
-                  label="I received this too"
+                  label={createEncounterButtonText}
                   size="sm"
                   variant="tertiary"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    setShowReceivedForm(true);
-                  }}
+                  onClick={handleCreateEncounterClick}
                 />
               )}
             </div>

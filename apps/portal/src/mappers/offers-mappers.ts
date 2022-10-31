@@ -680,6 +680,8 @@ export const getUserProfileResponseMapper = (
         profileName: profile.profileName,
         token: profile.editToken,
       };
+    }).sort((a, b) => {
+      return b.createdAt > a.createdAt ? 1 : -1;
     });
   }
 

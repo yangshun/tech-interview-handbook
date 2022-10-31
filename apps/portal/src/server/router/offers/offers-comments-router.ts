@@ -321,16 +321,11 @@ export const offersCommentsRouter = createRouter()
           },
         });
 
-        // If (result) {
-        //   return result.discussion.filter((x) => x.replyingToId === null);
-        // }
-
-        // return result;
+      } else {
+        throw new trpc.TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'Wrong userId or token.',
+        });
       }
-
-      throw new trpc.TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'Wrong userId or token.',
-      });
     },
   });

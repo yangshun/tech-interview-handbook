@@ -106,6 +106,35 @@ model Company {
   OffersOffer                OffersOffer[]
 }
 
+model Country {
+  id                          String                       @id
+  name                        String                       @unique
+  code                        String                       @unique
+  states                      State[]
+  questionsQuestionEncounters QuestionsQuestionEncounter[]
+}
+
+model State {
+  id                          String                       @id
+  name                        String
+  countryId                   String
+  cities                      City[]
+  country                     Country                      @relation(fields: [countryId], references: [id])
+  questionsQuestionEncounters QuestionsQuestionEncounter[]
+
+  @@unique([name, countryId])
+}
+
+model City {
+  id                          String                       @id
+  name                        String
+  stateId                     String
+  state                       State                        @relation(fields: [stateId], references: [id])
+  questionsQuestionEncounters QuestionsQuestionEncounter[]
+
+  @@unique([name, stateId])
+}
+
 // Start of Resumes project models.
 // Add Resumes project models here, prefix all models with "Resumes",
 // use camelCase for field names, and try to name them consistently
@@ -405,26 +434,29 @@ enum QuestionsQuestionType {
   CODING
   SYSTEM_DESIGN
   BEHAVIORAL
+  THEORY
 }
 
 model QuestionsQuestion {
-  id           String                @id @default(cuid())
-  userId       String?
-  content      String                @db.Text
-  questionType QuestionsQuestionType
-  lastSeenAt   DateTime?
-  upvotes      Int                   @default(0)
-  createdAt    DateTime              @default(now())
-  updatedAt    DateTime              @updatedAt
+  id            String                @id @default(cuid())
+  userId        String?
+  content       String                @db.Text
+  questionType  QuestionsQuestionType
+  lastSeenAt    DateTime?
+  upvotes       Int                   @default(0)
+  numEncounters Int                   @default(0)
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
 
-  user                       User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
-  encounters                 QuestionsQuestionEncounter[]
-  votes                      QuestionsQuestionVote[]
-  comments                   QuestionsQuestionComment[]
-  answers                    QuestionsAnswer[]
-  QuestionsListQuestionEntry QuestionsListQuestionEntry[]
+  user                         User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  encounters                   QuestionsQuestionEncounter[]
+  votes                        QuestionsQuestionVote[]
+  comments                     QuestionsQuestionComment[]
+  answers                      QuestionsAnswer[]
+  questionsListQuestionEntries QuestionsListQuestionEntry[]
 
   @@index([lastSeenAt, id])
+  @@index([numEncounters, id])
   @@index([upvotes, id])
 }
 
@@ -432,14 +464,18 @@ model QuestionsQuestionEncounter {
   id         String   @id @default(cuid())
   questionId String
   userId     String?
-  // TODO: sync with models (location, role)
-  companyId  String
-  location   String   @db.Text
+  companyId  String?
+  countryId  String?
+  stateId    String?
+  cityId     String?
   role       String   @db.Text
   seenAt     DateTime
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
+  country  Country?          @relation(fields: [countryId], references: [id], onDelete: SetNull)
+  state    State?            @relation(fields: [stateId], references: [id], onDelete: SetNull)
+  city     City?             @relation(fields: [cityId], references: [id], onDelete: SetNull)
   company  Company?          @relation(fields: [companyId], references: [id], onDelete: SetNull)
   user     User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
   question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
@@ -471,6 +507,9 @@ model QuestionsQuestionComment {
   user     User?                          @relation(fields: [userId], references: [id], onDelete: SetNull)
   question QuestionsQuestion              @relation(fields: [questionId], references: [id], onDelete: Cascade)
   votes    QuestionsQuestionCommentVote[]
+
+  @@index([updatedAt, id])
+  @@index([upvotes, id])
 }
 
 model QuestionsQuestionCommentVote {
@@ -500,6 +539,9 @@ model QuestionsAnswer {
   question QuestionsQuestion        @relation(fields: [questionId], references: [id], onDelete: Cascade)
   votes    QuestionsAnswerVote[]
   comments QuestionsAnswerComment[]
+
+  @@index([updatedAt, id])
+  @@index([upvotes, id])
 }
 
 model QuestionsAnswerVote {
@@ -528,6 +570,9 @@ model QuestionsAnswerComment {
   user   User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
   answer QuestionsAnswer              @relation(fields: [answerId], references: [id], onDelete: Cascade)
   votes  QuestionsAnswerCommentVote[]
+
+  @@index([updatedAt, id])
+  @@index([upvotes, id])
 }
 
 model QuestionsAnswerCommentVote {

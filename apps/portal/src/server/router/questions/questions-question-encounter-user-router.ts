@@ -1,38 +1,20 @@
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
 
-import { createAggregatedQuestionEncounter } from '~/utils/questions/server/aggregate-encounters';
-
 import { createProtectedRouter } from '../context';
 
 import { SortOrder } from '~/types/questions.d';
 
 export const questionsQuestionEncounterUserRouter = createProtectedRouter()
-  .query('getAggregatedEncounters', {
-    input: z.object({
-      questionId: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      const questionEncountersData =
-        await ctx.prisma.questionsQuestionEncounter.findMany({
-          include: {
-            company: true,
-          },
-          where: {
-            ...input,
-          },
-        });
-
-      return createAggregatedQuestionEncounter(questionEncountersData);
-    },
-  })
   .mutation('create', {
     input: z.object({
+      cityId: z.string().nullish(),
       companyId: z.string(),
-      location: z.string(),
+      countryId: z.string(),
       questionId: z.string(),
       role: z.string(),
       seenAt: z.date(),
+      stateId: z.string().nullish(),
     }),
     async resolve({ ctx, input }) {
       const userId = ctx.session?.user?.id;
@@ -59,19 +41,21 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
           });
         }
 
-        if (
-          questionToUpdate.lastSeenAt === null ||
-          questionToUpdate.lastSeenAt < input.seenAt
-        ) {
-          await tx.questionsQuestion.update({
-            data: {
-              lastSeenAt: input.seenAt,
+
+        await tx.questionsQuestion.update({
+          data: {
+            lastSeenAt: (questionToUpdate.lastSeenAt === null ||
+                          questionToUpdate.lastSeenAt < input.seenAt)
+                            ? input.seenAt : undefined,
+            numEncounters: {
+              increment: 1,
             },
-            where: {
-              id: input.questionId,
-            },
-          });
-        }
+          },
+          where: {
+            id: input.questionId,
+          },
+        });
+
         return questionEncounterCreated;
       });
     },
@@ -94,7 +78,7 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
           },
         });
 
-      if (questionEncounterToUpdate?.id !== userId) {
+      if (questionEncounterToUpdate?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -157,7 +141,7 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
           },
         });
 
-      if (questionEncounterToDelete?.id !== userId) {
+      if (questionEncounterToDelete?.userId !== userId) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'User have no authorization to record.',
@@ -178,6 +162,8 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
           }),
         ]);
 
+        let lastSeenVal = undefined;
+
         if (questionToUpdate!.lastSeenAt === questionEncounterToDelete.seenAt) {
           const latestEncounter =
             await ctx.prisma.questionsQuestionEncounter.findFirst({
@@ -189,17 +175,20 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
               },
             });
 
-          const lastSeenVal = latestEncounter ? latestEncounter!.seenAt : null;
+          lastSeenVal = latestEncounter ? latestEncounter!.seenAt : null;
+        }
 
-          await tx.questionsQuestion.update({
+        await tx.questionsQuestion.update({
             data: {
               lastSeenAt: lastSeenVal,
+              numEncounters: {
+                increment: -1,
+              },
             },
             where: {
               id: questionToUpdate!.id,
             },
           });
-        }
 
         return questionEncounterDeleted;
       });

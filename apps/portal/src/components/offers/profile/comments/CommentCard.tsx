@@ -1,7 +1,10 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
-import { ChatBubbleBottomCenterIcon } from '@heroicons/react/24/outline';
-import { Button, HorizontalDivider, TextArea } from '@tih/ui';
+import {
+  ChatBubbleBottomCenterIcon,
+  TrashIcon,
+} from '@heroicons/react/24/outline';
+import { Button, Dialog, HorizontalDivider, TextArea, useToast } from '@tih/ui';
 
 import { timeSinceNow } from '~/utils/offers/time';
 
@@ -25,12 +28,15 @@ export default function CommentCard({
   handleExpanded,
   isExpanded,
   profileId,
-  token = '',
   replyLength = 0,
+  token = '',
 }: Props) {
   const { data: session, status } = useSession();
   const [isReplying, setIsReplying] = useState(false);
   const [currentReply, setCurrentReply] = useState<string>('');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { showToast } = useToast();
+  const deletable: boolean = token.length > 0 || user?.id === session?.user?.id;
 
   const trpcContext = trpc.useContext();
   const createCommentMutation = trpc.useMutation(['offers.comments.create'], {
@@ -91,6 +97,33 @@ export default function CommentCard({
     }
   }
 
+  const deleteCommentMutation = trpc.useMutation(['offers.comments.delete'], {
+    onSuccess() {
+      trpcContext.invalidateQueries([
+        'offers.comments.getComments',
+        { profileId },
+      ]);
+    },
+  });
+  function handleDelete() {
+    deleteCommentMutation.mutate(
+      {
+        id,
+        profileId,
+        token,
+        userId: session?.user?.id,
+      },
+      {
+        onError: () => {
+          showToast({ title: `Server Error`, variant: 'failure' });
+        },
+        onSuccess: () => {
+          showToast({ title: `Deleted comment`, variant: 'success' });
+        },
+      },
+    );
+  }
+
   return (
     <>
       <div className="flex pl-2">
@@ -122,6 +155,47 @@ export default function CommentCard({
                 />
               </div>
             )}
+            {deletable && (
+              <>
+                <Button
+                  disabled={deleteCommentMutation.isLoading}
+                  icon={TrashIcon}
+                  isLabelHidden={true}
+                  isLoading={deleteCommentMutation.isLoading}
+                  label="Delete"
+                  size="sm"
+                  variant="tertiary"
+                  onClick={() => setIsDialogOpen(true)}
+                />
+                {isDialogOpen && (
+                  <Dialog
+                    isShown={isDialogOpen}
+                    primaryButton={
+                      <Button
+                        display="block"
+                        label="Delete"
+                        variant="primary"
+                        onClick={() => {
+                          setIsDialogOpen(false);
+                          handleDelete();
+                        }}
+                      />
+                    }
+                    secondaryButton={
+                      <Button
+                        display="block"
+                        label="Cancel"
+                        variant="tertiary"
+                        onClick={() => setIsDialogOpen(false)}
+                      />
+                    }
+                    title="Are you sure you want to delete this comment?"
+                    onClose={() => setIsDialogOpen(false)}>
+                    <div>You cannot undo this operation.</div>
+                  </Dialog>
+                )}
+              </>
+            )}
           </div>
           {!disableReply && isReplying && (
             <div className="mt-2 mr-2">
@@ -137,7 +211,9 @@ export default function CommentCard({
                 <div className="w-fit">
                   <Button
                     disabled={
-                      !currentReply.length || createCommentMutation.isLoading
+                      !currentReply.length ||
+                      createCommentMutation.isLoading ||
+                      deleteCommentMutation.isLoading
                     }
                     display="block"
                     isLabelHidden={false}

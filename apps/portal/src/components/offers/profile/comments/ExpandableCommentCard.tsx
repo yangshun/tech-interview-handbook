@@ -35,6 +35,7 @@ export default function ExpandableCommentCard({
                 comment={reply}
                 disableReply={true}
                 profileId={profileId}
+                token={token}
               />
             ))}
         </div>

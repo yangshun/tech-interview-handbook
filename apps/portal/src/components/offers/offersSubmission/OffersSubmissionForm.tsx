@@ -6,6 +6,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 import { JobType } from '@prisma/client';
 import { Button } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import type { BreadcrumbStep } from '~/components/offers/Breadcrumb';
 import { Breadcrumbs } from '~/components/offers/Breadcrumb';
 import BackgroundForm from '~/components/offers/offersSubmission/submissionForm/BackgroundForm';
@@ -27,6 +28,7 @@ import { trpc } from '~/utils/trpc';
 const defaultOfferValues = {
   comments: '',
   companyId: '',
+  jobTitle: '',
   jobType: JobType.FULLTIME,
   location: '',
   monthYearReceived: {
@@ -39,11 +41,38 @@ const defaultOfferValues = {
 export const defaultFullTimeOfferValues = {
   ...defaultOfferValues,
   jobType: JobType.FULLTIME,
+  offersFullTime: {
+    baseSalary: {
+      currency: 'SGD',
+      value: null,
+    },
+    bonus: {
+      currency: 'SGD',
+      value: null,
+    },
+    level: '',
+    stocks: {
+      currency: 'SGD',
+      value: null,
+    },
+    totalCompensation: {
+      currency: 'SGD',
+      value: null,
+    },
+  },
 };
 
 export const defaultInternshipOfferValues = {
   ...defaultOfferValues,
   jobType: JobType.INTERN,
+  offersIntern: {
+    internshipCycle: null,
+    monthlySalary: {
+      currency: 'SGD',
+      value: null,
+    },
+    startYear: null,
+  },
 };
 
 const defaultOfferProfileValues = {
@@ -73,6 +102,7 @@ export default function OffersSubmissionForm({
     token: editToken,
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { event: gaEvent } = useGoogleAnalytics();
 
   const router = useRouter();
   const pageRef = useRef<HTMLDivElement>(null);
@@ -82,7 +112,11 @@ export default function OffersSubmissionForm({
     defaultValues: initialOfferProfileValues,
     mode: 'all',
   });
-  const { handleSubmit, trigger } = formMethods;
+  const {
+    handleSubmit,
+    trigger,
+    formState: { isSubmitting, isSubmitSuccessful },
+  } = formMethods;
 
   const generateAnalysisMutation = trpc.useMutation(
     ['offers.analysis.generate'],
@@ -150,7 +184,7 @@ export default function OffersSubmissionForm({
 
   const onSubmit: SubmitHandler<OffersProfileFormData> = async (data) => {
     const result = await trigger();
-    if (!result) {
+    if (!result || isSubmitting || isSubmitSuccessful) {
       return;
     }
 
@@ -183,6 +217,11 @@ export default function OffersSubmissionForm({
     } else {
       createOrUpdateMutation.mutate({ background, offers });
     }
+    gaEvent({
+      action: 'offers.submit_profile',
+      category: 'submission',
+      label: 'Submit profile',
+    });
   };
 
   useEffect(() => {
@@ -198,6 +237,32 @@ export default function OffersSubmissionForm({
     scrollToTop();
   }, [step]);
 
+  useEffect(() => {
+    const warningText =
+      'Leave this page? Changes that you made will not be saved.';
+    const handleWindowClose = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      return (e.returnValue = warningText);
+    };
+    const handleRouteChange = (url: string) => {
+      if (url.includes('/offers/submit/result')) {
+        return;
+      }
+      if (window.confirm(warningText)) {
+        return;
+      }
+      router.events.emit('routeChangeError');
+      throw 'routeChange aborted.';
+    };
+    window.addEventListener('beforeunload', handleWindowClose);
+    router.events.on('routeChangeStart', handleRouteChange);
+    return () => {
+      window.removeEventListener('beforeunload', handleWindowClose);
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div ref={pageRef} className="fixed h-full w-full overflow-y-scroll">
       <div className="mb-20 flex justify-center">
@@ -210,7 +275,7 @@ export default function OffersSubmissionForm({
             />
           </div>
           <FormProvider {...formMethods}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className="text-sm" onSubmit={handleSubmit(onSubmit)}>
               {steps[step]}
               {/* <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre> */}
               {step === 0 && (
@@ -220,7 +285,14 @@ export default function OffersSubmissionForm({
                     icon={ArrowRightIcon}
                     label="Next"
                     variant="secondary"
-                    onClick={() => goToNextStep(step)}
+                    onClick={() => {
+                      goToNextStep(step);
+                      gaEvent({
+                        action: 'offers.profile_submission_navigate_next',
+                        category: 'submission',
+                        label: 'Navigate next',
+                      });
+                    }}
                   />
                 </div>
               )}
@@ -230,9 +302,22 @@ export default function OffersSubmissionForm({
                     icon={ArrowLeftIcon}
                     label="Previous"
                     variant="secondary"
-                    onClick={() => setStep(step - 1)}
+                    onClick={() => {
+                      setStep(step - 1);
+                      gaEvent({
+                        action: 'offers.profile_submission_navigation_back',
+                        category: 'submission',
+                        label: 'Navigate back',
+                      });
+                    }}
                   />
-                  <Button label="Submit" type="submit" variant="primary" />{' '}
+                  <Button
+                    disabled={isSubmitting || isSubmitSuccessful}
+                    isLoading={isSubmitting || isSubmitSuccessful}
+                    label="Submit"
+                    type="submit"
+                    variant="primary"
+                  />
                 </div>
               )}
             </form>

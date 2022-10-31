@@ -10,7 +10,8 @@
     "tsc": "tsc",
     "postinstall": "prisma generate",
     "seed": "ts-node prisma/seed.ts",
-    "seedSalaries": "ts-node prisma/readSheet.ts"
+    "seedSalaries": "ts-node prisma/readSheet.ts",
+    "seed-questions": "ts-node prisma/seed-questions.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.3",

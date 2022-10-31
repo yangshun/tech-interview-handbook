@@ -62,6 +62,7 @@ type EndAddOnProps =
 
 type BaseProps = Readonly<{
   defaultValue?: string;
+  description?: React.ReactNode;
   endIcon?: React.ComponentType<React.ComponentProps<'svg'>>;
   errorMessage?: React.ReactNode;
   id?: string;
@@ -99,6 +100,7 @@ const stateClasses: Record<
 function TextInput(
   {
     defaultValue,
+    description,
     disabled,
     endAddOn,
     endAddOnType,
@@ -119,7 +121,7 @@ function TextInput(
   const hasError = errorMessage != null;
   const generatedId = useId();
   const id = idParam ?? generatedId;
-  const errorId = useId();
+  const messageId = useId();
   const state: State = hasError ? 'error' : 'normal';
   const { input: inputClass, container: containerClass } = stateClasses[state];
 
@@ -143,7 +145,7 @@ function TextInput(
       <div
         className={clsx(
           'flex w-full overflow-hidden rounded-md border text-sm focus-within:ring-1',
-          disabled && 'pointer-events-none select-none bg-slate-50',
+          disabled ? 'pointer-events-none select-none bg-slate-50' : 'bg-white',
           containerClass,
         )}>
         {(() => {
@@ -154,14 +156,14 @@ function TextInput(
           switch (startAddOnType) {
             case 'label':
               return (
-                <div className="pointer-events-none flex items-center px-2 text-slate-500">
+                <div className="pointer-events-none flex items-center pl-3 text-slate-500">
                   {startAddOn}
                 </div>
               );
             case 'icon': {
               const StartAddOn = startAddOn;
               return (
-                <div className="pointer-events-none flex items-center px-2">
+                <div className="pointer-events-none flex items-center pl-3">
                   <StartAddOn
                     aria-hidden="true"
                     className="h-5 w-5 text-slate-400"
@@ -175,7 +177,9 @@ function TextInput(
         })()}
         <input
           ref={ref}
-          aria-describedby={hasError ? errorId : undefined}
+          aria-describedby={
+            hasError || description != null ? messageId : undefined
+          }
           aria-invalid={hasError ? true : undefined}
           className={clsx(
             'w-0 flex-1 border-none text-sm focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:bg-transparent disabled:text-slate-500',
@@ -224,9 +228,14 @@ function TextInput(
           }
         })()}
       </div>
-      {errorMessage && (
-        <p className="text-danger-600 mt-2 text-sm" id={errorId}>
-          {errorMessage}
+      {(errorMessage ?? description) && (
+        <p
+          className={clsx(
+            'mt-2 text-sm',
+            errorMessage ? 'text-danger-600' : 'text-slate-500',
+          )}
+          id={messageId}>
+          {errorMessage ?? description}
         </p>
       )}
     </div>

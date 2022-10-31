@@ -11,52 +11,59 @@ import { SortOrder, SortType } from '~/types/questions.d';
 export const questionsQuestionRouter = createRouter()
   .query('getQuestionsByFilter', {
     input: z.object({
-      companyNames: z.string().array(),
-      cursor: z
-        .object({
-          idCursor: z.string().optional(),
-          lastSeenCursor: z.date().nullish().optional(),
-          upvoteCursor: z.number().optional(),
-        })
-        .nullish(),
+      cityIds: z.string().array(),
+      companyIds: z.string().array(),
+      countryIds: z.string().array(),
+      cursor: z.string().nullish(),
       endDate: z.date().default(new Date()),
       limit: z.number().min(1).default(50),
-      locations: z.string().array(),
       questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
       roles: z.string().array(),
       sortOrder: z.nativeEnum(SortOrder),
       sortType: z.nativeEnum(SortType),
       startDate: z.date().optional(),
+      stateIds: z.string().array(),
     }),
     async resolve({ ctx, input }) {
       const { cursor } = input;
 
-      const sortCondition =
-        input.sortType === SortType.TOP
-          ? [
-              {
-                upvotes: input.sortOrder,
-              },
-              {
-                id: input.sortOrder,
-              },
-            ]
-          : [
-              {
-                lastSeenAt: input.sortOrder,
-              },
-              {
-                id: input.sortOrder,
-              },
-            ];
+      let sortCondition = undefined;
+
+      switch (input.sortType) {
+        case SortType.TOP:
+          sortCondition = [
+            {
+              upvotes: input.sortOrder,
+            },
+            {
+              id: input.sortOrder,
+            },
+          ]
+          break;
+        case SortType.NEW:
+          sortCondition = [
+            {
+              lastSeenAt: input.sortOrder,
+            },
+            {
+              id: input.sortOrder,
+            },
+          ];
+          break;
+        case SortType.ENCOUNTERS:
+          sortCondition = [
+            {
+              numEncounters: input.sortOrder,
+            },
+            {
+              id: input.sortOrder,
+            },
+          ];
+          break;
+        }
 
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
-        cursor:
-          cursor !== undefined
-            ? {
-                id: cursor ? cursor!.idCursor : undefined,
-              }
-            : undefined,
+        cursor: cursor ? { id: cursor } : undefined,
         include: {
           _count: {
             select: {
@@ -66,10 +73,12 @@ export const questionsQuestionRouter = createRouter()
           },
           encounters: {
             select: {
+              city: true,
               company: true,
-              location: true,
+              country: true,
               role: true,
               seenAt: true,
+              state: true,
             },
           },
           user: {
@@ -95,19 +104,39 @@ export const questionsQuestionRouter = createRouter()
                 gte: input.startDate,
                 lte: input.endDate,
               },
-              ...(input.companyNames.length > 0
+              ...(input.companyIds.length > 0
                 ? {
                     company: {
-                      name: {
-                        in: input.companyNames,
+                      id: {
+                        in: input.companyIds,
                       },
                     },
                   }
                 : {}),
-              ...(input.locations.length > 0
+              ...(input.cityIds.length > 0
                 ? {
-                    location: {
-                      in: input.locations,
+                    city: {
+                      id: {
+                        in: input.cityIds,
+                      },
+                    },
+                  }
+                : {}),
+              ...(input.countryIds.length > 0
+                ? {
+                    country: {
+                      id: {
+                        in: input.countryIds,
+                      },
+                    },
+                  }
+                : {}),
+              ...(input.stateIds.length > 0
+                ? {
+                    state: {
+                      id: {
+                        in: input.stateIds,
+                      },
                     },
                   }
                 : {}),
@@ -134,16 +163,8 @@ export const questionsQuestionRouter = createRouter()
         processedQuestionsData.pop();
 
         const nextIdCursor: string | undefined = nextItem.id;
-        const nextLastSeenCursor =
-          input.sortType === SortType.NEW ? nextItem.lastSeenAt : undefined;
-        const nextUpvoteCursor =
-          input.sortType === SortType.TOP ? nextItem.upvotes : undefined;
 
-        nextCursor = {
-          idCursor: nextIdCursor,
-          lastSeenCursor: nextLastSeenCursor,
-          upvoteCursor: nextUpvoteCursor,
-        };
+        nextCursor = nextIdCursor;
       }
 
       return {
@@ -167,10 +188,12 @@ export const questionsQuestionRouter = createRouter()
           },
           encounters: {
             select: {
+              city: true,
               company: true,
-              location: true,
+              country: true,
               role: true,
               seenAt: true,
+              state: true,
             },
           },
           user: {
@@ -192,5 +215,69 @@ export const questionsQuestionRouter = createRouter()
       }
 
       return createQuestionWithAggregateData(questionData);
+    },
+  })
+  .query('getRelatedQuestions', {
+    input: z.object({
+      content: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const escapeChars = /[()|&:*!]/g;
+
+      const query = input.content
+        .replace(escapeChars, ' ')
+        .trim()
+        .split(/\s+/)
+        .join(' | ');
+
+      const relatedQuestionsId: Array<{ id: string }> = await ctx.prisma
+        .$queryRaw`
+        SELECT id FROM "QuestionsQuestion"
+        WHERE
+          to_tsvector("content") @@ to_tsquery('english', ${query})
+        ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 4) DESC;
+      `;
+
+      const relatedQuestionsIdArray = relatedQuestionsId.map(
+        (current) => current.id,
+      );
+
+      const relatedQuestionsData = await ctx.prisma.questionsQuestion.findMany({
+        include: {
+          _count: {
+            select: {
+              answers: true,
+              comments: true,
+            },
+          },
+          encounters: {
+            select: {
+              city: true,
+              company: true,
+              country: true,
+              role: true,
+              seenAt: true,
+              state: true,
+            },
+          },
+          user: {
+            select: {
+              name: true,
+            },
+          },
+          votes: true,
+        },
+        where: {
+          id: {
+            in: relatedQuestionsIdArray,
+          },
+        },
+      });
+
+      const processedQuestionsData = relatedQuestionsData.map(
+        createQuestionWithAggregateData,
+      );
+
+      return processedQuestionsData;
     },
   });

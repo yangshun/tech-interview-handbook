@@ -20,6 +20,7 @@ import {
   TextInput,
 } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
@@ -118,7 +119,7 @@ export default function ResumeHomePage() {
     '',
   );
   const [shortcutSelected, setShortcutSelected, isShortcutInit] =
-    useSearchParams('shortcutSelected', 'All');
+    useSearchParams('shortcutSelected', 'Unreviewed');
   const [currentPage, setCurrentPage, isCurrentPageInit] = useSearchParams(
     'currentPage',
     1,
@@ -127,7 +128,15 @@ export default function ResumeHomePage() {
     'userFilters',
     INITIAL_FILTER_STATE,
   );
+  const [isFiltersOpen, setIsFiltersOpen, isFiltersOpenInit] = useSearchParams<
+    Record<FilterId, boolean>
+  >('isFiltersOpen', {
+    experience: false,
+    location: false,
+    role: false,
+  });
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const { event: gaEvent } = useGoogleAnalytics();
 
   const skip = (currentPage - 1) * PAGE_LIMIT;
   const isSearchOptionsInit = useMemo(() => {
@@ -137,7 +146,8 @@ export default function ResumeHomePage() {
       isSearchValueInit &&
       isShortcutInit &&
       isCurrentPageInit &&
-      isUserFiltersInit
+      isUserFiltersInit &&
+      isFiltersOpenInit
     );
   }, [
     isTabsValueInit,
@@ -146,6 +156,7 @@ export default function ResumeHomePage() {
     isShortcutInit,
     isCurrentPageInit,
     isUserFiltersInit,
+    isFiltersOpenInit,
   ]);
 
   useEffect(() => {
@@ -164,6 +175,7 @@ export default function ResumeHomePage() {
       pathname: router.pathname,
       query: {
         currentPage: JSON.stringify(currentPage),
+        isFiltersOpen: JSON.stringify(isFiltersOpen),
         searchValue: JSON.stringify(searchValue),
         shortcutSelected: JSON.stringify(shortcutSelected),
         sortOrder: JSON.stringify(sortOrder),
@@ -180,22 +192,16 @@ export default function ResumeHomePage() {
     currentPage,
     router.pathname,
     isSearchOptionsInit,
+    isFiltersOpen,
   ]);
-
-  const filterCountsQuery = trpc.useQuery(
-    ['resumes.resume.getTotalFilterCounts'],
-    {
-      staleTime: STALE_TIME,
-    },
-  );
 
   const allResumesQuery = trpc.useQuery(
     [
       'resumes.resume.findAll',
       {
         experienceFilters: userFilters.experience,
+        isUnreviewed: userFilters.isUnreviewed,
         locationFilters: userFilters.location,
-        numComments: userFilters.numComments,
         roleFilters: userFilters.role,
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
@@ -213,8 +219,8 @@ export default function ResumeHomePage() {
       'resumes.resume.user.findUserStarred',
       {
         experienceFilters: userFilters.experience,
+        isUnreviewed: userFilters.isUnreviewed,
         locationFilters: userFilters.location,
-        numComments: userFilters.numComments,
         roleFilters: userFilters.role,
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
@@ -233,8 +239,8 @@ export default function ResumeHomePage() {
       'resumes.resume.user.findUserCreated',
       {
         experienceFilters: userFilters.experience,
+        isUnreviewed: userFilters.isUnreviewed,
         locationFilters: userFilters.location,
-        numComments: userFilters.numComments,
         roleFilters: userFilters.role,
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
@@ -248,14 +254,6 @@ export default function ResumeHomePage() {
       staleTime: STALE_TIME,
     },
   );
-
-  const getFilterCount = (filter: FilterLabel, value: string) => {
-    if (filterCountsQuery.isLoading) {
-      return 0;
-    }
-    const filterCountsData = filterCountsQuery.data!;
-    return filterCountsData[filter][value];
-  };
 
   const onSubmitResume = () => {
     if (sessionData === null) {
@@ -283,6 +281,11 @@ export default function ResumeHomePage() {
         ),
       });
     }
+    gaEvent({
+      action: 'resumes.filter_checkbox_click',
+      category: 'engagement',
+      label: 'Select Filter',
+    });
   };
 
   const onClearFilterClick = (filterSection: FilterId) => {
@@ -300,11 +303,21 @@ export default function ResumeHomePage() {
     setShortcutSelected(shortcutName);
     setSortOrder(shortcutSortOrder);
     setUserFilters(shortcutFilters);
+    gaEvent({
+      action: 'resumes.shortcut_button_click',
+      category: 'engagement',
+      label: `Select Shortcut: ${shortcutName}`,
+    });
   };
 
   const onTabChange = (tab: string) => {
     setTabsValue(tab);
     setCurrentPage(1);
+    gaEvent({
+      action: 'resumes.tab_click',
+      category: 'engagement',
+      label: `Select Tab: ${tab}`,
+    });
   };
 
   const getTabQueryData = () => {
@@ -335,6 +348,18 @@ export default function ResumeHomePage() {
     allResumesQuery.isFetching ||
     starredResumesQuery.isFetching ||
     myResumesQuery.isFetching;
+
+  const getTabFilterCounts = () => {
+    return getTabQueryData()?.filterCounts;
+  };
+
+  const getFilterCount = (filter: FilterLabel, value: string) => {
+    const filterCountsData = getTabFilterCounts();
+    if (!filterCountsData) {
+      return 0;
+    }
+    return filterCountsData[filter][value];
+  };
 
   return (
     <>
@@ -402,11 +427,19 @@ export default function ResumeHomePage() {
                       <Disclosure
                         key={filter.id}
                         as="div"
-                        className="border-t border-slate-200 px-4 pt-6 pb-4">
+                        className="border-t border-slate-200 px-4 pt-6 pb-4"
+                        defaultOpen={isFiltersOpen[filter.id]}>
                         {({ open }) => (
                           <>
                             <h3 className="-mx-2 -my-3 flow-root">
-                              <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-slate-400 hover:text-slate-500">
+                              <Disclosure.Button
+                                className="flex w-full items-center justify-between bg-white px-2 py-3 text-slate-400 hover:text-slate-500"
+                                onClick={() =>
+                                  setIsFiltersOpen({
+                                    ...isFiltersOpen,
+                                    [filter.id]: !isFiltersOpen[filter.id],
+                                  })
+                                }>
                                 <span className="font-medium text-slate-900">
                                   {filter.label}
                                 </span>
@@ -430,12 +463,9 @@ export default function ResumeHomePage() {
                                 {filter.options.map((option) => (
                                   <div
                                     key={option.value}
-                                    className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 [&>div>div:nth-child(2)>label]:font-normal">
+                                    className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 flex items-center px-1 text-sm [&>div>div:nth-child(2)>label]:font-normal">
                                     <CheckboxInput
-                                      label={`${option.label} (${getFilterCount(
-                                        filter.label,
-                                        option.label,
-                                      )})`}
+                                      label={option.label}
                                       value={userFilters[filter.id].includes(
                                         option.value,
                                       )}
@@ -447,11 +477,19 @@ export default function ResumeHomePage() {
                                         )
                                       }
                                     />
+                                    <span className="ml-1 text-slate-500">
+                                      (
+                                      {getFilterCount(
+                                        filter.label,
+                                        option.label,
+                                      )}
+                                      )
+                                    </span>
                                   </div>
                                 ))}
                               </div>
                               <p
-                                className="cursor-pointer text-sm text-slate-500 underline"
+                                className="inline-block cursor-pointer text-sm text-slate-500 underline hover:text-slate-700"
                                 onClick={() => onClearFilterClick(filter.id)}>
                                 Clear
                               </p>
@@ -494,72 +532,83 @@ export default function ResumeHomePage() {
                 <h3 className="text-md font-medium tracking-tight text-slate-900">
                   Explore these filters
                 </h3>
-                {filters.map((filter) => (
-                  <Disclosure
-                    key={filter.id}
-                    as="div"
-                    className="border-b border-slate-200 pt-6 pb-4">
-                    {({ open }) => (
-                      <>
-                        <h3 className="-my-3 flow-root">
-                          <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-slate-400 hover:text-slate-500">
-                            <span className="font-medium text-slate-900">
-                              {filter.label}
-                            </span>
-                            <span className="ml-6 flex items-center">
-                              {open ? (
-                                <MinusIcon
-                                  aria-hidden="true"
-                                  className="h-5 w-5"
-                                />
-                              ) : (
-                                <PlusIcon
-                                  aria-hidden="true"
-                                  className="h-5 w-5"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel className="space-y-4 pt-4">
-                          <CheckboxList
-                            description=""
-                            isLabelHidden={true}
-                            label=""
-                            orientation="vertical">
-                            {filter.options.map((option) => (
-                              <div
-                                key={option.value}
-                                className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 px-1 [&>div>div:nth-child(2)>label]:font-normal">
-                                <CheckboxInput
-                                  label={`${option.label} (${getFilterCount(
-                                    filter.label,
-                                    option.label,
-                                  )})`}
-                                  value={userFilters[filter.id].includes(
-                                    option.value,
-                                  )}
-                                  onChange={(isChecked) =>
-                                    onFilterCheckboxChange(
-                                      isChecked,
-                                      filter.id,
+                {isFiltersOpenInit &&
+                  filters.map((filter) => (
+                    <Disclosure
+                      key={filter.id}
+                      as="div"
+                      className="border-b border-slate-200 pt-6 pb-4"
+                      defaultOpen={isFiltersOpen[filter.id]}>
+                      {({ open }) => (
+                        <>
+                          <h3 className="-my-3 flow-root">
+                            <Disclosure.Button
+                              className="flex w-full items-center justify-between py-3 text-sm text-slate-400 hover:text-slate-500"
+                              onClick={() =>
+                                setIsFiltersOpen({
+                                  ...isFiltersOpen,
+                                  [filter.id]: !isFiltersOpen[filter.id],
+                                })
+                              }>
+                              <span className="font-medium text-slate-900">
+                                {filter.label}
+                              </span>
+                              <span className="ml-6 flex items-center">
+                                {open ? (
+                                  <MinusIcon
+                                    aria-hidden="true"
+                                    className="h-5 w-5"
+                                  />
+                                ) : (
+                                  <PlusIcon
+                                    aria-hidden="true"
+                                    className="h-5 w-5"
+                                  />
+                                )}
+                              </span>
+                            </Disclosure.Button>
+                          </h3>
+                          <Disclosure.Panel className="space-y-4 pt-4">
+                            <CheckboxList
+                              description=""
+                              isLabelHidden={true}
+                              label=""
+                              orientation="vertical">
+                              {filter.options.map((option) => (
+                                <div
+                                  key={option.value}
+                                  className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 flex items-center px-1 text-sm [&>div>div:nth-child(2)>label]:font-normal">
+                                  <CheckboxInput
+                                    label={option.label}
+                                    value={userFilters[filter.id].includes(
                                       option.value,
+                                    )}
+                                    onChange={(isChecked) =>
+                                      onFilterCheckboxChange(
+                                        isChecked,
+                                        filter.id,
+                                        option.value,
+                                      )
+                                    }
+                                  />
+                                  <span className="ml-1 text-slate-500">
+                                    (
+                                    {getFilterCount(filter.label, option.label)}
                                     )
-                                  }
-                                />
-                              </div>
-                            ))}
-                          </CheckboxList>
-                          <p
-                            className="cursor-pointer text-sm text-slate-500 underline"
-                            onClick={() => onClearFilterClick(filter.id)}>
-                            Clear
-                          </p>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))}
+                                  </span>
+                                </div>
+                              ))}
+                            </CheckboxList>
+                            <p
+                              className="inline-block cursor-pointer text-sm text-slate-500 underline hover:text-slate-700"
+                              onClick={() => onClearFilterClick(filter.id)}>
+                              Clear
+                            </p>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                  ))}
               </form>
             </div>
           </div>
@@ -599,6 +648,13 @@ export default function ResumeHomePage() {
                     type="text"
                     value={searchValue}
                     onChange={setSearchValue}
+                    onFocus={() =>
+                      gaEvent({
+                        action: 'resumes.search_input_focus',
+                        category: 'engagement',
+                        label: 'Click Search',
+                      })
+                    }
                   />
                 </div>
                 <DropdownMenu

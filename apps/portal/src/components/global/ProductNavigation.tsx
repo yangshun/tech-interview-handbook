@@ -17,11 +17,17 @@ export type ProductNavigationItems = ReadonlyArray<NavigationItem>;
 
 type Props = Readonly<{
   items: ProductNavigationItems;
+  logo?: React.ReactNode;
   title: string;
   titleHref: string;
 }>;
 
-export default function ProductNavigation({ items, title, titleHref }: Props) {
+export default function ProductNavigation({
+  items,
+  logo,
+  title,
+  titleHref,
+}: Props) {
   const router = useRouter();
 
   return (
@@ -29,13 +35,14 @@ export default function ProductNavigation({ items, title, titleHref }: Props) {
       <Link
         className="hover:text-primary-700 flex items-center gap-2 text-base font-medium"
         href={titleHref}>
-        {titleHref !== '/' && (
-          <img
-            alt="Tech Interview Handbook"
-            className="h-8 w-auto"
-            src="/logo.svg"
-          />
-        )}
+        {titleHref !== '/' &&
+          (logo ?? (
+            <img
+              alt="Tech Interview Handbook"
+              className="h-8 w-auto"
+              src="/logo.svg"
+            />
+          ))}
         {title}
       </Link>
       <div className="hidden h-full items-center space-x-8 md:flex">
