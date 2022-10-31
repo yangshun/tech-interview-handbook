@@ -13,6 +13,7 @@ import SortOptionsSelect from '~/components/questions/SortOptionsSelect';
 
 import { APP_TITLE } from '~/utils/questions/constants';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
+import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { trpc } from '~/utils/trpc';
 
 import { SortOrder, SortType } from '~/types/questions.d';
@@ -82,13 +83,15 @@ export default function QuestionPage() {
     },
   );
 
-  const handleSubmitComment = (data: AnswerCommentData) => {
-    resetComment();
-    addComment({
-      answerId: answerId as string,
-      content: data.commentContent,
-    });
-  };
+  const handleSubmitComment = useProtectedCallback(
+    (data: AnswerCommentData) => {
+      resetComment();
+      addComment({
+        answerId: answerId as string,
+        content: data.commentContent,
+      });
+    },
+  );
 
   if (!answer) {
     return <FullScreenSpinner />;

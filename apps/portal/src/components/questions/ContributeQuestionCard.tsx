@@ -6,6 +6,8 @@ import {
 } from '@heroicons/react/24/outline';
 import { TextInput } from '@tih/ui';
 
+import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
+
 import ContributeQuestionDialog from './ContributeQuestionDialog';
 import type { ContributeQuestionFormProps } from './forms/ContributeQuestionForm';
 
@@ -23,9 +25,9 @@ export default function ContributeQuestionCard({
     setShowDraftDialog(false);
   };
 
-  const handleOpenContribute = () => {
+  const handleOpenContribute = useProtectedCallback(() => {
     setShowDraftDialog(true);
-  };
+  });
 
   return (
     <div className="w-full">
