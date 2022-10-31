@@ -5,6 +5,7 @@ import { Fragment, useRef, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { CheckIcon, HeartIcon } from '@heroicons/react/20/solid';
 
+import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { trpc } from '~/utils/trpc';
 
 export type AddToListDropdownProps = {
@@ -85,14 +86,16 @@ export default function AddToListDropdown({
     });
   };
 
+  const handleMenuButtonClick = useProtectedCallback(() => {
+    addClickOutsideListener();
+    setMenuOpened(!menuOpened);
+  });
+
   const CustomMenuButton = ({ children }: PropsWithChildren<unknown>) => (
     <button
       className="focus:ring-primary-500 inline-flex w-full justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-100"
       type="button"
-      onClick={() => {
-        addClickOutsideListener();
-        setMenuOpened(!menuOpened);
-      }}>
+      onClick={handleMenuButtonClick}>
       {children}
     </button>
   );

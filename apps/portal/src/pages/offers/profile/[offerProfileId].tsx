@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Spinner, useToast } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import { ProfileDetailTab } from '~/components/offers/constants';
 import ProfileComments from '~/components/offers/profile/ProfileComments';
 import ProfileDetails from '~/components/offers/profile/ProfileDetails';
@@ -36,6 +37,7 @@ export default function OfferProfile() {
   );
   const [analysis, setAnalysis] = useState<ProfileAnalysis>();
   const { data: session } = useSession();
+  const { event: gaEvent } = useGoogleAnalytics();
 
   const getProfileQuery = trpc.useQuery(
     [
@@ -176,6 +178,11 @@ export default function OfferProfile() {
         profileId: offerProfileId as string,
         token: token as string,
       });
+      gaEvent({
+        action: 'offers.delete_profile',
+        category: 'engagement',
+        label: 'Delete profile',
+      });
     }
   }
 
@@ -202,7 +209,6 @@ export default function OfferProfile() {
               handleDelete={handleDelete}
               isEditable={isEditable}
               isLoading={getProfileQuery.isLoading}
-              isSaved={getProfileQuery.data?.isSaved}
               selectedTab={selectedTab}
               setSelectedTab={setSelectedTab}
             />

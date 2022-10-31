@@ -12,6 +12,7 @@ import {
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ExpandableCommentCard from '~/components/offers/profile/comments/ExpandableCommentCard';
 import Tooltip from '~/components/offers/util/Tooltip';
+import loginPageHref from '~/components/shared/loginPageHref';
 
 import { copyProfileLink } from '~/utils/offers/link';
 import { trpc } from '~/utils/trpc';
@@ -195,7 +196,7 @@ export default function ProfileComments({
         <Button
           className="mb-5"
           display="block"
-          href="/api/auth/signin"
+          href={loginPageHref()}
           label="Sign in to join discussion"
           variant="tertiary"
         />

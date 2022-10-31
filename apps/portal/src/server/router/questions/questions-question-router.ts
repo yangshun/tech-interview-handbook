@@ -13,6 +13,7 @@ export const questionsQuestionRouter = createRouter()
     input: z.object({
       cityIds: z.string().array(),
       companyIds: z.string().array(),
+      content: z.string().optional(),
       countryIds: z.string().array(),
       cursor: z.string().nullish(),
       endDate: z.date().default(new Date()),
@@ -27,24 +28,40 @@ export const questionsQuestionRouter = createRouter()
     async resolve({ ctx, input }) {
       const { cursor } = input;
 
-      const sortCondition =
-        input.sortType === SortType.TOP
-          ? [
-              {
-                upvotes: input.sortOrder,
-              },
-              {
-                id: input.sortOrder,
-              },
-            ]
-          : [
-              {
-                lastSeenAt: input.sortOrder,
-              },
-              {
-                id: input.sortOrder,
-              },
-            ];
+      let sortCondition = undefined;
+
+      switch (input.sortType) {
+        case SortType.TOP:
+          sortCondition = [
+            {
+              upvotes: input.sortOrder,
+            },
+            {
+              id: input.sortOrder,
+            },
+          ]
+          break;
+        case SortType.NEW:
+          sortCondition = [
+            {
+              lastSeenAt: input.sortOrder,
+            },
+            {
+              id: input.sortOrder,
+            },
+          ];
+          break;
+        case SortType.ENCOUNTERS:
+          sortCondition = [
+            {
+              numEncounters: input.sortOrder,
+            },
+            {
+              id: input.sortOrder,
+            },
+          ];
+          break;
+        }
 
       const questionsData = await ctx.prisma.questionsQuestion.findMany({
         cursor: cursor ? { id: cursor } : undefined,

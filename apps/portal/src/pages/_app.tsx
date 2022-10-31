@@ -9,6 +9,7 @@ import { loggerLink } from '@trpc/client/links/loggerLink';
 import { withTRPC } from '@trpc/next';
 
 import AppShell from '~/components/global/AppShell';
+import ProtectedContextProvider from '~/components/questions/protected/ProtectedContextProvider';
 
 import type { AppRouter } from '~/server/router';
 
@@ -21,9 +22,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <ToastsProvider>
-        <AppShell>
-          <Component {...pageProps} />
-        </AppShell>
+        <ProtectedContextProvider>
+          <AppShell>
+            <Component {...pageProps} />
+          </AppShell>
+        </ProtectedContextProvider>
       </ToastsProvider>
     </SessionProvider>
   );

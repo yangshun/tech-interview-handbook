@@ -438,14 +438,15 @@ enum QuestionsQuestionType {
 }
 
 model QuestionsQuestion {
-  id           String                @id @default(cuid())
-  userId       String?
-  content      String                @db.Text
-  questionType QuestionsQuestionType
-  lastSeenAt   DateTime?
-  upvotes      Int                   @default(0)
-  createdAt    DateTime              @default(now())
-  updatedAt    DateTime              @updatedAt
+  id            String                @id @default(cuid())
+  userId        String?
+  content       String                @db.Text
+  questionType  QuestionsQuestionType
+  lastSeenAt    DateTime?
+  upvotes       Int                   @default(0)
+  numEncounters Int                   @default(0)
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
 
   user                         User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
   encounters                   QuestionsQuestionEncounter[]
@@ -455,6 +456,7 @@ model QuestionsQuestion {
   questionsListQuestionEntries QuestionsListQuestionEntry[]
 
   @@index([lastSeenAt, id])
+  @@index([numEncounters, id])
   @@index([upvotes, id])
 }
 

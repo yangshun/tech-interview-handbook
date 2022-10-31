@@ -20,9 +20,11 @@ import {
   TextInput,
 } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
+import loginPageHref from '~/components/shared/loginPageHref';
 
 import type {
   Filter,
@@ -135,6 +137,7 @@ export default function ResumeHomePage() {
     role: false,
   });
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const { event: gaEvent } = useGoogleAnalytics();
 
   const skip = (currentPage - 1) * PAGE_LIMIT;
   const isSearchOptionsInit = useMemo(() => {
@@ -255,7 +258,7 @@ export default function ResumeHomePage() {
 
   const onSubmitResume = () => {
     if (sessionData === null) {
-      router.push('/api/auth/signin');
+      router.push(loginPageHref());
     } else {
       router.push('/resumes/submit');
     }
@@ -279,6 +282,11 @@ export default function ResumeHomePage() {
         ),
       });
     }
+    gaEvent({
+      action: 'resumes.filter_checkbox_click',
+      category: 'engagement',
+      label: 'Select Filter',
+    });
   };
 
   const onClearFilterClick = (filterSection: FilterId) => {
@@ -296,11 +304,21 @@ export default function ResumeHomePage() {
     setShortcutSelected(shortcutName);
     setSortOrder(shortcutSortOrder);
     setUserFilters(shortcutFilters);
+    gaEvent({
+      action: 'resumes.shortcut_button_click',
+      category: 'engagement',
+      label: `Select Shortcut: ${shortcutName}`,
+    });
   };
 
   const onTabChange = (tab: string) => {
     setTabsValue(tab);
     setCurrentPage(1);
+    gaEvent({
+      action: 'resumes.tab_click',
+      category: 'engagement',
+      label: `Select Tab: ${tab}`,
+    });
   };
 
   const getTabQueryData = () => {
@@ -631,6 +649,13 @@ export default function ResumeHomePage() {
                     type="text"
                     value={searchValue}
                     onChange={setSearchValue}
+                    onFocus={() =>
+                      gaEvent({
+                        action: 'resumes.search_input_focus',
+                        category: 'engagement',
+                        label: 'Click Search',
+                      })
+                    }
                   />
                 </div>
                 <DropdownMenu

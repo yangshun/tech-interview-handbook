@@ -35,14 +35,16 @@ export default function ProductNavigation({
       <Link
         className="hover:text-primary-700 flex items-center gap-2 text-base font-medium"
         href={titleHref}>
-        {titleHref !== '/' &&
-          (logo ?? (
-            <img
-              alt="Tech Interview Handbook"
-              className="h-8 w-auto"
-              src="/logo.svg"
-            />
-          ))}
+        <div>
+          {titleHref !== '/' &&
+            (logo ?? (
+              <img
+                alt="Tech Interview Handbook"
+                className="h-8 w-auto"
+                src="/logo.svg"
+              />
+            ))}
+        </div>
         {title}
       </Link>
       <div className="hidden h-full items-center space-x-8 md:flex">

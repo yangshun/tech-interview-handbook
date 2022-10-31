@@ -16,6 +16,7 @@ import { APP_TITLE } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
 import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
 import { useFormRegister } from '~/utils/questions/useFormRegister';
+import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { trpc } from '~/utils/trpc';
 
 import { SortOrder, SortType } from '~/types/questions.d';
@@ -53,10 +54,11 @@ export default function QuestionPage() {
 
   const {
     register: comRegister,
-    handleSubmit: handleCommentSubmit,
+    handleSubmit: handleCommentSubmitClick,
     reset: resetComment,
     formState: { isDirty: isCommentDirty, isValid: isCommentValid },
   } = useForm<QuestionCommentData>({ mode: 'onChange' });
+
   const commentRegister = useFormRegister(comRegister);
 
   const { questionId } = router.query;
@@ -149,21 +151,25 @@ export default function QuestionPage() {
     },
   );
 
-  const handleSubmitAnswer = (data: AnswerQuestionData) => {
-    addAnswer({
-      content: data.answerContent,
-      questionId: questionId as string,
-    });
-    resetAnswer();
-  };
+  const handleSubmitAnswer = useProtectedCallback(
+    (data: AnswerQuestionData) => {
+      addAnswer({
+        content: data.answerContent,
+        questionId: questionId as string,
+      });
+      resetAnswer();
+    },
+  );
 
-  const handleSubmitComment = (data: QuestionCommentData) => {
-    addComment({
-      content: data.commentContent,
-      questionId: questionId as string,
-    });
-    resetComment();
-  };
+  const handleSubmitComment = useProtectedCallback(
+    (data: QuestionCommentData) => {
+      addComment({
+        content: data.commentContent,
+        questionId: questionId as string,
+      });
+      resetComment();
+    },
+  );
 
   if (!question) {
     return <FullScreenSpinner />;
@@ -219,7 +225,7 @@ export default function QuestionPage() {
                 <div className="mt-4 px-4">
                   <form
                     className="mb-2"
-                    onSubmit={handleCommentSubmit(handleSubmitComment)}>
+                    onSubmit={handleCommentSubmitClick(handleSubmitComment)}>
                     <TextArea
                       {...commentRegister('commentContent', {
                         minLength: 1,

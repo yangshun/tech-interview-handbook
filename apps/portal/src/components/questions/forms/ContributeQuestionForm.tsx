@@ -252,7 +252,7 @@ export default function ContributeQuestionForm({
           )}
         </div>
         <div
-          className="bg-primary-50 flex w-full justify-between gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)]"
+          className="bg-primary-50 flex w-full flex-col gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)] sm:flex-row sm:justify-between"
           style={{
             // Hack to make the background bleed outside the container
             clipPath: 'inset(0 -100vmax)',
@@ -278,6 +278,7 @@ export default function ContributeQuestionForm({
             </button>
             <Button
               className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-slate-400 sm:ml-3 sm:w-auto sm:text-sm"
+              disabled={!checkedSimilar}
               label="Contribute"
               type="submit"
               variant="primary"></Button>
