@@ -478,8 +478,8 @@ export default function QuestionsBrowsePage() {
       </Head>
       <main className="flex flex-1 flex-col items-stretch">
         <div className="flex h-full flex-1">
-          <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
-            <div className="m-4 flex max-w-3xl flex-1 flex-col items-stretch justify-start gap-6">
+          <section className="min-h-0 flex-1 overflow-auto">
+            <div className="my-4 mx-auto flex max-w-3xl flex-col items-stretch justify-start gap-6">
               <ContributeQuestionCard
                 onSubmit={(data) => {
                   const { cityId, countryId, stateId } = data.location;
