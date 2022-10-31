@@ -36,12 +36,14 @@ export default function OfferCard({
       <div className="flex justify-between px-8">
         <div className="flex flex-col">
           <div className="flex flex-row">
-            <BuildingOffice2Icon className="mr-1 h-5" />
+            <span>
+              <BuildingOffice2Icon className="mr-3 h-5" />
+            </span>
             <span className="font-bold">
               {location ? `${companyName}, ${location}` : companyName}
             </span>
           </div>
-          <div className="ml-6 flex flex-row">
+          <div className="ml-8 flex flex-row">
             <p>
               {jobLevel ? `${jobTitle}, ${jobLevel}` : jobTitle}{' '}
               {jobType && `(${JobTypeLabel[jobType]})`}
@@ -79,15 +81,19 @@ export default function OfferCard({
           <div className="flex flex-col py-2">
             {(totalCompensation || monthlySalary) && (
               <div className="flex flex-row">
-                <CurrencyDollarIcon className="mr-1 h-5" />
-                <p>
-                  {totalCompensation && `TC: ${totalCompensation}`}
-                  {monthlySalary && `Monthly Salary: ${monthlySalary}`}
-                </p>
+                <span>
+                  <CurrencyDollarIcon className="mr-3 h-5" />
+                </span>
+                <span>
+                  <p>
+                    {totalCompensation && `TC: ${totalCompensation}`}
+                    {monthlySalary && `Monthly Salary: ${monthlySalary}`}
+                  </p>
+                </span>
               </div>
             )}
             {totalCompensation && (
-              <div className="ml-6 flex flex-row font-light">
+              <div className="ml-8 flex flex-row font-light">
                 <p>
                   Base / year: {base} ⋅ Stocks / year: {stocks} ⋅ Bonus / year:{' '}
                   {bonus}
@@ -98,7 +104,9 @@ export default function OfferCard({
           {negotiationStrategy && (
             <div className="flex flex-col py-2">
               <div className="flex flex-row">
-                <ScaleIcon className="h-5 w-5" />
+                <span>
+                  <ScaleIcon className="h-5 w-5" />
+                </span>
                 <span className="overflow-wrap ml-2">
                   "{negotiationStrategy}"
                 </span>
@@ -108,7 +116,9 @@ export default function OfferCard({
           {otherComment && (
             <div className="flex flex-col py-2">
               <div className="flex flex-row">
-                <ChatBubbleBottomCenterTextIcon className="h-5 w-5" />
+                <span>
+                  <ChatBubbleBottomCenterTextIcon className="h-5 w-5" />
+                </span>
                 <span className="overflow-wrap ml-2">"{otherComment}"</span>
               </div>
             </div>
