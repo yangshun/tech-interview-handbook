@@ -10,6 +10,8 @@ import {
 } from '@heroicons/react/20/solid';
 import { ChatBubbleLeftIcon, StarIcon } from '@heroicons/react/24/outline';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
+
 import type {
   ExperienceFilter,
   LocationFilter,
@@ -30,8 +32,17 @@ type Props = Readonly<{
 }>;
 
 export default function ResumeListItem({ href, resumeInfo }: Props) {
+  const { event: gaEvent } = useGoogleAnalytics();
   return (
-    <Link href={href}>
+    <Link
+      href={href}
+      onClick={() =>
+        gaEvent({
+          action: 'resumes.listitem_click',
+          category: 'engagement',
+          label: 'Select Resume',
+        })
+      }>
       <div className="grid grid-cols-8">
         <div className="col-span-7 grid gap-4 border-b border-slate-200 p-4 hover:bg-slate-100 sm:grid-cols-7">
           <div className="sm:col-span-4">
