@@ -18,6 +18,10 @@ import LocationTypeahead from '~/components/questions/typeahead/LocationTypeahea
 import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
 import { JobTitleLabels } from '~/components/shared/JobTitles';
 
+import {
+  companyOptionToSlug,
+  slugToCompanyOption,
+} from '~/utils/questions/companySlug';
 import type { QuestionAge } from '~/utils/questions/constants';
 import { APP_TITLE } from '~/utils/questions/constants';
 import { QUESTION_AGES, QUESTION_TYPES } from '~/utils/questions/constants';
@@ -288,15 +292,7 @@ export default function QuestionsBrowsePage() {
   ]);
 
   const selectedCompanyOptions = useMemo(() => {
-    return selectedCompanySlugs.map((company) => {
-      const [id, label] = company.split('_');
-      return {
-        checked: true,
-        id,
-        label,
-        value: id,
-      };
-    });
+    return selectedCompanySlugs.map(slugToCompanyOption);
   }, [selectedCompanySlugs]);
 
   const selectedRoleOptions = useMemo(() => {
@@ -363,12 +359,12 @@ export default function QuestionsBrowsePage() {
           if (option.checked) {
             setSelectedCompanySlugs([
               ...selectedCompanySlugs,
-              `${option.id}_${option.label}`,
+              companyOptionToSlug(option),
             ]);
           } else {
             setSelectedCompanySlugs(
               selectedCompanySlugs.filter(
-                (companySlug) => companySlug !== `${option.id}_${option.label}`,
+                (companySlug) => companySlug !== companyOptionToSlug(option),
               ),
             );
           }
