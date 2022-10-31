@@ -55,6 +55,7 @@ export default function ProfileHeader({
     {
       onError: () => {
         showToast({
+          subtitle: 'Please check that you are logged in.',
           title: `Failed to saved to dashboard!`,
           variant: 'failure',
         });
