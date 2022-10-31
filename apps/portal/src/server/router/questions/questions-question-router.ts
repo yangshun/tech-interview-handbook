@@ -219,8 +219,8 @@ export const questionsQuestionRouter = createRouter()
         SELECT id FROM "QuestionsQuestion"
         WHERE
           to_tsvector("content") @@ to_tsquery('english', ${query})
-          AND ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) > 0.6
-        ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) DESC;
+        ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 4) DESC
+        LIMIT 3;
       `;
 
       const relatedQuestionsIdArray = relatedQuestionsId.map(
@@ -299,8 +299,8 @@ export const questionsQuestionRouter = createRouter()
           SELECT id FROM "QuestionsQuestion"
           WHERE
             to_tsvector("content") @@ to_tsquery('english', ${query})
-            AND ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) > 0.8
-          ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) DESC;
+          ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 4) DESC
+          LIMIT 3;
         `;
       }
 
