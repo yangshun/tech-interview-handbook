@@ -171,9 +171,6 @@ export default function SubmitResumeForm({
         onSuccess() {
           if (isNewForm) {
             trpcContext.invalidateQueries('resumes.resume.findAll');
-            trpcContext.invalidateQueries(
-              'resumes.resume.getTotalFilterCounts',
-            );
             router.push('/resumes');
             gaEvent({
               action: 'resumes.submit_button_click',

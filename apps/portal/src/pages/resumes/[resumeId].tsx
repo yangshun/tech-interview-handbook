@@ -142,6 +142,11 @@ export default function ResumeReviewPage() {
       pathname: '/resumes',
       query: {
         currentPage: JSON.stringify(1),
+        isFiltersOpen: JSON.stringify({
+          experience: experienceLabel !== undefined,
+          location: locationLabel !== undefined,
+          role: roleLabel !== undefined,
+        }),
         searchValue: JSON.stringify(''),
         shortcutSelected: JSON.stringify('all'),
         sortOrder: JSON.stringify('latest'),

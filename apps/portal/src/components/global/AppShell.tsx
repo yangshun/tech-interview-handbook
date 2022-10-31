@@ -9,7 +9,9 @@ import { Bars3BottomLeftIcon } from '@heroicons/react/24/outline';
 
 import GlobalNavigation from '~/components/global/GlobalNavigation';
 import HomeNavigation from '~/components/global/HomeNavigation';
-import OffersNavigation from '~/components/offers/OffersNavigation';
+import OffersNavigation, {
+  OffersNavigationAuthenticated,
+} from '~/components/offers/OffersNavigation';
 import QuestionsNavigation from '~/components/questions/QuestionsNavigation';
 import ResumesNavigation from '~/components/resumes/ResumesNavigation';
 
@@ -105,9 +107,11 @@ function ProfileJewel() {
 export default function AppShell({ children }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
+  const { data: session } = useSession();
 
   const currentProductNavigation: Readonly<{
     googleAnalyticsMeasurementID: string;
+    logo?: React.ReactNode;
     navigation: ProductNavigationItems;
     showGlobalNav: boolean;
     title: string;
@@ -119,7 +123,10 @@ export default function AppShell({ children }: Props) {
     }
 
     if (path.startsWith('/offers')) {
-      return OffersNavigation;
+      if (session == null) {
+        return OffersNavigation;
+      }
+      return OffersNavigationAuthenticated;
     }
 
     if (path.startsWith('/questions')) {
@@ -173,6 +180,7 @@ export default function AppShell({ children }: Props) {
         <MobileNavigation
           globalNavigationItems={GlobalNavigation}
           isShown={mobileMenuOpen}
+          logo={currentProductNavigation.logo}
           productNavigationItems={currentProductNavigation.navigation}
           productTitle={currentProductNavigation.title}
           setIsShown={setMobileMenuOpen}
@@ -192,6 +200,7 @@ export default function AppShell({ children }: Props) {
                 <div className="flex flex-1 items-center">
                   <ProductNavigation
                     items={currentProductNavigation.navigation}
+                    logo={currentProductNavigation.logo}
                     title={currentProductNavigation.title}
                     titleHref={currentProductNavigation.titleHref}
                   />

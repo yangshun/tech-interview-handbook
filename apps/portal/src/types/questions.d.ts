@@ -14,10 +14,40 @@ export type Question = {
   user: string;
 };
 
+export type StateInfo = {
+  cityCounts: Record<string, number>;
+  total: number;
+};
+
+export type CountryInfo = {
+  stateInfos: Record<string, StateInfo>;
+  total: number;
+};
+
+export type CityLocation = {
+  cityId: string;
+  countryId: string;
+  stateId: string;
+};
+
+export type StateLocation = {
+  cityId?: never;
+  countryId: string;
+  stateId: string;
+};
+
+export type CountryLocation = {
+  cityId?: never;
+  countryId: string;
+  stateId?: never;
+};
+
+export type Location = CityLocation | CountryLocation | StateLocation;
+
 export type AggregatedQuestionEncounter = {
   companyCounts: Record<string, number>;
+  countryCounts: Record<string, CountryInfo>;
   latestSeenAt: Date;
-  locationCounts: Record<string, number>;
   roleCounts: Record<string, number>;
 };
 

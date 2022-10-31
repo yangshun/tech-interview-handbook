@@ -1,3 +1,4 @@
+import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { JobType } from '@prisma/client';
@@ -36,6 +37,7 @@ export default function OffersEditPage() {
                 ? [{ jobType: JobType.FULLTIME }]
                 : experiences.map((exp) => ({
                     companyId: exp.company?.id,
+                    companyName: exp.company?.name,
                     durationInMonths: exp.durationInMonths,
                     id: exp.id,
                     jobType: exp.jobType,
@@ -53,6 +55,7 @@ export default function OffersEditPage() {
           offers: data.offers.map((offer) => ({
             comments: offer.comments,
             companyId: offer.company.id,
+            companyName: offer.company.name,
             id: offer.id,
             jobType: offer.jobType,
             location: offer.location,
@@ -74,6 +77,11 @@ export default function OffersEditPage() {
 
   return (
     <>
+      {getProfileResult.isError && (
+        <div className="flex w-full justify-center">
+          <Error statusCode={404} title="Requested profile does not exist" />
+        </div>
+      )}
       {getProfileResult.isLoading && (
         <div className="flex w-full justify-center">
           <Spinner className="m-10" display="block" size="lg" />

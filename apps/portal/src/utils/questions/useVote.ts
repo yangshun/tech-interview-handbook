@@ -5,9 +5,9 @@ import type { Vote } from '@prisma/client';
 import { trpc } from '../trpc';
 
 type UseVoteOptions = {
-  createVote: (opts: { vote: Vote }) => void;
-  deleteVote: (opts: { id: string }) => void;
-  updateVote: (opts: BackendVote) => void;
+  setDownVote: () => void;
+  setNoVote: () => void;
+  setUpVote: () => void;
 };
 
 type BackendVote = {
@@ -19,47 +19,23 @@ const createVoteCallbacks = (
   vote: BackendVote | null,
   opts: UseVoteOptions,
 ) => {
-  const { createVote, updateVote, deleteVote } = opts;
+  const { setDownVote, setNoVote, setUpVote } = opts;
 
   const handleUpvote = () => {
     // Either upvote or remove upvote
-    if (vote) {
-      if (vote.vote === 'DOWNVOTE') {
-        updateVote({
-          id: vote.id,
-          vote: 'UPVOTE',
-        });
-      } else {
-        deleteVote({
-          id: vote.id,
-        });
-      }
-      // Update vote to an upvote
+    if (vote && vote.vote === 'UPVOTE') {
+      setNoVote();
     } else {
-      createVote({
-        vote: 'UPVOTE',
-      });
+      setUpVote();
     }
   };
 
   const handleDownvote = () => {
     // Either downvote or remove downvote
-    if (vote) {
-      if (vote.vote === 'UPVOTE') {
-        updateVote({
-          id: vote.id,
-          vote: 'DOWNVOTE',
-        });
-      } else {
-        deleteVote({
-          id: vote.id,
-        });
-      }
-      // Update vote to an upvote
+    if (vote && vote.vote === 'DOWNVOTE') {
+      setNoVote();
     } else {
-      createVote({
-        vote: 'DOWNVOTE',
-      });
+      setDownVote();
     }
   };
 
@@ -71,61 +47,61 @@ type QueryKey = Parameters<typeof trpc.useQuery>[0][0];
 
 export const useQuestionVote = (id: string) => {
   return useVote(id, {
-    create: 'questions.questions.user.createVote',
-    deleteKey: 'questions.questions.user.deleteVote',
     idKey: 'questionId',
     invalidateKeys: [
       'questions.questions.getQuestionsByFilter',
       'questions.questions.getQuestionById',
     ],
     query: 'questions.questions.user.getVote',
-    update: 'questions.questions.user.updateVote',
+    setDownVoteKey: 'questions.questions.user.setDownVote',
+    setNoVoteKey: 'questions.questions.user.setNoVote',
+    setUpVoteKey: 'questions.questions.user.setUpVote',
   });
 };
 
 export const useAnswerVote = (id: string) => {
   return useVote(id, {
-    create: 'questions.answers.user.createVote',
-    deleteKey: 'questions.answers.user.deleteVote',
     idKey: 'answerId',
     invalidateKeys: [
       'questions.answers.getAnswers',
       'questions.answers.getAnswerById',
     ],
     query: 'questions.answers.user.getVote',
-    update: 'questions.answers.user.updateVote',
+    setDownVoteKey: 'questions.answers.user.setDownVote',
+    setNoVoteKey: 'questions.answers.user.setNoVote',
+    setUpVoteKey: 'questions.answers.user.setUpVote',
   });
 };
 
 export const useQuestionCommentVote = (id: string) => {
   return useVote(id, {
-    create: 'questions.questions.comments.user.createVote',
-    deleteKey: 'questions.questions.comments.user.deleteVote',
     idKey: 'questionCommentId',
     invalidateKeys: ['questions.questions.comments.getQuestionComments'],
     query: 'questions.questions.comments.user.getVote',
-    update: 'questions.questions.comments.user.updateVote',
+    setDownVoteKey: 'questions.questions.comments.user.setDownVote',
+    setNoVoteKey: 'questions.questions.comments.user.setNoVote',
+    setUpVoteKey: 'questions.questions.comments.user.setUpVote',
   });
 };
 
 export const useAnswerCommentVote = (id: string) => {
   return useVote(id, {
-    create: 'questions.answers.comments.user.createVote',
-    deleteKey: 'questions.answers.comments.user.deleteVote',
     idKey: 'answerCommentId',
     invalidateKeys: ['questions.answers.comments.getAnswerComments'],
     query: 'questions.answers.comments.user.getVote',
-    update: 'questions.answers.comments.user.updateVote',
+    setDownVoteKey: 'questions.answers.comments.user.setDownVote',
+    setNoVoteKey: 'questions.answers.comments.user.setNoVote',
+    setUpVoteKey: 'questions.answers.comments.user.setUpVote',
   });
 };
 
 type VoteProps<VoteQueryKey extends QueryKey = QueryKey> = {
-  create: MutationKey;
-  deleteKey: MutationKey;
   idKey: string;
   invalidateKeys: Array<VoteQueryKey>;
   query: VoteQueryKey;
-  update: MutationKey;
+  setDownVoteKey: MutationKey;
+  setNoVoteKey: MutationKey;
+  setUpVoteKey: MutationKey;
 };
 
 type UseVoteMutationContext = {
@@ -137,7 +113,14 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
   id: string,
   opts: VoteProps<VoteQueryKey>,
 ) => {
-  const { create, deleteKey, query, update, idKey, invalidateKeys } = opts;
+  const {
+    idKey,
+    invalidateKeys,
+    query,
+    setDownVoteKey,
+    setNoVoteKey,
+    setUpVoteKey,
+  } = opts;
   const utils = trpc.useContext();
 
   const onVoteUpdate = useCallback(() => {
@@ -157,8 +140,8 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
 
   const backendVote = data as BackendVote;
 
-  const { mutate: createVote } = trpc.useMutation<any, UseVoteMutationContext>(
-    create,
+  const { mutate: setUpVote } = trpc.useMutation<any, UseVoteMutationContext>(
+    setUpVoteKey,
     {
       onError: (err, variables, context) => {
         if (context !== undefined) {
@@ -185,8 +168,8 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
       onSettled: onVoteUpdate,
     },
   );
-  const { mutate: updateVote } = trpc.useMutation<any, UseVoteMutationContext>(
-    update,
+  const { mutate: setDownVote } = trpc.useMutation<any, UseVoteMutationContext>(
+    setDownVoteKey,
     {
       onError: (error, variables, context) => {
         if (context !== undefined) {
@@ -214,8 +197,8 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
     },
   );
 
-  const { mutate: deleteVote } = trpc.useMutation<any, UseVoteMutationContext>(
-    deleteKey,
+  const { mutate: setNoVote } = trpc.useMutation<any, UseVoteMutationContext>(
+    setNoVoteKey,
     {
       onError: (err, variables, context) => {
         if (context !== undefined) {
@@ -242,14 +225,21 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
   const { handleDownvote, handleUpvote } = createVoteCallbacks(
     backendVote ?? null,
     {
-      createVote: ({ vote }) => {
-        createVote({
+      setDownVote: () => {
+        setDownVote({
           [idKey]: id,
-          vote,
-        } as any);
+        });
       },
-      deleteVote,
-      updateVote,
+      setNoVote: () => {
+        setNoVote({
+          [idKey]: id,
+        });
+      },
+      setUpVote: () => {
+        setUpVote({
+          [idKey]: id,
+        });
+      },
     },
   );
 

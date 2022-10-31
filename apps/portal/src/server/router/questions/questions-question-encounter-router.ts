@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { createRouter } from '../context';
+import { createAggregatedQuestionEncounter } from '~/utils/questions/server/aggregate-encounters';
 
-import type { AggregatedQuestionEncounter } from '~/types/questions';
+import { createRouter } from '../context';
 
 export const questionsQuestionEncounterRouter = createRouter().query(
   'getAggregatedEncounters',
@@ -14,48 +14,17 @@ export const questionsQuestionEncounterRouter = createRouter().query(
       const questionEncountersData =
         await ctx.prisma.questionsQuestionEncounter.findMany({
           include: {
+            city: true,
             company: true,
+            country: true,
+            state: true,
           },
           where: {
             ...input,
           },
         });
 
-      const companyCounts: Record<string, number> = {};
-      const locationCounts: Record<string, number> = {};
-      const roleCounts: Record<string, number> = {};
-
-      let latestSeenAt = questionEncountersData[0].seenAt;
-
-      for (let i = 0; i < questionEncountersData.length; i++) {
-        const encounter = questionEncountersData[i];
-
-        latestSeenAt =
-          latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
-
-        if (!(encounter.company!.name in companyCounts)) {
-          companyCounts[encounter.company!.name] = 1;
-        }
-        companyCounts[encounter.company!.name] += 1;
-
-        if (!(encounter.location in locationCounts)) {
-          locationCounts[encounter.location] = 1;
-        }
-        locationCounts[encounter.location] += 1;
-
-        if (!(encounter.role in roleCounts)) {
-          roleCounts[encounter.role] = 1;
-        }
-        roleCounts[encounter.role] += 1;
-      }
-
-      const questionEncounter: AggregatedQuestionEncounter = {
-        companyCounts,
-        latestSeenAt,
-        locationCounts,
-        roleCounts,
-      };
-      return questionEncounter;
+      return createAggregatedQuestionEncounter(questionEncountersData);
     },
   },
 );

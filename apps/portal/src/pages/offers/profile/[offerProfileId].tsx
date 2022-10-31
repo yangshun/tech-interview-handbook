@@ -1,6 +1,8 @@
 import Error from 'next/error';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
+import { Spinner, useToast } from '@tih/ui';
 
 import { ProfileDetailTab } from '~/components/offers/constants';
 import ProfileComments from '~/components/offers/profile/ProfileComments';
@@ -14,7 +16,6 @@ import { HOME_URL } from '~/components/offers/types';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
-import { useToast } from '~/../../../packages/ui/dist';
 import { convertMoneyToString } from '~/utils/offers/currency';
 import { getProfilePath } from '~/utils/offers/link';
 import { formatDate } from '~/utils/offers/time';
@@ -24,9 +25,6 @@ import type { Profile, ProfileAnalysis, ProfileOffer } from '~/types/offers';
 
 export default function OfferProfile() {
   const { showToast } = useToast();
-  const ErrorPage = (
-    <Error statusCode={404} title="Requested profile does not exist." />
-  );
   const router = useRouter();
   const { offerProfileId, token = '' } = router.query;
   const [isEditable, setIsEditable] = useState(false);
@@ -37,11 +35,16 @@ export default function OfferProfile() {
     ProfileDetailTab.OFFERS,
   );
   const [analysis, setAnalysis] = useState<ProfileAnalysis>();
+  const { data: session } = useSession();
 
   const getProfileQuery = trpc.useQuery(
     [
       'offers.profile.listOne',
-      { profileId: offerProfileId as string, token: token as string },
+      {
+        profileId: offerProfileId as string,
+        token: token as string,
+        userId: session?.user?.id,
+      },
     ],
     {
       enabled: typeof offerProfileId === 'string',
@@ -126,6 +129,7 @@ export default function OfferProfile() {
                 jobTitle: experience.title
                   ? getLabelForJobTitleType(experience.title as JobTitleType)
                   : null,
+                jobType: experience.jobType || undefined,
                 monthlySalary: experience.monthlySalary
                   ? convertMoneyToString(experience.monthlySalary)
                   : null,
@@ -177,8 +181,20 @@ export default function OfferProfile() {
 
   return (
     <>
-      {getProfileQuery.isError && ErrorPage}
-      {!getProfileQuery.isError && (
+      {getProfileQuery.isError && (
+        <div className="flex w-full justify-center">
+          <Error statusCode={404} title="Requested profile does not exist" />
+        </div>
+      )}
+      {getProfileQuery.isLoading && (
+        <div className="flex h-screen w-screen">
+          <div className="m-auto mx-auto w-screen justify-center">
+            <Spinner display="block" size="lg" />
+            <div className="text-center">Loading...</div>
+          </div>
+        </div>
+      )}
+      {!getProfileQuery.isLoading && !getProfileQuery.isError && (
         <div className="mb-4 flex flex h-screen w-screen items-center justify-center divide-x">
           <div className="h-full w-2/3 divide-y">
             <ProfileHeader
@@ -186,6 +202,7 @@ export default function OfferProfile() {
               handleDelete={handleDelete}
               isEditable={isEditable}
               isLoading={getProfileQuery.isLoading}
+              isSaved={getProfileQuery.data?.isSaved}
               selectedTab={selectedTab}
               setSelectedTab={setSelectedTab}
             />

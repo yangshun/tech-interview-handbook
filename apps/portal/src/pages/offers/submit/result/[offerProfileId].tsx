@@ -70,7 +70,12 @@ export default function OffersSubmissionResult() {
   return (
     <>
       {getAnalysis.isLoading && (
-        <Spinner className="m-10" display="block" size="lg" />
+        <div className="flex h-screen w-screen">
+          <div className="m-auto mx-auto w-screen justify-center">
+            <Spinner display="block" size="lg" />
+            <div className="text-center">Loading...</div>
+          </div>
+        </div>
       )}
       {!getAnalysis.isLoading && (
         <div ref={pageRef} className="fixed h-full w-full overflow-y-scroll">
@@ -98,6 +103,7 @@ export default function OffersSubmissionResult() {
               {step === 1 && (
                 <div className="flex items-center justify-between">
                   <Button
+                    addonPosition="start"
                     icon={ArrowLeftIcon}
                     label="Previous"
                     variant="secondary"
