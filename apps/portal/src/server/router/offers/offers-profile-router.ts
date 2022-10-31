@@ -117,6 +117,43 @@ export const offersProfileRouter = createRouter()
       return profile?.editToken === input.token
     }
   })
+  .query('isSaved', {
+    input: z.object({
+      profileId: z.string(),
+      userId: z.string().nullish(),
+    }),
+    async resolve({ ctx, input }) {
+
+      if (!input.userId) {
+        return false
+      }
+
+      const profile = await ctx.prisma.offersProfile.findFirst({
+        include: {
+          users: true
+        },
+        where: {
+          id: input.profileId
+        }
+      })
+
+      const users = profile?.users
+
+      if (!users) {
+        return false
+      }
+
+      let isSaved = false
+
+      for (let i = 0; i < users.length; i++) {
+        if (users[i].id === input.userId) {
+          isSaved = true
+        }
+      }
+
+      return isSaved
+    }
+  })
   .query('listOne', {
     input: z.object({
       profileId: z.string(),
