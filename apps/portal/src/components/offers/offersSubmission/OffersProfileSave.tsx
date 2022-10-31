@@ -1,5 +1,3 @@
-// Import { useState } from 'react';
-// import { setTimeout } from 'timers';
 import { useState } from 'react';
 import { DocumentDuplicateIcon } from '@heroicons/react/20/solid';
 import { BookmarkSquareIcon, CheckIcon } from '@heroicons/react/24/outline';
@@ -28,11 +26,13 @@ export default function OffersProfileSave({
     {
       onError: () => {
         showToast({
+          subtitle: 'Please check that you are logged in.',
           title: `Failed to saved to dashboard!`,
           variant: 'failure',
         });
       },
       onSuccess: () => {
+        setSaved(true);
         showToast({
           title: `Saved to your dashboard!`,
           variant: 'success',
@@ -46,7 +46,6 @@ export default function OffersProfileSave({
       profileId,
       token: token as string,
     });
-    setSaved(true);
     gaEvent({
       action: 'offers.profile_submission_save_to_profile',
       category: 'engagement',
