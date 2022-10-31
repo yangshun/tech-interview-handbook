@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import type { ReactNode } from 'react';
 import { Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
@@ -19,12 +19,14 @@ import GoogleAnalytics from './GoogleAnalytics';
 import MobileNavigation from './MobileNavigation';
 import type { ProductNavigationItems } from './ProductNavigation';
 import ProductNavigation from './ProductNavigation';
+import loginPageHref from '../shared/loginPageHref';
 
 type Props = Readonly<{
   children: ReactNode;
 }>;
 
 function ProfileJewel() {
+  const router = useRouter();
   const { data: session, status } = useSession();
   const isSessionLoading = status === 'loading';
 
@@ -32,25 +34,20 @@ function ProfileJewel() {
     return null;
   }
 
+  const loginHref = loginPageHref();
   if (session == null) {
-    return (
-      <Link
-        className="text-base"
-        href="/api/auth/signin"
-        onClick={(event) => {
-          event.preventDefault();
-          signIn();
-        }}>
-        Sign in
+    return router.pathname !== loginHref.pathname ? (
+      <Link className="text-base" href={loginHref}>
+        Log In
       </Link>
-    );
+    ) : null;
   }
 
   const userNavigation = [
     { href: '/profile', name: 'Profile' },
     {
       href: '/api/auth/signout',
-      name: 'Sign out',
+      name: 'Log out',
       onClick: (event: MouseEvent) => {
         event.preventDefault();
         signOut();
