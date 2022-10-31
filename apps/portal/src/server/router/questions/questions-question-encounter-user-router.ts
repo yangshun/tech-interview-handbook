@@ -1,8 +1,6 @@
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
 
-import { JobTitleLabels } from '~/components/shared/JobTitles';
-
 import { createProtectedRouter } from '../context';
 
 import { SortOrder } from '~/types/questions.d';
@@ -14,7 +12,7 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
       companyId: z.string(),
       countryId: z.string(),
       questionId: z.string(),
-      role: z.nativeEnum(JobTitleLabels),
+      role: z.string(),
       seenAt: z.date(),
       stateId: z.string().nullish(),
     }),

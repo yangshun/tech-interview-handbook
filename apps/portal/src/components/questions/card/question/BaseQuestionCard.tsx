@@ -88,10 +88,12 @@ type ReceivedStatisticsProps =
 
 type CreateEncounterProps =
   | {
+      createEncounterButtonText: string;
       onReceivedSubmit: (data: CreateQuestionEncounterData) => void;
       showCreateEncounterButton: true;
     }
   | {
+      createEncounterButtonText?: never;
       onReceivedSubmit?: never;
       showCreateEncounterButton?: false;
     };
@@ -132,6 +134,7 @@ export default function BaseQuestionCard({
   showAnswerStatistics,
   showReceivedStatistics,
   showCreateEncounterButton,
+  createEncounterButtonText,
   showActionButton,
   actionButtonLabel,
   onActionButtonClick,
@@ -238,7 +241,7 @@ export default function BaseQuestionCard({
                 <Button
                   addonPosition="start"
                   icon={CheckIcon}
-                  label="I received this too"
+                  label={createEncounterButtonText}
                   size="sm"
                   variant="tertiary"
                   onClick={(event) => {

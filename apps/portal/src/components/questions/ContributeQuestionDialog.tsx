@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { HorizontalDivider } from '@tih/ui';
+import { HorizontalDivider, useToast } from '@tih/ui';
 
 import DiscardDraftDialog from './DiscardDraftDialog';
 import type { ContributeQuestionFormProps } from './forms/ContributeQuestionForm';
@@ -20,6 +20,8 @@ export default function ContributeQuestionDialog({
   onCancel,
 }: ContributeQuestionDialogProps) {
   const [showDiscardDialog, setShowDiscardDialog] = useState(false);
+
+  const { showToast } = useToast();
 
   const handleDraftDiscard = () => {
     setShowDiscardDialog(false);
@@ -75,6 +77,14 @@ export default function ContributeQuestionDialog({
                         <div className="mt-2">
                           <ContributeQuestionForm
                             onDiscard={() => setShowDiscardDialog(true)}
+                            onSimilarQuestionFound={() => {
+                              onCancel();
+                              showToast({
+                                title:
+                                  'Your response has been recorded. Draft discarded.',
+                                variant: 'success',
+                              });
+                            }}
                             onSubmit={(data) => {
                               onSubmit(data);
                               onCancel();
