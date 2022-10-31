@@ -218,7 +218,7 @@ export default function BaseQuestionCard({
         </div>
         <p
           className={clsx(
-            'whitespace-pre-line',
+            'whitespace-pre-line font-semibold',
             truncateContent && 'line-clamp-2 text-ellipsis',
           )}>
           {content}
