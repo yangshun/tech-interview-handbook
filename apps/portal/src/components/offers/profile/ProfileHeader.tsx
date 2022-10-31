@@ -41,7 +41,7 @@ export default function ProfileHeader({
   setSelectedTab,
 }: ProfileHeaderProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  // Const [saved, setSaved] = useState(isSaved);
+  const [saved, setSaved] = useState(isSaved);
   const router = useRouter();
   const trpcContext = trpc.useContext();
   const { offerProfileId = '', token = '' } = router.query;
@@ -60,7 +60,7 @@ export default function ProfileHeader({
         });
       },
       onSuccess: () => {
-        // SetSaved(true);
+        setSaved(true);
         showToast({
           title: `Saved to dashboard!`,
           variant: 'success',
@@ -79,7 +79,7 @@ export default function ProfileHeader({
         });
       },
       onSuccess: () => {
-        // SetSaved(false);
+        setSaved(false);
         showToast({
           title: `Removed from dashboard!`,
           variant: 'success',
@@ -90,7 +90,7 @@ export default function ProfileHeader({
   );
 
   const toggleSaved = () => {
-    if (isSaved) {
+    if (saved) {
       unsaveMutation.mutate({ profileId: offerProfileId as string });
     } else {
       saveMutation.mutate({
@@ -111,10 +111,10 @@ export default function ProfileHeader({
             disabled={
               isLoading || saveMutation.isLoading || unsaveMutation.isLoading
             }
-            icon={isSaved ? BookmarkIconSolid : BookmarkIconOutline}
+            icon={saved ? BookmarkIconSolid : BookmarkIconOutline}
             isLabelHidden={true}
             isLoading={saveMutation.isLoading || unsaveMutation.isLoading}
-            label={isSaved ? 'Remove from account' : 'Save to your account'}
+            label={saved ? 'Remove from account' : 'Save to your account'}
             size="md"
             variant="tertiary"
             onClick={toggleSaved}

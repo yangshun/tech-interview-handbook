@@ -34,7 +34,7 @@ export default function OffersProfileSave({
       },
       onSuccess: () => {
         showToast({
-          title: `Saved to your repository!`,
+          title: `Saved to your dashboard!`,
           variant: 'success',
         });
       },
@@ -95,8 +95,8 @@ export default function OffersProfileSave({
         </div>
         <p className="mb-5 text-slate-900">
           If you do not want to keep the edit link, you can opt to save this
-          profile under your account's respository. It will still only be
-          editable by you.
+          profile under your account's dashboard. It will still only be editable
+          by you.
         </p>
         <div className="mb-20">
           <Button

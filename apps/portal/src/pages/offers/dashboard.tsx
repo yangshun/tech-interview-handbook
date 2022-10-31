@@ -71,11 +71,11 @@ export default function ProfilesDashboard() {
       {!userProfilesQuery.isLoading && (
         <div className="mt-8 overflow-y-auto">
           <h1 className="mx-auto mb-4 w-3/4 text-start text-4xl font-bold text-slate-900">
-            Your repository
+            Your dashboard
           </h1>
           <p className="mx-auto w-3/4 text-start text-xl text-slate-900">
-            Save your offer profiles to respository to easily access and edit
-            them later.
+            Save your offer profiles to dashboard to easily access and edit them
+            later.
           </p>
           <div className="justfy-center mt-8 flex w-screen">
             <ul className="mx-auto w-3/4 space-y-3" role="list">
