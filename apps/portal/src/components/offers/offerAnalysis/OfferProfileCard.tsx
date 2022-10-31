@@ -70,7 +70,7 @@ export default function OfferProfileCard({
           <p>
             Company: {company.name}, {location}
           </p>
-          <p>Level: {level}</p>
+          {level && <p>Level: {level}</p>}
         </div>
         <div className="col-span-1 row-span-3">
           <p className="text-end">{formatDate(monthYearReceived)}</p>
