@@ -4,6 +4,8 @@ import type { Vote } from '@prisma/client';
 import type { ButtonSize } from '@tih/ui';
 import { Button } from '@tih/ui';
 
+import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
+
 export type BackendVote = {
   id: string;
   vote: Vote;
@@ -31,6 +33,15 @@ export default function VotingButtons({
     vote?.vote === 'UPVOTE' ? 'secondary' : 'tertiary';
   const downvoteButtonVariant =
     vote?.vote === 'DOWNVOTE' ? 'secondary' : 'tertiary';
+
+  const handleUpvoteClick = useProtectedCallback(() => {
+    onUpvote();
+  });
+
+  const handleDownvoteClick = useProtectedCallback(() => {
+    onDownvote();
+  });
+
   return (
     <div className="flex flex-col items-center">
       <Button
@@ -42,7 +53,7 @@ export default function VotingButtons({
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
-          onUpvote();
+          handleUpvoteClick();
         }}
       />
       <p>{upvoteCount}</p>
@@ -55,7 +66,7 @@ export default function VotingButtons({
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
-          onDownvote();
+          handleDownvoteClick();
         }}
       />
     </div>

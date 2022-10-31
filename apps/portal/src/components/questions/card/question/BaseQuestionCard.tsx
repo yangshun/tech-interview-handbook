@@ -9,6 +9,7 @@ import {
 import type { QuestionsQuestionType } from '@prisma/client';
 import { Button } from '@tih/ui';
 
+import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { useQuestionVote } from '~/utils/questions/useVote';
 
 import AddToListDropdown from '../../AddToListDropdown';
@@ -168,6 +169,10 @@ export default function BaseQuestionCard({
     return countryCount;
   }, [countries]);
 
+  const handleCreateEncounterClick = useProtectedCallback(() => {
+    setShowReceivedForm(true);
+  });
+
   const cardContent = (
     <>
       {showVoteButtons && (
@@ -244,10 +249,7 @@ export default function BaseQuestionCard({
                   label={createEncounterButtonText}
                   size="sm"
                   variant="tertiary"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    setShowReceivedForm(true);
-                  }}
+                  onClick={handleCreateEncounterClick}
                 />
               )}
             </div>
