@@ -1,5 +1,6 @@
 import Error from 'next/error';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Spinner, useToast } from '@tih/ui';
 
@@ -34,11 +35,16 @@ export default function OfferProfile() {
     ProfileDetailTab.OFFERS,
   );
   const [analysis, setAnalysis] = useState<ProfileAnalysis>();
+  const { data: session } = useSession();
 
   const getProfileQuery = trpc.useQuery(
     [
       'offers.profile.listOne',
-      { profileId: offerProfileId as string, token: token as string },
+      {
+        profileId: offerProfileId as string,
+        token: token as string,
+        userId: session?.user?.id,
+      },
     ],
     {
       enabled: typeof offerProfileId === 'string',
