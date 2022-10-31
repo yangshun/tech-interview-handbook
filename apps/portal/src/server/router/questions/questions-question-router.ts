@@ -219,7 +219,8 @@ export const questionsQuestionRouter = createRouter()
         SELECT id FROM "QuestionsQuestion"
         WHERE
           to_tsvector("content") @@ to_tsquery('english', ${query})
-        ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 4) DESC;
+          AND ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) > 0.6
+        ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) DESC;
       `;
 
       const relatedQuestionsIdArray = relatedQuestionsId.map(
@@ -263,5 +264,178 @@ export const questionsQuestionRouter = createRouter()
       );
 
       return processedQuestionsData;
+    },
+  })
+  .query('getQuestionsByFilterAndContent', {
+    input: z.object({
+      cityIds: z.string().array(),
+      companyIds: z.string().array(),
+      countryIds: z.string().array(),
+      content: z.string(),
+      cursor: z.string().nullish(),
+      endDate: z.date().default(new Date()),
+      limit: z.number().min(1).default(50),
+      questionTypes: z.nativeEnum(QuestionsQuestionType).array(),
+      roles: z.string().array(),
+      sortOrder: z.nativeEnum(SortOrder),
+      sortType: z.nativeEnum(SortType),
+      startDate: z.date().optional(),
+      stateIds: z.string().array(),
+    }),
+    async resolve({ ctx, input }) {
+      const escapeChars = /[()|&:*!]/g;
+
+      const query = input.content
+        .replace(escapeChars, ' ')
+        .trim()
+        .split(/\s+/)
+        .join(' | ');
+
+      const relatedQuestionsId: Array<{ id: string }> = await ctx.prisma
+        .$queryRaw`
+        SELECT id FROM "QuestionsQuestion"
+        WHERE
+          to_tsvector("content") @@ to_tsquery('english', ${query})
+          AND ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) > 0.6
+        ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 32) DESC;
+      `;
+
+      const relatedQuestionsIdArray = relatedQuestionsId.map(
+        (current) => current.id,
+      );
+
+      const { cursor } = input;
+
+      const sortCondition =
+        input.sortType === SortType.TOP
+          ? [
+              {
+                upvotes: input.sortOrder,
+              },
+              {
+                id: input.sortOrder,
+              },
+            ]
+          : [
+              {
+                lastSeenAt: input.sortOrder,
+              },
+              {
+                id: input.sortOrder,
+              },
+            ];
+
+      const questionsData = await ctx.prisma.questionsQuestion.findMany({
+        cursor: cursor ? { id: cursor } : undefined,
+        include: {
+          _count: {
+            select: {
+              answers: true,
+              comments: true,
+            },
+          },
+          encounters: {
+            select: {
+              city: true,
+              company: true,
+              country: true,
+              role: true,
+              seenAt: true,
+              state: true,
+            },
+          },
+          user: {
+            select: {
+              name: true,
+            },
+          },
+          votes: true,
+        },
+        orderBy: sortCondition,
+        take: input.limit + 1,
+        where: {
+          id: {
+            in: relatedQuestionsIdArray
+          },
+          ...(input.questionTypes.length > 0
+            ? {
+                questionType: {
+                  in: input.questionTypes,
+                },
+              }
+            : {}),
+          encounters: {
+            some: {
+              seenAt: {
+                gte: input.startDate,
+                lte: input.endDate,
+              },
+              ...(input.companyIds.length > 0
+                ? {
+                    company: {
+                      id: {
+                        in: input.companyIds,
+                      },
+                    },
+                  }
+                : {}),
+              ...(input.cityIds.length > 0
+                ? {
+                    city: {
+                      id: {
+                        in: input.cityIds,
+                      },
+                    },
+                  }
+                : {}),
+              ...(input.countryIds.length > 0
+                ? {
+                    country: {
+                      id: {
+                        in: input.countryIds,
+                      },
+                    },
+                  }
+                : {}),
+              ...(input.stateIds.length > 0
+                ? {
+                    state: {
+                      id: {
+                        in: input.stateIds,
+                      },
+                    },
+                  }
+                : {}),
+              ...(input.roles.length > 0
+                ? {
+                    role: {
+                      in: input.roles,
+                    },
+                  }
+                : {}),
+            },
+          },
+        },
+      });
+
+      const processedQuestionsData = questionsData.map(
+        createQuestionWithAggregateData,
+      );
+
+      let nextCursor: typeof cursor | undefined = undefined;
+
+      if (questionsData.length > input.limit) {
+        const nextItem = questionsData.pop()!;
+        processedQuestionsData.pop();
+
+        const nextIdCursor: string | undefined = nextItem.id;
+
+        nextCursor = nextIdCursor;
+      }
+
+      return {
+        data: processedQuestionsData,
+        nextCursor,
+      };
     },
   });
