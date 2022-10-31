@@ -47,6 +47,8 @@ function locationToSlug(value: Location & TypeaheadOption): string {
 export default function QuestionsBrowsePage() {
   const router = useRouter();
 
+  const [query, setQuery] = useState('');
+
   const [
     selectedCompanySlugs,
     setSelectedCompanySlugs,
@@ -170,13 +172,14 @@ export default function QuestionsBrowsePage() {
 
   const questionsInfiniteQuery = trpc.useInfiniteQuery(
     [
-      'questions.questions.getQuestionsByFilter',
+      'questions.questions.getQuestionsByFilterAndContent',
       {
         // TODO: Enable filtering by countryIds and stateIds
         cityIds: selectedLocations
           .map(({ cityId }) => cityId)
           .filter((id) => id !== undefined) as Array<string>,
         companyIds: selectedCompanySlugs.map((slug) => slug.split('_')[0]),
+        content: query,
         countryIds: [],
         endDate: today,
         limit: 10,
@@ -505,10 +508,14 @@ export default function QuestionsBrowsePage() {
               <div className="flex flex-col items-stretch gap-4">
                 <div className="sticky top-0 border-b border-slate-300 bg-slate-50 py-4">
                   <QuestionSearchBar
+                    query={query}
                     sortOrderValue={sortOrder}
                     sortTypeValue={sortType}
                     onFilterOptionsToggle={() => {
                       setFilterDrawerOpen(!filterDrawerOpen);
+                    }}
+                    onQueryChange={(newQuery) => {
+                      setQuery(newQuery);
                     }}
                     onSortOrderChange={setSortOrder}
                     onSortTypeChange={setSortType}
