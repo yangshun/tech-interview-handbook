@@ -446,7 +446,7 @@ export default function QuestionsBrowsePage() {
             isLabelHidden={true}
             placeholder="Search locations"
             onSelect={(option) => {
-              // @ts-ignore TODO(offers): fix potentially empty value.
+              // @ts-ignore TODO(questions): handle potentially null value.
               onOptionChange({
                 ...option,
                 checked: true,
