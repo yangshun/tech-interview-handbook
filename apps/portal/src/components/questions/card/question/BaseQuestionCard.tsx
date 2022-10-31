@@ -216,7 +216,11 @@ export default function BaseQuestionCard({
             />
           )}
         </div>
-        <p className={clsx(truncateContent && 'line-clamp-2 text-ellipsis')}>
+        <p
+          className={clsx(
+            'whitespace-pre-line',
+            truncateContent && 'line-clamp-2 text-ellipsis',
+          )}>
           {content}
         </p>
         {!showReceivedForm &&
