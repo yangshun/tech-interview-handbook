@@ -270,8 +270,8 @@ export const questionsQuestionRouter = createRouter()
     input: z.object({
       cityIds: z.string().array(),
       companyIds: z.string().array(),
-      countryIds: z.string().array(),
       content: z.string(),
+      countryIds: z.string().array(),
       cursor: z.string().nullish(),
       endDate: z.date().default(new Date()),
       limit: z.number().min(1).default(50),
@@ -355,7 +355,7 @@ export const questionsQuestionRouter = createRouter()
         take: input.limit + 1,
         where: {
           id: {
-            in: relatedQuestionsIdArray
+            in: relatedQuestionsIdArray,
           },
           ...(input.questionTypes.length > 0
             ? {
