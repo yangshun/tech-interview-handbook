@@ -83,7 +83,6 @@ const CODING_QUESTIONS: Array<QuestionCreateData> = CODING_QUESTION_CONTENT.map(
     userId: null,
     encounters: {
       create: {
-        location: 'Singapore',
         role: selectRandomRole(),
         seenAt: generateRandomDate(),
       },
@@ -98,7 +97,6 @@ const BEHAVIORAL_QUESTIONS: Array<QuestionCreateData> =
     userId: null,
     encounters: {
       create: {
-        location: 'Singapore',
         role: selectRandomRole(),
         seenAt: generateRandomDate(),
       },
@@ -120,6 +118,15 @@ async function main() {
     );
   }
 
+  const firstCity = await prisma.city.findFirst({
+    include: {
+      state: true,
+    },
+  });
+  if (!firstCity) {
+    throw new Error('No city found. Please seed db with some cities first.');
+  }
+
   // Generate random answers to the questions
   const users = await prisma.user.findMany();
   if (users.length === 0) {
@@ -138,6 +145,9 @@ async function main() {
             create: {
               ...question.encounters!.create,
               companyId: firstCompany.id,
+              stateId: firstCity.stateId,
+              cityId: firstCity.id,
+              countryId: firstCity.state.countryId,
             } as any,
           },
         },
