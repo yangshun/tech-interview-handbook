@@ -235,7 +235,7 @@ export default function ProfileHeader({
   return (
     <div className="h-40 bg-white p-4">
       <div className="justify-left flex h-1/2">
-        <div className="mx-4 mt-2">
+        <div className="mx-4 mt-2 h-16 w-16">
           <ProfilePhotoHolder />
         </div>
         <div className="w-full">
