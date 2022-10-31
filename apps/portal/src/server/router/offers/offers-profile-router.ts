@@ -110,12 +110,12 @@ export const offersProfileRouter = createRouter()
     async resolve({ ctx, input }) {
       const profile = await ctx.prisma.offersProfile.findFirst({
         where: {
-          id: input.profileId
-        }
-      })
+          id: input.profileId,
+        },
+      });
 
-      return profile?.editToken === input.token
-    }
+      return profile?.editToken === input.token;
+    },
   })
   .query('listOne', {
     input: z.object({
@@ -133,6 +133,15 @@ export const offersProfileRouter = createRouter()
                   topSimilarOffers: {
                     include: {
                       company: true,
+                      location: {
+                        include: {
+                          state: {
+                            include: {
+                              country: true,
+                            },
+                          },
+                        },
+                      },
                       offersFullTime: {
                         include: {
                           totalCompensation: true,
@@ -150,6 +159,15 @@ export const offersProfileRouter = createRouter()
                               experiences: {
                                 include: {
                                   company: true,
+                                  location: {
+                                    include: {
+                                      state: {
+                                        include: {
+                                          country: true,
+                                        },
+                                      },
+                                    },
+                                  },
                                 },
                               },
                             },
@@ -165,6 +183,15 @@ export const offersProfileRouter = createRouter()
                   topSimilarOffers: {
                     include: {
                       company: true,
+                      location: {
+                        include: {
+                          state: {
+                            include: {
+                              country: true,
+                            },
+                          },
+                        },
+                      },
                       offersFullTime: {
                         include: {
                           totalCompensation: true,
@@ -182,6 +209,15 @@ export const offersProfileRouter = createRouter()
                               experiences: {
                                 include: {
                                   company: true,
+                                  location: {
+                                    include: {
+                                      state: {
+                                        include: {
+                                          country: true,
+                                        },
+                                      },
+                                    },
+                                  },
                                 },
                               },
                             },
@@ -195,6 +231,15 @@ export const offersProfileRouter = createRouter()
               overallHighestOffer: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   offersFullTime: {
                     include: {
                       totalCompensation: true,
@@ -220,6 +265,15 @@ export const offersProfileRouter = createRouter()
               experiences: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   monthlySalary: true,
                   totalCompensation: true,
                 },
@@ -237,6 +291,15 @@ export const offersProfileRouter = createRouter()
           offers: {
             include: {
               company: true,
+              location: {
+                include: {
+                  state: {
+                    include: {
+                      country: true,
+                    },
+                  },
+                },
+              },
               offersFullTime: {
                 include: {
                   baseSalary: true,
