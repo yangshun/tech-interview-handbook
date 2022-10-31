@@ -64,12 +64,16 @@ export default function LandingComponent({
   return (
     <main className="flex flex-1 flex-col items-center overflow-y-auto bg-white">
       <div className="flex flex-1 flex-col items-start justify-center gap-12 px-4">
-        <header className="flex flex-col items-start gap-4">
-          <div className="flex items-center justify-center">
-            <h1 className="text-3xl font-semibold text-slate-900">
+        <header className="flex flex-col items-start gap-16">
+          <div className="flex flex-col items-center self-stretch">
+            <img
+              alt="Questions Bank"
+              className="h-40 w-40"
+              src="/bank-logo.png"
+            />
+            <h1 className="text-4xl font-bold text-slate-900 text-center">
               Tech Interview Question Bank
             </h1>
-            <img alt="app logo" className="h-20 w-20" src="/logo.svg"></img>
           </div>
           <p className="mb-2 max-w-lg text-5xl font-semibold text-slate-900 sm:max-w-3xl">
             Know the{' '}
