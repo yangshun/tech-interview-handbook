@@ -252,7 +252,7 @@ export default function ContributeQuestionForm({
           )}
         </div>
         <div
-          className="bg-primary-50 flex w-full justify-between gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)]"
+          className="bg-primary-50 flex w-full flex-col gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)] sm:flex-row sm:justify-between"
           style={{
             // Hack to make the background bleed outside the container
             clipPath: 'inset(0 -100vmax)',
