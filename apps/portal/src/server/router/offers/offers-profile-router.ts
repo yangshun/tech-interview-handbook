@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import { z } from 'zod';
+import type { OffersProfile } from '@prisma/client';
 import { JobType } from '@prisma/client';
 import * as trpc from '@trpc/server';
 
@@ -108,14 +109,15 @@ export const offersProfileRouter = createRouter()
       token: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const profile = await ctx.prisma.offersProfile.findFirst({
-        where: {
-          id: input.profileId
-        }
-      })
+      const profile: OffersProfile | null =
+        await ctx.prisma.offersProfile.findFirst({
+          where: {
+            id: input.profileId,
+          },
+        });
 
-      return profile?.editToken === input.token
-    }
+      return profile?.editToken === input.token;
+    },
   })
   .query('isSaved', {
     input: z.object({
@@ -123,36 +125,35 @@ export const offersProfileRouter = createRouter()
       userId: z.string().nullish(),
     }),
     async resolve({ ctx, input }) {
-
       if (!input.userId) {
-        return false
+        return false;
       }
 
       const profile = await ctx.prisma.offersProfile.findFirst({
         include: {
-          users: true
+          users: true,
         },
         where: {
-          id: input.profileId
-        }
-      })
+          id: input.profileId,
+        },
+      });
 
-      const users = profile?.users
+      const users = profile?.users;
 
       if (!users) {
-        return false
+        return false;
       }
 
-      let isSaved = false
+      let isSaved = false;
 
       for (let i = 0; i < users.length; i++) {
         if (users[i].id === input.userId) {
-          isSaved = true
+          isSaved = true;
         }
       }
 
-      return isSaved
-    }
+      return isSaved;
+    },
   })
   .query('listOne', {
     input: z.object({

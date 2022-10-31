@@ -1,3 +1,4 @@
+import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { DocumentDuplicateIcon } from '@heroicons/react/20/solid';
 import { BookmarkSquareIcon, CheckIcon } from '@heroicons/react/24/outline';
@@ -20,6 +21,7 @@ export default function OffersProfileSave({
   const { showToast } = useToast();
   const { event: gaEvent } = useGoogleAnalytics();
   const [isSaved, setSaved] = useState(false);
+  const { data: session, status } = useSession();
 
   const saveMutation = trpc.useMutation(
     ['offers.user.profile.addToUserProfile'],
@@ -32,7 +34,10 @@ export default function OffersProfileSave({
         });
       },
       onSuccess: () => {
-        setSaved(true);
+        trpcContext.invalidateQueries([
+          'offers.profile.isSaved',
+          { profileId, userId: session?.user?.id },
+        ]);
         showToast({
           title: `Saved to your dashboard!`,
           variant: 'success',
@@ -41,16 +46,30 @@ export default function OffersProfileSave({
     },
   );
 
+  const isSavedQuery = trpc.useQuery(
+    [`offers.profile.isSaved`, { profileId, userId: session?.user?.id }],
+    {
+      onSuccess: (res) => {
+        setSaved(res);
+      },
+    },
+  );
+
+  const trpcContext = trpc.useContext();
   const handleSave = () => {
-    saveMutation.mutate({
-      profileId,
-      token: token as string,
-    });
-    gaEvent({
-      action: 'offers.profile_submission_save_to_profile',
-      category: 'engagement',
-      label: 'Save to profile in profile submission',
-    });
+    if (status === 'unauthenticated') {
+      signIn();
+    } else {
+      saveMutation.mutate({
+        profileId,
+        token: token as string,
+      });
+      gaEvent({
+        action: 'offers.profile_submission_save_to_profile',
+        category: 'engagement',
+        label: 'Save to profile in profile submission',
+      });
+    }
   };
 
   return (
@@ -99,9 +118,9 @@ export default function OffersProfileSave({
         </p>
         <div className="mb-20">
           <Button
-            disabled={isSaved}
+            disabled={isSavedQuery.isLoading || isSaved}
             icon={isSaved ? CheckIcon : BookmarkSquareIcon}
-            isLoading={saveMutation.isLoading}
+            isLoading={saveMutation.isLoading || isSavedQuery.isLoading}
             label={isSaved ? 'Saved to user profile' : 'Save to user profile'}
             variant="primary"
             onClick={handleSave}
