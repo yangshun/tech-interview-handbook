@@ -10,13 +10,13 @@ export default function QuestionsHomePage() {
   const router = useRouter();
 
   const handleLandingQuery = async (data: LandingQueryData) => {
-    const { company, location, questionType } = data;
+    const { companySlug, location, questionType } = data;
 
     // Go to browse page
     router.push({
       pathname: '/questions/browse',
       query: {
-        companies: [company],
+        companies: [companySlug],
         locations: [location],
         questionTypes: [questionType],
       },

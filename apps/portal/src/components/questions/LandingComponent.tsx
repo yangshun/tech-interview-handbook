@@ -3,6 +3,7 @@ import { ArrowSmallRightIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
 import { Button, Select } from '@tih/ui';
 
+import { companyOptionToSlug } from '~/utils/questions/companySlug';
 import { QUESTION_TYPES } from '~/utils/questions/constants';
 import useDefaultCompany from '~/utils/questions/useDefaultCompany';
 import useDefaultLocation from '~/utils/questions/useDefaultLocation';
@@ -12,7 +13,7 @@ import CompanyTypeahead from './typeahead/CompanyTypeahead';
 import LocationTypeahead from './typeahead/LocationTypeahead';
 
 export type LandingQueryData = {
-  company: string;
+  companySlug: string;
   location: string;
   questionType: QuestionsQuestionType;
 };
@@ -71,7 +72,7 @@ export default function LandingComponent({
               className="h-40 w-40"
               src="/bank-logo.png"
             />
-            <h1 className="text-4xl font-bold text-slate-900 text-center">
+            <h1 className="text-center text-4xl font-bold text-slate-900">
               Tech Interview Question Bank
             </h1>
           </div>
@@ -124,7 +125,7 @@ export default function LandingComponent({
             onClick={() => {
               if (company !== undefined && location !== undefined) {
                 return handleLandingQuery({
-                  company: company.label,
+                  companySlug: companyOptionToSlug(company),
                   location: location.value,
                   questionType,
                 });
