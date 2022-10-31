@@ -171,6 +171,15 @@ export const offersProfileRouter = createRouter()
                   topSimilarOffers: {
                     include: {
                       company: true,
+                      location: {
+                        include: {
+                          state: {
+                            include: {
+                              country: true,
+                            },
+                          },
+                        },
+                      },
                       offersFullTime: {
                         include: {
                           totalCompensation: true,
@@ -188,6 +197,15 @@ export const offersProfileRouter = createRouter()
                               experiences: {
                                 include: {
                                   company: true,
+                                  location: {
+                                    include: {
+                                      state: {
+                                        include: {
+                                          country: true,
+                                        },
+                                      },
+                                    },
+                                  },
                                 },
                               },
                             },
@@ -203,6 +221,15 @@ export const offersProfileRouter = createRouter()
                   topSimilarOffers: {
                     include: {
                       company: true,
+                      location: {
+                        include: {
+                          state: {
+                            include: {
+                              country: true,
+                            },
+                          },
+                        },
+                      },
                       offersFullTime: {
                         include: {
                           totalCompensation: true,
@@ -220,6 +247,15 @@ export const offersProfileRouter = createRouter()
                               experiences: {
                                 include: {
                                   company: true,
+                                  location: {
+                                    include: {
+                                      state: {
+                                        include: {
+                                          country: true,
+                                        },
+                                      },
+                                    },
+                                  },
                                 },
                               },
                             },
@@ -233,6 +269,15 @@ export const offersProfileRouter = createRouter()
               overallHighestOffer: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   offersFullTime: {
                     include: {
                       totalCompensation: true,
@@ -258,6 +303,15 @@ export const offersProfileRouter = createRouter()
               experiences: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   monthlySalary: true,
                   totalCompensation: true,
                 },
@@ -275,6 +329,15 @@ export const offersProfileRouter = createRouter()
           offers: {
             include: {
               company: true,
+              location: {
+                include: {
+                  state: {
+                    include: {
+                      country: true,
+                    },
+                  },
+                },
+              },
               offersFullTime: {
                 include: {
                   baseSalary: true,
@@ -809,14 +872,14 @@ export const offersProfileRouter = createRouter()
                         ),
                         currency: exp.monthlySalary.currency,
                         value: exp.monthlySalary.value,
-                      }
-                    }
-                  }
+                      },
+                    },
+                  },
                 },
                 where: {
-                  id: exp.id
-                }
-              })
+                  id: exp.id,
+                },
+              });
             }
 
             if (exp.totalCompensation) {
@@ -843,14 +906,14 @@ export const offersProfileRouter = createRouter()
                         ),
                         currency: exp.totalCompensation.currency,
                         value: exp.totalCompensation.value,
-                      }
-                    }
-                  }
+                      },
+                    },
+                  },
                 },
                 where: {
-                  id: exp.id
-                }
-              })
+                  id: exp.id,
+                },
+              });
             }
           } else if (!exp.id) {
             // Create new experience
@@ -1176,7 +1239,8 @@ export const offersProfileRouter = createRouter()
                           offerToUpdate.offersIntern.monthlySalary.currency,
                           baseCurrencyString,
                         ),
-                        currency: offerToUpdate.offersIntern.monthlySalary.currency,
+                        currency:
+                          offerToUpdate.offersIntern.monthlySalary.currency,
                         value: offerToUpdate.offersIntern.monthlySalary.value,
                       },
                       update: {
@@ -1186,13 +1250,14 @@ export const offersProfileRouter = createRouter()
                           offerToUpdate.offersIntern.monthlySalary.currency,
                           baseCurrencyString,
                         ),
-                        currency: offerToUpdate.offersIntern.monthlySalary.currency,
+                        currency:
+                          offerToUpdate.offersIntern.monthlySalary.currency,
                         value: offerToUpdate.offersIntern.monthlySalary.value,
-                      }
-                    }
+                      },
+                    },
                   },
                   startYear: offerToUpdate.offersIntern.startYear ?? undefined,
-                  title: offerToUpdate.offersIntern.title
+                  title: offerToUpdate.offersIntern.title,
                 },
                 where: {
                   id: offerToUpdate.offersIntern.id,
@@ -1222,7 +1287,8 @@ export const offersProfileRouter = createRouter()
                             offerToUpdate.offersFullTime.baseSalary.currency,
                             baseCurrencyString,
                           ),
-                          currency: offerToUpdate.offersFullTime.baseSalary.currency,
+                          currency:
+                            offerToUpdate.offersFullTime.baseSalary.currency,
                           value: offerToUpdate.offersFullTime.baseSalary.value,
                         },
                         update: {
@@ -1232,11 +1298,12 @@ export const offersProfileRouter = createRouter()
                             offerToUpdate.offersFullTime.baseSalary.currency,
                             baseCurrencyString,
                           ),
-                          currency: offerToUpdate.offersFullTime.baseSalary.currency,
+                          currency:
+                            offerToUpdate.offersFullTime.baseSalary.currency,
                           value: offerToUpdate.offersFullTime.baseSalary.value,
-                        }
-                      }
-                    }
+                        },
+                      },
+                    },
                   },
                   where: {
                     id: offerToUpdate.offersFullTime.id,
@@ -1267,9 +1334,9 @@ export const offersProfileRouter = createRouter()
                           ),
                           currency: offerToUpdate.offersFullTime.bonus.currency,
                           value: offerToUpdate.offersFullTime.bonus.value,
-                        }
-                      }
-                    }
+                        },
+                      },
+                    },
                   },
                   where: {
                     id: offerToUpdate.offersFullTime.id,
@@ -1288,7 +1355,8 @@ export const offersProfileRouter = createRouter()
                             offerToUpdate.offersFullTime.stocks.currency,
                             baseCurrencyString,
                           ),
-                          currency: offerToUpdate.offersFullTime.stocks.currency,
+                          currency:
+                            offerToUpdate.offersFullTime.stocks.currency,
                           value: offerToUpdate.offersFullTime.stocks.value,
                         },
                         update: {
@@ -1298,11 +1366,12 @@ export const offersProfileRouter = createRouter()
                             offerToUpdate.offersFullTime.stocks.currency,
                             baseCurrencyString,
                           ),
-                          currency: offerToUpdate.offersFullTime.stocks.currency,
+                          currency:
+                            offerToUpdate.offersFullTime.stocks.currency,
                           value: offerToUpdate.offersFullTime.stocks.value,
-                        }
-                      }
-                    }
+                        },
+                      },
+                    },
                   },
                   where: {
                     id: offerToUpdate.offersFullTime.id,
@@ -1317,24 +1386,32 @@ export const offersProfileRouter = createRouter()
                         baseCurrency: baseCurrencyString,
                         baseValue: await convert(
                           offerToUpdate.offersFullTime.totalCompensation.value,
-                          offerToUpdate.offersFullTime.totalCompensation.currency,
+                          offerToUpdate.offersFullTime.totalCompensation
+                            .currency,
                           baseCurrencyString,
                         ),
-                        currency: offerToUpdate.offersFullTime.totalCompensation.currency,
-                        value: offerToUpdate.offersFullTime.totalCompensation.value,
+                        currency:
+                          offerToUpdate.offersFullTime.totalCompensation
+                            .currency,
+                        value:
+                          offerToUpdate.offersFullTime.totalCompensation.value,
                       },
                       update: {
                         baseCurrency: baseCurrencyString,
                         baseValue: await convert(
                           offerToUpdate.offersFullTime.totalCompensation.value,
-                          offerToUpdate.offersFullTime.totalCompensation.currency,
+                          offerToUpdate.offersFullTime.totalCompensation
+                            .currency,
                           baseCurrencyString,
                         ),
-                        currency: offerToUpdate.offersFullTime.totalCompensation.currency,
-                        value: offerToUpdate.offersFullTime.totalCompensation.value,
-                      }
-                    }
-                  }
+                        currency:
+                          offerToUpdate.offersFullTime.totalCompensation
+                            .currency,
+                        value:
+                          offerToUpdate.offersFullTime.totalCompensation.value,
+                      },
+                    },
+                  },
                 },
                 where: {
                   id: offerToUpdate.offersFullTime.id,
