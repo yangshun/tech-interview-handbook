@@ -1,5 +1,7 @@
 import type {
+  City,
   Company,
+  Country,
   OffersAnalysis,
   OffersAnalysisUnit,
   OffersBackground,
@@ -12,6 +14,7 @@ import type {
   OffersProfile,
   OffersReply,
   OffersSpecificYoe,
+  State,
   User,
 } from '@prisma/client';
 import { JobType } from '@prisma/client';
@@ -449,6 +452,7 @@ export const profileDtoMapper = (
               topSimilarOffers: Array<
                 OffersOffer & {
                   company: Company;
+                  location: City & { state: State & { country: Country } };
                   offersFullTime:
                     | (OffersFullTime & { totalCompensation: OffersCurrency })
                     | null;
@@ -459,7 +463,14 @@ export const profileDtoMapper = (
                     background:
                       | (OffersBackground & {
                           experiences: Array<
-                            OffersExperience & { company: Company | null }
+                            OffersExperience & {
+                              company: Company | null;
+                              location:
+                                | (City & {
+                                    state: State & { country: Country };
+                                  })
+                                | null;
+                            }
                           >;
                         })
                       | null;
@@ -472,6 +483,7 @@ export const profileDtoMapper = (
             topSimilarOffers: Array<
               OffersOffer & {
                 company: Company;
+                location: City & { state: State & { country: Country } };
                 offersFullTime:
                   | (OffersFullTime & { totalCompensation: OffersCurrency })
                   | null;
@@ -482,7 +494,12 @@ export const profileDtoMapper = (
                   background:
                     | (OffersBackground & {
                         experiences: Array<
-                          OffersExperience & { company: Company | null }
+                          OffersExperience & {
+                            company: Company | null;
+                            location:
+                              | (City & { state: State & { country: Country } })
+                              | null;
+                          }
                         >;
                       })
                     | null;
@@ -492,6 +509,7 @@ export const profileDtoMapper = (
           };
           overallHighestOffer: OffersOffer & {
             company: Company;
+            location: City & { state: State & { country: Country } };
             offersFullTime:
               | (OffersFullTime & { totalCompensation: OffersCurrency })
               | null;
@@ -508,6 +526,7 @@ export const profileDtoMapper = (
           experiences: Array<
             OffersExperience & {
               company: Company | null;
+              location: (City & { state: State & { country: Country } }) | null;
               monthlySalary: OffersCurrency | null;
               totalCompensation: OffersCurrency | null;
             }
@@ -525,6 +544,7 @@ export const profileDtoMapper = (
     offers: Array<
       OffersOffer & {
         company: Company;
+        location: City & { state: State & { country: Country } };
         offersFullTime:
           | (OffersFullTime & {
               baseSalary: OffersCurrency | null;
