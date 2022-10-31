@@ -7,7 +7,7 @@ const navigation: ProductNavigationItems = [
 
 const navigationAuthenticated: ProductNavigationItems = [
   { href: '/offers/submit', name: 'Analyze your offers' },
-  { href: '/offers/dashboard', name: 'Your repository' },
+  { href: '/offers/dashboard', name: 'Your dashboard' },
   { href: '/offers/features', name: 'Features' },
 ];
 

@@ -1,6 +1,7 @@
 import type {
   Company,
   OffersAnalysis,
+  OffersAnalysisUnit,
   OffersBackground,
   OffersCurrency,
   OffersEducation,
@@ -18,9 +19,9 @@ import { TRPCError } from '@trpc/server';
 
 import type {
   AddToProfileResponse,
-  Analysis,
   AnalysisHighestOffer,
   AnalysisOffer,
+  AnalysisUnit,
   Background,
   CreateOfferProfileResponse,
   DashboardOffer,
@@ -111,32 +112,33 @@ const analysisOfferDtoMapper = (
   return analysisOfferDto;
 };
 
-const analysisDtoMapper = (
-  noOfOffers: number,
-  percentile: number,
-  topPercentileOffers: Array<
-    OffersOffer & {
-      company: Company;
-      offersFullTime:
-        | (OffersFullTime & { totalCompensation: OffersCurrency })
-        | null;
-      offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-      profile: OffersProfile & {
-        background:
-          | (OffersBackground & {
-              experiences: Array<
-                OffersExperience & { company: Company | null }
-              >;
-            })
+const analysisUnitDtoMapper = (
+  analysisUnit: OffersAnalysisUnit & {
+    topSimilarOffers: Array<
+      OffersOffer & {
+        company: Company;
+        offersFullTime:
+          | (OffersFullTime & { totalCompensation: OffersCurrency })
           | null;
-      };
-    }
-  >,
+        offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
+        profile: OffersProfile & {
+          background:
+            | (OffersBackground & {
+                experiences: Array<
+                  OffersExperience & { company: Company | null }
+                >;
+              })
+            | null;
+        };
+      }
+    >;
+  },
 ) => {
-  const analysisDto: Analysis = {
-    noOfOffers,
-    percentile,
-    topPercentileOffers: topPercentileOffers.map((offer) =>
+  const analysisDto: AnalysisUnit = {
+    companyName: analysisUnit.companyName,
+    noOfOffers: analysisUnit.noOfSimilarOffers,
+    percentile: analysisUnit.percentile,
+    topPercentileOffers: analysisUnit.topSimilarOffers.map((offer) =>
       analysisOfferDtoMapper(offer),
     ),
   };
@@ -166,6 +168,52 @@ const analysisHighestOfferDtoMapper = (
 export const profileAnalysisDtoMapper = (
   analysis:
     | (OffersAnalysis & {
+        companyAnalysis: Array<
+          OffersAnalysisUnit & {
+            topSimilarOffers: Array<
+              OffersOffer & {
+                company: Company;
+                offersFullTime:
+                  | (OffersFullTime & { totalCompensation: OffersCurrency })
+                  | null;
+                offersIntern:
+                  | (OffersIntern & { monthlySalary: OffersCurrency })
+                  | null;
+                profile: OffersProfile & {
+                  background:
+                    | (OffersBackground & {
+                        experiences: Array<
+                          OffersExperience & { company: Company | null }
+                        >;
+                      })
+                    | null;
+                };
+              }
+            >;
+          }
+        >;
+        overallAnalysis: OffersAnalysisUnit & {
+          topSimilarOffers: Array<
+            OffersOffer & {
+              company: Company;
+              offersFullTime:
+                | (OffersFullTime & { totalCompensation: OffersCurrency })
+                | null;
+              offersIntern:
+                | (OffersIntern & { monthlySalary: OffersCurrency })
+                | null;
+              profile: OffersProfile & {
+                background:
+                  | (OffersBackground & {
+                      experiences: Array<
+                        OffersExperience & { company: Company | null }
+                      >;
+                    })
+                  | null;
+              };
+            }
+          >;
+        };
         overallHighestOffer: OffersOffer & {
           company: Company;
           offersFullTime:
@@ -176,46 +224,6 @@ export const profileAnalysisDtoMapper = (
             | null;
           profile: OffersProfile & { background: OffersBackground | null };
         };
-        topCompanyOffers: Array<
-          OffersOffer & {
-            company: Company;
-            offersFullTime:
-              | (OffersFullTime & { totalCompensation: OffersCurrency })
-              | null;
-            offersIntern:
-              | (OffersIntern & { monthlySalary: OffersCurrency })
-              | null;
-            profile: OffersProfile & {
-              background:
-                | (OffersBackground & {
-                    experiences: Array<
-                      OffersExperience & { company: Company | null }
-                    >;
-                  })
-                | null;
-            };
-          }
-        >;
-        topOverallOffers: Array<
-          OffersOffer & {
-            company: Company;
-            offersFullTime:
-              | (OffersFullTime & { totalCompensation: OffersCurrency })
-              | null;
-            offersIntern:
-              | (OffersIntern & { monthlySalary: OffersCurrency })
-              | null;
-            profile: OffersProfile & {
-              background:
-                | (OffersBackground & {
-                    experiences: Array<
-                      OffersExperience & { company: Company | null }
-                    >;
-                  })
-                | null;
-            };
-          }
-        >;
       })
     | null,
 ) => {
@@ -224,23 +232,17 @@ export const profileAnalysisDtoMapper = (
   }
 
   const profileAnalysisDto: ProfileAnalysis = {
-    companyAnalysis: [
-      analysisDtoMapper(
-        analysis.noOfSimilarCompanyOffers,
-        analysis.companyPercentile,
-        analysis.topCompanyOffers,
-      ),
-    ],
-    id: analysis.id,
-    overallAnalysis: analysisDtoMapper(
-      analysis.noOfSimilarOffers,
-      analysis.overallPercentile,
-      analysis.topOverallOffers,
+    companyAnalysis: analysis.companyAnalysis.map((analysisUnit) =>
+      analysisUnitDtoMapper(analysisUnit),
     ),
+    createdAt: analysis.createdAt,
+    id: analysis.id,
+    overallAnalysis: analysisUnitDtoMapper(analysis.overallAnalysis),
     overallHighestOffer: analysisHighestOfferDtoMapper(
       analysis.overallHighestOffer,
     ),
     profileId: analysis.profileId,
+    updatedAt: analysis.updatedAt,
   };
   return profileAnalysisDto;
 };
@@ -442,6 +444,52 @@ export const profileDtoMapper = (
   profile: OffersProfile & {
     analysis:
       | (OffersAnalysis & {
+          companyAnalysis: Array<
+            OffersAnalysisUnit & {
+              topSimilarOffers: Array<
+                OffersOffer & {
+                  company: Company;
+                  offersFullTime:
+                    | (OffersFullTime & { totalCompensation: OffersCurrency })
+                    | null;
+                  offersIntern:
+                    | (OffersIntern & { monthlySalary: OffersCurrency })
+                    | null;
+                  profile: OffersProfile & {
+                    background:
+                      | (OffersBackground & {
+                          experiences: Array<
+                            OffersExperience & { company: Company | null }
+                          >;
+                        })
+                      | null;
+                  };
+                }
+              >;
+            }
+          >;
+          overallAnalysis: OffersAnalysisUnit & {
+            topSimilarOffers: Array<
+              OffersOffer & {
+                company: Company;
+                offersFullTime:
+                  | (OffersFullTime & { totalCompensation: OffersCurrency })
+                  | null;
+                offersIntern:
+                  | (OffersIntern & { monthlySalary: OffersCurrency })
+                  | null;
+                profile: OffersProfile & {
+                  background:
+                    | (OffersBackground & {
+                        experiences: Array<
+                          OffersExperience & { company: Company | null }
+                        >;
+                      })
+                    | null;
+                };
+              }
+            >;
+          };
           overallHighestOffer: OffersOffer & {
             company: Company;
             offersFullTime:
@@ -452,46 +500,6 @@ export const profileDtoMapper = (
               | null;
             profile: OffersProfile & { background: OffersBackground | null };
           };
-          topCompanyOffers: Array<
-            OffersOffer & {
-              company: Company;
-              offersFullTime:
-                | (OffersFullTime & { totalCompensation: OffersCurrency })
-                | null;
-              offersIntern:
-                | (OffersIntern & { monthlySalary: OffersCurrency })
-                | null;
-              profile: OffersProfile & {
-                background:
-                  | (OffersBackground & {
-                      experiences: Array<
-                        OffersExperience & { company: Company | null }
-                      >;
-                    })
-                  | null;
-              };
-            }
-          >;
-          topOverallOffers: Array<
-            OffersOffer & {
-              company: Company;
-              offersFullTime:
-                | (OffersFullTime & { totalCompensation: OffersCurrency })
-                | null;
-              offersIntern:
-                | (OffersIntern & { monthlySalary: OffersCurrency })
-                | null;
-              profile: OffersProfile & {
-                background:
-                  | (OffersBackground & {
-                      experiences: Array<
-                        OffersExperience & { company: Company | null }
-                      >;
-                    })
-                  | null;
-              };
-            }
-          >;
         })
       | null;
     background:
@@ -528,7 +536,7 @@ export const profileDtoMapper = (
         offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
       }
     >;
-    user: User | null;
+    users: Array<User>;
   },
   inputToken: string | undefined,
   inputUserId: string | null | undefined,
@@ -548,18 +556,12 @@ export const profileDtoMapper = (
     profileDto.editToken = profile.editToken ?? null;
     profileDto.isEditable = true;
 
-    const users = profile.user;
+    const { users } = profile;
 
-    // TODO: BRYANN UNCOMMENT THIS ONCE U CHANGE THE SCHEMA
-    // for (let i = 0; i < users.length; i++) {
-    //   if (users[i].id === inputUserId) {
-    //     profileDto.isSaved = true
-    //   }
-    // }
-
-    // TODO: REMOVE THIS ONCE U CHANGE THE SCHEMA
-    if (users?.id === inputUserId) {
-      profileDto.isSaved = true;
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].id === inputUserId) {
+        profileDto.isSaved = true;
+      }
     }
   }
 

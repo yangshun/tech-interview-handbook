@@ -6,29 +6,20 @@ import OfferPercentileAnalysisText from './OfferPercentileAnalysisText';
 import OfferProfileCard from './OfferProfileCard';
 import { OVERALL_TAB } from '../constants';
 
-import type {
-  Analysis,
-  AnalysisHighestOffer,
-  ProfileAnalysis,
-} from '~/types/offers';
-
-type OfferAnalysisData = {
-  offer?: AnalysisHighestOffer;
-  offerAnalysis?: Analysis;
-};
+import type { AnalysisUnit, ProfileAnalysis } from '~/types/offers';
 
 type OfferAnalysisContentProps = Readonly<{
-  analysis: OfferAnalysisData;
+  analysis: AnalysisUnit;
   isSubmission: boolean;
   tab: string;
 }>;
 
 function OfferAnalysisContent({
-  analysis: { offer, offerAnalysis },
+  analysis,
   tab,
   isSubmission,
 }: OfferAnalysisContentProps) {
-  if (!offerAnalysis || !offer || offerAnalysis.noOfOffers === 0) {
+  if (!analysis || analysis.noOfOffers === 0) {
     if (tab === OVERALL_TAB) {
       return (
         <p className="m-10">
@@ -47,9 +38,8 @@ function OfferAnalysisContent({
   return (
     <>
       <OfferPercentileAnalysisText
-        companyName={offer.company.name}
+        analysis={analysis}
         isSubmission={isSubmission}
-        offerAnalysis={offerAnalysis}
         tab={tab}
       />
       <p className="mt-5">
@@ -57,7 +47,7 @@ function OfferAnalysisContent({
           ? 'Here are some of the top offers relevant to you:'
           : 'Relevant top offers:'}
       </p>
-      {offerAnalysis.topPercentileOffers.map((topPercentileOffer) => (
+      {analysis.topPercentileOffers.map((topPercentileOffer) => (
         <OfferProfileCard
           key={topPercentileOffer.id}
           offerProfile={topPercentileOffer}
@@ -77,7 +67,7 @@ function OfferAnalysisContent({
 }
 
 type OfferAnalysisProps = Readonly<{
-  allAnalysis?: ProfileAnalysis | null;
+  allAnalysis: ProfileAnalysis;
   isError: boolean;
   isLoading: boolean;
   isSubmission?: boolean;
@@ -90,61 +80,55 @@ export default function OfferAnalysis({
   isSubmission = false,
 }: OfferAnalysisProps) {
   const [tab, setTab] = useState(OVERALL_TAB);
-  const [analysis, setAnalysis] = useState<OfferAnalysisData | null>(null);
+  const [analysis, setAnalysis] = useState<AnalysisUnit>(
+    allAnalysis.overallAnalysis,
+  );
 
   useEffect(() => {
     if (tab === OVERALL_TAB) {
-      setAnalysis({
-        offer: allAnalysis?.overallHighestOffer,
-        offerAnalysis: allAnalysis?.overallAnalysis,
-      });
+      setAnalysis(allAnalysis.overallAnalysis);
     } else {
-      setAnalysis({
-        offer: allAnalysis?.overallHighestOffer,
-        offerAnalysis: allAnalysis?.companyAnalysis[0],
-      });
+      setAnalysis(allAnalysis.companyAnalysis[parseInt(tab, 10)]);
     }
   }, [tab, allAnalysis]);
 
-  const tabOptions = [
+  const companyTabs = allAnalysis.companyAnalysis.map((value, index) => ({
+    label: value.companyName,
+    value: `${index}`,
+  }));
+
+  let tabOptions = [
     {
       label: OVERALL_TAB,
       value: OVERALL_TAB,
     },
-    {
-      label: allAnalysis?.overallHighestOffer.company.name || '',
-      value: allAnalysis?.overallHighestOffer.company.id || '',
-    },
   ];
+  tabOptions = tabOptions.concat(companyTabs);
 
   return (
-    <>
+    <div>
+      {isError && (
+        <p className="m-10 text-center">
+          An error occurred while generating profile analysis.
+        </p>
+      )}
       {isLoading && <Spinner className="m-10" display="block" size="lg" />}
-      {analysis && (
+      {!isError && !isLoading && (
         <div>
-          {isError && (
-            <p className="m-10 text-center">
-              An error occurred while generating profile analysis.
-            </p>
-          )}
-          {!isError && !isLoading && (
-            <div>
-              <Tabs
-                label="Result Navigation"
-                tabs={tabOptions}
-                value={tab}
-                onChange={setTab}
-              />
-              <HorizontalDivider className="mb-5" />
-              <OfferAnalysisContent
-                analysis={analysis}
-                isSubmission={isSubmission}
-                tab={tab}
-              />
-            </div>
-          )}
+          <Tabs
+            label="Result Navigation"
+            tabs={tabOptions}
+            value={tab}
+            onChange={setTab}
+          />
+          <HorizontalDivider className="mb-5" />
+          <OfferAnalysisContent
+            analysis={analysis}
+            isSubmission={isSubmission}
+            tab={tab}
+          />
         </div>
       )}
-    </>
+    </div>
   );
 }
