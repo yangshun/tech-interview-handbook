@@ -37,6 +37,8 @@ import { SortOrder } from '~/types/questions.d';
 export default function QuestionsBrowsePage() {
   const router = useRouter();
 
+  const [query, setQuery] = useState('');
+
   const [
     selectedCompanySlugs,
     setSelectedCompanySlugs,
@@ -160,13 +162,14 @@ export default function QuestionsBrowsePage() {
 
   const questionsInfiniteQuery = trpc.useInfiniteQuery(
     [
-      'questions.questions.getQuestionsByFilter',
+      'questions.questions.getQuestionsByFilterAndContent',
       {
         // TODO: Enable filtering by countryIds and stateIds
         cityIds: selectedLocations
           .map(({ cityId }) => cityId)
           .filter((id) => id !== undefined) as Array<string>,
         companyIds: selectedCompanySlugs.map((slug) => slug.split('_')[0]),
+        content: query,
         countryIds: [],
         endDate: today,
         limit: 10,
@@ -475,8 +478,8 @@ export default function QuestionsBrowsePage() {
       </Head>
       <main className="flex flex-1 flex-col items-stretch">
         <div className="flex h-full flex-1">
-          <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
-            <div className="m-4 flex max-w-3xl flex-1 flex-col items-stretch justify-start gap-6">
+          <section className="min-h-0 flex-1 overflow-auto">
+            <div className="my-4 mx-auto flex max-w-3xl flex-col items-stretch justify-start gap-6">
               <ContributeQuestionCard
                 onSubmit={(data) => {
                   const { cityId, countryId, stateId } = data.location;
@@ -495,10 +498,14 @@ export default function QuestionsBrowsePage() {
               <div className="flex flex-col items-stretch gap-4">
                 <div className="sticky top-0 border-b border-slate-300 bg-slate-50 py-4">
                   <QuestionSearchBar
+                    query={query}
                     sortOrderValue={sortOrder}
                     sortTypeValue={sortType}
                     onFilterOptionsToggle={() => {
                       setFilterDrawerOpen(!filterDrawerOpen);
+                    }}
+                    onQueryChange={(newQuery) => {
+                      setQuery(newQuery);
                     }}
                     onSortOrderChange={setSortOrder}
                     onSortTypeChange={setSortType}
