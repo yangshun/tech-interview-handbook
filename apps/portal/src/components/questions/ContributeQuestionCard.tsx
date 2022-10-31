@@ -6,6 +6,8 @@ import {
 } from '@heroicons/react/24/outline';
 import { TextInput } from '@tih/ui';
 
+import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
+
 import ContributeQuestionDialog from './ContributeQuestionDialog';
 import type { ContributeQuestionFormProps } from './forms/ContributeQuestionForm';
 
@@ -23,14 +25,14 @@ export default function ContributeQuestionCard({
     setShowDraftDialog(false);
   };
 
-  const handleOpenContribute = () => {
+  const handleOpenContribute = useProtectedCallback(() => {
     setShowDraftDialog(true);
-  };
+  });
 
   return (
     <div className="w-full">
       <button
-        className="flex flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4 text-left hover:bg-slate-100"
+        className="flex w-full flex-col items-stretch justify-center gap-2 rounded-md border border-slate-300 bg-white p-4 text-left hover:bg-slate-100"
         type="button"
         onClick={handleOpenContribute}>
         <TextInput
@@ -40,7 +42,7 @@ export default function ContributeQuestionCard({
           placeholder="Contribute a question"
           onChange={handleOpenContribute}
         />
-        <div className="flex flex-wrap items-end justify-center gap-x-2">
+        <div className="flex flex-wrap items-end justify-start gap-2">
           <div className="min-w-[150px] flex-1">
             <TextInput
               disabled={true}
@@ -72,12 +74,12 @@ export default function ContributeQuestionCard({
             Contribute
           </h1>
         </div>
-        <ContributeQuestionDialog
-          show={showDraftDialog}
-          onCancel={handleDraftDialogCancel}
-          onSubmit={onSubmit}
-        />
       </button>
+      <ContributeQuestionDialog
+        show={showDraftDialog}
+        onCancel={handleDraftDialogCancel}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 }

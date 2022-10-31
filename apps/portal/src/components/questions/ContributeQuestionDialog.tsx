@@ -35,7 +35,12 @@ export default function ContributeQuestionDialog({
   return (
     <div>
       <Transition.Root as={Fragment} show={show}>
-        <Dialog as="div" className="relative z-10" onClose={onCancel}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => {
+            onCancel();
+          }}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

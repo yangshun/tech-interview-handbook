@@ -47,8 +47,9 @@ export default function CreateQuestionEncounterForm({
         <div>
           <CompanyTypeahead
             isLabelHidden={true}
-            placeholder="Other company"
-            suggestedCount={3}
+            placeholder="Company"
+            // TODO: Fix suggestions and set count back to 3
+            suggestedCount={0}
             // @ts-ignore TODO(questions): handle potentially null value.
             onSelect={({ value: company }) => {
               setSelectedCompany(company);
@@ -64,8 +65,8 @@ export default function CreateQuestionEncounterForm({
         <div>
           <LocationTypeahead
             isLabelHidden={true}
-            placeholder="Other location"
-            suggestedCount={3}
+            placeholder="Location"
+            suggestedCount={0}
             // @ts-ignore TODO(questions): handle potentially null value.
             onSelect={(location) => {
               setSelectedLocation(location);
@@ -81,8 +82,8 @@ export default function CreateQuestionEncounterForm({
         <div>
           <RoleTypeahead
             isLabelHidden={true}
-            placeholder="Other role"
-            suggestedCount={3}
+            placeholder="Role"
+            suggestedCount={0}
             // @ts-ignore TODO(questions): handle potentially null value.
             onSelect={({ value: role }) => {
               setSelectedRole(role);

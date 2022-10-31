@@ -16,6 +16,7 @@ import { Button } from '~/../../../packages/ui/dist';
 import { APP_TITLE } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
 import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
+import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { trpc } from '~/utils/trpc';
 
 export default function ListPage() {
@@ -76,6 +77,10 @@ export default function ListPage() {
   const handleCreateListCancel = () => {
     setShowCreateListDialog(false);
   };
+
+  const handleAddClick = useProtectedCallback(() => {
+    setShowCreateListDialog(true);
+  });
 
   const listOptions = (
     <>
@@ -157,10 +162,10 @@ export default function ListPage() {
                   label="Create"
                   size="md"
                   variant="tertiary"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setShowCreateListDialog(true);
+                  onClick={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    handleAddClick();
                   }}
                 />
               </div>
@@ -223,11 +228,13 @@ export default function ListPage() {
               onCancel={handleDeleteListCancel}
               onDelete={() => {
                 handleDeleteList(listIdToDelete);
-              }}></DeleteListDialog>
+              }}
+            />
             <CreateListDialog
               show={showCreateListDialog}
               onCancel={handleCreateListCancel}
-              onSubmit={handleCreateList}></CreateListDialog>
+              onSubmit={handleCreateList}
+            />
           </section>
         </div>
       </main>
