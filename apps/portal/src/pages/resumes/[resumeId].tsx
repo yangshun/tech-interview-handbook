@@ -22,6 +22,7 @@ import ResumeCommentsForm from '~/components/resumes/comments/ResumeCommentsForm
 import ResumeCommentsList from '~/components/resumes/comments/ResumeCommentsList';
 import ResumePdf from '~/components/resumes/ResumePdf';
 import ResumeExpandableText from '~/components/resumes/shared/ResumeExpandableText';
+import loginPageHref from '~/components/shared/loginPageHref';
 
 import type {
   ExperienceFilter,
@@ -107,7 +108,7 @@ export default function ResumeReviewPage() {
 
   const onStarButtonClick = () => {
     if (session?.user?.id == null) {
-      router.push('/api/auth/signin');
+      router.push(loginPageHref());
       return;
     }
 
@@ -184,8 +185,8 @@ export default function ResumeReviewPage() {
         <Button
           className="h-10 shadow-md"
           display="block"
-          href="/api/auth/signin"
-          label="Sign in to join discussion"
+          href={loginPageHref()}
+          label="Log in to join discussion"
           variant="primary"
         />
       );

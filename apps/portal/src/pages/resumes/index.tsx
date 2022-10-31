@@ -24,6 +24,7 @@ import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
+import loginPageHref from '~/components/shared/loginPageHref';
 
 import type {
   Filter,
@@ -257,7 +258,7 @@ export default function ResumeHomePage() {
 
   const onSubmitResume = () => {
     if (sessionData === null) {
-      router.push('/api/auth/signin');
+      router.push(loginPageHref());
     } else {
       router.push('/resumes/submit');
     }

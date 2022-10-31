@@ -21,6 +21,7 @@ import {
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import SubmissionGuidelines from '~/components/resumes/submit-form/SubmissionGuidelines';
+import loginPageHref from '~/components/shared/loginPageHref';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
 import { EXPERIENCES, LOCATIONS, ROLES } from '~/utils/resumes/resumeFilters';
@@ -129,7 +130,7 @@ export default function SubmitResumeForm({
   // Route user to sign in if not logged in
   useEffect(() => {
     if (status === 'unauthenticated') {
-      router.push('/api/auth/signin');
+      router.push(loginPageHref());
     }
   }, [router, status]);
 
