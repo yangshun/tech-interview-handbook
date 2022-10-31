@@ -42,7 +42,9 @@ export default function CreateQuestionEncounterForm({
 
   return (
     <div className="flex items-center gap-2">
-      <p className="font-md text-md text-slate-600">I saw this question at</p>
+      <p className="font-md text-md text-slate-600">
+        I saw this question {step <= 1 ? 'at' : step === 2 ? 'for' : 'on'}
+      </p>
       {step === 0 && (
         <div>
           <CompanyTypeahead
