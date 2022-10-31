@@ -17,13 +17,17 @@ export default function OffersSubmissionAnalysis({
       <h5 className="mb-8 text-center text-4xl font-bold text-slate-900">
         Result
       </h5>
-      <OfferAnalysis
-        key={3}
-        allAnalysis={analysis}
-        isError={isError}
-        isLoading={isLoading}
-        isSubmission={true}
-      />
+      {!analysis && (
+        <p className="mb-8 text-center">Error generating analysis.</p>
+      )}
+      {analysis && (
+        <OfferAnalysis
+          key={3}
+          allAnalysis={analysis}
+          isError={isError}
+          isLoading={isLoading}
+        />
+      )}
     </div>
   );
 }

@@ -225,8 +225,7 @@ model OffersProfile {
 
   offers OffersOffer[]
 
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  users User[]
 
   analysis OffersAnalysis?
 }
@@ -362,9 +361,8 @@ model OffersOffer {
   offersFullTime   OffersFullTime? @relation(fields: [offersFullTimeId], references: [id], onDelete: Cascade)
   offersFullTimeId String?         @unique
 
-  OffersAnalysis                 OffersAnalysis?  @relation("HighestOverallOffer")
-  OffersAnalysisTopOverallOffers OffersAnalysis[] @relation("TopOverallOffers")
-  OffersAnalysisTopCompanyOffers OffersAnalysis[] @relation("TopCompanyOffers")
+  offersAnalysis     OffersAnalysis?      @relation("HighestOverallOffer")
+  offersAnalysisUnit OffersAnalysisUnit[]
 }
 
 model OffersIntern {
@@ -396,7 +394,9 @@ model OffersFullTime {
 }
 
 model OffersAnalysis {
-  id String @id @default(cuid())
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   profile   OffersProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId String        @unique
@@ -405,14 +405,22 @@ model OffersAnalysis {
   offerId             String      @unique
 
   // OVERALL
-  overallPercentile Float
-  noOfSimilarOffers Int
-  topOverallOffers  OffersOffer[] @relation("TopOverallOffers")
+  overallAnalysis       OffersAnalysisUnit @relation("OverallAnalysis", fields: [overallAnalysisUnitId], references: [id])
+  overallAnalysisUnitId String
 
-  // Company
-  companyPercentile        Float
-  noOfSimilarCompanyOffers Int
-  topCompanyOffers         OffersOffer[] @relation("TopCompanyOffers")
+  companyAnalysis OffersAnalysisUnit[] @relation("CompanyAnalysis")
+}
+
+model OffersAnalysisUnit {
+  id String @id @default(cuid())
+
+  companyName       String
+  percentile        Float
+  noOfSimilarOffers Int
+  topSimilarOffers  OffersOffer[]
+
+  offersAnalysisOverall OffersAnalysis[] @relation("OverallAnalysis")
+  offersAnalysisCompany OffersAnalysis[] @relation("CompanyAnalysis")
 }
 
 // End of Offers project models.
