@@ -13,6 +13,7 @@ export const questionsQuestionRouter = createRouter()
     input: z.object({
       cityIds: z.string().array(),
       companyIds: z.string().array(),
+      content: z.string().optional(),
       countryIds: z.string().array(),
       cursor: z.string().nullish(),
       endDate: z.date().default(new Date()),
