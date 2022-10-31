@@ -47,6 +47,8 @@ export default function OffersHomePage() {
                     category: 'engagement',
                     label: 'Filter by job title',
                   });
+                } else {
+                  setjobTitleFilter('');
                 }
               }}
             />
@@ -62,6 +64,8 @@ export default function OffersHomePage() {
                     category: 'engagement',
                     label: 'Filter by company',
                   });
+                } else {
+                  setCompanyFilter('');
                 }
               }}
             />
