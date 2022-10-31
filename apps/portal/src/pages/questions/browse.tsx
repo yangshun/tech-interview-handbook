@@ -486,7 +486,7 @@ export default function QuestionsBrowsePage() {
       <main className="flex flex-1 flex-col items-stretch">
         <div className="flex h-full flex-1">
           <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
-            <div className="m-4 flex max-w-3xl flex-1 flex-col items-stretch justify-start gap-8">
+            <div className="m-4 flex max-w-3xl flex-1 flex-col items-stretch justify-start gap-6">
               <ContributeQuestionCard
                 onSubmit={(data) => {
                   const { cityId, countryId, stateId } = data.location;
@@ -502,60 +502,64 @@ export default function QuestionsBrowsePage() {
                   });
                 }}
               />
-              <div className="sticky top-0 border-b border-slate-300 bg-slate-50 py-4">
-                <QuestionSearchBar
-                  sortOrderValue={sortOrder}
-                  sortTypeValue={sortType}
-                  onFilterOptionsToggle={() => {
-                    setFilterDrawerOpen(!filterDrawerOpen);
-                  }}
-                  onSortOrderChange={setSortOrder}
-                  onSortTypeChange={setSortType}
-                />
-              </div>
-              <div className="flex flex-col gap-2 pb-4">
-                {(questionsQueryData?.pages ?? []).flatMap(
-                  ({ data: questions }) =>
-                    questions.map((question) => {
-                      const { companyCounts, countryCounts, roleCounts } =
-                        relabelQuestionAggregates(
-                          question.aggregatedQuestionEncounters,
-                        );
+              <div className="flex flex-col items-stretch gap-4">
+                <div className="sticky top-0 border-b border-slate-300 bg-slate-50 py-4">
+                  <QuestionSearchBar
+                    sortOrderValue={sortOrder}
+                    sortTypeValue={sortType}
+                    onFilterOptionsToggle={() => {
+                      setFilterDrawerOpen(!filterDrawerOpen);
+                    }}
+                    onSortOrderChange={setSortOrder}
+                    onSortTypeChange={setSortType}
+                  />
+                </div>
+                <div className="flex flex-col gap-2 pb-4">
+                  {(questionsQueryData?.pages ?? []).flatMap(
+                    ({ data: questions }) =>
+                      questions.map((question) => {
+                        const { companyCounts, countryCounts, roleCounts } =
+                          relabelQuestionAggregates(
+                            question.aggregatedQuestionEncounters,
+                          );
 
-                      return (
-                        <QuestionOverviewCard
-                          key={question.id}
-                          answerCount={question.numAnswers}
-                          companies={companyCounts}
-                          content={question.content}
-                          countries={countryCounts}
-                          href={`/questions/${question.id}/${createSlug(
-                            question.content,
-                          )}`}
-                          questionId={question.id}
-                          receivedCount={question.receivedCount}
-                          roles={roleCounts}
-                          timestamp={question.seenAt.toLocaleDateString(
-                            undefined,
-                            {
-                              month: 'short',
-                              year: 'numeric',
-                            },
-                          )}
-                          type={question.type}
-                          upvoteCount={question.numVotes}
-                        />
-                      );
-                    }),
-                )}
-                <PaginationLoadMoreButton query={questionsInfiniteQuery} />
-                {questionCount === 0 && (
-                  <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
-                    <NoSymbolIcon className="h-6 w-6" />
-                    <p>Nothing found.</p>
-                    {hasFilters && <p>Try changing your search criteria.</p>}
-                  </div>
-                )}
+                        return (
+                          <QuestionOverviewCard
+                            key={question.id}
+                            answerCount={question.numAnswers}
+                            companies={companyCounts}
+                            content={question.content}
+                            countries={countryCounts}
+                            href={`/questions/${question.id}/${createSlug(
+                              question.content,
+                            )}`}
+                            questionId={question.id}
+                            receivedCount={question.receivedCount}
+                            roles={roleCounts}
+                            timestamp={question.seenAt.toLocaleDateString(
+                              undefined,
+                              {
+                                month: 'short',
+                                year: 'numeric',
+                              },
+                            )}
+                            type={question.type}
+                            upvoteCount={question.numVotes}
+                          />
+                        );
+                      }),
+                  )}
+                  {questionCount !== 0 && (
+                    <PaginationLoadMoreButton query={questionsInfiniteQuery} />
+                  )}
+                  {questionCount === 0 && (
+                    <div className="flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-200 p-4 text-slate-600">
+                      <NoSymbolIcon className="h-6 w-6" />
+                      <p>Nothing found.</p>
+                      {hasFilters && <p>Try changing your search criteria.</p>}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </section>

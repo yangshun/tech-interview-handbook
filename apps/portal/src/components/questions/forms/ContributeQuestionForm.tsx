@@ -115,7 +115,6 @@ export default function ContributeQuestionForm({
           rows={5}
           {...register('questionContent')}
         />
-        <HorizontalDivider />
         <h2 className="text-md text-primary-800 font-semibold">
           Additional information
         </h2>
