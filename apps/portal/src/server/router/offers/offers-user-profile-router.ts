@@ -57,6 +57,15 @@ export const offersUserProfileRouter = createProtectedRouter()
               offers: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   offersFullTime: {
                     include: {
                       totalCompensation: true,

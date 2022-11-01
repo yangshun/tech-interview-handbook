@@ -1,12 +1,15 @@
 import { z } from 'zod';
 import type {
+  City,
   Company,
+  Country,
   OffersBackground,
   OffersCurrency,
   OffersFullTime,
   OffersIntern,
   OffersOffer,
   OffersProfile,
+  State,
 } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
@@ -16,8 +19,14 @@ import { createRouter } from '../context';
 
 type Offer = OffersOffer & {
   company: Company;
+  location: City & { state: State & { country: Country } };
   offersFullTime:
-    | (OffersFullTime & { totalCompensation: OffersCurrency })
+    | (OffersFullTime & {
+        baseSalary: OffersCurrency | null;
+        bonus: OffersCurrency | null;
+        stocks: OffersCurrency | null;
+        totalCompensation: OffersCurrency;
+      })
     | null;
   offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
   profile: OffersProfile & { background: OffersBackground | null };
@@ -60,6 +69,15 @@ export const offersAnalysisRouter = createRouter()
               topSimilarOffers: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   offersFullTime: {
                     include: {
                       totalCompensation: true,
@@ -77,6 +95,15 @@ export const offersAnalysisRouter = createRouter()
                           experiences: {
                             include: {
                               company: true,
+                              location: {
+                                include: {
+                                  state: {
+                                    include: {
+                                      country: true,
+                                    },
+                                  },
+                                },
+                              },
                             },
                           },
                         },
@@ -92,6 +119,15 @@ export const offersAnalysisRouter = createRouter()
               topSimilarOffers: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   offersFullTime: {
                     include: {
                       totalCompensation: true,
@@ -109,6 +145,15 @@ export const offersAnalysisRouter = createRouter()
                           experiences: {
                             include: {
                               company: true,
+                              location: {
+                                include: {
+                                  state: {
+                                    include: {
+                                      country: true,
+                                    },
+                                  },
+                                },
+                              },
                             },
                           },
                         },
@@ -122,6 +167,15 @@ export const offersAnalysisRouter = createRouter()
           overallHighestOffer: {
             include: {
               company: true,
+              location: {
+                include: {
+                  state: {
+                    include: {
+                      country: true,
+                    },
+                  },
+                },
+              },
               offersFullTime: {
                 include: {
                   totalCompensation: true,
@@ -169,6 +223,15 @@ export const offersAnalysisRouter = createRouter()
       const offers = await ctx.prisma.offersOffer.findMany({
         include: {
           company: true,
+          location: {
+            include: {
+              state: {
+                include: {
+                  country: true,
+                },
+              },
+            },
+          },
           offersFullTime: {
             include: {
               baseSalary: true,
@@ -235,6 +298,15 @@ export const offersAnalysisRouter = createRouter()
       let similarOffers = await ctx.prisma.offersOffer.findMany({
         include: {
           company: true,
+          location: {
+            include: {
+              state: {
+                include: {
+                  country: true,
+                },
+              },
+            },
+          },
           offersFullTime: {
             include: {
               totalCompensation: true,
@@ -252,6 +324,15 @@ export const offersAnalysisRouter = createRouter()
                   experiences: {
                     include: {
                       company: true,
+                      location: {
+                        include: {
+                          state: {
+                            include: {
+                              country: true,
+                            },
+                          },
+                        },
+                      },
                     },
                   },
                 },
@@ -434,6 +515,15 @@ export const offersAnalysisRouter = createRouter()
               topSimilarOffers: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   offersFullTime: {
                     include: {
                       totalCompensation: true,
@@ -451,6 +541,15 @@ export const offersAnalysisRouter = createRouter()
                           experiences: {
                             include: {
                               company: true,
+                              location: {
+                                include: {
+                                  state: {
+                                    include: {
+                                      country: true,
+                                    },
+                                  },
+                                },
+                              },
                             },
                           },
                         },
@@ -466,6 +565,15 @@ export const offersAnalysisRouter = createRouter()
               topSimilarOffers: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   offersFullTime: {
                     include: {
                       totalCompensation: true,
@@ -483,6 +591,15 @@ export const offersAnalysisRouter = createRouter()
                           experiences: {
                             include: {
                               company: true,
+                              location: {
+                                include: {
+                                  state: {
+                                    include: {
+                                      country: true,
+                                    },
+                                  },
+                                },
+                              },
                             },
                           },
                         },
@@ -496,6 +613,15 @@ export const offersAnalysisRouter = createRouter()
           overallHighestOffer: {
             include: {
               company: true,
+              location: {
+                include: {
+                  state: {
+                    include: {
+                      country: true,
+                    },
+                  },
+                },
+              },
               offersFullTime: {
                 include: {
                   totalCompensation: true,
