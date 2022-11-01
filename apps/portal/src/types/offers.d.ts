@@ -25,7 +25,7 @@ export type Experience = {
   id: string;
   jobType: JobType?;
   level: string?;
-  location: string?;
+  location: Location?;
   monthlySalary: Valuation?;
   title: string?;
   totalCompensation: Valuation?;
@@ -79,7 +79,7 @@ export type ProfileOffer = {
   company: OffersCompany;
   id: string;
   jobType: JobType;
-  location: string;
+  location: Location;
   monthYearReceived: Date;
   negotiationStrategy: string;
   offersFullTime: FullTime?;
@@ -163,7 +163,7 @@ export type AnalysisHighestOffer = {
   company: OffersCompany;
   id: string;
   level: string;
-  location: string;
+  location: Location;
   totalYoe: number;
 };
 
@@ -173,7 +173,7 @@ export type AnalysisOffer = {
   income: Valuation;
   jobType: JobType;
   level: string;
-  location: string;
+  location: Location;
   monthYearReceived: Date;
   negotiationStrategy: string;
   previousCompanies: Array<string>;
@@ -202,7 +202,17 @@ export type UserProfileOffer = {
   income: Valuation;
   jobType: JobType;
   level: string;
-  location: string;
+  location: Location;
   monthYearReceived: Date;
   title: string;
+};
+
+export type Location = {
+  cityId: string;
+  cityName: string;
+  countryCode: string;
+  countryId: string;
+  countryName: string;
+  stateId: string;
+  stateName: string;
 };
