@@ -3,7 +3,7 @@ import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Button, Spinner } from '@tih/ui';
 
-import DashboardOfferCard from '~/components/offers/dashboard/DashboardProfileCard';
+import DashboardProfileCard from '~/components/offers/dashboard/DashboardProfileCard';
 
 import { trpc } from '~/utils/trpc';
 
@@ -69,7 +69,7 @@ export default function ProfilesDashboard() {
         </div>
       )}
       {!userProfilesQuery.isLoading && (
-        <div className="mt-8 overflow-y-auto">
+        <div className="overflow-y-auto py-8">
           <h1 className="mx-auto mb-4 w-3/4 text-start text-4xl font-bold text-slate-900">
             Your dashboard
           </h1>
@@ -83,7 +83,7 @@ export default function ProfilesDashboard() {
                 <li
                   key={profile.id}
                   className="overflow-hidden bg-white px-4 py-4 shadow sm:rounded-md sm:px-6">
-                  <DashboardOfferCard key={profile.id} profile={profile} />
+                  <DashboardProfileCard key={profile.id} profile={profile} />
                 </li>
               ))}
             </ul>
