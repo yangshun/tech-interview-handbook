@@ -202,17 +202,19 @@ export default function OfferProfile() {
         </div>
       )}
       {!getProfileQuery.isLoading && !getProfileQuery.isError && (
-        <div className="mb-4 flex flex h-screen w-screen items-center justify-center divide-x">
-          <div className="h-full w-2/3 divide-y">
-            <ProfileHeader
-              background={background}
-              handleDelete={handleDelete}
-              isEditable={isEditable}
-              isLoading={getProfileQuery.isLoading}
-              selectedTab={selectedTab}
-              setSelectedTab={setSelectedTab}
-            />
-            <div className="h-4/5 w-full overflow-y-scroll pb-32">
+        <div className="h-fuill flex grid w-full grid-cols-1 items-center justify-center divide-x overflow-y-auto md:grid-cols-3">
+          <div className="col-span-1 flex h-full flex-col divide-y md:col-span-2 md:overflow-y-auto">
+            <div className="h-fit md:sticky md:top-0">
+              <ProfileHeader
+                background={background}
+                handleDelete={handleDelete}
+                isEditable={isEditable}
+                isLoading={getProfileQuery.isLoading}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
+            </div>
+            <div className="pb-4">
               <ProfileDetails
                 analysis={analysis}
                 background={background}
@@ -224,7 +226,7 @@ export default function OfferProfile() {
               />
             </div>
           </div>
-          <div className="h-full w-1/3 bg-white">
+          <div className="col-span-1 h-full bg-white">
             <ProfileComments
               isDisabled={deleteMutation.isLoading}
               isEditable={isEditable}
