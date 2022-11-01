@@ -39,6 +39,7 @@ export default function OffersHomePage() {
             <JobTitlesTypeahead
               isLabelHidden={true}
               placeholder="Software Engineer"
+              textSize="inherit"
               onSelect={(option) => {
                 if (option) {
                   setjobTitleFilter(option.value);
@@ -56,6 +57,7 @@ export default function OffersHomePage() {
             <CompaniesTypeahead
               isLabelHidden={true}
               placeholder="All Companies"
+              textSize="inherit"
               onSelect={(option) => {
                 if (option) {
                   setCompanyFilter(option.value);

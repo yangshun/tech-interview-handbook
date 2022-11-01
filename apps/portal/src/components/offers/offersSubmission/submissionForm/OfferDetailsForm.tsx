@@ -32,6 +32,7 @@ import FormMonthYearPicker from '../../forms/FormMonthYearPicker';
 import FormSelect from '../../forms/FormSelect';
 import FormTextArea from '../../forms/FormTextArea';
 import FormTextInput from '../../forms/FormTextInput';
+import JobTypeTabs from '../../JobTypeTabs';
 import type { OfferFormData } from '../../types';
 import { JobTypeLabel } from '../../types';
 import {
@@ -103,7 +104,7 @@ function FullTimeOfferDetailsForm({
           })}
         />
       </div>
-      <div className="mb-5 flex grid grid-cols-2 space-x-3">
+      <div className="mb-5 grid grid-cols-2 space-x-3">
         <div>
           <CompaniesTypeahead
             required={true}
@@ -527,35 +528,17 @@ export default function OfferDetailsForm({
       <h5 className="mb-8 text-center text-4xl font-bold text-slate-900">
         Fill in your offer details
       </h5>
-      <div className="flex w-full justify-center">
-        <div className="mx-5 w-1/3">
-          <Button
-            display="block"
-            label={JobTypeLabel.FULLTIME}
-            size="md"
-            variant={jobType === JobType.FULLTIME ? 'secondary' : 'tertiary'}
-            onClick={() => {
-              if (jobType === JobType.FULLTIME) {
-                return;
-              }
-              setDialogOpen(true);
-            }}
-          />
-        </div>
-        <div className="mx-5 w-1/3">
-          <Button
-            display="block"
-            label={JobTypeLabel.INTERN}
-            size="md"
-            variant={jobType === JobType.INTERN ? 'secondary' : 'tertiary'}
-            onClick={() => {
-              if (jobType === JobType.INTERN) {
-                return;
-              }
-              setDialogOpen(true);
-            }}
-          />
-        </div>
+      <div>
+        <JobTypeTabs
+          value={jobType}
+          onChange={(newJobType) => {
+            if (newJobType === jobType) {
+              return;
+            }
+
+            setDialogOpen(true);
+          }}
+        />
       </div>
       <OfferDetailsFormArray
         fieldArrayValues={fieldArrayValues}
