@@ -275,16 +275,17 @@ export default function OffersSubmissionForm({
             />
           </div>
           <FormProvider {...formMethods}>
-            <form className="text-sm" onSubmit={handleSubmit(onSubmit)}>
+            <form
+              className="space-y-6 text-sm"
+              onSubmit={handleSubmit(onSubmit)}>
               {steps[step]}
-              {/* <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre> */}
               {step === 0 && (
                 <div className="flex justify-end">
                   <Button
                     disabled={false}
                     icon={ArrowRightIcon}
                     label="Next"
-                    variant="secondary"
+                    variant="primary"
                     onClick={() => {
                       goToNextStep(step);
                       gaEvent({
