@@ -110,108 +110,115 @@ export default function ProfileComments({
     );
   }
   return (
-    <div className="m-4 h-full">
-      <div className="flex-end flex justify-end space-x-4">
-        {isEditable && (
-          <Tooltip tooltipContent="Copy this link to edit your profile later">
-            <Button
-              addonPosition="start"
-              disabled={isDisabled}
-              icon={ClipboardDocumentIcon}
-              isLabelHidden={false}
-              label="Copy profile edit link"
-              size="sm"
-              variant="secondary"
-              onClick={() => {
-                copyProfileLink(profileId, token);
-                gaEvent({
-                  action: 'offers.copy_profile_edit_link',
-                  category: 'engagement',
-                  label: 'Copy Profile Edit Link',
-                });
-                showToast({
-                  title: `Profile edit link copied to clipboard!`,
-                  variant: 'success',
-                });
-              }}
-            />
-          </Tooltip>
-        )}
-        <Tooltip tooltipContent="Share this profile with your friends">
-          <Button
-            addonPosition="start"
-            disabled={isDisabled}
-            icon={ShareIcon}
-            isLabelHidden={false}
-            label="Copy public link"
-            size="sm"
-            variant="secondary"
-            onClick={() => {
-              copyProfileLink(profileId);
-              gaEvent({
-                action: 'offers.copy_profile_public_link',
-                category: 'engagement',
-                label: 'Copy Profile Public Link',
-              });
-              showToast({
-                title: `Public profile link copied to clipboard!`,
-                variant: 'success',
-              });
-            }}
-          />
-        </Tooltip>
-      </div>
-      <h2 className="mt-2 mb-6 text-2xl font-bold">Discussions</h2>
-      {isEditable || session?.user?.name ? (
-        <div>
-          <TextArea
-            label={`Comment as ${
-              isEditable ? profileName : session?.user?.name ?? 'anonymous'
-            }`}
-            placeholder="Type your comment here"
-            value={currentReply}
-            onChange={(value) => setCurrentReply(value)}
-          />
-          <div className="mt-2 flex w-full justify-end">
-            <div className="w-fit">
-              <Button
-                disabled={
-                  commentsQuery.isLoading ||
-                  !currentReply.length ||
-                  createCommentMutation.isLoading
-                }
-                display="block"
-                isLabelHidden={false}
-                isLoading={createCommentMutation.isLoading}
-                label="Comment"
-                size="sm"
-                variant="primary"
-                onClick={() => handleComment(currentReply)}
-              />
+    <div className="bh-white h-fit px-4 md:h-[calc(100vh-4.5rem)] md:overflow-y-auto">
+      <div className="bg-white pt-4 md:sticky md:top-0">
+        <div className="flex justify-end">
+          <div className="grid w-fit space-y-2 md:grid-cols-1 lg:grid-cols-2 lg:space-y-0 lg:space-x-4">
+            <div className="col-span-1 flex justify-end">
+              {isEditable && (
+                <Tooltip tooltipContent="Copy this link to edit your profile later">
+                  <Button
+                    addonPosition="start"
+                    disabled={isDisabled}
+                    icon={ClipboardDocumentIcon}
+                    isLabelHidden={false}
+                    label="Copy edit link"
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => {
+                      copyProfileLink(profileId, token);
+                      gaEvent({
+                        action: 'offers.copy_profile_edit_link',
+                        category: 'engagement',
+                        label: 'Copy Profile Edit Link',
+                      });
+                      showToast({
+                        title: `Profile edit link copied to clipboard!`,
+                        variant: 'success',
+                      });
+                    }}
+                  />
+                </Tooltip>
+              )}
+            </div>
+            <div className="col-span-1 flex justify-end">
+              <Tooltip tooltipContent="Share this profile with your friends">
+                <Button
+                  addonPosition="start"
+                  disabled={isDisabled}
+                  icon={ShareIcon}
+                  isLabelHidden={false}
+                  label="Copy public link"
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => {
+                    copyProfileLink(profileId);
+                    gaEvent({
+                      action: 'offers.copy_profile_public_link',
+                      category: 'engagement',
+                      label: 'Copy Profile Public Link',
+                    });
+                    showToast({
+                      title: `Public profile link copied to clipboard!`,
+                      variant: 'success',
+                    });
+                  }}
+                />
+              </Tooltip>
             </div>
           </div>
-          <HorizontalDivider />
         </div>
-      ) : (
-        <Button
-          className="mb-5"
-          display="block"
-          href={loginPageHref()}
-          label="Sign in to join discussion"
-          variant="tertiary"
-        />
-      )}
-      <div className="h-full overflow-y-auto">
-        <div className="h-content mb-96 w-full">
-          {replies?.map((reply: Reply) => (
-            <ExpandableCommentCard
-              key={reply.id}
-              comment={reply}
-              profileId={profileId}
-              token={isEditable ? token : undefined}
+
+        <h2 className="mt-2 mb-6 text-2xl font-bold">Discussions</h2>
+        {isEditable || session?.user?.name ? (
+          <div>
+            <TextArea
+              label={`Comment as ${
+                isEditable ? profileName : session?.user?.name ?? 'anonymous'
+              }`}
+              placeholder="Type your comment here"
+              value={currentReply}
+              onChange={(value) => setCurrentReply(value)}
             />
-          ))}
-        </div>
+            <div className="mt-2 flex w-full justify-end">
+              <div className="w-fit">
+                <Button
+                  disabled={
+                    commentsQuery.isLoading ||
+                    !currentReply.length ||
+                    createCommentMutation.isLoading
+                  }
+                  display="block"
+                  isLabelHidden={false}
+                  isLoading={createCommentMutation.isLoading}
+                  label="Comment"
+                  size="sm"
+                  variant="primary"
+                  onClick={() => handleComment(currentReply)}
+                />
+              </div>
+            </div>
+            <HorizontalDivider />
+          </div>
+        ) : (
+          <Button
+            className="mb-5"
+            display="block"
+            href={loginPageHref()}
+            label="Sign in to join discussion"
+            variant="tertiary"
+          />
+        )}
+      </div>
+      <div className="h-full w-full">
+        {replies?.map((reply: Reply) => (
+          <ExpandableCommentCard
+            key={reply.id}
+            comment={reply}
+            profileId={profileId}
+            token={isEditable ? token : undefined}
+          />
+        ))}
       </div>
     </div>
   );

@@ -76,7 +76,7 @@ export default function OffersTable({
 
   function renderFilters() {
     return (
-      <div className="m-4 flex items-center justify-between">
+      <div className="m-4 flex grid grid-cols-1 items-center justify-between gap-6 sm:grid-cols-4">
         <DropdownMenu
           align="start"
           label={
@@ -101,7 +101,7 @@ export default function OffersTable({
             />
           ))}
         </DropdownMenu>
-        <div className="divide-x-slate-200 flex items-center space-x-4 divide-x">
+        <div className="divide-x-slate-200 col-span-3 flex items-center justify-end space-x-4 divide-x">
           <div className="justify-left flex items-center space-x-2">
             <span>View all offers in</span>
             <CurrencySelector

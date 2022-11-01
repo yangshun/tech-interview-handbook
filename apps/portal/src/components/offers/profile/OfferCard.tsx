@@ -128,7 +128,7 @@ export default function OfferCard({
     );
   }
   return (
-    <div className="mx-8 my-4 block rounded-lg bg-white py-4 shadow-md">
+    <div className="mx-8 my-4 block rounded-md border-b border-gray-300 bg-white py-4">
       <UpperSection />
       <BottomSection />
     </div>
