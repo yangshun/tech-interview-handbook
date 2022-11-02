@@ -1061,35 +1061,110 @@ export const offersProfileRouter = createRouter()
                 exp.totalCompensation?.currency != null &&
                 exp.totalCompensation?.value != null
               ) {
+                // FULLTIME
                 if (exp.companyId) {
+                  if (exp.cityId) {
+                    await ctx.prisma.offersBackground.update({
+                      data: {
+                        experiences: {
+                          create: {
+                            company: {
+                              connect: {
+                                id: exp.companyId,
+                              },
+                            },
+                            durationInMonths: exp.durationInMonths,
+                            jobType: exp.jobType,
+                            level: exp.level,
+                            location: {
+                              connect: {
+                                id: exp.cityId
+                              }
+                            },
+                            title: exp.title,
+                            totalCompensation: exp.totalCompensation
+                              ? {
+                                  create: {
+                                    baseCurrency: baseCurrencyString,
+                                    baseValue: await convert(
+                                      exp.totalCompensation.value,
+                                      exp.totalCompensation.currency,
+                                      baseCurrencyString,
+                                    ),
+                                    currency: exp.totalCompensation.currency,
+                                    value: exp.totalCompensation.value,
+                                  },
+                                }
+                              : undefined,
+                          },
+                        },
+                      },
+                      where: {
+                        id: input.background.id,
+                      },
+                    });
+                  } else {
+                    await ctx.prisma.offersBackground.update({
+                      data: {
+                        experiences: {
+                          create: {
+                            company: {
+                              connect: {
+                                id: exp.companyId,
+                              },
+                            },
+                            durationInMonths: exp.durationInMonths,
+                            jobType: exp.jobType,
+                            level: exp.level,
+                            title: exp.title,
+                            totalCompensation: exp.totalCompensation
+                              ? {
+                                  create: {
+                                    baseCurrency: baseCurrencyString,
+                                    baseValue: await convert(
+                                      exp.totalCompensation.value,
+                                      exp.totalCompensation.currency,
+                                      baseCurrencyString,
+                                    ),
+                                    currency: exp.totalCompensation.currency,
+                                    value: exp.totalCompensation.value,
+                                  },
+                                }
+                              : undefined,
+                          },
+                        },
+                      },
+                      where: {
+                        id: input.background.id,
+                      },
+                    });
+                  }
+                } else if (exp.cityId) {
                   await ctx.prisma.offersBackground.update({
                     data: {
                       experiences: {
                         create: {
-                          company: {
-                            connect: {
-                              id: exp.companyId,
-                            },
-                          },
                           durationInMonths: exp.durationInMonths,
                           jobType: exp.jobType,
                           level: exp.level,
-                          location: exp.location,
+                          location: {
+                            connect: {
+                              id: exp.cityId
+                            }
+                          },
                           title: exp.title,
-                          totalCompensation: exp.totalCompensation
-                            ? {
-                                create: {
-                                  baseCurrency: baseCurrencyString,
-                                  baseValue: await convert(
-                                    exp.totalCompensation.value,
-                                    exp.totalCompensation.currency,
-                                    baseCurrencyString,
-                                  ),
-                                  currency: exp.totalCompensation.currency,
-                                  value: exp.totalCompensation.value,
-                                },
-                              }
-                            : undefined,
+                          totalCompensation: {
+                            create: {
+                              baseCurrency: baseCurrencyString,
+                              baseValue: await convert(
+                                exp.totalCompensation.value,
+                                exp.totalCompensation.currency,
+                                baseCurrencyString,
+                              ),
+                              currency: exp.totalCompensation.currency,
+                              value: exp.totalCompensation.value,
+                            },
+                          },
                         },
                       },
                     },
@@ -1105,7 +1180,6 @@ export const offersProfileRouter = createRouter()
                           durationInMonths: exp.durationInMonths,
                           jobType: exp.jobType,
                           level: exp.level,
-                          location: exp.location,
                           title: exp.title,
                           totalCompensation: {
                             create: {
@@ -1128,19 +1202,67 @@ export const offersProfileRouter = createRouter()
                   });
                 }
               } else if (exp.companyId) {
+                if (exp.cityId) {
+                  await ctx.prisma.offersBackground.update({
+                    data: {
+                      experiences: {
+                        create: {
+                          company: {
+                            connect: {
+                              id: exp.companyId,
+                            },
+                          },
+                          durationInMonths: exp.durationInMonths,
+                          jobType: exp.jobType,
+                          level: exp.level,
+                          location: {
+                            connect: {
+                              id: exp.cityId
+                            }
+                          },
+                          title: exp.title,
+                        },
+                      },
+                    },
+                    where: {
+                      id: input.background.id,
+                    },
+                  });
+                } else {
+                  await ctx.prisma.offersBackground.update({
+                    data: {
+                      experiences: {
+                        create: {
+                          company: {
+                            connect: {
+                              id: exp.companyId,
+                            },
+                          },
+                          durationInMonths: exp.durationInMonths,
+                          jobType: exp.jobType,
+                          level: exp.level,
+                          title: exp.title,
+                        },
+                      },
+                    },
+                    where: {
+                      id: input.background.id,
+                    },
+                  });
+                }
+              } else if (exp.cityId) {
                 await ctx.prisma.offersBackground.update({
                   data: {
                     experiences: {
                       create: {
-                        company: {
-                          connect: {
-                            id: exp.companyId,
-                          },
-                        },
                         durationInMonths: exp.durationInMonths,
                         jobType: exp.jobType,
                         level: exp.level,
-                        location: exp.location,
+                        location: {
+                          connect: {
+                            id: exp.cityId
+                          }
+                        },
                         title: exp.title,
                       },
                     },
@@ -1157,7 +1279,6 @@ export const offersProfileRouter = createRouter()
                         durationInMonths: exp.durationInMonths,
                         jobType: exp.jobType,
                         level: exp.level,
-                        location: exp.location,
                         title: exp.title,
                       },
                     },
@@ -1172,19 +1293,90 @@ export const offersProfileRouter = createRouter()
                 exp.monthlySalary?.currency != null &&
                 exp.monthlySalary?.value != null
               ) {
+                // INTERN
                 if (exp.companyId) {
+                  if (exp.cityId) {
+                    await ctx.prisma.offersBackground.update({
+                      data: {
+                        experiences: {
+                          create: {
+                            company: {
+                              connect: {
+                                id: exp.companyId,
+                              },
+                            },
+                            durationInMonths: exp.durationInMonths,
+                            jobType: exp.jobType,
+                            location: {
+                              connect: {
+                                id: exp.cityId
+                              }
+                            },
+                            monthlySalary: {
+                              create: {
+                                baseCurrency: baseCurrencyString,
+                                baseValue: await convert(
+                                  exp.monthlySalary.value,
+                                  exp.monthlySalary.currency,
+                                  baseCurrencyString,
+                                ),
+                                currency: exp.monthlySalary.currency,
+                                value: exp.monthlySalary.value,
+                              },
+                            },
+                            title: exp.title,
+                          },
+                        },
+                      },
+                      where: {
+                        id: input.background.id,
+                      },
+                    });
+                  } else {
+                    await ctx.prisma.offersBackground.update({
+                      data: {
+                        experiences: {
+                          create: {
+                            company: {
+                              connect: {
+                                id: exp.companyId,
+                              },
+                            },
+                            durationInMonths: exp.durationInMonths,
+                            jobType: exp.jobType,
+                            monthlySalary: {
+                              create: {
+                                baseCurrency: baseCurrencyString,
+                                baseValue: await convert(
+                                  exp.monthlySalary.value,
+                                  exp.monthlySalary.currency,
+                                  baseCurrencyString,
+                                ),
+                                currency: exp.monthlySalary.currency,
+                                value: exp.monthlySalary.value,
+                              },
+                            },
+                            title: exp.title,
+                          },
+                        },
+                      },
+                      where: {
+                        id: input.background.id,
+                      },
+                    });
+                  }
+                } else if (exp.cityId) {
                   await ctx.prisma.offersBackground.update({
                     data: {
                       experiences: {
                         create: {
-                          company: {
-                            connect: {
-                              id: exp.companyId,
-                            },
-                          },
                           durationInMonths: exp.durationInMonths,
                           jobType: exp.jobType,
-                          location: exp.location,
+                          location: {
+                            connect: {
+                              id: exp.cityId
+                            }
+                          },
                           monthlySalary: {
                             create: {
                               baseCurrency: baseCurrencyString,
@@ -1212,7 +1404,6 @@ export const offersProfileRouter = createRouter()
                         create: {
                           durationInMonths: exp.durationInMonths,
                           jobType: exp.jobType,
-                          location: exp.location,
                           monthlySalary: {
                             create: {
                               baseCurrency: baseCurrencyString,
@@ -1235,18 +1426,64 @@ export const offersProfileRouter = createRouter()
                   });
                 }
               } else if (exp.companyId) {
+                if (exp.cityId) {
+                  await ctx.prisma.offersBackground.update({
+                    data: {
+                      experiences: {
+                        create: {
+                          company: {
+                            connect: {
+                              id: exp.companyId,
+                            },
+                          },
+                          durationInMonths: exp.durationInMonths,
+                          jobType: exp.jobType,
+                          location: {
+                            connect: {
+                              id: exp.cityId,
+                            }
+                          },
+                          title: exp.title,
+                        },
+                      },
+                    },
+                    where: {
+                      id: input.background.id,
+                    },
+                  });
+                } else {
+                  await ctx.prisma.offersBackground.update({
+                    data: {
+                      experiences: {
+                        create: {
+                          company: {
+                            connect: {
+                              id: exp.companyId,
+                            },
+                          },
+                          durationInMonths: exp.durationInMonths,
+                          jobType: exp.jobType,
+                          title: exp.title,
+                        },
+                      },
+                    },
+                    where: {
+                      id: input.background.id,
+                    },
+                  });
+                }
+              } else if (exp.cityId) {
                 await ctx.prisma.offersBackground.update({
                   data: {
                     experiences: {
                       create: {
-                        company: {
-                          connect: {
-                            id: exp.companyId,
-                          },
-                        },
                         durationInMonths: exp.durationInMonths,
                         jobType: exp.jobType,
-                        location: exp.location,
+                        location: {
+                          connect: {
+                            id: exp.cityId
+                          }
+                        },
                         title: exp.title,
                       },
                     },
@@ -1262,7 +1499,6 @@ export const offersProfileRouter = createRouter()
                       create: {
                         durationInMonths: exp.durationInMonths,
                         jobType: exp.jobType,
-                        location: exp.location,
                         title: exp.title,
                       },
                     },
@@ -1350,12 +1586,20 @@ export const offersProfileRouter = createRouter()
             await ctx.prisma.offersOffer.update({
               data: {
                 comments: offerToUpdate.comments,
-                companyId: offerToUpdate.companyId,
+                company: {
+                  connect: {
+                    id: offerToUpdate.companyId
+                  }
+                },
                 jobType:
                   offerToUpdate.jobType === JobType.FULLTIME
                     ? JobType.FULLTIME
                     : JobType.INTERN,
-                location: offerToUpdate.location,
+                location: {
+                  connect: {
+                    id: offerToUpdate.cityId
+                  }
+                },
                 monthYearReceived: offerToUpdate.monthYearReceived,
                 negotiationStrategy: offerToUpdate.negotiationStrategy,
               },
@@ -1578,7 +1822,11 @@ export const offersProfileRouter = createRouter()
                         },
                       },
                       jobType: offerToUpdate.jobType,
-                      location: offerToUpdate.location,
+                      location: {
+                        connect: {
+                          id: offerToUpdate.cityId
+                        }
+                      },
                       monthYearReceived: offerToUpdate.monthYearReceived,
                       negotiationStrategy: offerToUpdate.negotiationStrategy,
                       offersIntern: {
@@ -1632,7 +1880,11 @@ export const offersProfileRouter = createRouter()
                         },
                       },
                       jobType: offerToUpdate.jobType,
-                      location: offerToUpdate.location,
+                      location: {
+                        connect: {
+                          id: offerToUpdate.cityId
+                        }
+                      },
                       monthYearReceived: offerToUpdate.monthYearReceived,
                       negotiationStrategy: offerToUpdate.negotiationStrategy,
                       offersFullTime: {
