@@ -264,65 +264,69 @@ export default function OffersSubmissionForm({
   }, []);
 
   return (
-    <div ref={pageRef} className="fixed h-full w-full overflow-y-scroll">
-      <div className="mb-20 flex justify-center">
-        <div className="my-5 block w-full max-w-screen-md rounded-lg bg-white py-10 px-10 shadow-lg">
-          <div className="mb-4 flex justify-end">
+    <div ref={pageRef} className="w-full overflow-y-scroll">
+      <div className="flex justify-center">
+        <div className="block w-full max-w-screen-md overflow-hidden rounded-lg sm:shadow-lg md:my-10">
+          <div className="bg-primary-100 flex justify-center px-4 py-4 sm:px-6 lg:px-8">
             <Breadcrumbs
               currentStep={step}
               setStep={setStep}
               steps={breadcrumbSteps}
             />
           </div>
-          <FormProvider {...formMethods}>
-            <form
-              className="space-y-6 text-sm"
-              onSubmit={handleSubmit(onSubmit)}>
-              {steps[step]}
-              {step === 0 && (
-                <div className="flex justify-end">
-                  <Button
-                    disabled={false}
-                    icon={ArrowRightIcon}
-                    label="Next"
-                    variant="primary"
-                    onClick={() => {
-                      goToNextStep(step);
-                      gaEvent({
-                        action: 'offers.profile_submission_navigate_next',
-                        category: 'submission',
-                        label: 'Navigate next',
-                      });
-                    }}
-                  />
-                </div>
-              )}
-              {step === 1 && (
-                <div className="flex items-center justify-between">
-                  <Button
-                    icon={ArrowLeftIcon}
-                    label="Previous"
-                    variant="secondary"
-                    onClick={() => {
-                      setStep(step - 1);
-                      gaEvent({
-                        action: 'offers.profile_submission_navigation_back',
-                        category: 'submission',
-                        label: 'Navigate back',
-                      });
-                    }}
-                  />
-                  <Button
-                    disabled={isSubmitting || isSubmitSuccessful}
-                    isLoading={isSubmitting || isSubmitSuccessful}
-                    label="Submit"
-                    type="submit"
-                    variant="primary"
-                  />
-                </div>
-              )}
-            </form>
-          </FormProvider>
+          <div className="bg-white p-6 sm:p-10">
+            <FormProvider {...formMethods}>
+              <form
+                className="space-y-6 text-sm"
+                onSubmit={handleSubmit(onSubmit)}>
+                {steps[step]}
+                {step === 0 && (
+                  <div className="flex justify-end">
+                    <Button
+                      disabled={false}
+                      icon={ArrowRightIcon}
+                      label="Next"
+                      variant="primary"
+                      onClick={() => {
+                        goToNextStep(step);
+                        gaEvent({
+                          action: 'offers.profile_submission_navigate_next',
+                          category: 'submission',
+                          label: 'Navigate next',
+                        });
+                      }}
+                    />
+                  </div>
+                )}
+                {step === 1 && (
+                  <div className="flex items-center justify-between">
+                    <Button
+                      addonPosition="start"
+                      icon={ArrowLeftIcon}
+                      label="Previous"
+                      variant="secondary"
+                      onClick={() => {
+                        setStep(step - 1);
+                        gaEvent({
+                          action: 'offers.profile_submission_navigation_back',
+                          category: 'submission',
+                          label: 'Navigate back',
+                        });
+                      }}
+                    />
+                    <Button
+                      disabled={isSubmitting || isSubmitSuccessful}
+                      icon={ArrowRightIcon}
+                      isLoading={isSubmitting || isSubmitSuccessful}
+                      label="Submit"
+                      type="submit"
+                      variant="primary"
+                    />
+                  </div>
+                )}
+              </form>
+            </FormProvider>
+          </div>
         </div>
       </div>
     </div>
