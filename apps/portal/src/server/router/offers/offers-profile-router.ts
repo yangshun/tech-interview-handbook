@@ -34,12 +34,12 @@ const company = z.object({
 });
 
 const offer = z.object({
+  cityId: z.string(),
   comments: z.string(),
   company: company.nullish(),
   companyId: z.string(),
   id: z.string().optional(),
   jobType: z.string().regex(createValidationRegex(Object.keys(JobType), null)),
-  location: z.string(),
   monthYearReceived: z.date(),
   negotiationStrategy: z.string(),
   offersFullTime: z
@@ -74,6 +74,7 @@ const offer = z.object({
 
 const experience = z.object({
   backgroundId: z.string().nullish(),
+  cityId: z.string().nullish(),
   company: company.nullish(),
   companyId: z.string().nullish(),
   durationInMonths: z.number().nullish(),
@@ -83,7 +84,6 @@ const experience = z.object({
     .regex(createValidationRegex(Object.keys(JobType), null))
     .nullish(),
   level: z.string().nullish(),
-  location: z.string().nullish(),
   monthlySalary: valuation.nullish(),
   monthlySalaryId: z.string().nullish(),
   title: z.string().nullish(),
@@ -375,6 +375,39 @@ export const offersProfileRouter = createRouter()
                   input.background.experiences.map(async (x) => {
                     if (x.jobType === JobType.FULLTIME) {
                       if (x.companyId) {
+                        if (x.cityId) {
+                          return {
+                            company: {
+                              connect: {
+                                id: x.companyId,
+                              },
+                            },
+                            durationInMonths: x.durationInMonths,
+                            jobType: x.jobType,
+                            level: x.level,
+                            location: {
+                              connect: {
+                                id: x.cityId
+                              }
+                            },
+                            title: x.title,
+                            totalCompensation:
+                              x.totalCompensation != null
+                                ? {
+                                    create: {
+                                      baseCurrency: baseCurrencyString,
+                                      baseValue: await convert(
+                                        x.totalCompensation.value,
+                                        x.totalCompensation.currency,
+                                        baseCurrencyString,
+                                      ),
+                                      currency: x.totalCompensation.currency,
+                                      value: x.totalCompensation.value,
+                                    },
+                                  }
+                                : undefined,
+                          };
+                        }
                         return {
                           company: {
                             connect: {
@@ -402,11 +435,40 @@ export const offersProfileRouter = createRouter()
                               : undefined,
                         };
                       }
+                      if (x.cityId) {
+                        return {
+                          durationInMonths: x.durationInMonths,
+                          jobType: x.jobType,
+                          level: x.level,
+                          location: {
+                            connect: {
+                              where: {
+                                id: x.cityId
+                              }
+                            }
+                          },
+                          title: x.title,
+                          totalCompensation:
+                            x.totalCompensation != null
+                              ? {
+                                  create: {
+                                    baseCurrency: baseCurrencyString,
+                                    baseValue: await convert(
+                                      x.totalCompensation.value,
+                                      x.totalCompensation.currency,
+                                      baseCurrencyString,
+                                    ),
+                                    currency: x.totalCompensation.currency,
+                                    value: x.totalCompensation.value,
+                                  },
+                                }
+                              : undefined,
+                        };
+                      }
                       return {
                         durationInMonths: x.durationInMonths,
                         jobType: x.jobType,
                         level: x.level,
-                        location: x.location,
                         title: x.title,
                         totalCompensation:
                           x.totalCompensation != null
@@ -427,6 +489,40 @@ export const offersProfileRouter = createRouter()
                     }
                     if (x.jobType === JobType.INTERN) {
                       if (x.companyId) {
+                        if (x.cityId) {
+                          return {
+                            company: {
+                              connect: {
+                                id: x.companyId,
+                              },
+                            },
+                            durationInMonths: x.durationInMonths,
+                            jobType: x.jobType,
+                            location: {
+                              connect: {
+                                where: {
+                                  id: x.cityId
+                                }
+                              }
+                            },
+                            monthlySalary:
+                              x.monthlySalary != null
+                                ? {
+                                    create: {
+                                      baseCurrency: baseCurrencyString,
+                                      baseValue: await convert(
+                                        x.monthlySalary.value,
+                                        x.monthlySalary.currency,
+                                        baseCurrencyString,
+                                      ),
+                                      currency: x.monthlySalary.currency,
+                                      value: x.monthlySalary.value,
+                                    },
+                                  }
+                                : undefined,
+                            title: x.title,
+                          };
+                        }
                         return {
                           company: {
                             connect: {
@@ -453,6 +549,37 @@ export const offersProfileRouter = createRouter()
                           title: x.title,
                         };
                       }
+
+                      if (x.cityId) {
+                        return {
+                          durationInMonths: x.durationInMonths,
+                          jobType: x.jobType,
+                          location: {
+                            connect: {
+                              where: {
+                                id: x.cityId
+                              }
+                            }
+                          },
+                          monthlySalary:
+                            x.monthlySalary != null
+                              ? {
+                                  create: {
+                                    baseCurrency: baseCurrencyString,
+                                    baseValue: await convert(
+                                      x.monthlySalary.value,
+                                      x.monthlySalary.currency,
+                                      baseCurrencyString,
+                                    ),
+                                    currency: x.monthlySalary.currency,
+                                    value: x.monthlySalary.value,
+                                  },
+                                }
+                              : undefined,
+                          title: x.title,
+                        };
+                      }
+
                       return {
                         durationInMonths: x.durationInMonths,
                         jobType: x.jobType,
@@ -513,7 +640,13 @@ export const offersProfileRouter = createRouter()
                       },
                     },
                     jobType: x.jobType,
-                    location: x.location,
+                    location: {
+                      connect: {
+                        where: {
+                          id: x.cityId
+                        }
+                      }
+                    },
                     monthYearReceived: x.monthYearReceived,
                     negotiationStrategy: x.negotiationStrategy,
                     offersIntern: {
@@ -553,7 +686,13 @@ export const offersProfileRouter = createRouter()
                       },
                     },
                     jobType: x.jobType,
-                    location: x.location,
+                    location: {
+                      connect: {
+                        where: {
+                          id: x.cityId
+                        }
+                      }
+                    },
                     monthYearReceived: x.monthYearReceived,
                     negotiationStrategy: x.negotiationStrategy,
                     offersFullTime: {
