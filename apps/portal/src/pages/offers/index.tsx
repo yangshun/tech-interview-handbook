@@ -5,10 +5,9 @@ import { Banner } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTable from '~/components/offers/table/OffersTable';
+import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
-
-import CitiesTypeahead from '../../components/shared/CitiesTypeahead';
 
 export default function OffersHomePage() {
   const [jobTitleFilter, setjobTitleFilter] = useState('software-engineer');
