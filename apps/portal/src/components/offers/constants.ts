@@ -2,21 +2,6 @@ import { EducationBackgroundType } from './types';
 
 export const emptyOption = '----';
 
-export const locationOptions = [
-  {
-    label: 'Singapore, Singapore',
-    value: 'Singapore, Singapore',
-  },
-  {
-    label: 'New York, US',
-    value: 'New York, US',
-  },
-  {
-    label: 'San Francisco, US',
-    value: 'San Francisco, US',
-  },
-];
-
 export const internshipCycleOptions = [
   {
     label: 'Summer',

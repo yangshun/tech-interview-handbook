@@ -7,9 +7,9 @@ import {
   educationLevelOptions,
   emptyOption,
   FieldError,
-  locationOptions,
 } from '~/components/offers/constants';
 import type { BackgroundPostData } from '~/components/offers/types';
+import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
@@ -104,6 +104,12 @@ function FullTimeJobFields() {
   const watchCompanyName = useWatch({
     name: 'background.experiences.0.companyName',
   });
+  const watchCityId = useWatch({
+    name: 'background.experiences.0.cityId',
+  });
+  const watchCityName = useWatch({
+    name: 'background.experiences.0.cityName',
+  });
 
   return (
     <>
@@ -172,11 +178,22 @@ function FullTimeJobFields() {
             placeholder="e.g. L4, Junior"
             {...register(`background.experiences.0.level`)}
           />
-          <FormSelect
-            display="block"
+          <CitiesTypeahead
             label="Location"
-            options={locationOptions}
-            {...register(`background.experiences.0.location`)}
+            value={{
+              id: watchCityId,
+              label: watchCityName,
+              value: watchCityId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue('background.experiences.0.cityId', option.value);
+                setValue('background.experiences.0.cityName', option.label);
+              } else {
+                setValue('background.experiences.0.cityId', '');
+                setValue('background.experiences.0.cityName', '');
+              }
+            }}
           />
         </div>
         <div className="mb-5 grid grid-cols-2 space-x-3">
@@ -209,6 +226,12 @@ function InternshipJobFields() {
   });
   const watchCompanyName = useWatch({
     name: 'background.experiences.0.companyName',
+  });
+  const watchCityId = useWatch({
+    name: 'background.experiences.0.cityId',
+  });
+  const watchCityName = useWatch({
+    name: 'background.experiences.0.cityName',
   });
 
   return (
@@ -271,12 +294,22 @@ function InternshipJobFields() {
       </div>
       <Collapsible label="Add more details">
         <div className="mb-5 grid grid-cols-2 space-x-3">
-          <FormSelect
-            display="block"
+          <CitiesTypeahead
             label="Location"
-            options={locationOptions}
-            placeholder={emptyOption}
-            {...register(`background.experiences.0.location`)}
+            value={{
+              id: watchCityId,
+              label: watchCityName,
+              value: watchCityId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue('background.experiences.0.cityId', option.value);
+                setValue('background.experiences.0.cityName', option.label);
+              } else {
+                setValue('background.experiences.0.cityId', '');
+                setValue('background.experiences.0.cityName', '');
+              }
+            }}
           />
         </div>
       </Collapsible>
