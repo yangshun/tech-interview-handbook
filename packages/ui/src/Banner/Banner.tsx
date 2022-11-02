@@ -19,7 +19,8 @@ export default function Banner({ children, size = 'md', onHide }: Props) {
         size === 'xs' && 'text-xs',
       )}>
       <div className="mx-auto max-w-7xl py-2 px-3 sm:px-6 lg:px-8">
-        <div className="pr-16 sm:px-16 sm:text-center">
+        <div
+          className={clsx('text-center sm:px-16', onHide != null && 'pr-16')}>
           <p className="font-medium text-white">{children}</p>
         </div>
         {onHide != null && (

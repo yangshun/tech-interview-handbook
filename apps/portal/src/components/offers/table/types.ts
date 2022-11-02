@@ -6,7 +6,7 @@ export enum YOE_CATEGORY {
   SENIOR = 3,
 }
 
-export const OfferTableTabOptions = [
+export const OfferTableYoeOptions = [
   {
     label: 'Fresh Grad (0-2 YOE)',
     value: YOE_CATEGORY.ENTRY,

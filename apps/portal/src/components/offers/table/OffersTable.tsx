@@ -7,7 +7,7 @@ import OffersTablePagination from '~/components/offers/table/OffersTablePaginati
 import {
   OfferTableFilterOptions,
   OfferTableSortBy,
-  OfferTableTabOptions,
+  OfferTableYoeOptions,
   YOE_CATEGORY,
 } from '~/components/offers/table/types';
 
@@ -29,7 +29,7 @@ export default function OffersTable({
   jobTitleFilter,
 }: OffersTableProps) {
   const [currency, setCurrency] = useState(Currency.SGD.toString()); // TODO: Detect location
-  const [selectedTab, setSelectedTab] = useState(YOE_CATEGORY.ENTRY);
+  const [selectedYoe, setSelectedYoe] = useState(YOE_CATEGORY.ENTRY);
   const [pagination, setPagination] = useState<Paging>({
     currentPage: 0,
     numOfItems: 0,
@@ -48,7 +48,7 @@ export default function OffersTable({
       numOfPages: 0,
       totalItems: 0,
     });
-  }, [selectedTab, currency]);
+  }, [selectedYoe, currency]);
   const offersQuery = trpc.useQuery(
     [
       'offers.list',
@@ -60,7 +60,7 @@ export default function OffersTable({
         offset: pagination.currentPage,
         sortBy: OfferTableSortBy[selectedFilter] ?? '-monthYearReceived',
         title: jobTitleFilter,
-        yoeCategory: selectedTab,
+        yoeCategory: selectedYoe,
       },
     ],
     {
@@ -76,22 +76,15 @@ export default function OffersTable({
 
   function renderFilters() {
     return (
-      <div className="m-4 flex grid grid-cols-1 items-center justify-between gap-6 sm:grid-cols-4">
-        <DropdownMenu
-          align="start"
-          label={
-            OfferTableTabOptions.filter(
-              ({ value: itemValue }) => itemValue === selectedTab,
-            )[0].label
-          }
-          size="inherit">
-          {OfferTableTabOptions.map(({ label: itemLabel, value }) => (
+      <div className="flex items-center justify-between p-4 text-sm sm:grid-cols-4 md:text-base">
+        <DropdownMenu align="start" label="Filters" size="inherit">
+          {OfferTableYoeOptions.map(({ label: itemLabel, value }) => (
             <DropdownMenu.Item
               key={value}
-              isSelected={value === selectedTab}
+              isSelected={value === selectedYoe}
               label={itemLabel}
               onClick={() => {
-                setSelectedTab(value);
+                setSelectedYoe(value);
                 gaEvent({
                   action: `offers.table_filter_yoe_category_${value}`,
                   category: 'engagement',
@@ -103,7 +96,9 @@ export default function OffersTable({
         </DropdownMenu>
         <div className="divide-x-slate-200 col-span-3 flex items-center justify-end space-x-4 divide-x">
           <div className="justify-left flex items-center space-x-2">
-            <span>View all offers in</span>
+            <span className="sr-only sm:not-sr-only sm:inline">
+              View all offers in
+            </span>
             <CurrencySelector
               handleCurrencyChange={(value: string) => setCurrency(value)}
               selectedCurrency={currency}
@@ -140,7 +135,7 @@ export default function OffersTable({
       'Company',
       'Title',
       'YOE',
-      selectedTab === YOE_CATEGORY.INTERN ? 'Monthly Salary' : 'Annual TC',
+      selectedYoe === YOE_CATEGORY.INTERN ? 'Monthly Salary' : 'Annual TC',
       'Date Offered',
       'Actions',
     ];
@@ -172,34 +167,32 @@ export default function OffersTable({
   };
 
   return (
-    <div className="w-5/6">
-      <div className="relative w-full border border-slate-200">
-        {renderFilters()}
-        {offersQuery.isLoading ? (
-          <div className="col-span-10 pt-4">
-            <Spinner display="block" size="lg" />
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full divide-y divide-slate-200 border-y border-slate-200 text-left text-slate-600">
-              {renderHeader()}
-              <tbody>
-                {offers.map((offer) => (
-                  <OffersRow key={offer.id} row={offer} />
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-        <OffersTablePagination
-          endNumber={
-            pagination.currentPage * NUMBER_OF_OFFERS_IN_PAGE + offers.length
-          }
-          handlePageChange={handlePageChange}
-          pagination={pagination}
-          startNumber={pagination.currentPage * NUMBER_OF_OFFERS_IN_PAGE + 1}
-        />
-      </div>
+    <div className="relative w-full border border-slate-200">
+      {renderFilters()}
+      {offersQuery.isLoading ? (
+        <div className="col-span-10 pt-4">
+          <Spinner display="block" size="lg" />
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full divide-y divide-slate-200 border-y border-slate-200 text-left text-slate-600">
+            {renderHeader()}
+            <tbody>
+              {offers.map((offer) => (
+                <OffersRow key={offer.id} row={offer} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      <OffersTablePagination
+        endNumber={
+          pagination.currentPage * NUMBER_OF_OFFERS_IN_PAGE + offers.length
+        }
+        handlePageChange={handlePageChange}
+        pagination={pagination}
+        startNumber={pagination.currentPage * NUMBER_OF_OFFERS_IN_PAGE + 1}
+      />
     </div>
   );
 }

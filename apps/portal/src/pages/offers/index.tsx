@@ -5,10 +5,14 @@ import { Banner } from '@tih/ui';
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTable from '~/components/offers/table/OffersTable';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
+import Container from '~/components/shared/Container';
+import type { JobTitleType } from '~/components/shared/JobTitles';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
 export default function OffersHomePage() {
-  const [jobTitleFilter, setjobTitleFilter] = useState('software-engineer');
+  const [jobTitleFilter, setJobTitleFilter] = useState<JobTitleType | ''>(
+    'software-engineer',
+  );
   const [companyFilter, setCompanyFilter] = useState('');
   const { event: gaEvent } = useGoogleAnalytics();
 
@@ -42,14 +46,14 @@ export default function OffersHomePage() {
               textSize="inherit"
               onSelect={(option) => {
                 if (option) {
-                  setjobTitleFilter(option.value);
+                  setJobTitleFilter(option.value as JobTitleType);
                   gaEvent({
                     action: `offers.table_filter_job_title_${option.value}`,
                     category: 'engagement',
                     label: 'Filter by job title',
                   });
                 } else {
-                  setjobTitleFilter('');
+                  setJobTitleFilter('');
                 }
               }}
             />
@@ -74,12 +78,12 @@ export default function OffersHomePage() {
           </div>
         </div>
       </div>
-      <div className="flex justify-center bg-white pb-20 pt-10">
+      <Container className="pb-20 pt-10">
         <OffersTable
           companyFilter={companyFilter}
           jobTitleFilter={jobTitleFilter}
         />
-      </div>
+      </Container>
     </main>
   );
 }
