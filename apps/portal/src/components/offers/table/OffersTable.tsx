@@ -55,9 +55,9 @@ export default function OffersTable({
     [
       'offers.list',
       {
-        // Location: 'Singapore, Singapore', // TODO: Geolocation
-        cityId: cityFilter,
         companyId: companyFilter,
+        // Location: 'Singapore, Singapore', // TODO: Geolocation
+        countryId: cityFilter,
         currency,
         limit: NUMBER_OF_OFFERS_IN_PAGE,
         offset: pagination.currentPage,

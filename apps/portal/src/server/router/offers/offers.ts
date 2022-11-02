@@ -42,8 +42,8 @@ const getYoeRange = (yoeCategory: number | null | undefined) => {
 
 export const offersRouter = createRouter().query('list', {
   input: z.object({
-    cityId: z.string().nullish(),
     companyId: z.string().nullish(),
+    countryId: z.string().nullish(),
     currency: z.string().nullish(),
     dateEnd: z.date().nullish(),
     dateStart: z.date().nullish(),
@@ -131,10 +131,14 @@ export const offersRouter = createRouter().query('list', {
           where: {
             AND: [
               {
-                cityId:
-                  input.cityId != null && input.cityId.length !== 0
-                    ? input.cityId
-                    : undefined,
+                location: {
+                  state: {
+                    countryId:
+                      input.countryId != null && input.countryId.length !== 0
+                        ? input.countryId
+                        : undefined,
+                  },
+                },
               },
               {
                 offersIntern: {
@@ -247,10 +251,14 @@ export const offersRouter = createRouter().query('list', {
           where: {
             AND: [
               {
-                cityId:
-                  input.cityId != null && input.cityId.length !== 0
-                    ? input.cityId
-                    : undefined,
+                location: {
+                  state: {
+                    countryId:
+                      input.countryId != null && input.countryId.length !== 0
+                        ? input.countryId
+                        : undefined,
+                  },
+                },
               },
               {
                 offersIntern: {
