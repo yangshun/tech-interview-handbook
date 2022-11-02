@@ -3,30 +3,6 @@ import type { JobType } from '@prisma/client';
 import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
 import type { Location } from '~/types/offers';
-<<<<<<< HEAD
-=======
-
-export const HOME_URL = '/offers';
-
-/*
- *  Offer Profile
- */
-
-export const JobTypeLabel = {
-  FULLTIME: 'Full-time',
-  INTERN: 'Internship',
-};
-
-export enum EducationBackgroundType {
-  Bachelor = 'Bachelor',
-  Diploma = 'Diploma',
-  Masters = 'Masters',
-  PhD = 'PhD',
-  Professional = 'Professional',
-  Secondary = 'Secondary',
-  SelfTaught = 'Self-taught',
-}
->>>>>>> ac2d047d ([offers][feat] integrate location for offer table and profile)
 
 export type OffersProfilePostData = {
   background: BackgroundPostData;
@@ -57,13 +33,6 @@ type ExperiencePostData = {
   id?: string;
   jobType?: string | null;
   level?: string | null;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  location?: Location | null;
->>>>>>> ac2d047d ([offers][feat] integrate location for offer table and profile)
-=======
->>>>>>> a31230f7 ([offers][feat] Use city typeahead for location field)
   monthlySalary?: Money | null;
   title?: string | null;
   totalCompensation?: Money | null;

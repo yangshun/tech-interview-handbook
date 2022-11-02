@@ -25,19 +25,14 @@ import type { DashboardOffer, GetOffersResponse, Paging } from '~/types/offers';
 
 const NUMBER_OF_OFFERS_IN_PAGE = 10;
 export type OffersTableProps = Readonly<{
-  cityFilter: string;
   companyFilter: string;
   companyName?: string;
   countryFilter: string;
   jobTitleFilter: string;
 }>;
 export default function OffersTable({
-<<<<<<< HEAD
   countryFilter,
   companyName,
-=======
-  cityFilter,
->>>>>>> ac2d047d ([offers][feat] integrate location for offer table and profile)
   companyFilter,
   jobTitleFilter,
 }: OffersTableProps) {
@@ -111,8 +106,6 @@ export default function OffersTable({
     [
       'offers.list',
       {
-        // Location: 'Singapore, Singapore', // TODO: Geolocation
-        cityId: cityFilter,
         companyId: companyFilter,
         countryId: countryFilter,
         currency,
@@ -172,17 +165,11 @@ export default function OffersTable({
             />
           ))}
         </DropdownMenu>
-<<<<<<< HEAD
         <div className="divide-x-slate-200 col-span-3 flex items-center justify-end space-x-4 divide-x">
           <div className="justify-left flex items-center space-x-2 font-medium text-slate-700">
             <span className="sr-only sm:not-sr-only sm:inline">
               Display offers in
             </span>
-=======
-        <div className="divide-x-slate-200 flex items-center space-x-4 divide-x">
-          <div className="justify-left flex items-center space-x-2 font-medium text-slate-700">
-            <span>Display offers in</span>
->>>>>>> ac2d047d ([offers][feat] integrate location for offer table and profile)
             <CurrencySelector
               handleCurrencyChange={(value: string) => setCurrency(value)}
               selectedCurrency={currency}
