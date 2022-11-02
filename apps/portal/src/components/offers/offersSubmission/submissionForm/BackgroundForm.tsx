@@ -2,7 +2,16 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { JobType } from '@prisma/client';
 import { Collapsible, RadioList } from '@tih/ui';
 
+<<<<<<< HEAD
 import { FieldError } from '~/components/offers/constants';
+=======
+import {
+  educationFieldOptions,
+  educationLevelOptions,
+  emptyOption,
+  FieldError,
+} from '~/components/offers/constants';
+>>>>>>> a31230f7 ([offers][feat] Use city typeahead for location field)
 import type { BackgroundPostData } from '~/components/offers/types';
 import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
@@ -255,6 +264,7 @@ function InternshipJobFields() {
           }}
         />
       </div>
+<<<<<<< HEAD
       <FormTextInput
         endAddOn={
           <FormSelect
@@ -280,6 +290,10 @@ function InternshipJobFields() {
       />
       <Collapsible label="Add more details">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+=======
+      <Collapsible label="Add more details">
+        <div className="mb-5 grid grid-cols-2 space-x-3">
+>>>>>>> a31230f7 ([offers][feat] Use city typeahead for location field)
           <CitiesTypeahead
             label="Location"
             value={{
@@ -296,6 +310,7 @@ function InternshipJobFields() {
                 setValue('background.experiences.0.cityName', '');
               }
             }}
+<<<<<<< HEAD
           />
           <FormTextInput
             errorMessage={experiencesField?.durationInMonths?.message}
@@ -305,6 +320,8 @@ function InternshipJobFields() {
               min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
               valueAsNumber: true,
             })}
+=======
+>>>>>>> a31230f7 ([offers][feat] Use city typeahead for location field)
           />
         </div>
       </Collapsible>

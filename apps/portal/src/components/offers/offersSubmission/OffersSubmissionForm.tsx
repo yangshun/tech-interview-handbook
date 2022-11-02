@@ -289,6 +289,7 @@ export default function OffersSubmissionForm({
               steps={breadcrumbSteps}
             />
           </div>
+<<<<<<< HEAD
           <div className="bg-white p-6 sm:p-10">
             <FormProvider {...formMethods}>
               <form
@@ -349,6 +350,56 @@ export default function OffersSubmissionForm({
               </form>
             </FormProvider>
           </div>
+=======
+          <FormProvider {...formMethods}>
+            <form className="text-sm" onSubmit={handleSubmit(onSubmit)}>
+              {steps[step]}
+              <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre>
+              {step === 0 && (
+                <div className="flex justify-end">
+                  <Button
+                    disabled={false}
+                    icon={ArrowRightIcon}
+                    label="Next"
+                    variant="secondary"
+                    onClick={() => {
+                      goToNextStep(step);
+                      gaEvent({
+                        action: 'offers.profile_submission_navigate_next',
+                        category: 'submission',
+                        label: 'Navigate next',
+                      });
+                    }}
+                  />
+                </div>
+              )}
+              {step === 1 && (
+                <div className="flex items-center justify-between">
+                  <Button
+                    icon={ArrowLeftIcon}
+                    label="Previous"
+                    variant="secondary"
+                    onClick={() => {
+                      setStep(step - 1);
+                      gaEvent({
+                        action: 'offers.profile_submission_navigation_back',
+                        category: 'submission',
+                        label: 'Navigate back',
+                      });
+                    }}
+                  />
+                  <Button
+                    disabled={isSubmitting || isSubmitSuccessful}
+                    isLoading={isSubmitting || isSubmitSuccessful}
+                    label="Submit"
+                    type="submit"
+                    variant="primary"
+                  />
+                </div>
+              )}
+            </form>
+          </FormProvider>
+>>>>>>> a31230f7 ([offers][feat] Use city typeahead for location field)
         </div>
       </div>
     </div>

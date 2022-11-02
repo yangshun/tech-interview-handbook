@@ -58,9 +58,12 @@ type ExperiencePostData = {
   jobType?: string | null;
   level?: string | null;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   location?: Location | null;
 >>>>>>> ac2d047d ([offers][feat] integrate location for offer table and profile)
+=======
+>>>>>>> a31230f7 ([offers][feat] Use city typeahead for location field)
   monthlySalary?: Money | null;
   title?: string | null;
   totalCompensation?: Money | null;
