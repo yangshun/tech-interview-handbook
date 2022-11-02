@@ -700,6 +700,25 @@ export const dashboardOfferDtoMapper = (
     dashboardOfferDto.income = valuationDtoMapper(
       offer.offersFullTime.totalCompensation,
     );
+
+    if (offer.offersFullTime.baseSalary) {
+      dashboardOfferDto.baseSalary = valuationDtoMapper(
+        offer.offersFullTime.baseSalary
+      );
+    }
+
+    if (offer.offersFullTime.bonus) {
+      dashboardOfferDto.bonus = valuationDtoMapper(
+        offer.offersFullTime.bonus
+      );
+
+    }
+
+    if (offer.offersFullTime.stocks) {
+      dashboardOfferDto.stocks = valuationDtoMapper(
+        offer.offersFullTime.stocks
+      );
+    }
   } else if (offer.offersIntern) {
     dashboardOfferDto.income = valuationDtoMapper(
       offer.offersIntern.monthlySalary,
@@ -712,10 +731,12 @@ export const dashboardOfferDtoMapper = (
 export const getOffersResponseMapper = (
   data: Array<DashboardOffer>,
   paging: Paging,
+  jobType: JobType
 ) => {
   const getOffersResponse: GetOffersResponse = {
     data,
-    paging,
+    jobType,
+    paging
   };
   return getOffersResponse;
 };
