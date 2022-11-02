@@ -5,6 +5,7 @@ import { Banner } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTable from '~/components/offers/table/OffersTable';
+import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import Container from '~/components/shared/Container';
 import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
@@ -13,6 +14,7 @@ import { JobTitleLabels } from '~/components/shared/JobTitles';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useSearchParamSingle } from '~/utils/offers/useSearchParam';
 
 export default function OffersHomePage() {
@@ -20,6 +22,8 @@ export default function OffersHomePage() {
 =======
 import CitiesTypeahead from '../../components/shared/CitiesTypeahead';
 
+=======
+>>>>>>> d6d25df3 ([offers][chore] fix import of cities typeahead)
 export default function OffersHomePage() {
   const [jobTitleFilter, setjobTitleFilter] = useState('software-engineer');
   const [companyFilter, setCompanyFilter] = useState('');
