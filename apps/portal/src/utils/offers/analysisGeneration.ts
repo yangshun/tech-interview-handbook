@@ -1,6 +1,8 @@
 import type { Session } from 'next-auth';
 import type {
+  City,
   Company,
+  Country,
   OffersBackground,
   OffersCurrency,
   OffersFullTime,
@@ -9,6 +11,7 @@ import type {
   OffersProfile,
   Prisma,
   PrismaClient,
+  State,
 } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 

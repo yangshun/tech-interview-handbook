@@ -1,19 +1,4 @@
 import { z } from 'zod';
-<<<<<<< HEAD
-=======
-import type {
-  City,
-  Company,
-  Country,
-  OffersBackground,
-  OffersCurrency,
-  OffersFullTime,
-  OffersIntern,
-  OffersOffer,
-  OffersProfile,
-  State,
-} from '@prisma/client';
->>>>>>> BryannYeap/location
 import { TRPCError } from '@trpc/server';
 
 import { generateAnalysis } from '~/utils/offers/analysisGeneration';
