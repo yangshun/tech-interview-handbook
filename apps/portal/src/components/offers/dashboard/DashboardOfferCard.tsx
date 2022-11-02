@@ -36,7 +36,7 @@ export default function DashboardProfileCard({
           </p>
           <p>
             {location
-              ? `Company: ${company.name}, ${location}`
+              ? `Company: ${company.name}, ${location.cityName}`
               : `Company: ${company.name}`}
           </p>
           {level && <p>Level: {level}</p>}

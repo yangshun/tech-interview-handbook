@@ -36,13 +36,14 @@ export default function OffersEditPage() {
               experiences.length === 0
                 ? [{ jobType: JobType.FULLTIME }]
                 : experiences.map((exp) => ({
+                    cityId: exp.location?.cityId,
+                    cityName: exp.location?.cityName,
                     companyId: exp.company?.id,
                     companyName: exp.company?.name,
                     durationInMonths: exp.durationInMonths,
                     id: exp.id,
                     jobType: exp.jobType,
                     level: exp.level,
-                    location: exp.location,
                     monthlySalary: exp.monthlySalary,
                     title: exp.title,
                     totalCompensation: exp.totalCompensation,
@@ -53,12 +54,13 @@ export default function OffersEditPage() {
           },
           id: data.id,
           offers: data.offers.map((offer) => ({
+            cityId: offer.location.cityId,
+            cityName: offer.location.cityName,
             comments: offer.comments,
             companyId: offer.company.id,
             companyName: offer.company.name,
             id: offer.id,
             jobType: offer.jobType,
-            location: offer.location,
             monthYearReceived: convertToMonthYear(offer.monthYearReceived),
             negotiationStrategy: offer.negotiationStrategy,
             offersFullTime: offer.offersFullTime,

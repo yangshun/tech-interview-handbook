@@ -131,6 +131,8 @@ model City {
   stateId                     String
   state                       State                        @relation(fields: [stateId], references: [id])
   questionsQuestionEncounters QuestionsQuestionEncounter[]
+  OffersExperience            OffersExperience[]
+  OffersOffer                 OffersOffer[]
 
   @@unique([name, stateId])
 }
@@ -265,7 +267,8 @@ model OffersExperience {
 
   // Add more fields
   durationInMonths Int?
-  location         String?
+  location         City?   @relation(fields: [cityId], references: [id])
+  cityId           String?
 
   // FULLTIME fields
   level               String?
@@ -348,8 +351,9 @@ model OffersOffer {
   company   Company @relation(fields: [companyId], references: [id])
   companyId String
 
+  location            City     @relation(fields: [cityId], references: [id])
+  cityId              String
   monthYearReceived   DateTime
-  location            String
   negotiationStrategy String
   comments            String
 

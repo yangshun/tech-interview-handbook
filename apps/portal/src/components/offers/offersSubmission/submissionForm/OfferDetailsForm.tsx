@@ -12,6 +12,7 @@ import { TrashIcon } from '@heroicons/react/24/outline';
 import { JobType } from '@prisma/client';
 import { Button, Dialog } from '@tih/ui';
 
+import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
@@ -25,7 +26,6 @@ import {
   emptyOption,
   FieldError,
   internshipCycleOptions,
-  locationOptions,
   yearOptions,
 } from '../../constants';
 import FormMonthYearPicker from '../../forms/FormMonthYearPicker';
@@ -61,6 +61,12 @@ function FullTimeOfferDetailsForm({
   });
   const watchCompanyName = useWatch({
     name: `offers.${index}.companyName`,
+  });
+  const watchCityId = useWatch({
+    name: `offers.${index}.cityId`,
+  });
+  const watchCityName = useWatch({
+    name: `offers.${index}.cityName`,
   });
   const watchCurrency = useWatch({
     name: `offers.${index}.offersFullTime.totalCompensation.currency`,
@@ -104,32 +110,37 @@ function FullTimeOfferDetailsForm({
         />
       </div>
       <div className="mb-5 flex grid grid-cols-2 space-x-3">
-        <div>
-          <CompaniesTypeahead
-            required={true}
-            value={{
-              id: watchCompanyId,
-              label: watchCompanyName,
-              value: watchCompanyId,
-            }}
-            onSelect={(option) => {
-              if (option) {
-                setValue(`offers.${index}.companyId`, option.value);
-                setValue(`offers.${index}.companyName`, option.label);
-              }
-            }}
-          />
-        </div>
-        <FormSelect
-          display="block"
-          errorMessage={offerFields?.location?.message}
-          label="Location"
-          options={locationOptions}
-          placeholder={emptyOption}
+        <CompaniesTypeahead
           required={true}
-          {...register(`offers.${index}.location`, {
-            required: FieldError.REQUIRED,
-          })}
+          value={{
+            id: watchCompanyId,
+            label: watchCompanyName,
+            value: watchCompanyId,
+          }}
+          onSelect={(option) => {
+            if (option) {
+              setValue(`offers.${index}.companyId`, option.value);
+              setValue(`offers.${index}.companyName`, option.label);
+            }
+          }}
+        />
+        <CitiesTypeahead
+          label="Location"
+          required={true}
+          value={{
+            id: watchCityId,
+            label: watchCityName,
+            value: watchCityId,
+          }}
+          onSelect={(option) => {
+            if (option) {
+              setValue(`offers.${index}.cityId`, option.value);
+              setValue(`offers.${index}.cityName`, option.label);
+            } else {
+              setValue(`offers.${index}.cityId`, '');
+              setValue(`offers.${index}.cityName`, '');
+            }
+          }}
         />
       </div>
       <div className="mb-5 flex grid grid-cols-2 items-start space-x-3">
@@ -305,6 +316,12 @@ function InternshipOfferDetailsForm({
   const watchCompanyName = useWatch({
     name: `offers.${index}.companyName`,
   });
+  const watchCityId = useWatch({
+    name: `offers.${index}.cityId`,
+  });
+  const watchCityName = useWatch({
+    name: `offers.${index}.cityName`,
+  });
 
   return (
     <div className="my-5 rounded-lg border border-slate-200 px-10 py-5">
@@ -342,16 +359,23 @@ function InternshipOfferDetailsForm({
             }}
           />
         </div>
-        <FormSelect
-          display="block"
-          errorMessage={offerFields?.location?.message}
+        <CitiesTypeahead
           label="Location"
-          options={locationOptions}
-          placeholder={emptyOption}
           required={true}
-          {...register(`offers.${index}.location`, {
-            required: FieldError.REQUIRED,
-          })}
+          value={{
+            id: watchCityId,
+            label: watchCityName,
+            value: watchCityId,
+          }}
+          onSelect={(option) => {
+            if (option) {
+              setValue(`offers.${index}.cityId`, option.value);
+              setValue(`offers.${index}.cityName`, option.label);
+            } else {
+              setValue(`offers.${index}.cityId`, '');
+              setValue(`offers.${index}.cityName`, '');
+            }
+          }}
         />
       </div>
       <div className="mb-5 grid grid-cols-2 space-x-3">

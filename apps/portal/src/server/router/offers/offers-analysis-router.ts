@@ -1,4 +1,19 @@
 import { z } from 'zod';
+<<<<<<< HEAD
+=======
+import type {
+  City,
+  Company,
+  Country,
+  OffersBackground,
+  OffersCurrency,
+  OffersFullTime,
+  OffersIntern,
+  OffersOffer,
+  OffersProfile,
+  State,
+} from '@prisma/client';
+>>>>>>> BryannYeap/location
 import { TRPCError } from '@trpc/server';
 
 import { generateAnalysis } from '~/utils/offers/analysisGeneration';
@@ -19,6 +34,15 @@ export const offersAnalysisRouter = createRouter()
               topSimilarOffers: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   offersFullTime: {
                     include: {
                       totalCompensation: true,
@@ -36,6 +60,15 @@ export const offersAnalysisRouter = createRouter()
                           experiences: {
                             include: {
                               company: true,
+                              location: {
+                                include: {
+                                  state: {
+                                    include: {
+                                      country: true,
+                                    },
+                                  },
+                                },
+                              },
                             },
                           },
                         },
@@ -51,6 +84,15 @@ export const offersAnalysisRouter = createRouter()
               topSimilarOffers: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   offersFullTime: {
                     include: {
                       totalCompensation: true,
@@ -68,6 +110,15 @@ export const offersAnalysisRouter = createRouter()
                           experiences: {
                             include: {
                               company: true,
+                              location: {
+                                include: {
+                                  state: {
+                                    include: {
+                                      country: true,
+                                    },
+                                  },
+                                },
+                              },
                             },
                           },
                         },
@@ -81,6 +132,15 @@ export const offersAnalysisRouter = createRouter()
           overallHighestOffer: {
             include: {
               company: true,
+              location: {
+                include: {
+                  state: {
+                    include: {
+                      country: true,
+                    },
+                  },
+                },
+              },
               offersFullTime: {
                 include: {
                   totalCompensation: true,

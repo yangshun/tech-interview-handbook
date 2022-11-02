@@ -26,11 +26,11 @@ import { getCurrentMonth, getCurrentYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
 const defaultOfferValues = {
+  cityId: '',
   comments: '',
   companyId: '',
   jobTitle: '',
   jobType: JobType.FULLTIME,
-  location: '',
   monthYearReceived: {
     month: getCurrentMonth() as Month,
     year: getCurrentYear(),
@@ -277,7 +277,7 @@ export default function OffersSubmissionForm({
           <FormProvider {...formMethods}>
             <form className="text-sm" onSubmit={handleSubmit(onSubmit)}>
               {steps[step]}
-              {/* <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre> */}
+              <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre>
               {step === 0 && (
                 <div className="flex justify-end">
                   <Button
