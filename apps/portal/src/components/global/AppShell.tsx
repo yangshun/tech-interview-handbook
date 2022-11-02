@@ -136,7 +136,7 @@ export default function AppShell({ children }: Props) {
   return (
     <GoogleAnalytics
       measurementID={currentProductNavigation.googleAnalyticsMeasurementID}>
-      <div className="flex h-full min-h-screen">
+      <div className="flex">
         {/* Narrow sidebar */}
         {currentProductNavigation.showGlobalNav && (
           <div className="hidden w-28 overflow-y-auto border-r border-slate-200 bg-white md:block">
@@ -183,9 +183,10 @@ export default function AppShell({ children }: Props) {
           setIsShown={setMobileMenuOpen}
         />
         {/* Content area */}
-        <div className="flex h-screen flex-1 flex-col overflow-hidden">
-          <header className="w-full">
-            <div className="relative z-10 flex h-16 flex-shrink-0 border-b border-slate-200 bg-white shadow-sm">
+        <div className="w-full">
+          {/* Navigation Bar */}
+          <header className="sticky top-0 z-10 w-full">
+            <div className="relative flex h-16 flex-shrink-0 border-b border-slate-200 bg-white shadow-sm">
               <button
                 className="focus:ring-primary-500 border-r border-slate-200 px-4 text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset md:hidden"
                 type="button"
@@ -208,11 +209,8 @@ export default function AppShell({ children }: Props) {
               </div>
             </div>
           </header>
-
-          {/* Main content */}
-          <div className="flex flex-1 items-stretch overflow-hidden">
-            {children}
-          </div>
+          {/* Main Content */}
+          <div className="w-full">{children}</div>
         </div>
       </div>
     </GoogleAnalytics>
