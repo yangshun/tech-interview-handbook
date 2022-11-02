@@ -28,8 +28,10 @@ const yoeCategoryMap: Record<number, string> = {
   3: 'Senior',
 };
 
-const getYoeRange = (yoeCategory: number) => {
-  return yoeCategoryMap[yoeCategory] === 'Fresh Grad'
+const getYoeRange = (yoeCategory: number | null | undefined) => {
+  return yoeCategory == null
+    ? { maxYoe: 100, minYoe: 0 }
+    : yoeCategoryMap[yoeCategory] === 'Fresh Grad'
     ? { maxYoe: 2, minYoe: 0 }
     : yoeCategoryMap[yoeCategory] === 'Mid'
     ? { maxYoe: 5, minYoe: 3 }
@@ -40,7 +42,7 @@ const getYoeRange = (yoeCategory: number) => {
 
 export const offersRouter = createRouter().query('list', {
   input: z.object({
-    cityId: z.string(),
+    cityId: z.string().nullish(),
     companyId: z.string().nullish(),
     currency: z.string().nullish(),
     dateEnd: z.date().nullish(),
@@ -54,14 +56,14 @@ export const offersRouter = createRouter().query('list', {
       .regex(createValidationRegex(Object.keys(sortingKeysMap), '[+-]{1}'))
       .nullish(),
     title: z.string().nullish(),
-    yoeCategory: z.number().min(0).max(3),
+    yoeCategory: z.number().min(0).max(3).nullish(),
     yoeMax: z.number().max(100).nullish(),
     yoeMin: z.number().min(0).nullish(),
   }),
   async resolve({ ctx, input }) {
     const yoeRange = getYoeRange(input.yoeCategory);
-    const yoeMin = input.yoeMin ? input.yoeMin : yoeRange?.minYoe;
-    const yoeMax = input.yoeMax ? input.yoeMax : yoeRange?.maxYoe;
+    const yoeMin = input.yoeMin != null ? input.yoeMin : yoeRange?.minYoe;
+    const yoeMax = input.yoeMax != null ? input.yoeMax : yoeRange?.maxYoe;
 
     if (!input.sortBy) {
       input.sortBy = '-' + sortingKeysMap.monthYearReceived;
@@ -129,7 +131,10 @@ export const offersRouter = createRouter().query('list', {
           where: {
             AND: [
               {
-                cityId: input.cityId.length === 0 ? undefined : input.cityId,
+                cityId:
+                  input.cityId != null && input.cityId.length !== 0
+                    ? input.cityId
+                    : undefined,
               },
               {
                 offersIntern: {
@@ -139,7 +144,7 @@ export const offersRouter = createRouter().query('list', {
               {
                 offersIntern: {
                   title:
-                    input.title && input.title.length !== 0
+                    input.title != null && input.title.length !== 0
                       ? input.title
                       : undefined,
                 },
@@ -242,7 +247,10 @@ export const offersRouter = createRouter().query('list', {
           where: {
             AND: [
               {
-                cityId: input.cityId.length === 0 ? undefined : input.cityId,
+                cityId:
+                  input.cityId != null && input.cityId.length !== 0
+                    ? input.cityId
+                    : undefined,
               },
               {
                 offersIntern: {
@@ -257,7 +265,7 @@ export const offersRouter = createRouter().query('list', {
               {
                 offersFullTime: {
                   title:
-                    input.title && input.title.length !== 0
+                    input.title != null && input.title.length !== 0
                       ? input.title
                       : undefined,
                 },
