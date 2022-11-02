@@ -106,7 +106,6 @@ export default function LandingComponent({
               isLabelHidden={true}
               value={company}
               onSelect={(value) => {
-                // @ts-ignore TODO(questions): handle potentially null value.
                 handleChangeCompany(value);
               }}
             />
@@ -115,7 +114,6 @@ export default function LandingComponent({
               isLabelHidden={true}
               value={location}
               onSelect={(value) => {
-                // @ts-ignore TODO(questions): handle potentially null value.
                 handleChangeLocation(value);
               }}
             />
