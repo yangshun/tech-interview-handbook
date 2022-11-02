@@ -69,9 +69,7 @@ export default function OfferProfileCard({
             {getLabelForJobTitleType(title as JobTitleType)}{' '}
             {`(${JobTypeLabel[jobType]})`}
           </p>
-          <p>
-            Company: {company.name}, {location}
-          </p>
+          <p>{`Company: ${company.name}, ${location}`}</p>
           {level && <p>Level: {level}</p>}
         </div>
         <div className="col-span-1 row-span-3">
