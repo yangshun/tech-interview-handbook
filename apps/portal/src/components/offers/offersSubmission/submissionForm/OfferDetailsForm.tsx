@@ -22,16 +22,7 @@ import {
   defaultFullTimeOfferValues,
   defaultInternshipOfferValues,
 } from '../OffersSubmissionForm';
-<<<<<<< HEAD
 import { FieldError, JobTypeLabel } from '../../constants';
-=======
-import {
-  emptyOption,
-  FieldError,
-  internshipCycleOptions,
-  yearOptions,
-} from '../../constants';
->>>>>>> a31230f7 ([offers][feat] Use city typeahead for location field)
 import FormMonthYearPicker from '../../forms/FormMonthYearPicker';
 import FormSection from '../../forms/FormSection';
 import FormSelect from '../../forms/FormSelect';
@@ -115,7 +106,6 @@ function FullTimeOfferDetailsForm({
             })}
           />
         </div>
-<<<<<<< HEAD
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
           <CompaniesTypeahead
             required={true}
@@ -127,7 +117,6 @@ function FullTimeOfferDetailsForm({
             onSelect={(option) => {
               if (option) {
                 setValue(`offers.${index}.companyId`, option.value);
-                setValue(`offers.${index}.companyName`, option.label);
               }
             }}
           />
@@ -158,93 +147,6 @@ function FullTimeOfferDetailsForm({
             monthRequired={true}
             yearLabel=""
             {...register(`offers.${index}.monthYearReceived`, {
-=======
-        <FormTextInput
-          errorMessage={offerFields?.offersFullTime?.level?.message}
-          label="Level"
-          placeholder="e.g. L4, Junior"
-          required={true}
-          {...register(`offers.${index}.offersFullTime.level`, {
-            required: FieldError.REQUIRED,
-          })}
-        />
-      </div>
-      <div className="mb-5 flex grid grid-cols-2 space-x-3">
-        <CompaniesTypeahead
-          required={true}
-          value={{
-            id: watchCompanyId,
-            label: watchCompanyName,
-            value: watchCompanyId,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue(`offers.${index}.companyId`, option.value);
-              setValue(`offers.${index}.companyName`, option.label);
-            }
-          }}
-        />
-        <CitiesTypeahead
-          label="Location"
-          required={true}
-          value={{
-            id: watchCityId,
-            label: watchCityName,
-            value: watchCityId,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue(`offers.${index}.cityId`, option.value);
-              setValue(`offers.${index}.cityName`, option.label);
-            } else {
-              setValue(`offers.${index}.cityId`, '');
-              setValue(`offers.${index}.cityName`, '');
-            }
-          }}
-        />
-      </div>
-      <div className="mb-5 flex grid grid-cols-2 items-start space-x-3">
-        <FormMonthYearPicker
-          monthLabel="Date Received"
-          monthRequired={true}
-          yearLabel=""
-          {...register(`offers.${index}.monthYearReceived`, {
-            required: FieldError.REQUIRED,
-          })}
-        />
-      </div>
-      <div className="mb-5">
-        <FormTextInput
-          endAddOn={
-            <FormSelect
-              borderStyle="borderless"
-              defaultValue={Currency.SGD}
-              isLabelHidden={true}
-              label="Currency"
-              options={CURRENCY_OPTIONS}
-              {...register(
-                `offers.${index}.offersFullTime.totalCompensation.currency`,
-                {
-                  required: FieldError.REQUIRED,
-                },
-              )}
-            />
-          }
-          endAddOnType="element"
-          errorMessage={
-            offerFields?.offersFullTime?.totalCompensation?.value?.message
-          }
-          label="Total Compensation (Annual)"
-          placeholder="0"
-          required={true}
-          startAddOn="$"
-          startAddOnType="label"
-          type="number"
-          {...register(
-            `offers.${index}.offersFullTime.totalCompensation.value`,
-            {
-              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
->>>>>>> a31230f7 ([offers][feat] Use city typeahead for location field)
               required: FieldError.REQUIRED,
             })}
           />
@@ -472,7 +374,6 @@ function InternshipOfferDetailsForm({
             }}
           />
         </div>
-<<<<<<< HEAD
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
           <FormSelect
             display="block"
@@ -542,97 +443,6 @@ function InternshipOfferDetailsForm({
         </div>
       </FormSection>
       <FormSection title="Additional Information">
-=======
-        <CitiesTypeahead
-          label="Location"
-          required={true}
-          value={{
-            id: watchCityId,
-            label: watchCityName,
-            value: watchCityId,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue(`offers.${index}.cityId`, option.value);
-              setValue(`offers.${index}.cityName`, option.label);
-            } else {
-              setValue(`offers.${index}.cityId`, '');
-              setValue(`offers.${index}.cityName`, '');
-            }
-          }}
-        />
-      </div>
-      <div className="mb-5 grid grid-cols-2 space-x-3">
-        <FormSelect
-          display="block"
-          errorMessage={offerFields?.offersIntern?.internshipCycle?.message}
-          label="Internship Cycle"
-          options={internshipCycleOptions}
-          placeholder={emptyOption}
-          required={true}
-          {...register(`offers.${index}.offersIntern.internshipCycle`, {
-            required: FieldError.REQUIRED,
-          })}
-        />
-        <FormSelect
-          display="block"
-          errorMessage={offerFields?.offersIntern?.startYear?.message}
-          label="Internship Year"
-          options={yearOptions}
-          placeholder={emptyOption}
-          required={true}
-          {...register(`offers.${index}.offersIntern.startYear`, {
-            required: FieldError.REQUIRED,
-            valueAsNumber: true,
-          })}
-        />
-      </div>
-      <div className="mb-5">
-        <FormMonthYearPicker
-          monthLabel="Date Received"
-          monthRequired={true}
-          yearLabel=""
-          {...register(`offers.${index}.monthYearReceived`, {
-            required: FieldError.REQUIRED,
-          })}
-        />
-      </div>
-      <div className="mb-5">
-        <FormTextInput
-          endAddOn={
-            <FormSelect
-              borderStyle="borderless"
-              defaultValue={Currency.SGD}
-              isLabelHidden={true}
-              label="Currency"
-              options={CURRENCY_OPTIONS}
-              {...register(
-                `offers.${index}.offersIntern.monthlySalary.currency`,
-                {
-                  required: FieldError.REQUIRED,
-                },
-              )}
-            />
-          }
-          endAddOnType="element"
-          errorMessage={
-            offerFields?.offersIntern?.monthlySalary?.value?.message
-          }
-          label="Salary (Monthly)"
-          placeholder="0"
-          required={true}
-          startAddOn="$"
-          startAddOnType="label"
-          type="number"
-          {...register(`offers.${index}.offersIntern.monthlySalary.value`, {
-            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-            required: FieldError.REQUIRED,
-            valueAsNumber: true,
-          })}
-        />
-      </div>
-      <div className="mb-5">
->>>>>>> a31230f7 ([offers][feat] Use city typeahead for location field)
         <FormTextArea
           label="Negotiation Strategy / Interview Performance"
           placeholder="e.g. Did well in the behavioral interview. Used competing offers to negotiate for a higher salary."
