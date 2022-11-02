@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import { MapPinIcon } from '@heroicons/react/24/outline';
 import { Banner } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
@@ -7,9 +8,12 @@ import OffersTable from '~/components/offers/table/OffersTable';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
+import CitiesTypeahead from '../../components/shared/CitiesTypeahead';
+
 export default function OffersHomePage() {
   const [jobTitleFilter, setjobTitleFilter] = useState('software-engineer');
   const [companyFilter, setCompanyFilter] = useState('');
+  const [cityFilter, setCityFilter] = useState('');
   const { event: gaEvent } = useGoogleAnalytics();
 
   return (
@@ -21,6 +25,25 @@ export default function OffersHomePage() {
         </Link>
         . ⭐
       </Banner>
+      <div className="text-primary-600 flex items-center justify-end space-x-1 bg-slate-100 px-4 pt-4">
+        <span>
+          <MapPinIcon className="flex h-7 w-7" />
+        </span>
+        <CitiesTypeahead
+          isLabelHidden={true}
+          placeholder="All Cities"
+          onSelect={(option) => {
+            if (option) {
+              setCityFilter(option.value);
+              gaEvent({
+                action: `offers.table_filter_city_${option.value}`,
+                category: 'engagement',
+                label: 'Filter by city',
+              });
+            }
+          }}
+        />
+      </div>
       <div className="bg-slate-100 py-16 px-4">
         <div>
           <div>
@@ -58,7 +81,7 @@ export default function OffersHomePage() {
                 if (option) {
                   setCompanyFilter(option.value);
                   gaEvent({
-                    action: 'offers.table_filter_company',
+                    action: `offers.table_filter_company_${option.value}`,
                     category: 'engagement',
                     label: 'Filter by company',
                   });
@@ -70,6 +93,7 @@ export default function OffersHomePage() {
       </div>
       <div className="flex justify-center bg-white pb-20 pt-10">
         <OffersTable
+          cityFilter={cityFilter}
           companyFilter={companyFilter}
           jobTitleFilter={jobTitleFilter}
         />
