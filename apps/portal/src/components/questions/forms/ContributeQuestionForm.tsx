@@ -140,6 +140,7 @@ export default function ContributeQuestionForm({
               name="date"
               render={({ field }) => (
                 <MonthYearPicker
+                  className="space-x-2"
                   monthRequired={true}
                   value={{
                     month: ((field.value.getMonth() as number) + 1) as Month,

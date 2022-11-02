@@ -96,6 +96,7 @@ export default function CreateQuestionEncounterForm({
       )}
       {step === 3 && (
         <MonthYearPicker
+          className="space-x-2"
           // TODO: Add label and hide label on Select instead.
           monthLabel=""
           value={{
