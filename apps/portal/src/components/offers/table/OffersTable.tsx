@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { DropdownMenu, Spinner } from '@tih/ui';
 
@@ -9,6 +10,7 @@ import {
   OfferTableSortBy,
   OfferTableYoeOptions,
   YOE_CATEGORY,
+  YOE_CATEGORY_PARAM,
 } from '~/components/offers/table/types';
 
 import { Currency } from '~/utils/offers/currency/CurrencyEnum';
@@ -31,7 +33,7 @@ export default function OffersTable({
   jobTitleFilter,
 }: OffersTableProps) {
   const [currency, setCurrency] = useState(Currency.SGD.toString()); // TODO: Detect location
-  const [selectedYoe, setSelectedYoe] = useState(YOE_CATEGORY.ENTRY);
+  const [selectedYoe, setSelectedYoe] = useState('');
   const [pagination, setPagination] = useState<Paging>({
     currentPage: 0,
     numOfItems: 0,
@@ -43,6 +45,9 @@ export default function OffersTable({
     OfferTableFilterOptions[0].value,
   );
   const { event: gaEvent } = useGoogleAnalytics();
+  const router = useRouter();
+  const { yoeCategory = '' } = router.query;
+
   useEffect(() => {
     setPagination({
       currentPage: 0,
@@ -51,6 +56,11 @@ export default function OffersTable({
       totalItems: 0,
     });
   }, [selectedYoe, currency]);
+
+  useEffect(() => {
+    setSelectedYoe(yoeCategory as YOE_CATEGORY);
+  }, [yoeCategory]);
+
   const offersQuery = trpc.useQuery(
     [
       'offers.list',
@@ -63,7 +73,7 @@ export default function OffersTable({
         offset: pagination.currentPage,
         sortBy: OfferTableSortBy[selectedFilter] ?? '-monthYearReceived',
         title: jobTitleFilter,
-        yoeCategory: selectedYoe,
+        yoeCategory: YOE_CATEGORY_PARAM[yoeCategory as string] ?? undefined,
       },
     ],
     {
@@ -80,14 +90,39 @@ export default function OffersTable({
   function renderFilters() {
     return (
       <div className="flex items-center justify-between p-4 text-sm sm:grid-cols-4 md:text-base">
-        <DropdownMenu align="start" label="Filters" size="inherit">
+        <DropdownMenu
+          align="start"
+          label={
+            OfferTableYoeOptions.filter(
+              ({ value: itemValue }) => itemValue === selectedYoe,
+            )[0].label
+          }
+          size="inherit">
           {OfferTableYoeOptions.map(({ label: itemLabel, value }) => (
             <DropdownMenu.Item
               key={value}
               isSelected={value === selectedYoe}
               label={itemLabel}
               onClick={() => {
-                setSelectedYoe(value);
+                if (value === '') {
+                  router.replace(
+                    {
+                      pathname: router.pathname,
+                      query: undefined,
+                    },
+                    undefined,
+                    // Do not refresh the page
+                    { shallow: true },
+                  );
+                } else {
+                  const params = new URLSearchParams({
+                    ['yoeCategory']: value,
+                  });
+                  router.replace({
+                    pathname: location.pathname,
+                    search: params.toString(),
+                  });
+                }
                 gaEvent({
                   action: `offers.table_filter_yoe_category_${value}`,
                   category: 'engagement',

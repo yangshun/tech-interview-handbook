@@ -12,9 +12,7 @@ import type { JobTitleType } from '~/components/shared/JobTitles';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
 export default function OffersHomePage() {
-  const [jobTitleFilter, setJobTitleFilter] = useState<JobTitleType | ''>(
-    'software-engineer',
-  );
+  const [jobTitleFilter, setJobTitleFilter] = useState<JobTitleType | ''>('');
   const [companyFilter, setCompanyFilter] = useState('');
   const [cityFilter, setCityFilter] = useState('');
   const { event: gaEvent } = useGoogleAnalytics();
@@ -64,7 +62,7 @@ export default function OffersHomePage() {
           <div className="flex items-center space-x-4">
             <JobTitlesTypeahead
               isLabelHidden={true}
-              placeholder="Software Engineer"
+              placeholder="All Job Titles"
               textSize="inherit"
               onSelect={(option) => {
                 if (option) {
