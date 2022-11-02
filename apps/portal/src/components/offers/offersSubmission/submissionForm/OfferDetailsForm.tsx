@@ -29,6 +29,7 @@ import {
   yearOptions,
 } from '../../constants';
 import FormMonthYearPicker from '../../forms/FormMonthYearPicker';
+import FormSection from '../../forms/FormSection';
 import FormSelect from '../../forms/FormSelect';
 import FormTextArea from '../../forms/FormTextArea';
 import FormTextInput from '../../forms/FormTextInput';
@@ -44,23 +45,6 @@ type FullTimeOfferDetailsFormProps = Readonly<{
   index: number;
   remove: UseFieldArrayRemove;
 }>;
-
-function Section({
-  children,
-  title,
-}: Readonly<{ children: React.ReactNode; title: string }>) {
-  return (
-    <div>
-      <div className="mb-4">
-        <h3 className="text-lg font-medium leading-6 text-slate-900">
-          {title}
-        </h3>
-        <HorizontalDivider />
-      </div>
-      <div className="space-y-4 sm:space-y-6">{children}</div>
-    </div>
-  );
-}
 
 function FullTimeOfferDetailsForm({
   index,
@@ -95,8 +79,8 @@ function FullTimeOfferDetailsForm({
 
   return (
     <div className="space-y-8 rounded-lg border border-slate-200 p-6 sm:space-y-16 sm:p-8">
-      <Section title="Company & Title Information">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <FormSection title="Company & Title Information">
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
           <JobTitlesTypeahead
             required={true}
             value={{
@@ -120,7 +104,7 @@ function FullTimeOfferDetailsForm({
             })}
           />
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
           <CompaniesTypeahead
             required={true}
             value={{
@@ -147,9 +131,9 @@ function FullTimeOfferDetailsForm({
             })}
           />
         </div>
-      </Section>
-      <Section title="Compensation Details">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      </FormSection>
+      <FormSection title="Compensation Details">
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
           <FormMonthYearPicker
             monthLabel="Date Received"
             monthRequired={true}
@@ -269,8 +253,8 @@ function FullTimeOfferDetailsForm({
             })}
           />
         </div>
-      </Section>
-      <Section title="Additional Information">
+      </FormSection>
+      <FormSection title="Additional Information">
         <FormTextArea
           label="Negotiation Strategy / Interview Performance"
           placeholder="e.g. Did well in the behavioral interview / Used competing offers to negotiate for a higher salary"
@@ -296,7 +280,7 @@ function FullTimeOfferDetailsForm({
             </div>
           </div>
         )}
-      </Section>
+      </FormSection>
     </div>
   );
 }
@@ -327,7 +311,7 @@ function InternshipOfferDetailsForm({
 
   return (
     <div className="space-y-8 rounded-lg border border-slate-200 p-6 sm:space-y-16 sm:p-8">
-      <Section title="Company & Title Information">
+      <FormSection title="Company & Title Information">
         <JobTitlesTypeahead
           required={true}
           value={{
@@ -342,7 +326,7 @@ function InternshipOfferDetailsForm({
           }}
         />
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
           <CompaniesTypeahead
             required={true}
             value={{
@@ -369,7 +353,7 @@ function InternshipOfferDetailsForm({
             })}
           />
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
           <FormSelect
             display="block"
             errorMessage={offerFields?.offersIntern?.internshipCycle?.message}
@@ -394,9 +378,9 @@ function InternshipOfferDetailsForm({
             })}
           />
         </div>
-      </Section>
-      <Section title="Compensation Details">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      </FormSection>
+      <FormSection title="Compensation Details">
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
           <FormMonthYearPicker
             monthLabel="Date Received"
             monthRequired={true}
@@ -438,8 +422,8 @@ function InternshipOfferDetailsForm({
             })}
           />
         </div>
-      </Section>
-      <Section title="Additional Information">
+      </FormSection>
+      <FormSection title="Additional Information">
         <FormTextArea
           label="Negotiation Strategy / Interview Performance"
           placeholder="e.g. Did well in the behavioral interview. Used competing offers to negotiate for a higher salary."
@@ -450,7 +434,7 @@ function InternshipOfferDetailsForm({
           placeholder="e.g. Encountered similar questions using the Technical Interview Handbook."
           {...register(`offers.${index}.comments`)}
         />
-      </Section>
+      </FormSection>
       {index > 0 && (
         <div className="space-y-4 sm:space-y-6">
           <HorizontalDivider />
@@ -541,21 +525,19 @@ export default function OfferDetailsForm({
 
   return (
     <div className="space-y-6">
-      <h5 className="mb-8 text-center text-4xl font-bold text-slate-900">
+      <h2 className="mb-8 text-2xl font-bold text-slate-900 sm:text-center sm:text-4xl">
         Fill in your offer details
-      </h5>
-      <div>
-        <JobTypeTabs
-          value={jobType}
-          onChange={(newJobType) => {
-            if (newJobType === jobType) {
-              return;
-            }
+      </h2>
+      <JobTypeTabs
+        value={jobType}
+        onChange={(newJobType) => {
+          if (newJobType === jobType) {
+            return;
+          }
 
-            setDialogOpen(true);
-          }}
-        />
-      </div>
+          setDialogOpen(true);
+        }}
+      />
       <OfferDetailsFormArray
         fieldArrayValues={fieldArrayValues}
         jobType={jobType}

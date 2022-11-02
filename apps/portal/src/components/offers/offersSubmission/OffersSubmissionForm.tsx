@@ -264,10 +264,10 @@ export default function OffersSubmissionForm({
   }, []);
 
   return (
-    <div ref={pageRef} className="fixed h-full w-full overflow-y-scroll">
-      <div className="mb-20 flex justify-center">
-        <div className="my-5 block w-full max-w-screen-md rounded-lg bg-white py-10 px-10 shadow-lg">
-          <div className="mb-4 flex justify-end">
+    <div ref={pageRef} className="w-full overflow-y-scroll">
+      <div className="flex justify-center">
+        <div className="block w-full max-w-screen-md rounded-lg bg-white p-6 sm:p-10 sm:shadow-lg md:my-10">
+          <div className="mb-8 flex justify-end">
             <Breadcrumbs
               currentStep={step}
               setStep={setStep}
@@ -300,6 +300,7 @@ export default function OffersSubmissionForm({
               {step === 1 && (
                 <div className="flex items-center justify-between">
                   <Button
+                    addonPosition="start"
                     icon={ArrowLeftIcon}
                     label="Previous"
                     variant="secondary"
@@ -314,6 +315,7 @@ export default function OffersSubmissionForm({
                   />
                   <Button
                     disabled={isSubmitting || isSubmitSuccessful}
+                    icon={ArrowRightIcon}
                     isLoading={isSubmitting || isSubmitSuccessful}
                     label="Submit"
                     type="submit"
