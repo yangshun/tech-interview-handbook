@@ -126,6 +126,7 @@ export type User = {
 
 export type GetOffersResponse = {
   data: Array<DashboardOffer>;
+  jobType: JobType;
   paging: Paging;
 };
 
