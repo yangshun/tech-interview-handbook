@@ -73,58 +73,67 @@ export default function OffersProfileSave({
   };
 
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex w-full justify-center pb-10">
       <div className="max-w-2xl text-center">
-        <h5 className="mb-6 text-4xl font-bold text-slate-900">
+        <h2 className="block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
           Save for future edits
-        </h5>
-        <p className="mb-2 text-slate-900">We value your privacy.</p>
-        <p className="mb-5 text-slate-900">
-          To keep you offer profile strictly anonymous, only people who have the
-          link below can edit it.
+        </h2>
+        <p className="mt-4 text-xl leading-8 text-slate-500">
+          We value your privacy
         </p>
-        <div className="mb-20 grid grid-cols-12 gap-4">
-          <div className="col-span-11">
-            <TextInput
-              disabled={true}
-              isLabelHidden={true}
-              label="Edit link"
-              value={getProfileLink(profileId, token)}
+        <div className="mt-6 max-w-md text-slate-500">
+          <div className="bg-info-50 rounded-lg p-6">
+            <p className="sm:tex-base text-sm">
+              To keep your offer profile strictly anonymous, it is not linked to
+              your user account. Only people who have the link below can edit
+              it. If you want to edit the profile in future, store the link
+              somewhere.
+            </p>
+            <div className="mt-4 flex gap-4">
+              <div className="grow">
+                <TextInput
+                  disabled={true}
+                  isLabelHidden={true}
+                  label="Edit link"
+                  value={getProfileLink(profileId, token)}
+                />
+              </div>
+              <Button
+                icon={DocumentDuplicateIcon}
+                isLabelHidden={true}
+                label="Copy"
+                variant="info"
+                onClick={() => {
+                  copyProfileLink(profileId, token);
+                  showToast({
+                    title: `Profile edit link copied to clipboard!`,
+                    variant: 'success',
+                  });
+                  gaEvent({
+                    action: 'offers.profile_submission_copy_edit_profile_link',
+                    category: 'engagement',
+                    label: 'Copy Edit Profile Link in Profile Submission',
+                  });
+                }}
+              />
+            </div>
+          </div>
+          <p className="mt-6 text-xs sm:text-sm">
+            If you do not want to manually store the link somewhere else, you
+            can add this offers profile to your user account by clicking the
+            button below. It will still only be editable by you.
+          </p>
+          <div className="mt-6">
+            <Button
+              disabled={isSavedQuery.isLoading || isSaved}
+              icon={isSaved ? CheckIcon : BookmarkSquareIcon}
+              isLoading={saveMutation.isLoading || isSavedQuery.isLoading}
+              label={isSaved ? 'Added to account' : 'Add to your account'}
+              size="sm"
+              variant="secondary"
+              onClick={handleSave}
             />
           </div>
-          <Button
-            icon={DocumentDuplicateIcon}
-            isLabelHidden={true}
-            label="Copy"
-            variant="primary"
-            onClick={() => {
-              copyProfileLink(profileId, token);
-              showToast({
-                title: `Profile edit link copied to clipboard!`,
-                variant: 'success',
-              });
-              gaEvent({
-                action: 'offers.profile_submission_copy_edit_profile_link',
-                category: 'engagement',
-                label: 'Copy Edit Profile Link in Profile Submission',
-              });
-            }}
-          />
-        </div>
-        <p className="mb-5 text-slate-900">
-          If you do not want to keep the edit link, you can opt to save this
-          profile under your account's dashboard. It will still only be editable
-          by you.
-        </p>
-        <div className="mb-20">
-          <Button
-            disabled={isSavedQuery.isLoading || isSaved}
-            icon={isSaved ? CheckIcon : BookmarkSquareIcon}
-            isLoading={saveMutation.isLoading || isSavedQuery.isLoading}
-            label={isSaved ? 'Saved to user profile' : 'Save to user profile'}
-            variant="primary"
-            onClick={handleSave}
-          />
         </div>
       </div>
     </div>

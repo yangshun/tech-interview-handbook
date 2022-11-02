@@ -15,10 +15,12 @@ export default function OffersSubmissionAnalysis({
   return (
     <div className="mb-8">
       <h5 className="mb-8 text-center text-4xl font-bold text-slate-900">
-        Result
+        Offer Analysis
       </h5>
       {!analysis && (
-        <p className="mb-8 text-center">Error generating analysis.</p>
+        <p className="text-error-500 mb-8 text-center">
+          Error generating analysis.
+        </p>
       )}
       {analysis && (
         <OfferAnalysis

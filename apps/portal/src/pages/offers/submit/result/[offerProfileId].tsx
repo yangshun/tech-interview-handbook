@@ -78,48 +78,50 @@ export default function OffersSubmissionResult() {
         </div>
       )}
       {!getAnalysis.isLoading && (
-        <div ref={pageRef} className="fixed h-full w-full overflow-y-scroll">
-          <div className="mb-20 flex justify-center">
-            <div className="my-5 block w-full max-w-screen-md rounded-lg bg-white py-10 px-10 shadow-lg">
-              <div className="mb-4 flex justify-end">
+        <div ref={pageRef} className="w-full overflow-y-scroll">
+          <div className="flex justify-center">
+            <div className="block w-full max-w-screen-md overflow-hidden rounded-lg sm:shadow-lg md:my-10">
+              <div className="flex justify-center bg-slate-100 px-4 py-4 sm:px-6 lg:px-8">
                 <Breadcrumbs
                   currentStep={step}
                   setStep={setStep}
                   steps={breadcrumbSteps}
                 />
               </div>
-              {steps[step]}
-              {step === 0 && (
-                <div className="flex justify-end">
-                  <Button
-                    disabled={false}
-                    icon={ArrowRightIcon}
-                    label="Next"
-                    variant="secondary"
-                    onClick={() => setStep(step + 1)}
-                  />
-                </div>
-              )}
-              {step === 1 && (
-                <div className="flex items-center justify-between">
-                  <Button
-                    addonPosition="start"
-                    icon={ArrowLeftIcon}
-                    label="Previous"
-                    variant="secondary"
-                    onClick={() => setStep(step - 1)}
-                  />
-                  <Button
-                    href={getProfilePath(
-                      offerProfileId as string,
-                      token as string,
-                    )}
-                    icon={EyeIcon}
-                    label="View your profile"
-                    variant="primary"
-                  />
-                </div>
-              )}
+              <div className="bg-white p-6 sm:p-10">
+                {steps[step]}
+                {step === 0 && (
+                  <div className="flex justify-end">
+                    <Button
+                      disabled={false}
+                      icon={ArrowRightIcon}
+                      label="Next"
+                      variant="primary"
+                      onClick={() => setStep(step + 1)}
+                    />
+                  </div>
+                )}
+                {step === 1 && (
+                  <div className="flex items-center justify-between">
+                    <Button
+                      addonPosition="start"
+                      icon={ArrowLeftIcon}
+                      label="Previous"
+                      variant="secondary"
+                      onClick={() => setStep(step - 1)}
+                    />
+                    <Button
+                      href={getProfilePath(
+                        offerProfileId as string,
+                        token as string,
+                      )}
+                      icon={EyeIcon}
+                      label="View your profile"
+                      variant="primary"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

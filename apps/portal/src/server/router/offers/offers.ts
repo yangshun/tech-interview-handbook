@@ -12,10 +12,7 @@ import { createValidationRegex } from '~/utils/offers/zodRegex';
 import { createRouter } from '../context';
 
 const getOrder = (prefix: string) => {
-  if (prefix === '+') {
-    return 'asc';
-  }
-  return 'desc';
+  return prefix === '+' ? 'asc' : 'desc';
 };
 
 const sortingKeysMap = {
