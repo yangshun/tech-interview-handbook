@@ -12,10 +12,19 @@ import type { JobTitleType } from '~/components/shared/JobTitles';
 import { JobTitleLabels } from '~/components/shared/JobTitles';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
+<<<<<<< HEAD
 import { useSearchParamSingle } from '~/utils/offers/useSearchParam';
 
 export default function OffersHomePage() {
   const [countryFilter, setCountryFilter] = useState('');
+=======
+import CitiesTypeahead from '../../components/shared/CitiesTypeahead';
+
+export default function OffersHomePage() {
+  const [jobTitleFilter, setjobTitleFilter] = useState('software-engineer');
+  const [companyFilter, setCompanyFilter] = useState('');
+  const [cityFilter, setCityFilter] = useState('');
+>>>>>>> ac2d047d ([offers][feat] integrate location for offer table and profile)
   const { event: gaEvent } = useGoogleAnalytics();
 
   const [selectedCompanyName, setSelectedCompanyName] =
@@ -35,6 +44,7 @@ export default function OffersHomePage() {
         </Link>
         . ⭐
       </Banner>
+<<<<<<< HEAD
       <div className="text-primary-600 flex items-center justify-end space-x-1 bg-slate-100 px-4 pt-4 sm:text-lg">
         <span>
           <MapPinIcon className="flex h-7 w-7" />
@@ -52,6 +62,23 @@ export default function OffersHomePage() {
               });
             } else {
               setCountryFilter('');
+=======
+      <div className="text-primary-600 flex items-center justify-end space-x-1 bg-slate-100 px-4 pt-4">
+        <span>
+          <MapPinIcon className="flex h-7 w-7" />
+        </span>
+        <CitiesTypeahead
+          isLabelHidden={true}
+          placeholder="All Cities"
+          onSelect={(option) => {
+            if (option) {
+              setCityFilter(option.value);
+              gaEvent({
+                action: `offers.table_filter_city_${option.value}`,
+                category: 'engagement',
+                label: 'Filter by city',
+              });
+>>>>>>> ac2d047d ([offers][feat] integrate location for offer table and profile)
             }
           }}
         />
@@ -131,10 +158,16 @@ export default function OffersHomePage() {
       </div>
       <Container className="pb-20 pt-10">
         <OffersTable
+<<<<<<< HEAD
           companyFilter={selectedCompanyId}
           companyName={selectedCompanyName}
           countryFilter={countryFilter}
           jobTitleFilter={selectedJobTitleId ?? ''}
+=======
+          cityFilter={cityFilter}
+          companyFilter={companyFilter}
+          jobTitleFilter={jobTitleFilter}
+>>>>>>> ac2d047d ([offers][feat] integrate location for offer table and profile)
         />
       </Container>
     </main>
