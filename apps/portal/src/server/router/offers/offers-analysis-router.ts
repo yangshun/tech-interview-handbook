@@ -19,6 +19,15 @@ export const offersAnalysisRouter = createRouter()
               topSimilarOffers: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   offersFullTime: {
                     include: {
                       totalCompensation: true,
@@ -36,6 +45,15 @@ export const offersAnalysisRouter = createRouter()
                           experiences: {
                             include: {
                               company: true,
+                              location: {
+                                include: {
+                                  state: {
+                                    include: {
+                                      country: true,
+                                    },
+                                  },
+                                },
+                              },
                             },
                           },
                         },
@@ -51,6 +69,15 @@ export const offersAnalysisRouter = createRouter()
               topSimilarOffers: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                   offersFullTime: {
                     include: {
                       totalCompensation: true,
@@ -68,6 +95,15 @@ export const offersAnalysisRouter = createRouter()
                           experiences: {
                             include: {
                               company: true,
+                              location: {
+                                include: {
+                                  state: {
+                                    include: {
+                                      country: true,
+                                    },
+                                  },
+                                },
+                              },
                             },
                           },
                         },
@@ -81,6 +117,15 @@ export const offersAnalysisRouter = createRouter()
           overallHighestOffer: {
             include: {
               company: true,
+              location: {
+                include: {
+                  state: {
+                    include: {
+                      country: true,
+                    },
+                  },
+                },
+              },
               offersFullTime: {
                 include: {
                   totalCompensation: true,

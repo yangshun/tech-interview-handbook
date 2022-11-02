@@ -12,6 +12,7 @@ import { TrashIcon } from '@heroicons/react/24/outline';
 import { JobType } from '@prisma/client';
 import { Button, Dialog, HorizontalDivider } from '@tih/ui';
 
+import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
@@ -25,7 +26,6 @@ import {
   emptyOption,
   FieldError,
   internshipCycleOptions,
-  locationOptions,
   yearOptions,
 } from '../../constants';
 import FormMonthYearPicker from '../../forms/FormMonthYearPicker';
@@ -63,6 +63,12 @@ function FullTimeOfferDetailsForm({
   });
   const watchCompanyName = useWatch({
     name: `offers.${index}.companyName`,
+  });
+  const watchCityId = useWatch({
+    name: `offers.${index}.cityId`,
+  });
+  const watchCityName = useWatch({
+    name: `offers.${index}.cityName`,
   });
   const watchCurrency = useWatch({
     name: `offers.${index}.offersFullTime.totalCompensation.currency`,
@@ -119,16 +125,23 @@ function FullTimeOfferDetailsForm({
               }
             }}
           />
-          <FormSelect
-            display="block"
-            errorMessage={offerFields?.location?.message}
+          <CitiesTypeahead
             label="Location"
-            options={locationOptions}
-            placeholder={emptyOption}
             required={true}
-            {...register(`offers.${index}.location`, {
-              required: FieldError.REQUIRED,
-            })}
+            value={{
+              id: watchCityId,
+              label: watchCityName,
+              value: watchCityId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue(`offers.${index}.cityId`, option.value);
+                setValue(`offers.${index}.cityName`, option.label);
+              } else {
+                setValue(`offers.${index}.cityId`, '');
+                setValue(`offers.${index}.cityName`, '');
+              }
+            }}
           />
         </div>
       </FormSection>
@@ -308,6 +321,12 @@ function InternshipOfferDetailsForm({
   const watchCompanyName = useWatch({
     name: `offers.${index}.companyName`,
   });
+  const watchCityId = useWatch({
+    name: `offers.${index}.cityId`,
+  });
+  const watchCityName = useWatch({
+    name: `offers.${index}.cityName`,
+  });
 
   return (
     <div className="space-y-8 rounded-lg border border-slate-200 p-6 sm:space-y-16 sm:p-8">
@@ -341,16 +360,23 @@ function InternshipOfferDetailsForm({
               }
             }}
           />
-          <FormSelect
-            display="block"
-            errorMessage={offerFields?.location?.message}
+          <CitiesTypeahead
             label="Location"
-            options={locationOptions}
-            placeholder={emptyOption}
             required={true}
-            {...register(`offers.${index}.location`, {
-              required: FieldError.REQUIRED,
-            })}
+            value={{
+              id: watchCityId,
+              label: watchCityName,
+              value: watchCityId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue(`offers.${index}.cityId`, option.value);
+                setValue(`offers.${index}.cityName`, option.label);
+              } else {
+                setValue(`offers.${index}.cityId`, '');
+                setValue(`offers.${index}.cityName`, '');
+              }
+            }}
           />
         </div>
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">

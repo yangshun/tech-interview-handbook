@@ -1,6 +1,8 @@
 import type { Session } from 'next-auth';
 import type {
+  City,
   Company,
+  Country,
   OffersBackground,
   OffersCurrency,
   OffersFullTime,
@@ -9,6 +11,7 @@ import type {
   OffersProfile,
   Prisma,
   PrismaClient,
+  State,
 } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
@@ -16,8 +19,14 @@ import { profileAnalysisDtoMapper } from '../../mappers/offers-mappers';
 
 type Offer = OffersOffer & {
   company: Company;
+  location: City & { state: State & { country: Country } };
   offersFullTime:
-    | (OffersFullTime & { totalCompensation: OffersCurrency })
+    | (OffersFullTime & {
+        baseSalary: OffersCurrency | null;
+        bonus: OffersCurrency | null;
+        stocks: OffersCurrency | null;
+        totalCompensation: OffersCurrency;
+      })
     | null;
   offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
   profile: OffersProfile & { background: OffersBackground | null };
@@ -68,6 +77,15 @@ export const generateAnalysis = async (params: {
   const offers = await ctx.prisma.offersOffer.findMany({
     include: {
       company: true,
+      location: {
+        include: {
+          state: {
+            include: {
+              country: true,
+            },
+          },
+        },
+      },
       offersFullTime: {
         include: {
           baseSalary: true,
@@ -131,9 +149,18 @@ export const generateAnalysis = async (params: {
   const monthYearReceived = new Date(overallHighestOffer.monthYearReceived);
   monthYearReceived.setFullYear(monthYearReceived.getFullYear() - 1);
 
-  const similarOffers = await ctx.prisma.offersOffer.findMany({
+  let similarOffers = await ctx.prisma.offersOffer.findMany({
     include: {
       company: true,
+      location: {
+        include: {
+          state: {
+            include: {
+              country: true,
+            },
+          },
+        },
+      },
       offersFullTime: {
         include: {
           totalCompensation: true,
@@ -151,6 +178,15 @@ export const generateAnalysis = async (params: {
               experiences: {
                 include: {
                   company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
                 },
               },
             },
@@ -225,7 +261,7 @@ export const generateAnalysis = async (params: {
   const companyAnalysis = Array.from(companyMap.values()).map(
     (companyOffer) => {
       // TODO: Refactor calculating analysis into a function
-      const similarCompanyOffers = similarOffers.filter(
+      let similarCompanyOffers = similarOffers.filter(
         (offer) => offer.companyId === companyOffer.companyId,
       );
 
@@ -239,23 +275,21 @@ export const generateAnalysis = async (params: {
           : 100 - (100 * companyIndex) / (similarCompanyOffers.length - 1);
 
       // Get top offers (excluding user's offer)
-      const similarCompanyOffersWithoutUsersOffers =
-        similarCompanyOffers.filter(
-          (offer) => offer.profileId !== input.profileId,
-        );
+      similarCompanyOffers = similarCompanyOffers.filter(
+        (offer) => offer.id !== companyOffer.id,
+      );
 
-      const noOfSimilarCompanyOffers =
-        similarCompanyOffersWithoutUsersOffers.length;
+      const noOfSimilarCompanyOffers = similarCompanyOffers.length;
       const similarCompanyOffers90PercentileIndex = Math.ceil(
         noOfSimilarCompanyOffers * 0.1,
       );
       const topPercentileCompanyOffers =
         noOfSimilarCompanyOffers > 2
-          ? similarCompanyOffersWithoutUsersOffers.slice(
+          ? similarCompanyOffers.slice(
               similarCompanyOffers90PercentileIndex,
               similarCompanyOffers90PercentileIndex + 2,
             )
-          : similarCompanyOffersWithoutUsersOffers;
+          : similarCompanyOffers;
 
       return {
         companyName: companyOffer.company.name,
@@ -276,19 +310,19 @@ export const generateAnalysis = async (params: {
       ? 100
       : 100 - (100 * overallIndex) / (similarOffers.length - 1);
 
-  const similarOffersWithoutUsersOffers = similarOffers.filter(
-    (similarOffer) => similarOffer.profileId !== input.profileId,
+  similarOffers = similarOffers.filter(
+    (offer) => offer.id !== overallHighestOffer.id,
   );
 
-  const noOfSimilarOffers = similarOffersWithoutUsersOffers.length;
+  const noOfSimilarOffers = similarOffers.length;
   const similarOffers90PercentileIndex = Math.ceil(noOfSimilarOffers * 0.1);
   const topPercentileOffers =
     noOfSimilarOffers > 2
-      ? similarOffersWithoutUsersOffers.slice(
+      ? similarOffers.slice(
           similarOffers90PercentileIndex,
           similarOffers90PercentileIndex + 2,
         )
-      : similarOffersWithoutUsersOffers;
+      : similarOffers;
 
   const analysis = await ctx.prisma.offersAnalysis.create({
     data: {
@@ -335,6 +369,15 @@ export const generateAnalysis = async (params: {
           topSimilarOffers: {
             include: {
               company: true,
+              location: {
+                include: {
+                  state: {
+                    include: {
+                      country: true,
+                    },
+                  },
+                },
+              },
               offersFullTime: {
                 include: {
                   totalCompensation: true,
@@ -352,6 +395,15 @@ export const generateAnalysis = async (params: {
                       experiences: {
                         include: {
                           company: true,
+                          location: {
+                            include: {
+                              state: {
+                                include: {
+                                  country: true,
+                                },
+                              },
+                            },
+                          },
                         },
                       },
                     },
@@ -367,6 +419,15 @@ export const generateAnalysis = async (params: {
           topSimilarOffers: {
             include: {
               company: true,
+              location: {
+                include: {
+                  state: {
+                    include: {
+                      country: true,
+                    },
+                  },
+                },
+              },
               offersFullTime: {
                 include: {
                   totalCompensation: true,
@@ -384,6 +445,15 @@ export const generateAnalysis = async (params: {
                       experiences: {
                         include: {
                           company: true,
+                          location: {
+                            include: {
+                              state: {
+                                include: {
+                                  country: true,
+                                },
+                              },
+                            },
+                          },
                         },
                       },
                     },
@@ -397,6 +467,15 @@ export const generateAnalysis = async (params: {
       overallHighestOffer: {
         include: {
           company: true,
+          location: {
+            include: {
+              state: {
+                include: {
+                  country: true,
+                },
+              },
+            },
+          },
           offersFullTime: {
             include: {
               totalCompensation: true,

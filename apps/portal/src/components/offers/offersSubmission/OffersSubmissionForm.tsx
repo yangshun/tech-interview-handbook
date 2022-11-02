@@ -26,11 +26,11 @@ import { getCurrentMonth, getCurrentYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
 const defaultOfferValues = {
+  cityId: '',
   comments: '',
   companyId: '',
   jobTitle: '',
   jobType: JobType.FULLTIME,
-  location: '',
   monthYearReceived: {
     month: getCurrentMonth() as Month,
     year: getCurrentYear(),
