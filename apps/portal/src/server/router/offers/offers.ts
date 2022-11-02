@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { JobType } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
 import {
@@ -377,6 +378,7 @@ export const offersRouter = createRouter().query('list', {
         numOfPages: Math.ceil(data.length / input.limit),
         totalItems: data.length,
       },
+      !yoeRange ? JobType.INTERN : JobType.FULLTIME
     );
   },
 });
