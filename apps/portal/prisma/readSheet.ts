@@ -115,212 +115,232 @@ const seedSalaries = async () => {
     companyIdMappings[company.name] = company.id;
   });
 
-  //seed here
-  return await Promise.all(
-    data.map(async (data: ExcelData) => {
-      if (data.TC && typeof data.TC === 'number') {
-        // Generate random name until unique
-        let uniqueName: string = await generateRandomName();
+  // get countryId of Singapore
+  const singapore = (await prisma.city.findFirst({
+    where: {
+      name: "Singapore"
+    }
+  }))
 
-        const jobTitle = getJobTitle(data.Role);
-        const yoe = getYoe(data.Type);
-        const level = getLevel(data.Type);
+  // console.log(singapore)
+  // break;
+  // seed here
 
-        // check if we have company id
-        if (companyIdMappings[data.Company]) {
-          const token = crypto
-            .createHash('sha256')
-            .update(
-              xlSerialToJsDate(data.Timestamp).toString() +
-                generateRandomStringForToken(),
-            )
-            .digest('hex');
+  if (singapore) {
+    return await Promise.all(
+      data.map(async (data: ExcelData) => {
+        if (data.TC && typeof data.TC === 'number') {
+          // Generate random name until unique
+          let uniqueName: string = await generateRandomName();
 
-          if (data.Type.toUpperCase() === 'INTERNSHIP') {
-            // create profile
-            const dataAdded = await prisma.offersProfile.create({
-              data: {
-                profileName: uniqueName,
-                createdAt: xlSerialToJsDate(data.Timestamp),
-                editToken: token,
-                background: {
-                  create: {
-                    totalYoe: yoe,
-                  },
-                },
-                offers: {
-                  create: {
-                    comments: data.Comments ?? '',
-                    company: {
-                      connect: {
-                        id: companyIdMappings[data.Company],
-                      },
+          const jobTitle = getJobTitle(data.Role);
+          const yoe = getYoe(data.Type);
+          const level = getLevel(data.Type);
+
+          // check if we have company id
+          if (companyIdMappings[data.Company]) {
+            const token = crypto
+              .createHash('sha256')
+              .update(
+                xlSerialToJsDate(data.Timestamp).toString() +
+                  generateRandomStringForToken(),
+              )
+              .digest('hex');
+
+            if (data.Type.toUpperCase() === 'INTERNSHIP') {
+              // create profile
+              const dataAdded = await prisma.offersProfile.create({
+                data: {
+                  profileName: uniqueName,
+                  createdAt: xlSerialToJsDate(data.Timestamp),
+                  editToken: token,
+                  background: {
+                    create: {
+                      totalYoe: yoe,
                     },
-                    jobType: 'INTERN',
-                    location: 'Singapore, Singapore', // TODO: DEFAULT AS SG
-                    monthYearReceived: xlSerialToJsDate(data.Timestamp),
-                    negotiationStrategy: '',
-                    offersIntern: {
-                      create: {
-                        internshipCycle: 'Summer',
-                        monthlySalary: {
-                          create: {
-                            baseCurrency: baseCurrencyString,
-                            baseValue: await convert(
-                              data.Income
-                                ? typeof data.Income === 'number'
-                                  ? data.Income
-                                  : 0
-                                : 0,
-                              'SGD', // assume sgd
-                              baseCurrencyString,
-                            ),
-                            currency: 'SGD', // assume sgd
-                            value: data.Income
-                                ? typeof data.Income === 'number'
-                                  ? data.Income
-                                  : 0
-                                : 0,
-                          },
+                  },
+                  offers: {
+                    create: {
+                      comments: data.Comments ?? '',
+                      company: {
+                        connect: {
+                          id: companyIdMappings[data.Company],
                         },
-                        startYear: xlSerialToJsDate(
-                          data.Timestamp,
-                        ).getFullYear(),
-                        title: jobTitle,
                       },
-                    },
-                  },
-                },
-              },
-            });
-
-            console.log('Profile created:', dataAdded.id);
-            createdProfileIds.push(dataAdded.id);
-          } else {
-            // assume rest full time
-            const dataAdded = await prisma.offersProfile.create({
-              data: {
-                profileName: uniqueName,
-                createdAt: xlSerialToJsDate(data.Timestamp),
-                editToken: token,
-                background: {
-                  create: {
-                    totalYoe: yoe,
-                  },
-                },
-                offers: {
-                  create: {
-                    comments: data.Comments ?? '',
-                    company: {
-                      connect: {
-                        id: companyIdMappings[data.Company],
-                      },
-                    },
-                    jobType: 'FULLTIME',
-                    location: 'Singapore, Singapore', // TODO: DEFAULT AS SG
-                    monthYearReceived: xlSerialToJsDate(data.Timestamp),
-                    negotiationStrategy: '',
-                    offersFullTime: {
-                      create: {
-                        baseSalary: {
-                          create: {
-                            baseCurrency: baseCurrencyString,
-                            baseValue: await convert(
-                              data.Income
-                                ? typeof data.Income === 'number'
-                                  ? data.Income
-                                  : 0
-                                : 0,
-                              'SGD', // assume sgd
-                              baseCurrencyString,
-                            ),
-                            currency: 'SGD', // assume sgd
-                            value: data.Income
-                                ? typeof data.Income === 'number'
-                                  ? data.Income
-                                  : 0
-                                : 0,
+                      jobType: 'INTERN',
+                      location: {
+                        connect: {
+                          id: singapore.id
+                        }
+                      }, // TODO: DEFAULT AS SG
+                      monthYearReceived: xlSerialToJsDate(data.Timestamp),
+                      negotiationStrategy: '',
+                      offersIntern: {
+                        create: {
+                          internshipCycle: 'Summer',
+                          monthlySalary: {
+                            create: {
+                              baseCurrency: baseCurrencyString,
+                              baseValue: await convert(
+                                data.Income
+                                  ? typeof data.Income === 'number'
+                                    ? data.Income
+                                    : 0
+                                  : 0,
+                                'SGD', // assume sgd
+                                baseCurrencyString,
+                              ),
+                              currency: 'SGD', // assume sgd
+                              value: data.Income
+                                  ? typeof data.Income === 'number'
+                                    ? data.Income
+                                    : 0
+                                  : 0,
+                            },
                           },
+                          startYear: xlSerialToJsDate(
+                            data.Timestamp,
+                          ).getFullYear(),
+                          title: jobTitle,
                         },
-                        bonus: {
-                          create: {
-                            baseCurrency: baseCurrencyString,
-                            baseValue: await convert(
-                              data.Bonus
+                      },
+                    },
+                  },
+                },
+              });
+
+              console.log('Profile created:', dataAdded.id);
+              createdProfileIds.push(dataAdded.id);
+            } else {
+              // assume rest full time
+              const dataAdded = await prisma.offersProfile.create({
+                data: {
+                  profileName: uniqueName,
+                  createdAt: xlSerialToJsDate(data.Timestamp),
+                  editToken: token,
+                  background: {
+                    create: {
+                      totalYoe: yoe,
+                    },
+                  },
+                  offers: {
+                    create: {
+                      comments: data.Comments ?? '',
+                      company: {
+                        connect: {
+                          id: companyIdMappings[data.Company],
+                        },
+                      },
+                      jobType: 'FULLTIME',
+                      location: {
+                        connect: {
+                          id: singapore.id
+                        }
+                      }, // TODO: DEFAULT AS SG
+                      monthYearReceived: xlSerialToJsDate(data.Timestamp),
+                      negotiationStrategy: '',
+                      offersFullTime: {
+                        create: {
+                          baseSalary: {
+                            create: {
+                              baseCurrency: baseCurrencyString,
+                              baseValue: await convert(
+                                data.Income
+                                  ? typeof data.Income === 'number'
+                                    ? data.Income
+                                    : 0
+                                  : 0,
+                                'SGD', // assume sgd
+                                baseCurrencyString,
+                              ),
+                              currency: 'SGD', // assume sgd
+                              value: data.Income
+                                  ? typeof data.Income === 'number'
+                                    ? data.Income
+                                    : 0
+                                  : 0,
+                            },
+                          },
+                          bonus: {
+                            create: {
+                              baseCurrency: baseCurrencyString,
+                              baseValue: await convert(
+                                data.Bonus
+                                  ? typeof data.Bonus === 'number'
+                                    ? data.Bonus
+                                    : 0
+                                  : 0,
+                                'SGD',
+                                baseCurrencyString,
+                              ),
+                              currency: 'SGD',
+                              value: data.Bonus
                                 ? typeof data.Bonus === 'number'
                                   ? data.Bonus
                                   : 0
                                 : 0,
-                              'SGD',
-                              baseCurrencyString,
-                            ),
-                            currency: 'SGD',
-                            value: data.Bonus
-                              ? typeof data.Bonus === 'number'
-                                ? data.Bonus
-                                : 0
-                              : 0,
+                            },
                           },
-                        },
-                        level: level,
-                        stocks: {
-                          create: {
-                            baseCurrency: baseCurrencyString,
-                            baseValue: await convert(
-                              data.Stocks
+                          level: level,
+                          stocks: {
+                            create: {
+                              baseCurrency: baseCurrencyString,
+                              baseValue: await convert(
+                                data.Stocks
+                                  ? typeof data.Stocks === 'number'
+                                    ? data.Stocks
+                                    : 0
+                                  : 0,
+                                'SGD',
+                                baseCurrencyString,
+                              ),
+                              currency: 'SGD',
+                              value: data.Stocks
                                 ? typeof data.Stocks === 'number'
                                   ? data.Stocks
                                   : 0
                                 : 0,
-                              'SGD',
-                              baseCurrencyString,
-                            ),
-                            currency: 'SGD',
-                            value: data.Stocks
-                              ? typeof data.Stocks === 'number'
-                                ? data.Stocks
-                                : 0
-                              : 0,
+                            },
                           },
-                        },
-                        title: jobTitle,
-                        totalCompensation: {
-                          create: {
-                            baseCurrency: baseCurrencyString,
-                            baseValue: await convert(
-                              data.TC
+                          title: jobTitle,
+                          totalCompensation: {
+                            create: {
+                              baseCurrency: baseCurrencyString,
+                              baseValue: await convert(
+                                data.TC
+                                  ? typeof data.TC === 'number'
+                                    ? data.TC
+                                    : 0
+                                  : 0,
+                                'SGD',
+                                baseCurrencyString,
+                              ),
+                              currency: 'SGD',
+                              value: data.TC
                                 ? typeof data.TC === 'number'
                                   ? data.TC
                                   : 0
                                 : 0,
-                              'SGD',
-                              baseCurrencyString,
-                            ),
-                            currency: 'SGD',
-                            value: data.TC
-                              ? typeof data.TC === 'number'
-                                ? data.TC
-                                : 0
-                              : 0,
+                            },
                           },
                         },
                       },
                     },
                   },
                 },
-              },
-            });
-            console.log('Profile created:', dataAdded.id);
-            createdProfileIds.push(dataAdded.id);
+              });
+              console.log('Profile created:', dataAdded.id);
+              createdProfileIds.push(dataAdded.id);
+            }
+          } else {
+            console.log('Invalid Company: ' + data.Company);
           }
         } else {
-          console.log('Invalid Company: ' + data.Company);
+          console.log('Invalid TC not a number: ' + data.TC);
         }
-      } else {
-        console.log('Invalid TC not a number: ' + data.TC);
-      }
-    }),
-  );
+      }),
+    );
+  }
 };
 
 const generateAllAnalysis = async () => {
