@@ -731,10 +731,12 @@ export const dashboardOfferDtoMapper = (
 export const getOffersResponseMapper = (
   data: Array<DashboardOffer>,
   paging: Paging,
+  jobType: JobType
 ) => {
   const getOffersResponse: GetOffersResponse = {
     data,
-    paging,
+    jobType,
+    paging
   };
   return getOffersResponse;
 };
