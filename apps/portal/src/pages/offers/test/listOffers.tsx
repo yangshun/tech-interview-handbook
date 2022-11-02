@@ -1,14 +1,38 @@
 import React from 'react';
+import { useState } from 'react';
 
 import { trpc } from '~/utils/trpc';
 
 function Test() {
+  const [cities, setCities] = useState<
+    Array<{
+      id: string;
+      name: string;
+      state: {
+        country: {
+          id: string;
+          name: string;
+        };
+        id: string;
+        name: string;
+      };
+    }>
+  >([]);
+  trpc.useQuery(['locations.cities.list', { name: 'Singapore' }], {
+    onError(err) {
+      alert(err);
+    },
+    onSuccess(data) {
+      setCities(data);
+    },
+  });
+
   const data = trpc.useQuery([
     'offers.list',
     {
+      cityId: cities[0].id,
       currency: 'SGD',
       limit: 100,
-      location: 'Singapore, Singapore',
       offset: 0,
       sortBy: '-totalCompensation',
       yoeCategory: 2,

@@ -4,6 +4,20 @@ import { trpc } from '~/utils/trpc';
 
 function Test() {
   const [createdData, setCreatedData] = useState('');
+  const [cities, setCities] = useState<
+    Array<{
+      id: string;
+      name: string;
+      state: {
+        country: {
+          id: string;
+          name: string;
+        };
+        id: string;
+        name: string;
+      };
+    }>
+  >([]);
   const [error, setError] = useState('');
 
   const createMutation = trpc.useMutation(['offers.profile.create'], {
@@ -89,6 +103,15 @@ function Test() {
     });
   };
 
+  trpc.useQuery(['locations.cities.list', { name: 'Singapore' }], {
+    onError(err) {
+      alert(err);
+    },
+    onSuccess(data) {
+      setCities(data);
+    },
+  });
+
   const handleClick = () => {
     createMutation.mutate({
       background: {
@@ -128,11 +151,11 @@ function Test() {
       },
       offers: [
         {
+          cityId: cities[0].id,
           comments: 'I am a Raffles Institution almumni',
           // Comments: '',
           companyId: 'cl9j4yawz0003utlp1uaa1t8o',
           jobType: 'FULLTIME',
-          location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
           negotiationStrategy: 'Leveraged having multiple offers',
           offersFullTime: {
@@ -157,10 +180,10 @@ function Test() {
           },
         },
         {
+          cityId: cities[0].id,
           comments: '',
           companyId: 'cl9j4yawz0003utlp1uaa1t8o',
           jobType: 'FULLTIME',
-          location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
           negotiationStrategy: 'Leveraged having multiple offers',
           offersFullTime: {
@@ -315,6 +338,7 @@ function Test() {
       isEditable: true,
       offers: [
         {
+          cityId: cities[0].id,
           comments: 'this IS SO IEUHDAEUIGDI',
           company: {
             createdAt: new Date('2022-10-12T16:19:05.196Z'),
@@ -329,7 +353,6 @@ function Test() {
           companyId: 'cl9j4yawz0003utlp1uaa1t8o',
           id: 'cl9i68fve000ntthj5h9yvqnh',
           jobType: 'FULLTIME',
-          location: 'Singapore, Singapore',
           monthYearReceived: new Date('2022-09-30T07:58:54.000Z'),
           negotiationStrategy: 'Charmed the guy with my face',
           offersFullTime: {
