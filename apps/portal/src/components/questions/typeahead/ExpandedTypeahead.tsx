@@ -8,7 +8,10 @@ import type { RequireAllOrNone } from '~/utils/questions/RequireAllOrNone';
 type TypeaheadProps = ComponentProps<typeof Typeahead>;
 type TypeaheadOption = TypeaheadProps['options'][number];
 
-export type ExpandedTypeaheadProps = Omit<TypeaheadProps, 'onSelect'> &
+export type ExpandedTypeaheadProps = Omit<
+  TypeaheadProps,
+  'nullable' | 'onSelect'
+> &
   RequireAllOrNone<{
     clearOnSelect?: boolean;
     filterOption: (option: TypeaheadOption) => boolean;
@@ -59,8 +62,7 @@ export default function ExpandedTypeahead({
             if (clearOnSelect) {
               setKey((key + 1) % 2);
             }
-            // TODO: Remove onSelect null coercion once onSelect prop is refactored
-            onSelect(option!);
+            onSelect(option);
           }}
         />
       </div>

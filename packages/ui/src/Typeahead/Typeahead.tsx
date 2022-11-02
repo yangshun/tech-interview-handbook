@@ -29,17 +29,25 @@ type Props = Readonly<{
   isLabelHidden?: boolean;
   label: string;
   noResultsMessage?: string;
-  nullable?: boolean;
   onQueryChange: (
     value: string,
     event: React.ChangeEvent<HTMLInputElement>,
   ) => void;
-  onSelect: (option: TypeaheadOption | null) => void;
   options: ReadonlyArray<TypeaheadOption>;
   textSize?: TypeaheadTextSize;
   value?: TypeaheadOption | null;
 }> &
-  Readonly<Attributes>;
+  Readonly<Attributes> &
+  (
+    | {
+        nullable: true;
+        onSelect: (option: TypeaheadOption | null) => void;
+      }
+    | {
+        nullable?: false;
+        onSelect: (option: TypeaheadOption) => void;
+      }
+  );
 
 type State = 'error' | 'normal';
 
