@@ -46,13 +46,14 @@ export type BackgroundPostData = {
 };
 
 type ExperiencePostData = {
+  cityId?: string | null;
+  cityName?: string | null;
   companyId?: string | null;
   companyName?: string | null;
   durationInMonths?: number | null;
   id?: string;
   jobType?: string | null;
   level?: string | null;
-  location?: Location | null;
   monthlySalary?: Money | null;
   title?: string | null;
   totalCompensation?: Money | null;
@@ -77,12 +78,13 @@ type SpecificYoePostData = {
 type SpecificYoe = SpecificYoePostData;
 
 export type OfferPostData = {
+  cityId: string;
+  cityName?: string;
   comments: string;
   companyId: string;
   companyName?: string;
   id?: string;
   jobType: JobType;
-  location: string;
   monthYearReceived: Date;
   negotiationStrategy: string;
   offersFullTime?: OfferFullTimePostData | null;

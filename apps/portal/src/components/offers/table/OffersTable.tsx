@@ -100,7 +100,7 @@ export default function OffersTable({
         <div className="divide-x-slate-200 col-span-3 flex items-center justify-end space-x-4 divide-x">
           <div className="justify-left flex items-center space-x-2">
             <span className="sr-only sm:not-sr-only sm:inline">
-              View all offers in
+              Display offers in
             </span>
             <CurrencySelector
               handleCurrencyChange={(value: string) => setCurrency(value)}

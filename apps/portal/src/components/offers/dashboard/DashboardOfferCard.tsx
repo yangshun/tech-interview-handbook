@@ -51,7 +51,7 @@ export default function DashboardProfileCard({
                   aria-hidden="true"
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                 />
-                {location}
+                {location.cityName}
               </div>
             )}
             {level && (
