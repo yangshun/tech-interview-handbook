@@ -21,10 +21,12 @@ import type { DashboardOffer, GetOffersResponse, Paging } from '~/types/offers';
 
 const NUMBER_OF_OFFERS_IN_PAGE = 10;
 export type OffersTableProps = Readonly<{
+  cityFilter: string;
   companyFilter: string;
   jobTitleFilter: string;
 }>;
 export default function OffersTable({
+  cityFilter,
   companyFilter,
   jobTitleFilter,
 }: OffersTableProps) {
@@ -53,10 +55,11 @@ export default function OffersTable({
     [
       'offers.list',
       {
+        // Location: 'Singapore, Singapore', // TODO: Geolocation
+        cityId: cityFilter,
         companyId: companyFilter,
         currency,
         limit: NUMBER_OF_OFFERS_IN_PAGE,
-        location: 'Singapore, Singapore', // TODO: Geolocation
         offset: pagination.currentPage,
         sortBy: OfferTableSortBy[selectedFilter] ?? '-monthYearReceived',
         title: jobTitleFilter,

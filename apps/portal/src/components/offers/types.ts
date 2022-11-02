@@ -2,6 +2,8 @@ import type { JobType } from '@prisma/client';
 
 import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
+import type { Location } from '~/types/offers';
+
 export const HOME_URL = '/offers';
 
 /*
@@ -50,7 +52,7 @@ type ExperiencePostData = {
   id?: string;
   jobType?: string | null;
   level?: string | null;
-  location?: string | null;
+  location?: Location | null;
   monthlySalary?: Money | null;
   title?: string | null;
   totalCompensation?: Money | null;
@@ -132,7 +134,7 @@ export type OfferDisplayData = {
   jobLevel?: string | null;
   jobTitle?: string | null;
   jobType?: JobType;
-  location?: string | null;
+  location?: Location | null;
   monthlySalary?: string | null;
   negotiationStrategy?: string | null;
   otherComment?: string | null;

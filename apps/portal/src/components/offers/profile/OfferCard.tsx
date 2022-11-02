@@ -40,7 +40,7 @@ export default function OfferCard({
               <BuildingOffice2Icon className="mr-3 h-5" />
             </span>
             <span className="font-bold">
-              {location ? `${companyName}, ${location}` : companyName}
+              {location ? `${companyName}, ${location.cityName}` : companyName}
             </span>
           </div>
           <div className="ml-8 flex flex-row">
@@ -92,11 +92,11 @@ export default function OfferCard({
                 </span>
               </div>
             )}
-            {totalCompensation && (
+            {(base || stocks || bonus) && totalCompensation && (
               <div className="ml-8 flex flex-row font-light">
                 <p>
-                  Base / year: {base} ⋅ Stocks / year: {stocks} ⋅ Bonus / year:{' '}
-                  {bonus}
+                  Base / year: {base ?? 'N/A'} ⋅ Stocks / year:{' '}
+                  {stocks ?? 'N/A'} ⋅ Bonus / year: {bonus ?? 'N/A'}
                 </p>
               </div>
             )}
