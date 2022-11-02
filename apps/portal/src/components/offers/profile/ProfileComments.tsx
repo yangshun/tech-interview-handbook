@@ -110,10 +110,10 @@ export default function ProfileComments({
     );
   }
   return (
-    <div className="bh-white h-fit px-4 md:h-[calc(100vh-4.5rem)] md:overflow-y-auto">
-      <div className="bg-white pt-4 md:sticky md:top-0">
+    <div className="bh-white h-fit px-4 lg:h-[calc(100vh-4.5rem)] lg:overflow-y-auto">
+      <div className="bg-white pt-4 lg:sticky lg:top-0">
         <div className="flex justify-end">
-          <div className="grid w-fit space-y-2 md:grid-cols-1 lg:grid-cols-2 lg:space-y-0 lg:space-x-4">
+          <div className="grid w-fit space-y-2 lg:grid-cols-1 lg:grid-cols-2 lg:space-y-0 lg:space-x-4">
             <div className="col-span-1 flex justify-end">
               {isEditable && (
                 <Tooltip tooltipContent="Copy this link to edit your profile later">
@@ -210,7 +210,7 @@ export default function ProfileComments({
           />
         )}
       </div>
-      <div className="h-full w-full">
+      <div className="w-full">
         {replies?.map((reply: Reply) => (
           <ExpandableCommentCard
             key={reply.id}

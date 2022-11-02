@@ -202,9 +202,9 @@ export default function OfferProfile() {
         </div>
       )}
       {!getProfileQuery.isLoading && !getProfileQuery.isError && (
-        <div className="h-fuill flex grid w-full grid-cols-1 items-center justify-center divide-x overflow-y-auto md:grid-cols-3">
-          <div className="col-span-1 flex h-full flex-col divide-y md:col-span-2 md:overflow-y-auto">
-            <div className="h-fit md:sticky md:top-0">
+        <div className="w-full divide-x lg:flex">
+          <div className="divide-y lg:w-2/3">
+            <div className="h-fit">
               <ProfileHeader
                 background={background}
                 handleDelete={handleDelete}
@@ -226,7 +226,9 @@ export default function OfferProfile() {
               />
             </div>
           </div>
-          <div className="col-span-1 h-full bg-white">
+          <div
+            className="bg-white lg:fixed lg:right-0 lg:bottom-0 lg:w-1/3"
+            style={{ top: 64 }}>
             <ProfileComments
               isDisabled={deleteMutation.isLoading}
               isEditable={isEditable}

@@ -1,7 +1,8 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { DocumentDuplicateIcon } from '@heroicons/react/20/solid';
-import { BookmarkSquareIcon, CheckIcon } from '@heroicons/react/24/outline';
+import { BookmarkIcon as BookmarkOutlineIcon } from '@heroicons/react/24/outline';
+import { BookmarkIcon as BookmarkSolidIcon } from '@heroicons/react/24/solid';
 import { Button, TextInput, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
@@ -126,7 +127,7 @@ export default function OffersProfileSave({
           <div className="mt-6">
             <Button
               disabled={isSavedQuery.isLoading || isSaved}
-              icon={isSaved ? CheckIcon : BookmarkSquareIcon}
+              icon={isSaved ? BookmarkSolidIcon : BookmarkOutlineIcon}
               isLoading={saveMutation.isLoading || isSavedQuery.isLoading}
               label={isSaved ? 'Added to account' : 'Add to your account'}
               size="sm"

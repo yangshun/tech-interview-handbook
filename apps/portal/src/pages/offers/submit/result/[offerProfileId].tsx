@@ -78,7 +78,7 @@ export default function OffersSubmissionResult() {
         </div>
       )}
       {!getAnalysis.isLoading && (
-        <div ref={pageRef} className="w-full overflow-y-scroll">
+        <div ref={pageRef} className="w-full">
           <div className="flex justify-center">
             <div className="block w-full max-w-screen-md overflow-hidden rounded-lg sm:shadow-lg md:my-10">
               <div className="flex justify-center bg-slate-100 px-4 py-4 sm:px-6 lg:px-8">
