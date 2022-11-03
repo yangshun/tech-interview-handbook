@@ -168,6 +168,7 @@ export const offersProfileRouter = createRouter()
             include: {
               companyAnalysis: {
                 include: {
+                  company: true,
                   topSimilarOffers: {
                     include: {
                       company: true,
@@ -218,6 +219,7 @@ export const offersProfileRouter = createRouter()
               },
               overallAnalysis: {
                 include: {
+                  company: true,
                   topSimilarOffers: {
                     include: {
                       company: true,
@@ -425,8 +427,8 @@ export const offersProfileRouter = createRouter()
                             level: x.level,
                             location: {
                               connect: {
-                                id: x.cityId
-                              }
+                                id: x.cityId,
+                              },
                             },
                             title: x.title,
                             totalCompensation:
@@ -481,9 +483,9 @@ export const offersProfileRouter = createRouter()
                           location: {
                             connect: {
                               where: {
-                                id: x.cityId
-                              }
-                            }
+                                id: x.cityId,
+                              },
+                            },
                           },
                           title: x.title,
                           totalCompensation:
@@ -539,9 +541,9 @@ export const offersProfileRouter = createRouter()
                             location: {
                               connect: {
                                 where: {
-                                  id: x.cityId
-                                }
-                              }
+                                  id: x.cityId,
+                                },
+                              },
                             },
                             monthlySalary:
                               x.monthlySalary != null
@@ -595,9 +597,9 @@ export const offersProfileRouter = createRouter()
                           location: {
                             connect: {
                               where: {
-                                id: x.cityId
-                              }
-                            }
+                                id: x.cityId,
+                              },
+                            },
                           },
                           monthlySalary:
                             x.monthlySalary != null
@@ -680,8 +682,8 @@ export const offersProfileRouter = createRouter()
                     jobType: x.jobType,
                     location: {
                       connect: {
-                        id: x.cityId
-                      }
+                        id: x.cityId,
+                      },
                     },
                     monthYearReceived: x.monthYearReceived,
                     negotiationStrategy: x.negotiationStrategy,
@@ -724,8 +726,8 @@ export const offersProfileRouter = createRouter()
                     jobType: x.jobType,
                     location: {
                       connect: {
-                        id: x.cityId
-                      }
+                        id: x.cityId,
+                      },
                     },
                     monthYearReceived: x.monthYearReceived,
                     negotiationStrategy: x.negotiationStrategy,
@@ -1074,8 +1076,8 @@ export const offersProfileRouter = createRouter()
                             level: exp.level,
                             location: {
                               connect: {
-                                id: exp.cityId
-                              }
+                                id: exp.cityId,
+                              },
                             },
                             title: exp.title,
                             totalCompensation: exp.totalCompensation
@@ -1145,8 +1147,8 @@ export const offersProfileRouter = createRouter()
                           level: exp.level,
                           location: {
                             connect: {
-                              id: exp.cityId
-                            }
+                              id: exp.cityId,
+                            },
                           },
                           title: exp.title,
                           totalCompensation: {
@@ -1213,8 +1215,8 @@ export const offersProfileRouter = createRouter()
                           level: exp.level,
                           location: {
                             connect: {
-                              id: exp.cityId
-                            }
+                              id: exp.cityId,
+                            },
                           },
                           title: exp.title,
                         },
@@ -1256,8 +1258,8 @@ export const offersProfileRouter = createRouter()
                         level: exp.level,
                         location: {
                           connect: {
-                            id: exp.cityId
-                          }
+                            id: exp.cityId,
+                          },
                         },
                         title: exp.title,
                       },
@@ -1305,8 +1307,8 @@ export const offersProfileRouter = createRouter()
                             jobType: exp.jobType,
                             location: {
                               connect: {
-                                id: exp.cityId
-                              }
+                                id: exp.cityId,
+                              },
                             },
                             monthlySalary: {
                               create: {
@@ -1370,8 +1372,8 @@ export const offersProfileRouter = createRouter()
                           jobType: exp.jobType,
                           location: {
                             connect: {
-                              id: exp.cityId
-                            }
+                              id: exp.cityId,
+                            },
                           },
                           monthlySalary: {
                             create: {
@@ -1437,7 +1439,7 @@ export const offersProfileRouter = createRouter()
                           location: {
                             connect: {
                               id: exp.cityId,
-                            }
+                            },
                           },
                           title: exp.title,
                         },
@@ -1477,8 +1479,8 @@ export const offersProfileRouter = createRouter()
                         jobType: exp.jobType,
                         location: {
                           connect: {
-                            id: exp.cityId
-                          }
+                            id: exp.cityId,
+                          },
                         },
                         title: exp.title,
                       },
@@ -1584,8 +1586,8 @@ export const offersProfileRouter = createRouter()
                 comments: offerToUpdate.comments,
                 company: {
                   connect: {
-                    id: offerToUpdate.companyId
-                  }
+                    id: offerToUpdate.companyId,
+                  },
                 },
                 jobType:
                   offerToUpdate.jobType === JobType.FULLTIME
@@ -1593,8 +1595,8 @@ export const offersProfileRouter = createRouter()
                     : JobType.INTERN,
                 location: {
                   connect: {
-                    id: offerToUpdate.cityId
-                  }
+                    id: offerToUpdate.cityId,
+                  },
                 },
                 monthYearReceived: offerToUpdate.monthYearReceived,
                 negotiationStrategy: offerToUpdate.negotiationStrategy,
@@ -1820,8 +1822,8 @@ export const offersProfileRouter = createRouter()
                       jobType: offerToUpdate.jobType,
                       location: {
                         connect: {
-                          id: offerToUpdate.cityId
-                        }
+                          id: offerToUpdate.cityId,
+                        },
                       },
                       monthYearReceived: offerToUpdate.monthYearReceived,
                       negotiationStrategy: offerToUpdate.negotiationStrategy,
@@ -1878,8 +1880,8 @@ export const offersProfileRouter = createRouter()
                       jobType: offerToUpdate.jobType,
                       location: {
                         connect: {
-                          id: offerToUpdate.cityId
-                        }
+                          id: offerToUpdate.cityId,
+                        },
                       },
                       monthYearReceived: offerToUpdate.monthYearReceived,
                       negotiationStrategy: offerToUpdate.negotiationStrategy,

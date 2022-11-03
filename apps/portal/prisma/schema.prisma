@@ -104,6 +104,7 @@ model Company {
   questionsQuestionEncounter QuestionsQuestionEncounter[]
   OffersExperience           OffersExperience[]
   OffersOffer                OffersOffer[]
+  OffersAnalysisUnit         OffersAnalysisUnit[]
 }
 
 model Country {
@@ -418,7 +419,9 @@ model OffersAnalysis {
 model OffersAnalysisUnit {
   id String @id @default(cuid())
 
-  companyName       String
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId String
+
   percentile        Float
   noOfSimilarOffers Int
   topSimilarOffers  OffersOffer[]

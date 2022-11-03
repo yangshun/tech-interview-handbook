@@ -292,7 +292,7 @@ export const generateAnalysis = async (params: {
           : similarCompanyOffers;
 
       return {
-        companyName: companyOffer.company.name,
+        companyId: companyOffer.companyId,
         noOfSimilarOffers: noOfSimilarCompanyOffers,
         percentile: companyPercentile,
         topSimilarOffers: topPercentileCompanyOffers,
@@ -329,7 +329,11 @@ export const generateAnalysis = async (params: {
       companyAnalysis: {
         create: companyAnalysis.map((analysisUnit) => {
           return {
-            companyName: analysisUnit.companyName,
+            company: {
+              connect: {
+                id: analysisUnit.companyId,
+              },
+            },
             noOfSimilarOffers: analysisUnit.noOfSimilarOffers,
             percentile: analysisUnit.percentile,
             topSimilarOffers: {
@@ -342,7 +346,11 @@ export const generateAnalysis = async (params: {
       },
       overallAnalysis: {
         create: {
-          companyName: overallHighestOffer.company.name,
+          company: {
+            connect: {
+              id: overallHighestOffer.companyId,
+            },
+          },
           noOfSimilarOffers,
           percentile: overallPercentile,
           topSimilarOffers: {
@@ -366,6 +374,7 @@ export const generateAnalysis = async (params: {
     include: {
       companyAnalysis: {
         include: {
+          company: true,
           topSimilarOffers: {
             include: {
               company: true,
@@ -416,6 +425,7 @@ export const generateAnalysis = async (params: {
       },
       overallAnalysis: {
         include: {
+          company: true,
           topSimilarOffers: {
             include: {
               company: true,
