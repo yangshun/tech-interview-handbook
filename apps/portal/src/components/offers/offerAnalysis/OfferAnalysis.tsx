@@ -109,13 +109,13 @@ export default function OfferAnalysis({
 
   return (
     <div>
-      {isError && (
+      {isError ? (
         <p className="m-10 text-center">
           An error occurred while generating profile analysis.
         </p>
-      )}
-      {isLoading && <Spinner className="m-10" display="block" size="lg" />}
-      {!isError && !isLoading && (
+      ) : isLoading ? (
+        <Spinner className="m-10" display="block" size="lg" />
+      ) : (
         <div>
           <Tabs
             label="Result Navigation"

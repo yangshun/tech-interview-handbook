@@ -3,11 +3,13 @@ import {
   BuildingOfficeIcon,
   MapPinIcon,
 } from '@heroicons/react/20/solid';
+import { JobType } from '@prisma/client';
 
 import { JobTypeLabel } from '~/components/offers/constants';
 import type { OfferDisplayData } from '~/components/offers/types';
 
 import { getLocationDisplayText } from '~/utils/offers/string';
+import { getDurationDisplayText } from '~/utils/offers/time';
 
 type Props = Readonly<{
   offer: OfferDisplayData;
@@ -75,9 +77,9 @@ export default function OfferCard({
                 <p>{receivedMonth}</p>
               </div>
             )}
-            {duration && (
+            {!!duration && (
               <div className="text-sm text-slate-500">
-                <p>{`${duration} months`}</p>
+                <p>{getDurationDisplayText(duration)}</p>
               </div>
             )}
           </div>
@@ -99,24 +101,27 @@ export default function OfferCard({
     return (
       <div className="border-t border-slate-200 px-4 py-5 sm:px-6">
         <dl className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4">
-          {totalCompensation && (
-            <div className="col-span-1">
-              <dt className="text-sm font-medium text-slate-500">
-                Total Compensation
-              </dt>
-              <dd className="mt-1 text-sm text-slate-900">
-                {totalCompensation}
-              </dd>
-            </div>
-          )}
-          {monthlySalary && (
-            <div className="col-span-1">
-              <dt className="text-sm font-medium text-slate-500">
-                Monthly Salary
-              </dt>
-              <dd className="mt-1 text-sm text-slate-900">{monthlySalary}</dd>
-            </div>
-          )}
+          {jobType === JobType.FULLTIME
+            ? totalCompensation && (
+                <div className="col-span-1">
+                  <dt className="text-sm font-medium text-slate-500">
+                    Total Compensation
+                  </dt>
+                  <dd className="mt-1 text-sm text-slate-900">
+                    {totalCompensation}
+                  </dd>
+                </div>
+              )
+            : monthlySalary && (
+                <div className="col-span-1">
+                  <dt className="text-sm font-medium text-slate-500">
+                    Monthly Salary
+                  </dt>
+                  <dd className="mt-1 text-sm text-slate-900">
+                    {monthlySalary}
+                  </dd>
+                </div>
+              )}
           {base && (
             <div className="col-span-1">
               <dt className="text-sm font-medium text-slate-500">
