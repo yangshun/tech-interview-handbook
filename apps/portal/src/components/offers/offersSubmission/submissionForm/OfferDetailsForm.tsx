@@ -22,20 +22,16 @@ import {
   defaultFullTimeOfferValues,
   defaultInternshipOfferValues,
 } from '../OffersSubmissionForm';
-import {
-  emptyOption,
-  FieldError,
-  internshipCycleOptions,
-  yearOptions,
-} from '../../constants';
+import { FieldError, JobTypeLabel } from '../../constants';
 import FormMonthYearPicker from '../../forms/FormMonthYearPicker';
 import FormSection from '../../forms/FormSection';
 import FormSelect from '../../forms/FormSelect';
 import FormTextArea from '../../forms/FormTextArea';
 import FormTextInput from '../../forms/FormTextInput';
+import { InternshipCycleOptions } from '../../InternshipCycles';
 import JobTypeTabs from '../../JobTypeTabs';
 import type { OfferFormData } from '../../types';
-import { JobTypeLabel } from '../../types';
+import { FutureYearsOptions } from '../../Years';
 import {
   Currency,
   CURRENCY_OPTIONS,
@@ -384,8 +380,7 @@ function InternshipOfferDetailsForm({
             display="block"
             errorMessage={offerFields?.offersIntern?.internshipCycle?.message}
             label="Internship Cycle"
-            options={internshipCycleOptions}
-            placeholder={emptyOption}
+            options={InternshipCycleOptions}
             required={true}
             {...register(`offers.${index}.offersIntern.internshipCycle`, {
               required: FieldError.REQUIRED,
@@ -395,8 +390,7 @@ function InternshipOfferDetailsForm({
             display="block"
             errorMessage={offerFields?.offersIntern?.startYear?.message}
             label="Internship Year"
-            options={yearOptions}
-            placeholder={emptyOption}
+            options={FutureYearsOptions}
             required={true}
             {...register(`offers.${index}.offersIntern.startYear`, {
               required: FieldError.REQUIRED,
@@ -522,14 +516,11 @@ function OfferDetailsFormArray({
   );
 }
 
-type OfferDetailsFormProps = Readonly<{
-  defaultJobType?: JobType;
-}>;
-
-export default function OfferDetailsForm({
-  defaultJobType = JobType.FULLTIME,
-}: OfferDetailsFormProps) {
-  const [jobType, setJobType] = useState(defaultJobType);
+export default function OfferDetailsForm() {
+  const watchJobType = useWatch({
+    name: `offers.0.jobType`,
+  });
+  const [jobType, setJobType] = useState(watchJobType as JobType);
   const [isDialogOpen, setDialogOpen] = useState(false);
   const { control } = useFormContext();
   const fieldArrayValues = useFieldArray({ control, name: 'offers' });
@@ -576,8 +567,8 @@ export default function OfferDetailsForm({
             label="Switch"
             variant="primary"
             onClick={() => {
-              toggleJobType();
               setDialogOpen(false);
+              toggleJobType();
             }}
           />
         }

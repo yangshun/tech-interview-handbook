@@ -4,7 +4,11 @@ import { Currency } from './CurrencyEnum';
 
 export const baseCurrencyString = Currency.USD.toString();
 
-export function convertMoneyToString({ currency, value }: Money) {
+export function convertMoneyToString(money: Money | undefined) {
+  if (!money) {
+    return '-';
+  }
+  const { currency, value } = money;
   if (!value) {
     return '-';
   }

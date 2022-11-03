@@ -9,10 +9,11 @@ import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
 import { HorizontalDivider } from '~/../../../packages/ui/dist';
 import { convertMoneyToString } from '~/utils/offers/currency';
+import { getCompanyDisplayText } from '~/utils/offers/string';
 import { formatDate } from '~/utils/offers/time';
 
+import { JobTypeLabel } from '../constants';
 import ProfilePhotoHolder from '../profile/ProfilePhotoHolder';
-import { JobTypeLabel } from '../types';
 
 import type { AnalysisOffer } from '~/types/offers';
 
@@ -69,7 +70,7 @@ export default function OfferProfileCard({
             {getLabelForJobTitleType(title as JobTitleType)}{' '}
             {`(${JobTypeLabel[jobType]})`}
           </p>
-          <p>{`Company: ${company.name}, ${location}`}</p>
+          <p>{`Company: ${getCompanyDisplayText(company.name, location)}`}</p>
           {level && <p>Level: {level}</p>}
         </div>
         <div className="col-span-1 row-span-3">

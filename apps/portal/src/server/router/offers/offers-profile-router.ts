@@ -972,7 +972,19 @@ export const offersProfileRouter = createRouter()
 
         for (const exp of input.background.experiences) {
           if (exp.id) {
-            // Update existing experience
+            const currentExp = await ctx.prisma.offersExperience.findFirst({
+              where: {
+                id: exp.id
+              }
+            })
+
+            if (!currentExp) {
+              throw new trpc.TRPCError({
+                code: 'NOT_FOUND',
+                message: 'Experience does not exist',
+              });
+            }
+
             await ctx.prisma.offersExperience.update({
               data: {
                 companyId: exp.companyId, // TODO: check if can change with connect or whether there is a difference
@@ -984,73 +996,164 @@ export const offersProfileRouter = createRouter()
                 id: exp.id,
               },
             });
-
-            if (exp.monthlySalary) {
-              await ctx.prisma.offersExperience.update({
-                data: {
-                  monthlySalary: {
-                    upsert: {
-                      create: {
-                        baseCurrency: baseCurrencyString,
-                        baseValue: await convert(
-                          exp.monthlySalary.value,
-                          exp.monthlySalary.currency,
-                          baseCurrencyString,
-                        ),
-                        currency: exp.monthlySalary.currency,
-                        value: exp.monthlySalary.value,
-                      },
-                      update: {
-                        baseCurrency: baseCurrencyString,
-                        baseValue: await convert(
-                          exp.monthlySalary.value,
-                          exp.monthlySalary.currency,
-                          baseCurrencyString,
-                        ),
-                        currency: exp.monthlySalary.currency,
-                        value: exp.monthlySalary.value,
-                      },
-                    },
-                  },
-                },
-                where: {
-                  id: exp.id,
-                },
-              });
-            }
-
-            if (exp.totalCompensation) {
-              await ctx.prisma.offersExperience.update({
-                data: {
-                  totalCompensation: {
-                    upsert: {
-                      create: {
-                        baseCurrency: baseCurrencyString,
-                        baseValue: await convert(
-                          exp.totalCompensation.value,
-                          exp.totalCompensation.currency,
-                          baseCurrencyString,
-                        ),
-                        currency: exp.totalCompensation.currency,
-                        value: exp.totalCompensation.value,
-                      },
-                      update: {
-                        baseCurrency: baseCurrencyString,
-                        baseValue: await convert(
-                          exp.totalCompensation.value,
-                          exp.totalCompensation.currency,
-                          baseCurrencyString,
-                        ),
-                        currency: exp.totalCompensation.currency,
-                        value: exp.totalCompensation.value,
+            if (currentExp.jobType === exp.jobType) {
+              // Update existing experience
+              if (exp.monthlySalary) {
+                await ctx.prisma.offersExperience.update({
+                  data: {
+                    monthlySalary: {
+                      upsert: {
+                        create: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            exp.monthlySalary.value,
+                            exp.monthlySalary.currency,
+                            baseCurrencyString,
+                          ),
+                          currency: exp.monthlySalary.currency,
+                          value: exp.monthlySalary.value,
+                        },
+                        update: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            exp.monthlySalary.value,
+                            exp.monthlySalary.currency,
+                            baseCurrencyString,
+                          ),
+                          currency: exp.monthlySalary.currency,
+                          value: exp.monthlySalary.value,
+                        },
                       },
                     },
                   },
+                  where: {
+                    id: exp.id,
+                  },
+                });
+              }
+
+              if (exp.totalCompensation) {
+                await ctx.prisma.offersExperience.update({
+                  data: {
+                    totalCompensation: {
+                      upsert: {
+                        create: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            exp.totalCompensation.value,
+                            exp.totalCompensation.currency,
+                            baseCurrencyString,
+                          ),
+                          currency: exp.totalCompensation.currency,
+                          value: exp.totalCompensation.value,
+                        },
+                        update: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            exp.totalCompensation.value,
+                            exp.totalCompensation.currency,
+                            baseCurrencyString,
+                          ),
+                          currency: exp.totalCompensation.currency,
+                          value: exp.totalCompensation.value,
+                        },
+                      },
+                    },
+                  },
+                  where: {
+                    id: exp.id,
+                  },
+                });
+              }
+            } else if (exp.jobType === JobType.INTERN) {
+              // Add 1 remove the other
+              if (exp.monthlySalary) {
+                await ctx.prisma.offersExperience.update({
+                  data: {
+                    monthlySalary: {
+                      upsert: {
+                        create: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            exp.monthlySalary.value,
+                            exp.monthlySalary.currency,
+                            baseCurrencyString,
+                          ),
+                          currency: exp.monthlySalary.currency,
+                          value: exp.monthlySalary.value,
+                        },
+                        update: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            exp.monthlySalary.value,
+                            exp.monthlySalary.currency,
+                            baseCurrencyString,
+                          ),
+                          currency: exp.monthlySalary.currency,
+                          value: exp.monthlySalary.value,
+                        },
+                      },
+                    },
+                  },
+                  where: {
+                    id: exp.id,
+                  },
+                });
+              }
+
+              await ctx.prisma.offersExperience.update({
+                data: {
+                  totalCompensation: undefined,
+                  totalCompensationId: null,
                 },
                 where: {
-                  id: exp.id,
-                },
-              });
+                  id: exp.id
+                }
+              })
+            } else if (exp.jobType === JobType.FULLTIME) {
+                if (exp.totalCompensation) {
+                  await ctx.prisma.offersExperience.update({
+                    data: {
+                      totalCompensation: {
+                        upsert: {
+                          create: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              exp.totalCompensation.value,
+                              exp.totalCompensation.currency,
+                              baseCurrencyString,
+                            ),
+                            currency: exp.totalCompensation.currency,
+                            value: exp.totalCompensation.value,
+                          },
+                          update: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              exp.totalCompensation.value,
+                              exp.totalCompensation.currency,
+                              baseCurrencyString,
+                            ),
+                            currency: exp.totalCompensation.currency,
+                            value: exp.totalCompensation.value,
+                          },
+                        },
+                      },
+                    },
+                    where: {
+                      id: exp.id,
+                    },
+                  });
+                }
+
+                await ctx.prisma.offersExperience.update({
+                  data: {
+                    monthlySalary: undefined,
+                    monthlySalaryId: null
+                  },
+                  where: {
+                    id: exp.id
+                  }
+                })
             }
           } else if (!exp.id) {
             // Create new experience
@@ -1581,6 +1684,18 @@ export const offersProfileRouter = createRouter()
         for (const offerToUpdate of input.offers) {
           if (offerToUpdate.id) {
             // Update existing offer
+            const currentOffer = await ctx.prisma.offersOffer.findFirst({
+              where: {
+                id: offerToUpdate.id
+              }
+            })
+
+            if (!currentOffer) {
+              throw new trpc.TRPCError({
+                code: 'NOT_FOUND',
+                message: 'Offer to update does not exist',
+              });
+            }
             await ctx.prisma.offersOffer.update({
               data: {
                 comments: offerToUpdate.comments,
@@ -1606,198 +1721,414 @@ export const offersProfileRouter = createRouter()
               },
             });
 
-            if (offerToUpdate.offersIntern?.monthlySalary != null) {
-              await ctx.prisma.offersIntern.update({
-                data: {
-                  internshipCycle:
-                    offerToUpdate.offersIntern.internshipCycle ?? undefined,
-                  monthlySalary: {
-                    upsert: {
-                      create: {
-                        baseCurrency: baseCurrencyString,
-                        baseValue: await convert(
-                          offerToUpdate.offersIntern.monthlySalary.value,
-                          offerToUpdate.offersIntern.monthlySalary.currency,
-                          baseCurrencyString,
-                        ),
-                        currency:
-                          offerToUpdate.offersIntern.monthlySalary.currency,
-                        value: offerToUpdate.offersIntern.monthlySalary.value,
-                      },
-                      update: {
-                        baseCurrency: baseCurrencyString,
-                        baseValue: await convert(
-                          offerToUpdate.offersIntern.monthlySalary.value,
-                          offerToUpdate.offersIntern.monthlySalary.currency,
-                          baseCurrencyString,
-                        ),
-                        currency:
-                          offerToUpdate.offersIntern.monthlySalary.currency,
-                        value: offerToUpdate.offersIntern.monthlySalary.value,
+            if (currentOffer.jobType === offerToUpdate.jobType) {
+              if (offerToUpdate.offersIntern?.monthlySalary != null) {
+                await ctx.prisma.offersIntern.update({
+                  data: {
+                    internshipCycle:
+                      offerToUpdate.offersIntern.internshipCycle ?? undefined,
+                    monthlySalary: {
+                      upsert: {
+                        create: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            offerToUpdate.offersIntern.monthlySalary.value,
+                            offerToUpdate.offersIntern.monthlySalary.currency,
+                            baseCurrencyString,
+                          ),
+                          currency:
+                            offerToUpdate.offersIntern.monthlySalary.currency,
+                          value: offerToUpdate.offersIntern.monthlySalary.value,
+                        },
+                        update: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            offerToUpdate.offersIntern.monthlySalary.value,
+                            offerToUpdate.offersIntern.monthlySalary.currency,
+                            baseCurrencyString,
+                          ),
+                          currency:
+                            offerToUpdate.offersIntern.monthlySalary.currency,
+                          value: offerToUpdate.offersIntern.monthlySalary.value,
+                        },
                       },
                     },
+                    startYear: offerToUpdate.offersIntern.startYear ?? undefined,
+                    title: offerToUpdate.offersIntern.title,
                   },
-                  startYear: offerToUpdate.offersIntern.startYear ?? undefined,
-                  title: offerToUpdate.offersIntern.title,
-                },
-                where: {
-                  id: offerToUpdate.offersIntern.id,
-                },
-              });
-            }
+                  where: {
+                    id: offerToUpdate.offersIntern.id,
+                  },
+                });
+              }
 
-            if (offerToUpdate.offersFullTime?.totalCompensation != null) {
-              await ctx.prisma.offersFullTime.update({
+              if (offerToUpdate.offersFullTime?.totalCompensation != null) {
+                await ctx.prisma.offersFullTime.update({
+                  data: {
+                    level: offerToUpdate.offersFullTime.level ?? undefined,
+                    title: offerToUpdate.offersFullTime.title,
+                  },
+                  where: {
+                    id: offerToUpdate.offersFullTime.id,
+                  },
+                });
+                if (offerToUpdate.offersFullTime.baseSalary != null) {
+                  await ctx.prisma.offersFullTime.update({
+                    data: {
+                      baseSalary: {
+                        upsert: {
+                          create: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.baseSalary.value,
+                              offerToUpdate.offersFullTime.baseSalary.currency,
+                              baseCurrencyString,
+                            ),
+                            currency:
+                              offerToUpdate.offersFullTime.baseSalary.currency,
+                            value: offerToUpdate.offersFullTime.baseSalary.value,
+                          },
+                          update: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.baseSalary.value,
+                              offerToUpdate.offersFullTime.baseSalary.currency,
+                              baseCurrencyString,
+                            ),
+                            currency:
+                              offerToUpdate.offersFullTime.baseSalary.currency,
+                            value: offerToUpdate.offersFullTime.baseSalary.value,
+                          },
+                        },
+                      },
+                    },
+                    where: {
+                      id: offerToUpdate.offersFullTime.id,
+                    },
+                  });
+                }
+                if (offerToUpdate.offersFullTime.bonus != null) {
+                  await ctx.prisma.offersFullTime.update({
+                    data: {
+                      bonus: {
+                        upsert: {
+                          create: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.bonus.value,
+                              offerToUpdate.offersFullTime.bonus.currency,
+                              baseCurrencyString,
+                            ),
+                            currency: offerToUpdate.offersFullTime.bonus.currency,
+                            value: offerToUpdate.offersFullTime.bonus.value,
+                          },
+                          update: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.bonus.value,
+                              offerToUpdate.offersFullTime.bonus.currency,
+                              baseCurrencyString,
+                            ),
+                            currency: offerToUpdate.offersFullTime.bonus.currency,
+                            value: offerToUpdate.offersFullTime.bonus.value,
+                          },
+                        },
+                      },
+                    },
+                    where: {
+                      id: offerToUpdate.offersFullTime.id,
+                    },
+                  });
+                }
+                if (offerToUpdate.offersFullTime.stocks != null) {
+                  await ctx.prisma.offersFullTime.update({
+                    data: {
+                      stocks: {
+                        upsert: {
+                          create: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.stocks.value,
+                              offerToUpdate.offersFullTime.stocks.currency,
+                              baseCurrencyString,
+                            ),
+                            currency:
+                              offerToUpdate.offersFullTime.stocks.currency,
+                            value: offerToUpdate.offersFullTime.stocks.value,
+                          },
+                          update: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.stocks.value,
+                              offerToUpdate.offersFullTime.stocks.currency,
+                              baseCurrencyString,
+                            ),
+                            currency:
+                              offerToUpdate.offersFullTime.stocks.currency,
+                            value: offerToUpdate.offersFullTime.stocks.value,
+                          },
+                        },
+                      },
+                    },
+                    where: {
+                      id: offerToUpdate.offersFullTime.id,
+                    },
+                  });
+                }
+                await ctx.prisma.offersFullTime.update({
+                  data: {
+                    totalCompensation: {
+                      upsert: {
+                        create: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            offerToUpdate.offersFullTime.totalCompensation.value,
+                            offerToUpdate.offersFullTime.totalCompensation
+                              .currency,
+                            baseCurrencyString,
+                          ),
+                          currency:
+                            offerToUpdate.offersFullTime.totalCompensation
+                              .currency,
+                          value:
+                            offerToUpdate.offersFullTime.totalCompensation.value,
+                        },
+                        update: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            offerToUpdate.offersFullTime.totalCompensation.value,
+                            offerToUpdate.offersFullTime.totalCompensation
+                              .currency,
+                            baseCurrencyString,
+                          ),
+                          currency:
+                            offerToUpdate.offersFullTime.totalCompensation
+                              .currency,
+                          value:
+                            offerToUpdate.offersFullTime.totalCompensation.value,
+                        },
+                      },
+                    },
+                  },
+                  where: {
+                    id: offerToUpdate.offersFullTime.id,
+                  },
+                });
+              }
+            } else if (currentOffer.jobType === JobType.FULLTIME) {
+              if (offerToUpdate.offersFullTime?.totalCompensation != null) {
+                await ctx.prisma.offersFullTime.update({
+                  data: {
+                    level: offerToUpdate.offersFullTime.level ?? undefined,
+                    title: offerToUpdate.offersFullTime.title,
+                  },
+                  where: {
+                    id: offerToUpdate.offersFullTime.id,
+                  },
+                });
+                if (offerToUpdate.offersFullTime.baseSalary != null) {
+                  await ctx.prisma.offersFullTime.update({
+                    data: {
+                      baseSalary: {
+                        upsert: {
+                          create: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.baseSalary.value,
+                              offerToUpdate.offersFullTime.baseSalary.currency,
+                              baseCurrencyString,
+                            ),
+                            currency:
+                              offerToUpdate.offersFullTime.baseSalary.currency,
+                            value: offerToUpdate.offersFullTime.baseSalary.value,
+                          },
+                          update: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.baseSalary.value,
+                              offerToUpdate.offersFullTime.baseSalary.currency,
+                              baseCurrencyString,
+                            ),
+                            currency:
+                              offerToUpdate.offersFullTime.baseSalary.currency,
+                            value: offerToUpdate.offersFullTime.baseSalary.value,
+                          },
+                        },
+                      },
+                    },
+                    where: {
+                      id: offerToUpdate.offersFullTime.id,
+                    },
+                  });
+                }
+                if (offerToUpdate.offersFullTime.bonus != null) {
+                  await ctx.prisma.offersFullTime.update({
+                    data: {
+                      bonus: {
+                        upsert: {
+                          create: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.bonus.value,
+                              offerToUpdate.offersFullTime.bonus.currency,
+                              baseCurrencyString,
+                            ),
+                            currency: offerToUpdate.offersFullTime.bonus.currency,
+                            value: offerToUpdate.offersFullTime.bonus.value,
+                          },
+                          update: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.bonus.value,
+                              offerToUpdate.offersFullTime.bonus.currency,
+                              baseCurrencyString,
+                            ),
+                            currency: offerToUpdate.offersFullTime.bonus.currency,
+                            value: offerToUpdate.offersFullTime.bonus.value,
+                          },
+                        },
+                      },
+                    },
+                    where: {
+                      id: offerToUpdate.offersFullTime.id,
+                    },
+                  });
+                }
+                if (offerToUpdate.offersFullTime.stocks != null) {
+                  await ctx.prisma.offersFullTime.update({
+                    data: {
+                      stocks: {
+                        upsert: {
+                          create: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.stocks.value,
+                              offerToUpdate.offersFullTime.stocks.currency,
+                              baseCurrencyString,
+                            ),
+                            currency:
+                              offerToUpdate.offersFullTime.stocks.currency,
+                            value: offerToUpdate.offersFullTime.stocks.value,
+                          },
+                          update: {
+                            baseCurrency: baseCurrencyString,
+                            baseValue: await convert(
+                              offerToUpdate.offersFullTime.stocks.value,
+                              offerToUpdate.offersFullTime.stocks.currency,
+                              baseCurrencyString,
+                            ),
+                            currency:
+                              offerToUpdate.offersFullTime.stocks.currency,
+                            value: offerToUpdate.offersFullTime.stocks.value,
+                          },
+                        },
+                      },
+                    },
+                    where: {
+                      id: offerToUpdate.offersFullTime.id,
+                    },
+                  });
+                }
+                await ctx.prisma.offersFullTime.update({
+                  data: {
+                    totalCompensation: {
+                      upsert: {
+                        create: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            offerToUpdate.offersFullTime.totalCompensation.value,
+                            offerToUpdate.offersFullTime.totalCompensation
+                              .currency,
+                            baseCurrencyString,
+                          ),
+                          currency:
+                            offerToUpdate.offersFullTime.totalCompensation
+                              .currency,
+                          value:
+                            offerToUpdate.offersFullTime.totalCompensation.value,
+                        },
+                        update: {
+                          baseCurrency: baseCurrencyString,
+                          baseValue: await convert(
+                            offerToUpdate.offersFullTime.totalCompensation.value,
+                            offerToUpdate.offersFullTime.totalCompensation
+                              .currency,
+                            baseCurrencyString,
+                          ),
+                          currency:
+                            offerToUpdate.offersFullTime.totalCompensation
+                              .currency,
+                          value:
+                            offerToUpdate.offersFullTime.totalCompensation.value,
+                        },
+                      },
+                    },
+                  },
+                  where: {
+                    id: offerToUpdate.offersFullTime.id,
+                  },
+                });
+              }
+
+              await ctx.prisma.offersOffer.update({
                 data: {
-                  level: offerToUpdate.offersFullTime.level ?? undefined,
-                  title: offerToUpdate.offersFullTime.title,
+                  offersIntern: undefined,
+                  offersInternId: null
                 },
                 where: {
-                  id: offerToUpdate.offersFullTime.id,
-                },
-              });
-              if (offerToUpdate.offersFullTime.baseSalary != null) {
-                await ctx.prisma.offersFullTime.update({
+                  id: offerToUpdate.id
+                }
+              })
+            } else if (currentOffer.jobType === JobType.INTERN) {
+              if (offerToUpdate.offersIntern?.monthlySalary != null) {
+                await ctx.prisma.offersIntern.update({
                   data: {
-                    baseSalary: {
+                    internshipCycle:
+                      offerToUpdate.offersIntern.internshipCycle ?? undefined,
+                    monthlySalary: {
                       upsert: {
                         create: {
                           baseCurrency: baseCurrencyString,
                           baseValue: await convert(
-                            offerToUpdate.offersFullTime.baseSalary.value,
-                            offerToUpdate.offersFullTime.baseSalary.currency,
+                            offerToUpdate.offersIntern.monthlySalary.value,
+                            offerToUpdate.offersIntern.monthlySalary.currency,
                             baseCurrencyString,
                           ),
                           currency:
-                            offerToUpdate.offersFullTime.baseSalary.currency,
-                          value: offerToUpdate.offersFullTime.baseSalary.value,
+                            offerToUpdate.offersIntern.monthlySalary.currency,
+                          value: offerToUpdate.offersIntern.monthlySalary.value,
                         },
                         update: {
                           baseCurrency: baseCurrencyString,
                           baseValue: await convert(
-                            offerToUpdate.offersFullTime.baseSalary.value,
-                            offerToUpdate.offersFullTime.baseSalary.currency,
+                            offerToUpdate.offersIntern.monthlySalary.value,
+                            offerToUpdate.offersIntern.monthlySalary.currency,
                             baseCurrencyString,
                           ),
                           currency:
-                            offerToUpdate.offersFullTime.baseSalary.currency,
-                          value: offerToUpdate.offersFullTime.baseSalary.value,
+                            offerToUpdate.offersIntern.monthlySalary.currency,
+                          value: offerToUpdate.offersIntern.monthlySalary.value,
                         },
                       },
                     },
+                    startYear: offerToUpdate.offersIntern.startYear ?? undefined,
+                    title: offerToUpdate.offersIntern.title,
                   },
                   where: {
-                    id: offerToUpdate.offersFullTime.id,
+                    id: offerToUpdate.offersIntern.id,
                   },
                 });
               }
-              if (offerToUpdate.offersFullTime.bonus != null) {
-                await ctx.prisma.offersFullTime.update({
-                  data: {
-                    bonus: {
-                      upsert: {
-                        create: {
-                          baseCurrency: baseCurrencyString,
-                          baseValue: await convert(
-                            offerToUpdate.offersFullTime.bonus.value,
-                            offerToUpdate.offersFullTime.bonus.currency,
-                            baseCurrencyString,
-                          ),
-                          currency: offerToUpdate.offersFullTime.bonus.currency,
-                          value: offerToUpdate.offersFullTime.bonus.value,
-                        },
-                        update: {
-                          baseCurrency: baseCurrencyString,
-                          baseValue: await convert(
-                            offerToUpdate.offersFullTime.bonus.value,
-                            offerToUpdate.offersFullTime.bonus.currency,
-                            baseCurrencyString,
-                          ),
-                          currency: offerToUpdate.offersFullTime.bonus.currency,
-                          value: offerToUpdate.offersFullTime.bonus.value,
-                        },
-                      },
-                    },
-                  },
-                  where: {
-                    id: offerToUpdate.offersFullTime.id,
-                  },
-                });
-              }
-              if (offerToUpdate.offersFullTime.stocks != null) {
-                await ctx.prisma.offersFullTime.update({
-                  data: {
-                    stocks: {
-                      upsert: {
-                        create: {
-                          baseCurrency: baseCurrencyString,
-                          baseValue: await convert(
-                            offerToUpdate.offersFullTime.stocks.value,
-                            offerToUpdate.offersFullTime.stocks.currency,
-                            baseCurrencyString,
-                          ),
-                          currency:
-                            offerToUpdate.offersFullTime.stocks.currency,
-                          value: offerToUpdate.offersFullTime.stocks.value,
-                        },
-                        update: {
-                          baseCurrency: baseCurrencyString,
-                          baseValue: await convert(
-                            offerToUpdate.offersFullTime.stocks.value,
-                            offerToUpdate.offersFullTime.stocks.currency,
-                            baseCurrencyString,
-                          ),
-                          currency:
-                            offerToUpdate.offersFullTime.stocks.currency,
-                          value: offerToUpdate.offersFullTime.stocks.value,
-                        },
-                      },
-                    },
-                  },
-                  where: {
-                    id: offerToUpdate.offersFullTime.id,
-                  },
-                });
-              }
-              await ctx.prisma.offersFullTime.update({
+
+              await ctx.prisma.offersOffer.update({
                 data: {
-                  totalCompensation: {
-                    upsert: {
-                      create: {
-                        baseCurrency: baseCurrencyString,
-                        baseValue: await convert(
-                          offerToUpdate.offersFullTime.totalCompensation.value,
-                          offerToUpdate.offersFullTime.totalCompensation
-                            .currency,
-                          baseCurrencyString,
-                        ),
-                        currency:
-                          offerToUpdate.offersFullTime.totalCompensation
-                            .currency,
-                        value:
-                          offerToUpdate.offersFullTime.totalCompensation.value,
-                      },
-                      update: {
-                        baseCurrency: baseCurrencyString,
-                        baseValue: await convert(
-                          offerToUpdate.offersFullTime.totalCompensation.value,
-                          offerToUpdate.offersFullTime.totalCompensation
-                            .currency,
-                          baseCurrencyString,
-                        ),
-                        currency:
-                          offerToUpdate.offersFullTime.totalCompensation
-                            .currency,
-                        value:
-                          offerToUpdate.offersFullTime.totalCompensation.value,
-                      },
-                    },
-                  },
+                  offersFullTime: undefined,
+                  offersFullTimeId: null
                 },
                 where: {
-                  id: offerToUpdate.offersFullTime.id,
-                },
-              });
+                  id: offerToUpdate.id
+                }
+              })
             }
           } else {
             // Create new offer

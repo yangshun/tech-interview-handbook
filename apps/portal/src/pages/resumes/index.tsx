@@ -395,7 +395,7 @@ export default function ResumeHomePage() {
                 leave="transition ease-in-out duration-300 transform"
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full">
-                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-scroll bg-white py-4 pb-12 shadow-xl">
+                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
                   <div className="flex items-center justify-between px-4">
                     <h2 className="text-lg font-medium text-slate-900">
                       Quick access
@@ -614,7 +614,7 @@ export default function ResumeHomePage() {
             </div>
           </div>
           <div className="relative lg:left-64 lg:w-[calc(100%-16rem)]">
-            <div className="lg:border-grey-200 sticky top-0 z-10 flex flex-wrap items-center justify-between pt-6 pb-2 lg:border-b">
+            <div className="lg:border-grey-200 sticky top-16 z-10 flex flex-wrap items-center justify-between bg-slate-50 pt-6 pb-2 lg:border-b">
               <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none xl:pb-0">
                 <div>
                   <Tabs
@@ -705,13 +705,13 @@ export default function ResumeHomePage() {
                 {getEmptyDataText(tabsValue, searchValue, userFilters)}
               </div>
             ) : (
-              <div className="h-[calc(100vh-9rem)] pb-10 lg:h-[calc(100vh-6rem)]">
+              <div>
                 <div className="h-[85%] overflow-y-auto">
                   <div>
                     <ResumeListItems resumes={getTabResumes()} />
                   </div>
                 </div>
-                <div className="flex h-[15%] items-center justify-center">
+                <div className="flex h-[15%] items-center justify-center p-4">
                   {getTabTotalPages() > 1 && (
                     <div>
                       <Pagination

@@ -6,6 +6,7 @@ import { Spinner, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import { ProfileDetailTab } from '~/components/offers/constants';
+import { HOME_URL } from '~/components/offers/constants';
 import ProfileComments from '~/components/offers/profile/ProfileComments';
 import ProfileDetails from '~/components/offers/profile/ProfileDetails';
 import ProfileHeader from '~/components/offers/profile/ProfileHeader';
@@ -13,7 +14,6 @@ import type {
   BackgroundDisplayData,
   OfferDisplayData,
 } from '~/components/offers/types';
-import { HOME_URL } from '~/components/offers/types';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
@@ -132,6 +132,7 @@ export default function OfferProfile() {
                   ? getLabelForJobTitleType(experience.title as JobTitleType)
                   : null,
                 jobType: experience.jobType || undefined,
+                location: experience.location,
                 monthlySalary: experience.monthlySalary
                   ? convertMoneyToString(experience.monthlySalary)
                   : null,
@@ -214,7 +215,7 @@ export default function OfferProfile() {
                 setSelectedTab={setSelectedTab}
               />
             </div>
-            <div className="pb-4">
+            <div>
               <ProfileDetails
                 analysis={analysis}
                 background={background}

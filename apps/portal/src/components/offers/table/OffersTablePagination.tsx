@@ -26,7 +26,7 @@ export default function OffersTablePagination({
         <div className="mb-2 text-sm font-normal text-slate-500 md:mb-0">
           Showing
           <span className="font-semibold text-slate-900">
-            {` ${startNumber} - ${endNumber} `}
+            {` ${endNumber > 0 ? startNumber : 0} - ${endNumber} `}
           </span>
           {`of `}
           <span className="font-semibold text-slate-900">

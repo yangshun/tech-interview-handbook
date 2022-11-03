@@ -1,14 +1,9 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
-import {
-  ChatBubbleBottomCenterIcon,
-  TrashIcon,
-} from '@heroicons/react/24/outline';
-import { Button, Dialog, HorizontalDivider, TextArea, useToast } from '@tih/ui';
+import { Button, Dialog, TextArea, useToast } from '@tih/ui';
 
 import { timeSinceNow } from '~/utils/offers/time';
-
-import { trpc } from '../../../../utils/trpc';
+import { trpc } from '~/utils/trpc';
 
 import type { Reply } from '~/types/offers';
 
@@ -125,80 +120,97 @@ export default function CommentCard({
   }
 
   return (
-    <>
-      <div className="flex pl-2">
-        <div className="flex w-full flex-col">
-          <div className="flex flex-row font-bold">
+    <div className="flex space-x-3">
+      {/* <div className="flex-shrink-0">
+        <img
+          alt=""
+          className="h-10 w-10 rounded-full"
+          src={`https://images.unsplash.com/photo-${comment.imageId}?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`}
+        />
+      </div> */}
+      <div>
+        <div className="text-sm">
+          <p className="font-medium text-slate-900">
             {user?.name ?? 'unknown user'}
-          </div>
-          <div className="mt-2 mb-2 flex flex-row ">{message}</div>
-          <div className="flex flex-row items-center justify-start space-x-4 ">
-            <div className="flex flex-col text-sm font-light text-slate-400">{`${timeSinceNow(
-              createdAt,
-            )} ago`}</div>
-            {replyLength > 0 && (
-              <div
-                className="text-primary-600 flex cursor-pointer flex-col text-sm hover:underline"
+          </p>
+        </div>
+        <div className="mt-1 text-sm text-slate-700">
+          <p className="break-all">{message}</p>
+        </div>
+        <div className="mt-2 space-x-2 text-sm">
+          <span className="font-medium text-slate-500">
+            {timeSinceNow(createdAt)} ago
+          </span>{' '}
+          <span className="font-medium text-slate-500">&middot;</span>{' '}
+          {replyLength > 0 && (
+            <>
+              <button
+                className="font-medium text-slate-900"
+                type="button"
                 onClick={handleExpanded}>
                 {isExpanded ? `Hide replies` : `View replies (${replyLength})`}
-              </div>
-            )}
-            {!disableReply && (
-              <div className="flex flex-col">
-                <Button
-                  icon={ChatBubbleBottomCenterIcon}
-                  isLabelHidden={true}
-                  label="Reply"
-                  size="sm"
-                  variant="tertiary"
-                  onClick={() => setIsReplying(!isReplying)}
-                />
-              </div>
-            )}
-            {deletable && (
-              <>
-                <Button
-                  disabled={deleteCommentMutation.isLoading}
-                  icon={TrashIcon}
-                  isLabelHidden={true}
-                  isLoading={deleteCommentMutation.isLoading}
-                  label="Delete"
-                  size="sm"
-                  variant="tertiary"
-                  onClick={() => setIsDialogOpen(true)}
-                />
-                {isDialogOpen && (
-                  <Dialog
-                    isShown={isDialogOpen}
-                    primaryButton={
-                      <Button
-                        display="block"
-                        label="Delete"
-                        variant="primary"
-                        onClick={() => {
-                          setIsDialogOpen(false);
-                          handleDelete();
-                        }}
-                      />
-                    }
-                    secondaryButton={
-                      <Button
-                        display="block"
-                        label="Cancel"
-                        variant="tertiary"
-                        onClick={() => setIsDialogOpen(false)}
-                      />
-                    }
-                    title="Are you sure you want to delete this comment?"
-                    onClose={() => setIsDialogOpen(false)}>
-                    <div>You cannot undo this operation.</div>
-                  </Dialog>
-                )}
-              </>
-            )}
-          </div>
-          {!disableReply && isReplying && (
-            <div className="mt-2 mr-2">
+              </button>
+              <span className="font-medium text-slate-500">&middot;</span>{' '}
+            </>
+          )}
+          {!disableReply && (
+            <>
+              <button
+                className="font-medium text-slate-900"
+                type="button"
+                onClick={() => setIsReplying(!isReplying)}>
+                Reply
+              </button>
+              <span className="font-medium text-slate-500">&middot;</span>{' '}
+            </>
+          )}
+          {deletable && (
+            <>
+              <button
+                className="font-medium text-slate-900"
+                disabled={deleteCommentMutation.isLoading}
+                type="button"
+                onClick={() => setIsDialogOpen(true)}>
+                {deleteCommentMutation.isLoading ? 'Deleting...' : 'Delete'}
+              </button>
+              {isDialogOpen && (
+                <Dialog
+                  isShown={isDialogOpen}
+                  primaryButton={
+                    <Button
+                      display="block"
+                      label="Delete"
+                      variant="primary"
+                      onClick={() => {
+                        setIsDialogOpen(false);
+                        handleDelete();
+                      }}
+                    />
+                  }
+                  secondaryButton={
+                    <Button
+                      display="block"
+                      label="Cancel"
+                      variant="tertiary"
+                      onClick={() => setIsDialogOpen(false)}
+                    />
+                  }
+                  title="Are you sure you want to delete this comment?"
+                  onClose={() => setIsDialogOpen(false)}>
+                  <div>You cannot undo this operation.</div>
+                </Dialog>
+              )}
+            </>
+          )}
+        </div>
+        {!disableReply && isReplying && (
+          <div className="mt-2 mr-2">
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                handleReply();
+              }}>
               <TextArea
                 isLabelHidden={true}
                 label="Comment"
@@ -225,11 +237,10 @@ export default function CommentCard({
                   />
                 </div>
               </div>
-            </div>
-          )}
-        </div>
+            </form>
+          </div>
+        )}
       </div>
-      <HorizontalDivider />
-    </>
+    </div>
   );
 }

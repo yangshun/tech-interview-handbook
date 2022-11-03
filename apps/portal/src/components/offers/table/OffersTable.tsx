@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { JobType } from '@prisma/client';
-import { DropdownMenu, Spinner } from '@tih/ui';
+import { DropdownMenu, Spinner, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTablePagination from '~/components/offers/table/OffersTablePagination';
@@ -66,6 +66,7 @@ export default function OffersTable({
     event?.preventDefault();
   }, [yoeCategory]);
 
+  const { showToast } = useToast();
   trpc.useQuery(
     [
       'offers.list',
@@ -81,8 +82,11 @@ export default function OffersTable({
       },
     ],
     {
-      onError: (err) => {
-        alert(err);
+      onError: () => {
+        showToast({
+          title: 'Error loading the page.',
+          variant: 'failure',
+        });
       },
       onSuccess: (response: GetOffersResponse) => {
         setOffers(response.data);
@@ -95,7 +99,7 @@ export default function OffersTable({
 
   function renderFilters() {
     return (
-      <div className="flex items-center justify-between p-4 text-sm sm:grid-cols-4 md:text-base">
+      <div className="flex items-center justify-between p-4 text-xs text-slate-700 sm:grid-cols-4 sm:text-sm md:text-base">
         <DropdownMenu
           align="start"
           label={
@@ -200,13 +204,13 @@ export default function OffersTable({
     }
 
     return (
-      <thead className="text-slate-700">
+      <thead className="font-semibold">
         <tr className="divide-x divide-slate-200">
           {columns.map((header, index) => (
             <th
               key={header}
               className={clsx(
-                'bg-slate-100 py-3 px-4',
+                'whitespace-nowrap bg-slate-100 py-3 px-4',
                 // Make last column sticky.
                 index === columns.length - 1 &&
                   'sticky right-0 drop-shadow md:drop-shadow-none',
@@ -235,7 +239,7 @@ export default function OffersTable({
         </div>
       ) : (
         <div className="overflow-x-auto text-slate-600">
-          <table className="w-full divide-y divide-slate-200 border-y border-slate-200 text-left">
+          <table className="w-full divide-y divide-slate-200 border-y border-slate-200 text-left text-xs text-slate-700 sm:text-sm md:text-base">
             {renderHeader()}
             <tbody>
               {offers.map((offer) => (
@@ -247,9 +251,6 @@ export default function OffersTable({
             (offers.length === 0 && (
               <div className="py-16 text-lg">
                 <div className="flex justify-center">No data yet🥺</div>
-                <div className="flex justify-center">
-                  Please try another set of filters.
-                </div>
               </div>
             ))}
         </div>
