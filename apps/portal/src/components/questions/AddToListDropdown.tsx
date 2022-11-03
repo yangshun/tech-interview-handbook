@@ -30,7 +30,7 @@ function DropdownButton({ onClick, children }: DropdownButtonProps) {
         <button
           className={clsx(
             active ? 'bg-slate-100 text-slate-900' : 'text-slate-700',
-            'group flex w-full items-center px-4 py-2 text-sm',
+            'flex w-full items-center px-4 py-2 text-sm',
           )}
           type="button"
           onClick={onClick}>
@@ -146,12 +146,14 @@ export default function AddToListDropdown({
                           handleAddToList(list.id);
                         }
                       }}>
-                      <div className="flex flex-1 justify-between">
-                        {list.name}
+                      <div className="flex w-full flex-1 justify-between">
+                        <span className="flex-1 overflow-hidden text-ellipsis text-start">
+                          {list.name}
+                        </span>
                         {list.hasQuestion && (
                           <CheckIcon
                             aria-hidden="true"
-                            className="h-5 w-5 text-slate-400 group-hover:text-slate-500"
+                            className="h-5 w-5 text-slate-400"
                           />
                         )}
                       </div>
@@ -164,9 +166,11 @@ export default function AddToListDropdown({
                   }}>
                   <PlusIcon
                     aria-hidden="true"
-                    className="mr-3 h-5 w-5 text-slate-400 group-hover:text-slate-500"
+                    className="mr-3 h-5 w-5 text-slate-500"
                   />
-                  Create new list
+                  <span className="font-semibold text-slate-500">
+                    Create new list
+                  </span>
                 </DropdownButton>
               </>
             )}
