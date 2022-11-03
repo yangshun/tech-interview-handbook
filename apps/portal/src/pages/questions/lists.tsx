@@ -15,6 +15,10 @@ import DeleteListDialog from '~/components/questions/DeleteListDialog';
 import { Button } from '~/../../../packages/ui/dist';
 import { APP_TITLE } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
+import {
+  useCreateListAsync,
+  useDeleteListAsync,
+} from '~/utils/questions/mutations';
 import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
 import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { trpc } from '~/utils/trpc';
@@ -22,24 +26,10 @@ import { trpc } from '~/utils/trpc';
 export default function ListPage() {
   const utils = trpc.useContext();
   const { data: lists } = trpc.useQuery(['questions.lists.getListsByUser']);
-  const { mutateAsync: createList } = trpc.useMutation(
-    'questions.lists.create',
-    {
-      onSuccess: () => {
-        // TODO: Add optimistic update
-        utils.invalidateQueries(['questions.lists.getListsByUser']);
-      },
-    },
-  );
-  const { mutateAsync: deleteList } = trpc.useMutation(
-    'questions.lists.delete',
-    {
-      onSuccess: () => {
-        // TODO: Add optimistic update
-        utils.invalidateQueries(['questions.lists.getListsByUser']);
-      },
-    },
-  );
+
+  const createListAsync = useCreateListAsync();
+  const deleteListAsync = useDeleteListAsync();
+
   const { mutateAsync: deleteQuestionEntry } = trpc.useMutation(
     'questions.lists.deleteQuestionEntry',
     {
@@ -57,7 +47,7 @@ export default function ListPage() {
   const [listIdToDelete, setListIdToDelete] = useState('');
 
   const handleDeleteList = async (listId: string) => {
-    await deleteList({
+    await deleteListAsync({
       id: listId,
     });
     setShowDeleteListDialog(false);
@@ -68,7 +58,7 @@ export default function ListPage() {
   };
 
   const handleCreateList = async (data: CreateListFormData) => {
-    await createList({
+    await createListAsync({
       name: data.name,
     });
     setShowCreateListDialog(false);
