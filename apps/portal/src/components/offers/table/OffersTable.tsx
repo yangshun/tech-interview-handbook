@@ -143,7 +143,7 @@ export default function OffersTable({
           ))}
         </DropdownMenu>
         <div className="divide-x-slate-200 col-span-3 flex items-center justify-end space-x-4 divide-x">
-          <div className="justify-left flex items-center space-x-2">
+          <div className="justify-left flex items-center space-x-2 font-medium text-slate-700">
             <span className="sr-only sm:not-sr-only sm:inline">
               Display offers in
             </span>

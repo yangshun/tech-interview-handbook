@@ -195,7 +195,7 @@ export default function OfferProfile() {
       )}
       {getProfileQuery.isLoading && (
         <div className="flex h-screen w-screen">
-          <div className="m-auto mx-auto w-screen justify-center">
+          <div className="m-auto mx-auto w-screen justify-center font-medium text-slate-500">
             <Spinner display="block" size="lg" />
             <div className="text-center">Loading...</div>
           </div>
