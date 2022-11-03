@@ -356,6 +356,10 @@ const generateAllAnalysis = async () => {
 };
 
 Promise.all([seedSalaries()])
+  .then(() => {
+    console.log(createdProfileIds.length + " profiles created")
+    console.log("Busy crunching analysis.....")
+  })
   .then(() => generateAllAnalysis())
   .then((_data) => {
     console.log('Seeding from salaries sheet complete');
