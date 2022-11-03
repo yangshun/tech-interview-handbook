@@ -46,8 +46,8 @@ export default function ProfilesDashboard() {
   if (userProfiles.length === 0) {
     return (
       <div className="flex w-full">
-        <div className="m-auto mx-auto w-full justify-center text-xl">
-          <div className="mb-8 flex w-full flex-row justify-center">
+        <div className="w-full justify-center space-y-8 py-16 text-xl">
+          <div className="flex w-full flex-row justify-center">
             <h2>You have not saved any offer profiles yet.</h2>
           </div>
           <div className="flex flex-row justify-center">

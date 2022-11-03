@@ -113,7 +113,7 @@ export default function ProfileComments({
     <div className="bh-white h-fit px-4 lg:h-[calc(100vh-4.5rem)] lg:overflow-y-auto">
       <div className="bg-white pt-4 lg:sticky lg:top-0">
         <div className="flex justify-end">
-          <div className="grid w-fit space-y-2 lg:grid-cols-1 lg:grid-cols-2 lg:space-y-0 lg:space-x-4">
+          <div className="grid w-fit grid-cols-1 space-y-2 md:grid-cols-2 md:grid-cols-2 md:space-y-0 md:space-x-4">
             <div className="col-span-1 flex justify-end">
               {isEditable && (
                 <Tooltip tooltipContent="Copy this link to edit your profile later">
