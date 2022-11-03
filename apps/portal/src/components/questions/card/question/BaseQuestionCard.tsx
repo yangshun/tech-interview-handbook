@@ -185,7 +185,7 @@ export default function BaseQuestionCard({
       )}
       <div className="flex flex-1 flex-col items-start gap-2">
         <div className="flex items-baseline justify-between self-stretch">
-          <div className="flex items-center gap-2 text-slate-500">
+          <div className="z-10 flex items-center gap-2 text-slate-500">
             {showAggregateStatistics && (
               <>
                 <QuestionTypeBadge type={type} />
