@@ -90,7 +90,7 @@ type ReceivedStatisticsProps =
 type CreateEncounterProps =
   | {
       createEncounterButtonText: string;
-      onReceivedSubmit: (data: CreateQuestionEncounterData) => void;
+      onReceivedSubmit: (data: CreateQuestionEncounterData) => Promise<void>;
       showCreateEncounterButton: true;
     }
   | {
@@ -263,9 +263,8 @@ export default function BaseQuestionCard({
             onCancel={() => {
               setShowReceivedForm(false);
             }}
-            onSubmit={(data) => {
-              onReceivedSubmit?.(data);
-              setShowReceivedForm(false);
+            onSubmit={async (data) => {
+              await onReceivedSubmit?.(data);
             }}
           />
         )}

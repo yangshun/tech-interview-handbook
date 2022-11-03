@@ -139,7 +139,7 @@ export default function QuestionPage() {
     },
   );
 
-  const { mutate: addEncounter } = trpc.useMutation(
+  const { mutateAsync: addEncounterAsync } = trpc.useMutation(
     'questions.questions.encounters.user.create',
     {
       onSuccess: () => {
@@ -208,8 +208,8 @@ export default function QuestionPage() {
                 year: 'numeric',
               })}
               upvoteCount={question.numVotes}
-              onReceivedSubmit={(data) => {
-                addEncounter({
+              onReceivedSubmit={async (data) => {
+                await addEncounterAsync({
                   cityId: data.cityId,
                   companyId: data.company,
                   countryId: data.countryId,
