@@ -42,14 +42,16 @@ export default function CreateQuestionEncounterForm({
 
   return (
     <div className="flex items-center gap-2">
-      <p className="font-md text-md text-slate-600">I saw this question at</p>
+      <p className="font-md text-md text-slate-600">
+        I saw this question {step <= 1 ? 'at' : step === 2 ? 'for' : 'on'}
+      </p>
       {step === 0 && (
         <div>
           <CompanyTypeahead
             isLabelHidden={true}
-            placeholder="Other company"
-            suggestedCount={3}
-            // @ts-ignore TODO(questions): handle potentially null value.
+            placeholder="Company"
+            // TODO: Fix suggestions and set count back to 3
+            suggestedCount={0}
             onSelect={({ value: company }) => {
               setSelectedCompany(company);
             }}
@@ -64,9 +66,8 @@ export default function CreateQuestionEncounterForm({
         <div>
           <LocationTypeahead
             isLabelHidden={true}
-            placeholder="Other location"
-            suggestedCount={3}
-            // @ts-ignore TODO(questions): handle potentially null value.
+            placeholder="Location"
+            suggestedCount={0}
             onSelect={(location) => {
               setSelectedLocation(location);
             }}
@@ -81,9 +82,8 @@ export default function CreateQuestionEncounterForm({
         <div>
           <RoleTypeahead
             isLabelHidden={true}
-            placeholder="Other role"
-            suggestedCount={3}
-            // @ts-ignore TODO(questions): handle potentially null value.
+            placeholder="Role"
+            suggestedCount={0}
             onSelect={({ value: role }) => {
               setSelectedRole(role);
             }}
@@ -96,6 +96,7 @@ export default function CreateQuestionEncounterForm({
       )}
       {step === 3 && (
         <MonthYearPicker
+          className="space-x-2"
           // TODO: Add label and hide label on Select instead.
           monthLabel=""
           value={{

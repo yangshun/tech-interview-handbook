@@ -69,122 +69,120 @@ export const generateAnalysis = async (params: {
 }) => {
   const { ctx, input } = params;
   await ctx.prisma.offersAnalysis.deleteMany({
-        where: {
-          profileId: input.profileId,
-        },
-      });
+    where: {
+      profileId: input.profileId,
+    },
+  });
 
-      const offers = await ctx.prisma.offersOffer.findMany({
+  const offers = await ctx.prisma.offersOffer.findMany({
+    include: {
+      company: true,
+      location: {
         include: {
-          company: true,
-          location: {
+          state: {
             include: {
-              state: {
-                include: {
-                  country: true,
-                },
-              },
-            },
-          },
-          offersFullTime: {
-            include: {
-              baseSalary: true,
-              bonus: true,
-              stocks: true,
-              totalCompensation: true,
-            },
-          },
-          offersIntern: {
-            include: {
-              monthlySalary: true,
-            },
-          },
-          profile: {
-            include: {
-              background: true,
+              country: true,
             },
           },
         },
-        orderBy: [
-          {
-            offersFullTime: {
-              totalCompensation: {
-                baseValue: 'desc',
-              },
-            },
-          },
-          {
-            offersIntern: {
-              monthlySalary: {
-                baseValue: 'desc',
-              },
-            },
-          },
-        ],
-        where: {
-          profileId: input.profileId,
-        },
-      });
-
-      if (!offers || offers.length === 0) {
-        throw new TRPCError({
-          code: 'NOT_FOUND',
-          message: 'No offers found on this profile',
-        });
-      }
-
-      const overallHighestOffer = offers[0];
-
-      if (
-        !overallHighestOffer.profile.background ||
-        overallHighestOffer.profile.background.totalYoe == null
-      ) {
-        throw new TRPCError({
-          code: 'NOT_FOUND',
-          message: 'YOE not found',
-        });
-      }
-
-      const yoe = overallHighestOffer.profile.background.totalYoe as number;
-      const monthYearReceived = new Date(overallHighestOffer.monthYearReceived);
-      monthYearReceived.setFullYear(monthYearReceived.getFullYear() - 1);
-
-      let similarOffers = await ctx.prisma.offersOffer.findMany({
+      },
+      offersFullTime: {
         include: {
-          company: true,
-          location: {
+          baseSalary: true,
+          bonus: true,
+          stocks: true,
+          totalCompensation: true,
+        },
+      },
+      offersIntern: {
+        include: {
+          monthlySalary: true,
+        },
+      },
+      profile: {
+        include: {
+          background: true,
+        },
+      },
+    },
+    orderBy: [
+      {
+        offersFullTime: {
+          totalCompensation: {
+            baseValue: 'desc',
+          },
+        },
+      },
+      {
+        offersIntern: {
+          monthlySalary: {
+            baseValue: 'desc',
+          },
+        },
+      },
+    ],
+    where: {
+      profileId: input.profileId,
+    },
+  });
+
+  if (!offers || offers.length === 0) {
+    throw new TRPCError({
+      code: 'NOT_FOUND',
+      message: 'No offers found on this profile',
+    });
+  }
+
+  const overallHighestOffer = offers[0];
+
+  if (
+    !overallHighestOffer.profile.background ||
+    overallHighestOffer.profile.background.totalYoe == null
+  ) {
+    throw new TRPCError({
+      code: 'NOT_FOUND',
+      message: 'YOE not found',
+    });
+  }
+
+  const yoe = overallHighestOffer.profile.background.totalYoe as number;
+  const monthYearReceived = new Date(overallHighestOffer.monthYearReceived);
+  monthYearReceived.setFullYear(monthYearReceived.getFullYear() - 1);
+
+  let similarOffers = await ctx.prisma.offersOffer.findMany({
+    include: {
+      company: true,
+      location: {
+        include: {
+          state: {
             include: {
-              state: {
+              country: true,
+            },
+          },
+        },
+      },
+      offersFullTime: {
+        include: {
+          totalCompensation: true,
+        },
+      },
+      offersIntern: {
+        include: {
+          monthlySalary: true,
+        },
+      },
+      profile: {
+        include: {
+          background: {
+            include: {
+              experiences: {
                 include: {
-                  country: true,
-                },
-              },
-            },
-          },
-          offersFullTime: {
-            include: {
-              totalCompensation: true,
-            },
-          },
-          offersIntern: {
-            include: {
-              monthlySalary: true,
-            },
-          },
-          profile: {
-            include: {
-              background: {
-                include: {
-                  experiences: {
+                  company: true,
+                  location: {
                     include: {
-                      company: true,
-                      location: {
+                      state: {
                         include: {
-                          state: {
-                            include: {
-                              country: true,
-                            },
-                          },
+                          country: true,
                         },
                       },
                     },
@@ -194,277 +192,181 @@ export const generateAnalysis = async (params: {
             },
           },
         },
-        orderBy: [
-          {
-            offersFullTime: {
-              totalCompensation: {
-                baseValue: 'desc',
-              },
-            },
+      },
+    },
+    orderBy: [
+      {
+        offersFullTime: {
+          totalCompensation: {
+            baseValue: 'desc',
           },
-          {
-            offersIntern: {
-              monthlySalary: {
-                baseValue: 'desc',
-              },
-            },
+        },
+      },
+      {
+        offersIntern: {
+          monthlySalary: {
+            baseValue: 'desc',
           },
-        ],
-        where: {
-          AND: [
+        },
+      },
+    ],
+    where: {
+      AND: [
+        {
+          location: overallHighestOffer.location,
+        },
+        {
+          monthYearReceived: {
+            gte: monthYearReceived,
+          },
+        },
+        {
+          OR: [
             {
-              location: overallHighestOffer.location,
-            },
-            {
-              monthYearReceived: {
-                gte: monthYearReceived,
+              offersFullTime: {
+                title: overallHighestOffer.offersFullTime?.title,
               },
-            },
-            {
-              OR: [
-                {
-                  offersFullTime: {
-                    title: overallHighestOffer.offersFullTime?.title,
-                  },
-                  offersIntern: {
-                    title: overallHighestOffer.offersIntern?.title,
-                  },
-                },
-              ],
-            },
-            {
-              profile: {
-                background: {
-                  AND: [
-                    {
-                      totalYoe: {
-                        gte: Math.max(yoe - 1, 0),
-                        lte: yoe + 1,
-                      },
-                    },
-                  ],
-                },
+              offersIntern: {
+                title: overallHighestOffer.offersIntern?.title,
               },
             },
           ],
         },
-      });
-
-      // COMPANY ANALYSIS
-      const companyMap = new Map<string, Offer>();
-      offers.forEach((offer) => {
-        if (companyMap.get(offer.companyId) == null) {
-          companyMap.set(offer.companyId, offer);
-        }
-      });
-
-      const companyAnalysis = Array.from(companyMap.values()).map(
-        (companyOffer) => {
-          // TODO: Refactor calculating analysis into a function
-          let similarCompanyOffers = similarOffers.filter(
-            (offer) => offer.companyId === companyOffer.companyId,
-          );
-
-          const companyIndex = searchOfferPercentile(
-            companyOffer,
-            similarCompanyOffers,
-          );
-          const companyPercentile =
-            similarCompanyOffers.length <= 1
-              ? 100
-              : 100 - (100 * companyIndex) / (similarCompanyOffers.length - 1);
-
-          // Get top offers (excluding user's offer)
-          similarCompanyOffers = similarCompanyOffers.filter(
-            (offer) => offer.id !== companyOffer.id,
-          );
-
-          const noOfSimilarCompanyOffers = similarCompanyOffers.length;
-          const similarCompanyOffers90PercentileIndex = Math.ceil(
-            noOfSimilarCompanyOffers * 0.1,
-          );
-          const topPercentileCompanyOffers =
-            noOfSimilarCompanyOffers > 2
-              ? similarCompanyOffers.slice(
-                  similarCompanyOffers90PercentileIndex,
-                  similarCompanyOffers90PercentileIndex + 2,
-                )
-              : similarCompanyOffers;
-
-          return {
-            companyName: companyOffer.company.name,
-            noOfSimilarOffers: noOfSimilarCompanyOffers,
-            percentile: companyPercentile,
-            topSimilarOffers: topPercentileCompanyOffers,
-          };
-        },
-      );
-
-      // OVERALL ANALYSIS
-      const overallIndex = searchOfferPercentile(
-        overallHighestOffer,
-        similarOffers,
-      );
-      const overallPercentile =
-        similarOffers.length <= 1
-          ? 100
-          : 100 - (100 * overallIndex) / (similarOffers.length - 1);
-
-      similarOffers = similarOffers.filter(
-        (offer) => offer.id !== overallHighestOffer.id,
-      );
-
-      const noOfSimilarOffers = similarOffers.length;
-      const similarOffers90PercentileIndex = Math.ceil(noOfSimilarOffers * 0.1);
-      const topPercentileOffers =
-        noOfSimilarOffers > 2
-          ? similarOffers.slice(
-              similarOffers90PercentileIndex,
-              similarOffers90PercentileIndex + 2,
-            )
-          : similarOffers;
-
-      const analysis = await ctx.prisma.offersAnalysis.create({
-        data: {
-          companyAnalysis: {
-            create: companyAnalysis.map((analysisUnit) => {
-              return {
-                companyName: analysisUnit.companyName,
-                noOfSimilarOffers: analysisUnit.noOfSimilarOffers,
-                percentile: analysisUnit.percentile,
-                topSimilarOffers: {
-                  connect: analysisUnit.topSimilarOffers.map((offer) => {
-                    return { id: offer.id };
-                  }),
+        {
+          profile: {
+            background: {
+              AND: [
+                {
+                  totalYoe: {
+                    gte: Math.max(yoe - 1, 0),
+                    lte: yoe + 1,
+                  },
                 },
-              };
+              ],
+            },
+          },
+        },
+      ],
+    },
+  });
+
+  // COMPANY ANALYSIS
+  const companyMap = new Map<string, Offer>();
+  offers.forEach((offer) => {
+    if (companyMap.get(offer.companyId) == null) {
+      companyMap.set(offer.companyId, offer);
+    }
+  });
+
+  const companyAnalysis = Array.from(companyMap.values()).map(
+    (companyOffer) => {
+      // TODO: Refactor calculating analysis into a function
+      let similarCompanyOffers = similarOffers.filter(
+        (offer) => offer.companyId === companyOffer.companyId,
+      );
+
+      const companyIndex = searchOfferPercentile(
+        companyOffer,
+        similarCompanyOffers,
+      );
+      const companyPercentile =
+        similarCompanyOffers.length <= 1
+          ? 100
+          : 100 - (100 * companyIndex) / (similarCompanyOffers.length - 1);
+
+      // Get top offers (excluding user's offer)
+      similarCompanyOffers = similarCompanyOffers.filter(
+        (offer) => offer.id !== companyOffer.id,
+      );
+
+      const noOfSimilarCompanyOffers = similarCompanyOffers.length;
+      const similarCompanyOffers90PercentileIndex = Math.ceil(
+        noOfSimilarCompanyOffers * 0.1,
+      );
+      const topPercentileCompanyOffers =
+        noOfSimilarCompanyOffers > 2
+          ? similarCompanyOffers.slice(
+              similarCompanyOffers90PercentileIndex,
+              similarCompanyOffers90PercentileIndex + 2,
+            )
+          : similarCompanyOffers;
+
+      return {
+        companyName: companyOffer.company.name,
+        noOfSimilarOffers: noOfSimilarCompanyOffers,
+        percentile: companyPercentile,
+        topSimilarOffers: topPercentileCompanyOffers,
+      };
+    },
+  );
+
+  // OVERALL ANALYSIS
+  const overallIndex = searchOfferPercentile(
+    overallHighestOffer,
+    similarOffers,
+  );
+  const overallPercentile =
+    similarOffers.length <= 1
+      ? 100
+      : 100 - (100 * overallIndex) / (similarOffers.length - 1);
+
+  similarOffers = similarOffers.filter(
+    (offer) => offer.id !== overallHighestOffer.id,
+  );
+
+  const noOfSimilarOffers = similarOffers.length;
+  const similarOffers90PercentileIndex = Math.ceil(noOfSimilarOffers * 0.1);
+  const topPercentileOffers =
+    noOfSimilarOffers > 2
+      ? similarOffers.slice(
+          similarOffers90PercentileIndex,
+          similarOffers90PercentileIndex + 2,
+        )
+      : similarOffers;
+
+  const analysis = await ctx.prisma.offersAnalysis.create({
+    data: {
+      companyAnalysis: {
+        create: companyAnalysis.map((analysisUnit) => {
+          return {
+            companyName: analysisUnit.companyName,
+            noOfSimilarOffers: analysisUnit.noOfSimilarOffers,
+            percentile: analysisUnit.percentile,
+            topSimilarOffers: {
+              connect: analysisUnit.topSimilarOffers.map((offer) => {
+                return { id: offer.id };
+              }),
+            },
+          };
+        }),
+      },
+      overallAnalysis: {
+        create: {
+          companyName: overallHighestOffer.company.name,
+          noOfSimilarOffers,
+          percentile: overallPercentile,
+          topSimilarOffers: {
+            connect: topPercentileOffers.map((offer) => {
+              return { id: offer.id };
             }),
           },
-          overallAnalysis: {
-            create: {
-              companyName: overallHighestOffer.company.name,
-              noOfSimilarOffers,
-              percentile: overallPercentile,
-              topSimilarOffers: {
-                connect: topPercentileOffers.map((offer) => {
-                  return { id: offer.id };
-                }),
-              },
-            },
-          },
-          overallHighestOffer: {
-            connect: {
-              id: overallHighestOffer.id,
-            },
-          },
-          profile: {
-            connect: {
-              id: input.profileId,
-            },
-          },
         },
+      },
+      overallHighestOffer: {
+        connect: {
+          id: overallHighestOffer.id,
+        },
+      },
+      profile: {
+        connect: {
+          id: input.profileId,
+        },
+      },
+    },
+    include: {
+      companyAnalysis: {
         include: {
-          companyAnalysis: {
-            include: {
-              topSimilarOffers: {
-                include: {
-                  company: true,
-                  location: {
-                    include: {
-                      state: {
-                        include: {
-                          country: true,
-                        },
-                      },
-                    },
-                  },
-                  offersFullTime: {
-                    include: {
-                      totalCompensation: true,
-                    },
-                  },
-                  offersIntern: {
-                    include: {
-                      monthlySalary: true,
-                    },
-                  },
-                  profile: {
-                    include: {
-                      background: {
-                        include: {
-                          experiences: {
-                            include: {
-                              company: true,
-                              location: {
-                                include: {
-                                  state: {
-                                    include: {
-                                      country: true,
-                                    },
-                                  },
-                                },
-                              },
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-          overallAnalysis: {
-            include: {
-              topSimilarOffers: {
-                include: {
-                  company: true,
-                  location: {
-                    include: {
-                      state: {
-                        include: {
-                          country: true,
-                        },
-                      },
-                    },
-                  },
-                  offersFullTime: {
-                    include: {
-                      totalCompensation: true,
-                    },
-                  },
-                  offersIntern: {
-                    include: {
-                      monthlySalary: true,
-                    },
-                  },
-                  profile: {
-                    include: {
-                      background: {
-                        include: {
-                          experiences: {
-                            include: {
-                              company: true,
-                              location: {
-                                include: {
-                                  state: {
-                                    include: {
-                                      country: true,
-                                    },
-                                  },
-                                },
-                              },
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-          overallHighestOffer: {
+          topSimilarOffers: {
             include: {
               company: true,
               location: {
@@ -488,13 +390,111 @@ export const generateAnalysis = async (params: {
               },
               profile: {
                 include: {
-                  background: true,
+                  background: {
+                    include: {
+                      experiences: {
+                        include: {
+                          company: true,
+                          location: {
+                            include: {
+                              state: {
+                                include: {
+                                  country: true,
+                                },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
                 },
               },
             },
           },
         },
-      });
+      },
+      overallAnalysis: {
+        include: {
+          topSimilarOffers: {
+            include: {
+              company: true,
+              location: {
+                include: {
+                  state: {
+                    include: {
+                      country: true,
+                    },
+                  },
+                },
+              },
+              offersFullTime: {
+                include: {
+                  totalCompensation: true,
+                },
+              },
+              offersIntern: {
+                include: {
+                  monthlySalary: true,
+                },
+              },
+              profile: {
+                include: {
+                  background: {
+                    include: {
+                      experiences: {
+                        include: {
+                          company: true,
+                          location: {
+                            include: {
+                              state: {
+                                include: {
+                                  country: true,
+                                },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      overallHighestOffer: {
+        include: {
+          company: true,
+          location: {
+            include: {
+              state: {
+                include: {
+                  country: true,
+                },
+              },
+            },
+          },
+          offersFullTime: {
+            include: {
+              totalCompensation: true,
+            },
+          },
+          offersIntern: {
+            include: {
+              monthlySalary: true,
+            },
+          },
+          profile: {
+            include: {
+              background: true,
+            },
+          },
+        },
+      },
+    },
+  });
 
-      return profileAnalysisDtoMapper(analysis);
+  return profileAnalysisDtoMapper(analysis);
 };

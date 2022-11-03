@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { HorizontalDivider, Spinner, Tabs } from '@tih/ui';
+import { Alert, HorizontalDivider, Spinner, Tabs } from '@tih/ui';
 
 import OfferPercentileAnalysisText from './OfferPercentileAnalysisText';
 import OfferProfileCard from './OfferProfileCard';
@@ -22,17 +22,19 @@ function OfferAnalysisContent({
   if (!analysis || analysis.noOfOffers === 0) {
     if (tab === OVERALL_TAB) {
       return (
-        <p className="m-10">
-          You are the first to submit an offer for your job title and YOE! Check
-          back later when there are more submissions.
-        </p>
+        <Alert title="Insufficient data to compare with" variant="info">
+          You are among the first to submit an offer for your job title and
+          years of experience! Check back later when there are more submissions.
+        </Alert>
       );
     }
+
     return (
-      <p className="m-10">
-        You are the first to submit an offer for this company, job title and
-        YOE! Check back later when there are more submissions.
-      </p>
+      <Alert title="Insufficient data to compare with" variant="info">
+        You are among the first to submit an offer for this company, job title
+        and years of experience! Check back later when there are more
+        submissions.
+      </Alert>
     );
   }
   return (

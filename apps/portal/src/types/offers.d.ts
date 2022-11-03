@@ -65,11 +65,14 @@ export type SpecificYoe = {
 };
 
 export type DashboardOffer = {
+  baseSalary?: Valuation;
+  bonus?: Valuation;
   company: OffersCompany;
   id: string;
   income: Valuation;
   monthYearReceived: Date;
   profileId: string;
+  stocks?: Valuation;
   title: string;
   totalYoe: number;
 };
@@ -123,6 +126,7 @@ export type User = {
 
 export type GetOffersResponse = {
   data: Array<DashboardOffer>;
+  jobType: JobType;
   paging: Paging;
 };
 

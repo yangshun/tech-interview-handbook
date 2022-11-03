@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import type { ReactNode } from 'react';
 import { Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
@@ -19,12 +19,14 @@ import GoogleAnalytics from './GoogleAnalytics';
 import MobileNavigation from './MobileNavigation';
 import type { ProductNavigationItems } from './ProductNavigation';
 import ProductNavigation from './ProductNavigation';
+import loginPageHref from '../shared/loginPageHref';
 
 type Props = Readonly<{
   children: ReactNode;
 }>;
 
 function ProfileJewel() {
+  const router = useRouter();
   const { data: session, status } = useSession();
   const isSessionLoading = status === 'loading';
 
@@ -32,25 +34,20 @@ function ProfileJewel() {
     return null;
   }
 
+  const loginHref = loginPageHref();
   if (session == null) {
-    return (
-      <Link
-        className="text-base"
-        href="/api/auth/signin"
-        onClick={(event) => {
-          event.preventDefault();
-          signIn();
-        }}>
-        Sign in
+    return router.pathname !== loginHref.pathname ? (
+      <Link className="text-base" href={loginHref}>
+        Log In
       </Link>
-    );
+    ) : null;
   }
 
   const userNavigation = [
     { href: '/profile', name: 'Profile' },
     {
       href: '/api/auth/signout',
-      name: 'Sign out',
+      name: 'Log out',
       onClick: (event: MouseEvent) => {
         event.preventDefault();
         signOut();
@@ -139,7 +136,7 @@ export default function AppShell({ children }: Props) {
   return (
     <GoogleAnalytics
       measurementID={currentProductNavigation.googleAnalyticsMeasurementID}>
-      <div className="flex h-full min-h-screen">
+      <div className="flex">
         {/* Narrow sidebar */}
         {currentProductNavigation.showGlobalNav && (
           <div className="hidden w-28 overflow-y-auto border-r border-slate-200 bg-white md:block">
@@ -186,9 +183,10 @@ export default function AppShell({ children }: Props) {
           setIsShown={setMobileMenuOpen}
         />
         {/* Content area */}
-        <div className="flex h-screen flex-1 flex-col overflow-hidden">
-          <header className="w-full">
-            <div className="relative z-10 flex h-16 flex-shrink-0 border-b border-slate-200 bg-white shadow-sm">
+        <div className="w-full">
+          {/* Navigation Bar */}
+          <header className="sticky top-0 z-10 w-full">
+            <div className="relative flex h-16 flex-shrink-0 border-b border-slate-200 bg-white shadow-sm">
               <button
                 className="focus:ring-primary-500 border-r border-slate-200 px-4 text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset md:hidden"
                 type="button"
@@ -211,11 +209,8 @@ export default function AppShell({ children }: Props) {
               </div>
             </div>
           </header>
-
-          {/* Main content */}
-          <div className="flex flex-1 items-stretch overflow-hidden">
-            {children}
-          </div>
+          {/* Main Content */}
+          <div className="w-full">{children}</div>
         </div>
       </div>
     </GoogleAnalytics>

@@ -1,6 +1,6 @@
-type ProfilePhotoHolderProps = {
+type ProfilePhotoHolderProps = Readonly<{
   size?: 'lg' | 'sm';
-};
+}>;
 
 export default function ProfilePhotoHolder({
   size = 'lg',

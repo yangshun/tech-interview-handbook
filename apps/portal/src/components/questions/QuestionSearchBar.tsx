@@ -9,10 +9,14 @@ import SortOptionsSelect from './SortOptionsSelect';
 
 export type QuestionSearchBarProps = SortOptionsSelectProps & {
   onFilterOptionsToggle: () => void;
+  onQueryChange: (query: string) => void;
+  query: string;
 };
 
 export default function QuestionSearchBar({
   onFilterOptionsToggle,
+  onQueryChange,
+  query,
   ...sortOptionsSelectProps
 }: QuestionSearchBarProps) {
   return (
@@ -24,6 +28,10 @@ export default function QuestionSearchBar({
           placeholder="Search by content"
           startAddOn={MagnifyingGlassIcon}
           startAddOnType="icon"
+          value={query}
+          onChange={(value) => {
+            onQueryChange(value);
+          }}
         />
       </div>
       <div className="flex items-end justify-end gap-4">

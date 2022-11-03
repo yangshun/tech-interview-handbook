@@ -128,7 +128,6 @@ export default function ContributeQuestionForm({
                   {...field}
                   required={true}
                   onSelect={(option) => {
-                    // @ts-ignore TODO(questions): handle potentially null value.
                     field.onChange(option);
                   }}
                 />
@@ -141,6 +140,7 @@ export default function ContributeQuestionForm({
               name="date"
               render={({ field }) => (
                 <MonthYearPicker
+                  className="space-x-2"
                   monthRequired={true}
                   value={{
                     month: ((field.value.getMonth() as number) + 1) as Month,
@@ -164,7 +164,6 @@ export default function ContributeQuestionForm({
                 <CompanyTypeahead
                   {...field}
                   required={true}
-                  // @ts-ignore TODO(questions): handle potentially null value.
                   onSelect={({ id }) => {
                     field.onChange(id);
                   }}
@@ -181,7 +180,6 @@ export default function ContributeQuestionForm({
                   {...field}
                   required={true}
                   onSelect={(option) => {
-                    // @ts-ignore TODO(questions): handle potentially null value.
                     field.onChange(option);
                   }}
                 />
@@ -278,6 +276,7 @@ export default function ContributeQuestionForm({
             </button>
             <Button
               className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-slate-400 sm:ml-3 sm:w-auto sm:text-sm"
+              disabled={!checkedSimilar}
               label="Contribute"
               type="submit"
               variant="primary"></Button>

@@ -22,6 +22,7 @@ import type { QuestionAge } from '~/utils/questions/constants';
 import { APP_TITLE } from '~/utils/questions/constants';
 import { QUESTION_AGES, QUESTION_TYPES } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
+import { locationOptionToSlug } from '~/utils/questions/locationSlug';
 import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
 import {
   useSearchParam,
@@ -33,19 +34,10 @@ import type { Location } from '~/types/questions.d';
 import { SortType } from '~/types/questions.d';
 import { SortOrder } from '~/types/questions.d';
 
-function locationToSlug(value: Location & TypeaheadOption): string {
-  return [
-    value.countryId,
-    value.stateId,
-    value.cityId,
-    value.id,
-    value.label,
-    value.value,
-  ].join('-');
-}
-
 export default function QuestionsBrowsePage() {
   const router = useRouter();
+
+  const [query, setQuery] = useState('');
 
   const [
     selectedCompanySlugs,
@@ -86,7 +78,7 @@ export default function QuestionsBrowsePage() {
     useSearchParam('roles');
   const [selectedLocations, setSelectedLocations, areLocationsInitialized] =
     useSearchParam<Location & TypeaheadOption>('locations', {
-      paramToString: locationToSlug,
+      paramToString: locationOptionToSlug,
       stringToParam: (param) => {
         const [countryId, stateId, cityId, id, label, value] = param.split('-');
         return { cityId, countryId, id, label, stateId, value };
@@ -170,13 +162,14 @@ export default function QuestionsBrowsePage() {
 
   const questionsInfiniteQuery = trpc.useInfiniteQuery(
     [
-      'questions.questions.getQuestionsByFilter',
+      'questions.questions.getQuestionsByFilterAndContent',
       {
         // TODO: Enable filtering by countryIds and stateIds
         cityIds: selectedLocations
           .map(({ cityId }) => cityId)
           .filter((id) => id !== undefined) as Array<string>,
         companyIds: selectedCompanySlugs.map((slug) => slug.split('_')[0]),
+        content: query,
         countryIds: [],
         endDate: today,
         limit: 10,
@@ -263,7 +256,7 @@ export default function QuestionsBrowsePage() {
         pathname,
         query: {
           companies: selectedCompanySlugs,
-          locations: selectedLocations.map(locationToSlug),
+          locations: selectedLocations.map(locationOptionToSlug),
           questionAge: selectedQuestionAge,
           questionTypes: selectedQuestionTypes,
           roles: selectedRoles,
@@ -351,7 +344,6 @@ export default function QuestionsBrowsePage() {
             isLabelHidden={true}
             placeholder="Search companies"
             onSelect={(option) => {
-              // @ts-ignore TODO(questions): handle potentially null value.
               onOptionChange({
                 ...option,
                 checked: true,
@@ -392,7 +384,6 @@ export default function QuestionsBrowsePage() {
             isLabelHidden={true}
             placeholder="Search roles"
             onSelect={(option) => {
-              // @ts-ignore TODO(questions): handle potentially null value.
               onOptionChange({
                 ...option,
                 checked: true,
@@ -453,7 +444,6 @@ export default function QuestionsBrowsePage() {
             isLabelHidden={true}
             placeholder="Search locations"
             onSelect={(option) => {
-              // @ts-ignore TODO(offers): fix potentially empty value.
               onOptionChange({
                 ...option,
                 checked: true,
@@ -485,8 +475,8 @@ export default function QuestionsBrowsePage() {
       </Head>
       <main className="flex flex-1 flex-col items-stretch">
         <div className="flex h-full flex-1">
-          <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
-            <div className="m-4 flex max-w-3xl flex-1 flex-col items-stretch justify-start gap-6">
+          <section className="min-h-0 flex-1 overflow-auto">
+            <div className="my-4 mx-auto flex max-w-3xl flex-col items-stretch justify-start gap-6">
               <ContributeQuestionCard
                 onSubmit={(data) => {
                   const { cityId, countryId, stateId } = data.location;
@@ -505,10 +495,14 @@ export default function QuestionsBrowsePage() {
               <div className="flex flex-col items-stretch gap-4">
                 <div className="sticky top-0 border-b border-slate-300 bg-slate-50 py-4">
                   <QuestionSearchBar
+                    query={query}
                     sortOrderValue={sortOrder}
                     sortTypeValue={sortType}
                     onFilterOptionsToggle={() => {
                       setFilterDrawerOpen(!filterDrawerOpen);
+                    }}
+                    onQueryChange={(newQuery) => {
+                      setQuery(newQuery);
                     }}
                     onSortOrderChange={setSortOrder}
                     onSortTypeChange={setSortType}

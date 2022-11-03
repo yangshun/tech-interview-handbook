@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { JobType } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
 import {
@@ -12,10 +13,7 @@ import { createValidationRegex } from '~/utils/offers/zodRegex';
 import { createRouter } from '../context';
 
 const getOrder = (prefix: string) => {
-  if (prefix === '+') {
-    return 'asc';
-  }
-  return 'desc';
+  return prefix === '+' ? 'asc' : 'desc';
 };
 
 const sortingKeysMap = {
@@ -31,8 +29,10 @@ const yoeCategoryMap: Record<number, string> = {
   3: 'Senior',
 };
 
-const getYoeRange = (yoeCategory: number) => {
-  return yoeCategoryMap[yoeCategory] === 'Fresh Grad'
+const getYoeRange = (yoeCategory: number | null | undefined) => {
+  return yoeCategory == null
+    ? { maxYoe: 100, minYoe: 0 }
+    : yoeCategoryMap[yoeCategory] === 'Fresh Grad'
     ? { maxYoe: 2, minYoe: 0 }
     : yoeCategoryMap[yoeCategory] === 'Mid'
     ? { maxYoe: 5, minYoe: 3 }
@@ -43,8 +43,8 @@ const getYoeRange = (yoeCategory: number) => {
 
 export const offersRouter = createRouter().query('list', {
   input: z.object({
-    cityId: z.string(),
     companyId: z.string().nullish(),
+    countryId: z.string().nullish(),
     currency: z.string().nullish(),
     dateEnd: z.date().nullish(),
     dateStart: z.date().nullish(),
@@ -57,14 +57,14 @@ export const offersRouter = createRouter().query('list', {
       .regex(createValidationRegex(Object.keys(sortingKeysMap), '[+-]{1}'))
       .nullish(),
     title: z.string().nullish(),
-    yoeCategory: z.number().min(0).max(3),
+    yoeCategory: z.number().min(0).max(3).nullish(),
     yoeMax: z.number().max(100).nullish(),
     yoeMin: z.number().min(0).nullish(),
   }),
   async resolve({ ctx, input }) {
     const yoeRange = getYoeRange(input.yoeCategory);
-    const yoeMin = input.yoeMin ? input.yoeMin : yoeRange?.minYoe;
-    const yoeMax = input.yoeMax ? input.yoeMax : yoeRange?.maxYoe;
+    const yoeMin = input.yoeMin != null ? input.yoeMin : yoeRange?.minYoe;
+    const yoeMax = input.yoeMax != null ? input.yoeMax : yoeRange?.maxYoe;
 
     if (!input.sortBy) {
       input.sortBy = '-' + sortingKeysMap.monthYearReceived;
@@ -132,7 +132,14 @@ export const offersRouter = createRouter().query('list', {
           where: {
             AND: [
               {
-                cityId: input.cityId.length === 0 ? undefined : input.cityId,
+                location: {
+                  state: {
+                    countryId:
+                      input.countryId != null && input.countryId.length !== 0
+                        ? input.countryId
+                        : undefined,
+                  },
+                },
               },
               {
                 offersIntern: {
@@ -142,7 +149,7 @@ export const offersRouter = createRouter().query('list', {
               {
                 offersIntern: {
                   title:
-                    input.title && input.title.length !== 0
+                    input.title != null && input.title.length !== 0
                       ? input.title
                       : undefined,
                 },
@@ -245,7 +252,14 @@ export const offersRouter = createRouter().query('list', {
           where: {
             AND: [
               {
-                cityId: input.cityId.length === 0 ? undefined : input.cityId,
+                location: {
+                  state: {
+                    countryId:
+                      input.countryId != null && input.countryId.length !== 0
+                        ? input.countryId
+                        : undefined,
+                  },
+                },
               },
               {
                 offersIntern: {
@@ -260,7 +274,7 @@ export const offersRouter = createRouter().query('list', {
               {
                 offersFullTime: {
                   title:
-                    input.title && input.title.length !== 0
+                    input.title != null && input.title.length !== 0
                       ? input.title
                       : undefined,
                 },
@@ -380,6 +394,7 @@ export const offersRouter = createRouter().query('list', {
         numOfPages: Math.ceil(data.length / input.limit),
         totalItems: data.length,
       },
+      !yoeRange ? JobType.INTERN : JobType.FULLTIME,
     );
   },
 });

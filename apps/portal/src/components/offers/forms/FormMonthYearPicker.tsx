@@ -28,6 +28,7 @@ function FormMonthYearPickerWithRef({
 
   return (
     <MonthYearPicker
+      className="space-x-6"
       {...(rest as MonthYearPickerProps)}
       value={value}
       onChange={(val) => {

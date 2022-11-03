@@ -195,24 +195,26 @@ export default function OfferProfile() {
       )}
       {getProfileQuery.isLoading && (
         <div className="flex h-screen w-screen">
-          <div className="m-auto mx-auto w-screen justify-center">
+          <div className="m-auto mx-auto w-screen justify-center font-medium text-slate-500">
             <Spinner display="block" size="lg" />
             <div className="text-center">Loading...</div>
           </div>
         </div>
       )}
       {!getProfileQuery.isLoading && !getProfileQuery.isError && (
-        <div className="mb-4 flex flex h-screen w-screen items-center justify-center divide-x">
-          <div className="h-full w-2/3 divide-y">
-            <ProfileHeader
-              background={background}
-              handleDelete={handleDelete}
-              isEditable={isEditable}
-              isLoading={getProfileQuery.isLoading}
-              selectedTab={selectedTab}
-              setSelectedTab={setSelectedTab}
-            />
-            <div className="h-4/5 w-full overflow-y-scroll pb-32">
+        <div className="w-full divide-x lg:flex">
+          <div className="divide-y lg:w-2/3">
+            <div className="h-fit">
+              <ProfileHeader
+                background={background}
+                handleDelete={handleDelete}
+                isEditable={isEditable}
+                isLoading={getProfileQuery.isLoading}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
+            </div>
+            <div className="pb-4">
               <ProfileDetails
                 analysis={analysis}
                 background={background}
@@ -224,7 +226,9 @@ export default function OfferProfile() {
               />
             </div>
           </div>
-          <div className="h-full w-1/3 bg-white">
+          <div
+            className="bg-white lg:fixed lg:right-0 lg:bottom-0 lg:w-1/3"
+            style={{ top: 64 }}>
             <ProfileComments
               isDisabled={deleteMutation.isLoading}
               isEditable={isEditable}

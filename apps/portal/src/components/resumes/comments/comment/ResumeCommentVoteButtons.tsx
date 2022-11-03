@@ -8,6 +8,7 @@ import {
 import { Vote } from '@prisma/client';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
+import loginPageHref from '~/components/shared/loginPageHref';
 
 import { trpc } from '~/utils/trpc';
 
@@ -63,7 +64,7 @@ export default function ResumeCommentVoteButtons({
 
   const onVote = async (value: Vote, setAnimation: (_: boolean) => void) => {
     if (!userId) {
-      router.push('/api/auth/signin');
+      router.push(loginPageHref());
       return;
     }
 

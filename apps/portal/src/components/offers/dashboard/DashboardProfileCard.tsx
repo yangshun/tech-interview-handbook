@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
-import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { BookmarkSlashIcon } from '@heroicons/react/20/solid';
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import { Button, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
@@ -43,54 +44,52 @@ export default function DashboardProfileCard({
   );
 
   function handleRemoveProfile() {
+    // TODO(offers): Confirm before removal.
     removeSavedProfileMutation.mutate({ profileId: id });
   }
 
   return (
-    <div className="space-y-4 bg-white px-4 pt-5 sm:px-4">
+    <div className="overflow-hidden bg-white sm:rounded-lg sm:shadow">
       {/* Header */}
-      <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between border-b border-gray-300 pb-4 sm:flex-nowrap">
-        <div className="flex items-center gap-x-5">
-          <div>
-            <ProfilePhotoHolder size="sm" />
-          </div>
-          <div className="col-span-10">
-            <p className="text-xl font-bold">{profileName}</p>
-
-            <div className="flex flex-row">
-              <span>Created at {formatDate(createdAt)}</span>
+      <div className="border-b border-slate-200 bg-white px-4 py-5 sm:px-6">
+        <div className="-ml-4 -mt-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
+          <div className="ml-4 mt-4">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <ProfilePhotoHolder size="sm" />
+              </div>
+              <div className="ml-4">
+                <h2 className="text-lg font-medium leading-6 text-slate-900">
+                  {profileName}
+                </h2>
+                <p className="text-sm text-slate-500">
+                  <span>Created at {formatDate(createdAt)}</span>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="flex self-start">
-          <Button
-            disabled={removeSavedProfileMutation.isLoading}
-            icon={XMarkIcon}
-            isLabelHidden={true}
-            label="Remove Profile"
-            size="md"
-            variant="tertiary"
-            onClick={handleRemoveProfile}
-          />
-        </div>
-      </div>
-
-      {/* Offers */}
-      <div>
-        {offers.map((offer: UserProfileOffer, index) =>
-          index === 0 ? (
-            <DashboardOfferCard
-              key={offer.id}
-              disableTopDivider={true}
-              offer={offer}
+          <div className="ml-4 mt-4 flex flex-shrink-0">
+            <Button
+              disabled={removeSavedProfileMutation.isLoading}
+              icon={BookmarkSlashIcon}
+              isLabelHidden={true}
+              label="Remove Profile"
+              size="md"
+              variant="tertiary"
+              onClick={handleRemoveProfile}
             />
-          ) : (
-            <DashboardOfferCard key={offer.id} offer={offer} />
-          ),
-        )}
+          </div>
+        </div>
       </div>
-      <div className="flex justify-end pt-1">
+      {/* List of Offers */}
+      <ul className="divide-y divide-slate-200" role="list">
+        {offers.map((offer: UserProfileOffer) => (
+          <li key={offer.id}>
+            <DashboardOfferCard offer={offer} />
+          </li>
+        ))}
+      </ul>
+      <div className="flex justify-end border-t border-slate-200 px-4 py-5 sm:px-6">
         <Button
           disabled={removeSavedProfileMutation.isLoading}
           icon={ArrowRightIcon}

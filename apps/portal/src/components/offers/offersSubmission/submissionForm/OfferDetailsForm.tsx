@@ -10,7 +10,7 @@ import { useFieldArray } from 'react-hook-form';
 import { PlusIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { JobType } from '@prisma/client';
-import { Button, Dialog } from '@tih/ui';
+import { Button, Dialog, HorizontalDivider } from '@tih/ui';
 
 import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
@@ -29,9 +29,11 @@ import {
   yearOptions,
 } from '../../constants';
 import FormMonthYearPicker from '../../forms/FormMonthYearPicker';
+import FormSection from '../../forms/FormSection';
 import FormSelect from '../../forms/FormSelect';
 import FormTextArea from '../../forms/FormTextArea';
 import FormTextInput from '../../forms/FormTextInput';
+import JobTypeTabs from '../../JobTypeTabs';
 import type { OfferFormData } from '../../types';
 import { JobTypeLabel } from '../../types';
 import {
@@ -82,9 +84,9 @@ function FullTimeOfferDetailsForm({
   }, [watchCurrency, index, setValue]);
 
   return (
-    <div className="my-5 rounded-lg border border-slate-200 px-10 py-5">
-      <div className="mb-5 grid grid-cols-2 space-x-3">
-        <div>
+    <div className="space-y-8 rounded-lg border border-slate-200 p-6 sm:space-y-16 sm:p-8">
+      <FormSection title="Company & Title Information">
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
           <JobTitlesTypeahead
             required={true}
             value={{
@@ -98,197 +100,200 @@ function FullTimeOfferDetailsForm({
               }
             }}
           />
-        </div>
-        <FormTextInput
-          errorMessage={offerFields?.offersFullTime?.level?.message}
-          label="Level"
-          placeholder="e.g. L4, Junior"
-          required={true}
-          {...register(`offers.${index}.offersFullTime.level`, {
-            required: FieldError.REQUIRED,
-          })}
-        />
-      </div>
-      <div className="mb-5 flex grid grid-cols-2 space-x-3">
-        <CompaniesTypeahead
-          required={true}
-          value={{
-            id: watchCompanyId,
-            label: watchCompanyName,
-            value: watchCompanyId,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue(`offers.${index}.companyId`, option.value);
-              setValue(`offers.${index}.companyName`, option.label);
-            }
-          }}
-        />
-        <CitiesTypeahead
-          label="Location"
-          required={true}
-          value={{
-            id: watchCityId,
-            label: watchCityName,
-            value: watchCityId,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue(`offers.${index}.cityId`, option.value);
-              setValue(`offers.${index}.cityName`, option.label);
-            } else {
-              setValue(`offers.${index}.cityId`, '');
-              setValue(`offers.${index}.cityName`, '');
-            }
-          }}
-        />
-      </div>
-      <div className="mb-5 flex grid grid-cols-2 items-start space-x-3">
-        <FormMonthYearPicker
-          monthLabel="Date Received"
-          monthRequired={true}
-          yearLabel=""
-          {...register(`offers.${index}.monthYearReceived`, {
-            required: FieldError.REQUIRED,
-          })}
-        />
-      </div>
-      <div className="mb-5">
-        <FormTextInput
-          endAddOn={
-            <FormSelect
-              borderStyle="borderless"
-              defaultValue={Currency.SGD}
-              isLabelHidden={true}
-              label="Currency"
-              options={CURRENCY_OPTIONS}
-              {...register(
-                `offers.${index}.offersFullTime.totalCompensation.currency`,
-                {
-                  required: FieldError.REQUIRED,
-                },
-              )}
-            />
-          }
-          endAddOnType="element"
-          errorMessage={
-            offerFields?.offersFullTime?.totalCompensation?.value?.message
-          }
-          label="Total Compensation (Annual)"
-          placeholder="0"
-          required={true}
-          startAddOn="$"
-          startAddOnType="label"
-          type="number"
-          {...register(
-            `offers.${index}.offersFullTime.totalCompensation.value`,
-            {
-              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+          <FormTextInput
+            errorMessage={offerFields?.offersFullTime?.level?.message}
+            label="Level"
+            placeholder="e.g. L4, Junior"
+            required={true}
+            {...register(`offers.${index}.offersFullTime.level`, {
               required: FieldError.REQUIRED,
+            })}
+          />
+        </div>
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
+          <CompaniesTypeahead
+            required={true}
+            value={{
+              id: watchCompanyId,
+              label: watchCompanyName,
+              value: watchCompanyId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue(`offers.${index}.companyId`, option.value);
+                setValue(`offers.${index}.companyName`, option.label);
+              }
+            }}
+          />
+          <CitiesTypeahead
+            label="Location"
+            required={true}
+            value={{
+              id: watchCityId,
+              label: watchCityName,
+              value: watchCityId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue(`offers.${index}.cityId`, option.value);
+                setValue(`offers.${index}.cityName`, option.label);
+              } else {
+                setValue(`offers.${index}.cityId`, '');
+                setValue(`offers.${index}.cityName`, '');
+              }
+            }}
+          />
+        </div>
+      </FormSection>
+      <FormSection title="Compensation Details">
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
+          <FormMonthYearPicker
+            monthLabel="Date Received"
+            monthRequired={true}
+            yearLabel=""
+            {...register(`offers.${index}.monthYearReceived`, {
+              required: FieldError.REQUIRED,
+            })}
+          />
+          <FormTextInput
+            endAddOn={
+              <FormSelect
+                borderStyle="borderless"
+                defaultValue={Currency.SGD}
+                isLabelHidden={true}
+                label="Currency"
+                options={CURRENCY_OPTIONS}
+                {...register(
+                  `offers.${index}.offersFullTime.totalCompensation.currency`,
+                  {
+                    required: FieldError.REQUIRED,
+                  },
+                )}
+              />
+            }
+            endAddOnType="element"
+            errorMessage={
+              offerFields?.offersFullTime?.totalCompensation?.value?.message
+            }
+            label="Total Compensation (Annual)"
+            placeholder="0"
+            required={true}
+            startAddOn="$"
+            startAddOnType="label"
+            type="number"
+            {...register(
+              `offers.${index}.offersFullTime.totalCompensation.value`,
+              {
+                min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+                required: FieldError.REQUIRED,
+                valueAsNumber: true,
+              },
+            )}
+          />
+        </div>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <FormTextInput
+            endAddOn={
+              <FormSelect
+                borderStyle="borderless"
+                defaultValue={Currency.SGD}
+                isLabelHidden={true}
+                label="Currency"
+                options={CURRENCY_OPTIONS}
+                {...register(
+                  `offers.${index}.offersFullTime.baseSalary.currency`,
+                )}
+              />
+            }
+            endAddOnType="element"
+            errorMessage={
+              offerFields?.offersFullTime?.baseSalary?.value?.message
+            }
+            label="Base Salary (Annual)"
+            placeholder="0"
+            startAddOn="$"
+            startAddOnType="label"
+            type="number"
+            {...register(`offers.${index}.offersFullTime.baseSalary.value`, {
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
               valueAsNumber: true,
-            },
-          )}
-        />
-      </div>
-      <div className="mb-5 grid grid-cols-2 space-x-3">
-        <FormTextInput
-          endAddOn={
-            <FormSelect
-              borderStyle="borderless"
-              defaultValue={Currency.SGD}
-              isLabelHidden={true}
-              label="Currency"
-              options={CURRENCY_OPTIONS}
-              {...register(
-                `offers.${index}.offersFullTime.baseSalary.currency`,
-              )}
-            />
-          }
-          endAddOnType="element"
-          errorMessage={offerFields?.offersFullTime?.baseSalary?.value?.message}
-          label="Base Salary (Annual)"
-          placeholder="0"
-          startAddOn="$"
-          startAddOnType="label"
-          type="number"
-          {...register(`offers.${index}.offersFullTime.baseSalary.value`, {
-            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-            valueAsNumber: true,
-          })}
-        />
-        <FormTextInput
-          endAddOn={
-            <FormSelect
-              borderStyle="borderless"
-              defaultValue={Currency.SGD}
-              isLabelHidden={true}
-              label="Currency"
-              options={CURRENCY_OPTIONS}
-              {...register(`offers.${index}.offersFullTime.bonus.currency`)}
-            />
-          }
-          endAddOnType="element"
-          errorMessage={offerFields?.offersFullTime?.bonus?.value?.message}
-          label="Bonus (Annual)"
-          placeholder="0"
-          startAddOn="$"
-          startAddOnType="label"
-          type="number"
-          {...register(`offers.${index}.offersFullTime.bonus.value`, {
-            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-            valueAsNumber: true,
-          })}
-        />
-      </div>
-      <div className="mb-5 grid grid-cols-2 space-x-3">
-        <FormTextInput
-          endAddOn={
-            <FormSelect
-              borderStyle="borderless"
-              defaultValue={Currency.SGD}
-              isLabelHidden={true}
-              label="Currency"
-              options={CURRENCY_OPTIONS}
-              {...register(`offers.${index}.offersFullTime.stocks.currency`)}
-            />
-          }
-          endAddOnType="element"
-          errorMessage={offerFields?.offersFullTime?.stocks?.value?.message}
-          label="Stocks (Annual)"
-          placeholder="0"
-          startAddOn="$"
-          startAddOnType="label"
-          type="number"
-          {...register(`offers.${index}.offersFullTime.stocks.value`, {
-            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-            valueAsNumber: true,
-          })}
-        />
-      </div>
-      <div className="mb-5">
+            })}
+          />
+          <FormTextInput
+            endAddOn={
+              <FormSelect
+                borderStyle="borderless"
+                defaultValue={Currency.SGD}
+                isLabelHidden={true}
+                label="Currency"
+                options={CURRENCY_OPTIONS}
+                {...register(`offers.${index}.offersFullTime.bonus.currency`)}
+              />
+            }
+            endAddOnType="element"
+            errorMessage={offerFields?.offersFullTime?.bonus?.value?.message}
+            label="Bonus (Annual)"
+            placeholder="0"
+            startAddOn="$"
+            startAddOnType="label"
+            type="number"
+            {...register(`offers.${index}.offersFullTime.bonus.value`, {
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+              valueAsNumber: true,
+            })}
+          />
+          <FormTextInput
+            endAddOn={
+              <FormSelect
+                borderStyle="borderless"
+                defaultValue={Currency.SGD}
+                isLabelHidden={true}
+                label="Currency"
+                options={CURRENCY_OPTIONS}
+                {...register(`offers.${index}.offersFullTime.stocks.currency`)}
+              />
+            }
+            endAddOnType="element"
+            errorMessage={offerFields?.offersFullTime?.stocks?.value?.message}
+            label="Stocks (Annual)"
+            placeholder="0"
+            startAddOn="$"
+            startAddOnType="label"
+            type="number"
+            {...register(`offers.${index}.offersFullTime.stocks.value`, {
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+              valueAsNumber: true,
+            })}
+          />
+        </div>
+      </FormSection>
+      <FormSection title="Additional Information">
         <FormTextArea
           label="Negotiation Strategy / Interview Performance"
           placeholder="e.g. Did well in the behavioral interview / Used competing offers to negotiate for a higher salary"
           {...register(`offers.${index}.negotiationStrategy`)}
         />
-      </div>
-      <div className="mb-5">
         <FormTextArea
           label="Comments"
           placeholder="e.g. Benefits offered by the company"
           {...register(`offers.${index}.comments`)}
         />
-      </div>
-      <div className="flex justify-end">
         {index > 0 && (
-          <Button
-            icon={TrashIcon}
-            label="Delete"
-            variant="secondary"
-            onClick={() => remove(index)}
-          />
+          <div className="space-y-4 sm:space-y-6">
+            <HorizontalDivider />
+            <div className="flex justify-end">
+              <Button
+                icon={TrashIcon}
+                label="Delete"
+                variant="tertiary"
+                onClick={() => {
+                  remove(index);
+                }}
+              />
+            </div>
+          </div>
         )}
-      </div>
+      </FormSection>
     </div>
   );
 }
@@ -324,26 +329,23 @@ function InternshipOfferDetailsForm({
   });
 
   return (
-    <div className="my-5 rounded-lg border border-slate-200 px-10 py-5">
-      <div className="mb-5 grid grid-cols-2 space-x-3">
-        <div>
-          <JobTitlesTypeahead
-            required={true}
-            value={{
-              id: watchJobTitle,
-              label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
-              value: watchJobTitle,
-            }}
-            onSelect={(option) => {
-              if (option) {
-                setValue(`offers.${index}.offersIntern.title`, option.value);
-              }
-            }}
-          />
-        </div>
-      </div>
-      <div className="mb-5 grid grid-cols-2 space-x-3">
-        <div>
+    <div className="space-y-8 rounded-lg border border-slate-200 p-6 sm:space-y-16 sm:p-8">
+      <FormSection title="Company & Title Information">
+        <JobTitlesTypeahead
+          required={true}
+          value={{
+            id: watchJobTitle,
+            label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
+            value: watchJobTitle,
+          }}
+          onSelect={(option) => {
+            if (option) {
+              setValue(`offers.${index}.offersIntern.title`, option.value);
+            }
+          }}
+        />
+
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
           <CompaniesTypeahead
             required={true}
             value={{
@@ -358,121 +360,122 @@ function InternshipOfferDetailsForm({
               }
             }}
           />
+          <CitiesTypeahead
+            label="Location"
+            required={true}
+            value={{
+              id: watchCityId,
+              label: watchCityName,
+              value: watchCityId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue(`offers.${index}.cityId`, option.value);
+                setValue(`offers.${index}.cityName`, option.label);
+              } else {
+                setValue(`offers.${index}.cityId`, '');
+                setValue(`offers.${index}.cityName`, '');
+              }
+            }}
+          />
         </div>
-        <CitiesTypeahead
-          label="Location"
-          required={true}
-          value={{
-            id: watchCityId,
-            label: watchCityName,
-            value: watchCityId,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue(`offers.${index}.cityId`, option.value);
-              setValue(`offers.${index}.cityName`, option.label);
-            } else {
-              setValue(`offers.${index}.cityId`, '');
-              setValue(`offers.${index}.cityName`, '');
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
+          <FormSelect
+            display="block"
+            errorMessage={offerFields?.offersIntern?.internshipCycle?.message}
+            label="Internship Cycle"
+            options={internshipCycleOptions}
+            placeholder={emptyOption}
+            required={true}
+            {...register(`offers.${index}.offersIntern.internshipCycle`, {
+              required: FieldError.REQUIRED,
+            })}
+          />
+          <FormSelect
+            display="block"
+            errorMessage={offerFields?.offersIntern?.startYear?.message}
+            label="Internship Year"
+            options={yearOptions}
+            placeholder={emptyOption}
+            required={true}
+            {...register(`offers.${index}.offersIntern.startYear`, {
+              required: FieldError.REQUIRED,
+              valueAsNumber: true,
+            })}
+          />
+        </div>
+      </FormSection>
+      <FormSection title="Compensation Details">
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
+          <FormMonthYearPicker
+            monthLabel="Date Received"
+            monthRequired={true}
+            yearLabel=""
+            {...register(`offers.${index}.monthYearReceived`, {
+              required: FieldError.REQUIRED,
+            })}
+          />
+          <FormTextInput
+            endAddOn={
+              <FormSelect
+                borderStyle="borderless"
+                defaultValue={Currency.SGD}
+                isLabelHidden={true}
+                label="Currency"
+                options={CURRENCY_OPTIONS}
+                {...register(
+                  `offers.${index}.offersIntern.monthlySalary.currency`,
+                  {
+                    required: FieldError.REQUIRED,
+                  },
+                )}
+              />
             }
-          }}
-        />
-      </div>
-      <div className="mb-5 grid grid-cols-2 space-x-3">
-        <FormSelect
-          display="block"
-          errorMessage={offerFields?.offersIntern?.internshipCycle?.message}
-          label="Internship Cycle"
-          options={internshipCycleOptions}
-          placeholder={emptyOption}
-          required={true}
-          {...register(`offers.${index}.offersIntern.internshipCycle`, {
-            required: FieldError.REQUIRED,
-          })}
-        />
-        <FormSelect
-          display="block"
-          errorMessage={offerFields?.offersIntern?.startYear?.message}
-          label="Internship Year"
-          options={yearOptions}
-          placeholder={emptyOption}
-          required={true}
-          {...register(`offers.${index}.offersIntern.startYear`, {
-            required: FieldError.REQUIRED,
-            valueAsNumber: true,
-          })}
-        />
-      </div>
-      <div className="mb-5">
-        <FormMonthYearPicker
-          monthLabel="Date Received"
-          monthRequired={true}
-          yearLabel=""
-          {...register(`offers.${index}.monthYearReceived`, {
-            required: FieldError.REQUIRED,
-          })}
-        />
-      </div>
-      <div className="mb-5">
-        <FormTextInput
-          endAddOn={
-            <FormSelect
-              borderStyle="borderless"
-              defaultValue={Currency.SGD}
-              isLabelHidden={true}
-              label="Currency"
-              options={CURRENCY_OPTIONS}
-              {...register(
-                `offers.${index}.offersIntern.monthlySalary.currency`,
-                {
-                  required: FieldError.REQUIRED,
-                },
-              )}
-            />
-          }
-          endAddOnType="element"
-          errorMessage={
-            offerFields?.offersIntern?.monthlySalary?.value?.message
-          }
-          label="Salary (Monthly)"
-          placeholder="0"
-          required={true}
-          startAddOn="$"
-          startAddOnType="label"
-          type="number"
-          {...register(`offers.${index}.offersIntern.monthlySalary.value`, {
-            min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-            required: FieldError.REQUIRED,
-            valueAsNumber: true,
-          })}
-        />
-      </div>
-      <div className="mb-5">
+            endAddOnType="element"
+            errorMessage={
+              offerFields?.offersIntern?.monthlySalary?.value?.message
+            }
+            label="Salary (Monthly)"
+            placeholder="0"
+            required={true}
+            startAddOn="$"
+            startAddOnType="label"
+            type="number"
+            {...register(`offers.${index}.offersIntern.monthlySalary.value`, {
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+              required: FieldError.REQUIRED,
+              valueAsNumber: true,
+            })}
+          />
+        </div>
+      </FormSection>
+      <FormSection title="Additional Information">
         <FormTextArea
           label="Negotiation Strategy / Interview Performance"
           placeholder="e.g. Did well in the behavioral interview. Used competing offers to negotiate for a higher salary."
           {...register(`offers.${index}.negotiationStrategy`)}
         />
-      </div>
-      <div className="mb-5">
         <FormTextArea
           label="Comments"
           placeholder="e.g. Encountered similar questions using the Technical Interview Handbook."
           {...register(`offers.${index}.comments`)}
         />
-      </div>
-      <div className="flex justify-end">
-        {index > 0 && (
-          <Button
-            icon={TrashIcon}
-            label="Delete"
-            variant="secondary"
-            onClick={() => {
-              remove(index);
-            }}
-          />
-        )}
-      </div>
+      </FormSection>
+      {index > 0 && (
+        <div className="space-y-4 sm:space-y-6">
+          <HorizontalDivider />
+          <div className="flex justify-end">
+            <Button
+              icon={TrashIcon}
+              label="Delete"
+              variant="tertiary"
+              onClick={() => {
+                remove(index);
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -489,7 +492,7 @@ function OfferDetailsFormArray({
   const { append, remove, fields } = fieldArrayValues;
 
   return (
-    <div>
+    <div className="space-y-8">
       {fields.map((item, index) => {
         return (
           <div key={item.id}>
@@ -506,7 +509,7 @@ function OfferDetailsFormArray({
         icon={PlusIcon}
         label="Add another offer"
         size="lg"
-        variant="tertiary"
+        variant="secondary"
         onClick={() =>
           append(
             jobType === JobType.FULLTIME
@@ -547,40 +550,20 @@ export default function OfferDetailsForm({
     jobType === JobType.FULLTIME ? JobTypeLabel.INTERN : JobTypeLabel.FULLTIME;
 
   return (
-    <div className="mb-5">
-      <h5 className="mb-8 text-center text-4xl font-bold text-slate-900">
+    <div className="space-y-6">
+      <h2 className="mb-8 text-2xl font-bold text-slate-900 sm:text-center sm:text-4xl">
         Fill in your offer details
-      </h5>
-      <div className="flex w-full justify-center">
-        <div className="mx-5 w-1/3">
-          <Button
-            display="block"
-            label={JobTypeLabel.FULLTIME}
-            size="md"
-            variant={jobType === JobType.FULLTIME ? 'secondary' : 'tertiary'}
-            onClick={() => {
-              if (jobType === JobType.FULLTIME) {
-                return;
-              }
-              setDialogOpen(true);
-            }}
-          />
-        </div>
-        <div className="mx-5 w-1/3">
-          <Button
-            display="block"
-            label={JobTypeLabel.INTERN}
-            size="md"
-            variant={jobType === JobType.INTERN ? 'secondary' : 'tertiary'}
-            onClick={() => {
-              if (jobType === JobType.INTERN) {
-                return;
-              }
-              setDialogOpen(true);
-            }}
-          />
-        </div>
-      </div>
+      </h2>
+      <JobTypeTabs
+        value={jobType}
+        onChange={(newJobType) => {
+          if (newJobType === jobType) {
+            return;
+          }
+
+          setDialogOpen(true);
+        }}
+      />
       <OfferDetailsFormArray
         fieldArrayValues={fieldArrayValues}
         jobType={jobType}
