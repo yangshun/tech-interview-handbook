@@ -6,6 +6,7 @@ import { Spinner, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import { ProfileDetailTab } from '~/components/offers/constants';
+import { HOME_URL } from '~/components/offers/constants';
 import ProfileComments from '~/components/offers/profile/ProfileComments';
 import ProfileDetails from '~/components/offers/profile/ProfileDetails';
 import ProfileHeader from '~/components/offers/profile/ProfileHeader';
@@ -13,7 +14,6 @@ import type {
   BackgroundDisplayData,
   OfferDisplayData,
 } from '~/components/offers/types';
-import { HOME_URL } from '~/components/offers/types';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 

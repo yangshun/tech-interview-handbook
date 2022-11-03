@@ -2,7 +2,7 @@ import type { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import type { ReactNode } from 'react';
 
-import { HOME_URL } from '~/components/offers/types';
+import { HOME_URL } from '../constants';
 
 type RightTextCarddProps = Readonly<{
   description: string;

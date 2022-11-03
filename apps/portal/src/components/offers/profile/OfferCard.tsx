@@ -7,7 +7,11 @@ import {
 import { HorizontalDivider } from '@tih/ui';
 
 import type { OfferDisplayData } from '~/components/offers/types';
-import { JobTypeLabel } from '~/components/offers/types';
+
+import {
+  getCompanyDisplayText,
+  getJobDisplayText,
+} from '~/utils/offers/string';
 
 type Props = Readonly<{
   offer: OfferDisplayData;
@@ -35,19 +39,18 @@ export default function OfferCard({
     return (
       <div className="flex justify-between px-8">
         <div className="flex flex-col">
-          <div className="flex flex-row">
-            <span>
-              <BuildingOffice2Icon className="mr-3 h-5" />
-            </span>
-            <span className="font-bold">
-              {location ? `${companyName}, ${location.cityName}` : companyName}
-            </span>
-          </div>
+          {(companyName || location) && (
+            <div className="flex flex-row">
+              <span>
+                <BuildingOffice2Icon className="mr-3 h-5" />
+              </span>
+              <span className="font-bold">
+                {getCompanyDisplayText(companyName, location)}
+              </span>
+            </div>
+          )}
           <div className="ml-8 flex flex-row">
-            <p>
-              {jobLevel ? `${jobTitle}, ${jobLevel}` : jobTitle}{' '}
-              {jobType && `(${JobTypeLabel[jobType]})`}
-            </p>
+            <p>{getJobDisplayText(jobTitle, jobLevel, jobType)}</p>
           </div>
         </div>
         {!duration && receivedMonth && (

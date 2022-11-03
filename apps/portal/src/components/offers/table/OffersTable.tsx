@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { JobType } from '@prisma/client';
-import { DropdownMenu, Spinner } from '@tih/ui';
+import { DropdownMenu, Spinner, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTablePagination from '~/components/offers/table/OffersTablePagination';
@@ -66,6 +66,7 @@ export default function OffersTable({
     event?.preventDefault();
   }, [yoeCategory]);
 
+  const { showToast } = useToast();
   trpc.useQuery(
     [
       'offers.list',
@@ -81,8 +82,11 @@ export default function OffersTable({
       },
     ],
     {
-      onError: (err) => {
-        alert(err);
+      onError: () => {
+        showToast({
+          title: 'Error loading the page.',
+          variant: 'failure',
+        });
       },
       onSuccess: (response: GetOffersResponse) => {
         setOffers(response.data);
@@ -246,7 +250,7 @@ export default function OffersTable({
           {!offers ||
             (offers.length === 0 && (
               <div className="py-16 text-lg">
-                <div className="flex justify-center">No data yet🥺</div>
+                <div className="flex justify-center">No data yet 🥺</div>
               </div>
             ))}
         </div>

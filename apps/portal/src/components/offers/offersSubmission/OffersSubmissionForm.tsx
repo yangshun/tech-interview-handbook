@@ -4,11 +4,11 @@ import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 import { JobType } from '@prisma/client';
-import { Button } from '@tih/ui';
+import { Button, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
-import type { BreadcrumbStep } from '~/components/offers/Breadcrumb';
-import { Breadcrumbs } from '~/components/offers/Breadcrumb';
+import type { BreadcrumbStep } from '~/components/offers/Breadcrumbs';
+import { Breadcrumbs } from '~/components/offers/Breadcrumbs';
 import BackgroundForm from '~/components/offers/offersSubmission/submissionForm/BackgroundForm';
 import OfferDetailsForm from '~/components/offers/offersSubmission/submissionForm/OfferDetailsForm';
 import type {
@@ -102,8 +102,9 @@ export default function OffersSubmissionForm({
     token: editToken,
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { event: gaEvent } = useGoogleAnalytics();
 
+  const { event: gaEvent } = useGoogleAnalytics();
+  const { showToast } = useToast();
   const router = useRouter();
   const pageRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () =>
@@ -132,13 +133,7 @@ export default function OffersSubmissionForm({
     },
   );
 
-  const steps = [
-    <OfferDetailsForm
-      key={0}
-      defaultJobType={initialOfferProfileValues.offers[0].jobType}
-    />,
-    <BackgroundForm key={1} />,
-  ];
+  const steps = [<OfferDetailsForm key={0} />, <BackgroundForm key={1} />];
 
   const breadcrumbSteps: Array<BreadcrumbStep> = [
     {
@@ -157,14 +152,14 @@ export default function OffersSubmissionForm({
     },
   ];
 
-  const goToNextStep = async (currStep: number) => {
-    if (currStep === 0) {
+  const setStepWithValidation = async (nextStep: number) => {
+    if (nextStep === 1) {
       const result = await trigger('offers');
       if (!result) {
         return;
       }
     }
-    setStep(step + 1);
+    setStep(nextStep);
   };
 
   const mutationpath =
@@ -175,10 +170,24 @@ export default function OffersSubmissionForm({
   const createOrUpdateMutation = trpc.useMutation([mutationpath], {
     onError(error) {
       console.error(error.message);
+      showToast({
+        title:
+          editProfileId && editToken
+            ? 'Error updating offer profile.'
+            : 'Error creating offer profile',
+        variant: 'failure',
+      });
     },
     onSuccess(data) {
       setParams({ profileId: data.id, token: data.token });
       setIsSubmitted(true);
+      showToast({
+        title:
+          editProfileId && editToken
+            ? 'Offer profile updated successfully!'
+            : 'Offer profile created successfully!',
+        variant: 'success',
+      });
     },
   });
 
@@ -270,7 +279,7 @@ export default function OffersSubmissionForm({
           <div className="flex justify-center bg-slate-100 px-4 py-4 sm:px-6 lg:px-8">
             <Breadcrumbs
               currentStep={step}
-              setStep={setStep}
+              setStep={setStepWithValidation}
               steps={breadcrumbSteps}
             />
           </div>
@@ -288,7 +297,7 @@ export default function OffersSubmissionForm({
                       label="Next"
                       variant="primary"
                       onClick={() => {
-                        goToNextStep(step);
+                        setStepWithValidation(step + 1);
                         gaEvent({
                           action: 'offers.profile_submission_navigate_next',
                           category: 'submission',

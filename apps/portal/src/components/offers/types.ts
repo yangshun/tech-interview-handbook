@@ -4,27 +4,6 @@ import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
 import type { Location } from '~/types/offers';
 
-export const HOME_URL = '/offers';
-
-/*
- *  Offer Profile
- */
-
-export const JobTypeLabel = {
-  FULLTIME: 'Full-time',
-  INTERN: 'Internship',
-};
-
-export enum EducationBackgroundType {
-  Bachelor = 'Bachelor',
-  Diploma = 'Diploma',
-  Masters = 'Masters',
-  PhD = 'PhD',
-  Professional = 'Professional',
-  Secondary = 'Secondary',
-  SelfTaught = 'Self-taught',
-}
-
 export type OffersProfilePostData = {
   background: BackgroundPostData;
   id?: string;

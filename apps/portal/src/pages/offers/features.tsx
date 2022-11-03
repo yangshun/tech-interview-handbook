@@ -8,12 +8,12 @@ import {
   UsersIcon,
 } from '@heroicons/react/24/outline';
 
+import { HOME_URL } from '~/components/offers/constants';
 import offersAnalysis from '~/components/offers/features/images/offers-analysis.png';
 import offersBrowse from '~/components/offers/features/images/offers-browse.png';
 import offersProfile from '~/components/offers/features/images/offers-profile.png';
 import LeftTextCard from '~/components/offers/features/LeftTextCard';
 import RightTextCard from '~/components/offers/features/RightTextCard';
-import { HOME_URL } from '~/components/offers/types';
 
 const features = [
   {
