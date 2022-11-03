@@ -96,7 +96,10 @@ const analysisOfferDtoMapper = (
     totalYoe: background?.totalYoe ?? -1,
   };
 
-  if (offer.offersFullTime?.totalCompensation) {
+  if (
+    offer.offersFullTime?.totalCompensation &&
+    offer.jobType === JobType.FULLTIME
+  ) {
     analysisOfferDto.income.value =
       offer.offersFullTime.totalCompensation.value;
     analysisOfferDto.income.currency =
@@ -106,7 +109,10 @@ const analysisOfferDtoMapper = (
       offer.offersFullTime.totalCompensation.baseValue;
     analysisOfferDto.income.baseCurrency =
       offer.offersFullTime.totalCompensation.baseCurrency;
-  } else if (offer.offersIntern?.monthlySalary) {
+  } else if (
+    offer.offersIntern?.monthlySalary &&
+    offer.jobType === JobType.INTERN
+  ) {
     analysisOfferDto.income.value = offer.offersIntern.monthlySalary.value;
     analysisOfferDto.income.currency =
       offer.offersIntern.monthlySalary.currency;
@@ -370,13 +376,15 @@ export const experienceDtoMapper = (
       experience.location != null
         ? locationDtoMapper(experience.location)
         : null,
-    monthlySalary: experience.monthlySalary
-      ? valuationDtoMapper(experience.monthlySalary)
-      : null,
+    monthlySalary:
+      experience.monthlySalary && experience.jobType === JobType.INTERN
+        ? valuationDtoMapper(experience.monthlySalary)
+        : null,
     title: experience.title,
-    totalCompensation: experience.totalCompensation
-      ? valuationDtoMapper(experience.totalCompensation)
-      : null,
+    totalCompensation:
+      experience.totalCompensation && experience.jobType === JobType.FULLTIME
+        ? valuationDtoMapper(experience.totalCompensation)
+        : null,
   };
   return experienceDto;
 };
@@ -702,7 +710,7 @@ export const dashboardOfferDtoMapper = (
     totalYoe: offer.profile.background?.totalYoe ?? -1,
   };
 
-  if (offer.offersFullTime) {
+  if (offer.offersFullTime && offer.jobType === JobType.FULLTIME) {
     dashboardOfferDto.income = valuationDtoMapper(
       offer.offersFullTime.totalCompensation,
     );
@@ -722,7 +730,7 @@ export const dashboardOfferDtoMapper = (
         offer.offersFullTime.stocks,
       );
     }
-  } else if (offer.offersIntern) {
+  } else if (offer.offersIntern && offer.jobType === JobType.INTERN) {
     dashboardOfferDto.income = valuationDtoMapper(
       offer.offersIntern.monthlySalary,
     );
@@ -815,7 +823,10 @@ const userProfileOfferDtoMapper = (
         : offer.offersIntern?.title ?? '',
   };
 
-  if (offer.offersFullTime?.totalCompensation) {
+  if (
+    offer.offersFullTime?.totalCompensation &&
+    offer.jobType === JobType.FULLTIME
+  ) {
     mappedOffer.income.value = offer.offersFullTime.totalCompensation.value;
     mappedOffer.income.currency =
       offer.offersFullTime.totalCompensation.currency;
@@ -824,7 +835,10 @@ const userProfileOfferDtoMapper = (
       offer.offersFullTime.totalCompensation.baseValue;
     mappedOffer.income.baseCurrency =
       offer.offersFullTime.totalCompensation.baseCurrency;
-  } else if (offer.offersIntern?.monthlySalary) {
+  } else if (
+    offer.offersIntern?.monthlySalary &&
+    offer.jobType === JobType.INTERN
+  ) {
     mappedOffer.income.value = offer.offersIntern.monthlySalary.value;
     mappedOffer.income.currency = offer.offersIntern.monthlySalary.currency;
     mappedOffer.income.id = offer.offersIntern.monthlySalary.id;
