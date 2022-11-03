@@ -10,7 +10,7 @@
     "tsc": "tsc",
     "postinstall": "prisma generate",
     "seed": "ts-node prisma/seed.ts",
-    "seedSalaries": "ts-node prisma/readSheet.ts",
+    "seed-salaries": "ts-node prisma/seed-salaries.ts",
     "seed-questions": "ts-node prisma/seed-questions.ts"
   },
   "dependencies": {
