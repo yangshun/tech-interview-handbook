@@ -1,12 +1,20 @@
 // eslint-disable-next-line no-shadow
 export enum YOE_CATEGORY {
-  INTERN = 0,
-  ENTRY = 1,
-  MID = 2,
-  SENIOR = 3,
+  ENTRY = 'entry',
+  INTERN = 'intern',
+  MID = 'mid',
+  SENIOR = 'senior',
 }
 
+export const YOE_CATEGORY_PARAM: Record<string, number> = {
+  entry: 1,
+  intern: 0,
+  mid: 2,
+  senior: 3,
+};
+
 export const OfferTableYoeOptions = [
+  { label: 'All Full Time YOE', value: '' },
   {
     label: 'Fresh Grad (0-2 YOE)',
     value: YOE_CATEGORY.ENTRY,

@@ -5,18 +5,16 @@ import { Banner } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTable from '~/components/offers/table/OffersTable';
-import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import Container from '~/components/shared/Container';
+import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
 export default function OffersHomePage() {
-  const [jobTitleFilter, setJobTitleFilter] = useState<JobTitleType | ''>(
-    'software-engineer',
-  );
+  const [jobTitleFilter, setJobTitleFilter] = useState<JobTitleType | ''>('');
   const [companyFilter, setCompanyFilter] = useState('');
-  const [cityFilter, setCityFilter] = useState('');
+  const [countryFilter, setCountryFilter] = useState('');
   const { event: gaEvent } = useGoogleAnalytics();
 
   return (
@@ -28,21 +26,23 @@ export default function OffersHomePage() {
         </Link>
         . ⭐
       </Banner>
-      <div className="text-primary-600 flex items-center justify-end space-x-1 bg-slate-100 px-4 pt-4">
+      <div className="text-primary-600 flex items-center justify-end space-x-1 bg-slate-100 px-4 pt-4 sm:text-lg">
         <span>
           <MapPinIcon className="flex h-7 w-7" />
         </span>
-        <CitiesTypeahead
+        <CountriesTypeahead
           isLabelHidden={true}
-          placeholder="All Cities"
+          placeholder="All Countries"
           onSelect={(option) => {
             if (option) {
-              setCityFilter(option.value);
+              setCountryFilter(option.value);
               gaEvent({
-                action: `offers.table_filter_city_${option.value}`,
+                action: `offers.table_filter_country_${option.value}`,
                 category: 'engagement',
-                label: 'Filter by city',
+                label: 'Filter by country',
               });
+            } else {
+              setCountryFilter('');
             }
           }}
         />
@@ -64,7 +64,7 @@ export default function OffersHomePage() {
           <div className="flex items-center space-x-4">
             <JobTitlesTypeahead
               isLabelHidden={true}
-              placeholder="Software Engineer"
+              placeholder="All Job Titles"
               textSize="inherit"
               onSelect={(option) => {
                 if (option) {
@@ -102,8 +102,8 @@ export default function OffersHomePage() {
       </div>
       <Container className="pb-20 pt-10">
         <OffersTable
-          cityFilter={cityFilter}
           companyFilter={companyFilter}
+          countryFilter={countryFilter}
           jobTitleFilter={jobTitleFilter}
         />
       </Container>
