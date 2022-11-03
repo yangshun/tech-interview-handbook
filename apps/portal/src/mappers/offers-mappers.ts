@@ -87,6 +87,7 @@ const analysisOfferDtoMapper = (
       background?.experiences
         ?.filter((exp) => exp.company != null)
         .map((exp) => exp.company?.name ?? '') ?? [],
+    profileId: offer.profileId,
     profileName,
     title:
       offer.jobType === JobType.FULLTIME
@@ -708,20 +709,17 @@ export const dashboardOfferDtoMapper = (
 
     if (offer.offersFullTime.baseSalary) {
       dashboardOfferDto.baseSalary = valuationDtoMapper(
-        offer.offersFullTime.baseSalary
+        offer.offersFullTime.baseSalary,
       );
     }
 
     if (offer.offersFullTime.bonus) {
-      dashboardOfferDto.bonus = valuationDtoMapper(
-        offer.offersFullTime.bonus
-      );
-
+      dashboardOfferDto.bonus = valuationDtoMapper(offer.offersFullTime.bonus);
     }
 
     if (offer.offersFullTime.stocks) {
       dashboardOfferDto.stocks = valuationDtoMapper(
-        offer.offersFullTime.stocks
+        offer.offersFullTime.stocks,
       );
     }
   } else if (offer.offersIntern) {
@@ -736,12 +734,12 @@ export const dashboardOfferDtoMapper = (
 export const getOffersResponseMapper = (
   data: Array<DashboardOffer>,
   paging: Paging,
-  jobType: JobType
+  jobType: JobType,
 ) => {
   const getOffersResponse: GetOffersResponse = {
     data,
     jobType,
-    paging
+    paging,
   };
   return getOffersResponse;
 };

@@ -181,6 +181,7 @@ export type AnalysisOffer = {
   monthYearReceived: Date;
   negotiationStrategy: string;
   previousCompanies: Array<string>;
+  profileId: string;
   profileName: string;
   title: string;
   totalYoe: number;
