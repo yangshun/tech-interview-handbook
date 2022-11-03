@@ -6,6 +6,7 @@ import { Bars3BottomLeftIcon } from '@heroicons/react/20/solid';
 import { NoSymbolIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
 import type { TypeaheadOption } from '@tih/ui';
+import { useToast } from '@tih/ui';
 import { Button, SlideOut } from '@tih/ui';
 
 import QuestionOverviewCard from '~/components/questions/card/question/QuestionOverviewCard';
@@ -205,6 +206,11 @@ export default function QuestionsBrowsePage() {
     {
       onSuccess: () => {
         utils.invalidateQueries('questions.questions.getQuestionsByFilter');
+        showToast({
+          // Duration: 10000 (optional)
+          title: `Thank you for submitting your question!`,
+          variant: 'success',
+        });
       },
     },
   );
@@ -279,6 +285,8 @@ export default function QuestionsBrowsePage() {
     sortOrder,
     sortType,
   ]);
+
+  const { showToast } = useToast();
 
   const selectedCompanyOptions = useMemo(() => {
     return selectedCompanySlugs.map((company) => {
