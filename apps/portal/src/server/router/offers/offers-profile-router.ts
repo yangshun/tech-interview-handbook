@@ -168,6 +168,7 @@ export const offersProfileRouter = createRouter()
             include: {
               companyAnalysis: {
                 include: {
+                  company: true,
                   topSimilarOffers: {
                     include: {
                       company: true,
@@ -218,6 +219,7 @@ export const offersProfileRouter = createRouter()
               },
               overallAnalysis: {
                 include: {
+                  company: true,
                   topSimilarOffers: {
                     include: {
                       company: true,
