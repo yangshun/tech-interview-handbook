@@ -31,7 +31,7 @@ type ExcelData = {
 
 const sheets = file.SheetNames;
 
-for (let i = 0; i < sheets.length; i++) {
+for (let i = 0; i < 1; i++) {
   const temp = reader.utils.sheet_to_json(file.Sheets[file.SheetNames[i]]);
   temp.forEach((res: ExcelData) => {
     data.push(res);
@@ -112,7 +112,7 @@ const seedSalaries = async () => {
 
   const companyIdMappings = {};
   (await prisma.company.findMany()).forEach((company) => {
-    companyIdMappings[company.name] = company.id;
+    companyIdMappings[company.slug] = company.id;
   });
 
   // get countryId of Singapore
@@ -122,7 +122,7 @@ const seedSalaries = async () => {
     }
   }))
 
-  // console.log(singapore)
+  console.log("Singapore ID: " + singapore)
   // break;
   // seed here
 
