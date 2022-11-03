@@ -4,11 +4,11 @@ import { JobTypeLabel } from '~/components/offers/constants';
 
 import type { Location } from '~/types/offers';
 
-function joinWithComma(...strings: Array<string | null | undefined>) {
+export function joinWithComma(...strings: Array<string | null | undefined>) {
   return strings.filter((value) => !!value).join(', ');
 }
 
-function getLocationDisplayText({ cityName, countryName }: Location) {
+export function getLocationDisplayText({ cityName, countryName }: Location) {
   return cityName === countryName
     ? cityName
     : joinWithComma(cityName, countryName);

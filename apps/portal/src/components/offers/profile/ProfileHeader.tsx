@@ -233,20 +233,20 @@ export default function ProfileHeader({
   const { experiences, totalYoe, specificYoes, profileName } = background;
 
   return (
-    <div className="grid-rows-2 bg-white p-4">
-      <div className="flex grid grid-cols-5 md:grid-cols-7">
-        <div className="jsutify-start col-span-5 flex">
-          <div className="ml-0 mr-2 mt-2 h-16 w-16 md:mx-4">
+    <div className="grid-rows-2 bg-white">
+      <div className="grid grid-cols-5 p-4 md:grid-cols-7">
+        <div className="col-span-5 flex justify-start space-x-4">
+          <div className="mt-2 h-16 w-16">
             <ProfilePhotoHolder />
           </div>
-          <div>
+          <div className="space-y-1">
             <h2 className="flex text-2xl font-bold">
               {profileName ?? 'anonymous'}
             </h2>
             {(experiences[0]?.companyName ||
               experiences[0]?.jobLevel ||
               experiences[0]?.jobTitle) && (
-              <div className="flex flex-row text-slate-600">
+              <div className="flex items-center text-sm text-slate-600">
                 <span>
                   <BuildingOffice2Icon className="mr-2.5 h-5 w-5" />
                 </span>
@@ -262,7 +262,7 @@ export default function ProfileHeader({
                 </p>
               </div>
             )}
-            <div className="flex flex-row text-slate-600">
+            <div className="flex items-center text-sm text-slate-600">
               <CalendarDaysIcon className="mr-2.5 h-5" />
               <p>
                 <span className="mr-2 font-bold">YOE:</span>
@@ -286,7 +286,7 @@ export default function ProfileHeader({
           </div>
         )}
       </div>
-      <div className="mt-4">
+      <div className="border-t border-slate-200 p-4">
         <Tabs
           label="Profile Detail Navigation"
           tabs={profileDetailTabs}

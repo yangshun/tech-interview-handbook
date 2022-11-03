@@ -215,7 +215,7 @@ export default function OfferProfile() {
                 setSelectedTab={setSelectedTab}
               />
             </div>
-            <div className="pb-4">
+            <div>
               <ProfileDetails
                 analysis={analysis}
                 background={background}
