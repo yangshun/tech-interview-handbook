@@ -132,6 +132,7 @@ export default function OfferProfile() {
                   ? getLabelForJobTitleType(experience.title as JobTitleType)
                   : null,
                 jobType: experience.jobType || undefined,
+                location: experience.location,
                 monthlySalary: experience.monthlySalary
                   ? convertMoneyToString(experience.monthlySalary)
                   : null,
