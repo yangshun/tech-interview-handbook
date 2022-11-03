@@ -461,11 +461,11 @@ export const profileOfferDtoMapper = (
     location: locationDtoMapper(offer.location),
     monthYearReceived: offer.monthYearReceived,
     negotiationStrategy: offer.negotiationStrategy,
-    offersFullTime: offer.offersFullTime,
-    offersIntern: offer.offersIntern,
+    offersFullTime: null,
+    offersIntern: null,
   };
 
-  if (offer.offersFullTime) {
+  if (offer.offersFullTime && offer.jobType === JobType.FULLTIME) {
     profileOfferDto.offersFullTime = {
       baseSalary:
         offer.offersFullTime?.baseSalary != null
@@ -486,7 +486,7 @@ export const profileOfferDtoMapper = (
         offer.offersFullTime.totalCompensation,
       ),
     };
-  } else if (offer.offersIntern) {
+  } else if (offer.offersIntern && offer.jobType === JobType.INTERN) {
     profileOfferDto.offersIntern = {
       id: offer.offersIntern.id,
       internshipCycle: offer.offersIntern.internshipCycle,
