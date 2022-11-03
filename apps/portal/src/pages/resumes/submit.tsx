@@ -246,7 +246,7 @@ export default function SubmitResumeForm({
         </div>
       )}
       {status === 'authenticated' && (
-        <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto">
+        <main className="flex-1">
           <section
             aria-labelledby="primary-heading"
             className="flex h-full min-w-0 flex-1 flex-col lg:order-last">
