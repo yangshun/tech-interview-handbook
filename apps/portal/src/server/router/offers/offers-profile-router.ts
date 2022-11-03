@@ -680,9 +680,7 @@ export const offersProfileRouter = createRouter()
                     jobType: x.jobType,
                     location: {
                       connect: {
-                        where: {
-                          id: x.cityId
-                        }
+                        id: x.cityId
                       }
                     },
                     monthYearReceived: x.monthYearReceived,
@@ -726,9 +724,7 @@ export const offersProfileRouter = createRouter()
                     jobType: x.jobType,
                     location: {
                       connect: {
-                        where: {
-                          id: x.cityId
-                        }
+                        id: x.cityId
                       }
                     },
                     monthYearReceived: x.monthYearReceived,
