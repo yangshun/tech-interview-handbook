@@ -5,6 +5,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { JobType } from '@prisma/client';
 
+import { JobTypeLabel } from '~/components/offers/constants';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
@@ -33,7 +34,8 @@ export default function DashboardProfileCard({
       <div className="flex items-end justify-between">
         <div className="col-span-1 row-span-3">
           <h4 className="font-medium">
-            {getLabelForJobTitleType(title as JobTitleType)}
+            {getLabelForJobTitleType(title as JobTitleType)}{' '}
+            {jobType && <>({JobTypeLabel[jobType]})</>}
           </h4>
           <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-4">
             {company?.name && (
