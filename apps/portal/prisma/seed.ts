@@ -1,4 +1,4 @@
-import { COMPANIES } from '../src/utils/companySeed';
+import { COMPANIES } from './companySeed';
 const { PrismaClient } = require('@prisma/client');
 
 const cities = require('./data/cities.json');
