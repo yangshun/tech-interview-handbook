@@ -42,9 +42,9 @@ export default function OfferTableRow({
       <td className="py-4 px-4">{convertMoneyToString(income)}</td>
       {jobType === JobType.FULLTIME && (
         <td className="py-4 px-4">
-          {`${baseSalary && convertMoneyToString(baseSalary)} / ${
-            bonus && convertMoneyToString(bonus)
-          } / ${stocks && convertMoneyToString(stocks)}`}
+          {`${convertMoneyToString(baseSalary)} / ${convertMoneyToString(
+            bonus,
+          )} / ${convertMoneyToString(stocks)}`}
         </td>
       )}
       <td className="py-4 px-4">{formatDate(monthYearReceived)}</td>

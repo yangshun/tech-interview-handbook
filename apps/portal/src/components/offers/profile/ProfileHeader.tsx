@@ -246,7 +246,7 @@ export default function ProfileHeader({
             {(experiences[0]?.companyName ||
               experiences[0]?.jobLevel ||
               experiences[0]?.jobTitle) && (
-              <div className="flex flex-row">
+              <div className="flex flex-row text-slate-600">
                 <span>
                   <BuildingOffice2Icon className="mr-2.5 h-5 w-5" />
                 </span>
@@ -262,7 +262,7 @@ export default function ProfileHeader({
                 </p>
               </div>
             )}
-            <div className="flex flex-row">
+            <div className="flex flex-row text-slate-600">
               <CalendarDaysIcon className="mr-2.5 h-5" />
               <p>
                 <span className="mr-2 font-bold">YOE:</span>
