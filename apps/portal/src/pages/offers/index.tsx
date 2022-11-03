@@ -59,7 +59,7 @@ export default function OffersHomePage() {
             offers.
           </div>
         </div>
-        <div className="mt-6 flex flex-col items-center justify-center space-y-2 text-base text-slate-700 sm:mt-10 sm:flex-row sm:space-y-0 sm:space-x-4 sm:text-lg">
+        <div className="mt-6 flex flex-col items-center justify-center space-y-2 text-sm text-slate-700 sm:mt-10 sm:flex-row sm:space-y-0 sm:space-x-4 sm:text-lg">
           <span>Viewing offers for</span>
           <div className="flex items-center space-x-4">
             <JobTitlesTypeahead

@@ -144,7 +144,7 @@ export default function Typeahead({
             <Combobox.Input
               aria-describedby={hasError ? errorId : undefined}
               className={clsx(
-                'w-full border-none py-2 pl-3 pr-10 leading-5 focus:ring-0',
+                'w-full border-none py-2 pl-3 pr-10 text-[length:inherit] leading-5 focus:ring-0',
                 stateClasses[state].input,
                 textSizes[textSize],
                 'disabled:cursor-not-allowed disabled:bg-transparent disabled:text-slate-500',
