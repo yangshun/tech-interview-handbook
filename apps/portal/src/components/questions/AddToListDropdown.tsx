@@ -5,6 +5,8 @@ import { Fragment, useRef, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { CheckIcon, HeartIcon } from '@heroicons/react/20/solid';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
+
 import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { trpc } from '~/utils/trpc';
 
@@ -15,6 +17,8 @@ export type AddToListDropdownProps = {
 export default function AddToListDropdown({
   questionId,
 }: AddToListDropdownProps) {
+  const { event } = useGoogleAnalytics();
+
   const [menuOpened, setMenuOpened] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -36,6 +40,11 @@ export default function AddToListDropdown({
       // TODO: Add optimistic update
       onSuccess: () => {
         utils.invalidateQueries(['questions.lists.getListsByUser']);
+        event({
+          action: 'questions.lists',
+          category: 'engagement',
+          label: 'add question to list',
+        });
       },
     },
   );
@@ -54,8 +63,8 @@ export default function AddToListDropdown({
     document.addEventListener('click', handleClickOutside, true);
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (ref.current && !ref.current.contains(event.target as Node)) {
+  const handleClickOutside = (e: MouseEvent) => {
+    if (ref.current && !ref.current.contains(e.target as Node)) {
       setMenuOpened(false);
       document.removeEventListener('click', handleClickOutside, true);
     }

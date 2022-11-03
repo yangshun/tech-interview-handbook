@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import type { LandingQueryData } from '~/components/questions/LandingComponent';
 import LandingComponent from '~/components/questions/LandingComponent';
 
@@ -8,6 +9,7 @@ import { APP_TITLE } from '~/utils/questions/constants';
 
 export default function QuestionsHomePage() {
   const router = useRouter();
+  const { event } = useGoogleAnalytics();
 
   const handleLandingQuery = async (data: LandingQueryData) => {
     const { companySlug, location, questionType } = data;
@@ -20,6 +22,11 @@ export default function QuestionsHomePage() {
         locations: [location],
         questionTypes: [questionType],
       },
+    });
+    event({
+      action: 'questions.landing',
+      category: 'engagement',
+      label: 'navigate to browse',
     });
   };
 

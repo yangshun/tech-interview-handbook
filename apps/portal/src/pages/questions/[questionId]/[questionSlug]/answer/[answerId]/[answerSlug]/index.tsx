@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button, TextArea } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullAnswerCard from '~/components/questions/card/FullAnswerCard';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
@@ -24,6 +25,7 @@ export type AnswerCommentData = {
 
 export default function QuestionPage() {
   const router = useRouter();
+  const { event } = useGoogleAnalytics();
 
   const [commentSortOrder, setCommentSortOrder] = useState<SortOrder>(
     SortOrder.DESC,
@@ -79,6 +81,11 @@ export default function QuestionPage() {
             sortType: SortType.NEW,
           },
         ]);
+        event({
+          action: 'questions.comment',
+          category: 'engagement',
+          label: 'comment on answer',
+        });
       },
     },
   );

@@ -7,6 +7,7 @@ import {
   PlusIcon,
 } from '@heroicons/react/24/outline';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import QuestionListCard from '~/components/questions/card/question/QuestionListCard';
 import type { CreateListFormData } from '~/components/questions/CreateListDialog';
 import CreateListDialog from '~/components/questions/CreateListDialog';
@@ -20,6 +21,8 @@ import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { trpc } from '~/utils/trpc';
 
 export default function ListPage() {
+  const { event } = useGoogleAnalytics();
+
   const utils = trpc.useContext();
   const { data: lists } = trpc.useQuery(['questions.lists.getListsByUser']);
   const { mutateAsync: createList } = trpc.useMutation(
@@ -28,6 +31,11 @@ export default function ListPage() {
       onSuccess: () => {
         // TODO: Add optimistic update
         utils.invalidateQueries(['questions.lists.getListsByUser']);
+        event({
+          action: 'questions.lists',
+          category: 'engagement',
+          label: 'create list',
+        });
       },
     },
   );
@@ -162,9 +170,9 @@ export default function ListPage() {
                   label="Create"
                   size="md"
                   variant="tertiary"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     handleAddClick();
                   }}
                 />
