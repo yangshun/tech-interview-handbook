@@ -1,3 +1,4 @@
+import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
@@ -21,12 +22,21 @@ export default function OffersSubmissionResult() {
   token = token as string;
   const [step, setStep] = useState(0);
   const [analysis, setAnalysis] = useState<ProfileAnalysis | null>(null);
+  const [isValidToken, setIsValidToken] = useState(false);
 
   const pageRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () =>
     pageRef.current?.scrollTo({ behavior: 'smooth', top: 0 });
 
-  // TODO: Check if the token is valid before showing this page
+  const checkToken = trpc.useQuery(
+    ['offers.profile.isValidToken', { profileId: offerProfileId, token }],
+    {
+      onSuccess(data) {
+        setIsValidToken(data);
+      },
+    },
+  );
+
   const getAnalysis = trpc.useQuery(
     ['offers.analysis.get', { profileId: offerProfileId }],
     {
@@ -69,7 +79,7 @@ export default function OffersSubmissionResult() {
 
   return (
     <>
-      {getAnalysis.isLoading && (
+      {(checkToken.isLoading || getAnalysis.isLoading) && (
         <div className="flex h-screen w-screen">
           <div className="m-auto mx-auto w-screen justify-center font-medium text-slate-500">
             <Spinner display="block" size="lg" />
@@ -77,7 +87,13 @@ export default function OffersSubmissionResult() {
           </div>
         </div>
       )}
-      {!getAnalysis.isLoading && (
+      {checkToken.isSuccess && !isValidToken && (
+        <Error
+          statusCode={403}
+          title="You do not have permissions to access this page"
+        />
+      )}
+      {getAnalysis.isSuccess && (
         <div ref={pageRef} className="w-full">
           <div className="flex justify-center">
             <div className="block w-full max-w-screen-md overflow-hidden rounded-lg sm:shadow-lg md:my-10">
