@@ -289,7 +289,6 @@ export default function OffersSubmissionForm({
                 className="space-y-6 text-sm"
                 onSubmit={handleSubmit(onSubmit)}>
                 {steps[step]}
-                <pre>{JSON.stringify(formMethods.watch(), null, 2)}</pre>
                 {step === 0 && (
                   <div className="flex justify-end">
                     <Button

@@ -93,7 +93,6 @@ export default function OffersProfileSave({
             <div className="mt-4 flex gap-4">
               <div className="grow">
                 <TextInput
-                  disabled={true}
                   isLabelHidden={true}
                   label="Edit link"
                   value={getProfileLink(profileId, token)}
