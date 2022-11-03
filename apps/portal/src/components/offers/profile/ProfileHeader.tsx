@@ -13,10 +13,10 @@ import { Button, Dialog, Spinner, Tabs, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import type { ProfileDetailTab } from '~/components/offers/constants';
+import { JobTypeLabel } from '~/components/offers/constants';
 import { profileDetailTabs } from '~/components/offers/constants';
 import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
 import type { BackgroundDisplayData } from '~/components/offers/types';
-import { JobTypeLabel } from '~/components/offers/types';
 import Tooltip from '~/components/offers/util/Tooltip';
 
 import { getProfileEditPath } from '~/utils/offers/link';

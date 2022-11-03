@@ -2,12 +2,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { JobType } from '@prisma/client';
 import { Collapsible, RadioList } from '@tih/ui';
 
-import {
-  educationFieldOptions,
-  educationLevelOptions,
-  emptyOption,
-  FieldError,
-} from '~/components/offers/constants';
+import { FieldError } from '~/components/offers/constants';
 import type { BackgroundPostData } from '~/components/offers/types';
 import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
@@ -20,6 +15,8 @@ import {
   CURRENCY_OPTIONS,
 } from '~/utils/offers/currency/CurrencyEnum';
 
+import { EducationFieldOptions } from '../../EducationFields';
+import { EducationLevelOptions } from '../../EducationLevels';
 import FormRadioList from '../../forms/FormRadioList';
 import FormSection from '../../forms/FormSection';
 import FormSelect from '../../forms/FormSelect';
@@ -134,6 +131,9 @@ function FullTimeJobFields() {
             if (option) {
               setValue('background.experiences.0.companyId', option.value);
               setValue('background.experiences.0.companyName', option.label);
+            } else {
+              setValue('background.experiences.0.companyId', '');
+              setValue('background.experiences.0.companyName', '');
             }
           }}
         />
@@ -343,15 +343,13 @@ function EducationSection() {
         <FormSelect
           display="block"
           label="Education Level"
-          options={educationLevelOptions}
-          placeholder={emptyOption}
+          options={EducationLevelOptions}
           {...register(`background.educations.0.type`)}
         />
         <FormSelect
           display="block"
           label="Field"
-          options={educationFieldOptions}
-          placeholder={emptyOption}
+          options={EducationFieldOptions}
           {...register(`background.educations.0.field`)}
         />
       </div>

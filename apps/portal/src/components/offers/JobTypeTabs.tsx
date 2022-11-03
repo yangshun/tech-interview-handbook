@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { JobType } from '@prisma/client';
 
-import { JobTypeLabel } from './types';
+import { JobTypeLabel } from '~/components/offers/constants';
 
 type Props = Readonly<{
   onChange: (jobType: JobType) => void;

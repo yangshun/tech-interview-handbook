@@ -11,8 +11,8 @@ import { HorizontalDivider } from '~/../../../packages/ui/dist';
 import { convertMoneyToString } from '~/utils/offers/currency';
 import { formatDate } from '~/utils/offers/time';
 
+import { JobTypeLabel } from '../constants';
 import ProfilePhotoHolder from '../profile/ProfilePhotoHolder';
-import { JobTypeLabel } from '../types';
 
 import type { AnalysisOffer } from '~/types/offers';
 
