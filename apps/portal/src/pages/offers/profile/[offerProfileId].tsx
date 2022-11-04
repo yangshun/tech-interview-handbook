@@ -79,6 +79,7 @@ export default function OfferProfile() {
                   jobTitle: getLabelForJobTitleType(
                     res.offersFullTime.title as JobTitleType,
                   ),
+                  jobType: res.jobType,
                   location: res.location,
                   negotiationStrategy: res.negotiationStrategy,
                   otherComment: res.comments,
@@ -99,6 +100,7 @@ export default function OfferProfile() {
                 jobTitle: getLabelForJobTitleType(
                   res.offersIntern!.title as JobTitleType,
                 ),
+                jobType: res.jobType,
                 location: res.location,
                 monthlySalary: convertMoneyToString(
                   res.offersIntern!.monthlySalary,
@@ -187,60 +189,54 @@ export default function OfferProfile() {
     }
   }
 
-  return (
-    <>
-      {getProfileQuery.isError && (
-        <div className="flex w-full justify-center">
-          <Error statusCode={404} title="Requested profile does not exist" />
+  return getProfileQuery.isError ? (
+    <div className="flex w-full justify-center">
+      <Error statusCode={404} title="Requested profile does not exist." />
+    </div>
+  ) : getProfileQuery.isLoading ? (
+    <div className="flex h-screen w-screen">
+      <div className="m-auto mx-auto w-screen justify-center font-medium text-slate-500">
+        <Spinner display="block" size="lg" />
+        <div className="text-center">Loading...</div>
+      </div>
+    </div>
+  ) : (
+    <div className="w-full divide-x lg:flex">
+      <div className="divide-y lg:w-2/3">
+        <div className="h-fit">
+          <ProfileHeader
+            background={background}
+            handleDelete={handleDelete}
+            isEditable={isEditable}
+            isLoading={getProfileQuery.isLoading}
+            selectedTab={selectedTab}
+            setSelectedTab={setSelectedTab}
+          />
         </div>
-      )}
-      {getProfileQuery.isLoading && (
-        <div className="flex h-screen w-screen">
-          <div className="m-auto mx-auto w-screen justify-center font-medium text-slate-500">
-            <Spinner display="block" size="lg" />
-            <div className="text-center">Loading...</div>
-          </div>
+        <div>
+          <ProfileDetails
+            analysis={analysis}
+            background={background}
+            isEditable={isEditable}
+            isLoading={getProfileQuery.isLoading}
+            offers={offers}
+            profileId={offerProfileId as string}
+            selectedTab={selectedTab}
+          />
         </div>
-      )}
-      {!getProfileQuery.isLoading && !getProfileQuery.isError && (
-        <div className="w-full divide-x lg:flex">
-          <div className="divide-y lg:w-2/3">
-            <div className="h-fit">
-              <ProfileHeader
-                background={background}
-                handleDelete={handleDelete}
-                isEditable={isEditable}
-                isLoading={getProfileQuery.isLoading}
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
-              />
-            </div>
-            <div>
-              <ProfileDetails
-                analysis={analysis}
-                background={background}
-                isEditable={isEditable}
-                isLoading={getProfileQuery.isLoading}
-                offers={offers}
-                profileId={offerProfileId as string}
-                selectedTab={selectedTab}
-              />
-            </div>
-          </div>
-          <div
-            className="bg-white lg:fixed lg:right-0 lg:bottom-0 lg:w-1/3"
-            style={{ top: 64 }}>
-            <ProfileComments
-              isDisabled={deleteMutation.isLoading}
-              isEditable={isEditable}
-              isLoading={getProfileQuery.isLoading}
-              profileId={offerProfileId as string}
-              profileName={background?.profileName}
-              token={token as string}
-            />
-          </div>
-        </div>
-      )}
-    </>
+      </div>
+      <div
+        className="bg-white lg:fixed lg:right-0 lg:bottom-0 lg:w-1/3"
+        style={{ top: 64 }}>
+        <ProfileComments
+          isDisabled={deleteMutation.isLoading}
+          isEditable={isEditable}
+          isLoading={getProfileQuery.isLoading}
+          profileId={offerProfileId as string}
+          profileName={background?.profileName}
+          token={token as string}
+        />
+      </div>
+    </div>
   );
 }

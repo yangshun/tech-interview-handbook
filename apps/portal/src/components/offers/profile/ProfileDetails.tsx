@@ -118,7 +118,7 @@ function ProfileAnalysis({
   }
 
   return (
-    <div className="p-4">
+    <div className="space-y-4 p-4">
       {!analysis ? (
         <p>No analysis available.</p>
       ) : (

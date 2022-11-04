@@ -2,6 +2,8 @@ import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Button, Dialog, TextArea, useToast } from '@tih/ui';
 
+import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
+
 import { timeSinceNow } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
@@ -121,14 +123,18 @@ export default function CommentCard({
 
   return (
     <div className="flex space-x-3">
-      {/* <div className="flex-shrink-0">
-        <img
-          alt=""
-          className="h-10 w-10 rounded-full"
-          src={`https://images.unsplash.com/photo-${comment.imageId}?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`}
-        />
-      </div> */}
-      <div>
+      <div className="flex-shrink-0">
+        {user?.image ? (
+          <img
+            alt={user?.name ?? user?.email ?? 'Unknown user'}
+            className="h-10 w-10 rounded-full"
+            src={user?.image}
+          />
+        ) : (
+          <ProfilePhotoHolder size="xs" />
+        )}
+      </div>
+      <div className="w-full">
         <div className="text-sm">
           <p className="font-medium text-slate-900">
             {user?.name ?? 'unknown user'}
@@ -137,35 +143,35 @@ export default function CommentCard({
         <div className="mt-1 text-sm text-slate-700">
           <p className="break-all">{message}</p>
         </div>
-        <div className="mt-2 space-x-2 text-sm">
+        <div className="mt-2 space-x-2 text-xs">
           <span className="font-medium text-slate-500">
             {timeSinceNow(createdAt)} ago
           </span>{' '}
-          <span className="font-medium text-slate-500">&middot;</span>{' '}
           {replyLength > 0 && (
             <>
+              <span className="font-medium text-slate-500">&middot;</span>{' '}
               <button
                 className="font-medium text-slate-900"
                 type="button"
                 onClick={handleExpanded}>
                 {isExpanded ? `Hide replies` : `View replies (${replyLength})`}
               </button>
-              <span className="font-medium text-slate-500">&middot;</span>{' '}
             </>
           )}
           {!disableReply && (
             <>
+              <span className="font-medium text-slate-500">&middot;</span>{' '}
               <button
                 className="font-medium text-slate-900"
                 type="button"
                 onClick={() => setIsReplying(!isReplying)}>
                 Reply
               </button>
-              <span className="font-medium text-slate-500">&middot;</span>{' '}
             </>
           )}
           {deletable && (
             <>
+              <span className="font-medium text-slate-500">&middot;</span>{' '}
               <button
                 className="font-medium text-slate-900"
                 disabled={deleteCommentMutation.isLoading}
@@ -204,7 +210,7 @@ export default function CommentCard({
           )}
         </div>
         {!disableReply && isReplying && (
-          <div className="mt-2 mr-2">
+          <div className="mt-4 mr-2">
             <form
               onSubmit={(event) => {
                 event.preventDefault();
@@ -212,8 +218,9 @@ export default function CommentCard({
                 handleReply();
               }}>
               <TextArea
+                autoFocus={true}
                 isLabelHidden={true}
-                label="Comment"
+                label="Reply to comment"
                 placeholder="Type your reply here"
                 resize="none"
                 value={currentReply}

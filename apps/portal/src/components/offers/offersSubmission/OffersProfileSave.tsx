@@ -1,5 +1,5 @@
 import { signIn, useSession } from 'next-auth/react';
-import { useState } from 'react';
+import type { UseQueryResult } from 'react-query';
 import { DocumentDuplicateIcon } from '@heroicons/react/20/solid';
 import { BookmarkIcon as BookmarkOutlineIcon } from '@heroicons/react/24/outline';
 import { BookmarkIcon as BookmarkSolidIcon } from '@heroicons/react/24/solid';
@@ -11,6 +11,7 @@ import { copyProfileLink, getProfileLink } from '~/utils/offers/link';
 import { trpc } from '~/utils/trpc';
 
 type OfferProfileSaveProps = Readonly<{
+  isSavedQuery: UseQueryResult<boolean>;
   profileId: string;
   token?: string;
 }>;
@@ -18,10 +19,10 @@ type OfferProfileSaveProps = Readonly<{
 export default function OffersProfileSave({
   profileId,
   token,
+  isSavedQuery: { data: isSaved, isLoading },
 }: OfferProfileSaveProps) {
   const { showToast } = useToast();
   const { event: gaEvent } = useGoogleAnalytics();
-  const [isSaved, setSaved] = useState(false);
   const { data: session, status } = useSession();
 
   const saveMutation = trpc.useMutation(
@@ -43,15 +44,6 @@ export default function OffersProfileSave({
           title: `Saved to your dashboard!`,
           variant: 'success',
         });
-      },
-    },
-  );
-
-  const isSavedQuery = trpc.useQuery(
-    [`offers.profile.isSaved`, { profileId, userId: session?.user?.id }],
-    {
-      onSuccess: (res) => {
-        setSaved(res);
       },
     },
   );
@@ -125,9 +117,9 @@ export default function OffersProfileSave({
           </p>
           <div className="mt-6">
             <Button
-              disabled={isSavedQuery.isLoading || isSaved}
+              disabled={isLoading || isSaved}
               icon={isSaved ? BookmarkSolidIcon : BookmarkOutlineIcon}
-              isLoading={saveMutation.isLoading || isSavedQuery.isLoading}
+              isLoading={saveMutation.isLoading}
               label={isSaved ? 'Added to account' : 'Add to your account'}
               size="sm"
               variant="secondary"

@@ -1,13 +1,7 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { ClipboardDocumentIcon, ShareIcon } from '@heroicons/react/24/outline';
-import {
-  Button,
-  HorizontalDivider,
-  Spinner,
-  TextArea,
-  useToast,
-} from '@tih/ui';
+import { Button, Spinner, TextArea, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ExpandableCommentCard from '~/components/offers/profile/comments/ExpandableCommentCard';
@@ -110,8 +104,8 @@ export default function ProfileComments({
     );
   }
   return (
-    <div className="bh-white h-fit p-4 lg:h-[calc(100vh-4.5rem)] lg:overflow-y-auto">
-      <div className="bg-white lg:sticky lg:top-0">
+    <div className="bh-white h-fit lg:h-[calc(100vh-4.5rem)] lg:overflow-y-auto">
+      <div className="border-b border-slate-200 bg-white p-4 lg:sticky lg:top-0">
         <div className="flex justify-end">
           <div className="grid w-fit grid-cols-1 space-y-2 md:grid-cols-2 md:space-y-0 md:space-x-4">
             <div className="col-span-1 flex justify-end">
@@ -169,7 +163,7 @@ export default function ProfileComments({
           </div>
         </div>
 
-        <div className="mt-2 mb-6 bg-white">
+        <div className="space-y-4">
           <h2 className="text-2xl font-bold">Discussions</h2>
           {isEditable || session?.user?.name ? (
             <div>
@@ -199,11 +193,9 @@ export default function ProfileComments({
                   />
                 </div>
               </div>
-              <HorizontalDivider />
             </div>
           ) : (
             <Button
-              className="mb-5"
               display="block"
               href={loginPageHref()}
               label="Sign in to join discussion"
@@ -212,10 +204,10 @@ export default function ProfileComments({
           )}
         </div>
       </div>
-      <section className="w-full">
-        <ul className="space-y-8" role="list">
+      <section className="w-full px-4">
+        <ul className="divide-y divide-slate-200" role="list">
           {replies?.map((reply: Reply) => (
-            <li key={reply.id}>
+            <li key={reply.id} className="py-6">
               <ExpandableCommentCard
                 comment={reply}
                 profileId={profileId}

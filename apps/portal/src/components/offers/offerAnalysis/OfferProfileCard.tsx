@@ -33,15 +33,15 @@ export default function OfferProfileCard({
     location,
     title,
     previousCompanies,
+    profileId,
   },
 }: OfferProfileCardProps) {
   return (
-    // <a
-    //   className="my-5 block rounded-lg bg-white p-4 px-8  shadow-md"
-    //   href={`/offers/profile/${id}`}
-    //   rel="noreferrer"
-    //   target="_blank">
-    <div className="my-5 block rounded-lg bg-white p-4 px-8  shadow-lg">
+    <a
+      className="my-5 block rounded-lg border bg-white p-4  px-8 shadow-md"
+      href={`/offers/profile/${profileId}`}
+      rel="noreferrer"
+      target="_blank">
       <div className="flex items-center gap-x-5">
         <div>
           <ProfilePhotoHolder size="sm" />
@@ -82,6 +82,6 @@ export default function OfferProfileCard({
           </p>
         </div>
       </div>
-    </div>
+    </a>
   );
 }

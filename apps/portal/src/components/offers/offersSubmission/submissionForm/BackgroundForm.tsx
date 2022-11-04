@@ -279,23 +279,34 @@ function InternshipJobFields() {
         })}
       />
       <Collapsible label="Add more details">
-        <CitiesTypeahead
-          label="Location"
-          value={{
-            id: watchCityId,
-            label: watchCityName,
-            value: watchCityId,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue('background.experiences.0.cityId', option.value);
-              setValue('background.experiences.0.cityName', option.label);
-            } else {
-              setValue('background.experiences.0.cityId', '');
-              setValue('background.experiences.0.cityName', '');
-            }
-          }}
-        />
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <CitiesTypeahead
+            label="Location"
+            value={{
+              id: watchCityId,
+              label: watchCityName,
+              value: watchCityId,
+            }}
+            onSelect={(option) => {
+              if (option) {
+                setValue('background.experiences.0.cityId', option.value);
+                setValue('background.experiences.0.cityName', option.label);
+              } else {
+                setValue('background.experiences.0.cityId', '');
+                setValue('background.experiences.0.cityName', '');
+              }
+            }}
+          />
+          <FormTextInput
+            errorMessage={experiencesField?.durationInMonths?.message}
+            label="Duration (months)"
+            type="number"
+            {...register(`background.experiences.0.durationInMonths`, {
+              min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+              valueAsNumber: true,
+            })}
+          />
+        </div>
       </Collapsible>
     </>
   );
