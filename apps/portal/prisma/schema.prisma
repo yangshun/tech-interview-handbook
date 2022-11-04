@@ -104,7 +104,6 @@ model Company {
   questionsQuestionEncounter QuestionsQuestionEncounter[]
   OffersExperience           OffersExperience[]
   OffersOffer                OffersOffer[]
-  OffersAnalysisUnit         OffersAnalysisUnit[]
 }
 
 model Country {
@@ -368,6 +367,7 @@ model OffersOffer {
 
   offersAnalysis     OffersAnalysis?      @relation("HighestOverallOffer")
   offersAnalysisUnit OffersAnalysisUnit[]
+  OffersAnalysisUnit OffersAnalysisUnit[] @relation("Analysed Offer")
 }
 
 model OffersIntern {
@@ -419,8 +419,8 @@ model OffersAnalysis {
 model OffersAnalysisUnit {
   id String @id @default(cuid())
 
-  company   Company @relation(fields: [companyId], references: [id])
-  companyId String
+  analysedOffer   OffersOffer @relation("Analysed Offer", fields: [analysedOfferId], references: [id])
+  analysedOfferId String
 
   percentile        Float
   noOfSimilarOffers Int
