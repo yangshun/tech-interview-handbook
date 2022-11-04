@@ -4,6 +4,7 @@ import type {
   Country,
   QuestionsQuestion,
   QuestionsQuestionVote,
+  QuestionTag,
   State,
 } from '@prisma/client';
 import { Vote } from '@prisma/client';
@@ -13,6 +14,8 @@ import type {
   CountryInfo,
   Question,
 } from '~/types/questions';
+
+type QuestionTagEntry = { tag: QuestionTag; }
 
 type AggregatableEncounters = Array<{
   city: City | null;
@@ -28,6 +31,7 @@ type QuestionWithAggregatableData = QuestionsQuestion & {
     answers: number;
     comments: number;
   };
+  questionTagEntries: Array<QuestionTagEntry>;
   encounters: AggregatableEncounters;
   user: {
     name: string | null;
@@ -66,6 +70,7 @@ export function createQuestionWithAggregateData(
     numVotes: votes,
     receivedCount: data.encounters.length,
     seenAt: data.encounters[0].seenAt,
+    tags: data.tags,
     type: data.questionType,
     updatedAt: data.updatedAt,
     user: data.user?.name ?? '',

@@ -24,6 +24,7 @@ export const questionsQuestionRouter = createRouter()
       sortType: z.nativeEnum(SortType),
       startDate: z.date().optional(),
       stateIds: z.string().array(),
+      tagIds: z.string().array(),
     }),
     async resolve({ ctx, input }) {
       const { cursor } = input;
@@ -82,6 +83,11 @@ export const questionsQuestionRouter = createRouter()
               state: true,
             },
           },
+          questionTagEntries: {
+            select: {
+              tag: true,
+            },
+          },
           user: {
             select: {
               name: true,
@@ -96,6 +102,19 @@ export const questionsQuestionRouter = createRouter()
             ? {
                 questionType: {
                   in: input.questionTypes,
+                },
+              }
+            : {}),
+          ...(input.tagIds.length > 0
+            ? {
+                questionTagEntries: {
+                  some : {
+                    tag: {
+                      id: {
+                        in: input.tagIds,
+                      },
+                    },
+                  }
                 },
               }
             : {}),
@@ -150,6 +169,7 @@ export const questionsQuestionRouter = createRouter()
                 : {}),
             },
           },
+
         },
       });
 
@@ -195,6 +215,11 @@ export const questionsQuestionRouter = createRouter()
               role: true,
               seenAt: true,
               state: true,
+            },
+          },
+          questionTagEntries: {
+            select: {
+              tag: true,
             },
           },
           user: {
@@ -262,6 +287,11 @@ export const questionsQuestionRouter = createRouter()
               state: true,
             },
           },
+          questionTagEntries: {
+            select: {
+              tag: true,
+            },
+          },
           user: {
             select: {
               name: true,
@@ -298,6 +328,7 @@ export const questionsQuestionRouter = createRouter()
       sortType: z.nativeEnum(SortType),
       startDate: z.date().optional(),
       stateIds: z.string().array(),
+      tagIds: z.string().array(),
     }),
     async resolve({ ctx, input }) {
       const escapeChars = /[()|&:*!]/g;
@@ -367,6 +398,11 @@ export const questionsQuestionRouter = createRouter()
               state: true,
             },
           },
+          questionTagEntries: {
+            select: {
+              tag: true,
+            },
+          },
           user: {
             select: {
               name: true,
@@ -377,13 +413,23 @@ export const questionsQuestionRouter = createRouter()
         orderBy: sortCondition,
         take: input.limit + 1,
         where: {
-          id: input.content !== "" ? {
-            in: relatedQuestionsIdArray,
-          } : undefined,
           ...(input.questionTypes.length > 0
             ? {
                 questionType: {
                   in: input.questionTypes,
+                },
+              }
+            : {}),
+          ...(input.tagIds.length > 0
+            ? {
+                questionTagEntries: {
+                  some : {
+                    tag: {
+                      id: {
+                        in: input.tagIds,
+                      },
+                    },
+                  }
                 },
               }
             : {}),
@@ -438,6 +484,7 @@ export const questionsQuestionRouter = createRouter()
                 : {}),
             },
           },
+
         },
       });
 

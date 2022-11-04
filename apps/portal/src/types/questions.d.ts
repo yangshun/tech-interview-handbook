@@ -5,6 +5,7 @@ export type Question = {
   content: string;
   id: string;
   numAnswers: number;
+  tags: Array<QuestionTag>;
   numComments: number;
   numVotes: number;
   receivedCount: number;

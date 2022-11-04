@@ -455,16 +455,34 @@ model QuestionsQuestion {
   createdAt     DateTime              @default(now())
   updatedAt     DateTime              @updatedAt
 
-  user                         User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
-  encounters                   QuestionsQuestionEncounter[]
-  votes                        QuestionsQuestionVote[]
-  comments                     QuestionsQuestionComment[]
-  answers                      QuestionsAnswer[]
-  questionsListQuestionEntries QuestionsListQuestionEntry[]
+  user                User?                        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  encounters          QuestionsQuestionEncounter[]
+  votes               QuestionsQuestionVote[]
+  comments            QuestionsQuestionComment[]
+  answers             QuestionsAnswer[]
+  listQuestionEntries QuestionsListQuestionEntry[]
+  questionTagEntries  QuestionQuestionTagEntry[]
 
   @@index([lastSeenAt, id])
   @@index([numEncounters, id])
   @@index([upvotes, id])
+}
+
+model QuestionTag {
+  id                 String                     @id @default(cuid())
+  tag                String                     @unique
+  questionTagEntries QuestionQuestionTagEntry[]
+}
+
+model QuestionQuestionTagEntry {
+  id         String @id @default(cuid())
+  questionId String
+  tagId      String
+
+  question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  tag      QuestionTag       @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, tagId])
 }
 
 model QuestionsQuestionEncounter {
