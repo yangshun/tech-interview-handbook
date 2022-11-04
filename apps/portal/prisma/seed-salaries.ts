@@ -47,7 +47,7 @@ const getJobTitle = (role: string) => {
   const processedRole = role.toUpperCase().trim();
 
   if (processedRole.includes('ML ENGINEER')) {
-    return 'ai-ml-engineer';
+    return 'machine-learning-engineer';
   } else if (processedRole.includes('BACKEND')) {
     return 'back-end-engineer';
   } else if (processedRole.includes('DATA')) {
@@ -117,13 +117,13 @@ const seedSalaries = async () => {
   });
 
   // get countryId of Singapore
-  const singapore = (await prisma.city.findFirst({
+  const singapore = await prisma.city.findFirst({
     where: {
-      name: "Singapore"
-    }
-  }))
+      name: 'Singapore',
+    },
+  });
 
-  console.log("Singapore ID: " + singapore?.id)
+  console.log('Singapore ID: ' + singapore?.id);
   // break;
   // seed here
 
@@ -171,8 +171,8 @@ const seedSalaries = async () => {
                       jobType: 'INTERN',
                       location: {
                         connect: {
-                          id: singapore.id
-                        }
+                          id: singapore.id,
+                        },
                       }, // TODO: DEFAULT AS SG
                       monthYearReceived: xlSerialToJsDate(data.Timestamp),
                       negotiationStrategy: '',
@@ -193,10 +193,10 @@ const seedSalaries = async () => {
                               ),
                               currency: 'SGD', // assume sgd
                               value: data.Income
-                                  ? typeof data.Income === 'number'
-                                    ? data.Income
-                                    : 0
-                                  : 0,
+                                ? typeof data.Income === 'number'
+                                  ? data.Income
+                                  : 0
+                                : 0,
                             },
                           },
                           startYear: xlSerialToJsDate(
@@ -235,8 +235,8 @@ const seedSalaries = async () => {
                       jobType: 'FULLTIME',
                       location: {
                         connect: {
-                          id: singapore.id
-                        }
+                          id: singapore.id,
+                        },
                       }, // TODO: DEFAULT AS SG
                       monthYearReceived: xlSerialToJsDate(data.Timestamp),
                       negotiationStrategy: '',
@@ -256,10 +256,10 @@ const seedSalaries = async () => {
                               ),
                               currency: 'SGD', // assume sgd
                               value: data.Income
-                                  ? typeof data.Income === 'number'
-                                    ? data.Income
-                                    : 0
-                                  : 0,
+                                ? typeof data.Income === 'number'
+                                  ? data.Income
+                                  : 0
+                                : 0,
                             },
                           },
                           bonus: {
@@ -358,8 +358,8 @@ const generateAllAnalysis = async () => {
 
 Promise.all([seedSalaries()])
   .then(() => {
-    console.log(createdProfileIds.length + " profiles created")
-    console.log("Busy crunching analysis.....")
+    console.log(createdProfileIds.length + ' profiles created');
+    console.log('Busy crunching analysis.....');
   })
   .then(() => generateAllAnalysis())
   .then((_data) => {
