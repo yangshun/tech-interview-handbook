@@ -394,7 +394,7 @@ export const offersRouter = createRouter().query('list', {
         numOfPages: Math.ceil(data.length / input.limit),
         totalItems: data.length,
       },
-      !yoeRange ? JobType.INTERN : JobType.FULLTIME
+      !yoeRange ? JobType.INTERN : JobType.FULLTIME,
     );
   },
 });
