@@ -1,11 +1,11 @@
 type ProfilePhotoHolderProps = Readonly<{
-  size?: 'lg' | 'sm';
+  size?: 'lg' | 'sm' | 'xs';
 }>;
 
 export default function ProfilePhotoHolder({
   size = 'lg',
 }: ProfilePhotoHolderProps) {
-  const sizeMap = { lg: '16', sm: '12' };
+  const sizeMap = { lg: '16', sm: '12', xs: '10' };
   return (
     <span
       className={`inline-block h-${sizeMap[size]} w-${sizeMap[size]} overflow-hidden rounded-full bg-slate-100`}>
