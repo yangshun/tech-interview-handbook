@@ -7,7 +7,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { FileRejection } from 'react-dropzone';
 import { useDropzone } from 'react-dropzone';
 import type { SubmitHandler } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { ArrowUpCircleIcon } from '@heroicons/react/24/outline';
 import {
   Button,
@@ -20,12 +20,14 @@ import {
 } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
+import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
 import ResumeSubmissionGuidelines from '~/components/resumes/submit-form/ResumeSubmissionGuidelines';
 import Container from '~/components/shared/Container';
+import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
 import loginPageHref from '~/components/shared/loginPageHref';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
-import { EXPERIENCES, LOCATIONS, ROLES } from '~/utils/resumes/resumeFilters';
+import { EXPERIENCES } from '~/utils/resumes/resumeFilters';
 import { trpc } from '~/utils/trpc';
 
 const FILE_SIZE_LIMIT_MB = 3;
@@ -85,6 +87,7 @@ export default function SubmitResumeForm({
     register,
     handleSubmit,
     setValue,
+    control,
     reset,
     watch,
     clearErrors,
@@ -300,15 +303,19 @@ export default function SubmitResumeForm({
                   onChange={(val) => onValueChange('title', val)}
                 />
                 <div className="flex flex-wrap gap-6">
-                  <Select
-                    {...register('role', { required: true })}
-                    defaultValue={undefined}
-                    disabled={isLoading}
-                    label="Role"
-                    options={ROLES}
-                    placeholder=" "
-                    required={true}
-                    onChange={(val) => onValueChange('role', val)}
+                  <Controller
+                    control={control}
+                    name="role"
+                    render={() => (
+                      <RoleTypeahead
+                        disabled={isLoading}
+                        required={true}
+                        onSelect={(option) =>
+                          onValueChange('role', option.value)
+                        }
+                      />
+                    )}
+                    rules={{ required: true }}
                   />
                   <Select
                     {...register('experience', { required: true })}
@@ -320,14 +327,22 @@ export default function SubmitResumeForm({
                     onChange={(val) => onValueChange('experience', val)}
                   />
                 </div>
-                <Select
-                  {...register('location', { required: true })}
-                  disabled={isLoading}
-                  label="Location"
-                  options={LOCATIONS}
-                  placeholder=" "
-                  required={true}
-                  onChange={(val) => onValueChange('location', val)}
+                <Controller
+                  control={control}
+                  name="location"
+                  render={() => (
+                    <CountriesTypeahead
+                      disabled={isLoading}
+                      required={true}
+                      onSelect={(option) => {
+                        if (option == null) {
+                          return;
+                        }
+                        onValueChange('location', option.value);
+                      }}
+                    />
+                  )}
+                  rules={{ required: true }}
                 />
                 {/* Upload resume form */}
                 {isNewForm && (
