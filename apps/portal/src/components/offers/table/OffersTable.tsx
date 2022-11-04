@@ -1,14 +1,14 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { JobType } from '@prisma/client';
-import { DropdownMenu, Spinner } from '@tih/ui';
+import { DropdownMenu, Spinner, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTablePagination from '~/components/offers/table/OffersTablePagination';
+import type { OfferTableSortByType } from '~/components/offers/table/types';
 import {
   OfferTableFilterOptions,
-  OfferTableSortBy,
   OfferTableYoeOptions,
   YOE_CATEGORY,
   YOE_CATEGORY_PARAM,
@@ -16,6 +16,7 @@ import {
 
 import { Currency } from '~/utils/offers/currency/CurrencyEnum';
 import CurrencySelector from '~/utils/offers/currency/CurrencySelector';
+import { useSearchParamSingle } from '~/utils/offers/useSearchParam';
 import { trpc } from '~/utils/trpc';
 
 import OffersRow from './OffersRow';
@@ -25,16 +26,17 @@ import type { DashboardOffer, GetOffersResponse, Paging } from '~/types/offers';
 const NUMBER_OF_OFFERS_IN_PAGE = 10;
 export type OffersTableProps = Readonly<{
   companyFilter: string;
+  companyName?: string;
   countryFilter: string;
   jobTitleFilter: string;
 }>;
 export default function OffersTable({
   countryFilter,
+  companyName,
   companyFilter,
   jobTitleFilter,
 }: OffersTableProps) {
   const [currency, setCurrency] = useState(Currency.SGD.toString()); // TODO: Detect location
-  const [selectedYoe, setSelectedYoe] = useState('');
   const [jobType, setJobType] = useState<JobType>(JobType.FULLTIME);
   const [pagination, setPagination] = useState<Paging>({
     currentPage: 0,
@@ -42,30 +44,64 @@ export default function OffersTable({
     numOfPages: 0,
     totalItems: 0,
   });
+
   const [offers, setOffers] = useState<Array<DashboardOffer>>([]);
-  const [selectedFilter, setSelectedFilter] = useState(
-    OfferTableFilterOptions[0].value,
-  );
+
   const { event: gaEvent } = useGoogleAnalytics();
   const router = useRouter();
-  const { yoeCategory = '' } = router.query;
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setPagination({
-      currentPage: 0,
-      numOfItems: 0,
-      numOfPages: 0,
-      totalItems: 0,
-    });
-    setIsLoading(true);
-  }, [selectedYoe, currency, countryFilter, companyFilter, jobTitleFilter]);
+  const [
+    selectedYoeCategory,
+    setSelectedYoeCategory,
+    isYoeCategoryInitialized,
+  ] = useSearchParamSingle<keyof typeof YOE_CATEGORY_PARAM>('yoeCategory');
+
+  const [selectedSortBy, setSelectedSortBy, isSortByInitialized] =
+    useSearchParamSingle<OfferTableSortByType>('sortBy');
+
+  const areFilterParamsInitialized = useMemo(() => {
+    return isYoeCategoryInitialized && isSortByInitialized;
+  }, [isYoeCategoryInitialized, isSortByInitialized]);
+  const { pathname } = router;
 
   useEffect(() => {
-    setSelectedYoe(yoeCategory as YOE_CATEGORY);
-    event?.preventDefault();
-  }, [yoeCategory]);
+    if (areFilterParamsInitialized) {
+      router.replace(
+        {
+          pathname,
+          query: {
+            companyId: companyFilter,
+            companyName,
+            jobTitleId: jobTitleFilter,
+            sortBy: selectedSortBy,
+            yoeCategory: selectedYoeCategory,
+          },
+        },
+        undefined,
+        { shallow: true },
+      );
+      setPagination({
+        currentPage: 0,
+        numOfItems: 0,
+        numOfPages: 0,
+        totalItems: 0,
+      });
+      setIsLoading(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    areFilterParamsInitialized,
+    currency,
+    countryFilter,
+    companyFilter,
+    jobTitleFilter,
+    selectedSortBy,
+    selectedYoeCategory,
+    pathname,
+  ]);
 
+  const { showToast } = useToast();
   trpc.useQuery(
     [
       'offers.list',
@@ -75,14 +111,19 @@ export default function OffersTable({
         currency,
         limit: NUMBER_OF_OFFERS_IN_PAGE,
         offset: pagination.currentPage,
-        sortBy: OfferTableSortBy[selectedFilter] ?? '-monthYearReceived',
+        sortBy: selectedSortBy ?? '-monthYearReceived',
         title: jobTitleFilter,
-        yoeCategory: YOE_CATEGORY_PARAM[yoeCategory as string] ?? undefined,
+        yoeCategory: selectedYoeCategory
+          ? YOE_CATEGORY_PARAM[selectedYoeCategory as string]
+          : undefined,
       },
     ],
     {
-      onError: (err) => {
-        alert(err);
+      onError: () => {
+        showToast({
+          title: 'Error loading the page.',
+          variant: 'failure',
+        });
       },
       onSuccess: (response: GetOffersResponse) => {
         setOffers(response.data);
@@ -95,44 +136,26 @@ export default function OffersTable({
 
   function renderFilters() {
     return (
-      <div className="flex items-center justify-between p-4 text-sm sm:grid-cols-4 md:text-base">
+      <div className="flex items-center justify-between p-4 text-xs text-slate-700 sm:grid-cols-4 sm:text-sm md:text-base">
         <DropdownMenu
           align="start"
           label={
             OfferTableYoeOptions.filter(
-              ({ value: itemValue }) => itemValue === selectedYoe,
-            )[0].label
+              ({ value: itemValue }) => itemValue === selectedYoeCategory,
+            ).length > 0
+              ? OfferTableYoeOptions.filter(
+                  ({ value: itemValue }) => itemValue === selectedYoeCategory,
+                )[0].label
+              : OfferTableYoeOptions[0].label
           }
           size="inherit">
           {OfferTableYoeOptions.map(({ label: itemLabel, value }) => (
             <DropdownMenu.Item
               key={value}
-              isSelected={value === selectedYoe}
+              isSelected={value === selectedYoeCategory}
               label={itemLabel}
               onClick={() => {
-                if (value === '') {
-                  router.replace(
-                    {
-                      pathname: router.pathname,
-                      query: undefined,
-                    },
-                    undefined,
-                    // Do not refresh the page
-                    { shallow: true },
-                  );
-                } else {
-                  const params = new URLSearchParams({
-                    ['yoeCategory']: value,
-                  });
-                  router.replace(
-                    {
-                      pathname: location.pathname,
-                      search: params.toString(),
-                    },
-                    undefined,
-                    { shallow: true },
-                  );
-                }
+                setSelectedYoeCategory(value);
                 gaEvent({
                   action: `offers.table_filter_yoe_category_${value}`,
                   category: 'engagement',
@@ -157,17 +180,21 @@ export default function OffersTable({
               align="end"
               label={
                 OfferTableFilterOptions.filter(
-                  ({ value: itemValue }) => itemValue === selectedFilter,
-                )[0].label
+                  ({ value: itemValue }) => itemValue === selectedSortBy,
+                ).length > 0
+                  ? OfferTableFilterOptions.filter(
+                      ({ value: itemValue }) => itemValue === selectedSortBy,
+                    )[0].label
+                  : OfferTableFilterOptions[0].label
               }
               size="inherit">
               {OfferTableFilterOptions.map(({ label: itemLabel, value }) => (
                 <DropdownMenu.Item
                   key={value}
-                  isSelected={value === selectedFilter}
+                  isSelected={value === selectedSortBy}
                   label={itemLabel}
                   onClick={() => {
-                    setSelectedFilter(value);
+                    setSelectedSortBy(value as OfferTableSortByType);
                   }}
                 />
               ))}
@@ -183,7 +210,9 @@ export default function OffersTable({
       'Company',
       'Title',
       'YOE',
-      selectedYoe === YOE_CATEGORY.INTERN ? 'Monthly Salary' : 'Annual TC',
+      selectedYoeCategory === YOE_CATEGORY.INTERN
+        ? 'Monthly Salary'
+        : 'Annual TC',
       'Date Offered',
       'Actions',
     ];
@@ -200,13 +229,13 @@ export default function OffersTable({
     }
 
     return (
-      <thead className="text-slate-700">
+      <thead className="font-semibold">
         <tr className="divide-x divide-slate-200">
           {columns.map((header, index) => (
             <th
               key={header}
               className={clsx(
-                'bg-slate-100 py-3 px-4',
+                'whitespace-nowrap bg-slate-100 py-3 px-4',
                 // Make last column sticky.
                 index === columns.length - 1 &&
                   'sticky right-0 drop-shadow md:drop-shadow-none',
@@ -235,7 +264,7 @@ export default function OffersTable({
         </div>
       ) : (
         <div className="overflow-x-auto text-slate-600">
-          <table className="w-full divide-y divide-slate-200 border-y border-slate-200 text-left">
+          <table className="w-full divide-y divide-slate-200 border-y border-slate-200 text-left text-xs text-slate-700 sm:text-sm md:text-base">
             {renderHeader()}
             <tbody>
               {offers.map((offer) => (

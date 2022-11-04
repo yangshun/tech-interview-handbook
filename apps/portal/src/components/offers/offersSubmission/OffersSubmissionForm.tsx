@@ -4,11 +4,11 @@ import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 import { JobType } from '@prisma/client';
-import { Button } from '@tih/ui';
+import { Button, Spinner, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
-import type { BreadcrumbStep } from '~/components/offers/Breadcrumb';
-import { Breadcrumbs } from '~/components/offers/Breadcrumb';
+import type { BreadcrumbStep } from '~/components/offers/Breadcrumbs';
+import { Breadcrumbs } from '~/components/offers/Breadcrumbs';
 import BackgroundForm from '~/components/offers/offersSubmission/submissionForm/BackgroundForm';
 import OfferDetailsForm from '~/components/offers/offersSubmission/submissionForm/OfferDetailsForm';
 import type {
@@ -102,8 +102,9 @@ export default function OffersSubmissionForm({
     token: editToken,
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { event: gaEvent } = useGoogleAnalytics();
 
+  const { event: gaEvent } = useGoogleAnalytics();
+  const { showToast } = useToast();
   const router = useRouter();
   const pageRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () =>
@@ -115,7 +116,7 @@ export default function OffersSubmissionForm({
   const {
     handleSubmit,
     trigger,
-    formState: { isSubmitting, isSubmitSuccessful },
+    formState: { isSubmitting },
   } = formMethods;
 
   const generateAnalysisMutation = trpc.useMutation(
@@ -123,6 +124,10 @@ export default function OffersSubmissionForm({
     {
       onError(error) {
         console.error(error.message);
+        showToast({
+          title: 'Error generating analysis.',
+          variant: 'failure',
+        });
       },
       onSuccess() {
         router.push(
@@ -132,13 +137,7 @@ export default function OffersSubmissionForm({
     },
   );
 
-  const steps = [
-    <OfferDetailsForm
-      key={0}
-      defaultJobType={initialOfferProfileValues.offers[0].jobType}
-    />,
-    <BackgroundForm key={1} />,
-  ];
+  const steps = [<OfferDetailsForm key={0} />, <BackgroundForm key={1} />];
 
   const breadcrumbSteps: Array<BreadcrumbStep> = [
     {
@@ -157,14 +156,14 @@ export default function OffersSubmissionForm({
     },
   ];
 
-  const goToNextStep = async (currStep: number) => {
-    if (currStep === 0) {
+  const setStepWithValidation = async (nextStep: number) => {
+    if (nextStep === 1) {
       const result = await trigger('offers');
       if (!result) {
         return;
       }
     }
-    setStep(step + 1);
+    setStep(nextStep);
   };
 
   const mutationpath =
@@ -175,16 +174,30 @@ export default function OffersSubmissionForm({
   const createOrUpdateMutation = trpc.useMutation([mutationpath], {
     onError(error) {
       console.error(error.message);
+      showToast({
+        title:
+          editProfileId && editToken
+            ? 'Error updating offer profile.'
+            : 'Error creating offer profile.',
+        variant: 'failure',
+      });
     },
     onSuccess(data) {
       setParams({ profileId: data.id, token: data.token });
       setIsSubmitted(true);
+      showToast({
+        title:
+          editProfileId && editToken
+            ? 'Offer profile updated successfully!'
+            : 'Offer profile created successfully!',
+        variant: 'success',
+      });
     },
   });
 
   const onSubmit: SubmitHandler<OffersProfileFormData> = async (data) => {
     const result = await trigger();
-    if (!result || isSubmitting || isSubmitSuccessful) {
+    if (!result || isSubmitting || createOrUpdateMutation.isLoading) {
       return;
     }
 
@@ -263,14 +276,16 @@ export default function OffersSubmissionForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
+  return generateAnalysisMutation.isLoading ? (
+    <Spinner className="m-10" display="block" size="lg" />
+  ) : (
     <div ref={pageRef} className="w-full">
       <div className="flex justify-center">
         <div className="block w-full max-w-screen-md overflow-hidden rounded-lg sm:shadow-lg md:my-10">
           <div className="flex justify-center bg-slate-100 px-4 py-4 sm:px-6 lg:px-8">
             <Breadcrumbs
               currentStep={step}
-              setStep={setStep}
+              setStep={setStepWithValidation}
               steps={breadcrumbSteps}
             />
           </div>
@@ -288,7 +303,7 @@ export default function OffersSubmissionForm({
                       label="Next"
                       variant="primary"
                       onClick={() => {
-                        goToNextStep(step);
+                        setStepWithValidation(step + 1);
                         gaEvent({
                           action: 'offers.profile_submission_navigate_next',
                           category: 'submission',
@@ -315,9 +330,16 @@ export default function OffersSubmissionForm({
                       }}
                     />
                     <Button
-                      disabled={isSubmitting || isSubmitSuccessful}
+                      disabled={
+                        isSubmitting ||
+                        createOrUpdateMutation.isLoading ||
+                        generateAnalysisMutation.isLoading ||
+                        generateAnalysisMutation.isSuccess
+                      }
                       icon={ArrowRightIcon}
-                      isLoading={isSubmitting || isSubmitSuccessful}
+                      isLoading={
+                        isSubmitting || createOrUpdateMutation.isLoading
+                      }
                       label="Submit"
                       type="submit"
                       variant="primary"

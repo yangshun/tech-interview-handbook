@@ -5,6 +5,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { JobType } from '@prisma/client';
 
+import { JobTypeLabel } from '~/components/offers/constants';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
@@ -33,32 +34,33 @@ export default function DashboardProfileCard({
       <div className="flex items-end justify-between">
         <div className="col-span-1 row-span-3">
           <h4 className="font-medium">
-            {getLabelForJobTitleType(title as JobTitleType)}
+            {getLabelForJobTitleType(title as JobTitleType)}{' '}
+            {jobType && <>({JobTypeLabel[jobType]})</>}
           </h4>
           <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-4">
             {company?.name && (
-              <div className="mt-2 flex items-center text-sm text-gray-500">
+              <div className="mt-2 flex items-center text-sm text-slate-500">
                 <BuildingOfficeIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
                 />
                 {company.name}
               </div>
             )}
             {location && (
-              <div className="mt-2 flex items-center text-sm text-gray-500">
+              <div className="mt-2 flex items-center text-sm text-slate-500">
                 <MapPinIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
                 />
                 {location.cityName}
               </div>
             )}
             {level && (
-              <div className="mt-2 flex items-center text-sm text-gray-500">
+              <div className="mt-2 flex items-center text-sm text-slate-500">
                 <ArrowTrendingUpIcon
                   aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
                 />
                 {level}
               </div>

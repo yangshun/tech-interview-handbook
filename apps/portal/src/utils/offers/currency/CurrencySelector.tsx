@@ -20,7 +20,7 @@ export default function CurrencySelector({
     <Select
       display="inline"
       isLabelHidden={true}
-      label="Select fruit"
+      label="Currency"
       name=""
       options={currencyOptions}
       value={selectedCurrency}

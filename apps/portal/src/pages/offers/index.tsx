@@ -9,13 +9,22 @@ import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import Container from '~/components/shared/Container';
 import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
 import type { JobTitleType } from '~/components/shared/JobTitles';
+import { JobTitleLabels } from '~/components/shared/JobTitles';
 import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
+import { useSearchParamSingle } from '~/utils/offers/useSearchParam';
+
 export default function OffersHomePage() {
-  const [jobTitleFilter, setJobTitleFilter] = useState<JobTitleType | ''>('');
-  const [companyFilter, setCompanyFilter] = useState('');
   const [countryFilter, setCountryFilter] = useState('');
   const { event: gaEvent } = useGoogleAnalytics();
+
+  const [selectedCompanyName, setSelectedCompanyName] =
+    useSearchParamSingle('companyName');
+  const [selectedCompanyId, setSelectedCompanyId] =
+    useSearchParamSingle('companyId');
+
+  const [selectedJobTitleId, setSelectedJobTitleId] =
+    useSearchParamSingle<JobTitleType | null>('jobTitleId');
 
   return (
     <main className="flex-1 overflow-y-auto">
@@ -59,23 +68,32 @@ export default function OffersHomePage() {
             offers.
           </div>
         </div>
-        <div className="mt-6 flex flex-col items-center justify-center space-y-2 text-base text-slate-700 sm:mt-10 sm:flex-row sm:space-y-0 sm:space-x-4 sm:text-lg">
+        <div className="mt-6 flex flex-col items-center justify-center space-y-2 text-sm text-slate-700 sm:mt-10 sm:flex-row sm:space-y-0 sm:space-x-4 sm:text-lg">
           <span>Viewing offers for</span>
           <div className="flex items-center space-x-4">
             <JobTitlesTypeahead
               isLabelHidden={true}
               placeholder="All Job Titles"
               textSize="inherit"
+              value={
+                selectedJobTitleId
+                  ? {
+                      id: selectedJobTitleId,
+                      label: JobTitleLabels[selectedJobTitleId as JobTitleType],
+                      value: selectedJobTitleId,
+                    }
+                  : null
+              }
               onSelect={(option) => {
                 if (option) {
-                  setJobTitleFilter(option.value as JobTitleType);
+                  setSelectedJobTitleId(option.id as JobTitleType);
                   gaEvent({
                     action: `offers.table_filter_job_title_${option.value}`,
                     category: 'engagement',
                     label: 'Filter by job title',
                   });
                 } else {
-                  setJobTitleFilter('');
+                  setSelectedJobTitleId(null);
                 }
               }}
             />
@@ -84,16 +102,27 @@ export default function OffersHomePage() {
               isLabelHidden={true}
               placeholder="All Companies"
               textSize="inherit"
+              value={
+                selectedCompanyName
+                  ? {
+                      id: selectedCompanyId,
+                      label: selectedCompanyName,
+                      value: selectedCompanyId,
+                    }
+                  : null
+              }
               onSelect={(option) => {
                 if (option) {
-                  setCompanyFilter(option.value);
+                  setSelectedCompanyId(option.id);
+                  setSelectedCompanyName(option.label);
                   gaEvent({
                     action: `offers.table_filter_company_${option.value}`,
                     category: 'engagement',
                     label: 'Filter by company',
                   });
                 } else {
-                  setCompanyFilter('');
+                  setSelectedCompanyId('');
+                  setSelectedCompanyName('');
                 }
               }}
             />
@@ -102,9 +131,10 @@ export default function OffersHomePage() {
       </div>
       <Container className="pb-20 pt-10">
         <OffersTable
-          companyFilter={companyFilter}
+          companyFilter={selectedCompanyId}
+          companyName={selectedCompanyName}
           countryFilter={countryFilter}
-          jobTitleFilter={jobTitleFilter}
+          jobTitleFilter={selectedJobTitleId ?? ''}
         />
       </Container>
     </main>

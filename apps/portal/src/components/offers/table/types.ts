@@ -36,25 +36,24 @@ export const OfferTableYoeOptions = [
 export const OfferTableFilterOptions = [
   {
     label: 'Latest Submitted',
-    value: 'latest-submitted',
+    value: '-monthYearReceived',
   },
   {
     label: 'Highest Salary',
-    value: 'highest-salary',
+    value: '-totalCompensation',
   },
   {
     label: 'Highest YOE first',
-    value: 'highest-yoe-first',
+    value: '-totalYoe',
   },
   {
     label: 'Lowest YOE first',
-    value: 'lowest-yoe-first',
+    value: '+totalYoe',
   },
 ];
 
-export const OfferTableSortBy: Record<string, string> = {
-  'highest-salary': '-totalCompensation',
-  'highest-yoe-first': '-totalYoe',
-  'latest-submitted': '-monthYearReceived',
-  'lowest-yoe-first': '+totalYoe',
-};
+export type OfferTableSortByType =
+  | '-monthYearReceived'
+  | '-totalCompensation'
+  | '-totalYoe'
+  | '+totalYoe';

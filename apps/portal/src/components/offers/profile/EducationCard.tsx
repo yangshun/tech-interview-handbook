@@ -13,12 +13,12 @@ export default function EducationCard({
   education: { type, field, startDate, endDate, school },
 }: Props) {
   return (
-    <div className="mx-8 my-4 block rounded-lg bg-white py-4 shadow-md">
-      <div className="flex justify-between px-8">
-        <div className="flex flex-col">
-          <div className="flex flex-row">
+    <div className="block rounded-lg border border-slate-200 bg-white p-4 text-sm ">
+      <div className="flex justify-between">
+        <div>
+          <div className="flex items-center">
             <LightBulbIcon className="mr-1 h-5" />
-            <span className="ml-1 font-bold">
+            <span className="text-semibold ml-1">
               {field ? `${type ?? 'N/A'}, ${field}` : type ?? `N/A`}
             </span>
           </div>

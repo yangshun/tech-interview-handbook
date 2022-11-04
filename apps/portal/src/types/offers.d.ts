@@ -157,10 +157,15 @@ export type ProfileAnalysis = {
 };
 
 export type AnalysisUnit = {
+  companyId: string;
   companyName: string;
+  income: Valuation;
+  jobType: JobType;
   noOfOffers: number;
   percentile: number;
+  title: string;
   topPercentileOffers: Array<AnalysisOffer>;
+  totalYoe: number;
 };
 
 export type AnalysisHighestOffer = {
@@ -181,6 +186,7 @@ export type AnalysisOffer = {
   monthYearReceived: Date;
   negotiationStrategy: string;
   previousCompanies: Array<string>;
+  profileId: string;
   profileName: string;
   title: string;
   totalYoe: number;

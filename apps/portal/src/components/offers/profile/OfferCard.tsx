@@ -1,13 +1,15 @@
 import {
-  BuildingOffice2Icon,
-  ChatBubbleBottomCenterTextIcon,
-  CurrencyDollarIcon,
-  ScaleIcon,
-} from '@heroicons/react/24/outline';
-import { HorizontalDivider } from '@tih/ui';
+  ArrowTrendingUpIcon,
+  BuildingOfficeIcon,
+  MapPinIcon,
+} from '@heroicons/react/20/solid';
+import { JobType } from '@prisma/client';
 
+import { JobTypeLabel } from '~/components/offers/constants';
 import type { OfferDisplayData } from '~/components/offers/types';
-import { JobTypeLabel } from '~/components/offers/types';
+
+import { getLocationDisplayText } from '~/utils/offers/string';
+import { getDurationDisplayText } from '~/utils/offers/time';
 
 type Props = Readonly<{
   offer: OfferDisplayData;
@@ -33,33 +35,55 @@ export default function OfferCard({
 }: Props) {
   function UpperSection() {
     return (
-      <div className="flex justify-between px-8">
-        <div className="flex flex-col">
-          <div className="flex flex-row">
-            <span>
-              <BuildingOffice2Icon className="mr-3 h-5" />
-            </span>
-            <span className="font-bold">
-              {location ? `${companyName}, ${location.cityName}` : companyName}
-            </span>
+      <div className="px-4 py-5 sm:px-6">
+        <div className="flex justify-between">
+          <div>
+            <h3 className="text-lg font-medium leading-6 text-slate-900">
+              {jobTitle} {jobType && <>({JobTypeLabel[jobType]})</>}
+            </h3>
+            <div className="mt-1 flex flex-row flex-wrap space-x-4 sm:mt-0">
+              {companyName && (
+                <div className="mt-2 flex items-center text-sm text-slate-500">
+                  <BuildingOfficeIcon
+                    aria-hidden="true"
+                    className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
+                  />
+                  {companyName}
+                </div>
+              )}
+              {location && (
+                <div className="mt-2 flex items-center text-sm text-slate-500">
+                  <MapPinIcon
+                    aria-hidden="true"
+                    className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
+                  />
+                  {getLocationDisplayText(location)}
+                </div>
+              )}
+              {jobLevel && (
+                <div className="mt-2 flex items-center text-sm text-slate-500">
+                  <ArrowTrendingUpIcon
+                    aria-hidden="true"
+                    className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
+                  />
+                  {jobLevel}
+                </div>
+              )}
+            </div>
           </div>
-          <div className="ml-8 flex flex-row">
-            <p>
-              {jobLevel ? `${jobTitle}, ${jobLevel}` : jobTitle}{' '}
-              {jobType && `(${JobTypeLabel[jobType]})`}
-            </p>
+          <div className="space-y-2">
+            {!duration && receivedMonth && (
+              <div className="text-sm text-slate-500">
+                <p>{receivedMonth}</p>
+              </div>
+            )}
+            {!!duration && (
+              <div className="text-sm text-slate-500">
+                <p>{getDurationDisplayText(duration)}</p>
+              </div>
+            )}
           </div>
         </div>
-        {!duration && receivedMonth && (
-          <div className="font-light text-slate-400">
-            <p>{receivedMonth}</p>
-          </div>
-        )}
-        {duration && (
-          <div className="font-light text-slate-400">
-            <p>{`${duration} months`}</p>
-          </div>
-        )}
       </div>
     );
   }
@@ -75,60 +99,72 @@ export default function OfferCard({
     }
 
     return (
-      <>
-        <HorizontalDivider />
-        <div className="px-8">
-          <div className="flex flex-col py-2">
-            {(totalCompensation || monthlySalary) && (
-              <div className="flex flex-row">
-                <span>
-                  <CurrencyDollarIcon className="mr-3 h-5" />
-                </span>
-                <span>
-                  <p>
-                    {totalCompensation && `TC: ${totalCompensation}`}
-                    {monthlySalary && `Monthly Salary: ${monthlySalary}`}
-                  </p>
-                </span>
-              </div>
-            )}
-            {(base || stocks || bonus) && totalCompensation && (
-              <div className="ml-8 flex flex-row font-light">
-                <p>
-                  Base / year: {base ?? 'N/A'} ⋅ Stocks / year:{' '}
-                  {stocks ?? 'N/A'} ⋅ Bonus / year: {bonus ?? 'N/A'}
-                </p>
-              </div>
-            )}
-          </div>
+      <div className="border-t border-slate-200 px-4 py-5 sm:px-6">
+        <dl className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4">
+          {jobType === JobType.FULLTIME
+            ? totalCompensation && (
+                <div className="col-span-1">
+                  <dt className="text-sm font-medium text-slate-500">
+                    Total Compensation
+                  </dt>
+                  <dd className="mt-1 text-sm text-slate-900">
+                    {totalCompensation}
+                  </dd>
+                </div>
+              )
+            : monthlySalary && (
+                <div className="col-span-1">
+                  <dt className="text-sm font-medium text-slate-500">
+                    Monthly Salary
+                  </dt>
+                  <dd className="mt-1 text-sm text-slate-900">
+                    {monthlySalary}
+                  </dd>
+                </div>
+              )}
+          {base && (
+            <div className="col-span-1">
+              <dt className="text-sm font-medium text-slate-500">
+                Base Salary
+              </dt>
+              <dd className="mt-1 text-sm text-slate-900">{base}</dd>
+            </div>
+          )}
+          {stocks && (
+            <div className="col-span-1">
+              <dt className="text-sm font-medium text-slate-500">Stocks</dt>
+              <dd className="mt-1 text-sm text-slate-900">{stocks}</dd>
+            </div>
+          )}
+          {bonus && (
+            <div className="col-span-1">
+              <dt className="text-sm font-medium text-slate-500">Bonus</dt>
+              <dd className="mt-1 text-sm text-slate-900">{bonus}</dd>
+            </div>
+          )}
           {negotiationStrategy && (
-            <div className="flex flex-col py-2">
-              <div className="flex flex-row">
-                <span>
-                  <ScaleIcon className="h-5 w-5" />
-                </span>
-                <span className="overflow-wrap ml-2">
-                  "{negotiationStrategy}"
-                </span>
-              </div>
+            <div className="col-span-2">
+              <dt className="text-sm font-medium text-slate-500">
+                Negotiation Strategy
+              </dt>
+              <dd className="mt-1 text-sm text-slate-900">
+                {negotiationStrategy}
+              </dd>
             </div>
           )}
           {otherComment && (
-            <div className="flex flex-col py-2">
-              <div className="flex flex-row">
-                <span>
-                  <ChatBubbleBottomCenterTextIcon className="h-5 w-5" />
-                </span>
-                <span className="overflow-wrap ml-2">"{otherComment}"</span>
-              </div>
+            <div className="col-span-2">
+              <dt className="text-sm font-medium text-slate-500">Others</dt>
+              <dd className="mt-1 text-sm text-slate-900">{otherComment}</dd>
             </div>
           )}
-        </div>
-      </>
+        </dl>
+      </div>
     );
   }
+
   return (
-    <div className="mx-8 my-4 block rounded-md border-b border-gray-300 bg-white py-4">
+    <div className="block rounded-lg border border-slate-200 bg-white">
       <UpperSection />
       <BottomSection />
     </div>
