@@ -63,7 +63,7 @@ export default function DashboardProfileCard({
                   {profileName}
                 </h2>
                 <p className="text-sm text-slate-500">
-                  <span>Created at {formatDate(createdAt)}</span>
+                  <span>Created in {formatDate(createdAt)}</span>
                 </p>
               </div>
             </div>
