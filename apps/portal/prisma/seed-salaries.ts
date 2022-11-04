@@ -3,7 +3,8 @@ import { PrismaClient } from '@prisma/client';
 import crypto from 'crypto';
 import { baseCurrencyString } from '../src/utils/offers/currency';
 import { convert } from '../src/utils/offers/currency/currencyExchange';
-import { generateAnalysis } from '../src/utils/offers/analysisGeneration';
+import { generateAnalysis } from '../src/utils/offers/analysis/analysisGeneration';
+
 import {
   generateRandomName,
   generateRandomStringForToken,
@@ -122,7 +123,7 @@ const seedSalaries = async () => {
     }
   }))
 
-  console.log("Singapore ID: " + singapore)
+  console.log("Singapore ID: " + singapore?.id)
   // break;
   // seed here
 
