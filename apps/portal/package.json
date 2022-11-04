@@ -10,13 +10,8 @@
     "tsc": "tsc",
     "postinstall": "prisma generate",
     "seed": "ts-node prisma/seed.ts",
-<<<<<<< HEAD
-    "seed-questions": "ts-node prisma/seed-questions.ts",
-    "seedSalaries": "ts-node prisma/readSheet.ts"
-=======
     "seed-salaries": "ts-node prisma/seed-salaries.ts",
     "seed-questions": "ts-node prisma/seed-questions.ts"
->>>>>>> cfab8715 ([offers][refactor] standardise seed script with question)
   },
   "dependencies": {
     "@headlessui/react": "^1.7.3",
@@ -48,6 +43,7 @@
     "react-query": "^3.39.2",
     "read-excel-file": "^5.5.3",
     "superjson": "^1.10.0",
+    "xlsx": "^0.18.5",
     "unique-names-generator": "^4.7.1",
     "xlsx": "^0.18.5",
     "zod": "^3.18.0"
