@@ -33,7 +33,6 @@ export default function DashboardProfileCard({
     <div className="px-4 py-4 sm:px-6">
       <div className="flex items-end justify-between">
         <div className="col-span-1 row-span-3">
-<<<<<<< HEAD
           <h4 className="font-medium">
             {getLabelForJobTitleType(title as JobTitleType)}{' '}
             {jobType && <>({JobTypeLabel[jobType]})</>}
@@ -67,17 +66,6 @@ export default function DashboardProfileCard({
               </div>
             )}
           </div>
-=======
-          <p className="font-bold">
-            {getLabelForJobTitleType(title as JobTitleType)}
-          </p>
-          <p>
-            {location
-              ? `Company: ${company.name}, ${location.cityName}`
-              : `Company: ${company.name}`}
-          </p>
-          {level && <p>Level: {level}</p>}
->>>>>>> ac2d047d ([offers][feat] integrate location for offer table and profile)
         </div>
         <div className="col-span-1 row-span-3">
           <p className="text-end text-lg font-medium leading-6 text-slate-900">
