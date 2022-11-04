@@ -410,7 +410,7 @@ model OffersAnalysis {
   offerId             String      @unique
 
   // OVERALL
-  overallAnalysis       OffersAnalysisUnit @relation("OverallAnalysis", fields: [overallAnalysisUnitId], references: [id])
+  overallAnalysis       OffersAnalysisUnit @relation("OverallAnalysis", fields: [overallAnalysisUnitId], references: [id], onDelete: Cascade)
   overallAnalysisUnitId String
 
   companyAnalysis OffersAnalysisUnit[] @relation("CompanyAnalysis")
@@ -419,7 +419,7 @@ model OffersAnalysis {
 model OffersAnalysisUnit {
   id String @id @default(cuid())
 
-  analysedOffer   OffersOffer @relation("Analysed Offer", fields: [analysedOfferId], references: [id])
+  analysedOffer   OffersOffer @relation("Analysed Offer", fields: [analysedOfferId], references: [id], onDelete: Cascade)
   analysedOfferId String
 
   percentile        Float
