@@ -20,10 +20,10 @@ import {
 } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
-import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
+import ResumeLocationTypeahead from '~/components/resumes/shared/ResumeLocationTypeahead';
+import ResumeRoleTypeahead from '~/components/resumes/shared/ResumeRoleTypeahead';
 import ResumeSubmissionGuidelines from '~/components/resumes/submit-form/ResumeSubmissionGuidelines';
 import Container from '~/components/shared/Container';
-import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
 import loginPageHref from '~/components/shared/loginPageHref';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
@@ -43,7 +43,7 @@ type IFormInput = {
   experience: string;
   file: File;
   isChecked: boolean;
-  location: string;
+  locationId: string;
   role: string;
   title: string;
 };
@@ -97,7 +97,7 @@ export default function SubmitResumeForm({
       additionalInfo: '',
       experience: '',
       isChecked: false,
-      location: '',
+      locationId: '',
       role: '',
       title: '',
       ...initFormDetails,
@@ -161,7 +161,7 @@ export default function SubmitResumeForm({
         additionalInfo: data.additionalInfo,
         experience: data.experience,
         id: initFormDetails?.resumeId,
-        location: data.location,
+        locationId: data.locationId,
         role: data.role,
         title: data.title,
         url: fileUrl,
@@ -307,12 +307,15 @@ export default function SubmitResumeForm({
                     control={control}
                     name="role"
                     render={() => (
-                      <RoleTypeahead
+                      <ResumeRoleTypeahead
                         disabled={isLoading}
                         required={true}
-                        onSelect={(option) =>
-                          onValueChange('role', option.value)
-                        }
+                        onSelect={(option) => {
+                          if (option == null) {
+                            return;
+                          }
+                          onValueChange('role', option.value);
+                        }}
                       />
                     )}
                     rules={{ required: true }}
@@ -329,16 +332,16 @@ export default function SubmitResumeForm({
                 </div>
                 <Controller
                   control={control}
-                  name="location"
+                  name="locationId"
                   render={() => (
-                    <CountriesTypeahead
+                    <ResumeLocationTypeahead
                       disabled={isLoading}
                       required={true}
                       onSelect={(option) => {
                         if (option == null) {
                           return;
                         }
-                        onValueChange('location', option.value);
+                        onValueChange('locationId', option.value);
                       }}
                     />
                   )}
