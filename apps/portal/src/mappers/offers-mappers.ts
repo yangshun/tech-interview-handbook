@@ -167,15 +167,51 @@ const analysisUnitDtoMapper = (
     >;
   },
 ) => {
-  const analysisDto: AnalysisUnit = {
-    companyName: analysisUnit.analysedOffer.company.name,
+  const { analysedOffer } = analysisUnit;
+  const { jobType } = analysedOffer;
+
+  const analysisUnitDto: AnalysisUnit = {
+    companyId: analysedOffer.companyId,
+    companyName: analysedOffer.company.name,
+    income: valuationDtoMapper({
+      baseCurrency: '',
+      baseValue: -1,
+      currency: '',
+      id: '',
+      value: -1,
+    }),
+    jobType,
     noOfOffers: analysisUnit.noOfSimilarOffers,
     percentile: analysisUnit.percentile,
+    title:
+      jobType === JobType.FULLTIME && analysedOffer.offersFullTime != null
+        ? analysedOffer.offersFullTime.title
+        : jobType === JobType.INTERN && analysedOffer.offersIntern != null
+        ? analysedOffer.offersIntern.title
+        : '',
     topPercentileOffers: analysisUnit.topSimilarOffers.map((offer) =>
       analysisOfferDtoMapper(offer),
     ),
+    totalYoe: analysisUnit.analysedOffer.profile.background?.totalYoe ?? 0,
   };
-  return analysisDto;
+
+  if (
+    analysedOffer.offersFullTime &&
+    analysedOffer.jobType === JobType.FULLTIME
+  ) {
+    analysisUnitDto.income = valuationDtoMapper(
+      analysedOffer.offersFullTime.totalCompensation,
+    );
+  } else if (
+    analysedOffer.offersIntern &&
+    analysedOffer.jobType === JobType.INTERN
+  ) {
+    analysisUnitDto.income = valuationDtoMapper(
+      analysedOffer.offersIntern.monthlySalary,
+    );
+  }
+
+  return analysisUnitDto;
 };
 
 const analysisHighestOfferDtoMapper = (
