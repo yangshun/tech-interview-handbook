@@ -235,7 +235,7 @@ model OffersProfile {
 model OffersBackground {
   id String @id @default(cuid())
 
-  totalYoe     Int
+  totalYoe     Int                 @default(0)
   specificYoes OffersSpecificYoe[]
 
   experiences OffersExperience[]
