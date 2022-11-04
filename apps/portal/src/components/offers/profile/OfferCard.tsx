@@ -35,7 +35,6 @@ export default function OfferCard({
 }: Props) {
   function UpperSection() {
     return (
-<<<<<<< HEAD
       <div className="px-4 py-5 sm:px-6">
         <div className="flex justify-between">
           <div>
@@ -71,17 +70,6 @@ export default function OfferCard({
                 </div>
               )}
             </div>
-=======
-      <div className="flex justify-between px-8">
-        <div className="flex flex-col">
-          <div className="flex flex-row">
-            <span>
-              <BuildingOffice2Icon className="mr-3 h-5" />
-            </span>
-            <span className="font-bold">
-              {location ? `${companyName}, ${location.cityName}` : companyName}
-            </span>
->>>>>>> ac2d047d ([offers][feat] integrate location for offer table and profile)
           </div>
           <div className="space-y-2">
             {!duration && receivedMonth && (
@@ -111,7 +99,6 @@ export default function OfferCard({
     }
 
     return (
-<<<<<<< HEAD
       <div className="border-t border-slate-200 px-4 py-5 sm:px-6">
         <dl className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4">
           {jobType === JobType.FULLTIME
@@ -155,34 +142,6 @@ export default function OfferCard({
               <dd className="mt-1 text-sm text-slate-900">{bonus}</dd>
             </div>
           )}
-=======
-      <>
-        <HorizontalDivider />
-        <div className="px-8">
-          <div className="flex flex-col py-2">
-            {(totalCompensation || monthlySalary) && (
-              <div className="flex flex-row">
-                <span>
-                  <CurrencyDollarIcon className="mr-3 h-5" />
-                </span>
-                <span>
-                  <p>
-                    {totalCompensation && `TC: ${totalCompensation}`}
-                    {monthlySalary && `Monthly Salary: ${monthlySalary}`}
-                  </p>
-                </span>
-              </div>
-            )}
-            {(base || stocks || bonus) && totalCompensation && (
-              <div className="ml-8 flex flex-row font-light">
-                <p>
-                  Base / year: {base ?? 'N/A'} ⋅ Stocks / year:{' '}
-                  {stocks ?? 'N/A'} ⋅ Bonus / year: {bonus ?? 'N/A'}
-                </p>
-              </div>
-            )}
-          </div>
->>>>>>> ac2d047d ([offers][feat] integrate location for offer table and profile)
           {negotiationStrategy && (
             <div className="col-span-2">
               <dt className="text-sm font-medium text-slate-500">
