@@ -133,7 +133,14 @@ const analysisOfferDtoMapper = (
 
 const analysisUnitDtoMapper = (
   analysisUnit: OffersAnalysisUnit & {
-    company: Company;
+    analysedOffer: OffersOffer & {
+      company: Company;
+      offersFullTime:
+        | (OffersFullTime & { totalCompensation: OffersCurrency })
+        | null;
+      offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
+      profile: OffersProfile & { background: OffersBackground | null };
+    };
     topSimilarOffers: Array<
       OffersOffer & {
         company: Company;
@@ -161,7 +168,7 @@ const analysisUnitDtoMapper = (
   },
 ) => {
   const analysisDto: AnalysisUnit = {
-    companyName: analysisUnit.company.name,
+    companyName: analysisUnit.analysedOffer.company.name,
     noOfOffers: analysisUnit.noOfSimilarOffers,
     percentile: analysisUnit.percentile,
     topPercentileOffers: analysisUnit.topSimilarOffers.map((offer) =>
@@ -197,7 +204,16 @@ export const profileAnalysisDtoMapper = (
     | (OffersAnalysis & {
         companyAnalysis: Array<
           OffersAnalysisUnit & {
-            company: Company;
+            analysedOffer: OffersOffer & {
+              company: Company;
+              offersFullTime:
+                | (OffersFullTime & { totalCompensation: OffersCurrency })
+                | null;
+              offersIntern:
+                | (OffersIntern & { monthlySalary: OffersCurrency })
+                | null;
+              profile: OffersProfile & { background: OffersBackground | null };
+            };
             topSimilarOffers: Array<
               OffersOffer & {
                 company: Company;
@@ -227,7 +243,16 @@ export const profileAnalysisDtoMapper = (
           }
         >;
         overallAnalysis: OffersAnalysisUnit & {
-          company: Company;
+          analysedOffer: OffersOffer & {
+            company: Company;
+            offersFullTime:
+              | (OffersFullTime & { totalCompensation: OffersCurrency })
+              | null;
+            offersIntern:
+              | (OffersIntern & { monthlySalary: OffersCurrency })
+              | null;
+            profile: OffersProfile & { background: OffersBackground | null };
+          };
           topSimilarOffers: Array<
             OffersOffer & {
               company: Company;
@@ -513,7 +538,18 @@ export const profileDtoMapper = (
       | (OffersAnalysis & {
           companyAnalysis: Array<
             OffersAnalysisUnit & {
-              company: Company;
+              analysedOffer: OffersOffer & {
+                company: Company;
+                offersFullTime:
+                  | (OffersFullTime & { totalCompensation: OffersCurrency })
+                  | null;
+                offersIntern:
+                  | (OffersIntern & { monthlySalary: OffersCurrency })
+                  | null;
+                profile: OffersProfile & {
+                  background: OffersBackground | null;
+                };
+              };
               topSimilarOffers: Array<
                 OffersOffer & {
                   company: Company;
@@ -545,7 +581,16 @@ export const profileDtoMapper = (
             }
           >;
           overallAnalysis: OffersAnalysisUnit & {
-            company: Company;
+            analysedOffer: OffersOffer & {
+              company: Company;
+              offersFullTime:
+                | (OffersFullTime & { totalCompensation: OffersCurrency })
+                | null;
+              offersIntern:
+                | (OffersIntern & { monthlySalary: OffersCurrency })
+                | null;
+              profile: OffersProfile & { background: OffersBackground | null };
+            };
             topSimilarOffers: Array<
               OffersOffer & {
                 company: Company;
