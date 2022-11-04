@@ -1,10 +1,11 @@
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
 
-import { generateAnalysis } from '~/utils/offers/analysisGeneration';
+import { profileAnalysisDtoMapper } from '~/mappers/offers-mappers';
+import { analysisInclusion } from '~/utils/offers/analysis/analysisInclusion';
 
 import { createRouter } from '../context';
-import { profileAnalysisDtoMapper } from '../../../mappers/offers-mappers';
+import { generateAnalysis } from '../../../utils/offers/analysis/analysisGeneration';
 
 export const offersAnalysisRouter = createRouter()
   .query('get', {
@@ -13,139 +14,7 @@ export const offersAnalysisRouter = createRouter()
     }),
     async resolve({ ctx, input }) {
       const analysis = await ctx.prisma.offersAnalysis.findFirst({
-        include: {
-          companyAnalysis: {
-            include: {
-              company: true,
-              topSimilarOffers: {
-                include: {
-                  company: true,
-                  location: {
-                    include: {
-                      state: {
-                        include: {
-                          country: true,
-                        },
-                      },
-                    },
-                  },
-                  offersFullTime: {
-                    include: {
-                      totalCompensation: true,
-                    },
-                  },
-                  offersIntern: {
-                    include: {
-                      monthlySalary: true,
-                    },
-                  },
-                  profile: {
-                    include: {
-                      background: {
-                        include: {
-                          experiences: {
-                            include: {
-                              company: true,
-                              location: {
-                                include: {
-                                  state: {
-                                    include: {
-                                      country: true,
-                                    },
-                                  },
-                                },
-                              },
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-          overallAnalysis: {
-            include: {
-              company: true,
-              topSimilarOffers: {
-                include: {
-                  company: true,
-                  location: {
-                    include: {
-                      state: {
-                        include: {
-                          country: true,
-                        },
-                      },
-                    },
-                  },
-                  offersFullTime: {
-                    include: {
-                      totalCompensation: true,
-                    },
-                  },
-                  offersIntern: {
-                    include: {
-                      monthlySalary: true,
-                    },
-                  },
-                  profile: {
-                    include: {
-                      background: {
-                        include: {
-                          experiences: {
-                            include: {
-                              company: true,
-                              location: {
-                                include: {
-                                  state: {
-                                    include: {
-                                      country: true,
-                                    },
-                                  },
-                                },
-                              },
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-          overallHighestOffer: {
-            include: {
-              company: true,
-              location: {
-                include: {
-                  state: {
-                    include: {
-                      country: true,
-                    },
-                  },
-                },
-              },
-              offersFullTime: {
-                include: {
-                  totalCompensation: true,
-                },
-              },
-              offersIntern: {
-                include: {
-                  monthlySalary: true,
-                },
-              },
-              profile: {
-                include: {
-                  background: true,
-                },
-              },
-            },
-          },
-        },
+        include: analysisInclusion,
         where: {
           profileId: input.profileId,
         },

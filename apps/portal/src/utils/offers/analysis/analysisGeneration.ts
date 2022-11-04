@@ -15,7 +15,8 @@ import type {
 } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
-import { profileAnalysisDtoMapper } from '../../mappers/offers-mappers';
+import { analysisInclusion } from './analysisInclusion';
+import { profileAnalysisDtoMapper } from '../../../mappers/offers-mappers';
 
 type Offer = OffersOffer & {
   company: Company;
@@ -292,7 +293,7 @@ export const generateAnalysis = async (params: {
           : similarCompanyOffers;
 
       return {
-        companyId: companyOffer.companyId,
+        analysedOfferId: companyOffer.id,
         noOfSimilarOffers: noOfSimilarCompanyOffers,
         percentile: companyPercentile,
         topSimilarOffers: topPercentileCompanyOffers,
@@ -329,9 +330,9 @@ export const generateAnalysis = async (params: {
       companyAnalysis: {
         create: companyAnalysis.map((analysisUnit) => {
           return {
-            company: {
+            analysedOffer: {
               connect: {
-                id: analysisUnit.companyId,
+                id: analysisUnit.analysedOfferId,
               },
             },
             noOfSimilarOffers: analysisUnit.noOfSimilarOffers,
@@ -346,9 +347,9 @@ export const generateAnalysis = async (params: {
       },
       overallAnalysis: {
         create: {
-          company: {
+          analysedOffer: {
             connect: {
-              id: overallHighestOffer.companyId,
+              id: overallHighestOffer.id,
             },
           },
           noOfSimilarOffers,
@@ -371,139 +372,7 @@ export const generateAnalysis = async (params: {
         },
       },
     },
-    include: {
-      companyAnalysis: {
-        include: {
-          company: true,
-          topSimilarOffers: {
-            include: {
-              company: true,
-              location: {
-                include: {
-                  state: {
-                    include: {
-                      country: true,
-                    },
-                  },
-                },
-              },
-              offersFullTime: {
-                include: {
-                  totalCompensation: true,
-                },
-              },
-              offersIntern: {
-                include: {
-                  monthlySalary: true,
-                },
-              },
-              profile: {
-                include: {
-                  background: {
-                    include: {
-                      experiences: {
-                        include: {
-                          company: true,
-                          location: {
-                            include: {
-                              state: {
-                                include: {
-                                  country: true,
-                                },
-                              },
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-      overallAnalysis: {
-        include: {
-          company: true,
-          topSimilarOffers: {
-            include: {
-              company: true,
-              location: {
-                include: {
-                  state: {
-                    include: {
-                      country: true,
-                    },
-                  },
-                },
-              },
-              offersFullTime: {
-                include: {
-                  totalCompensation: true,
-                },
-              },
-              offersIntern: {
-                include: {
-                  monthlySalary: true,
-                },
-              },
-              profile: {
-                include: {
-                  background: {
-                    include: {
-                      experiences: {
-                        include: {
-                          company: true,
-                          location: {
-                            include: {
-                              state: {
-                                include: {
-                                  country: true,
-                                },
-                              },
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-      overallHighestOffer: {
-        include: {
-          company: true,
-          location: {
-            include: {
-              state: {
-                include: {
-                  country: true,
-                },
-              },
-            },
-          },
-          offersFullTime: {
-            include: {
-              totalCompensation: true,
-            },
-          },
-          offersIntern: {
-            include: {
-              monthlySalary: true,
-            },
-          },
-          profile: {
-            include: {
-              background: true,
-            },
-          },
-        },
-      },
-    },
+    include: analysisInclusion,
   });
 
   return profileAnalysisDtoMapper(analysis);
