@@ -24,7 +24,6 @@ import ResumeLocationTypeahead from '~/components/resumes/shared/ResumeLocationT
 import ResumeRoleTypeahead from '~/components/resumes/shared/ResumeRoleTypeahead';
 import ResumeSubmissionGuidelines from '~/components/resumes/submit-form/ResumeSubmissionGuidelines';
 import Container from '~/components/shared/Container';
-import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
 import loginPageHref from '~/components/shared/loginPageHref';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
