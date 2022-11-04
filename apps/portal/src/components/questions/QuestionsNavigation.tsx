@@ -8,7 +8,6 @@ const navigation: ProductNavigationItems = [
 ];
 
 const config = {
-  // TODO: Change this to your own GA4 measurement ID.
   googleAnalyticsMeasurementID: 'G-0T4LYWMK8L',
   logo: (
     <img alt="Questions Bank" className="h-8 w-auto" src="/bank-logo.png" />
