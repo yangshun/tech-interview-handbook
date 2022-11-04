@@ -31,9 +31,9 @@ type Props = Readonly<{
   isLoading?: boolean;
   label: string;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
-  rel?: string | undefined;
+  rel?: string;
   size?: ButtonSize;
-  target?: HTMLAttributeAnchorTarget | undefined;
+  target?: HTMLAttributeAnchorTarget;
   type?: ButtonType;
   variant: ButtonVariant;
 }>;
