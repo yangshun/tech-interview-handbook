@@ -131,9 +131,8 @@ function ProfileAnalysis({
       {isEditable && (
         <div className="flex justify-end">
           <Button
-            addonPosition="start"
             icon={ArrowPathIcon}
-            label="Regenerate Analysis"
+            label="Regenerate analysis"
             variant="secondary"
             onClick={() => generateAnalysisMutation.mutate({ profileId })}
           />

@@ -117,6 +117,7 @@ function FullTimeOfferDetailsForm({
             onSelect={(option) => {
               if (option) {
                 setValue(`offers.${index}.companyId`, option.value);
+                setValue(`offers.${index}.companyName`, option.label);
               }
             }}
           />
@@ -550,7 +551,6 @@ export default function OfferDetailsForm() {
           if (newJobType === jobType) {
             return;
           }
-
           setDialogOpen(true);
         }}
       />

@@ -13,10 +13,12 @@ import BackgroundForm from '~/components/offers/offersSubmission/submissionForm/
 import OfferDetailsForm from '~/components/offers/offersSubmission/submissionForm/OfferDetailsForm';
 import type {
   OfferFormData,
+  OfferPostData,
   OffersProfileFormData,
 } from '~/components/offers/types';
 import type { Month } from '~/components/shared/MonthYearPicker';
 
+import { Currency } from '~/utils/offers/currency/CurrencyEnum';
 import {
   cleanObject,
   removeEmptyObjects,
@@ -24,6 +26,8 @@ import {
 } from '~/utils/offers/form';
 import { getCurrentMonth, getCurrentYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
+
+export const DEFAULT_CURRENCY = Currency.SGD;
 
 const defaultOfferValues = {
   cityId: '',
@@ -43,21 +47,17 @@ export const defaultFullTimeOfferValues = {
   jobType: JobType.FULLTIME,
   offersFullTime: {
     baseSalary: {
-      currency: 'SGD',
-      value: null,
+      currency: DEFAULT_CURRENCY,
     },
     bonus: {
-      currency: 'SGD',
-      value: null,
+      currency: DEFAULT_CURRENCY,
     },
     level: '',
     stocks: {
-      currency: 'SGD',
-      value: null,
+      currency: DEFAULT_CURRENCY,
     },
     totalCompensation: {
-      currency: 'SGD',
-      value: null,
+      currency: DEFAULT_CURRENCY,
     },
   },
 };
@@ -66,16 +66,15 @@ export const defaultInternshipOfferValues = {
   ...defaultOfferValues,
   jobType: JobType.INTERN,
   offersIntern: {
-    internshipCycle: null,
+    internshipCycle: '',
     monthlySalary: {
-      currency: 'SGD',
-      value: null,
+      currency: DEFAULT_CURRENCY,
     },
     startYear: null,
   },
 };
 
-const defaultOfferProfileValues = {
+const defaultOfferProfileValues: OffersProfileFormData = {
   background: {
     educations: [],
     experiences: [{ jobType: JobType.FULLTIME }],
@@ -116,7 +115,7 @@ export default function OffersSubmissionForm({
   const {
     handleSubmit,
     trigger,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isDirty },
   } = formMethods;
 
   const generateAnalysisMutation = trpc.useMutation(
@@ -218,7 +217,7 @@ export default function OffersSubmissionForm({
         offer.monthYearReceived.year,
         offer.monthYearReceived.month - 1, // Convert month to monthIndex
       ),
-    }));
+    })) as Array<OfferPostData>;
 
     if (params.profileId && params.token) {
       createOrUpdateMutation.mutate({
@@ -254,11 +253,14 @@ export default function OffersSubmissionForm({
     const warningText =
       'Leave this page? Changes that you made will not be saved.';
     const handleWindowClose = (e: BeforeUnloadEvent) => {
+      if (!isDirty) {
+        return;
+      }
       e.preventDefault();
       return (e.returnValue = warningText);
     };
     const handleRouteChange = (url: string) => {
-      if (url.includes('/offers/submit/result')) {
+      if (url.includes('/offers/submit/result') || !isDirty) {
         return;
       }
       if (window.confirm(warningText)) {
@@ -274,7 +276,7 @@ export default function OffersSubmissionForm({
       router.events.off('routeChangeStart', handleRouteChange);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isDirty]);
 
   return generateAnalysisMutation.isLoading ? (
     <Spinner className="m-10" display="block" size="lg" />
