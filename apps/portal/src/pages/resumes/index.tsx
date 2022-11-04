@@ -614,7 +614,7 @@ export default function ResumeHomePage() {
             </div>
           </div>
           <div className="relative lg:left-64 lg:w-[calc(100%-16rem)]">
-            <div className="lg:border-grey-200 sticky top-16 z-10 flex flex-wrap items-center justify-between bg-slate-50 pt-6 pb-2 lg:border-b">
+            <div className="lg:border-grey-200 z-1 sticky top-16 flex flex-wrap items-center justify-between bg-slate-50 pt-6 pb-2 lg:border-b">
               <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none xl:pb-0">
                 <div>
                   <Tabs

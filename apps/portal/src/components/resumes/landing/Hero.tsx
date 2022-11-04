@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Button } from '@tih/ui';
 
 import { Container } from './Container';
@@ -26,19 +25,18 @@ export function Hero() {
       </p>
       <div className="mt-10 flex justify-center gap-x-4">
         <Button href="/resumes" label="Start browsing now" variant="primary" />
-        {/* TODO: Update video */}
-        <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-          <button
-            className="focus-visible:outline-primary-600 group inline-flex items-center justify-center rounded-md py-2 px-4 text-sm ring-1 ring-slate-200 hover:text-slate-900 hover:ring-slate-300 focus:outline-none focus-visible:ring-slate-300 active:bg-slate-100 active:text-slate-600"
-            type="button">
-            <svg
-              aria-hidden="true"
-              className="fill-primary-600 h-3 w-3 flex-none group-active:fill-current">
-              <path d="m9.997 6.91-7.583 3.447A1 1 0 0 1 1 9.447V2.553a1 1 0 0 1 1.414-.91L9.997 5.09c.782.355.782 1.465 0 1.82Z" />
-            </svg>
-            <span className="ml-3">Watch video</span>
-          </button>
-        </Link>
+      </div>
+
+      <div className="mt-10 flex justify-center">
+        <iframe
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen={true}
+          frameBorder="0"
+          height="480"
+          src="https://www.youtube.com/embed/7jNiW4extlI"
+          title="Resume Review Walkthrough"
+          width="853"
+        />
       </div>
     </Container>
   );
