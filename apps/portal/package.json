@@ -10,6 +10,7 @@
     "tsc": "tsc",
     "postinstall": "prisma generate",
     "seed": "ts-node prisma/seed.ts",
+    "seed-salaries": "ts-node prisma/seed-salaries.ts",
     "seed-questions": "ts-node prisma/seed-questions.ts"
   },
   "dependencies": {
@@ -26,10 +27,12 @@
     "@trpc/server": "^9.27.2",
     "axios": "^1.1.2",
     "clsx": "^1.2.1",
+    "cross-fetch": "^3.1.5",
     "date-fns": "^2.29.3",
     "formidable": "^2.0.1",
     "next": "12.3.1",
     "next-auth": "~4.10.3",
+    "node-fetch": "^3.2.10",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
@@ -38,8 +41,11 @@
     "react-popper": "^2.3.0",
     "react-popper-tooltip": "^4.4.2",
     "react-query": "^3.39.2",
+    "read-excel-file": "^5.5.3",
     "superjson": "^1.10.0",
+    "xlsx": "^0.18.5",
     "unique-names-generator": "^4.7.1",
+    "xlsx": "^0.18.5",
     "zod": "^3.18.0"
   },
   "devDependencies": {

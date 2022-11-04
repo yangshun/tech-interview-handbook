@@ -1,4 +1,5 @@
 // API from https://github.com/fawazahmed0/currency-api#readme
+import fetch from 'cross-fetch';
 
 export const convert = async (
   value: number,

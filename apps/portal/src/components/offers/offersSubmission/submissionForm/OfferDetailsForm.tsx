@@ -117,7 +117,6 @@ function FullTimeOfferDetailsForm({
             onSelect={(option) => {
               if (option) {
                 setValue(`offers.${index}.companyId`, option.value);
-                setValue(`offers.${index}.companyName`, option.label);
               }
             }}
           />
