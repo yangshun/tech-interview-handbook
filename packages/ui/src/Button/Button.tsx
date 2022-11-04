@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
+import type { HTMLAttributeAnchorTarget } from 'react';
 import type { UrlObject } from 'url';
 
 import { Spinner } from '../';
@@ -30,7 +31,9 @@ type Props = Readonly<{
   isLoading?: boolean;
   label: string;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+  rel?: string;
   size?: ButtonSize;
+  target?: HTMLAttributeAnchorTarget;
   type?: ButtonType;
   variant: ButtonVariant;
 }>;
@@ -115,6 +118,8 @@ export default function Button({
   type = 'button',
   variant,
   onClick,
+  rel,
+  target,
 }: Props) {
   const iconSpacingClass = (() => {
     if (!isLabelHidden && addonPosition === 'start') {
@@ -166,6 +171,6 @@ export default function Button({
 
   return (
     // TODO: Allow passing in of Link component.
-    <Link href={href} {...commonProps} />
+    <Link href={href} rel={rel} target={target} {...commonProps} />
   );
 }
