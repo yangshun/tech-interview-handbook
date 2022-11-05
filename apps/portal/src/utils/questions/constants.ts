@@ -28,7 +28,7 @@ export const QUESTION_TYPES: FilterChoices<QuestionsQuestionType> = [
   },
   {
     id: 'SYSTEM_DESIGN',
-    label: 'Design',
+    label: 'System Design',
     value: 'SYSTEM_DESIGN',
   },
   {
