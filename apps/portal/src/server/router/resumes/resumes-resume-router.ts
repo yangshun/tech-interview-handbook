@@ -35,7 +35,7 @@ export const resumesRouter = createRouter()
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
+          locationId: { in: locationFilters },
           role: { in: roleFilters },
           title: { contains: searchValue, mode: 'insensitive' },
         },
@@ -49,6 +49,11 @@ export const resumesRouter = createRouter()
             },
           },
           comments: true,
+          location: {
+            select: {
+              name: true,
+            },
+          },
           stars: {
             where: {
               OR: {
@@ -79,7 +84,7 @@ export const resumesRouter = createRouter()
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
+          locationId: { in: locationFilters },
           role: { in: roleFilters },
           title: { contains: searchValue, mode: 'insensitive' },
         },
@@ -92,7 +97,7 @@ export const resumesRouter = createRouter()
           id: r.id,
           isResolved: r.isResolved,
           isStarredByUser: r.stars.length > 0,
-          location: r.location,
+          location: r.location.name,
           numComments: r._count.comments,
           numStars: r._count.stars,
           role: r.role,
@@ -103,7 +108,7 @@ export const resumesRouter = createRouter()
         return resume;
       });
 
-      // Group by role and count, taking into account all role/experience/location/isUnreviewed filters and search value
+      // Group by role and count, taking into account all role/experience/locationId/isUnreviewed filters and search value
       const roleCounts = await ctx.prisma.resumesResume.groupBy({
         _count: {
           _all: true,
@@ -112,7 +117,7 @@ export const resumesRouter = createRouter()
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
+          locationId: { in: locationFilters },
           title: { contains: searchValue, mode: 'insensitive' },
         },
       });
@@ -143,7 +148,7 @@ export const resumesRouter = createRouter()
         by: ['experience'],
         where: {
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
+          locationId: { in: locationFilters },
           role: { in: roleFilters },
           title: { contains: searchValue, mode: 'insensitive' },
         },
@@ -165,7 +170,7 @@ export const resumesRouter = createRouter()
         _count: {
           _all: true,
         },
-        by: ['location'],
+        by: ['locationId'],
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
@@ -174,7 +179,7 @@ export const resumesRouter = createRouter()
         },
       });
       const mappedLocationCounts = Object.fromEntries(
-        locationCounts.map((lc) => [lc.location, lc._count._all]),
+        locationCounts.map((lc) => [lc.locationId, lc._count._all]),
       );
       const zeroLocationCounts = Object.fromEntries(
         LOCATIONS.filter((l) => !(l.value in mappedLocationCounts)).map((l) => [
@@ -215,6 +220,11 @@ export const resumesRouter = createRouter()
           _count: {
             select: {
               stars: true,
+            },
+          },
+          location: {
+            select: {
+              name: true,
             },
           },
           stars: {

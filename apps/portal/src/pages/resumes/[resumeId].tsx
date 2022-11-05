@@ -200,7 +200,7 @@ export default function ResumeReviewPage() {
         initFormDetails={{
           additionalInfo: detailsQuery.data.additionalInfo ?? '',
           experience: detailsQuery.data.experience,
-          location: detailsQuery.data.location,
+          location: detailsQuery.data.locationId,
           resumeId: resumeId as string,
           role: detailsQuery.data.role,
           title: detailsQuery.data.title,
@@ -334,10 +334,10 @@ export default function ResumeReviewPage() {
                   type="button"
                   onClick={() =>
                     onInfoTagClick({
-                      locationLabel: detailsQuery.data?.location,
+                      locationLabel: detailsQuery.data?.locationId,
                     })
                   }>
-                  {getFilterLabel('location', detailsQuery.data.location)}
+                  {detailsQuery.data?.location.name}
                 </button>
               </div>
               <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">

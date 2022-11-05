@@ -8,7 +8,6 @@ import type { Resume } from '~/types/resume';
 
 export const resumesResumeUserRouter = createProtectedRouter()
   .mutation('upsert', {
-    // TODO: Use enums for experience, location, role
     input: z.object({
       additionalInfo: z.string().optional(),
       experience: z.string(),
@@ -91,7 +90,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
           resume: {
             experience: { in: experienceFilters },
             isResolved: isUnreviewed ? false : {},
-            location: { in: locationFilters },
+            locationId: { in: locationFilters },
             role: { in: roleFilters },
             title: { contains: searchValue, mode: 'insensitive' },
           },
@@ -106,6 +105,11 @@ export const resumesResumeUserRouter = createProtectedRouter()
                 select: {
                   comments: true,
                   stars: true,
+                },
+              },
+              location: {
+                select: {
+                  name: true,
                 },
               },
               user: {
@@ -144,7 +148,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
           resume: {
             experience: { in: experienceFilters },
             isResolved: isUnreviewed ? false : {},
-            location: { in: locationFilters },
+            locationId: { in: locationFilters },
             role: { in: roleFilters },
             title: { contains: searchValue, mode: 'insensitive' },
           },
@@ -160,7 +164,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
           id: rs.resume.id,
           isResolved: rs.resume.isResolved,
           isStarredByUser: true,
-          location: rs.resume.location,
+          location: rs.resume.location.name,
           numComments: rs.resume._count.comments,
           numStars: rs.resume._count.stars,
           role: rs.resume.role,
@@ -179,7 +183,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
+          locationId: { in: locationFilters },
           stars: {
             some: {
               userId,
@@ -209,7 +213,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         by: ['experience'],
         where: {
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
+          locationId: { in: locationFilters },
           role: { in: roleFilters },
           stars: {
             some: {
@@ -236,7 +240,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         _count: {
           _all: true,
         },
-        by: ['location'],
+        by: ['locationId'],
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
@@ -250,7 +254,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         },
       });
       const mappedLocationCounts = Object.fromEntries(
-        locationCounts.map((lc) => [lc.location, lc._count._all]),
+        locationCounts.map((lc) => [lc.locationId, lc._count._all]),
       );
       const zeroLocationCounts = Object.fromEntries(
         LOCATIONS.filter((l) => !(l.value in mappedLocationCounts)).map((l) => [
@@ -299,7 +303,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
+          locationId: { in: locationFilters },
           role: { in: roleFilters },
           title: { contains: searchValue, mode: 'insensitive' },
           userId,
@@ -311,6 +315,11 @@ export const resumesResumeUserRouter = createProtectedRouter()
             select: {
               comments: true,
               stars: true,
+            },
+          },
+          location: {
+            select: {
+              name: true,
             },
           },
           stars: {
@@ -341,7 +350,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
+          locationId: { in: locationFilters },
           role: { in: roleFilters },
           title: { contains: searchValue, mode: 'insensitive' },
           userId,
@@ -355,7 +364,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
           id: r.id,
           isResolved: r.isResolved,
           isStarredByUser: r.stars.length > 0,
-          location: r.location,
+          location: r.location.name,
           numComments: r._count.comments,
           numStars: r._count.stars,
           role: r.role,
@@ -374,7 +383,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
+          locationId: { in: locationFilters },
           title: { contains: searchValue, mode: 'insensitive' },
           userId,
         },
@@ -400,7 +409,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         by: ['experience'],
         where: {
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
+          locationId: { in: locationFilters },
           role: { in: roleFilters },
           title: { contains: searchValue, mode: 'insensitive' },
           userId,
@@ -423,7 +432,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         _count: {
           _all: true,
         },
-        by: ['location'],
+        by: ['locationId'],
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
@@ -433,7 +442,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         },
       });
       const mappedLocationCounts = Object.fromEntries(
-        locationCounts.map((lc) => [lc.location, lc._count._all]),
+        locationCounts.map((lc) => [lc.locationId, lc._count._all]),
       );
       const zeroLocationCounts = Object.fromEntries(
         LOCATIONS.filter((l) => !(l.value in mappedLocationCounts)).map((l) => [
