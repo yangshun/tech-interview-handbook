@@ -235,7 +235,7 @@ export const questionsQuestionRouter = createRouter()
         .$queryRaw`
         SELECT id FROM "QuestionsQuestion"
         WHERE
-          ts_rank_cd(to_tsvector("content"), to_tsquery(${query}), 32) > 0.7
+          ts_rank_cd(to_tsvector("content"), to_tsquery(${query}), 32) > 0.1
         ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 4) DESC;
       `;
 
@@ -314,7 +314,7 @@ export const questionsQuestionRouter = createRouter()
           .$queryRaw`
           SELECT id FROM "QuestionsQuestion"
           WHERE
-            ts_rank_cd(to_tsvector("content"), to_tsquery(${query}), 32) > 0.7
+            ts_rank_cd(to_tsvector("content"), to_tsquery(${query}), 32) > 0.1
           ORDER BY ts_rank_cd(to_tsvector("content"), to_tsquery('english', ${query}), 4) DESC;
         `;
       }
