@@ -33,13 +33,13 @@ const defaultOfferValues = {
   cityId: '',
   comments: '',
   companyId: '',
-  jobTitle: '',
   jobType: JobType.FULLTIME,
   monthYearReceived: {
     month: getCurrentMonth() as Month,
     year: getCurrentYear(),
   },
   negotiationStrategy: '',
+  title: '',
 };
 
 export const defaultFullTimeOfferValues = {
@@ -108,6 +108,7 @@ export default function OffersSubmissionForm({
   const pageRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () =>
     pageRef.current?.scrollTo({ behavior: 'smooth', top: 0 });
+
   const formMethods = useForm<OffersProfileFormData>({
     defaultValues: initialOfferProfileValues,
     mode: 'all',
