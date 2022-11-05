@@ -1,27 +1,13 @@
+import type { TypeaheadOption } from '@tih/ui';
+
+import type { JobTitleType } from '~/components/shared/JobTitles';
+import { JobTitleLabels } from '~/components/shared/JobTitles';
+
 export type FilterId = 'experience' | 'location' | 'role';
-export type FilterLabel = 'Experience' | 'Location' | 'Role';
 
 export type CustomFilter = {
   isUnreviewed: boolean;
 };
-
-export type RoleFilter =
-  | 'Android Engineer'
-  | 'Backend Engineer'
-  | 'DevOps Engineer'
-  | 'Frontend Engineer'
-  | 'Full-Stack Engineer'
-  | 'iOS Engineer';
-
-export type ExperienceFilter =
-  | 'Entry Level (0 - 2 years)'
-  | 'Internship'
-  | 'Mid Level (3 - 5 years)'
-  | 'Senior Level (5+ years)';
-
-export type LocationFilter = 'India' | 'Singapore' | 'United States';
-
-export type FilterValue = ExperienceFilter | LocationFilter | RoleFilter;
 
 export type FilterOption<T> = {
   label: string;
@@ -30,11 +16,11 @@ export type FilterOption<T> = {
 
 export type Filter = {
   id: FilterId;
-  label: FilterLabel;
-  options: Array<FilterOption<FilterValue>>;
+  label: string;
 };
 
-export type FilterState = CustomFilter & Record<FilterId, Array<FilterValue>>;
+export type FilterState = CustomFilter &
+  Record<FilterId, Array<TypeaheadOption>>;
 
 export type SortOrder = 'latest' | 'mostComments' | 'popular';
 
@@ -43,6 +29,31 @@ export type Shortcut = {
   filters: FilterState;
   name: string;
   sortOrder: SortOrder;
+};
+
+export const getTypeaheadOption = (
+  filterId: FilterId,
+  filterValue: string,
+  locationName?: string,
+) => {
+  switch (filterId) {
+    case 'experience':
+      return EXPERIENCES.find(({ value }) => value === filterValue);
+    case 'role':
+      return {
+        id: filterValue,
+        label: JobTitleLabels[filterValue as keyof typeof JobTitleLabels],
+        value: filterValue,
+      };
+    case 'location':
+      return {
+        id: filterValue,
+        label: locationName ?? '',
+        value: filterValue,
+      };
+    default:
+      break;
+  }
 };
 
 export const BROWSE_TABS_VALUES = {
@@ -57,45 +68,85 @@ export const SORT_OPTIONS: Array<FilterOption<SortOrder>> = [
   { label: 'Most Comments', value: 'mostComments' },
 ];
 
-export const ROLES: Array<FilterOption<RoleFilter>> = [
-  {
-    label: 'Full-Stack Engineer',
-    value: 'Full-Stack Engineer',
-  },
-  { label: 'Frontend Engineer', value: 'Frontend Engineer' },
-  { label: 'Backend Engineer', value: 'Backend Engineer' },
-  { label: 'DevOps Engineer', value: 'DevOps Engineer' },
-  { label: 'iOS Engineer', value: 'iOS Engineer' },
-  { label: 'Android Engineer', value: 'Android Engineer' },
+const INITIAL_ROLES_VALUES: Array<JobTitleType> = [
+  'software-engineer',
+  'back-end-engineer',
+  'front-end-engineer',
+  'full-stack-engineer',
+  'ios-engineer',
+  'android-engineer',
+  'data-engineer',
 ];
+export const INITIAL_ROLES: Array<TypeaheadOption> = INITIAL_ROLES_VALUES.map(
+  (value) =>
+    getTypeaheadOption('role', value) ?? {
+      id: value,
+      label: value,
+      value,
+    },
+);
 
-export const EXPERIENCES: Array<FilterOption<ExperienceFilter>> = [
-  { label: 'Internship', value: 'Internship' },
+export const EXPERIENCES: Array<TypeaheadOption> = [
   {
+    id: 'internship',
+    label: 'Internship',
+    value: 'internship',
+  },
+  {
+    id: 'entry-level',
     label: 'Entry Level (0 - 2 years)',
-    value: 'Entry Level (0 - 2 years)',
+    value: 'entry-level',
   },
   {
+    id: 'mid-level',
     label: 'Mid Level (3 - 5 years)',
-    value: 'Mid Level (3 - 5 years)',
+    value: 'mid-level',
   },
   {
+    id: 'senior-level',
     label: 'Senior Level (5+ years)',
-    value: 'Senior Level (5+ years)',
+    value: 'senior-level',
   },
 ];
 
-export const LOCATIONS: Array<FilterOption<LocationFilter>> = [
-  { label: 'Singapore', value: 'Singapore' },
-  { label: 'United States', value: 'United States' },
-  { label: 'India', value: 'India' },
+export const INITIAL_LOCATIONS: Array<TypeaheadOption> = [
+  {
+    id: '196',
+    label: 'Singapore',
+    value: '196',
+  },
+  {
+    id: '101',
+    label: 'India',
+    value: '101',
+  },
+  {
+    id: '231',
+    label: 'United States',
+    value: '231',
+  },
+  {
+    id: '230',
+    label: 'United Kingdom',
+    value: '230',
+  },
+  {
+    id: '102',
+    label: 'Indonesia',
+    value: '102',
+  },
+  {
+    id: '44',
+    label: 'China',
+    value: '44',
+  },
 ];
 
 export const INITIAL_FILTER_STATE: FilterState = {
-  experience: Object.values(EXPERIENCES).map(({ value }) => value),
+  experience: EXPERIENCES,
   isUnreviewed: true,
-  location: Object.values(LOCATIONS).map(({ value }) => value),
-  role: Object.values(ROLES).map(({ value }) => value),
+  location: INITIAL_LOCATIONS,
+  role: INITIAL_ROLES,
 };
 
 export const SHORTCUTS: Array<Shortcut> = [
@@ -104,7 +155,7 @@ export const SHORTCUTS: Array<Shortcut> = [
       ...INITIAL_FILTER_STATE,
       isUnreviewed: false,
     },
-    name: 'All',
+    name: 'General',
     sortOrder: 'latest',
   },
   {
@@ -118,7 +169,13 @@ export const SHORTCUTS: Array<Shortcut> = [
   {
     filters: {
       ...INITIAL_FILTER_STATE,
-      experience: ['Entry Level (0 - 2 years)'],
+      experience: [
+        {
+          id: 'entry-level',
+          label: 'Entry Level (0 - 2 years)',
+          value: 'entry-level',
+        },
+      ],
       isUnreviewed: false,
     },
     name: 'Fresh Grad',
@@ -136,26 +193,46 @@ export const SHORTCUTS: Array<Shortcut> = [
     filters: {
       ...INITIAL_FILTER_STATE,
       isUnreviewed: false,
-      location: ['United States'],
+      location: [
+        {
+          id: '231',
+          label: 'United States',
+          value: '231',
+        },
+      ],
     },
     name: 'US Only',
     sortOrder: 'latest',
   },
 ];
 
-export const isInitialFilterState = (filters: FilterState) =>
-  Object.keys(filters).every((filter) => {
-    if (!['experience', 'location', 'role'].includes(filter)) {
-      return true;
-    }
-    return INITIAL_FILTER_STATE[filter as FilterId].every((value) =>
-      filters[filter as FilterId].includes(value),
-    );
-  });
-
+// We omit 'location' as its label should be fetched from the Country table.
 export const getFilterLabel = (
-  filters: Array<
-    FilterOption<ExperienceFilter | LocationFilter | RoleFilter | SortOrder>
-  >,
-  filterValue: ExperienceFilter | LocationFilter | RoleFilter | SortOrder,
-) => filters.find(({ value }) => value === filterValue)?.label ?? filterValue;
+  filterId: Omit<FilterId | 'sort', 'location'>,
+  filterValue: SortOrder | string,
+): string | undefined => {
+  if (filterId === 'location') {
+    return filterValue;
+  }
+
+  let filters: Array<TypeaheadOption> = [];
+
+  switch (filterId) {
+    case 'experience':
+      filters = EXPERIENCES;
+      break;
+    case 'role':
+      filters = Object.entries(JobTitleLabels).map(([slug, label]) => ({
+        id: slug,
+        label,
+        value: slug,
+      }));
+      break;
+    case 'sort':
+      return SORT_OPTIONS.find(({ value }) => value === filterValue)?.label;
+    default:
+      break;
+  }
+
+  return filters.find(({ value }) => value === filterValue)?.label;
+};

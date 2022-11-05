@@ -6,6 +6,7 @@ export type Resume = {
   isResolved: boolean;
   isStarredByUser: boolean;
   location: string;
+  locationId: string;
   numComments: number;
   numStars: number;
   role: string;
