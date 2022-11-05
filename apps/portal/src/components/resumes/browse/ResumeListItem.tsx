@@ -37,15 +37,14 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
         <div className="col-span-7 grid gap-4 border-b border-slate-200 p-4 hover:bg-slate-100 sm:grid-cols-7">
           <div className="sm:col-span-4">
             <div className="flex items-center gap-3">
-              {resumeInfo.title}
+              <p className="truncate">{resumeInfo.title}</p>
               <p
                 className={clsx(
-                  'w-auto items-center space-x-4 rounded-xl border border-slate-300 px-2 py-1 text-xs font-medium text-white opacity-60',
-                  resumeInfo.isResolved ? 'bg-slate-400' : 'bg-success-500',
+                  'w-auto items-center space-x-4 rounded-xl border px-2 py-1 text-xs font-medium',
+                  resumeInfo.isResolved ? 'bg-slate-300' : 'bg-success-100',
+                  resumeInfo.isResolved ? 'text-slate-600' : 'text-success-700',
                 )}>
-                <span className="opacity-100">
-                  {resumeInfo.isResolved ? 'Reviewed' : 'Unreviewed'}
-                </span>
+                {resumeInfo.isResolved ? 'Reviewed' : 'Unreviewed'}
               </p>
             </div>
             <div className="text-primary-500 mt-2 flex items-center justify-start text-xs">
