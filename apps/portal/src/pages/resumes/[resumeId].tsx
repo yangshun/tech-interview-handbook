@@ -235,80 +235,86 @@ export default function ResumeReviewPage() {
           <Head>
             <title>{`${detailsQuery.data.title} | Resume Review`}</title>
           </Head>
-          <main className="h-full w-full bg-white">
-            <div className="mx-auto space-y-4 border-b border-slate-200 px-4 py-6 sm:px-6 lg:space-y-2 lg:px-8">
-              <div className="flex flex-wrap justify-between space-y-4 lg:space-y-0">
-                <h1 className="pr-2 text-xl font-medium leading-7 text-slate-900 sm:text-2xl lg:w-[60%]">
+          <main className="flex h-[calc(100vh-4rem)] w-full flex-col bg-white">
+            <div className="mx-auto w-full space-y-4 border-b border-slate-200 px-4 py-6 sm:px-6 lg:px-8">
+              <div className="justify-between gap-4 space-y-4 lg:flex lg:space-y-0">
+                <h1 className="pr-2 text-xl font-medium leading-7 text-slate-900">
                   {detailsQuery.data.title}
                 </h1>
                 <div className="flex gap-3">
                   {userIsOwner && (
                     <>
-                      <Button
-                        addonPosition="start"
-                        icon={PencilSquareIcon}
-                        label="Edit"
-                        variant="tertiary"
-                        onClick={onEditButtonClick}
-                      />
-                      <button
-                        className="isolate inline-flex items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 focus:ring-slate-600 disabled:hover:bg-white"
-                        disabled={resolveMutation.isLoading}
-                        type="button"
-                        onClick={onResolveButtonClick}>
-                        <div className="-ml-1 mr-2 h-5 w-5">
-                          {resolveMutation.isLoading ? (
-                            <Spinner className="mt-0.5" size="xs" />
-                          ) : (
-                            <CheckCircleIcon
-                              aria-hidden="true"
-                              className={
-                                isResumeResolved
-                                  ? 'text-slate-500'
-                                  : 'text-success-600'
-                              }
-                            />
-                          )}
-                        </div>
-                        {isResumeResolved
-                          ? 'Reopen for review'
-                          : 'Mark as reviewed'}
-                      </button>
+                      <div>
+                        <Button
+                          addonPosition="start"
+                          icon={PencilSquareIcon}
+                          label="Edit"
+                          variant="tertiary"
+                          onClick={onEditButtonClick}
+                        />
+                      </div>
+                      <div>
+                        <button
+                          className="isolate inline-flex items-center space-x-4 whitespace-nowrap rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 focus:ring-slate-600 disabled:hover:bg-white"
+                          disabled={resolveMutation.isLoading}
+                          type="button"
+                          onClick={onResolveButtonClick}>
+                          <div className="-ml-1 mr-2 h-5 w-5">
+                            {resolveMutation.isLoading ? (
+                              <Spinner className="mt-0.5" size="xs" />
+                            ) : (
+                              <CheckCircleIcon
+                                aria-hidden="true"
+                                className={
+                                  isResumeResolved
+                                    ? 'text-slate-500'
+                                    : 'text-success-600'
+                                }
+                              />
+                            )}
+                          </div>
+                          {isResumeResolved
+                            ? 'Reopen for review'
+                            : 'Mark as reviewed'}
+                        </button>
+                      </div>
                     </>
                   )}
-                  <button
-                    className="isolate inline-flex h-10 items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 focus:ring-slate-600 disabled:hover:bg-white"
-                    disabled={
-                      starMutation.isLoading || unstarMutation.isLoading
-                    }
-                    type="button"
-                    onClick={onStarButtonClick}>
-                    <div className="-ml-1 mr-2 h-5 w-5">
-                      {starMutation.isLoading ||
-                      unstarMutation.isLoading ||
-                      detailsQuery.isLoading ? (
-                        <Spinner className="mt-0.5" size="xs" />
-                      ) : (
-                        <StarIcon
-                          aria-hidden="true"
-                          className={clsx(
-                            detailsQuery.data?.stars.length
-                              ? 'text-orange-400'
-                              : 'text-slate-400',
-                          )}
-                        />
-                      )}
-                    </div>
-                    {detailsQuery.data?.stars.length ? 'Starred' : 'Star'}
-                    <span className="relative -ml-px inline-flex">
-                      {detailsQuery.data?._count.stars}
-                    </span>
-                  </button>
+                  <div>
+                    <button
+                      className="isolate inline-flex items-center space-x-4 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 focus:ring-slate-600 disabled:hover:bg-white"
+                      disabled={
+                        starMutation.isLoading || unstarMutation.isLoading
+                      }
+                      type="button"
+                      onClick={onStarButtonClick}>
+                      <div className="-ml-1 mr-2 h-5 w-5">
+                        {starMutation.isLoading ||
+                        unstarMutation.isLoading ||
+                        detailsQuery.isLoading ? (
+                          <Spinner className="mt-0.5" size="xs" />
+                        ) : (
+                          <StarIcon
+                            aria-hidden="true"
+                            className={clsx(
+                              detailsQuery.data?.stars.length
+                                ? 'text-orange-400'
+                                : 'text-slate-400',
+                            )}
+                          />
+                        )}
+                      </div>
+                      {detailsQuery.data?.stars.length ? 'Starred' : 'Star'}
+                      <span className="relative -ml-px inline-flex">
+                        {detailsQuery.data?._count.stars}
+                      </span>
+                    </button>
+                  </div>
                   <div className="hidden xl:block">{renderReviewButton()}</div>
                 </div>
               </div>
               <div className="space-y-2">
-                <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:space-x-8">
+                <div className="grid grid-cols-2 gap-2 lg:flex lg:flex-wrap lg:space-x-8">
                   <div className="col-span-1 flex items-center text-xs text-slate-600 sm:text-sm">
                     <BriefcaseIcon
                       aria-hidden="true"
@@ -380,7 +386,7 @@ export default function ResumeReviewPage() {
                   </div>
                 </div>
                 {detailsQuery.data.additionalInfo && (
-                  <div className="col-span-2 flex items-start whitespace-pre-wrap pt-2 text-slate-600 xl:pt-1">
+                  <div className="col-span-2 flex items-start whitespace-pre-wrap text-slate-600 xl:pt-1">
                     <InformationCircleIcon
                       aria-hidden="true"
                       className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
@@ -393,11 +399,11 @@ export default function ResumeReviewPage() {
                 )}
               </div>
             </div>
-            <div className="flex w-full flex-col divide-x divide-slate-200 lg:flex-row xl:py-0">
-              <div className="w-full bg-slate-100 lg:w-1/2">
+            <div className="flex w-full shrink-0 grow flex-col divide-x divide-slate-200 overflow-hidden lg:h-0 lg:flex-row xl:py-0">
+              <div className="w-full bg-slate-100 lg:h-full lg:w-1/2">
                 <ResumePdf url={detailsQuery.data.url} />
               </div>
-              <div className="grow border-t border-slate-200 bg-slate-50 pb-4 lg:border-none lg:pb-0">
+              <div className="grow overflow-y-auto border-t border-slate-200 bg-slate-50 pb-4 lg:h-full lg:border-t-0 lg:pb-0">
                 <div className="divide-y divide-slate-200 lg:hidden">
                   <div className="bg-white p-4 lg:p-0">
                     {renderReviewButton()}

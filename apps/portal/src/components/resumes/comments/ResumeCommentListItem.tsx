@@ -92,7 +92,7 @@ export default function ResumeCommentListItem({
                   <>
                     <span className="font-medium text-slate-500">&middot;</span>{' '}
                     <button
-                      className="px-1 text-xs font-medium text-slate-500 hover:text-slate-600"
+                      className="text-xs font-medium text-slate-500 hover:text-slate-600"
                       type="button"
                       onClick={() => setIsEditingComment(true)}>
                       Edit
@@ -103,7 +103,7 @@ export default function ResumeCommentListItem({
                   <>
                     <span className="font-medium text-slate-500">&middot;</span>{' '}
                     <button
-                      className="px-1 text-xs font-medium text-slate-500 hover:text-slate-600"
+                      className="text-xs font-medium text-slate-500 hover:text-slate-600"
                       type="button"
                       onClick={() => setIsReplyingComment(true)}>
                       Reply

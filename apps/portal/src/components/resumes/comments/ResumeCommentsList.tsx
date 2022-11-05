@@ -55,7 +55,7 @@ export default function ResumeCommentsList({
   }
 
   return (
-    <div className="flow-root w-full space-y-4 overflow-y-auto overflow-x-hidden px-4 lg:h-[calc(100vh-12rem)] lg:py-8">
+    <div className="flow-root w-full space-y-4 overflow-y-auto overflow-x-hidden px-4 lg:py-8">
       {RESUME_COMMENTS_SECTIONS.map(({ label, value }) => {
         const comments = commentsQuery.data
           ? commentsQuery.data.filter((comment: ResumeComment) => {

@@ -35,10 +35,12 @@ export default function ResumePdf({ url }: Props) {
   }, [pageWidth]);
 
   return (
-    <div className="w-full" id="pdfView">
-      <div className="group relative bg-slate-100">
+    <div
+      className="w-full flex-col overflow-y-auto lg:flex lg:h-full"
+      id="pdfView">
+      <div className="group relative grow bg-slate-100 lg:h-0">
         <Document
-          className="flex h-[calc(100vh-16rem)] flex-row justify-center overflow-auto py-8"
+          className="flex flex-row justify-center overflow-auto py-8 lg:h-full"
           file={url}
           loading={<Spinner display="block" size="lg" />}
           noData=""

@@ -25,7 +25,7 @@ export default function ResumeExpandableText({
   };
 
   return (
-    <div>
+    <div className="space-y-1">
       <span
         ref={ref}
         className={clsx(
@@ -35,11 +35,12 @@ export default function ResumeExpandableText({
         {text}
       </span>
       {descriptionOverflow && (
-        <p
-          className="text-primary-500 hover:text-primary-300 mt-1 cursor-pointer text-xs sm:text-sm"
+        <button
+          className="text-primary-500 hover:text-primary-600 text-xs font-medium"
+          type="button"
           onClick={onSeeActionClicked}>
           {isExpanded ? 'See Less' : 'See More'}
-        </p>
+        </button>
       )}
     </div>
   );
