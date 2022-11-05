@@ -143,6 +143,7 @@ export default function Typeahead({
             )}>
             <Combobox.Input
               aria-describedby={hasError ? errorId : undefined}
+              autoComplete="nope" // "off" doesn't work as intended sometimes, so we use a random string.
               className={clsx(
                 'w-full border-none py-2 pl-3 pr-10 text-[length:inherit] leading-5 focus:ring-0',
                 stateClasses[state].input,
