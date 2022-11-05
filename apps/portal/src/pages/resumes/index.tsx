@@ -354,6 +354,9 @@ export default function ResumeHomePage() {
           <ResumeExperienceTypeahead
             isLabelHidden={true}
             placeholder="Select experiences"
+            selectedValues={
+              new Set(userFilters[filterId].map(({ value }) => value))
+            }
             onSelect={onSelect}
           />
         );
@@ -362,6 +365,9 @@ export default function ResumeHomePage() {
           <ResumeLocationTypeahead
             isLabelHidden={true}
             placeholder="Select locations"
+            selectedValues={
+              new Set(userFilters[filterId].map(({ value }) => value))
+            }
             onSelect={onSelect}
           />
         );
@@ -370,6 +376,9 @@ export default function ResumeHomePage() {
           <ResumeRoleTypeahead
             isLabelHidden={true}
             placeholder="Select roles"
+            selectedValues={
+              new Set(userFilters[filterId].map(({ value }) => value))
+            }
             onSelect={onSelect}
           />
         );

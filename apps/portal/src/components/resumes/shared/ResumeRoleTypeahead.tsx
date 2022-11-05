@@ -18,12 +18,12 @@ type BaseProps = Pick<
 type Props = BaseProps &
   Readonly<{
     onSelect: (option: TypeaheadOption | null) => void;
-    value?: TypeaheadOption | null;
+    selectedValues?: Set<string>;
   }>;
 
 export default function ResumeRoleTypeahead({
   onSelect,
-  value,
+  selectedValues = new Set(),
   ...props
 }: Props) {
   const [query, setQuery] = useState('');
@@ -33,6 +33,7 @@ export default function ResumeRoleTypeahead({
       label,
       value: slug,
     }))
+    .filter(({ value }) => !selectedValues.has(value))
     .filter(
       ({ label }) =>
         label.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) > -1,
@@ -44,7 +45,6 @@ export default function ResumeRoleTypeahead({
       noResultsMessage="No available roles."
       nullable={true}
       options={options}
-      value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}
       {...props}

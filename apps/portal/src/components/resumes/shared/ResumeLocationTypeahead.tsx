@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { TypeaheadOption } from '@tih/ui';
 import { Typeahead } from '@tih/ui';
 
@@ -18,12 +18,12 @@ type BaseProps = Pick<
 type Props = BaseProps &
   Readonly<{
     onSelect: (option: TypeaheadOption | null) => void;
-    value?: TypeaheadOption | null;
+    selectedValues?: Set<string>;
   }>;
 
 export default function ResumeLocationTypeahead({
   onSelect,
-  value,
+  selectedValues = new Set(),
   ...props
 }: Props) {
   const [query, setQuery] = useState('');
@@ -34,21 +34,27 @@ export default function ResumeLocationTypeahead({
     },
   ]);
 
-  const { data } = countries;
+  const options = useMemo(() => {
+    const { data } = countries;
+    if (data == null) {
+      return [];
+    }
+
+    return data
+      .map(({ id, name }) => ({
+        id,
+        label: name,
+        value: id,
+      }))
+      .filter(({ value }) => !selectedValues.has(value));
+  }, [countries, selectedValues]);
 
   return (
     <Typeahead
       label="Location"
       noResultsMessage="No location found"
       nullable={true}
-      options={
-        data?.map(({ id, name }) => ({
-          id,
-          label: name,
-          value: id,
-        })) ?? []
-      }
-      value={value}
+      options={options}
       onQueryChange={setQuery}
       onSelect={onSelect}
       {...props}
