@@ -89,9 +89,7 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
                 addSuffix: true,
               })} by ${resumeInfo.user}`}
             </div>
-            <div className="mt-2 text-slate-400">
-              {getFilterLabel('location', resumeInfo.location)}
-            </div>
+            <div className="mt-2 text-slate-400">{resumeInfo.location}</div>
           </div>
         </div>
         <ChevronRightIcon className="col-span-1 w-8 self-center justify-self-center text-slate-400" />

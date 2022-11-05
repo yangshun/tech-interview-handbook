@@ -85,12 +85,28 @@ export const EXPERIENCES: Array<TypeaheadOption> = [
   },
 ];
 
-export const LOCATIONS: Array<TypeaheadOption> = [];
+export const LOCATIONS: Array<TypeaheadOption> = [
+  {
+    id: '196',
+    label: 'Singapore',
+    value: '196',
+  },
+  {
+    id: '231',
+    label: 'United States',
+    value: '231',
+  },
+  {
+    id: '101',
+    label: 'India',
+    value: '101',
+  },
+];
 
 export const INITIAL_FILTER_STATE: FilterState = {
   experience: EXPERIENCES,
   isUnreviewed: true,
-  location: [],
+  location: LOCATIONS,
   role: ROLES,
 };
 
@@ -152,14 +168,16 @@ export const isInitialFilterState = (filters: FilterState) =>
 export const getFilterLabel = (
   filterId: FilterId | 'sort',
   filterValue: SortOrder | string,
-) => {
+): string | undefined => {
+  if (filterId === 'location') {
+    return filterValue;
+  }
+
   let filters: Array<TypeaheadOption> = [];
 
   switch (filterId) {
     case 'experience':
       filters = EXPERIENCES;
-      break;
-    case 'location':
       break;
     case 'role':
       filters = Object.entries(JobTitleLabels).map(([slug, label]) => ({
