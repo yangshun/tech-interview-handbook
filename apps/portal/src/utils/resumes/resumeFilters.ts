@@ -1,5 +1,6 @@
 import type { TypeaheadOption } from '@tih/ui';
 
+import type { JobTitleType } from '~/components/shared/JobTitles';
 import { JobTitleLabels } from '~/components/shared/JobTitles';
 
 export type FilterId = 'experience' | 'location' | 'role';
@@ -44,22 +45,14 @@ export const SORT_OPTIONS: Array<FilterOption<SortOrder>> = [
   { label: 'Most Comments', value: 'mostComments' },
 ];
 
-export const ROLES: Array<TypeaheadOption> = [
-  {
-    id: 'software-engineer',
-    label: 'Software Engineer',
-    value: 'software-engineer',
-  },
-  {
-    id: 'back-end-engineer',
-    label: 'Back End Engineer',
-    value: 'back-end-engineer',
-  },
-  {
-    id: 'front-end-engineer',
-    label: 'Front End Engineer',
-    value: 'front-end-engineer',
-  },
+const INITIAL_ROLES_VALUES: Array<JobTitleType> = [
+  'software-engineer',
+  'back-end-engineer',
+  'front-end-engineer',
+  'full-stack-engineer',
+  'ios-engineer',
+  'android-engineer',
+  'data-engineer',
 ];
 
 export const EXPERIENCES: Array<TypeaheadOption> = [
