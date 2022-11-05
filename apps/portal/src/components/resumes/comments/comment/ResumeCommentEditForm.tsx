@@ -67,39 +67,35 @@ export default function ResumeCommentEditForm({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex-column mt-1 space-y-2">
-        <TextArea
-          {...(register('description', {
-            required: 'Comments cannot be empty!',
-          }),
-          {})}
-          defaultValue={comment.description}
+    <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
+      <TextArea
+        {...(register('description', {
+          required: 'Comments cannot be empty!',
+        }),
+        {})}
+        defaultValue={comment.description}
+        disabled={commentUpdateMutation.isLoading}
+        errorMessage={errors.description?.message}
+        label=""
+        placeholder="Leave your comment here"
+        onChange={setFormValue}
+      />
+      <div className="flex w-full justify-end space-x-2">
+        <Button
           disabled={commentUpdateMutation.isLoading}
-          errorMessage={errors.description?.message}
-          label=""
-          placeholder="Leave your comment here"
-          onChange={setFormValue}
+          label="Cancel"
+          size="sm"
+          variant="tertiary"
+          onClick={onCancel}
         />
-
-        <div className="flex-row space-x-2">
-          <Button
-            disabled={commentUpdateMutation.isLoading}
-            label="Cancel"
-            size="sm"
-            variant="tertiary"
-            onClick={onCancel}
-          />
-
-          <Button
-            disabled={!isDirty || commentUpdateMutation.isLoading}
-            isLoading={commentUpdateMutation.isLoading}
-            label="Confirm"
-            size="sm"
-            type="submit"
-            variant="primary"
-          />
-        </div>
+        <Button
+          disabled={!isDirty || commentUpdateMutation.isLoading}
+          isLoading={commentUpdateMutation.isLoading}
+          label="Submit"
+          size="sm"
+          type="submit"
+          variant="primary"
+        />
       </div>
     </form>
   );

@@ -50,7 +50,7 @@ export default function ResumeCommentListItem({
         <div className="flex w-full flex-col space-y-1">
           {/* Name and creation time */}
           <div className="flex flex-row items-center space-x-2">
-            <p className={clsx('text-sm font-medium text-slate-800')}>
+            <p className="text-sm font-medium text-slate-900">
               {comment.user.name ?? 'Reviewer ABC'}
             </p>
             {isCommentOwner && (
@@ -83,64 +83,59 @@ export default function ResumeCommentListItem({
           )}
 
           {/* Upvote and edit */}
-          <div className="flex flex-row space-x-2 pt-1 align-middle">
+          <div className="mt-1 flex h-6 items-center">
             <ResumeCommentVoteButtons commentId={comment.id} userId={userId} />
             {/* Action buttons; only present for authenticated user when not editing/replying */}
-            {userId && !isEditingComment && !isReplyingComment && (
-              <>
-                {isCommentOwner && (
-                  <>
-                    <span className="font-medium text-slate-500">&middot;</span>{' '}
-                    <button
-                      className="text-xs font-medium text-slate-500 hover:text-slate-600"
-                      type="button"
-                      onClick={() => setIsEditingComment(true)}>
-                      Edit
-                    </button>
-                  </>
-                )}
-                {!comment.parentId && (
-                  <>
-                    <span className="font-medium text-slate-500">&middot;</span>{' '}
-                    <button
-                      className="text-xs font-medium text-slate-500 hover:text-slate-600"
-                      type="button"
-                      onClick={() => setIsReplyingComment(true)}>
-                      Reply
-                    </button>
-                  </>
-                )}
-              </>
+            {userId && !comment.parentId && (
+              <button
+                className="-my-1 rounded-md px-2 py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+                type="button"
+                onClick={() => {
+                  setIsReplyingComment(!isReplyingComment);
+                  setIsEditingComment(false);
+                }}>
+                Reply
+              </button>
             )}
             {comment.children.length > 0 && (
-              <>
-                <span className="font-medium text-slate-500">&middot;</span>{' '}
-                <button
-                  className="flex items-center space-x-1 rounded-md text-xs font-medium text-slate-500 hover:text-slate-600"
-                  type="button"
-                  onClick={() => setShowReplies(!showReplies)}>
-                  <span>
-                    {showReplies
-                      ? `Hide ${
-                          comment.children.length === 1 ? 'reply' : 'replies'
-                        }`
-                      : `Show ${comment.children.length} ${
-                          comment.children.length === 1 ? 'reply' : 'replies'
-                        }`}
-                  </span>
-                </button>
-              </>
+              <button
+                className="-my-1 rounded-md px-2 py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+                type="button"
+                onClick={() => setShowReplies(!showReplies)}>
+                <span>
+                  {showReplies
+                    ? `Hide ${
+                        comment.children.length === 1 ? 'reply' : 'replies'
+                      }`
+                    : `Show ${comment.children.length} ${
+                        comment.children.length === 1 ? 'reply' : 'replies'
+                      }`}
+                </span>
+              </button>
+            )}
+            {isCommentOwner && (
+              <button
+                className="-my-1 rounded-md px-2 py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+                type="button"
+                onClick={() => {
+                  setIsEditingComment(!isEditingComment);
+                  setIsReplyingComment(false);
+                }}>
+                Edit
+              </button>
             )}
           </div>
 
           {/* Reply Form */}
           {isReplyingComment && (
-            <ResumeCommentReplyForm
-              parentId={comment.id}
-              resumeId={comment.resumeId}
-              section={comment.section}
-              setIsReplyingComment={setIsReplyingComment}
-            />
+            <div className="mt-2">
+              <ResumeCommentReplyForm
+                parentId={comment.id}
+                resumeId={comment.resumeId}
+                section={comment.section}
+                setIsReplyingComment={setIsReplyingComment}
+              />
+            </div>
           )}
 
           {/* Replies */}

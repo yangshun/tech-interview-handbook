@@ -83,15 +83,16 @@ export default function ResumeCommentReplyForm({
           required: 'Reply cannot be empty!',
         }),
         {})}
+        autoFocus={true}
         defaultValue=""
         disabled={commentReplyMutation.isLoading}
         errorMessage={errors.description?.message}
-        label=""
-        placeholder="Leave your reply here"
+        isLabelHidden={true}
+        label="Reply to comment"
+        placeholder="Type your reply here"
         onChange={setFormValue}
       />
-
-      <div className="flex-row space-x-2">
+      <div className="flex w-full justify-end space-x-2">
         <Button
           disabled={commentReplyMutation.isLoading}
           label="Cancel"
@@ -99,11 +100,10 @@ export default function ResumeCommentReplyForm({
           variant="tertiary"
           onClick={onCancel}
         />
-
         <Button
           disabled={!isDirty || commentReplyMutation.isLoading}
           isLoading={commentReplyMutation.isLoading}
-          label="Confirm"
+          label="Submit"
           size="sm"
           type="submit"
           variant="primary"
