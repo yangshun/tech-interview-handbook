@@ -39,18 +39,22 @@ export default function ResumeUserBadges({ userId }: Props) {
     topUpvotedCommentCount: userTopUpvotedCommentCountQuery.data ?? 0,
   };
 
+  const badges = RESUME_USER_BADGES.filter((badge) => badge.isValid(payload));
+
+  if (badges.length === 0) {
+    return null;
+  }
+
   return (
     <div className="flex items-center justify-center gap-1">
-      {RESUME_USER_BADGES.filter((badge) => badge.isValid(payload)).map(
-        (badge) => (
-          <ResumeUserBadge
-            key={badge.id}
-            description={badge.description}
-            icon={badge.icon}
-            title={badge.title}
-          />
-        ),
-      )}
+      {badges.map((badge) => (
+        <ResumeUserBadge
+          key={badge.id}
+          description={badge.description}
+          icon={badge.icon}
+          title={badge.title}
+        />
+      ))}
     </div>
   );
 }

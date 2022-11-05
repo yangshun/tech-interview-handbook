@@ -29,14 +29,14 @@ export default function ResumeExpandableText({
       <span
         ref={ref}
         className={clsx(
-          'line-clamp-3 whitespace-pre-wrap text-sm',
+          'line-clamp-3 whitespace-pre-wrap text-xs sm:text-sm',
           isExpanded ? 'line-clamp-none' : '',
         )}>
         {text}
       </span>
       {descriptionOverflow && (
         <p
-          className="text-primary-500 hover:text-primary-300 mt-1 cursor-pointer text-xs"
+          className="text-primary-500 hover:text-primary-300 mt-1 cursor-pointer text-xs sm:text-sm"
           onClick={onSeeActionClicked}>
           {isExpanded ? 'See Less' : 'See More'}
         </p>

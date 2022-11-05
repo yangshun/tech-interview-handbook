@@ -1,9 +1,7 @@
-import clsx from 'clsx';
 import { useSession } from 'next-auth/react';
 import {
   BookOpenIcon,
   BriefcaseIcon,
-  ChatBubbleLeftRightIcon,
   CodeBracketSquareIcon,
   FaceSmileIcon,
   IdentificationIcon,
@@ -31,7 +29,7 @@ export default function ResumeCommentsList({
   const commentsQuery = trpc.useQuery(['resumes.comments.list', { resumeId }]);
 
   const renderIcon = (section: ResumesSection) => {
-    const className = 'h-7 w-7';
+    const className = 'h-5 w-5';
     switch (section) {
       case ResumesSection.GENERAL:
         return <IdentificationIcon className={className} />;
@@ -57,7 +55,7 @@ export default function ResumeCommentsList({
   }
 
   return (
-    <div className="flow-root w-full flex-col space-y-10 overflow-y-auto overflow-x-hidden lg:h-[calc(100vh-13rem)]">
+    <div className="flow-root w-full space-y-4 overflow-y-auto overflow-x-hidden px-4 lg:h-[calc(100vh-12rem)] lg:py-8">
       {RESUME_COMMENTS_SECTIONS.map(({ label, value }) => {
         const comments = commentsQuery.data
           ? commentsQuery.data.filter((comment: ResumeComment) => {
@@ -67,22 +65,19 @@ export default function ResumeCommentsList({
         const commentCount = comments.length;
 
         return (
-          <div key={value} className="space-y-4 pr-4">
+          <div
+            key={value}
+            className="rounded-lg border border-slate-200 bg-white shadow-sm">
             {/* CommentHeader Section */}
-            <div className="text-primary-800 flex items-center space-x-2">
-              <hr className="flex-grow border-slate-800" />
+            <div className="flex items-center space-x-2 border-b border-slate-200 px-4 py-3 font-medium text-slate-700">
               {renderIcon(value)}
-
-              <span className="w-fit text-lg font-medium">{label}</span>
-              <hr className="flex-grow border-slate-800" />
+              <span className="w-fit text-sm font-medium uppercase tracking-wide">
+                {label}
+              </span>
             </div>
 
             {/* Comment Section */}
-            <div
-              className={clsx(
-                'space-y-2 rounded-md border-2 bg-white px-4 py-3 drop-shadow-md',
-                commentCount ? 'border-slate-300' : 'border-slate-300',
-              )}>
+            <div className="space-y-4 px-4 py-3">
               {commentCount > 0 ? (
                 comments.map((comment) => {
                   return (
@@ -95,10 +90,8 @@ export default function ResumeCommentsList({
                 })
               ) : (
                 <div className="flex flex-row items-center text-sm">
-                  <ChatBubbleLeftRightIcon className="mr-2 h-6 w-6 text-slate-500" />
-
                   <div className="text-slate-500">
-                    There are no comments for this section yet!
+                    There are no comments for this section.
                   </div>
                 </div>
               )}

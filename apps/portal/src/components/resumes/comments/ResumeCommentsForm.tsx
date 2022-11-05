@@ -115,10 +115,12 @@ export default function ResumeCommentsForm({
   };
 
   return (
-    <div className="h-[calc(100vh-13rem)] overflow-y-auto pb-4">
-      <h2 className="text-xl font-semibold text-slate-800">Add your review</h2>
-      <p className="text-slate-800">
-        Please fill in at least one section to submit your review
+    <div className="overflow-y-auto py-8 px-4 lg:h-[calc(100vh-13rem)]">
+      <h2 className="text-xl font-medium text-slate-800">
+        Contribute a review
+      </h2>
+      <p className="mt-1 text-slate-600">
+        Please fill in at least one section to submit a review.
       </p>
 
       <form
