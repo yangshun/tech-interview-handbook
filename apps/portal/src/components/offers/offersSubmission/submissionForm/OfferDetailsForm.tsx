@@ -4,6 +4,7 @@ import type {
   UseFieldArrayRemove,
   UseFieldArrayReturn,
 } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { useWatch } from 'react-hook-form';
 import { useFormContext } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
@@ -12,17 +13,14 @@ import { TrashIcon } from '@heroicons/react/24/outline';
 import { JobType } from '@prisma/client';
 import { Button, Dialog, HorizontalDivider } from '@tih/ui';
 
-import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
-import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
-import type { JobTitleType } from '~/components/shared/JobTitles';
-import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
-import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
-
 import {
   defaultFullTimeOfferValues,
   defaultInternshipOfferValues,
 } from '../OffersSubmissionForm';
 import { FieldError, JobTypeLabel } from '../../constants';
+import FormCitiesTypeahead from '../../forms/FormCitiesTypeahead';
+import FormCompaniesTypeahead from '../../forms/FormCompaniesTypeahead';
+import FormJobTitlesTypeahead from '../../forms/FormJobTitlesTypeahead';
 import FormMonthYearPicker from '../../forms/FormMonthYearPicker';
 import FormSection from '../../forms/FormSection';
 import FormSelect from '../../forms/FormSelect';
@@ -46,26 +44,11 @@ function FullTimeOfferDetailsForm({
   index,
   remove,
 }: FullTimeOfferDetailsFormProps) {
-  const { register, formState, setValue } = useFormContext<{
+  const { register, formState, setValue, control } = useFormContext<{
     offers: Array<OfferFormData>;
   }>();
   const offerFields = formState.errors.offers?.[index];
 
-  const watchJobTitle = useWatch({
-    name: `offers.${index}.offersFullTime.title`,
-  });
-  const watchCompanyId = useWatch({
-    name: `offers.${index}.companyId`,
-  });
-  const watchCompanyName = useWatch({
-    name: `offers.${index}.companyName`,
-  });
-  const watchCityId = useWatch({
-    name: `offers.${index}.cityId`,
-  });
-  const watchCityName = useWatch({
-    name: `offers.${index}.cityName`,
-  });
   const watchCurrency = useWatch({
     name: `offers.${index}.offersFullTime.totalCompensation.currency`,
   });
@@ -83,18 +66,17 @@ function FullTimeOfferDetailsForm({
     <div className="space-y-8 rounded-lg border border-slate-200 p-6 sm:space-y-16 sm:p-8">
       <FormSection title="Company & Title Information">
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
-          <JobTitlesTypeahead
-            required={true}
-            value={{
-              id: watchJobTitle,
-              label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
-              value: watchJobTitle,
-            }}
-            onSelect={(option) => {
-              if (option) {
-                setValue(`offers.${index}.offersFullTime.title`, option.value);
-              }
-            }}
+          <Controller
+            control={control}
+            name={`offers.${index}.offersFullTime.title`}
+            render={() => (
+              <FormJobTitlesTypeahead
+                errorMessage={offerFields?.offersFullTime?.title?.message}
+                name={`offers.${index}.offersFullTime.title`}
+                required={true}
+              />
+            )}
+            rules={{ required: true }}
           />
           <FormTextInput
             errorMessage={offerFields?.offersFullTime?.level?.message}
@@ -107,37 +89,35 @@ function FullTimeOfferDetailsForm({
           />
         </div>
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
-          <CompaniesTypeahead
-            required={true}
-            value={{
-              id: watchCompanyId,
-              label: watchCompanyName,
-              value: watchCompanyId,
-            }}
-            onSelect={(option) => {
-              if (option) {
-                setValue(`offers.${index}.companyId`, option.value);
-                setValue(`offers.${index}.companyName`, option.label);
-              }
-            }}
+          <Controller
+            control={control}
+            name={`offers.${index}.companyId`}
+            render={() => (
+              <FormCompaniesTypeahead
+                errorMessage={offerFields?.companyId?.message}
+                names={{
+                  label: `offers.${index}.companyName`,
+                  value: `offers.${index}.companyId`,
+                }}
+                required={true}
+              />
+            )}
+            rules={{ required: true }}
           />
-          <CitiesTypeahead
-            label="Location"
-            required={true}
-            value={{
-              id: watchCityId,
-              label: watchCityName,
-              value: watchCityId,
-            }}
-            onSelect={(option) => {
-              if (option) {
-                setValue(`offers.${index}.cityId`, option.value);
-                setValue(`offers.${index}.cityName`, option.label);
-              } else {
-                setValue(`offers.${index}.cityId`, '');
-                setValue(`offers.${index}.cityName`, '');
-              }
-            }}
+          <Controller
+            control={control}
+            name={`offers.${index}.cityId`}
+            render={() => (
+              <FormCitiesTypeahead
+                errorMessage={offerFields?.cityId?.message}
+                names={{
+                  label: `offers.${index}.cityName`,
+                  value: `offers.${index}.companyId`,
+                }}
+                required={true}
+              />
+            )}
+            rules={{ required: true }}
           />
         </div>
       </FormSection>
@@ -303,76 +283,56 @@ function InternshipOfferDetailsForm({
   index,
   remove,
 }: InternshipOfferDetailsFormProps) {
-  const { register, formState, setValue } = useFormContext<{
+  const { register, formState, control } = useFormContext<{
     offers: Array<OfferFormData>;
   }>();
   const offerFields = formState.errors.offers?.[index];
 
-  const watchJobTitle = useWatch({
-    name: `offers.${index}.offersIntern.title`,
-  });
-  const watchCompanyId = useWatch({
-    name: `offers.${index}.companyId`,
-  });
-  const watchCompanyName = useWatch({
-    name: `offers.${index}.companyName`,
-  });
-  const watchCityId = useWatch({
-    name: `offers.${index}.cityId`,
-  });
-  const watchCityName = useWatch({
-    name: `offers.${index}.cityName`,
-  });
-
   return (
     <div className="space-y-8 rounded-lg border border-slate-200 p-6 sm:space-y-16 sm:p-8">
       <FormSection title="Company & Title Information">
-        <JobTitlesTypeahead
-          required={true}
-          value={{
-            id: watchJobTitle,
-            label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
-            value: watchJobTitle,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue(`offers.${index}.offersIntern.title`, option.value);
-            }
-          }}
+        <Controller
+          control={control}
+          name={`offers.${index}.offersIntern.title`}
+          render={() => (
+            <FormJobTitlesTypeahead
+              errorMessage={offerFields?.offersIntern?.title?.message}
+              name={`offers.${index}.offersIntern.title`}
+              required={true}
+            />
+          )}
+          rules={{ required: true }}
         />
-
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
-          <CompaniesTypeahead
-            required={true}
-            value={{
-              id: watchCompanyId,
-              label: watchCompanyName,
-              value: watchCompanyId,
-            }}
-            onSelect={(option) => {
-              if (option) {
-                setValue(`offers.${index}.companyId`, option.value);
-                setValue(`offers.${index}.companyName`, option.label);
-              }
-            }}
+          <Controller
+            control={control}
+            name={`offers.${index}.companyId`}
+            render={() => (
+              <FormCompaniesTypeahead
+                errorMessage={offerFields?.companyId?.message}
+                names={{
+                  label: `offers.${index}.companyName`,
+                  value: `offers.${index}.companyId`,
+                }}
+                required={true}
+              />
+            )}
+            rules={{ required: true }}
           />
-          <CitiesTypeahead
-            label="Location"
-            required={true}
-            value={{
-              id: watchCityId,
-              label: watchCityName,
-              value: watchCityId,
-            }}
-            onSelect={(option) => {
-              if (option) {
-                setValue(`offers.${index}.cityId`, option.value);
-                setValue(`offers.${index}.cityName`, option.label);
-              } else {
-                setValue(`offers.${index}.cityId`, '');
-                setValue(`offers.${index}.cityName`, '');
-              }
-            }}
+          <Controller
+            control={control}
+            name={`offers.${index}.cityId`}
+            render={() => (
+              <FormCitiesTypeahead
+                errorMessage={offerFields?.cityId?.message}
+                names={{
+                  label: `offers.${index}.cityName`,
+                  value: `offers.${index}.companyId`,
+                }}
+                required={true}
+              />
+            )}
+            rules={{ required: true }}
           />
         </div>
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
