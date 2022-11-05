@@ -39,6 +39,7 @@ export default function CountriesTypeahead({
   return (
     <Typeahead
       label="Country"
+      minQueryLength={3}
       noResultsMessage="No countries found"
       nullable={true}
       options={

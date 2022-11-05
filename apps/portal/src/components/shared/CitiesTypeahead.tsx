@@ -41,6 +41,7 @@ export default function CitiesTypeahead({
   return (
     <Typeahead
       label={label}
+      minQueryLength={3}
       noResultsMessage="No cities found"
       nullable={true}
       options={

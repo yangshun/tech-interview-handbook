@@ -28,6 +28,8 @@ type Props = Readonly<{
   errorMessage?: React.ReactNode;
   isLabelHidden?: boolean;
   label: string;
+  // Minimum query length before any results will be shown.
+  minQueryLength?: number;
   noResultsMessage?: string;
   onQueryChange: (
     value: string,
@@ -80,6 +82,7 @@ export default function Typeahead({
   errorMessage,
   isLabelHidden,
   label,
+  minQueryLength = 0,
   noResultsMessage = 'No results',
   nullable = false,
   options,
@@ -167,46 +170,48 @@ export default function Typeahead({
               />
             </Combobox.Button>
           </div>
-          <Transition
-            afterLeave={() => setQuery('')}
-            as={Fragment}
-            leave="transition ease-in duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0">
-            <Combobox.Options
-              className={clsx(
-                'absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none',
-                textSizes[textSize],
-              )}>
-              {options.length === 0 && query !== '' ? (
-                <div className="relative cursor-default select-none py-2 px-4 text-slate-700">
-                  {noResultsMessage}
-                </div>
-              ) : (
-                options.map((option) => (
-                  <Combobox.Option
-                    key={option.id}
-                    className={({ active }) =>
-                      clsx(
-                        'relative cursor-default select-none py-2 px-4 text-slate-500',
-                        active && 'bg-slate-100',
-                      )
-                    }
-                    value={option}>
-                    {({ selected }) => (
-                      <span
-                        className={clsx(
-                          'block truncate',
-                          selected ? 'font-medium' : 'font-normal',
-                        )}>
-                        {option.label}
-                      </span>
-                    )}
-                  </Combobox.Option>
-                ))
-              )}
-            </Combobox.Options>
-          </Transition>
+          {query.length >= minQueryLength && (
+            <Transition
+              afterLeave={() => setQuery('')}
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0">
+              <Combobox.Options
+                className={clsx(
+                  'absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none',
+                  textSizes[textSize],
+                )}>
+                {options.length === 0 && query !== '' ? (
+                  <div className="relative cursor-default select-none py-2 px-4 text-slate-700">
+                    {noResultsMessage}
+                  </div>
+                ) : (
+                  options.map((option) => (
+                    <Combobox.Option
+                      key={option.id}
+                      className={({ active }) =>
+                        clsx(
+                          'relative cursor-default select-none py-2 px-4 text-slate-500',
+                          active && 'bg-slate-100',
+                        )
+                      }
+                      value={option}>
+                      {({ selected }) => (
+                        <span
+                          className={clsx(
+                            'block truncate',
+                            selected ? 'font-medium' : 'font-normal',
+                          )}>
+                          {option.label}
+                        </span>
+                      )}
+                    </Combobox.Option>
+                  ))
+                )}
+              </Combobox.Options>
+            </Transition>
+          )}
         </div>
       </Combobox>
       {errorMessage && (
