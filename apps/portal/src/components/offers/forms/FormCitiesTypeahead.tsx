@@ -30,7 +30,7 @@ export default function FormCitiesTypeahead({ names, ...props }: Props) {
       }}
       onSelect={(option) => {
         setValue(names.value, option?.value);
-        setValue(names.label, option?.value);
+        setValue(names.label, option?.label);
       }}
     />
   );
