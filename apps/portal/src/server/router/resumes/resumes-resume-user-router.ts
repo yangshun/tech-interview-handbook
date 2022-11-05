@@ -13,7 +13,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
       additionalInfo: z.string().optional(),
       experience: z.string(),
       id: z.string().optional(),
-      location: z.string(),
+      locationId: z.string(),
       role: z.string(),
       title: z.string(),
       url: z.string(),
@@ -25,7 +25,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         create: {
           additionalInfo: input.additionalInfo,
           experience: input.experience,
-          location: input.location,
+          locationId: input.locationId,
           role: input.role,
           title: input.title,
           url: input.url,
@@ -34,7 +34,7 @@ export const resumesResumeUserRouter = createProtectedRouter()
         update: {
           additionalInfo: input.additionalInfo,
           experience: input.experience,
-          location: input.location,
+          locationId: input.locationId,
           role: input.role,
           title: input.title,
           url: input.url,
