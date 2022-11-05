@@ -9,6 +9,7 @@ import { useDropzone } from 'react-dropzone';
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 import { ArrowUpCircleIcon } from '@heroicons/react/24/outline';
+import type { TypeaheadOption } from '@tih/ui';
 import {
   Button,
   CheckboxInput,
@@ -43,19 +44,20 @@ type IFormInput = {
   experience: string;
   file: File;
   isChecked: boolean;
-  locationId: string;
-  role: string;
+  location: TypeaheadOption;
+  role: TypeaheadOption;
   title: string;
 };
 
 type InputKeys = keyof IFormInput;
+type TypeAheadKeys = keyof Pick<IFormInput, 'location' | 'role'>;
 
 type InitFormDetails = {
   additionalInfo?: string;
   experience: string;
-  location: string;
+  location: TypeaheadOption;
   resumeId: string;
-  role: string;
+  role: TypeaheadOption;
   title: string;
   url: string;
 };
@@ -97,8 +99,6 @@ export default function SubmitResumeForm({
       additionalInfo: '',
       experience: '',
       isChecked: false,
-      locationId: '',
-      role: '',
       title: '',
       ...initFormDetails,
     },
@@ -139,6 +139,11 @@ export default function SubmitResumeForm({
   }, [router, status]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    if (!isDirty) {
+      onClose();
+      return;
+    }
+
     setIsLoading(true);
     let fileUrl = initFormDetails?.url ?? '';
 
@@ -161,8 +166,8 @@ export default function SubmitResumeForm({
         additionalInfo: data.additionalInfo,
         experience: data.experience,
         id: initFormDetails?.resumeId,
-        locationId: data.locationId,
-        role: data.role,
+        locationId: data.location.value,
+        role: data.role.value,
         title: data.title,
         url: fileUrl,
       },
@@ -238,6 +243,13 @@ export default function SubmitResumeForm({
     setValue(section, value.trim(), { shouldDirty: true });
   };
 
+  const onSelect = (section: TypeAheadKeys, option: TypeaheadOption | null) => {
+    if (option == null) {
+      return;
+    }
+    setValue(section, option, { shouldDirty: true });
+  };
+
   return (
     <>
       <Head>
@@ -302,50 +314,42 @@ export default function SubmitResumeForm({
                   required={true}
                   onChange={(val) => onValueChange('title', val)}
                 />
-                <div className="flex flex-wrap gap-6">
-                  <Controller
-                    control={control}
-                    name="role"
-                    render={() => (
-                      <ResumeRoleTypeahead
-                        disabled={isLoading}
-                        required={true}
-                        onSelect={(option) => {
-                          if (option == null) {
-                            return;
-                          }
-                          onValueChange('role', option.value);
-                        }}
-                      />
-                    )}
-                    rules={{ required: true }}
-                  />
-                  <Select
-                    {...register('experience', { required: true })}
-                    disabled={isLoading}
-                    label="Experience Level"
-                    options={EXPERIENCES}
-                    placeholder=" "
-                    required={true}
-                    onChange={(val) => onValueChange('experience', val)}
-                  />
-                </div>
                 <Controller
                   control={control}
-                  name="locationId"
-                  render={() => (
+                  name="location"
+                  render={({ field: { value } }) => (
                     <ResumeLocationTypeahead
                       disabled={isLoading}
+                      placeholder="Select a location"
                       required={true}
-                      onSelect={(option) => {
-                        if (option == null) {
-                          return;
-                        }
-                        onValueChange('locationId', option.value);
-                      }}
+                      value={value}
+                      onSelect={(option) => onSelect('location', option)}
                     />
                   )}
                   rules={{ required: true }}
+                />
+                <Controller
+                  control={control}
+                  name="role"
+                  render={({ field: { value } }) => (
+                    <ResumeRoleTypeahead
+                      disabled={isLoading}
+                      placeholder="Select a role"
+                      required={true}
+                      value={value}
+                      onSelect={(option) => onSelect('role', option)}
+                    />
+                  )}
+                  rules={{ required: true }}
+                />
+                <Select
+                  {...register('experience', { required: true })}
+                  disabled={isLoading}
+                  label="Experience Level"
+                  options={EXPERIENCES}
+                  placeholder=" "
+                  required={true}
+                  onChange={(val) => onValueChange('experience', val)}
                 />
                 {/* Upload resume form */}
                 {isNewForm && (

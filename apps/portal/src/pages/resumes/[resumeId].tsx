@@ -36,6 +36,8 @@ import {
 import { trpc } from '~/utils/trpc';
 
 import SubmitResumeForm from './submit';
+import type { JobTitleType } from '../../components/shared/JobTitles';
+import { getLabelForJobTitleType } from '../../components/shared/JobTitles';
 
 export default function ResumeReviewPage() {
   const ErrorPage = (
@@ -200,9 +202,19 @@ export default function ResumeReviewPage() {
         initFormDetails={{
           additionalInfo: detailsQuery.data.additionalInfo ?? '',
           experience: detailsQuery.data.experience,
-          location: detailsQuery.data.locationId,
+          location: {
+            id: detailsQuery.data.locationId,
+            label: detailsQuery.data.location.name,
+            value: detailsQuery.data.locationId,
+          },
           resumeId: resumeId as string,
-          role: detailsQuery.data.role,
+          role: {
+            id: detailsQuery.data.role,
+            label: getLabelForJobTitleType(
+              detailsQuery.data.role as JobTitleType,
+            ),
+            value: detailsQuery.data.role,
+          },
           title: detailsQuery.data.title,
           url: detailsQuery.data.url,
         }}
