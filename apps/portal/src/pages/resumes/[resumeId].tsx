@@ -15,7 +15,6 @@ import {
   PencilSquareIcon,
   StarIcon,
 } from '@heroicons/react/20/solid';
-import type { TypeaheadOption } from '@tih/ui';
 import { Button, Spinner } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
@@ -27,11 +26,9 @@ import loginPageHref from '~/components/shared/loginPageHref';
 
 import {
   BROWSE_TABS_VALUES,
-  EXPERIENCES,
   getFilterLabel,
+  getTypeaheadOption,
   INITIAL_FILTER_STATE,
-  LOCATIONS,
-  ROLES,
 } from '~/utils/resumes/resumeFilters';
 import { trpc } from '~/utils/trpc';
 
@@ -121,27 +118,24 @@ export default function ResumeReviewPage() {
   };
 
   const onInfoTagClick = ({
-    locationLabel,
-    experienceLabel,
-    roleLabel,
+    locationName,
+    locationValue,
+    experienceValue,
+    roleValue,
   }: {
-    experienceLabel?: string;
-    locationLabel?: string;
-    roleLabel?: string;
+    experienceValue?: string;
+    locationName?: string;
+    locationValue?: string;
+    roleValue?: string;
   }) => {
-    const getFilterValue = (
-      label: string,
-      filterOptions: Array<TypeaheadOption>,
-    ) => filterOptions.find((option) => option.label === label)?.value;
-
     router.push({
       pathname: '/resumes',
       query: {
         currentPage: JSON.stringify(1),
         isFiltersOpen: JSON.stringify({
-          experience: experienceLabel !== undefined,
-          location: locationLabel !== undefined,
-          role: roleLabel !== undefined,
+          experience: experienceValue !== undefined,
+          location: locationValue !== undefined,
+          role: roleValue !== undefined,
         }),
         searchValue: JSON.stringify(''),
         shortcutSelected: JSON.stringify('all'),
@@ -149,14 +143,16 @@ export default function ResumeReviewPage() {
         tabsValue: JSON.stringify(BROWSE_TABS_VALUES.ALL),
         userFilters: JSON.stringify({
           ...INITIAL_FILTER_STATE,
-          ...(locationLabel && {
-            location: [getFilterValue(locationLabel, LOCATIONS)],
+          ...(locationValue && {
+            location: [
+              getTypeaheadOption('location', locationValue, locationName),
+            ],
           }),
-          ...(roleLabel && {
-            role: [getFilterValue(roleLabel, ROLES)],
+          ...(roleValue && {
+            role: [getTypeaheadOption('role', roleValue)],
           }),
-          ...(experienceLabel && {
-            experience: [getFilterValue(experienceLabel, EXPERIENCES)],
+          ...(experienceValue && {
+            experience: [getTypeaheadOption('experience', experienceValue)],
           }),
         }),
       },
@@ -318,92 +314,71 @@ export default function ResumeReviewPage() {
                   <div className="hidden xl:block">{renderReviewButton()}</div>
                 </div>
               </div>
-            </div>
-            <div className="flex flex-col lg:mt-0 lg:flex-row lg:flex-wrap lg:space-x-8">
-              <div className="mt-2 flex items-center text-sm text-slate-600 xl:mt-1">
-                <BriefcaseIcon
-                  aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
-                />
-                <button
-                  className="hover:text-primary-800 underline"
-                  type="button"
-                  onClick={() =>
-                    onInfoTagClick({
-                      roleLabel: detailsQuery.data?.role,
-                    })
-                  }>
-                  {getFilterLabel('role', detailsQuery.data.role)}
-                </button>
-              </div>
-              <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
-                <MapPinIcon
-                  aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
-                />
-                <button
-                  className="hover:text-primary-800 underline"
-                  type="button"
-                  onClick={() =>
-                    onInfoTagClick({
-                      locationLabel: detailsQuery.data?.locationId,
-                    })
-                  }>
-                  {detailsQuery.data?.location.name}
-                </button>
-              </div>
-              <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
-                <AcademicCapIcon
-                  aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
-                />
-                <button
-                  className="hover:text-primary-800 underline"
-                  type="button"
-                  onClick={() =>
-                    onInfoTagClick({
-                      experienceLabel: detailsQuery.data?.experience,
-                    })
-                  }>
-                  {getFilterLabel('experience', detailsQuery.data.experience)}
-                </button>
-              </div>
-              <div className="flex items-center pt-2 text-sm text-slate-600 xl:pt-1">
-                <CalendarIcon
-                  aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
-                />
-                {`Uploaded ${formatDistanceToNow(detailsQuery.data.createdAt, {
-                  addSuffix: true,
-                })} by ${detailsQuery.data.user.name}`}
-              </div>
-            </div>
-            {detailsQuery.data.additionalInfo && (
-              <div className="flex items-start whitespace-pre-wrap pt-2 text-sm text-slate-600 xl:pt-1">
-                <InformationCircleIcon
-                  aria-hidden="true"
-                  className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
-                />
-                <ResumeExpandableText
-                  key={detailsQuery.data.additionalInfo}
-                  text={detailsQuery.data.additionalInfo}
-                />
-              </div>
-            )}
-
-            <div className="flex w-full flex-col gap-6 py-4 xl:flex-row xl:py-0">
-              <div className="w-full xl:w-1/2">
-                <ResumePdf url={detailsQuery.data.url} />
-              </div>
-              <div className="grow">
-                <div className="mb-6 space-y-4 xl:hidden">
-                  {renderReviewButton()}
-                  <div className="flex items-center space-x-2">
-                    <hr className="flex-grow border-slate-300" />
-                    <span className="bg-slate-50 px-3 text-lg font-medium text-slate-900">
-                      Reviews
-                    </span>
-                    <hr className="flex-grow border-slate-300" />
+              <div className="space-y-2">
+                <div className="grid grid-cols-2 gap-2 lg:flex lg:flex-wrap lg:space-x-8">
+                  <div className="col-span-1 flex items-center text-xs text-slate-600 sm:text-sm">
+                    <BriefcaseIcon
+                      aria-hidden="true"
+                      className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
+                    />
+                    <button
+                      className="hover:text-primary-800 underline"
+                      type="button"
+                      onClick={() =>
+                        onInfoTagClick({
+                          roleValue: detailsQuery.data?.role,
+                        })
+                      }>
+                      {getFilterLabel('role', detailsQuery.data.role)}
+                    </button>
+                  </div>
+                  <div className="col-span-1 flex items-center text-xs text-slate-600 sm:text-sm">
+                    <MapPinIcon
+                      aria-hidden="true"
+                      className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
+                    />
+                    <button
+                      className="hover:text-primary-800 underline"
+                      type="button"
+                      onClick={() =>
+                        onInfoTagClick({
+                          locationName: detailsQuery.data?.location.name,
+                          locationValue: detailsQuery.data?.locationId,
+                        })
+                      }>
+                      {detailsQuery.data?.location.name}
+                    </button>
+                  </div>
+                  <div className="col-span-1 flex items-center text-xs text-slate-600 sm:text-sm">
+                    <AcademicCapIcon
+                      aria-hidden="true"
+                      className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
+                    />
+                    <button
+                      className="hover:text-primary-800 underline"
+                      type="button"
+                      onClick={() =>
+                        onInfoTagClick({
+                          experienceValue: detailsQuery.data?.experience,
+                        })
+                      }>
+                      {getFilterLabel(
+                        'experience',
+                        detailsQuery.data.experience,
+                      )}
+                    </button>
+                  </div>
+                  <div className="col-span-1 flex items-center text-xs text-slate-600 sm:text-sm">
+                    <CalendarIcon
+                      aria-hidden="true"
+                      className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
+                    />
+                    {`Uploaded ${formatDistanceToNow(
+                      detailsQuery.data.createdAt,
+                      {
+                        addSuffix: true,
+                      },
+                    )} by ${detailsQuery.data.user.name}`}
                   </div>
                 </div>
                 {detailsQuery.data.additionalInfo && (

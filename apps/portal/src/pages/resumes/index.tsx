@@ -30,21 +30,12 @@ import ResumeRoleTypeahead from '~/components/resumes/shared/ResumeRoleTypeahead
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 import loginPageHref from '~/components/shared/loginPageHref';
 
-import type {
-  Filter,
-  FilterId,
-  FilterLabel,
-  Shortcut,
-} from '~/utils/resumes/resumeFilters';
-import type { FilterState, SortOrder } from '~/utils/resumes/resumeFilters';
+import type { Filter, FilterId, Shortcut } from '~/utils/resumes/resumeFilters';
+import type { SortOrder } from '~/utils/resumes/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
-  EXPERIENCES,
   getFilterLabel,
   INITIAL_FILTER_STATE,
-  isInitialFilterState,
-  LOCATIONS,
-  ROLES,
   SHORTCUTS,
   SORT_OPTIONS,
 } from '~/utils/resumes/resumeFilters';
@@ -59,17 +50,14 @@ const filters: Array<Filter> = [
   {
     id: 'role',
     label: 'Role',
-    options: ROLES,
   },
   {
     id: 'experience',
     label: 'Experience',
-    options: EXPERIENCES,
   },
   {
     id: 'location',
     label: 'Location',
-    options: LOCATIONS,
   },
 ];
 
@@ -84,20 +72,14 @@ const getLoggedOutText = (tabsValue: string) => {
   }
 };
 
-const getEmptyDataText = (
-  tabsValue: string,
-  searchValue: string,
-  userFilters: FilterState,
-) => {
+const getEmptyDataText = (tabsValue: string, searchValue: string) => {
   if (searchValue.length > 0) {
     return 'Try tweaking your search text to see more resumes.';
   }
-  if (!isInitialFilterState(userFilters)) {
-    return 'Try tweaking your filters to see more resumes.';
-  }
+
   switch (tabsValue) {
     case BROWSE_TABS_VALUES.ALL:
-      return "There's nothing to see here...";
+      return 'Oops, there is no resumes to see here. Maybe try tweaking your filters to see more.';
     case BROWSE_TABS_VALUES.STARRED:
       return 'You have not starred any resumes. Star one to see it here!';
     case BROWSE_TABS_VALUES.MY:
@@ -387,12 +369,16 @@ export default function ResumeHomePage() {
     }
   };
 
-  const getFilterCount = (filter: FilterLabel, value: string) => {
+  const getFilterCount = (filterId: FilterId, value: string) => {
     const filterCountsData = getTabFilterCounts();
-    if (!filterCountsData) {
+    if (
+      filterCountsData === undefined ||
+      filterCountsData[filterId] === undefined ||
+      filterCountsData[filterId][value] === undefined
+    ) {
       return 0;
     }
-    return filterCountsData[filter][value];
+    return filterCountsData[filterId][value];
   };
 
   return (
@@ -498,7 +484,7 @@ export default function ResumeHomePage() {
                                 {userFilters[filter.id].map((option) => (
                                   <div
                                     key={option.value}
-                                    className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 flex items-center px-1 text-sm [&>div>div:nth-child(2)>label]:font-normal">
+                                    className="flex items-center px-1 text-sm">
                                     <CheckboxInput
                                       label={option.label}
                                       value={true}
@@ -515,11 +501,7 @@ export default function ResumeHomePage() {
                                       }
                                     />
                                     <span className="ml-1 text-slate-500">
-                                      (
-                                      {getFilterCount(
-                                        filter.label,
-                                        option.label,
-                                      )}
+                                      ({getFilterCount(filter.id, option.value)}
                                       )
                                     </span>
                                   </div>
@@ -615,7 +597,7 @@ export default function ResumeHomePage() {
                               {userFilters[filter.id].map((option) => (
                                 <div
                                   key={option.value}
-                                  className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 flex items-center px-1 text-sm [&>div>div:nth-child(2)>label]:font-normal">
+                                  className="flex items-center px-1 text-sm">
                                   <CheckboxInput
                                     label={option.label}
                                     value={true}
@@ -631,9 +613,7 @@ export default function ResumeHomePage() {
                                     }
                                   />
                                   <span className="ml-1 text-slate-500">
-                                    (
-                                    {getFilterCount(filter.label, option.label)}
-                                    )
+                                    ({getFilterCount(filter.id, option.value)})
                                   </span>
                                 </div>
                               ))}
@@ -740,7 +720,7 @@ export default function ResumeHomePage() {
                   height={196}
                   width={196}
                 />
-                {getEmptyDataText(tabsValue, searchValue, userFilters)}
+                {getEmptyDataText(tabsValue, searchValue)}
               </div>
             ) : (
               <div>

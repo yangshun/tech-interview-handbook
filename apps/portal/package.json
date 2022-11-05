@@ -43,7 +43,6 @@
     "react-query": "^3.39.2",
     "read-excel-file": "^5.5.3",
     "superjson": "^1.10.0",
-    "xlsx": "^0.18.5",
     "unique-names-generator": "^4.7.1",
     "xlsx": "^0.18.5",
     "zod": "^3.18.0"
