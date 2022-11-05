@@ -20,6 +20,7 @@ import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
 import { JobTitleLabels } from '~/components/shared/JobTitles';
 
 import type { QuestionAge } from '~/utils/questions/constants';
+import { QUESTION_SORT_TYPES } from '~/utils/questions/constants';
 import { APP_TITLE } from '~/utils/questions/constants';
 import { QUESTION_AGES, QUESTION_TYPES } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
@@ -34,6 +35,30 @@ import { trpc } from '~/utils/trpc';
 import type { Location } from '~/types/questions.d';
 import { SortType } from '~/types/questions.d';
 import { SortOrder } from '~/types/questions.d';
+
+function sortOrderToString(value: SortOrder): string | null {
+  switch (value) {
+    case SortOrder.ASC:
+      return 'ASC';
+    case SortOrder.DESC:
+      return 'DESC';
+    default:
+      return null;
+  }
+}
+
+function sortTypeToString(value: SortType): string | null {
+  switch (value) {
+    case SortType.TOP:
+      return 'TOP';
+    case SortType.NEW:
+      return 'NEW';
+    case SortType.ENCOUNTERS:
+      return 'ENCOUNTERS';
+    default:
+      return null;
+  }
+}
 
 export default function QuestionsBrowsePage() {
   const router = useRouter();
@@ -89,15 +114,7 @@ export default function QuestionsBrowsePage() {
   const [sortOrder, setSortOrder, isSortOrderInitialized] =
     useSearchParamSingle<SortOrder>('sortOrder', {
       defaultValue: SortOrder.DESC,
-      paramToString: (value) => {
-        if (value === SortOrder.ASC) {
-          return 'ASC';
-        }
-        if (value === SortOrder.DESC) {
-          return 'DESC';
-        }
-        return null;
-      },
+      paramToString: sortOrderToString,
       stringToParam: (param) => {
         const uppercaseParam = param.toUpperCase();
         if (uppercaseParam === 'ASC') {
@@ -113,15 +130,7 @@ export default function QuestionsBrowsePage() {
   const [sortType, setSortType, isSortTypeInitialized] =
     useSearchParamSingle<SortType>('sortType', {
       defaultValue: SortType.TOP,
-      paramToString: (value) => {
-        if (value === SortType.NEW) {
-          return 'NEW';
-        }
-        if (value === SortType.TOP) {
-          return 'TOP';
-        }
-        return null;
-      },
+      paramToString: sortTypeToString,
       stringToParam: (param) => {
         const uppercaseParam = param.toUpperCase();
         if (uppercaseParam === 'NEW') {
@@ -129,6 +138,9 @@ export default function QuestionsBrowsePage() {
         }
         if (uppercaseParam === 'TOP') {
           return SortType.TOP;
+        }
+        if (uppercaseParam === 'ENCOUNTERS') {
+          return SortType.ENCOUNTERS;
         }
         return null;
       },
@@ -266,8 +278,8 @@ export default function QuestionsBrowsePage() {
           questionAge: selectedQuestionAge,
           questionTypes: selectedQuestionTypes,
           roles: selectedRoles,
-          sortOrder: sortOrder === SortOrder.ASC ? 'ASC' : 'DESC',
-          sortType: sortType === SortType.TOP ? 'TOP' : 'NEW',
+          sortOrder: sortOrderToString(sortOrder),
+          sortType: sortTypeToString(sortType),
         },
       });
 
@@ -509,6 +521,7 @@ export default function QuestionsBrowsePage() {
                   <QuestionSearchBar
                     query={query}
                     sortOrderValue={sortOrder}
+                    sortTypeOptions={QUESTION_SORT_TYPES}
                     sortTypeValue={sortType}
                     onFilterOptionsToggle={() => {
                       setFilterDrawerOpen(!filterDrawerOpen);

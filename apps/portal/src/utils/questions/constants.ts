@@ -85,6 +85,21 @@ export const SORT_TYPES = [
   },
 ];
 
+export const QUESTION_SORT_TYPES = [
+  {
+    label: 'New',
+    value: SortType.NEW,
+  },
+  {
+    label: 'Top',
+    value: SortType.TOP,
+  },
+  {
+    label: 'Encounters',
+    value: SortType.ENCOUNTERS,
+  },
+];
+
 export const SAMPLE_QUESTION = {
   answerCount: 10,
   commentCount: 10,
