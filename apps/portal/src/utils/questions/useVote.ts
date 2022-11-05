@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback } from 'react';
-import type { Vote } from '@prisma/client';
+import type { InfiniteData } from 'react-query';
+import { Vote } from '@prisma/client';
 
 import { trpc } from '../trpc';
+
+import type { Question } from '~/types/questions';
 
 type UseVoteOptions = {
   setDownVote: () => void;
@@ -46,12 +49,78 @@ type MutationKey = Parameters<typeof trpc.useMutation>[0];
 type QueryKey = Parameters<typeof trpc.useQuery>[0][0];
 
 export const useQuestionVote = (id: string) => {
+  const utils = trpc.useContext();
+
   return useVote(id, {
     idKey: 'questionId',
     invalidateKeys: [
-      'questions.questions.getQuestionsByFilter',
-      'questions.questions.getQuestionById',
+      // 'questions.questions.getQuestionById',
+      // 'questions.questions.getQuestionsByFilterAndContent',
     ],
+    onMutate: async (previousVote, currentVote) => {
+      const questionQueries = utils.queryClient.getQueriesData([
+        'questions.questions.getQuestionsByFilterAndContent',
+      ]);
+
+      const getVoteValue = (vote: Vote | null) => {
+        if (vote === Vote.UPVOTE) {
+          return 1;
+        }
+        if (vote === Vote.DOWNVOTE) {
+          return -1;
+        }
+        return 0;
+      };
+
+      const voteValueChange =
+        getVoteValue(currentVote) - getVoteValue(previousVote);
+
+      for (const [key, query] of questionQueries) {
+        if (query === undefined) {
+          continue;
+        }
+
+        const { pages, ...restQuery } = query as InfiniteData<{
+          data: Array<Question>;
+        }>;
+
+        const newQuery = {
+          pages: pages.map(({ data, ...restPage }) => ({
+            data: data.map((question) => {
+              if (question.id === id) {
+                const { numVotes, ...restQuestion } = question;
+                return {
+                  numVotes: numVotes + voteValueChange,
+                  ...restQuestion,
+                };
+              }
+              return question;
+            }),
+            ...restPage,
+          })),
+          ...restQuery,
+        };
+
+        utils.queryClient.setQueryData(key, newQuery);
+      }
+
+      const prevQuestion = utils.queryClient.getQueryData([
+        'questions.questions.getQuestionById',
+        {
+          id,
+        },
+      ]) as Question;
+
+      const newQuestion = {
+        ...prevQuestion,
+        numVotes: prevQuestion.numVotes + voteValueChange,
+      };
+
+      utils.queryClient.setQueryData(
+        ['questions.questions.getQuestionById', { id }],
+        newQuestion,
+      );
+    },
     query: 'questions.questions.user.getVote',
     setDownVoteKey: 'questions.questions.user.setDownVote',
     setNoVoteKey: 'questions.questions.user.setNoVote',
@@ -63,8 +132,8 @@ export const useAnswerVote = (id: string) => {
   return useVote(id, {
     idKey: 'answerId',
     invalidateKeys: [
-      'questions.answers.getAnswers',
       'questions.answers.getAnswerById',
+      'questions.answers.getAnswers',
     ],
     query: 'questions.answers.user.getVote',
     setDownVoteKey: 'questions.answers.user.setDownVote',
@@ -95,9 +164,17 @@ export const useAnswerCommentVote = (id: string) => {
   });
 };
 
+type InvalidateFunction = (
+  previousVote: Vote | null,
+  currentVote: Vote | null,
+) => Promise<void>;
+
 type VoteProps<VoteQueryKey extends QueryKey = QueryKey> = {
   idKey: string;
-  invalidateKeys: Array<VoteQueryKey>;
+  invalidateKeys: Array<QueryKey>;
+  onMutate?: InvalidateFunction;
+
+  // Invalidate: Partial<Record<QueryKey, InvalidateFunction | null>>;
   query: VoteQueryKey;
   setDownVoteKey: MutationKey;
   setNoVoteKey: MutationKey;
@@ -116,6 +193,7 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
   const {
     idKey,
     invalidateKeys,
+    onMutate,
     query,
     setDownVoteKey,
     setNoVoteKey,
@@ -125,11 +203,16 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
 
   const onVoteUpdate = useCallback(() => {
     // TODO: Optimise query invalidation
-    utils.invalidateQueries([query, { [idKey]: id } as any]);
+    // utils.invalidateQueries([query, { [idKey]: id } as any]);
     for (const invalidateKey of invalidateKeys) {
-      utils.invalidateQueries([invalidateKey]);
+      utils.invalidateQueries(invalidateKey);
+      // If (invalidateFunction === null) {
+      //   utils.invalidateQueries([invalidateKey as QueryKey]);
+      // } else {
+      //   invalidateFunction(utils, previousVote, currentVote);
+      // }
     }
-  }, [id, idKey, utils, query, invalidateKeys]);
+  }, [utils, invalidateKeys]);
 
   const { data } = trpc.useQuery([
     query,
@@ -143,7 +226,7 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
   const { mutate: setUpVote } = trpc.useMutation<any, UseVoteMutationContext>(
     setUpVoteKey,
     {
-      onError: (err, variables, context) => {
+      onError: (_error, _variables, context) => {
         if (context !== undefined) {
           utils.setQueryData([query], context.previousData);
         }
@@ -154,6 +237,11 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
           [query, { [idKey]: id } as any],
         );
 
+        const currentData = {
+          ...(vote as any),
+          vote: Vote.UPVOTE,
+        } as BackendVote;
+
         utils.setQueryData(
           [
             query,
@@ -161,9 +249,11 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
               [idKey]: id,
             } as any,
           ],
-          vote as any,
+          currentData as any,
         );
-        return { currentData: vote, previousData };
+
+        await onMutate?.(previousData?.vote ?? null, currentData?.vote ?? null);
+        return { currentData, previousData };
       },
       onSettled: onVoteUpdate,
     },
@@ -171,7 +261,7 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
   const { mutate: setDownVote } = trpc.useMutation<any, UseVoteMutationContext>(
     setDownVoteKey,
     {
-      onError: (error, variables, context) => {
+      onError: (_error, _variables, context) => {
         if (context !== undefined) {
           utils.setQueryData([query], context.previousData);
         }
@@ -182,6 +272,11 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
           [query, { [idKey]: id } as any],
         );
 
+        const currentData = {
+          ...vote,
+          vote: Vote.DOWNVOTE,
+        } as BackendVote;
+
         utils.setQueryData(
           [
             query,
@@ -189,9 +284,11 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
               [idKey]: id,
             } as any,
           ],
-          vote,
+          currentData as any,
         );
-        return { currentData: vote, previousData };
+
+        await onMutate?.(previousData?.vote ?? null, currentData?.vote ?? null);
+        return { currentData, previousData };
       },
       onSettled: onVoteUpdate,
     },
@@ -200,23 +297,31 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
   const { mutate: setNoVote } = trpc.useMutation<any, UseVoteMutationContext>(
     setNoVoteKey,
     {
-      onError: (err, variables, context) => {
+      onError: (_error, _variables, context) => {
         if (context !== undefined) {
           utils.setQueryData([query], context.previousData);
         }
       },
-      onMutate: async (vote) => {
+      onMutate: async () => {
         await utils.queryClient.cancelQueries([query, { [idKey]: id } as any]);
-        utils.setQueryData(
+        const previousData = utils.queryClient.getQueryData<BackendVote | null>(
+          [query, { [idKey]: id } as any],
+        );
+        const currentData: BackendVote | null = null;
+
+        utils.queryClient.setQueryData<BackendVote | null>(
           [
             query,
             {
               [idKey]: id,
             } as any,
           ],
-          null as any,
+          currentData,
         );
-        return { currentData: null, previousData: vote };
+
+        await onMutate?.(previousData?.vote ?? null, null);
+
+        return { currentData, previousData };
       },
       onSettled: onVoteUpdate,
     },

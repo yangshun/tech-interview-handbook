@@ -481,7 +481,11 @@ export default function QuestionsBrowsePage() {
       <Head>
         <title>Home - {APP_TITLE}</title>
       </Head>
-      <main className="flex flex-1 flex-col items-stretch">
+      <main
+        className="flex flex-1 flex-col items-stretch"
+        style={{
+          height: 'calc(100vh - 64px)',
+        }}>
         <div className="flex h-full flex-1">
           <section className="min-h-0 flex-1 overflow-auto">
             <div className="my-4 mx-auto flex max-w-3xl flex-col items-stretch justify-start gap-6">
