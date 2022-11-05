@@ -1,4 +1,5 @@
 export const HOME_URL = '/offers';
+export const OFFERS_SUBMIT_URL = '/offers/submit';
 
 export const JobTypeLabel = {
   FULLTIME: 'Full-time',
