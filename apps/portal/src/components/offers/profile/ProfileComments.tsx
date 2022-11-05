@@ -186,7 +186,7 @@ export default function ProfileComments({
                     display="block"
                     isLabelHidden={false}
                     isLoading={createCommentMutation.isLoading}
-                    label="Comment"
+                    label="Submit"
                     size="sm"
                     variant="primary"
                     onClick={() => handleComment(currentReply)}

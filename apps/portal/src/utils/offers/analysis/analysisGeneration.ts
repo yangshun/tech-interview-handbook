@@ -251,6 +251,8 @@ export const generateAnalysis = async (params: {
     },
   });
 
+  const offerIds = offers.map((offer) => offer.id);
+
   // COMPANY ANALYSIS
   const companyMap = new Map<string, Offer>();
   offers.forEach((offer) => {
@@ -275,9 +277,9 @@ export const generateAnalysis = async (params: {
           ? 100
           : 100 - (100 * companyIndex) / (similarCompanyOffers.length - 1);
 
-      // Get top offers (excluding user's offer)
+      // Get top offers (excluding user's offers)
       similarCompanyOffers = similarCompanyOffers.filter(
-        (offer) => offer.id !== companyOffer.id,
+        (offer) => !offerIds.includes(offer.id),
       );
 
       const noOfSimilarCompanyOffers = similarCompanyOffers.length;
@@ -311,9 +313,7 @@ export const generateAnalysis = async (params: {
       ? 100
       : 100 - (100 * overallIndex) / (similarOffers.length - 1);
 
-  similarOffers = similarOffers.filter(
-    (offer) => offer.id !== overallHighestOffer.id,
-  );
+  similarOffers = similarOffers.filter((offer) => !offerIds.includes(offer.id));
 
   const noOfSimilarOffers = similarOffers.length;
   const similarOffers90PercentileIndex = Math.ceil(noOfSimilarOffers * 0.1);

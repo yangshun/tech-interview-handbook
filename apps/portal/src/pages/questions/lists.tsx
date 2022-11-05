@@ -5,16 +5,21 @@ import {
   EllipsisVerticalIcon,
   NoSymbolIcon,
   PlusIcon,
+  TrashIcon,
 } from '@heroicons/react/24/outline';
+import { Button, Select } from '@tih/ui';
 
 import QuestionListCard from '~/components/questions/card/question/QuestionListCard';
 import type { CreateListFormData } from '~/components/questions/CreateListDialog';
 import CreateListDialog from '~/components/questions/CreateListDialog';
 import DeleteListDialog from '~/components/questions/DeleteListDialog';
 
-import { Button } from '~/../../../packages/ui/dist';
 import { APP_TITLE } from '~/utils/questions/constants';
 import createSlug from '~/utils/questions/createSlug';
+import {
+  useCreateListAsync,
+  useDeleteListAsync,
+} from '~/utils/questions/mutations';
 import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
 import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { trpc } from '~/utils/trpc';
@@ -22,24 +27,10 @@ import { trpc } from '~/utils/trpc';
 export default function ListPage() {
   const utils = trpc.useContext();
   const { data: lists } = trpc.useQuery(['questions.lists.getListsByUser']);
-  const { mutateAsync: createList } = trpc.useMutation(
-    'questions.lists.create',
-    {
-      onSuccess: () => {
-        // TODO: Add optimistic update
-        utils.invalidateQueries(['questions.lists.getListsByUser']);
-      },
-    },
-  );
-  const { mutateAsync: deleteList } = trpc.useMutation(
-    'questions.lists.delete',
-    {
-      onSuccess: () => {
-        // TODO: Add optimistic update
-        utils.invalidateQueries(['questions.lists.getListsByUser']);
-      },
-    },
-  );
+
+  const createListAsync = useCreateListAsync();
+  const deleteListAsync = useDeleteListAsync();
+
   const { mutateAsync: deleteQuestionEntry } = trpc.useMutation(
     'questions.lists.deleteQuestionEntry',
     {
@@ -57,7 +48,7 @@ export default function ListPage() {
   const [listIdToDelete, setListIdToDelete] = useState('');
 
   const handleDeleteList = async (listId: string) => {
-    await deleteList({
+    await deleteListAsync({
       id: listId,
     });
     setShowDeleteListDialog(false);
@@ -68,7 +59,7 @@ export default function ListPage() {
   };
 
   const handleCreateList = async (data: CreateListFormData) => {
-    await createList({
+    await createListAsync({
       name: data.name,
     });
     setShowCreateListDialog(false);
@@ -92,7 +83,7 @@ export default function ListPage() {
               selectedListIndex === index ? 'bg-primary-100' : ''
             }`}>
             <button
-              className="flex w-full flex-1 justify-between  "
+              className="flex w-full flex-1 justify-between"
               type="button"
               onClick={() => {
                 setSelectedListIndex(index);
@@ -145,36 +136,69 @@ export default function ListPage() {
     </>
   );
 
+  const createButton = (
+    <Button
+      icon={PlusIcon}
+      isLabelHidden={true}
+      label="Create"
+      size="md"
+      variant="tertiary"
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        handleAddClick();
+      }}
+    />
+  );
+
   return (
     <>
       <Head>
         <title>My Lists - {APP_TITLE}</title>
       </Head>
-      <main className="flex flex-1 flex-col items-stretch">
+      <main className="flex h-[calc(100vh_-_64px)] flex-1 flex-col items-stretch">
         <div className="flex h-full flex-1">
-          <aside className="w-[300px] overflow-y-auto border-r bg-white py-4 lg:block">
+          <aside className="hidden w-[300px] overflow-y-auto border-r bg-white py-4 lg:block">
             <div className="mb-2 flex items-center justify-between">
               <h2 className="px-4 text-xl font-semibold">My Lists</h2>
-              <div className="px-4">
-                <Button
-                  icon={PlusIcon}
-                  isLabelHidden={true}
-                  label="Create"
-                  size="md"
-                  variant="tertiary"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    handleAddClick();
-                  }}
-                />
-              </div>
+              <div className="px-4">{createButton}</div>
             </div>
             {listOptions}
           </aside>
           <section className="flex min-h-0 flex-1 flex-col items-center overflow-auto">
             <div className="flex min-h-0 max-w-3xl flex-1 p-4">
               <div className="flex flex-1 flex-col items-stretch justify-start gap-4">
+                <div className="flex items-end gap-2 lg:hidden">
+                  <div className="flex-1">
+                    <Select
+                      label="My Lists"
+                      options={
+                        lists?.map((list) => ({
+                          label: list.name,
+                          value: list.id,
+                        })) ?? []
+                      }
+                      value={lists?.[selectedListIndex]?.id ?? ''}
+                      onChange={(value) => {
+                        setSelectedListIndex(
+                          lists?.findIndex((list) => list.id === value) ?? 0,
+                        );
+                      }}
+                    />
+                  </div>
+                  <Button
+                    icon={TrashIcon}
+                    isLabelHidden={true}
+                    label="Delete"
+                    size="md"
+                    variant="tertiary"
+                    onClick={() => {
+                      setShowDeleteListDialog(true);
+                      setListIdToDelete(lists?.[selectedListIndex]?.id ?? '');
+                    }}
+                  />
+                  {createButton}
+                </div>
                 {lists?.[selectedListIndex] && (
                   <div className="flex flex-col gap-4 pb-4">
                     {lists[selectedListIndex].questionEntries.map(

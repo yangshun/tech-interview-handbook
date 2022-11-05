@@ -84,7 +84,7 @@ export function PrimaryFeatures() {
                               : 'text-blue-100 hover:text-white lg:text-white',
                           )}>
                           <span className="absolute inset-0 rounded-full lg:rounded-r-none lg:rounded-l-xl" />
-                          {feature.title}
+                          <div className="font-bold">{feature.title}</div>
                         </Tab>
                       </h3>
                       <p

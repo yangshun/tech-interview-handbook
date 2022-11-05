@@ -8,6 +8,7 @@ export const EducationLevelLabels = [
   'Professional',
   'Secondary',
   'Self-taught',
+  'Bootcamp',
 ];
 
 export const EducationLevelOptions = [emptyOption].concat(

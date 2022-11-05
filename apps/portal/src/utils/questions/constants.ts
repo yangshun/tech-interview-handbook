@@ -28,7 +28,7 @@ export const QUESTION_TYPES: FilterChoices<QuestionsQuestionType> = [
   },
   {
     id: 'SYSTEM_DESIGN',
-    label: 'Design',
+    label: 'System Design',
     value: 'SYSTEM_DESIGN',
   },
   {
@@ -82,6 +82,21 @@ export const SORT_TYPES = [
   {
     label: 'Top',
     value: SortType.TOP,
+  },
+];
+
+export const QUESTION_SORT_TYPES = [
+  {
+    label: 'New',
+    value: SortType.NEW,
+  },
+  {
+    label: 'Top',
+    value: SortType.TOP,
+  },
+  {
+    label: 'Encounters',
+    value: SortType.ENCOUNTERS,
   },
 ];
 

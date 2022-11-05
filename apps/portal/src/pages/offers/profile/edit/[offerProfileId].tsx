@@ -3,7 +3,9 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { JobType } from '@prisma/client';
 
-import OffersSubmissionForm from '~/components/offers/offersSubmission/OffersSubmissionForm';
+import OffersSubmissionForm, {
+  DEFAULT_CURRENCY,
+} from '~/components/offers/offersSubmission/OffersSubmissionForm';
 import type { OffersProfileFormData } from '~/components/offers/types';
 
 import { Spinner } from '~/../../../packages/ui/dist';
@@ -44,9 +46,16 @@ export default function OffersEditPage() {
                     id: exp.id,
                     jobType: exp.jobType,
                     level: exp.level,
-                    monthlySalary: exp.monthlySalary,
+                    monthlySalary: {
+                      currency: exp.monthlySalary?.currency || DEFAULT_CURRENCY,
+                      value: exp.monthlySalary?.value,
+                    },
                     title: exp.title,
-                    totalCompensation: exp.totalCompensation,
+                    totalCompensation: {
+                      currency:
+                        exp.totalCompensation?.currency || DEFAULT_CURRENCY,
+                      value: exp.totalCompensation?.value,
+                    },
                   })),
             id,
             specificYoes,

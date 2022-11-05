@@ -1,10 +1,13 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Alert, HorizontalDivider, Spinner, Tabs } from '@tih/ui';
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline';
+import { JobType } from '@prisma/client';
+import { Alert, Button, HorizontalDivider, Spinner, Tabs } from '@tih/ui';
 
 import OfferPercentileAnalysisText from './OfferPercentileAnalysisText';
 import OfferProfileCard from './OfferProfileCard';
 import { OVERALL_TAB } from '../constants';
+import { YOE_CATEGORY } from '../table/types';
 
 import type { AnalysisUnit, ProfileAnalysis } from '~/types/offers';
 
@@ -19,6 +22,16 @@ function OfferAnalysisContent({
   tab,
   isSubmission,
 }: OfferAnalysisContentProps) {
+  const { companyId, companyName, title, totalYoe, jobType } = analysis;
+  const yoeCategory =
+    jobType === JobType.INTERN
+      ? ''
+      : totalYoe <= 2
+      ? YOE_CATEGORY.ENTRY
+      : totalYoe <= 5
+      ? YOE_CATEGORY.MID
+      : YOE_CATEGORY.SENIOR;
+
   if (!analysis || analysis.noOfOffers === 0) {
     if (tab === OVERALL_TAB) {
       return (
@@ -55,15 +68,22 @@ function OfferAnalysisContent({
           offerProfile={topPercentileOffer}
         />
       ))}
-      {/* {offerAnalysis.topPercentileOffers.length > 0 && (
+      {analysis.topPercentileOffers.length > 0 && (
         <div className="mb-4 flex justify-end">
           <Button
-            icon={EllipsisHorizontalIcon}
+            href={
+              tab === OVERALL_TAB
+                ? `/offers?jobTitleId=${title}&sortBy=-totalCompensation&yoeCategory=${yoeCategory}`
+                : `/offers?companyId=${companyId}&companyName=${companyName}&jobTitleId=${title}&sortBy=-totalCompensation&yoeCategory=${yoeCategory}`
+            }
+            icon={ArrowUpRightIcon}
             label="View more offers"
+            rel="noreferrer"
+            target="_blank"
             variant="tertiary"
           />
         </div>
-      )} */}
+      )}
     </>
   );
 }

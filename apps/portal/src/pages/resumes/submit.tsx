@@ -7,8 +7,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { FileRejection } from 'react-dropzone';
 import { useDropzone } from 'react-dropzone';
 import type { SubmitHandler } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { ArrowUpCircleIcon } from '@heroicons/react/24/outline';
+import type { TypeaheadOption } from '@tih/ui';
 import {
   Button,
   CheckboxInput,
@@ -20,12 +21,14 @@ import {
 } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
+import ResumeLocationTypeahead from '~/components/resumes/shared/ResumeLocationTypeahead';
+import ResumeRoleTypeahead from '~/components/resumes/shared/ResumeRoleTypeahead';
 import ResumeSubmissionGuidelines from '~/components/resumes/submit-form/ResumeSubmissionGuidelines';
 import Container from '~/components/shared/Container';
 import loginPageHref from '~/components/shared/loginPageHref';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
-import { EXPERIENCES, LOCATIONS, ROLES } from '~/utils/resumes/resumeFilters';
+import { EXPERIENCES } from '~/utils/resumes/resumeFilters';
 import { trpc } from '~/utils/trpc';
 
 const FILE_SIZE_LIMIT_MB = 3;
@@ -41,19 +44,20 @@ type IFormInput = {
   experience: string;
   file: File;
   isChecked: boolean;
-  location: string;
-  role: string;
+  location: TypeaheadOption;
+  role: TypeaheadOption;
   title: string;
 };
 
 type InputKeys = keyof IFormInput;
+type TypeAheadKeys = keyof Pick<IFormInput, 'location' | 'role'>;
 
 type InitFormDetails = {
   additionalInfo?: string;
   experience: string;
-  location: string;
+  location: TypeaheadOption;
   resumeId: string;
-  role: string;
+  role: TypeaheadOption;
   title: string;
   url: string;
 };
@@ -85,6 +89,7 @@ export default function SubmitResumeForm({
     register,
     handleSubmit,
     setValue,
+    control,
     reset,
     watch,
     clearErrors,
@@ -94,8 +99,6 @@ export default function SubmitResumeForm({
       additionalInfo: '',
       experience: '',
       isChecked: false,
-      location: '',
-      role: '',
       title: '',
       ...initFormDetails,
     },
@@ -136,6 +139,11 @@ export default function SubmitResumeForm({
   }, [router, status]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    if (!isDirty) {
+      onClose();
+      return;
+    }
+
     setIsLoading(true);
     let fileUrl = initFormDetails?.url ?? '';
 
@@ -158,8 +166,8 @@ export default function SubmitResumeForm({
         additionalInfo: data.additionalInfo,
         experience: data.experience,
         id: initFormDetails?.resumeId,
-        location: data.location,
-        role: data.role,
+        locationId: data.location.value,
+        role: data.role.value,
         title: data.title,
         url: fileUrl,
       },
@@ -235,6 +243,13 @@ export default function SubmitResumeForm({
     setValue(section, value.trim(), { shouldDirty: true });
   };
 
+  const onSelect = (section: TypeAheadKeys, option: TypeaheadOption | null) => {
+    if (option == null) {
+      return;
+    }
+    setValue(section, option, { shouldDirty: true });
+  };
+
   return (
     <>
       <Head>
@@ -299,35 +314,42 @@ export default function SubmitResumeForm({
                   required={true}
                   onChange={(val) => onValueChange('title', val)}
                 />
-                <div className="flex flex-wrap gap-6">
-                  <Select
-                    {...register('role', { required: true })}
-                    defaultValue={undefined}
-                    disabled={isLoading}
-                    label="Role"
-                    options={ROLES}
-                    placeholder=" "
-                    required={true}
-                    onChange={(val) => onValueChange('role', val)}
-                  />
-                  <Select
-                    {...register('experience', { required: true })}
-                    disabled={isLoading}
-                    label="Experience Level"
-                    options={EXPERIENCES}
-                    placeholder=" "
-                    required={true}
-                    onChange={(val) => onValueChange('experience', val)}
-                  />
-                </div>
+                <Controller
+                  control={control}
+                  name="location"
+                  render={({ field: { value } }) => (
+                    <ResumeLocationTypeahead
+                      disabled={isLoading}
+                      placeholder="Select a location"
+                      required={true}
+                      value={value}
+                      onSelect={(option) => onSelect('location', option)}
+                    />
+                  )}
+                  rules={{ required: true }}
+                />
+                <Controller
+                  control={control}
+                  name="role"
+                  render={({ field: { value } }) => (
+                    <ResumeRoleTypeahead
+                      disabled={isLoading}
+                      placeholder="Select a role"
+                      required={true}
+                      value={value}
+                      onSelect={(option) => onSelect('role', option)}
+                    />
+                  )}
+                  rules={{ required: true }}
+                />
                 <Select
-                  {...register('location', { required: true })}
+                  {...register('experience', { required: true })}
                   disabled={isLoading}
-                  label="Location"
-                  options={LOCATIONS}
+                  label="Experience Level"
+                  options={EXPERIENCES}
                   placeholder=" "
                   required={true}
-                  onChange={(val) => onValueChange('location', val)}
+                  onChange={(val) => onValueChange('experience', val)}
                 />
                 {/* Upload resume form */}
                 {isNewForm && (

@@ -8,16 +8,15 @@ export type SortOption<Value> = {
   value: Value;
 };
 
-const sortTypeOptions = SORT_TYPES;
-const sortOrderOptions = SORT_ORDERS;
-
 type SortOrderProps<Order> = {
   onSortOrderChange?: (sortValue: Order) => void;
+  sortOrderOptions?: Array<SortOption<Order>>;
   sortOrderValue: Order;
 };
 
 type SortTypeProps<Type> = {
   onSortTypeChange?: (sortType: Type) => void;
+  sortTypeOptions?: Array<SortOption<Type>>;
   sortTypeValue: Type;
 };
 
@@ -29,17 +28,22 @@ export default function SortOptionsSelect({
   sortOrderValue,
   onSortTypeChange,
   sortTypeValue,
+  sortOrderOptions,
+  sortTypeOptions,
 }: SortOptionsSelectProps) {
+  const sortTypes = sortTypeOptions ?? SORT_TYPES;
+  const sortOrders = sortOrderOptions ?? SORT_ORDERS;
+
   return (
     <div className="flex items-end justify-end gap-4">
       <div className="flex items-center gap-2">
         <Select
           display="inline"
           label="Sort by"
-          options={sortTypeOptions}
+          options={sortTypes}
           value={sortTypeValue}
           onChange={(value) => {
-            const chosenOption = sortTypeOptions.find(
+            const chosenOption = sortTypes.find(
               (option) => String(option.value) === value,
             );
             if (chosenOption) {
@@ -52,10 +56,10 @@ export default function SortOptionsSelect({
         <Select
           display="inline"
           label="Order by"
-          options={sortOrderOptions}
+          options={sortOrders}
           value={sortOrderValue}
           onChange={(value) => {
-            const chosenOption = sortOrderOptions.find(
+            const chosenOption = sortOrders.find(
               (option) => String(option.value) === value,
             );
             if (chosenOption) {

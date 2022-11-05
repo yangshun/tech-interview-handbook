@@ -1,10 +1,10 @@
+import { formatDistanceToNow } from 'date-fns';
 import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Button, Dialog, TextArea, useToast } from '@tih/ui';
 
 import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
 
-import { timeSinceNow } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
 import type { Reply } from '~/types/offers';
@@ -135,45 +135,45 @@ export default function CommentCard({
         )}
       </div>
       <div className="w-full">
-        <div className="text-sm">
-          <p className="font-medium text-slate-900">
-            {user?.name ?? 'unknown user'}
+        <div className="flex flex-row items-center space-x-2">
+          <p className="text-sm font-medium text-slate-900">
+            {user?.name ?? 'Unknown user'}
           </p>
+          <span className="font-medium text-slate-500">&middot;</span>
+          <div className="text-xs text-slate-500">
+            {formatDistanceToNow(createdAt, {
+              addSuffix: true,
+            })}
+          </div>
         </div>
         <div className="mt-1 text-sm text-slate-700">
           <p className="break-all">{message}</p>
         </div>
-        <div className="mt-2 space-x-2 text-xs">
-          <span className="font-medium text-slate-500">
-            {timeSinceNow(createdAt)} ago
-          </span>{' '}
-          {replyLength > 0 && (
-            <>
-              <span className="font-medium text-slate-500">&middot;</span>{' '}
-              <button
-                className="font-medium text-slate-900"
-                type="button"
-                onClick={handleExpanded}>
-                {isExpanded ? `Hide replies` : `View replies (${replyLength})`}
-              </button>
-            </>
-          )}
+        <div className="-ml-2 mt-1 flex h-6 items-center text-xs">
           {!disableReply && (
-            <>
-              <span className="font-medium text-slate-500">&middot;</span>{' '}
-              <button
-                className="font-medium text-slate-900"
-                type="button"
-                onClick={() => setIsReplying(!isReplying)}>
-                Reply
-              </button>
-            </>
+            <button
+              className="-my-1 rounded-md px-2 py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+              type="button"
+              onClick={() => setIsReplying(!isReplying)}>
+              Reply
+            </button>
+          )}
+          {replyLength > 0 && (
+            <button
+              className="-my-1 rounded-md px-2 py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+              type="button"
+              onClick={handleExpanded}>
+              {isExpanded
+                ? `Hide ${replyLength === 1 ? 'reply' : 'replies'}`
+                : `Show ${replyLength} ${
+                    replyLength === 1 ? 'reply' : 'replies'
+                  }`}
+            </button>
           )}
           {deletable && (
             <>
-              <span className="font-medium text-slate-500">&middot;</span>{' '}
               <button
-                className="font-medium text-slate-900"
+                className="-my-1 rounded-md px-2 py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-600"
                 disabled={deleteCommentMutation.isLoading}
                 type="button"
                 onClick={() => setIsDialogOpen(true)}>
@@ -210,8 +210,9 @@ export default function CommentCard({
           )}
         </div>
         {!disableReply && isReplying && (
-          <div className="mt-4 mr-2">
+          <div className="mt-2">
             <form
+              className="space-y-2"
               onSubmit={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
@@ -226,23 +227,29 @@ export default function CommentCard({
                 value={currentReply}
                 onChange={(value) => setCurrentReply(value)}
               />
-              <div className="mt-2 flex w-full justify-end">
-                <div className="w-fit">
-                  <Button
-                    disabled={
-                      !currentReply.length ||
-                      createCommentMutation.isLoading ||
-                      deleteCommentMutation.isLoading
-                    }
-                    display="block"
-                    isLabelHidden={false}
-                    isLoading={createCommentMutation.isLoading}
-                    label="Reply"
-                    size="sm"
-                    variant="primary"
-                    onClick={handleReply}
-                  />
-                </div>
+              <div className="flex w-full justify-end space-x-2">
+                <Button
+                  disabled={createCommentMutation.isLoading}
+                  label="Cancel"
+                  size="sm"
+                  variant="tertiary"
+                  onClick={() => {
+                    setIsReplying(false);
+                  }}
+                />
+                <Button
+                  disabled={
+                    !currentReply.length ||
+                    createCommentMutation.isLoading ||
+                    deleteCommentMutation.isLoading
+                  }
+                  isLabelHidden={false}
+                  isLoading={createCommentMutation.isLoading}
+                  label="Submit"
+                  size="sm"
+                  variant="primary"
+                  onClick={handleReply}
+                />
               </div>
             </form>
           </div>

@@ -4,11 +4,6 @@ import { Collapsible, RadioList } from '@tih/ui';
 
 import { FieldError } from '~/components/offers/constants';
 import type { BackgroundPostData } from '~/components/offers/types';
-import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
-import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
-import type { JobTitleType } from '~/components/shared/JobTitles';
-import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
-import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
 
 import {
   Currency,
@@ -17,6 +12,9 @@ import {
 
 import { EducationFieldOptions } from '../../EducationFields';
 import { EducationLevelOptions } from '../../EducationLevels';
+import FormCitiesTypeahead from '../../forms/FormCitiesTypeahead';
+import FormCompaniesTypeahead from '../../forms/FormCompaniesTypeahead';
+import FormJobTitlesTypeahead from '../../forms/FormJobTitlesTypeahead';
 import FormRadioList from '../../forms/FormRadioList';
 import FormSection from '../../forms/FormSection';
 import FormSelect from '../../forms/FormSelect';
@@ -85,56 +83,19 @@ function YoeSection() {
 }
 
 function FullTimeJobFields() {
-  const { register, setValue, formState } = useFormContext<{
+  const { register, formState } = useFormContext<{
     background: BackgroundPostData;
   }>();
   const experiencesField = formState.errors.background?.experiences?.[0];
 
-  const watchJobTitle = useWatch({
-    name: 'background.experiences.0.title',
-  });
-  const watchCompanyId = useWatch({
-    name: 'background.experiences.0.companyId',
-  });
-  const watchCompanyName = useWatch({
-    name: 'background.experiences.0.companyName',
-  });
-  const watchCityId = useWatch({
-    name: 'background.experiences.0.cityId',
-  });
-  const watchCityName = useWatch({
-    name: 'background.experiences.0.cityName',
-  });
-
   return (
     <>
       <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
-        <JobTitlesTypeahead
-          value={{
-            id: watchJobTitle,
-            label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
-            value: watchJobTitle,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue('background.experiences.0.title', option.value);
-            }
-          }}
-        />
-        <CompaniesTypeahead
-          value={{
-            id: watchCompanyId,
-            label: watchCompanyName,
-            value: watchCompanyId,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue('background.experiences.0.companyId', option.value);
-              setValue('background.experiences.0.companyName', option.label);
-            } else {
-              setValue('background.experiences.0.companyId', '');
-              setValue('background.experiences.0.companyName', '');
-            }
+        <FormJobTitlesTypeahead name="background.experiences.0.title" />
+        <FormCompaniesTypeahead
+          names={{
+            label: 'background.experiences.0.companyName',
+            value: 'background.experiences.0.companyId',
           }}
         />
       </div>
@@ -172,21 +133,10 @@ function FullTimeJobFields() {
             placeholder="e.g. L4, Junior"
             {...register(`background.experiences.0.level`)}
           />
-          <CitiesTypeahead
-            label="Location"
-            value={{
-              id: watchCityId,
-              label: watchCityName,
-              value: watchCityId,
-            }}
-            onSelect={(option) => {
-              if (option) {
-                setValue('background.experiences.0.cityId', option.value);
-                setValue('background.experiences.0.cityName', option.label);
-              } else {
-                setValue('background.experiences.0.cityId', '');
-                setValue('background.experiences.0.cityName', '');
-              }
+          <FormCitiesTypeahead
+            names={{
+              label: 'background.experiences.0.cityName',
+              value: 'background.experiences.0.cityId',
             }}
           />
           <FormTextInput
@@ -205,53 +155,19 @@ function FullTimeJobFields() {
 }
 
 function InternshipJobFields() {
-  const { register, setValue, formState } = useFormContext<{
+  const { register, formState } = useFormContext<{
     background: BackgroundPostData;
   }>();
   const experiencesField = formState.errors.background?.experiences?.[0];
 
-  const watchJobTitle = useWatch({
-    name: 'background.experiences.0.title',
-  });
-  const watchCompanyId = useWatch({
-    name: 'background.experiences.0.companyId',
-  });
-  const watchCompanyName = useWatch({
-    name: 'background.experiences.0.companyName',
-  });
-  const watchCityId = useWatch({
-    name: 'background.experiences.0.cityId',
-  });
-  const watchCityName = useWatch({
-    name: 'background.experiences.0.cityName',
-  });
-
   return (
     <>
       <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-6">
-        <JobTitlesTypeahead
-          value={{
-            id: watchJobTitle,
-            label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
-            value: watchJobTitle,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue('background.experiences.0.title', option.value);
-            }
-          }}
-        />
-        <CompaniesTypeahead
-          value={{
-            id: watchCompanyId,
-            label: watchCompanyName,
-            value: watchCompanyId,
-          }}
-          onSelect={(option) => {
-            if (option) {
-              setValue('background.experiences.0.companyId', option.value);
-              setValue('background.experiences.0.companyName', option.label);
-            }
+        <FormJobTitlesTypeahead name="background.experiences.0.title" />
+        <FormCompaniesTypeahead
+          names={{
+            label: 'background.experiences.0.companyName',
+            value: 'background.experiences.0.companyId',
           }}
         />
       </div>
@@ -280,21 +196,10 @@ function InternshipJobFields() {
       />
       <Collapsible label="Add more details">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <CitiesTypeahead
-            label="Location"
-            value={{
-              id: watchCityId,
-              label: watchCityName,
-              value: watchCityId,
-            }}
-            onSelect={(option) => {
-              if (option) {
-                setValue('background.experiences.0.cityId', option.value);
-                setValue('background.experiences.0.cityName', option.label);
-              } else {
-                setValue('background.experiences.0.cityId', '');
-                setValue('background.experiences.0.cityName', '');
-              }
+          <FormCitiesTypeahead
+            names={{
+              label: 'background.experiences.0.cityName',
+              value: 'background.experiences.0.cityId',
             }}
           />
           <FormTextInput

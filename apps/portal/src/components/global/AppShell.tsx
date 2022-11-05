@@ -194,7 +194,7 @@ export default function AppShell({ children }: Props) {
                 <span className="sr-only">Open sidebar</span>
                 <Bars3BottomLeftIcon aria-hidden="true" className="h-6 w-6" />
               </button>
-              <div className="flex flex-1 justify-between px-4 sm:px-6">
+              <div className="flex flex-1 justify-between px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-1 items-center">
                   <ProductNavigation
                     items={currentProductNavigation.navigation}
