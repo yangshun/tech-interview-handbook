@@ -413,6 +413,9 @@ export const questionsQuestionRouter = createRouter()
         orderBy: sortCondition,
         take: input.limit + 1,
         where: {
+          id: input.content !== "" ? {
+            in: relatedQuestionsIdArray,
+          } : undefined,
           ...(input.questionTypes.length > 0
             ? {
                 questionType: {

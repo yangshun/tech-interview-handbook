@@ -8,7 +8,7 @@ export const questionsTagUserRouter = createProtectedRouter()
       tag: z.string(),
     }),
     async resolve({ ctx, input }) {
-      return await ctx.prisma.questionTag.upsert({
+      return await ctx.prisma.questionsQuestionTag.upsert({
         where: {
             tag : input.tag,
         },
@@ -25,7 +25,7 @@ export const questionsTagUserRouter = createProtectedRouter()
         tagId: z.string(),
     }),
     async resolve({ ctx, input }) {
-        return await ctx.prisma.questionQuestionTagEntry.create({
+        return await ctx.prisma.questionsQuestionTagEntry.create({
             data: {
               question:{
                 connect: {
@@ -46,7 +46,7 @@ export const questionsTagUserRouter = createProtectedRouter()
         id: z.string(),
     }),
     async resolve({ ctx, input }) {
-        return await ctx.prisma.questionQuestionTagEntry.delete({
+        return await ctx.prisma.questionsQuestionTagEntry.delete({
             where: {
                 id: input.id,
             },
@@ -60,7 +60,7 @@ export const questionsTagUserRouter = createProtectedRouter()
     }),
     async resolve({ ctx, input }) {
       return await ctx.prisma.$transaction(async (tx) => {
-        const questionTagsUpdated = await tx.questionQuestionTagEntry.updateMany({
+        const questionTagsUpdated = await tx.questionsQuestionTagEntry.updateMany({
           where: {
             tagId: input.tagToCombineId,
           },
@@ -69,7 +69,7 @@ export const questionsTagUserRouter = createProtectedRouter()
           },
         });
 
-        tx.questionTag.delete({
+        tx.questionsQuestionTag.delete({
           where: {
             id: input.tagToCombineId,
           },

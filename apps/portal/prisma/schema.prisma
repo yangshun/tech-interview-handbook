@@ -461,26 +461,26 @@ model QuestionsQuestion {
   comments            QuestionsQuestionComment[]
   answers             QuestionsAnswer[]
   listQuestionEntries QuestionsListQuestionEntry[]
-  questionTagEntries  QuestionQuestionTagEntry[]
+  questionTagEntries  QuestionsQuestionTagEntry[]
 
   @@index([lastSeenAt, id])
   @@index([numEncounters, id])
   @@index([upvotes, id])
 }
 
-model QuestionTag {
-  id                 String                     @id @default(cuid())
-  tag                String                     @unique
-  questionTagEntries QuestionQuestionTagEntry[]
+model QuestionsQuestionTag {
+  id                 String                      @id @default(cuid())
+  tag                String                      @unique
+  questionTagEntries QuestionsQuestionTagEntry[]
 }
 
-model QuestionQuestionTagEntry {
+model QuestionsQuestionTagEntry {
   id         String @id @default(cuid())
   questionId String
   tagId      String
 
-  question QuestionsQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
-  tag      QuestionTag       @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  question QuestionsQuestion    @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  tag      QuestionsQuestionTag @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
   @@unique([questionId, tagId])
 }
