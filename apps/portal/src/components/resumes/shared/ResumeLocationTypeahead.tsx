@@ -19,11 +19,13 @@ type Props = BaseProps &
   Readonly<{
     onSelect: (option: TypeaheadOption | null) => void;
     selectedValues?: Set<string>;
+    value?: TypeaheadOption | null;
   }>;
 
 export default function ResumeLocationTypeahead({
   onSelect,
   selectedValues = new Set(),
+  value,
   ...props
 }: Props) {
   const [query, setQuery] = useState('');
@@ -46,7 +48,7 @@ export default function ResumeLocationTypeahead({
         label: name,
         value: id,
       }))
-      .filter(({ value }) => !selectedValues.has(value));
+      .filter((option) => !selectedValues.has(option.value));
   }, [countries, selectedValues]);
 
   return (
@@ -55,6 +57,7 @@ export default function ResumeLocationTypeahead({
       noResultsMessage="No location found"
       nullable={true}
       options={options}
+      value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}
       {...props}

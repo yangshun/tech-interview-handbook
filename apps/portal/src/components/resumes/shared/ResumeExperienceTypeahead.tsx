@@ -19,16 +19,18 @@ type Props = BaseProps &
   Readonly<{
     onSelect: (option: TypeaheadOption | null) => void;
     selectedValues?: Set<string>;
+    value?: TypeaheadOption | null;
   }>;
 
 export default function ResumeExperienceTypeahead({
   onSelect,
   selectedValues = new Set(),
+  value,
   ...props
 }: Props) {
   const [query, setQuery] = useState('');
   const options = EXPERIENCES.filter(
-    ({ value }) => !selectedValues.has(value),
+    (option) => !selectedValues.has(option.value),
   ).filter(
     ({ label }) =>
       label.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) > -1,
@@ -40,6 +42,7 @@ export default function ResumeExperienceTypeahead({
       noResultsMessage="No available experiences."
       nullable={true}
       options={options}
+      value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}
       {...props}
