@@ -40,7 +40,7 @@ export default function ResumeRoleTypeahead({
 
   return (
     <Typeahead
-      label="Roles"
+      label="Role"
       noResultsMessage="No available roles."
       nullable={true}
       options={options}

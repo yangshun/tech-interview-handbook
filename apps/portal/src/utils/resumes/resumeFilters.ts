@@ -64,14 +64,14 @@ export const ROLES: Array<TypeaheadOption> = [
 
 export const EXPERIENCES: Array<TypeaheadOption> = [
   {
-    id: 'Entry Level (0 - 2 years)',
-    label: 'Entry Level (0 - 2 years)',
-    value: 'Entry Level (0 - 2 years)',
-  },
-  {
     id: 'Internship',
     label: 'Internship',
     value: 'Internship',
+  },
+  {
+    id: 'Entry Level (0 - 2 years)',
+    label: 'Entry Level (0 - 2 years)',
+    value: 'Entry Level (0 - 2 years)',
   },
   {
     id: 'Mid Level (3 - 5 years)',
