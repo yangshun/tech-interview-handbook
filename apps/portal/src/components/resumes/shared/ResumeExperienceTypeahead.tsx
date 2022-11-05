@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { TypeaheadOption } from '@tih/ui';
 import { Typeahead } from '@tih/ui';
 
-import { JobTitleLabels } from '~/components/shared/JobTitles';
+import { EXPERIENCES } from '~/utils/resumes/resumeFilters';
 
 type BaseProps = Pick<
   ComponentProps<typeof Typeahead>,
@@ -21,27 +21,21 @@ type Props = BaseProps &
     value?: TypeaheadOption | null;
   }>;
 
-export default function ResumeRoleTypeahead({
+export default function ResumeExperienceTypeahead({
   onSelect,
   value,
   ...props
 }: Props) {
   const [query, setQuery] = useState('');
-  const options = Object.entries(JobTitleLabels)
-    .map(([slug, label]) => ({
-      id: slug,
-      label,
-      value: slug,
-    }))
-    .filter(
-      ({ label }) =>
-        label.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) > -1,
-    );
+  const options = EXPERIENCES.filter(
+    ({ label }) =>
+      label.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) > -1,
+  );
 
   return (
     <Typeahead
-      label="Roles"
-      noResultsMessage="No available roles."
+      label="Experiences"
+      noResultsMessage="No available experiences."
       nullable={true}
       options={options}
       value={value}

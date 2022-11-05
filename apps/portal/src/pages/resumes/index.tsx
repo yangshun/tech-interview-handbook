@@ -9,6 +9,7 @@ import {
   NewspaperIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import type { TypeaheadOption } from '@tih/ui';
 import {
   Button,
   CheckboxInput,
@@ -23,6 +24,9 @@ import {
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
+import ResumeExperienceTypeahead from '~/components/resumes/shared/ResumeExperienceTypeahead';
+import ResumeLocationTypeahead from '~/components/resumes/shared/ResumeLocationTypeahead';
+import ResumeRoleTypeahead from '~/components/resumes/shared/ResumeRoleTypeahead';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 import loginPageHref from '~/components/shared/loginPageHref';
 
@@ -32,6 +36,7 @@ import type {
   FilterLabel,
   Shortcut,
 } from '~/utils/resumes/resumeFilters';
+import type { FilterState, SortOrder } from '~/utils/resumes/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
   EXPERIENCES,
@@ -46,8 +51,6 @@ import {
 import useDebounceValue from '~/utils/resumes/useDebounceValue';
 import useSearchParams from '~/utils/resumes/useSearchParams';
 import { trpc } from '~/utils/trpc';
-
-import type { FilterState, SortOrder } from '../../utils/resumes/resumeFilters';
 
 const STALE_TIME = 5 * 60 * 1000;
 const DEBOUNCE_DELAY = 800;
@@ -200,10 +203,10 @@ export default function ResumeHomePage() {
     [
       'resumes.resume.findAll',
       {
-        experienceFilters: userFilters.experience,
+        experienceFilters: userFilters.experience.map(({ value }) => value),
         isUnreviewed: userFilters.isUnreviewed,
-        locationFilters: userFilters.location,
-        roleFilters: userFilters.role,
+        locationFilters: userFilters.location.map(({ value }) => value),
+        roleFilters: userFilters.role.map(({ value }) => value),
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
@@ -219,10 +222,10 @@ export default function ResumeHomePage() {
     [
       'resumes.resume.user.findUserStarred',
       {
-        experienceFilters: userFilters.experience,
+        experienceFilters: userFilters.experience.map(({ value }) => value),
         isUnreviewed: userFilters.isUnreviewed,
-        locationFilters: userFilters.location,
-        roleFilters: userFilters.role,
+        locationFilters: userFilters.location.map(({ value }) => value),
+        roleFilters: userFilters.role.map(({ value }) => value),
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
@@ -239,10 +242,10 @@ export default function ResumeHomePage() {
     [
       'resumes.resume.user.findUserCreated',
       {
-        experienceFilters: userFilters.experience,
+        experienceFilters: userFilters.experience.map(({ value }) => value),
         isUnreviewed: userFilters.isUnreviewed,
-        locationFilters: userFilters.location,
-        roleFilters: userFilters.role,
+        locationFilters: userFilters.location.map(({ value }) => value),
+        roleFilters: userFilters.role.map(({ value }) => value),
         searchValue: useDebounceValue(searchValue, DEBOUNCE_DELAY),
         skip,
         sortOrder,
@@ -262,31 +265,6 @@ export default function ResumeHomePage() {
     } else {
       router.push('/resumes/submit');
     }
-  };
-
-  const onFilterCheckboxChange = (
-    isChecked: boolean,
-    filterSection: FilterId,
-    filterValue: string,
-  ) => {
-    if (isChecked) {
-      setUserFilters({
-        ...userFilters,
-        [filterSection]: [...userFilters[filterSection], filterValue],
-      });
-    } else {
-      setUserFilters({
-        ...userFilters,
-        [filterSection]: userFilters[filterSection].filter(
-          (value) => value !== filterValue,
-        ),
-      });
-    }
-    gaEvent({
-      action: 'resumes.filter_checkbox_click',
-      category: 'engagement',
-      label: 'Select Filter',
-    });
   };
 
   const onClearFilterClick = (filterSection: FilterId) => {
@@ -352,6 +330,52 @@ export default function ResumeHomePage() {
 
   const getTabFilterCounts = () => {
     return getTabQueryData()?.filterCounts;
+  };
+
+  const getFilterTypeahead = (filterId: FilterId) => {
+    const onSelect = (option: TypeaheadOption | null) => {
+      if (option === null) {
+        return;
+      }
+      setUserFilters({
+        ...userFilters,
+        [filterId]: [...userFilters[filterId], option],
+      });
+      gaEvent({
+        action: 'resumes.filter_typeahead_click',
+        category: 'engagement',
+        label: 'Select Filter',
+      });
+    };
+
+    switch (filterId) {
+      case 'experience':
+        return (
+          <ResumeExperienceTypeahead
+            isLabelHidden={true}
+            placeholder="Select experiences"
+            onSelect={onSelect}
+          />
+        );
+      case 'location':
+        return (
+          <ResumeLocationTypeahead
+            isLabelHidden={true}
+            placeholder="Select locations"
+            onSelect={onSelect}
+          />
+        );
+      case 'role':
+        return (
+          <ResumeRoleTypeahead
+            isLabelHidden={true}
+            placeholder="Select roles"
+            onSelect={onSelect}
+          />
+        );
+      default:
+        return null;
+    }
   };
 
   const getFilterCount = (filter: FilterLabel, value: string) => {
@@ -461,21 +485,24 @@ export default function ResumeHomePage() {
                             </h3>
                             <Disclosure.Panel className="space-y-4 pt-6">
                               <div className="space-y-3">
-                                {filter.options.map((option) => (
+                                {getFilterTypeahead(filter.id)}
+                                {userFilters[filter.id].map((option) => (
                                   <div
                                     key={option.value}
                                     className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 flex items-center px-1 text-sm [&>div>div:nth-child(2)>label]:font-normal">
                                     <CheckboxInput
                                       label={option.label}
-                                      value={userFilters[filter.id].includes(
-                                        option.value,
-                                      )}
-                                      onChange={(isChecked) =>
-                                        onFilterCheckboxChange(
-                                          isChecked,
-                                          filter.id,
-                                          option.value,
-                                        )
+                                      value={true}
+                                      onChange={() =>
+                                        setUserFilters({
+                                          ...userFilters,
+                                          [filter.id]: userFilters[
+                                            filter.id
+                                          ].filter(
+                                            ({ value }) =>
+                                              value !== option.value,
+                                          ),
+                                        })
                                       }
                                     />
                                     <span className="ml-1 text-slate-500">
@@ -570,26 +597,28 @@ export default function ResumeHomePage() {
                             </Disclosure.Button>
                           </h3>
                           <Disclosure.Panel className="space-y-4 pt-4">
+                            {getFilterTypeahead(filter.id)}
                             <CheckboxList
                               description=""
                               isLabelHidden={true}
                               label=""
                               orientation="vertical">
-                              {filter.options.map((option) => (
+                              {userFilters[filter.id].map((option) => (
                                 <div
                                   key={option.value}
                                   className="[&>div>div:nth-child(1)>input]:text-primary-600 [&>div>div:nth-child(1)>input]:ring-primary-500 flex items-center px-1 text-sm [&>div>div:nth-child(2)>label]:font-normal">
                                   <CheckboxInput
                                     label={option.label}
-                                    value={userFilters[filter.id].includes(
-                                      option.value,
-                                    )}
-                                    onChange={(isChecked) =>
-                                      onFilterCheckboxChange(
-                                        isChecked,
-                                        filter.id,
-                                        option.value,
-                                      )
+                                    value={true}
+                                    onChange={() =>
+                                      setUserFilters({
+                                        ...userFilters,
+                                        [filter.id]: userFilters[
+                                          filter.id
+                                        ].filter(
+                                          ({ value }) => value !== option.value,
+                                        ),
+                                      })
                                     }
                                   />
                                   <span className="ml-1 text-slate-500">
@@ -660,7 +689,7 @@ export default function ResumeHomePage() {
                 </div>
                 <DropdownMenu
                   align="end"
-                  label={getFilterLabel(SORT_OPTIONS, sortOrder)}>
+                  label={getFilterLabel('sort', sortOrder)}>
                   {SORT_OPTIONS.map(({ label, value }) => (
                     <DropdownMenu.Item
                       key={value}

@@ -12,17 +12,7 @@ import { ChatBubbleLeftIcon, StarIcon } from '@heroicons/react/24/outline';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 
-import type {
-  ExperienceFilter,
-  LocationFilter,
-  RoleFilter,
-} from '~/utils/resumes/resumeFilters';
-import {
-  EXPERIENCES,
-  getFilterLabel,
-  LOCATIONS,
-  ROLES,
-} from '~/utils/resumes/resumeFilters';
+import { getFilterLabel } from '~/utils/resumes/resumeFilters';
 
 import type { Resume } from '~/types/resume';
 
@@ -64,17 +54,14 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
                   aria-hidden="true"
                   className="mr-1.5 h-4 w-4 flex-shrink-0"
                 />
-                {getFilterLabel(ROLES, resumeInfo.role as RoleFilter)}
+                {getFilterLabel('role', resumeInfo.role)}
               </div>
               <div className="ml-4 flex">
                 <AcademicCapIcon
                   aria-hidden="true"
                   className="mr-1.5 h-4 w-4 flex-shrink-0"
                 />
-                {getFilterLabel(
-                  EXPERIENCES,
-                  resumeInfo.experience as ExperienceFilter,
-                )}
+                {getFilterLabel('experience', resumeInfo.experience)}
               </div>
             </div>
             <div className="mt-4 flex justify-start text-xs text-slate-500">
@@ -103,7 +90,7 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
               })} by ${resumeInfo.user}`}
             </div>
             <div className="mt-2 text-slate-400">
-              {getFilterLabel(LOCATIONS, resumeInfo.location as LocationFilter)}
+              {getFilterLabel('location', resumeInfo.location)}
             </div>
           </div>
         </div>
