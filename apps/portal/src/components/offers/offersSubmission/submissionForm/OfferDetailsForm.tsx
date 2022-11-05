@@ -112,7 +112,7 @@ function FullTimeOfferDetailsForm({
                 errorMessage={offerFields?.cityId?.message}
                 names={{
                   label: `offers.${index}.cityName`,
-                  value: `offers.${index}.companyId`,
+                  value: `offers.${index}.cityId`,
                 }}
                 required={true}
               />
@@ -327,7 +327,7 @@ function InternshipOfferDetailsForm({
                 errorMessage={offerFields?.cityId?.message}
                 names={{
                   label: `offers.${index}.cityName`,
-                  value: `offers.${index}.companyId`,
+                  value: `offers.${index}.cityId`,
                 }}
                 required={true}
               />
