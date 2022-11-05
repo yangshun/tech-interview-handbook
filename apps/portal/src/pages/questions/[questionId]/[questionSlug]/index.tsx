@@ -139,7 +139,7 @@ export default function QuestionPage() {
     },
   );
 
-  const { mutate: addEncounter } = trpc.useMutation(
+  const { mutateAsync: addEncounterAsync } = trpc.useMutation(
     'questions.questions.encounters.user.create',
     {
       onSuccess: () => {
@@ -208,8 +208,8 @@ export default function QuestionPage() {
                 year: 'numeric',
               })}
               upvoteCount={question.numVotes}
-              onReceivedSubmit={(data) => {
-                addEncounter({
+              onReceivedSubmit={async (data) => {
+                await addEncounterAsync({
                   cityId: data.cityId,
                   companyId: data.company,
                   countryId: data.countryId,
@@ -221,7 +221,7 @@ export default function QuestionPage() {
               }}
             />
             <div className="mx-2">
-              <Collapsible label={`${question.numComments} comment(s)`}>
+              <Collapsible label={`View ${question.numComments} comment(s)`}>
                 <div className="mt-4 px-4">
                   <form
                     className="mb-2"
@@ -246,7 +246,7 @@ export default function QuestionPage() {
                     </div>
                   </form>
                   {/* TODO: Add button to load more */}
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 text-black">
                     <div className="flex items-center justify-between gap-2">
                       <p className="text-lg">Comments</p>
                       <div className="flex items-end gap-2">

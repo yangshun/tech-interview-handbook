@@ -1,5 +1,6 @@
 import { startOfMonth } from 'date-fns';
 import { useState } from 'react';
+import { CheckIcon } from '@heroicons/react/20/solid';
 import { Button } from '@tih/ui';
 
 import type { Month } from '~/components/shared/MonthYearPicker';
@@ -22,7 +23,7 @@ export type CreateQuestionEncounterData = {
 
 export type CreateQuestionEncounterFormProps = {
   onCancel: () => void;
-  onSubmit: (data: CreateQuestionEncounterData) => void;
+  onSubmit: (data: CreateQuestionEncounterData) => Promise<void>;
 };
 
 export default function CreateQuestionEncounterForm({
@@ -30,6 +31,8 @@ export default function CreateQuestionEncounterForm({
   onSubmit,
 }: CreateQuestionEncounterFormProps) {
   const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(
@@ -40,9 +43,18 @@ export default function CreateQuestionEncounterForm({
     startOfMonth(new Date()),
   );
 
+  if (submitted) {
+    return (
+      <div className="font-md flex items-center gap-1 rounded-full border bg-slate-50 py-1 pl-2 pr-3 text-sm text-slate-500">
+        <CheckIcon className="h-5 w-5" />
+        <p>Thank you for your response</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center gap-2">
-      <p className="font-md text-md text-slate-600">
+      <p className="text-md text-slate-600">
         I saw this question {step <= 1 ? 'at' : step === 2 ? 'for' : 'on'}
       </p>
       {step === 0 && (
@@ -128,9 +140,10 @@ export default function CreateQuestionEncounterForm({
       )}
       {step === 3 && (
         <Button
+          isLoading={loading}
           label="Submit"
           variant="primary"
-          onClick={() => {
+          onClick={async () => {
             if (
               selectedCompany &&
               selectedLocation &&
@@ -138,14 +151,20 @@ export default function CreateQuestionEncounterForm({
               selectedDate
             ) {
               const { cityId, stateId, countryId } = selectedLocation;
-              onSubmit({
-                cityId,
-                company: selectedCompany,
-                countryId,
-                role: selectedRole,
-                seenAt: selectedDate,
-                stateId,
-              });
+              setLoading(true);
+              try {
+                await onSubmit({
+                  cityId,
+                  company: selectedCompany,
+                  countryId,
+                  role: selectedRole,
+                  seenAt: selectedDate,
+                  stateId,
+                });
+                setSubmitted(true);
+              } finally {
+                setLoading(false);
+              }
             }
           }}
         />

@@ -5,7 +5,7 @@ import { ArrowPathIcon } from '@heroicons/react/20/solid';
 import type { QuestionsQuestionType } from '@prisma/client';
 import type { TypeaheadOption } from '@tih/ui';
 import { CheckboxInput } from '@tih/ui';
-import { Button, HorizontalDivider, Select, TextArea } from '@tih/ui';
+import { Button, Select, TextArea } from '@tih/ui';
 
 import { QUESTION_TYPES } from '~/utils/questions/constants';
 import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';
@@ -187,11 +187,9 @@ export default function ContributeQuestionForm({
             />
           </div>
         </div>
-        <div className="w-full">
-          <HorizontalDivider />
-        </div>
+
         <h2
-          className="text-primary-900 mb-3
+          className="text-primary-900
         text-lg font-semibold
         ">
           Are these questions the same as yours?
@@ -243,11 +241,13 @@ export default function ContributeQuestionForm({
               />
             );
           })}
-          {similarQuestions?.length === 0 && (
-            <p className="font-semibold text-slate-900">
-              No similar questions found.
-            </p>
-          )}
+          {similarQuestions?.length === 0 &&
+            contentToCheck?.length !== 0 &&
+            questionContent === contentToCheck && (
+              <p className="font-semibold text-slate-900">
+                No similar questions found.
+              </p>
+            )}
         </div>
         <div
           className="bg-primary-50 flex w-full flex-col gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)] sm:flex-row sm:justify-between"
