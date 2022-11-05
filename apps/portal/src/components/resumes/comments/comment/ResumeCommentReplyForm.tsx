@@ -77,39 +77,37 @@ export default function ResumeCommentReplyForm({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex-column space-y-2 pt-2">
-        <TextArea
-          {...(register('description', {
-            required: 'Reply cannot be empty!',
-          }),
-          {})}
-          defaultValue=""
+    <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
+      <TextArea
+        {...(register('description', {
+          required: 'Reply cannot be empty!',
+        }),
+        {})}
+        defaultValue=""
+        disabled={commentReplyMutation.isLoading}
+        errorMessage={errors.description?.message}
+        label=""
+        placeholder="Leave your reply here"
+        onChange={setFormValue}
+      />
+
+      <div className="flex-row space-x-2">
+        <Button
           disabled={commentReplyMutation.isLoading}
-          errorMessage={errors.description?.message}
-          label=""
-          placeholder="Leave your reply here"
-          onChange={setFormValue}
+          label="Cancel"
+          size="sm"
+          variant="tertiary"
+          onClick={onCancel}
         />
 
-        <div className="flex-row space-x-2">
-          <Button
-            disabled={commentReplyMutation.isLoading}
-            label="Cancel"
-            size="sm"
-            variant="tertiary"
-            onClick={onCancel}
-          />
-
-          <Button
-            disabled={!isDirty || commentReplyMutation.isLoading}
-            isLoading={commentReplyMutation.isLoading}
-            label="Confirm"
-            size="sm"
-            type="submit"
-            variant="primary"
-          />
-        </div>
+        <Button
+          disabled={!isDirty || commentReplyMutation.isLoading}
+          isLoading={commentReplyMutation.isLoading}
+          label="Confirm"
+          size="sm"
+          type="submit"
+          variant="primary"
+        />
       </div>
     </form>
   );

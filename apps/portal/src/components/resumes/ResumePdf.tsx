@@ -36,9 +36,9 @@ export default function ResumePdf({ url }: Props) {
 
   return (
     <div className="w-full" id="pdfView">
-      <div className="group relative">
+      <div className="group relative bg-slate-100">
         <Document
-          className="flex h-[calc(100vh-16rem)] flex-row justify-center overflow-auto"
+          className="flex h-[calc(100vh-16rem)] flex-row justify-center overflow-auto py-8"
           file={url}
           loading={<Spinner display="block" size="lg" />}
           noData=""
@@ -79,7 +79,7 @@ export default function ResumePdf({ url }: Props) {
           </div>
         </Document>
       </div>
-      <div className="flex justify-center p-4">
+      <div className="flex justify-center border-t border-slate-200 bg-white py-4">
         <Pagination
           current={pageNumber}
           end={numPages}
