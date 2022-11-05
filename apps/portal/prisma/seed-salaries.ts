@@ -374,6 +374,4 @@ Promise.all([seedSalaries()])
     process.exit(1);
   });
 
-console.log(xlSerialToJsDate(data[0].Timestamp));
-
 export {};
