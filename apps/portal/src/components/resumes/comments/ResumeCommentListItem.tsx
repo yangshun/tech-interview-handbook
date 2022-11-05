@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { formatDistanceToNow } from 'date-fns';
 import { useState } from 'react';
+import { ChevronUpIcon } from '@heroicons/react/20/solid';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
 
 import ResumeCommentEditForm from './comment/ResumeCommentEditForm';
@@ -11,10 +12,10 @@ import ResumeExpandableText from '../shared/ResumeExpandableText';
 
 import type { ResumeComment } from '~/types/resume-comments';
 
-type ResumeCommentListItemProps = Readonly<{
+type ResumeCommentListItemProps = {
   comment: ResumeComment;
   userId: string | undefined;
-}>;
+};
 
 export default function ResumeCommentListItem({
   comment,
@@ -27,14 +28,14 @@ export default function ResumeCommentListItem({
 
   return (
     <div className="min-w-fit">
-      <div className="flex flex-row space-x-3 align-top">
+      <div className="flex flex-row space-x-2 p-1 align-top">
         {/* Image Icon */}
         {comment.user.image ? (
           <img
             alt={comment.user.name ?? 'Reviewer'}
             className={clsx(
               'mt-1 rounded-full',
-              comment.parentId ? 'h-8 w-8' : 'h-10 w-10',
+              comment.parentId ? 'h-6 w-6' : 'h-8 w-8 ',
             )}
             src={comment.user.image!}
           />
@@ -49,18 +50,24 @@ export default function ResumeCommentListItem({
 
         <div className="flex w-full flex-col space-y-1">
           {/* Name and creation time */}
-          <div className="flex flex-row items-center space-x-2">
-            <p className={clsx('text-sm font-medium text-slate-800')}>
-              {comment.user.name ?? 'Reviewer ABC'}
-            </p>
-            {isCommentOwner && (
-              <span className="bg-primary-100 text-primary-800 rounded-md py-0.5 px-1 text-xs">
-                Me
-              </span>
-            )}
-            <ResumeUserBadges userId={comment.user.userId} />
-            <span className="font-medium text-slate-500">&middot;</span>
-            <div className="text-xs text-slate-500">
+          <div className="flex flex-row justify-between">
+            <div className="flex flex-row items-center space-x-1">
+              <p
+                className={clsx(
+                  'font-medium text-gray-800',
+                  !!comment.parentId && 'text-sm',
+                )}>
+                {comment.user.name ?? 'Reviewer ABC'}
+              </p>
+
+              <p className="text-primary-800 text-xs font-medium">
+                {isCommentOwner ? '(Me)' : ''}
+              </p>
+
+              <ResumeUserBadges userId={comment.user.userId} />
+            </div>
+
+            <div className="px-2 text-xs text-slate-600">
               {formatDistanceToNow(comment.createdAt, {
                 addSuffix: true,
               })}
@@ -74,7 +81,7 @@ export default function ResumeCommentListItem({
               setIsEditingComment={setIsEditingComment}
             />
           ) : (
-            <div className="text-slate-800">
+            <div className="text-gray-800">
               <ResumeExpandableText
                 key={comment.description}
                 text={comment.description}
@@ -83,52 +90,29 @@ export default function ResumeCommentListItem({
           )}
 
           {/* Upvote and edit */}
-          <div className="flex flex-row space-x-2 pt-1 align-middle">
+          <div className="flex flex-row space-x-1 pt-1 align-middle">
             <ResumeCommentVoteButtons commentId={comment.id} userId={userId} />
+
             {/* Action buttons; only present for authenticated user when not editing/replying */}
             {userId && !isEditingComment && !isReplyingComment && (
               <>
                 {isCommentOwner && (
-                  <>
-                    <span className="font-medium text-slate-500">&middot;</span>{' '}
-                    <button
-                      className="px-1 text-xs font-medium text-slate-500 hover:text-slate-600"
-                      type="button"
-                      onClick={() => setIsEditingComment(true)}>
-                      Edit
-                    </button>
-                  </>
+                  <button
+                    className="text-primary-800 hover:text-primary-400 px-1 text-xs"
+                    type="button"
+                    onClick={() => setIsEditingComment(true)}>
+                    Edit
+                  </button>
                 )}
+
                 {!comment.parentId && (
-                  <>
-                    <span className="font-medium text-slate-500">&middot;</span>{' '}
-                    <button
-                      className="px-1 text-xs font-medium text-slate-500 hover:text-slate-600"
-                      type="button"
-                      onClick={() => setIsReplyingComment(true)}>
-                      Reply
-                    </button>
-                  </>
+                  <button
+                    className="text-primary-800 hover:text-primary-400 px-1 text-xs"
+                    type="button"
+                    onClick={() => setIsReplyingComment(true)}>
+                    Reply
+                  </button>
                 )}
-              </>
-            )}
-            {comment.children.length > 0 && (
-              <>
-                <span className="font-medium text-slate-500">&middot;</span>{' '}
-                <button
-                  className="flex items-center space-x-1 rounded-md text-xs font-medium text-slate-500 hover:text-slate-600"
-                  type="button"
-                  onClick={() => setShowReplies(!showReplies)}>
-                  <span>
-                    {showReplies
-                      ? `Hide ${
-                          comment.children.length === 1 ? 'reply' : 'replies'
-                        }`
-                      : `Show ${comment.children.length} ${
-                          comment.children.length === 1 ? 'reply' : 'replies'
-                        }`}
-                  </span>
-                </button>
               </>
             )}
           </div>
@@ -144,21 +128,48 @@ export default function ResumeCommentListItem({
           )}
 
           {/* Replies */}
-          {comment.children.length > 0 && showReplies && (
+          {comment.children.length > 0 && (
             <div className="min-w-fit space-y-1 pt-2">
-              <div className="flex flex-row border-l-2 border-slate-200 pl-2">
-                <div className="flex flex-1 flex-col space-y-1">
-                  {comment.children.map((child) => {
-                    return (
-                      <ResumeCommentListItem
-                        key={child.id}
-                        comment={child}
-                        userId={userId}
-                      />
-                    );
-                  })}
+              <button
+                className="text-primary-800 hover:text-primary-300 flex items-center space-x-1 rounded-md text-xs font-medium"
+                type="button"
+                onClick={() => setShowReplies(!showReplies)}>
+                <ChevronUpIcon
+                  className={clsx(
+                    'h-5 w-5 ',
+                    !showReplies && 'rotate-180 transform',
+                  )}
+                />
+                <span>
+                  {showReplies
+                    ? `Hide ${
+                        comment.children.length === 1 ? 'reply' : 'replies'
+                      }`
+                    : `Show ${comment.children.length} ${
+                        comment.children.length === 1 ? 'reply' : 'replies'
+                      }`}
+                </span>
+              </button>
+
+              {showReplies && (
+                <div className="flex flex-row">
+                  <div className="relative flex flex-col px-2 py-2">
+                    <div className="flex-grow border-r border-slate-300" />
+                  </div>
+
+                  <div className="flex flex-1 flex-col space-y-1">
+                    {comment.children.map((child) => {
+                      return (
+                        <ResumeCommentListItem
+                          key={child.id}
+                          comment={child}
+                          userId={userId}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
         </div>
