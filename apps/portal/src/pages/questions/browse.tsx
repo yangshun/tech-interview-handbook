@@ -179,6 +179,7 @@ export default function QuestionsBrowsePage() {
         sortType,
         startDate,
         stateIds: [],
+        tagIds: [],
       },
     ],
     {
