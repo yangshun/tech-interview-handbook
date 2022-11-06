@@ -70,9 +70,9 @@ export default function LandingComponent({ onLanded }: LandingComponentProps) {
         <header className="flex flex-col items-start gap-16">
           <div className="flex flex-col items-center">
             <img
-              alt="Questions Bank"
+              alt="Question Bank"
               className="h-40 w-40"
-              src="/bank-logo.png"
+              src="/logos/bank-logo.png"
             />
             <h1 className="text-primary-700 text-center text-5xl font-bold">
               Tech Interview Question Bank

@@ -26,7 +26,7 @@ const config = {
     <img
       alt="Tech Resume Review"
       className="h-8 w-auto"
-      src="/resumes-logo.svg"
+      src="/logos/resumes-logo.svg"
     />
   ),
   navigation,

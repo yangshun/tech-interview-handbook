@@ -11,7 +11,11 @@ const navigation: ProductNavigationItems = [
 const config = {
   googleAnalyticsMeasurementID: 'G-0T4LYWMK8L',
   logo: (
-    <img alt="Questions Bank" className="h-8 w-auto" src="/bank-logo.png" />
+    <img
+      alt="Questions Bank"
+      className="h-8 w-auto"
+      src="/logos/bank-logo.png"
+    />
   ),
   navigation,
   showGlobalNav: false,

@@ -16,7 +16,11 @@ const navigationAuthenticated: ProductNavigationItems = [
 const config = {
   googleAnalyticsMeasurementID: 'G-34XRGLEVCF',
   logo: (
-    <img alt="Tech Offers Repo" className="h-8 w-auto" src="/offers-logo.svg" />
+    <img
+      alt="Tech Offers Repo"
+      className="h-8 w-auto"
+      src="/logos/offers-logo.svg"
+    />
   ),
   navigation,
   showGlobalNav: false,

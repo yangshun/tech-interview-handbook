@@ -90,7 +90,7 @@ export default function LandingPage() {
             <img
               alt="Tech Offers Repo"
               className="mx-auto mb-8 w-auto"
-              src="/offers-logo.svg"
+              src="/logos/offers-logo.svg"
             />
             <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
               <span>Choosing offers </span>
