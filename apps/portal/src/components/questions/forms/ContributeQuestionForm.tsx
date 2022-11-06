@@ -53,6 +53,10 @@ export default function ContributeQuestionForm({
   } = useForm<ContributeQuestionData>({
     defaultValues: {
       date: startOfMonth(new Date()),
+      ...({
+        questionType: null,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any),
     },
   });
 
@@ -101,7 +105,6 @@ export default function ContributeQuestionForm({
         onSubmit={handleSubmit(onSubmit)}>
         <div className="min-w-[113px] max-w-[113px] flex-1">
           <Select
-            defaultValue="coding"
             label="Type"
             options={QUESTION_TYPES}
             required={true}
