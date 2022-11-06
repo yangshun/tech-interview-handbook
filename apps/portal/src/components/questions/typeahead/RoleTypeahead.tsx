@@ -26,7 +26,9 @@ export default function RoleTypeahead(props: RoleTypeaheadProps) {
       {...(props as ExpandedTypeaheadProps)}
       label="Role"
       options={ROLES.filter((option) =>
-        option.label.toLowerCase().includes(query.toLowerCase()),
+        option.label
+          .toLocaleLowerCase()
+          .includes(query.trim().toLocaleLowerCase()),
       )}
       onQueryChange={setQuery}
     />

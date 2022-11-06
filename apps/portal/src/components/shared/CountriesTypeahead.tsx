@@ -48,10 +48,11 @@ export default function CountriesTypeahead({
     },
   ]);
 
-  const { data } = countries;
+  const { data, isLoading } = countries;
 
   return (
     <Typeahead
+      isLoading={isLoading}
       label={label}
       noResultsMessage="No countries found"
       nullable={true}

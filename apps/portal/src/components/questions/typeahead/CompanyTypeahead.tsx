@@ -13,7 +13,7 @@ export type CompanyTypeaheadProps = Omit<
 export default function CompanyTypeahead(props: CompanyTypeaheadProps) {
   const [query, setQuery] = useState('');
 
-  const { data: companies } = trpc.useQuery([
+  const { data: companies, isLoading } = trpc.useQuery([
     'companies.list',
     {
       name: query,
@@ -33,6 +33,7 @@ export default function CompanyTypeahead(props: CompanyTypeaheadProps) {
   return (
     <ExpandedTypeahead
       {...(props as ExpandedTypeaheadProps)}
+      isLoading={isLoading}
       label="Company"
       options={companyOptions}
       onQueryChange={setQuery}

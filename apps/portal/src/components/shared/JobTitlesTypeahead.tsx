@@ -35,9 +35,8 @@ export default function JobTitlesTypeahead({
       value: slug,
     }))
     .sort((a, b) => b.ranking - a.ranking)
-    .filter(
-      ({ label }) =>
-        label.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) > -1,
+    .filter(({ label }) =>
+      label.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()),
     );
 
   return (

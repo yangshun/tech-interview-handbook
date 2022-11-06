@@ -34,10 +34,11 @@ export default function CompaniesTypeahead({
     },
   ]);
 
-  const { data } = companies;
+  const { data, isLoading } = companies;
 
   return (
     <Typeahead
+      isLoading={isLoading}
       label="Company"
       noResultsMessage="No companies found"
       nullable={true}
