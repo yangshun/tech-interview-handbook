@@ -25,7 +25,6 @@ import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeExperienceTypeahead from '~/components/resumes/shared/ResumeExperienceTypeahead';
-import ResumeRoleTypeahead from '~/components/resumes/shared/ResumeRoleTypeahead';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
 import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
 import loginPageHref from '~/components/shared/loginPageHref';
@@ -42,6 +41,8 @@ import {
 import useDebounceValue from '~/utils/resumes/useDebounceValue';
 import useSearchParams from '~/utils/resumes/useSearchParams';
 import { trpc } from '~/utils/trpc';
+
+import JobTitlesTypeahead from '../../components/shared/JobTitlesTypeahead';
 
 const STALE_TIME = 5 * 60 * 1000;
 const DEBOUNCE_DELAY = 800;
@@ -356,12 +357,14 @@ export default function ResumeHomePage() {
         );
       case 'role':
         return (
-          <ResumeRoleTypeahead
-            isLabelHidden={true}
-            placeholder="Select roles"
-            selectedValues={
+          <JobTitlesTypeahead
+            excludedValues={
               new Set(userFilters[filterId].map(({ value }) => value))
             }
+            isLabelHidden={true}
+            label="Role"
+            noResultsMessage="No available roles."
+            placeholder="Select roles"
             onSelect={onSelect}
           />
         );

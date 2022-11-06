@@ -21,10 +21,10 @@ import {
 } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
-import ResumeRoleTypeahead from '~/components/resumes/shared/ResumeRoleTypeahead';
 import ResumeSubmissionGuidelines from '~/components/resumes/submit-form/ResumeSubmissionGuidelines';
 import Container from '~/components/shared/Container';
 import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
+import JobTitlesTypeahead from '~/components/shared/JobTitlesTypeahead';
 import loginPageHref from '~/components/shared/loginPageHref';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
@@ -333,8 +333,10 @@ export default function SubmitResumeForm({
                   control={control}
                   name="role"
                   render={({ field: { value } }) => (
-                    <ResumeRoleTypeahead
+                    <JobTitlesTypeahead
                       disabled={isLoading}
+                      label="Role"
+                      noResultsMessage="No available roles."
                       placeholder="Select a role"
                       required={true}
                       value={value}

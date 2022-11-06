@@ -17,11 +17,17 @@ type BaseProps = Pick<
 
 type Props = BaseProps &
   Readonly<{
+    excludedValues?: Set<string>;
+    label?: string;
+    noResultsMessage?: string;
     onSelect: (option: TypeaheadOption | null) => void;
     value?: TypeaheadOption | null;
   }>;
 
 export default function JobTitlesTypeahead({
+  excludedValues,
+  label: labelProp = 'Job Title',
+  noResultsMessage = 'No available job titles.',
   onSelect,
   value,
   ...props
@@ -34,15 +40,16 @@ export default function JobTitlesTypeahead({
       ranking,
       value: slug,
     }))
-    .sort((a, b) => b.ranking - a.ranking)
     .filter(({ label }) =>
       label.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()),
-    );
+    )
+    .filter((option) => !excludedValues?.has(option.value))
+    .sort((a, b) => b.ranking - a.ranking);
 
   return (
     <Typeahead
-      label="Job Title"
-      noResultsMessage="No available job titles."
+      label={labelProp}
+      noResultsMessage={noResultsMessage}
       nullable={true}
       options={options}
       value={value}
