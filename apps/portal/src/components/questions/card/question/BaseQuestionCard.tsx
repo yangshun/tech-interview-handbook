@@ -6,17 +6,25 @@ import {
   EyeIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
-import type { QuestionsQuestionType } from '@prisma/client';
+import type {
+  QuestionsQuestionTag,
+  QuestionsQuestionType,
+} from '@prisma/client';
+import type { TypeaheadOption } from '@tih/ui';
+import { HorizontalDivider } from '@tih/ui';
+import { Badge } from '@tih/ui';
 import { Button } from '@tih/ui';
 
 import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { useQuestionVote } from '~/utils/questions/useVote';
+import { trpc } from '~/utils/trpc';
 
 import AddToListDropdown from '../../AddToListDropdown';
 import type { CreateQuestionEncounterData } from '../../forms/CreateQuestionEncounterForm';
 import CreateQuestionEncounterForm from '../../forms/CreateQuestionEncounterForm';
 import QuestionAggregateBadge from '../../QuestionAggregateBadge';
 import QuestionTypeBadge from '../../QuestionTypeBadge';
+import TagTypeahead from '../../typeahead/TagTypeahead';
 import VotingButtons from '../../VotingButtons';
 
 import type { CountryInfo } from '~/types/questions';
@@ -118,6 +126,8 @@ export type BaseQuestionCardProps = ActionButtonProps &
     content: string;
     questionId: string;
     showHover?: boolean;
+    showTagForm?: boolean;
+    tags: Array<QuestionsQuestionTag>;
     timestamp: string | null;
     truncateContent?: boolean;
     type: QuestionsQuestionType;
@@ -142,17 +152,35 @@ export default function BaseQuestionCard({
   upvoteCount,
   timestamp,
   roles,
+  tags,
   countries,
   showHover,
   onReceivedSubmit,
   showDeleteButton,
   showAddToList,
   onDelete,
+  showTagForm,
   truncateContent = true,
 }: BaseQuestionCardProps) {
   const [showReceivedForm, setShowReceivedForm] = useState(false);
   const { handleDownvote, handleUpvote, vote } = useQuestionVote(questionId);
+
+  const utils = trpc.useContext();
+  const { mutateAsync: addTagToQuestion, isLoading: isAddingTag } =
+    trpc.useMutation('questions.tags.user.addTagToQuestion', {
+      onSuccess: () => {
+        utils.invalidateQueries([
+          'questions.questions.getQuestionById',
+          {
+            id: questionId,
+          },
+        ]);
+      },
+    });
+
   const hoverClass = showHover ? 'hover:bg-slate-50' : '';
+
+  const [selectedTag, setSelectedTag] = useState<TypeaheadOption | null>(null);
 
   const locations = useMemo(() => {
     if (countries === undefined) {
@@ -185,7 +213,7 @@ export default function BaseQuestionCard({
       )}
       <div className="flex flex-1 flex-col items-start gap-2">
         <div className="flex items-baseline justify-between self-stretch">
-          <div className="flex items-center gap-2 text-slate-500">
+          <div className="flex flex-wrap items-center gap-2 text-slate-500">
             {showAggregateStatistics && (
               <>
                 <QuestionTypeBadge type={type} />
@@ -215,6 +243,11 @@ export default function BaseQuestionCard({
               onClick={onActionButtonClick}
             />
           )}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <Badge key={tag.id} label={tag.tag} variant="warning" />
+          ))}
         </div>
         <p
           className={clsx(
@@ -268,6 +301,34 @@ export default function BaseQuestionCard({
               setShowReceivedForm(false);
             }}
           />
+        )}
+        {showTagForm && (
+          <>
+            <HorizontalDivider />
+            <div className="flex items-end gap-2">
+              <TagTypeahead
+                value={selectedTag}
+                onSelect={async (option) => {
+                  setSelectedTag(option);
+                }}
+              />
+              <Button
+                disabled={selectedTag === null}
+                isLoading={isAddingTag}
+                label="Add tag"
+                variant="primary"
+                onClick={() => {
+                  if (selectedTag === null) {
+                    return;
+                  }
+                  addTagToQuestion({
+                    questionId,
+                    tagId: selectedTag.id,
+                  });
+                }}
+              />
+            </div>
+          </>
         )}
       </div>
     </>

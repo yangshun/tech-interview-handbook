@@ -220,6 +220,7 @@ export default function ContributeQuestionForm({
                 createEncounterButtonText="Yes, this is my question"
                 questionId={question.id}
                 roles={roleCounts}
+                tags={question.tags}
                 timestamp={
                   question.seenAt.toLocaleDateString(undefined, {
                     month: 'short',

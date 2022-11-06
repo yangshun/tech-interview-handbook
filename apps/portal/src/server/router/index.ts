@@ -20,6 +20,8 @@ import { questionsQuestionEncounterRouter } from './questions/questions-question
 import { questionsQuestionEncounterUserRouter } from './questions/questions-question-encounter-user-router';
 import { questionsQuestionRouter } from './questions/questions-question-router';
 import { questionsQuestionUserRouter } from './questions/questions-question-user-router';
+import { questionsQuestionTagRouter } from './questions/questions-tag-router';
+import { questionsQuestionTagUserRouter } from './questions/questions-tag-user-router';
 import { resumeCommentsRouter } from './resumes/resumes-comments-router';
 import { resumesCommentsUserRouter } from './resumes/resumes-comments-user-router';
 import { resumesCommentsVotesRouter } from './resumes/resumes-comments-votes-router';
@@ -64,6 +66,8 @@ export const appRouter = createRouter()
   )
   .merge('questions.questions.', questionsQuestionRouter)
   .merge('questions.questions.user.', questionsQuestionUserRouter)
+  .merge('questions.tags.', questionsQuestionTagRouter)
+  .merge('questions.tags.user.', questionsQuestionTagUserRouter)
   .merge('offers.', offersRouter)
   .merge('offers.profile.', offersProfileRouter)
   .merge('offers.analysis.', offersAnalysisRouter)

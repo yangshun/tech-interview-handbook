@@ -33,6 +33,11 @@ export const questionsListRouter = createProtectedRouter()
                       state: true,
                     },
                   },
+                  questionTagEntries: {
+                    select: {
+                      tag: true,
+                    },
+                  },
                   user: {
                     select: {
                       name: true,
@@ -91,6 +96,11 @@ export const questionsListRouter = createProtectedRouter()
                       role: true,
                       seenAt: true,
                       state: true,
+                    },
+                  },
+                  questionTagEntries: {
+                    select: {
+                      tag: true,
                     },
                   },
                   user: {

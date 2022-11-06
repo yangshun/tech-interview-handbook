@@ -3,8 +3,8 @@ import type {
   Company,
   Country,
   QuestionsQuestion,
+  QuestionsQuestionTag,
   QuestionsQuestionVote,
-  QuestionTag,
   State,
 } from '@prisma/client';
 import { Vote } from '@prisma/client';
@@ -15,7 +15,7 @@ import type {
   Question,
 } from '~/types/questions';
 
-type QuestionTagEntry = { tag: QuestionTag; }
+type QuestionTagEntry = { tag: QuestionsQuestionTag };
 
 type AggregatableEncounters = Array<{
   city: City | null;
@@ -31,8 +31,8 @@ type QuestionWithAggregatableData = QuestionsQuestion & {
     answers: number;
     comments: number;
   };
-  questionTagEntries: Array<QuestionTagEntry>;
   encounters: AggregatableEncounters;
+  questionTagEntries: Array<QuestionTagEntry>;
   user: {
     name: string | null;
   } | null;
@@ -70,7 +70,7 @@ export function createQuestionWithAggregateData(
     numVotes: votes,
     receivedCount: data.encounters.length,
     seenAt: data.encounters[0].seenAt,
-    tags: data.tags,
+    tags: data.questionTagEntries.map(({ tag }) => tag),
     type: data.questionType,
     updatedAt: data.updatedAt,
     user: data.user?.name ?? '',

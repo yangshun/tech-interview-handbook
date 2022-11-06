@@ -531,6 +531,7 @@ export default function QuestionsBrowsePage() {
                             questionId={question.id}
                             receivedCount={question.receivedCount}
                             roles={roleCounts}
+                            tags={question.tags}
                             timestamp={question.seenAt.toLocaleDateString(
                               undefined,
                               {

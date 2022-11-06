@@ -10,6 +10,7 @@ export type QuestionOverviewCardProps = Omit<
     showCreateEncounterButton: true;
     showDeleteButton: false;
     showReceivedStatistics: false;
+    showTagForm: true;
     showVoteButtons: true;
   },
   | 'actionButtonLabel'
@@ -21,6 +22,7 @@ export type QuestionOverviewCardProps = Omit<
   | 'showCreateEncounterButton'
   | 'showDeleteButton'
   | 'showReceivedStatistics'
+  | 'showTagForm'
   | 'showVoteButtons'
 >;
 
@@ -34,6 +36,7 @@ export default function FullQuestionCard(props: QuestionOverviewCardProps) {
       showAnswerStatistics={false}
       showCreateEncounterButton={true}
       showReceivedStatistics={false}
+      showTagForm={true}
       showVoteButtons={true}
       truncateContent={false}
     />

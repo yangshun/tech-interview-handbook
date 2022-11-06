@@ -1,15 +1,18 @@
-import type { QuestionsQuestionType } from '@prisma/client';
+import type {
+  QuestionsQuestionTag,
+  QuestionsQuestionType,
+} from '@prisma/client';
 
 export type Question = {
   aggregatedQuestionEncounters: AggregatedQuestionEncounter;
   content: string;
   id: string;
   numAnswers: number;
-  tags: Array<QuestionTag>;
   numComments: number;
   numVotes: number;
   receivedCount: number;
   seenAt: Date;
+  tags: Array<QuestionsQuestionTag>;
   type: QuestionsQuestionType;
   updatedAt: Date;
   user: string;
