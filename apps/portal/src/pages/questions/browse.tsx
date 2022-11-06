@@ -9,6 +9,7 @@ import type { TypeaheadOption } from '@tih/ui';
 import { useToast } from '@tih/ui';
 import { Button, SlideOut } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import QuestionOverviewCard from '~/components/questions/card/question/QuestionOverviewCard';
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
 import FilterSection from '~/components/questions/filter/FilterSection';
@@ -63,6 +64,7 @@ function sortTypeToString(value: SortType): string | null {
 
 export default function QuestionsBrowsePage() {
   const router = useRouter();
+  const { event } = useGoogleAnalytics();
 
   const [query, setQuery] = useState('');
 
@@ -219,8 +221,12 @@ export default function QuestionsBrowsePage() {
     {
       onSuccess: () => {
         utils.invalidateQueries('questions.questions.getQuestionsByFilter');
+        event({
+          action: 'questions.create_question',
+          category: 'engagement',
+          label: 'create_question',
+        });
         showToast({
-          // Duration: 10000 (optional)
           title: `Thank you for submitting your question!`,
           variant: 'success',
         });

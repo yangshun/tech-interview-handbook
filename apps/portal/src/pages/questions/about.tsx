@@ -2,28 +2,28 @@ import Container from '~/components/shared/Container';
 
 const people = [
   {
-    bio: 'I like to play games so I treat life like a game.',
-    imageUrl: '/team/bryann.jpg',
-    name: 'Bryann Yeap',
-    role: 'Back End Engineer',
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    imageUrl: '/team/TODO.jpg',
+    name: 'Jeff Sieu',
+    role: 'Role TODO',
   },
   {
-    bio: 'I am always up for sushi.',
-    imageUrl: '/team/ai-ling.jpg',
-    name: 'Hong Ai Ling',
-    role: 'Back End Engineer',
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    imageUrl: '/team/TODO.jpg',
+    name: 'Koh Hong Po',
+    role: 'Role TODO',
   },
   {
-    bio: 'I love to watch football and code.',
-    imageUrl: '/team/stuart.jpg',
-    name: 'Stuart Long',
-    role: 'Front End Engineer',
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    imageUrl: '/team/TODO.jpg',
+    name: 'Ren Weilin',
+    role: 'Role TODO',
   },
   {
-    bio: 'Ziqing is a human who thrives under pressure, coffee and cat. In her own time, she likes playing the flute, building fun stuff with friends and watching animes.',
-    imageUrl: '/team/ziqing.jpg',
-    name: 'Zhang Ziqing',
-    role: 'Front End Engineer',
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    imageUrl: '/team/TODO.jpg',
+    name: 'Tang Zhiying',
+    role: 'Role TODO',
   },
 ];
 
@@ -34,7 +34,7 @@ export default function AboutPage() {
         <div className="space-y-12">
           <div className="space-y-6">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              About Tech Offers Repo
+              About Question Bank
             </h1>
             <p className="text-lg text-slate-500">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
