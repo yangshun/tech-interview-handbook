@@ -1,4 +1,4 @@
-import { useQuestionCommentVote } from '~/utils/questions/useVote';
+import useQuestionCommentVote from '~/utils/questions/vote/useQuestionCommentVote';
 
 import type { CommentListItemProps } from './CommentListItem';
 import CommentListItem from './CommentListItem';

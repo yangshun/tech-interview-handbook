@@ -10,7 +10,7 @@ import type { QuestionsQuestionType } from '@prisma/client';
 import { Button } from '@tih/ui';
 
 import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
-import { useQuestionVote } from '~/utils/questions/useVote';
+import { useQuestionVote } from '~/utils/questions/vote/useQuestionVote';
 
 import AddToListDropdown from '../../AddToListDropdown';
 import type { CreateQuestionEncounterData } from '../../forms/CreateQuestionEncounterForm';
