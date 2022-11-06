@@ -33,30 +33,6 @@ type Offer = OffersOffer & {
   profile: OffersProfile & { background: OffersBackground | null };
 };
 
-const searchOfferPercentile = (
-  offer: Offer,
-  similarOffers: Array<
-    OffersOffer & {
-      company: Company;
-      offersFullTime:
-        | (OffersFullTime & {
-            totalCompensation: OffersCurrency;
-          })
-        | null;
-      offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-      profile: OffersProfile & { background: OffersBackground | null };
-    }
-  >,
-) => {
-  for (let i = 0; i < similarOffers.length; i++) {
-    if (similarOffers[i].id === offer.id) {
-      return i;
-    }
-  }
-
-  return -1;
-};
-
 const getSimilarOffers = async (
   prisma: PrismaClient<
     Prisma.PrismaClientOptions,
@@ -64,7 +40,7 @@ const getSimilarOffers = async (
     Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
   >,
   comparedOffer: Offer,
-  companyIdFilter: string | undefined,
+  companyIdFilter: string | undefined = undefined,
 ) => {
   if (
     !comparedOffer.profile.background ||
@@ -185,6 +161,30 @@ const getSimilarOffers = async (
   });
 };
 
+const searchOfferPercentile = (
+  offer: Offer,
+  similarOffers: Array<
+    OffersOffer & {
+      company: Company;
+      offersFullTime:
+        | (OffersFullTime & {
+            totalCompensation: OffersCurrency;
+          })
+        | null;
+      offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
+      profile: OffersProfile & { background: OffersBackground | null };
+    }
+  >,
+) => {
+  for (let i = 0; i < similarOffers.length; i++) {
+    if (similarOffers[i].id === offer.id) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
 export const generateAnalysis = async (params: {
   ctx: {
     prisma: PrismaClient<
@@ -264,11 +264,7 @@ export const generateAnalysis = async (params: {
 
   const overallHighestOffer = offers[0];
 
-  let similarOffers = await getSimilarOffers(
-    ctx.prisma,
-    overallHighestOffer,
-    undefined,
-  );
+  let similarOffers = await getSimilarOffers(ctx.prisma, overallHighestOffer);
 
   const offerIds = offers.map((offer) => offer.id);
 
