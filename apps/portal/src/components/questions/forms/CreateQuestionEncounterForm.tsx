@@ -6,8 +6,13 @@ import { Button } from '@tih/ui';
 import type { Month } from '~/components/shared/MonthYearPicker';
 import MonthYearPicker from '~/components/shared/MonthYearPicker';
 
+import useCompanyOptions from '~/utils/shared/useCompanyOptions';
+import useJobTitleOptions from '~/utils/shared/useJobTitleOptions';
+
 import CompanyTypeahead from '../typeahead/CompanyTypeahead';
-import LocationTypeahead from '../typeahead/LocationTypeahead';
+import LocationTypeahead, {
+  useLocationOptions,
+} from '../typeahead/LocationTypeahead';
 import RoleTypeahead from '../typeahead/RoleTypeahead';
 
 import type { Location } from '~/types/questions';
@@ -43,6 +48,10 @@ export default function CreateQuestionEncounterForm({
     startOfMonth(new Date()),
   );
 
+  const { data: allCompanyOptions } = useCompanyOptions('');
+  const { data: allLocationOptions } = useLocationOptions('');
+  const allRoleOptions = useJobTitleOptions('');
+
   if (submitted) {
     return (
       <div className="font-md flex items-center gap-1 rounded-full border bg-slate-50 py-1 pl-2 pr-3 text-sm text-slate-500">
@@ -53,7 +62,7 @@ export default function CreateQuestionEncounterForm({
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       <p className="text-md text-slate-600">
         I saw this question {step <= 1 ? 'at' : step === 2 ? 'for' : 'on'}
       </p>
@@ -62,8 +71,8 @@ export default function CreateQuestionEncounterForm({
           <CompanyTypeahead
             isLabelHidden={true}
             placeholder="Company"
-            // TODO: Fix suggestions and set count back to 3
-            suggestedCount={0}
+            suggestedCount={3}
+            suggestedOptions={allCompanyOptions}
             onSelect={({ value: company }) => {
               setSelectedCompany(company);
             }}
@@ -79,7 +88,8 @@ export default function CreateQuestionEncounterForm({
           <LocationTypeahead
             isLabelHidden={true}
             placeholder="Location"
-            suggestedCount={0}
+            suggestedCount={3}
+            suggestedOptions={allLocationOptions}
             onSelect={(location) => {
               setSelectedLocation(location);
             }}
@@ -95,7 +105,8 @@ export default function CreateQuestionEncounterForm({
           <RoleTypeahead
             isLabelHidden={true}
             placeholder="Role"
-            suggestedCount={0}
+            suggestedCount={3}
+            suggestedOptions={allRoleOptions}
             onSelect={({ value: role }) => {
               setSelectedRole(role);
             }}

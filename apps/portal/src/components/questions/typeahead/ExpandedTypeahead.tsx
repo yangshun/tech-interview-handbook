@@ -13,11 +13,12 @@ export type ExpandedTypeaheadProps = Omit<
   'nullable' | 'onSelect'
 > &
   RequireAllOrNone<{
-    clearOnSelect?: boolean;
-    filterOption: (option: TypeaheadOption) => boolean;
     onSuggestionClick: (option: TypeaheadOption) => void;
     suggestedCount: number;
+    suggestedOptions: Array<TypeaheadOption>;
   }> & {
+    clearOnSelect?: boolean;
+    filterOption?: (option: TypeaheadOption) => boolean;
     onChange?: unknown; // Workaround: This prop is here just to absorb the onChange returned react-hook-form
     onSelect: (option: TypeaheadOption) => void;
   };
@@ -25,6 +26,7 @@ export type ExpandedTypeaheadProps = Omit<
 export default function ExpandedTypeahead({
   suggestedCount = 0,
   onSuggestionClick,
+  suggestedOptions = [],
   filterOption = () => true,
   clearOnSelect = false,
   options,
@@ -37,21 +39,22 @@ export default function ExpandedTypeahead({
     return options.filter(filterOption);
   }, [options, filterOption]);
   const suggestions = useMemo(
-    () => filteredOptions.slice(0, suggestedCount),
-    [filteredOptions, suggestedCount],
+    () => suggestedOptions.slice(0, suggestedCount),
+    [suggestedOptions, suggestedCount],
   );
 
   return (
-    <div className="flex flex-wrap gap-x-2">
+    <div className="flex flex-wrap gap-2">
       {suggestions.map((suggestion) => (
-        <Button
-          key={suggestion.id}
-          label={suggestion.label}
-          variant="tertiary"
-          onClick={() => {
-            onSuggestionClick?.(suggestion);
-          }}
-        />
+        <div key={suggestion.id} className="hidden lg:block">
+          <Button
+            label={suggestion.label}
+            variant="tertiary"
+            onClick={() => {
+              onSuggestionClick?.(suggestion);
+            }}
+          />
+        </div>
       ))}
       <div className="flex-1">
         <Typeahead
