@@ -20,15 +20,13 @@ export type LandingQueryData = {
   companySlug: string;
   location: string;
   questionType: QuestionsQuestionType;
-};
+} | null;
 
 export type LandingComponentProps = {
   onLanded: (data: LandingQueryData) => void;
 };
 
-export default function LandingComponent({
-  onLanded: handleLandingQuery,
-}: LandingComponentProps) {
+export default function LandingComponent({ onLanded }: LandingComponentProps) {
   const defaultCompany = useDefaultCompany();
   const defaultLocation = useDefaultLocation();
 
@@ -84,7 +82,7 @@ export default function LandingComponent({
             Know the{' '}
             <span className="text-primary-700">
               latest SWE interview questions
-            </span>{' '} 
+            </span>{' '}
             asked by top companies.
           </p>
         </header>
@@ -118,22 +116,34 @@ export default function LandingComponent({
               }}
             />
           </div>
-          <Button
-            addonPosition="end"
-            icon={ArrowSmallRightIcon}
-            label="Go"
-            size="md"
-            variant="primary"
-            onClick={() => {
-              if (company !== undefined && location !== undefined) {
-                return handleLandingQuery({
-                  companySlug: companyOptionToSlug(company),
-                  location: locationOptionToSlug(location),
-                  questionType,
-                });
-              }
-            }}
-          />
+          <div className="flex items-center gap-2">
+            <Button
+              addonPosition="end"
+              icon={ArrowSmallRightIcon}
+              label="Go"
+              size="md"
+              variant="primary"
+              onClick={() => {
+                if (company !== undefined && location !== undefined) {
+                  onLanded({
+                    companySlug: companyOptionToSlug(company),
+                    location: locationOptionToSlug(location),
+                    questionType,
+                  });
+                }
+              }}
+            />
+            <Button
+              addonPosition="end"
+              icon={ArrowSmallRightIcon}
+              label="View all questions"
+              size="md"
+              variant="secondary"
+              onClick={() => {
+                onLanded(null);
+              }}
+            />
+          </div>
         </div>
         <div className="flex justify-center">
           <iframe
