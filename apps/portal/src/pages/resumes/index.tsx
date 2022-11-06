@@ -25,9 +25,9 @@ import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';
 import ResumeListItems from '~/components/resumes/browse/ResumeListItems';
 import ResumeExperienceTypeahead from '~/components/resumes/shared/ResumeExperienceTypeahead';
-import ResumeLocationTypeahead from '~/components/resumes/shared/ResumeLocationTypeahead';
 import ResumeRoleTypeahead from '~/components/resumes/shared/ResumeRoleTypeahead';
 import ResumeSignInButton from '~/components/resumes/shared/ResumeSignInButton';
+import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
 import loginPageHref from '~/components/shared/loginPageHref';
 
 import type { Filter, FilterId, Shortcut } from '~/utils/resumes/resumeFilters';
@@ -344,12 +344,13 @@ export default function ResumeHomePage() {
         );
       case 'location':
         return (
-          <ResumeLocationTypeahead
-            isLabelHidden={true}
-            placeholder="Select locations"
-            selectedValues={
+          <CountriesTypeahead
+            excludedValues={
               new Set(userFilters[filterId].map(({ value }) => value))
             }
+            isLabelHidden={true}
+            label="Location"
+            placeholder="Select countries"
             onSelect={onSelect}
           />
         );

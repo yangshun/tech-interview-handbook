@@ -21,10 +21,10 @@ import {
 } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
-import ResumeLocationTypeahead from '~/components/resumes/shared/ResumeLocationTypeahead';
 import ResumeRoleTypeahead from '~/components/resumes/shared/ResumeRoleTypeahead';
 import ResumeSubmissionGuidelines from '~/components/resumes/submit-form/ResumeSubmissionGuidelines';
 import Container from '~/components/shared/Container';
+import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
 import loginPageHref from '~/components/shared/loginPageHref';
 
 import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
@@ -318,9 +318,10 @@ export default function SubmitResumeForm({
                   control={control}
                   name="location"
                   render={({ field: { value } }) => (
-                    <ResumeLocationTypeahead
+                    <CountriesTypeahead
                       disabled={isLoading}
-                      placeholder="Select a location"
+                      label="Location"
+                      placeholder="Enter a country"
                       required={true}
                       value={value}
                       onSelect={(option) => onSelect('location', option)}
