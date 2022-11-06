@@ -1,6 +1,7 @@
 import type { TypeaheadOption } from '@tih/ui';
 
 import type { JobTitleType } from '~/components/shared/JobTitles';
+import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 import { JobTitleLabels } from '~/components/shared/JobTitles';
 
 export type FilterId = 'experience' | 'location' | 'role';
@@ -42,7 +43,7 @@ export const getTypeaheadOption = (
     case 'role':
       return {
         id: filterValue,
-        label: JobTitleLabels[filterValue as keyof typeof JobTitleLabels],
+        label: getLabelForJobTitleType(filterValue as JobTitleType),
         value: filterValue,
       };
     case 'location':
@@ -222,7 +223,7 @@ export const getFilterLabel = (
       filters = EXPERIENCES;
       break;
     case 'role':
-      filters = Object.entries(JobTitleLabels).map(([slug, label]) => ({
+      filters = Object.entries(JobTitleLabels).map(([slug, { label }]) => ({
         id: slug,
         label,
         value: slug,

@@ -17,7 +17,8 @@ import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 import CompanyTypeahead from '~/components/questions/typeahead/CompanyTypeahead';
 import LocationTypeahead from '~/components/questions/typeahead/LocationTypeahead';
 import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
-import { JobTitleLabels } from '~/components/shared/JobTitles';
+import type { JobTitleType } from '~/components/shared/JobTitles';
+import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
 import type { QuestionAge } from '~/utils/questions/constants';
 import { QUESTION_SORT_TYPES } from '~/utils/questions/constants';
@@ -316,7 +317,7 @@ export default function QuestionsBrowsePage() {
     return selectedRoles.map((role) => ({
       checked: true,
       id: role,
-      label: JobTitleLabels[role as keyof typeof JobTitleLabels],
+      label: getLabelForJobTitleType(role as JobTitleType),
       value: role,
     }));
   }, [selectedRoles]);

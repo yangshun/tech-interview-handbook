@@ -1,4 +1,5 @@
-import { JobTitleLabels } from '~/components/shared/JobTitles';
+import type { JobTitleType } from '~/components/shared/JobTitles';
+import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
 import type { AggregatedQuestionEncounter } from '~/types/questions';
 
@@ -8,7 +9,7 @@ export default function relabelQuestionAggregates({
 }: AggregatedQuestionEncounter) {
   const newRoleCounts = Object.fromEntries(
     Object.entries(roleCounts).map(([roleId, count]) => [
-      JobTitleLabels[roleId as keyof typeof JobTitleLabels],
+      getLabelForJobTitleType(roleId as JobTitleType),
       count,
     ]),
   );

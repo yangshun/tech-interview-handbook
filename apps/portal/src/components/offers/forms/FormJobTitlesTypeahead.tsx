@@ -3,7 +3,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
-import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
+import JobTitlesTypeahead from '~/components/shared/JobTitlesTypeahead';
 
 type Props = Omit<
   ComponentProps<typeof JobTitlesTypeahead>,
@@ -21,11 +21,15 @@ export default function FormJobTitlesTypeahead({ name, ...props }: Props) {
   return (
     <JobTitlesTypeahead
       {...props}
-      value={{
-        id: watchJobTitle,
-        label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
-        value: watchJobTitle,
-      }}
+      value={
+        watchJobTitle
+          ? {
+              id: watchJobTitle,
+              label: getLabelForJobTitleType(watchJobTitle as JobTitleType),
+              value: watchJobTitle,
+            }
+          : null
+      }
       onSelect={(option) => {
         setValue(name, option?.value);
       }}

@@ -12,7 +12,7 @@ export type RoleTypeaheadProps = Omit<
 >;
 
 const ROLES: FilterChoices = Object.entries(JobTitleLabels).map(
-  ([slug, label]) => ({
+  ([slug, { label }]) => ({
     id: slug,
     label,
     value: slug,

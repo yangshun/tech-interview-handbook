@@ -28,11 +28,13 @@ export default function JobTitlesTypeahead({
 }: Props) {
   const [query, setQuery] = useState('');
   const options = Object.entries(JobTitleLabels)
-    .map(([slug, label]) => ({
+    .map(([slug, { label, ranking }]) => ({
       id: slug,
       label,
+      ranking,
       value: slug,
     }))
+    .sort((a, b) => b.ranking - a.ranking)
     .filter(
       ({ label }) =>
         label.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) > -1,

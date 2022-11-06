@@ -9,8 +9,8 @@ import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import Container from '~/components/shared/Container';
 import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
 import type { JobTitleType } from '~/components/shared/JobTitles';
-import { JobTitleLabels } from '~/components/shared/JobTitles';
-import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
+import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
+import JobTitlesTypeahead from '~/components/shared/JobTitlesTypeahead';
 
 import { useSearchParamSingle } from '~/utils/offers/useSearchParam';
 
@@ -79,7 +79,9 @@ export default function OffersHomePage() {
                 selectedJobTitleId
                   ? {
                       id: selectedJobTitleId,
-                      label: JobTitleLabels[selectedJobTitleId as JobTitleType],
+                      label: getLabelForJobTitleType(
+                        selectedJobTitleId as JobTitleType,
+                      ),
                       value: selectedJobTitleId,
                     }
                   : null

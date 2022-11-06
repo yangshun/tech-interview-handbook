@@ -30,7 +30,7 @@ export default function ResumeRoleTypeahead({
 }: Props) {
   const [query, setQuery] = useState('');
   const options = Object.entries(JobTitleLabels)
-    .map(([slug, label]) => ({
+    .map(([slug, { label }]) => ({
       id: slug,
       label,
       value: slug,
