@@ -78,6 +78,8 @@ export const useQuestionVote = (id: string) => {
         'questions.questions.getQuestionsByFilterAndContent',
       ]);
 
+      const revertFunctions: Array<() => void> = [];
+
       if (questionQueries !== undefined) {
         for (const [key, query] of questionQueries) {
           if (query === undefined) {
@@ -106,6 +108,10 @@ export const useQuestionVote = (id: string) => {
           };
 
           utils.queryClient.setQueryData(key, newQuery);
+
+          revertFunctions.push(() => {
+            utils.queryClient.setQueryData(key, query);
+          });
         }
       }
 
@@ -126,7 +132,20 @@ export const useQuestionVote = (id: string) => {
           ['questions.questions.getQuestionById', { id }],
           newQuestion,
         );
+
+        revertFunctions.push(() => {
+          utils.queryClient.setQueryData(
+            ['questions.questions.getQuestionById', { id }],
+            prevQuestion,
+          );
+        });
       }
+
+      return () => {
+        for (const revertFunction of revertFunctions) {
+          revertFunction();
+        }
+      };
     },
     query: 'questions.questions.user.getVote',
     setDownVoteKey: 'questions.questions.user.setDownVote',
@@ -149,6 +168,8 @@ export const useAnswerVote = (id: string) => {
       const answerQueries = utils.queryClient.getQueriesData([
         'questions.answers.getAnswers',
       ]);
+
+      const revertFunctions: Array<() => void> = [];
 
       if (answerQueries !== undefined) {
         for (const [key, query] of answerQueries) {
@@ -178,6 +199,10 @@ export const useAnswerVote = (id: string) => {
           };
 
           utils.queryClient.setQueryData(key, newQuery);
+
+          revertFunctions.push(() => {
+            utils.queryClient.setQueryData(key, query);
+          });
         }
       }
 
@@ -198,7 +223,20 @@ export const useAnswerVote = (id: string) => {
           ['questions.answers.getAnswerById', { answerId: id }],
           newAnswer,
         );
+
+        revertFunctions.push(() => {
+          utils.queryClient.setQueryData(
+            ['questions.answers.getAnswerById', { answerId: id }],
+            prevAnswer,
+          );
+        });
       }
+
+      return () => {
+        for (const revertFunction of revertFunctions) {
+          revertFunction();
+        }
+      };
     },
     query: 'questions.answers.user.getVote',
     setDownVoteKey: 'questions.answers.user.setDownVote',
@@ -218,6 +256,8 @@ export const useQuestionCommentVote = (id: string) => {
       const questionCommentQueries = utils.queryClient.getQueriesData([
         'questions.questions.comments.getQuestionComments',
       ]);
+
+      const revertFunctions: Array<() => void> = [];
 
       if (questionCommentQueries !== undefined) {
         for (const [key, query] of questionCommentQueries) {
@@ -247,8 +287,18 @@ export const useQuestionCommentVote = (id: string) => {
           };
 
           utils.queryClient.setQueryData(key, newQuery);
+
+          revertFunctions.push(() => {
+            utils.queryClient.setQueryData(key, query);
+          });
         }
       }
+
+      return () => {
+        for (const revertFunction of revertFunctions) {
+          revertFunction();
+        }
+      };
     },
     query: 'questions.questions.comments.user.getVote',
     setDownVoteKey: 'questions.questions.comments.user.setDownVote',
@@ -268,6 +318,8 @@ export const useAnswerCommentVote = (id: string) => {
       const answerCommentQueries = utils.queryClient.getQueriesData([
         'questions.answers.comments.getAnswerComments',
       ]);
+
+      const revertFunctions: Array<() => void> = [];
 
       if (answerCommentQueries !== undefined) {
         for (const [key, query] of answerCommentQueries) {
@@ -297,8 +349,17 @@ export const useAnswerCommentVote = (id: string) => {
           };
 
           utils.queryClient.setQueryData(key, newQuery);
+
+          revertFunctions.push(() => {
+            utils.queryClient.setQueryData(key, query);
+          });
         }
       }
+      return () => {
+        for (const revertFunction of revertFunctions) {
+          revertFunction();
+        }
+      };
     },
     query: 'questions.answers.comments.user.getVote',
     setDownVoteKey: 'questions.answers.comments.user.setDownVote',
@@ -307,14 +368,14 @@ export const useAnswerCommentVote = (id: string) => {
   });
 };
 
-type InvalidateFunction = (voteValueChange: number) => Promise<void>;
+type RevertFunction = () => void;
+
+type InvalidateFunction = (voteValueChange: number) => Promise<RevertFunction>;
 
 type VoteProps<VoteQueryKey extends QueryKey = QueryKey> = {
   idKey: string;
   invalidateKeys: Array<QueryKey>;
   onMutate?: InvalidateFunction;
-
-  // Invalidate: Partial<Record<QueryKey, InvalidateFunction | null>>;
   query: VoteQueryKey;
   setDownVoteKey: MutationKey;
   setNoVoteKey: MutationKey;
@@ -324,6 +385,7 @@ type VoteProps<VoteQueryKey extends QueryKey = QueryKey> = {
 type UseVoteMutationContext = {
   currentData: any;
   previousData: any;
+  revert: RevertFunction | undefined;
 };
 
 export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
@@ -369,6 +431,7 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
       onError: (_error, _variables, context) => {
         if (context !== undefined) {
           utils.setQueryData([query], context.previousData);
+          context.revert?.();
         }
       },
       onMutate: async (vote) => {
@@ -396,8 +459,8 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
           getVoteValue(currentData?.vote ?? null) -
           getVoteValue(previousData?.vote ?? null);
 
-        await onMutate?.(voteValueChange);
-        return { currentData, previousData };
+        const revert = await onMutate?.(voteValueChange);
+        return { currentData, previousData, revert };
       },
       onSettled: onVoteUpdateSettled,
     },
@@ -408,6 +471,7 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
       onError: (_error, _variables, context) => {
         if (context !== undefined) {
           utils.setQueryData([query], context.previousData);
+          context.revert?.();
         }
       },
       onMutate: async (vote) => {
@@ -435,8 +499,8 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
           getVoteValue(currentData?.vote ?? null) -
           getVoteValue(previousData?.vote ?? null);
 
-        await onMutate?.(voteValueChange);
-        return { currentData, previousData };
+        const revert = await onMutate?.(voteValueChange);
+        return { currentData, previousData, revert };
       },
       onSettled: onVoteUpdateSettled,
     },
@@ -448,6 +512,7 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
       onError: (_error, _variables, context) => {
         if (context !== undefined) {
           utils.setQueryData([query], context.previousData);
+          context.revert?.();
         }
       },
       onMutate: async () => {
@@ -470,8 +535,8 @@ export const useVote = <VoteQueryKey extends QueryKey = QueryKey>(
         const voteValueChange =
           getVoteValue(null) - getVoteValue(previousData?.vote ?? null);
 
-        await onMutate?.(voteValueChange);
-        return { currentData, previousData };
+        const revert = await onMutate?.(voteValueChange);
+        return { currentData, previousData, revert };
       },
       onSettled: onVoteUpdateSettled,
     },
