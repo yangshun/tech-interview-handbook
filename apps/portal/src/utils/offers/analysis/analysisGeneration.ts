@@ -225,6 +225,55 @@ const getSalary = (offer: Offer | SimilarOffer, defaultSalary = 0) => {
     : defaultSalary;
 };
 
+const getTopOffers = (
+  similarOffers: Array<SimilarOffer>,
+  noOfSimilarOffers: number,
+) => {
+  const similarOffers90PercentileIndex = Math.ceil(noOfSimilarOffers * 0.1);
+  const topPercentileOffers =
+    noOfSimilarOffers > 2
+      ? similarOffers.slice(
+          similarOffers90PercentileIndex,
+          similarOffers90PercentileIndex + 2,
+        )
+      : similarOffers;
+
+  return topPercentileOffers;
+};
+
+const generateAnalysisUnit = async (
+  prisma: PrismaClient<
+    Prisma.PrismaClientOptions,
+    never,
+    Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
+  >,
+  analysedOffer: Offer,
+  usersOfferIds: Array<string>,
+  isCompanyAnalysisUnit = false,
+) => {
+  let similarOffers = await getSimilarOffers(
+    prisma,
+    analysedOffer,
+    isCompanyAnalysisUnit ? analysedOffer.companyId : undefined,
+  );
+
+  const percentile = calculatePercentile(similarOffers, analysedOffer);
+
+  similarOffers = similarOffers.filter(
+    (offer) => !usersOfferIds.includes(offer.id),
+  );
+  const noOfSimilarOffers = similarOffers.length;
+
+  const topSimilarOffers = getTopOffers(similarOffers, noOfSimilarOffers);
+
+  return {
+    analysedOfferId: analysedOffer.id,
+    noOfSimilarOffers,
+    percentile,
+    topSimilarOffers,
+  };
+};
+
 export const generateAnalysis = async (params: {
   ctx: {
     prisma: PrismaClient<
@@ -304,26 +353,14 @@ export const generateAnalysis = async (params: {
 
   const overallHighestOffer = offers[0];
 
-  const offerIds = offers.map((offer) => offer.id);
+  const usersOfferIds = offers.map((offer) => offer.id);
 
   // OVERALL ANALYSIS
-  let similarOffers = await getSimilarOffers(ctx.prisma, overallHighestOffer);
-  const overallPercentile = calculatePercentile(
-    similarOffers,
+  const overallAnalysisUnit = await generateAnalysisUnit(
+    ctx.prisma,
     overallHighestOffer,
+    usersOfferIds,
   );
-
-  // Get top offers (excluding user's offers)
-  similarOffers = similarOffers.filter((offer) => !offerIds.includes(offer.id));
-  const noOfSimilarOffers = similarOffers.length;
-  const similarOffers90PercentileIndex = Math.ceil(noOfSimilarOffers * 0.1);
-  const topPercentileOffers =
-    noOfSimilarOffers > 2
-      ? similarOffers.slice(
-          similarOffers90PercentileIndex,
-          similarOffers90PercentileIndex + 2,
-        )
-      : similarOffers;
 
   // COMPANY ANALYSIS
   const companyMap = new Map<string, Offer>();
@@ -335,39 +372,12 @@ export const generateAnalysis = async (params: {
 
   const companyAnalysis = await Promise.all(
     Array.from(companyMap.values()).map(async (companyOffer) => {
-      // TODO: Refactor calculating analysis into a function
-      let similarCompanyOffers = await getSimilarOffers(
+      return await generateAnalysisUnit(
         ctx.prisma,
         companyOffer,
-        companyOffer.companyId,
+        usersOfferIds,
+        true,
       );
-      const companyPercentile = calculatePercentile(
-        similarCompanyOffers,
-        companyOffer,
-      );
-
-      // Get top offers (excluding user's offers)
-      similarCompanyOffers = similarCompanyOffers.filter(
-        (offer) => !offerIds.includes(offer.id),
-      );
-      const noOfSimilarCompanyOffers = similarCompanyOffers.length;
-      const similarCompanyOffers90PercentileIndex = Math.ceil(
-        noOfSimilarCompanyOffers * 0.1,
-      );
-      const topPercentileCompanyOffers =
-        noOfSimilarCompanyOffers > 2
-          ? similarCompanyOffers.slice(
-              similarCompanyOffers90PercentileIndex,
-              similarCompanyOffers90PercentileIndex + 2,
-            )
-          : similarCompanyOffers;
-
-      return {
-        analysedOfferId: companyOffer.id,
-        noOfSimilarOffers: noOfSimilarCompanyOffers,
-        percentile: companyPercentile,
-        topSimilarOffers: topPercentileCompanyOffers,
-      };
     }),
   );
 
@@ -395,13 +405,13 @@ export const generateAnalysis = async (params: {
         create: {
           analysedOffer: {
             connect: {
-              id: overallHighestOffer.id,
+              id: overallAnalysisUnit.analysedOfferId,
             },
           },
-          noOfSimilarOffers,
-          percentile: overallPercentile,
+          noOfSimilarOffers: overallAnalysisUnit.noOfSimilarOffers,
+          percentile: overallAnalysisUnit.percentile,
           topSimilarOffers: {
-            connect: topPercentileOffers.map((offer) => {
+            connect: overallAnalysisUnit.topSimilarOffers.map((offer) => {
               return { id: offer.id };
             }),
           },
