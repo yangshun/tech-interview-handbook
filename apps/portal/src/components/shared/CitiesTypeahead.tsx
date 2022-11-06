@@ -36,11 +36,13 @@ export default function CitiesTypeahead({
     },
   ]);
 
-  const { data } = cities;
+  const { data, isLoading } = cities;
 
   return (
     <Typeahead
+      isLoading={isLoading}
       label={label}
+      minQueryLength={3}
       noResultsMessage="No cities found"
       nullable={true}
       options={

@@ -110,8 +110,11 @@ model Country {
   id                          String                       @id
   name                        String                       @unique
   code                        String                       @unique
+  // The higher the value of the ranking, the higher it appears in the search results.
+  ranking                     Int?                         @default(0)
   states                      State[]
   questionsQuestionEncounters QuestionsQuestionEncounter[]
+  ResumesResume               ResumesResume[]
 }
 
 model State {
@@ -148,13 +151,14 @@ model ResumesResume {
   // TODO: Update role, experience, location to use Enums
   role           String           @db.Text
   experience     String           @db.Text
-  location       String           @db.Text
+  locationId     String
   url            String
   additionalInfo String?          @db.Text
   isResolved     Boolean          @default(false)
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
   user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  location       Country          @relation(fields: [locationId], references: [id], onDelete: Cascade)
   stars          ResumesStar[]
   comments       ResumesComment[]
 }

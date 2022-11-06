@@ -3,12 +3,14 @@ import type { ProductNavigationItems } from '~/components/global/ProductNavigati
 const navigation: ProductNavigationItems = [
   { href: '/offers/submit', name: 'Analyze your offers' },
   { href: '/offers/features', name: 'Features' },
+  { href: '/offers/about', name: 'About' },
 ];
 
 const navigationAuthenticated: ProductNavigationItems = [
   { href: '/offers/submit', name: 'Analyze your offers' },
   { href: '/offers/dashboard', name: 'Your dashboard' },
   { href: '/offers/features', name: 'Features' },
+  { href: '/offers/about', name: 'About' },
 ];
 
 const config = {

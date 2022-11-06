@@ -36,6 +36,11 @@ export const QUESTION_TYPES: FilterChoices<QuestionsQuestionType> = [
     label: 'Behavioral',
     value: 'BEHAVIORAL',
   },
+  {
+    id: 'THEORY',
+    label: 'Theory',
+    value: 'THEORY',
+  },
 ] as const;
 
 export type QuestionAge = 'all' | 'last-6-months' | 'last-month' | 'last-year';
@@ -82,6 +87,21 @@ export const SORT_TYPES = [
   {
     label: 'Top',
     value: SortType.TOP,
+  },
+];
+
+export const QUESTION_SORT_TYPES = [
+  {
+    label: 'New',
+    value: SortType.NEW,
+  },
+  {
+    label: 'Top',
+    value: SortType.TOP,
+  },
+  {
+    label: 'Encounters',
+    value: SortType.ENCOUNTERS,
   },
 ];
 

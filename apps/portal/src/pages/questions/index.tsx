@@ -12,6 +12,14 @@ export default function QuestionsHomePage() {
   const { event } = useGoogleAnalytics();
 
   const handleLandingQuery = async (data: LandingQueryData) => {
+    if (data === null) {
+      // Go to browse page
+      router.push({
+        pathname: '/questions/browse',
+      });
+      return;
+    }
+
     const { companySlug, location, questionType } = data;
 
     // Go to browse page

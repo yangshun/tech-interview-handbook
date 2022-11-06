@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { TypeaheadOption } from '@tih/ui';
 import { Typeahead } from '@tih/ui';
 
-import { trpc } from '~/utils/trpc';
+import { EXPERIENCES } from '~/utils/resumes/resumeFilters';
 
 type BaseProps = Pick<
   ComponentProps<typeof Typeahead>,
@@ -18,37 +18,30 @@ type BaseProps = Pick<
 type Props = BaseProps &
   Readonly<{
     onSelect: (option: TypeaheadOption | null) => void;
+    selectedValues?: Set<string>;
     value?: TypeaheadOption | null;
   }>;
 
-export default function CompaniesTypeahead({
+export default function ResumeExperienceTypeahead({
   onSelect,
+  selectedValues = new Set(),
   value,
   ...props
 }: Props) {
   const [query, setQuery] = useState('');
-  const companies = trpc.useQuery([
-    'companies.list',
-    {
-      name: query,
-    },
-  ]);
-
-  const { data, isLoading } = companies;
+  const options = EXPERIENCES.filter(
+    (option) => !selectedValues.has(option.value),
+  ).filter(
+    ({ label }) =>
+      label.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) > -1,
+  );
 
   return (
     <Typeahead
-      isLoading={isLoading}
-      label="Company"
-      noResultsMessage="No companies found"
+      label="Experiences"
+      noResultsMessage="No available experiences."
       nullable={true}
-      options={
-        data?.map(({ id, name }) => ({
-          id,
-          label: name,
-          value: id,
-        })) ?? []
-      }
+      options={options}
       value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}

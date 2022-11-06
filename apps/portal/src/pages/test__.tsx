@@ -7,7 +7,7 @@ import { HorizontalDivider } from '@tih/ui';
 import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
-import JobTitlesTypeahead from '~/components/shared/JobTitlesTypahead';
+import JobTitlesTypeahead from '~/components/shared/JobTitlesTypeahead';
 import type {
   Month,
   MonthYearOptional,

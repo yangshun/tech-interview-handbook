@@ -12,7 +12,7 @@ export type RoleTypeaheadProps = Omit<
 >;
 
 const ROLES: FilterChoices = Object.entries(JobTitleLabels).map(
-  ([slug, label]) => ({
+  ([slug, { label }]) => ({
     id: slug,
     label,
     value: slug,
@@ -26,7 +26,9 @@ export default function RoleTypeahead(props: RoleTypeaheadProps) {
       {...(props as ExpandedTypeaheadProps)}
       label="Role"
       options={ROLES.filter((option) =>
-        option.label.toLowerCase().includes(query.toLowerCase()),
+        option.label
+          .toLocaleLowerCase()
+          .includes(query.trim().toLocaleLowerCase()),
       )}
       onQueryChange={setQuery}
     />

@@ -23,7 +23,7 @@ export default function LocationTypeahead({
 }: LocationTypeaheadProps) {
   const [query, setQuery] = useState('');
 
-  const { data: locations } = trpc.useQuery([
+  const { data: locations, isLoading } = trpc.useQuery([
     'locations.cities.list',
     {
       name: query,
@@ -45,6 +45,7 @@ export default function LocationTypeahead({
 
   return (
     <ExpandedTypeahead
+      isLoading={isLoading}
       {...({
         onSuggestionClick: onSuggestionClick
           ? (option: TypeaheadOption) => {

@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { Vote } from '@prisma/client';
 
-import { EXPERIENCES, LOCATIONS, ROLES } from '~/utils/resumes/resumeFilters';
+import type { FilterCounts } from '~/utils/resumes/resumeFilters';
+import { resumeGetFilterCounts } from '~/utils/resumes/resumeGetFilterCounts';
 
 import { createRouter } from '../context';
 
@@ -11,6 +12,7 @@ export const resumesRouter = createRouter()
   .query('findAll', {
     input: z.object({
       experienceFilters: z.string().array(),
+      isTop10: z.boolean(),
       isUnreviewed: z.boolean(),
       locationFilters: z.string().array(),
       roleFilters: z.string().array(),
@@ -27,19 +29,14 @@ export const resumesRouter = createRouter()
         sortOrder,
         isUnreviewed,
         skip,
+        isTop10,
         searchValue,
         take,
       } = input;
       const userId = ctx.session?.user?.id;
-      const totalRecords = await ctx.prisma.resumesResume.count({
-        where: {
-          experience: { in: experienceFilters },
-          isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
-          role: { in: roleFilters },
-          title: { contains: searchValue, mode: 'insensitive' },
-        },
-      });
+      let totalRecords = 10;
+      let filterCounts = {} as FilterCounts;
+
       const resumesData = await ctx.prisma.resumesResume.findMany({
         include: {
           _count: {
@@ -49,6 +46,11 @@ export const resumesRouter = createRouter()
             },
           },
           comments: true,
+          location: {
+            select: {
+              name: true,
+            },
+          },
           stars: {
             where: {
               OR: {
@@ -74,12 +76,12 @@ export const resumesRouter = createRouter()
                 },
               }
             : { comments: { _count: 'desc' } },
-        skip,
+        skip: isTop10 ? 0 : skip,
         take,
         where: {
           experience: { in: experienceFilters },
           isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
+          locationId: { in: locationFilters },
           role: { in: roleFilters },
           title: { contains: searchValue, mode: 'insensitive' },
         },
@@ -92,7 +94,8 @@ export const resumesRouter = createRouter()
           id: r.id,
           isResolved: r.isResolved,
           isStarredByUser: r.stars.length > 0,
-          location: r.location,
+          location: r.location.name,
+          locationId: r.locationId,
           numComments: r._count.comments,
           numStars: r._count.stars,
           role: r.role,
@@ -103,95 +106,76 @@ export const resumesRouter = createRouter()
         return resume;
       });
 
-      // Group by role and count, taking into account all role/experience/location/isUnreviewed filters and search value
-      const roleCounts = await ctx.prisma.resumesResume.groupBy({
-        _count: {
-          _all: true,
-        },
-        by: ['role'],
-        where: {
-          experience: { in: experienceFilters },
-          isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
-          title: { contains: searchValue, mode: 'insensitive' },
-        },
-      });
+      if (isTop10) {
+        filterCounts = resumeGetFilterCounts(mappedResumeData);
+      } else {
+        totalRecords = await ctx.prisma.resumesResume.count({
+          where: {
+            experience: { in: experienceFilters },
+            isResolved: isUnreviewed ? false : {},
+            locationId: { in: locationFilters },
+            role: { in: roleFilters },
+            title: { contains: searchValue, mode: 'insensitive' },
+          },
+        });
 
-      // Map all nonzero counts from array to object where key = role and value = count
-      const mappedRoleCounts = Object.fromEntries(
-        roleCounts.map((rc) => [rc.role, rc._count._all]),
-      );
+        // Group by role and count, taking into account all role/experience/locationId/isUnreviewed filters and search value
+        const roleCounts = await ctx.prisma.resumesResume.groupBy({
+          _count: {
+            _all: true,
+          },
+          by: ['role'],
+          where: {
+            experience: { in: experienceFilters },
+            isResolved: isUnreviewed ? false : {},
+            locationId: { in: locationFilters },
+            title: { contains: searchValue, mode: 'insensitive' },
+          },
+        });
 
-      // Filter out roles with zero counts and map to object where key = role and value = 0
-      const zeroRoleCounts = Object.fromEntries(
-        ROLES.filter((r) => !(r.value in mappedRoleCounts)).map((r) => [
-          r.value,
-          0,
-        ]),
-      );
+        // Map all nonzero counts from array to object where key = role and value = count
+        const mappedRoleCounts = Object.fromEntries(
+          roleCounts.map((rc) => [rc.role, rc._count._all]),
+        );
 
-      // Combine to form singular role counts object
-      const processedRoleCounts = {
-        ...mappedRoleCounts,
-        ...zeroRoleCounts,
-      };
+        const experienceCounts = await ctx.prisma.resumesResume.groupBy({
+          _count: {
+            _all: true,
+          },
+          by: ['experience'],
+          where: {
+            isResolved: isUnreviewed ? false : {},
+            locationId: { in: locationFilters },
+            role: { in: roleFilters },
+            title: { contains: searchValue, mode: 'insensitive' },
+          },
+        });
+        const mappedExperienceCounts = Object.fromEntries(
+          experienceCounts.map((ec) => [ec.experience, ec._count._all]),
+        );
 
-      const experienceCounts = await ctx.prisma.resumesResume.groupBy({
-        _count: {
-          _all: true,
-        },
-        by: ['experience'],
-        where: {
-          isResolved: isUnreviewed ? false : {},
-          location: { in: locationFilters },
-          role: { in: roleFilters },
-          title: { contains: searchValue, mode: 'insensitive' },
-        },
-      });
-      const mappedExperienceCounts = Object.fromEntries(
-        experienceCounts.map((ec) => [ec.experience, ec._count._all]),
-      );
-      const zeroExperienceCounts = Object.fromEntries(
-        EXPERIENCES.filter((e) => !(e.value in mappedExperienceCounts)).map(
-          (e) => [e.value, 0],
-        ),
-      );
-      const processedExperienceCounts = {
-        ...mappedExperienceCounts,
-        ...zeroExperienceCounts,
-      };
+        const locationCounts = await ctx.prisma.resumesResume.groupBy({
+          _count: {
+            _all: true,
+          },
+          by: ['locationId'],
+          where: {
+            experience: { in: experienceFilters },
+            isResolved: isUnreviewed ? false : {},
+            role: { in: roleFilters },
+            title: { contains: searchValue, mode: 'insensitive' },
+          },
+        });
+        const mappedLocationCounts = Object.fromEntries(
+          locationCounts.map((lc) => [lc.locationId, lc._count._all]),
+        );
 
-      const locationCounts = await ctx.prisma.resumesResume.groupBy({
-        _count: {
-          _all: true,
-        },
-        by: ['location'],
-        where: {
-          experience: { in: experienceFilters },
-          isResolved: isUnreviewed ? false : {},
-          role: { in: roleFilters },
-          title: { contains: searchValue, mode: 'insensitive' },
-        },
-      });
-      const mappedLocationCounts = Object.fromEntries(
-        locationCounts.map((lc) => [lc.location, lc._count._all]),
-      );
-      const zeroLocationCounts = Object.fromEntries(
-        LOCATIONS.filter((l) => !(l.value in mappedLocationCounts)).map((l) => [
-          l.value,
-          0,
-        ]),
-      );
-      const processedLocationCounts = {
-        ...mappedLocationCounts,
-        ...zeroLocationCounts,
-      };
-
-      const filterCounts = {
-        Experience: processedExperienceCounts,
-        Location: processedLocationCounts,
-        Role: processedRoleCounts,
-      };
+        filterCounts = {
+          experience: mappedExperienceCounts,
+          location: mappedLocationCounts,
+          role: mappedRoleCounts,
+        };
+      }
 
       return {
         filterCounts,
@@ -215,6 +199,11 @@ export const resumesRouter = createRouter()
           _count: {
             select: {
               stars: true,
+            },
+          },
+          location: {
+            select: {
+              name: true,
             },
           },
           stars: {

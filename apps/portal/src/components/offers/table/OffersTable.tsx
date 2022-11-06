@@ -275,7 +275,7 @@ export default function OffersTable({
           {!offers ||
             (offers.length === 0 && (
               <div className="py-16 text-lg">
-                <div className="flex justify-center">No data yet🥺</div>
+                <div className="flex justify-center">No data yet 🥺</div>
               </div>
             ))}
         </div>

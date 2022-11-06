@@ -28,6 +28,7 @@ export default function FullQuestionCard(props: QuestionOverviewCardProps) {
   return (
     <BaseQuestionCard
       {...props}
+      hideCard={true}
       showActionButton={false}
       showAddToList={true}
       showAggregateStatistics={true}

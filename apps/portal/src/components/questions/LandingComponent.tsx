@@ -20,15 +20,13 @@ export type LandingQueryData = {
   companySlug: string;
   location: string;
   questionType: QuestionsQuestionType;
-};
+} | null;
 
 export type LandingComponentProps = {
   onLanded: (data: LandingQueryData) => void;
 };
 
-export default function LandingComponent({
-  onLanded: handleLandingQuery,
-}: LandingComponentProps) {
+export default function LandingComponent({ onLanded }: LandingComponentProps) {
   const defaultCompany = useDefaultCompany();
   const defaultLocation = useDefaultLocation();
 
@@ -70,17 +68,17 @@ export default function LandingComponent({
     <main className="flex flex-1 flex-col items-center overflow-y-auto bg-white">
       <div className="flex flex-1 flex-col items-start justify-center gap-12 px-4">
         <header className="flex flex-col items-start gap-16">
-          <div className="flex flex-col items-center self-stretch">
+          <div className="flex flex-col items-center">
             <img
               alt="Questions Bank"
               className="h-40 w-40"
               src="/bank-logo.png"
             />
-            <h1 className="text-center text-4xl font-bold text-slate-900">
+            <h1 className="text-primary-700 text-center text-5xl font-bold">
               Tech Interview Question Bank
             </h1>
           </div>
-          <p className="mb-2 max-w-lg text-5xl font-semibold text-slate-900 sm:max-w-3xl">
+          <p className="mb-2 max-w-lg text-4xl font-semibold text-slate-900 sm:max-w-3xl">
             Know the{' '}
             <span className="text-primary-700">
               latest SWE interview questions
@@ -118,22 +116,34 @@ export default function LandingComponent({
               }}
             />
           </div>
-          <Button
-            addonPosition="end"
-            icon={ArrowSmallRightIcon}
-            label="Go"
-            size="md"
-            variant="primary"
-            onClick={() => {
-              if (company !== undefined && location !== undefined) {
-                return handleLandingQuery({
-                  companySlug: companyOptionToSlug(company),
-                  location: locationOptionToSlug(location),
-                  questionType,
-                });
-              }
-            }}
-          />
+          <div className="flex items-center gap-2">
+            <Button
+              addonPosition="end"
+              icon={ArrowSmallRightIcon}
+              label="Go"
+              size="md"
+              variant="primary"
+              onClick={() => {
+                if (company !== undefined && location !== undefined) {
+                  onLanded({
+                    companySlug: companyOptionToSlug(company),
+                    location: locationOptionToSlug(location),
+                    questionType,
+                  });
+                }
+              }}
+            />
+            <Button
+              addonPosition="end"
+              icon={ArrowSmallRightIcon}
+              label="View all questions"
+              size="md"
+              variant="secondary"
+              onClick={() => {
+                onLanded(null);
+              }}
+            />
+          </div>
         </div>
         <div className="flex justify-center">
           <iframe

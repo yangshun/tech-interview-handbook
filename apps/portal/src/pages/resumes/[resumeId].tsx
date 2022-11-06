@@ -24,23 +24,17 @@ import ResumePdf from '~/components/resumes/ResumePdf';
 import ResumeExpandableText from '~/components/resumes/shared/ResumeExpandableText';
 import loginPageHref from '~/components/shared/loginPageHref';
 
-import type {
-  ExperienceFilter,
-  FilterOption,
-  LocationFilter,
-  RoleFilter,
-} from '~/utils/resumes/resumeFilters';
 import {
   BROWSE_TABS_VALUES,
-  EXPERIENCES,
   getFilterLabel,
+  getTypeaheadOption,
   INITIAL_FILTER_STATE,
-  LOCATIONS,
-  ROLES,
 } from '~/utils/resumes/resumeFilters';
 import { trpc } from '~/utils/trpc';
 
 import SubmitResumeForm from './submit';
+import type { JobTitleType } from '../../components/shared/JobTitles';
+import { getLabelForJobTitleType } from '../../components/shared/JobTitles';
 
 export default function ResumeReviewPage() {
   const ErrorPage = (
@@ -124,29 +118,24 @@ export default function ResumeReviewPage() {
   };
 
   const onInfoTagClick = ({
-    locationLabel,
-    experienceLabel,
-    roleLabel,
+    locationName,
+    locationValue,
+    experienceValue,
+    roleValue,
   }: {
-    experienceLabel?: string;
-    locationLabel?: string;
-    roleLabel?: string;
+    experienceValue?: string;
+    locationName?: string;
+    locationValue?: string;
+    roleValue?: string;
   }) => {
-    const getFilterValue = (
-      label: string,
-      filterOptions: Array<
-        FilterOption<ExperienceFilter | LocationFilter | RoleFilter>
-      >,
-    ) => filterOptions.find((option) => option.label === label)?.value;
-
     router.push({
       pathname: '/resumes',
       query: {
         currentPage: JSON.stringify(1),
         isFiltersOpen: JSON.stringify({
-          experience: experienceLabel !== undefined,
-          location: locationLabel !== undefined,
-          role: roleLabel !== undefined,
+          experience: experienceValue !== undefined,
+          location: locationValue !== undefined,
+          role: roleValue !== undefined,
         }),
         searchValue: JSON.stringify(''),
         shortcutSelected: JSON.stringify('all'),
@@ -154,14 +143,16 @@ export default function ResumeReviewPage() {
         tabsValue: JSON.stringify(BROWSE_TABS_VALUES.ALL),
         userFilters: JSON.stringify({
           ...INITIAL_FILTER_STATE,
-          ...(locationLabel && {
-            location: [getFilterValue(locationLabel, LOCATIONS)],
+          ...(locationValue && {
+            location: [
+              getTypeaheadOption('location', locationValue, locationName),
+            ],
           }),
-          ...(roleLabel && {
-            role: [getFilterValue(roleLabel, ROLES)],
+          ...(roleValue && {
+            role: [getTypeaheadOption('role', roleValue)],
           }),
-          ...(experienceLabel && {
-            experience: [getFilterValue(experienceLabel, EXPERIENCES)],
+          ...(experienceValue && {
+            experience: [getTypeaheadOption('experience', experienceValue)],
           }),
         }),
       },
@@ -207,9 +198,19 @@ export default function ResumeReviewPage() {
         initFormDetails={{
           additionalInfo: detailsQuery.data.additionalInfo ?? '',
           experience: detailsQuery.data.experience,
-          location: detailsQuery.data.location,
+          location: {
+            id: detailsQuery.data.locationId,
+            label: detailsQuery.data.location.name,
+            value: detailsQuery.data.locationId,
+          },
           resumeId: resumeId as string,
-          role: detailsQuery.data.role,
+          role: {
+            id: detailsQuery.data.role,
+            label: getLabelForJobTitleType(
+              detailsQuery.data.role as JobTitleType,
+            ),
+            value: detailsQuery.data.role,
+          },
           title: detailsQuery.data.title,
           url: detailsQuery.data.url,
         }}
@@ -325,13 +326,10 @@ export default function ResumeReviewPage() {
                       type="button"
                       onClick={() =>
                         onInfoTagClick({
-                          roleLabel: detailsQuery.data?.role,
+                          roleValue: detailsQuery.data?.role,
                         })
                       }>
-                      {getFilterLabel(
-                        ROLES,
-                        detailsQuery.data.role as RoleFilter,
-                      )}
+                      {getFilterLabel('role', detailsQuery.data.role)}
                     </button>
                   </div>
                   <div className="col-span-1 flex items-center text-xs text-slate-600 sm:text-sm">
@@ -344,13 +342,11 @@ export default function ResumeReviewPage() {
                       type="button"
                       onClick={() =>
                         onInfoTagClick({
-                          locationLabel: detailsQuery.data?.location,
+                          locationName: detailsQuery.data?.location.name,
+                          locationValue: detailsQuery.data?.locationId,
                         })
                       }>
-                      {getFilterLabel(
-                        LOCATIONS,
-                        detailsQuery.data.location as LocationFilter,
-                      )}
+                      {detailsQuery.data?.location.name}
                     </button>
                   </div>
                   <div className="col-span-1 flex items-center text-xs text-slate-600 sm:text-sm">
@@ -363,12 +359,12 @@ export default function ResumeReviewPage() {
                       type="button"
                       onClick={() =>
                         onInfoTagClick({
-                          experienceLabel: detailsQuery.data?.experience,
+                          experienceValue: detailsQuery.data?.experience,
                         })
                       }>
                       {getFilterLabel(
-                        EXPERIENCES,
-                        detailsQuery.data.experience as ExperienceFilter,
+                        'experience',
+                        detailsQuery.data.experience,
                       )}
                     </button>
                   </div>

@@ -8,7 +8,7 @@ import {
   UsersIcon,
 } from '@heroicons/react/24/outline';
 
-import { HOME_URL } from '~/components/offers/constants';
+import { HOME_URL, OFFERS_SUBMIT_URL } from '~/components/offers/constants';
 import offersAnalysis from '~/components/offers/features/images/offers-analysis.png';
 import offersBrowse from '~/components/offers/features/images/offers-browse.png';
 import offersProfile from '~/components/offers/features/images/offers-profile.png';
@@ -126,6 +126,7 @@ export default function LandingPage() {
           />
           <div className="relative">
             <LeftTextCard
+              buttonLabel="View offers"
               description="Filter relevant offers by job title, company, submission date, salary and more."
               icon={
                 <TableCellsIcon
@@ -133,27 +134,31 @@ export default function LandingPage() {
                   className="h-6 w-6 text-white"
                 />
               }
-              imageAlt="Offer table page"
+              imageAlt="Browse page"
               imageSrc={offersBrowse}
               title="Stay informed of recent offers"
+              url={HOME_URL}
             />
           </div>
           <div className="mt-36">
             <RightTextCard
-              description="With our offer engine analysis, you can compare your offers with other offers on the market and make an informed decision."
+              buttonLabel="Analyse offers"
+              description="With our offer engine analysis, you can benchmark your offers against other offers on the market and make an informed decision."
               icon={
                 <ChartBarSquareIcon
                   aria-hidden="true"
                   className="h-6 w-6 text-white"
                 />
               }
-              imageAlt="Customer profile user interface"
+              imageAlt="Offers analysis page"
               imageSrc={offersAnalysis}
               title="Better understand your offers"
+              url={OFFERS_SUBMIT_URL}
             />
           </div>
           <div className="mt-36">
             <LeftTextCard
+              buttonLabel="View offer profiles"
               description="An offer profile includes not only offers that a person received in their application cycle, but also background information such as education and work experience. Use offer profiles to help you better contextualize offers."
               icon={
                 <InformationCircleIcon
@@ -161,9 +166,10 @@ export default function LandingPage() {
                   className="h-6 w-6 text-white"
                 />
               }
-              imageAlt="Offer table page"
+              imageAlt="Offer profile page"
               imageSrc={offersProfile}
               title="Choosing an offer needs context"
+              url={HOME_URL}
             />
           </div>
         </div>
@@ -215,7 +221,7 @@ export default function LandingPage() {
             <div className="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
               <a
                 className="to-primary-500 flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
-                href={HOME_URL}>
+                href={OFFERS_SUBMIT_URL}>
                 Get Started
               </a>
             </div>
