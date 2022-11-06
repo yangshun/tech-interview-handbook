@@ -110,6 +110,8 @@ model Country {
   id                          String                       @id
   name                        String                       @unique
   code                        String                       @unique
+  // The higher the value of the ranking, the higher it appears in the search results.
+  ranking                     Int?                         @default(0)
   states                      State[]
   questionsQuestionEncounters QuestionsQuestionEncounter[]
   ResumesResume               ResumesResume[]

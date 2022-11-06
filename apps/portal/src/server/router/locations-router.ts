@@ -45,14 +45,24 @@ export const locationsRouter = createRouter()
     async resolve({ ctx, input }) {
       return await ctx.prisma.country.findMany({
         orderBy: {
-          name: 'asc',
+          ranking: 'desc',
         },
         take: 10,
         where: {
-          name: {
-            contains: input.name,
-            mode: 'insensitive',
-          },
+          OR: [
+            {
+              name: {
+                contains: input.name,
+                mode: 'insensitive',
+              },
+            },
+            {
+              code: {
+                contains: input.name,
+                mode: 'insensitive',
+              },
+            },
+          ],
         },
       });
     },

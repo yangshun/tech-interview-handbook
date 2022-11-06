@@ -39,16 +39,22 @@ export default function CountriesTypeahead({
   return (
     <Typeahead
       label="Country"
-      minQueryLength={3}
+      minQueryLength={2}
       noResultsMessage="No countries found"
       nullable={true}
-      options={
-        data?.map(({ id, name }) => ({
+      options={(data ?? [])
+        // Client-side sorting by position of query string appearing
+        // in the country name since we can't do that in Prisma.
+        .sort(
+          (a, b) =>
+            a.name.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) -
+            b.name.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()),
+        )
+        .map(({ id, name }) => ({
           id,
           label: name,
           value: id,
-        })) ?? []
-      }
+        }))}
       value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}
