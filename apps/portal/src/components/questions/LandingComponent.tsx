@@ -70,21 +70,21 @@ export default function LandingComponent({
     <main className="flex flex-1 flex-col items-center overflow-y-auto bg-white">
       <div className="flex flex-1 flex-col items-start justify-center gap-12 px-4">
         <header className="flex flex-col items-start gap-16">
-          <div className="flex flex-col items-center self-stretch">
+          <div className="flex flex-col items-center">
             <img
               alt="Questions Bank"
               className="h-40 w-40"
               src="/bank-logo.png"
             />
-            <h1 className="text-center text-4xl font-bold text-slate-900">
+            <h1 className="text-primary-700 text-center text-5xl font-bold">
               Tech Interview Question Bank
             </h1>
           </div>
-          <p className="mb-2 max-w-lg text-5xl font-semibold text-slate-900 sm:max-w-3xl">
+          <p className="mb-2 max-w-lg text-4xl font-semibold text-slate-900 sm:max-w-3xl">
             Know the{' '}
             <span className="text-primary-700">
               latest SWE interview questions
-            </span>{' '}
+            </span>{' '} 
             asked by top companies.
           </p>
         </header>
