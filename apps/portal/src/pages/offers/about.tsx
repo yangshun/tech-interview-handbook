@@ -2,25 +2,25 @@ import Container from '~/components/shared/Container';
 
 const people = [
   {
-    bio: 'I like to play games so I treat life like a game.',
+    bio: 'I like to play games, so I treat life like a game. I collect achievements by crossing items off my bucket list.',
     imageUrl: '/team/bryann.jpg',
     name: 'Bryann Yeap',
     role: 'Back End Engineer',
   },
   {
-    bio: 'I am always up for sushi.',
+    bio: 'I dream of eating hot food in the cold winter, falling off the grid in a skydive, and watching auroras dance in the night sky. For now, I am living in reality as a full-time coder.',
     imageUrl: '/team/ai-ling.jpg',
     name: 'Hong Ai Ling',
-    role: 'Back End Engineer',
-  },
-  {
-    bio: 'I love to watch football and code.',
-    imageUrl: '/team/stuart.jpg',
-    name: 'Stuart Long',
     role: 'Front End Engineer',
   },
   {
-    bio: 'Ziqing is a human who thrives under pressure, coffee and cat. In her own time, she likes playing the flute, building fun stuff with friends and watching animes.',
+    bio: 'I’m an avid Manchester United fan who loves to code. To fuel my late night coding sessions, I love to brew my own coffee from different parts of the world.',
+    imageUrl: '/team/stuart.jpg',
+    name: 'Stuart Long',
+    role: 'Back End Engineer',
+  },
+  {
+    bio: 'I thrive under pressure, coffee and cat. In my own time, I like playing the flute, building fun stuff with friends and watching animes.',
     imageUrl: '/team/ziqing.jpg',
     name: 'Zhang Ziqing',
     role: 'Front End Engineer',
@@ -37,13 +37,30 @@ export default function AboutPage() {
               About Tech Offers Repo
             </h1>
             <p className="text-lg text-slate-500">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Tech Offers Repo, a project under the series of Tech Interview
+              Handbook (TIH), reveals the stories behind offers by focusing on
+              the profiles of the offer receivers. It helps job seekers
+              benchmark and analyse their anonymous offers with more context and
+              encourages discussions around offer profiles.
+            </p>
+          </div>
+          {/* Feedback */}
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              Feedback to Us
+            </h2>
+
+            <p className="text-lg text-slate-500">
+              Thank you for using our platform! Feel free to submit your
+              feedback / feature request / bug report
+              <a
+                className="text-primary-600 hover:text-primary-500 ml-1"
+                href="https://forms.gle/6zV5yimPyiByKqDy8"
+                rel="noreferrer"
+                target="_blank">
+                here
+              </a>
+              .
             </p>
           </div>
           <div className="space-y-6">
