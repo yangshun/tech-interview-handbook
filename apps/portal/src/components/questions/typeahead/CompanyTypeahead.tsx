@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useCompanyOptions } from '~/components/shared/CompaniesTypeahead';
+import useCompanyOptions from '~/utils/shared/useCompanyOptions';
 
 import type { ExpandedTypeaheadProps } from './ExpandedTypeahead';
 import ExpandedTypeahead from './ExpandedTypeahead';

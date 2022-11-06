@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { TypeaheadOption } from '@tih/ui';
 import { Typeahead } from '@tih/ui';
 
-import { trpc } from '~/utils/trpc';
+import useCompanyOptions from '~/utils/shared/useCompanyOptions';
 
 type BaseProps = Pick<
   ComponentProps<typeof Typeahead>,
@@ -20,27 +20,6 @@ type Props = BaseProps &
     onSelect: (option: TypeaheadOption | null) => void;
     value?: TypeaheadOption | null;
   }>;
-
-export function useCompanyOptions(query: string) {
-  const companies = trpc.useQuery([
-    'companies.list',
-    {
-      name: query,
-    },
-  ]);
-
-  const { data, ...restQuery } = companies;
-
-  return {
-    data:
-      data?.map(({ id, name }) => ({
-        id,
-        label: name,
-        value: id,
-      })) ?? [],
-    ...restQuery,
-  };
-}
 
 export default function CompaniesTypeahead({
   onSelect,

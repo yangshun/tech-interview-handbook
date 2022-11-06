@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { CheckIcon } from '@heroicons/react/20/solid';
 import { Button } from '@tih/ui';
 
-import { useCompanyOptions } from '~/components/shared/CompaniesTypeahead';
-import { useJobTitleOptions } from '~/components/shared/JobTitlesTypeahead';
 import type { Month } from '~/components/shared/MonthYearPicker';
 import MonthYearPicker from '~/components/shared/MonthYearPicker';
+
+import useCompanyOptions from '~/utils/shared/useCompanyOptions';
+import useJobTitleOptions from '~/utils/shared/useJobTitleOptions';
 
 import CompanyTypeahead from '../typeahead/CompanyTypeahead';
 import LocationTypeahead, {
@@ -49,7 +50,7 @@ export default function CreateQuestionEncounterForm({
 
   const { data: allCompanyOptions } = useCompanyOptions('');
   const { data: allLocationOptions } = useLocationOptions('');
-  const allRoleOptions  = useJobTitleOptions('');
+  const allRoleOptions = useJobTitleOptions('');
 
   if (submitted) {
     return (
@@ -61,7 +62,7 @@ export default function CreateQuestionEncounterForm({
   }
 
   return (
-    <div className="flex items-center gap-2 flex-wrap">
+    <div className="flex flex-wrap items-center gap-2">
       <p className="text-md text-slate-600">
         I saw this question {step <= 1 ? 'at' : step === 2 ? 'for' : 'on'}
       </p>

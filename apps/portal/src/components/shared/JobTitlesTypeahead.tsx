@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { TypeaheadOption } from '@tih/ui';
 import { Typeahead } from '@tih/ui';
 
-import { JobTitleLabels } from './JobTitles';
+import useJobTitleOptions from '~/utils/shared/useJobTitleOptions';
 
 type BaseProps = Pick<
   ComponentProps<typeof Typeahead>,
@@ -23,23 +23,6 @@ type Props = BaseProps &
     onSelect: (option: TypeaheadOption | null) => void;
     value?: TypeaheadOption | null;
   }>;
-
-const sortedJobTitleOptions = Object.entries(JobTitleLabels)
-  .map(([slug, { label, ranking }]) => ({
-    id: slug,
-    label,
-    ranking,
-    value: slug,
-  }))
-  .sort((a, b) => b.ranking - a.ranking);
-
-export function useJobTitleOptions(query: string) {
-  const jobTitles = sortedJobTitleOptions.filter(({ label }) =>
-    label.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()),
-  );
-
-  return jobTitles;
-}
 
 export default function JobTitlesTypeahead({
   excludedValues,

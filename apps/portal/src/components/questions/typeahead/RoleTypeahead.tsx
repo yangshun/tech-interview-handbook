@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useJobTitleOptions } from '~/components/shared/JobTitlesTypeahead';
+import useJobTitleOptions from '~/utils/shared/useJobTitleOptions';
 
 import type { ExpandedTypeaheadProps } from './ExpandedTypeahead';
 import ExpandedTypeahead from './ExpandedTypeahead';
