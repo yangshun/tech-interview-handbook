@@ -200,7 +200,7 @@ const calculatePercentile = (
 
     if (salary !== lastOfferSalary) {
       if (salary === offerToCalculateSalary && offerToCalculateIndex === -1) {
-        offerToCalculateIndex = i;
+        offerToCalculateIndex = numberOfNoDuplicateOffers;
       }
       numberOfNoDuplicateOffers++;
       lastOfferSalary = salary;
