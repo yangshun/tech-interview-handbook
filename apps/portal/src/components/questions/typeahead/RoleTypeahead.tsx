@@ -11,13 +11,15 @@ export type RoleTypeaheadProps = Omit<
   'label' | 'onQueryChange' | 'options'
 >;
 
-const ROLES: FilterChoices = Object.entries(JobTitleLabels).map(
-  ([slug, { label }]) => ({
+const ROLES: FilterChoices = Object.entries(JobTitleLabels)
+  .map(([slug, { label, ranking }]) => ({
     id: slug,
     label,
+    ranking,
     value: slug,
-  }),
-);
+  }))
+  .sort((a, b) => b.ranking - a.ranking);
+
 export default function RoleTypeahead(props: RoleTypeaheadProps) {
   const [query, setQuery] = useState('');
 
