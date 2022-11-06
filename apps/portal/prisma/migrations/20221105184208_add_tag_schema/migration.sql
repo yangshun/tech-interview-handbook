@@ -1,22 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `QuestionQuestionTagEntry` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `QuestionTag` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE "QuestionQuestionTagEntry" DROP CONSTRAINT "QuestionQuestionTagEntry_questionId_fkey";
-
--- DropForeignKey
-ALTER TABLE "QuestionQuestionTagEntry" DROP CONSTRAINT "QuestionQuestionTagEntry_tagId_fkey";
-
--- DropTable
-DROP TABLE "QuestionQuestionTagEntry";
-
--- DropTable
-DROP TABLE "QuestionTag";
-
 -- CreateTable
 CREATE TABLE "QuestionsQuestionTag" (
     "id" TEXT NOT NULL,
