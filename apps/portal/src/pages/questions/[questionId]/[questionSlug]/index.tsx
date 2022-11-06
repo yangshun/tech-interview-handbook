@@ -2,13 +2,13 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button, Collapsible, HorizontalDivider, TextArea } from '@tih/ui';
 
 import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullQuestionCard from '~/components/questions/card/question/FullQuestionCard';
 import QuestionAnswerCard from '~/components/questions/card/QuestionAnswerCard';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
+import BackButtonLayout from '~/components/questions/layout/BackButtonLayout';
 import PaginationLoadMoreButton from '~/components/questions/PaginationLoadMoreButton';
 import SortOptionsSelect from '~/components/questions/SortOptionsSelect';
 
@@ -182,168 +182,154 @@ export default function QuestionPage() {
           {question.content} - {APP_TITLE}
         </title>
       </Head>
-      <div className="flex w-full flex-1 items-stretch pb-4">
-        <div className="flex items-baseline gap-2 py-4 pl-4">
-          <Button
-            addonPosition="start"
-            display="inline"
-            href="/questions/browse"
-            icon={ArrowSmallLeftIcon}
-            label="Back"
-            variant="secondary"
-          />
-        </div>
-        <div className="flex w-full justify-center overflow-y-auto py-4 px-5">
-          <div className="flex max-w-7xl flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-2 rounded-md border bg-white p-4">
-              <FullQuestionCard
-                {...question}
-                companies={relabeledAggregatedEncounters?.companyCounts ?? {}}
-                countries={relabeledAggregatedEncounters?.countryCounts ?? {}}
-                createEncounterButtonText="I received this too"
-                questionId={question.id}
-                receivedCount={undefined}
-                roles={relabeledAggregatedEncounters?.roleCounts ?? {}}
-                timestamp={question.seenAt.toLocaleDateString(undefined, {
-                  month: 'short',
-                  year: 'numeric',
-                })}
-                upvoteCount={question.numVotes}
-                onReceivedSubmit={async (data) => {
-                  await addEncounterAsync({
-                    cityId: data.cityId,
-                    companyId: data.company,
-                    countryId: data.countryId,
-                    questionId: questionId as string,
-                    role: data.role,
-                    seenAt: data.seenAt,
-                    stateId: data.stateId,
-                  });
-                }}
-              />
-              <div className="ml-16 mr-2">
-                <Collapsible
-                  defaultOpen={true}
-                  label={
-                    <div className="text-primary-700">{`${question.numComments} comment(s)`}</div>
-                  }>
-                  <div className="">
-                    <div className="flex flex-col gap-2 text-black">
-                      <div className="flex justify-end gap-2">
-                        <div className="flex items-end gap-2">
-                          <SortOptionsSelect
-                            sortOrderValue={commentSortOrder}
-                            sortTypeValue={commentSortType}
-                            onSortOrderChange={setCommentSortOrder}
-                            onSortTypeChange={setCommentSortType}
-                          />
-                        </div>
-                      </div>
-                      {(commentData?.pages ?? []).flatMap(
-                        ({ processedQuestionCommentsData: comments }) =>
-                          comments.map((comment) => (
-                            <AnswerCommentListItem
-                              key={comment.id}
-                              answerCommentId={comment.id}
-                              authorImageUrl={comment.userImage}
-                              authorName={comment.user}
-                              content={comment.content}
-                              createdAt={comment.createdAt}
-                              upvoteCount={comment.numVotes}
-                            />
-                          )),
-                      )}
-                      <PaginationLoadMoreButton query={commentInfiniteQuery} />
-                      <form
-                        className="mt-4"
-                        onSubmit={handleCommentSubmitClick(
-                          handleSubmitComment,
-                        )}>
-                        <TextArea
-                          {...commentRegister('commentContent', {
-                            minLength: 1,
-                            required: true,
-                          })}
-                          label="Post a comment"
-                          required={true}
-                          resize="vertical"
-                          rows={2}
+      <BackButtonLayout href="/questions/browse">
+        <div className="flex max-w-7xl flex-1 flex-col gap-2">
+          <div className="flex flex-col gap-2 rounded-md border bg-white p-4">
+            <FullQuestionCard
+              {...question}
+              companies={relabeledAggregatedEncounters?.companyCounts ?? {}}
+              countries={relabeledAggregatedEncounters?.countryCounts ?? {}}
+              createEncounterButtonText="I received this too"
+              questionId={question.id}
+              receivedCount={undefined}
+              roles={relabeledAggregatedEncounters?.roleCounts ?? {}}
+              timestamp={question.seenAt.toLocaleDateString(undefined, {
+                month: 'short',
+                year: 'numeric',
+              })}
+              upvoteCount={question.numVotes}
+              onReceivedSubmit={async (data) => {
+                await addEncounterAsync({
+                  cityId: data.cityId,
+                  companyId: data.company,
+                  countryId: data.countryId,
+                  questionId: questionId as string,
+                  role: data.role,
+                  seenAt: data.seenAt,
+                  stateId: data.stateId,
+                });
+              }}
+            />
+            <div className="ml-16 mr-2">
+              <Collapsible
+                defaultOpen={true}
+                label={
+                  <div className="text-primary-700">{`${question.numComments} comment(s)`}</div>
+                }>
+                <div className="">
+                  <div className="flex flex-col gap-2 text-black">
+                    <div className="flex justify-end gap-2">
+                      <div className="flex items-end gap-2">
+                        <SortOptionsSelect
+                          sortOrderValue={commentSortOrder}
+                          sortTypeValue={commentSortType}
+                          onSortOrderChange={setCommentSortOrder}
+                          onSortTypeChange={setCommentSortType}
                         />
-                        <div className="my-3 flex justify-between">
-                          <Button
-                            disabled={!isCommentDirty || !isCommentValid}
-                            label="Post"
-                            type="submit"
-                            variant="primary"
-                          />
-                        </div>
-                      </form>
+                      </div>
                     </div>
+                    {(commentData?.pages ?? []).flatMap(
+                      ({ processedQuestionCommentsData: comments }) =>
+                        comments.map((comment) => (
+                          <AnswerCommentListItem
+                            key={comment.id}
+                            answerCommentId={comment.id}
+                            authorImageUrl={comment.userImage}
+                            authorName={comment.user}
+                            content={comment.content}
+                            createdAt={comment.createdAt}
+                            upvoteCount={comment.numVotes}
+                          />
+                        )),
+                    )}
+                    <PaginationLoadMoreButton query={commentInfiniteQuery} />
+                    <form
+                      className="mt-4"
+                      onSubmit={handleCommentSubmitClick(handleSubmitComment)}>
+                      <TextArea
+                        {...commentRegister('commentContent', {
+                          minLength: 1,
+                          required: true,
+                        })}
+                        label="Post a comment"
+                        required={true}
+                        resize="vertical"
+                        rows={2}
+                      />
+                      <div className="my-3 flex justify-between">
+                        <Button
+                          disabled={!isCommentDirty || !isCommentValid}
+                          label="Post"
+                          type="submit"
+                          variant="primary"
+                        />
+                      </div>
+                    </form>
                   </div>
-                </Collapsible>
-              </div>
+                </div>
+              </Collapsible>
             </div>
-            <HorizontalDivider />
-            <form onSubmit={handleSubmit(handleSubmitAnswer)}>
-              <div className="flex flex-col gap-2">
-                <p className="text-md font-semibold">Contribute your answer</p>
-                <TextArea
-                  {...answerRegister('answerContent', {
-                    minLength: 1,
-                    required: true,
-                  })}
-                  isLabelHidden={true}
-                  label="Contribute your answer"
-                  required={true}
-                  resize="vertical"
-                  rows={5}
-                />
-              </div>
-              <div className="mt-3 mb-1 flex justify-between">
-                <Button
-                  disabled={!isDirty || !isValid}
-                  label="Contribute"
-                  type="submit"
-                  variant="primary"
-                />
-              </div>
-            </form>
-            <div className="flex items-center justify-between gap-2">
-              <p className="text-xl font-semibold">
-                {question.numAnswers} answers
-              </p>
-              <div className="flex items-end gap-2">
-                <SortOptionsSelect
-                  sortOrderValue={answerSortOrder}
-                  sortTypeValue={answerSortType}
-                  onSortOrderChange={setAnswerSortOrder}
-                  onSortTypeChange={setAnswerSortType}
-                />
-              </div>
-            </div>
-            {/* TODO: Add button to load more */}
-            {(answerData?.pages ?? []).flatMap(
-              ({ processedAnswersData: answers }) =>
-                answers.map((answer) => (
-                  <QuestionAnswerCard
-                    key={answer.id}
-                    answerId={answer.id}
-                    authorImageUrl={answer.userImage}
-                    authorName={answer.user}
-                    commentCount={answer.numComments}
-                    content={answer.content}
-                    createdAt={answer.createdAt}
-                    href={`${router.asPath}/answer/${answer.id}/${createSlug(
-                      answer.content,
-                    )}`}
-                    upvoteCount={answer.numVotes}
-                  />
-                )),
-            )}
-            <PaginationLoadMoreButton query={answerInfiniteQuery} />
           </div>
+          <HorizontalDivider />
+          <form onSubmit={handleSubmit(handleSubmitAnswer)}>
+            <div className="flex flex-col gap-2">
+              <p className="text-md font-semibold">Contribute your answer</p>
+              <TextArea
+                {...answerRegister('answerContent', {
+                  minLength: 1,
+                  required: true,
+                })}
+                isLabelHidden={true}
+                label="Contribute your answer"
+                required={true}
+                resize="vertical"
+                rows={5}
+              />
+            </div>
+            <div className="mt-3 mb-1 flex justify-between">
+              <Button
+                disabled={!isDirty || !isValid}
+                label="Contribute"
+                type="submit"
+                variant="primary"
+              />
+            </div>
+          </form>
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-xl font-semibold">
+              {question.numAnswers} answers
+            </p>
+            <div className="flex items-end gap-2">
+              <SortOptionsSelect
+                sortOrderValue={answerSortOrder}
+                sortTypeValue={answerSortType}
+                onSortOrderChange={setAnswerSortOrder}
+                onSortTypeChange={setAnswerSortType}
+              />
+            </div>
+          </div>
+          {/* TODO: Add button to load more */}
+          {(answerData?.pages ?? []).flatMap(
+            ({ processedAnswersData: answers }) =>
+              answers.map((answer) => (
+                <QuestionAnswerCard
+                  key={answer.id}
+                  answerId={answer.id}
+                  authorImageUrl={answer.userImage}
+                  authorName={answer.user}
+                  commentCount={answer.numComments}
+                  content={answer.content}
+                  createdAt={answer.createdAt}
+                  href={`${router.asPath}/answer/${answer.id}/${createSlug(
+                    answer.content,
+                  )}`}
+                  upvoteCount={answer.numVotes}
+                />
+              )),
+          )}
+          <PaginationLoadMoreButton query={answerInfiniteQuery} />
         </div>
-      </div>
+      </BackButtonLayout>
     </>
   );
 }
