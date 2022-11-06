@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { Button, TextArea } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
-import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullAnswerCard from '~/components/questions/card/FullAnswerCard';
+import AnswerCommentListItem from '~/components/questions/comments/AnswerCommentListItem';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 import BackButtonLayout from '~/components/questions/layout/BackButtonLayout';
 import PaginationLoadMoreButton from '~/components/questions/PaginationLoadMoreButton';
@@ -158,19 +158,18 @@ export default function QuestionPage() {
                 </div>
               </div>
               {/* TODO: Allow to load more pages */}
-              {(answerCommentsData?.pages ?? []).flatMap(
-                ({ processedQuestionAnswerCommentsData: comments }) =>
-                  comments.map((comment) => (
-                    <AnswerCommentListItem
-                      key={comment.id}
-                      answerCommentId={comment.id}
-                      authorImageUrl={comment.userImage}
-                      authorName={comment.user}
-                      content={comment.content}
-                      createdAt={comment.createdAt}
-                      upvoteCount={comment.numVotes}
-                    />
-                  )),
+              {(answerCommentsData?.pages ?? []).flatMap(({ data: comments }) =>
+                comments.map((comment) => (
+                  <AnswerCommentListItem
+                    key={comment.id}
+                    answerCommentId={comment.id}
+                    authorImageUrl={comment.userImage}
+                    authorName={comment.user}
+                    content={comment.content}
+                    createdAt={comment.createdAt}
+                    upvoteCount={comment.numVotes}
+                  />
+                )),
               )}
               <PaginationLoadMoreButton query={answerCommentInfiniteQuery} />
             </div>

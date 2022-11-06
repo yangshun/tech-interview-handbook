@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 
-import { useAnswerVote } from '~/utils/questions/useVote';
+import useAnswerVote from '~/utils/questions/vote/useAnswerVote';
 
 import type { VotingButtonsProps } from '../VotingButtons';
 import VotingButtons from '../VotingButtons';

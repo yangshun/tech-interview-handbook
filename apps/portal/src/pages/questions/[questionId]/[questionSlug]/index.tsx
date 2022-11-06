@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import { Button, Collapsible, HorizontalDivider, TextArea } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
-import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullQuestionCard from '~/components/questions/card/question/FullQuestionCard';
 import QuestionAnswerCard from '~/components/questions/card/QuestionAnswerCard';
+import QuestionCommentListItem from '~/components/questions/comments/QuestionCommentListItem';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 import BackButtonLayout from '~/components/questions/layout/BackButtonLayout';
 import PaginationLoadMoreButton from '~/components/questions/PaginationLoadMoreButton';
@@ -245,19 +245,18 @@ export default function QuestionPage() {
                         />
                       </div>
                     </div>
-                    {(commentData?.pages ?? []).flatMap(
-                      ({ processedQuestionCommentsData: comments }) =>
-                        comments.map((comment) => (
-                          <AnswerCommentListItem
-                            key={comment.id}
-                            answerCommentId={comment.id}
-                            authorImageUrl={comment.userImage}
-                            authorName={comment.user}
-                            content={comment.content}
-                            createdAt={comment.createdAt}
-                            upvoteCount={comment.numVotes}
-                          />
-                        )),
+                    {(commentData?.pages ?? []).flatMap(({ data: comments }) =>
+                      comments.map((comment) => (
+                        <QuestionCommentListItem
+                          key={comment.id}
+                          authorImageUrl={comment.userImage}
+                          authorName={comment.user}
+                          content={comment.content}
+                          createdAt={comment.createdAt}
+                          questionCommentId={comment.id}
+                          upvoteCount={comment.numVotes}
+                        />
+                      )),
                     )}
                     <PaginationLoadMoreButton query={commentInfiniteQuery} />
                     <form
@@ -326,23 +325,22 @@ export default function QuestionPage() {
             </div>
           </div>
           {/* TODO: Add button to load more */}
-          {(answerData?.pages ?? []).flatMap(
-            ({ processedAnswersData: answers }) =>
-              answers.map((answer) => (
-                <QuestionAnswerCard
-                  key={answer.id}
-                  answerId={answer.id}
-                  authorImageUrl={answer.userImage}
-                  authorName={answer.user}
-                  commentCount={answer.numComments}
-                  content={answer.content}
-                  createdAt={answer.createdAt}
-                  href={`${router.asPath}/answer/${answer.id}/${createSlug(
-                    answer.content,
-                  )}`}
-                  upvoteCount={answer.numVotes}
-                />
-              )),
+          {(answerData?.pages ?? []).flatMap(({ data: answers }) =>
+            answers.map((answer) => (
+              <QuestionAnswerCard
+                key={answer.id}
+                answerId={answer.id}
+                authorImageUrl={answer.userImage}
+                authorName={answer.user}
+                commentCount={answer.numComments}
+                content={answer.content}
+                createdAt={answer.createdAt}
+                href={`${router.asPath}/answer/${answer.id}/${createSlug(
+                  answer.content,
+                )}`}
+                upvoteCount={answer.numVotes}
+              />
+            )),
           )}
           <PaginationLoadMoreButton query={answerInfiniteQuery} />
         </div>

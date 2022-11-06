@@ -56,35 +56,36 @@ export const questionsAnswerCommentRouter = createRouter().query(
             answerId,
           },
         });
-      const processedQuestionAnswerCommentsData = questionAnswerCommentsData.map((data) => {
-        const votes: number = data.votes.reduce(
-          (previousValue: number, currentValue) => {
-            let result: number = previousValue;
+      const processedQuestionAnswerCommentsData =
+        questionAnswerCommentsData.map((data) => {
+          const votes: number = data.votes.reduce(
+            (previousValue: number, currentValue) => {
+              let result: number = previousValue;
 
-            switch (currentValue.vote) {
-              case Vote.UPVOTE:
-                result += 1;
-                break;
-              case Vote.DOWNVOTE:
-                result -= 1;
-                break;
-            }
-            return result;
-          },
-          0,
-        );
+              switch (currentValue.vote) {
+                case Vote.UPVOTE:
+                  result += 1;
+                  break;
+                case Vote.DOWNVOTE:
+                  result -= 1;
+                  break;
+              }
+              return result;
+            },
+            0,
+          );
 
-        const answerComment: AnswerComment = {
-          content: data.content,
-          createdAt: data.createdAt,
-          id: data.id,
-          numVotes: votes,
-          updatedAt: data.updatedAt,
-          user: data.user?.name ?? '',
-          userImage: data.user?.image ?? '',
-        };
-        return answerComment;
-      });
+          const answerComment: AnswerComment = {
+            content: data.content,
+            createdAt: data.createdAt,
+            id: data.id,
+            numVotes: votes,
+            updatedAt: data.updatedAt,
+            user: data.user?.name ?? '',
+            userImage: data.user?.image ?? '',
+          };
+          return answerComment;
+        });
 
       let nextCursor: typeof cursor | undefined = undefined;
 
@@ -98,9 +99,9 @@ export const questionsAnswerCommentRouter = createRouter().query(
       }
 
       return {
+        data: processedQuestionAnswerCommentsData,
         nextCursor,
-        processedQuestionAnswerCommentsData,
-      }
+      };
     },
   },
 );

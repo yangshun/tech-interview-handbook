@@ -256,17 +256,14 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
         }
 
         if (vote.vote === Vote.UPVOTE) {
-          tx.questionsQuestionCommentVote.delete({
-            where: {
-              id: vote.id,
-            },
-          });
-
-          const createdVote = await tx.questionsQuestionCommentVote.create({
+          const updatedVote = await tx.questionsQuestionCommentVote.update({
             data: {
               questionCommentId,
               userId,
               vote: Vote.DOWNVOTE,
+            },
+            where: {
+              id: vote.id,
             },
           });
 
@@ -281,7 +278,7 @@ export const questionsQuestionCommentUserRouter = createProtectedRouter()
             },
           });
 
-          return createdVote;
+          return updatedVote;
         }
       });
     },
