@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Collapsible, HorizontalDivider, TextArea } from '@tih/ui';
 
+import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullQuestionCard from '~/components/questions/card/question/FullQuestionCard';
 import QuestionAnswerCard from '~/components/questions/card/QuestionAnswerCard';
@@ -31,6 +32,7 @@ export type QuestionCommentData = {
 
 export default function QuestionPage() {
   const router = useRouter();
+  const { event } = useGoogleAnalytics();
 
   const [answerSortOrder, setAnswerSortOrder] = useState<SortOrder>(
     SortOrder.DESC,
@@ -108,6 +110,11 @@ export default function QuestionPage() {
         utils.invalidateQueries(
           'questions.questions.comments.getQuestionComments',
         );
+        event({
+          action: 'questions.comment',
+          category: 'engagement',
+          label: 'comment on question',
+        });
       },
     },
   );
@@ -135,6 +142,11 @@ export default function QuestionPage() {
     {
       onSuccess: () => {
         utils.invalidateQueries('questions.answers.getAnswers');
+        event({
+          action: 'questions.answer',
+          category: 'engagement',
+          label: 'add answer to question',
+        });
       },
     },
   );
@@ -147,6 +159,11 @@ export default function QuestionPage() {
           'questions.questions.encounters.getAggregatedEncounters',
         );
         utils.invalidateQueries('questions.questions.getQuestionById');
+        event({
+          action: 'questions.create_question',
+          category: 'engagement',
+          label: 'create question encounter',
+        });
       },
     },
   );
