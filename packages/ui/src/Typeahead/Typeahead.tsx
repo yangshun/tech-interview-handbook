@@ -3,7 +3,9 @@ import type { InputHTMLAttributes } from 'react';
 import { useId } from 'react';
 import { Fragment, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
+
+import { Spinner } from '..';
 
 export type TypeaheadOption = Readonly<{
   // String value to uniquely identify the option.
@@ -27,6 +29,7 @@ type Attributes = Pick<
 type Props = Readonly<{
   errorMessage?: React.ReactNode;
   isLabelHidden?: boolean;
+  isLoading?: boolean;
   label: string;
   // Minimum query length before any results will be shown.
   minQueryLength?: number;
@@ -81,6 +84,7 @@ export default function Typeahead({
   disabled = false,
   errorMessage,
   isLabelHidden,
+  isLoading = false,
   label,
   minQueryLength = 0,
   noResultsMessage = 'No results',
@@ -163,14 +167,20 @@ export default function Typeahead({
               }}
               {...props}
             />
-            <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
-              <ChevronDownIcon
-                aria-hidden="true"
-                className="h-5 w-5 text-slate-400"
-              />
-            </Combobox.Button>
+            {isLoading ? (
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2">
+                <Spinner size="xs" />
+              </div>
+            ) : (
+              <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+                <ChevronDownIcon
+                  aria-hidden="true"
+                  className="h-5 w-5 text-slate-400"
+                />
+              </Combobox.Button>
+            )}
           </div>
-          {query.length >= minQueryLength && (
+          {query.length >= minQueryLength && !isLoading && (
             <Transition
               afterLeave={() => setQuery('')}
               as={Fragment}
@@ -198,13 +208,26 @@ export default function Typeahead({
                       }
                       value={option}>
                       {({ selected }) => (
-                        <span
-                          className={clsx(
-                            'block truncate',
-                            selected ? 'font-medium' : 'font-normal',
-                          )}>
-                          {option.label}
-                        </span>
+                        <>
+                          <span
+                            className={clsx(
+                              'block truncate',
+                              selected && 'font-medium',
+                            )}>
+                            {option.label}
+                          </span>
+                          {selected && (
+                            <span
+                              className={clsx(
+                                'absolute inset-y-0 right-0 flex items-center pr-4',
+                              )}>
+                              <CheckIcon
+                                aria-hidden="true"
+                                className="h-5 w-5"
+                              />
+                            </span>
+                          )}
+                        </>
                       )}
                     </Combobox.Option>
                   ))
