@@ -57,6 +57,134 @@ const searchOfferPercentile = (
   return -1;
 };
 
+const getSimilarOffers = async (
+  prisma: PrismaClient<
+    Prisma.PrismaClientOptions,
+    never,
+    Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
+  >,
+  comparedOffer: Offer,
+  companyIdFilter: string | undefined,
+) => {
+  if (
+    !comparedOffer.profile.background ||
+    comparedOffer.profile.background.totalYoe == null
+  ) {
+    throw new TRPCError({
+      code: 'NOT_FOUND',
+      message: 'YOE not found',
+    });
+  }
+
+  const yoe = comparedOffer.profile.background.totalYoe as number;
+  const monthYearReceived = new Date(comparedOffer.monthYearReceived);
+  monthYearReceived.setFullYear(monthYearReceived.getFullYear() - 1);
+
+  return await prisma.offersOffer.findMany({
+    include: {
+      company: true,
+      location: {
+        include: {
+          state: {
+            include: {
+              country: true,
+            },
+          },
+        },
+      },
+      offersFullTime: {
+        include: {
+          totalCompensation: true,
+        },
+      },
+      offersIntern: {
+        include: {
+          monthlySalary: true,
+        },
+      },
+      profile: {
+        include: {
+          background: {
+            include: {
+              experiences: {
+                include: {
+                  company: true,
+                  location: {
+                    include: {
+                      state: {
+                        include: {
+                          country: true,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    orderBy: [
+      {
+        offersFullTime: {
+          totalCompensation: {
+            baseValue: 'desc',
+          },
+        },
+      },
+      {
+        offersIntern: {
+          monthlySalary: {
+            baseValue: 'desc',
+          },
+        },
+      },
+    ],
+    where: {
+      AND: [
+        {
+          location: comparedOffer.location,
+        },
+        {
+          companyId: companyIdFilter,
+        },
+        {
+          monthYearReceived: {
+            gte: monthYearReceived,
+          },
+        },
+        {
+          OR: [
+            {
+              offersFullTime: {
+                title: comparedOffer.offersFullTime?.title,
+              },
+              offersIntern: {
+                title: comparedOffer.offersIntern?.title,
+              },
+            },
+          ],
+        },
+        {
+          profile: {
+            background: {
+              AND: [
+                {
+                  totalYoe: {
+                    gte: Math.max(yoe - 1, 0),
+                    lte: yoe + 1,
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  });
+};
+
 export const generateAnalysis = async (params: {
   ctx: {
     prisma: PrismaClient<
@@ -136,120 +264,11 @@ export const generateAnalysis = async (params: {
 
   const overallHighestOffer = offers[0];
 
-  if (
-    !overallHighestOffer.profile.background ||
-    overallHighestOffer.profile.background.totalYoe == null
-  ) {
-    throw new TRPCError({
-      code: 'NOT_FOUND',
-      message: 'YOE not found',
-    });
-  }
-
-  const yoe = overallHighestOffer.profile.background.totalYoe as number;
-  const monthYearReceived = new Date(overallHighestOffer.monthYearReceived);
-  monthYearReceived.setFullYear(monthYearReceived.getFullYear() - 1);
-
-  let similarOffers = await ctx.prisma.offersOffer.findMany({
-    include: {
-      company: true,
-      location: {
-        include: {
-          state: {
-            include: {
-              country: true,
-            },
-          },
-        },
-      },
-      offersFullTime: {
-        include: {
-          totalCompensation: true,
-        },
-      },
-      offersIntern: {
-        include: {
-          monthlySalary: true,
-        },
-      },
-      profile: {
-        include: {
-          background: {
-            include: {
-              experiences: {
-                include: {
-                  company: true,
-                  location: {
-                    include: {
-                      state: {
-                        include: {
-                          country: true,
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-    orderBy: [
-      {
-        offersFullTime: {
-          totalCompensation: {
-            baseValue: 'desc',
-          },
-        },
-      },
-      {
-        offersIntern: {
-          monthlySalary: {
-            baseValue: 'desc',
-          },
-        },
-      },
-    ],
-    where: {
-      AND: [
-        {
-          location: overallHighestOffer.location,
-        },
-        {
-          monthYearReceived: {
-            gte: monthYearReceived,
-          },
-        },
-        {
-          OR: [
-            {
-              offersFullTime: {
-                title: overallHighestOffer.offersFullTime?.title,
-              },
-              offersIntern: {
-                title: overallHighestOffer.offersIntern?.title,
-              },
-            },
-          ],
-        },
-        {
-          profile: {
-            background: {
-              AND: [
-                {
-                  totalYoe: {
-                    gte: Math.max(yoe - 1, 0),
-                    lte: yoe + 1,
-                  },
-                },
-              ],
-            },
-          },
-        },
-      ],
-    },
-  });
+  let similarOffers = await getSimilarOffers(
+    ctx.prisma,
+    overallHighestOffer,
+    undefined,
+  );
 
   const offerIds = offers.map((offer) => offer.id);
 
@@ -261,11 +280,13 @@ export const generateAnalysis = async (params: {
     }
   });
 
-  const companyAnalysis = Array.from(companyMap.values()).map(
-    (companyOffer) => {
+  const companyAnalysis = await Promise.all(
+    Array.from(companyMap.values()).map(async (companyOffer) => {
       // TODO: Refactor calculating analysis into a function
-      let similarCompanyOffers = similarOffers.filter(
-        (offer) => offer.companyId === companyOffer.companyId,
+      let similarCompanyOffers = await getSimilarOffers(
+        ctx.prisma,
+        companyOffer,
+        companyOffer.companyId,
       );
 
       const companyIndex = searchOfferPercentile(
@@ -300,7 +321,7 @@ export const generateAnalysis = async (params: {
         percentile: companyPercentile,
         topSimilarOffers: topPercentileCompanyOffers,
       };
-    },
+    }),
   );
 
   // OVERALL ANALYSIS
