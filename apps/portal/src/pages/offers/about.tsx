@@ -2,25 +2,25 @@ import Container from '~/components/shared/Container';
 
 const people = [
   {
-    bio: 'I like to play games so I treat life like a game.',
+    bio: 'I like to play games, so I treat life like a game. I collect achievements by crossing items off my bucket list.',
     imageUrl: '/team/bryann.jpg',
     name: 'Bryann Yeap',
     role: 'Back End Engineer',
   },
   {
-    bio: 'I am always up for sushi.',
+    bio: 'I dream of eating hot food in the cold winter, falling off the grid in a skydive, and watching auroras dance in the night sky. For now, I am living in reality as a full-time coder.',
     imageUrl: '/team/ai-ling.jpg',
     name: 'Hong Ai Ling',
-    role: 'Back End Engineer',
-  },
-  {
-    bio: 'I love to watch football and code.',
-    imageUrl: '/team/stuart.jpg',
-    name: 'Stuart Long',
     role: 'Front End Engineer',
   },
   {
-    bio: 'Ziqing is a human who thrives under pressure, coffee and cat. In her own time, she likes playing the flute, building fun stuff with friends and watching animes.',
+    bio: 'I’m an avid Manchester United fan who loves to code. To fuel my late night coding sessions, I love to brew my own coffee from different parts of the world.',
+    imageUrl: '/team/stuart.jpg',
+    name: 'Stuart Long',
+    role: 'Back End Engineer',
+  },
+  {
+    bio: 'I thrive under pressure, coffee and cat. In my own time, I like playing the flute, building fun stuff with friends and watching animes.',
     imageUrl: '/team/ziqing.jpg',
     name: 'Zhang Ziqing',
     role: 'Front End Engineer',
