@@ -67,8 +67,8 @@ export default function AddToListDropdown({
     document.addEventListener('click', handleClickOutside, true);
   };
 
-  const handleClickOutside = (e: MouseEvent) => {
-    if (ref.current && !ref.current.contains(e.target as Node)) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (ref.current && !ref.current.contains(event.target as Node)) {
       setMenuOpened(false);
       document.removeEventListener('click', handleClickOutside, true);
     }
