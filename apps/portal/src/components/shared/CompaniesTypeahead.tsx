@@ -21,12 +21,7 @@ type Props = BaseProps &
     value?: TypeaheadOption | null;
   }>;
 
-export default function CompaniesTypeahead({
-  onSelect,
-  value,
-  ...props
-}: Props) {
-  const [query, setQuery] = useState('');
+export function useCompanyOptions(query: string) {
   const companies = trpc.useQuery([
     'companies.list',
     {
@@ -34,7 +29,27 @@ export default function CompaniesTypeahead({
     },
   ]);
 
-  const { data, isLoading } = companies;
+  const { data, ...restQuery } = companies;
+
+  return {
+    data:
+      data?.map(({ id, name }) => ({
+        id,
+        label: name,
+        value: id,
+      })) ?? [],
+    ...restQuery,
+  };
+}
+
+export default function CompaniesTypeahead({
+  onSelect,
+  value,
+  ...props
+}: Props) {
+  const [query, setQuery] = useState('');
+
+  const { data: companyOptions, isLoading } = useCompanyOptions(query);
 
   return (
     <Typeahead
@@ -42,13 +57,7 @@ export default function CompaniesTypeahead({
       label="Company"
       noResultsMessage="No companies found"
       nullable={true}
-      options={
-        data?.map(({ id, name }) => ({
-          id,
-          label: name,
-          value: id,
-        })) ?? []
-      }
+      options={companyOptions}
       value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}

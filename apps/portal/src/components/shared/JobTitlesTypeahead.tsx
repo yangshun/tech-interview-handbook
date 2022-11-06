@@ -24,6 +24,23 @@ type Props = BaseProps &
     value?: TypeaheadOption | null;
   }>;
 
+const sortedJobTitleOptions = Object.entries(JobTitleLabels)
+  .map(([slug, { label, ranking }]) => ({
+    id: slug,
+    label,
+    ranking,
+    value: slug,
+  }))
+  .sort((a, b) => b.ranking - a.ranking);
+
+export function useJobTitleOptions(query: string) {
+  const jobTitles = sortedJobTitleOptions.filter(({ label }) =>
+    label.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()),
+  );
+
+  return jobTitles;
+}
+
 export default function JobTitlesTypeahead({
   excludedValues,
   label: labelProp = 'Job Title',
@@ -33,18 +50,10 @@ export default function JobTitlesTypeahead({
   ...props
 }: Props) {
   const [query, setQuery] = useState('');
-  const options = Object.entries(JobTitleLabels)
-    .map(([slug, { label, ranking }]) => ({
-      id: slug,
-      label,
-      ranking,
-      value: slug,
-    }))
-    .filter(({ label }) =>
-      label.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()),
-    )
-    .filter((option) => !excludedValues?.has(option.value))
-    .sort((a, b) => b.ranking - a.ranking);
+  const jobTitleOptions = useJobTitleOptions(query);
+  const options = jobTitleOptions.filter(
+    (option) => !excludedValues?.has(option.value),
+  );
 
   return (
     <Typeahead

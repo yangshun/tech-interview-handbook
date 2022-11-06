@@ -16,14 +16,8 @@ export type LocationTypeaheadProps = Omit<
   onSuggestionClick?: (option: Location) => void;
 };
 
-export default function LocationTypeahead({
-  onSelect,
-  onSuggestionClick,
-  ...restProps
-}: LocationTypeaheadProps) {
-  const [query, setQuery] = useState('');
-
-  const { data: locations, isLoading } = trpc.useQuery([
+export function useLocationOptions(query: string) {
+  const { data: locations, ...restQuery } = trpc.useQuery([
     'locations.cities.list',
     {
       name: query,
@@ -42,6 +36,21 @@ export default function LocationTypeahead({
       })) ?? []
     );
   }, [locations]);
+
+  return {
+    data: locationOptions,
+    ...restQuery,
+  };
+}
+
+export default function LocationTypeahead({
+  onSelect,
+  onSuggestionClick,
+  ...restProps
+}: LocationTypeaheadProps) {
+  const [query, setQuery] = useState('');
+
+  const { data: locationOptions, isLoading } = useLocationOptions(query);
 
   return (
     <ExpandedTypeahead

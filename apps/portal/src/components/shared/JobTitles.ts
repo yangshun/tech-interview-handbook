@@ -78,5 +78,5 @@ export const JobTitleLabels: JobTitleData = {
 export type JobTitleType = keyof typeof JobTitleLabels;
 
 export function getLabelForJobTitleType(jobTitle: JobTitleType): string {
-  return JobTitleLabels[jobTitle].label;
+  return JobTitleLabels[jobTitle]?.label ?? '';
 }

@@ -1,5 +1,6 @@
 import type { ComponentProps } from 'react';
 import { useState } from 'react';
+import type { Country } from '@prisma/client';
 import type { TypeaheadOption } from '@tih/ui';
 import { Typeahead } from '@tih/ui';
 
@@ -33,6 +34,48 @@ function stringPositionComparator(a: string, b: string, query: string): number {
   );
 }
 
+export function useCompareCountry(query: string) {
+  return (a: Country, b: Country) => {
+    const normalizedQueryString = query.trim().toLocaleLowerCase();
+    if (
+      a.code.toLocaleLowerCase() === normalizedQueryString ||
+      b.code.toLocaleLowerCase() === normalizedQueryString
+    ) {
+      return stringPositionComparator(a.code, b.code, normalizedQueryString);
+    }
+
+    return stringPositionComparator(a.name, b.name, normalizedQueryString);
+  };
+}
+
+export function useCountryOptions(query: string) {
+  const countries = trpc.useQuery([
+    'locations.countries.list',
+    {
+      name: query,
+    },
+  ]);
+
+  const { data, ...restQuery } = countries;
+
+  const compareCountry = useCompareCountry(query);
+
+  const countryOptions = (data ?? [])
+    // Client-side sorting by position of query string appearing
+    // in the country name since we can't do that in Prisma.
+    .sort(compareCountry)
+    .map(({ id, name }) => ({
+      id,
+      label: name,
+      value: id,
+    }));
+
+  return {
+    ...restQuery,
+    data: countryOptions,
+  };
+}
+
 export default function CountriesTypeahead({
   excludedValues,
   label = 'Country',
@@ -41,14 +84,7 @@ export default function CountriesTypeahead({
   ...props
 }: Props) {
   const [query, setQuery] = useState('');
-  const countries = trpc.useQuery([
-    'locations.countries.list',
-    {
-      name: query,
-    },
-  ]);
-
-  const { data, isLoading } = countries;
+  const { data: countryOptions, isLoading } = useCountryOptions(query);
 
   return (
     <Typeahead
@@ -56,34 +92,9 @@ export default function CountriesTypeahead({
       label={label}
       noResultsMessage="No countries found"
       nullable={true}
-      options={(data ?? [])
-        // Client-side sorting by position of query string appearing
-        // in the country name since we can't do that in Prisma.
-        .sort((a, b) => {
-          const normalizedQueryString = query.trim().toLocaleLowerCase();
-          if (
-            a.code.toLocaleLowerCase() === normalizedQueryString ||
-            b.code.toLocaleLowerCase() === normalizedQueryString
-          ) {
-            return stringPositionComparator(
-              a.code,
-              b.code,
-              normalizedQueryString,
-            );
-          }
-
-          return stringPositionComparator(
-            a.name,
-            b.name,
-            normalizedQueryString,
-          );
-        })
-        .map(({ id, name }) => ({
-          id,
-          label: name,
-          value: id,
-        }))
-        .filter((option) => !excludedValues?.has(option.value))}
+      options={countryOptions.filter(
+        (option) => !excludedValues?.has(option.value),
+      )}
       value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}

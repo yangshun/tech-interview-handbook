@@ -22,6 +22,25 @@ type Props = BaseProps &
     value?: TypeaheadOption | null;
   }>;
 
+export function useCityOptions(query: string) {
+  const { data, ...restQuery } = trpc.useQuery([
+    'locations.cities.list',
+    {
+      name: query,
+    },
+  ]);
+
+  return {
+    data:
+      data?.map(({ id, name, state }) => ({
+        id,
+        label: `${name}, ${state?.name}, ${state?.country?.name}`,
+        value: id,
+      })) ?? [],
+    ...restQuery,
+  };
+}
+
 export default function CitiesTypeahead({
   label = 'City',
   onSelect,
@@ -29,14 +48,8 @@ export default function CitiesTypeahead({
   ...props
 }: Props) {
   const [query, setQuery] = useState('');
-  const cities = trpc.useQuery([
-    'locations.cities.list',
-    {
-      name: query,
-    },
-  ]);
 
-  const { data, isLoading } = cities;
+  const { data: cityOptions, isLoading } = useCityOptions(query);
 
   return (
     <Typeahead
@@ -45,13 +58,7 @@ export default function CitiesTypeahead({
       minQueryLength={3}
       noResultsMessage="No cities found"
       nullable={true}
-      options={
-        data?.map(({ id, name, state }) => ({
-          id,
-          label: `${name}, ${state?.name}, ${state?.country?.name}`,
-          value: id,
-        })) ?? []
-      }
+      options={cityOptions}
       value={value}
       onQueryChange={setQuery}
       onSelect={onSelect}
