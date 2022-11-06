@@ -37,13 +37,30 @@ export default function AboutPage() {
               About Tech Offers Repo
             </h1>
             <p className="text-lg text-slate-500">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Tech Offers Repo, a project under the series of Tech Interview
+              Handbook (TIH), reveals the stories behind offers by focusing on
+              the profiles of the offer receivers. It helps job seekers
+              benchmark and analyse their anonymous offers with more context and
+              encourages discussions around offer profiles.
+            </p>
+          </div>
+          {/* Feedback */}
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              Feedback to Us
+            </h2>
+
+            <p className="text-lg text-slate-500">
+              Thank you for using our platform! Feel free to submit your
+              feedback / feature request / bug report
+              <a
+                className="text-primary-600 hover:text-primary-500 ml-1"
+                href="https://forms.gle/6zV5yimPyiByKqDy8"
+                rel="noreferrer"
+                target="_blank">
+                here
+              </a>
+              .
             </p>
           </div>
           <div className="space-y-6">
