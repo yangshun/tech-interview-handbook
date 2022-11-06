@@ -60,7 +60,7 @@ export default function QuestionAggregateBadge({
         <Badge label={label} {...badgeProps} />
       </button>
       {visible && (
-        <div ref={setTooltipRef} {...getTooltipProps()}>
+        <div ref={setTooltipRef} {...getTooltipProps()} className="z-10">
           <div className="flex flex-col gap-2 rounded-md bg-white p-2 shadow-md">
             <ul>
               {sortedStatistics.map(({ key, value }) => (

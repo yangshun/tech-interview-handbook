@@ -25,7 +25,7 @@ export default function AnswerCommentListItem({
     useAnswerCommentVote(answerCommentId);
 
   return (
-    <div className="flex gap-4 border bg-white p-2 ">
+    <div className="flex gap-4 rounded-md border bg-white p-2">
       <VotingButtons
         size="sm"
         upvoteCount={upvoteCount}

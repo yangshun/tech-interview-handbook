@@ -2,12 +2,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button, TextArea } from '@tih/ui';
 
 import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullAnswerCard from '~/components/questions/card/FullAnswerCard';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
+import BackButtonLayout from '~/components/questions/layout/BackButtonLayout';
 import PaginationLoadMoreButton from '~/components/questions/PaginationLoadMoreButton';
 import SortOptionsSelect from '~/components/questions/SortOptionsSelect';
 
@@ -104,83 +104,72 @@ export default function QuestionPage() {
           {answer.content} - {APP_TITLE}
         </title>
       </Head>
-      <div className="flex w-full flex-1 items-stretch pb-4">
-        <div className="flex items-baseline gap-2 py-4 pl-4">
-          <Button
-            addonPosition="start"
-            display="inline"
-            href={`/questions/${router.query.questionId}/${router.query.questionSlug}`}
-            icon={ArrowSmallLeftIcon}
-            label="Back"
-            variant="secondary"
+      <BackButtonLayout
+        href={`/questions/${router.query.questionId}/${router.query.questionSlug}`}>
+        <div className="flex max-w-7xl flex-1 flex-col gap-2">
+          <FullAnswerCard
+            answerId={answer.id}
+            authorImageUrl={answer.userImage}
+            authorName={answer.user}
+            content={answer.content}
+            createdAt={answer.createdAt}
+            upvoteCount={answer.numVotes}
           />
-        </div>
-        <div className="flex w-full  justify-center overflow-y-auto py-4 px-5">
-          <div className="flex max-w-7xl flex-1 flex-col gap-2">
-            <FullAnswerCard
-              answerId={answer.id}
-              authorImageUrl={answer.userImage}
-              authorName={answer.user}
-              content={answer.content}
-              createdAt={answer.createdAt}
-              upvoteCount={answer.numVotes}
-            />
-            <div className="mx-2">
-              <form
-                className="mb-2"
-                onSubmit={handleCommentSubmit(handleSubmitComment)}>
-                <TextArea
-                  {...commentRegister('commentContent', {
-                    minLength: 1,
-                    required: true,
-                  })}
-                  label="Post a comment"
-                  required={true}
-                  resize="vertical"
-                  rows={2}
+          <div className="mx-2">
+            <form
+              className="mb-2"
+              onSubmit={handleCommentSubmit(handleSubmitComment)}>
+              <TextArea
+                {...commentRegister('commentContent', {
+                  minLength: 1,
+                  required: true,
+                })}
+                label="Post a comment"
+                required={true}
+                resize="vertical"
+                rows={2}
+              />
+              <div className="my-3 flex justify-between">
+                <Button
+                  disabled={!isCommentDirty || !isCommentValid}
+                  label="Post"
+                  type="submit"
+                  variant="primary"
                 />
-                <div className="my-3 flex justify-between">
-                  <Button
-                    disabled={!isCommentDirty || !isCommentValid}
-                    label="Post"
-                    type="submit"
-                    variant="primary"
+              </div>
+            </form>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-lg">Comments</p>
+                <div className="flex items-end gap-2">
+                  <SortOptionsSelect
+                    sortOrderValue={commentSortOrder}
+                    sortTypeValue={commentSortType}
+                    onSortOrderChange={setCommentSortOrder}
+                    onSortTypeChange={setCommentSortType}
                   />
                 </div>
-              </form>
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-between gap-2">
-                  <p className="text-lg">Comments</p>
-                  <div className="flex items-end gap-2">
-                    <SortOptionsSelect
-                      sortOrderValue={commentSortOrder}
-                      sortTypeValue={commentSortType}
-                      onSortOrderChange={setCommentSortOrder}
-                      onSortTypeChange={setCommentSortType}
-                    />
-                  </div>
-                </div>
-                {/* TODO: Allow to load more pages */}
-                {(answerCommentsData?.pages ?? []).flatMap(
-                  ({ processedQuestionAnswerCommentsData: comments }) =>
-                    comments.map((comment) => (
-                      <AnswerCommentListItem
-                        key={comment.id}
-                        answerCommentId={comment.id}
-                        authorImageUrl={comment.userImage}
-                        authorName={comment.user}
-                        content={comment.content}
-                        createdAt={comment.createdAt}
-                        upvoteCount={comment.numVotes}
-                      />
-                    )),
-                )}
-                <PaginationLoadMoreButton query={answerCommentInfiniteQuery} />
               </div>
+              {/* TODO: Allow to load more pages */}
+              {(answerCommentsData?.pages ?? []).flatMap(
+                ({ processedQuestionAnswerCommentsData: comments }) =>
+                  comments.map((comment) => (
+                    <AnswerCommentListItem
+                      key={comment.id}
+                      answerCommentId={comment.id}
+                      authorImageUrl={comment.userImage}
+                      authorName={comment.user}
+                      content={comment.content}
+                      createdAt={comment.createdAt}
+                      upvoteCount={comment.numVotes}
+                    />
+                  )),
+              )}
+              <PaginationLoadMoreButton query={answerCommentInfiniteQuery} />
             </div>
           </div>
         </div>
-      </div>
+      </BackButtonLayout>
     </>
   );
 }

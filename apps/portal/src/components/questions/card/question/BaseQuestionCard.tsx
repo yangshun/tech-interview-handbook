@@ -116,6 +116,7 @@ export type BaseQuestionCardProps = ActionButtonProps &
   ReceivedStatisticsProps &
   UpvoteProps & {
     content: string;
+    hideCard?: boolean;
     questionId: string;
     showHover?: boolean;
     timestamp: string | null;
@@ -140,6 +141,7 @@ export default function BaseQuestionCard({
   actionButtonLabel,
   onActionButtonClick,
   upvoteCount,
+  hideCard,
   timestamp,
   roles,
   countries,
@@ -152,7 +154,6 @@ export default function BaseQuestionCard({
 }: BaseQuestionCardProps) {
   const [showReceivedForm, setShowReceivedForm] = useState(false);
   const { handleDownvote, handleUpvote, vote } = useQuestionVote(questionId);
-  const hoverClass = showHover ? 'hover:bg-slate-50' : '';
 
   const locations = useMemo(() => {
     if (countries === undefined) {
@@ -185,7 +186,7 @@ export default function BaseQuestionCard({
       )}
       <div className="flex flex-1 flex-col items-start gap-2">
         <div className="flex items-baseline justify-between self-stretch">
-          <div className="z-10 flex items-center gap-2 text-slate-500">
+          <div className="flex items-center gap-2 text-slate-500">
             {showAggregateStatistics && (
               <>
                 <QuestionTypeBadge type={type} />
@@ -274,7 +275,11 @@ export default function BaseQuestionCard({
 
   return (
     <article
-      className={`group flex gap-4 rounded-md border border-slate-300 bg-white p-4 ${hoverClass}`}>
+      className={clsx(
+        'group flex gap-4 border-slate-300',
+        showHover && 'hover:bg-slate-50',
+        !hideCard && 'rounded-md border bg-white p-4',
+      )}>
       {cardContent}
       {showDeleteButton && (
         <div className="fill-danger-700 invisible	self-center group-hover:visible">
