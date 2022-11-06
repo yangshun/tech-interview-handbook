@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import { Button, Collapsible, HorizontalDivider, TextArea } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
-import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullQuestionCard from '~/components/questions/card/question/FullQuestionCard';
 import QuestionAnswerCard from '~/components/questions/card/QuestionAnswerCard';
+import QuestionCommentListItem from '~/components/questions/comments/QuestionCommentListItem';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 import BackButtonLayout from '~/components/questions/layout/BackButtonLayout';
 import PaginationLoadMoreButton from '~/components/questions/PaginationLoadMoreButton';
@@ -248,13 +248,13 @@ export default function QuestionPage() {
                     {(commentData?.pages ?? []).flatMap(
                       ({ processedQuestionCommentsData: comments }) =>
                         comments.map((comment) => (
-                          <AnswerCommentListItem
+                          <QuestionCommentListItem
                             key={comment.id}
-                            answerCommentId={comment.id}
                             authorImageUrl={comment.userImage}
                             authorName={comment.user}
                             content={comment.content}
                             createdAt={comment.createdAt}
+                            questionCommentId={comment.id}
                             upvoteCount={comment.numVotes}
                           />
                         )),

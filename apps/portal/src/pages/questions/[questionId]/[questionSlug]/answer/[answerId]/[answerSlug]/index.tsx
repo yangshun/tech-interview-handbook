@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { Button, TextArea } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
-import AnswerCommentListItem from '~/components/questions/AnswerCommentListItem';
 import FullAnswerCard from '~/components/questions/card/FullAnswerCard';
+import AnswerCommentListItem from '~/components/questions/comments/AnswerCommentListItem';
 import FullScreenSpinner from '~/components/questions/FullScreenSpinner';
 import BackButtonLayout from '~/components/questions/layout/BackButtonLayout';
 import PaginationLoadMoreButton from '~/components/questions/PaginationLoadMoreButton';
