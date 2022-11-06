@@ -36,6 +36,11 @@ export const QUESTION_TYPES: FilterChoices<QuestionsQuestionType> = [
     label: 'Behavioral',
     value: 'BEHAVIORAL',
   },
+  {
+    id: 'THEORY',
+    label: 'Theory',
+    value: 'THEORY',
+  },
 ] as const;
 
 export type QuestionAge = 'all' | 'last-6-months' | 'last-month' | 'last-year';
