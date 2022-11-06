@@ -38,7 +38,6 @@ export const questionsAnswerRouter = createRouter()
               },
             ];
 
-
       const answersData = await ctx.prisma.questionsAnswer.findMany({
         cursor: cursor ? { id: cursor } : undefined,
         include: {
@@ -104,9 +103,9 @@ export const questionsAnswerRouter = createRouter()
       }
 
       return {
+        data: processedAnswersData,
         nextCursor,
-        processedAnswersData,
-      }
+      };
     },
   })
   .query('getAnswerById', {

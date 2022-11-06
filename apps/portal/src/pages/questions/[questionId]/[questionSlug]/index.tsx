@@ -245,19 +245,18 @@ export default function QuestionPage() {
                         />
                       </div>
                     </div>
-                    {(commentData?.pages ?? []).flatMap(
-                      ({ processedQuestionCommentsData: comments }) =>
-                        comments.map((comment) => (
-                          <QuestionCommentListItem
-                            key={comment.id}
-                            authorImageUrl={comment.userImage}
-                            authorName={comment.user}
-                            content={comment.content}
-                            createdAt={comment.createdAt}
-                            questionCommentId={comment.id}
-                            upvoteCount={comment.numVotes}
-                          />
-                        )),
+                    {(commentData?.pages ?? []).flatMap(({ data: comments }) =>
+                      comments.map((comment) => (
+                        <QuestionCommentListItem
+                          key={comment.id}
+                          authorImageUrl={comment.userImage}
+                          authorName={comment.user}
+                          content={comment.content}
+                          createdAt={comment.createdAt}
+                          questionCommentId={comment.id}
+                          upvoteCount={comment.numVotes}
+                        />
+                      )),
                     )}
                     <PaginationLoadMoreButton query={commentInfiniteQuery} />
                     <form
@@ -326,23 +325,22 @@ export default function QuestionPage() {
             </div>
           </div>
           {/* TODO: Add button to load more */}
-          {(answerData?.pages ?? []).flatMap(
-            ({ processedAnswersData: answers }) =>
-              answers.map((answer) => (
-                <QuestionAnswerCard
-                  key={answer.id}
-                  answerId={answer.id}
-                  authorImageUrl={answer.userImage}
-                  authorName={answer.user}
-                  commentCount={answer.numComments}
-                  content={answer.content}
-                  createdAt={answer.createdAt}
-                  href={`${router.asPath}/answer/${answer.id}/${createSlug(
-                    answer.content,
-                  )}`}
-                  upvoteCount={answer.numVotes}
-                />
-              )),
+          {(answerData?.pages ?? []).flatMap(({ data: answers }) =>
+            answers.map((answer) => (
+              <QuestionAnswerCard
+                key={answer.id}
+                answerId={answer.id}
+                authorImageUrl={answer.userImage}
+                authorName={answer.user}
+                commentCount={answer.numComments}
+                content={answer.content}
+                createdAt={answer.createdAt}
+                href={`${router.asPath}/answer/${answer.id}/${createSlug(
+                  answer.content,
+                )}`}
+                upvoteCount={answer.numVotes}
+              />
+            )),
           )}
           <PaginationLoadMoreButton query={answerInfiniteQuery} />
         </div>

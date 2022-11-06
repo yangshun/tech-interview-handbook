@@ -97,9 +97,9 @@ export const questionsQuestionCommentRouter = createRouter().query(
       }
 
       return {
+        data: processedQuestionCommentsData,
         nextCursor,
-        processedQuestionCommentsData,
-      }
+      };
     },
   },
 );
