@@ -5,6 +5,7 @@ import type {
   Country,
   OffersBackground,
   OffersCurrency,
+  OffersExperience,
   OffersFullTime,
   OffersIntern,
   OffersOffer,
@@ -13,6 +14,7 @@ import type {
   PrismaClient,
   State,
 } from '@prisma/client';
+import { JobType } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 
 import { analysisInclusion } from './analysisInclusion';
@@ -31,6 +33,27 @@ type Offer = OffersOffer & {
     | null;
   offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
   profile: OffersProfile & { background: OffersBackground | null };
+};
+
+type SimilarOffer = OffersOffer & {
+  company: Company;
+  location: City & { state: State & { country: Country } };
+  offersFullTime:
+    | (OffersFullTime & { totalCompensation: OffersCurrency })
+    | null;
+  offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
+  profile: OffersProfile & {
+    background:
+      | (OffersBackground & {
+          experiences: Array<
+            OffersExperience & {
+              company: Company | null;
+              location: (City & { state: State & { country: Country } }) | null;
+            }
+          >;
+        })
+      | null;
+  };
 };
 
 const getSimilarOffers = async (
@@ -161,28 +184,45 @@ const getSimilarOffers = async (
   });
 };
 
-const searchOfferPercentile = (
-  offer: Offer,
-  similarOffers: Array<
-    OffersOffer & {
-      company: Company;
-      offersFullTime:
-        | (OffersFullTime & {
-            totalCompensation: OffersCurrency;
-          })
-        | null;
-      offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-      profile: OffersProfile & { background: OffersBackground | null };
-    }
-  >,
+// OFFERS MUST BE ORDERED
+const calculatePercentile = (
+  orderedOffers: Array<SimilarOffer>,
+  offerToCalculate: Offer,
 ) => {
-  for (let i = 0; i < similarOffers.length; i++) {
-    if (similarOffers[i].id === offer.id) {
-      return i;
+  let offerToCalculateIndex = -1;
+  let numberOfNoDuplicateOffers = 0;
+  let lastOfferSalary = -1;
+  const offerToCalculateSalary = getSalary(offerToCalculate);
+
+  for (let i = 0; i < orderedOffers.length; i++) {
+    const offer = orderedOffers[i];
+    const salary = getSalary(offer, lastOfferSalary);
+
+    if (salary !== lastOfferSalary) {
+      if (salary === offerToCalculateSalary) {
+        offerToCalculateIndex = i;
+      }
+      numberOfNoDuplicateOffers++;
+      lastOfferSalary = salary;
     }
   }
 
-  return -1;
+  const percentile =
+    numberOfNoDuplicateOffers <= 1
+      ? 100
+      : 100 - (100 * offerToCalculateIndex) / (numberOfNoDuplicateOffers - 1);
+
+  return percentile;
+};
+
+const getSalary = (offer: Offer | SimilarOffer, defaultSalary = 0) => {
+  return offer.jobType === JobType.FULLTIME &&
+    offer.offersFullTime?.totalCompensation?.baseValue != null
+    ? offer.offersFullTime.totalCompensation.baseValue
+    : offer.jobType === JobType.INTERN &&
+      offer.offersIntern?.monthlySalary?.baseValue != null
+    ? offer.offersIntern.monthlySalary.baseValue
+    : defaultSalary;
 };
 
 export const generateAnalysis = async (params: {
@@ -264,9 +304,26 @@ export const generateAnalysis = async (params: {
 
   const overallHighestOffer = offers[0];
 
-  let similarOffers = await getSimilarOffers(ctx.prisma, overallHighestOffer);
-
   const offerIds = offers.map((offer) => offer.id);
+
+  // OVERALL ANALYSIS
+  let similarOffers = await getSimilarOffers(ctx.prisma, overallHighestOffer);
+  const overallPercentile = calculatePercentile(
+    similarOffers,
+    overallHighestOffer,
+  );
+
+  // Get top offers (excluding user's offers)
+  similarOffers = similarOffers.filter((offer) => !offerIds.includes(offer.id));
+  const noOfSimilarOffers = similarOffers.length;
+  const similarOffers90PercentileIndex = Math.ceil(noOfSimilarOffers * 0.1);
+  const topPercentileOffers =
+    noOfSimilarOffers > 2
+      ? similarOffers.slice(
+          similarOffers90PercentileIndex,
+          similarOffers90PercentileIndex + 2,
+        )
+      : similarOffers;
 
   // COMPANY ANALYSIS
   const companyMap = new Map<string, Offer>();
@@ -284,21 +341,15 @@ export const generateAnalysis = async (params: {
         companyOffer,
         companyOffer.companyId,
       );
-
-      const companyIndex = searchOfferPercentile(
-        companyOffer,
+      const companyPercentile = calculatePercentile(
         similarCompanyOffers,
+        companyOffer,
       );
-      const companyPercentile =
-        similarCompanyOffers.length <= 1
-          ? 100
-          : 100 - (100 * companyIndex) / (similarCompanyOffers.length - 1);
 
       // Get top offers (excluding user's offers)
       similarCompanyOffers = similarCompanyOffers.filter(
         (offer) => !offerIds.includes(offer.id),
       );
-
       const noOfSimilarCompanyOffers = similarCompanyOffers.length;
       const similarCompanyOffers90PercentileIndex = Math.ceil(
         noOfSimilarCompanyOffers * 0.1,
@@ -319,28 +370,6 @@ export const generateAnalysis = async (params: {
       };
     }),
   );
-
-  // OVERALL ANALYSIS
-  const overallIndex = searchOfferPercentile(
-    overallHighestOffer,
-    similarOffers,
-  );
-  const overallPercentile =
-    similarOffers.length <= 1
-      ? 100
-      : 100 - (100 * overallIndex) / (similarOffers.length - 1);
-
-  similarOffers = similarOffers.filter((offer) => !offerIds.includes(offer.id));
-
-  const noOfSimilarOffers = similarOffers.length;
-  const similarOffers90PercentileIndex = Math.ceil(noOfSimilarOffers * 0.1);
-  const topPercentileOffers =
-    noOfSimilarOffers > 2
-      ? similarOffers.slice(
-          similarOffers90PercentileIndex,
-          similarOffers90PercentileIndex + 2,
-        )
-      : similarOffers;
 
   const analysis = await ctx.prisma.offersAnalysis.create({
     data: {
