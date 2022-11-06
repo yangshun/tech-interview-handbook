@@ -48,6 +48,16 @@ const createVoteCallbacks = (
 type MutationKey = Parameters<typeof trpc.useMutation>[0];
 type QueryKey = Parameters<typeof trpc.useQuery>[0][0];
 
+const getVoteValue = (vote: Vote | null) => {
+  if (vote === Vote.UPVOTE) {
+    return 1;
+  }
+  if (vote === Vote.DOWNVOTE) {
+    return -1;
+  }
+  return 0;
+};
+
 export const useQuestionVote = (id: string) => {
   const utils = trpc.useContext();
 
@@ -58,50 +68,42 @@ export const useQuestionVote = (id: string) => {
       // 'questions.questions.getQuestionsByFilterAndContent',
     ],
     onMutate: async (previousVote, currentVote) => {
+      // Update question list
       const questionQueries = utils.queryClient.getQueriesData([
         'questions.questions.getQuestionsByFilterAndContent',
       ]);
-
-      const getVoteValue = (vote: Vote | null) => {
-        if (vote === Vote.UPVOTE) {
-          return 1;
-        }
-        if (vote === Vote.DOWNVOTE) {
-          return -1;
-        }
-        return 0;
-      };
-
       const voteValueChange =
         getVoteValue(currentVote) - getVoteValue(previousVote);
 
-      for (const [key, query] of questionQueries) {
-        if (query === undefined) {
-          continue;
+      if (questionQueries !== undefined) {
+        for (const [key, query] of questionQueries) {
+          if (query === undefined) {
+            continue;
+          }
+
+          const { pages, ...restQuery } = query as InfiniteData<{
+            data: Array<Question>;
+          }>;
+
+          const newQuery = {
+            pages: pages.map(({ data, ...restPage }) => ({
+              data: data.map((question) => {
+                if (question.id === id) {
+                  const { numVotes, ...restQuestion } = question;
+                  return {
+                    numVotes: numVotes + voteValueChange,
+                    ...restQuestion,
+                  };
+                }
+                return question;
+              }),
+              ...restPage,
+            })),
+            ...restQuery,
+          };
+
+          utils.queryClient.setQueryData(key, newQuery);
         }
-
-        const { pages, ...restQuery } = query as InfiniteData<{
-          data: Array<Question>;
-        }>;
-
-        const newQuery = {
-          pages: pages.map(({ data, ...restPage }) => ({
-            data: data.map((question) => {
-              if (question.id === id) {
-                const { numVotes, ...restQuestion } = question;
-                return {
-                  numVotes: numVotes + voteValueChange,
-                  ...restQuestion,
-                };
-              }
-              return question;
-            }),
-            ...restPage,
-          })),
-          ...restQuery,
-        };
-
-        utils.queryClient.setQueryData(key, newQuery);
       }
 
       const prevQuestion = utils.queryClient.getQueryData([
@@ -109,17 +111,19 @@ export const useQuestionVote = (id: string) => {
         {
           id,
         },
-      ]) as Question;
+      ]) as Question | undefined;
 
-      const newQuestion = {
-        ...prevQuestion,
-        numVotes: prevQuestion.numVotes + voteValueChange,
-      };
+      if (prevQuestion !== undefined) {
+        const newQuestion = {
+          ...prevQuestion,
+          numVotes: prevQuestion.numVotes + voteValueChange,
+        };
 
-      utils.queryClient.setQueryData(
-        ['questions.questions.getQuestionById', { id }],
-        newQuestion,
-      );
+        utils.queryClient.setQueryData(
+          ['questions.questions.getQuestionById', { id }],
+          newQuestion,
+        );
+      }
     },
     query: 'questions.questions.user.getVote',
     setDownVoteKey: 'questions.questions.user.setDownVote',
