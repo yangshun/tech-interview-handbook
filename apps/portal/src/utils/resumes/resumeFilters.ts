@@ -5,8 +5,10 @@ import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 import { JobTitleLabels } from '~/components/shared/JobTitles';
 
 export type FilterId = 'experience' | 'location' | 'role';
+export type FilterCounts = Record<FilterId, Record<string, number>>;
 
 export type CustomFilter = {
+  isTop10: boolean;
   isUnreviewed: boolean;
 };
 
@@ -145,6 +147,7 @@ export const INITIAL_LOCATIONS: Array<TypeaheadOption> = [
 
 export const INITIAL_FILTER_STATE: FilterState = {
   experience: EXPERIENCES,
+  isTop10: false,
   isUnreviewed: true,
   location: INITIAL_LOCATIONS,
   role: INITIAL_ROLES,
@@ -185,6 +188,7 @@ export const SHORTCUTS: Array<Shortcut> = [
   {
     filters: {
       ...INITIAL_FILTER_STATE,
+      isTop10: true,
       isUnreviewed: false,
     },
     name: 'Top 10',

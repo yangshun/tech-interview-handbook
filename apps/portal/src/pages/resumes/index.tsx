@@ -187,6 +187,7 @@ export default function ResumeHomePage() {
       'resumes.resume.findAll',
       {
         experienceFilters: userFilters.experience.map(({ value }) => value),
+        isTop10: userFilters.isTop10,
         isUnreviewed: userFilters.isUnreviewed,
         locationFilters: userFilters.location.map(({ value }) => value),
         roleFilters: userFilters.role.map(({ value }) => value),
@@ -206,6 +207,7 @@ export default function ResumeHomePage() {
       'resumes.resume.user.findUserStarred',
       {
         experienceFilters: userFilters.experience.map(({ value }) => value),
+        isTop10: userFilters.isTop10,
         isUnreviewed: userFilters.isUnreviewed,
         locationFilters: userFilters.location.map(({ value }) => value),
         roleFilters: userFilters.role.map(({ value }) => value),
@@ -226,6 +228,7 @@ export default function ResumeHomePage() {
       'resumes.resume.user.findUserCreated',
       {
         experienceFilters: userFilters.experience.map(({ value }) => value),
+        isTop10: userFilters.isTop10,
         isUnreviewed: userFilters.isUnreviewed,
         locationFilters: userFilters.location.map(({ value }) => value),
         roleFilters: userFilters.role.map(({ value }) => value),
