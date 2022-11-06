@@ -5,7 +5,12 @@ import { Vote } from '@prisma/client';
 
 import { trpc } from '../trpc';
 
-import type { Answer, Question, QuestionComment } from '~/types/questions';
+import type {
+  Answer,
+  AnswerComment,
+  Question,
+  QuestionComment,
+} from '~/types/questions';
 
 type UseVoteOptions = {
   setDownVote: () => void;
@@ -253,9 +258,48 @@ export const useQuestionCommentVote = (id: string) => {
 };
 
 export const useAnswerCommentVote = (id: string) => {
+  const utils = trpc.useContext();
+
   return useVote(id, {
     idKey: 'answerCommentId',
-    invalidateKeys: ['questions.answers.comments.getAnswerComments'],
+    invalidateKeys: [],
+    onMutate: async (voteValueChange) => {
+      // Update answer comment list
+      const answerCommentQueries = utils.queryClient.getQueriesData([
+        'questions.answers.comments.getAnswerComments',
+      ]);
+
+      if (answerCommentQueries !== undefined) {
+        for (const [key, query] of answerCommentQueries) {
+          if (query === undefined) {
+            continue;
+          }
+
+          const { pages, ...restQuery } = query as InfiniteData<{
+            data: Array<AnswerComment>;
+          }>;
+
+          const newQuery = {
+            pages: pages.map(({ data, ...restPage }) => ({
+              data: data.map((answerComment) => {
+                if (answerComment.id === id) {
+                  const { numVotes, ...restAnswerComment } = answerComment;
+                  return {
+                    numVotes: numVotes + voteValueChange,
+                    ...restAnswerComment,
+                  };
+                }
+                return answerComment;
+              }),
+              ...restPage,
+            })),
+            ...restQuery,
+          };
+
+          utils.queryClient.setQueryData(key, newQuery);
+        }
+      }
+    },
     query: 'questions.answers.comments.user.getVote',
     setDownVoteKey: 'questions.answers.comments.user.setDownVote',
     setNoVoteKey: 'questions.answers.comments.user.setNoVote',

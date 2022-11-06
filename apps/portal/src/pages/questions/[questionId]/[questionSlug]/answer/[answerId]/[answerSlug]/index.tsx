@@ -158,19 +158,18 @@ export default function QuestionPage() {
                 </div>
               </div>
               {/* TODO: Allow to load more pages */}
-              {(answerCommentsData?.pages ?? []).flatMap(
-                ({ processedQuestionAnswerCommentsData: comments }) =>
-                  comments.map((comment) => (
-                    <AnswerCommentListItem
-                      key={comment.id}
-                      answerCommentId={comment.id}
-                      authorImageUrl={comment.userImage}
-                      authorName={comment.user}
-                      content={comment.content}
-                      createdAt={comment.createdAt}
-                      upvoteCount={comment.numVotes}
-                    />
-                  )),
+              {(answerCommentsData?.pages ?? []).flatMap(({ data: comments }) =>
+                comments.map((comment) => (
+                  <AnswerCommentListItem
+                    key={comment.id}
+                    answerCommentId={comment.id}
+                    authorImageUrl={comment.userImage}
+                    authorName={comment.user}
+                    content={comment.content}
+                    createdAt={comment.createdAt}
+                    upvoteCount={comment.numVotes}
+                  />
+                )),
               )}
               <PaginationLoadMoreButton query={answerCommentInfiniteQuery} />
             </div>
