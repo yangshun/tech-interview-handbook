@@ -330,7 +330,7 @@ export const profileAnalysisDtoMapper = (
       })
     | null,
 ) => {
-  if (!analysis) {
+  if (analysis == null) {
     return null;
   }
 
