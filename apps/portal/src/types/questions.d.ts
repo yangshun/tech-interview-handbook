@@ -4,11 +4,11 @@ export type Question = {
   aggregatedQuestionEncounters: AggregatedQuestionEncounter;
   content: string;
   id: string;
+  lastSeenAt: Date | null;
   numAnswers: number;
   numComments: number;
   numVotes: number;
   receivedCount: number;
-  seenAt: Date;
   type: QuestionsQuestionType;
   updatedAt: Date;
   user: string;
@@ -47,7 +47,6 @@ export type Location = CityLocation | CountryLocation | StateLocation;
 export type AggregatedQuestionEncounter = {
   companyCounts: Record<string, number>;
   countryCounts: Record<string, CountryInfo>;
-  latestSeenAt: Date;
   roleCounts: Record<string, number>;
 };
 
