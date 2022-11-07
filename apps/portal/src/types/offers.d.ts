@@ -70,6 +70,7 @@ export type DashboardOffer = {
   company: OffersCompany;
   id: string;
   income: Valuation;
+  location: Location;
   monthYearReceived: Date;
   profileId: string;
   stocks?: Valuation;

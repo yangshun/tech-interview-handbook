@@ -1,5 +1,14 @@
+import Head from 'next/head';
+
 import OffersSubmissionForm from '~/components/offers/offersSubmission/OffersSubmissionForm';
 
 export default function OffersSubmissionPage() {
-  return <OffersSubmissionForm />;
+  return (
+    <>
+      <Head>
+        <title>Analyze your offers</title>
+      </Head>
+      <OffersSubmissionForm />
+    </>
+  );
 }

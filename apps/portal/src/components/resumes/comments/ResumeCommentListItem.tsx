@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { formatDistanceToNow } from 'date-fns';
 import { useState } from 'react';
-import { FaceSmileIcon } from '@heroicons/react/24/outline';
 
 import ResumeCommentEditForm from './comment/ResumeCommentEditForm';
 import ResumeCommentReplyForm from './comment/ResumeCommentReplyForm';
@@ -29,24 +28,16 @@ export default function ResumeCommentListItem({
     <div className="min-w-fit">
       <div className="flex flex-row space-x-3 align-top">
         {/* Image Icon */}
-        {comment.user.image ? (
-          <img
-            alt={comment.user.name ?? 'Reviewer'}
-            className={clsx(
-              'mt-1 rounded-full',
-              comment.parentId ? 'h-8 w-8' : 'h-10 w-10',
-            )}
-            src={comment.user.image!}
-          />
-        ) : (
-          <FaceSmileIcon
-            className={clsx(
-              'mt-1 rounded-full',
-              comment.parentId ? 'h-6 w-6' : 'h-8 w-8 ',
-            )}
-          />
-        )}
-
+        <img
+          alt={comment.user.name ?? 'Reviewer'}
+          className={clsx(
+            'mt-1 rounded-full',
+            comment.parentId ? 'h-7 w-7' : 'h-9 w-9',
+          )}
+          src={`https://avatars.dicebear.com/api/gridy/${
+            comment.user.name ?? 'random'
+          }.svg`}
+        />
         <div className="flex w-full flex-col space-y-1">
           {/* Name and creation time */}
           <div className="flex flex-row items-center space-x-2">

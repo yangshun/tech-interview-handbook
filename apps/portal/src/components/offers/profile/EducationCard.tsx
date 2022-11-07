@@ -3,6 +3,8 @@ import {
   LightBulbIcon,
 } from '@heroicons/react/24/outline';
 
+import type { EducationType } from '~/components/offers/EducationFields';
+import { getLabelForEducationFieldType } from '~/components/offers/EducationFields';
 import type { EducationDisplayData } from '~/components/offers/types';
 
 type Props = Readonly<{
@@ -19,7 +21,16 @@ export default function EducationCard({
           <div className="flex items-center">
             <LightBulbIcon className="mr-1 h-5" />
             <span className="text-semibold ml-1">
-              {field ? `${type ?? 'N/A'}, ${field}` : type ?? `N/A`}
+              {field
+                ? `${
+                    type ? type.charAt(0).toUpperCase() + type.slice(1) : 'N/A'
+                  }, ${
+                    getLabelForEducationFieldType(field as EducationType) ??
+                    'N/A'
+                  }`
+                : type
+                ? type.charAt(0).toUpperCase() + type.slice(1)
+                : `N/A`}
             </span>
           </div>
           {school && (

@@ -17,13 +17,11 @@ function pageview(measurementID: string, url: string) {
     return;
   }
 
-  window.gtag('config', measurementID, {
+  window.gtag('event', 'page_view', {
+    page_location: window.location.href,
     page_path: url,
-  });
-
-  window.gtag('event', url, {
-    event_category: 'pageview',
-    event_label: document.title,
+    page_title: document.title,
+    send_to: measurementID,
   });
 }
 

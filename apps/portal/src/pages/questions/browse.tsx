@@ -503,7 +503,7 @@ export default function QuestionsBrowsePage() {
       <main className="flex h-[calc(100vh_-_64px)] flex-1 flex-col items-stretch">
         <div className="flex h-full flex-1">
           <section className="min-h-0 flex-1 overflow-auto">
-            <div className="my-4 mx-auto flex max-w-3xl flex-col items-stretch justify-start gap-6">
+            <div className="my-4 mx-auto flex max-w-3xl flex-col items-stretch justify-start gap-6 p-4">
               <ContributeQuestionCard
                 onSubmit={(data) => {
                   const { cityId, countryId, stateId } = data.location;
@@ -558,13 +558,9 @@ export default function QuestionsBrowsePage() {
                             questionId={question.id}
                             receivedCount={question.receivedCount}
                             roles={roleCounts}
-                            timestamp={question.seenAt.toLocaleDateString(
-                              undefined,
-                              {
-                                month: 'short',
-                                year: 'numeric',
-                              },
-                            )}
+                            timestamp={
+                              question.aggregatedQuestionEncounters.latestSeenAt
+                            }
                             type={question.type}
                             upvoteCount={question.numVotes}
                           />

@@ -151,7 +151,9 @@ export default function ContributeQuestionForm({
                   }}
                   yearRequired={true}
                   onChange={({ month, year }) => {
-                    field.onChange(startOfMonth(new Date(year!, month! - 1)));
+                    field.onChange(
+                      new Date(Date.UTC(year!, month! - 1, 1, 0, 0, 0, 0)),
+                    );
                   }}
                 />
               )}
@@ -221,12 +223,7 @@ export default function ContributeQuestionForm({
                 createEncounterButtonText="Yes, this is my question"
                 questionId={question.id}
                 roles={roleCounts}
-                timestamp={
-                  question.seenAt.toLocaleDateString(undefined, {
-                    month: 'short',
-                    year: 'numeric',
-                  }) ?? null
-                }
+                timestamp={question.seenAt}
                 type={question.type}
                 onReceivedSubmit={async (data) => {
                   await addEncounterAsync({
@@ -271,18 +268,13 @@ export default function ContributeQuestionForm({
             />
           </div>
           <div className="flex gap-x-2">
-            <button
-              className="focus:ring-primary-500 inline-flex w-full justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-base font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-              type="button"
-              onClick={onDiscard}>
-              Discard
-            </button>
+            <Button label="Discard" variant="tertiary" onClick={onDiscard} />
             <Button
-              className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-slate-400 sm:ml-3 sm:w-auto sm:text-sm"
               disabled={!checkedSimilar}
               label="Contribute"
               type="submit"
-              variant="primary"></Button>
+              variant="primary"
+            />
           </div>
         </div>
       </form>

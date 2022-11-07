@@ -35,7 +35,7 @@ export default function SortOptionsSelect({
   const sortOrders = sortOrderOptions ?? SORT_ORDERS;
 
   return (
-    <div className="flex items-end justify-end gap-4">
+    <div className="flex items-end justify-end gap-2">
       <div className="flex items-center gap-2">
         <Select
           display="inline"

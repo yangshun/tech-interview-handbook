@@ -91,7 +91,7 @@ export default function ProfileComments({
         },
       );
     } else {
-      // If not the OP and not logged in, direct users to log in
+      // If not the OP and not logged in, direct users to sign in
       signIn();
     }
   }

@@ -198,6 +198,8 @@ function TextInput(
 
             onChange(event.target.value, event);
           }}
+          // To prevent scrolling from changing number input value
+          onWheel={(event) => event.currentTarget.blur()}
           {...props}
         />
         {(() => {

@@ -119,7 +119,7 @@ export type BaseQuestionCardProps = ActionButtonProps &
     hideCard?: boolean;
     questionId: string;
     showHover?: boolean;
-    timestamp: string | null;
+    timestamp: Date | null;
     truncateContent?: boolean;
     type: QuestionsQuestionType;
   };
@@ -177,12 +177,26 @@ export default function BaseQuestionCard({
   const cardContent = (
     <>
       {showVoteButtons && (
-        <VotingButtons
-          upvoteCount={upvoteCount}
-          vote={vote}
-          onDownvote={handleDownvote}
-          onUpvote={handleUpvote}
-        />
+        <>
+          <div className="md:hidden">
+            <VotingButtons
+              size="sm"
+              upvoteCount={upvoteCount}
+              vote={vote}
+              onDownvote={handleDownvote}
+              onUpvote={handleUpvote}
+            />
+          </div>
+          <div className="hidden md:block">
+            <VotingButtons
+              size="md"
+              upvoteCount={upvoteCount}
+              vote={vote}
+              onDownvote={handleDownvote}
+              onUpvote={handleUpvote}
+            />
+          </div>
+        </>
       )}
       <div className="flex flex-1 flex-col items-start gap-2">
         <div className="flex items-baseline justify-between self-stretch">
@@ -201,7 +215,14 @@ export default function BaseQuestionCard({
                 <QuestionAggregateBadge statistics={roles} variant="danger" />
               </>
             )}
-            {timestamp !== null && <p className="text-xs">{timestamp}</p>}
+            {timestamp !== null && (
+              <p className="text-xs">
+                {timestamp.toLocaleDateString(undefined, {
+                  month: 'short',
+                  year: 'numeric',
+                })}
+              </p>
+            )}
             {showAddToList && (
               <div className="pl-4">
                 <AddToListDropdown questionId={questionId} />
@@ -230,22 +251,48 @@ export default function BaseQuestionCard({
             showCreateEncounterButton) && (
             <div className="flex gap-2">
               {showAnswerStatistics && (
-                <Button
-                  addonPosition="start"
-                  icon={ChatBubbleBottomCenterTextIcon}
-                  label={`${answerCount} answers`}
-                  size="sm"
-                  variant="tertiary"
-                />
+                <>
+                  <div className="sm:hidden">
+                    <Button
+                      addonPosition="start"
+                      icon={ChatBubbleBottomCenterTextIcon}
+                      label={`${answerCount}`}
+                      size="sm"
+                      variant="tertiary"
+                    />
+                  </div>
+                  <div className="hidden sm:block">
+                    <Button
+                      addonPosition="start"
+                      icon={ChatBubbleBottomCenterTextIcon}
+                      label={`${answerCount} answers`}
+                      size="sm"
+                      variant="tertiary"
+                    />
+                  </div>
+                </>
               )}
               {showReceivedStatistics && (
-                <Button
-                  addonPosition="start"
-                  icon={EyeIcon}
-                  label={`${receivedCount} received this`}
-                  size="sm"
-                  variant="tertiary"
-                />
+                <>
+                  <div className="sm:hidden">
+                    <Button
+                      addonPosition="start"
+                      icon={EyeIcon}
+                      label={`${receivedCount}`}
+                      size="sm"
+                      variant="tertiary"
+                    />
+                  </div>
+                  <div className="hidden sm:block">
+                    <Button
+                      addonPosition="start"
+                      icon={EyeIcon}
+                      label={`${receivedCount} received this`}
+                      size="sm"
+                      variant="tertiary"
+                    />
+                  </div>
+                </>
               )}
               {showCreateEncounterButton && (
                 <Button
@@ -277,7 +324,7 @@ export default function BaseQuestionCard({
     <article
       className={clsx(
         'group flex gap-4 border-slate-300',
-        showHover && 'hover:bg-slate-50',
+        showHover && 'transition hover:bg-slate-50',
         !hideCard && 'rounded-md border bg-white p-4',
       )}>
       {cardContent}

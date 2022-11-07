@@ -130,7 +130,7 @@ export default function CreateQuestionEncounterForm({
           yearLabel=""
           onChange={(value) => {
             setSelectedDate(
-              startOfMonth(new Date(value.year!, value.month! - 1)),
+              new Date(Date.UTC(value.year!, value.month! - 1, 1, 0, 0, 0, 0)),
             );
           }}
         />

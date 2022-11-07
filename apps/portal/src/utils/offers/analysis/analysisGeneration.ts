@@ -3,6 +3,8 @@ import type {
   City,
   Company,
   Country,
+  OffersAnalysis,
+  OffersAnalysisUnit,
   OffersBackground,
   OffersCurrency,
   OffersExperience,
@@ -19,6 +21,98 @@ import { TRPCError } from '@trpc/server';
 
 import { analysisInclusion } from './analysisInclusion';
 import { profileAnalysisDtoMapper } from '../../../mappers/offers-mappers';
+
+type Analysis =
+  | (OffersAnalysis & {
+      companyAnalysis: Array<
+        OffersAnalysisUnit & {
+          analysedOffer: OffersOffer & {
+            company: Company;
+            offersFullTime:
+              | (OffersFullTime & { totalCompensation: OffersCurrency })
+              | null;
+            offersIntern:
+              | (OffersIntern & { monthlySalary: OffersCurrency })
+              | null;
+            profile: OffersProfile & { background: OffersBackground | null };
+          };
+          topSimilarOffers: Array<
+            OffersOffer & {
+              company: Company;
+              location: City & { state: State & { country: Country } };
+              offersFullTime:
+                | (OffersFullTime & { totalCompensation: OffersCurrency })
+                | null;
+              offersIntern:
+                | (OffersIntern & { monthlySalary: OffersCurrency })
+                | null;
+              profile: OffersProfile & {
+                background:
+                  | (OffersBackground & {
+                      experiences: Array<
+                        OffersExperience & {
+                          company: Company | null;
+                          location:
+                            | (City & { state: State & { country: Country } })
+                            | null;
+                        }
+                      >;
+                    })
+                  | null;
+              };
+            }
+          >;
+        }
+      >;
+      overallAnalysis: OffersAnalysisUnit & {
+        analysedOffer: OffersOffer & {
+          company: Company;
+          offersFullTime:
+            | (OffersFullTime & { totalCompensation: OffersCurrency })
+            | null;
+          offersIntern:
+            | (OffersIntern & { monthlySalary: OffersCurrency })
+            | null;
+          profile: OffersProfile & { background: OffersBackground | null };
+        };
+        topSimilarOffers: Array<
+          OffersOffer & {
+            company: Company;
+            location: City & { state: State & { country: Country } };
+            offersFullTime:
+              | (OffersFullTime & { totalCompensation: OffersCurrency })
+              | null;
+            offersIntern:
+              | (OffersIntern & { monthlySalary: OffersCurrency })
+              | null;
+            profile: OffersProfile & {
+              background:
+                | (OffersBackground & {
+                    experiences: Array<
+                      OffersExperience & {
+                        company: Company | null;
+                        location:
+                          | (City & { state: State & { country: Country } })
+                          | null;
+                      }
+                    >;
+                  })
+                | null;
+            };
+          }
+        >;
+      };
+      overallHighestOffer: OffersOffer & {
+        company: Company;
+        location: City & { state: State & { country: Country } };
+        offersFullTime:
+          | (OffersFullTime & { totalCompensation: OffersCurrency })
+          | null;
+        offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
+        profile: OffersProfile & { background: OffersBackground | null };
+      };
+    })
+  | null;
 
 type Offer = OffersOffer & {
   company: Company;
@@ -285,6 +379,8 @@ export const generateAnalysis = async (params: {
   };
   input: { profileId: string };
 }) => {
+  let analysis: Analysis = null;
+
   const { ctx, input } = params;
   await ctx.prisma.offersAnalysis.deleteMany({
     where: {
@@ -352,17 +448,8 @@ export const generateAnalysis = async (params: {
   }
 
   const overallHighestOffer = offers[0];
-
   const usersOfferIds = offers.map((offer) => offer.id);
 
-  // OVERALL ANALYSIS
-  const overallAnalysisUnit = await generateAnalysisUnit(
-    ctx.prisma,
-    overallHighestOffer,
-    usersOfferIds,
-  );
-
-  // COMPANY ANALYSIS
   const companyMap = new Map<string, Offer>();
   offers.forEach((offer) => {
     if (companyMap.get(offer.companyId) == null) {
@@ -370,65 +457,70 @@ export const generateAnalysis = async (params: {
     }
   });
 
-  const companyAnalysis = await Promise.all(
-    Array.from(companyMap.values()).map(async (companyOffer) => {
-      return await generateAnalysisUnit(
-        ctx.prisma,
-        companyOffer,
-        usersOfferIds,
-        true,
-      );
-    }),
-  );
+  Promise.all([
+    generateAnalysisUnit(ctx.prisma, overallHighestOffer, usersOfferIds),
+    Promise.all(
+      Array.from(companyMap.values()).map(async (companyOffer) => {
+        return await generateAnalysisUnit(
+          ctx.prisma,
+          companyOffer,
+          usersOfferIds,
+          true,
+        );
+      }),
+    ),
+  ]).then(async (analyses) => {
+    const [overallAnalysisUnit, companyAnalysis] = analyses;
 
-  const analysis = await ctx.prisma.offersAnalysis.create({
-    data: {
-      companyAnalysis: {
-        create: companyAnalysis.map((analysisUnit) => {
-          return {
+    analysis = await ctx.prisma.offersAnalysis.create({
+      data: {
+        companyAnalysis: {
+          create: companyAnalysis.map((analysisUnit) => {
+            return {
+              analysedOffer: {
+                connect: {
+                  id: analysisUnit.analysedOfferId,
+                },
+              },
+              noOfSimilarOffers: analysisUnit.noOfSimilarOffers,
+              percentile: analysisUnit.percentile,
+              topSimilarOffers: {
+                connect: analysisUnit.topSimilarOffers.map((offer) => {
+                  return { id: offer.id };
+                }),
+              },
+            };
+          }),
+        },
+        overallAnalysis: {
+          create: {
             analysedOffer: {
               connect: {
-                id: analysisUnit.analysedOfferId,
+                id: overallAnalysisUnit.analysedOfferId,
               },
             },
-            noOfSimilarOffers: analysisUnit.noOfSimilarOffers,
-            percentile: analysisUnit.percentile,
+            noOfSimilarOffers: overallAnalysisUnit.noOfSimilarOffers,
+            percentile: overallAnalysisUnit.percentile,
             topSimilarOffers: {
-              connect: analysisUnit.topSimilarOffers.map((offer) => {
+              connect: overallAnalysisUnit.topSimilarOffers.map((offer) => {
                 return { id: offer.id };
               }),
             },
-          };
-        }),
-      },
-      overallAnalysis: {
-        create: {
-          analysedOffer: {
-            connect: {
-              id: overallAnalysisUnit.analysedOfferId,
-            },
           },
-          noOfSimilarOffers: overallAnalysisUnit.noOfSimilarOffers,
-          percentile: overallAnalysisUnit.percentile,
-          topSimilarOffers: {
-            connect: overallAnalysisUnit.topSimilarOffers.map((offer) => {
-              return { id: offer.id };
-            }),
+        },
+        overallHighestOffer: {
+          connect: {
+            id: overallHighestOffer.id,
+          },
+        },
+        profile: {
+          connect: {
+            id: input.profileId,
           },
         },
       },
-      overallHighestOffer: {
-        connect: {
-          id: overallHighestOffer.id,
-        },
-      },
-      profile: {
-        connect: {
-          id: input.profileId,
-        },
-      },
-    },
-    include: analysisInclusion,
+      include: analysisInclusion,
+    });
   });
 
   return profileAnalysisDtoMapper(analysis);

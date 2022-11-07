@@ -21,7 +21,7 @@ export default function CreateListDialog({
   const {
     register: formRegister,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isDirty },
     reset,
   } = useForm<CreateListFormData>();
   const register = useFormRegister(formRegister);
@@ -51,6 +51,7 @@ export default function CreateListDialog({
             autoComplete="off"
             label="Name"
             placeholder="List name"
+            required={true}
             type="text"
           />
         </div>
@@ -62,6 +63,7 @@ export default function CreateListDialog({
           onClick={handleDialogCancel}
         />
         <Button
+          disabled={!isDirty}
           display="inline"
           isLoading={isSubmitting}
           label="Create"

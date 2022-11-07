@@ -176,7 +176,7 @@ export default function ResumeReviewPage() {
         <Button
           display="block"
           href={loginPageHref()}
-          label="Log in to join discussion"
+          label="Sign in to comment"
           variant="primary"
         />
       );

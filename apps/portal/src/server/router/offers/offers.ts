@@ -78,6 +78,15 @@ export const offersRouter = createRouter().query('list', {
           // Internship
           include: {
             company: true,
+            location: {
+              include: {
+                state: {
+                  include: {
+                    country: true,
+                  },
+                },
+              },
+            },
             offersFullTime: {
               include: {
                 baseSalary: true,
@@ -198,6 +207,15 @@ export const offersRouter = createRouter().query('list', {
           // Junior, Mid, Senior
           include: {
             company: true,
+            location: {
+              include: {
+                state: {
+                  include: {
+                    country: true,
+                  },
+                },
+              },
+            },
             offersFullTime: {
               include: {
                 baseSalary: true,
