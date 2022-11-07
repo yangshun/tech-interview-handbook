@@ -12,7 +12,7 @@ const features = [
   },
   {
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'Reveal stories behind offers. Help job seekers benchmark and analyse their anonymous offers with more context. Encourage discussions around offer profiles.',
     href: '/offers',
     img: '/logos/offers-logo.svg',
     name: 'Tech Offers',
