@@ -34,6 +34,7 @@ function SettingsForm({
   );
 
   const [name, setName] = useState(session?.user?.name);
+  const [email, setEmail] = useState(session?.user?.email);
 
   return (
     <div className="lg:py-18 bg-white py-12">
@@ -50,6 +51,7 @@ function SettingsForm({
             onSubmit={(event) => {
               event.preventDefault();
               updateProfileMutation.mutate({
+                email: email ? email : undefined,
                 name: name ? name : undefined,
               });
             }}>
@@ -58,8 +60,18 @@ function SettingsForm({
                 <TextInput
                   description="This name will be used across the entire platform"
                   label="Name"
+                  placeholder="John Doe"
                   value={name ?? undefined}
                   onChange={(val) => setName(val)}
+                />
+              </div>
+              <div className="sm:col-span-3">
+                <TextInput
+                  label="Email"
+                  placeholder="john.doe@example.com"
+                  type="email"
+                  value={email ?? undefined}
+                  onChange={(val) => setEmail(val)}
                 />
               </div>
               {/* <div className="sm:col-span-6">
