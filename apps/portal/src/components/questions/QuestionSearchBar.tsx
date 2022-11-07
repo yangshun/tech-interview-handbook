@@ -11,6 +11,7 @@ import type { SortOptionsSelectProps } from './SortOptionsSelect';
 import { SortOrder, SortType } from '~/types/questions.d';
 
 export type QuestionSearchBarProps = SortOptionsSelectProps & {
+  activeFilterCount: number;
   onFilterOptionsToggle: () => void;
   onQueryChange: (query: string) => void;
   query: string;
@@ -33,6 +34,7 @@ function getSortOrderLabel(sortOrder: SortOrder, sortType: SortType): string {
 }
 
 export default function QuestionSearchBar({
+  activeFilterCount,
   onFilterOptionsToggle,
   onQueryChange,
   query,
@@ -55,22 +57,16 @@ export default function QuestionSearchBar({
               }}
             />
           </div>
-          <div className="sm:hidden">
+          <div className="lg:hidden">
             <Button
               addonPosition="start"
               icon={AdjustmentsHorizontalIcon}
-              isLabelHidden={true}
-              label="Filters"
-              variant="tertiary"
-              onClick={onFilterOptionsToggle}
-            />
-          </div>
-          <div className="hidden sm:block lg:hidden">
-            <Button
-              addonPosition="start"
-              icon={AdjustmentsHorizontalIcon}
-              label="Filters"
-              variant="tertiary"
+              label={
+                activeFilterCount > 0
+                  ? `Filters (${activeFilterCount})`
+                  : 'Filters'
+              }
+              variant={activeFilterCount > 0 ? 'secondary' : 'tertiary'}
               onClick={onFilterOptionsToggle}
             />
           </div>

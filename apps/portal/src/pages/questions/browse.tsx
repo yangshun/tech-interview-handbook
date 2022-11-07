@@ -149,13 +149,15 @@ export default function QuestionsBrowsePage() {
       },
     });
 
-  const hasFilters = useMemo(
+  const activeFilterCount = useMemo(
     () =>
-      selectedCompanySlugs.length > 0 ||
-      selectedQuestionTypes.length > 0 ||
-      selectedQuestionAge !== 'all' ||
-      selectedRoles.length > 0 ||
-      selectedLocations.length > 0,
+      [
+        ...selectedCompanySlugs,
+        ...selectedQuestionTypes,
+        ...(selectedQuestionAge !== 'all' ? [selectedQuestionAge] : []),
+        ...selectedRoles,
+        ...selectedLocations,
+      ].length,
     [
       selectedCompanySlugs,
       selectedQuestionTypes,
@@ -164,6 +166,8 @@ export default function QuestionsBrowsePage() {
       selectedLocations,
     ],
   );
+
+  const hasFilters = activeFilterCount > 0;
 
   const today = useMemo(() => new Date(), []);
   const startDate = useMemo(() => {
@@ -522,6 +526,7 @@ export default function QuestionsBrowsePage() {
               <div className="flex flex-col items-stretch gap-4">
                 <div className="sticky top-0 border-b border-slate-300 bg-slate-50 py-4">
                   <QuestionSearchBar
+                    activeFilterCount={activeFilterCount}
                     query={query}
                     sortOrderValue={sortOrder}
                     sortTypeOptions={QUESTION_SORT_TYPES}
