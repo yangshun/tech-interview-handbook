@@ -44,7 +44,7 @@ function ProfileJewel() {
   }
 
   const userNavigation = [
-    // { href: '/profile', name: 'Profile' },
+    { href: '/settings', name: 'Settings' },
     {
       href: '/api/auth/signout',
       name: 'Sign Out',
