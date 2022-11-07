@@ -32,11 +32,11 @@ export default function LoginPage({
             src="/logo.svg"
           />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-slate-900">
-            Tech Interview Handbook Portal
+            Sign in to Tech Interview Handbook Portal
           </h2>
           <p className="mt-2 text-center text-slate-600">
             Get your resumes peer-reviewed, discuss solutions to tech interview
-            questions, get offer data points.
+            questions, explore offer data points.
           </p>
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

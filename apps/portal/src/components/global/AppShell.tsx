@@ -38,7 +38,7 @@ function ProfileJewel() {
   if (session == null) {
     return router.pathname !== loginHref.pathname ? (
       <Link className="text-base" href={loginHref}>
-        Log In
+        Sign In
       </Link>
     ) : null;
   }
@@ -47,7 +47,7 @@ function ProfileJewel() {
     // { href: '/profile', name: 'Profile' },
     {
       href: '/api/auth/signout',
-      name: 'Log out',
+      name: 'Sign Out',
       onClick: (event: MouseEvent) => {
         event.preventDefault();
         signOut();
@@ -80,6 +80,15 @@ function ProfileJewel() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95">
         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          {!!session?.user?.name && (
+            <Menu.Item>
+              {() => (
+                <span className="block px-4 py-2 text-sm font-semibold text-slate-700">
+                  {session?.user?.name ?? ''}
+                </span>
+              )}
+            </Menu.Item>
+          )}
           {userNavigation.map((item) => (
             <Menu.Item key={item.name}>
               {({ active }) => (

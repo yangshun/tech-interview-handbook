@@ -15,7 +15,7 @@ export default function ResumeSignInButton({ text, className }: Props) {
         <Link
           className="text-primary-500 hover:text-primary-600"
           href={loginPageHref()}>
-          Log in
+          Sign in
         </Link>{' '}
         {text}
       </p>
