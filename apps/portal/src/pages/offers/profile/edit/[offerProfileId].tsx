@@ -1,4 +1,5 @@
 import Error from 'next/error';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { JobType } from '@prisma/client';
@@ -88,6 +89,9 @@ export default function OffersEditPage() {
 
   return (
     <>
+      <Head>
+        <title>Edit profile</title>
+      </Head>
       {getProfileResult.isError && (
         <div className="flex w-full justify-center">
           <Error statusCode={404} title="Requested profile does not exist" />

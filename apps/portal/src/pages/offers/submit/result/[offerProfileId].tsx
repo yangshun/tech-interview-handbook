@@ -1,4 +1,5 @@
 import Error from 'next/error';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useRef, useState } from 'react';
@@ -92,52 +93,57 @@ export default function OffersSubmissionResult() {
       title="You do not have permissions to access this page"
     />
   ) : (
-    <div ref={pageRef} className="w-full">
-      <div className="flex justify-center">
-        <div className="block w-full max-w-screen-md overflow-hidden rounded-lg sm:shadow-lg md:my-10">
-          <div className="flex justify-center bg-slate-100 px-4 py-4 sm:px-6 lg:px-8">
-            <Breadcrumbs
-              currentStep={step}
-              setStep={setStep}
-              steps={breadcrumbSteps}
-            />
-          </div>
-          <div className="bg-white p-6 sm:p-10">
-            {steps[step]}
-            {step === 0 && (
-              <div className="flex justify-end">
-                <Button
-                  disabled={false}
-                  icon={ArrowRightIcon}
-                  label="Next"
-                  variant="primary"
-                  onClick={() => setStep(step + 1)}
-                />
-              </div>
-            )}
-            {step === 1 && (
-              <div className="flex items-center justify-between">
-                <Button
-                  addonPosition="start"
-                  icon={ArrowLeftIcon}
-                  label="Previous"
-                  variant="secondary"
-                  onClick={() => setStep(step - 1)}
-                />
-                <Button
-                  href={getProfilePath(
-                    offerProfileId as string,
-                    token as string,
-                  )}
-                  icon={EyeIcon}
-                  label="View your profile"
-                  variant="primary"
-                />
-              </div>
-            )}
+    <>
+      <Head>
+        <title>View the result</title>
+      </Head>
+      <div ref={pageRef} className="w-full">
+        <div className="flex justify-center">
+          <div className="block w-full max-w-screen-md overflow-hidden rounded-lg sm:shadow-lg md:my-10">
+            <div className="flex justify-center bg-slate-100 px-4 py-4 sm:px-6 lg:px-8">
+              <Breadcrumbs
+                currentStep={step}
+                setStep={setStep}
+                steps={breadcrumbSteps}
+              />
+            </div>
+            <div className="bg-white p-6 sm:p-10">
+              {steps[step]}
+              {step === 0 && (
+                <div className="flex justify-end">
+                  <Button
+                    disabled={false}
+                    icon={ArrowRightIcon}
+                    label="Next"
+                    variant="primary"
+                    onClick={() => setStep(step + 1)}
+                  />
+                </div>
+              )}
+              {step === 1 && (
+                <div className="flex items-center justify-between">
+                  <Button
+                    addonPosition="start"
+                    icon={ArrowLeftIcon}
+                    label="Previous"
+                    variant="secondary"
+                    onClick={() => setStep(step - 1)}
+                  />
+                  <Button
+                    href={getProfilePath(
+                      offerProfileId as string,
+                      token as string,
+                    )}
+                    icon={EyeIcon}
+                    label="View your profile"
+                    variant="primary"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

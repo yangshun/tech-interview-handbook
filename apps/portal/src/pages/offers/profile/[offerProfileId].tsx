@@ -1,4 +1,5 @@
 import Error from 'next/error';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
@@ -201,42 +202,49 @@ export default function OfferProfile() {
       </div>
     </div>
   ) : (
-    <div className="w-full divide-x lg:flex">
-      <div className="divide-y lg:w-2/3">
-        <div className="h-fit">
-          <ProfileHeader
-            background={background}
-            handleDelete={handleDelete}
-            isEditable={isEditable}
-            isLoading={getProfileQuery.isLoading}
-            selectedTab={selectedTab}
-            setSelectedTab={setSelectedTab}
-          />
+    <>
+      <Head>
+        <title>
+          {background?.profileName ? background.profileName : 'View profile'}
+        </title>
+      </Head>
+      <div className="w-full divide-x lg:flex">
+        <div className="divide-y lg:w-2/3">
+          <div className="h-fit">
+            <ProfileHeader
+              background={background}
+              handleDelete={handleDelete}
+              isEditable={isEditable}
+              isLoading={getProfileQuery.isLoading}
+              selectedTab={selectedTab}
+              setSelectedTab={setSelectedTab}
+            />
+          </div>
+          <div>
+            <ProfileDetails
+              analysis={analysis}
+              background={background}
+              isEditable={isEditable}
+              isLoading={getProfileQuery.isLoading}
+              offers={offers}
+              profileId={offerProfileId as string}
+              selectedTab={selectedTab}
+            />
+          </div>
         </div>
-        <div>
-          <ProfileDetails
-            analysis={analysis}
-            background={background}
+        <div
+          className="bg-white lg:fixed lg:right-0 lg:bottom-0 lg:w-1/3"
+          style={{ top: 64 }}>
+          <ProfileComments
+            isDisabled={deleteMutation.isLoading}
             isEditable={isEditable}
             isLoading={getProfileQuery.isLoading}
-            offers={offers}
             profileId={offerProfileId as string}
-            selectedTab={selectedTab}
+            profileName={background?.profileName}
+            token={token as string}
           />
         </div>
       </div>
-      <div
-        className="bg-white lg:fixed lg:right-0 lg:bottom-0 lg:w-1/3"
-        style={{ top: 64 }}>
-        <ProfileComments
-          isDisabled={deleteMutation.isLoading}
-          isEditable={isEditable}
-          isLoading={getProfileQuery.isLoading}
-          profileId={offerProfileId as string}
-          profileName={background?.profileName}
-          token={token as string}
-        />
-      </div>
-    </div>
+    </>
   );
 }
