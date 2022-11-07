@@ -70,37 +70,37 @@ export const QUESTION_AGES: FilterChoices<QuestionAge> = [
 
 export const SORT_ORDERS = [
   {
-    label: 'Ascending',
-    value: SortOrder.ASC,
-  },
-  {
     label: 'Descending',
     value: SortOrder.DESC,
+  },
+  {
+    label: 'Ascending',
+    value: SortOrder.ASC,
   },
 ];
 
 export const SORT_TYPES = [
   {
-    label: 'New',
-    value: SortType.NEW,
+    label: 'Upvotes',
+    value: SortType.TOP,
   },
   {
-    label: 'Top',
-    value: SortType.TOP,
+    label: 'Date',
+    value: SortType.NEW,
   },
 ];
 
 export const QUESTION_SORT_TYPES = [
   {
-    label: 'New',
-    value: SortType.NEW,
-  },
-  {
-    label: 'Top',
+    label: 'Upvotes',
     value: SortType.TOP,
   },
   {
-    label: 'Encounters',
+    label: 'Age',
+    value: SortType.NEW,
+  },
+  {
+    label: 'Received',
     value: SortType.ENCOUNTERS,
   },
 ];

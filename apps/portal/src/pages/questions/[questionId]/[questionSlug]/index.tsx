@@ -210,10 +210,7 @@ export default function QuestionPage() {
               questionId={question.id}
               receivedCount={undefined}
               roles={relabeledAggregatedEncounters?.roleCounts ?? {}}
-              timestamp={question.seenAt.toLocaleDateString(undefined, {
-                month: 'short',
-                year: 'numeric',
-              })}
+              timestamp={question.seenAt}
               upvoteCount={question.numVotes}
               onReceivedSubmit={async (data) => {
                 await addEncounterAsync({

@@ -119,7 +119,7 @@ export type BaseQuestionCardProps = ActionButtonProps &
     hideCard?: boolean;
     questionId: string;
     showHover?: boolean;
-    timestamp: string | null;
+    timestamp: Date | null;
     truncateContent?: boolean;
     type: QuestionsQuestionType;
   };
@@ -215,7 +215,14 @@ export default function BaseQuestionCard({
                 <QuestionAggregateBadge statistics={roles} variant="danger" />
               </>
             )}
-            {timestamp !== null && <p className="text-xs">{timestamp}</p>}
+            {timestamp !== null && (
+              <p className="text-xs">
+                {timestamp.toLocaleDateString(undefined, {
+                  month: 'short',
+                  year: 'numeric',
+                })}
+              </p>
+            )}
             {showAddToList && (
               <div className="pl-4">
                 <AddToListDropdown questionId={questionId} />
@@ -317,7 +324,7 @@ export default function BaseQuestionCard({
     <article
       className={clsx(
         'group flex gap-4 border-slate-300',
-        showHover && 'hover:bg-slate-50',
+        showHover && 'transition hover:bg-slate-50',
         !hideCard && 'rounded-md border bg-white p-4',
       )}>
       {cardContent}

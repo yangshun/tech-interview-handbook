@@ -558,13 +558,9 @@ export default function QuestionsBrowsePage() {
                             questionId={question.id}
                             receivedCount={question.receivedCount}
                             roles={roleCounts}
-                            timestamp={question.seenAt.toLocaleDateString(
-                              undefined,
-                              {
-                                month: 'short',
-                                year: 'numeric',
-                              },
-                            )}
+                            timestamp={
+                              question.aggregatedQuestionEncounters.latestSeenAt
+                            }
                             type={question.type}
                             upvoteCount={question.numVotes}
                           />

@@ -220,13 +220,7 @@ export default function ListPage() {
                             questionId={question.id}
                             receivedCount={question.receivedCount}
                             roles={roleCounts}
-                            timestamp={question.seenAt.toLocaleDateString(
-                              undefined,
-                              {
-                                month: 'short',
-                                year: 'numeric',
-                              },
-                            )}
+                            timestamp={question.seenAt}
                             type={question.type}
                             onDelete={() => {
                               deleteQuestionEntry({ id: entryId });
