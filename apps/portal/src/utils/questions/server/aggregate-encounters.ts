@@ -65,7 +65,7 @@ export function createQuestionWithAggregateData(
     numComments: data._count.comments,
     numVotes: votes,
     receivedCount: data.encounters.length,
-    seenAt: data.encounters[0].seenAt,
+    lastSeenAt: data.lastSeenAt,
     type: data.questionType,
     updatedAt: data.updatedAt,
     user: data.user?.name ?? '',
@@ -80,11 +80,7 @@ export function createAggregatedQuestionEncounter(
   const companyCounts: Record<string, number> = {};
   const roleCounts: Record<string, number> = {};
 
-  let latestSeenAt = encounters[0].seenAt;
-
   for (const encounter of encounters) {
-    latestSeenAt =
-      latestSeenAt < encounter.seenAt ? encounter.seenAt : latestSeenAt;
 
     if (encounter.company !== null) {
       if (!(encounter.company.name in companyCounts)) {
@@ -137,7 +133,6 @@ export function createAggregatedQuestionEncounter(
   return {
     companyCounts,
     countryCounts,
-    latestSeenAt,
     roleCounts,
   };
 }
