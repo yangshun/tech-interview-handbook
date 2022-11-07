@@ -198,6 +198,7 @@ function TextInput(
 
             onChange(event.target.value, event);
           }}
+          onWheel={(event) => event.currentTarget.blur()}
           {...props}
         />
         {(() => {
