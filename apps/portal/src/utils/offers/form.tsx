@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { Validate } from 'react-hook-form';
+
+import { FieldError } from '~/components/offers/constants';
+
 /**
  * Removes empty objects, empty strings, `null`, `undefined`, and `NaN` values from an object.
  * Does not remove empty arrays.
@@ -85,3 +89,16 @@ export function removeInvalidMoneyData(object: any) {
   });
   return object;
 }
+
+/**
+ * Validation rule for numbers.
+ * @param value
+ * @returns `true` if value is a number, otherwise error message.
+ */
+export const validateNumber: Validate<number | null | undefined> = (value) => {
+  // Checks for NaN value, as the value passed in by the form is already converted to number pre-validation.
+  if (value !== value) {
+    return FieldError.NUMBER;
+  }
+  return true;
+};
