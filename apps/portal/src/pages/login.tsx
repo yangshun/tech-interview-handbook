@@ -54,9 +54,9 @@ export default function LoginPage({
                     onClick={() =>
                       signIn(
                         provider.id,
-                        router.query.redirect != null
+                        router.query.callbackUrl != null
                           ? {
-                              callbackUrl: String(router.query.redirect),
+                              callbackUrl: String(router.query.callbackUrl),
                             }
                           : undefined,
                       )

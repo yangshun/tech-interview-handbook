@@ -127,7 +127,7 @@ export default function SettingsPage() {
   }
 
   if (session == null) {
-    return null;
+    return <p>You are not signed in</p>;
   }
 
   return (

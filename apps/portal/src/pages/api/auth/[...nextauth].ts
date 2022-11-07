@@ -20,6 +20,9 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  pages: {
+    signIn: '/login',
+  },
   providers: [
     GitHubProvider({
       clientId: env.GITHUB_CLIENT_ID,
