@@ -763,6 +763,7 @@ export const addToProfileResponseMapper = (updatedProfile: {
 export const dashboardOfferDtoMapper = (
   offer: OffersOffer & {
     company: Company;
+    location: City & { state: State & { country: Country } };
     offersFullTime:
       | (OffersFullTime & {
           baseSalary: OffersCurrency | null;
@@ -785,6 +786,7 @@ export const dashboardOfferDtoMapper = (
       id: '',
       value: -1,
     }),
+    location: locationDtoMapper(offer.location),
     monthYearReceived: offer.monthYearReceived,
     profileId: offer.profileId,
     title: offer.offersFullTime?.title || offer.offersIntern?.title || '',
