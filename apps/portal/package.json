@@ -11,6 +11,7 @@
     "postinstall": "prisma generate",
     "seed": "ts-node prisma/seed.ts",
     "seed-salaries": "ts-node prisma/seed-salaries.ts",
+    "seed-analysis": "ts-node prisma/seed-analysis.ts",
     "seed-questions": "ts-node prisma/seed-questions.ts"
   },
   "dependencies": {

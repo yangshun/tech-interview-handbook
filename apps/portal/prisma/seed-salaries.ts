@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client';
 import crypto from 'crypto';
 import { baseCurrencyString } from '../src/utils/offers/currency';
 import { convert } from '../src/utils/offers/currency/currencyExchange';
-import { generateAnalysis } from '../src/utils/offers/analysis/analysisGeneration';
 
 import {
   generateRandomName,
@@ -344,26 +343,9 @@ const seedSalaries = async () => {
   }
 };
 
-const generateAllAnalysis = async () => {
-  return await Promise.all(
-    createdProfileIds.map(async (profileId) => {
-      await generateAnalysis({
-        ctx: { prisma, session: null },
-        input: { profileId },
-      });
-      console.log('Analysis generated for profile with id:', profileId);
-    }),
-  );
-};
-
 Promise.all([seedSalaries()])
   .then(() => {
     console.log(createdProfileIds.length + ' profiles created');
-    console.log('Busy crunching analysis.....');
-  })
-  .then(() => generateAllAnalysis())
-  .then((_data) => {
-    console.log('Seeding from salaries sheet complete');
   })
   .then(async () => {
     await prisma.$disconnect();
