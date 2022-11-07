@@ -223,7 +223,7 @@ export default function ContributeQuestionForm({
                 createEncounterButtonText="Yes, this is my question"
                 questionId={question.id}
                 roles={roleCounts}
-                timestamp={question.seenAt}
+                timestamp={question.lastSeenAt}
                 type={question.type}
                 onReceivedSubmit={async (data) => {
                   await addEncounterAsync({

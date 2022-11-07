@@ -4,11 +4,11 @@ export type Question = {
   aggregatedQuestionEncounters: AggregatedQuestionEncounter;
   content: string;
   id: string;
+  lastSeenAt: Date | null;
   numAnswers: number;
   numComments: number;
   numVotes: number;
   receivedCount: number;
-  lastSeenAt: Date | null;
   type: QuestionsQuestionType;
   updatedAt: Date;
   user: string;

@@ -61,11 +61,11 @@ export function createQuestionWithAggregateData(
     ),
     content: data.content,
     id: data.id,
+    lastSeenAt: data.lastSeenAt,
     numAnswers: data._count.answers,
     numComments: data._count.comments,
     numVotes: votes,
     receivedCount: data.encounters.length,
-    lastSeenAt: data.lastSeenAt,
     type: data.questionType,
     updatedAt: data.updatedAt,
     user: data.user?.name ?? '',
@@ -81,7 +81,6 @@ export function createAggregatedQuestionEncounter(
   const roleCounts: Record<string, number> = {};
 
   for (const encounter of encounters) {
-
     if (encounter.company !== null) {
       if (!(encounter.company.name in companyCounts)) {
         companyCounts[encounter.company!.name] = 0;

@@ -558,9 +558,7 @@ export default function QuestionsBrowsePage() {
                             questionId={question.id}
                             receivedCount={question.receivedCount}
                             roles={roleCounts}
-                            timestamp={
-                              question.aggregatedQuestionEncounters.latestSeenAt
-                            }
+                            timestamp={question.lastSeenAt}
                             type={question.type}
                             upvoteCount={question.numVotes}
                           />
