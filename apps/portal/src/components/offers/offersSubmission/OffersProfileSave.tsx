@@ -41,7 +41,7 @@ export default function OffersProfileSave({
           { profileId, userId: session?.user?.id },
         ]);
         showToast({
-          title: `Saved to my dashboard!`,
+          title: `Saved to your dashboard!`,
           variant: 'success',
         });
       },
