@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import type { SVGProps } from 'react';
 import {
   BookmarkSquareIcon,
@@ -82,176 +83,182 @@ const footerNavigation = {
 
 export default function LandingPage() {
   return (
-    <div className="mx-auto w-full overflow-y-auto bg-white">
-      <main>
-        {/* Hero section */}
-        <div className="relative h-full">
-          <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
-            <img
-              alt="Tech Offers Repo"
-              className="mx-auto mb-8 w-auto"
-              src="/logos/offers-logo.svg"
-            />
-            <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              <span>Choosing offers </span>
-              <span className="from-primary-600 -mb-1 mr-2 bg-gradient-to-r to-purple-500 bg-clip-text pb-1 pr-4 italic text-transparent">
-                made easier
-              </span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-lg text-center text-xl sm:max-w-3xl">
-              Analyze your offers using profiles from fellow software engineers.
-            </p>
-            <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
-              <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-1 sm:gap-5 sm:space-y-0">
-                <a
-                  className="border-grey-600 flex items-center justify-center rounded-md border bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8"
-                  href={HOME_URL}>
-                  Get started
-                </a>
-                {/* <a
+    <>
+      <Head>
+        <title>Features - Tech Offers Repo</title>
+      </Head>
+      <div className="mx-auto w-full overflow-y-auto bg-white">
+        <main>
+          {/* Hero section */}
+          <div className="relative h-full">
+            <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+              <img
+                alt="Tech Offers Repo"
+                className="mx-auto mb-8 w-auto"
+                src="/logos/offers-logo.svg"
+              />
+              <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+                <span>Choosing offers </span>
+                <span className="from-primary-600 -mb-1 mr-2 bg-gradient-to-r to-purple-500 bg-clip-text pb-1 pr-4 italic text-transparent">
+                  made easier
+                </span>
+              </h1>
+              <p className="mx-auto mt-6 max-w-lg text-center text-xl sm:max-w-3xl">
+                Analyze your offers using profiles from fellow software
+                engineers.
+              </p>
+              <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
+                <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-1 sm:gap-5 sm:space-y-0">
+                  <a
+                    className="border-grey-600 flex items-center justify-center rounded-md border bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8"
+                    href={HOME_URL}>
+                    Get started
+                  </a>
+                  {/* <a
                   className="bg-primary-500 flex items-center justify-center rounded-md border border-transparent px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"
                   href="#">
                   Live demo
                 </a> */}
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Alternating Feature Sections */}
-        <div className="relative overflow-hidden pt-16 pb-32">
-          <div
-            aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-gray-100"
-          />
-          <div className="relative">
-            <LeftTextCard
-              buttonLabel="View offers"
-              description="Filter relevant offers by job title, company, submission date, salary and more."
-              icon={
-                <TableCellsIcon
-                  aria-hidden="true"
-                  className="h-6 w-6 text-white"
-                />
-              }
-              imageAlt="Browse page"
-              imageSrc={offersBrowse}
-              title="Stay informed of recent offers"
-              url={HOME_URL}
+          {/* Alternating Feature Sections */}
+          <div className="relative overflow-hidden pt-16 pb-32">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-gray-100"
             />
-          </div>
-          <div className="mt-36">
-            <RightTextCard
-              buttonLabel="Analyse offers"
-              description="With our offer engine analysis, you can benchmark your offers against other offers on the market and make an informed decision."
-              icon={
-                <ChartBarSquareIcon
-                  aria-hidden="true"
-                  className="h-6 w-6 text-white"
-                />
-              }
-              imageAlt="Offers analysis page"
-              imageSrc={offersAnalysis}
-              title="Better understand your offers"
-              url={OFFERS_SUBMIT_URL}
-            />
-          </div>
-          <div className="mt-36">
-            <LeftTextCard
-              buttonLabel="View offer profiles"
-              description="An offer profile includes not only offers that a person received in their application cycle, but also background information such as education and work experience. Use offer profiles to help you better contextualize offers."
-              icon={
-                <InformationCircleIcon
-                  aria-hidden="true"
-                  className="h-6 w-6 text-white"
-                />
-              }
-              imageAlt="Offer profile page"
-              imageSrc={offersProfile}
-              title="Choosing an offer needs context"
-              url={HOME_URL}
-            />
-          </div>
-        </div>
-
-        {/* Gradient Feature Section */}
-        <div className="to-primary-600 bg-gradient-to-r from-purple-800">
-          <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:px-8 lg:pt-24">
-            <h2 className="flex justify-center text-4xl font-bold tracking-tight text-white">
-              Your privacy is our priority.
-            </h2>
-            <p className="text-primary-100 mt-4 flex flex-row justify-center text-lg">
-              All offer profiles are anonymized and we do not store information
-              about your personal identity.
-            </p>
-            <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
-              {features.map((feature) => (
-                <div key={feature.name}>
-                  <div>
-                    <span className="flex h-12 w-12 items-center justify-center rounded-md bg-white bg-opacity-10">
-                      <feature.icon
-                        aria-hidden="true"
-                        className="h-6 w-6 text-white"
-                      />
-                    </span>
-                  </div>
-                  <div className="mt-6">
-                    <h3 className="text-lg font-medium text-white">
-                      {feature.name}
-                    </h3>
-                    <p className="text-primary-100 mt-2 text-base">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+            <div className="relative">
+              <LeftTextCard
+                buttonLabel="View offers"
+                description="Filter relevant offers by job title, company, submission date, salary and more."
+                icon={
+                  <TableCellsIcon
+                    aria-hidden="true"
+                    className="h-6 w-6 text-white"
+                  />
+                }
+                imageAlt="Browse page"
+                imageSrc={offersBrowse}
+                title="Stay informed of recent offers"
+                url={HOME_URL}
+              />
+            </div>
+            <div className="mt-36">
+              <RightTextCard
+                buttonLabel="Analyse offers"
+                description="With our offer engine analysis, you can benchmark your offers against other offers on the market and make an informed decision."
+                icon={
+                  <ChartBarSquareIcon
+                    aria-hidden="true"
+                    className="h-6 w-6 text-white"
+                  />
+                }
+                imageAlt="Offers analysis page"
+                imageSrc={offersAnalysis}
+                title="Better understand your offers"
+                url={OFFERS_SUBMIT_URL}
+              />
+            </div>
+            <div className="mt-36">
+              <LeftTextCard
+                buttonLabel="View offer profiles"
+                description="An offer profile includes not only offers that a person received in their application cycle, but also background information such as education and work experience. Use offer profiles to help you better contextualize offers."
+                icon={
+                  <InformationCircleIcon
+                    aria-hidden="true"
+                    className="h-6 w-6 text-white"
+                  />
+                }
+                imageAlt="Offer profile page"
+                imageSrc={offersProfile}
+                title="Choosing an offer needs context"
+                url={HOME_URL}
+              />
             </div>
           </div>
-        </div>
 
-        {/* CTA Section */}
-        <div className="bg-white">
-          <div className="mx-auto max-w-4xl py-16 px-4 sm:px-6 sm:py-24 lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:px-8">
-            <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              <span className="block">Ready to get started?</span>
-              <span className="to-primary-600 -mb-1 block bg-gradient-to-r from-purple-600 bg-clip-text pb-1 text-transparent">
-                Create your own offer profile today.
-              </span>
-            </h2>
-            <div className="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
-              <a
-                className="to-primary-500 flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
-                href={OFFERS_SUBMIT_URL}>
-                Get Started
-              </a>
+          {/* Gradient Feature Section */}
+          <div className="to-primary-600 bg-gradient-to-r from-purple-800">
+            <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:px-8 lg:pt-24">
+              <h2 className="flex justify-center text-4xl font-bold tracking-tight text-white">
+                Your privacy is our priority.
+              </h2>
+              <p className="text-primary-100 mt-4 flex flex-row justify-center text-lg">
+                All offer profiles are anonymized and we do not store
+                information about your personal identity.
+              </p>
+              <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
+                {features.map((feature) => (
+                  <div key={feature.name}>
+                    <div>
+                      <span className="flex h-12 w-12 items-center justify-center rounded-md bg-white bg-opacity-10">
+                        <feature.icon
+                          aria-hidden="true"
+                          className="h-6 w-6 text-white"
+                        />
+                      </span>
+                    </div>
+                    <div className="mt-6">
+                      <h3 className="text-lg font-medium text-white">
+                        {feature.name}
+                      </h3>
+                      <p className="text-primary-100 mt-2 text-base">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </main>
 
-      <footer aria-labelledby="footer-heading" className="bg-gray-50">
-        <h2 className="sr-only" id="footer-heading">
-          Footer
-        </h2>
-        <div className="mx-auto max-w-7xl px-4 pt-0 pb-8 sm:px-6 lg:px-8">
-          <div className="mt-12 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between lg:mt-16">
-            <div className="flex space-x-6 md:order-2">
-              {footerNavigation.social.map((item) => (
+          {/* CTA Section */}
+          <div className="bg-white">
+            <div className="mx-auto max-w-4xl py-16 px-4 sm:px-6 sm:py-24 lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:px-8">
+              <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                <span className="block">Ready to get started?</span>
+                <span className="to-primary-600 -mb-1 block bg-gradient-to-r from-purple-600 bg-clip-text pb-1 text-transparent">
+                  Create your own offer profile today.
+                </span>
+              </h2>
+              <div className="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
                 <a
-                  key={item.name}
-                  className="text-gray-400 hover:text-gray-500"
-                  href={item.href}>
-                  <span className="sr-only">{item.name}</span>
-                  <item.icon aria-hidden="true" className="h-6 w-6" />
+                  className="to-primary-500 flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                  href={OFFERS_SUBMIT_URL}>
+                  Get Started
                 </a>
-              ))}
+              </div>
             </div>
-            <p className="mt-8 text-base text-gray-400 md:order-1 md:mt-0">
-              &copy; 2022 Tech Offers Repo. All rights reserved.
-            </p>
           </div>
-        </div>
-      </footer>
-    </div>
+        </main>
+
+        <footer aria-labelledby="footer-heading" className="bg-gray-50">
+          <h2 className="sr-only" id="footer-heading">
+            Footer
+          </h2>
+          <div className="mx-auto max-w-7xl px-4 pt-0 pb-8 sm:px-6 lg:px-8">
+            <div className="mt-12 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between lg:mt-16">
+              <div className="flex space-x-6 md:order-2">
+                {footerNavigation.social.map((item) => (
+                  <a
+                    key={item.name}
+                    className="text-gray-400 hover:text-gray-500"
+                    href={item.href}>
+                    <span className="sr-only">{item.name}</span>
+                    <item.icon aria-hidden="true" className="h-6 w-6" />
+                  </a>
+                ))}
+              </div>
+              <p className="mt-8 text-base text-gray-400 md:order-1 md:mt-0">
+                &copy; 2022 Tech Offers Repo. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </>
   );
 }
