@@ -53,7 +53,7 @@ export default function AnswerCard({
             Posted on: {format(createdAt, 'h:mm a, MMMM dd, yyyy')}
           </p>
         </div>
-        <p>{content}</p>
+        <p className="whitespace-pre-line">{content}</p>
         {commentCount !== undefined && (
           <div className="flex items-center gap-2 text-slate-500">
             <ChatBubbleLeftRightIcon className="h-6 w-6" />

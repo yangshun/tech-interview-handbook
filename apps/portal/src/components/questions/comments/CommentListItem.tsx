@@ -44,7 +44,7 @@ export default function CommentListItem({
             Posted on: {format(createdAt, 'h:mm a, MMMM dd, yyyy')}
           </p>
         </div>
-        <p className="pl-1 pt-1">{content}</p>
+        <p className="whitespace-pre-line">{content}</p>
       </div>
     </div>
   );
