@@ -14,13 +14,26 @@ const seedAnalysis = async () => {
     },
   });
 
-  for (const profile of profilesWithoutAnalysis) {
+  console.log(
+    'Number of profiles found without analysis:',
+    profilesWithoutAnalysis.length,
+  );
+
+  let i = 0;
+
+  while (i < profilesWithoutAnalysis.length) {
+    const profile = profilesWithoutAnalysis[i];
     await generateAnalysis({
       ctx: { prisma, session: null },
       input: { profileId: profile.id },
     });
-    console.log('Analysis generated for profile with id:', profile.id);
+
+    i++;
+
+    console.log(i, ': Analysis generated for profile with id', profile.id);
   }
+
+  console.log(i, ' analysis generated');
 };
 
 Promise.all([seedAnalysis()])
