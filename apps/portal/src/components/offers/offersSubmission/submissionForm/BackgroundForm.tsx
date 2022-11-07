@@ -9,7 +9,6 @@ import {
   Currency,
   CURRENCY_OPTIONS,
 } from '~/utils/offers/currency/CurrencyEnum';
-import { validateNumber } from '~/utils/offers/form';
 
 import { EducationFieldOptions } from '../../EducationFields';
 import { EducationLevelOptions } from '../../EducationLevels';
@@ -35,11 +34,10 @@ function YoeSection() {
           label="Total YOE"
           placeholder="0"
           required={true}
-          type="text"
+          type="number"
           {...register(`background.totalYoe`, {
             min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
             required: FieldError.REQUIRED,
-            validate: validateNumber,
             valueAsNumber: true,
           })}
         />
@@ -50,10 +48,9 @@ function YoeSection() {
             <FormTextInput
               errorMessage={backgroundFields?.specificYoes?.[0]?.yoe?.message}
               label="Specific YOE 1"
-              type="text"
+              type="number"
               {...register(`background.specificYoes.0.yoe`, {
                 min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-                validate: validateNumber,
                 valueAsNumber: true,
               })}
             />
@@ -67,10 +64,9 @@ function YoeSection() {
             <FormTextInput
               errorMessage={backgroundFields?.specificYoes?.[1]?.yoe?.message}
               label="Specific YOE 2"
-              type="text"
+              type="number"
               {...register(`background.specificYoes.1.yoe`, {
                 min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-                validate: validateNumber,
                 valueAsNumber: true,
               })}
             />
@@ -123,10 +119,9 @@ function FullTimeJobFields() {
           placeholder="0.00"
           startAddOn="$"
           startAddOnType="label"
-          type="text"
+          type="number"
           {...register(`background.experiences.0.totalCompensation.value`, {
             min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-            validate: validateNumber,
             valueAsNumber: true,
           })}
         />
@@ -147,10 +142,9 @@ function FullTimeJobFields() {
           <FormTextInput
             errorMessage={experiencesField?.durationInMonths?.message}
             label="Duration (months)"
-            type="text"
+            type="number"
             {...register(`background.experiences.0.durationInMonths`, {
               min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-              validate: validateNumber,
               valueAsNumber: true,
             })}
           />
@@ -194,10 +188,9 @@ function InternshipJobFields() {
         placeholder="0.00"
         startAddOn="$"
         startAddOnType="label"
-        type="text"
+        type="number"
         {...register(`background.experiences.0.monthlySalary.value`, {
           min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-          validate: validateNumber,
           valueAsNumber: true,
         })}
       />
@@ -212,10 +205,9 @@ function InternshipJobFields() {
           <FormTextInput
             errorMessage={experiencesField?.durationInMonths?.message}
             label="Duration (months)"
-            type="text"
+            type="number"
             {...register(`background.experiences.0.durationInMonths`, {
               min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-              validate: validateNumber,
               valueAsNumber: true,
             })}
           />
