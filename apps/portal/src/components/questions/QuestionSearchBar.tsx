@@ -75,9 +75,8 @@ export default function QuestionSearchBar({
             />
           </div>
         </div>
-        {/* <SortOptionsSelect {...sortOptionsSelectProps} /> */}
       </div>
-      <div className="flex justify-start gap-4">
+      <div className="flex flex-col justify-start gap-x-4 gap-y-2 sm:flex-row">
         <div>
           <Tabs
             label="Sort by"
@@ -86,7 +85,7 @@ export default function QuestionSearchBar({
             onChange={sortOptionsSelectProps.onSortTypeChange}
           />
         </div>
-        <div className="border-l" />
+        <div className="border-b border-l" />
         <div>
           <Tabs
             label="Order by"
