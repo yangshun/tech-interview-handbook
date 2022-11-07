@@ -96,13 +96,13 @@ const getLevel = (type: string) => {
     processedType.includes('FRESH GRAD') ||
     processedType.includes('JUNIOR')
   ) {
-    return 'L1';
+    return 'Junior';
   } else if (processedType.includes('MID')) {
-    return 'L2';
+    return 'Mid';
   } else if (processedType.includes('SENIOR')) {
-    return 'L4';
+    return 'Senior';
   } else {
-    return 'L0';
+    return 'N/A';
   }
 };
 

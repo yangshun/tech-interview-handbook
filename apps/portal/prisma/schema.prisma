@@ -98,6 +98,7 @@ model Company {
   slug        String   @unique
   description String?  @db.Text
   logoUrl     String?
+  website     String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

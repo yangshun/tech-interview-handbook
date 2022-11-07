@@ -16,6 +16,7 @@ async function main() {
       name: company.name,
       slug: company.slug,
       description: company.description,
+      website: company.website,
       logoUrl: company.logoUrl,
     })),
     skipDuplicates: true,
