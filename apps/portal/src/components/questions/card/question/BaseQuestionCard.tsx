@@ -177,12 +177,26 @@ export default function BaseQuestionCard({
   const cardContent = (
     <>
       {showVoteButtons && (
-        <VotingButtons
-          upvoteCount={upvoteCount}
-          vote={vote}
-          onDownvote={handleDownvote}
-          onUpvote={handleUpvote}
-        />
+        <>
+          <div className="md:hidden">
+            <VotingButtons
+              size="sm"
+              upvoteCount={upvoteCount}
+              vote={vote}
+              onDownvote={handleDownvote}
+              onUpvote={handleUpvote}
+            />
+          </div>
+          <div className="hidden md:block">
+            <VotingButtons
+              size="md"
+              upvoteCount={upvoteCount}
+              vote={vote}
+              onDownvote={handleDownvote}
+              onUpvote={handleUpvote}
+            />
+          </div>
+        </>
       )}
       <div className="flex flex-1 flex-col items-start gap-2">
         <div className="flex items-baseline justify-between self-stretch">
@@ -230,22 +244,48 @@ export default function BaseQuestionCard({
             showCreateEncounterButton) && (
             <div className="flex gap-2">
               {showAnswerStatistics && (
-                <Button
-                  addonPosition="start"
-                  icon={ChatBubbleBottomCenterTextIcon}
-                  label={`${answerCount} answers`}
-                  size="sm"
-                  variant="tertiary"
-                />
+                <>
+                  <div className="sm:hidden">
+                    <Button
+                      addonPosition="start"
+                      icon={ChatBubbleBottomCenterTextIcon}
+                      label={`${answerCount}`}
+                      size="sm"
+                      variant="tertiary"
+                    />
+                  </div>
+                  <div className="hidden sm:block">
+                    <Button
+                      addonPosition="start"
+                      icon={ChatBubbleBottomCenterTextIcon}
+                      label={`${answerCount} answers`}
+                      size="sm"
+                      variant="tertiary"
+                    />
+                  </div>
+                </>
               )}
               {showReceivedStatistics && (
-                <Button
-                  addonPosition="start"
-                  icon={EyeIcon}
-                  label={`${receivedCount} received this`}
-                  size="sm"
-                  variant="tertiary"
-                />
+                <>
+                  <div className="sm:hidden">
+                    <Button
+                      addonPosition="start"
+                      icon={EyeIcon}
+                      label={`${receivedCount}`}
+                      size="sm"
+                      variant="tertiary"
+                    />
+                  </div>
+                  <div className="hidden sm:block">
+                    <Button
+                      addonPosition="start"
+                      icon={EyeIcon}
+                      label={`${receivedCount} received this`}
+                      size="sm"
+                      variant="tertiary"
+                    />
+                  </div>
+                </>
               )}
               {showCreateEncounterButton && (
                 <Button
