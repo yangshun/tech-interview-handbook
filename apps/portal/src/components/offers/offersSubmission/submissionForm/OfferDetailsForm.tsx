@@ -13,8 +13,6 @@ import { TrashIcon } from '@heroicons/react/24/outline';
 import { JobType } from '@prisma/client';
 import { Button, Dialog, HorizontalDivider } from '@tih/ui';
 
-import { validateNumber } from '~/utils/offers/form';
-
 import {
   defaultFullTimeOfferValues,
   defaultInternshipOfferValues,
@@ -158,13 +156,12 @@ function FullTimeOfferDetailsForm({
             required={true}
             startAddOn="$"
             startAddOnType="label"
-            type="text"
+            type="number"
             {...register(
               `offers.${index}.offersFullTime.totalCompensation.value`,
               {
                 min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
                 required: FieldError.REQUIRED,
-                validate: validateNumber,
                 valueAsNumber: true,
               },
             )}
@@ -192,10 +189,9 @@ function FullTimeOfferDetailsForm({
             placeholder="0"
             startAddOn="$"
             startAddOnType="label"
-            type="text"
+            type="number"
             {...register(`offers.${index}.offersFullTime.baseSalary.value`, {
               min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-              validate: validateNumber,
               valueAsNumber: true,
             })}
           />
@@ -216,10 +212,9 @@ function FullTimeOfferDetailsForm({
             placeholder="0"
             startAddOn="$"
             startAddOnType="label"
-            type="text"
+            type="number"
             {...register(`offers.${index}.offersFullTime.bonus.value`, {
               min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-              validate: validateNumber,
               valueAsNumber: true,
             })}
           />
@@ -240,10 +235,9 @@ function FullTimeOfferDetailsForm({
             placeholder="0"
             startAddOn="$"
             startAddOnType="label"
-            type="text"
+            type="number"
             {...register(`offers.${index}.offersFullTime.stocks.value`, {
               min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
-              validate: validateNumber,
               valueAsNumber: true,
             })}
           />
@@ -400,11 +394,10 @@ function InternshipOfferDetailsForm({
             required={true}
             startAddOn="$"
             startAddOnType="label"
-            type="text"
+            type="number"
             {...register(`offers.${index}.offersIntern.monthlySalary.value`, {
               min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
               required: FieldError.REQUIRED,
-              validate: validateNumber,
               valueAsNumber: true,
             })}
           />
