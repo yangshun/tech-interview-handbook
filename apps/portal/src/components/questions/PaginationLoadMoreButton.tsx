@@ -9,8 +9,15 @@ export default function PaginationLoadMoreButton(
   props: PaginationLoadMoreButtonProps,
 ) {
   const {
-    query: { hasNextPage, isFetchingNextPage, fetchNextPage },
+    query: { data, hasNextPage, isFetchingNextPage, fetchNextPage },
   } = props;
+
+  const isOnlyOnePage = data?.pages.length === 1;
+
+  if (isOnlyOnePage && !hasNextPage) {
+    return null;
+  }
+
   return (
     <Button
       disabled={!hasNextPage || isFetchingNextPage}
