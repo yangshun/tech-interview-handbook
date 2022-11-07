@@ -23,6 +23,7 @@ export default function OfferTableRow({
     company,
     id,
     income,
+    location,
     monthYearReceived,
     profileId,
     stocks,
@@ -32,9 +33,12 @@ export default function OfferTableRow({
 }: OfferTableRowProps) {
   return (
     <tr key={id} className="divide-x divide-slate-200 border-b bg-white">
-      <th className="whitespace-nowrap py-4 px-4 font-medium" scope="row">
-        {company.name}
-      </th>
+      <td className="space-y-0.5 py-4 px-4" scope="row">
+        <div className="font-medium">{company.name}</div>
+        <div className="text-xs text-slate-400">
+          {location.cityName} ({location.countryCode})
+        </div>
+      </td>
       <td className="py-4 px-4">
         {getLabelForJobTitleType(title as JobTitleType)}
       </td>

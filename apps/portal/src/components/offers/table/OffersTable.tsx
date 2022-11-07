@@ -235,7 +235,8 @@ export default function OffersTable({
             <th
               key={header}
               className={clsx(
-                'whitespace-nowrap bg-slate-100 py-3 px-4',
+                'bg-slate-100 py-3 px-4',
+                header !== 'Company' && 'whitespace-nowrap',
                 // Make last column sticky.
                 index === columns.length - 1 &&
                   'sticky right-0 drop-shadow md:drop-shadow-none',
