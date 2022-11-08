@@ -18,6 +18,7 @@ const getOrder = (prefix: string) => {
 
 const sortingKeysMap = {
   companyName: 'companyName',
+  jobTitle: 'jobTitle',
   monthYearReceived: 'monthYearReceived',
   totalCompensation: 'totalCompensation',
   totalYoe: 'totalYoe',
@@ -145,6 +146,20 @@ export const offersRouter = createRouter().query('list', {
                     company: {
                       name: order,
                     },
+                  },
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
+              : sortingKey === sortingKeysMap.jobTitle
+              ? [
+                  {
+                    offersIntern: {
+                      title: order,
+                    },
+                  },
+                  {
+                    monthYearReceived: 'desc',
                   },
                 ]
               : { monthYearReceived: 'desc' },
@@ -283,6 +298,20 @@ export const offersRouter = createRouter().query('list', {
                     company: {
                       name: order,
                     },
+                  },
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
+              : sortingKey === sortingKeysMap.jobTitle
+              ? [
+                  {
+                    offersFullTime: {
+                      title: order,
+                    },
+                  },
+                  {
+                    monthYearReceived: 'desc',
                   },
                 ]
               : { monthYearReceived: 'desc' },
