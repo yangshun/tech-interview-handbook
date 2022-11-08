@@ -34,6 +34,12 @@ export type OffersTableProps = Readonly<{
   country: string | null;
   countryFilter: string;
   jobTitleFilter: string;
+  onSort: (
+    sortDirection: OFFER_TABLE_SORT_ORDER,
+    sortType: OfferTableSortType | null,
+  ) => void;
+  selectedSortDirection: OFFER_TABLE_SORT_ORDER;
+  selectedSortType: OfferTableSortType | null;
 }>;
 
 export default function OffersTable({
@@ -42,6 +48,9 @@ export default function OffersTable({
   companyName,
   companyFilter,
   jobTitleFilter,
+  selectedSortDirection,
+  selectedSortType,
+  onSort,
 }: OffersTableProps) {
   const [currency, setCurrency] = useState(
     getCurrencyForCountry(country).toString(),
@@ -66,14 +75,11 @@ export default function OffersTable({
     isYoeCategoryInitialized,
   ] = useSearchParamSingle<keyof typeof YOE_CATEGORY_PARAM>('yoeCategory');
 
-  const [
-    selectedSortDirection,
-    setSelectedSortDirection,
-    isSortDirectionInitialized,
-  ] = useSearchParamSingle<OFFER_TABLE_SORT_ORDER>('sortDirection');
+  const [, , isSortDirectionInitialized] =
+    useSearchParamSingle<OFFER_TABLE_SORT_ORDER>('sortDirection');
 
-  const [selectedSortType, setSelectedSortType, isSortTypeInitialized] =
-    useSearchParamSingle<OfferTableSortType>('sortType');
+  const [, , isSortTypeInitialized] =
+    useSearchParamSingle<OfferTableSortType | null>('sortType');
 
   const areFilterParamsInitialized = useMemo(() => {
     return (
@@ -164,19 +170,6 @@ export default function OffersTable({
     },
   );
 
-  const onSort = (
-    sortDirection: OFFER_TABLE_SORT_ORDER,
-    sortType: OfferTableSortType,
-  ) => {
-    gaEvent({
-      action: 'offers_table_sort',
-      category: 'engagement',
-      label: `${sortType} - ${sortDirection}`,
-    });
-    setSelectedSortType(sortType);
-    setSelectedSortDirection(sortDirection);
-  };
-
   function renderFilters() {
     return (
       <div className="flex items-center justify-between p-4 text-xs text-slate-700 sm:grid-cols-4 sm:text-sm md:text-base">
@@ -199,7 +192,7 @@ export default function OffersTable({
               label={itemLabel}
               onClick={() => {
                 setSelectedYoeCategory(value);
-                setSelectedSortDirection(OFFER_TABLE_SORT_ORDER.UNSORTED);
+                onSort(OFFER_TABLE_SORT_ORDER.UNSORTED, null);
                 gaEvent({
                   action: `offers.table_filter_yoe_category_${value}`,
                   category: 'engagement',

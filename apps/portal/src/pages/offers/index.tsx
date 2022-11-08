@@ -7,6 +7,8 @@ import { Banner } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTable from '~/components/offers/table/OffersTable';
+import type { OfferTableSortType } from '~/components/offers/table/types';
+import { OFFER_TABLE_SORT_ORDER } from '~/components/offers/table/types';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';
 import Container from '~/components/shared/Container';
 import CountriesTypeahead from '~/components/shared/CountriesTypeahead';
@@ -38,6 +40,26 @@ export default function OffersHomePage({
   const [selectedJobTitleId, setSelectedJobTitleId] =
     useSearchParamSingle<JobTitleType | null>('jobTitleId');
 
+  const [selectedSortDirection, setSelectedSortDirection] =
+    useSearchParamSingle<OFFER_TABLE_SORT_ORDER>('sortDirection');
+
+  const [selectedSortType, setSelectedSortType] =
+    useSearchParamSingle<OfferTableSortType | null>('sortType');
+
+  const onSort = (
+    sortDirection: OFFER_TABLE_SORT_ORDER,
+    sortType: OfferTableSortType | null,
+  ) => {
+    if (sortType) {
+      gaEvent({
+        action: 'offers_table_sort',
+        category: 'engagement',
+        label: `${sortType} - ${sortDirection}`,
+      });
+      setSelectedSortType(sortType);
+    }
+    setSelectedSortDirection(sortDirection);
+  };
   return (
     <>
       <Head>
@@ -69,6 +91,8 @@ export default function OffersHomePage({
               } else {
                 setCountryFilter('');
               }
+              setSelectedSortDirection(OFFER_TABLE_SORT_ORDER.UNSORTED);
+              setSelectedSortType(null);
             }}
           />
         </div>
@@ -113,6 +137,8 @@ export default function OffersHomePage({
                   } else {
                     setSelectedJobTitleId(null);
                   }
+                  setSelectedSortDirection(OFFER_TABLE_SORT_ORDER.UNSORTED);
+                  setSelectedSortType(null);
                 }}
               />
               <span>in</span>
@@ -141,6 +167,8 @@ export default function OffersHomePage({
                   } else {
                     setSelectedCompanyId('');
                     setSelectedCompanyName('');
+                    setSelectedSortDirection(OFFER_TABLE_SORT_ORDER.UNSORTED);
+                    setSelectedSortType(null);
                   }
                 }}
               />
@@ -154,6 +182,9 @@ export default function OffersHomePage({
             country={country}
             countryFilter={countryFilter}
             jobTitleFilter={selectedJobTitleId ?? ''}
+            selectedSortDirection={selectedSortDirection}
+            selectedSortType={selectedSortType}
+            onSort={onSort}
           />
         </Container>
       </main>
