@@ -1,7 +1,10 @@
 import { z } from 'zod';
 
 import type { FilterCounts } from '~/utils/resumes/resumeFilters';
-import { resumeGetFilterCounts } from '~/utils/resumes/resumeGetFilterCounts';
+import {
+  getWhereClauseFilters,
+  resumeGetFilterCounts,
+} from '~/utils/resumes/resumePrismaUtils';
 
 import { createProtectedRouter } from '../context';
 
@@ -141,10 +144,12 @@ export const resumesResumeUserRouter = createProtectedRouter()
         take,
         where: {
           resume: {
-            experience: { in: experienceFilters },
+            ...getWhereClauseFilters(
+              experienceFilters,
+              roleFilters,
+              locationFilters,
+            ),
             isResolved: isUnreviewed ? false : {},
-            locationId: { in: locationFilters },
-            role: { in: roleFilters },
             title: { contains: searchValue, mode: 'insensitive' },
           },
           userId,
@@ -177,10 +182,12 @@ export const resumesResumeUserRouter = createProtectedRouter()
         totalRecords = await ctx.prisma.resumesStar.count({
           where: {
             resume: {
-              experience: { in: experienceFilters },
+              ...getWhereClauseFilters(
+                experienceFilters,
+                roleFilters,
+                locationFilters,
+              ),
               isResolved: isUnreviewed ? false : {},
-              locationId: { in: locationFilters },
-              role: { in: roleFilters },
               title: { contains: searchValue, mode: 'insensitive' },
             },
             userId,
@@ -193,9 +200,8 @@ export const resumesResumeUserRouter = createProtectedRouter()
           },
           by: ['role'],
           where: {
-            experience: { in: experienceFilters },
+            ...getWhereClauseFilters(experienceFilters, [], locationFilters),
             isResolved: isUnreviewed ? false : {},
-            locationId: { in: locationFilters },
             stars: {
               some: {
                 userId,
@@ -214,9 +220,8 @@ export const resumesResumeUserRouter = createProtectedRouter()
           },
           by: ['experience'],
           where: {
+            ...getWhereClauseFilters([], roleFilters, locationFilters),
             isResolved: isUnreviewed ? false : {},
-            locationId: { in: locationFilters },
-            role: { in: roleFilters },
             stars: {
               some: {
                 userId,
@@ -235,9 +240,8 @@ export const resumesResumeUserRouter = createProtectedRouter()
           },
           by: ['locationId'],
           where: {
-            experience: { in: experienceFilters },
+            ...getWhereClauseFilters(experienceFilters, roleFilters, []),
             isResolved: isUnreviewed ? false : {},
-            role: { in: roleFilters },
             stars: {
               some: {
                 userId,
@@ -328,10 +332,12 @@ export const resumesResumeUserRouter = createProtectedRouter()
         skip: isTop10 ? 0 : skip,
         take,
         where: {
-          experience: { in: experienceFilters },
+          ...getWhereClauseFilters(
+            experienceFilters,
+            roleFilters,
+            locationFilters,
+          ),
           isResolved: isUnreviewed ? false : {},
-          locationId: { in: locationFilters },
-          role: { in: roleFilters },
           title: { contains: searchValue, mode: 'insensitive' },
           userId,
         },
@@ -361,10 +367,12 @@ export const resumesResumeUserRouter = createProtectedRouter()
       } else {
         totalRecords = await ctx.prisma.resumesResume.count({
           where: {
-            experience: { in: experienceFilters },
+            ...getWhereClauseFilters(
+              experienceFilters,
+              roleFilters,
+              locationFilters,
+            ),
             isResolved: isUnreviewed ? false : {},
-            locationId: { in: locationFilters },
-            role: { in: roleFilters },
             title: { contains: searchValue, mode: 'insensitive' },
             userId,
           },
@@ -376,9 +384,8 @@ export const resumesResumeUserRouter = createProtectedRouter()
           },
           by: ['role'],
           where: {
-            experience: { in: experienceFilters },
+            ...getWhereClauseFilters(experienceFilters, [], locationFilters),
             isResolved: isUnreviewed ? false : {},
-            locationId: { in: locationFilters },
             title: { contains: searchValue, mode: 'insensitive' },
             userId,
           },
@@ -393,9 +400,8 @@ export const resumesResumeUserRouter = createProtectedRouter()
           },
           by: ['experience'],
           where: {
+            ...getWhereClauseFilters([], roleFilters, locationFilters),
             isResolved: isUnreviewed ? false : {},
-            locationId: { in: locationFilters },
-            role: { in: roleFilters },
             title: { contains: searchValue, mode: 'insensitive' },
             userId,
           },
@@ -410,9 +416,8 @@ export const resumesResumeUserRouter = createProtectedRouter()
           },
           by: ['locationId'],
           where: {
-            experience: { in: experienceFilters },
+            ...getWhereClauseFilters(experienceFilters, roleFilters, []),
             isResolved: isUnreviewed ? false : {},
-            role: { in: roleFilters },
             title: { contains: searchValue, mode: 'insensitive' },
             userId,
           },

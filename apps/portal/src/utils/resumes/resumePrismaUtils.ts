@@ -37,3 +37,21 @@ export function resumeGetFilterCounts(data: Array<Resume>) {
     role: roleCounts,
   };
 }
+
+export const getWhereClauseFilters = (
+  experienceFilters: Array<string>,
+  roleFilters: Array<string>,
+  locationFilters: Array<string>,
+) => {
+  return {
+    ...(experienceFilters.length > 0 && {
+      experience: { in: experienceFilters },
+    }),
+    ...(roleFilters.length > 0 && {
+      role: { in: roleFilters },
+    }),
+    ...(locationFilters.length > 0 && {
+      locationId: { in: locationFilters },
+    }),
+  };
+};
