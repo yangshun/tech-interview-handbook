@@ -97,7 +97,7 @@ export const EXPERIENCES: Array<TypeaheadOption> = [
 export const INITIAL_FILTER_STATE: FilterState = {
   experience: [],
   isTop10: false,
-  isUnreviewed: true,
+  isUnreviewed: false,
   location: [],
   role: [],
 };
@@ -106,7 +106,6 @@ export const SHORTCUTS: Array<Shortcut> = [
   {
     filters: {
       ...INITIAL_FILTER_STATE,
-      isUnreviewed: false,
     },
     name: 'General',
     sortOrder: 'latest',
@@ -129,7 +128,6 @@ export const SHORTCUTS: Array<Shortcut> = [
           value: 'entry-level',
         },
       ],
-      isUnreviewed: false,
     },
     name: 'Fresh Grad',
     sortOrder: 'latest',
@@ -138,7 +136,6 @@ export const SHORTCUTS: Array<Shortcut> = [
     filters: {
       ...INITIAL_FILTER_STATE,
       isTop10: true,
-      isUnreviewed: false,
     },
     name: 'Top 10',
     sortOrder: 'popular',
@@ -146,7 +143,6 @@ export const SHORTCUTS: Array<Shortcut> = [
   {
     filters: {
       ...INITIAL_FILTER_STATE,
-      isUnreviewed: false,
       location: [
         {
           id: '231',

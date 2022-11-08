@@ -106,7 +106,7 @@ export default function ResumeHomePage() {
     '',
   );
   const [shortcutSelected, setShortcutSelected, isShortcutInit] =
-    useSearchParams('shortcutSelected', 'Unreviewed');
+    useSearchParams('shortcutSelected', 'General');
   const [currentPage, setCurrentPage, isCurrentPageInit] = useSearchParams(
     'currentPage',
     1,
