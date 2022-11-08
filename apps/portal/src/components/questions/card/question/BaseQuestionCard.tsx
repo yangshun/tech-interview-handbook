@@ -1,6 +1,11 @@
 import clsx from 'clsx';
 import { useMemo, useState } from 'react';
 import {
+  BuildingOfficeIcon,
+  MapPinIcon,
+  UserCircleIcon,
+} from '@heroicons/react/20/solid';
+import {
   ChatBubbleBottomCenterTextIcon,
   CheckIcon,
   EyeIcon,
@@ -198,21 +203,24 @@ export default function BaseQuestionCard({
           </div>
         </>
       )}
-      <div className="flex flex-1 flex-col items-start gap-2">
-        <div className="flex items-baseline justify-between self-stretch">
-          <div className="flex flex-wrap items-center gap-2 text-slate-500">
+      <div className="flex flex-1 flex-col items-start gap-4">
+        <div className="flex items-center justify-between self-stretch">
+          <div className="flex flex-wrap items-center gap-3 text-slate-500">
             {showAggregateStatistics && (
               <>
                 <QuestionTypeBadge type={type} />
                 <QuestionAggregateBadge
+                  icon={BuildingOfficeIcon}
                   statistics={companies}
-                  variant="primary"
                 />
                 <QuestionAggregateBadge
+                  icon={MapPinIcon}
                   statistics={locations!}
-                  variant="success"
                 />
-                <QuestionAggregateBadge statistics={roles} variant="danger" />
+                <QuestionAggregateBadge
+                  icon={UserCircleIcon}
+                  statistics={roles}
+                />
               </>
             )}
             {timestamp !== null && (
@@ -240,59 +248,43 @@ export default function BaseQuestionCard({
         </div>
         <p
           className={clsx(
-            'whitespace-pre-line font-semibold',
+            'whitespace-pre-line text-base font-medium leading-6 text-slate-900 md:text-lg',
             truncateContent && 'line-clamp-2 text-ellipsis',
           )}>
           {content}
         </p>
+
         {!showReceivedForm &&
           (showAnswerStatistics ||
             showReceivedStatistics ||
             showCreateEncounterButton) && (
-            <div className="flex gap-2">
+            <div className="flex w-full gap-4">
               {showAnswerStatistics && (
-                <>
-                  <div className="sm:hidden">
-                    <Button
-                      addonPosition="start"
-                      icon={ChatBubbleBottomCenterTextIcon}
-                      label={`${answerCount}`}
-                      size="sm"
-                      variant="tertiary"
+                <div>
+                  <button
+                    className="-my-1 flex items-center rounded-md px-2
+                  py-1 text-xs font-medium
+                  text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+                    type="button">
+                    <ChatBubbleBottomCenterTextIcon
+                      aria-hidden={true}
+                      className="mr-2 h-5 w-5"
                     />
-                  </div>
-                  <div className="hidden sm:block">
-                    <Button
-                      addonPosition="start"
-                      icon={ChatBubbleBottomCenterTextIcon}
-                      label={`${answerCount} answers`}
-                      size="sm"
-                      variant="tertiary"
-                    />
-                  </div>
-                </>
+                    {answerCount} {answerCount === 1 ? 'answer' : 'answers'}
+                  </button>
+                </div>
               )}
               {showReceivedStatistics && (
-                <>
-                  <div className="sm:hidden">
-                    <Button
-                      addonPosition="start"
-                      icon={EyeIcon}
-                      label={`${receivedCount}`}
-                      size="sm"
-                      variant="tertiary"
-                    />
-                  </div>
-                  <div className="hidden sm:block">
-                    <Button
-                      addonPosition="start"
-                      icon={EyeIcon}
-                      label={`${receivedCount} received this`}
-                      size="sm"
-                      variant="tertiary"
-                    />
-                  </div>
-                </>
+                <div>
+                  <button
+                    className="-my-1 flex items-center rounded-md px-2
+                  py-1 text-xs font-medium
+                  text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+                    type="button">
+                    <EyeIcon aria-hidden={true} className="mr-2 h-5 w-5" />
+                    {receivedCount} received this
+                  </button>
+                </div>
               )}
               {showCreateEncounterButton && (
                 <Button
@@ -323,9 +315,9 @@ export default function BaseQuestionCard({
   return (
     <article
       className={clsx(
-        'group flex gap-4 border-slate-300',
-        showHover && 'transition hover:bg-slate-50',
-        !hideCard && 'rounded-md border bg-white p-4',
+        'group flex gap-4 border-slate-200',
+        showHover && 'hover:border-primary-500 transition',
+        !hideCard && 'rounded-md border bg-white p-4 sm:rounded-lg sm:p-6',
       )}>
       {cardContent}
       {showDeleteButton && (

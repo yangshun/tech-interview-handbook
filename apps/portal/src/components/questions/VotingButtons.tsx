@@ -1,8 +1,7 @@
+import clsx from 'clsx';
 import React from 'react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import type { Vote } from '@prisma/client';
-import type { ButtonSize } from '@tih/ui';
-import { Button } from '@tih/ui';
 
 import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 
@@ -18,7 +17,7 @@ export type VotingButtonsCallbackProps = {
 };
 
 export type VotingButtonsProps = VotingButtonsCallbackProps & {
-  size?: ButtonSize;
+  size?: 'md' | 'sm';
   upvoteCount: number;
 };
 
@@ -29,11 +28,6 @@ export default function VotingButtons({
   upvoteCount,
   size = 'md',
 }: VotingButtonsProps) {
-  const upvoteButtonVariant =
-    vote?.vote === 'UPVOTE' ? 'secondary' : 'tertiary';
-  const downvoteButtonVariant =
-    vote?.vote === 'DOWNVOTE' ? 'secondary' : 'tertiary';
-
   const handleUpvoteClick = useProtectedCallback(() => {
     onUpvote();
   });
@@ -44,31 +38,45 @@ export default function VotingButtons({
 
   return (
     <div className="flex flex-col items-center">
-      <Button
-        icon={ChevronUpIcon}
-        isLabelHidden={true}
-        label="Upvote"
-        size={size}
-        variant={upvoteButtonVariant}
+      <button
+        aria-label="Upvote"
+        className="rounded-full p-1 hover:bg-slate-100"
+        type="button"
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
           handleUpvoteClick();
-        }}
-      />
+        }}>
+        <ChevronUpIcon
+          className={clsx(
+            size === 'sm' && 'h-5 w-5',
+            size === 'md' && 'h-8 w-8',
+            vote?.vote === 'UPVOTE'
+              ? 'text-primary-500'
+              : 'hover:text-primary-500 text-slate-400',
+          )}
+        />
+      </button>
       <p>{upvoteCount}</p>
-      <Button
-        icon={ChevronDownIcon}
-        isLabelHidden={true}
-        label="Downvote"
-        size={size}
-        variant={downvoteButtonVariant}
+      <button
+        aria-label="Downvote"
+        className="rounded-full p-1 hover:bg-slate-100"
+        type="button"
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
           handleDownvoteClick();
-        }}
-      />
+        }}>
+        <ChevronDownIcon
+          className={clsx(
+            size === 'sm' && 'h-5 w-5',
+            size === 'md' && 'h-8 w-8',
+            vote?.vote === 'DOWNVOTE'
+              ? 'text-danger-500'
+              : 'hover:text-danger-500 text-slate-400',
+          )}
+        />
+      </button>
     </div>
   );
 }

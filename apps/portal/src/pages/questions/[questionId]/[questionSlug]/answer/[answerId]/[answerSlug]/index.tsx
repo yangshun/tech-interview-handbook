@@ -113,7 +113,7 @@ export default function QuestionPage() {
       </Head>
       <BackButtonLayout
         href={`/questions/${router.query.questionId}/${router.query.questionSlug}`}>
-        <div className="flex max-w-7xl flex-1 flex-col gap-2">
+        <div className="flex max-w-7xl flex-1 flex-col gap-4">
           <FullAnswerCard
             answerId={answer.id}
             authorImageUrl={answer.userImage}
@@ -122,7 +122,7 @@ export default function QuestionPage() {
             createdAt={answer.createdAt}
             upvoteCount={answer.numVotes}
           />
-          <div className="mx-2">
+          <div>
             <form
               className="mb-2"
               onSubmit={handleCommentSubmit(handleSubmitComment)}>
@@ -136,7 +136,7 @@ export default function QuestionPage() {
                 resize="vertical"
                 rows={2}
               />
-              <div className="my-3 flex justify-between">
+              <div className="my-3 flex justify-end">
                 <Button
                   disabled={!isCommentDirty || !isCommentValid}
                   label="Post"
@@ -145,7 +145,7 @@ export default function QuestionPage() {
                 />
               </div>
             </form>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between gap-2">
                 <p className="text-lg">Comments</p>
                 <div className="flex items-end gap-2">
