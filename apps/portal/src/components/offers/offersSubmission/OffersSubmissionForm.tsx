@@ -18,7 +18,10 @@ import type {
 } from '~/components/offers/types';
 import type { Month } from '~/components/shared/MonthYearPicker';
 
-import { Currency } from '~/utils/offers/currency/CurrencyEnum';
+import {
+  Currency,
+  getCurrencyForCountry,
+} from '~/utils/offers/currency/CurrencyEnum';
 import {
   cleanObject,
   removeEmptyObjects,
@@ -85,6 +88,7 @@ const defaultOfferProfileValues: OffersProfileFormData = {
 };
 
 type Props = Readonly<{
+  country: string | null;
   initialOfferProfileValues?: OffersProfileFormData;
   profileId?: string;
   token?: string;
@@ -94,6 +98,7 @@ export default function OffersSubmissionForm({
   initialOfferProfileValues = defaultOfferProfileValues,
   profileId: editProfileId = '',
   token: editToken = '',
+  country,
 }: Props) {
   const [step, setStep] = useState(0);
   const [params, setParams] = useState({
@@ -137,7 +142,12 @@ export default function OffersSubmissionForm({
     },
   );
 
-  const steps = [<OfferDetailsForm key={0} />, <BackgroundForm key={1} />];
+  const defaultCurrency = getCurrencyForCountry(country).toString();
+
+  const steps = [
+    <OfferDetailsForm key={0} defaultCurrency={defaultCurrency} />,
+    <BackgroundForm key={1} defaultCurrency={defaultCurrency} />,
+  ];
 
   const breadcrumbSteps: Array<BreadcrumbStep> = [
     {

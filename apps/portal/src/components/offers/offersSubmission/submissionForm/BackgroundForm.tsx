@@ -5,10 +5,7 @@ import { Collapsible, RadioList } from '@tih/ui';
 import { FieldError } from '~/components/offers/constants';
 import type { BackgroundPostData } from '~/components/offers/types';
 
-import {
-  Currency,
-  CURRENCY_OPTIONS,
-} from '~/utils/offers/currency/CurrencyEnum';
+import { CURRENCY_OPTIONS } from '~/utils/offers/currency/CurrencyEnum';
 
 import { EducationFieldOptions } from '../../EducationFields';
 import { EducationLevelOptions } from '../../EducationLevels';
@@ -82,7 +79,11 @@ function YoeSection() {
   );
 }
 
-function FullTimeJobFields() {
+type FullTimeJobFieldsProps = Readonly<{
+  defaultCurrency: string;
+}>;
+
+function FullTimeJobFields({ defaultCurrency }: FullTimeJobFieldsProps) {
   const { register, formState } = useFormContext<{
     background: BackgroundPostData;
   }>();
@@ -104,7 +105,7 @@ function FullTimeJobFields() {
           endAddOn={
             <FormSelect
               borderStyle="borderless"
-              defaultValue={Currency.SGD}
+              defaultValue={defaultCurrency}
               isLabelHidden={true}
               label="Currency"
               options={CURRENCY_OPTIONS}
@@ -154,7 +155,11 @@ function FullTimeJobFields() {
   );
 }
 
-function InternshipJobFields() {
+type InternshipJobFieldsProps = Readonly<{
+  defaultCurrency: string;
+}>;
+
+function InternshipJobFields({ defaultCurrency }: InternshipJobFieldsProps) {
   const { register, formState } = useFormContext<{
     background: BackgroundPostData;
   }>();
@@ -175,7 +180,7 @@ function InternshipJobFields() {
         endAddOn={
           <FormSelect
             borderStyle="borderless"
-            defaultValue={Currency.SGD}
+            defaultValue={defaultCurrency}
             isLabelHidden={true}
             label="Currency"
             options={CURRENCY_OPTIONS}
@@ -217,7 +222,11 @@ function InternshipJobFields() {
   );
 }
 
-function CurrentJobSection() {
+type CurrentJobSectionProps = Readonly<{
+  defaultCurrency: string;
+}>;
+
+function CurrentJobSection({ defaultCurrency }: CurrentJobSectionProps) {
   const { register } = useFormContext();
   const watchJobType = useWatch({
     name: 'background.experiences.0.jobType',
@@ -243,9 +252,9 @@ function CurrentJobSection() {
         />
       </FormRadioList>
       {watchJobType === JobType.FULLTIME ? (
-        <FullTimeJobFields />
+        <FullTimeJobFields defaultCurrency={defaultCurrency} />
       ) : (
-        <InternshipJobFields />
+        <InternshipJobFields defaultCurrency={defaultCurrency} />
       )}
     </FormSection>
   );
@@ -280,7 +289,13 @@ function EducationSection() {
   );
 }
 
-export default function BackgroundForm() {
+type BackgroundFormProps = Readonly<{
+  defaultCurrency: string;
+}>;
+
+export default function BackgroundForm({
+  defaultCurrency,
+}: BackgroundFormProps) {
   return (
     <div className="space-y-6">
       <h2 className="mb-8 text-2xl font-bold text-slate-900 sm:text-center sm:text-4xl">
@@ -288,7 +303,7 @@ export default function BackgroundForm() {
       </h2>
       <div className="space-y-8 rounded-lg border border-slate-200 p-6 sm:space-y-16 sm:p-8">
         <YoeSection />
-        <CurrentJobSection />
+        <CurrentJobSection defaultCurrency={defaultCurrency} />
         <EducationSection />
       </div>
     </div>

@@ -1,3 +1,4 @@
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Error from 'next/error';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -14,7 +15,17 @@ import { getProfilePath } from '~/utils/offers/link';
 import { convertToMonthYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';
 
-export default function OffersEditPage() {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  return {
+    props: {
+      country: req.cookies.country ?? null,
+    },
+  };
+};
+
+export default function OffersEditPage({
+  country,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [initialData, setInitialData] = useState<OffersProfileFormData>();
   const router = useRouter();
   const { offerProfileId, token = '' } = router.query;
@@ -104,6 +115,7 @@ export default function OffersEditPage() {
       )}
       {!getProfileResult.isLoading && initialData && (
         <OffersSubmissionForm
+          country={country}
           initialOfferProfileValues={initialData}
           profileId={profile?.id}
           token={profile?.editToken || undefined}
