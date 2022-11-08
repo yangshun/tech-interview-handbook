@@ -773,7 +773,10 @@ export const dashboardOfferDtoMapper = (
         })
       | null;
     offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
-    profile: OffersProfile & { background: OffersBackground | null };
+    profile: OffersProfile & {
+      background: OffersBackground | null;
+      offers: Array<OffersOffer>;
+    };
   },
 ) => {
   const dashboardOfferDto: DashboardOffer = {
@@ -788,6 +791,8 @@ export const dashboardOfferDtoMapper = (
     }),
     location: locationDtoMapper(offer.location),
     monthYearReceived: offer.monthYearReceived,
+    numberOfOtherOffers:
+      offer.profile.offers.length < 2 ? 0 : offer.profile.offers.length,
     profileId: offer.profileId,
     title: offer.offersFullTime?.title || offer.offersIntern?.title || '',
     totalYoe: offer.profile.background?.totalYoe ?? -1,

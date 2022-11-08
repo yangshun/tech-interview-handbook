@@ -72,6 +72,7 @@ export type DashboardOffer = {
   income: Valuation;
   location: Location;
   monthYearReceived: Date;
+  numberOfOtherOffers: number;
   profileId: string;
   stocks?: Valuation;
   title: string;

@@ -103,6 +103,7 @@ export const offersRouter = createRouter().query('list', {
             profile: {
               include: {
                 background: true,
+                offers: true,
               },
             },
           },
@@ -232,6 +233,7 @@ export const offersRouter = createRouter().query('list', {
             profile: {
               include: {
                 background: true,
+                offers: true,
               },
             },
           },
