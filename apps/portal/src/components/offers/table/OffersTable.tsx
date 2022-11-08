@@ -34,6 +34,12 @@ export type OffersTableProps = Readonly<{
   country: string | null;
   countryFilter: string;
   jobTitleFilter: string;
+  onSort: (
+    sortDirection: OFFER_TABLE_SORT_ORDER,
+    sortType: OfferTableSortType | null,
+  ) => void;
+  selectedSortDirection: OFFER_TABLE_SORT_ORDER;
+  selectedSortType: OfferTableSortType | null;
 }>;
 
 export default function OffersTable({
@@ -42,6 +48,9 @@ export default function OffersTable({
   companyName,
   companyFilter,
   jobTitleFilter,
+  selectedSortDirection,
+  selectedSortType,
+  onSort,
 }: OffersTableProps) {
   const [currency, setCurrency] = useState(
     getCurrencyForCountry(country).toString(),
@@ -66,14 +75,11 @@ export default function OffersTable({
     isYoeCategoryInitialized,
   ] = useSearchParamSingle<keyof typeof YOE_CATEGORY_PARAM>('yoeCategory');
 
-  const [
-    selectedSortDirection,
-    setSelectedSortDirection,
-    isSortDirectionInitialized,
-  ] = useSearchParamSingle<OFFER_TABLE_SORT_ORDER>('sortDirection');
+  const [, , isSortDirectionInitialized] =
+    useSearchParamSingle<OFFER_TABLE_SORT_ORDER>('sortDirection');
 
-  const [selectedSortType, setSelectedSortType, isSortTypeInitialized] =
-    useSearchParamSingle<OfferTableSortType>('sortType');
+  const [, , isSortTypeInitialized] =
+    useSearchParamSingle<OfferTableSortType | null>('sortType');
 
   const areFilterParamsInitialized = useMemo(() => {
     return (
@@ -126,10 +132,6 @@ export default function OffersTable({
     pathname,
   ]);
 
-  useEffect(() => {
-    setSelectedSortDirection(OFFER_TABLE_SORT_ORDER.UNSORTED);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedYoeCategory]);
   const topRef = useRef<HTMLDivElement>(null);
   const { showToast } = useToast();
   const { isLoading: isResultsLoading } = trpc.useQuery(
@@ -141,7 +143,6 @@ export default function OffersTable({
         currency,
         limit: NUMBER_OF_OFFERS_PER_PAGE,
         offset: pagination.currentPage,
-        // SortBy: selectedSortBy ?? '-monthYearReceived',
         sortBy:
           selectedSortDirection && selectedSortType
             ? `${selectedSortDirection}${selectedSortType}`
@@ -169,19 +170,6 @@ export default function OffersTable({
     },
   );
 
-  const onSort = (
-    sortDirection: OFFER_TABLE_SORT_ORDER,
-    sortType: OfferTableSortType,
-  ) => {
-    gaEvent({
-      action: 'offers_table_sort',
-      category: 'engagement',
-      label: `${sortType} - ${sortDirection}`,
-    });
-    setSelectedSortType(sortType);
-    setSelectedSortDirection(sortDirection);
-  };
-
   function renderFilters() {
     return (
       <div className="flex items-center justify-between p-4 text-xs text-slate-700 sm:grid-cols-4 sm:text-sm md:text-base">
@@ -204,6 +192,7 @@ export default function OffersTable({
               label={itemLabel}
               onClick={() => {
                 setSelectedYoeCategory(value);
+                onSort(OFFER_TABLE_SORT_ORDER.UNSORTED, null);
                 gaEvent({
                   action: `offers.table_filter_yoe_category_${value}`,
                   category: 'engagement',
@@ -291,12 +280,11 @@ export default function OffersTable({
             <Spinner display="block" size="lg" />
           </div>
         )}
-        {(!isLoading && !offers) ||
-          (offers.length === 0 && (
-            <div className="py-16 text-lg">
-              <div className="flex justify-center">No data yet 🥺</div>
-            </div>
-          ))}
+        {!isLoading && (!offers || offers.length === 0) && (
+          <div className="py-16 text-lg">
+            <div className="flex justify-center">No data yet 🥺</div>
+          </div>
+        )}
       </div>
       <OffersTablePagination
         endNumber={
