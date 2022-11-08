@@ -10,7 +10,7 @@ const people = [
     role: 'Front End Engineer',
   },
   {
-    bio: 'Good morning dailou.',
+    bio: 'Software engineer focused on developing robust and performant large-scale backend systems. Currently deepening my expertise in parallel and distributed computing and developing low-latency systems. When I am not debugging segmentation faults, you can find me playing poker, video games, or enjoying thrillers!',
     imageUrl: '/team/hongpo.jpg',
     name: 'Koh Hong Po',
     role: 'Back End Engineer',
