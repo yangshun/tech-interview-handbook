@@ -17,6 +17,7 @@ const getOrder = (prefix: string) => {
 };
 
 const sortingKeysMap = {
+  companyName: 'companyName',
   monthYearReceived: 'monthYearReceived',
   totalCompensation: 'totalCompensation',
   totalYoe: 'totalYoe',
@@ -136,6 +137,14 @@ export const offersRouter = createRouter().query('list', {
                   },
                   {
                     monthYearReceived: 'desc',
+                  },
+                ]
+              : sortingKey === sortingKeysMap.companyName
+              ? [
+                  {
+                    company: {
+                      name: order,
+                    },
                   },
                 ]
               : { monthYearReceived: 'desc' },
@@ -266,6 +275,14 @@ export const offersRouter = createRouter().query('list', {
                   },
                   {
                     monthYearReceived: 'desc',
+                  },
+                ]
+              : sortingKey === sortingKeysMap.companyName
+              ? [
+                  {
+                    company: {
+                      name: order,
+                    },
                   },
                 ]
               : { monthYearReceived: 'desc' },
