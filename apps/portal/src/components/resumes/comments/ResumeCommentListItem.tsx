@@ -120,7 +120,7 @@ export default function ResumeCommentListItem({
               </button>
             )}
 
-            {isCommentOwner && !isDeletingComment && (
+            {isCommentOwner && (
               <button
                 className="-my-1 rounded-md px-2 py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-red-600"
                 type="button"
@@ -136,6 +136,7 @@ export default function ResumeCommentListItem({
             {/* Delete comment form */}
             {isDeletingComment && (
               <ResumeCommentDeleteForm
+                id={comment.id}
                 isDeletingComment={isDeletingComment}
                 setIsDeletingComment={setIsDeletingComment}
               />

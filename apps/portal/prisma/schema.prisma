@@ -187,7 +187,7 @@ model ResumesComment {
   resume      ResumesResume        @relation(fields: [resumeId], references: [id], onDelete: Cascade)
   votes       ResumesCommentVote[]
   user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
-  parent      ResumesComment?      @relation("parentComment", fields: [parentId], references: [id])
+  parent      ResumesComment?      @relation("parentComment", fields: [parentId], references: [id], onDelete: Cascade)
   children    ResumesComment[]     @relation("parentComment")
 }
 
