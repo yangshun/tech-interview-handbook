@@ -71,24 +71,6 @@ export const SORT_OPTIONS: Array<FilterOption<SortOrder>> = [
   { label: 'Most Comments', value: 'mostComments' },
 ];
 
-const INITIAL_ROLES_VALUES: Array<JobTitleType> = [
-  'software-engineer',
-  'back-end-engineer',
-  'front-end-engineer',
-  'full-stack-engineer',
-  'ios-engineer',
-  'android-engineer',
-  'data-engineer',
-];
-export const INITIAL_ROLES: Array<TypeaheadOption> = INITIAL_ROLES_VALUES.map(
-  (value) =>
-    getTypeaheadOption('role', value) ?? {
-      id: value,
-      label: value,
-      value,
-    },
-);
-
 export const EXPERIENCES: Array<TypeaheadOption> = [
   {
     id: 'internship',
@@ -112,45 +94,12 @@ export const EXPERIENCES: Array<TypeaheadOption> = [
   },
 ];
 
-export const INITIAL_LOCATIONS: Array<TypeaheadOption> = [
-  {
-    id: '196',
-    label: 'Singapore',
-    value: '196',
-  },
-  {
-    id: '101',
-    label: 'India',
-    value: '101',
-  },
-  {
-    id: '231',
-    label: 'United States',
-    value: '231',
-  },
-  {
-    id: '230',
-    label: 'United Kingdom',
-    value: '230',
-  },
-  {
-    id: '102',
-    label: 'Indonesia',
-    value: '102',
-  },
-  {
-    id: '44',
-    label: 'China',
-    value: '44',
-  },
-];
-
 export const INITIAL_FILTER_STATE: FilterState = {
-  experience: EXPERIENCES,
+  experience: [],
   isTop10: false,
   isUnreviewed: true,
-  location: INITIAL_LOCATIONS,
-  role: INITIAL_ROLES,
+  location: [],
+  role: [],
 };
 
 export const SHORTCUTS: Array<Shortcut> = [
