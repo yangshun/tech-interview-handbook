@@ -14,8 +14,9 @@ import {
   MapPinIcon,
   PencilSquareIcon,
   StarIcon,
+  TrashIcon,
 } from '@heroicons/react/20/solid';
-import { Button, Spinner } from '@tih/ui';
+import { Button, Dialog, Spinner } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ResumeCommentsForm from '~/components/resumes/comments/ResumeCommentsForm';
@@ -83,6 +84,16 @@ export default function ResumeReviewPage() {
       });
     },
   });
+  const deleteResumeMutation = trpc.useMutation('resumes.resume.user.delete', {
+    onSuccess() {
+      invalidateResumeQueries();
+      gaEvent({
+        action: 'resumes.delete_button_click',
+        category: 'engagement',
+        label: 'Delete Resume',
+      });
+    },
+  });
 
   const invalidateResumeQueries = () => {
     utils.invalidateQueries(['resumes.resume.findOne']);
@@ -98,6 +109,7 @@ export default function ResumeReviewPage() {
   const isResumeResolved = detailsQuery.data?.isResolved;
 
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isDeleteMode, setIsDeleteMode] = useState(false);
   const [showCommentsForm, setShowCommentsForm] = useState(false);
 
   const onStarButtonClick = () => {
@@ -163,6 +175,43 @@ export default function ResumeReviewPage() {
     setIsEditMode(true);
   };
 
+  const onDeleteButtonClick = () => {
+    setIsDeleteMode(true);
+  };
+
+  const onDeleteDialog = async () => {
+    return deleteResumeMutation.mutate(
+      { id: resumeId as string },
+      {
+        onSuccess() {
+          // TODO: Delete from file storage
+
+          // redirect to browse with default settings
+          router.push({
+            pathname: '/resumes',
+            query: {
+              currentPage: JSON.stringify(1),
+              isFiltersOpen: JSON.stringify({
+                experience: false,
+                location: false,
+                role: false,
+              }),
+              searchValue: JSON.stringify(''),
+              shortcutSelected: JSON.stringify('all'),
+              sortOrder: JSON.stringify('latest'),
+              tabsValue: JSON.stringify(BROWSE_TABS_VALUES.ALL),
+              userFilters: JSON.stringify(INITIAL_FILTER_STATE),
+            },
+          });
+        },
+      },
+    );
+  };
+
+  const onCancelDialog = () => {
+    setIsDeleteMode(false);
+  };
+
   const onResolveButtonClick = () => {
     resolveMutation.mutate({
       id: resumeId as string,
@@ -226,7 +275,7 @@ export default function ResumeReviewPage() {
     <>
       {/* Has to strict quality check (===), don't change it to ==  */}
       {(detailsQuery.isError || detailsQuery.data === null) && ErrorPage}
-      {detailsQuery.isLoading && (
+      {(detailsQuery.isLoading || deleteResumeMutation.isLoading) && (
         <div className="w-full pt-4">
           <Spinner display="block" size="lg" />
         </div>
@@ -252,6 +301,16 @@ export default function ResumeReviewPage() {
                           label="Edit"
                           variant="tertiary"
                           onClick={onEditButtonClick}
+                        />
+                      </div>
+                      <div>
+                        <Button
+                          addonPosition="start"
+                          className="hover:text-red-500"
+                          icon={TrashIcon}
+                          label="Delete"
+                          variant="tertiary"
+                          onClick={onDeleteButtonClick}
                         />
                       </div>
                       <div>
@@ -422,6 +481,37 @@ export default function ResumeReviewPage() {
                 )}
               </div>
             </div>
+
+            {/* Delete resume dialog */}
+            <Dialog
+              isShown={isDeleteMode}
+              primaryButton={
+                <Button
+                  disabled={deleteResumeMutation.isLoading}
+                  display="block"
+                  isLoading={deleteResumeMutation.isLoading}
+                  label="Delete"
+                  variant="danger"
+                  onClick={onDeleteDialog}
+                />
+              }
+              secondaryButton={
+                <Button
+                  disabled={deleteResumeMutation.isLoading}
+                  display="block"
+                  label="Cancel"
+                  variant="tertiary"
+                  onClick={onCancelDialog}
+                />
+              }
+              title="Are you sure?"
+              onClose={() => setIsDeleteMode(false)}>
+              <div>
+                Note that deleting this resume will delete all its contents as
+                well. This action is also irreversible! Please check before
+                confirming!
+              </div>
+            </Dialog>
           </main>
         </>
       )}

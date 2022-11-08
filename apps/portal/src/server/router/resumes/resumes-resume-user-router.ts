@@ -435,4 +435,18 @@ export const resumesResumeUserRouter = createProtectedRouter()
 
       return { filterCounts, mappedResumeData, totalRecords };
     },
+  })
+  .mutation('delete', {
+    input: z.object({
+      id: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      const { id } = input;
+
+      return await ctx.prisma.resumesResume.delete({
+        where: {
+          id,
+        },
+      });
+    },
   });
