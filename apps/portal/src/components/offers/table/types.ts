@@ -33,27 +33,50 @@ export const OfferTableYoeOptions = [
   },
 ];
 
-export const OfferTableFilterOptions = [
-  {
-    label: 'Latest Submitted',
-    value: '-monthYearReceived',
-  },
-  {
-    label: 'Highest Salary',
-    value: '-totalCompensation',
-  },
-  {
-    label: 'Highest YOE first',
-    value: '-totalYoe',
-  },
-  {
-    label: 'Lowest YOE first',
-    value: '+totalYoe',
-  },
+export type OfferTableSortType =
+  | 'companyName'
+  | 'jobTitle'
+  | 'monthYearReceived'
+  | 'totalCompensation'
+  | 'totalYoe';
+
+export enum OFFER_TABLE_SORT_ORDER {
+  ASC = '+',
+  DESC = '-',
+  UNSORTED = '',
+}
+
+export function getOppositeSortOrder(
+  order: OFFER_TABLE_SORT_ORDER,
+): OFFER_TABLE_SORT_ORDER {
+  if (order === OFFER_TABLE_SORT_ORDER.UNSORTED) {
+    return OFFER_TABLE_SORT_ORDER.UNSORTED;
+  }
+  return order === OFFER_TABLE_SORT_ORDER.ASC
+    ? OFFER_TABLE_SORT_ORDER.DESC
+    : OFFER_TABLE_SORT_ORDER.ASC;
+}
+
+export type OfferTableColumn = {
+  label: string;
+  sortType?: OfferTableSortType;
+};
+
+export const FullTimeOfferTableColumns: Array<OfferTableColumn> = [
+  { label: 'Company', sortType: 'companyName' },
+  { label: 'Title', sortType: 'jobTitle' },
+  { label: 'YOE', sortType: 'totalYoe' },
+  { label: 'Annual TC', sortType: 'totalCompensation' },
+  { label: 'Annual Base / Bonus / Stocks' },
+  { label: 'Date Offered', sortType: 'monthYearReceived' },
+  { label: 'Actions' },
 ];
 
-export type OfferTableSortByType =
-  | '-monthYearReceived'
-  | '-totalCompensation'
-  | '-totalYoe'
-  | '+totalYoe';
+export const InternOfferTableColumns: Array<OfferTableColumn> = [
+  { label: 'Company', sortType: 'companyName' },
+  { label: 'Title', sortType: 'jobTitle' },
+  { label: 'YOE', sortType: 'totalYoe' },
+  { label: 'Monthly Salary', sortType: 'totalCompensation' },
+  { label: 'Date Offered', sortType: 'monthYearReceived' },
+  { label: 'Actions' },
+];
