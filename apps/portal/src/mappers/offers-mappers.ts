@@ -22,6 +22,7 @@ import { TRPCError } from '@trpc/server';
 
 import type {
   AddToProfileResponse,
+  AdminDashboardOffer,
   AnalysisHighestOffer,
   AnalysisOffer,
   AnalysisUnit,
@@ -30,6 +31,7 @@ import type {
   DashboardOffer,
   Education,
   Experience,
+  GetAdminOffersResponse,
   GetOffersResponse,
   Location,
   OffersCompany,
@@ -941,4 +943,87 @@ const userProfileOfferDtoMapper = (
   }
 
   return mappedOffer;
+};
+
+export const adminDashboardOfferDtoMapper = (
+  offer: OffersOffer & {
+    company: Company;
+    location: City & { state: State & { country: Country } };
+    offersFullTime:
+      | (OffersFullTime & {
+          baseSalary: OffersCurrency | null;
+          bonus: OffersCurrency | null;
+          stocks: OffersCurrency | null;
+          totalCompensation: OffersCurrency;
+        })
+      | null;
+    offersIntern: (OffersIntern & { monthlySalary: OffersCurrency }) | null;
+    profile: OffersProfile & {
+      background: OffersBackground | null;
+      offers: Array<OffersOffer>;
+    };
+  },
+) => {
+  const adminDashboardOfferDto: AdminDashboardOffer = {
+    company: offersCompanyDtoMapper(offer.company),
+    id: offer.id,
+    income: valuationDtoMapper({
+      baseCurrency: '',
+      baseValue: -1,
+      currency: '',
+      id: '',
+      value: -1,
+    }),
+    location: locationDtoMapper(offer.location),
+    monthYearReceived: offer.monthYearReceived,
+    numberOfOtherOffers:
+      offer.profile.offers.length < 2 ? 0 : offer.profile.offers.length - 1,
+    profileId: offer.profileId,
+    title: offer.offersFullTime?.title || offer.offersIntern?.title || '',
+    token: offer.profile.editToken,
+    totalYoe: offer.profile.background?.totalYoe ?? -1,
+  };
+
+  if (offer.offersFullTime && offer.jobType === JobType.FULLTIME) {
+    adminDashboardOfferDto.income = valuationDtoMapper(
+      offer.offersFullTime.totalCompensation,
+    );
+
+    if (offer.offersFullTime.baseSalary) {
+      adminDashboardOfferDto.baseSalary = valuationDtoMapper(
+        offer.offersFullTime.baseSalary,
+      );
+    }
+
+    if (offer.offersFullTime.bonus) {
+      adminDashboardOfferDto.bonus = valuationDtoMapper(
+        offer.offersFullTime.bonus,
+      );
+    }
+
+    if (offer.offersFullTime.stocks) {
+      adminDashboardOfferDto.stocks = valuationDtoMapper(
+        offer.offersFullTime.stocks,
+      );
+    }
+  } else if (offer.offersIntern && offer.jobType === JobType.INTERN) {
+    adminDashboardOfferDto.income = valuationDtoMapper(
+      offer.offersIntern.monthlySalary,
+    );
+  }
+
+  return adminDashboardOfferDto;
+};
+
+export const getAdminOffersResponseMapper = (
+  data: Array<AdminDashboardOffer>,
+  paging: Paging,
+  jobType: JobType,
+) => {
+  const getAdminOffersResponse: GetAdminOffersResponse = {
+    data,
+    jobType,
+    paging,
+  };
+  return getAdminOffersResponse;
 };

@@ -228,3 +228,25 @@ export type Location = {
   stateId: string;
   stateName: string;
 };
+
+export type GetAdminOffersResponse = {
+  data: Array<AdminDashboardOffer>;
+  jobType: JobType;
+  paging: Paging;
+};
+
+export type AdminDashboardOffer = {
+  baseSalary?: Valuation;
+  bonus?: Valuation;
+  company: OffersCompany;
+  id: string;
+  income: Valuation;
+  location: Location;
+  monthYearReceived: Date;
+  numberOfOtherOffers: number;
+  profileId: string;
+  stocks?: Valuation;
+  title: string;
+  token: string;
+  totalYoe: number;
+};
