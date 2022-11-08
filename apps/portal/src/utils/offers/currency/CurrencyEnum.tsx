@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-shadow
 export enum Currency {
   AED = 'AED', // 'UNITED ARAB EMIRATES DIRHAM'
   AFN = 'AFN', // 'AFGHAN AFGHANI'
@@ -172,3 +171,116 @@ export const CURRENCY_OPTIONS = Object.entries(Currency).map(
     value,
   }),
 );
+
+export function getCurrencyForCountry(
+  countryCode: string | null = 'US',
+): Currency {
+  // Source: https://github.com/srcagency/country-currencies/blob/master/data.json
+  switch (countryCode) {
+    case 'AU':
+    case 'CX':
+    case 'CC':
+    case 'HM':
+    case 'KI':
+    case 'NF':
+    case 'NR':
+    case 'TV':
+      return Currency.AUD;
+    case 'AD':
+    case 'AT':
+    case 'AX':
+    case 'BE':
+    case 'BL':
+    case 'CY':
+    case 'DE':
+    case 'EE':
+    case 'ES':
+    case 'FI':
+    case 'FR':
+    case 'GF':
+    case 'GP':
+    case 'GR':
+    case 'IE':
+    case 'IT':
+    case 'LT':
+    case 'LU':
+    case 'LV':
+    case 'MC':
+    case 'ME':
+    case 'MF':
+    case 'MQ':
+    case 'MT':
+    case 'NL':
+    case 'PM':
+    case 'PT':
+    case 'RE':
+    case 'SI':
+    case 'SK':
+    case 'SM':
+    case 'TF':
+    case 'VA':
+    case 'WS':
+    case 'YT':
+      return Currency.EUR;
+    case 'GS':
+    case 'GB':
+    case 'JE':
+    case 'IM':
+      return Currency.GBP;
+    case 'CA':
+      return Currency.CAD;
+    case 'SG':
+      return Currency.SGD;
+    case 'JP':
+      return Currency.JPY;
+    case 'BT':
+    case 'IN':
+      return Currency.INR;
+    case 'BV':
+    case 'NO':
+    case 'SJ':
+      return Currency.NOK;
+    case 'BR':
+      return Currency.BRL;
+    case 'CN':
+      return Currency.CNY;
+    case 'DK':
+    case 'FO':
+    case 'GL':
+      return Currency.DKK;
+    case 'TP':
+    case 'ID':
+      return Currency.IDR;
+    case 'KP':
+      return Currency.KPW;
+    case 'KR':
+      return Currency.KRW;
+    case 'CH':
+      return Currency.CHF;
+    case 'MY':
+      return Currency.MYR;
+    case 'MX':
+      return Currency.MXN;
+    case 'NG':
+      return Currency.NGN;
+    case 'PH':
+      return Currency.PHP;
+    case 'PL':
+      return Currency.PLN;
+    case 'RU':
+      return Currency.RUB;
+    case 'SA':
+      return Currency.SAR;
+    case 'TW':
+      return Currency.TWD;
+    case 'TH':
+      return Currency.THB;
+    case 'TR':
+      return Currency.TRY;
+    case 'VN':
+      return Currency.VND;
+    case 'US':
+    default:
+      return Currency.USD;
+  }
+}

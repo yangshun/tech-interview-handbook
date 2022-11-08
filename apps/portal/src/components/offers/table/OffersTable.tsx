@@ -14,7 +14,7 @@ import {
   YOE_CATEGORY_PARAM,
 } from '~/components/offers/table/types';
 
-import { Currency } from '~/utils/offers/currency/CurrencyEnum';
+import { getCurrencyForCountry } from '~/utils/offers/currency/CurrencyEnum';
 import CurrencySelector from '~/utils/offers/currency/CurrencySelector';
 import { useSearchParamSingle } from '~/utils/offers/useSearchParam';
 import { trpc } from '~/utils/trpc';
@@ -28,17 +28,21 @@ const NUMBER_OF_OFFERS_PER_PAGE = 20;
 export type OffersTableProps = Readonly<{
   companyFilter: string;
   companyName?: string;
+  country: string | null;
   countryFilter: string;
   jobTitleFilter: string;
 }>;
 
 export default function OffersTable({
+  country,
   countryFilter,
   companyName,
   companyFilter,
   jobTitleFilter,
 }: OffersTableProps) {
-  const [currency, setCurrency] = useState(Currency.SGD.toString()); // TODO: Detect location
+  const [currency, setCurrency] = useState(
+    getCurrencyForCountry(country).toString(),
+  );
   const [jobType, setJobType] = useState<JobType>(JobType.FULLTIME);
   const [pagination, setPagination] = useState<Paging>({
     currentPage: 0,

@@ -1,3 +1,4 @@
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -15,7 +16,17 @@ import JobTitlesTypeahead from '~/components/shared/JobTitlesTypeahead';
 
 import { useSearchParamSingle } from '~/utils/offers/useSearchParam';
 
-export default function OffersHomePage() {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  return {
+    props: {
+      country: req.cookies.country ?? null,
+    },
+  };
+};
+
+export default function OffersHomePage({
+  country,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [countryFilter, setCountryFilter] = useState('');
   const { event: gaEvent } = useGoogleAnalytics();
 
@@ -140,6 +151,7 @@ export default function OffersHomePage() {
           <OffersTable
             companyFilter={selectedCompanyId}
             companyName={selectedCompanyName}
+            country={country}
             countryFilter={countryFilter}
             jobTitleFilter={selectedJobTitleId ?? ''}
           />
