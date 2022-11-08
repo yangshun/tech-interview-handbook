@@ -6,13 +6,12 @@ import { Button } from '@tih/ui';
 import type { Month } from '~/components/shared/MonthYearPicker';
 import MonthYearPicker from '~/components/shared/MonthYearPicker';
 
+import useLocationOptions from '~/utils/questions/useLocationOptions';
 import useCompanyOptions from '~/utils/shared/useCompanyOptions';
 import useJobTitleOptions from '~/utils/shared/useJobTitleOptions';
 
 import CompanyTypeahead from '../typeahead/CompanyTypeahead';
-import LocationTypeahead, {
-  useLocationOptions,
-} from '../typeahead/LocationTypeahead';
+import LocationTypeahead from '../typeahead/LocationTypeahead';
 import RoleTypeahead from '../typeahead/RoleTypeahead';
 
 import type { Location } from '~/types/questions';
