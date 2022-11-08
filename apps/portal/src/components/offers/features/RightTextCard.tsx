@@ -46,7 +46,7 @@ export default function RightTextCard({
         </div>
       </div>
       <div className="mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
-        <div className="w-full rounded-xl pl-4 shadow-xl ring-1 ring-black ring-opacity-5 sm:pl-6 lg:relative lg:m-0 lg:h-full lg:px-0">
+        <div className="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:relative lg:m-0 lg:h-full lg:px-0">
           <Image
             alt={imageAlt}
             className="lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none"
