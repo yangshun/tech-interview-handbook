@@ -4,27 +4,31 @@ import { JobType } from '@prisma/client';
 import { DropdownMenu, Spinner, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
-import OffersRow from '~/components/offers/table//OffersRow';
-import OffersHeader from '~/components/offers/table/OffersHeader';
-import OffersTablePagination from '~/components/offers/table/OffersTablePagination';
+import OffersRow from '~/components/offers/admin_temp//OffersRow';
+import OffersHeader from '~/components/offers/admin_temp/OffersHeader';
+import OffersTablePagination from '~/components/offers/admin_temp/OffersTablePagination';
 import type {
   OfferTableColumn,
   OfferTableSortType,
-} from '~/components/offers/table/types';
+} from '~/components/offers/admin_temp/types';
 import {
   FullTimeOfferTableColumns,
   InternOfferTableColumns,
   OFFER_TABLE_SORT_ORDER,
   OfferTableYoeOptions,
   YOE_CATEGORY_PARAM,
-} from '~/components/offers/table/types';
+} from '~/components/offers/admin_temp/types';
 
 import { getCurrencyForCountry } from '~/utils/offers/currency/CurrencyEnum';
 import CurrencySelector from '~/utils/offers/currency/CurrencySelector';
 import { useSearchParamSingle } from '~/utils/offers/useSearchParam';
 import { trpc } from '~/utils/trpc';
 
-import type { DashboardOffer, GetOffersResponse, Paging } from '~/types/offers';
+import type {
+  AdminDashboardOffer,
+  GetAdminOffersResponse,
+  Paging,
+} from '~/types/offers';
 
 const NUMBER_OF_OFFERS_PER_PAGE = 20;
 
@@ -34,12 +38,6 @@ export type OffersTableProps = Readonly<{
   country: string | null;
   countryFilter: string;
   jobTitleFilter: string;
-  onSort: (
-    sortDirection: OFFER_TABLE_SORT_ORDER,
-    sortType: OfferTableSortType | null,
-  ) => void;
-  selectedSortDirection: OFFER_TABLE_SORT_ORDER;
-  selectedSortType: OfferTableSortType | null;
 }>;
 
 export default function OffersTable({
@@ -48,9 +46,6 @@ export default function OffersTable({
   companyName,
   companyFilter,
   jobTitleFilter,
-  selectedSortDirection,
-  selectedSortType,
-  onSort,
 }: OffersTableProps) {
   const [currency, setCurrency] = useState(
     getCurrencyForCountry(country).toString(),
@@ -63,7 +58,7 @@ export default function OffersTable({
     totalItems: 0,
   });
 
-  const [offers, setOffers] = useState<Array<DashboardOffer>>([]);
+  const [offers, setOffers] = useState<Array<AdminDashboardOffer>>([]);
 
   const { event: gaEvent } = useGoogleAnalytics();
   const router = useRouter();
@@ -75,11 +70,14 @@ export default function OffersTable({
     isYoeCategoryInitialized,
   ] = useSearchParamSingle<keyof typeof YOE_CATEGORY_PARAM>('yoeCategory');
 
-  const [, , isSortDirectionInitialized] =
-    useSearchParamSingle<OFFER_TABLE_SORT_ORDER>('sortDirection');
+  const [
+    selectedSortDirection,
+    setSelectedSortDirection,
+    isSortDirectionInitialized,
+  ] = useSearchParamSingle<OFFER_TABLE_SORT_ORDER>('sortDirection');
 
-  const [, , isSortTypeInitialized] =
-    useSearchParamSingle<OfferTableSortType | null>('sortType');
+  const [selectedSortType, setSelectedSortType, isSortTypeInitialized] =
+    useSearchParamSingle<OfferTableSortType>('sortType');
 
   const areFilterParamsInitialized = useMemo(() => {
     return (
@@ -132,11 +130,15 @@ export default function OffersTable({
     pathname,
   ]);
 
+  useEffect(() => {
+    setSelectedSortDirection(OFFER_TABLE_SORT_ORDER.UNSORTED);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedYoeCategory]);
   const topRef = useRef<HTMLDivElement>(null);
   const { showToast } = useToast();
   const { isLoading: isResultsLoading } = trpc.useQuery(
     [
-      'offers.list',
+      'offers.admin.list',
       {
         companyId: companyFilter,
         countryId: countryFilter,
@@ -161,7 +163,7 @@ export default function OffersTable({
         });
         setIsLoading(false);
       },
-      onSuccess: (response: GetOffersResponse) => {
+      onSuccess: (response: GetAdminOffersResponse) => {
         setOffers(response.data);
         setPagination(response.paging);
         setJobType(response.jobType);
@@ -169,6 +171,19 @@ export default function OffersTable({
       },
     },
   );
+
+  const onSort = (
+    sortDirection: OFFER_TABLE_SORT_ORDER,
+    sortType: OfferTableSortType,
+  ) => {
+    gaEvent({
+      action: 'offers_table_sort',
+      category: 'engagement',
+      label: `${sortType} - ${sortDirection}`,
+    });
+    setSelectedSortType(sortType);
+    setSelectedSortDirection(sortDirection);
+  };
 
   function renderFilters() {
     return (
@@ -192,7 +207,6 @@ export default function OffersTable({
               label={itemLabel}
               onClick={() => {
                 setSelectedYoeCategory(value);
-                onSort(OFFER_TABLE_SORT_ORDER.UNSORTED, null);
                 gaEvent({
                   action: `offers.table_filter_yoe_category_${value}`,
                   category: 'engagement',
@@ -280,11 +294,12 @@ export default function OffersTable({
             <Spinner display="block" size="lg" />
           </div>
         )}
-        {!isLoading && (!offers || offers.length === 0) && (
-          <div className="py-16 text-lg">
-            <div className="flex justify-center">No data yet 🥺</div>
-          </div>
-        )}
+        {(!isLoading && !offers) ||
+          (offers.length === 0 && (
+            <div className="py-16 text-lg">
+              <div className="flex justify-center">No data yet 🥺</div>
+            </div>
+          ))}
       </div>
       <OffersTablePagination
         endNumber={
