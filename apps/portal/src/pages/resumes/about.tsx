@@ -5,25 +5,25 @@ const people = [
     bio: 'I like to write and read good code.',
     imageUrl: '/team/keane.png',
     name: 'Keane Chan',
-    role: 'Role TODO',
+    role: 'Full Stack Engineer',
   },
   {
     bio: 'Hello',
     imageUrl: '/team/su-yin.jpg',
     name: 'Tan Su Yin',
-    role: 'Role TODO',
+    role: 'Full Stack Engineer',
   },
   {
-    bio: 'Hi! I like to explore new technologies and fantasize about the countries I could be traveling in instead of working on my assignments.',
+    bio: 'Hi! I like to explore new technologies and create cool, fun stuff! But usually I just spend my time fantasizing about the countries I could be traveling in instead of working on my assignments.',
     imageUrl: '/team/terence.jpg',
     name: 'Terence Ho',
-    role: 'Role TODO',
+    role: 'Full Stack Engineer',
   },
   {
     bio: 'Peirong likes to work in teams because he needs the peer pressure from others to deliver excellent work. In his free time, he enjoys running and watching vlogs of people having fun in adventurous locations which he does not have money for.',
     imageUrl: '/team/peirong.png',
     name: 'Wu Peirong',
-    role: 'Role TODO',
+    role: 'Full Stack Engineer',
   },
 ];
 

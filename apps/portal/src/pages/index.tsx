@@ -6,7 +6,7 @@ import Container from '~/components/shared/Container';
 const features = [
   {
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      "Preparing resumes for your next role? Browse for our community's best resumes. Upload yours and source for community reviews. Start your next job/internship hunt with a great resume!",
     href: '/resumes',
     img: '/logos/resumes-logo.svg',
     name: 'Resume Review',
