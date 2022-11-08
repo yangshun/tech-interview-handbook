@@ -36,7 +36,7 @@ export default function SortOptionsSelect({
 
   return (
     <div className="flex items-end justify-end gap-2">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center">
         <Select
           display="inline"
           label="Sort by"
@@ -52,7 +52,7 @@ export default function SortOptionsSelect({
           }}
         />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center">
         <Select
           display="inline"
           label="Order by"

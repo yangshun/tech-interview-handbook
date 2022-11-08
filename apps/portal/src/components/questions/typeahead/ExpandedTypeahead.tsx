@@ -44,11 +44,12 @@ export default function ExpandedTypeahead({
   );
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       {suggestions.map((suggestion) => (
         <div key={suggestion.id} className="hidden lg:block">
           <Button
             label={suggestion.label}
+            size="sm"
             variant="tertiary"
             onClick={() => {
               onSuggestionClick?.(suggestion);

@@ -315,7 +315,7 @@ export default function BaseQuestionCard({
   return (
     <article
       className={clsx(
-        'group flex gap-4 border-slate-300',
+        'group flex gap-4 border-slate-200',
         showHover && 'hover:border-primary-500 transition',
         !hideCard && 'rounded-md border bg-white p-4 sm:rounded-lg sm:p-6',
       )}>

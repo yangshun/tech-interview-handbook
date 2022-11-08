@@ -2,6 +2,8 @@ import type { PropsWithChildren } from 'react';
 import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
 import { Button } from '@tih/ui';
 
+import Container from '~/components/shared/Container';
+
 export type BackButtonLayoutProps = PropsWithChildren<{
   href: string;
 }>;
@@ -11,7 +13,7 @@ export default function BackButtonLayout({
   children,
 }: BackButtonLayoutProps) {
   return (
-    <div className="flex w-full flex-1 flex-col items-stretch gap-4 p-4 lg:flex-row">
+    <Container className="flex flex-col gap-4 pt-4 pb-12" variant="sm">
       <div>
         <Button
           addonPosition="start"
@@ -19,12 +21,13 @@ export default function BackButtonLayout({
           href={href}
           icon={ArrowSmallLeftIcon}
           label="Back"
+          size="sm"
           variant="secondary"
         />
       </div>
       <div className="flex w-full justify-center overflow-y-auto">
         {children}
       </div>
-    </div>
+    </Container>
   );
 }

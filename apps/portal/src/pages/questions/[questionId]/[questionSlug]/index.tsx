@@ -200,8 +200,8 @@ export default function QuestionPage() {
         </title>
       </Head>
       <BackButtonLayout href="/questions/browse">
-        <div className="flex max-w-7xl flex-1 flex-col gap-2">
-          <div className="flex flex-col gap-2 rounded-md border bg-white p-4">
+        <div className="flex flex-1 flex-col gap-4">
+          <div className="flex flex-col gap-4 rounded-md border bg-white p-4">
             <FullQuestionCard
               {...question}
               companies={relabeledAggregatedEncounters?.companyCounts ?? {}}
@@ -224,24 +224,24 @@ export default function QuestionPage() {
                 });
               }}
             />
-            <div className="ml-16 mr-2">
+            <div className="sm:ml-13 ml-11 mr-2 md:ml-14">
               <Collapsible
                 defaultOpen={true}
                 label={
                   <div className="text-primary-700">{`${question.numComments} comment(s)`}</div>
                 }>
-                <div className="">
-                  <div className="flex flex-col gap-2 text-black">
-                    <div className="flex justify-end gap-2">
-                      <div className="flex items-end gap-2">
-                        <SortOptionsSelect
-                          sortOrderValue={commentSortOrder}
-                          sortTypeValue={commentSortType}
-                          onSortOrderChange={setCommentSortOrder}
-                          onSortTypeChange={setCommentSortType}
-                        />
-                      </div>
+                <div className="flex flex-col gap-4 text-black">
+                  <div className="flex justify-end gap-2">
+                    <div className="flex items-end gap-2">
+                      <SortOptionsSelect
+                        sortOrderValue={commentSortOrder}
+                        sortTypeValue={commentSortType}
+                        onSortOrderChange={setCommentSortOrder}
+                        onSortTypeChange={setCommentSortType}
+                      />
                     </div>
+                  </div>
+                  <div className="flex flex-col gap-4">
                     {(commentData?.pages ?? []).flatMap(({ data: comments }) =>
                       comments.map((comment) => (
                         <QuestionCommentListItem
@@ -255,30 +255,30 @@ export default function QuestionPage() {
                         />
                       )),
                     )}
-                    <PaginationLoadMoreButton query={commentInfiniteQuery} />
-                    <form
-                      className="mt-4"
-                      onSubmit={handleCommentSubmitClick(handleSubmitComment)}>
-                      <TextArea
-                        {...commentRegister('commentContent', {
-                          minLength: 1,
-                          required: true,
-                        })}
-                        label="Post a comment"
-                        required={true}
-                        resize="vertical"
-                        rows={2}
-                      />
-                      <div className="my-3 flex justify-between">
-                        <Button
-                          disabled={!isCommentDirty || !isCommentValid}
-                          label="Post"
-                          type="submit"
-                          variant="primary"
-                        />
-                      </div>
-                    </form>
                   </div>
+                  <PaginationLoadMoreButton query={commentInfiniteQuery} />
+                  <form
+                    className="mt-4"
+                    onSubmit={handleCommentSubmitClick(handleSubmitComment)}>
+                    <TextArea
+                      {...commentRegister('commentContent', {
+                        minLength: 1,
+                        required: true,
+                      })}
+                      label="Post a comment"
+                      required={true}
+                      resize="vertical"
+                      rows={2}
+                    />
+                    <div className="my-3 flex justify-end">
+                      <Button
+                        disabled={!isCommentDirty || !isCommentValid}
+                        label="Post"
+                        type="submit"
+                        variant="primary"
+                      />
+                    </div>
+                  </form>
                 </div>
               </Collapsible>
             </div>
@@ -299,7 +299,7 @@ export default function QuestionPage() {
                 rows={5}
               />
             </div>
-            <div className="mt-3 mb-1 flex justify-between">
+            <div className="mt-3 mb-1 flex justify-end">
               <Button
                 disabled={!isDirty || !isValid}
                 label="Contribute"
@@ -308,11 +308,11 @@ export default function QuestionPage() {
               />
             </div>
           </form>
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center justify-between gap-4">
             <p className="text-xl font-semibold">
               {question.numAnswers} answers
             </p>
-            <div className="flex items-end gap-2">
+            <div className="flex items-end gap-4">
               <SortOptionsSelect
                 sortOrderValue={answerSortOrder}
                 sortTypeValue={answerSortType}
@@ -321,25 +321,27 @@ export default function QuestionPage() {
               />
             </div>
           </div>
-          {/* TODO: Add button to load more */}
-          {(answerData?.pages ?? []).flatMap(({ data: answers }) =>
-            answers.map((answer) => (
-              <QuestionAnswerCard
-                key={answer.id}
-                answerId={answer.id}
-                authorImageUrl={answer.userImage}
-                authorName={answer.user}
-                commentCount={answer.numComments}
-                content={answer.content}
-                createdAt={answer.createdAt}
-                href={`${router.asPath}/answer/${answer.id}/${createSlug(
-                  answer.content,
-                )}`}
-                upvoteCount={answer.numVotes}
-              />
-            )),
-          )}
-          <PaginationLoadMoreButton query={answerInfiniteQuery} />
+          <div className="flex flex-col gap-4">
+            {/* TODO: Add button to load more */}
+            {(answerData?.pages ?? []).flatMap(({ data: answers }) =>
+              answers.map((answer) => (
+                <QuestionAnswerCard
+                  key={answer.id}
+                  answerId={answer.id}
+                  authorImageUrl={answer.userImage}
+                  authorName={answer.user}
+                  commentCount={answer.numComments}
+                  content={answer.content}
+                  createdAt={answer.createdAt}
+                  href={`${router.asPath}/answer/${answer.id}/${createSlug(
+                    answer.content,
+                  )}`}
+                  upvoteCount={answer.numVotes}
+                />
+              )),
+            )}
+            <PaginationLoadMoreButton query={answerInfiniteQuery} />
+          </div>
         </div>
       </BackButtonLayout>
     </>

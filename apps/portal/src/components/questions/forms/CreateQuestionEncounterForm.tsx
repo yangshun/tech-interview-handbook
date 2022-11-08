@@ -142,6 +142,7 @@ export default function CreateQuestionEncounterForm({
             (step === 2 && selectedRole === null)
           }
           label="Next"
+          size="sm"
           variant="primary"
           onClick={() => {
             setStep(step + 1);
@@ -152,6 +153,7 @@ export default function CreateQuestionEncounterForm({
         <Button
           isLoading={loading}
           label="Submit"
+          size="sm"
           variant="primary"
           onClick={async () => {
             if (
@@ -181,6 +183,7 @@ export default function CreateQuestionEncounterForm({
       )}
       <Button
         label="Cancel"
+        size="sm"
         variant="tertiary"
         onClick={(event) => {
           event.preventDefault();
