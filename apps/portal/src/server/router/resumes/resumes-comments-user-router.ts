@@ -99,4 +99,16 @@ export const resumesCommentsUserRouter = createProtectedRouter()
         },
       });
     },
+  })
+  .mutation('delete', {
+    input: z.object({ id: z.string() }),
+    async resolve({ ctx, input }) {
+      const { id } = input;
+
+      return await ctx.prisma.resumesComment.delete({
+        where: {
+          id,
+        },
+      });
+    },
   });

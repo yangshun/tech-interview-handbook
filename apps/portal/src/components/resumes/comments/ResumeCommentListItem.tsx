@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { formatDistanceToNow } from 'date-fns';
 import { useState } from 'react';
 
+import ResumeCommentDeleteForm from './comment/ResumeCommentDeleteForm';
 import ResumeCommentEditForm from './comment/ResumeCommentEditForm';
 import ResumeCommentReplyForm from './comment/ResumeCommentReplyForm';
 import ResumeCommentVoteButtons from './comment/ResumeCommentVoteButtons';
@@ -22,6 +23,7 @@ export default function ResumeCommentListItem({
   const isCommentOwner = userId === comment.user.userId;
   const [isEditingComment, setIsEditingComment] = useState(false);
   const [isReplyingComment, setIsReplyingComment] = useState(false);
+  const [isDeletingComment, setIsDeletingComment] = useState(false);
   const [showReplies, setShowReplies] = useState(true);
 
   return (
@@ -73,7 +75,7 @@ export default function ResumeCommentListItem({
             </div>
           )}
 
-          {/* Upvote and edit */}
+          {/* Upvote and actions (edit, reply, delete) */}
           <div className="mt-1 flex h-6 items-center">
             <ResumeCommentVoteButtons commentId={comment.id} userId={userId} />
             {/* Action buttons; only present for authenticated user when not editing/replying */}
@@ -84,6 +86,7 @@ export default function ResumeCommentListItem({
                 onClick={() => {
                   setIsReplyingComment(!isReplyingComment);
                   setIsEditingComment(false);
+                  setIsDeletingComment(false);
                 }}>
                 Reply
               </button>
@@ -111,9 +114,32 @@ export default function ResumeCommentListItem({
                 onClick={() => {
                   setIsEditingComment(!isEditingComment);
                   setIsReplyingComment(false);
+                  setIsDeletingComment(false);
                 }}>
                 Edit
               </button>
+            )}
+
+            {isCommentOwner && (
+              <button
+                className="-my-1 rounded-md px-2 py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-red-600"
+                type="button"
+                onClick={() => {
+                  setIsDeletingComment(!isDeletingComment);
+                  setIsEditingComment(false);
+                  setIsReplyingComment(false);
+                }}>
+                Delete
+              </button>
+            )}
+
+            {/* Delete comment form */}
+            {isDeletingComment && (
+              <ResumeCommentDeleteForm
+                id={comment.id}
+                isDeletingComment={isDeletingComment}
+                setIsDeletingComment={setIsDeletingComment}
+              />
             )}
           </div>
 
