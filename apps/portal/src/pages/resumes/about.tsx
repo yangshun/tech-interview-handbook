@@ -8,13 +8,13 @@ const people = [
     role: 'Full Stack Engineer',
   },
   {
-    bio: 'Hello',
+    bio: 'Su Yin loves coffee and games. Most of the time, she is either asleep, rushing work or at a pool table. She dreams of travelling the world with friends.',
     imageUrl: '/team/su-yin.jpg',
     name: 'Tan Su Yin',
     role: 'Full Stack Engineer',
   },
   {
-    bio: 'Hi! I like to explore new technologies and create cool, fun stuff! But usually I just spend my time fantasizing about the countries I could be traveling in instead of working on my assignments.',
+    bio: 'Terence likes to explore new technologies and create cool, fun stuff. But usually he just spends his time fantasizing about the countries he could be traveling in instead of working on his assignments.',
     imageUrl: '/team/terence.jpg',
     name: 'Terence Ho',
     role: 'Full Stack Engineer',
