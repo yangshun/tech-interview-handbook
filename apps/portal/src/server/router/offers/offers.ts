@@ -17,6 +17,8 @@ const getOrder = (prefix: string) => {
 };
 
 const sortingKeysMap = {
+  companyName: 'companyName',
+  jobTitle: 'jobTitle',
   monthYearReceived: 'monthYearReceived',
   totalCompensation: 'totalCompensation',
   totalYoe: 'totalYoe',
@@ -132,6 +134,28 @@ export const offersRouter = createRouter().query('list', {
                       background: {
                         totalYoe: order,
                       },
+                    },
+                  },
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
+              : sortingKey === sortingKeysMap.companyName
+              ? [
+                  {
+                    company: {
+                      name: order,
+                    },
+                  },
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
+              : sortingKey === sortingKeysMap.jobTitle
+              ? [
+                  {
+                    offersIntern: {
+                      title: order,
                     },
                   },
                   {
@@ -262,6 +286,28 @@ export const offersRouter = createRouter().query('list', {
                       background: {
                         totalYoe: order,
                       },
+                    },
+                  },
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
+              : sortingKey === sortingKeysMap.companyName
+              ? [
+                  {
+                    company: {
+                      name: order,
+                    },
+                  },
+                  {
+                    monthYearReceived: 'desc',
+                  },
+                ]
+              : sortingKey === sortingKeysMap.jobTitle
+              ? [
+                  {
+                    offersFullTime: {
+                      title: order,
                     },
                   },
                   {

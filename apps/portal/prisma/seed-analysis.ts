@@ -23,17 +23,16 @@ const seedAnalysis = async () => {
 
   while (i < profilesWithoutAnalysis.length) {
     const profile = profilesWithoutAnalysis[i];
+
     await generateAnalysis({
       ctx: { prisma, session: null },
       input: { profileId: profile.id },
     });
 
-    i++;
-
-    console.log(i, ': Analysis generated for profile with id', profile.id);
+    console.log(++i, ': Analysis generated for profile with id', profile.id);
   }
 
-  console.log(i, ' analysis generated');
+  console.log(i, 'analysis generated');
 };
 
 Promise.all([seedAnalysis()])
