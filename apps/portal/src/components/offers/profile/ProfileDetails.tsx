@@ -49,8 +49,8 @@ type ProfileBackgroundProps = Readonly<{
 function ProfileBackground({ background }: ProfileBackgroundProps) {
   if (!background?.experiences?.length && !background?.educations?.length) {
     return (
-      <div className="p-4">
-        <p>No background information available.</p>
+      <div className="flex items-center justify-center p-8 text-slate-500">
+        <p>Creator has not filled in background information.</p>
       </div>
     );
   }
@@ -120,7 +120,9 @@ function ProfileAnalysis({
   return (
     <div className="space-y-4 p-4">
       {!analysis ? (
-        <p>No analysis available.</p>
+        <div className="flex items-center justify-center p-4 text-slate-500">
+          <p>This profile has no analysis yet.</p>
+        </div>
       ) : (
         <OfferAnalysis
           allAnalysis={analysis}

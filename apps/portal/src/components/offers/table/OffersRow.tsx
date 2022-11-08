@@ -25,6 +25,7 @@ export default function OfferTableRow({
     income,
     location,
     monthYearReceived,
+    numberOfOtherOffers,
     profileId,
     stocks,
     title,
@@ -61,6 +62,9 @@ export default function OfferTableRow({
           href={`/offers/profile/${profileId}`}>
           View Profile
         </Link>
+        <div className="text-xs text-slate-500">
+          This person also received {numberOfOtherOffers} other offer(s).
+        </div>
       </td>
     </tr>
   );
