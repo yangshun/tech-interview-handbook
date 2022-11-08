@@ -2,28 +2,28 @@ import Container from '~/components/shared/Container';
 
 const people = [
   {
-    bio: 'I like to write and read good code.',
+    bio: 'Keane loves to try out new technologies and build awesome stuff with awesome people. He spends most of his free time travelling to eat good food (that he can afford) and going to the gym.',
     imageUrl: '/team/keane.png',
     name: 'Keane Chan',
-    role: 'Role TODO',
+    role: 'Full Stack Engineer',
   },
   {
-    bio: 'Hello',
+    bio: 'Su Yin loves coffee and games. Most of the time, she is either asleep, rushing work or at a pool table. She dreams of travelling the world with friends.',
     imageUrl: '/team/su-yin.jpg',
     name: 'Tan Su Yin',
-    role: 'Role TODO',
+    role: 'Full Stack Engineer',
   },
   {
-    bio: 'Hi! I like to explore new technologies and fantasize about the countries I could be traveling in instead of working on my assignments.',
+    bio: 'Terence likes to explore new technologies and create cool, fun stuff. But usually he just spends his time fantasizing about the countries he could be traveling in instead of working on his assignments.',
     imageUrl: '/team/terence.jpg',
     name: 'Terence Ho',
-    role: 'Role TODO',
+    role: 'Full Stack Engineer',
   },
   {
     bio: 'Peirong likes to work in teams because he needs the peer pressure from others to deliver excellent work. In his free time, he enjoys running and watching vlogs of people having fun in adventurous locations which he does not have money for.',
     imageUrl: '/team/peirong.png',
     name: 'Wu Peirong',
-    role: 'Role TODO',
+    role: 'Full Stack Engineer',
   },
 ];
 
