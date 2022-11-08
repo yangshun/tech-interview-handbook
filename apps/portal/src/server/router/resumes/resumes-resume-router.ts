@@ -299,8 +299,8 @@ export const resumesRouter = createRouter()
       let topUpvotedCommentCount = 0;
 
       for (const resume of resumes) {
-        // Set minimum upvote count >= 5 to qualify
-        let highestVoteCount = 5;
+        // Set minimum upvote count >= 2 to qualify
+        let highestVoteCount = 2;
 
         // Get Map of {userId, voteCount} for each comment
         const commentUpvotePairs = [];
