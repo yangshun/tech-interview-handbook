@@ -327,9 +327,9 @@ I recommend using these free tools to optimize your resume:
 
 ### 1. Free resume review
 
-[Resume Worded](https://a.paddle.com/v2/click/29828/144522?link=1861) uses AI to give instant expert feedback on your resume.
+Tech Interview Handbook has a [resume review portal](https://app.techinterviewhandbook.org/resumes) where you can upload your resume and get helpful comments and feedback from other community members and even the authors of Tech Interview Handbook!
 
-We previously recommended [TopResume's free all-in-one review](https://tidd.ly/3GxVIs9) of your resume, but received some feedback that that their reviewers are not technical and do not give feedback relevant to engineering roles. In that regard, we recommend [FAANG Tech Leads' Resume Review service (paid)](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) where your resume will be reviewed by ex-FAANG hiring managers and engineers, not random writers who don't understand technology.
+If you are willing to spend some money we recommend [FAANG Tech Leads' Resume Review service](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) where your resume will be reviewed by ex-FAANG hiring managers and engineers, not random writers who don't understand technology.
 
 ### 2. Test readability with industry-standard ATS
 

@@ -29,6 +29,27 @@ function FAANGTechLeads({ position }) {
   );
 }
 
+function TIHResumeReview({ position }) {
+  return (
+    <a
+      className={clsx(styles.container, styles.backgroundTIH)}
+      href={`https://app.techinterviewhandbook.org/resumes?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&aff=1e80c401fe7e2`}
+      target="_blank"
+      rel="noopener"
+      onClick={() => {
+        window.gtag('event', `tih.resume_review.${position}.click`);
+      }}>
+      <p className={styles.tagline}>
+        <strong className={styles.title}>
+          Get your resume reviewed for free
+        </strong>
+        Try out our free new community-powered resume review portal. Upload a
+        resume, receive helpful comments and feedback from community members.
+      </p>
+    </a>
+  );
+}
+
 function GreatFrontEnd({ position }) {
   return (
     <a
@@ -206,7 +227,11 @@ export default React.memo(function SidebarAd({ position }) {
         }
 
         if (path.includes('resume')) {
-          return <FAANGTechLeads key={Math.random()} position={position} />;
+          return rand < 0.67 ? (
+            <TIHResumeReview key={Math.random()} position={position} />
+          ) : (
+            <FAANGTechLeads key={Math.random()} position={position} />
+          );
         }
 
         if (path.includes('negotiation') || path.includes('compensation')) {
