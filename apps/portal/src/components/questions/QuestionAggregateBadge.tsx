@@ -1,19 +1,16 @@
-import type { ComponentProps } from 'react';
 import { useMemo } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
-import { Badge } from '@tih/ui';
 
 import 'react-popper-tooltip/dist/styles.css';
 
-type BadgeProps = ComponentProps<typeof Badge>;
-
-export type QuestionAggregateBadgeProps = Omit<BadgeProps, 'label'> & {
+export type QuestionAggregateBadgeProps = Readonly<{
+  icon: (props: React.ComponentProps<'svg'>) => JSX.Element;
   statistics: Record<string, number>;
-};
+}>;
 
 export default function QuestionAggregateBadge({
+  icon: Icon,
   statistics,
-  ...badgeProps
 }: QuestionAggregateBadgeProps) {
   const { getTooltipProps, setTooltipRef, setTriggerRef, visible } =
     usePopperTooltip({
@@ -56,8 +53,16 @@ export default function QuestionAggregateBadge({
 
   return (
     <>
-      <button ref={setTriggerRef} className="rounded-full" type="button">
-        <Badge label={label} {...badgeProps} />
+      <button
+        ref={setTriggerRef}
+        className="-my-1 flex items-center rounded-md px-2
+                  py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+        type="button">
+        <Icon
+          aria-hidden={true}
+          className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
+        />
+        {label}
       </button>
       {visible && (
         <div ref={setTooltipRef} {...getTooltipProps()} className="z-10">

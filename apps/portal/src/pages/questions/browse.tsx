@@ -541,7 +541,7 @@ export default function QuestionsBrowsePage() {
                     onSortTypeChange={setSortType}
                   />
                 </div>
-                <div className="flex flex-col gap-2 pb-4">
+                <div className="flex flex-col gap-4 pb-4">
                   {(questionsQueryData?.pages ?? []).flatMap(
                     ({ data: questions }) =>
                       questions.map((question) => {
