@@ -4,7 +4,7 @@ import Container from '~/components/shared/Container';
 
 const people = [
   {
-    bio: 'Dsyfunctional human who cannot survive without 10 hours of sleep.',
+    bio: 'Dysfunctional human who cannot survive without 10 hours of sleep.',
     imageUrl: '/team/weilin.jpg',
     name: 'Ren Weilin',
     role: 'Front End Engineer',
@@ -17,12 +17,12 @@ const people = [
   },
   {
     bio: 'Why spend 1 hour solving the problem when you can spend 10 hours doing abstraction, optimisation and automation (in order of increasing rates of success)?',
-    imageUrl: '/team/jeffsieu.png',
+    imageUrl: '/team/jeffsieu.jpg',
     name: 'Jeff Sieu',
-    role: 'Front End Engineer/Karate Gold medalist',
+    role: 'Front End Engineer',
   },
   {
-    bio: 'Exicited to jump into anything.',
+    bio: 'Excited to jump into anything.',
     imageUrl: '/team/zhiying.png',
     name: 'Tang Zhiying',
     role: 'Designer',
