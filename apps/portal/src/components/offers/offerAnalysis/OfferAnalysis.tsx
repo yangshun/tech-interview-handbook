@@ -58,9 +58,9 @@ function OfferAnalysisContent({
         tab={tab}
       />
       <p className="mt-5">
-        {isSubmission
-          ? 'Here are some of the top offers relevant to you:'
-          : 'Relevant top offers:'}
+        {tab === OVERALL_TAB
+          ? 'Here are some of the highest offers with the same job title and YOE(±1):'
+          : 'Here are some of the highest offers with the same company, job title and YOE(±1):'}
       </p>
       {analysis.topPercentileOffers.map((topPercentileOffer) => (
         <OfferProfileCard

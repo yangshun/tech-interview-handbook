@@ -30,12 +30,10 @@ import { InternshipCycleOptions } from '../../InternshipCycles';
 import JobTypeTabs from '../../JobTypeTabs';
 import type { OfferFormData } from '../../types';
 import { FutureYearsOptions } from '../../Years';
-import {
-  Currency,
-  CURRENCY_OPTIONS,
-} from '../../../../utils/offers/currency/CurrencyEnum';
+import { CURRENCY_OPTIONS } from '../../../../utils/offers/currency/CurrencyEnum';
 
 type FullTimeOfferDetailsFormProps = Readonly<{
+  defaultCurrency: string;
   index: number;
   remove: UseFieldArrayRemove;
 }>;
@@ -43,6 +41,7 @@ type FullTimeOfferDetailsFormProps = Readonly<{
 function FullTimeOfferDetailsForm({
   index,
   remove,
+  defaultCurrency,
 }: FullTimeOfferDetailsFormProps) {
   const { register, formState, setValue, control } = useFormContext<{
     offers: Array<OfferFormData>;
@@ -135,7 +134,7 @@ function FullTimeOfferDetailsForm({
             endAddOn={
               <FormSelect
                 borderStyle="borderless"
-                defaultValue={Currency.SGD}
+                defaultValue={defaultCurrency}
                 isLabelHidden={true}
                 label="Currency"
                 options={CURRENCY_OPTIONS}
@@ -172,7 +171,7 @@ function FullTimeOfferDetailsForm({
             endAddOn={
               <FormSelect
                 borderStyle="borderless"
-                defaultValue={Currency.SGD}
+                defaultValue={defaultCurrency}
                 isLabelHidden={true}
                 label="Currency"
                 options={CURRENCY_OPTIONS}
@@ -199,7 +198,7 @@ function FullTimeOfferDetailsForm({
             endAddOn={
               <FormSelect
                 borderStyle="borderless"
-                defaultValue={Currency.SGD}
+                defaultValue={defaultCurrency}
                 isLabelHidden={true}
                 label="Currency"
                 options={CURRENCY_OPTIONS}
@@ -222,7 +221,7 @@ function FullTimeOfferDetailsForm({
             endAddOn={
               <FormSelect
                 borderStyle="borderless"
-                defaultValue={Currency.SGD}
+                defaultValue={defaultCurrency}
                 isLabelHidden={true}
                 label="Currency"
                 options={CURRENCY_OPTIONS}
@@ -275,6 +274,7 @@ function FullTimeOfferDetailsForm({
 }
 
 type InternshipOfferDetailsFormProps = Readonly<{
+  defaultCurrency: string;
   index: number;
   remove: UseFieldArrayRemove;
 }>;
@@ -282,6 +282,7 @@ type InternshipOfferDetailsFormProps = Readonly<{
 function InternshipOfferDetailsForm({
   index,
   remove,
+  defaultCurrency,
 }: InternshipOfferDetailsFormProps) {
   const { register, formState, control } = useFormContext<{
     offers: Array<OfferFormData>;
@@ -373,7 +374,7 @@ function InternshipOfferDetailsForm({
             endAddOn={
               <FormSelect
                 borderStyle="borderless"
-                defaultValue={Currency.SGD}
+                defaultValue={defaultCurrency}
                 isLabelHidden={true}
                 label="Currency"
                 options={CURRENCY_OPTIONS}
@@ -435,6 +436,7 @@ function InternshipOfferDetailsForm({
 }
 
 type OfferDetailsFormArrayProps = Readonly<{
+  defaultCurrency: string;
   fieldArrayValues: UseFieldArrayReturn<FieldValues, 'offers', 'id'>;
   jobType: JobType;
 }>;
@@ -442,6 +444,7 @@ type OfferDetailsFormArrayProps = Readonly<{
 function OfferDetailsFormArray({
   fieldArrayValues,
   jobType,
+  defaultCurrency,
 }: OfferDetailsFormArrayProps) {
   const { append, remove, fields } = fieldArrayValues;
 
@@ -451,9 +454,17 @@ function OfferDetailsFormArray({
         return (
           <div key={item.id}>
             {jobType === JobType.FULLTIME ? (
-              <FullTimeOfferDetailsForm index={index} remove={remove} />
+              <FullTimeOfferDetailsForm
+                defaultCurrency={defaultCurrency}
+                index={index}
+                remove={remove}
+              />
             ) : (
-              <InternshipOfferDetailsForm index={index} remove={remove} />
+              <InternshipOfferDetailsForm
+                defaultCurrency={defaultCurrency}
+                index={index}
+                remove={remove}
+              />
             )}
           </div>
         );
@@ -476,7 +487,13 @@ function OfferDetailsFormArray({
   );
 }
 
-export default function OfferDetailsForm() {
+type OfferDetailsFormProps = Readonly<{
+  defaultCurrency: string;
+}>;
+
+export default function OfferDetailsForm({
+  defaultCurrency,
+}: OfferDetailsFormProps) {
   const watchJobType = useWatch({
     name: `offers.0.jobType`,
   });
@@ -515,6 +532,7 @@ export default function OfferDetailsForm() {
         }}
       />
       <OfferDetailsFormArray
+        defaultCurrency={defaultCurrency}
         fieldArrayValues={fieldArrayValues}
         jobType={jobType}
       />
