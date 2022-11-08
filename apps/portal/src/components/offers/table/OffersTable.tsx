@@ -126,10 +126,6 @@ export default function OffersTable({
     pathname,
   ]);
 
-  useEffect(() => {
-    setSelectedSortDirection(OFFER_TABLE_SORT_ORDER.UNSORTED);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedYoeCategory]);
   const topRef = useRef<HTMLDivElement>(null);
   const { showToast } = useToast();
   const { isLoading: isResultsLoading } = trpc.useQuery(
@@ -141,7 +137,6 @@ export default function OffersTable({
         currency,
         limit: NUMBER_OF_OFFERS_PER_PAGE,
         offset: pagination.currentPage,
-        // SortBy: selectedSortBy ?? '-monthYearReceived',
         sortBy:
           selectedSortDirection && selectedSortType
             ? `${selectedSortDirection}${selectedSortType}`
@@ -204,6 +199,7 @@ export default function OffersTable({
               label={itemLabel}
               onClick={() => {
                 setSelectedYoeCategory(value);
+                setSelectedSortDirection(OFFER_TABLE_SORT_ORDER.UNSORTED);
                 gaEvent({
                   action: `offers.table_filter_yoe_category_${value}`,
                   category: 'engagement',
@@ -291,12 +287,11 @@ export default function OffersTable({
             <Spinner display="block" size="lg" />
           </div>
         )}
-        {(!isLoading && !offers) ||
-          (offers.length === 0 && (
-            <div className="py-16 text-lg">
-              <div className="flex justify-center">No data yet 🥺</div>
-            </div>
-          ))}
+        {!isLoading && (!offers || offers.length === 0) && (
+          <div className="py-16 text-lg">
+            <div className="flex justify-center">No data yet 🥺</div>
+          </div>
+        )}
       </div>
       <OffersTablePagination
         endNumber={

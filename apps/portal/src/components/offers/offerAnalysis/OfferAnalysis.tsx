@@ -73,8 +73,8 @@ function OfferAnalysisContent({
           <Button
             href={
               tab === OVERALL_TAB
-                ? `/offers?jobTitleId=${title}&sortBy=-totalCompensation&yoeCategory=${yoeCategory}`
-                : `/offers?companyId=${companyId}&companyName=${companyName}&jobTitleId=${title}&sortBy=-totalCompensation&yoeCategory=${yoeCategory}`
+                ? `/offers?jobTitleId=${title}&sortDirection=-&sortType=totalCompensation&yoeCategory=${yoeCategory}`
+                : `/offers?companyId=${companyId}&companyName=${companyName}&jobTitleId=${title}&sortDirection=-&sortType=totalCompensation&yoeCategory=${yoeCategory}`
             }
             icon={ArrowUpRightIcon}
             label="View more offers"
