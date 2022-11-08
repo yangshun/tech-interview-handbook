@@ -62,9 +62,11 @@ export default function OfferTableRow({
           href={`/offers/profile/${profileId}`}>
           View Profile
         </Link>
-        <div className="text-xs text-slate-500">
-          This person also received {numberOfOtherOffers} other offer(s).
-        </div>
+        {numberOfOtherOffers > 0 && (
+          <div className="text-xs text-slate-500">
+            This person also received {numberOfOtherOffers} other offer(s).
+          </div>
+        )}
       </td>
     </tr>
   );
