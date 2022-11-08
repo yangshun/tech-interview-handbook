@@ -2,7 +2,7 @@ import Container from '~/components/shared/Container';
 
 const people = [
   {
-    bio: 'I like to write and read good code.',
+    bio: 'Keane loves to try out new technologies and build awesome stuff with awesome people. He spends most of his free time travelling to eat good food (that he can afford) and going to the gym.',
     imageUrl: '/team/keane.png',
     name: 'Keane Chan',
     role: 'Full Stack Engineer',
