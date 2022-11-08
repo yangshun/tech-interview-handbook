@@ -6,6 +6,7 @@ import type { ReactNode } from 'react';
 import { Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { Bars3BottomLeftIcon } from '@heroicons/react/24/outline';
+import { Button } from '@tih/ui';
 
 import GlobalNavigation from '~/components/global/GlobalNavigation';
 import HomeNavigation from '~/components/global/HomeNavigation';
@@ -37,9 +38,25 @@ function ProfileJewel() {
   const loginHref = loginPageHref();
   if (session == null) {
     return router.pathname !== loginHref.pathname ? (
-      <Link className="text-base" href={loginHref}>
-        Sign In
-      </Link>
+      <div className="flex items-center space-x-4">
+        <Link
+          className="hover:text-primary-500 text-xs font-medium text-slate-700"
+          href={loginHref}>
+          Sign In
+        </Link>
+        <Button
+          href={{
+            ...loginHref,
+            query: {
+              ...loginHref.query,
+              mode: 'signup',
+            },
+          }}
+          label="Sign Up"
+          size="sm"
+          variant="tertiary"
+        />
+      </div>
     ) : null;
   }
 
