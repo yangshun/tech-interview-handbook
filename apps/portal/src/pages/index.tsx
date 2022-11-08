@@ -20,7 +20,7 @@ const features = [
   },
   {
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'A community driven interview question bank. Help job seekers prepare for their interviews with real questions from real companies.',
     href: '/questions',
     img: '/logos/bank-logo.png',
     name: 'Question Bank',
