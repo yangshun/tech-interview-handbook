@@ -35,7 +35,7 @@ export default function OfferTableRow({
     <tr key={id} className="divide-x divide-slate-200 border-b bg-white">
       <td className="space-y-0.5 py-4 px-4" scope="row">
         <div className="font-medium">{company.name}</div>
-        <div className="text-xs text-slate-400">
+        <div className="text-xs text-slate-500">
           {location.cityName} ({location.countryCode})
         </div>
       </td>

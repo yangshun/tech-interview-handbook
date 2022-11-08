@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { JobType } from '@prisma/client';
 import { DropdownMenu, Spinner, useToast } from '@tih/ui';
 
@@ -23,13 +23,15 @@ import OffersRow from './OffersRow';
 
 import type { DashboardOffer, GetOffersResponse, Paging } from '~/types/offers';
 
-const NUMBER_OF_OFFERS_IN_PAGE = 10;
+const NUMBER_OF_OFFERS_PER_PAGE = 20;
+
 export type OffersTableProps = Readonly<{
   companyFilter: string;
   companyName?: string;
   countryFilter: string;
   jobTitleFilter: string;
 }>;
+
 export default function OffersTable({
   countryFilter,
   companyName,
@@ -101,15 +103,16 @@ export default function OffersTable({
     pathname,
   ]);
 
+  const topRef = useRef<HTMLDivElement>(null);
   const { showToast } = useToast();
-  trpc.useQuery(
+  const { isLoading: isResultsLoading } = trpc.useQuery(
     [
       'offers.list',
       {
         companyId: companyFilter,
         countryId: countryFilter,
         currency,
-        limit: NUMBER_OF_OFFERS_IN_PAGE,
+        limit: NUMBER_OF_OFFERS_PER_PAGE,
         offset: pagination.currentPage,
         sortBy: selectedSortBy ?? '-monthYearReceived',
         title: jobTitleFilter,
@@ -257,17 +260,27 @@ export default function OffersTable({
   };
 
   return (
-    <div className="relative w-full border border-slate-200">
-      {renderFilters()}
+    <div className="relative w-full divide-y divide-slate-200 border border-slate-200 bg-white">
+      <div ref={topRef}>{renderFilters()}</div>
+      <OffersTablePagination
+        endNumber={
+          pagination.currentPage * NUMBER_OF_OFFERS_PER_PAGE + offers.length
+        }
+        handlePageChange={handlePageChange}
+        isInitialFetch={isLoading}
+        isLoading={isResultsLoading}
+        pagination={pagination}
+        startNumber={pagination.currentPage * NUMBER_OF_OFFERS_PER_PAGE + 1}
+      />
       {isLoading ? (
         <div className="col-span-10 py-32">
           <Spinner display="block" size="lg" />
         </div>
       ) : (
         <div className="overflow-x-auto text-slate-600">
-          <table className="w-full divide-y divide-slate-200 border-y border-slate-200 text-left text-xs text-slate-700 sm:text-sm md:text-base">
+          <table className="w-full divide-y divide-slate-200 text-left text-xs text-slate-700 sm:text-sm">
             {renderHeader()}
-            <tbody>
+            <tbody className="divide-y divide-slate-200">
               {offers.map((offer) => (
                 <OffersRow key={offer.id} jobType={jobType} row={offer} />
               ))}
@@ -283,11 +296,18 @@ export default function OffersTable({
       )}
       <OffersTablePagination
         endNumber={
-          pagination.currentPage * NUMBER_OF_OFFERS_IN_PAGE + offers.length
+          pagination.currentPage * NUMBER_OF_OFFERS_PER_PAGE + offers.length
         }
-        handlePageChange={handlePageChange}
+        handlePageChange={(number) => {
+          topRef?.current?.scrollIntoView({
+            block: 'start',
+          });
+          handlePageChange(number);
+        }}
+        isInitialFetch={isLoading}
+        isLoading={isResultsLoading}
         pagination={pagination}
-        startNumber={pagination.currentPage * NUMBER_OF_OFFERS_IN_PAGE + 1}
+        startNumber={pagination.currentPage * NUMBER_OF_OFFERS_PER_PAGE + 1}
       />
     </div>
   );

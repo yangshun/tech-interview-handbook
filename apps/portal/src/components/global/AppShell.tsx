@@ -61,7 +61,7 @@ function ProfileJewel() {
         <Menu.Button className="focus:ring-primary-500 flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-offset-2">
           <span className="sr-only">Open user menu</span>
           {session?.user?.image == null ? (
-            <span>Render some icon</span>
+            <span>TODO: Render some icon</span>
           ) : (
             <img
               alt={session?.user?.email ?? session?.user?.name ?? ''}
