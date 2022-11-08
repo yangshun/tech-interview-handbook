@@ -57,7 +57,7 @@ export default function OffersHeader({
           <span className="ml-2 grid grid-cols-1 space-y-0 text-[9px] text-gray-300">
             <div
               className={clsx(
-                '-mb-3 flex items-end',
+                '-mb-2 flex items-end sm:-mb-3',
                 sortDirection === OFFER_TABLE_SORT_ORDER.ASC &&
                   'text-primary-500',
                 sortDirection === OFFER_TABLE_SORT_ORDER.DESC &&
