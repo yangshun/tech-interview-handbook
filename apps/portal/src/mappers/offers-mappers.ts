@@ -792,7 +792,7 @@ export const dashboardOfferDtoMapper = (
     location: locationDtoMapper(offer.location),
     monthYearReceived: offer.monthYearReceived,
     numberOfOtherOffers:
-      offer.profile.offers.length < 2 ? 0 : offer.profile.offers.length,
+      offer.profile.offers.length < 2 ? 0 : offer.profile.offers.length - 1,
     profileId: offer.profileId,
     title: offer.offersFullTime?.title || offer.offersIntern?.title || '',
     totalYoe: offer.profile.background?.totalYoe ?? -1,
