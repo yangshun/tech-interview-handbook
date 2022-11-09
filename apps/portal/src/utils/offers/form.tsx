@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { FieldError } from '~/components/offers/constants';
+
 /**
  * Removes empty objects, empty strings, `null`, `undefined`, and `NaN` values from an object.
  * Does not remove empty arrays.
@@ -84,4 +86,14 @@ export function removeInvalidMoneyData(object: any) {
     }
   });
   return object;
+}
+
+export function validatePositiveNumber(v?: number | null) {
+  return (
+    v === null ||
+    v === undefined ||
+    v !== v ||
+    v > 0 ||
+    FieldError.POSITIVE_NUMBER
+  );
 }
