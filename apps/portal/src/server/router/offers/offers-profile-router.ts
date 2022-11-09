@@ -351,9 +351,7 @@ export const offersProfileRouter = createRouter()
                           level: x.level,
                           location: {
                             connect: {
-                              where: {
-                                id: x.cityId,
-                              },
+                              id: x.cityId,
                             },
                           },
                           title: x.title,
@@ -409,9 +407,7 @@ export const offersProfileRouter = createRouter()
                             jobType: x.jobType,
                             location: {
                               connect: {
-                                where: {
-                                  id: x.cityId,
-                                },
+                                id: x.cityId,
                               },
                             },
                             monthlySalary:
@@ -464,8 +460,8 @@ export const offersProfileRouter = createRouter()
                           durationInMonths: x.durationInMonths,
                           jobType: x.jobType,
                           location: {
-                            connect: {
-                              where: {
+                            location: {
+                              connect: {
                                 id: x.cityId,
                               },
                             },
