@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { useMemo, useState } from 'react';
 import {
   BuildingOfficeIcon,
+  CalendarIcon,
   MapPinIcon,
   UserCircleIcon,
 } from '@heroicons/react/20/solid';
@@ -224,12 +225,15 @@ export default function BaseQuestionCard({
               </>
             )}
             {timestamp !== null && (
-              <p className="text-xs">
-                {timestamp.toLocaleDateString(undefined, {
-                  month: 'short',
-                  year: 'numeric',
-                })}
-              </p>
+              <div className="flex items-center text-slate-500">
+                <CalendarIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400" />
+                <p className="text-xs font-medium">
+                  {timestamp.toLocaleDateString(undefined, {
+                    month: 'short',
+                    year: 'numeric',
+                  })}
+                </p>
+              </div>
             )}
             {showAddToList && (
               <div className="pl-4">
