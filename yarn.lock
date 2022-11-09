@@ -6182,6 +6182,31 @@ csstype@^3.0.2:
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.1.tgz"
   integrity sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==
 
+csv-generate@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/csv-generate/-/csv-generate-4.2.1.tgz#2a0c5f0d9a5b6f7a0c1fee40f028707af048b31b"
+  integrity sha512-w6GFHjvApv6bcJ2xdi9JGsH6ZvUBfC+vUdfefnEzurXG6hMRwzkBLnhztU2H7v7+zfCk1I/knnQ+tGbgpxWrBw==
+
+csv-parse@^5.3.2:
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-5.3.2.tgz#a8ce2f8dec1b9c1013c9e73c6102fe0d2d436dbb"
+  integrity sha512-3jQ/JMs+voKxr4vwpmElS1d37J0o6rQdQyEKoPyA9HG8fYczpLaBJnmp5ykvkXL8ZeEGVP0qwLU645BZVykXKw==
+
+csv-stringify@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/csv-stringify/-/csv-stringify-6.2.1.tgz#de4f9940abd8c9780eda41130c737a18d24e5986"
+  integrity sha512-+DT/YEgqRy82aMPMA7yUUpFJPx9X8iZy7UhfyTE2bHmFJcjDiz1j29wzTFkYTtuNVceNgz8efsjICch+O1WcLQ==
+
+csv@^6.2.2:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/csv/-/csv-6.2.2.tgz#375020fb5b396fc2919a20f0d4b1b831aa721c4c"
+  integrity sha512-flTUz/J1VZ6n5+PJmxO7EImbt+tmk2aVgYxeo5UkC/f/beo9OQ7uFMVm53xOsS+/8+5gFN+MQwCdYtYzRXhrRg==
+  dependencies:
+    csv-generate "^4.2.1"
+    csv-parse "^5.3.2"
+    csv-stringify "^6.2.1"
+    stream-transform "^3.2.1"
+
 currently-unhandled@^0.4.1:
   version "0.4.1"
   resolved "https://registry.npmjs.org/currently-unhandled/-/currently-unhandled-0.4.1.tgz"
@@ -13681,6 +13706,11 @@ stream-shift@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/stream-shift/-/stream-shift-1.0.1.tgz"
   integrity sha512-AiisoFqQ0vbGcZgQPY1cdP2I76glaVA/RauYR4G4thNFgkTqr90yXTo4LYX60Jl+sIlPNHHdGSwo01AvbKUSVQ==
+
+stream-transform@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/stream-transform/-/stream-transform-3.2.1.tgz#4c8cbdd3e4fa7254c770ef34a962cec68349fcb0"
+  integrity sha512-ApK+WTJ5bCOf0A2tlec1qhvr8bGEBM/sgXXB7mysdCYgZJO5DZeaV3h3G+g0HnAQ372P5IhiGqnW29zoLOfTzQ==
 
 "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.0.0, string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.2, string-width@^4.2.3:
   version "4.2.3"

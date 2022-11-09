@@ -13,6 +13,7 @@
     "seed-salaries": "ts-node prisma/seed-salaries.ts",
     "seed-analysis": "ts-node prisma/seed-analysis.ts",
     "seed-questions": "ts-node prisma/seed-questions.ts",
+    "seed-companies": "ts-node prisma/seed-companies.ts",
     "map-internship-cycle": "ts-node prisma/map-internship-cycle.ts"
   },
   "dependencies": {
@@ -58,6 +59,7 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-pdf": "^5.7.2",
     "autoprefixer": "^10.4.12",
+    "csv": "^6.2.2",
     "postcss": "^8.4.16",
     "prettier-plugin-tailwindcss": "^0.1.13",
     "prisma": "^4.4.0",

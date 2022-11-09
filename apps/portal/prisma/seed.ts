@@ -1,4 +1,3 @@
-import { COMPANIES } from './companySeed';
 const { PrismaClient } = require('@prisma/client');
 
 const cities = require('./data/cities.json');
@@ -9,18 +8,6 @@ const prisma = new PrismaClient();
 
 async function main() {
   console.log('Seeding started...');
-
-  console.info('Seeding companies');
-  await prisma.company.createMany({
-    data: COMPANIES.map((company) => ({
-      name: company.name,
-      slug: company.slug,
-      description: company.description,
-      website: company.website,
-      logoUrl: company.logoUrl,
-    })),
-    skipDuplicates: true,
-  });
 
   console.info('Seeding countries');
   await prisma.country.createMany({
