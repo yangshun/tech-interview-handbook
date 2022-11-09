@@ -18,6 +18,7 @@ import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 import CompanyTypeahead from '~/components/questions/typeahead/CompanyTypeahead';
 import LocationTypeahead from '~/components/questions/typeahead/LocationTypeahead';
 import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
+import Container from '~/components/shared/Container';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
@@ -504,10 +505,10 @@ export default function QuestionsBrowsePage() {
       <Head>
         <title>Home - {APP_TITLE}</title>
       </Head>
-      <main className="flex h-[calc(100vh_-_64px)] flex-1 flex-col items-stretch">
-        <div className="flex h-full flex-1">
+      <main>
+        <Container className="relative flex" variant="sm">
           <section className="min-h-0 flex-1 overflow-auto">
-            <div className="my-4 mx-auto flex max-w-3xl flex-col items-stretch justify-start gap-6 p-4">
+            <div className="my-4 mx-auto flex flex-col items-stretch justify-start gap-6 sm:px-4">
               <ContributeQuestionCard
                 onSubmit={(data) => {
                   const { cityId, countryId, stateId } = data.location;
@@ -584,22 +585,22 @@ export default function QuestionsBrowsePage() {
               </div>
             </div>
           </section>
-          <aside className="hidden w-[300px] overflow-y-auto border-l bg-white py-4 lg:block">
+          <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-[300px] overflow-y-auto border-x bg-white py-4 lg:block">
             <h2 className="px-4 text-xl font-semibold">Filter by</h2>
             {filterSidebar}
           </aside>
-          <SlideOut
-            className="lg:hidden"
-            enterFrom="end"
-            isShown={filterDrawerOpen}
-            size="sm"
-            title="Filter by"
-            onClose={() => {
-              setFilterDrawerOpen(false);
-            }}>
-            {filterSidebar}
-          </SlideOut>
-        </div>
+        </Container>
+        <SlideOut
+          className="lg:hidden"
+          enterFrom="end"
+          isShown={filterDrawerOpen}
+          size="sm"
+          title="Filter by"
+          onClose={() => {
+            setFilterDrawerOpen(false);
+          }}>
+          {filterSidebar}
+        </SlideOut>
       </main>
     </>
   );

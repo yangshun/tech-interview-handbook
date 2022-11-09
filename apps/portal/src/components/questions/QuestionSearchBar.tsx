@@ -2,7 +2,7 @@ import {
   AdjustmentsHorizontalIcon,
   MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
-import { Button, Tabs, TextInput } from '@tih/ui';
+import { Button, DropdownMenu, TextInput } from '@tih/ui';
 
 import { SORT_ORDERS } from '~/utils/questions/constants';
 
@@ -43,7 +43,7 @@ export default function QuestionSearchBar({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col items-stretch gap-x-2 gap-y-4 lg:flex-row lg:items-end">
-        <div className="flex flex-1 gap-2">
+        <div className="flex flex-1 items-center gap-4">
           <div className="flex-1">
             <TextInput
               isLabelHidden={true}
@@ -57,50 +57,46 @@ export default function QuestionSearchBar({
               }}
             />
           </div>
+          <DropdownMenu align="end" label="Sort by">
+            {(sortOptionsSelectProps.sortTypeOptions ?? []).map(
+              ({ value: sortTypeValue }) =>
+                (sortOptionsSelectProps?.sortOrderOptions ?? SORT_ORDERS).map(
+                  ({ value: sortOrderValue }) => (
+                    <DropdownMenu.Item
+                      key={`${sortTypeValue}/${sortOrderValue}`}
+                      isSelected={
+                        sortOptionsSelectProps.sortTypeValue ===
+                          sortTypeValue &&
+                        sortOptionsSelectProps.sortOrderValue === sortOrderValue
+                      }
+                      label={getSortOrderLabel(sortOrderValue, sortTypeValue)}
+                      onClick={() => {
+                        sortOptionsSelectProps.onSortTypeChange?.(
+                          sortTypeValue,
+                        );
+                        sortOptionsSelectProps.onSortOrderChange?.(
+                          sortOrderValue,
+                        );
+                      }}
+                    />
+                  ),
+                ),
+            )}
+          </DropdownMenu>
           <div className="lg:hidden">
             <Button
               addonPosition="start"
-              icon={AdjustmentsHorizontalIcon}
-              label={
+              aria-label={
                 activeFilterCount > 0
                   ? `Filters (${activeFilterCount})`
                   : 'Filters'
               }
+              icon={AdjustmentsHorizontalIcon}
+              label={`(${activeFilterCount})`}
               variant={activeFilterCount > 0 ? 'secondary' : 'tertiary'}
               onClick={onFilterOptionsToggle}
             />
           </div>
-        </div>
-      </div>
-      <div className="flex flex-col justify-start gap-x-4 gap-y-2 sm:flex-row">
-        <div>
-          <Tabs
-            label="Sort by"
-            tabs={sortOptionsSelectProps.sortTypeOptions ?? []}
-            value={sortOptionsSelectProps.sortTypeValue}
-            onChange={sortOptionsSelectProps.onSortTypeChange}
-          />
-        </div>
-        <div className="border-b border-l" />
-        <div>
-          <Tabs
-            label="Order by"
-            tabs={(sortOptionsSelectProps.sortOrderOptions ?? SORT_ORDERS).map(
-              (option) => {
-                const newLabel = getSortOrderLabel(
-                  option.value,
-                  sortOptionsSelectProps.sortTypeValue,
-                );
-
-                return {
-                  ...option,
-                  label: newLabel,
-                };
-              },
-            )}
-            value={sortOptionsSelectProps.sortOrderValue}
-            onChange={sortOptionsSelectProps.onSortOrderChange}
-          />
         </div>
       </div>
     </div>

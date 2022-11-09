@@ -21,6 +21,7 @@ export default function PaginationLoadMoreButton(
   return (
     <Button
       disabled={!hasNextPage || isFetchingNextPage}
+      display="block"
       isLoading={isFetchingNextPage}
       label={hasNextPage ? 'Load more' : 'Nothing more to load'}
       variant="tertiary"
