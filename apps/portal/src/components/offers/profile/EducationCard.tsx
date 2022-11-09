@@ -1,7 +1,4 @@
-import {
-  BuildingLibraryIcon,
-  LightBulbIcon,
-} from '@heroicons/react/24/outline';
+import { BuildingLibraryIcon, LightBulbIcon } from '@heroicons/react/20/solid';
 
 import type { EducationType } from '~/components/offers/EducationFields';
 import { getLabelForEducationFieldType } from '~/components/offers/EducationFields';
@@ -18,9 +15,9 @@ export default function EducationCard({
     <div className="block rounded-lg border border-slate-200 bg-white p-4 text-sm ">
       <div className="flex justify-between">
         <div>
-          <div className="flex items-center">
-            <LightBulbIcon className="mr-1 h-5" />
-            <span className="text-semibold ml-1">
+          <div className="mb-2 flex items-center">
+            <LightBulbIcon className="mr-1 h-5 text-slate-400" />
+            <span className="ml-1 font-semibold">
               {field
                 ? `${
                     type ? type.charAt(0).toUpperCase() + type.slice(1) : 'N/A'
@@ -35,7 +32,7 @@ export default function EducationCard({
           </div>
           {school && (
             <div className="flex flex-row">
-              <BuildingLibraryIcon className="mr-1 h-5" />
+              <BuildingLibraryIcon className="mr-1 h-5 text-slate-400" />
               <span className="ml-1">{school}</span>
             </div>
           )}

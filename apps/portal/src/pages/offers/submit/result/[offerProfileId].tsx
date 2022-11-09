@@ -82,7 +82,7 @@ export default function OffersSubmissionResult() {
     <div className="flex h-screen w-screen">
       <div className="m-auto mx-auto w-screen justify-center font-medium text-slate-500">
         <Spinner display="block" size="lg" />
-        <div className="text-center">Loading...</div>
+        <div className="text-center">Loading results...</div>
       </div>
     </div>
   ) : checkToken.isError || getAnalysis.isError ? (
