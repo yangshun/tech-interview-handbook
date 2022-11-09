@@ -37,7 +37,8 @@ function OfferAnalysisContent({
       return (
         <Alert title="Insufficient data to compare with" variant="info">
           You are among the first to submit an offer for your job title and
-          years of experience! Check back later when there are more submissions.
+          years of experience in your location! Check back later when there are
+          more submissions.
         </Alert>
       );
     }
@@ -45,8 +46,8 @@ function OfferAnalysisContent({
     return (
       <Alert title="Insufficient data to compare with" variant="info">
         You are among the first to submit an offer for this company, job title
-        and years of experience! Check back later when there are more
-        submissions.
+        and years of experience in your location! Check back later when there
+        are more submissions.
       </Alert>
     );
   }
