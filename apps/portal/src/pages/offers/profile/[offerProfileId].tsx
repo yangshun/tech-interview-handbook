@@ -98,6 +98,7 @@ export default function OfferProfile() {
               const filteredOffer: OfferDisplayData = {
                 companyName: res.company.name,
                 id: res.offersIntern!.id,
+                internshipCycle: res.offersIntern!.internshipCycle,
                 jobTitle: getLabelForJobTitleType(
                   res.offersIntern!.title as JobTitleType,
                 ),
@@ -109,6 +110,7 @@ export default function OfferProfile() {
                 negotiationStrategy: res.negotiationStrategy,
                 otherComment: res.comments,
                 receivedMonth: formatDate(res.monthYearReceived),
+                startYear: res.offersIntern!.startYear,
               };
               return filteredOffer;
             })

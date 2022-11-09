@@ -1,11 +1,13 @@
 import {
   ArrowTrendingUpIcon,
   BuildingOfficeIcon,
+  CalendarIcon,
   MapPinIcon,
 } from '@heroicons/react/20/solid';
 import { JobType } from '@prisma/client';
 
 import { JobTypeLabel } from '~/components/offers/constants';
+import { InternshipCycleValuesToLabels } from '~/components/offers/InternshipCycles';
 import type { OfferDisplayData } from '~/components/offers/types';
 
 import { getLocationDisplayText } from '~/utils/offers/string';
@@ -21,12 +23,14 @@ export default function OfferCard({
     bonus,
     companyName,
     duration,
+    internshipCycle,
     jobTitle,
     jobLevel,
     jobType,
     location,
     receivedMonth,
     totalCompensation,
+    startYear,
     stocks,
     monthlySalary,
     negotiationStrategy,
@@ -41,9 +45,9 @@ export default function OfferCard({
             <h3 className="text-lg font-medium leading-6 text-slate-900">
               {jobTitle} {jobType && <>({JobTypeLabel[jobType]})</>}
             </h3>
-            <div className="mt-1 flex flex-row flex-wrap space-x-4 sm:mt-0">
+            <div className="mt-1 flex flex-row flex-wrap sm:mt-0">
               {companyName && (
-                <div className="mt-2 flex items-center text-sm text-slate-500">
+                <div className="mr-4 mt-2 flex items-center text-sm text-slate-500">
                   <BuildingOfficeIcon
                     aria-hidden="true"
                     className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
@@ -52,12 +56,23 @@ export default function OfferCard({
                 </div>
               )}
               {location && (
-                <div className="mt-2 flex items-center text-sm text-slate-500">
+                <div className="mr-4 mt-2 flex items-center text-sm text-slate-500">
                   <MapPinIcon
                     aria-hidden="true"
                     className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
                   />
                   {getLocationDisplayText(location)}
+                </div>
+              )}
+              {(internshipCycle || startYear) && (
+                <div className="mt-2 flex items-center text-sm text-slate-500">
+                  <CalendarIcon
+                    aria-hidden="true"
+                    className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
+                  />
+                  {internshipCycle && startYear
+                    ? `${startYear} ${InternshipCycleValuesToLabels[internshipCycle]}`
+                    : internshipCycle || startYear}
                 </div>
               )}
               {jobLevel && (

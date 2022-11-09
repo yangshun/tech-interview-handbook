@@ -16,3 +16,13 @@ export const InternshipCycleOptions = [emptyOption].concat(
     value: label.replace(/\s+/g, '-').toLowerCase(),
   })),
 );
+
+export const InternshipCycleValuesToLabels: Record<string, string> = {
+  fall: 'Fall',
+  'full-year': 'Full year',
+  'half-year': 'Half year',
+  others: 'Others',
+  spring: 'Spring',
+  summer: 'Summer',
+  winter: 'Winter',
+};

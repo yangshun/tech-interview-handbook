@@ -180,6 +180,7 @@ export type OfferDisplayData = {
   companyName?: string | null;
   duration?: number | null;
   id?: string;
+  internshipCycle?: string;
   jobLevel?: string | null;
   jobTitle?: string | null;
   jobType?: JobType;
@@ -188,6 +189,7 @@ export type OfferDisplayData = {
   negotiationStrategy?: string | null;
   otherComment?: string | null;
   receivedMonth?: string | null;
+  startYear?: number;
   stocks?: string | null;
   totalCompensation?: string | null;
 };
