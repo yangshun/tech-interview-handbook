@@ -56,7 +56,7 @@ export default function QuestionAggregateBadge({
       <button
         ref={setTriggerRef}
         className="-my-1 flex items-center rounded-md px-2
-                  py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+                  py-1 text-xs font-medium text-slate-500 bg-slate-100 hover:bg-slate-200 hover:text-slate-600"
         type="button">
         <Icon
           aria-hidden={true}

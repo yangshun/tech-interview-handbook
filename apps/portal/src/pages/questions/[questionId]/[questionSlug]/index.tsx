@@ -261,7 +261,6 @@ export default function QuestionPage() {
             />
             <div className="sm:ml-13 ml-11 mr-2 md:ml-14">
               <Collapsible
-                defaultOpen={true}
                 label={
                   <div className="text-primary-700">
                     {question.numComments}{' '}

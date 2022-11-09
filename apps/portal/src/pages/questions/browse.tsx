@@ -14,11 +14,11 @@ import QuestionOverviewCard from '~/components/questions/card/question/QuestionO
 import ContributeQuestionCard from '~/components/questions/ContributeQuestionCard';
 import FilterSection from '~/components/questions/filter/FilterSection';
 import PaginationLoadMoreButton from '~/components/questions/PaginationLoadMoreButton';
+import QuestionContainer from '~/components/questions/QuestionContainer';
 import QuestionSearchBar from '~/components/questions/QuestionSearchBar';
 import CompanyTypeahead from '~/components/questions/typeahead/CompanyTypeahead';
 import LocationTypeahead from '~/components/questions/typeahead/LocationTypeahead';
 import RoleTypeahead from '~/components/questions/typeahead/RoleTypeahead';
-import Container from '~/components/shared/Container';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
@@ -506,7 +506,7 @@ export default function QuestionsBrowsePage() {
         <title>Home - {APP_TITLE}</title>
       </Head>
       <main>
-        <Container className="relative flex" variant="sm">
+        <QuestionContainer className="relative flex" variant="sm">
           <section className="min-h-0 flex-1 overflow-auto">
             <div className="my-4 mx-auto flex flex-col items-stretch justify-start gap-6 sm:px-4">
               <ContributeQuestionCard
@@ -589,7 +589,7 @@ export default function QuestionsBrowsePage() {
             <h2 className="px-4 text-xl font-semibold">Filter by</h2>
             {filterSidebar}
           </aside>
-        </Container>
+        </QuestionContainer>
         <SlideOut
           className="lg:hidden"
           enterFrom="end"

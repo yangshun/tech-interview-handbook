@@ -252,7 +252,7 @@ export default function BaseQuestionCard({
         </div>
         <p
           className={clsx(
-            'whitespace-pre-line text-base font-medium leading-6 text-slate-900 md:text-lg',
+            'md:text-md whitespace-pre-line text-base font-medium leading-6 text-slate-900',
             truncateContent && 'line-clamp-2 text-ellipsis',
           )}>
           {content}
@@ -321,7 +321,7 @@ export default function BaseQuestionCard({
       className={clsx(
         'group flex gap-4 border-slate-200',
         showHover && 'hover:border-primary-500 transition',
-        !hideCard && 'rounded-md border bg-white p-4 sm:rounded-lg sm:p-6',
+        !hideCard && 'rounded-md border bg-white px-2 py-4 sm:rounded-lg',
       )}>
       {cardContent}
       {showDeleteButton && (

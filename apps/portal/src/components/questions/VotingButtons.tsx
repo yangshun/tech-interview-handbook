@@ -40,7 +40,10 @@ export default function VotingButtons({
     <div className="flex flex-col items-center">
       <button
         aria-label="Upvote"
-        className="rounded-full p-1 hover:bg-slate-100"
+        className={clsx(
+          'rounded-full p-1 hover:bg-slate-100',
+          vote?.vote === 'UPVOTE' && 'bg-primary-50',
+        )}
         type="button"
         onClick={(event) => {
           event.preventDefault();
@@ -50,7 +53,7 @@ export default function VotingButtons({
         <ChevronUpIcon
           className={clsx(
             size === 'sm' && 'h-5 w-5',
-            size === 'md' && 'h-8 w-8',
+            size === 'md' && 'h-6 w-6',
             vote?.vote === 'UPVOTE'
               ? 'text-primary-500'
               : 'hover:text-primary-500 text-slate-400',
@@ -60,7 +63,10 @@ export default function VotingButtons({
       <p>{upvoteCount}</p>
       <button
         aria-label="Downvote"
-        className="rounded-full p-1 hover:bg-slate-100"
+        className={clsx(
+          'rounded-full p-1 hover:bg-slate-100',
+          vote?.vote === 'DOWNVOTE' && 'bg-danger-50',
+        )}
         type="button"
         onClick={(event) => {
           event.preventDefault();
@@ -70,7 +76,7 @@ export default function VotingButtons({
         <ChevronDownIcon
           className={clsx(
             size === 'sm' && 'h-5 w-5',
-            size === 'md' && 'h-8 w-8',
+            size === 'md' && 'h-6 w-6',
             vote?.vote === 'DOWNVOTE'
               ? 'text-danger-500'
               : 'hover:text-danger-500 text-slate-400',
