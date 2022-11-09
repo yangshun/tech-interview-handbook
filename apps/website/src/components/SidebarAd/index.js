@@ -43,8 +43,9 @@ function TIHResumeReview({ position }) {
         <strong className={styles.title}>
           Get your resume reviewed for free
         </strong>
-        Try out our free new community-powered resume review portal. Upload a
-        resume, receive helpful comments and feedback from community members.
+        Try out our free new <u>community-powered resume review portal</u>.
+        Upload a resume, receive helpful comments and feedback from community
+        members.
       </p>
     </a>
   );
