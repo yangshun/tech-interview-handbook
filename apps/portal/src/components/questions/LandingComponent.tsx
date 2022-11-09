@@ -4,6 +4,8 @@ import type { QuestionsQuestionType } from '@prisma/client';
 import type { TypeaheadOption } from '@tih/ui';
 import { Button, Select } from '@tih/ui';
 
+import Container from '~/components/shared/Container';
+
 import { companyOptionToSlug } from '~/utils/questions/companySlug';
 import { QUESTION_TYPES } from '~/utils/questions/constants';
 import { locationOptionToSlug } from '~/utils/questions/locationSlug';
@@ -65,100 +67,100 @@ export default function LandingComponent({ onLanded }: LandingComponentProps) {
   }, [defaultLocation, location]);
 
   return (
-    <main className="flex flex-1 flex-col items-center overflow-y-auto bg-white">
-      <div className="flex flex-1 flex-col items-start justify-center gap-12 px-4">
-        <header className="flex flex-col items-start gap-16">
-          <div className="flex flex-col items-center">
-            <img
-              alt="Question Bank"
-              className="h-40 w-40"
-              src="/logos/bank-logo.png"
-            />
-            <h1 className="text-primary-700 text-center text-5xl font-bold">
-              Tech Interview Question Bank
-            </h1>
+    <div className="relative pt-6 pb-16 sm:pb-24">
+      <main className="mt-8 sm:mt-16">
+        <Container>
+          <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+            <div className="px-4 sm:px-6 sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:flex lg:items-center lg:text-left">
+              <div>
+                <h1 className="text-primary-600 mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+                  Tech Interview Question Bank
+                </h1>
+                <p className="mt-3 text-base text-slate-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                  Discover the latest tech interview questions asked by top
+                  companies. Learn from answers by others.
+                </p>
+              </div>
+            </div>
+            <div className="mt-16 sm:mt-24 lg:col-span-6 lg:mt-0">
+              <div className="bg-white shadow sm:mx-auto sm:w-full sm:max-w-md sm:overflow-hidden sm:rounded-lg">
+                <div className="px-4 py-8 sm:px-10">
+                  <div>
+                    <Button
+                      display="block"
+                      href="/questions/browse"
+                      label="Explore All Questions"
+                      variant="primary"
+                    />
+                  </div>
+                  <div className="relative mt-6">
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-gray-300" />
+                    </div>
+                    <div className="relative flex justify-center text-sm">
+                      <span className="bg-white px-2 text-gray-500">Or</span>
+                    </div>
+                  </div>
+                  <div className="mt-6">
+                    <p className="text-lg">Find questions</p>
+                    <div className="mt-4 grid grid-cols-[auto_auto] items-baseline gap-x-4 gap-y-2">
+                      <p className="text-slate-600">about</p>
+                      <Select
+                        isLabelHidden={true}
+                        label="Type"
+                        options={QUESTION_TYPES}
+                        value={questionType}
+                        onChange={(value) => {
+                          handleChangeType(
+                            value.toUpperCase() as QuestionsQuestionType,
+                          );
+                        }}
+                      />
+                      <p className="text-slate-600">from</p>
+                      <CompanyTypeahead
+                        isLabelHidden={true}
+                        value={company}
+                        onSelect={(value) => {
+                          handleChangeCompany(value);
+                        }}
+                      />
+                      <p className="text-slate-600">in</p>
+                      <LocationTypeahead
+                        isLabelHidden={true}
+                        value={location}
+                        onSelect={(value) => {
+                          handleChangeLocation(value);
+                        }}
+                      />
+                    </div>
+                    <div className="mt-4 flex items-center">
+                      <Button
+                        addonPosition="end"
+                        display="block"
+                        icon={ArrowSmallRightIcon}
+                        label="Go"
+                        size="md"
+                        variant="secondary"
+                        onClick={() => {
+                          if (company !== undefined && location !== undefined) {
+                            onLanded({
+                              companySlug: companyOptionToSlug(company),
+                              location: locationOptionToSlug(location),
+                              questionType,
+                            });
+                          }
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="mb-2 max-w-lg text-4xl font-semibold text-slate-900 sm:max-w-3xl">
-            Know the{' '}
-            <span className="text-primary-700">
-              latest SWE interview questions
-            </span>{' '}
-            asked by top companies.
-          </p>
-        </header>
-        <div className="flex flex-col items-start gap-3 text-xl font-semibold text-slate-900">
-          <p className="text-3xl">Find questions</p>
-          <div className="grid grid-cols-[auto_auto] items-baseline gap-x-4 gap-y-2">
-            <p className="text-slate-600">about</p>
-            <Select
-              isLabelHidden={true}
-              label="Type"
-              options={QUESTION_TYPES}
-              value={questionType}
-              onChange={(value) => {
-                handleChangeType(value.toUpperCase() as QuestionsQuestionType);
-              }}
-            />
-            <p className="text-slate-600">from</p>
-            <CompanyTypeahead
-              isLabelHidden={true}
-              value={company}
-              onSelect={(value) => {
-                handleChangeCompany(value);
-              }}
-            />
-            <p className="text-slate-600">in</p>
-            <LocationTypeahead
-              isLabelHidden={true}
-              value={location}
-              onSelect={(value) => {
-                handleChangeLocation(value);
-              }}
-            />
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              addonPosition="end"
-              icon={ArrowSmallRightIcon}
-              label="Go"
-              size="md"
-              variant="primary"
-              onClick={() => {
-                if (company !== undefined && location !== undefined) {
-                  onLanded({
-                    companySlug: companyOptionToSlug(company),
-                    location: locationOptionToSlug(location),
-                    questionType,
-                  });
-                }
-              }}
-            />
-            <Button
-              addonPosition="end"
-              icon={ArrowSmallRightIcon}
-              label="View all questions"
-              size="md"
-              variant="secondary"
-              onClick={() => {
-                onLanded(null);
-              }}
-            />
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <iframe
-            height={30}
-            src="https://ghbtns.com/github-btn.html?user=yangshun&amp;repo=tech-interview-handbook&amp;type=star&amp;count=true&amp;size=large"
-            title="GitHub Stars"
-            width={160}
-          />
-        </div>
-        <div>
-          <p className="py-20 text-center text-white ">
-            TODO questions Carousel
-          </p>
-        </div>
-      </div>
-    </main>
+        </Container>
+      </main>
+    </div>
   );
 }

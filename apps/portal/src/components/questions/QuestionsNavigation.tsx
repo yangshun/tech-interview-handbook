@@ -19,7 +19,7 @@ const config = {
   ),
   navigation,
   showGlobalNav: false,
-  title: 'Questions Bank',
+  title: 'Tech Interview Question Bank',
   titleHref: '/questions',
 };
 
