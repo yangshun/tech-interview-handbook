@@ -1,8 +1,12 @@
 const NUM_YEARS = 5;
-export const FutureYearsOptions = Array.from({ length: NUM_YEARS }, (_, i) => {
-  const year = new Date().getFullYear() + i;
-  return {
-    label: String(year),
-    value: year,
-  };
-});
+const OFFSET = 2;
+export const YearsOptions = (yearSelected?: number) =>
+  Array.from({ length: NUM_YEARS }, (_, i) => {
+    const year = yearSelected
+      ? yearSelected - OFFSET + i
+      : new Date().getFullYear() - OFFSET + i;
+    return {
+      label: String(year),
+      value: year,
+    };
+  });
