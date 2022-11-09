@@ -6,6 +6,7 @@ import { FieldError } from '~/components/offers/constants';
 import type { BackgroundPostData } from '~/components/offers/types';
 
 import { CURRENCY_OPTIONS } from '~/utils/offers/currency/CurrencyEnum';
+import { validatePositiveNumber } from '~/utils/offers/form';
 
 import { EducationFieldOptions } from '../../EducationFields';
 import { EducationLevelOptions } from '../../EducationLevels';
@@ -47,7 +48,7 @@ function YoeSection() {
               label="Specific YOE 1"
               type="number"
               {...register(`background.specificYoes.0.yoe`, {
-                min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+                validate: validatePositiveNumber,
                 valueAsNumber: true,
               })}
             />
@@ -63,7 +64,7 @@ function YoeSection() {
               label="Specific YOE 2"
               type="number"
               {...register(`background.specificYoes.1.yoe`, {
-                min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+                validate: validatePositiveNumber,
                 valueAsNumber: true,
               })}
             />
@@ -146,6 +147,7 @@ function FullTimeJobFields({ defaultCurrency }: FullTimeJobFieldsProps) {
             type="number"
             {...register(`background.experiences.0.durationInMonths`, {
               min: { message: FieldError.NON_NEGATIVE_NUMBER, value: 0 },
+              validate: validatePositiveNumber,
               valueAsNumber: true,
             })}
           />

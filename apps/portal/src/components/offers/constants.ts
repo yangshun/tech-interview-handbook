@@ -14,6 +14,7 @@ export const emptyOption = {
 export enum FieldError {
   NON_NEGATIVE_NUMBER = 'Please fill in a non-negative number in this field.',
   NUMBER = 'Please fill in a number in this field.',
+  POSITIVE_NUMBER = 'Please fill in a positive number in this field.',
   REQUIRED = 'Please fill in this field.',
 }
 
