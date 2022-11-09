@@ -12,7 +12,8 @@
     "seed": "ts-node prisma/seed.ts",
     "seed-salaries": "ts-node prisma/seed-salaries.ts",
     "seed-analysis": "ts-node prisma/seed-analysis.ts",
-    "seed-questions": "ts-node prisma/seed-questions.ts"
+    "seed-questions": "ts-node prisma/seed-questions.ts",
+    "map-internship-cycle": "ts-node prisma/map-internship-cycle.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.3",
