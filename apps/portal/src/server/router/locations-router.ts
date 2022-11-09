@@ -10,7 +10,7 @@ export const locationsRouter = createRouter()
     async resolve({ ctx, input }) {
       return await ctx.prisma.city.findMany({
         orderBy: {
-          name: 'asc',
+          ranking: 'desc',
         },
         select: {
           id: true,

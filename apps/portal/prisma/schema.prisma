@@ -99,6 +99,8 @@ model Company {
   description String?  @db.Text
   logoUrl     String?
   website     String?
+  // The higher the value of the ranking, the higher it appears in the search results.
+  ranking     Int?     @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -133,6 +135,8 @@ model City {
   id                          String                       @id
   name                        String
   stateId                     String
+  // The higher the value of the ranking, the higher it appears in the search results.
+  ranking                     Int?                         @default(0)
   state                       State                        @relation(fields: [stateId], references: [id])
   questionsQuestionEncounters QuestionsQuestionEncounter[]
   OffersExperience            OffersExperience[]
