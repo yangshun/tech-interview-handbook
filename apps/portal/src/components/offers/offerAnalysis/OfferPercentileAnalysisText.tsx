@@ -18,14 +18,14 @@ export default function OfferPercentileAnalysisText({
       {isSubmission ? 'Your' : "This profile's"} highest offer is from{' '}
       <b>{companyName}</b>, which is <b>{percentile.toFixed(1)}</b> percentile
       out of <b>{noOfOffers}</b> offers received for the same job title and
-      YOE(±1) in the last year.
+      YOE(±1) in the last year in the same location.
     </p>
   ) : (
     <p>
       {isSubmission ? 'Your' : 'The'} offer from <b>{companyName}</b> is{' '}
       <b>{percentile.toFixed(1)}</b> percentile out of <b>{noOfOffers}</b>{' '}
       offers received in {companyName} for the same job title and YOE(±1) in the
-      last year.
+      last year in the same location.
     </p>
   );
 }
