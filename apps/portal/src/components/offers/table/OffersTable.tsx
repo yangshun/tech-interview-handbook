@@ -184,7 +184,7 @@ export default function OffersTable({
                 )[0].label
               : OfferTableYoeOptions[0].label
           }
-          size="inherit">
+          size="md">
           {OfferTableYoeOptions.map(({ label: itemLabel, value }) => (
             <DropdownMenu.Item
               key={value}

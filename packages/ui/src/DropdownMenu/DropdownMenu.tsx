@@ -6,7 +6,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import DropdownMenuItem from './DropdownMenuItem';
 
 export type DropdownMenuAlignment = 'end' | 'start';
-export type DropdownMenuSize = 'default' | 'inherit';
+export type DropdownMenuSize = 'lg' | 'md' | 'sm';
 
 type Props = Readonly<{
   align?: DropdownMenuAlignment;
@@ -22,24 +22,53 @@ const alignmentClasses: Record<DropdownMenuAlignment, string> = {
   start: 'origin-top-left left-0',
 };
 
+const sizeClasses: Record<DropdownMenuSize, string> = {
+  lg: 'px-5 py-2.5',
+  md: 'px-4 py-2',
+  sm: 'px-2.5 py-1.5',
+};
+
+const baseClasses: Record<DropdownMenuSize, string> = {
+  lg: 'text-base rounded-xl',
+  md: 'text-sm rounded-lg',
+  sm: 'text-xs rounded-md',
+};
+
+const sizeIconSpacingEndClasses: Record<DropdownMenuSize, string> = {
+  lg: 'ml-3 -mr-1',
+  md: 'ml-2 -mr-1',
+  sm: 'ml-2 -mr-0.5',
+};
+
+const sizeIconClasses: Record<DropdownMenuSize, string> = {
+  lg: '!h-5 !w-5',
+  md: '!h-5 !w-5',
+  sm: '!h-4 !w-4',
+};
+
 export default function DropdownMenu({
   align = 'start',
   children,
   label,
-  size = 'default',
+  size = 'md',
 }: Props) {
   return (
     <Menu as="div" className="relative inline-block">
       <div className="flex">
         <Menu.Button
           className={clsx(
-            'group inline-flex items-center justify-center font-medium text-slate-700 hover:text-slate-900',
-            size === 'default' && 'text-sm',
+            'group inline-flex items-center justify-center whitespace-nowrap border border-slate-300 bg-white font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600 focus:ring-offset-2',
+            baseClasses[size],
+            sizeClasses[size],
           )}>
           <div>{label}</div>
           <ChevronDownIcon
             aria-hidden="true"
-            className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-slate-400 group-hover:text-slate-500"
+            className={clsx(
+              'flex-shrink-0 text-slate-400 group-hover:text-slate-500',
+              sizeIconSpacingEndClasses[size],
+              sizeIconClasses[size],
+            )}
           />
         </Menu.Button>
       </div>
