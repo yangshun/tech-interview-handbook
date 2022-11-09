@@ -23,7 +23,7 @@ const people = [
   },
   {
     bio: 'Excited to jump into anything.',
-    imageUrl: '/team/zhiying.png',
+    imageUrl: '/team/zhiying.jpg',
     name: 'Tang Zhiying',
     role: 'Designer',
   },

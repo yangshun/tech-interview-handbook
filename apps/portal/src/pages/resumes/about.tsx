@@ -3,7 +3,7 @@ import Container from '~/components/shared/Container';
 const people = [
   {
     bio: 'Keane loves to try out new technologies and build awesome stuff with awesome people. He spends most of his free time travelling to eat good food (that he can afford) and going to the gym.',
-    imageUrl: '/team/keane.png',
+    imageUrl: '/team/keane.jpg',
     name: 'Keane Chan',
     role: 'Full Stack Engineer',
   },
@@ -21,7 +21,7 @@ const people = [
   },
   {
     bio: 'Peirong likes to work in teams because he needs the peer pressure from others to deliver excellent work. In his free time, he enjoys running and watching vlogs of people having fun in adventurous locations which he does not have money for.',
-    imageUrl: '/team/peirong.png',
+    imageUrl: '/team/peirong.jpg',
     name: 'Wu Peirong',
     role: 'Full Stack Engineer',
   },
