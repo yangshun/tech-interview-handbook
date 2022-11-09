@@ -81,6 +81,24 @@ export default function QuestionPage() {
             sortType: SortType.NEW,
           },
         ]);
+
+        const previousData = utils.getQueryData([
+          'questions.answers.getAnswerById',
+          { answerId: answerId as string },
+        ]);
+
+        if (previousData === undefined) {
+          return;
+        }
+
+        utils.setQueryData(
+          ['questions.answers.getAnswerById', { answerId: answerId as string }],
+          {
+            ...previousData,
+            numComments: previousData.numComments + 1,
+          },
+        );
+
         event({
           action: 'questions.comment',
           category: 'engagement',

@@ -110,6 +110,24 @@ export default function QuestionPage() {
         utils.invalidateQueries(
           'questions.questions.comments.getQuestionComments',
         );
+
+        const previousData = utils.getQueryData([
+          'questions.questions.getQuestionById',
+          { id: questionId as string },
+        ]);
+
+        if (previousData === undefined) {
+          return;
+        }
+
+        utils.setQueryData(
+          ['questions.questions.getQuestionById', { id: questionId as string }],
+          {
+            ...previousData,
+            numComments: previousData.numComments + 1,
+          },
+        );
+
         event({
           action: 'questions.comment',
           category: 'engagement',
@@ -142,6 +160,23 @@ export default function QuestionPage() {
     {
       onSuccess: () => {
         utils.invalidateQueries('questions.answers.getAnswers');
+
+        const previousData = utils.getQueryData([
+          'questions.questions.getQuestionById',
+          { id: questionId as string },
+        ]);
+
+        if (previousData === undefined) {
+          return;
+        }
+
+        utils.setQueryData(
+          ['questions.questions.getQuestionById', { id: questionId as string }],
+          {
+            ...previousData,
+            numAnswers: previousData.numAnswers + 1,
+          },
+        );
         event({
           action: 'questions.answer',
           category: 'engagement',
@@ -228,7 +263,10 @@ export default function QuestionPage() {
               <Collapsible
                 defaultOpen={true}
                 label={
-                  <div className="text-primary-700">{`${question.numComments} comment(s)`}</div>
+                  <div className="text-primary-700">
+                    {question.numComments}{' '}
+                    {question.numComments === 1 ? 'comment' : 'comments'}
+                  </div>
                 }>
                 <div className="flex flex-col gap-4 text-black">
                   <div className="flex justify-end gap-2">
@@ -310,7 +348,8 @@ export default function QuestionPage() {
           </form>
           <div className="flex items-center justify-between gap-4">
             <p className="text-xl font-semibold">
-              {question.numAnswers} answers
+              {question.numAnswers}{' '}
+              {question.numAnswers === 1 ? 'answer' : 'answers'}
             </p>
             <div className="flex items-end gap-4">
               <SortOptionsSelect
