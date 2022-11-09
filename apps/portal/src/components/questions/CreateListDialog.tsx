@@ -31,37 +31,15 @@ export default function CreateListDialog({
     reset();
   };
 
+  const handleFormSubmit = handleSubmit(async (data) => {
+    await onSubmit(data);
+    reset();
+  });
+
   return (
     <Dialog
       isShown={show}
-      primaryButton={undefined}
-      title="Create question list"
-      onClose={handleDialogCancel}>
-      <form
-        className="mt-5 gap-2 sm:flex sm:items-center"
-        onSubmit={handleSubmit(async (data) => {
-          await onSubmit(data);
-          reset();
-        })}>
-        <div className="w-full sm:max-w-xs">
-          <TextInput
-            id="listName"
-            isLabelHidden={true}
-            {...register('name')}
-            autoComplete="off"
-            label="Name"
-            placeholder="List name"
-            required={true}
-            type="text"
-          />
-        </div>
-        <Button
-          display="inline"
-          label="Cancel"
-          size="md"
-          variant="tertiary"
-          onClick={handleDialogCancel}
-        />
+      primaryButton={
         <Button
           disabled={!isDirty}
           display="inline"
@@ -70,6 +48,30 @@ export default function CreateListDialog({
           size="md"
           type="submit"
           variant="primary"
+          onClick={handleFormSubmit}
+        />
+      }
+      secondaryButton={
+        <Button
+          display="inline"
+          label="Cancel"
+          size="md"
+          variant="tertiary"
+          onClick={handleDialogCancel}
+        />
+      }
+      title="Create question list"
+      onClose={handleDialogCancel}>
+      <form className="w-full" onSubmit={handleFormSubmit}>
+        <TextInput
+          id="listName"
+          isLabelHidden={true}
+          {...register('name')}
+          autoComplete="off"
+          label="Name"
+          placeholder="List name"
+          required={true}
+          type="text"
         />
       </form>
     </Dialog>
