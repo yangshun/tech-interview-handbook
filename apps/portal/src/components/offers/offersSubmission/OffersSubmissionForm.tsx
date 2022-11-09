@@ -73,7 +73,7 @@ export const defaultInternshipOfferValues = {
     monthlySalary: {
       currency: DEFAULT_CURRENCY,
     },
-    startYear: null,
+    startYear: getCurrentYear(),
   },
 };
 

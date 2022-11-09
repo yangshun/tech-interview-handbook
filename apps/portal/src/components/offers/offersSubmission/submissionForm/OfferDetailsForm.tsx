@@ -29,7 +29,7 @@ import FormTextInput from '../../forms/FormTextInput';
 import { InternshipCycleOptions } from '../../InternshipCycles';
 import JobTypeTabs from '../../JobTypeTabs';
 import type { OfferFormData } from '../../types';
-import { FutureYearsOptions } from '../../Years';
+import { YearsOptions } from '../../Years';
 import { CURRENCY_OPTIONS } from '../../../../utils/offers/currency/CurrencyEnum';
 
 type FullTimeOfferDetailsFormProps = Readonly<{
@@ -287,6 +287,9 @@ function InternshipOfferDetailsForm({
   const { register, formState, control } = useFormContext<{
     offers: Array<OfferFormData>;
   }>();
+  const watchStartYear = useWatch({
+    name: `offers.${index}.offersIntern.startYear`,
+  });
   const offerFields = formState.errors.offers?.[index];
 
   return (
@@ -351,7 +354,7 @@ function InternshipOfferDetailsForm({
             display="block"
             errorMessage={offerFields?.offersIntern?.startYear?.message}
             label="Internship Year"
-            options={FutureYearsOptions}
+            options={YearsOptions(watchStartYear)}
             required={true}
             {...register(`offers.${index}.offersIntern.startYear`, {
               required: FieldError.REQUIRED,
