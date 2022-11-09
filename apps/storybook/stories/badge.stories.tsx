@@ -48,7 +48,31 @@ export function Variants() {
   );
 }
 
-export function Icon() {
+export function StartIcon() {
+  return (
+    <div className="space-x-4">
+      <Badge label="Primary" startAddOn={StarIcon} variant="primary" />
+      <Badge label="Success" startAddOn={CheckCircleIcon} variant="success" />
+      <Badge
+        label="Information"
+        startAddOn={InformationCircleIcon}
+        variant="info"
+      />
+      <Badge
+        label="Warning"
+        startAddOn={ExclamationTriangleIcon}
+        variant="warning"
+      />
+      <Badge
+        label="Danger"
+        startAddOn={ExclamationCircleIcon}
+        variant="danger"
+      />
+    </div>
+  );
+}
+
+export function EndIcon() {
   return (
     <div className="space-x-4">
       <Badge endAddOn={StarIcon} label="Primary" variant="primary" />
