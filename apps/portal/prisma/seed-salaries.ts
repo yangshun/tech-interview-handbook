@@ -177,7 +177,7 @@ const seedSalaries = async () => {
                       negotiationStrategy: '',
                       offersIntern: {
                         create: {
-                          internshipCycle: 'Summer',
+                          internshipCycle: 'summer',
                           monthlySalary: {
                             create: {
                               baseCurrency: baseCurrencyString,
