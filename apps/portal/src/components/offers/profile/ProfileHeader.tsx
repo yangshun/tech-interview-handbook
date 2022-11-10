@@ -243,7 +243,7 @@ export default function ProfileHeader({
             <h2 className="flex text-2xl font-bold">
               {profileName ?? 'anonymous'}
             </h2>
-            {(experiences[0]?.companyName ||
+            {(experiences[0]?.company?.name ||
               experiences[0]?.jobLevel ||
               experiences[0]?.jobTitle) && (
               <div className="flex items-center text-sm text-slate-600">
@@ -252,7 +252,7 @@ export default function ProfileHeader({
                 </span>
                 <p>
                   <span className="mr-2 font-bold">Current:</span>
-                  {`${experiences[0].companyName || ''} ${
+                  {`${experiences[0].company?.name || ''} ${
                     experiences[0].jobLevel || ''
                   } ${experiences[0].jobTitle || ''} ${
                     experiences[0].jobType

@@ -74,7 +74,7 @@ export default function OfferProfile() {
                     res.offersFullTime.bonus != null
                       ? convertMoneyToString(res.offersFullTime.bonus)
                       : undefined,
-                  companyName: res.company.name,
+                  company: res.company,
                   id: res.offersFullTime.id,
                   jobLevel: res.offersFullTime.level,
                   jobTitle: getLabelForJobTitleType(
@@ -96,7 +96,7 @@ export default function OfferProfile() {
                 return filteredOffer;
               }
               const filteredOffer: OfferDisplayData = {
-                companyName: res.company.name,
+                company: res.company,
                 id: res.offersIntern!.id,
                 internshipCycle: res.offersIntern!.internshipCycle,
                 jobTitle: getLabelForJobTitleType(
@@ -130,7 +130,7 @@ export default function OfferProfile() {
             })),
             experiences: data.background.experiences.map(
               (experience): OfferDisplayData => ({
-                companyName: experience.company?.name,
+                company: experience.company,
                 duration: experience.durationInMonths,
                 jobLevel: experience.level,
                 jobTitle: experience.title
@@ -197,10 +197,10 @@ export default function OfferProfile() {
       <Error statusCode={404} title="Requested profile does not exist." />
     </div>
   ) : getProfileQuery.isLoading ? (
-    <div className="flex h-screen w-screen">
-      <div className="m-auto mx-auto w-screen justify-center font-medium text-slate-500">
+    <div className="flex h-screen w-full items-center justify-center text-slate-500">
+      <div className="flex flex-col gap-2">
         <Spinner display="block" size="lg" />
-        <div className="text-center">Loading profile...</div>
+        <p className="text-center">Loading profile...</p>
       </div>
     </div>
   ) : (

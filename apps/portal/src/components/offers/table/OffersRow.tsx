@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { JobType } from '@prisma/client';
 
+import CompanyProfileImage from '~/components/shared/CompanyProfileImage';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
@@ -34,10 +35,19 @@ export default function OfferTableRow({
 }: OfferTableRowProps) {
   return (
     <tr key={id} className="divide-x divide-slate-200 border-b bg-white">
-      <td className="space-y-0.5 py-2 px-4" scope="row">
-        <div className="font-medium">{company.name}</div>
-        <div className="text-xs text-slate-500">
-          {location.cityName} ({location.countryCode})
+      <td className="flex items-center gap-3 space-y-0.5 py-2 px-4" scope="row">
+        <CompanyProfileImage
+          alt={company.name}
+          className="hidden h-6 w-6 object-contain sm:block"
+          src={company.logoUrl}
+        />
+        <div>
+          <div className="line-clamp-2 sm:line-clamp-1 font-medium">
+            {company.name}
+          </div>
+          <div className="text-xs text-slate-500">
+            {location.cityName} ({location.countryCode})
+          </div>
         </div>
       </td>
       <td className="py-2 px-4">

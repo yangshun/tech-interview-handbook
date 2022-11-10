@@ -186,6 +186,15 @@ export default function OffersHomePage({
             selectedSortType={selectedSortType}
             onSort={onSort}
           />
+          <div className="mt-1 text-end">
+            <a
+              className="text-xs text-slate-500"
+              href="https://clearbit.com"
+              rel="noreferrer"
+              target="_blank">
+              Logos provided by Clearbit
+            </a>
+          </div>
         </Container>
       </main>
     </>

@@ -141,6 +141,15 @@ export default function OffersSubmissionResult() {
                 </div>
               )}
             </div>
+            <div className="px-6 py-2 text-end sm:px-10">
+              <a
+                className="text-xs text-slate-500"
+                href="https://clearbit.com"
+                rel="noreferrer"
+                target="_blank">
+                Logos provided by Clearbit
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -85,13 +85,13 @@ export default function ProfilesDashboard() {
         {!userProfilesQuery.isLoading && (
           <div className="overflow-y-auto py-8">
             <h1 className="mx-auto mb-4 text-start text-4xl font-bold text-slate-900">
-              My dashboard
+              Dashboard
             </h1>
             <p className="mt-4 text-xl leading-8 text-slate-500">
-              Save your offer profiles to your dashboard to easily access and
-              edit them later.
+              Save offer profiles to your dashboard to easily access and edit
+              them later.
             </p>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8">
               <ul className="w-full space-y-4" role="list">
                 {userProfiles?.map((profile) => (
                   <li key={profile.id}>
@@ -99,6 +99,15 @@ export default function ProfilesDashboard() {
                   </li>
                 ))}
               </ul>
+              <div className="mt-2 text-end">
+                <a
+                  className="text-xs text-slate-500"
+                  href="https://clearbit.com"
+                  rel="noreferrer"
+                  target="_blank">
+                  Logos provided by Clearbit
+                </a>
+              </div>
             </div>
           </div>
         )}

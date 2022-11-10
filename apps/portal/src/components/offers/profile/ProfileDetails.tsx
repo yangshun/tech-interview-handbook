@@ -34,10 +34,21 @@ function ProfileOffers({ offers }: ProfileOffersProps) {
   }
 
   return (
-    <div className="space-y-4 p-4">
-      {offers.map((offer) => (
-        <OfferCard key={offer.id} offer={offer} />
-      ))}
+    <div className="p-4">
+      <div className="space-y-4">
+        {offers.map((offer) => (
+          <OfferCard key={offer.id} offer={offer} />
+        ))}
+      </div>
+      <div className="mt-1 text-end">
+        <a
+          className="text-xs text-slate-500"
+          href="https://clearbit.com"
+          rel="noreferrer"
+          target="_blank">
+          Logos provided by Clearbit
+        </a>
+      </div>
     </div>
   );
 }
@@ -140,6 +151,15 @@ function ProfileAnalysis({
           />
         </div>
       )}
+      <div className="text-end">
+        <a
+          className="text-xs text-slate-500"
+          href="https://clearbit.com"
+          rel="noreferrer"
+          target="_blank">
+          Logos provided by Clearbit
+        </a>
+      </div>
     </div>
   );
 }
@@ -188,5 +208,6 @@ export default function ProfileDetails({
       />
     );
   }
+
   return null;
 }

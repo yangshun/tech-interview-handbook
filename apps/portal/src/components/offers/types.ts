@@ -2,6 +2,8 @@ import type { JobType } from '@prisma/client';
 
 import type { MonthYear } from '~/components/shared/MonthYearPicker';
 
+import type { OffersCompany } from '../../types/offers';
+
 import type { Location } from '~/types/offers';
 
 /**
@@ -177,7 +179,7 @@ export type EducationDisplayData = {
 export type OfferDisplayData = {
   base?: string | null;
   bonus?: string | null;
-  companyName?: string | null;
+  company?: OffersCompany | null;
   duration?: number | null;
   id?: string;
   internshipCycle?: string;

@@ -6,6 +6,7 @@ import {
 import { JobType } from '@prisma/client';
 
 import { JobTypeLabel } from '~/components/offers/constants';
+import CompanyProfileImage from '~/components/shared/CompanyProfileImage';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
@@ -31,8 +32,13 @@ export default function DashboardProfileCard({
 }: Props) {
   return (
     <div className="px-4 py-4 sm:px-6">
-      <div className="flex items-end justify-between">
-        <div className="col-span-1 row-span-3">
+      <div className="flex justify-between gap-4">
+        <CompanyProfileImage
+          alt={company.name}
+          className="hidden h-10 w-10 object-contain sm:block"
+          src={company.logoUrl}
+        />
+        <div className="grow">
           <h4 className="font-medium">
             {getLabelForJobTitleType(title as JobTitleType)}{' '}
             {jobType && <>({JobTypeLabel[jobType]})</>}

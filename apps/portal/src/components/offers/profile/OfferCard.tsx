@@ -9,6 +9,7 @@ import { JobType } from '@prisma/client';
 import { JobTypeLabel } from '~/components/offers/constants';
 import { InternshipCycleValuesToLabels } from '~/components/offers/InternshipCycles';
 import type { OfferDisplayData } from '~/components/offers/types';
+import CompanyProfileImage from '~/components/shared/CompanyProfileImage';
 
 import { getLocationDisplayText } from '~/utils/offers/string';
 import { getDurationDisplayText } from '~/utils/offers/time';
@@ -21,7 +22,7 @@ export default function OfferCard({
   offer: {
     base,
     bonus,
-    companyName,
+    company,
     duration,
     internshipCycle,
     jobTitle,
@@ -40,19 +41,26 @@ export default function OfferCard({
   function UpperSection() {
     return (
       <div className="px-4 py-5 sm:px-6">
-        <div className="flex justify-between">
-          <div>
+        <div className="flex justify-between gap-4">
+          {company && (
+            <CompanyProfileImage
+              alt={company.name}
+              className="h-10 w-10 object-contain"
+              src={company.logoUrl}
+            />
+          )}
+          <div className="grow">
             <h3 className="text-lg font-medium leading-6 text-slate-900">
               {jobTitle} {jobType && <>({JobTypeLabel[jobType]})</>}
             </h3>
             <div className="mt-1 flex flex-row flex-wrap sm:mt-0">
-              {companyName && (
+              {company?.name != null && (
                 <div className="mr-4 mt-2 flex items-center text-sm text-slate-500">
                   <BuildingOfficeIcon
                     aria-hidden="true"
                     className="mr-1.5 h-5 w-5 flex-shrink-0 text-slate-400"
                   />
-                  {companyName}
+                  {company?.name}
                 </div>
               )}
               {location && (
