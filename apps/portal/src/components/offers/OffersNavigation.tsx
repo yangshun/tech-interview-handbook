@@ -13,6 +13,14 @@ const navigationAuthenticated: ProductNavigationItems = [
   { href: '/offers/about', name: 'About' },
 ];
 
+const navigationAdmin: ProductNavigationItems = [
+  { href: '/offers/submit', name: 'Analyze your offers' },
+  { href: '/offers/dashboard', name: 'My dashboard' },
+  { href: '/offers/features', name: 'Features' },
+  { href: '/offers/about', name: 'About' },
+  { href: '/offers/admin', name: 'Admin' },
+];
+
 const config = {
   googleAnalyticsMeasurementID: 'G-34XRGLEVCF',
   logo: (
@@ -26,6 +34,11 @@ const config = {
   showGlobalNav: false,
   title: 'Tech Offers Repo',
   titleHref: '/offers',
+};
+
+export const OffersNavigationAdmin = {
+  ...config,
+  navigation: navigationAdmin,
 };
 
 export const OffersNavigationAuthenticated = {

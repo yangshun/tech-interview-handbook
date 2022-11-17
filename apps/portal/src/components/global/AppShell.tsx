@@ -11,10 +11,13 @@ import { Button } from '@tih/ui';
 import GlobalNavigation from '~/components/global/GlobalNavigation';
 import HomeNavigation from '~/components/global/HomeNavigation';
 import OffersNavigation, {
+  OffersNavigationAdmin,
   OffersNavigationAuthenticated,
 } from '~/components/offers/OffersNavigation';
 import QuestionsNavigation from '~/components/questions/QuestionsNavigation';
 import ResumesNavigation from '~/components/resumes/ResumesNavigation';
+
+import { trpc } from '~/utils/trpc';
 
 import GoogleAnalytics from './GoogleAnalytics';
 import MobileNavigation from './MobileNavigation';
@@ -131,7 +134,12 @@ export default function AppShell({ children }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
-
+  const { isLoading: isOffersAdminResultsLoading, data: isOffersAdmin } =
+    trpc.useQuery(['offers.admin.isAdmin'], {
+      onError: () => {
+        router.push('/offers');
+      },
+    });
   const currentProductNavigation: Readonly<{
     googleAnalyticsMeasurementID: string;
     logo?: React.ReactNode;
@@ -149,7 +157,9 @@ export default function AppShell({ children }: Props) {
       if (session == null) {
         return OffersNavigation;
       }
-      return OffersNavigationAuthenticated;
+      return !isOffersAdminResultsLoading && isOffersAdmin
+        ? OffersNavigationAdmin
+        : OffersNavigationAuthenticated;
     }
 
     if (path.startsWith('/questions')) {

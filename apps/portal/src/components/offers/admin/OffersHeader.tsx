@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 
-import type { OfferTableSortType } from '~/components/offers/admin_temp/types';
+import type { OfferTableSortType } from '~/components/offers/admin/types';
 import {
   getOppositeSortOrder,
   OFFER_TABLE_SORT_ORDER,
-} from '~/components/offers/admin_temp/types';
+} from '~/components/offers/admin/types';
 
 export type OffersTableHeaderProps = Readonly<{
   header: string;
