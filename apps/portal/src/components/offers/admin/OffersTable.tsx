@@ -4,20 +4,20 @@ import { JobType } from '@prisma/client';
 import { DropdownMenu, Spinner, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
-import OffersRow from '~/components/offers/admin_temp//OffersRow';
-import OffersHeader from '~/components/offers/admin_temp/OffersHeader';
-import OffersTablePagination from '~/components/offers/admin_temp/OffersTablePagination';
+import OffersHeader from '~/components/offers/admin/OffersHeader';
+import OffersRow from '~/components/offers/admin/OffersRow';
+import OffersTablePagination from '~/components/offers/admin/OffersTablePagination';
 import type {
   OfferTableColumn,
   OfferTableSortType,
-} from '~/components/offers/admin_temp/types';
+} from '~/components/offers/admin/types';
 import {
   FullTimeOfferTableColumns,
   InternOfferTableColumns,
   OFFER_TABLE_SORT_ORDER,
   OfferTableYoeOptions,
   YOE_CATEGORY_PARAM,
-} from '~/components/offers/admin_temp/types';
+} from '~/components/offers/admin/types';
 
 import { getCurrencyForCountry } from '~/utils/offers/currency/CurrencyEnum';
 import CurrencySelector from '~/utils/offers/currency/CurrencySelector';
@@ -294,12 +294,11 @@ export default function OffersTable({
             <Spinner display="block" size="lg" />
           </div>
         )}
-        {(!isLoading && !offers) ||
-          (offers.length === 0 && (
-            <div className="py-16 text-lg">
-              <div className="flex justify-center">No data yet 🥺</div>
-            </div>
-          ))}
+        {!isLoading && (!offers || offers.length === 0) && (
+          <div className="py-16 text-lg">
+            <div className="flex justify-center">No data yet 🥺</div>
+          </div>
+        )}
       </div>
       <OffersTablePagination
         endNumber={
