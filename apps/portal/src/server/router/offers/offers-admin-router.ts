@@ -10,7 +10,7 @@ import { Currency } from '~/utils/offers/currency/CurrencyEnum';
 import { convertWithDate } from '~/utils/offers/currency/currencyExchange';
 import { createValidationRegex } from '~/utils/offers/zodRegex';
 
-import { createRouter } from '../context';
+import { createProtectedRouter } from '../context';
 
 const getOrder = (prefix: string) => {
   return prefix === '+' ? 'asc' : 'desc';
@@ -43,7 +43,7 @@ const getYoeRange = (yoeCategory: number | null | undefined) => {
     : null; // Internship
 };
 
-export const offerAdminRouter = createRouter().query('list', {
+export const offerAdminRouter = createProtectedRouter().query('list', {
   input: z.object({
     companyId: z.string().nullish(),
     countryId: z.string().nullish(),
@@ -463,4 +463,15 @@ export const offerAdminRouter = createRouter().query('list', {
       !yoeRange ? JobType.INTERN : JobType.FULLTIME,
     );
   },
+}).query('isAdmin', {
+  async resolve({ ctx }) {
+    const userId = ctx.session.user.id;
+    const result = await ctx.prisma.offersAdmin.findFirst({
+      where: {
+        userId
+      }
+    })
+
+    return result ? true : false
+  }
 });
