@@ -40,22 +40,6 @@ export default function OffersHomePage({
   const [selectedJobTitleId, setSelectedJobTitleId] =
     useSearchParamSingle<JobTitleType | null>('jobTitleId');
 
-  // Const { data: session, status } = useSession();
-
-  // const authoizedPeople = [
-  //   '8b4550989cb7fe9ea7649b5538178b8d19aba0f3e5944dbff0b8d0e2ffe3911f',
-  //   '0544d5d2be7815b5347dd2233c4d08a52120e52ac529f21b1a5c2005db3c42ab',
-  //   '9934698c65bc72876018350a02910acdb27b7974dc757a320057588b67c5422b',
-  //   '5cd57c9d1cc00d1010c3548ea3941941c04d18f7cf50766cdec30b12630e69ac',
-  // ];
-
-  // const isAuthorized = authoizedPeople.includes(
-  //   crypto
-  //     .createHash('sha256')
-  //     .update(session?.user?.email ?? '')
-  //     .digest('hex'),
-  // );
-
   const { isLoading, data: isAuthorized } = trpc.useQuery(
     ['offers.admin.isAdmin'],
     {
