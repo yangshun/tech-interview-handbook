@@ -53,6 +53,7 @@ export default function OffersHomePage({
     router.push('/offers');
   }
   return (
+    !isLoading &&
     isAuthorized && (
       <>
         <Head>
