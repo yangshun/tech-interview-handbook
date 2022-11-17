@@ -157,9 +157,10 @@ export default function AppShell({ children }: Props) {
       if (session == null) {
         return OffersNavigation;
       }
-      return !isOffersAdminResultsLoading && isOffersAdmin
-        ? OffersNavigationAdmin
-        : OffersNavigationAuthenticated;
+      if (!isOffersAdminResultsLoading && isOffersAdmin) {
+        return OffersNavigationAdmin;
+      }
+      return OffersNavigationAuthenticated;
     }
 
     if (path.startsWith('/questions')) {
