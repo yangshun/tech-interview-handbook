@@ -64,6 +64,20 @@ export const offerAdminRouter = createProtectedRouter().query('list', {
     yoeMin: z.number().min(0).nullish(),
   }),
   async resolve({ ctx, input }) {
+    const userId = ctx.session.user.id;
+    const adminAccount = await ctx.prisma.offersAdmin.findFirst({
+      where: {
+        userId
+      }
+    })
+
+    if (!adminAccount) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'Not an admin.',
+      });
+    }
+
     const yoeRange = getYoeRange(input.yoeCategory);
     const yoeMin = input.yoeMin != null ? input.yoeMin : yoeRange?.minYoe;
     const yoeMax = input.yoeMax != null ? input.yoeMax : yoeRange?.maxYoe;
