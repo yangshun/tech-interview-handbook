@@ -135,11 +135,7 @@ export default function AppShell({ children }: Props) {
   const router = useRouter();
   const { data: session } = useSession();
   const { isLoading: isOffersAdminResultsLoading, data: isOffersAdmin } =
-    trpc.useQuery(['offers.admin.isAdmin'], {
-      onError: () => {
-        router.push('/offers');
-      },
-    });
+    trpc.useQuery(['offers.admin.isAdmin']);
   const currentProductNavigation: Readonly<{
     googleAnalyticsMeasurementID: string;
     logo?: React.ReactNode;
