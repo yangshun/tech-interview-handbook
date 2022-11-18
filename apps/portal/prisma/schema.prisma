@@ -154,7 +154,6 @@ model ResumesResume {
   id             String           @id @default(cuid())
   userId         String
   title          String           @db.Text
-  // TODO: Update role, experience, location to use Enums
   role           String           @db.Text
   experience     String           @db.Text
   locationId     String

@@ -17,8 +17,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  if (req.method === 'POST') {
-    try {
+  try {
+    if (req.method === 'POST') {
       const form = formidable({ keepExtensions: true });
       form.parse(req, async (err, fields, files) => {
         if (err) {
@@ -45,8 +45,26 @@ export default async function handler(
           url: `${BASE_FILE_URL}/${key}/${filePath}`,
         });
       });
-    } catch (error: unknown) {
-      return Promise.reject(error);
+    } else if (req.method === 'DELETE') {
+      const { key, fileUrl } = req.query;
+      const storageKey = key as string;
+      const url = fileUrl as string;
+
+      const filePath = url.substring(url.lastIndexOf('/') + 1);
+
+      const { error } = await supabase.storage
+        .from(storageKey)
+        .remove([filePath]);
+
+      if (error) {
+        throw error;
+      }
+
+      return res.status(200).json({
+        message: `File ${filePath} has been deleted`,
+      });
     }
+  } catch (error: unknown) {
+    return Promise.reject(error);
   }
 }
