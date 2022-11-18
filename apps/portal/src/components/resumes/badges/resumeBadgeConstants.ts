@@ -20,7 +20,6 @@ export type BadgeInfo = {
   title: string;
 };
 
-// TODO: Add other badges in
 export type BadgePayload = {
   maxResumeUpvoteCount: number;
   reviewedResumesCount: number;

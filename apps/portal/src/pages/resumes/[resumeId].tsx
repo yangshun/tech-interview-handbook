@@ -1,3 +1,4 @@
+import axios from 'axios';
 import clsx from 'clsx';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Error from 'next/error';
@@ -25,6 +26,7 @@ import ResumePdf from '~/components/resumes/ResumePdf';
 import ResumeExpandableText from '~/components/resumes/shared/ResumeExpandableText';
 import loginPageHref from '~/components/shared/loginPageHref';
 
+import { RESUME_STORAGE_KEY } from '~/constants/file-storage-keys';
 import {
   BROWSE_TABS_VALUES,
   getFilterLabel,
@@ -183,10 +185,15 @@ export default function ResumeReviewPage() {
     return deleteResumeMutation.mutate(
       { id: resumeId as string },
       {
-        onSuccess() {
-          // TODO: Delete from file storage
+        async onSuccess() {
+          // Delete from file storage
+          if (detailsQuery.data != null) {
+            await axios.delete(
+              `/api/file-storage?key=${RESUME_STORAGE_KEY}&fileUrl=${detailsQuery.data.url}`,
+            );
+          }
 
-          // redirect to browse with default settings
+          // Redirect to browse with default settings
           router.push({
             pathname: '/resumes',
             query: {
