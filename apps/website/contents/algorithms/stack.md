@@ -74,7 +74,7 @@ _These are essential questions to practice if you're studying for this topic._
 
 _These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
 
-- [Implement Stack using Queues](https://leetcode.com/problems/implement-queue-using-stacks)
+- [Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/)
 - [Min Stack](https://leetcode.com/problems/min-stack)
 - [Asteroid Collision](https://leetcode.com/problems/asteroid-collision)
 - [Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation)
