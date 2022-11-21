@@ -333,7 +333,7 @@ If you are willing to spend some money we recommend [FAANG Tech Leads' Resume Re
 
 ### 2. Test readability with industry-standard ATS
 
-Test the readability and formatting of your resume using . Most big companies use such resume scanners.
+Test the readability and formatting of your resume using industry-standard ATS like [Resume Worded](https://resumeworded.com/resume-scanner) . Most big companies use such resume scanners.
 
 ### 3. The plain text file test
 
