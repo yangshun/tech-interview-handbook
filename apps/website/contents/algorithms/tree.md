@@ -33,6 +33,9 @@ Trees are commonly used to represent hierarchical data, e.g. file systems, JSON,
 
 - Videos
   - [Trees](https://www.coursera.org/lecture/data-structures/trees-95qda), University of California San Diego
+  - [A Brief Guide to Binary Search Trees](https://www.youtube.com/watch?v=0woI8l0ZWmA) ([slides](https://samuelalbanie.com/files/digest-slides/2022-10-brief-guide-to-binary-search-trees.pdf)), Samuel Albanie, University of Cambridge
+  - [A Brief Guide to Red-Black Trees](https://www.youtube.com/watch?v=t-oiZnplv7g) ([slides](https://samuelalbanie.com/files/digest-slides/2022-12-brief-guide-to-red-black-trees.pdf)), Samuel Albanie, University of Cambridge
+  - [A Brief Guide to B-trees](https://www.youtube.com/watch?app=desktop&v=7MqaHGWRS3E) ([slides](https://samuelalbanie.com/files/digest-slides/2022-12-brief-guide-to-b-trees.pdf)), Samuel Albanie, University of Cambridge
 - Readings
   - [How To Not Be Stumped By Trees](https://medium.com/basecs/how-to-not-be-stumped-by-trees-5f36208f68a7), basecs
   - [Leaf It Up To Binary Trees](https://medium.com/basecs/leaf-it-up-to-binary-trees-11001aaf746d), basecs

@@ -37,6 +37,7 @@ In the case of hash collisions, there are a number of collision resolution techn
   - [Hashing Out Hash Functions](https://medium.com/basecs/hashing-out-hash-functions-ea5dd8beb4dd), basecs
 - Videos
   - [Core: Hash Tables](https://www.coursera.org/lecture/data-structures-optimizing-performance/core-hash-tables-m7UuP), University of California San Diego
+  - [A Brief Guide to Hash Tables](https://www.youtube.com/watch?v=r1XZGP5ppqQ) ([slides](https://samuelalbanie.com/files/digest-slides/2022-09-brief-guide-to-hash-tables.pdf)), Samuel Albanie, University of Cambridge
 
 ## Implementations
 
