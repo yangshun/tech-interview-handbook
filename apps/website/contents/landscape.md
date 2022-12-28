@@ -53,7 +53,7 @@ Salaries of top US tech internships in 2016 ([source](https://twitter.com/rodney
 
 ### Singapore
 
-We ran a survey to find out what the famous tech companies in Singapore are paying new hires in 2022 and here's a sample of the results. View the [full dataset](https://docs.google.com/spreadsheets/d/1QtC8efWw0mVkGXW4QA9bX4f0nJhGbmFqCfVLSumMZ0I/) or [contribute your data](https://forms.gle/9oNNJJwespqWBZGw6)!
+We ran a survey to find out what the famous tech companies in Singapore are paying new hires in 2022/2023 and here's a sample of the results. View the [full dataset](https://app.techinterviewhandbook.org/offers) or [contribute your data](https://app.techinterviewhandbook.org/offers/submit)!
 
 | Company       | Internship (monthly in SGD) | Fresh Grad Annual Total (SGD) |
 | ------------- | --------------------------- | ----------------------------- |
@@ -61,9 +61,9 @@ We ran a survey to find out what the famous tech companies in Singapore are payi
 | Meta/Facebook | $6000                       | $140,000                      |
 | Google        | $5400                       | $110,000                      |
 | Shopee        | $4200                       | $100,000 - $140,000           |
-| ByteDance     | $4000                       | $85,000                       |
+| ByteDance     | $4000                       | $90,000 - $100,000            |
 | Grab          | $2500                       | No data                       |
-| Visa          | $2200                       | $75,000                       |
+| Visa          | $2200                       | $110,000                      |
 
 _Note: Fresh grad annual total numbers are approximate and include base salary, stock, and target bonuses._
 
@@ -85,9 +85,9 @@ _It's important to note that the above are just general trends and exceptions ca
 
 |  | US (Silicon Valley/NY) | Singapore |
 | --- | --- | --- |
-| Starting Pay | USD 100,000 | Monthly $5243 (Median), $6316 (75th percentile) |
+| Starting Pay | USD 100,000 | Monthly $6000 (Median), $6900 (75th percentile) |
 | Talent Access | Global talent, diverse nationalities and backgrounds | Usually regional, mostly Asians |
 | Types of Companies | HQ of large companies (Facebook, Amazon, Apple, Google, Microsoft, etc), Startups | Branch offices of large companies, Startups |
 | Types of Engineering Work | Depends on size of office/company | Both product and infra (building new programming languages, frameworks, and tools) |
 
-_Singapore salary data taken from [NUS GES 2020](https://www.moe.gov.sg/-/media/files/post-secondary/ges-2020/web-publication-nus-ges-2020.pdf)._
+_Singapore salary data taken from [NUS GES 2021](https://www.moe.gov.sg/-/media/files/post-secondary/ges-2021/web-publication-nus-ges-2021.pdf)._

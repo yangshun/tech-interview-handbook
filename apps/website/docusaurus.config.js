@@ -9,9 +9,10 @@ module.exports = {
   projectName: 'tech-interview-handbook',
   themeConfig: {
     announcementBar: {
-      id: 'tih-1', // Increment on change
-      content: `[NEW] We have launched 3 new free resources:
-      <a href="https://app.techinterviewhandbook.org/resumes" target="_blank">resume peer review portal</a>, a repository to <a href="https://app.techinterviewhandbook.org/offers" target="_blank">compare tech offers</a> and an <a href="https://app.techinterviewhandbook.org/questions" target="_blank">interview question bank</a>. Try them out today!`,
+       id: 'algomonster-1', // Increment on change
+      content: `Stop grinding mindlessly, study with a plan! Developed by Google engineers,
+      <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">AlgoMonster</a> is the fastest way to get a software engineering job.
+      <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">Check it out now!</a>`,
       isCloseable: false,
     },
     prism: {
