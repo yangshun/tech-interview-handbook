@@ -1,17 +1,19 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 import { createContext, useContext, useEffect } from 'react';
 
 type Context = Readonly<{
   event: (payload: GoogleAnalyticsEventPayload) => void;
 }>;
 
+const MEASUREMENT_ID = 'G-DBLZDQ2ZZN';
+
 export const GoogleAnalyticsContext = createContext<Context>({
   event,
 });
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
-function pageview(measurementID: string, url: string) {
+function pageview(url: string) {
   // Don't log analytics during development.
   if (process.env.NODE_ENV === 'development') {
     return;
@@ -21,7 +23,6 @@ function pageview(measurementID: string, url: string) {
     page_location: window.location.href,
     page_path: url,
     page_title: document.title,
-    send_to: measurementID,
   });
 }
 
@@ -53,49 +54,46 @@ export function event({
 
 type Props = Readonly<{
   children: React.ReactNode;
-  measurementID: string;
 }>;
 
 export function useGoogleAnalytics() {
   return useContext(GoogleAnalyticsContext);
 }
 
-export default function GoogleAnalytics({ children, measurementID }: Props) {
+export default function GoogleAnalytics({ children }: Props) {
   const router = useRouter();
   useEffect(() => {
     function handleRouteChange(url: string) {
-      pageview(measurementID, url);
+      pageview(url);
     }
 
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [router.events, measurementID]);
+  }, [router.events,]);
 
   return (
     <GoogleAnalyticsContext.Provider value={{ event }}>
       {children}
-      <Head>
-        {/* TODO(yangshun): Change back to next/script in future. */}
-        {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script
-          async={true}
-          src={`https://www.googletagmanager.com/gtag/js?id=${measurementID}`}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      <Script
+        async={true}
+        src={`https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`}
+      />
+      <Script
+        dangerouslySetInnerHTML={{
+          __html: `
             window.dataLayer = window.dataLayer || [];
             window.gtag = function(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${measurementID}', {
+            gtag('config', '${MEASUREMENT_ID}', {
               page_path: window.location.pathname,
             });
           `,
-          }}
-        />
-      </Head>
+        }}
+        id="google-analytics"
+      />
     </GoogleAnalyticsContext.Provider>
   );
 }

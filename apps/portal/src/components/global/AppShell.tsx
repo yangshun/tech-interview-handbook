@@ -134,10 +134,10 @@ export default function AppShell({ children }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
+  // TODO: Shift this into offers pages and not in this common component.
   const { isLoading: isOffersAdminResultsLoading, data: isOffersAdmin } =
     trpc.useQuery(['offers.admin.isAdmin']);
   const currentProductNavigation: Readonly<{
-    googleAnalyticsMeasurementID: string;
     logo?: React.ReactNode;
     navigation: ProductNavigationItems;
     showGlobalNav: boolean;
@@ -167,8 +167,7 @@ export default function AppShell({ children }: Props) {
   })();
 
   return (
-    <GoogleAnalytics
-      measurementID={currentProductNavigation.googleAnalyticsMeasurementID}>
+    <GoogleAnalytics>
       <div className="flex">
         {/* Narrow sidebar */}
         {currentProductNavigation.showGlobalNav && (

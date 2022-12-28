@@ -21,7 +21,6 @@ const navigation: ProductNavigationItems = [
 ];
 
 const config = {
-  googleAnalyticsMeasurementID: 'G-VFTWPMW1WK',
   logo: (
     <img
       alt="Tech Resume Review"

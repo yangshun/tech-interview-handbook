@@ -22,7 +22,6 @@ const navigationAdmin: ProductNavigationItems = [
 ];
 
 const config = {
-  googleAnalyticsMeasurementID: 'G-34XRGLEVCF',
   logo: (
     <img
       alt="Tech Offers Repo"

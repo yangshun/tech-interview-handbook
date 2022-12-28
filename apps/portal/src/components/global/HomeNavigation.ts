@@ -13,7 +13,6 @@
 // ];
 
 const config = {
-  googleAnalyticsMeasurementID: 'G-DBLZDQ2ZZN',
   navigation: [],
   showGlobalNav: false,
   title: 'Tech Interview Handbook',
