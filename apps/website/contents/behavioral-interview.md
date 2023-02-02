@@ -100,7 +100,7 @@ As aforementioned, most top tech companies use their company values to evaluate 
 
 ### 4. Try out mock behavioral interviews
 
-If you would like to practice behavioral interviews with professional interviewers from top tech companies, schedule one with [interviewing.io](https://iio.sh/r/DMCa). Interviewing.io boasts a large pool of interviewers from Facebook, Amazon, Apply, Google and Microsoft. I have used [interviewing.io](https://iio.sh/r/DMCa) both as an interviewer and interviewee and can guarantee a good experience with this platform.
+If you would like to practice behavioral interviews with professional interviewers from top tech companies, schedule one with [interviewing.io](https://iio.sh/r/DMCa). Interviewing.io boasts a large pool of interviewers from Facebook, Amazon, Apple, Google and Microsoft. I have used [interviewing.io](https://iio.sh/r/DMCa) both as an interviewer and interviewee and can guarantee a good experience with this platform.
 
 ### 5. Use structured courses
 
