@@ -33,7 +33,7 @@ In algorithm interviews, geometry is usually not be the focus of the problem (yo
 
 ### Distance between two points
 
-When comparing the between two points, using dx<sup>2</sup> + dy<sup>2</sup> is sufficient. It is unnecessary to square root the value. Examples: [K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
+When comparing the distance between two points, using dx<sup>2</sup> + dy<sup>2</sup> is sufficient. It is unnecessary to square root the value. Examples: [K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
 
 ### Overlapping circles
 
