@@ -71,7 +71,7 @@ In algorithm interviews, graphs are commonly given in the input as 2D matrices w
 
 - Empty graph
 - Graph with one or two nodes
-- Disjoint graphs
+- Disconnected graphs
 - Graph with cycles
 
 ## Graph search algorithms
