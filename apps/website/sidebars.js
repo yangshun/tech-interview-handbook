@@ -38,6 +38,7 @@ module.exports = {
       collapsible: false,
       items: [
         'behavioral-interview',
+        'behavioral-interview-rubrics',
         'behavioral-interview-questions',
         'self-introduction',
         'final-questions',
