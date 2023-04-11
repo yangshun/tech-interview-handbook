@@ -33,3 +33,16 @@ I have used [interviewing.io](https://iio.sh/r/DMCa) both as an interviewer and 
 Another platform that allows you to practice coding interviews is [Pramp](https://pramp.com). Where [interviewing.io](https://iio.sh/r/DMCa) matches potential job seekers with seasoned technical interviewers, Pramp takes a different approach. Pramp pairs you up with another peer who is also a job seeker and both of you take turns to assume the role of interviewer and interviewee. Pramp also prepares questions for you, along with suggested solutions and prompts to guide the interviewee.
 
 Personally, I am not that fond of Pramp's approach because if I were to interview someone, I would rather choose a question I am familiar with. Also, many users of the platform do not have the experience of being interviewers and that can result in a horrible interview experience. There was once where my matched peer, as the interviewer, did not have the right understanding of the question and attempted to lead me down the wrong path of solving the question. However, this is more of a problem of the candidate than the platform though.
+
+## [Meetapro](https://meetapro.com/?utm_source=techinterviewhandbook)
+
+**Disclaimer: This section was added by the Meetapro team**
+
+Envision Meetapro as the Airbnb for mock interviews and career coaching. It connects job seekers with seasoned FAANG interviewers who provide invaluable feedback, getting you ready for real-life interviews. Numerous job seekers have already reaped the benefits of this platform.
+
+What makes Meetapro stand out?
+
+- Affordability: The average cost per session is significantly lower compared to other platforms.
+- Expert interviewers: Veterans from FAANG and top-tier companies bring years of experience, offering priceless feedback that truly makes a difference.
+- Direct communication: Job seekers can directly message interviewers to address any questions or concerns, such as experience sharing or rescheduling, ensuring better preparation for both parties.
+- All-in-one tools: Meetapro equips you with the essential tools for an effective interview session, including recording options for post-session review.
