@@ -16,12 +16,13 @@ function FAANGTechLeads({ position }) {
       rel="noopener"
       onClick={() => {
         window.gtag('event', `faangtechleads.${position}.click`);
-      }}>
+      }}
+    >
       <p className={styles.tagline}>
         <strong className={styles.title}>
-          Craft the perfect resume for Google and Facebook
+          Craft the perfect resume for FAANG
         </strong>
-        Save time crafting your resume with FAANG Tech Leads'{' '}
+        Save time crafting your resume with{' '}
         <u>FAANG-quality resume templates and examples</u> which have helped
         many Software Engineers get interviews at top Bay Area companies!
       </p>
@@ -38,7 +39,8 @@ function TIHResumeReview({ position }) {
       rel="noopener"
       onClick={() => {
         window.gtag('event', `tih.resume_review.${position}.click`);
-      }}>
+      }}
+    >
       <p className={styles.tagline}>
         <strong className={styles.title}>
           Get your resume reviewed for free
@@ -55,16 +57,17 @@ function GreatFrontEnd({ position }) {
   return (
     <a
       className={clsx(styles.container, styles.backgroundGreatFrontEnd)}
-      href={`https://www.greatfrontend.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}&fpr=techinterviewhandbook`}
+      href={`https://www.greatfrontend.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}`}
       target="_blank"
       rel="noopener"
       onClick={() => {
         window.gtag('event', `greatfrontend.${position}.click`);
-      }}>
+      }}
+    >
       <p className={styles.tagline}>
         <strong className={styles.title}>LeetCode for Front End</strong>
-        Prepare with <u>Great Front End</u>'s large pool of high quality front
-        end interview questions and solutions!
+        Built by ex-FAANG Senior Engineers, <u>GreatFrontEnd</u> is the fastest
+        way to prepare for a Front End interview.
       </p>
     </a>
   );
@@ -79,56 +82,14 @@ function AlgoMonster({ position }) {
       rel="noopener"
       onClick={() => {
         window.gtag('event', `algomonster.${position}.click`);
-      }}>
+      }}
+    >
       <p className={styles.tagline}>
         <strong className={styles.title}>
           Stop grinding mindlessly. Study with a plan
         </strong>
         Developed by Google engineers, <u>AlgoMonster</u> is the fastest way to
         get a software engineering job. <u>Check it out for free!</u>
-      </p>
-    </a>
-  );
-}
-
-function Rora({ position }) {
-  return (
-    <a
-      className={clsx(styles.container, styles.backgroundRora)}
-      href={`https://www.teamrora.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=${position}`}
-      key={Math.random()}
-      target="_blank"
-      rel="noopener"
-      onClick={() => {
-        window.gtag('event', `rora.${position}.click`);
-      }}>
-      <p className={styles.tagline}>
-        <strong className={styles.title}>
-          Risk-free salary negotiation help
-        </strong>{' '}
-        Receive risk-free salary negotiation advice from <u>Rora</u>. You pay
-        nothing unless your offer is increased.{' '}
-        <u>Book your free consultation today!</u>
-      </p>
-    </a>
-  );
-}
-
-function DesignGurusCoding({ position }) {
-  return (
-    <a
-      className={clsx(styles.container, styles.backgroundGrokkingCoding)}
-      href="https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview"
-      key={Math.random()}
-      target="_blank"
-      rel="noopener"
-      onClick={() => {
-        window.gtag('event', `designgurus.coding.${position}.click`);
-      }}>
-      <p className={styles.tagline}>
-        <strong className={styles.title}>Stop memorizing solutions</strong>
-        <u>Grokking the Coding Interview</u> teaches you techniques and question
-        patterns to ace coding interviews. Grab your lifetime access today!
       </p>
     </a>
   );
@@ -144,7 +105,8 @@ function DesignGurusSystemDesign({ position }) {
       rel="noopener"
       onClick={() => {
         window.gtag('event', `designgurus.system_design.${position}.click`);
-      }}>
+      }}
+    >
       <p className={styles.tagline}>
         <strong className={styles.title}>Get the job at FAANG</strong>
         <u>Grokking the System Design Interview</u> is a highly recommended
@@ -164,7 +126,8 @@ function ByteByteGoSystemDesign({ position }) {
       rel="noopener"
       onClick={() => {
         window.gtag('event', `bytebytego.system_design.${position}.click`);
-      }}>
+      }}
+    >
       <p className={styles.tagline}>
         <strong className={styles.title}>
           Ace Your Next System Design Interview
@@ -172,29 +135,6 @@ function ByteByteGoSystemDesign({ position }) {
         <u>ByteByteGo's</u> system design interview course is everything you
         need to take your system design skill to the next level.{' '}
         <u>Find out more!</u>
-      </p>
-    </a>
-  );
-}
-
-function Interviewingio({ position }) {
-  return (
-    <a
-      className={clsx(styles.container, styles.backgroundInterviewingio)}
-      href="https://iio.sh/r/DMCa"
-      key={Math.random()}
-      target="_blank"
-      rel="noopener"
-      onClick={() => {
-        window.gtag('event', `interviewingio.${position}.click`);
-      }}>
-      <p className={styles.tagline}>
-        <strong className={styles.title}>
-          Practice interviewing with Google engineers
-        </strong>
-        <u>interviewing.io</u> provides anonymous technical mock interviews with
-        engineers from Google, Facebook, and other top companies.{' '}
-        <u>Give it a try!</u>
       </p>
     </a>
   );
@@ -235,10 +175,6 @@ export default React.memo(function SidebarAd({ position }) {
           );
         }
 
-        if (path.includes('negotiation') || path.includes('compensation')) {
-          return <Rora key={Math.random()} position={position} />;
-        }
-
         if (path.includes('system-design')) {
           return rand < 0.5 ? (
             <ByteByteGoSystemDesign key={Math.random()} position={position} />
@@ -264,10 +200,8 @@ export default React.memo(function SidebarAd({ position }) {
 
         return rand < 0.5 ? (
           <FAANGTechLeads key={Math.random()} position={position} />
-        ) : rand < 0.75 ? (
-          <AlgoMonster key={Math.random()} position={position} />
         ) : (
-          <DesignGurusCoding key={Math.random()} position={position} />
+          <GreatFrontEnd key={Math.random()} position={position} />
         );
       }}
     </BrowserOnly>

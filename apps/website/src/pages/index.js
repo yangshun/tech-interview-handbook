@@ -108,7 +108,8 @@ function Home() {
   return (
     <Layout
       title="Technical Interview Guide for Busy Engineers"
-      description={siteConfig.tagline}>
+      description={siteConfig.tagline}
+    >
       <HeroSection />
       <WhatIsThisSection />
       <GreatFrontEndSection />
@@ -116,9 +117,7 @@ function Home() {
       <HowToUseSection />
       <FAANGTechLeadsSection />
       <FeaturesSection />
-      <AlgoMonsterSection />
       <SuccessStoriesSection />
-      <DesignGurusSection />
       <SponsorshipSection />
       <PreFooterSection />
     </Layout>
@@ -147,7 +146,8 @@ function HeroSection() {
         <div className={styles.buttons}>
           <Link
             className={clsx('button button--primary button--lg')}
-            to="/software-engineering-interview-guide/">
+            to="/software-engineering-interview-guide/"
+          >
             Start reading now&nbsp;&nbsp;→
           </Link>
         </div>
@@ -186,7 +186,8 @@ function WhatIsThisSection() {
                 'text--center',
                 'margin-bottom--lg',
                 styles.sectionTitle,
-              )}>
+              )}
+            >
               Fastest way to prepare effectively for your software engineering
               interviews, used by over 1,000,000 engineers
             </h3>
@@ -249,7 +250,8 @@ function RoraSection() {
                         target="_blank"
                         onClick={() => {
                           window.gtag('event', 'rora.homepage.click');
-                        }}>
+                        }}
+                      >
                         Get risk-free negotiation advice&nbsp;&nbsp;→
                       </a>
                     </div>
@@ -303,7 +305,8 @@ function HowToUseSection() {
                 'text--center',
                 'margin-bottom--lg',
                 styles.sectionTitle,
-              )}>
+              )}
+            >
               Not sure where to start in your interview preparation?
               <br /> We've got you covered.
             </h3>
@@ -312,7 +315,8 @@ function HowToUseSection() {
                 'text--center',
                 'margin-bottom--lg',
                 styles.sectionTagline,
-              )}>
+              )}
+            >
               This guide is structured in a{' '}
               <strong>simple to follow, step-by-step</strong> style covering all
               aspects of your software engineering interview preparation -{' '}
@@ -322,7 +326,8 @@ function HowToUseSection() {
         </div>
         <div className={clsx('row', styles.featuresRow)}>
           <div
-            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}>
+            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}
+          >
             <HowToUseStep
               index={1}
               title={<>Prepare a FAANG-ready resume</>}
@@ -335,7 +340,8 @@ function HowToUseSection() {
             />
           </div>
           <div
-            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}>
+            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}
+          >
             <HowToUseStep
               index={2}
               title={<>Ace the interviews</>}
@@ -349,7 +355,8 @@ function HowToUseSection() {
             />
           </div>
           <div
-            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}>
+            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}
+          >
             <HowToUseStep
               index={3}
               title={<>Negotiate the best offer</>}
@@ -361,7 +368,8 @@ function HowToUseSection() {
             />
           </div>
           <div
-            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}>
+            className={clsx('col', 'col--3', styles.featuresRowItemContainer)}
+          >
             <HowToUseStep
               index={4}
               title={<>Prepare for the job</>}
@@ -392,7 +400,8 @@ function FeaturesSection() {
                 'text--center',
                 'margin-vert--lg',
                 styles.sectionTitle,
-              )}>
+              )}
+            >
               We have everything you need - all straight to the point
             </h3>
             <div className={clsx('row', styles.featuresRow)}>
@@ -403,7 +412,8 @@ function FeaturesSection() {
                     'col',
                     'col--4',
                     styles.featuresRowItemContainer,
-                  )}>
+                  )}
+                >
                   <div className={clsx('card', styles.featuresRowItem)}>
                     <h3 className={styles.featuresRowItemTitle}>{title}</h3>
                     <p className={styles.featuresRowItemDescription}>
@@ -425,49 +435,12 @@ function FeaturesSection() {
   );
 }
 
-function DesignGurusSection() {
-  return (
-    <div
-      className={clsx('padding-vert--lg')}
-      style={{ backgroundColor: '#6fc8cc' }}>
-      <div className="container">
-        <div className="row">
-          <div className="col col--8 col--offset-2">
-            <div className="margin-vert--lg text--center">
-              <div>
-                <h2 style={{ color: '#083436' }}>
-                  <strong>
-                    Tired of grinding mindlessly? Grokking the Coding Interview
-                    is the recommended way to quickly learn coding question
-                    patterns to help you ace the coding interviews.
-                  </strong>
-                </h2>
-                <div className="margin-vert--lg">
-                  <a
-                    className="button button--secondary button--lg"
-                    href="https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview"
-                    rel="noopener"
-                    target="_blank"
-                    onClick={() => {
-                      window.gtag('event', 'designgurus.homepage.click');
-                    }}>
-                    Learn efficiently&nbsp;&nbsp;→
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function FAANGTechLeadsSection() {
   return (
     <div
       className={clsx('padding-vert--lg')}
-      style={{ backgroundColor: 'rgb(244, 63, 94)' }}>
+      style={{ backgroundColor: 'rgb(244, 63, 94)' }}
+    >
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -487,7 +460,8 @@ function FAANGTechLeadsSection() {
                     target="_blank"
                     onClick={() => {
                       window.gtag('event', 'faangtechleads.homepage.click');
-                    }}>
+                    }}
+                  >
                     Improve your resume now &nbsp;&nbsp;→
                   </a>
                 </div>
@@ -504,7 +478,8 @@ function GreatFrontEndSection() {
   return (
     <div
       className={clsx('padding-vert--lg')}
-      style={{ backgroundColor: 'rgb(79, 70, 229)' }}>
+      style={{ backgroundColor: 'rgb(79, 70, 229)' }}
+    >
       <div className="container">
         <div className="row">
           <div className="col col--8 col--offset-2">
@@ -517,82 +492,34 @@ function GreatFrontEndSection() {
                 </h2>
                 <h3
                   className={styles.sectionSponsorTitle}
-                  style={{ fontSize: 'var(--ifm-h2-font-size)' }}>
+                  style={{ fontSize: 'var(--ifm-h2-font-size)' }}
+                >
                   <strong>
-                    Spend less time but prepare better for your Front End
-                    Interviews with{' '}
+                    Built by ex-FAANG Senior Engineers,{' '}
                     <a
-                      href="https://www.greatfrontend.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=homepage&fpr=techinterviewhandbook"
-                      style={{ color: '#fff', textDecoration: 'underline' }}>
-                      Great Front End's
+                      href="https://www.greatfrontend.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=homepage"
+                      style={{ color: '#fff', textDecoration: 'underline' }}
+                      target="_blank"
+                    >
+                      GreatFrontEnd
                     </a>{' '}
-                    large pool of high quality practice questions and solutions.
+                    is the fastest way to prepare for a front end interview job.
                   </strong>
                 </h3>
                 <div className="margin-vert--lg">
                   <a
                     className="button button--secondary button--lg"
-                    href="https://www.greatfrontend.com/questions/javascript/flatten?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=homepage&fpr=techinterviewhandbook"
+                    href="https://www.greatfrontend.com/prepare"
                     rel="noopener"
                     target="_blank"
                     onClick={() => {
                       window.gtag(
                         'event',
-                        'greatfrontend.homepage.question.click',
+                        'greatfrontend.homepage.prepare.click',
                       );
-                    }}>
-                    Try a question &nbsp;&nbsp;→
-                  </a>{' '}
-                  <a
-                    className="button button--secondary button--lg"
-                    href="https://www.greatfrontend.com/get-started?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=homepage&fpr=techinterviewhandbook"
-                    rel="noopener"
-                    target="_blank"
-                    onClick={() => {
-                      window.gtag(
-                        'event',
-                        'greatfrontend.homepage.study_plan.click',
-                      );
-                    }}>
-                    View study plans &nbsp;&nbsp;→
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function AlgoMonsterSection() {
-  return (
-    <div
-      className={clsx('padding-vert--lg')}
-      style={{ backgroundImage: 'linear-gradient(270deg, #3e1792, #6a45b9)' }}>
-      <div className="container">
-        <div className="row">
-          <div className="col col--8 col--offset-2">
-            <div className="margin-vert--lg text--center">
-              <div>
-                <h2 className={styles.sectionSponsorTitle}>
-                  <strong>
-                    Developed by Google engineers, AlgoMonster is the fastest
-                    way to get a software engineering job. Join today for a 70%
-                    discount!
-                  </strong>
-                </h2>
-                <div className="margin-vert--lg">
-                  <a
-                    className="button button--secondary button--lg"
-                    href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack="
-                    rel="noopener"
-                    target="_blank"
-                    onClick={() => {
-                      window.gtag('event', 'algomonster.homepage.click');
-                    }}>
-                    Study with a plan&nbsp;&nbsp;→
+                    }}
+                  >
+                    Try it out &nbsp;&nbsp;→
                   </a>
                 </div>
               </div>
@@ -613,7 +540,8 @@ function TweetsSection() {
             'margin-bottom--lg',
             'text--center',
             styles.sectionTitle,
-          )}>
+          )}
+        >
           Over 1,000,000 people have benefitted from this handbook!
         </h2>
         <div className={clsx('row', styles.tweetsSection)}>
@@ -815,7 +743,8 @@ function SuccessStoriesSection() {
                 'margin-vert--lg',
                 'text--center',
                 styles.sectionTitle,
-              )}>
+              )}
+            >
               Countless engineers have gotten a job at FAANG with this free
               handbook
             </h3>
@@ -838,7 +767,8 @@ function SuccessStoriesSection() {
           <a
             href="https://github.com/yangshun/tech-interview-handbook/edit/master/website/src/data/successStories.js"
             rel="noopener"
-            target="_blank">
+            target="_blank"
+          >
             Open a Pull Request here
           </a>
           !
@@ -862,7 +792,8 @@ function SponsorshipSection() {
                 'margin-vert--lg',
                 'text--center',
                 styles.sectionTitle,
-              )}>
+              )}
+            >
               Interested in advertising on Tech Interview Handbook?
             </h3>
             <p className={clsx(styles.sectionTagline, 'text--center')}>
@@ -895,12 +826,14 @@ function SponsorshipSection() {
                 className="button button--primary button--lg margin-right--md"
                 href="mailto:contact@techinterviewhandbook.org"
                 rel="noopener"
-                target="_blank">
+                target="_blank"
+              >
                 Advertise with us!
               </a>
               <Link
                 className="button button--secondary button--lg"
-                to="/advertise">
+                to="/advertise"
+              >
                 Find out more
               </Link>
             </div>
@@ -926,7 +859,8 @@ function PreFooterSection() {
             </p>
             <Link
               className={clsx('button button--primary button--lg')}
-              to="/software-engineering-interview-guide/">
+              to="/software-engineering-interview-guide/"
+            >
               Start reading now&nbsp;&nbsp;→
             </Link>
           </div>
