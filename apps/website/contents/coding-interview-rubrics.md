@@ -132,7 +132,7 @@ Advanced technical competency signals:
 
 ### 4. Testing
 
-Testing signals
+Testing signals:
 
 - Came up with more typical cases and tested their code against it
 - Found and handled corner cases
