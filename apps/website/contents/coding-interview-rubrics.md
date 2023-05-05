@@ -144,7 +144,7 @@ Testing signals:
 | Strong hire | Demonstrated testing signals effortlessly. |
 | Leaning hire | Had some difficulty demonstrating testing signals, such as not being able to identify all the relevant corner cases. |
 | Leaning no hire | Conducted testing but did not handle corner cases. Not able to identify or correct bugs in code. |
-| Strong no hire | Did not even test code against typical cases. Did not spot glaring bugs in the code and announced they are done |
+| Strong no hire | Did not even test code against typical cases. Did not spot glaring bugs in the code and announced they are done. |
 
 <div className="text--center margin-vert--lg">
   <figure>
