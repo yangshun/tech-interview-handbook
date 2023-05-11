@@ -71,7 +71,7 @@ While you're unlikely to be asked to implement a sorting algorithm from scratch 
 
 ## Things to look out for during interviews
 
-Make sure you know the time and space complexity of the language's default sorting algorithm! The time complexity is almost definitely O(nlog(n))). Bonus points if you can name the sort. In Python, it's [Timsort](https://en.wikipedia.org/wiki/Timsort).
+Make sure you know the time and space complexity of the language's default sorting algorithm! The time complexity is almost definitely O(nlog(n))). Bonus points if you can name the sort. In Python, it's [Timsort](https://en.wikipedia.org/wiki/Timsort). In Java, [an implementation of Timsort](https://github.com/openjdk/jdk/blob/d9052b946682d1c0f2629455d73fe4e6b95b29db/src/java.base/share/classes/java/util/TimSort.java) is used for sorting objects, and [Dual-Pivot Quicksort](https://github.com/openjdk/jdk/blob/d9052b946682d1c0f2629455d73fe4e6b95b29db/src/java.base/share/classes/java/util/DualPivotQuicksort.java) is used for sorting primitives. 
 
 ## Corner cases
 
