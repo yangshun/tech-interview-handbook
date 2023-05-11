@@ -47,7 +47,7 @@ While you're unlikely to be asked to implement a sorting algorithm from scratch 
 - Videos
   - [Heapsort](https://youtu.be/ryRfapIQHW0) ([slides](https://samuelalbanie.com/files/digest-slides/2022-12-brief-guide-to-heapsort-and-binary-heaps.pdf)), Samuel Albanie, University of Cambridge
   - [Quicksort](https://youtu.be/kbiKn1K08RM) ([slides](https://samuelalbanie.com/files/digest-slides/2023-01-brief-guide-to-quicksort.pdf)), Samuel Albanie, University of Cambridge
-  - [Lower bounds for comparison sorts](https://www.youtube.com/watch?v=JWSiXs9aB5U) ([slides](https://samuelalbanie.com/files/digest-slides/2023-01-2023-01-brief-guide-to-comparison-sorting-lower-bounds.pdf)), Samuel Albanie, University of Cambridge
+  - [Lower bounds for comparison sorts](https://www.youtube.com/watch?v=JWSiXs9aB5U) ([slides](https://samuelalbanie.com/files/digest-slides/2023-01-brief-guide-to-comparison-sorting-lower-bounds.pdf)), Samuel Albanie, University of Cambridge
   - [Counting sort](https://www.youtube.com/watch?v=0aMcZpAySjw) ([slides](https://samuelalbanie.com/files/digest-slides/2023-01-brief-guide-to-counting-sort.pdf)), Samuel Albanie, University of Cambridge
   - [Radix sort](https://www.youtube.com/watch?v=HzPbzQi9404) ([slides](https://samuelalbanie.com/files/digest-slides/2023-01-brief-guide-to-radix-sort.pdf)), Samuel Albanie, University of Cambridge
   - [Bucket sort](https://www.youtube.com/watch?v=mz2fBJyoEVc) ([slides](https://samuelalbanie.com/files/digest-slides/2023-01-brief-guide-to-bucket-sort.pdf)), Samuel Albanie, University of Cambridge 
