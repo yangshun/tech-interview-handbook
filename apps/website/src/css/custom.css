@@ -136,7 +136,7 @@ div[class^='announcementBar_'] {
 
 .theme-doc-markdown details {
   --ifm-alert-background-color: transparent;
-  border: 1px solid var(--ifm-color-primary);
+  border: 1px solid var(--ifm-color-emphasis-800);
 }
 
 .theme-doc-markdown details h2,
@@ -170,4 +170,18 @@ div[class^='announcementBar_'] {
 
 .admonition-heading h5 {
   margin-top: 0;
+}
+
+.shoutout {
+  background-color: var(--ifm-color-primary);
+  border-radius: 0.5rem;
+  color: #fff;
+  display: block;
+  font-size: 14px;
+  padding: 0.75rem;
+}
+
+.shoutout:hover {
+  text-decoration: none;
+  color: #fff;
 }

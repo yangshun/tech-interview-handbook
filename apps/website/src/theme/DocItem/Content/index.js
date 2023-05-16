@@ -4,6 +4,7 @@ import { ThemeClassNames } from '@docusaurus/theme-common';
 import { useDoc } from '@docusaurus/theme-common/internal';
 import Heading from '@theme/Heading';
 import MDXContent from '@theme/MDXContent';
+
 /**
  Title can be declared inside md content or declared through
  front matter and added manually. To make both cases consistent,
@@ -40,6 +41,17 @@ export default function DocItemContent({ children }) {
           height={30}
           title="GitHub Stars"
         />
+      </div>
+      <div className="margin-bottom--lg">
+        <a
+          className="shoutout"
+          href="https://www.linkedin.com/in/yangshun"
+          target="_blank"
+        >
+          👋 Hi there, I'm Yangshun, an ex-Meta Staff Engineer, author of this
+          handbook and Blind 75. Follow me on <u>LinkedIn</u> for Software
+          Engineering advice and interview tips!
+        </a>
       </div>
       <MDXContent>{children}</MDXContent>
     </div>
