@@ -28,6 +28,7 @@ Besides the usual algorithm questions, other **awesome** stuff includes:
 - [Best practice questions](https://www.techinterviewhandbook.org/coding-interview-study-plan/) for coding interviews
 - [Grind 75](https://www.techinterviewhandbook.org/grind75) - the next evolution of Blind 75, bigger and better
 - [How to prepare](https://www.techinterviewhandbook.org/coding-interview-prep/) for coding interviews
+- [Extra coding interview preparation](https://ripplematch.com/career-advice/how-to-prepare-for-your-coding-interview/?utm_source=Github&utm_medium=organic_social&utm_campaign=growth_github&utm_content=dyna&utm_term=null) - step-by-step guide and resources on how to prepare for your coding interviews
 - [Coding interview best practices](https://www.techinterviewhandbook.org/coding-interview-cheatsheet/) - Straight-to-the-point Do's and Don'ts
 - [Algorithm cheatsheets and tips](https://www.techinterviewhandbook.org/algorithms/study-cheatsheet/) categorized by topic
 - [Step-by-step Software Engineer resume guide](https://www.techinterviewhandbook.org/resume/) to prepare a FAANG-ready resume
