@@ -50,6 +50,7 @@ System design content is still work-in-progress, but the following are some reso
 - [System Design Primer](https://github.com/donnemartin/system-design-primer) - Most comprehensive resource on system design out there. Recommended only if you have a ton of time to spare.
 - [System Design Interview](https://github.com/checkcheckzz/system-design-interview) - Contains many links to tips about system design, system design-related topics and engineering blogs of famous companies.
 - [System Design Cheatsheet](https://gist.github.com/vasanthk/485d1c25737e8e72759f) - Brief and concise content. Serves as a good revision right before your system design interview.
+- [System Design Roadmap](https://roadmap.sh/system-design) - Step-by-step guide that includes links to articles and videos on learning essential topics. 
 
 ## Books
 
