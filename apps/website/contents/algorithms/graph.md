@@ -117,7 +117,7 @@ def dfs(matrix):
 
 Breadth-first search is a graph traversal algorithm which starts at a node and explores all nodes at the present depth, before moving on to the nodes at the next depth level. A [queue](./queue.md) is usually used to keep track of the nodes that were encountered but not yet explored.
 
-A similar template for doing breadth-first searches on the matrix goes like this. It is important to use double-ended queues and not arrays/Python lists as enqueuing for double-ended queues is O(1) but it's O(n) for arrays.
+A similar template for doing breadth-first searches on the matrix goes like this. It is important to use double-ended queues and not arrays/Python lists as dequeuing for double-ended queues is O(1) but it's O(n) for arrays.
 
 ```py
 from collections import deque
