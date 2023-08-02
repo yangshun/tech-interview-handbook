@@ -29,6 +29,13 @@ Math is a foundational aspect of Computer Science and every programmer and compu
 - Check for and handle overflow/underflow if you are using a typed language like Java and C++. At the very least, mention that overflow/underflow is possible and ask whether you need to handle it.
 - Consider negative numbers and floating point numbers. This may sound obvious, but under interview pressure, many obvious cases go unnoticed.
 
+## Corner cases
+
+- Division by 0
+- Multiplication by 1
+- Negative numbers
+- Floats
+
 ## Common formulas
 
 |  | Formula |
@@ -52,13 +59,6 @@ When dealing with floating point numbers, take note of rounding mistakes. Consid
 ### Fast operators
 
 If the question asks you to implement an operator such as power, square root or division and want it to be faster than O(n), some sort of doubling (fast exponentiation) or halving (binary search) is usually the approach to go. Examples: [Pow(x, n)](https://leetcode.com/problems/powx-n/), [Sqrt(x)](https://leetcode.com/problems/sqrtx/)
-
-## Corner cases
-
-- Division by 0
-- Multiplication by 1
-- Negative numbers
-- Floats
 
 ## Essential questions
 
