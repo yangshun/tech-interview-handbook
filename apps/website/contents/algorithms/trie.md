@@ -37,11 +37,11 @@ Be familiar with implementing from scratch, a `Trie` class and its `add`, `remov
 
 `m` is the length of the string used in the operation.
 
-| Operation | Big-O | Note |
-| --------- | ----- | ---- |
-| Search    | O(m)  |      |
-| Insert    | O(m)  |      |
-| Remove    | O(m)  |      |
+| Operation | Big-O |
+| --------- | ----- |
+| Search    | O(m)  |
+| Insert    | O(m)  |
+| Remove    | O(m)  |
 
 ## Corner cases
 
