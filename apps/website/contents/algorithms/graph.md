@@ -26,7 +26,7 @@ A graph is a structure containing a set of objects (nodes or vertices) where the
 Graphs are commonly used to model relationship between unordered entities, such as
 
 - Friendship between people - Each node is a person and edges between nodes represent that these two people are friends.
-- Distances between locations - Each node is a location and the edge between nodes represent that these locations are connected. The value of the edge represent the distance.
+- Distances between locations - Each node is a location and the edge between nodes represent that these locations are connected. The value of the edge represents the distance.
 
 Be familiar with the various graph representations, graph search algorithms and their time and space complexities.
 
@@ -48,7 +48,7 @@ You can be given a list of edges and you have to build your own graph from the e
 - Adjacency list
 - Hash table of hash tables
 
-Using a hash table of hash table would be the simplest approach during algorithm interviews. It will be rare that you have to use adjacency matrix or list for graph questions during interviews.
+Using a hash table of hash tables would be the simplest approach during algorithm interviews. It will be rare that you have to use an adjacency matrix or list for graph questions during interviews.
 
 In algorithm interviews, graphs are commonly given in the input as 2D matrices where cells are the nodes and each cell can traverse to its adjacent cells (up/down/left/right). Hence it is important that you be familiar with traversing a 2D matrix. When traversing the matrix, always ensure that your current position is within the boundary of the matrix and has not been visited before.
 
@@ -78,7 +78,7 @@ In algorithm interviews, graphs are commonly given in the input as 2D matrices w
 
 - **Common** - Breadth-first Search, Depth-first Search
 - **Uncommon** - Topological Sort, Dijkstra's algorithm
-- **Almost never** - Bellman-Ford algorithm, Floyd-Warshall algorithm, Prim's algorithm, Kruskal's algorithm. Your interviewer likely don't know them either.
+- **Almost never** - Bellman-Ford algorithm, Floyd-Warshall algorithm, Prim's algorithm, Kruskal's algorithm. Your interviewer likely doesn't know them either.
 
 ### Depth-first search
 
@@ -161,7 +161,7 @@ For additional tips on BFS and DFS, you can refer to this [LeetCode post](https:
 
 A topological sort or topological ordering of a directed graph is a linear ordering of its vertices such that for every directed edge uv from vertex u to vertex v, u comes before v in the ordering. Precisely, a topological sort is a graph traversal in which each node v is visited only after all its dependencies are visited.
 
-Topological sorting is most commonly used for job scheduling a sequence of jobs or tasks which has dependencies on other jobs/tasks. The jobs are represented by vertices, and there is an edge from x to y if job x must be completed before job y can be started.
+Topological sorting is most commonly used for scheduling a sequence of jobs or tasks which has dependencies on other jobs/tasks. The jobs are represented by vertices, and there is an edge from x to y if job x must be completed before job y can be started.
 
 Another example is taking courses in university where courses have pre-requisites.
 

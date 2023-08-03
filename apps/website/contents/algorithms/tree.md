@@ -57,7 +57,7 @@ Trees are commonly used to represent hierarchical data, e.g. file systems, JSON,
 
 ### Binary tree
 
-Binary means two, so nodes in a binary trees have a maximum of two children.
+Binary means two, so nodes in a binary tree have a maximum of two children.
 
 **Binary tree terms**
 
@@ -119,7 +119,7 @@ Be familiar with the following routines because many tree questions make use of 
 - Whether a value is in the tree
 - Calculate height of the tree
 - Binary search tree
-  - Determine if is binary search tree
+  - Determine if it is a binary search tree
   - Get maximum value
   - Get minimum value
 
