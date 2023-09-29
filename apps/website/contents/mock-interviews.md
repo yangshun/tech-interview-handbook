@@ -46,3 +46,11 @@ What makes Meetapro stand out?
 - Expert interviewers: Veterans from FAANG and top-tier companies bring years of experience, offering priceless feedback that truly makes a difference.
 - Direct communication: Job seekers can directly message interviewers to address any questions or concerns, such as experience sharing or rescheduling, ensuring better preparation for both parties.
 - All-in-one tools: Meetapro equips you with the essential tools for an effective interview session, including recording options for post-session review.
+
+## [Hello Interview](https://www.hellointerview.com/?utm_source=techinterviewhandbook)
+
+**Disclaimer: This section was added by the Hello Interview team**
+
+Hello Interview uses a combination of AI and expert FAANG staff engineers and managers to help you prepare for your interview. Practice with AI at your own pace on system design, behavioral, or coding interviews. Schedule mock interviews with a human for detailed, 360 degree feedback on all aspects of your interview from domain knowledge and techniques to presentation skills and communication.
+
+Hello Interview offers included services from resume reviews to salary negotiation and offer decision support ensuring you're able to enter your minimize the time spent preparing and maximize the result of your interview journey.
