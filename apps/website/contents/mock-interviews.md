@@ -53,4 +53,4 @@ What makes Meetapro stand out?
 
 Hello Interview uses a combination of AI and expert FAANG staff engineers and managers to help you prepare for your interview. Practice with AI at your own pace on system design, behavioral, or coding interviews. Schedule mock interviews with a human for detailed, 360 degree feedback on all aspects of your interview from domain knowledge and techniques to presentation skills and communication.
 
-Hello Interview offers included services from resume reviews to salary negotiation and offer decision support ensuring you're able to enter your minimize the time spent preparing and maximize the result of your interview journey.
+Hello Interview offers included services from resume reviews to salary negotiation and offer decision support ensuring you're able to minimize the time spent preparing and maximize the result of your interview journey.
