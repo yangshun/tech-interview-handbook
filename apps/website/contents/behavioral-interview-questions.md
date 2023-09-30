@@ -147,8 +147,8 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Lyft-Interview-Questions
 
 ## Palantir Software Engineer behavioral interview questions
 
-- **What is something 90% of people disagree with you about?**
-- **What is broken around you?**
+- What is something 90% of people disagree with you about?
+- What is broken around you?
 - How do you deal with difficult coworkers? Think about specific instances where you resolved conflicts.
 - How did you win over the difficult employees?
 - Tell me about an analytical problem that you have worked on in the past.
