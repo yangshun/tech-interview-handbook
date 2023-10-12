@@ -23,6 +23,8 @@ import InDocAd from './\_components/InDocAd';
 
 Not sure why you're still not getting shortlisted at some or all of the top tech companies? Your software engineer resume could be the issue.
 
+HELLO WORLD!
+
 Having read tons of software engineering resumes as a FAANG interviewer, even some of the most qualified candidates I know fail to get shortlisted due to bad resumes. The mistake most people make is to immediately assume that they weren't qualified enough - but that could be far from the truth.
 
 Thankfully, there are specific steps and requirements you can fulfill to write a good software engineer resume. From your resume structure, content, to free tools you can use to test your resume, I have collated a very concise summary of the best practices to prepare your resume for a FAANG software engineering job application:
@@ -77,15 +79,15 @@ ATS readers need to identify and parse standard types of information from your r
 
 This is the order which has worked well for me and recommended by recruiters:
 
-| Section | Heading Name |
-| --- | --- |
-| Professional summary | (Use resume headline as section title, for e.g. "Senior Software Engineer at Google with over 5 years of experience leading teams") |
-| Contact information | "Contact Information" |
-| Skills - programming languages, frameworks, etc. | "Skills" |
-| Experience | "Work Experience" |
-| Education (Note: if you are still in school or have less than 3 years of experience, you may put Education first) | "Education" |
-| Projects | "Projects" |
-| Other optional sections - e.g. Certifications, Awards, etc | "Awards and Accolades" / "Certifications" / "Awards, Accolades and Certifications" |
+| Section                                                                                                           | Heading Name                                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Professional summary                                                                                              | (Use resume headline as section title, for e.g. "Senior Software Engineer at Google with over 5 years of experience leading teams") |
+| Contact information                                                                                               | "Contact Information"                                                                                                               |
+| Skills - programming languages, frameworks, etc.                                                                  | "Skills"                                                                                                                            |
+| Experience                                                                                                        | "Work Experience"                                                                                                                   |
+| Education (Note: if you are still in school or have less than 3 years of experience, you may put Education first) | "Education"                                                                                                                         |
+| Projects                                                                                                          | "Projects"                                                                                                                          |
+| Other optional sections - e.g. Certifications, Awards, etc                                                        | "Awards and Accolades" / "Certifications" / "Awards, Accolades and Certifications"                                                  |
 
 :::caution
 
