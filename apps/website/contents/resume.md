@@ -343,8 +343,6 @@ Simply copy the content from your resume and paste it into a plain text document
 - Characters are displaying incorrectly in plain text
 - Sections are disorganized
 
-<!-- FRANCISCO START HERE -->
-
 ## Crafting the Perfect Cover Letter
 
 Your cover letter serves as a handshake, an introduction to the professional persona encapsulated in your resume. It's an avenue to express your genuine interest in a position or a particular company, portraying the value you can add to the organization. Unlike the formal tone of a resume, a cover letter allows for a unique, creative expression of your personal brand, ensuring it **complements rather than replicates** your CV.
@@ -403,7 +401,6 @@ Example of an ML Engineer Cover Letter:
 
 > After [SAAS COMPANY] I had the opportunity to apply my skills in the Fintech industry. Coming from Argentina, where the population suffer the consequences of the absence of good credit, I was extremely excited about [BNLP FINTECH]’s mission of democratizing free-credit in the UK and the U.S.
 
-<!-- FRANCISCO END HERE -->
 
 ## Final tips
 
