@@ -368,6 +368,7 @@ Here's a structure to transform your cover letter into a compelling narrative:
 - Repetition: Your cover letter should **accentuate your CV, not echo it.**
 - Over-verbosity: Keep it crisp, to the point, and **under a page.**
 - Sloppiness: Errors in spelling or grammar reflect poorly on your attention to detail. Proofread meticulously.
+- AI-Generated Content: **Be cautious with AI-generated Cover Letters**. These are now flooding the market and tend to look very similar. While AI can aid in enhancing your cover letter, it's essential to go above and beyond with the prompt to ensure your cover letter is personal and not generic.
 
 ### Practical Tips
 
