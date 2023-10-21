@@ -89,6 +89,10 @@ This is the order which has worked well for me and recommended by recruiters:
 
 :::caution
 
+Never add symbols to your headers to avoid ATS readability issues.
+
+:::
+
 <InDocAd />
 
 ## How to write good Software Engineer resume content
@@ -339,15 +343,15 @@ Simply copy the content from your resume and paste it into a plain text document
 - Characters are displaying incorrectly in plain text
 - Sections are disorganized
 
-## Crafting the Perfect Cover Letter
+## Crafting the perfect cover letter
 
-Your cover letter serves as a handshake, an introduction to the professional persona encapsulated in your resume. It's an avenue to express your genuine interest in a position or a particular company, portraying the value you can add to the organization. Unlike the formal tone of a resume, a cover letter allows for a unique, creative expression of your personal brand, ensuring it **complements rather than replicates** your CV.
+Your cover letter serves as a handshake, an introduction to the professional persona encapsulated in your resume. It's an avenue to express your genuine interest in a position or a particular company, portraying the value you can add to the organization. Unlike the formal tone of a resume, a cover letter allows for a unique, creative expression of your personal brand, ensuring it **complements rather than replicates** your resume.
 
 **Tailoring is key in crafting a compelling cover letter. **It is about aligning your skills and aspirations with the role at hand, going beyond mere name switches. Hence, delve into the company's ethos, the industry, and the specific role, letting your cover letter reflect a clear understanding and a deliberate choice. You need to show that you have done your research and you understand the company mission and how you will contribute towards that goal.
 
 :::tip Expert tip
 
-The cover letter should **highlight the CV, rather than duplicate the content** (which is what is seen too often). In some cases, the cover letter will be the first document, and sometimes, the only document an employer or recruiter sees, and as such, should make a stellar first impression.
+The cover letter should **highlight the resume, rather than duplicate the content** (which is what is seen too often). In some cases, the cover letter will be the first document, and sometimes, the only document an employer or recruiter sees, and as such, should make a stellar first impression.
 
 :::
 
@@ -358,20 +362,20 @@ Here's a structure to transform your cover letter into a compelling narrative:
 - Express Your Value: Highlight **what you bring to the table**, how you can contribute to the company's goals.
 - Narrate Succinctly: People resonate with stories. Share a **brief, relevant narrative** that leaves the reader intrigued. Similar to your resume, you should very rarely go beyond the one page limit.
 
-### Common Pitfalls to Avoid on your Cover Letter
+### Common pitfalls to avoid on your cover letter
 
 - The Generic Trap: **Tailor your cover letter** to the job and company. Avoid a one-size-fits-all approach.
-- Repetition: Your cover letter should **accentuate your CV, not echo it.**
+- Repetition: Your cover letter should **accentuate your resume, not echo it.**
 - Over-verbosity: Keep it crisp, to the point, and **under a page.**
 - Sloppiness: Errors in spelling or grammar reflect poorly on your attention to detail. Proofread meticulously.
 
-### Practical Tips
+### Practical tips
 
 - Align your qualifications with the employer's needs.
 - Keep it engaging. Avoid cliches and standard phrases. Your first paragraph should capture the attention of the employer.
 - Ensure your cover letter is free from errors. Enlist a friend to review it or put it aside and review with fresh eyes later.
 
-### Cover Letter Example and Evaluation
+### Cover letter example and evaluation
 
 Example of an ML Engineer Cover Letter:
 
