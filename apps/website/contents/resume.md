@@ -77,21 +77,17 @@ ATS readers need to identify and parse standard types of information from your r
 
 This is the order which has worked well for me and recommended by recruiters:
 
-| Section                                                                                                           | Heading Name                                                                                                                        |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Professional summary                                                                                              | (Use resume headline as section title, for e.g. "Senior Software Engineer at Google with over 5 years of experience leading teams") |
-| Contact information                                                                                               | "Contact Information"                                                                                                               |
-| Skills - programming languages, frameworks, etc.                                                                  | "Skills"                                                                                                                            |
-| Experience                                                                                                        | "Work Experience"                                                                                                                   |
-| Education (Note: if you are still in school or have less than 3 years of experience, you may put Education first) | "Education"                                                                                                                         |
-| Projects                                                                                                          | "Projects"                                                                                                                          |
-| Other optional sections - e.g. Certifications, Awards, etc                                                        | "Awards and Accolades" / "Certifications" / "Awards, Accolades and Certifications"                                                  |
+| Section | Heading Name |
+| --- | --- |
+| Professional summary | (Use resume headline as section title, for e.g. "Senior Software Engineer at Google with over 5 years of experience leading teams") |
+| Contact information | "Contact Information" |
+| Skills - programming languages, frameworks, etc. | "Skills" |
+| Experience | "Work Experience" |
+| Education (Note: if you are still in school or have less than 3 years of experience, you may put Education first) | "Education" |
+| Projects | "Projects" |
+| Other optional sections - e.g. Certifications, Awards, etc | "Awards and Accolades" / "Certifications" / "Awards, Accolades and Certifications" |
 
 :::caution
-
-Never add symbols to your headers to avoid ATS readability issues.
-
-:::
 
 <InDocAd />
 
