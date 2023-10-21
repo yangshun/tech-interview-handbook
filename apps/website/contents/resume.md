@@ -402,7 +402,6 @@ Example of an ML Engineer Cover Letter:
 
 > After [SAAS COMPANY] I had the opportunity to apply my skills in the Fintech industry. Coming from Argentina, where the population suffer the consequences of the absence of good credit, I was extremely excited about [BNLP FINTECH]’s mission of democratizing free-credit in the UK and the U.S.
 
-<!-- FRANCISCO END HERE -->
 
 ## Final tips
 
