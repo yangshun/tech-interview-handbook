@@ -9,7 +9,7 @@
     <a href="https://www.techinterviewhandbook.org/">Read on the website</a>
   </h3>
   <p>
-    Join/follow us on <a href="https://discord.gg/usMqNaPczq" target="_blank">Discord</a> | <a href="https://twitter.com/techinterviewhb" target="_blank">Twitter</a> | <a href="https://t.me/techinterviewhandbook" target="_blank">Telegram</a> |  <a href="https://facebook.com/techinterviewhandbook" target="_blank">Facebook</a>
+    Join/follow us on <a href="https://discord.gg/usMqNaPczq" target="_blank">Discord</a> | <a href="https://twitter.com/techinterviewhb" target="_blank">𝕏 (Twitter)</a> | <a href="https://t.me/techinterviewhandbook" target="_blank">Telegram</a> |  <a href="https://facebook.com/techinterviewhandbook" target="_blank">Facebook</a>
   </p>
 </div>
 
