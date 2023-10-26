@@ -333,7 +333,8 @@ If you are willing to spend some money we recommend [FAANG Tech Leads' Resume Re
 
 ### 2. Test readability with industry-standard ATS
 
-Test the readability and formatting of your resume using industry-standard ATS like [Resume Worded](https://resumeworded.com/resume-scanner) . Most big companies use such resume scanners.
+- Test the readability and formatting of your resume using industry-standard ATS like [Resume Worded](https://resumeworded.com/resume-scanner) or Free tools like [AI Resume Judge](https://ayehigh.com/resume-judge). Most big companies use such resume scanners.
+- Everytime before applying for a Job, always make sure to tailor your resume content a bit according to the job requirement. You can use tools like [Resume Shortlister](https://ayehigh.com/resume-shortlister) or [Resume Target](https://resumeworded.com/targeted-resume), to Check how good your resume is for the job you are applying for. It gives you good improvement tips and list of keywords that you can add to your resume for better chances in ATS ranking.
 
 ### 3. The plain text file test
 
