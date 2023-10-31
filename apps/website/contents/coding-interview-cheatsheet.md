@@ -122,6 +122,7 @@ This discussion can range from a few minutes to up to 5-10 minutes depending on 
 
 - ✅ If you get stuck on the approach or optimization, use [this structured way](./coding-interview-techniques.md) to jog your memory / find a good approach
 - ✅ Explain a few approaches that you could take at a high level (don't go too much into implementation details). Discuss the tradeoffs of each approach with your interviewer as if the interviewer was your coworker and you all are collaborating on a problem.
+
   > For algorithmic questions, space/time is a common tradeoff. Let's take the famous [Two Sum](https://leetcode.com/problems/two-sum/) question for example. There are two common solutions
   >
   > 1. Use nested for loops. This would be O(n<sup>2</sup>) in terms of time complexity and O(1) in terms of space.

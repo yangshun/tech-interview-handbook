@@ -46,8 +46,7 @@ export default function DocItemContent({ children }) {
         <a
           className="shoutout"
           href="https://www.linkedin.com/in/yangshun"
-          target="_blank"
-        >
+          target="_blank">
           👋 Hi there, I'm Yangshun, an ex-Meta Staff Engineer, author of this
           handbook and Blind 75. Follow me on <u>LinkedIn</u> for Software
           Engineering advice and interview tips!

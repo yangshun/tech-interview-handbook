@@ -54,4 +54,3 @@ What makes Meetapro stand out?
 - Expert interviewers: Veterans from FAANG and top-tier companies bring years of experience, offering priceless feedback that truly makes a difference.
 - Direct communication: Job seekers can directly message interviewers to address any questions or concerns, such as experience sharing or rescheduling, ensuring better preparation for both parties.
 - All-in-one tools: Meetapro equips you with the essential tools for an effective interview session, including recording options for post-session review.
-
