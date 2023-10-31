@@ -17,7 +17,16 @@ sidebar_label: System design preparation guide
 
 The objective of system design interviews is to evaluate a candidate's skill at designing real-world software systems involving multiple components. System design questions are typically given to more senior candidates (with a few years of experience). Interns aren't typically given system design questions as it is hard to expect interns to have sufficient and relevant industry experience to answer this type of questions well.
 
-Some common questions include:
+## Types of system design interviews
+
+System design questions can come in different formats:
+
+- **Back end / distributed system design**: Candidates are asked to design systems that work across multiple servers or data centers. Topics include back end architecture, database schema design, data replication, fault tolerance, message queues, consistency models, and more.
+- **API system design**: Design the APIs within a large system, possibly HTTP APIs (e.g. REST), or methods within a software component.
+- **Object-oriented design**: Object-oriented design interviews focus on designing classes, objects, and their relationships. Candidates are often asked to create class diagrams, define interfaces, and discuss design patterns.
+- **Front end system design**: Design the architecture of complex client applications or UI components. There's more emphasis on what goes on in the client and API design between the client and the server.
+
+As software engineers, the most common type of system design you will encounter is the back end / distributed system design type. Some common back end system design interview questions include:
 
 - Design a URL shortener (e.g. Bitly)
 - Design a social media website (e.g. Twitter)
@@ -36,8 +45,9 @@ System design content is still work-in-progress, but the following are some reso
 
 :::
 
-## Quality courses
+## Quality resources
 
+- ["Front End System Design Guidebook" by GreatFrontEnd](https://www.greatfrontend.com/system-design) - A free system design guidebook by yours truly, focused on system design for the front end, e.g. how to design Facebook's News Feed, Autocomplete components, Image Carousels and more.
 - [ByteByteGo](https://bytebytego.com?fpr=techinterviewhandbook) - This is a new System Design course by Alex Xu, author of the System Design Interview books, a bestseller on Amazon. The course covers system designs basics, then goes into deep dives of the design of over 10 famous common products (e.g. [Designing YouTube](https://bytebytego.com/courses/system-design-interview/design-youtube?fpr=techinterviewhandbook), Facebook Newsfeed, etc) and multiple big data and storage systems (e.g. [Designing a Chat System](https://bytebytego.com/courses/system-design-interview/design-a-chat-system?fpr=techinterviewhandbook)). For each deep dive, concepts are explained and comprehensive diagrams are used, making it very approachable regardless of seniority level.
 - ["Grokking the System Design Interview" by Design Gurus](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-system-design-interview) - This is probably the most famous system design interview course on the internet and what makes it different from most other courses out there is that it is purely text-based, which is great for people who prefer reading over watching videos (such as myself!). It contains a repository of the popular system design problems along with a glossary of system design basics. I've personally completed this course and highly recommended many others to use this.
 - ["Grokking the Advanced System Design Interview" by Design Gurus](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-advanced-system-design-interview) - I haven't tried this but it's by the same people who created "Grokking the System Design Interview", so it should be good! In my opinion you probably wouldn't need this unless you're very senior or going for a specialist position.
