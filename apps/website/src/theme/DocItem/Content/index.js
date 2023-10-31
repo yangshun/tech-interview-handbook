@@ -37,7 +37,7 @@ export default function DocItemContent({ children }) {
         <iframe
           src="https://ghbtns.com/github-btn.html?user=yangshun&amp;repo=tech-interview-handbook&amp;type=star&amp;count=true&amp;size=large"
           frameBorder={0}
-          width={160}
+          width={170}
           height={30}
           title="GitHub Stars"
         />
