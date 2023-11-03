@@ -9,10 +9,9 @@ module.exports = {
   projectName: 'tech-interview-handbook',
   themeConfig: {
     announcementBar: {
-      id: 'algomonster-1', // Increment on change
-      content: `Stop grinding mindlessly, study with a plan! Developed by Google engineers,
-      <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">AlgoMonster</a> is the fastest way to get a software engineering job.
-      <a href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=" target="_blank" rel="noopener">Check it out now!</a>`,
+      id: 'gfe-1', // Increment on change,
+      backgroundColor: '#7063f3',
+      content: `We collaborated with engineers from Google and Amazon and built the best front end interview preparation platform. <a href="https://www.greatfrontend.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=banner" target="_blank" rel="noopener">Check out GreatFrontEnd today<a>!`,
       isCloseable: false,
     },
     prism: {
