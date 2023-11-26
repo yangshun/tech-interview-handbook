@@ -104,7 +104,7 @@ module.exports = {
       ],
     },
     {
-      Misc: [
+      'Beyond the interview': [
         'interview-formats-top-companies',
         'interviewer-cheatsheet',
         'landscape',
