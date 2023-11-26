@@ -104,11 +104,12 @@ module.exports = {
       ],
     },
     {
-      Misc: [
+      'Beyond the interview': [
         'interview-formats-top-companies',
         'interviewer-cheatsheet',
         'landscape',
         'engineering-levels',
+        'career-growth',
         'best-coding-interview-courses',
         'best-practice-questions',
       ],
