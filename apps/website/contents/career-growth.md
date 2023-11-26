@@ -42,6 +42,3 @@ This gives you the resources to get promoted and improve your skill set as an en
 
 ## References
 - [Path to Senior Engineer Handbook](https://github.com/jordan-cutler/path-to-senior-engineer-handbook)
-
-
-
