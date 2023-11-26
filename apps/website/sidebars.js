@@ -109,6 +109,7 @@ module.exports = {
         'interviewer-cheatsheet',
         'landscape',
         'engineering-levels',
+        'career-growth',
         'best-coding-interview-courses',
         'best-practice-questions',
       ],
