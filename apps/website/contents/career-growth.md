@@ -21,6 +21,7 @@ After being hired, it's crucial to focus on your career growth so you don't stag
 - [Strategize Your Career](https://strategizeyourcareer.substack.com/)
 - [Saiyan Growth Letter](https://www.saiyangrowthletter.com/)
 - [Data Engineering Newsletter](https://blog.dataengineer.io/)
+- [16x Engineer](https://16x.engineer/)
 
 ## Books
 
