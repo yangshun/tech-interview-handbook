@@ -13,6 +13,7 @@ After being hired, it's crucial to focus on your career growth so you don't stag
 - [The Developing Dev](https://www.developing.dev/)
 - [The Pragmatic Engineer](https://newsletter.pragmaticengineer.com/)
 - [Level Up Software Engineering](https://levelupsoftwareengineering.substack.com/)
+- [Peak Performance](https://addyo.substack.com/)
 - [Engineer's Codex](https://engineercodex.substack.com/)
 - [Techlead Mentor](https://open.substack.com/pub/ravirajachar)
 - [The Caring Techie](https://www.thecaringtechie.com/)
@@ -36,6 +37,7 @@ After being hired, it's crucial to focus on your career growth so you don't stag
 - [Ryan Peterman](https://www.linkedin.com/in/ryanlpeterman/): Author of "The Developing Dev" newsletter
 - [Jordan Cutler](https://www.linkedin.com/in/jordancutler1/): Author of "High Growth Engineer" newsletter
 - [Gergely Orosz](https://www.linkedin.com/in/gergelyorosz/): Author of "The Pragmatic Engineer" newsletter
+- [Addy Osmani](https://www.linkedin.com/in/addyosmani/): Author of "Peak Performance" newsletter and Engineering leader at Google
 - [Alex Chiou](https://www.linkedin.com/in/alexander-chiou/): Co-founder of Taro
 - [Rahul Pandey](https://www.linkedin.com/in/rpandey1234/): Co-founder of Taro
 - [Alex Xu](https://www.linkedin.com/in/alexxubyte/): Founder of ByteByteGo
@@ -47,6 +49,7 @@ After being hired, it's crucial to focus on your career growth so you don't stag
 ## YouTube
 
 - [Fireship](https://www.youtube.com/@Fireship/)
+- [NeetCode](https://www.youtube.com/@NeetCode/)
 - [LeadDev](https://www.youtube.com/@LeadDev/)
 
 ## Communities
