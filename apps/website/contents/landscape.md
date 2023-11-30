@@ -1,6 +1,6 @@
 ---
 id: landscape
-title: Landscape
+title: 🏔 Landscape
 ---
 
 import InDocAd from './\_components/InDocAd';

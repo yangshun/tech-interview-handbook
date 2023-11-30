@@ -1,11 +1,15 @@
 ---
 id: interviewer-cheatsheet
-title: Cheatsheet (Interviewer)
+title: 👩‍💻 Cheatsheet (Interviewer)
 ---
 
 This is a straight-to-the-point, distilled list of technical interview Do's and Don'ts **for interviewers**, mainly for algorithmic interviews. Some of these may apply to only phone screens or whiteboard interviews, but most will apply to both. I revise this list before each of my interviews as an interviewer to remind myself of them and eventually internalized all of them to the point I do not have to rely on it anymore.
 
-**If you are a candidate you probably do not need to know this section well. You may read this to get a better sense of what an interviewer is supposed to do during an interview.**
+:::caution
+
+If you are an interview candidate, this page is not crucial for you. However, having an understanding of what interviewers look out for can be helpful to you!
+
+:::
 
 #### Legend
 
