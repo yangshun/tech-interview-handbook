@@ -19,6 +19,7 @@ After being hired, it's crucial to focus on your career growth so you don't stag
 - [The Caring Techie](https://www.thecaringtechie.com/)
 - [Refactoring](https://refactoring.fm/)
 - [Strategize Your Career](https://strategizeyourcareer.substack.com/)
+- [Hungry Minds](https://hungryminds.dev/)
 - [Saiyan Growth Letter](https://www.saiyangrowthletter.com/)
 - [Data Engineering Newsletter](https://blog.dataengineer.io/)
 - [16x Engineer](https://16x.engineer/)
@@ -46,6 +47,7 @@ After being hired, it's crucial to focus on your career growth so you don't stag
 - [Yangshun Tay](https://www.linkedin.com/in/yangshun/): Creator of Tech Interview Handbook, Blind 75 and CEO of GreatFrontEnd (me)!
 - [Neo Kim](https://www.linkedin.com/in/nk-systemdesign-one/): Creator of "System Design One" newsletter
 - [Caleb Mellas](https://www.linkedin.com/in/calebmellas/): Creator of "Level Up Software Engineering" newsletter
+- [Alexandre Zajac](https://www.linkedin.com/in/alexandre-zajac/): Creator of the "Hungry Minds" newsletter
 
 ## YouTube
 
