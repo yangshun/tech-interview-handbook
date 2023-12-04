@@ -19,10 +19,10 @@ After being hired, it's crucial to focus on your career growth so you don't stag
 - [The Caring Techie](https://www.thecaringtechie.com/)
 - [Refactoring](https://refactoring.fm/)
 - [Strategize Your Career](https://strategizeyourcareer.substack.com/)
+- [Hungry Minds](https://hungryminds.dev/)
 - [Saiyan Growth Letter](https://www.saiyangrowthletter.com/)
 - [Data Engineering Newsletter](https://blog.dataengineer.io/)
 - [16x Engineer](https://16x.engineer/)
-- [Hungry Minds](https://hungryminds.dev/)
 
 ## Books
 
