@@ -8,17 +8,13 @@ export const convert = async (
 ) => {
   fromCurrency = fromCurrency.trim().toLowerCase();
   toCurrency = toCurrency.trim().toLowerCase();
-  const url = [
-    'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies',
-    fromCurrency,
-    toCurrency,
-  ].join('/');
 
-  return await fetch(url + '.json')
+  return await fetch(
+    `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${fromCurrency}.json`,
+  )
     .then((res) => res.json())
-    .then((data) => value * data[toCurrency]);
+    .then((data) => value * data[fromCurrency][toCurrency]);
 };
-// https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@{apiVersion}/{date}/{endpoint}
 
 export const convertWithDate = async (
   value: number,
@@ -33,18 +29,15 @@ export const convertWithDate = async (
   fromCurrency = fromCurrency.trim().toLowerCase();
   toCurrency = toCurrency.trim().toLowerCase();
 
-  // Format date to YYYY-MM-DD
-  const formattedDate = date.toJSON().substring(0, 10);
+  // https://github.com/fawazahmed0/exchange-api
+  // Format date to YYYY.M.D
+  // const formattedDate = date.toJSON().substring(0, 10).replaceAll('-', '.');
+  // TODO: Migrated API does not work with historical API yet, so we use latest for now.
+  const formattedDate = 'latest';
 
-  const url = [
-    'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1',
-    formattedDate,
-    'currencies',
-    fromCurrency,
-    toCurrency,
-  ].join('/');
-
-  return await fetch(url + '.json')
+  return await fetch(
+    `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${formattedDate}/v1/${fromCurrency}.json`,
+  )
     .then((res) => res.json())
     .then((data) => value * data[toCurrency]);
 };
