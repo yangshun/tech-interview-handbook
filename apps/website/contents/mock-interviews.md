@@ -54,3 +54,9 @@ What makes Meetapro stand out?
 - Expert interviewers: Veterans from FAANG and top-tier companies bring years of experience, offering priceless feedback that truly makes a difference.
 - Direct communication: Job seekers can directly message interviewers to address any questions or concerns, such as experience sharing or rescheduling, ensuring better preparation for both parties.
 - All-in-one tools: Meetapro equips you with the essential tools for an effective interview session, including recording options for post-session review.
+
+## [Codemia](https://codemia.io/?utm_source=techinterviewhandbook)
+
+**Disclaimer: This section was added by the Codemia team**
+
+Codemia harnesses the power of advanced AI technology to evaluate and score your solutions instantly, enabling iterative practice and rapid skill refinement. But Codemia isn't just about practicing in isolation; it's a thriving community where members collaborate, share insights, and provide valuable feedback to one another, fostering a collaborative learning environment unlike any other. With a practice environment reminiscent of the familiar setup of LeetCode for algorithm challenges, Codemia offers a realistic simulation of interview scenarios, ensuring you're fully prepared to tackle any system design question with confidence.
