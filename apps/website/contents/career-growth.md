@@ -3,13 +3,13 @@ id: career-growth
 title: 📈 Career growth
 ---
 
-_The following page is written in collaboration with [Jordan Cutler](https://www.linkedin.com/in/jordancutler1/) — Author of ["High Growth Engineer" newsletter](https://careercutler.substack.com/)._
+_The following page is written in collaboration with [Jordan Cutler](https://www.linkedin.com/in/jordancutler1/) — Author of ["High Growth Engineer" newsletter](https://read.highgrowthengineer.com/)._
 
 After being hired, it's crucial to focus on your career growth so you don't stagnate. This page gives you the resources to get promoted and improve your skill set as an engineer.
 
 ## Newsletters
 
-- [High Growth Engineer](https://careercutler.substack.com/)
+- [High Growth Engineer](https://read.highgrowthengineer.com/)
 - [The Developing Dev](https://www.developing.dev/)
 - [The Pragmatic Engineer](https://newsletter.pragmaticengineer.com/)
 - [Level Up Software Engineering](https://levelupsoftwareengineering.substack.com/)
