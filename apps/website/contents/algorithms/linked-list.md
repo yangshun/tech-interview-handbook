@@ -62,7 +62,7 @@ Out of the common languages, only Java provides a linked list implementation. Th
 
 | Language | API |
 | --- | --- |
-| C++ | N/A |
+| C++ | [`std::list`](https://en.cppreference.com/w/cpp/container/list) |
 | Java | [`java.util.LinkedList`](https://docs.oracle.com/javase/10/docs/api/java/util/LinkedList.html) |
 | Python | N/A |
 | JavaScript | N/A |
