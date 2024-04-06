@@ -22,6 +22,12 @@ sidebar_label: Mock coding interviews
 
 Interviewing is a skill that you can get better at. The steps mentioned above can be rehearsed over and over again until you have fully internalized them and following those steps become second nature to you. A good way to practice is to find a friend to partner with and the both of you can take turns to interview each other.
 
+## [enginEBogie](https://enginebogie.com/)
+
+**Disclaimer: This section was added by the enginEBogie team**
+
+An important aspect of a mock interview is the right interviewer so that you get the right feedback. That's exactly where [enginEBogie](https://enginebogie.com/) stands out. The kind of interviewers you will find there are top notch thus helping you the best in your interview preparation. They provide you with detailed feedback on both your strengths and improvement areas. These are vetted interviewers who have been taking interviews in their own organizations too. This ensures that the experience you get is the same as what you would get in a real interview. You get to (choose your own interviewer)[https://enginebogie.com/find/experts]. There are lots of interviewers from all FAANG companies. 
+
 ## [interviewing.io](https://iio.sh/r/DMCa)
 
 A great resource for practicing mock coding interviews would be [interviewing.io](https://iio.sh/r/DMCa). [interviewing.io](https://iio.sh/r/DMCa) provides anonymous practice technical interviews with Google and Facebook engineers, which can lead to real jobs and internships. By virtue of being anonymous during the interview, the inclusive interview process is de-biased and low risk. At the end of the interview, both interviewer and interviewees can provide feedback to each other for the purpose of improvement. Doing well in your mock interviews will unlock the jobs page and allow candidates to book interviews (also anonymously) with top companies like Uber, Lyft, Quora, Asana and more. You can also book mock interviews for more specific roles such as Mobile, Front End, Engineering Management. For those who are totally new to technical interviews, you can even view [recorded interviews](https://interviewing.io/recordings) and see how phone interviews are like. Read more about them [here](https://techcrunch.com/2017/09/27/interviewing-io-hopes-to-close-the-engineer-diversity-gap-with-anonymous-interviews/).
