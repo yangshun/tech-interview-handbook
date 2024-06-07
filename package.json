@@ -24,5 +24,6 @@
   "devDependencies": {
     "prettier": "^2.7.1",
     "turbo": "latest"
-  }
+  },
+  "packageManager": "yarn@3.6.1"
 }

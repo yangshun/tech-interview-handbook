@@ -481,7 +481,7 @@ function GreatFrontEndSection() {
                   <strong>
                     Built by ex-FAANG Senior Engineers,{' '}
                     <a
-                      href="https://www.greatfrontend.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=homepage"
+                      href="https://www.greatfrontend.com/?fpr=yangshun&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=homepage"
                       style={{ color: '#fff', textDecoration: 'underline' }}
                       target="_blank">
                       GreatFrontEnd
@@ -492,7 +492,7 @@ function GreatFrontEndSection() {
                 <div className="margin-vert--lg">
                   <a
                     className="button button--secondary button--lg"
-                    href="https://www.greatfrontend.com/prepare"
+                    href="https://www.greatfrontend.com/prepare?fpr=yangshun&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=homepage"
                     rel="noopener"
                     target="_blank"
                     onClick={() => {

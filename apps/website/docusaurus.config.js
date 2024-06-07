@@ -11,7 +11,7 @@ module.exports = {
     announcementBar: {
       id: 'gfe-1', // Increment on change,
       backgroundColor: '#7063f3',
-      content: `We collaborated with engineers from Google and Amazon and built the best front end interview preparation platform. <a href="https://www.greatfrontend.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=banner" target="_blank" rel="noopener">Check out GreatFrontEnd today<a>!`,
+      content: `We collaborated with engineers from Google and Amazon and built the best front end interview preparation platform. <a href="https://www.greatfrontend.com?fpr=yangshun&utm_source=techinterviewhandbook&utm_medium=referral&utm_content=banner" target="_blank" rel="noopener">Check out GreatFrontEnd today<a>!`,
       isCloseable: false,
     },
     prism: {
