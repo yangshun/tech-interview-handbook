@@ -377,7 +377,7 @@ export default function ResumeReviewPage() {
                       </span>
                     </button>
                   </div>
-                  <div className="hidden xl:block">{renderReviewButton()}</div>
+                  <div className="hidden lg:block">{renderReviewButton()}</div>
                 </div>
               </div>
               <div className="space-y-2">
@@ -448,7 +448,7 @@ export default function ResumeReviewPage() {
                   </div>
                 </div>
                 {detailsQuery.data.additionalInfo && (
-                  <div className="col-span-2 flex items-start whitespace-pre-wrap text-slate-600 xl:pt-1">
+                  <div className="col-span-2 flex items-start whitespace-pre-wrap text-slate-600 lg:pt-1">
                     <InformationCircleIcon
                       aria-hidden="true"
                       className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
@@ -461,7 +461,7 @@ export default function ResumeReviewPage() {
                 )}
               </div>
             </div>
-            <div className="flex w-full shrink-0 grow flex-col divide-x divide-slate-200 overflow-hidden lg:h-0 lg:flex-row xl:py-0">
+            <div className="flex w-full shrink-0 grow flex-col divide-x divide-slate-200 overflow-hidden lg:h-0 lg:flex-row lg:py-0">
               <div className="w-full bg-slate-100 lg:h-full lg:w-1/2">
                 <ResumePdf url={detailsQuery.data.url} />
               </div>
