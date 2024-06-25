@@ -23,7 +23,10 @@
   },
   "devDependencies": {
     "prettier": "^2.7.1",
-    "turbo": "latest"
+    "turbo": "1.5.6"
+  },
+  "engines": {
+    "node": "18.18.2"
   },
   "packageManager": "yarn@3.6.1"
 }

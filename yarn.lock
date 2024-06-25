@@ -4683,6 +4683,7 @@ __metadata:
     next: ^12.3.1
     prettier-plugin-tailwindcss: ^0.1.13
     react: ^18.2.0
+    tailwindcss: ^3.1.8
     tsup: ^6.2.3
     typescript: ^4.8.3
   languageName: unknown
@@ -19554,7 +19555,7 @@ eslint-config-turbo@latest:
   resolution: "tech-interview-handbook@workspace:."
   dependencies:
     prettier: ^2.7.1
-    turbo: latest
+    turbo: 1.5.6
   languageName: unknown
   linkType: soft
 
@@ -20063,7 +20064,7 @@ eslint-config-turbo@latest:
   languageName: node
   linkType: hard
 
-turbo@latest:
+"turbo@npm:1.5.6":
   version: 1.5.6
   resolution: "turbo@npm:1.5.6"
   dependencies:
