@@ -14,7 +14,7 @@ function defineNextConfig(config) {
 
 export default defineNextConfig({
   experimental: {
-    newNextLinkBehavior: true,
+    esmExternals: 'loose',
   },
   reactStrictMode: true,
   swcMinify: true,

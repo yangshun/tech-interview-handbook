@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "turbo build",
-    "ci": "yarn lint && yarn tsc",
+    "ci": "pnpm lint && pnpm tsc",
     "clean": "turbo clean",
     "dev": "turbo dev --filter=portal... --filter=ui...",
     "dev:ui": "turbo dev --filter=storybook... --filter=ui...",
@@ -26,7 +26,8 @@
     "turbo": "1.5.6"
   },
   "engines": {
-    "node": "18.18.2"
+    "node": "18.19.2",
+    "pnpm": "8.15.8"
   },
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "pnpm@8.15.8"
 }
