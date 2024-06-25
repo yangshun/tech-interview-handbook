@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.3",
-    "@heroicons/react": "^2.0.11",
+    "@heroicons/react": "2.0.11",
     "@next-auth/prisma-adapter": "^1.0.4",
     "@popperjs/core": "^2.11.6",
     "@prisma/client": "^4.4.0",
@@ -32,7 +32,7 @@
     "cross-fetch": "^3.1.5",
     "date-fns": "^2.29.3",
     "formidable": "^2.0.1",
-    "next": "12.3.1",
+    "next": "13.4.1",
     "next-auth": "~4.10.3",
     "node-fetch": "^3.2.10",
     "react": "18.2.0",

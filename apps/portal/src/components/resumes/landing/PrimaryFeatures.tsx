@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Tab } from '@headlessui/react';
 

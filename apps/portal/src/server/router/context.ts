@@ -47,7 +47,7 @@ export const createRouter = () => trpc.router<Context>();
  **/
 export function createProtectedRouter() {
   return createRouter().middleware(({ ctx, next }) => {
-    if (!ctx.session || !ctx.session.user) {
+    if (!ctx.session?.user) {
       throw new trpc.TRPCError({ code: 'UNAUTHORIZED' });
     }
     return next({

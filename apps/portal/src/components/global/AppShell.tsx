@@ -68,7 +68,7 @@ function ProfileJewel() {
     {
       href: '/api/auth/signout',
       name: 'Sign Out',
-      onClick: (event: MouseEvent) => {
+      onClick: (event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
         signOut();
       },
