@@ -5,9 +5,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { Bars3BottomLeftIcon } from '@heroicons/react/20/solid';
 import { NoSymbolIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
-import type { TypeaheadOption } from '@tih/ui';
-import { useToast } from '@tih/ui';
-import { Button, SlideOut } from '@tih/ui';
+import type { TypeaheadOption } from '~/ui';
+import { useToast } from '~/ui';
+import { Button, SlideOut } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import QuestionOverviewCard from '~/components/questions/card/question/QuestionOverviewCard';

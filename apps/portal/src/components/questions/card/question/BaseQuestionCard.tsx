@@ -13,7 +13,7 @@ import {
   TrashIcon,
 } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
-import { Button } from '@tih/ui';
+import { Button } from '~/ui';
 
 import { useProtectedCallback } from '~/utils/questions/useProtectedCallback';
 import { useQuestionVote } from '~/utils/questions/vote/useQuestionVote';

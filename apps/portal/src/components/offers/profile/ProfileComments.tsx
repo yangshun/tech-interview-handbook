@@ -1,7 +1,7 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { ClipboardDocumentIcon, ShareIcon } from '@heroicons/react/24/outline';
-import { Button, Spinner, TextArea, useToast } from '@tih/ui';
+import { Button, Spinner, TextArea, useToast } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ExpandableCommentCard from '~/components/offers/profile/comments/ExpandableCommentCard';

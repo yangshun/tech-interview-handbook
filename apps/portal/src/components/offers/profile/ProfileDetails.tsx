@@ -4,7 +4,7 @@ import {
   ArrowPathIcon,
   BriefcaseIcon,
 } from '@heroicons/react/24/outline';
-import { Button, Spinner } from '@tih/ui';
+import { Button, Spinner } from '~/ui';
 
 import EducationCard from '~/components/offers/profile/EducationCard';
 import OfferCard from '~/components/offers/profile/OfferCard';

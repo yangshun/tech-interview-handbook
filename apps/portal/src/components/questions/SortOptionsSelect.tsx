@@ -1,4 +1,4 @@
-import { Select } from '~/../../../packages/ui/dist';
+import { Select } from '~/ui';
 import { SORT_ORDERS, SORT_TYPES } from '~/utils/questions/constants';
 
 import type { SortOrder, SortType } from '~/types/questions.d';

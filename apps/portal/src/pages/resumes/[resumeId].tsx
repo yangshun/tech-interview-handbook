@@ -17,7 +17,7 @@ import {
   StarIcon,
   TrashIcon,
 } from '@heroicons/react/20/solid';
-import { Button, Dialog, Spinner } from '@tih/ui';
+import { Button, Dialog, Spinner } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ResumeCommentsForm from '~/components/resumes/comments/ResumeCommentsForm';

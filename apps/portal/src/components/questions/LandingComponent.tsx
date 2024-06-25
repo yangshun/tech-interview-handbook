@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ArrowSmallRightIcon } from '@heroicons/react/24/outline';
 import type { QuestionsQuestionType } from '@prisma/client';
-import type { TypeaheadOption } from '@tih/ui';
-import { Button, Select } from '@tih/ui';
+import type { TypeaheadOption } from '~/ui';
+import { Button, Select } from '~/ui';
 
 import Container from '~/components/shared/Container';
 

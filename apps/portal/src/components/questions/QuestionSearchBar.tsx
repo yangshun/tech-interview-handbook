@@ -2,7 +2,7 @@ import {
   AdjustmentsHorizontalIcon,
   MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
-import { Button, Tabs, TextInput } from '@tih/ui';
+import { Button, Tabs, TextInput } from '~/ui';
 
 import { SORT_ORDERS } from '~/utils/questions/constants';
 

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { BookmarkSlashIcon } from '@heroicons/react/20/solid';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import { Button, useToast } from '@tih/ui';
+import { Button, useToast } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import DashboardOfferCard from '~/components/offers/dashboard/DashboardOfferCard';

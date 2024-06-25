@@ -9,7 +9,7 @@ import {
   TrashIcon,
 } from '@heroicons/react/24/outline';
 import { BookmarkIcon as BookmarkIconSolid } from '@heroicons/react/24/solid';
-import { Button, Dialog, Spinner, Tabs, useToast } from '@tih/ui';
+import { Button, Dialog, Spinner, Tabs, useToast } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import type { ProfileDetailTab } from '~/components/offers/constants';

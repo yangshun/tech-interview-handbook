@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
-import { Spinner, useToast } from '@tih/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import { ProfileDetailTab } from '~/components/offers/constants';
@@ -18,6 +17,7 @@ import type {
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
+import { Spinner, useToast } from '~/ui';
 import { convertMoneyToString } from '~/utils/offers/currency';
 import { getProfilePath } from '~/utils/offers/link';
 import { formatDate } from '~/utils/offers/time';

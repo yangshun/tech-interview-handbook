@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { MapPinIcon } from '@heroicons/react/24/outline';
-import { Banner, Spinner } from '@tih/ui';
+import { Banner, Spinner } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTable from '~/components/offers/admin/OffersTable';

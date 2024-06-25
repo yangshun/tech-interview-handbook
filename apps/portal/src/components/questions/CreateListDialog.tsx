@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Button, Dialog, TextInput } from '@tih/ui';
+import { Button, Dialog, TextInput } from '~/ui';
 
 import { useFormRegister } from '~/utils/questions/useFormRegister';
 

@@ -1,4 +1,4 @@
-import { Button, Dialog } from '@tih/ui';
+import { Button, Dialog } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 

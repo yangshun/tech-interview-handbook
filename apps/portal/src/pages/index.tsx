@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Button } from '@tih/ui';
+import { Button } from '~/ui';
 
 import Container from '~/components/shared/Container';
 

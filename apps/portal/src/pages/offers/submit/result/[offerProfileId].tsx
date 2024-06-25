@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 import { EyeIcon } from '@heroicons/react/24/outline';
-import { Button, Spinner } from '@tih/ui';
+import { Button, Spinner } from '~/ui';
 
 import type { BreadcrumbStep } from '~/components/offers/Breadcrumbs';
 import { Breadcrumbs } from '~/components/offers/Breadcrumbs';

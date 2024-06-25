@@ -3,7 +3,7 @@ import type { UseQueryResult } from 'react-query';
 import { DocumentDuplicateIcon } from '@heroicons/react/20/solid';
 import { BookmarkIcon as BookmarkOutlineIcon } from '@heroicons/react/24/outline';
 import { BookmarkIcon as BookmarkSolidIcon } from '@heroicons/react/24/solid';
-import { Button, TextInput, useToast } from '@tih/ui';
+import { Button, TextInput, useToast } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 

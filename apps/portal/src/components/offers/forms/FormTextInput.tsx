@@ -1,7 +1,7 @@
 import type { ComponentProps, ForwardedRef } from 'react';
 import { forwardRef } from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
-import { TextInput } from '@tih/ui';
+import { TextInput } from '~/ui';
 
 type TextInputProps = ComponentProps<typeof TextInput>;
 

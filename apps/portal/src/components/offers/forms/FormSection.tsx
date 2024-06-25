@@ -1,4 +1,4 @@
-import { HorizontalDivider } from '@tih/ui';
+import { HorizontalDivider } from '~/ui';
 
 export default function FormSection({
   children,

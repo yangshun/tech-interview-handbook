@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
-import { Button, Spinner } from '@tih/ui';
+import { Button, Spinner } from '~/ui';
 
 import DashboardProfileCard from '~/components/offers/dashboard/DashboardProfileCard';
 import Container from '~/components/shared/Container';

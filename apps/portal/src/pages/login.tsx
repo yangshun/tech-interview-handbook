@@ -4,7 +4,7 @@ import type {
   InferGetServerSidePropsType,
 } from 'next/types';
 import { getProviders, signIn } from 'next-auth/react';
-import { Button } from '@tih/ui';
+import { Button } from '~/ui';
 
 import GitHubIcon from '~/components/shared/icons/GitHubIcon';
 

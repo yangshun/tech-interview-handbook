@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { CheckboxInput, CheckboxList, Collapsible, RadioList } from '@tih/ui';
+import { CheckboxInput, CheckboxList, Collapsible, RadioList } from '~/ui';
 
 export type FilterChoice<V extends string = string> = {
   id: string;

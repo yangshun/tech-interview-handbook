@@ -6,8 +6,8 @@ import {
   WrenchIcon,
 } from '@heroicons/react/20/solid';
 import type { QuestionsQuestionType } from '@prisma/client';
-import type { BadgeVariant } from '@tih/ui';
-import { Badge } from '@tih/ui';
+import type { BadgeVariant } from '~/ui';
+import { Badge } from '~/ui';
 
 import { QUESTION_TYPES } from '~/utils/questions/constants';
 

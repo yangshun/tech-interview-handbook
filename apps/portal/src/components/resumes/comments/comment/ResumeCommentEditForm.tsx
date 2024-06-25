@@ -1,6 +1,6 @@
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { Button, TextArea } from '@tih/ui';
+import { Button, TextArea } from '~/ui';
 
 import { trpc } from '~/utils/trpc';
 

@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { RadioList } from '@tih/ui';
+import { RadioList } from '~/ui';
 
 type RadioListProps = ComponentProps<typeof RadioList>;
 

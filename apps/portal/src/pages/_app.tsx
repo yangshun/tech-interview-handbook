@@ -3,7 +3,7 @@ import type { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import React from 'react';
 import superjson from 'superjson';
-import { ToastsProvider } from '@tih/ui';
+import { ToastsProvider } from '~/ui';
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import { loggerLink } from '@trpc/client/links/loggerLink';
 import { withTRPC } from '@trpc/next';

@@ -2,7 +2,7 @@ import Head from 'next/head';
 import type { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
-import { Button, HorizontalDivider, TextInput, useToast } from '@tih/ui';
+import { Button, HorizontalDivider, TextInput, useToast } from '~/ui';
 
 import Container from '~/components/shared/Container';
 

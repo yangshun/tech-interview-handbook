@@ -6,7 +6,7 @@ import type { ReactNode } from 'react';
 import { Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { Bars3BottomLeftIcon } from '@heroicons/react/24/outline';
-import { Button } from '@tih/ui';
+import { Button } from '~/ui';
 
 import GlobalNavigation from '~/components/global/GlobalNavigation';
 import HomeNavigation from '~/components/global/HomeNavigation';

@@ -1,5 +1,5 @@
 import type { UseInfiniteQueryResult } from 'react-query';
-import { Button } from '@tih/ui';
+import { Button } from '~/ui';
 
 export type PaginationLoadMoreButtonProps = {
   query: UseInfiniteQueryResult;

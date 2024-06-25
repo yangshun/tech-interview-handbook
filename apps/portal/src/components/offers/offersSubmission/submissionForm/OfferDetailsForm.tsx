@@ -11,7 +11,7 @@ import { useFieldArray } from 'react-hook-form';
 import { PlusIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { JobType } from '@prisma/client';
-import { Button, Dialog, HorizontalDivider } from '@tih/ui';
+import { Button, Dialog, HorizontalDivider } from '~/ui';
 
 import {
   defaultFullTimeOfferValues,

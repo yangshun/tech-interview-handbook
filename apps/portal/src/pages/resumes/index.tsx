@@ -9,7 +9,7 @@ import {
   NewspaperIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import type { TypeaheadOption } from '@tih/ui';
+import type { TypeaheadOption } from '~/ui';
 import {
   Button,
   CheckboxInput,
@@ -19,7 +19,7 @@ import {
   Spinner,
   Tabs,
   TextInput,
-} from '@tih/ui';
+} from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import ResumeFilterPill from '~/components/resumes/browse/ResumeFilterPill';

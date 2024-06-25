@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { JobType } from '@prisma/client';
-import { DropdownMenu, Spinner, useToast } from '@tih/ui';
+import { DropdownMenu, Spinner, useToast } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersHeader from '~/components/offers/admin/OffersHeader';

@@ -22,7 +22,6 @@
     "@popperjs/core": "^2.11.6",
     "@prisma/client": "^4.4.0",
     "@supabase/supabase-js": "^1.35.7",
-    "@tih/ui": "workspace:0.0.0",
     "@trpc/client": "^9.27.2",
     "@trpc/next": "^9.27.2",
     "@trpc/react": "^9.27.2",

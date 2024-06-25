@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Pagination, Spinner } from '@tih/ui';
+import { Pagination, Spinner } from '~/ui';
 
 import type { Paging } from '~/types/offers';
 

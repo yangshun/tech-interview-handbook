@@ -1,4 +1,4 @@
-import { Select } from '@tih/ui';
+import { Select } from '~/ui';
 
 import { Currency } from '~/utils/offers/currency/CurrencyEnum';
 

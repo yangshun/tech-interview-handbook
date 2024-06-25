@@ -1,6 +1,6 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 import { JobType } from '@prisma/client';
-import { Collapsible, RadioList } from '@tih/ui';
+import { Collapsible, RadioList } from '~/ui';
 
 import { FieldError } from '~/components/offers/constants';
 import type { BackgroundPostData } from '~/components/offers/types';

@@ -1,4 +1,4 @@
-import type { TypeaheadOption } from '@tih/ui';
+import type { TypeaheadOption } from '~/ui';
 
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';

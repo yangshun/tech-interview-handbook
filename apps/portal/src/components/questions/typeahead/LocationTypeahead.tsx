@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { TypeaheadOption } from '@tih/ui';
+import type { TypeaheadOption } from '~/ui';
 
 import useLocationOptions from '~/utils/questions/useLocationOptions';
 

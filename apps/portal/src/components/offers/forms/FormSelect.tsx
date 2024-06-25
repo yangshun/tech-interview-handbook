@@ -1,7 +1,7 @@
 import type { ComponentProps, ForwardedRef } from 'react';
 import { forwardRef } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Select } from '@tih/ui';
+import { Select } from '~/ui';
 
 type SelectProps = ComponentProps<typeof Select>;
 

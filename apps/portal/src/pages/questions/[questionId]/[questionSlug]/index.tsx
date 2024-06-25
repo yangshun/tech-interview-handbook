@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Collapsible, HorizontalDivider, TextArea } from '@tih/ui';
+import { Button, Collapsible, HorizontalDivider, TextArea } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import FullQuestionCard from '~/components/questions/card/question/FullQuestionCard';

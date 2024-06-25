@@ -7,7 +7,7 @@ import {
   PlusIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
-import { Button, Select } from '@tih/ui';
+import { Button, Select } from '~/ui';
 
 import QuestionListCard from '~/components/questions/card/question/QuestionListCard';
 import type { CreateListFormData } from '~/components/questions/CreateListDialog';

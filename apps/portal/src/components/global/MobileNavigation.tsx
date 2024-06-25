@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { HorizontalDivider } from '@tih/ui';
+import { HorizontalDivider } from '~/ui';
 
 import type { GlobalNavigationItems } from './GlobalNavigation';
 import type { ProductNavigationItems } from './ProductNavigation';

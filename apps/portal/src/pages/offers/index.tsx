@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import { MapPinIcon } from '@heroicons/react/24/outline';
-import { Banner } from '@tih/ui';
+import { Banner } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import OffersTable from '~/components/offers/table/OffersTable';

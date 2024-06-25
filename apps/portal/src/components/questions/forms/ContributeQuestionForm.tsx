@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ArrowPathIcon } from '@heroicons/react/20/solid';
 import type { QuestionsQuestionType } from '@prisma/client';
-import type { TypeaheadOption } from '@tih/ui';
-import { CheckboxInput } from '@tih/ui';
-import { Button, Select, TextArea } from '@tih/ui';
+import type { TypeaheadOption } from '~/ui';
+import { CheckboxInput } from '~/ui';
+import { Button, Select, TextArea } from '~/ui';
 
 import { QUESTION_TYPES } from '~/utils/questions/constants';
 import relabelQuestionAggregates from '~/utils/questions/relabelQuestionAggregates';

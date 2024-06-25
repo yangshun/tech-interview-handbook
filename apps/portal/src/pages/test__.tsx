@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import type { TypeaheadOption } from '@tih/ui';
-import { Button } from '@tih/ui';
-import { useToast } from '@tih/ui';
-import { HorizontalDivider } from '@tih/ui';
+import type { TypeaheadOption } from '~/ui';
+import { Button } from '~/ui';
+import { useToast } from '~/ui';
+import { HorizontalDivider } from '~/ui';
 
 import CitiesTypeahead from '~/components/shared/CitiesTypeahead';
 import CompaniesTypeahead from '~/components/shared/CompaniesTypeahead';

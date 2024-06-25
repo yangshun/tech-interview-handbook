@@ -5,7 +5,8 @@ import {
   MagnifyingGlassMinusIcon,
   MagnifyingGlassPlusIcon,
 } from '@heroicons/react/20/solid';
-import { Button, Pagination, Spinner } from '@tih/ui';
+
+import { Button, Pagination, Spinner } from '~/ui';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 

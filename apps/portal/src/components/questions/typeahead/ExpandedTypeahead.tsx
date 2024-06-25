@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import { useMemo } from 'react';
-import { Button, Typeahead } from '@tih/ui';
+import { Button, Typeahead } from '~/ui';
 
 import type { RequireAllOrNone } from '~/utils/questions/RequireAllOrNone';
 

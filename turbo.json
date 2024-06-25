@@ -7,8 +7,7 @@
         ".next/**",
         "build/**",
         "api/**",
-        "public/build/**",
-        "storybook-static/**"
+        "public/build/**"
       ],
       "dependsOn": ["^build"]
     },

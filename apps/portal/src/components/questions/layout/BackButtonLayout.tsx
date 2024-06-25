@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
-import { Button } from '@tih/ui';
+import { Button } from '~/ui';
 
 import Container from '~/components/shared/Container';
 

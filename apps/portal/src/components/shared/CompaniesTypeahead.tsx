@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 import { useState } from 'react';
-import type { TypeaheadOption } from '@tih/ui';
-import { Typeahead } from '@tih/ui';
+import type { TypeaheadOption } from '~/ui';
+import { Typeahead } from '~/ui';
 
 import useCompanyOptions from '~/utils/shared/useCompanyOptions';
 

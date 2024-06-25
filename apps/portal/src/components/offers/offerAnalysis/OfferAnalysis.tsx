@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { ArrowUpRightIcon } from '@heroicons/react/24/outline';
 import { JobType } from '@prisma/client';
-import { Alert, Button, HorizontalDivider, Spinner, Tabs } from '@tih/ui';
+import { Alert, Button, HorizontalDivider, Spinner, Tabs } from '~/ui';
 
 import OfferPercentileAnalysisText from './OfferPercentileAnalysisText';
 import OfferProfileCard from './OfferProfileCard';

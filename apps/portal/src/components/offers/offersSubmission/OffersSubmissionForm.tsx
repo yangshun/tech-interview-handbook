@@ -4,7 +4,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 import { JobType } from '@prisma/client';
-import { Button, Spinner, useToast } from '@tih/ui';
+import { Button, Spinner, useToast } from '~/ui';
 
 import { useGoogleAnalytics } from '~/components/global/GoogleAnalytics';
 import type { BreadcrumbStep } from '~/components/offers/Breadcrumbs';

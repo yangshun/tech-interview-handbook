@@ -1,7 +1,7 @@
 import { formatDistanceToNow } from 'date-fns';
 import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
-import { Button, Dialog, TextArea, useToast } from '@tih/ui';
+import { Button, Dialog, TextArea, useToast } from '~/ui';
 
 import ProfilePhotoHolder from '~/components/offers/profile/ProfilePhotoHolder';
 

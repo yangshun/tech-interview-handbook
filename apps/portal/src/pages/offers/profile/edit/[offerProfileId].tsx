@@ -10,7 +10,7 @@ import OffersSubmissionForm, {
 } from '~/components/offers/offersSubmission/OffersSubmissionForm';
 import type { OffersProfileFormData } from '~/components/offers/types';
 
-import { Spinner } from '~/../../../packages/ui/dist';
+import { Spinner } from '~/ui';
 import { getProfilePath } from '~/utils/offers/link';
 import { convertToMonthYear } from '~/utils/offers/time';
 import { trpc } from '~/utils/trpc';

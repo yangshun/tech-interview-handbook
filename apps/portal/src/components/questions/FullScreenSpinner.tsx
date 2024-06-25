@@ -1,4 +1,4 @@
-import { Spinner } from '@tih/ui';
+import { Spinner } from '~/ui';
 
 export default function FullScreenSpinner() {
   return (

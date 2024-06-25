@@ -8,7 +8,7 @@ import {
   SparklesIcon,
 } from '@heroicons/react/24/outline';
 import { ResumesSection } from '@prisma/client';
-import { Spinner } from '@tih/ui';
+import { Spinner } from '~/ui';
 
 import { trpc } from '~/utils/trpc';
 

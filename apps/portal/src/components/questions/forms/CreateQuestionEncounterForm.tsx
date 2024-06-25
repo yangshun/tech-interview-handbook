@@ -1,7 +1,7 @@
 import { startOfMonth } from 'date-fns';
 import { useState } from 'react';
 import { CheckIcon } from '@heroicons/react/20/solid';
-import { Button } from '@tih/ui';
+import { Button } from '~/ui';
 
 import type { Month } from '~/components/shared/MonthYearPicker';
 import MonthYearPicker from '~/components/shared/MonthYearPicker';

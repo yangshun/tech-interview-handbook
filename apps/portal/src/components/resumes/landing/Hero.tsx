@@ -1,4 +1,4 @@
-import { Button } from '@tih/ui';
+import { Button } from '~/ui';
 
 import { Container } from './Container';
 

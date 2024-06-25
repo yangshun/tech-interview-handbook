@@ -14,7 +14,7 @@ import CompanyProfileImage from '~/components/shared/CompanyProfileImage';
 import type { JobTitleType } from '~/components/shared/JobTitles';
 import { getLabelForJobTitleType } from '~/components/shared/JobTitles';
 
-import { Button } from '~/../../../packages/ui/dist';
+import { Button } from '~/ui';
 import { convertMoneyToString } from '~/utils/offers/currency';
 import { formatDate } from '~/utils/offers/time';
 
