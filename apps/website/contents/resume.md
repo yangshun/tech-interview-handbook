@@ -124,7 +124,7 @@ Ensure you do these:
 
 #### Write a headline for your resume summary
 
-Instead of writing "Professional Summary" as the title of the section, further concise your experience into a headline with fewer than 10 words. Treat it like a slightly more elaborate version of your LinkedIn profile headline. Some examples"
+Instead of writing "Professional Summary" as the title of the section, further concise your experience into a headline with fewer than 10 words. Treat it like a slightly more elaborate version of your LinkedIn profile headline. Some examples:
 
 ##### Software Engineer (Full Stack)
 
