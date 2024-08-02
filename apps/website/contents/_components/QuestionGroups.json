@@ -100,17 +100,6 @@
       "routines": ["matrix", "depth-first-search"]
     },
     {
-      "slug": "lowest-common-ancestor-of-a-binary-search-tree",
-      "title": "Lowest Common Ancestor of a Binary Search Tree",
-      "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree",
-      "duration": 20,
-      "epi": 1,
-      "difficulty": "Easy",
-      "id": 235,
-      "topic": "binary-search-tree",
-      "routines": []
-    },
-    {
       "slug": "balanced-binary-tree",
       "title": "Balanced Binary Tree",
       "url": "https://leetcode.com/problems/balanced-binary-tree",
@@ -300,6 +289,17 @@
       "id": 57,
       "topic": "array",
       "routines": ["interval"]
+    },
+    {
+      "slug": "lowest-common-ancestor-of-a-binary-search-tree",
+      "title": "Lowest Common Ancestor of a Binary Search Tree",
+      "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree",
+      "duration": 20,
+      "epi": 1,
+      "difficulty": "Medium",
+      "id": 235,
+      "topic": "binary-search-tree",
+      "routines": []
     },
     {
       "slug": "01-matrix",
