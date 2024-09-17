@@ -73,7 +73,7 @@ Companies have different focuses depending on the stage they are at and the type
 
 | Dimension | Early-stage startup | Late-stage startup | Large company |
 | --- | --- | --- | --- |
-| Company size | <100 | 100-1000 | >1000 |
+| Company size | &lt;100 | 100-1000 | &gt;1000 |
 | Compensation | Base salary is a bit higher than big companies. Higher equity amount but its value is hard to judge as the company's valuation is unclear and stocks are not worth money yet. High risk, high return. | Base salary is a bit higher than big companies. Company valuation is clearer and stocks have higher chance of being worth money. | Depends on the prestige of the company. Compensation is usually market standard or better. Stocks are worth money if company has gone public. |
 | Types of work | Mainly product development. Engineers have to wear multiple hats - Front End, Back End, DevOps, Design, etc. | Product development and some infra. | Diverse roles and specialized work; dedicated people for each role. Infra and prod infra work is more common. More opportunities for internal transfers, sometimes even across the globe. |
 | Career ladder | Unstructured. No (or very vague) career levels. Not much formal mentorship nor training. | Somewhat structured. | Very structured. Well-defined career levels. |
