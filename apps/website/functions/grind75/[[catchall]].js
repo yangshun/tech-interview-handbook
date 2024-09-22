@@ -1,4 +1,4 @@
-const SOURCE_HOST = 'https://grind75.vercel.app';
+const SOURCE_HOST = 'https://grind75.pages.dev';
 
 export async function onRequest(context) {
   const { request } = context;
