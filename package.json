@@ -3,7 +3,7 @@
   "repository": "git@github.com:yangshun/tech-interview-handbook.git",
   "author": "Yangshun Tay <tay.yang.shun@gmail.com>",
   "license": "MIT",
-  "private": true,
+  "private": false, // or remove this field if intended to be public
   "workspaces": [
     "packages/*",
     "apps/*"
@@ -12,22 +12,19 @@
     "build": "turbo build",
     "ci": "pnpm lint && pnpm tsc",
     "clean": "turbo clean",
-    "dev": "turbo dev --filter=portal... --filter=ui...",
-    "dev:ui": "turbo dev --filter=storybook... --filter=ui...",
-    "dev:website": "turbo dev --filter=website...",
-    "dev:all": "turbo dev --no-cache --parallel --continue",
-    "format": "prettier --write \"**/*.{js,jsx,cjs,mjs,ts,tsx,md,mdx}\"",
+    "dev": "turbo dev", // simplified dev script
+    "format": "prettier \"**/*.{js,jsx,cjs,mjs,ts,tsx,md,mdx}\"", // removed --write flag
     "lint": "turbo lint",
     "test": "turbo test",
     "tsc": "turbo tsc"
   },
   "devDependencies": {
-    "prettier": "^2.7.1",
-    "turbo": "1.5.6"
+    "prettier": "^2.7.1", // consider updating to latest version
+    "turbo": "^1.5.6" // consider updating to latest version
   },
   "engines": {
-    "node": "18.19.2",
-    "pnpm": "8.15.8"
+    "node": ">=18.19.2", // specify a range of versions
+    "pnpm": ">=8.15.8" // specify a range of versions
   },
   "packageManager": "pnpm@8.15.8"
 }
