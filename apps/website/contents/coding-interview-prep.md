@@ -32,7 +32,7 @@ If you have decided to embark on the arduous process of preparing for your codin
 
 ## What is a Software Engineering coding interview?
 
-Coding interviews are a form of technical interviews used to access a potential software engineer candidate's competencies through presenting them with programming problems. Typically, coding interviews have a focus on data structures and algorithms, while other technical rounds may encompass [system design](./system-design.md) (especially for middle to senior level candidates).
+Coding interviews are a form of technical interviews used to assess a potential software engineer candidate's competencies through presenting them with programming problems. Typically, coding interviews have a focus on data structures and algorithms, while other technical rounds may encompass [system design](./system-design.md) (especially for middle to senior level candidates).
 
 A coding interview round is typically 30 - 45 minutes. You will be given a technical question (or questions) by the interviewer, and will be expected to write code in a real-time collaborative editor such as CodePen or CoderPad (phone screen / virtual onsite) or on a whiteboard (onsite) to solve the problem within 30–45 minutes.
 
