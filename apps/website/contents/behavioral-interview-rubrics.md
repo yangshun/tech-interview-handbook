@@ -110,7 +110,7 @@ Example Responses:
 Example Questions:
 
 - Describe a situation when you made a mistake, and what you learned from it.
-- Tell me about some constructive feedback you received from a manager or a peer
+- Tell me about some constructive feedback you received from a manager or a peer.
 - Tell me about a skill set that you observed in a peer or mentor that you want to develop in the next six months.
 
 Example Responses:
