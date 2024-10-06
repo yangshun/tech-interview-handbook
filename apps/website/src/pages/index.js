@@ -745,7 +745,7 @@ function SuccessStoriesSection() {
         <p className="margin-vert--lg text--center">
           Would you like to contribute a success story?{' '}
           <a
-            href="https://github.com/yangshun/tech-interview-handbook/edit/master/website/src/data/successStories.js"
+            href="https://github.com/yangshun/tech-interview-handbook/edit/main/apps/website/src/data/successStories.js"
             rel="noopener"
             target="_blank">
             Open a Pull Request here
