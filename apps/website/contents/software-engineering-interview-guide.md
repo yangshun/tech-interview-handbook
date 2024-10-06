@@ -196,7 +196,11 @@ Some of the best system design interview preparation resources include:
 
 ## Prepare for the behavioral interview
 
-Every top tech company has at least one round of behavioral interviews for software engineers. Typically, behavioral interviews for software engineers include: Sharing about details of previous experiences on resume. Providing examples of past situations and behavior that demonstrate certain behavioral attributes (e.g. conflict management, data driven). Sharing of ambitions and career plans.
+Every top tech company has at least one round of behavioral interviews for software engineers. Typically, behavioral interviews for software engineers include:
+
+- Sharing about details of previous experiences on resume
+- Providing examples of past situations and behavior that demonstrate certain behavioral attributes (e.g. conflict management skills, being data-driven)
+- Sharing of ambitions and career plans
 
 As much as these interviews seem "fluffy" or unstructured, there is actually a structured way to prepare for behavioral interviews:
 
