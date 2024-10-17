@@ -529,7 +529,7 @@ function TweetsSection() {
         <div className={clsx('row', styles.tweetsSection)}>
           {/* Render tweets in groups of three */}
           <div className="col col--4">
-            {userTweets.slice(0, 3).map((tweet, index) => (
+            {userTweets.slice(0, 4).map((tweet, index) => (
               <Tweet
                 key={index}
                 url={tweet.url}
@@ -542,7 +542,7 @@ function TweetsSection() {
             ))}
           </div>
           <div className="col col--4">
-            {userTweets.slice(3, 6).map((tweet, index) => (
+            {userTweets.slice(4, 7).map((tweet, index) => (
               <Tweet
                 key={index}
                 url={tweet.url}
@@ -555,7 +555,7 @@ function TweetsSection() {
             ))}
           </div>
           <div className="col col--4">
-            {userTweets.slice(6, 9).map((tweet, index) => (
+            {userTweets.slice(7, 10).map((tweet, index) => (
               <Tweet
                 key={index}
                 url={tweet.url}
