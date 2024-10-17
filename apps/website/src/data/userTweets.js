@@ -19,6 +19,46 @@ export default [
     ),
   },
   {
+    url: "https://twitter.com/ravinwashere/status/1328381097277681665",
+    handle: "ravinwashere",
+    name: "Ravin",
+    date: "Nov 17, 2020",
+    avatar: "/img/tweets/ravinwashere.jpg",
+    content: (
+      <>
+        Preparing for a job interview?
+        <br />
+        <br />
+        The tech interview handbook contains carefully curated to help
+        you ace your next technical interview.
+        <br />
+        <br />
+        And it's free.
+      </>
+    ),
+  },
+  {
+    url: "https://twitter.com/rwenderlich/status/1166336060533727232",
+    handle: "rwenderlich",
+    name: "raywenderlich.com",
+    date: "Aug 27, 2019",
+    avatar: "/img/tweets/rwenderlich.jpg",
+    content: <>Nice open source tech interview handbook</>,
+  },
+  {
+    url: "https://twitter.com/umaar/status/913425809108606976",
+    handle: "umaar",
+    name: "Umar Hansa",
+    date: "Sep 28, 2017",
+    avatar: "/img/tweets/umaar.jpg",
+    content: (
+      <>
+        Tech Interview Handbook 💻 - Content to help you ace your next
+        technical interview. Lots of front-end content here ✅
+      </>
+    ),
+  },
+  {
     url: "https://twitter.com/MSFTImagine/status/1502675788335886344",
     handle: "MSFTImagine",
     name: "Microsoft Imagine Cup",
@@ -29,6 +69,38 @@ export default [
         Ready to rock your #Coding interviews? Follow along as
         @yangshunz shares tips on how to land your dream job from
         personal experience.
+      </>
+    ),
+  },
+  {
+    url: "https://twitter.com/palashv2/status/1452981345899085833",
+    handle: "palashv2",
+    name: "Palash",
+    date: "Oct 26, 2021",
+    avatar: "/img/tweets/palashv2.jpg",
+    content: (
+      <>
+        5. Tech Interview Handbook
+        <br />
+        <br />
+        Here's free and curated technical interview preparation
+        materials for busy engineers. Besides the usual algorithm
+        questions, other awesome stuff includes How to prepare for
+        coding interviews, Interview Cheatsheet, and more.
+      </>
+    ),
+  },
+  {
+    url: "https://twitter.com/Justyna_Adam/status/1186166253830004736",
+    handle: "Justyna_Adam",
+    name: "Justyna_Adamczyk",
+    date: "Oct 21, 2019",
+    avatar: "/img/tweets/Justyna_Adam.jpg",
+    content: (
+      <>
+        Another excellent tech interview handbook! If you need to
+        prepare yourself for a tech interview or you're an interviewer
+        and need additional inspiration. Happy Monday! #techinterviews
       </>
     ),
   },
@@ -53,43 +125,6 @@ export default [
     ),
   },
   {
-    url: "https://twitter.com/ravinwashere/status/1328381097277681665",
-    handle: "ravinwashere",
-    name: "Ravin",
-    date: "Nov 17, 2020",
-    avatar: "/img/tweets/ravinwashere.jpg",
-    content: (
-      <>
-        Preparing for a job interview?
-        <br />
-        <br />
-        The tech interview handbook contains carefully curated to help
-        you ace your next technical interview.
-        <br />
-        <br />
-        And it's free.
-      </>
-    ),
-  },
-  {
-    url: "https://twitter.com/palashv2/status/1452981345899085833",
-    handle: "palashv2",
-    name: "Palash",
-    date: "Oct 26, 2021",
-    avatar: "/img/tweets/palashv2.jpg",
-    content: (
-      <>
-        5. Tech Interview Handbook
-        <br />
-        <br />
-        Here's free and curated technical interview preparation
-        materials for busy engineers. Besides the usual algorithm
-        questions, other awesome stuff includes How to prepare for
-        coding interviews, Interview Cheatsheet, and more.
-      </>
-    ),
-  },
-  {
     url: "https://twitter.com/Vinaystwt/status/1437062973554507777",
     handle: "Vinaystwt",
     name: "Vinay Sharma",
@@ -103,28 +138,6 @@ export default [
       </>
     ),
   },
-  {
-    url: "https://twitter.com/rwenderlich/status/1166336060533727232",
-    handle: "rwenderlich",
-    name: "raywenderlich.com",
-    date: "Aug 27, 2019",
-    avatar: "/img/tweets/rwenderlich.jpg",
-    content: <>Nice open source tech interview handbook</>,
-  },
-  {
-    url: "https://twitter.com/Justyna_Adam/status/1186166253830004736",
-    handle: "Justyna_Adam",
-    name: "Justyna_Adamczyk",
-    date: "Oct 21, 2019",
-    avatar: "/img/tweets/Justyna_Adam.jpg",
-    content: (
-      <>
-        Another excellent tech interview handbook! If you need to
-        prepare yourself for a tech interview or you're an interviewer
-        and need additional inspiration. Happy Monday! #techinterviews
-      </>
-    ),
-  },
     {
     url: "https://twitter.com/sitepointdotcom/status/1164121717243023360",
     handle: "sitepointdotcom",
@@ -135,19 +148,6 @@ export default [
       <>
         The Tech Interview Handbook provides carefully curated content
         to help you ace your next technical interview.
-      </>
-    ),
-  },
-  {
-    url: "https://twitter.com/umaar/status/913425809108606976",
-    handle: "umaar",
-    name: "Umar Hansa",
-    date: "Sep 28, 2017",
-    avatar: "/img/tweets/umaar.jpg",
-    content: (
-      <>
-        Tech Interview Handbook 💻 - Content to help you ace your next
-        technical interview. Lots of front-end content here ✅
       </>
     ),
   },
