@@ -60,3 +60,15 @@ What makes Meetapro stand out?
 **Disclaimer: This section was added by the Codemia team**
 
 Codemia harnesses the power of advanced AI technology to evaluate and score your solutions instantly, enabling iterative practice and rapid skill refinement. But Codemia isn't just about practicing in isolation; it's a thriving community where members collaborate, share insights, and provide valuable feedback to one another, fostering a collaborative learning environment unlike any other. With a practice environment reminiscent of the familiar setup of LeetCode for algorithm challenges, Codemia offers a realistic simulation of interview scenarios, ensuring you're fully prepared to tackle any system design question with confidence.
+
+## [Peerfect](https://peerfect.net/?utm_source=techinterviewhandbook)
+
+**Disclaimer: This section was added by the Peerfect team**
+
+Peerfect is a free platform that offers personalized mock interview practice, letting you choose both your interview partner and type. With options for technical, coding, behavioral, and system design interviews, Peerfect connects you with peers at different experience levels for targeted practice and constructive feedback—all within a supportive community focused on growth and skill-building.
+
+What sets Peerfect apart?
+
+- Choose Your Peer: Unlike other platforms that automatically match you with an interviewer, Peerfect lets you select your interview partner, giving you control over the kind of experience you want. You can choose someone with a similar skill level, career background, or even someone who specializes in areas you want to improve.
+- Variety of Interview Types: Peerfect covers all the bases—technical, coding, behavioral, and system design interviews—so you can practice for every stage of the hiring process. Each interview type is tailored to focus on specific skills, helping you build a well-rounded profile.
+- Free and Accessible: With Peerfect, there’s no cost barrier. It’s entirely free, making it easy for anyone to gain quality practice without financial stress.
