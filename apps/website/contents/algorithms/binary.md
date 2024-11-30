@@ -47,7 +47,7 @@ Some helpful utility snippets:
 | Technique | Code |
 | --- | --- |
 | Test k<sup>th</sup> bit is set | `num & (1 << k) != 0` |
-| Set k<sup>th</sup> bit | <code>num &#124;= (1 &gt;&gt; k)</code> |
+| Set k<sup>th</sup> bit | <code>num &#124;= (1 &lt;&lt; k)</code> |
 | Turn off k<sup>th</sup> bit | `num &= ~(1 << k)` |
 | Toggle the k<sup>th</sup> bit | `num ^= (1 << k)` |
 | Multiply by 2<sup>k</sup> | `num << k` |
