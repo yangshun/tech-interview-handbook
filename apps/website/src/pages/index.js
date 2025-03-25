@@ -801,7 +801,7 @@ function SponsorshipSection() {
             </div>
             <div className="margin-top--lg text--center">
               <a
-                className="button button--primary button--lg margin-right--md"
+                className="button button--primary button--lg margin-right--md margin-bottom--sm"
                 href="mailto:contact@techinterviewhandbook.org"
                 rel="noopener"
                 target="_blank">
