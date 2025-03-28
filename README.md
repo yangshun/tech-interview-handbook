@@ -1,5 +1,5 @@
-<h1 align="center">Tech Interview Handbook</h1>
-
+<h1 align="center">Tech Interview Handbook modified by Shell</h1>
+<h3 align="center">Programacion para Ciencia de Datos</h3>
 <div align="center">
   <a href="https://www.techinterviewhandbook.org/">
     <img src="assets/logo.svg" alt="Tech Interview Handbook" width="400" />
