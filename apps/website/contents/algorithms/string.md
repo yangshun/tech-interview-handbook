@@ -95,7 +95,7 @@ An anagram is word switch or word play. It is the result of rearranging the lett
 
 To determine if two strings are anagrams, there are a few approaches:
 
-- Sorting both strings should produce the same resulting string. This takes O(n.log(n)) time and O(log(n)) space.
+- Sorting both strings should produce the same resulting string. This takes O(n.log(n)) time and O(n) space.
 - If we map each character to a prime number and we multiply each mapped number together, anagrams should have the same multiple (prime factor decomposition). This takes O(n) time and O(1) space. Examples: [Group Anagram](https://leetcode.com/problems/group-anagrams/)
 - Frequency counting of characters will help to determine if two strings are anagrams. This also takes O(n) time and O(1) space.
 
