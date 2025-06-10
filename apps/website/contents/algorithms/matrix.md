@@ -59,7 +59,7 @@ Many grid-based games can be modeled as a matrix, such as Tic-Tac-Toe, Sudoku, C
 Transposing a matrix in Python is simply:
 
 ```py
-transposed_matrix = zip(*matrix)
+transposed_matrix = [[matrix[i][j] for i in range(len(matrix))] for j in range(len(matrix[0]))]
 ```
 
 ## Essential questions
