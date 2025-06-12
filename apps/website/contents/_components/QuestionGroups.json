@@ -103,9 +103,9 @@
       "slug": "lowest-common-ancestor-of-a-binary-search-tree",
       "title": "Lowest Common Ancestor of a Binary Search Tree",
       "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree",
-      "duration": 20,
+      "duration": 30,
       "epi": 1,
-      "difficulty": "Easy",
+      "difficulty": "Medium",
       "id": 235,
       "topic": "binary-search-tree",
       "routines": []
