@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import Container from '~/components/shared/Container';
 
 const people = [
