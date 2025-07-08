@@ -22,10 +22,6 @@ purchase quantity                                  price per unit
 
 <!--truncate-->
 
-<head>
-  <link rel="canonical" href="https://www.zhenghao.io/posts/take-control-coding-interview" />
-</head>
-
 The task the interviewer asks you to do is to write out a function that takes the amount of the times being purchased as the input and output the price per unit according the table. So if the input is 5, the function returns 5, and if the input is 6, the function returns 4... you get the idea.
 
 That's it. That is the whole question. "This is even simpler than [Fizz Buzz](https://leetcode.com/problems/fizz-buzz/)," you think to yourself, "but it might lead to more difficult follow-up questions, like it might get tweaked into a binary search problem or something". So you start to write the following simple solution, expecting more in-depth follow-up questions to come.
