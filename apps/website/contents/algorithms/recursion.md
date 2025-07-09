@@ -45,7 +45,7 @@ Many algorithms relevant in coding interviews make heavy use of recursion - bina
 ## Learning resources
 
 - Readings
-  - [Recursion](https://www.cs.utah.edu/~germain/PPS/Topics/recursion.html), University of Utah
+  - [Recursion](https://users.cs.utah.edu/~germain/PPS/Topics/recursion.html), University of Utah
 - Videos
   - [Tail Recursion](https://www.coursera.org/lecture/programming-languages/tail-recursion-YZic1), University of Washington
 

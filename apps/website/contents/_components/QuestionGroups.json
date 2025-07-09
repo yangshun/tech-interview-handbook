@@ -3,7 +3,7 @@
     {
       "slug": "two-sum",
       "title": "Two Sum",
-      "url": "https://leetcode.com/problems/two-sum",
+      "url": "https://leetcode.com/problems/two-sum/",
       "duration": 15,
       "epi": null,
       "difficulty": "Easy",
@@ -14,7 +14,7 @@
     {
       "slug": "valid-parentheses",
       "title": "Valid Parentheses",
-      "url": "https://leetcode.com/problems/valid-parentheses",
+      "url": "https://leetcode.com/problems/valid-parentheses/",
       "duration": 20,
       "epi": 3,
       "difficulty": "Easy",
@@ -25,7 +25,7 @@
     {
       "slug": "merge-two-sorted-lists",
       "title": "Merge Two Sorted Lists",
-      "url": "https://leetcode.com/problems/merge-two-sorted-lists",
+      "url": "https://leetcode.com/problems/merge-two-sorted-lists/",
       "duration": 20,
       "epi": 0,
       "difficulty": "Easy",
@@ -36,7 +36,7 @@
     {
       "slug": "best-time-to-buy-and-sell-stock",
       "title": "Best Time to Buy and Sell Stock",
-      "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock",
+      "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
       "duration": 20,
       "epi": 0,
       "difficulty": "Easy",
@@ -47,7 +47,7 @@
     {
       "slug": "valid-palindrome",
       "title": "Valid Palindrome",
-      "url": "https://leetcode.com/problems/valid-palindrome",
+      "url": "https://leetcode.com/problems/valid-palindrome/",
       "duration": 15,
       "epi": 2,
       "difficulty": "Easy",
@@ -58,7 +58,7 @@
     {
       "slug": "invert-binary-tree",
       "title": "Invert Binary Tree",
-      "url": "https://leetcode.com/problems/invert-binary-tree",
+      "url": "https://leetcode.com/problems/invert-binary-tree/",
       "duration": 15,
       "epi": null,
       "difficulty": "Easy",
@@ -69,7 +69,7 @@
     {
       "slug": "valid-anagram",
       "title": "Valid Anagram",
-      "url": "https://leetcode.com/problems/valid-anagram",
+      "url": "https://leetcode.com/problems/valid-anagram/",
       "duration": 15,
       "epi": null,
       "difficulty": "Easy",
@@ -80,7 +80,7 @@
     {
       "slug": "binary-search",
       "title": "Binary Search",
-      "url": "https://leetcode.com/problems/binary-search",
+      "url": "https://leetcode.com/problems/binary-search/",
       "duration": 15,
       "epi": null,
       "difficulty": "Easy",
@@ -91,7 +91,7 @@
     {
       "slug": "flood-fill",
       "title": "Flood Fill",
-      "url": "https://leetcode.com/problems/flood-fill",
+      "url": "https://leetcode.com/problems/flood-fill/",
       "duration": 20,
       "epi": 2,
       "difficulty": "Easy",
@@ -102,7 +102,7 @@
     {
       "slug": "lowest-common-ancestor-of-a-binary-search-tree",
       "title": "Lowest Common Ancestor of a Binary Search Tree",
-      "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree",
+      "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
       "duration": 20,
       "epi": 1,
       "difficulty": "Easy",
@@ -113,7 +113,7 @@
     {
       "slug": "balanced-binary-tree",
       "title": "Balanced Binary Tree",
-      "url": "https://leetcode.com/problems/balanced-binary-tree",
+      "url": "https://leetcode.com/problems/balanced-binary-tree/",
       "duration": 15,
       "epi": 0,
       "difficulty": "Easy",
@@ -124,7 +124,7 @@
     {
       "slug": "linked-list-cycle",
       "title": "Linked List Cycle",
-      "url": "https://leetcode.com/problems/linked-list-cycle",
+      "url": "https://leetcode.com/problems/linked-list-cycle/",
       "duration": 20,
       "epi": 1,
       "difficulty": "Easy",
@@ -137,7 +137,7 @@
     {
       "slug": "implement-queue-using-stacks",
       "title": "Implement Queue using Stacks",
-      "url": "https://leetcode.com/problems/implement-queue-using-stacks",
+      "url": "https://leetcode.com/problems/implement-queue-using-stacks/",
       "duration": 20,
       "epi": 3,
       "difficulty": "Easy",
@@ -148,7 +148,7 @@
     {
       "slug": "first-bad-version",
       "title": "First Bad Version",
-      "url": "https://leetcode.com/problems/first-bad-version",
+      "url": "https://leetcode.com/problems/first-bad-version/",
       "duration": 20,
       "epi": null,
       "difficulty": "Easy",
@@ -159,7 +159,7 @@
     {
       "slug": "ransom-note",
       "title": "Ransom Note",
-      "url": "https://leetcode.com/problems/ransom-note",
+      "url": "https://leetcode.com/problems/ransom-note/",
       "duration": 15,
       "epi": 0,
       "difficulty": "Easy",
@@ -170,7 +170,7 @@
     {
       "slug": "climbing-stairs",
       "title": "Climbing Stairs",
-      "url": "https://leetcode.com/problems/climbing-stairs",
+      "url": "https://leetcode.com/problems/climbing-stairs/",
       "duration": 20,
       "epi": null,
       "difficulty": "Easy",
@@ -181,7 +181,7 @@
     {
       "slug": "longest-palindrome",
       "title": "Longest Palindrome",
-      "url": "https://leetcode.com/problems/longest-palindrome",
+      "url": "https://leetcode.com/problems/longest-palindrome/",
       "duration": 20,
       "epi": 2,
       "difficulty": "Easy",
@@ -192,7 +192,7 @@
     {
       "slug": "reverse-linked-list",
       "title": "Reverse Linked List",
-      "url": "https://leetcode.com/problems/reverse-linked-list",
+      "url": "https://leetcode.com/problems/reverse-linked-list/",
       "duration": 20,
       "epi": 1,
       "difficulty": "Easy",
@@ -203,7 +203,7 @@
     {
       "slug": "majority-element",
       "title": "Majority Element",
-      "url": "https://leetcode.com/problems/majority-element",
+      "url": "https://leetcode.com/problems/majority-element/",
       "duration": 20,
       "epi": 2,
       "difficulty": "Easy",
@@ -214,7 +214,7 @@
     {
       "slug": "add-binary",
       "title": "Add Binary",
-      "url": "https://leetcode.com/problems/add-binary",
+      "url": "https://leetcode.com/problems/add-binary/",
       "duration": 15,
       "epi": null,
       "difficulty": "Easy",
@@ -225,7 +225,7 @@
     {
       "slug": "diameter-of-binary-tree",
       "title": "Diameter of Binary Tree",
-      "url": "https://leetcode.com/problems/diameter-of-binary-tree",
+      "url": "https://leetcode.com/problems/diameter-of-binary-tree/",
       "duration": 30,
       "epi": null,
       "difficulty": "Easy",
@@ -236,7 +236,7 @@
     {
       "slug": "middle-of-the-linked-list",
       "title": "Middle of the Linked List",
-      "url": "https://leetcode.com/problems/middle-of-the-linked-list",
+      "url": "https://leetcode.com/problems/middle-of-the-linked-list/",
       "duration": 20,
       "epi": null,
       "difficulty": "Easy",
@@ -247,7 +247,7 @@
     {
       "slug": "maximum-depth-of-binary-tree",
       "title": "Maximum Depth of Binary Tree",
-      "url": "https://leetcode.com/problems/maximum-depth-of-binary-tree",
+      "url": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
       "duration": 15,
       "epi": null,
       "difficulty": "Easy",
@@ -258,7 +258,7 @@
     {
       "slug": "contains-duplicate",
       "title": "Contains Duplicate",
-      "url": "https://leetcode.com/problems/contains-duplicate",
+      "url": "https://leetcode.com/problems/contains-duplicate/",
       "duration": 15,
       "epi": null,
       "difficulty": "Easy",
@@ -271,7 +271,7 @@
     {
       "slug": "min-stack",
       "title": "Min Stack",
-      "url": "https://leetcode.com/problems/min-stack",
+      "url": "https://leetcode.com/problems/min-stack/",
       "duration": 20,
       "epi": 0,
       "difficulty": "Medium",
@@ -282,7 +282,7 @@
     {
       "slug": "maximum-subarray",
       "title": "Maximum Subarray",
-      "url": "https://leetcode.com/problems/maximum-subarray",
+      "url": "https://leetcode.com/problems/maximum-subarray/",
       "duration": 20,
       "epi": null,
       "difficulty": "Medium",
@@ -293,7 +293,7 @@
     {
       "slug": "insert-interval",
       "title": "Insert Interval",
-      "url": "https://leetcode.com/problems/insert-interval",
+      "url": "https://leetcode.com/problems/insert-interval/",
       "duration": 25,
       "epi": null,
       "difficulty": "Medium",
@@ -304,7 +304,7 @@
     {
       "slug": "01-matrix",
       "title": "01 Matrix",
-      "url": "https://leetcode.com/problems/01-matrix",
+      "url": "https://leetcode.com/problems/01-matrix/",
       "duration": 30,
       "epi": null,
       "difficulty": "Medium",
@@ -315,7 +315,7 @@
     {
       "slug": "k-closest-points-to-origin",
       "title": "K Closest Points to Origin",
-      "url": "https://leetcode.com/problems/k-closest-points-to-origin",
+      "url": "https://leetcode.com/problems/k-closest-points-to-origin/",
       "duration": 30,
       "epi": 1,
       "difficulty": "Medium",
@@ -326,7 +326,7 @@
     {
       "slug": "longest-substring-without-repeating-characters",
       "title": "Longest Substring Without Repeating Characters",
-      "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters",
+      "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
       "duration": 30,
       "epi": null,
       "difficulty": "Medium",
@@ -337,7 +337,7 @@
     {
       "slug": "3sum",
       "title": "3Sum",
-      "url": "https://leetcode.com/problems/3sum",
+      "url": "https://leetcode.com/problems/3sum/",
       "duration": 30,
       "epi": 0,
       "difficulty": "Medium",
@@ -348,7 +348,7 @@
     {
       "slug": "binary-tree-level-order-traversal",
       "title": "Binary Tree Level Order Traversal",
-      "url": "https://leetcode.com/problems/binary-tree-level-order-traversal",
+      "url": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
       "duration": 20,
       "epi": 1,
       "difficulty": "Medium",
@@ -359,7 +359,7 @@
     {
       "slug": "clone-graph",
       "title": "Clone Graph",
-      "url": "https://leetcode.com/problems/clone-graph",
+      "url": "https://leetcode.com/problems/clone-graph/",
       "duration": 25,
       "epi": null,
       "difficulty": "Medium",
@@ -370,7 +370,7 @@
     {
       "slug": "evaluate-reverse-polish-notation",
       "title": "Evaluate Reverse Polish Notation",
-      "url": "https://leetcode.com/problems/evaluate-reverse-polish-notation",
+      "url": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
       "duration": 30,
       "epi": 2,
       "difficulty": "Medium",
@@ -383,7 +383,7 @@
     {
       "slug": "course-schedule",
       "title": "Course Schedule",
-      "url": "https://leetcode.com/problems/course-schedule",
+      "url": "https://leetcode.com/problems/course-schedule/",
       "duration": 30,
       "epi": null,
       "difficulty": "Medium",
@@ -394,7 +394,7 @@
     {
       "slug": "implement-trie-prefix-tree",
       "title": "Implement Trie (Prefix Tree)",
-      "url": "https://leetcode.com/problems/implement-trie-prefix-tree",
+      "url": "https://leetcode.com/problems/implement-trie-prefix-tree/",
       "duration": 35,
       "epi": null,
       "difficulty": "Medium",
@@ -405,7 +405,7 @@
     {
       "slug": "coin-change",
       "title": "Coin Change",
-      "url": "https://leetcode.com/problems/coin-change",
+      "url": "https://leetcode.com/problems/coin-change/",
       "duration": 25,
       "epi": null,
       "difficulty": "Medium",
@@ -416,7 +416,7 @@
     {
       "slug": "product-of-array-except-self",
       "title": "Product of Array Except Self",
-      "url": "https://leetcode.com/problems/product-of-array-except-self",
+      "url": "https://leetcode.com/problems/product-of-array-except-self/",
       "duration": 30,
       "epi": null,
       "difficulty": "Medium",
@@ -427,7 +427,7 @@
     {
       "slug": "validate-binary-search-tree",
       "title": "Validate Binary Search Tree",
-      "url": "https://leetcode.com/problems/validate-binary-search-tree",
+      "url": "https://leetcode.com/problems/validate-binary-search-tree/",
       "duration": 20,
       "epi": null,
       "difficulty": "Medium",
@@ -438,7 +438,7 @@
     {
       "slug": "number-of-islands",
       "title": "Number of Islands",
-      "url": "https://leetcode.com/problems/number-of-islands",
+      "url": "https://leetcode.com/problems/number-of-islands/",
       "duration": 25,
       "epi": null,
       "difficulty": "Medium",
@@ -449,7 +449,7 @@
     {
       "slug": "rotting-oranges",
       "title": "Rotting Oranges",
-      "url": "https://leetcode.com/problems/rotting-oranges",
+      "url": "https://leetcode.com/problems/rotting-oranges/",
       "duration": 30,
       "epi": null,
       "difficulty": "Medium",
@@ -460,7 +460,7 @@
     {
       "slug": "search-in-rotated-sorted-array",
       "title": "Search in Rotated Sorted Array",
-      "url": "https://leetcode.com/problems/search-in-rotated-sorted-array",
+      "url": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
       "duration": 30,
       "epi": 2,
       "difficulty": "Medium",
@@ -473,7 +473,7 @@
     {
       "slug": "combination-sum",
       "title": "Combination Sum",
-      "url": "https://leetcode.com/problems/combination-sum",
+      "url": "https://leetcode.com/problems/combination-sum/",
       "duration": 30,
       "epi": null,
       "difficulty": "Medium",
@@ -484,7 +484,7 @@
     {
       "slug": "permutations",
       "title": "Permutations",
-      "url": "https://leetcode.com/problems/permutations",
+      "url": "https://leetcode.com/problems/permutations/",
       "duration": 30,
       "epi": 2,
       "difficulty": "Medium",
@@ -495,7 +495,7 @@
     {
       "slug": "merge-intervals",
       "title": "Merge Intervals",
-      "url": "https://leetcode.com/problems/merge-intervals",
+      "url": "https://leetcode.com/problems/merge-intervals/",
       "duration": 30,
       "epi": 3,
       "difficulty": "Medium",
@@ -506,7 +506,7 @@
     {
       "slug": "lowest-common-ancestor-of-a-binary-tree",
       "title": "Lowest Common Ancestor of a Binary Tree",
-      "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree",
+      "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
       "duration": 25,
       "epi": null,
       "difficulty": "Medium",
@@ -517,7 +517,7 @@
     {
       "slug": "time-based-key-value-store",
       "title": "Time Based Key-Value Store",
-      "url": "https://leetcode.com/problems/time-based-key-value-store",
+      "url": "https://leetcode.com/problems/time-based-key-value-store/",
       "duration": 35,
       "epi": null,
       "difficulty": "Medium",
@@ -528,7 +528,7 @@
     {
       "slug": "accounts-merge",
       "title": "Accounts Merge",
-      "url": "https://leetcode.com/problems/accounts-merge",
+      "url": "https://leetcode.com/problems/accounts-merge/",
       "duration": 30,
       "epi": null,
       "difficulty": "Medium",
@@ -539,7 +539,7 @@
     {
       "slug": "sort-colors",
       "title": "Sort Colors",
-      "url": "https://leetcode.com/problems/sort-colors",
+      "url": "https://leetcode.com/problems/sort-colors/",
       "duration": 25,
       "epi": 0,
       "difficulty": "Medium",
@@ -550,7 +550,7 @@
     {
       "slug": "word-break",
       "title": "Word Break",
-      "url": "https://leetcode.com/problems/word-break",
+      "url": "https://leetcode.com/problems/word-break/",
       "duration": 30,
       "epi": 2,
       "difficulty": "Medium",
@@ -563,7 +563,7 @@
     {
       "slug": "partition-equal-subset-sum",
       "title": "Partition Equal Subset Sum",
-      "url": "https://leetcode.com/problems/partition-equal-subset-sum",
+      "url": "https://leetcode.com/problems/partition-equal-subset-sum/",
       "duration": 30,
       "epi": 2,
       "difficulty": "Medium",
@@ -574,7 +574,7 @@
     {
       "slug": "string-to-integer-atoi",
       "title": "String to Integer (atoi)",
-      "url": "https://leetcode.com/problems/string-to-integer-atoi",
+      "url": "https://leetcode.com/problems/string-to-integer-atoi/",
       "duration": 25,
       "epi": 0,
       "difficulty": "Medium",
@@ -585,7 +585,7 @@
     {
       "slug": "spiral-matrix",
       "title": "Spiral Matrix",
-      "url": "https://leetcode.com/problems/spiral-matrix",
+      "url": "https://leetcode.com/problems/spiral-matrix/",
       "duration": 25,
       "epi": 1,
       "difficulty": "Medium",
@@ -596,7 +596,7 @@
     {
       "slug": "subsets",
       "title": "Subsets",
-      "url": "https://leetcode.com/problems/subsets",
+      "url": "https://leetcode.com/problems/subsets/",
       "duration": 30,
       "epi": 3,
       "difficulty": "Medium",
@@ -607,7 +607,7 @@
     {
       "slug": "binary-tree-right-side-view",
       "title": "Binary Tree Right Side View",
-      "url": "https://leetcode.com/problems/binary-tree-right-side-view",
+      "url": "https://leetcode.com/problems/binary-tree-right-side-view/",
       "duration": 20,
       "epi": null,
       "difficulty": "Medium",
@@ -618,7 +618,7 @@
     {
       "slug": "longest-palindromic-substring",
       "title": "Longest Palindromic Substring",
-      "url": "https://leetcode.com/problems/longest-palindromic-substring",
+      "url": "https://leetcode.com/problems/longest-palindromic-substring/",
       "duration": 25,
       "epi": null,
       "difficulty": "Medium",
@@ -629,7 +629,7 @@
     {
       "slug": "unique-paths",
       "title": "Unique Paths",
-      "url": "https://leetcode.com/problems/unique-paths",
+      "url": "https://leetcode.com/problems/unique-paths/",
       "duration": 20,
       "epi": 2,
       "difficulty": "Medium",
@@ -640,7 +640,7 @@
     {
       "slug": "construct-binary-tree-from-preorder-and-inorder-traversal",
       "title": "Construct Binary Tree from Preorder and Inorder Traversal",
-      "url": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal",
+      "url": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
       "duration": 25,
       "epi": 2,
       "difficulty": "Medium",
@@ -651,7 +651,7 @@
     {
       "slug": "container-with-most-water",
       "title": "Container With Most Water",
-      "url": "https://leetcode.com/problems/container-with-most-water",
+      "url": "https://leetcode.com/problems/container-with-most-water/",
       "duration": 35,
       "epi": 2,
       "difficulty": "Medium",
@@ -664,7 +664,7 @@
     {
       "slug": "letter-combinations-of-a-phone-number",
       "title": "Letter Combinations of a Phone Number",
-      "url": "https://leetcode.com/problems/letter-combinations-of-a-phone-number",
+      "url": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
       "duration": 30,
       "epi": 3,
       "difficulty": "Medium",
@@ -675,7 +675,7 @@
     {
       "slug": "word-search",
       "title": "Word Search",
-      "url": "https://leetcode.com/problems/word-search",
+      "url": "https://leetcode.com/problems/word-search/",
       "duration": 30,
       "epi": null,
       "difficulty": "Medium",
@@ -686,7 +686,7 @@
     {
       "slug": "find-all-anagrams-in-a-string",
       "title": "Find All Anagrams in a String",
-      "url": "https://leetcode.com/problems/find-all-anagrams-in-a-string",
+      "url": "https://leetcode.com/problems/find-all-anagrams-in-a-string/",
       "duration": 30,
       "epi": null,
       "difficulty": "Medium",
@@ -697,7 +697,7 @@
     {
       "slug": "minimum-height-trees",
       "title": "Minimum Height Trees",
-      "url": "https://leetcode.com/problems/minimum-height-trees",
+      "url": "https://leetcode.com/problems/minimum-height-trees/",
       "duration": 30,
       "epi": null,
       "difficulty": "Medium",
@@ -708,7 +708,7 @@
     {
       "slug": "task-scheduler",
       "title": "Task Scheduler",
-      "url": "https://leetcode.com/problems/task-scheduler",
+      "url": "https://leetcode.com/problems/task-scheduler/",
       "duration": 35,
       "epi": null,
       "difficulty": "Medium",
@@ -719,7 +719,7 @@
     {
       "slug": "lru-cache",
       "title": "LRU Cache",
-      "url": "https://leetcode.com/problems/lru-cache",
+      "url": "https://leetcode.com/problems/lru-cache/",
       "duration": 30,
       "epi": null,
       "difficulty": "Medium",
@@ -730,7 +730,7 @@
     {
       "slug": "kth-smallest-element-in-a-bst",
       "title": "Kth Smallest Element in a BST",
-      "url": "https://leetcode.com/problems/kth-smallest-element-in-a-bst",
+      "url": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
       "duration": 25,
       "epi": null,
       "difficulty": "Medium",
@@ -741,7 +741,7 @@
     {
       "slug": "minimum-window-substring",
       "title": "Minimum Window Substring",
-      "url": "https://leetcode.com/problems/minimum-window-substring",
+      "url": "https://leetcode.com/problems/minimum-window-substring/",
       "duration": 30,
       "epi": 3,
       "difficulty": "Hard",
@@ -754,7 +754,7 @@
     {
       "slug": "serialize-and-deserialize-binary-tree",
       "title": "Serialize and Deserialize Binary Tree",
-      "url": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree",
+      "url": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
       "duration": 40,
       "epi": null,
       "difficulty": "Hard",
@@ -765,7 +765,7 @@
     {
       "slug": "trapping-rain-water",
       "title": "Trapping Rain Water",
-      "url": "https://leetcode.com/problems/trapping-rain-water",
+      "url": "https://leetcode.com/problems/trapping-rain-water/",
       "duration": 35,
       "epi": null,
       "difficulty": "Hard",
@@ -776,7 +776,7 @@
     {
       "slug": "find-median-from-data-stream",
       "title": "Find Median from Data Stream",
-      "url": "https://leetcode.com/problems/find-median-from-data-stream",
+      "url": "https://leetcode.com/problems/find-median-from-data-stream/",
       "duration": 30,
       "epi": 3,
       "difficulty": "Hard",
@@ -787,7 +787,7 @@
     {
       "slug": "word-ladder",
       "title": "Word Ladder",
-      "url": "https://leetcode.com/problems/word-ladder",
+      "url": "https://leetcode.com/problems/word-ladder/",
       "duration": 45,
       "epi": null,
       "difficulty": "Hard",
@@ -798,7 +798,7 @@
     {
       "slug": "basic-calculator",
       "title": "Basic Calculator",
-      "url": "https://leetcode.com/problems/basic-calculator",
+      "url": "https://leetcode.com/problems/basic-calculator/",
       "duration": 40,
       "epi": null,
       "difficulty": "Hard",
@@ -809,7 +809,7 @@
     {
       "slug": "maximum-profit-in-job-scheduling",
       "title": "Maximum Profit in Job Scheduling",
-      "url": "https://leetcode.com/problems/maximum-profit-in-job-scheduling",
+      "url": "https://leetcode.com/problems/maximum-profit-in-job-scheduling/",
       "duration": 45,
       "epi": null,
       "difficulty": "Hard",
@@ -820,7 +820,7 @@
     {
       "slug": "merge-k-sorted-lists",
       "title": "Merge k Sorted Lists",
-      "url": "https://leetcode.com/problems/merge-k-sorted-lists",
+      "url": "https://leetcode.com/problems/merge-k-sorted-lists/",
       "duration": 30,
       "epi": null,
       "difficulty": "Hard",
@@ -831,7 +831,7 @@
     {
       "slug": "largest-rectangle-in-histogram",
       "title": "Largest Rectangle in Histogram",
-      "url": "https://leetcode.com/problems/largest-rectangle-in-histogram",
+      "url": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
       "duration": 35,
       "epi": 3,
       "difficulty": "Hard",

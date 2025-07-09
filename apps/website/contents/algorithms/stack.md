@@ -38,7 +38,7 @@ Stacks are an important way of supporting nested or recursive function calls and
 
 | Language | API |
 | --- | --- |
-| C++ | [`std::stack`](https://docs.microsoft.com/en-us/cpp/standard-library/stack-class) |
+| C++ | [`std::stack`](https://learn.microsoft.com/en-us/cpp/standard-library/stack-class) |
 | Java | [`java.util.Stack`](https://docs.oracle.com/javase/10/docs/api/java/util/Stack.html) |
 | Python | Simulated using [List](https://docs.python.org/3/tutorial/datastructures.html) |
 | JavaScript | Simulated using [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) |
@@ -67,22 +67,22 @@ TODO: Monotonic stacks -->
 
 _These are essential questions to practice if you're studying for this topic._
 
-- [Valid Parentheses](https://leetcode.com/problems/valid-parentheses)
-- [Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks)
+- [Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
+- [Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/)
 
 ## Recommended practice questions
 
 _These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
 
 - [Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/)
-- [Min Stack](https://leetcode.com/problems/min-stack)
-- [Asteroid Collision](https://leetcode.com/problems/asteroid-collision)
-- [Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation)
-- [Basic Calculator](https://leetcode.com/problems/basic-calculator)
-- [Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii)
-- [Daily Temperatures](https://leetcode.com/problems/daily-temperatures)
-- [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water)
-- [Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram)
+- [Min Stack](https://leetcode.com/problems/min-stack/)
+- [Asteroid Collision](https://leetcode.com/problems/asteroid-collision/)
+- [Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
+- [Basic Calculator](https://leetcode.com/problems/basic-calculator/)
+- [Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/)
+- [Daily Temperatures](https://leetcode.com/problems/daily-temperatures/)
+- [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
+- [Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/)
 
 ## Recommended courses
 

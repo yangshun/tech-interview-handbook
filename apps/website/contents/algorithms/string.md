@@ -119,7 +119,7 @@ When a question is about counting the number of palindromes, a common trick is t
 
 _These are essential questions to practice if you're studying for this topic._
 
-- [Valid Anagram](https://leetcode.com/problems/valid-anagram)
+- [Valid Anagram](https://leetcode.com/problems/valid-anagram/)
 - [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
 - [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 
@@ -128,7 +128,7 @@ _These are essential questions to practice if you're studying for this topic._
 _These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
 
 - [Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/)
-- [Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string)
+- [Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/)
 - [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/description/)
 - [Group Anagrams](https://leetcode.com/problems/group-anagrams/)
 - [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
