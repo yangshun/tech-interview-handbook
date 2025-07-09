@@ -38,7 +38,7 @@ Breadth-first search is commonly implemented using queues.
 
 | Language | API |
 | --- | --- |
-| C++ | [`std::queue`](https://learn.microsoft.com/en-us/cpp/standard-library/queue-class) |
+| C++ | [`std::queue`](https://learn.microsoft.com/en-us/cpp/standard-library/queue-class?view=msvc-170) |
 | Java | [`java.util.Queue`](https://docs.oracle.com/javase/10/docs/api/java/util/Queue.html).Use [`java.util.ArrayDeque`](https://docs.oracle.com/javase/10/docs/api/java/util/ArrayDeque.html) |
 | Python | [`queue`](https://docs.python.org/3/library/queue.html) |
 | JavaScript | N/A |

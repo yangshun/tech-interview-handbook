@@ -87,7 +87,7 @@ export default function AboutUsPage() {
                 Submit your feedback
                 <a
                   className="text-primary-600 hover:text-primary-500 ml-1"
-                  href="https://forms.gle/KgA6KWDD4XNa53uJA"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSf-eCK4ybgewGDCoyStGdpi7e0EativtWU1Iq0HW3evdLEfwQ/viewform?usp=send_form"
                   rel="noreferrer"
                   target="_blank">
                   here
