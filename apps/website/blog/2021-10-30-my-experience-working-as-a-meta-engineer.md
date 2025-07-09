@@ -34,21 +34,20 @@ Commerce Engineering (hardware sales) is Meta's next up and coming revenue strea
 
 Some stories from engineers in Commerce Engineering:
 
-- [Help 10 People—or Billions? Engineering Impact on a Global Scale](https://www.metacareers.com/life/help-10-peopleor-billions/), Nishita A., Software Engineering Manager, Commerce Engineering
-- [Embracing Change to Evolve Her Engineering Journey](https://www.metacareers.com/life/embracing-change-to-evolve-her-engineering-journey), Michelle T., Software Engineer, Commerce Engineering
+- [Help 10 People—or Billions? Engineering Impact on a Global Scale](https://www.metacareers.com/blog/help-10-peopleor-billions/), Nishita A., Software Engineering Manager, Commerce Engineering
+- [Embracing Change to Evolve Her Engineering Journey](https://www.metacareers.com/blog/embracing-change-to-evolve-her-engineering-journey/), Michelle T., Software Engineer, Commerce Engineering
 
 On the Ads and Business organization, there are these teams:
 
 - **Business Integrity**: They work on building tools to catch bad advertisers (advertisers who create ads which violate our policies). They want to maximize Business Integrity outcomes by building a human review system for ads & commerce on Meta, driving end-to-end improvements in the workflows, and providing best-in-class tools to IP rights holders, etc.
-  - [Software Engineering in APAC: Building for Rapid Growth](https://www.metacareers.com/life/software-engineering-in-apac)
-  - [Curiosity and Passion: Software Engineering at Facebook](https://www.metacareers.com/life/curiosity-and-passion-software-engineering-at-facebook), Henry B., Software Engineer, Business Integrity
+  - [Software Engineering in APAC: Building for Rapid Growth](https://www.metacareers.com/blog/software-engineering-in-apac/)
 - **Business Support Platform**: They redefine the support experience across all Meta business products, making it available, effective and effortless for all businesses. They make sure businesses can identify the help resources available to them when they need assistance in accomplishing their goals across Meta's suite of business tools. Their tools will also effortlessly help marketers diagnose their issues and connect them to the best solution to solve their problem. They have also some investment into the machine learning space.
 - **Business Messaging Commerce**: They build products that enable the Business Messaging ecosystem across Messenger, Instagram, and WhatsApp.
 
 Enterprise Engineering has a sizable presence in Singapore as well:
 
-- [Enterprise Engineering in APAC: Building Products That Scale](https://www.metacareers.com/life/enterprise-engineering-in-apac)
-- [Opportunity and Trust: Growing an Engineering Career at Meta](https://www.metacareers.com/life/opportunity-and-trust-growing-an-engineering-career-at-facebook), Shuhong W., Enterprise Engineering Manager
+- [Enterprise Engineering in APAC: Building Products That Scale](https://www.metacareers.com/blog/enterprise-engineering-in-apac/)
+- [Opportunity and Trust: Growing an Engineering Career at Meta](https://www.metacareers.com/blog/opportunity-and-trust-growing-an-engineering-career-at-facebook/), Shuhong W., Enterprise Engineering Manager
 
 ## Career progression/compensation
 

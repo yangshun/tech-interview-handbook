@@ -95,7 +95,7 @@ function DesignGurusSystemDesign({ position }) {
   return (
     <a
       className={clsx(styles.container, styles.backgroundGrokkingSystemDesign)}
-      href="https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-system-design-interview"
+      href="https://www.designgurus.io/course/grokking-the-system-design-interview?aff=kJSIoU"
       key={Math.random()}
       target="_blank"
       rel="noopener"

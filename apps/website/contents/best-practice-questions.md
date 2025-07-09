@@ -19,7 +19,7 @@ import InDocAd from './\_components/InDocAd';
 
 :::tip
 
-As of April 2022, I've developed a [12-week study plan](./coding-interview-study-plan.md) which includes a curriculum for revision and practice questions. If you want to customize your own practice questions, I've also developed [Grind 75](https://www.techinterviewhandbook.org/grind75) which is a modern version of Blind 75 that you can customize.
+As of April 2022, I've developed a [12-week study plan](./coding-interview-study-plan.md) which includes a curriculum for revision and practice questions. If you want to customize your own practice questions, I've also developed [Grind 75](https://www.techinterviewhandbook.org/grind75/) which is a modern version of Blind 75 that you can customize.
 
 :::
 
@@ -27,7 +27,7 @@ Hey there, the author of Blind 75 here 👋!
 
 Practicing is the best way to prepare for coding interviews. LeetCode has over a thousand questions. Which should you practice? Hence years ago, I curated a list of the most important 75 questions on [LeetCode](https://leetcode.com). Many other LeetCode questions are a mash of the techniques from these individual questions. I used this list in my last job hunt to only do the important questions.
 
-I [shared this list on Blind](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-100-LeetCode-Questions-to-Save-Your-Time-OaM1orEU) by extracting the questions from [my freeCodeCamp article](https://www.freecodecamp.org/news/coding-interviews-for-dummies-5e048933b82b/) to save peoples' time when revising and someone reposted this list on [the LeetCode forum](https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions). It somehow blew up and became super famous in the coding interview scene, people even gave it a name - **Blind 75**. The Blind 75 questions as a LeetCode list can be found [here](https://leetcode.com/list/xi4ci4ig/).
+I [shared this list on Blind](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-100-LeetCode-Questions-to-Save-Your-Time-OaM1orEU) by extracting the questions from [my freeCodeCamp article](https://www.freecodecamp.org/news/coding-interviews-for-dummies-5e048933b82b/) to save peoples' time when revising and someone reposted this list on [the LeetCode forum](https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions/). It somehow blew up and became super famous in the coding interview scene, people even gave it a name - **Blind 75**. The Blind 75 questions as a LeetCode list can be found [here](https://leetcode.com/list/xi4ci4ig/).
 
 Years later, I further distilled the list down into only 50 questions and spread them across a 5-week schedule. Here is the suggested schedule for revising and practicing algorithm questions on LeetCode. Sign up for an account if you don't already have one, it's critical to your success in interviewing!
 
@@ -119,7 +119,7 @@ Week 4 builds up on knowledge from previous weeks but questions are of increased
 | Subtree of Another Tree | Easy | [Link](https://leetcode.com/problems/subtree-of-another-tree/) |
 | Lowest Common Ancestor of BST | Easy | [Link](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/) |
 | Implement Trie (Prefix Tree) | Medium | [Link](https://leetcode.com/problems/implement-trie-prefix-tree/) |
-| Add and Search Word | Medium | [Link](https://leetcode.com/problems/add-and-search-word-data-structure-design/) |
+| Add and Search Word | Medium | [Link](https://leetcode.com/problems/design-add-and-search-words-data-structure/) |
 | Kth Smallest Element in a BST | Medium | [Link](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) |
 | Merge K Sorted Lists | Hard | [Link](https://leetcode.com/problems/merge-k-sorted-lists/) |
 | Find Median from Data Stream | Hard | [Link](https://leetcode.com/problems/find-median-from-data-stream/) |
@@ -162,7 +162,7 @@ Practically speaking the return of investment (ROI) on studying and practicing f
 
 #### Dynamic programming course
 
-- [Grokking the Dynamic Programming Patterns for Coding Interviews](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-dynamic-programming)
+- [Grokking the Dynamic Programming Patterns for Coding Interviews](https://www.designgurus.io/course/grokking-dynamic-programming?aff=kJSIoU)
 
 ## Quality courses
 

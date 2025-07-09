@@ -16,7 +16,7 @@ keywords:
 sidebar_label: Behavioral interview rubrics
 ---
 
-_The following page is contributed by [Lior Neu-ner](https://www.linkedin.com/in/liornn/) — former Meta engineering manager and founder of [Remote Rocketship](http://remoterocketship.com/), a job board for remote tech jobs._
+_The following page is contributed by [Lior Neu-ner](https://www.linkedin.com/in/liornn/) — former Meta engineering manager and founder of [Remote Rocketship](https://remoterocketship.com/), a job board for remote tech jobs._
 
 ## How behavioral interviews are evaluated
 

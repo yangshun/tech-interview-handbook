@@ -22,7 +22,7 @@ keywords:
 
 import InDocAd from './\_components/InDocAd';
 
-Key points extracted from "Ten Rules for Negotiating a Job Offer" [Part 1](http://haseebq.com/my-ten-rules-for-negotiating-a-job-offer/) and [Part 2](https://haseebq.com/how-not-to-bomb-your-offer-negotiation/) by Haseeb Qureshi.
+Key points extracted from "Ten Rules for Negotiating a Job Offer" [Part 1](https://haseebq.com/my-ten-rules-for-negotiating-a-job-offer/) and [Part 2](https://haseebq.com/how-not-to-bomb-your-offer-negotiation/) by Haseeb Qureshi.
 
 ## Get everything in writing
 

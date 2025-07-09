@@ -25,7 +25,7 @@ Dynamic Programming (DP) is usually used to solve optimization problems. The onl
 
 ## Learning resources
 
-- [Demystifying Dynamic Programming](https://medium.freecodecamp.org/demystifying-dynamic-programming-3efafb8d4296)
+- [Demystifying Dynamic Programming](https://www.freecodecamp.org/news/demystifying-dynamic-programming-3efafb8d4296)
 - [Dynamic Programming – 7 Steps to Solve any DP Interview Problem](https://dev.to/nikolaotasevic/dynamic-programming--7-steps-to-solve-any-dp-interview-problem-3870)
 - [Less Repetition, More Dynamic Programming](https://medium.com/basecs/less-repetition-more-dynamic-programming-43d29830a630), basecs
 - [Dynamic Programming](http://www.cs.yale.edu/homes/aspnes/classes/223/notes.html#dynamicProgramming), James Aspnes, Yale University
@@ -60,8 +60,8 @@ _These are recommended questions to practice after you have studied for the topi
 
 import AlgorithmCourses from '../\_courses/AlgorithmCourses.md'
 
-### [Grokking Dynamic Programming Patterns for Coding Interviews](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-dynamic-programming)
+### [Grokking Dynamic Programming Patterns for Coding Interviews](https://www.designgurus.io/course/grokking-dynamic-programming?aff=kJSIoU)
 
-Brought to you by the same folks behind the famous ["Grokking the Coding Interview"](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview), this is one of the rare few courses focused on helping you get better at Dynamic Programming questions. If you are interviewing for companies who are famous for asking Dynamic Programming questions (-cough- Google -cough-), this course should be helpful.
+Brought to you by the same folks behind the famous ["Grokking the Coding Interview"](https://www.designgurus.io/course/grokking-the-coding-interview?aff=kJSIoU), this is one of the rare few courses focused on helping you get better at Dynamic Programming questions. If you are interviewing for companies who are famous for asking Dynamic Programming questions (-cough- Google -cough-), this course should be helpful.
 
 <AlgorithmCourses />

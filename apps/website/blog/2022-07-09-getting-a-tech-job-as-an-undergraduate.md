@@ -19,7 +19,7 @@ Before I share my resources and how to get a gentle start on this handbook, let 
 
 In most companies, the resume stage is the most important as it is the first stage that you will need to clear! For undergraduates, most hiring managers would only look at resumes that are within one page. The moment the second page is seen, they will not tend to consider. Hence, here are some tips that can help you to prepare your resume in under an hour to reduce your agony.
 
-1. Use a <strong>career hiring tool</strong> like [Kinobi](https://app.kinobi.asia/resume). Kinobi saves you time in having to fix alignments unlike word as this career tool formats everything for you. Furthermore, they help you to score your resume so that you know where you stand when applying for a job.
+1. Use a <strong>career hiring tool</strong> like [Kinobi](https://kinobi.tech/resume). Kinobi saves you time in having to fix alignments unlike word as this career tool formats everything for you. Furthermore, they help you to score your resume so that you know where you stand when applying for a job.
 
 2. As far as possible, <strong>attend career talks</strong> by your favorite companies because hiring managers are there and you can get some feedback about your resume. It is indeed helpful because you know what to look out for when applying.
 

@@ -43,7 +43,7 @@ In the case of hash collisions, there are a number of collision resolution techn
 
 | Language | API |
 | --- | --- |
-| C++ | [`std::unordered_map`](https://docs.microsoft.com/en-us/cpp/standard-library/unordered-map) |
+| C++ | [`std::unordered_map`](https://learn.microsoft.com/en-us/cpp/standard-library/unordered-map) |
 | Java | [`java.util.Map`](https://docs.oracle.com/javase/10/docs/api/java/util/Map.html). Use [`java.util.HashMap`](https://docs.oracle.com/javase/10/docs/api/java/util/HashMap.html) |
 | Python | [`dict`](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) |
 | JavaScript | [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) or [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) |
@@ -68,8 +68,8 @@ _\* This is the average case, but in interviews we only care about the average c
 
 _These are essential questions to practice if you're studying for this topic._
 
-- [Two Sum](https://leetcode.com/problems/two-sum)
-- [Ransom Note](https://leetcode.com/problems/ransom-note)
+- [Two Sum](https://leetcode.com/problems/two-sum/)
+- [Ransom Note](https://leetcode.com/problems/ransom-note/)
 
 ## Recommended practice questions
 

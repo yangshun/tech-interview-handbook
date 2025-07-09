@@ -155,7 +155,7 @@ While DFS is implemented using recursion in this sample, it could also be implem
 
 :::
 
-For additional tips on BFS and DFS, you can refer to this [LeetCode post](https://leetcode.com/problems/pacific-atlantic-water-flow/discuss/90774/Python-solution-with-detailed-explanation)
+For additional tips on BFS and DFS, you can refer to this [LeetCode post](https://leetcode.com/problems/pacific-atlantic-water-flow/discuss/90774/Python-solution-with-detailed-explanation/)
 
 ### Topological sorting
 
@@ -197,7 +197,7 @@ print(graph_topo_sort(4, [[0, 1], [0, 2], [2, 1], [3, 0]]))
 _These are essential questions to practice if you're studying for this topic._
 
 - [Number of Islands](https://leetcode.com/problems/number-of-islands/)
-- [Flood Fill](https://leetcode.com/problems/flood-fill)
+- [Flood Fill](https://leetcode.com/problems/flood-fill/)
 - [01 Matrix](https://leetcode.com/problems/01-matrix/)
 
 ## Recommended practice questions
@@ -206,7 +206,7 @@ _These are recommended questions to practice after you have studied for the topi
 
 - Breadth-first search
   - [Rotting Oranges](https://leetcode.com/problems/rotting-oranges/)
-  - [Minimum Knight Moves (LeetCode Premium)](https://leetcode.com/problems/minimum-knight-moves)
+  - [Minimum Knight Moves (LeetCode Premium)](https://leetcode.com/problems/minimum-knight-moves/)
 - Either search
   - [Clone Graph](https://leetcode.com/problems/clone-graph/)
   - [Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)

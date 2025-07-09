@@ -136,7 +136,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Dropbox-Interview-Questi
 - Where do you want to be in five years?
 - Tell me about a time you needed information from someone who wasn't responsive. What did you do?
 
-Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions-how-to-answer/)
+Source: Glassdoor
 
 ## Lyft Software Engineer behavioral interview questions
 
@@ -190,7 +190,7 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Slack-Interview-Question
 - Why do you want to work here?
 - How do you handle disagreements with co-workers?
 
-Source: [Glassdoor](https://hired.com/blog/candidates/10-top-interview-questions-how-to-answer/)
+Source: Glassdoor
 
 ## Stripe Software Engineer behavioral interview questions
 

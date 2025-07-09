@@ -38,7 +38,7 @@ Breadth-first search is commonly implemented using queues.
 
 | Language | API |
 | --- | --- |
-| C++ | [`std::queue`](https://docs.microsoft.com/en-us/cpp/standard-library/queue-class) |
+| C++ | [`std::queue`](https://learn.microsoft.com/en-us/cpp/standard-library/queue-class) |
 | Java | [`java.util.Queue`](https://docs.oracle.com/javase/10/docs/api/java/util/Queue.html).Use [`java.util.ArrayDeque`](https://docs.oracle.com/javase/10/docs/api/java/util/ArrayDeque.html) |
 | Python | [`queue`](https://docs.python.org/3/library/queue.html) |
 | JavaScript | N/A |
@@ -67,15 +67,15 @@ Most languages don't have a built-in Queue class which can be used, and candidat
 
 _These are essential questions to practice if you're studying for this topic._
 
-- [Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues)
+- [Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/)
 
 ## Recommended practice questions
 
 _These are recommended questions to practice after you have studied for the topic and have practiced the essential questions._
 
-- [Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks)
-- [Design Circular Queue](https://leetcode.com/problems/design-circular-queue)
-- [Design Hit Counter (LeetCode Premium)](https://leetcode.com/problems/design-hit-counter)
+- [Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/)
+- [Design Circular Queue](https://leetcode.com/problems/design-circular-queue/)
+- [Design Hit Counter (LeetCode Premium)](https://leetcode.com/problems/design-hit-counter/)
 
 ## Recommended courses
 

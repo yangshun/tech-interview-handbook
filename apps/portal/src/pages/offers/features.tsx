@@ -116,7 +116,7 @@ export default function LandingPage() {
                   </a>
                   <a
                     className="bg-primary-500 flex items-center justify-center rounded-md border border-transparent px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"
-                    href="https://youtu.be/e4g1lS6zWGA">
+                    href="https://www.youtube.com/watch?v=e4g1lS6zWGA&feature=youtu.be">
                     Promo Video
                   </a>
                 </div>

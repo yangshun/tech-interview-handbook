@@ -38,9 +38,9 @@ In the context of algorithm interviews, heaps and priority queues can be treated
 
 | Language | API |
 | --- | --- |
-| C++ | [`std::priority_queue`](https://docs.microsoft.com/en-us/cpp/standard-library/priority-queue-class) |
+| C++ | [`std::priority_queue`](https://learn.microsoft.com/en-us/cpp/standard-library/priority-queue-class) |
 | Java | [`java.util.PriorityQueue`](https://docs.oracle.com/javase/10/docs/api/java/util/PriorityQueue.html) |
-| Python | [`heapq`](https://docs.python.org/library/heapq.html) |
+| Python | [`heapq`](https://docs.python.org/3/library/heapq.html) |
 | JavaScript | N/A |
 
 ## Time complexity

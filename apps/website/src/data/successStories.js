@@ -58,8 +58,8 @@ export default [
         <br />
         <br />
         I've learnt a few things and blogged about them on{' '}
-        <a href="https://zhenghao.io" rel="noopener">
-          https://zhenghao.io
+        <a href="https://www.zhenghao.io/" rel="noopener">
+          https://www.zhenghao.io/
         </a>
         , check them out if you're interested!
       </>
@@ -153,7 +153,7 @@ export default [
         <br />
         My favourite part is the{' '}
         <a
-          href="https://www.techinterviewhandbook.org/grind75"
+          href="https://www.techinterviewhandbook.org/grind75/"
           target="_blank"
           rel="noreferrer noopener">
           Grind 75 Tool

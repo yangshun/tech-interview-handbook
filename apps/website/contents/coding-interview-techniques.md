@@ -267,7 +267,7 @@ Note that in Software Engineering, mutating input data is generally frowned upon
 
 The [Dutch National Flag](https://leetcode.com/problems/sort-colors/) problem could be easily solved with O(n) time and O(n) space by creating a new array and filling it up with the respective values in a sorted fashion. As an added challenge and space optimization, the interviewer will usually ask for an O(n) time and O(1) space solution which involves sorting the input array in-place.
 
-An example of using the original array as a hash table is the [First Missing Positive](https://leetcode.com/problems/first-missing-positive) question. After the first for loop, all the values in the array are positive, and you can indicate presence of a number by negating the value at the index corresponding to the number. To indicate 4 is present, negate `nums[4]`.
+An example of using the original array as a hash table is the [First Missing Positive](https://leetcode.com/problems/first-missing-positive/) question. After the first for loop, all the values in the array are positive, and you can indicate presence of a number by negating the value at the index corresponding to the number. To indicate 4 is present, negate `nums[4]`.
 
 #### 2. Change a data structure
 

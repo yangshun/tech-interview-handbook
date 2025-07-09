@@ -14,12 +14,12 @@ After being hired, it's crucial to focus on your career growth so you don't stag
 - [The Pragmatic Engineer](https://newsletter.pragmaticengineer.com/)
 - [Level Up Software Engineering](https://levelupsoftwareengineering.substack.com/)
 - [Peak Performance](https://addyo.substack.com/)
-- [Engineer's Codex](https://engineercodex.substack.com/)
-- [Techlead Mentor](https://open.substack.com/pub/ravirajachar)
+- [Engineer's Codex](https://read.engineerscodex.com/)
+- [Techlead Mentor](https://newsletter.techleadmentor.com/)
 - [The Caring Techie](https://www.thecaringtechie.com/)
 - [Refactoring](https://refactoring.fm/)
-- [Strategize Your Career](https://strategizeyourcareer.substack.com/)
-- [Hungry Minds](https://hungryminds.dev/)
+- [Strategize Your Career](https://strategizeyourcareer.com/)
+- [Hungry Minds](https://www.hungryminds.dev/)
 - [Saiyan Growth Letter](https://www.saiyangrowthletter.com/)
 - [Data Engineering Newsletter](https://blog.dataengineer.io/)
 - [16x Engineer](https://16x.engineer/)
@@ -59,7 +59,7 @@ After being hired, it's crucial to focus on your career growth so you don't stag
 
 - [Taro](https://www.jointaro.com/)
 - [Kent C. Dodds Discord Community](https://kentcdodds.com/discord)
-- [GreatFrontEnd](https://discord.gg/NDFx8f6P6B)
+- [GreatFrontEnd](https://discord.com/invite/NDFx8f6P6B)
 
 ## References
 
