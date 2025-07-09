@@ -196,6 +196,20 @@ module.exports = {
         blog: {
           blogSidebarCount: 15,
         },
+        sitemap: {
+          ignorePatterns: [
+            '/blog/',
+            '/blog/a-glimpse-into-front-end-interviews/',
+            '/blog/are-front-end-development-skills-enough-for-a-career/',
+            '/blog/facebook-career-questions-and-answers/',
+            '/blog/importance-of-communicating-effectively-as-engineers/',
+            '/blog/front-end-career-questions/',
+            '/blog/how-to-have-successful-software-engineering-internship/',
+            '/blog/tags/career/',
+            '/blog/tags/meta/',
+            '/blog/tags/facebook/',
+          ],
+        },
       },
     ],
   ],
