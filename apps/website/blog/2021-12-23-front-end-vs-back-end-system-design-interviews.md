@@ -13,10 +13,6 @@ Walkthrough of similarities and differences between front end vs. back end syste
 
 <!-- truncate -->
 
-<head>
-  <link rel="canonical" href="https://www.zhenghao.io/posts/system-design-interviews" />
-</head>
-
 ## Context
 
 As I mentioned in my post on [coding interviews frameworks](https://www.zhenghao.io/posts/framework-for-coding-interview), I have been interviewing a lot for the past year - not conducting interviews, I was the candidate being interviewed. Most of the interview processes I had with big tech companies consisted of 1-2 system design rounds depending on the level of the role. Unlike traditional back end-focused system design questions, for which you can find lots of prep resources online such as the famous Grokking System Design Interview or System Design Primer, I didn't know what to expect for a front end-focused system design interview as there are very few resources out there talking about this type of interviews.
