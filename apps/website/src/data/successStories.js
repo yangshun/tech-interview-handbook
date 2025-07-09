@@ -153,7 +153,7 @@ export default [
         <br />
         My favourite part is the{' '}
         <a
-          href="https://www.techinterviewhandbook.org/grind75"
+          href="https://www.techinterviewhandbook.org/grind75/"
           target="_blank"
           rel="noreferrer noopener">
           Grind 75 Tool

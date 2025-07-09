@@ -42,7 +42,7 @@ module.exports = {
         { label: 'Blog', to: 'blog', position: 'left' },
         {
           label: 'Grind 75',
-          href: 'https://www.techinterviewhandbook.org/grind75',
+          href: 'https://www.techinterviewhandbook.org/grind75/',
           position: 'left',
         },
         {
@@ -147,7 +147,7 @@ module.exports = {
           items: [
             {
               label: 'Grind 75',
-              href: 'https://www.techinterviewhandbook.org/grind75',
+              href: 'https://www.techinterviewhandbook.org/grind75/',
             },
             {
               label: 'Front End Interview Handbook',

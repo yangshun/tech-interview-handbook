@@ -131,7 +131,7 @@ However, LeetCode has thousands of questions and it can be daunting to know wher
 
 The recommended time period to set aside for coding interview preparation is 3 months (11 hours a week i.e. 2-3 hours a day) for a more holistic preparation. I shared my [3 month study plan here](./coding-interview-study-plan.md), which provides a list of coding interview topics with resources and practice questions that you should work through in order of priority every week. I will also be adding content on recommended 1 month and 1 week study plans soon.
 
-If you have less than 3 months to prepare, you can generate your own study plans using the [Grind 75 tool](https://www.techinterviewhandbook.org/grind75) (built by me) which generates recommended study plans for coding interviews based on the time you have left. The algorithm behind it includes a ranking of questions by priority and also a balance between breadth and depth of topics covered.
+If you have less than 3 months to prepare, you can generate your own study plans using the [Grind 75 tool](https://www.techinterviewhandbook.org/grind75/) (built by me) which generates recommended study plans for coding interviews based on the time you have left. The algorithm behind it includes a ranking of questions by priority and also a balance between breadth and depth of topics covered.
 
 ### Resources to use in your practice
 

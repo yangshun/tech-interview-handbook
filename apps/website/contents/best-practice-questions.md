@@ -19,7 +19,7 @@ import InDocAd from './\_components/InDocAd';
 
 :::tip
 
-As of April 2022, I've developed a [12-week study plan](./coding-interview-study-plan.md) which includes a curriculum for revision and practice questions. If you want to customize your own practice questions, I've also developed [Grind 75](https://www.techinterviewhandbook.org/grind75) which is a modern version of Blind 75 that you can customize.
+As of April 2022, I've developed a [12-week study plan](./coding-interview-study-plan.md) which includes a curriculum for revision and practice questions. If you want to customize your own practice questions, I've also developed [Grind 75](https://www.techinterviewhandbook.org/grind75/) which is a modern version of Blind 75 that you can customize.
 
 :::
 
