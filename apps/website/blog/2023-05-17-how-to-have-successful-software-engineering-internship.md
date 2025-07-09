@@ -4,7 +4,7 @@ slug: how-to-have-successful-software-engineering-internship
 author: Yangshun Tay
 author_title: Ex-Staff Engineer at Meta
 author_url: https://github.com/yangshun
-author_image_url: https://github.com/yangshun.png
+author_image_url: https://avatars.githubusercontent.com/u/1315101?v=4
 tags: [career, facebook, meta]
 image: /img/meta-facebook.jpg
 hide_table_of_contents: true

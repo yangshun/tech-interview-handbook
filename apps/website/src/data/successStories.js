@@ -45,7 +45,7 @@ export default [
   {
     name: 'Zhenghao He',
     title: 'Senior Software Engineer, Instacart',
-    thumbnail: 'https://github.com/zhenghaohe.png',
+    thumbnail: 'https://avatars.githubusercontent.com/u/33640448?v=4',
     quote: (
       <>
         Tech Interview Handbook was the best resource I used during my coding

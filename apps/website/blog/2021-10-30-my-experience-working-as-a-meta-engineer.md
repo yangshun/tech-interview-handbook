@@ -4,7 +4,7 @@ slug: my-experience-working-as-a-meta-facebook-engineer
 author: Yangshun Tay
 author_title: Engineering Lead at Meta
 author_url: https://github.com/yangshun
-author_image_url: https://github.com/yangshun.png
+author_image_url: https://avatars.githubusercontent.com/u/1315101?v=4
 tags: [career, facebook, meta]
 image: /img/meta-facebook.jpg
 hide_table_of_contents: true

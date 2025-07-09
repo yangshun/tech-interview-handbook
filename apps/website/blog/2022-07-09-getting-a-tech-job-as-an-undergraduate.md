@@ -4,7 +4,7 @@ slug: getting-a-tech-job-as-an-undergraduate
 author: Melody Yun
 author_title: RCG Software Engineer at PayPal
 author_url: https://github.com/caramelmelmel
-author_image_url: https://github.com/caramelmelmel.png
+author_image_url: https://avatars.githubusercontent.com/u/72269553?v=4
 tags: [undergraduate, career, job search]
 hide_table_of_contents: true
 ---

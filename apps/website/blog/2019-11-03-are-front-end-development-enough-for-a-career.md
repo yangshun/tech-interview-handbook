@@ -4,7 +4,7 @@ slug: are-front-end-development-skills-enough-for-a-career
 author: Yangshun Tay
 author_title: Front End Engineer at Facebook
 author_url: https://github.com/yangshun
-author_image_url: https://github.com/yangshun.png
+author_image_url: https://avatars.githubusercontent.com/u/1315101?v=4
 author_twitter: yangshunz
 tags: [front end, career]
 hide_table_of_contents: true

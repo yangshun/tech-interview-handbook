@@ -4,7 +4,7 @@ slug: summing-root-to-leaf-numbers
 author: Raivat Shah
 author_title: Student at NUS Computing
 author_url: https://github.com/raivatshah
-author_image_url: https://github.com/raivatshah.png
+author_image_url: https://avatars.githubusercontent.com/u/29497717?v=4
 tags: [leetcode, trees, problem-solving]
 hide_table_of_contents: true
 ---
