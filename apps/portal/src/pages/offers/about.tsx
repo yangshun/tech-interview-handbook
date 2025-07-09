@@ -61,7 +61,7 @@ export default function AboutPage() {
                 feedback / feature request / bug report
                 <a
                   className="text-primary-600 hover:text-primary-500 ml-1"
-                  href="https://forms.gle/6zV5yimPyiByKqDy8"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLScbhjhlCdcmu9SGyASevqrqLl_HOr4W1B_bpTXUgs78yClr_w/viewform?usp=send_form"
                   rel="noreferrer"
                   target="_blank">
                   here

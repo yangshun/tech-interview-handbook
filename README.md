@@ -9,7 +9,7 @@
     <a href="https://www.techinterviewhandbook.org/">Read on the website</a>
   </h3>
   <p>
-    Join/follow us on <a href="https://discord.gg/usMqNaPczq" target="_blank">Discord</a> | <a href="https://twitter.com/techinterviewhb" target="_blank">𝕏 (Twitter)</a> | <a href="https://t.me/techinterviewhandbook" target="_blank">Telegram</a> |  <a href="https://facebook.com/techinterviewhandbook" target="_blank">Facebook</a>
+    Join/follow us on <a href="https://discord.com/invite/usMqNaPczq" target="_blank">Discord</a> | <a href="https://twitter.com/techinterviewhb" target="_blank">𝕏 (Twitter)</a> | <a href="https://t.me/techinterviewhandbook" target="_blank">Telegram</a> |  <a href="https://facebook.com/techinterviewhandbook" target="_blank">Facebook</a>
   </p>
 </div>
 
@@ -26,7 +26,7 @@ Not everyone has the time to do a few hundred LeetCode questions. Here are _free
 Besides the usual algorithm questions, other **awesome** stuff includes:
 
 - [Best practice questions](https://www.techinterviewhandbook.org/coding-interview-study-plan/) for coding interviews
-- [Grind 75](https://www.techinterviewhandbook.org/grind75) - the next evolution of Blind 75, bigger and better
+- [Grind 75](https://www.techinterviewhandbook.org/grind75/) - the next evolution of Blind 75, bigger and better
 - [How to prepare](https://www.techinterviewhandbook.org/coding-interview-prep/) for coding interviews
 - [Coding interview best practices](https://www.techinterviewhandbook.org/coding-interview-cheatsheet/) - Straight-to-the-point Do's and Don'ts
 - [Algorithm cheatsheets and tips](https://www.techinterviewhandbook.org/algorithms/study-cheatsheet/) categorized by topic
@@ -50,7 +50,7 @@ Anybody who wants to land a job at a tech company but is new to technical interv
 
 <div align="center">
   <h3>💡 Stop grinding mindlessly! Study coding question patterns efficiently with
-    <a href="https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview">Grokking the Coding Interview</a> by Design Gurus 💡
+    <a href="https://www.designgurus.io/course/grokking-the-coding-interview?aff=kJSIoU">Grokking the Coding Interview</a> by Design Gurus 💡
   </h3>
 </div>
 
@@ -68,9 +68,9 @@ Also, existing resources focus mainly on algorithm questions and lack coverage f
 
 AlgoMonster aims to help you ace the technical interview **in the shortest time possible**. By Google engineers, AlgoMonster uses a data-driven approach to teach you the most useful key question patterns and has contents to help you quickly revise basic data structures and algorithms. Best of all, AlgoMonster is not subscription-based - pay a one-time fee and get **lifetime access**. [**Join today for a 70% discount →**](https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack=)
 
-### [Grokking the Coding Interview: Patterns for Coding Questions](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview)
+### [Grokking the Coding Interview: Patterns for Coding Questions](https://www.designgurus.io/course/grokking-the-coding-interview?aff=kJSIoU)
 
-This course by Design Gurus expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages. **Learn and understand patterns, not memorize answers!** [**Get lifetime access today →**](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-coding-interview)
+This course by Design Gurus expands upon the questions on the recommended practice questions but approaches the practicing from a questions pattern perspective, which is an approach I also agree with for learning and have personally used to get better at coding interviews. The course allows you to practice selected questions in Java, Python, C++, JavaScript and also provides sample solutions in those languages. **Learn and understand patterns, not memorize answers!** [**Get lifetime access today →**](https://www.designgurus.io/course/grokking-the-coding-interview?aff=kJSIoU)
 
 ## Looking for Front End content?
 
@@ -78,7 +78,7 @@ Front-end-related content has been moved to a separate website - [Front End Inte
 
 ## Looking for System Design content?
 
-We're still working on System Design content. In the meanwhile, check out [ByteByteGo's System Design Interview course](https://bytebytego.com?fpr=techinterviewhandbook) or Design Gurus' [Grokking the System Design Interview course](https://designgurus.org/link/kJSIoU?url=https%3A%2F%2Fdesigngurus.org%2Fcourse%3Fcourseid%3Dgrokking-the-system-design-interview), which in our opinion are among the most useful resources for getting started on system design interviews preparation.
+We're still working on System Design content. In the meanwhile, check out [ByteByteGo's System Design Interview course](https://bytebytego.com?fpr=techinterviewhandbook) or Design Gurus' [Grokking the System Design Interview course](https://www.designgurus.io/course/grokking-the-system-design-interview?aff=kJSIoU), which in our opinion are among the most useful resources for getting started on system design interviews preparation.
 
 ## Contents
 
