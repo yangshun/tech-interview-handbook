@@ -43,7 +43,7 @@ In the case of hash collisions, there are a number of collision resolution techn
 
 | Language | API |
 | --- | --- |
-| C++ | [`std::unordered_map`](https://learn.microsoft.com/en-us/cpp/standard-library/unordered-map) |
+| C++ | [`std::unordered_map`](https://learn.microsoft.com/en-us/cpp/standard-library/unordered-map?view=msvc-170) |
 | Java | [`java.util.Map`](https://docs.oracle.com/javase/10/docs/api/java/util/Map.html). Use [`java.util.HashMap`](https://docs.oracle.com/javase/10/docs/api/java/util/HashMap.html) |
 | Python | [`dict`](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) |
 | JavaScript | [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) or [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) |

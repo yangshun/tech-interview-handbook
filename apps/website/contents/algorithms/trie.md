@@ -29,7 +29,7 @@ Be familiar with implementing from scratch, a `Trie` class and its `add`, `remov
 
 - Readings
   - [Trying to Understand Tries](https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014), basecs
-  - [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/solution/), LeetCode
+  - [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/editorial/), LeetCode
 - Additional (only if you have time)
   - [Compressing Radix Trees Without (Too Many) Tears](https://medium.com/basecs/compressing-radix-trees-without-too-many-tears-a2e658adb9a0), basecs
 

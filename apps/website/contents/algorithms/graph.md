@@ -155,7 +155,7 @@ While DFS is implemented using recursion in this sample, it could also be implem
 
 :::
 
-For additional tips on BFS and DFS, you can refer to this [LeetCode post](https://leetcode.com/problems/pacific-atlantic-water-flow/discuss/90774/Python-solution-with-detailed-explanation/)
+For additional tips on BFS and DFS, you can refer to this [LeetCode post](https://leetcode.com/problems/pacific-atlantic-water-flow/solutions/90774/Python-solution-with-detailed-explanation/)
 
 ### Topological sorting
 

@@ -38,7 +38,7 @@ Stacks are an important way of supporting nested or recursive function calls and
 
 | Language | API |
 | --- | --- |
-| C++ | [`std::stack`](https://learn.microsoft.com/en-us/cpp/standard-library/stack-class) |
+| C++ | [`std::stack`](https://learn.microsoft.com/en-us/cpp/standard-library/stack-class?view=msvc-170) |
 | Java | [`java.util.Stack`](https://docs.oracle.com/javase/10/docs/api/java/util/Stack.html) |
 | Python | Simulated using [List](https://docs.python.org/3/tutorial/datastructures.html) |
 | JavaScript | Simulated using [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) |
