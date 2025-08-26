@@ -19,6 +19,8 @@ sidebar_label: Preparing a self introduction
 
 import InDocAd from './\_components/InDocAd';
 
+_The following page is a collaboration with [Austen McDonald](https://www.linkedin.com/in/austenmc/), former Senior Engineering Manager and Hiring Committee Chair at Meta, and author of [Mastering Behavioral Interviews](http://thebehavioral.tech/)._
+
 "Tell me about yourself" or "give me a quick introduction of your profile" is almost always the first question encountered in your software engineer interviews. This guide teaches you how to maximize this chance to impress the interviewer by crafting the perfect self introduction.
 
 Interviewers want to work with candidates they like. Leave a good/deep impression and it will increase your chances of success. Most of us are not strangers to self introductions as we meet new people now and then and have to introduce ourselves every once in a while. However, self introductions in interviews are slightly different from real life - you need to tweak it to your advantage - tailor the self introduction to the role and company you are applying for! Your self introduction evolves as you grow and are at a different stage of your career.
@@ -51,6 +53,8 @@ Does this look familiar? It should be, because it is similar to your resume! You
 ### 2. KISS (Keep It Simple and Sweet)
 
 Tell them some highlights from your favorite/most impressive projects and including some numbers if they're impressive or challenges that you've overcome. Do not delve into the depths of how you reverse engineered a game and decrypted a packet to predict when to use your DKP on a drop. Tell them the executive summary: "I reverse engineered X game by decrypting Y packet to predict Z." If this catches their interest, they might ask further questions on their own.
+
+Avoid a history lesson. "I started coding when I was 13 years old, went to college at State U, then worked as an intern for BigCo, then out of college I got a front-end job at SmallCo, then moved to backend at Acme, ..." is not adding value to the listener. In the discussions of your past, include roles that were meaningful and have some takeaway. For example, instead of the history lesson, try "I’ve had roles across large and small companies as well as worked across the stack."
 
 ### 3. Why do they want you?​
 
