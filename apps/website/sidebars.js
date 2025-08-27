@@ -40,6 +40,7 @@ module.exports = {
         'behavioral-interview',
         'behavioral-interview-rubrics',
         'behavioral-interview-questions',
+        'behavioral-interview-senior-candidates',
         'self-introduction',
         'final-questions',
       ],

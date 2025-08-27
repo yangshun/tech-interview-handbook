@@ -22,6 +22,8 @@ sidebar_label: Step-by-step how to prepare
 
 import InDocAd from './\_components/InDocAd';
 
+_The following page is a collaboration with [Austen McDonald](https://www.linkedin.com/in/austenmc/), former Senior Engineering Manager and Hiring Committee Chair at Meta, and author of [Mastering Behavioral Interviews](http://thebehavioral.tech/)._
+
 ## What are behavioral interviews
 
 Succeeding in an engineering career involves more than just technical skills. People skills become more important as an engineer becomes more senior. Senior engineers should have the ability to lead and influence, resolve conflicts, anticipate risks, plan the roadmap, and more.
@@ -42,6 +44,8 @@ From the company's perspective, the interview has two purposes:
 
 - Assess whether a candidate has a history of demonstrating the right behaviors that would make them successful at the company.
 - Assess the seniority of the candidate e.g. junior, senior, or staff.
+
+The importance of behavioral interviews is increasing as AI generates more code. Soft skills—how you work with people, and especially qualities like communication and willingness to learn—are pivotal as companies expect more from their engineers than simply implementation
 
 <InDocAd />
 
@@ -82,23 +86,59 @@ Here's an example of how the STAR format can be used to answer the question: "Te
 
 > "When our designer ended midterms, he came back with beautiful mockups that fit well into the wireframes. Our front-end developer implemented them with great care to detail. We ended up scoring top marks for the project and became a great team."
 
-### 2. Prepare your answers to commonly asked questions
+**Pro tip:** to show seniority and strong signal around growth, consider adding an additional R for Reflection. Finish your story with a look back at what you learned and took away. For more about this expanded version of STAR(R), check out [this post](https://thebehavioral.substack.com/p/using-the-carl-method-to-structure).
 
-The next natural step is to start preparing your answers for commonly asked behavioral interview questions. You may refer to [my list of 30 questions](./behavioral-interview-questions.md) which were collated across top tech companies for this.
+### 2. Organize your key stories
+
+Unlike preparing for a coding interview, drilling common questions is unlikely to be your best preparation strategy. Instead, you’ll likely find yourself leveraging a few key stories from larger projects in your career to answer most questions. It’s common for a project to have elements of addressing ambiguity and resolving conflict and communication, etc.
+
+Spend some time going through your past experiences, your resume, any performance reviews you may have access to, etc. and collect 3-5 projects that have high impact, high complexity, and high involvement by you.
+
+Consider projects like these:
+
+**High-Impact Projects:** Major launches, significant refactors, system migrations, new product features, architecture decisions that influenced multiple teams.
+
+**Challenging Situations:** Tight deadlines, technical failures, team or interpersonal conflicts, ambiguous requirements, projects where success was uncertain.
+
+**Leadership Moments:** Mentoring others, driving cross-team initiatives, representing your team externally, times when others looked to you for direction.
+
+**Learning Experiences:** Mistakes that led to growth, feedback that changed your approach, skills you developed under pressure, times when you had to completely rethink your approach.
+
+Construct a STAR(R) story for each project as an exercise in storytelling. Pay special attention to the Actions: these are the repeatable “behaviors” that the interview is named after. The company is not hiring you to do the same project you’ve done in the past but to engage in similar behaviors on their projects.
+
+### 3. Prepare answers to the Big Three Questions
+
+Despite our advice that preparing for specific questions has limited value, there are three questions that are very very common and it’s worth preparing in advance:
+
+- Tell me about yourself: this question opens almost any interview. See our advice at in [Preparing a self introduction](./behavioral-interview-questions.md) and a further dive [here](https://thebehavioral.substack.com/p/death-taxes-and-tmay).
+- Tell me about your favorite project/most impactful project/etc.: pick a project at the intersection of impact, scope, and your personal involvement.
+- Tell me about time when you resolved a conflict: this is the most common soft skill question. Check out a series of posts on choosing and structuring a response starting [here](https://thebehavioral.substack.com/p/conflict-stories-1-of-5-workplace).
 
 While most people might be inclined towards memorization, it's much better to pen down bullet points to each question and practice verbalizing them near to the interviews, so that your answers will come out more naturally.
 
-### 3. Prepare experiences to showcase fit to the company's culture / core values
+### 4. Practice other questions by yourself or with AI
+
+Even though trying to anticipate questions beyond the Big Three is challenging, you can get a lot of value out of practicing your story telling skills on sample questions. You may refer to [my list of 30 questions](./behavioral-interview-questions.md) which were collated across top tech companies for this. Also, going through this process will help you identify if there are significant gaps in your story catalog centered around specific signal areas. For example, perhaps you need more stories around past mistakes or .
+
+This is a natural place to use chatbots: prompt an LLM to ask you these questions and give you feedback on your responses. Also encourage the AI to ask you follow up questions.
+
+### 5. Prepare experiences to showcase fit to the company's culture / core values
 
 As aforementioned, most top tech companies use their company values to evaluate candidates in behavioral interviews. As such, you should do your research to find out what those values are and ensure you have prepared experiences that showcase fit.
 
-### 4. Try out mock behavioral interviews
+### 6. Try out mock behavioral interviews
 
 If you would like to practice behavioral interviews with professional interviewers from top tech companies, schedule one with [interviewing.io](https://iio.sh/r/DMCa). Interviewing.io boasts a large pool of interviewers from Facebook, Amazon, Apple, Google and Microsoft. I have used [interviewing.io](https://iio.sh/r/DMCa) both as an interviewer and interviewee and can guarantee a good experience with this platform.
 
-### 5. Use structured courses
+For some advice on how to maximize your experience with mock interviewers, check out [this post](https://thebehavioral.substack.com/p/getting-the-most-out-of-mock-behavioral).
 
-I don't really think one needs to attend a course on behavioral interviews, but your mileage may vary. I've seen candidates get rejected for failing the behavioral round even though they did super well on the coding and system design interviews. If you want to take a course on behavioral interviews, I'd recommend the following courses:
+### 7. Expand your knowledge with newsletters, books, and courses
+
+I've seen candidates get rejected for failing the behavioral round even though they did super well on the coding and system design interviews and if AI will be generating more and more code, behavioral interviews are getting more important—of course they’ve always been important for senior roles.
+
+Check out the free newsletter [Mastering Behavioral Interviews](https://thebehavioral.substack.com/) on Substack and the [accompanying book](https://thebehavioral.tech/).
+
+There are also courses available:
 
 - ["Behavioral Interviews" by Exponent](https://www.tryexponent.com/courses/behavioral?ref=techinterviewhandbook) - While Exponent also has courses on technical content, what really makes them stand out from the other interview preparation platform is their availability of content for non-software engineering roles such as Product Management and Product Marketing. Their behavioral interview course is a mix of videos (by the Exponent CEO himself!) and text, going through the most common questions and imparting you with techniques to help you ace the interview. To top it off, they also have an interview question bank for behavioral questions with responses from the platform's helpful community. While the subscription might be a little pricey for just the behavioral interviews content, they also offer quality technical content for [System Design](https://www.tryexponent.com/courses/system-design-interviews?ref=techinterviewhandbook), [Data Structures](https://www.tryexponent.com/courses/swe-practice?ref=techinterviewhandbook) and [Algorithms](https://www.tryexponent.com/courses/algorithms?ref=techinterviewhandbook). The convenience of a one-stop platform which covers all aspects of technical interview preparation is very enticing.
 - ["Grokking the Behavioral Interview" on Educative](https://www.educative.io/courses/grokking-the-behavioral-interview?aff=x23W) - As per other courses on Educative, this course is text-based and they believe that text-based courses are the more efficient than video courses. One thing that stands out about this course is that they teach you **patterns** for behavioral interviews, not just about memorizing questions and preparing answers.
