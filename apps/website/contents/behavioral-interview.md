@@ -110,7 +110,7 @@ Construct a STAR(R) story for each project as an exercise in storytelling. Pay s
 
 Despite our advice that preparing for specific questions has limited value, there are three questions that are very very common and it’s worth preparing in advance:
 
-- Tell me about yourself: this question opens almost any interview. See our advice at in [Preparing a self introduction](./behavioral-interview-questions.md) and a further dive [here](https://thebehavioral.substack.com/p/death-taxes-and-tmay).
+- Tell me about yourself: this question opens almost any interview. See our advice at in [Preparing a self introduction](./self-introduction.md) and a further dive [here](https://thebehavioral.substack.com/p/death-taxes-and-tmay).
 - Tell me about your favorite project/most impactful project/etc.: pick a project at the intersection of impact, scope, and your personal involvement.
 - Tell me about time when you resolved a conflict: this is the most common soft skill question. Check out a series of posts on choosing and structuring a response starting [here](https://thebehavioral.substack.com/p/conflict-stories-1-of-5-workplace).
 
