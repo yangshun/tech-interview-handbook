@@ -320,7 +320,6 @@ export const offersCommentsRouter = createRouter()
             id: input.profileId,
           },
         });
-
       } else {
         throw new trpc.TRPCError({
           code: 'UNAUTHORIZED',

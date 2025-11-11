@@ -41,12 +41,13 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
           });
         }
 
-
         await tx.questionsQuestion.update({
           data: {
-            lastSeenAt: (questionToUpdate.lastSeenAt === null ||
-                          questionToUpdate.lastSeenAt < input.seenAt)
-                            ? input.seenAt : undefined,
+            lastSeenAt:
+              questionToUpdate.lastSeenAt === null ||
+              questionToUpdate.lastSeenAt < input.seenAt
+                ? input.seenAt
+                : undefined,
             numEncounters: {
               increment: 1,
             },
@@ -179,16 +180,16 @@ export const questionsQuestionEncounterUserRouter = createProtectedRouter()
         }
 
         await tx.questionsQuestion.update({
-            data: {
-              lastSeenAt: lastSeenVal,
-              numEncounters: {
-                increment: -1,
-              },
+          data: {
+            lastSeenAt: lastSeenVal,
+            numEncounters: {
+              increment: -1,
             },
-            where: {
-              id: questionToUpdate!.id,
-            },
-          });
+          },
+          where: {
+            id: questionToUpdate!.id,
+          },
+        });
 
         return questionEncounterDeleted;
       });
