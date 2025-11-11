@@ -71,7 +71,7 @@ export default function GoogleAnalytics({ children }: Props) {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [router.events,]);
+  }, [router.events]);
 
   return (
     <GoogleAnalyticsContext.Provider value={{ event }}>
