@@ -8,6 +8,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
 import successStories from '../data/successStories';
+import userTweets from '../data/userTweets';
 
 const BLIND_75_URL =
   'https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU';
@@ -512,7 +513,6 @@ function GreatFrontEndSection() {
     </div>
   );
 }
-
 function TweetsSection() {
   return (
     <div className={clsx('padding-vert--xl', styles.sectionAlt)}>
@@ -522,172 +522,67 @@ function TweetsSection() {
             'margin-bottom--lg',
             'text--center',
             styles.sectionTitle,
-          )}>
+          )}
+        >
           Over 1,000,000 people have benefitted from this handbook!
         </h2>
         <div className={clsx('row', styles.tweetsSection)}>
+          {/* Render tweets in groups of three */}
           <div className="col col--4">
-            <Tweet
-              url="https://twitter.com/Insharamin/status/1412978510788915205"
-              handle="Insharamin"
-              name="Insha"
-              date="Jul 8, 2021"
-              avatar="/img/tweets/Insharamin.jpg"
-              content={
-                <>
-                  1️⃣ Tech Interview Handbook
-                  <br />
-                  <br />
-                  This repository has practical content that covers all phases
-                  of a technical interview, from applying for a job to passing
-                  the interviews to offer negotiation. 📎
-                </>
-              }
-            />
-            <Tweet
-              url="https://twitter.com/ravinwashere/status/1328381097277681665"
-              handle="ravinwashere"
-              name="Ravin"
-              date="Nov 17, 2020"
-              avatar="/img/tweets/ravinwashere.jpg"
-              content={
-                <>
-                  Preparing for a job interview?
-                  <br />
-                  <br />
-                  The tech interview handbook contains carefully curated to help
-                  you ace your next technical interview.
-                  <br />
-                  <br />
-                  And it's free.
-                </>
-              }
-            />
-            <Tweet
-              url="https://twitter.com/rwenderlich/status/1166336060533727232"
-              handle="rwenderlich"
-              name="raywenderlich.com"
-              date="Aug 27, 2019"
-              avatar="/img/tweets/rwenderlich.jpg"
-              content={<>Nice open source tech interview handbook</>}
-            />
-            <Tweet
-              url="https://twitter.com/umaar/status/913425809108606976"
-              handle="umaar"
-              name="Umar Hansa"
-              date="Sep 28, 2017"
-              avatar="/img/tweets/umaar.jpg"
-              content={
-                <>
-                  Tech Interview Handbook 💻 - Content to help you ace your next
-                  technical interview. Lots of front-end content here ✅
-                </>
-              }
-            />
+            {userTweets.slice(0, 4).map((tweet, index) => (
+              <Tweet
+                key={index}
+                url={tweet.url}
+                handle={tweet.handle}
+                name={tweet.name}
+                date={tweet.date}
+                avatar={tweet.avatar}
+                content={tweet.content}
+              />
+            ))}
           </div>
           <div className="col col--4">
-            <Tweet
-              url="https://twitter.com/MSFTImagine/status/1502675788335886344"
-              handle="MSFTImagine"
-              name="Microsoft Imagine Cup"
-              date="Mar 13, 2022"
-              avatar="/img/tweets/MSFTImagine.png"
-              content={
-                <>
-                  Ready to rock your #Coding interviews? Follow along as
-                  @yangshunz shares tips on how to land your dream job from
-                  personal experience.
-                </>
-              }
-            />
-            <Tweet
-              url="https://twitter.com/palashv2/status/1452981345899085833"
-              handle="palashv2"
-              name="Palash"
-              date="Oct 26, 2021"
-              avatar="/img/tweets/palashv2.jpg"
-              content={
-                <>
-                  5. Tech Interview Handbook
-                  <br />
-                  <br />
-                  Here's free and curated technical interview preparation
-                  materials for busy engineers. Besides the usual algorithm
-                  questions, other awesome stuff includes How to prepare for
-                  coding interviews, Interview Cheatsheet, and more.
-                </>
-              }
-            />
-            <Tweet
-              url="https://twitter.com/Justyna_Adam/status/1186166253830004736"
-              handle="Justyna_Adam"
-              name="Justyna_Adamczyk"
-              date="Oct 21, 2019"
-              avatar="/img/tweets/Justyna_Adam.jpg"
-              content={
-                <>
-                  Another excellent tech interview handbook! If you need to
-                  prepare yourself for a tech interview or you're an interviewer
-                  and need additional inspiration. Happy Monday! #techinterviews
-                </>
-              }
-            />
+            {userTweets.slice(4, 7).map((tweet, index) => (
+              <Tweet
+                key={index}
+                url={tweet.url}
+                handle={tweet.handle}
+                name={tweet.name}
+                date={tweet.date}
+                avatar={tweet.avatar}
+                content={tweet.content}
+              />
+            ))}
           </div>
           <div className="col col--4">
-            <Tweet
-              url="https://twitter.com/freeCodeCamp/status/1494658460830552065"
-              handle="freeCodeCamp"
-              name="freeCodeCamp.org"
-              date="Feb 18, 2022"
-              avatar="/img/tweets/freeCodeCamp.jpg"
-              content={
-                <>
-                  Back in 2017, @yangshunz was interviewing for developer jobs.
-                  <br />
-                  <br />
-                  He put in a lot of work, aced his interviews, & got offers
-                  from Google, Airbnb, Dropbox, and more.
-                  <br />
-                  <br />
-                  And he just updated this in-depth guide to help you also rock
-                  your next coding interview.
-                </>
-              }
-            />
-            <Tweet
-              url="https://twitter.com/Vinaystwt/status/1437062973554507777"
-              handle="Vinaystwt"
-              name="Vinay Sharma"
-              date="Sep 12, 2021"
-              avatar="/img/tweets/Vinaystwt.jpg"
-              content={
-                <>
-                  🔹Tech Interview Handbook: Another useful resource that covers
-                  information about technical interviews. It covers the job
-                  applications, the interview process and the post-interview
-                </>
-              }
-            />
-            <Tweet
-              url="https://twitter.com/sitepointdotcom/status/1164121717243023360"
-              handle="sitepointdotcom"
-              name="SitePoint"
-              date="Aug 21, 2019"
-              avatar="/img/tweets/sitepointdotcom.jpg"
-              content={
-                <>
-                  The Tech Interview Handbook provides carefully curated content
-                  to help you ace your next technical interview.
-                </>
-              }
-            />
+            {userTweets.slice(7, 10).map((tweet, index) => (
+              <Tweet
+                key={index}
+                url={tweet.url}
+                handle={tweet.handle}
+                name={tweet.name}
+                date={tweet.date}
+                avatar={tweet.avatar}
+                content={tweet.content}
+              />
+            ))}
           </div>
         </div>
+        <p className="margin-vert--lg text--center">
+          Would you like to share your experience?{' '}
+          <a
+            href="https://github.com/yangshun/tech-interview-handbook/edit/main/apps/website/src/data/userTweets.js"
+            rel="noopener"
+            target="_blank"
+          >
+            Open a Pull Request here
+          </a>
+          !
+        </p>
       </div>
     </div>
   );
 }
-
 function SuccessStory({ name, quote, thumbnail, title }) {
   return (
     <div className="card margin-vert--lg">
