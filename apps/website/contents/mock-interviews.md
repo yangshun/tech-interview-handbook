@@ -60,3 +60,19 @@ What makes Meetapro stand out?
 **Disclaimer: This section was added by the Codemia team**
 
 Codemia harnesses the power of advanced AI technology to evaluate and score your solutions instantly, enabling iterative practice and rapid skill refinement. But Codemia isn't just about practicing in isolation; it's a thriving community where members collaborate, share insights, and provide valuable feedback to one another, fostering a collaborative learning environment unlike any other. With a practice environment reminiscent of the familiar setup of LeetCode for algorithm challenges, Codemia offers a realistic simulation of interview scenarios, ensuring you're fully prepared to tackle any system design question with confidence.
+
+## [ICanFAANG](https://icanfaang.com)
+
+**Note:** *This section was contributed by the ICanFAANG team*
+
+### [Fully personalised interview preparation](https://icanfaang.com/exclusive-preparation/).
+
+Created by an ex-Amazon engineer who struggled through interviews as a candidate and later conducted them as an interviewer, ICanFAANG combines digital resources and realistic mock interviews with fully personalized sessions, adapted specifically to your background, target roles, and challenges.
+
+No two people approach interviews the same way—your psychology, experience, and technical strengths are unique. That’s why tailored preparation isn’t just helpful, it’s essential. ICanFAANG gives you a clear edge by focusing on your way of thinking and your gaps and helping you sharpen exactly what matters most **for you**.
+
+* Customized preparation plans built around your strengths and target companies.
+* Fully personalized mock interviews with expert, real-time feedback.
+* Proven frameworks to confidently tackle behavioral and technical questions.
+
+Stop guessing—get direct, exclusive guidance from someone who's been there and succeeded.
