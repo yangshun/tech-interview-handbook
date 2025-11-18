@@ -180,7 +180,7 @@ def graph_topo_sort(num_nodes, edges):
         if nodes[node_id]['in'] == 0:
             queue.append(node_id)
     while len(queue):
-        node_id = queue.pop()
+        node_id = queue.popleft()
         for outgoing_id in nodes[node_id]['out']:
             nodes[outgoing_id]['in'] -= 1
             if nodes[outgoing_id]['in'] == 0:
