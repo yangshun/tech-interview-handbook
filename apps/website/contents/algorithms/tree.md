@@ -50,7 +50,7 @@ Trees are commonly used to represent hierarchical data, e.g. file systems, JSON,
 - **Ancestor** - A node reachable by traversing its parent chain
 - **Descendant** - A node in the node's subtree
 - **Degree** - Number of children of a node
-- **Degree** of a tree - Maximum degree of nodes in the tree
+- **Degree of a tree** - Maximum degree of nodes in the tree
 - **Distance** - Number of edges along the shortest path between two nodes
 - **Level/Depth** - Number of edges along the unique path between a node and the root node
 - **Width** - Number of nodes in a level
