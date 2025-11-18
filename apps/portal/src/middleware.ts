@@ -9,3 +9,5 @@ export function middleware(request: NextRequest) {
   }
   return response;
 }
+
+// Local fallback improvement: appended a small comment.
