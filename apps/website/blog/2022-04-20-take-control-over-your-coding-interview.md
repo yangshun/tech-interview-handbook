@@ -73,7 +73,7 @@ Generally, there are two types of coding interviews:
 
 Normally it should be easy to distinguish between these two types of interviews by merely looking at the question: [Inverting a Binary Tree](https://leetcode.com/problems/invert-binary-tree/) is a typical algorithmic question, while designing and implementing an auto-complete search feature is more about practical app-building. Although sometimes the two types of interview questions would blend. For example, you might be asked to (partially) implement a [trie](https://en.wikipedia.org/wiki/Trie) when you are talking about the design of an auto-complete search feature/service/component. But these two different types of interviews are meant to test different competences.
 
-In a pure algorithmic, LeetCode-type of interviews, your **main goal** is to leverage the right data structures and come up with an efficient algorithm to solve the problem with the right set of memory/runtime complexity trade-offs **as fast as you can**. How readable, maintainable and extensible your code is, or whether it conforms to the current best practice in the the community/industry are _not_ that important, or at least secondary to the main goal. You can go ahead and name your variables `i`, `n`, `p`, `q` and mutate that input array in-place without being judged as long as your solution passes the test cases under the time and memory limits.
+In a pure algorithmic, LeetCode-type of interviews, your **main goal** is to leverage the right data structures and come up with an efficient algorithm to solve the problem with the right set of memory/runtime complexity trade-offs **as fast as you can**. How readable, maintainable and extensible your code is, or whether it conforms to the current best practice in the community/industry are _not_ that important, or at least secondary to the main goal. You can go ahead and name your variables `i`, `n`, `p`, `q` and mutate that input array in-place without being judged as long as your solution passes the test cases under the time and memory limits.
 
 > As [Joel Spolsky](https://www.joelonsoftware.com/) wrote in his [blog post](https://www.joelonsoftware.com/2006/10/25/the-guerrilla-guide-to-interviewing-version-30/): with the algorithmic interview questions, he wants to see if the candidate is smart enough to "rip through a recursive algorithm in seconds, or implement linked-list manipulation functions using pointers as fast as you can write on the whiteboard".
 
@@ -96,7 +96,7 @@ The question itself doesn't test any of the core competencies that distinguish b
 I don't believe that any smart college student who can breeze through a graph traversal problem in an interview can't understand and pick up patterns like the table-driven method in just a couple of hours. On the other hand, any mediocre programmers who happened to read _[Code Complete](https://en.wikipedia.org/wiki/Code_Complete)_ can write a table-driven solution and pass the interview. Not to say that knowing good engineering practices is not a good thing; it is just that using that as the **only** hiring criteria to hire new grads is pointless and it doesn't help you find the smart kids.
 
 <details>
-<summary>So what are the ideal interview quetsions to ask new grads?</summary>
+<summary>So what are the ideal interview questions to ask new grads?</summary>
 
 Joel pointed it out [in his post](https://www.joelonsoftware.com/2006/10/25/the-guerrilla-guide-to-interviewing-version-30/) that the ideal interview questions should cover at least one of these two Computer Science concepts: 1. recursion 2. pointers
 
@@ -143,7 +143,7 @@ function getPrice(amount) {
 }
 ```
 
-Now the pricing data is stored in `config.js` seperately and `priceByRanges` is resolved at load time.
+Now the pricing data is stored in `config.js` separately and `priceByRanges` is resolved at load time.
 
 ### Further optimization
 
