@@ -69,7 +69,7 @@ They also offer resume examples/references from candidates who have received mul
 
 New fonts may convert letters into special characters which are not readable by the ATS. Fonts you should use - **Arial, Calibri, Garamond**.
 
-Ensure your font size remains readable for humans later on in the hiring process - use a minimum size of **10px** for readability.
+Ensure your font size remains readable for humans later on in the hiring process - use a minimum size of **10pt** for readability.
 
 ### Add sections with standard headings and ordering
 
