@@ -60,3 +60,17 @@ What makes Meetapro stand out?
 **Disclaimer: This section was added by the Codemia team**
 
 Codemia harnesses the power of advanced AI technology to evaluate and score your solutions instantly, enabling iterative practice and rapid skill refinement. But Codemia isn't just about practicing in isolation; it's a thriving community where members collaborate, share insights, and provide valuable feedback to one another, fostering a collaborative learning environment unlike any other. With a practice environment reminiscent of the familiar setup of LeetCode for algorithm challenges, Codemia offers a realistic simulation of interview scenarios, ensuring you're fully prepared to tackle any system design question with confidence.
+
+## MockIF
+
+[MockIF](https://mockif.com) is an AI-powered mock interview platform that personalizes your practice based on your resume and target job description. Unlike platforms that use generic questions, MockIF analyzes your background and generates relevant interview questions tailored to your experience and the specific role you're applying for.
+
+**Key features:**
+
+- **Resume-based personalization**: Upload your resume and job description to receive questions that reflect what you'd actually face in an interview for that role
+- **AI interviewer with follow-ups**: The AI adapts in real-time, asking follow-up questions based on your responses just like a real interviewer would
+- **Instant feedback**: Get immediate analysis on your answer structure, content quality, and areas for improvement
+- **STAR method support**: Built-in framework guidance for behavioral questions
+- **Free tier available**: Practice common interview questions at no cost
+
+MockIF is particularly useful for candidates who want realistic, conversational interview practice available 24/7, without the scheduling constraints of peer matching or the cost of professional coaches.
