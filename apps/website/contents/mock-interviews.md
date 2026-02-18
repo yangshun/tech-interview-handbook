@@ -60,3 +60,9 @@ What makes Meetapro stand out?
 **Disclaimer: This section was added by the Codemia team**
 
 Codemia harnesses the power of advanced AI technology to evaluate and score your solutions instantly, enabling iterative practice and rapid skill refinement. But Codemia isn't just about practicing in isolation; it's a thriving community where members collaborate, share insights, and provide valuable feedback to one another, fostering a collaborative learning environment unlike any other. With a practice environment reminiscent of the familiar setup of LeetCode for algorithm challenges, Codemia offers a realistic simulation of interview scenarios, ensuring you're fully prepared to tackle any system design question with confidence.
+
+## [Lixir](https://www.lixir.io/?utm_source=techinterviewhandbook)
+
+**Disclaimer: This section was added by the Lixir team**
+
+Lixir is a technical interview practice platform that simulates a realistic coding interview experience. Rather than teaching algorithms or providing problem sets, Lixir is designed for when you've _already_ studied and need to practice applying what you know under the pressure of a live conversation. After uploading your resume, you join a voice call with an AI interviewer who presents a problem, asks clarifying questions, and reacts to your code as you write it in a live editor - similar to what you'd experience in an actual phone screen or virtual onsite. Each session follows the full arc of a real technical interview: introductions and problem presentation, clarifying questions, live coding, optimization discussion, and follow-ups. Through practice, you build familiarity with the entire flow, not just the algorithm. It's available on-demand, so you can run through practice interviews whenever you have 45 minutes free.
