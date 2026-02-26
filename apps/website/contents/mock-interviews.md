@@ -60,3 +60,12 @@ What makes Meetapro stand out?
 **Disclaimer: This section was added by the Codemia team**
 
 Codemia harnesses the power of advanced AI technology to evaluate and score your solutions instantly, enabling iterative practice and rapid skill refinement. But Codemia isn't just about practicing in isolation; it's a thriving community where members collaborate, share insights, and provide valuable feedback to one another, fostering a collaborative learning environment unlike any other. With a practice environment reminiscent of the familiar setup of LeetCode for algorithm challenges, Codemia offers a realistic simulation of interview scenarios, ensuring you're fully prepared to tackle any system design question with confidence.
+
+## [CleverMock](https://www.clevermock.com/?utm_source=techinterviewhandbook)
+
+**Disclaimer: This section was added by the CleverMock team**
+
+CleverMock is an AI-powered voice interviewer designed to simulate the pressure of real technical interviews. Unlike standard chat-based tools, it uses voice interaction and actually interrupts you to ask follow-up questions, testing your ability to communicate clearly under pressure.
+
+It focuses on System Design and Behavioral rounds, providing detailed feedback on your communication style, answer structure, and technical depth. It's currently free to use during beta.
+
