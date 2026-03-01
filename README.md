@@ -32,6 +32,7 @@ Besides the usual algorithm questions, other **awesome** stuff includes:
 - [Algorithm cheatsheets and tips](https://www.techinterviewhandbook.org/algorithms/study-cheatsheet/) categorized by topic
 - [Step-by-step Software Engineer resume guide](https://www.techinterviewhandbook.org/resume/) to prepare a FAANG-ready resume
 - [Behavioral questions](https://www.techinterviewhandbook.org/behavioral-interview-questions/) asked by the top tech companies
+- [AI Interview Coach](https://em-tools.io/interview-prep) - Voice-based AI behavioral interview practice for engineering managers and software engineers
 - [Front end interview preparation](https://www.frontendinterviewhandbook.com)
 
 Help from you in contributing content would be very much appreciated!
