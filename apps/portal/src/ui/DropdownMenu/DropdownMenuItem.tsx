@@ -23,7 +23,7 @@ export default function DropdownMenuItem({
           className: clsx(
             isSelected ? 'font-medium text-slate-900' : 'text-slate-500',
             active && 'bg-slate-100',
-            'block px-4 py-2 text-sm w-full text-left',
+            'block w-full px-4 py-2 text-left text-sm',
           ),
           onClick,
         };

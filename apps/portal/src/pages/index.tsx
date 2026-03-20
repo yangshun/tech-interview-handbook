@@ -39,7 +39,7 @@ export default function HomePage() {
             <Container>
               <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
                 <span className="block">Tech Interview Handbook</span>
-                <span className="text-primary-600 block">Portal</span>
+                <span className="block text-primary-600">Portal</span>
               </h1>
               <p className="mx-auto mt-3 max-w-md text-base text-slate-500 sm:text-lg md:mt-5 md:max-w-3xl md:text-xl">
                 Suite of products to help you get better at technical

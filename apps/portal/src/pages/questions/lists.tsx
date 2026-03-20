@@ -88,7 +88,7 @@ export default function ListPage() {
               onClick={() => {
                 setSelectedListIndex(index);
               }}>
-              <p className="text-primary-700 text-md p-3 pl-6 font-medium">
+              <p className="text-md p-3 pl-6 font-medium text-primary-700">
                 {list.name}
               </p>
             </button>
@@ -98,12 +98,12 @@ export default function ListPage() {
                   <Menu.Button className="inline-flex w-full justify-center rounded-md p-2 text-sm font-medium text-white">
                     <EllipsisVerticalIcon
                       aria-hidden="true"
-                      className="hover:text-primary-700 mr-1 h-5 w-5 text-violet-400"
+                      className="mr-1 h-5 w-5 text-violet-400 hover:text-primary-700"
                     />
                   </Menu.Button>
                 </div>
                 <Menu.Items className="w-18 absolute right-0 z-10 mr-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div className="px-1 py-1 ">
+                  <div className="px-1 py-1">
                     <Menu.Item>
                       {({ active }) => (
                         <button

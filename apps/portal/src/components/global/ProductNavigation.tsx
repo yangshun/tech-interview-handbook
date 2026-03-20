@@ -33,7 +33,7 @@ export default function ProductNavigation({
   return (
     <nav aria-label="Global" className="flex h-full items-center space-x-8">
       <Link
-        className="hover:text-primary-700 flex items-center gap-2 text-base font-medium"
+        className="flex items-center gap-2 text-base font-medium hover:text-primary-700"
         href={titleHref}>
         <div>
           {logo ?? (
@@ -51,7 +51,7 @@ export default function ProductNavigation({
           const isActive = router.pathname === item.href;
           return item.children != null && item.children.length > 0 ? (
             <Menu key={item.name} as="div" className="relative text-left">
-              <Menu.Button className="focus:ring-primary-600 flex items-center rounded-md text-base font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2">
+              <Menu.Button className="flex items-center rounded-md text-base font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2">
                 <span>{item.name}</span>
                 <ChevronDownIcon
                   aria-hidden="true"
@@ -96,7 +96,7 @@ export default function ProductNavigation({
             <Link
               key={item.name}
               className={clsx(
-                'hover:text-primary-600 inline-flex h-full items-center border-y-2 border-t-transparent text-base text-slate-900',
+                'inline-flex h-full items-center border-y-2 border-t-transparent text-base text-slate-900 hover:text-primary-600',
                 isActive ? 'border-b-primary-500' : 'border-b-transparent',
               )}
               href={item.href}

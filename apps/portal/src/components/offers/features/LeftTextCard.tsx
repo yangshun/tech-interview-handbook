@@ -23,10 +23,10 @@ export default function LeftTextCard({
 }: LeftTextCardProps) {
   return (
     <div className="items-center lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-      <div className="mx-auto max-w-xl px-4 sm:px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
+      <div className="mx-auto max-w-xl px-4 sm:px-6 lg:mx-0 lg:max-w-none lg:px-0 lg:py-16">
         <div>
           <div>
-            <span className="to-primary-500 flex h-12 w-12 items-center justify-center rounded-md bg-gradient-to-r from-purple-600">
+            <span className="flex h-12 w-12 items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-primary-500">
               {icon}
             </span>
           </div>
@@ -37,7 +37,7 @@ export default function LeftTextCard({
             <p className="mt-4 text-lg text-gray-500">{description}</p>
             <div className="mt-6">
               <a
-                className="to-primary-500 inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                className="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-primary-500 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
                 href={url}>
                 {buttonLabel}
               </a>

@@ -370,7 +370,7 @@ export default function SubmitResumeForm({
                         fileUploadError
                           ? 'border-danger-600'
                           : 'border-slate-300',
-                        'cursor-pointer flex-col items-center space-y-1 rounded-md border-2 border-dashed bg-slate-50 py-4 px-4 text-center',
+                        'cursor-pointer flex-col items-center space-y-1 rounded-md border-2 border-dashed bg-slate-50 px-4 py-4 text-center',
                       )}>
                       <input
                         {...register('file', { required: true })}
@@ -383,20 +383,20 @@ export default function SubmitResumeForm({
                         type="file"
                       />
                       {resumeFile == null ? (
-                        <ArrowUpCircleIcon className="text-primary-500 m-auto h-10 w-10" />
+                        <ArrowUpCircleIcon className="m-auto h-10 w-10 text-primary-500" />
                       ) : (
                         <p
-                          className="hover:text-primary-600 cursor-pointer underline underline-offset-1"
+                          className="cursor-pointer underline underline-offset-1 hover:text-primary-600"
                           onClick={onClickDownload}>
                           {resumeFile.name}
                         </p>
                       )}
                       <label
-                        className="focus-within:ring-primary-500 cursor-pointer text-sm focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2"
+                        className="cursor-pointer text-sm focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2"
                         htmlFor="file-upload">
                         <span className="font-medium">Drop file here</span>
-                        <span className="mr-1 ml-1 font-light">or</span>
-                        <span className="text-primary-600 hover:text-primary-400 font-medium">
+                        <span className="ml-1 mr-1 font-light">or</span>
+                        <span className="font-medium text-primary-600 hover:text-primary-400">
                           {resumeFile == null ? 'Select file' : 'Replace file'}
                         </span>
                       </label>
@@ -405,7 +405,7 @@ export default function SubmitResumeForm({
                       </p>
                     </div>
                     {fileUploadError && (
-                      <p className="text-danger-600 text-sm">
+                      <p className="text-sm text-danger-600">
                         {fileUploadError}
                       </p>
                     )}

@@ -4,7 +4,7 @@ export default function loginPageHref(redirectUrl?: string) {
     query: {
       callbackUrl:
         typeof window !== 'undefined'
-          ? redirectUrl ?? window.location.href
+          ? (redirectUrl ?? window.location.href)
           : null,
     },
   };

@@ -67,13 +67,13 @@ export default function LandingComponent({ onLanded }: LandingComponentProps) {
   }, [defaultLocation, location]);
 
   return (
-    <div className="relative pt-6 pb-16 sm:pb-24">
+    <div className="relative pb-16 pt-6 sm:pb-24">
       <main className="mt-8 sm:mt-16">
         <Container>
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="px-4 sm:px-6 sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:flex lg:items-center lg:text-left">
               <div>
-                <h1 className="text-primary-600 mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+                <h1 className="mt-4 text-4xl font-bold tracking-tight text-primary-600 sm:text-5xl md:text-6xl">
                   Tech Interview Question Bank
                 </h1>
                 <p className="mt-3 text-base text-slate-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">

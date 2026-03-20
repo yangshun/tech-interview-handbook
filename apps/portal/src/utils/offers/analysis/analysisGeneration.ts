@@ -314,9 +314,9 @@ const getSalary = (offer: Offer | SimilarOffer, defaultSalary = 0) => {
     offer.offersFullTime?.totalCompensation?.baseValue != null
     ? offer.offersFullTime.totalCompensation.baseValue
     : offer.jobType === JobType.INTERN &&
-      offer.offersIntern?.monthlySalary?.baseValue != null
-    ? offer.offersIntern.monthlySalary.baseValue
-    : defaultSalary;
+        offer.offersIntern?.monthlySalary?.baseValue != null
+      ? offer.offersIntern.monthlySalary.baseValue
+      : defaultSalary;
 };
 
 const getTopOffers = (

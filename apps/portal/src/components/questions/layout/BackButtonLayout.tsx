@@ -13,7 +13,7 @@ export default function BackButtonLayout({
   children,
 }: BackButtonLayoutProps) {
   return (
-    <Container className="flex flex-col gap-4 pt-4 pb-12" variant="sm">
+    <Container className="flex flex-col gap-4 pb-12 pt-4" variant="sm">
       <div>
         <Button
           addonPosition="start"

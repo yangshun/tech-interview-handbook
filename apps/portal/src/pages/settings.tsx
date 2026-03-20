@@ -55,7 +55,7 @@ function SettingsForm({
                 name: name ? name : undefined,
               });
             }}>
-            <div className="grid grid-cols-1 gap-y-8 gap-x-4 sm:grid-cols-6">
+            <div className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-3">
                 <TextInput
                   description="This name will be used across the entire platform"

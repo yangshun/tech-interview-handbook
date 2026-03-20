@@ -36,7 +36,7 @@ export default function CheckboxList({
         className={clsx(
           'space-y-2',
           orientation === 'horizontal' &&
-            'sm:flex sm:items-center sm:space-y-0 sm:space-x-10',
+            'sm:flex sm:items-center sm:space-x-10 sm:space-y-0',
         )}
         role="group">
         {children}

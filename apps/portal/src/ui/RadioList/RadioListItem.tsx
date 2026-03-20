@@ -34,7 +34,7 @@ export default function RadioListItem<T>({
             context?.value != null ? value === context?.value : undefined
           }
           className={clsx(
-            'text-primary-600 focus:ring-primary-500 h-4 w-4 border-slate-300',
+            'h-4 w-4 border-slate-300 text-primary-600 focus:ring-primary-500',
             disabled && 'bg-slate-100',
           )}
           defaultChecked={

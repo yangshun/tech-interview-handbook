@@ -69,7 +69,7 @@ export default function OffersHomePage({
           </Link>
           . ⭐
         </Banner>
-        <div className="text-primary-600 flex items-center justify-end space-x-1 bg-slate-100 px-4 pt-4 sm:text-lg">
+        <div className="flex items-center justify-end space-x-1 bg-slate-100 px-4 pt-4 text-primary-600 sm:text-lg">
           <span>
             <MapPinIcon className="flex h-7 w-7" />
           </span>
@@ -90,10 +90,10 @@ export default function OffersHomePage({
             }}
           />
         </div>
-        <div className="bg-slate-100 py-16 px-4">
+        <div className="bg-slate-100 px-4 py-16">
           <div>
             <div>
-              <h1 className="text-primary-600 text-center text-4xl font-bold sm:text-5xl">
+              <h1 className="text-center text-4xl font-bold text-primary-600 sm:text-5xl">
                 Tech Offers Repo (Admin)
               </h1>
             </div>
@@ -102,7 +102,7 @@ export default function OffersHomePage({
               offers.
             </div>
           </div>
-          <div className="mt-6 flex flex-col items-center justify-center space-y-2 text-sm text-slate-700 sm:mt-10 sm:flex-row sm:space-y-0 sm:space-x-4 sm:text-lg">
+          <div className="mt-6 flex flex-col items-center justify-center space-y-2 text-sm text-slate-700 sm:mt-10 sm:flex-row sm:space-x-4 sm:space-y-0 sm:text-lg">
             <span>Viewing offers for</span>
             <div className="flex items-center space-x-4">
               <JobTitlesTypeahead

@@ -64,9 +64,7 @@ export default function AnswerCard({
         <div className="-ml-2">
           {commentCount !== undefined && (
             <button
-              className="-my-1 flex items-center rounded-md px-2
-                  py-1 text-xs font-medium
-                  text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+              className="-my-1 flex items-center rounded-md px-2 py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-600"
               type="button">
               <ChatBubbleLeftRightIcon
                 aria-hidden={true}

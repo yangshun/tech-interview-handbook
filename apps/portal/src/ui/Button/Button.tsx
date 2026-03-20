@@ -150,11 +150,11 @@ export default function Button({
 
   const commonProps = {
     'aria-controls': ariaControls ?? undefined,
-    'aria-label': isLabelHidden ? ariaLabel ?? label : undefined,
+    'aria-label': isLabelHidden ? (ariaLabel ?? label) : undefined,
     children,
     className: clsx(
       display === 'block' ? 'flex w-full justify-center' : 'inline-flex',
-      'whitespace-nowrap items-center border font-medium focus:outline-none focus:ring-2 focus:ring-offset-2',
+      'items-center whitespace-nowrap border font-medium focus:outline-none focus:ring-2 focus:ring-offset-2',
       disabled ? variantDisabledClasses[variant] : variantClasses[variant],
       disabled && 'pointer-events-none',
       isLabelHidden ? iconOnlySizeClasses[size] : sizeClasses[size],

@@ -60,7 +60,7 @@ export default function AboutPage() {
                 Thank you for using our platform! Feel free to submit your
                 feedback / feature request / bug report
                 <a
-                  className="text-primary-600 hover:text-primary-500 ml-1"
+                  className="ml-1 text-primary-600 hover:text-primary-500"
                   href="https://forms.gle/BPbhrcXWcFvCbvvv8"
                   rel="noreferrer"
                   target="_blank">
@@ -79,7 +79,7 @@ export default function AboutPage() {
                 {people.map((person) => (
                   <li key={person.name}>
                     <div className="space-y-4 sm:grid sm:grid-cols-4 sm:gap-6 sm:space-y-0 lg:gap-8">
-                      <div className="aspect-w-2 aspect-h-2 h-0">
+                      <div className="aspect-h-2 aspect-w-2 h-0">
                         <img
                           alt={person.name}
                           className="rounded-lg object-cover shadow-lg"

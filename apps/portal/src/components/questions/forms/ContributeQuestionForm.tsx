@@ -118,7 +118,7 @@ export default function ContributeQuestionForm({
           rows={5}
           {...register('questionContent')}
         />
-        <h2 className="text-md text-primary-800 font-semibold">
+        <h2 className="text-md font-semibold text-primary-800">
           Additional information
         </h2>
         <div className="flex flex-col flex-wrap items-stretch gap-2 sm:flex-row sm:items-end">
@@ -193,10 +193,7 @@ export default function ContributeQuestionForm({
           </div>
         </div>
 
-        <h2
-          className="text-primary-900
-        text-lg font-semibold
-        ">
+        <h2 className="text-lg font-semibold text-primary-900">
           Are these questions the same as yours?
         </h2>
         <Button
@@ -250,7 +247,7 @@ export default function ContributeQuestionForm({
             )}
         </div>
         <div
-          className="bg-primary-50 flex w-full flex-col gap-y-2 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)] sm:flex-row sm:justify-between"
+          className="flex w-full flex-col gap-y-2 bg-primary-50 py-3 shadow-[0_0_0_100vmax_theme(colors.primary.50)] sm:flex-row sm:justify-between"
           style={{
             // Hack to make the background bleed outside the container
             clipPath: 'inset(0 -100vmax)',

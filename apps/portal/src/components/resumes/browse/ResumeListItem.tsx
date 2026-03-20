@@ -47,7 +47,7 @@ export default function ResumeListItem({ href, resumeInfo }: Props) {
                 {resumeInfo.isResolved ? 'Reviewed' : 'Unreviewed'}
               </p>
             </div>
-            <div className="text-primary-500 mt-2 flex items-center justify-start text-xs">
+            <div className="mt-2 flex items-center justify-start text-xs text-primary-500">
               <div className="flex">
                 <BriefcaseIcon
                   aria-hidden="true"

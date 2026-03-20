@@ -73,12 +73,12 @@ export const resumesRouter = createRouter()
                 createdAt: 'desc',
               }
             : sortOrder === 'popular'
-            ? {
-                stars: {
-                  _count: 'desc',
-                },
-              }
-            : { comments: { _count: 'desc' } },
+              ? {
+                  stars: {
+                    _count: 'desc',
+                  },
+                }
+              : { comments: { _count: 'desc' } },
         skip: isTop10 ? 0 : skip,
         take,
         where: {

@@ -27,7 +27,7 @@ export default function OffersTablePagination({
   }, []);
 
   return (
-    <nav aria-label="Offers Pagination" className="py-3 px-4">
+    <nav aria-label="Offers Pagination" className="px-4 py-3">
       <div className="grid grid-cols-1 items-center gap-2 md:grid-cols-2">
         <div>
           {!isInitialFetch && (

@@ -43,7 +43,7 @@ function ProfileJewel() {
     return router.pathname !== loginHref.pathname ? (
       <div className="flex items-center space-x-4">
         <Link
-          className="hover:text-primary-500 text-xs font-medium text-slate-700"
+          className="text-xs font-medium text-slate-700 hover:text-primary-500"
           href={loginHref}>
           Sign In
         </Link>
@@ -78,7 +78,7 @@ function ProfileJewel() {
   return (
     <Menu as="div" className="relative flex-shrink-0">
       <div>
-        <Menu.Button className="focus:ring-primary-500 flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-offset-2">
+        <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
           <span className="sr-only">Open user menu</span>
           {session?.user?.image == null ? (
             <span>TODO: Render some icon</span>
@@ -220,7 +220,7 @@ export default function AppShell({ children }: Props) {
           <header className="sticky top-0 z-10 w-full">
             <div className="relative flex h-16 flex-shrink-0 border-b border-slate-200 bg-white shadow-sm">
               <button
-                className="focus:ring-primary-500 border-r border-slate-200 px-4 text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset md:hidden"
+                className="border-r border-slate-200 px-4 text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 md:hidden"
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}>
                 <span className="sr-only">Open sidebar</span>

@@ -16,13 +16,14 @@
     "dev:ui": "turbo dev --filter=storybook... --filter=ui...",
     "dev:website": "turbo dev --filter=website...",
     "dev:all": "turbo dev --no-cache --parallel --continue",
-    "format": "prettier --write \"**/*.{js,jsx,cjs,mjs,ts,tsx,md,mdx}\"",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
     "lint": "turbo lint",
     "test": "turbo test",
     "tsc": "turbo tsc"
   },
   "devDependencies": {
-    "prettier": "^2.7.1",
+    "oxfmt": "^0.41.0",
     "turbo": "1.5.6"
   },
   "engines": {

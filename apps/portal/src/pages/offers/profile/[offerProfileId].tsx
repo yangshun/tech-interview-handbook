@@ -235,7 +235,7 @@ export default function OfferProfile() {
           </div>
         </div>
         <div
-          className="bg-white lg:fixed lg:right-0 lg:bottom-0 lg:w-1/3"
+          className="bg-white lg:fixed lg:bottom-0 lg:right-0 lg:w-1/3"
           style={{ top: 64 }}>
           <ProfileComments
             isDisabled={deleteMutation.isLoading}

@@ -29,8 +29,8 @@ export default function Tabs<T>({ label, tabs, value, onChange }: Props<T>) {
               className: clsx(
                 isSelected
                   ? 'bg-primary-100 text-primary-700'
-                  : 'hover:bg-slate-100 text-slate-500 hover:text-slate-700',
-                'px-3 py-2 font-medium text-sm rounded-md',
+                  : 'text-slate-500 hover:bg-slate-100 hover:text-slate-700',
+                'rounded-md px-3 py-2 text-sm font-medium',
               ),
               onClick: onChange != null ? () => onChange(tab.value) : undefined,
               role: 'tab',

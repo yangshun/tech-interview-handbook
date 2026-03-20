@@ -193,7 +193,7 @@ export default function Typeahead({
                   textSizes[textSize],
                 )}>
                 {options.length === 0 && query !== '' ? (
-                  <div className="relative cursor-default select-none py-2 px-4 text-slate-700">
+                  <div className="relative cursor-default select-none px-4 py-2 text-slate-700">
                     {noResultsMessage}
                   </div>
                 ) : (
@@ -202,7 +202,7 @@ export default function Typeahead({
                       key={option.id}
                       className={({ active }) =>
                         clsx(
-                          'relative cursor-default select-none py-2 px-4 text-slate-500',
+                          'relative cursor-default select-none px-4 py-2 text-slate-500',
                           active && 'bg-slate-100',
                         )
                       }
@@ -238,7 +238,7 @@ export default function Typeahead({
         </div>
       </Combobox>
       {errorMessage && (
-        <p className="text-danger-600 mt-2 text-sm" id={errorId}>
+        <p className="mt-2 text-sm text-danger-600" id={errorId}>
           {errorMessage}
         </p>
       )}

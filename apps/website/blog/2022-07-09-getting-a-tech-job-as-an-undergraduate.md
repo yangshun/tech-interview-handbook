@@ -24,7 +24,6 @@ In most companies, the resume stage is the most important as it is the first sta
 2. As far as possible, <strong>attend career talks</strong> by your favorite companies because hiring managers are there and you can get some feedback about your resume. It is indeed helpful because you know what to look out for when applying.
 
 3. Keep your sentences short and sweet, else you are out of the game.
-
    - <strong>Good example:</strong> "Developed a full-stack website that garnered positive responses from faculty and administration about course visualization." You need not provide tech stacks and let alone, links here. The sentence here is short and sweet and all in past tense.
 
    - <strong>Bad example:</strong> "Was a project manager for two projects- AI_ducation as well as the lift project for ALEF. Helped day-to-day operations by communicating with clients in Mandarin to map business requirements to technical requirements.". Over here, the sentence is long and things can be <strong>separated out into points</strong>. Furthermore, it does not describe the outcome of the project enough to say <strong>"Why should you be hired?"</strong>.
@@ -44,7 +43,6 @@ I am about to recommend relevant sections to go in sequentially and how to syste
 2. Go to your Glassdoor page and pick out some of the past relevant interview questions that your company has done to get a gauge of what to expect. If you are unable to do those past questions, I suggest revising a good amount about the common topics. One common topic is array and hash table design. You can refer to the [coding interview rubrics section](/coding-interview-rubrics/) get to know your interview rubrics. It helps and you know what to do.
 
 3. Know and try various techniques for each LeetCode question. It's not purely about variety but more about if you were to even come back to the same question, will you be able to give a more optimal solution? If you don't know where to get started especially when solving problems in general refer to this [coding interview techniques section](/coding-interview-techniques/).
-
    - Start with a whiteboard or pen and paper. Show your thought process.
    - In most companies, if you were to show your thought process while doing, interviewers tend to favour candidates who do this. If you are not confident, start thinking that you are explaining and teaching a 12 year old child about how to solve this question.
    - Code it out and write your own test cases. Get used to the HackerRank or LeetCode IDEs.

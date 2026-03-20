@@ -28,7 +28,7 @@ export default function OffersHeader({
     <th
       key={header}
       className={clsx(
-        'bg-slate-100 py-3 px-4',
+        'bg-slate-100 px-4 py-3',
         sortType &&
           'hover:cursor-pointer hover:bg-slate-200 active:bg-slate-300',
         header !== 'Company' && 'whitespace-nowrap',

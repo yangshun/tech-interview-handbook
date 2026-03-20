@@ -14,10 +14,10 @@ export default function ResumeFilterPill({
   return (
     <button
       className={clsx(
-        'border-primary-500 focus:bg-primary-500 rounded-xl border border-transparent px-2 py-1 text-xs font-medium focus:text-white',
+        'rounded-xl border border-primary-500 border-transparent px-2 py-1 text-xs font-medium focus:bg-primary-500 focus:text-white',
         isSelected
           ? 'bg-primary-500 text-white'
-          : 'text-primary-500 hover:text-primary-700 bg-white hover:bg-slate-100',
+          : 'bg-white text-primary-500 hover:bg-slate-100 hover:text-primary-700',
       )}
       type="button"
       onClick={onClick}>

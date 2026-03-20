@@ -27,10 +27,10 @@ function OfferAnalysisContent({
     jobType === JobType.INTERN
       ? ''
       : totalYoe <= 2
-      ? YOE_CATEGORY.ENTRY
-      : totalYoe <= 5
-      ? YOE_CATEGORY.MID
-      : YOE_CATEGORY.SENIOR;
+        ? YOE_CATEGORY.ENTRY
+        : totalYoe <= 5
+          ? YOE_CATEGORY.MID
+          : YOE_CATEGORY.SENIOR;
 
   if (!analysis || analysis.noOfOffers === 0) {
     if (tab === OVERALL_TAB) {

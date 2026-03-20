@@ -26,7 +26,7 @@ function ToastIcon({ variant }: Readonly<{ variant: ToastVariant }>) {
   switch (variant) {
     case 'success':
       return (
-        <CheckIcon aria-hidden="true" className="text-success-500 h-6 w-6" />
+        <CheckIcon aria-hidden="true" className="h-6 w-6 text-success-500" />
       );
     case 'failure':
       return (

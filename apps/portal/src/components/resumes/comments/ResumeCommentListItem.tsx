@@ -47,7 +47,7 @@ export default function ResumeCommentListItem({
               {comment.user.name ?? 'Reviewer ABC'}
             </p>
             {isCommentOwner && (
-              <span className="bg-primary-100 text-primary-800 rounded-md py-0.5 px-1 text-xs">
+              <span className="rounded-md bg-primary-100 px-1 py-0.5 text-xs text-primary-800">
                 Me
               </span>
             )}

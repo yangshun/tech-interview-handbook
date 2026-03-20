@@ -25,9 +25,10 @@
   --ifm-color-primary-lighter: #8a8adf;
   --ifm-color-primary-lightest: #afafe9;
 
-  --ifm-font-family-base: 'Inter var', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
+  --ifm-font-family-base:
+    'Inter var', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
   --ifm-font-size-base: 16px;
 
   --ifm-footer-padding-vertical: 3rem;

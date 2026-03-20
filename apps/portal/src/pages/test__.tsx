@@ -34,7 +34,7 @@ export default function HomePage() {
 
   return (
     <main className="mx-auto max-w-5xl flex-1 overflow-y-auto py-24">
-      <h1 className="text-primary-600 text-center text-4xl font-bold">
+      <h1 className="text-center text-4xl font-bold text-primary-600">
         Test Page
       </h1>
       <div className="mt-8 grid grid-cols-2 gap-8">

@@ -49,7 +49,7 @@ export function PrimaryFeatures() {
 
   return (
     <section
-      className="from-primary-400 to-primary-700 relative overflow-hidden bg-gradient-to-r pt-20 pb-28 sm:py-32"
+      className="relative overflow-hidden bg-gradient-to-r from-primary-400 to-primary-700 pb-28 pt-20 sm:py-32"
       id="features">
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
@@ -69,7 +69,7 @@ export function PrimaryFeatures() {
                     <div
                       key={feature.title}
                       className={clsx(
-                        'group relative rounded-full lg:rounded-r-none lg:rounded-l-xl lg:p-6',
+                        'group relative rounded-full lg:rounded-l-xl lg:rounded-r-none lg:p-6',
                         selectedIndex === featureIndex
                           ? 'bg-white lg:bg-white/10 lg:ring-1 lg:ring-inset lg:ring-white/10'
                           : 'hover:bg-white/10 lg:hover:bg-white/5',
@@ -77,13 +77,13 @@ export function PrimaryFeatures() {
                       <h3>
                         <Tab
                           className={clsx(
-                            'rounded-full py-1 px-4',
+                            'rounded-full px-4 py-1',
                             'font-display text-lg [&:not(:focus-visible)]:focus:outline-none',
                             selectedIndex === featureIndex
                               ? 'text-blue-600 lg:text-white'
                               : 'text-blue-100 hover:text-white lg:text-white',
                           )}>
-                          <span className="absolute inset-0 rounded-full lg:rounded-r-none lg:rounded-l-xl" />
+                          <span className="absolute inset-0 rounded-full lg:rounded-l-xl lg:rounded-r-none" />
                           <div className="font-bold">{feature.title}</div>
                         </Tab>
                       </h3>
@@ -104,7 +104,7 @@ export function PrimaryFeatures() {
                 {features.map((feature) => (
                   <Tab.Panel key={feature.title} unmount={false}>
                     <div className="relative sm:px-6 lg:hidden">
-                      <div className="absolute -inset-x-4 top-[-6.5rem] bottom-[-4.25rem] bg-white/10 ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
+                      <div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] bg-white/10 ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
                       <p className="relative mx-auto max-w-2xl text-base text-white sm:text-center">
                         {feature.description}
                       </p>

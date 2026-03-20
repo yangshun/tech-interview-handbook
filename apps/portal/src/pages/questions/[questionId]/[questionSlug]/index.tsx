@@ -336,7 +336,7 @@ export default function QuestionPage() {
                 rows={5}
               />
             </div>
-            <div className="mt-3 mb-1 flex justify-end">
+            <div className="mb-1 mt-3 flex justify-end">
               <Button
                 disabled={!isDirty || !isValid}
                 label="Contribute"

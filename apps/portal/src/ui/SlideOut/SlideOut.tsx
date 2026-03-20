@@ -84,7 +84,7 @@ export default function SlideOut({
               <div className="flex items-center justify-between px-4">
                 <h2 className="text-lg font-medium text-slate-900">{title}</h2>
                 <button
-                  className="focus:ring-primary-500 -mr-2 flex h-10 w-10 items-center justify-center rounded-full p-2 text-slate-400 hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset"
+                  className="-mr-2 flex h-10 w-10 items-center justify-center rounded-full p-2 text-slate-400 hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
                   type="button"
                   onClick={() => onClose?.()}>
                   <span className="sr-only">Close menu</span>

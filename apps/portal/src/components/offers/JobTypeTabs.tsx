@@ -35,7 +35,7 @@ export default function JobTypeTabs({ value, onChange }: Props) {
                 : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700',
               tabIdx === 0 && 'rounded-l-lg',
               tabIdx === tabs.length - 1 && 'rounded-r-lg',
-              'focus:ring-primary-500 group relative min-w-0 flex-1 overflow-hidden py-3 px-4 text-center font-medium focus:z-10',
+              'group relative min-w-0 flex-1 overflow-hidden px-4 py-3 text-center font-medium focus:z-10 focus:ring-primary-500',
             )}
             type="button"
             onClick={() => {

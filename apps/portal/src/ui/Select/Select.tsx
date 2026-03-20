@@ -113,7 +113,7 @@ function Select<T>(
         ))}
       </select>
       {errorMessage && (
-        <p className="text-danger-600 mt-2 text-sm" id={errorId}>
+        <p className="mt-2 text-sm text-danger-600" id={errorId}>
           {errorMessage}
         </p>
       )}

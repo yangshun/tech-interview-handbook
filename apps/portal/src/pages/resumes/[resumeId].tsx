@@ -388,7 +388,7 @@ export default function ResumeReviewPage() {
                       className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                     />
                     <button
-                      className="hover:text-primary-800 underline"
+                      className="underline hover:text-primary-800"
                       type="button"
                       onClick={() =>
                         onInfoTagClick({
@@ -404,7 +404,7 @@ export default function ResumeReviewPage() {
                       className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                     />
                     <button
-                      className="hover:text-primary-800 underline"
+                      className="underline hover:text-primary-800"
                       type="button"
                       onClick={() =>
                         onInfoTagClick({
@@ -421,7 +421,7 @@ export default function ResumeReviewPage() {
                       className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
                     />
                     <button
-                      className="hover:text-primary-800 underline"
+                      className="underline hover:text-primary-800"
                       type="button"
                       onClick={() =>
                         onInfoTagClick({

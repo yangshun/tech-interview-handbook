@@ -75,7 +75,7 @@ export default function OffersProfileSave({
           We value your privacy
         </p>
         <div className="mt-6 max-w-md text-slate-500">
-          <div className="bg-info-50 rounded-lg p-6">
+          <div className="rounded-lg bg-info-50 p-6">
             <p className="sm:tex-base text-sm">
               To keep your offer profile strictly anonymous, it is not linked to
               your user account. Only people who have the link below can edit

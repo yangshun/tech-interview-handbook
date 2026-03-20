@@ -83,7 +83,7 @@ export default function DropdownMenu({
         <Menu.Items
           className={clsx(
             alignmentClasses[align],
-            'ring-primary-500 absolute z-10 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-opacity-5 focus:outline-none',
+            'absolute z-10 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-primary-500 ring-opacity-5 focus:outline-none',
           )}>
           <div className="py-1">{children}</div>
         </Menu.Items>

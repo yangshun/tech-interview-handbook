@@ -24,9 +24,9 @@ function PaginationPage({
     <button
       aria-current={isCurrent}
       className={clsx(
-        'focus:ring-primary-500 focus:border-primary-500 relative inline-flex items-center border px-4 py-2 text-sm font-medium focus:z-20 focus:outline-none focus:ring-1',
+        'relative inline-flex items-center border px-4 py-2 text-sm font-medium focus:z-20 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500',
         isCurrent
-          ? 'border-primary-500 bg-primary-50 text-primary-600 z-10'
+          ? 'z-10 border-primary-500 bg-primary-50 text-primary-600'
           : 'border-slate-300 bg-white text-slate-500 hover:bg-slate-50',
       )}
       disabled={isCurrent}
@@ -113,7 +113,7 @@ export default function Pagination({
           'relative inline-flex items-center rounded-l-md border border-slate-300 px-2 py-2 text-sm font-medium focus:z-20',
           isPrevButtonDisabled
             ? 'text-slate-300'
-            : 'focus:ring-primary-500 focus:border-primary-500 bg-white text-slate-500 hover:bg-slate-50 focus:outline-none focus:ring-1',
+            : 'bg-white text-slate-500 hover:bg-slate-50 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500',
         )}
         disabled={isPrevButtonDisabled}
         type="button"
@@ -129,7 +129,7 @@ export default function Pagination({
           'relative inline-flex items-center rounded-r-md border border-slate-300 px-2 py-2 text-sm font-medium focus:z-20',
           isNextButtonDisabled
             ? 'text-slate-300'
-            : 'focus:ring-primary-500 focus:border-primary-500 bg-white text-slate-500 hover:bg-slate-50 focus:outline-none focus:ring-1',
+            : 'bg-white text-slate-500 hover:bg-slate-50 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500',
         )}
         disabled={isNextButtonDisabled}
         type="button"

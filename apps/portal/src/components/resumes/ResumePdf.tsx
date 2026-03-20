@@ -57,7 +57,7 @@ export default function ResumePdf({ url }: Props) {
               width={pageWidth}
             />
           </div>
-          <div className="absolute top-2 right-5 hidden hover:block group-hover:block">
+          <div className="absolute right-5 top-2 hidden hover:block group-hover:block">
             <Button
               className="rounded-r-none focus:ring-0 focus:ring-offset-0"
               disabled={pageWidth === 450}

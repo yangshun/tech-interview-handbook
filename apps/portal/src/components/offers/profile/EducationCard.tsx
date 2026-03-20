@@ -12,7 +12,7 @@ export default function EducationCard({
   education: { type, field, startDate, endDate, school },
 }: Props) {
   return (
-    <div className="block rounded-lg border border-slate-200 bg-white p-4 text-sm ">
+    <div className="block rounded-lg border border-slate-200 bg-white p-4 text-sm">
       <div className="flex justify-between">
         <div>
           <div className="mb-2 flex items-center">
@@ -26,8 +26,8 @@ export default function EducationCard({
                     'N/A'
                   }`
                 : type
-                ? type.charAt(0).toUpperCase() + type.slice(1)
-                : `N/A`}
+                  ? type.charAt(0).toUpperCase() + type.slice(1)
+                  : `N/A`}
             </span>
           </div>
           {school && (

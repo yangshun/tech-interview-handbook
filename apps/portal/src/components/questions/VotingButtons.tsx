@@ -56,7 +56,7 @@ export default function VotingButtons({
             size === 'md' && 'h-6 w-6',
             vote?.vote === 'UPVOTE'
               ? 'text-primary-500'
-              : 'hover:text-primary-500 text-slate-400',
+              : 'text-slate-400 hover:text-primary-500',
           )}
         />
       </button>
@@ -79,7 +79,7 @@ export default function VotingButtons({
             size === 'md' && 'h-6 w-6',
             vote?.vote === 'DOWNVOTE'
               ? 'text-danger-500'
-              : 'hover:text-danger-500 text-slate-400',
+              : 'text-slate-400 hover:text-danger-500',
           )}
         />
       </button>

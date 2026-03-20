@@ -107,7 +107,7 @@ export default function ProfileComments({
     <div className="bh-white h-fit lg:h-[calc(100vh-4.5rem)] lg:overflow-y-auto">
       <div className="border-b border-slate-200 bg-white p-4 lg:sticky lg:top-0">
         <div className="flex justify-end">
-          <div className="grid w-fit grid-cols-1 space-y-2 md:grid-cols-2 md:space-y-0 md:space-x-4">
+          <div className="grid w-fit grid-cols-1 space-y-2 md:grid-cols-2 md:space-x-4 md:space-y-0">
             <div className="col-span-1 flex justify-end">
               {isEditable && (
                 <Tooltip tooltipContent="Copy this link to edit your profile later">
@@ -169,7 +169,9 @@ export default function ProfileComments({
             <div>
               <TextArea
                 label={`Comment as ${
-                  isEditable ? profileName : session?.user?.name ?? 'anonymous'
+                  isEditable
+                    ? profileName
+                    : (session?.user?.name ?? 'anonymous')
                 }`}
                 placeholder="Type your comment here"
                 value={currentReply}

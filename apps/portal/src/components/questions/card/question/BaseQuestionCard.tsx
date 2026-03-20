@@ -266,9 +266,7 @@ export default function BaseQuestionCard({
               {showAnswerStatistics && (
                 <div>
                   <button
-                    className="-my-1 flex items-center rounded-md px-2
-                  py-1 text-xs font-medium
-                  text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+                    className="-my-1 flex items-center rounded-md px-2 py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-600"
                     type="button">
                     <ChatBubbleBottomCenterTextIcon
                       aria-hidden={true}
@@ -281,9 +279,7 @@ export default function BaseQuestionCard({
               {showReceivedStatistics && (
                 <div>
                   <button
-                    className="-my-1 flex items-center rounded-md px-2
-                  py-1 text-xs font-medium
-                  text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+                    className="-my-1 flex items-center rounded-md px-2 py-1 text-xs font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-600"
                     type="button">
                     <EyeIcon aria-hidden={true} className="mr-2 h-5 w-5" />
                     {receivedCount} received this
@@ -320,12 +316,12 @@ export default function BaseQuestionCard({
     <article
       className={clsx(
         'group flex gap-4 border-slate-200',
-        showHover && 'hover:border-primary-500 transition',
+        showHover && 'transition hover:border-primary-500',
         !hideCard && 'rounded-md border bg-white px-2 py-4 sm:rounded-lg',
       )}>
       {cardContent}
       {showDeleteButton && (
-        <div className="fill-danger-700 invisible	self-center group-hover:visible">
+        <div className="invisible self-center fill-danger-700 group-hover:visible">
           <Button
             icon={TrashIcon}
             isLabelHidden={true}

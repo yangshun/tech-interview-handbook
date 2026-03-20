@@ -36,7 +36,7 @@ export default function ResumeExpandableText({
       </span>
       {descriptionOverflow && (
         <button
-          className="text-primary-500 hover:text-primary-600 text-xs font-medium"
+          className="text-xs font-medium text-primary-500 hover:text-primary-600"
           type="button"
           onClick={onSeeActionClicked}>
           {isExpanded ? 'See Less' : 'See More'}

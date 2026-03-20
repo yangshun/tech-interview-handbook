@@ -106,7 +106,7 @@ export default function AddToListDropdown({
 
   const CustomMenuButton = ({ children }: PropsWithChildren<unknown>) => (
     <button
-      className="focus:ring-primary-500 inline-flex w-full items-center justify-center rounded-md border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-100"
+      className="inline-flex w-full items-center justify-center rounded-md border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-slate-100"
       type="button"
       onClick={handleMenuButtonClick}>
       {children}

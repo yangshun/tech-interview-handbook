@@ -115,7 +115,7 @@ export default function ResumeCommentsForm({
   };
 
   return (
-    <div className="overflow-y-auto py-8 px-4">
+    <div className="overflow-y-auto px-4 py-8">
       <h2 className="text-xl font-medium text-slate-800">
         Contribute a review
       </h2>

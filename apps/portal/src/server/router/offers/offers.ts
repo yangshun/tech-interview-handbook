@@ -35,12 +35,12 @@ const getYoeRange = (yoeCategory: number | null | undefined) => {
   return yoeCategory == null
     ? { maxYoe: 100, minYoe: 0 }
     : yoeCategoryMap[yoeCategory] === 'Fresh Grad'
-    ? { maxYoe: 2, minYoe: 0 }
-    : yoeCategoryMap[yoeCategory] === 'Mid'
-    ? { maxYoe: 5, minYoe: 3 }
-    : yoeCategoryMap[yoeCategory] === 'Senior'
-    ? { maxYoe: 100, minYoe: 6 }
-    : null; // Internship
+      ? { maxYoe: 2, minYoe: 0 }
+      : yoeCategoryMap[yoeCategory] === 'Mid'
+        ? { maxYoe: 5, minYoe: 3 }
+        : yoeCategoryMap[yoeCategory] === 'Senior'
+          ? { maxYoe: 100, minYoe: 6 }
+          : null; // Internship
 };
 
 export const offersRouter = createRouter().query('list', {
@@ -115,54 +115,54 @@ export const offersRouter = createRouter().query('list', {
                   monthYearReceived: order,
                 }
               : sortingKey === sortingKeysMap.totalCompensation
-              ? [
-                  {
-                    offersIntern: {
-                      monthlySalary: {
-                        baseValue: order,
+                ? [
+                    {
+                      offersIntern: {
+                        monthlySalary: {
+                          baseValue: order,
+                        },
                       },
                     },
-                  },
-                  {
-                    monthYearReceived: 'desc',
-                  },
-                ]
-              : sortingKey === sortingKeysMap.totalYoe
-              ? [
-                  {
-                    profile: {
-                      background: {
-                        totalYoe: order,
+                    {
+                      monthYearReceived: 'desc',
+                    },
+                  ]
+                : sortingKey === sortingKeysMap.totalYoe
+                  ? [
+                      {
+                        profile: {
+                          background: {
+                            totalYoe: order,
+                          },
+                        },
                       },
-                    },
-                  },
-                  {
-                    monthYearReceived: 'desc',
-                  },
-                ]
-              : sortingKey === sortingKeysMap.companyName
-              ? [
-                  {
-                    company: {
-                      name: order,
-                    },
-                  },
-                  {
-                    monthYearReceived: 'desc',
-                  },
-                ]
-              : sortingKey === sortingKeysMap.jobTitle
-              ? [
-                  {
-                    offersIntern: {
-                      title: order,
-                    },
-                  },
-                  {
-                    monthYearReceived: 'desc',
-                  },
-                ]
-              : { monthYearReceived: 'desc' },
+                      {
+                        monthYearReceived: 'desc',
+                      },
+                    ]
+                  : sortingKey === sortingKeysMap.companyName
+                    ? [
+                        {
+                          company: {
+                            name: order,
+                          },
+                        },
+                        {
+                          monthYearReceived: 'desc',
+                        },
+                      ]
+                    : sortingKey === sortingKeysMap.jobTitle
+                      ? [
+                          {
+                            offersIntern: {
+                              title: order,
+                            },
+                          },
+                          {
+                            monthYearReceived: 'desc',
+                          },
+                        ]
+                      : { monthYearReceived: 'desc' },
           where: {
             AND: [
               {
@@ -267,54 +267,54 @@ export const offersRouter = createRouter().query('list', {
                   monthYearReceived: order,
                 }
               : sortingKey === sortingKeysMap.totalCompensation
-              ? [
-                  {
-                    offersFullTime: {
-                      totalCompensation: {
-                        baseValue: order,
+                ? [
+                    {
+                      offersFullTime: {
+                        totalCompensation: {
+                          baseValue: order,
+                        },
                       },
                     },
-                  },
-                  {
-                    monthYearReceived: 'desc',
-                  },
-                ]
-              : sortingKey === sortingKeysMap.totalYoe
-              ? [
-                  {
-                    profile: {
-                      background: {
-                        totalYoe: order,
+                    {
+                      monthYearReceived: 'desc',
+                    },
+                  ]
+                : sortingKey === sortingKeysMap.totalYoe
+                  ? [
+                      {
+                        profile: {
+                          background: {
+                            totalYoe: order,
+                          },
+                        },
                       },
-                    },
-                  },
-                  {
-                    monthYearReceived: 'desc',
-                  },
-                ]
-              : sortingKey === sortingKeysMap.companyName
-              ? [
-                  {
-                    company: {
-                      name: order,
-                    },
-                  },
-                  {
-                    monthYearReceived: 'desc',
-                  },
-                ]
-              : sortingKey === sortingKeysMap.jobTitle
-              ? [
-                  {
-                    offersFullTime: {
-                      title: order,
-                    },
-                  },
-                  {
-                    monthYearReceived: 'desc',
-                  },
-                ]
-              : { monthYearReceived: 'desc' },
+                      {
+                        monthYearReceived: 'desc',
+                      },
+                    ]
+                  : sortingKey === sortingKeysMap.companyName
+                    ? [
+                        {
+                          company: {
+                            name: order,
+                          },
+                        },
+                        {
+                          monthYearReceived: 'desc',
+                        },
+                      ]
+                    : sortingKey === sortingKeysMap.jobTitle
+                      ? [
+                          {
+                            offersFullTime: {
+                              title: order,
+                            },
+                          },
+                          {
+                            monthYearReceived: 'desc',
+                          },
+                        ]
+                      : { monthYearReceived: 'desc' },
           where: {
             AND: [
               {

@@ -175,10 +175,10 @@ export default function QuestionsBrowsePage() {
     return selectedQuestionAge === 'last-year'
       ? subYears(new Date(), 1)
       : selectedQuestionAge === 'last-6-months'
-      ? subMonths(new Date(), 6)
-      : selectedQuestionAge === 'last-month'
-      ? subMonths(new Date(), 1)
-      : undefined;
+        ? subMonths(new Date(), 6)
+        : selectedQuestionAge === 'last-month'
+          ? subMonths(new Date(), 1)
+          : undefined;
   }, [selectedQuestionAge]);
 
   const questionsInfiniteQuery = trpc.useInfiniteQuery(
@@ -508,7 +508,7 @@ export default function QuestionsBrowsePage() {
       <main>
         <QuestionContainer className="relative flex" variant="sm">
           <section className="min-h-0 flex-1 overflow-auto">
-            <div className="my-4 mx-auto flex flex-col items-stretch justify-start gap-6 sm:px-4">
+            <div className="mx-auto my-4 flex flex-col items-stretch justify-start gap-6 sm:px-4">
               <ContributeQuestionCard
                 onSubmit={(data) => {
                   const { cityId, countryId, stateId } = data.location;

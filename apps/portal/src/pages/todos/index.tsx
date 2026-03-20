@@ -39,9 +39,9 @@ export default function TodoList() {
               A list of all Todos added by everyone.
             </p>
           </div>
-          <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+          <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
             <Link
-              className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:w-auto"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:w-auto"
               href="/todos/new">
               Add Todo
             </Link>
@@ -51,7 +51,7 @@ export default function TodoList() {
           <div>Loading...</div>
         ) : (
           <div className="mt-8 flex flex-col">
-            <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                 <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                   <table className="min-w-full divide-y divide-slate-300">
@@ -120,7 +120,7 @@ export default function TodoList() {
                                 }}>
                                 <input
                                   autoFocus={true}
-                                  className="focus:border-primary-500 focus:ring-primary-500 block w-full min-w-0 flex-1 rounded-md border-slate-300 sm:text-sm"
+                                  className="block w-full min-w-0 flex-1 rounded-md border-slate-300 focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                                   defaultValue={todo.text}
                                   name="text"
                                   type="text"
@@ -142,7 +142,7 @@ export default function TodoList() {
                           <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-slate-500 sm:pr-6">
                             <input
                               checked={todo.status === 'COMPLETE'}
-                              className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded border-slate-300"
+                              className="h-4 w-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500"
                               type="checkbox"
                               onChange={() => {
                                 todoUpdateMutation.mutate({

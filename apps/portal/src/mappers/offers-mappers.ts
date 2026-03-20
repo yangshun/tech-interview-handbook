@@ -93,8 +93,8 @@ const analysisOfferDtoMapper = (
     profileName,
     title:
       offer.jobType === JobType.FULLTIME
-        ? offer.offersFullTime?.title ?? ''
-        : offer.offersIntern?.title ?? '',
+        ? (offer.offersFullTime?.title ?? '')
+        : (offer.offersIntern?.title ?? ''),
     totalYoe: background?.totalYoe ?? -1,
   };
 
@@ -189,8 +189,8 @@ const analysisUnitDtoMapper = (
       jobType === JobType.FULLTIME && analysedOffer.offersFullTime != null
         ? analysedOffer.offersFullTime.title
         : jobType === JobType.INTERN && analysedOffer.offersIntern != null
-        ? analysedOffer.offersIntern.title
-        : '',
+          ? analysedOffer.offersIntern.title
+          : '',
     topPercentileOffers: analysisUnit.topSimilarOffers.map((offer) =>
       analysisOfferDtoMapper(offer),
     ),
@@ -909,8 +909,8 @@ const userProfileOfferDtoMapper = (
     monthYearReceived: offer.monthYearReceived,
     title:
       offer.jobType === JobType.FULLTIME
-        ? offer.offersFullTime?.title ?? ''
-        : offer.offersIntern?.title ?? '',
+        ? (offer.offersFullTime?.title ?? '')
+        : (offer.offersIntern?.title ?? ''),
   };
 
   if (

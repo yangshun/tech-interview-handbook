@@ -454,7 +454,7 @@ export default function ResumeHomePage() {
                       <Disclosure
                         key={filter.id}
                         as="div"
-                        className="border-t border-slate-200 px-4 pt-6 pb-4"
+                        className="border-t border-slate-200 px-4 pb-4 pt-6"
                         defaultOpen={isFiltersOpen[filter.id]}>
                         {({ open }) => (
                           <>
@@ -534,7 +534,7 @@ export default function ResumeHomePage() {
 
       <main className="h-full flex-auto px-8 pb-4">
         <div className="flex justify-start">
-          <div className="fixed top-0 bottom-0 mt-24 hidden w-64 overflow-auto lg:block">
+          <div className="fixed bottom-0 top-0 mt-24 hidden w-64 overflow-auto lg:block">
             {/* Quick Access Section */}
             <h3 className="text-md font-medium tracking-tight text-gray-900">
               Quick access
@@ -563,7 +563,7 @@ export default function ResumeHomePage() {
                     <Disclosure
                       key={filter.id}
                       as="div"
-                      className="border-b border-slate-200 pt-6 pb-4"
+                      className="border-b border-slate-200 pb-4 pt-6"
                       defaultOpen={isFiltersOpen[filter.id]}>
                       {({ open }) => (
                         <>
@@ -639,7 +639,7 @@ export default function ResumeHomePage() {
             </div>
           </div>
           <div className="relative lg:left-64 lg:w-[calc(100%-16rem)]">
-            <div className="lg:border-grey-200 z-1 sticky top-16 flex flex-wrap items-center justify-between bg-slate-50 pt-6 pb-2 lg:border-b">
+            <div className="lg:border-grey-200 z-1 sticky top-16 flex flex-wrap items-center justify-between bg-slate-50 pb-2 pt-6 lg:border-b">
               <div className="border-grey-200 mb-4 flex w-full justify-between border-b pb-2 lg:mb-0 lg:w-auto lg:border-none xl:pb-0">
                 <div>
                   <Tabs

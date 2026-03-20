@@ -60,23 +60,23 @@ export default function Example() {
               You may be trying to access the following services
             </h2>
             <ul
-              className="mt-4 divide-y divide-slate-200 border-t border-b border-slate-200"
+              className="mt-4 divide-y divide-slate-200 border-b border-t border-slate-200"
               role="list">
               {links.map((link) => (
                 <li
                   key={link.href}
                   className="relative flex items-start space-x-4 py-6">
                   <div className="flex-shrink-0">
-                    <span className="bg-primary-50 flex h-12 w-12 items-center justify-center rounded-lg">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-50">
                       <link.icon
                         aria-hidden="true"
-                        className="text-primary-700 h-6 w-6"
+                        className="h-6 w-6 text-primary-700"
                       />
                     </span>
                   </div>
                   <div className="min-w-0 flex-1">
                     <h3 className="text-base font-medium text-slate-900">
-                      <span className="focus-within:ring-primary-500 rounded-sm focus-within:ring-2 focus-within:ring-offset-2">
+                      <span className="rounded-sm focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2">
                         <Link className="focus:outline-none" href={link.href}>
                           <span
                             aria-hidden="true"
@@ -101,7 +101,7 @@ export default function Example() {
             </ul>
             <div className="mt-8">
               <Link
-                className="text-primary-600 hover:text-primary-500 text-base font-medium"
+                className="text-base font-medium text-primary-600 hover:text-primary-500"
                 href="/">
                 Or go back home
                 <span aria-hidden="true"> &rarr;</span>
