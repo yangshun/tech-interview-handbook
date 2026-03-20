@@ -1,9 +1,9 @@
 import type { JobType } from '@prisma/client';
 
 export type Profile = {
-  analysis: ProfileAnalysis?;
-  background: Background?;
-  editToken: string?;
+  analysis?: ProfileAnalysis | null;
+  background?: Background | null;
+  editToken?: string | null;
   id: string;
   isEditable: boolean;
   isSaved: boolean;
@@ -20,15 +20,15 @@ export type Background = {
 };
 
 export type Experience = {
-  company: OffersCompany?;
-  durationInMonths: number?;
+  company?: OffersCompany | null;
+  durationInMonths?: number | null;
   id: string;
-  jobType: JobType?;
-  level: string?;
-  location: Location?;
-  monthlySalary: Valuation?;
-  title: string?;
-  totalCompensation: Valuation?;
+  jobType?: JobType | null;
+  level?: string | null;
+  location?: Location | null;
+  monthlySalary?: Valuation | null;
+  title?: string | null;
+  totalCompensation?: Valuation | null;
 };
 
 export type OffersCompany = {
@@ -50,12 +50,12 @@ export type Valuation = {
 };
 
 export type Education = {
-  endDate: Date?;
-  field: string?;
+  endDate?: Date | null;
+  field?: string | null;
   id: string;
-  school: string?;
-  startDate: Date?;
-  type: string?;
+  school?: string | null;
+  startDate?: Date | null;
+  type?: string | null;
 };
 
 export type SpecificYoe = {
@@ -87,16 +87,16 @@ export type ProfileOffer = {
   location: Location;
   monthYearReceived: Date;
   negotiationStrategy: string;
-  offersFullTime: FullTime?;
-  offersIntern: Intern?;
+  offersFullTime?: FullTime | null;
+  offersIntern?: Intern | null;
 };
 
 export type FullTime = {
-  baseSalary: Valuation?;
-  bonus: Valuation?;
+  baseSalary?: Valuation | null;
+  bonus?: Valuation | null;
   id: string;
   level: string;
-  stocks: Valuation?;
+  stocks?: Valuation | null;
   title: string;
   totalCompensation: Valuation;
 };
@@ -113,17 +113,17 @@ export type Reply = {
   createdAt: Date;
   id: string;
   message: string;
-  replies: Array<Reply>?;
-  replyingToId: string?;
-  user: User?;
+  replies?: Array<Reply> | null;
+  replyingToId?: string | null;
+  user?: User | null;
 };
 
 export type User = {
-  email: string?;
-  emailVerified: Date?;
+  email?: string | null;
+  emailVerified?: Date | null;
   id: string;
-  image: string?;
-  name: string?;
+  image?: string | null;
+  name?: string | null;
 };
 
 export type GetOffersResponse = {

@@ -7,6 +7,7 @@
     "start": "docusaurus start",
     "dev": "docusaurus start",
     "build": "docusaurus build",
+    "lint": "oxlint docusaurus.config.js sidebars.js src",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy"
   },

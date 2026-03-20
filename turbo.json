@@ -16,17 +16,7 @@
       "dependsOn": []
     },
     "lint": {
-      "dependsOn": ["^build"],
-      "env": [
-        "DATABASE_URL",
-        "GITHUB_CLIENT_ID",
-        "GITHUB_CLIENT_SECRET",
-        "NEXTAUTH_SECRET",
-        "NEXTAUTH_URL",
-        "NODE_ENV",
-        "SUPABASE_ANON_KEY",
-        "SUPABASE_URL"
-      ]
+      "outputs": []
     },
     "tsc": {
       "cache": true,

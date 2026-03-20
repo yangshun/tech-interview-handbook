@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "oxlint next.config.mjs src",
     "tsc": "tsc",
     "postinstall": "prisma generate",
     "seed": "ts-node prisma/seed.ts",

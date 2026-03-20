@@ -9,18 +9,18 @@ export type ResumeComment = Readonly<{
   createdAt: Date;
   description: string;
   id: string;
-  parentId: string?;
+  parentId?: string | null;
   resumeId: string;
   section: ResumesSection;
   updatedAt: Date;
   user: {
-    image: string?;
-    name: string?;
+    image?: string | null;
+    name?: string | null;
     userId: string;
   };
 }>;
 
 export type ResumeCommentVote = Readonly<{
   numVotes: number;
-  userVote: ResumesCommentVote?;
+  userVote?: ResumesCommentVote | null;
 }>;

@@ -70,27 +70,6 @@ function GreatFrontEnd({ position }) {
   );
 }
 
-function AlgoMonster({ position }) {
-  return (
-    <a
-      className={clsx(styles.container, styles.backgroundAlgoMonster)}
-      href="https://shareasale.com/r.cfm?b=1873647&u=3114753&m=114505&urllink=&afftrack="
-      target="_blank"
-      rel="noopener"
-      onClick={() => {
-        window.gtag('event', `algomonster.${position}.click`);
-      }}>
-      <p className={styles.tagline}>
-        <strong className={styles.title}>
-          Stop grinding mindlessly. Study with a plan
-        </strong>
-        Developed by Google engineers, <u>AlgoMonster</u> is the fastest way to
-        get a software engineering job. <u>Check it out for free!</u>
-      </p>
-    </a>
-  );
-}
-
 function DesignGurusSystemDesign({ position }) {
   return (
     <a
@@ -176,21 +155,6 @@ export default React.memo(function SidebarAd({ position }) {
             <DesignGurusSystemDesign key={Math.random()} position={position} />
           );
         }
-
-        // if (
-        //   path.includes('coding') ||
-        //   path.includes('best-practice-questions') ||
-        //   path.includes('mock-interviews') ||
-        //   path.includes('algorithms')
-        // ) {
-        //   return rand < 0.3 ? (
-        //     <Interviewingio key={Math.random()} position={position} />
-        //   ) : rand < 0.6 ? (
-        //     <AlgoMonster key={Math.random()} position={position} />
-        //   ) : (
-        //     <DesignGurusCoding key={Math.random()} position={position} />
-        //   );
-        // }
 
         return rand < 0.5 ? (
           <FAANGTechLeads key={Math.random()} position={position} />

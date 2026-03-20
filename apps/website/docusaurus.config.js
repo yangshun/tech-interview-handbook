@@ -184,7 +184,7 @@ module.exports = {
           path: './contents',
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          // showLastUpdateAuthor: true,
+          // ShowLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
         theme: {

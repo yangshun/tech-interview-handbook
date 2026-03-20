@@ -1,5 +1,5 @@
 export type Resume = {
-  additionalInfo: string?;
+  additionalInfo?: string | null;
   createdAt: Date;
   experience: string;
   id: string;

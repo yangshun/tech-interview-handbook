@@ -21,6 +21,7 @@
     "tsc": "turbo tsc"
   },
   "devDependencies": {
+    "oxlint": "^1.56.0",
     "oxfmt": "^0.41.0",
     "turbo": "2.8.20"
   },

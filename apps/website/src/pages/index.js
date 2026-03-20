@@ -1,7 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
-import BrowserOnly from '@docusaurus/BrowserOnly';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -11,11 +10,10 @@ import successStories from '../data/successStories';
 
 const BLIND_75_URL =
   'https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU';
-const BLIND_OFFER_NUMBERS_URL =
-  'https://www.teamblind.com/post/Sharing-my-offer-numbers-from-big-companies-for-your-reference-yNgqUPQR';
 
 const FEATURES = [
   {
+    id: 'zero-to-hero',
     title: <>💯 Go From zero to hero</>,
     description: (
       <>
@@ -26,6 +24,7 @@ const FEATURES = [
     link: '/software-engineering-interview-guide/',
   },
   {
+    id: 'curated-practice',
     title: <>📝 Curated practice questions</>,
     description: (
       <>
@@ -39,6 +38,7 @@ const FEATURES = [
     link: '/coding-interview-study-plan/',
   },
   {
+    id: 'best-practices',
     title: <>📋 Interview best practices</>,
     description: (
       <>
@@ -49,6 +49,7 @@ const FEATURES = [
     link: '/coding-interview-cheatsheet/',
   },
   {
+    id: 'algorithm-tips',
     title: <>💁‍♀️ Practical algorithm tips</>,
     description: (
       <>
@@ -59,6 +60,7 @@ const FEATURES = [
     link: '/algorithms/study-cheatsheet/',
   },
   {
+    id: 'behavioral',
     title: <>💬 Behavioral questions</>,
     description: (
       <>
@@ -69,6 +71,7 @@ const FEATURES = [
     link: '/behavioral-interview-questions/',
   },
   {
+    id: 'tested',
     title: <>🧪 Tested and proven</>,
     description: (
       <>
@@ -220,48 +223,6 @@ function WhatIsThisSection() {
   );
 }
 
-function RoraSection() {
-  // Because the SSR and client output can differ and hydration doesn't patch attribute differences,
-  // we'll render this on the browser only.
-  return (
-    <BrowserOnly>
-      {() => (
-        <div className={clsx('padding-vert--lg', styles.sectionSponsor)}>
-          <div className="container">
-            <div className="row">
-              <div className="col col--8 col--offset-2">
-                <div className="margin-vert--lg text--center">
-                  <div>
-                    <h2 className={styles.sectionSponsorTitle}>
-                      <strong>
-                        Get paid more. Receive risk-free salary negotiation
-                        advice from Rora. You pay nothing unless your offer is
-                        increased.
-                      </strong>
-                    </h2>
-                    <div className="margin-vert--lg">
-                      <a
-                        className="button button--secondary button--lg"
-                        href="https://www.teamrora.com/?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=website_homepage"
-                        rel="noopener"
-                        target="_blank"
-                        onClick={() => {
-                          window.gtag('event', 'rora.homepage.click');
-                        }}>
-                        Get risk-free negotiation advice&nbsp;&nbsp;→
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </BrowserOnly>
-  );
-}
-
 function HowToUseStep({ index, title, ctaLink, contents }) {
   return (
     <div className={clsx('card', styles.howToUseStep)}>
@@ -273,8 +234,8 @@ function HowToUseStep({ index, title, ctaLink, contents }) {
       </div>
       <div className="card__body">
         <ul>
-          {contents.map((content, i) => (
-            <li key={i}>{content}</li>
+          {contents.map((content) => (
+            <li key={content}>{content}</li>
           ))}
         </ul>
       </div>
@@ -325,9 +286,9 @@ function HowToUseSection() {
               index={1}
               title={<>Prepare a FAANG-ready resume</>}
               contents={[
-                <>Create an ATS-proof resume</>,
-                <>Software engineering specific resume content</>,
-                <>Optimizing and testing your resume</>,
+                'Create an ATS-proof resume',
+                'Software engineering specific resume content',
+                'Optimizing and testing your resume',
               ]}
               ctaLink="/resume/"
             />
@@ -338,10 +299,10 @@ function HowToUseSection() {
               index={2}
               title={<>Ace the interviews</>}
               contents={[
-                <>Step-by-step coding interview preparation</>,
-                <>Algorithms deep dive</>,
-                <>System design interview preparation</>,
-                <>Behavioral interview preparation</>,
+                'Step-by-step coding interview preparation',
+                'Algorithms deep dive',
+                'System design interview preparation',
+                'Behavioral interview preparation',
               ]}
               ctaLink="/coding-interview-prep/"
             />
@@ -352,8 +313,8 @@ function HowToUseSection() {
               index={3}
               title={<>Negotiate the best offer</>}
               contents={[
-                <>Negotiation strategies for software engineers</>,
-                <>Guide on how compensation works for software engineers</>,
+                'Negotiation strategies for software engineers',
+                'Guide on how compensation works for software engineers',
               ]}
               ctaLink="/understanding-compensation/"
             />
@@ -363,10 +324,7 @@ function HowToUseSection() {
             <HowToUseStep
               index={4}
               title={<>Prepare for the job</>}
-              contents={[
-                <>How to choose between companies</>,
-                <>Guide to engineering levels</>,
-              ]}
+              contents={['How to choose between companies', 'Guide to engineering levels']}
               ctaLink="/choosing-between-companies"
             />
           </div>
@@ -394,9 +352,9 @@ function FeaturesSection() {
               We have everything you need - all straight to the point
             </h3>
             <div className={clsx('row', styles.featuresRow)}>
-              {FEATURES.map(({ title, description, link }, idx) => (
+              {FEATURES.map(({ id, title, description, link }) => (
                 <div
-                  key={idx}
+                  key={id}
                   className={clsx(
                     'col',
                     'col--4',
@@ -471,7 +429,7 @@ function GreatFrontEndSection() {
             <div className="margin-vert--lg text--center">
               <div>
                 <h2>
-                  <span class="badge badge--secondary">
+                  <span className="badge badge--secondary">
                     LeetCode for Front End Interviews
                   </span>
                 </h2>
