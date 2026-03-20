@@ -1,6 +1,6 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "pipeline": {
+  "tasks": {
     "build": {
       "outputs": [
         "dist/**",
@@ -17,10 +17,20 @@
     },
     "lint": {
       "dependsOn": ["^build"],
-      "outputs": []
+      "env": [
+        "DATABASE_URL",
+        "GITHUB_CLIENT_ID",
+        "GITHUB_CLIENT_SECRET",
+        "NEXTAUTH_SECRET",
+        "NEXTAUTH_URL",
+        "NODE_ENV",
+        "SUPABASE_ANON_KEY",
+        "SUPABASE_URL"
+      ]
     },
     "tsc": {
-      "cache": true
+      "cache": true,
+      "outputs": []
     },
     "dev": {
       "cache": false

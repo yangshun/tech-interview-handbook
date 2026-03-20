@@ -11,10 +11,11 @@
     "deploy": "docusaurus deploy"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.1",
-    "@docusaurus/plugin-client-redirects": "^2.0.1",
-    "@docusaurus/preset-classic": "^2.0.1",
-    "clsx": "^1.2.1",
+    "@docusaurus/core": "^2.4.3",
+    "@docusaurus/plugin-client-redirects": "^2.4.3",
+    "@docusaurus/preset-classic": "^2.4.3",
+    "@docusaurus/theme-common": "^2.4.3",
+    "clsx": "^2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

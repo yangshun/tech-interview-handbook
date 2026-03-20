@@ -12,10 +12,8 @@
     "build": "turbo build",
     "ci": "pnpm lint && pnpm tsc",
     "clean": "turbo clean",
-    "dev": "turbo dev --filter=portal... --filter=ui...",
-    "dev:ui": "turbo dev --filter=storybook... --filter=ui...",
-    "dev:website": "turbo dev --filter=website...",
-    "dev:all": "turbo dev --no-cache --parallel --continue",
+    "dev:portal": "turbo dev --filter=@tih/portal...",
+    "dev": "turbo dev --filter=@tih/website...",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
     "lint": "turbo lint",
@@ -24,7 +22,7 @@
   },
   "devDependencies": {
     "oxfmt": "^0.41.0",
-    "turbo": "1.5.6"
+    "turbo": "2.8.20"
   },
   "engines": {
     "node": "25.8.1",
