@@ -321,13 +321,11 @@ While optimizing for every application is ideal, you can generalize your resume 
 
 <InDocAd />
 
-## Free tools to review your resume
+## Tools to review your resume
 
-I recommend using these free tools to optimize your resume:
+I recommend using these tools to optimize your resume:
 
-### 1. Free resume review
-
-Tech Interview Handbook has a [resume review portal](https://app.techinterviewhandbook.org/resumes) where you can upload your resume and get helpful comments and feedback from other community members and even the authors of Tech Interview Handbook!
+### 1. Resume review
 
 If you are willing to spend some money we recommend [FAANG Tech Leads' Resume Review service](https://www.faangtechleads.com?utm_source=techinterviewhandbook&utm_medium=referral&utm_content=ats_template&aff=1e80c401fe7e2) where your resume will be reviewed by ex-FAANG hiring managers and engineers, not random writers who don't understand technology.
 

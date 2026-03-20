@@ -53,7 +53,7 @@ Salaries of top US tech internships in 2016 ([source](https://twitter.com/rodney
 
 ### Singapore
 
-We ran a survey to find out what the famous tech companies in Singapore are paying new hires in 2022/2023 and here's a sample of the results. View the [full dataset](https://app.techinterviewhandbook.org/offers) or [contribute your data](https://app.techinterviewhandbook.org/offers/submit)!
+We ran a survey to find out what the famous tech companies in Singapore are paying new hires in 2022/2023, and here's a sample of the results:
 
 | Company       | Internship (monthly in SGD) | Fresh Grad Annual Total (SGD) |
 | ------------- | --------------------------- | ----------------------------- |
