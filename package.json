@@ -9,21 +9,15 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "turbo build",
-    "ci": "pnpm lint && pnpm tsc",
-    "clean": "turbo clean",
-    "dev:portal": "turbo dev --filter=@tih/portal...",
-    "dev": "turbo dev --filter=@tih/website...",
-    "format": "oxfmt .",
-    "format:check": "oxfmt --check .",
-    "lint": "turbo lint",
-    "test": "turbo test",
-    "tsc": "turbo tsc"
+    "build": "vp run --cache -r build",
+    "ci": "vp check && vp test && vp run --cache -r build",
+    "clean": "vp cache clean",
+    "dev:portal": "vp run --filter @tih/portal... dev",
+    "dev": "vp run --filter @tih/website... dev",
+    "prepare": "vp config"
   },
   "devDependencies": {
-    "oxlint": "^1.56.0",
-    "oxfmt": "^0.41.0",
-    "turbo": "2.8.20"
+    "vite-plus": "catalog:"
   },
   "engines": {
     "node": "25.8.1",

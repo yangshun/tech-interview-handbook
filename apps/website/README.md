@@ -1,13 +1,13 @@
 # Website
 
-This website is built using Docusaurus 2, a modern static website generator. It is part of a [Turborepo](https://turborepo.org/) monorepo setup.
+This website is built using Docusaurus 2, a modern static website generator. It is part of the repository's Vite+ monorepo setup.
 
 ### Installation
 
-We use pnpm as the package manager. At the root of the repository, run `pnpm install` to install the monorepo dependencies.
+Vite+ manages installs through the repository's declared package manager. At the root of the repository, run `vp install` to install the monorepo dependencies.
 
 ```sh
-$ pnpm install
+$ vp install
 ```
 
 ### Local Development
@@ -15,18 +15,17 @@ $ pnpm install
 Also at the root of the repository, run:
 
 ```sh
-$ pnpm dev:website
+$ vp run dev
 ```
 
 This command starts a local development server and opens up a browser window. Most changes made to JavaScript and Markdown files will be reflected instantly without having to restart the server.
 
 ### Build
 
-Navigate to the `apps/website` directory.
+From the repository root, run:
 
 ```sh
-cd apps/website
-$ pnpm build
+$ vp run --filter @tih/website build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
@@ -34,7 +33,8 @@ This command generates static content into the `build` directory and can be serv
 ### Deployment
 
 ```
-$ GIT_USER=<Your GitHub username> USE_SSH=1 pnpm deploy
+$ cd apps/website
+$ GIT_USER=<Your GitHub username> USE_SSH=1 vp run deploy
 ```
 
 If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

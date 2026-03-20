@@ -1,5 +1,5 @@
-# Copied from https://github.com/facebook/docusaurus/blob/main/.github/workflows/lint.yml
-name: Typecheck
+# Framework builds using Vite+ task orchestration
+name: Build
 
 on:
   pull_request:
@@ -13,26 +13,32 @@ concurrency:
 permissions:
   contents: read
 
+env:
+  DATABASE_URL: 'postgresql://postgres:password@localhost:5432/postgres'
+  GITHUB_CLIENT_ID: '1234'
+  GITHUB_CLIENT_SECRET: 'abcd'
+  NEXTAUTH_SECRET: 'efgh'
+  NEXTAUTH_URL: 'http://localhost:3000'
+  NODE_ENV: test
+  SUPABASE_ANON_KEY: 'ijkl'
+  SUPABASE_URL: 'https://abcd.supabase.co'
+
 jobs:
-  tsc:
-    name: Typecheck
+  build:
+    name: Build
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
-      - name: Set up Node
-        uses: actions/setup-node@v6
+      - name: Set up Vite+
+        uses: voidzero-dev/setup-vp@v1
         with:
           node-version: '25.8.1'
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache: true
       - name: Installation
-        run: pnpm install --frozen-lockfile
-      # Build the shared types in dependent packages.
-      - name: Build dependencies
-        run: pnpm turbo run build --filter=ui
-      - name: Typecheck
-        run: pnpm tsc
+        run: vp install
+      - name: Build website
+        run: vp run --filter @tih/website build
+      - name: Build portal
+        run: vp run --filter @tih/portal build

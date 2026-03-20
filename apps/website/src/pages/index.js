@@ -324,7 +324,10 @@ function HowToUseSection() {
             <HowToUseStep
               index={4}
               title={<>Prepare for the job</>}
-              contents={['How to choose between companies', 'Guide to engineering levels']}
+              contents={[
+                'How to choose between companies',
+                'Guide to engineering levels',
+              ]}
               ctaLink="/choosing-between-companies"
             />
           </div>
