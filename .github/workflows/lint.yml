@@ -31,14 +31,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: '16'
-          cache: yarn
+          node-version: '25.8.1'
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
       - name: Installation
-        run: yarn
-      - name: Check immutable yarn.lock
-        run: git diff --exit-code
+        run: pnpm install --frozen-lockfile
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
