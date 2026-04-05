@@ -88,7 +88,7 @@ However, this interview format takes up more time from both the candidates and t
 
 Frequency: Common
 
-Phone interviews are the most common format and every candidate will face this at least once while interviewing. You will be asked to speak with an interviewer either over a phone call or VoIP (BlueJeans/Skype/Google Hangout). A question will be given to you and you will work on that question using an online collaborative editor (CoderPad/CodePen/Google Docs).
+Phone interviews are the most common format and every candidate will face this at least once while interviewing. You will be asked to speak with an interviewer either by phone or via a video meeting tool such as Microsoft Teams, Google Meet, or Zoom. A question will be given to you and you will work on that question using an online collaborative editor (CoderPad/CodePen/Google Docs).
 
 You are usually not allowed to execute the code even if the editor supports execution. So don't rely on that for verifying the correctness of your solution. Formats would differ slightly depending on the roles you are applying to. Many companies like to use [CoderPad](https://coderpad.io) for collaborative code editing. CoderPad supports running of the program, so it is possible that you will be asked to fix your code such that it can be run. For front end interviews, many companies like to use [CodePen](https://codepen.io), and it will be worth your time to familiarize yourself with the user interfaces of such web-based coding environments.
 
