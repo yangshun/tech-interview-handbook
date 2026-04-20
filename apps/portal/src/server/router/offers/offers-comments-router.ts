@@ -102,9 +102,10 @@ export const offersCommentsRouter = createRouter()
       profileId: z.string(),
       replyingToId: z.string().optional(),
       token: z.string().optional(),
-      userId: z.string().optional(),
     }),
     async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+
       const profile = await ctx.prisma.offersProfile.findFirst({
         where: {
           id: input.profileId,
@@ -113,7 +114,7 @@ export const offersCommentsRouter = createRouter()
 
       const profileEditToken = profile?.editToken;
 
-      if (input.token === profileEditToken || input.userId) {
+      if (input.token === profileEditToken || userId) {
         const createdReply = await ctx.prisma.offersReply.create({
           data: {
             message: input.message,
@@ -140,12 +141,12 @@ export const offersCommentsRouter = createRouter()
           });
         }
 
-        if (input.userId) {
+        if (userId) {
           await ctx.prisma.offersReply.update({
             data: {
               user: {
                 connect: {
-                  id: input.userId,
+                  id: userId,
                 },
               },
             },
@@ -193,11 +194,12 @@ export const offersCommentsRouter = createRouter()
       id: z.string(),
       message: z.string(),
       profileId: z.string(),
-      // Have to pass in either userID or token for validation
+      // Have to pass in either token for OP validation
       token: z.string().optional(),
-      userId: z.string().optional(),
     }),
     async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+
       const messageToUpdate = await ctx.prisma.offersReply.findFirst({
         where: {
           id: input.id,
@@ -212,10 +214,9 @@ export const offersCommentsRouter = createRouter()
       const profileEditToken = profile?.editToken;
 
       // To validate user editing, OP or correct user
-      // TODO: improve validation process
       if (
         profileEditToken === input.token ||
-        messageToUpdate?.userId === input.userId
+        (userId && messageToUpdate?.userId === userId)
       ) {
         const updated = await ctx.prisma.offersReply.update({
           data: {
@@ -277,11 +278,12 @@ export const offersCommentsRouter = createRouter()
     input: z.object({
       id: z.string(),
       profileId: z.string(),
-      // Have to pass in either userID or token for validation
+      // Have to pass in either token for OP validation
       token: z.string().optional(),
-      userId: z.string().optional(),
     }),
     async resolve({ ctx, input }) {
+      const userId = ctx.session?.user?.id;
+
       const messageToDelete = await ctx.prisma.offersReply.findFirst({
         where: {
           id: input.id,
@@ -296,10 +298,9 @@ export const offersCommentsRouter = createRouter()
       const profileEditToken = profile?.editToken;
 
       // To validate user editing, OP or correct user
-      // TODO: improve validation process
       if (
         profileEditToken === input.token ||
-        messageToDelete?.userId === input.userId
+        (userId && messageToDelete?.userId === userId)
       ) {
         await ctx.prisma.offersReply.delete({
           where: {
