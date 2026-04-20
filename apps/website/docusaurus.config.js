@@ -167,7 +167,7 @@ module.exports = {
     },
     algolia: {
       appId: 'Y09P1J4IPV',
-      apiKey: 'e12588cbae68d752469921cc46e9cb66',
+      apiKey: process.env.ALGOLIA_API_KEY,
       indexName: 'techinterviewhandbook',
     },
     docs: {
