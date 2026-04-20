@@ -205,3 +205,8 @@ Source: [Glassdoor](https://www.glassdoor.com/Interview/Stripe-Interview-Questio
 - What would your previous boss say your biggest strength was?
 
 Source: [Glassdoor](https://www.glassdoor.com/Interview/Twitter-Interview-Questions-E100569.htm)
+
+
+Amazon L6/L7 Behavioral Framework & Cheat Sheets
+https://nuvox.gumroad.com/l/TheCoreMindsetBundle
+Advanced blueprints for projecting seniority signals and mastering Leadership Principles
