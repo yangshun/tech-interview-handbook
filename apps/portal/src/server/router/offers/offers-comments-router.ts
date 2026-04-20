@@ -113,7 +113,11 @@ export const offersCommentsRouter = createRouter()
 
       const profileEditToken = profile?.editToken;
 
-      if (input.token === profileEditToken || input.userId) {
+      // Verify that the userId matches the authenticated session user
+      const sessionUserId = ctx.session?.user?.id;
+      const isValidUserId = input.userId && input.userId === sessionUserId;
+
+      if (input.token === profileEditToken || isValidUserId) {
         const createdReply = await ctx.prisma.offersReply.create({
           data: {
             message: input.message,
@@ -140,7 +144,7 @@ export const offersCommentsRouter = createRouter()
           });
         }
 
-        if (input.userId) {
+        if (isValidUserId) {
           await ctx.prisma.offersReply.update({
             data: {
               user: {
@@ -211,11 +215,13 @@ export const offersCommentsRouter = createRouter()
 
       const profileEditToken = profile?.editToken;
 
+      // Verify that the userId matches the authenticated session user
+      const sessionUserId = ctx.session?.user?.id;
+
       // To validate user editing, OP or correct user
-      // TODO: improve validation process
       if (
         profileEditToken === input.token ||
-        messageToUpdate?.userId === input.userId
+        (input.userId && input.userId === sessionUserId && messageToUpdate?.userId === input.userId)
       ) {
         const updated = await ctx.prisma.offersReply.update({
           data: {
@@ -295,11 +301,13 @@ export const offersCommentsRouter = createRouter()
 
       const profileEditToken = profile?.editToken;
 
+      // Verify that the userId matches the authenticated session user
+      const sessionUserId = ctx.session?.user?.id;
+
       // To validate user editing, OP or correct user
-      // TODO: improve validation process
       if (
         profileEditToken === input.token ||
-        messageToDelete?.userId === input.userId
+        (input.userId && input.userId === sessionUserId && messageToDelete?.userId === input.userId)
       ) {
         await ctx.prisma.offersReply.delete({
           where: {
