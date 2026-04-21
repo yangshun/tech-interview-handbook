@@ -441,7 +441,18 @@ export const resumesResumeUserRouter = createProtectedRouter()
       id: z.string(),
     }),
     async resolve({ ctx, input }) {
+      const userId = ctx.session.user.id;
       const { id } = input;
+
+      const resume = await ctx.prisma.resumesResume.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      if (resume?.userId !== userId) {
+        throw new Error('Unauthorized: you can only delete your own resumes');
+      }
 
       return await ctx.prisma.resumesResume.delete({
         where: {
